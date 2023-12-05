@@ -32,6 +32,21 @@ class ::Google::Cloud::Billing::V1::CloudBilling::ClientPathsTest < Minitest::Te
 
       path = client.billing_account_path billing_account: "value0"
       assert_equal "billingAccounts/value0", path
+
+      path = client.billing_account_path organization: "value0", billing_account: "value1"
+      assert_equal "organizations/value0/billingAccounts/value1", path
+    end
+  end
+
+  def test_organization_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Billing::V1::CloudBilling::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.organization_path organization: "value0"
+      assert_equal "organizations/value0", path
     end
   end
 

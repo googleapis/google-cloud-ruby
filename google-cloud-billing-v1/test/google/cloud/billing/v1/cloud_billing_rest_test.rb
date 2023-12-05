@@ -127,6 +127,7 @@ class ::Google::Cloud::Billing::V1::CloudBilling::Rest::ClientTest < Minitest::T
     page_size = 42
     page_token = "hello world"
     filter = "hello world"
+    parent = "hello world"
 
     list_billing_accounts_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -142,27 +143,27 @@ class ::Google::Cloud::Billing::V1::CloudBilling::Rest::ClientTest < Minitest::T
         end
 
         # Use hash object
-        client.list_billing_accounts({ page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        client.list_billing_accounts({ page_size: page_size, page_token: page_token, filter: filter, parent: parent }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_billing_accounts page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        client.list_billing_accounts page_size: page_size, page_token: page_token, filter: filter, parent: parent do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_billing_accounts ::Google::Cloud::Billing::V1::ListBillingAccountsRequest.new(page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        client.list_billing_accounts ::Google::Cloud::Billing::V1::ListBillingAccountsRequest.new(page_size: page_size, page_token: page_token, filter: filter, parent: parent) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_billing_accounts({ page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        client.list_billing_accounts({ page_size: page_size, page_token: page_token, filter: filter, parent: parent }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_billing_accounts(::Google::Cloud::Billing::V1::ListBillingAccountsRequest.new(page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        client.list_billing_accounts(::Google::Cloud::Billing::V1::ListBillingAccountsRequest.new(page_size: page_size, page_token: page_token, filter: filter, parent: parent), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -237,6 +238,7 @@ class ::Google::Cloud::Billing::V1::CloudBilling::Rest::ClientTest < Minitest::T
 
     # Create request parameters for a unary method.
     billing_account = {}
+    parent = "hello world"
 
     create_billing_account_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -252,27 +254,27 @@ class ::Google::Cloud::Billing::V1::CloudBilling::Rest::ClientTest < Minitest::T
         end
 
         # Use hash object
-        client.create_billing_account({ billing_account: billing_account }) do |_result, response|
+        client.create_billing_account({ billing_account: billing_account, parent: parent }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_billing_account billing_account: billing_account do |_result, response|
+        client.create_billing_account billing_account: billing_account, parent: parent do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_billing_account ::Google::Cloud::Billing::V1::CreateBillingAccountRequest.new(billing_account: billing_account) do |_result, response|
+        client.create_billing_account ::Google::Cloud::Billing::V1::CreateBillingAccountRequest.new(billing_account: billing_account, parent: parent) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_billing_account({ billing_account: billing_account }, call_options) do |_result, response|
+        client.create_billing_account({ billing_account: billing_account, parent: parent }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_billing_account(::Google::Cloud::Billing::V1::CreateBillingAccountRequest.new(billing_account: billing_account), call_options) do |_result, response|
+        client.create_billing_account(::Google::Cloud::Billing::V1::CreateBillingAccountRequest.new(billing_account: billing_account, parent: parent), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -609,6 +611,61 @@ class ::Google::Cloud::Billing::V1::CloudBilling::Rest::ClientTest < Minitest::T
 
         # Verify method calls
         assert_equal 5, test_iam_permissions_client_stub.call_count
+      end
+    end
+  end
+
+  def test_move_billing_account
+    # Create test objects.
+    client_result = ::Google::Cloud::Billing::V1::BillingAccount.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    destination_parent = "hello world"
+
+    move_billing_account_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Billing::V1::CloudBilling::Rest::ServiceStub.stub :transcode_move_billing_account_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, move_billing_account_client_stub do
+        # Create client
+        client = ::Google::Cloud::Billing::V1::CloudBilling::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.move_billing_account({ name: name, destination_parent: destination_parent }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.move_billing_account name: name, destination_parent: destination_parent do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.move_billing_account ::Google::Cloud::Billing::V1::MoveBillingAccountRequest.new(name: name, destination_parent: destination_parent) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.move_billing_account({ name: name, destination_parent: destination_parent }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.move_billing_account(::Google::Cloud::Billing::V1::MoveBillingAccountRequest.new(name: name, destination_parent: destination_parent), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, move_billing_account_client_stub.call_count
       end
     end
   end
