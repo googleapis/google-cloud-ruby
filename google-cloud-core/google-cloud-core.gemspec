@@ -18,7 +18,7 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 2.5"
 
-  gem.add_dependency "google-cloud-env", "~> 1.0"
+  gem.add_dependency "google-cloud-env", ">= 1.0", "< 3.a"
   gem.add_dependency "google-cloud-errors", "~> 1.0"
 
   gem.add_development_dependency "autotest-suffix", "~> 1.1"

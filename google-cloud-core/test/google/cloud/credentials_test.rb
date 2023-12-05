@@ -31,7 +31,7 @@ describe Google::Cloud::Credentials, :private do
   end
 
   it "uses a default scope" do
-    mocked_signet = MiniTest::Mock.new
+    mocked_signet = Minitest::Mock.new
     mocked_signet.expect :fetch_access_token!, true
 
     stubbed_signet = ->(options, scope: nil) {
@@ -52,7 +52,7 @@ describe Google::Cloud::Credentials, :private do
   end
 
   it "uses a custom scope" do
-    mocked_signet = MiniTest::Mock.new
+    mocked_signet = Minitest::Mock.new
     mocked_signet.expect :fetch_access_token!, true
 
     stubbed_signet = ->(options, scope: nil) {
