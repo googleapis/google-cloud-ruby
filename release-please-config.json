@@ -663,10 +663,6 @@
       "component": "google-cloud-functions-v2",
       "version_file": "lib/google/cloud/functions/v2/version.rb"
     },
-    "google-cloud-gaming": {
-      "component": "google-cloud-gaming",
-      "version_file": "lib/google/cloud/gaming/version.rb"
-    },
     "google-cloud-gaming-v1": {
       "component": "google-cloud-gaming-v1",
       "version_file": "lib/google/cloud/gaming/v1/version.rb"

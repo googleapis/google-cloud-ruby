@@ -1,3 +1,0 @@
-deep-copy-regex:
-  - source: /google/cloud/gaming/[^/]+-ruby/(.*)
-    dest: /owl-bot-staging/google-cloud-gaming/$1
