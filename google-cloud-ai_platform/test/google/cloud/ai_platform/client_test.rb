@@ -42,6 +42,16 @@ class Google::Cloud::AIPlatform::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_feature_online_store_admin_service_grpc
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::AIPlatform.feature_online_store_admin_service do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client, client
+    end
+  end
+
   def test_featurestore_online_serving_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
@@ -52,6 +62,16 @@ class Google::Cloud::AIPlatform::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_feature_online_store_service_grpc
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::AIPlatform.feature_online_store_service do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::AIPlatform::V1::FeatureOnlineStoreService::Client, client
+    end
+  end
+
   def test_featurestore_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
@@ -59,6 +79,16 @@ class Google::Cloud::AIPlatform::ClientConstructionMinitest < Minitest::Test
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::AIPlatform::V1::FeaturestoreService::Client, client
+    end
+  end
+
+  def test_feature_registry_service_grpc
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::AIPlatform.feature_registry_service do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client, client
     end
   end
 
@@ -89,6 +119,26 @@ class Google::Cloud::AIPlatform::ClientConstructionMinitest < Minitest::Test
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::AIPlatform::V1::JobService::Client, client
+    end
+  end
+
+  def test_prediction_service_grpc
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::AIPlatform.prediction_service do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::AIPlatform::V1::PredictionService::Client, client
+    end
+  end
+
+  def test_llm_utility_service_grpc
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::AIPlatform.llm_utility_service do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::AIPlatform::V1::LlmUtilityService::Client, client
     end
   end
 
@@ -149,16 +199,6 @@ class Google::Cloud::AIPlatform::ClientConstructionMinitest < Minitest::Test
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::AIPlatform::V1::PipelineService::Client, client
-    end
-  end
-
-  def test_prediction_service_grpc
-    Gapic::ServiceStub.stub :new, :stub do
-      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::AIPlatform.prediction_service do |config|
-        config.credentials = grpc_channel
-      end
-      assert_kind_of Google::Cloud::AIPlatform::V1::PredictionService::Client, client
     end
   end
 
