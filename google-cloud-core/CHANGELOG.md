@@ -1,5 +1,11 @@
 # Release History
 
+### 1.6.1 (2023-12-05)
+
+#### Bug Fixes
+
+* Allow dependency on google-cloud-env 2.x ([#23626](https://github.com/googleapis/google-cloud-ruby/issues/23626)) 
+
 ### 1.6.0 / 2021-03-10
 
 #### Features
