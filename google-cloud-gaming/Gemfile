@@ -2,4 +2,4 @@ source "https://rubygems.org"
 
 gemspec
 
-gem "google-cloud-gaming-v1", path: "../google-cloud-gaming-v1"
+gem "google-cloud-gaming-v1", path: "../obsolete/google-cloud-gaming-v1"
