@@ -1736,7 +1736,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload search_related_account_group_memberships(project: nil, hashed_account_id: nil, page_size: nil, page_token: nil)
+            # @overload search_related_account_group_memberships(project: nil, account_id: nil, hashed_account_id: nil, page_size: nil, page_token: nil)
             #   Pass arguments to `search_related_account_group_memberships` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1745,10 +1745,17 @@ module Google
             #     Required. The name of the project to search related account group
             #     memberships from. Specify the project name in the following format:
             #     `projects/{project}`.
+            #   @param account_id [::String]
+            #     Optional. The unique stable account identifier used to search connections.
+            #     The identifier should correspond to an `account_id` provided in a previous
+            #     `CreateAssessment` or `AnnotateAssessment` call. Either hashed_account_id
+            #     or account_id must be set, but not both.
             #   @param hashed_account_id [::String]
-            #     Optional. The unique stable hashed user identifier used to search
-            #     connections. The identifier should correspond to a `hashed_account_id`
-            #     provided in a previous `CreateAssessment` or `AnnotateAssessment` call.
+            #     Optional. Deprecated: use `account_id` instead.
+            #     The unique stable hashed account identifier used to search connections. The
+            #     identifier should correspond to a `hashed_account_id` provided in a
+            #     previous `CreateAssessment` or `AnnotateAssessment` call. Either
+            #     hashed_account_id or account_id must be set, but not both.
             #   @param page_size [::Integer]
             #     Optional. The maximum number of groups to return. The service might return
             #     fewer than this value. If unspecified, at most 50 groups are returned. The
