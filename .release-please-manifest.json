@@ -325,8 +325,6 @@
   "google-cloud-functions-v1+FILLER": "0.0.0",
   "google-cloud-functions-v2": "0.5.0",
   "google-cloud-functions-v2+FILLER": "0.0.0",
-  "google-cloud-gaming-v1": "0.7.0",
-  "google-cloud-gaming-v1+FILLER": "0.0.0",
   "google-cloud-gke_backup": "1.0.0",
   "google-cloud-gke_backup+FILLER": "0.0.0",
   "google-cloud-gke_backup-v1": "0.6.0",
