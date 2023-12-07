@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.16.0 (2023-12-07)
+
+#### Features
+
+* add data quality score to DataQualityResult ([#23583](https://github.com/googleapis/google-cloud-ruby/issues/23583)) 
+
 ### 0.15.0 (2023-12-04)
 
 #### Features
