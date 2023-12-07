@@ -147,7 +147,7 @@ module Google
                 end
 
                 @generators_stub = ::Gapic::ServiceStub.new(
-                  ::Google::Cloud::Dialogflow::Cx::V3::Generators::Stub,
+                  ::Google::Cloud::Dialogflow::CX::V3::Generators::Stub,
                   credentials:  credentials,
                   endpoint:     @config.endpoint,
                   channel_args: @config.channel_args,

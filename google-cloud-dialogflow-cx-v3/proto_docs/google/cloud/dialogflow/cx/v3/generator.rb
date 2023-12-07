@@ -20,7 +20,7 @@
 module Google
   module Cloud
     module Dialogflow
-      module Cx
+      module CX
         module V3
           # Generators contain prompt to be sent to the LLM model to generate text. The
           # prompt can contain parameters which will be resolved before calling the
