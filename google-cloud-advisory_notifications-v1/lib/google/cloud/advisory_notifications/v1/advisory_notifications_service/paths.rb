@@ -27,37 +27,83 @@ module Google
             ##
             # Create a fully-qualified Location resource string.
             #
-            # The resource will be in the following format:
+            # @overload location_path(organization:, location:)
+            #   The resource will be in the following format:
             #
-            # `organizations/{organization}/locations/{location}`
+            #   `organizations/{organization}/locations/{location}`
             #
-            # @param organization [String]
-            # @param location [String]
+            #   @param organization [String]
+            #   @param location [String]
+            #
+            # @overload location_path(project:, location:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}`
+            #
+            #   @param project [String]
+            #   @param location [String]
             #
             # @return [::String]
-            def location_path organization:, location:
-              raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+            def location_path **args
+              resources = {
+                "location:organization" => (proc do |organization:, location:|
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
 
-              "organizations/#{organization}/locations/#{location}"
+                  "organizations/#{organization}/locations/#{location}"
+                end),
+                "location:project" => (proc do |project:, location:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
             end
 
             ##
             # Create a fully-qualified Notification resource string.
             #
-            # The resource will be in the following format:
+            # @overload notification_path(organization:, location:, notification:)
+            #   The resource will be in the following format:
             #
-            # `organizations/{organization}/locations/{location}/notifications/{notification}`
+            #   `organizations/{organization}/locations/{location}/notifications/{notification}`
             #
-            # @param organization [String]
-            # @param location [String]
-            # @param notification [String]
+            #   @param organization [String]
+            #   @param location [String]
+            #   @param notification [String]
+            #
+            # @overload notification_path(project:, location:, notification:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/notifications/{notification}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param notification [String]
             #
             # @return [::String]
-            def notification_path organization:, location:, notification:
-              raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
-              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+            def notification_path **args
+              resources = {
+                "location:notification:organization" => (proc do |organization:, location:, notification:|
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
-              "organizations/#{organization}/locations/#{location}/notifications/#{notification}"
+                  "organizations/#{organization}/locations/#{location}/notifications/#{notification}"
+                end),
+                "location:notification:project" => (proc do |project:, location:, notification:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/notifications/#{notification}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
             end
 
             ##
