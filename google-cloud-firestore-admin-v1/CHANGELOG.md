@@ -1,5 +1,13 @@
 # Release History
 
+### 0.12.0 (2023-12-08)
+
+#### Features
+
+* Support database version retention and point-in-time-recovery 
+* Support namespace_ids and snapshot_time parameters to export_documents RPC 
+* Support namespace_ids parameter to import_documents RPC 
+
 ### 0.11.0 (2023-09-12)
 
 #### Features
