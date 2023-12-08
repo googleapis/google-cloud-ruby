@@ -1,5 +1,11 @@
 # Release History
 
+### 0.19.0 (2023-12-08)
+
+#### Features
+
+* Added use_table_schema field to BigQueryConfig ([#23582](https://github.com/googleapis/google-cloud-ruby/issues/23582)) 
+
 ### 0.18.1 (2023-10-23)
 
 #### Documentation
