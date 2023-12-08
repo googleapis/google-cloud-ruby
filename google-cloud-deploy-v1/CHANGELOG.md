@@ -1,5 +1,13 @@
 # Changelog
 
+### 0.15.0 (2023-12-08)
+
+#### Features
+
+* Support for canary revision tags in CloudRunConfig 
+* Support for custom target information in the Target resource type 
+* Support for RPCs managing custom target types ([#23625](https://github.com/googleapis/google-cloud-ruby/issues/23625)) 
+
 ### 0.14.0 (2023-11-06)
 
 #### Features
