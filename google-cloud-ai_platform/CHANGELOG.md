@@ -1,5 +1,14 @@
 # Changelog
 
+### 1.1.0 (2023-12-08)
+
+#### Features
+
+* Support for FeatureOnlineStoreAdminService 
+* Support for FeatureOnlineStoreService 
+* Support for FeatureRegistryService 
+* Support for LlmUtilityService 
+
 ### 1.0.0 (2023-07-28)
 
 #### Features
