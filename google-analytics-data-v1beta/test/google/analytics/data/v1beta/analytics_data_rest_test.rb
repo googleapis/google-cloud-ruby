@@ -479,6 +479,227 @@ class ::Google::Analytics::Data::V1beta::AnalyticsData::Rest::ClientTest < Minit
     end
   end
 
+  def test_create_audience_export
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    audience_export = {}
+
+    create_audience_export_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Analytics::Data::V1beta::AnalyticsData::Rest::ServiceStub.stub :transcode_create_audience_export_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_audience_export_client_stub do
+        # Create client
+        client = ::Google::Analytics::Data::V1beta::AnalyticsData::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_audience_export({ parent: parent, audience_export: audience_export }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_audience_export parent: parent, audience_export: audience_export do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_audience_export ::Google::Analytics::Data::V1beta::CreateAudienceExportRequest.new(parent: parent, audience_export: audience_export) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_audience_export({ parent: parent, audience_export: audience_export }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_audience_export(::Google::Analytics::Data::V1beta::CreateAudienceExportRequest.new(parent: parent, audience_export: audience_export), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_audience_export_client_stub.call_count
+      end
+    end
+  end
+
+  def test_query_audience_export
+    # Create test objects.
+    client_result = ::Google::Analytics::Data::V1beta::QueryAudienceExportResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    offset = 42
+    limit = 42
+
+    query_audience_export_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Analytics::Data::V1beta::AnalyticsData::Rest::ServiceStub.stub :transcode_query_audience_export_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, query_audience_export_client_stub do
+        # Create client
+        client = ::Google::Analytics::Data::V1beta::AnalyticsData::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.query_audience_export({ name: name, offset: offset, limit: limit }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.query_audience_export name: name, offset: offset, limit: limit do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.query_audience_export ::Google::Analytics::Data::V1beta::QueryAudienceExportRequest.new(name: name, offset: offset, limit: limit) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.query_audience_export({ name: name, offset: offset, limit: limit }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.query_audience_export(::Google::Analytics::Data::V1beta::QueryAudienceExportRequest.new(name: name, offset: offset, limit: limit), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, query_audience_export_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_audience_export
+    # Create test objects.
+    client_result = ::Google::Analytics::Data::V1beta::AudienceExport.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_audience_export_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Analytics::Data::V1beta::AnalyticsData::Rest::ServiceStub.stub :transcode_get_audience_export_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_audience_export_client_stub do
+        # Create client
+        client = ::Google::Analytics::Data::V1beta::AnalyticsData::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_audience_export({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_audience_export name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_audience_export ::Google::Analytics::Data::V1beta::GetAudienceExportRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_audience_export({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_audience_export(::Google::Analytics::Data::V1beta::GetAudienceExportRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_audience_export_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_audience_exports
+    # Create test objects.
+    client_result = ::Google::Analytics::Data::V1beta::ListAudienceExportsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_audience_exports_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Analytics::Data::V1beta::AnalyticsData::Rest::ServiceStub.stub :transcode_list_audience_exports_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_audience_exports_client_stub do
+        # Create client
+        client = ::Google::Analytics::Data::V1beta::AnalyticsData::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_audience_exports({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_audience_exports parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_audience_exports ::Google::Analytics::Data::V1beta::ListAudienceExportsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_audience_exports({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_audience_exports(::Google::Analytics::Data::V1beta::ListAudienceExportsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_audience_exports_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

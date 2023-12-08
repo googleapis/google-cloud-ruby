@@ -24,6 +24,7 @@ require "google/analytics/data/v1beta/version"
 
 require "google/analytics/data/v1beta/analytics_data/credentials"
 require "google/analytics/data/v1beta/analytics_data/paths"
+require "google/analytics/data/v1beta/analytics_data/operations"
 require "google/analytics/data/v1beta/analytics_data/client"
 require "google/analytics/data/v1beta/analytics_data/rest"
 

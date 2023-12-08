@@ -71,7 +71,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The dimensions and metrics currently accepted in reporting methods.
+        # The dimensions, metrics and comparisons currently accepted in reporting
+        # methods.
         # @!attribute [rw] name
         #   @return [::String]
         #     Resource name of this metadata.
@@ -553,6 +554,232 @@ module Google
         #     fixed string "analyticsData#runRealtimeReport". Useful to distinguish
         #     between response types in JSON.
         class RunRealtimeReportResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request to retrieve configuration metadata about a specific audience
+        # export.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The audience export resource name.
+        #     Format: `properties/{property}/audienceExports/{audience_export}`
+        class GetAudienceExportRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request to list all audience exports for a property.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. All audience exports for this property will be listed in the
+        #     response. Format: `properties/{property}`
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of audience exports to return. The service may
+        #     return fewer than this value. If unspecified, at most 200 audience exports
+        #     will be returned. The maximum value is 1000 (higher values will be coerced
+        #     to the maximum).
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A page token, received from a previous `ListAudienceExports`
+        #     call. Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to `ListAudienceExports`
+        #     must match the call that provided the page token.
+        class ListAudienceExportsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A list of all audience exports for a property.
+        # @!attribute [rw] audience_exports
+        #   @return [::Array<::Google::Analytics::Data::V1beta::AudienceExport>]
+        #     Each audience export for a property.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListAudienceExportsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request to create a new audience export.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where this audience export will be created.
+        #     Format: `properties/{property}`
+        # @!attribute [rw] audience_export
+        #   @return [::Google::Analytics::Data::V1beta::AudienceExport]
+        #     Required. The audience export to create.
+        class CreateAudienceExportRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # An audience export is a list of users in an audience at the time of the
+        # list's creation. One audience may have multiple audience exports created for
+        # different days.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. Identifier. The audience export resource name assigned during
+        #     creation. This resource name identifies this `AudienceExport`.
+        #
+        #     Format: `properties/{property}/audienceExports/{audience_export}`
+        # @!attribute [rw] audience
+        #   @return [::String]
+        #     Required. The audience resource name. This resource name identifies the
+        #     audience being listed and is shared between the Analytics Data & Admin
+        #     APIs.
+        #
+        #     Format: `properties/{property}/audiences/{audience}`
+        # @!attribute [r] audience_display_name
+        #   @return [::String]
+        #     Output only. The descriptive display name for this audience. For example,
+        #     "Purchasers".
+        # @!attribute [rw] dimensions
+        #   @return [::Array<::Google::Analytics::Data::V1beta::AudienceDimension>]
+        #     Required. The dimensions requested and displayed in the query response.
+        # @!attribute [r] state
+        #   @return [::Google::Analytics::Data::V1beta::AudienceExport::State]
+        #     Output only. The current state for this AudienceExport.
+        # @!attribute [r] begin_creating_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time when CreateAudienceExport was called and the
+        #     AudienceExport began the `CREATING` state.
+        # @!attribute [r] creation_quota_tokens_charged
+        #   @return [::Integer]
+        #     Output only. The total quota tokens charged during creation of the
+        #     AudienceExport. Because this token count is based on activity from the
+        #     `CREATING` state, this tokens charged will be fixed once an AudienceExport
+        #     enters the `ACTIVE` or `FAILED` states.
+        # @!attribute [r] row_count
+        #   @return [::Integer]
+        #     Output only. The total number of rows in the AudienceExport result.
+        # @!attribute [r] error_message
+        #   @return [::String]
+        #     Output only. Error message is populated when an audience export fails
+        #     during creation. A common reason for such a failure is quota exhaustion.
+        # @!attribute [r] percentage_completed
+        #   @return [::Float]
+        #     Output only. The percentage completed for this audience export ranging
+        #     between 0 to 100.
+        class AudienceExport
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The AudienceExport currently exists in this state.
+          module State
+            # Unspecified state will never be used.
+            STATE_UNSPECIFIED = 0
+
+            # The AudienceExport is currently creating and will be available in the
+            # future. Creating occurs immediately after the CreateAudienceExport call.
+            CREATING = 1
+
+            # The AudienceExport is fully created and ready for querying. An
+            # AudienceExport is updated to active asynchronously from a request; this
+            # occurs some time (for example 15 minutes) after the initial create call.
+            ACTIVE = 2
+
+            # The AudienceExport failed to be created. It is possible that
+            # re-requesting this audience export will succeed.
+            FAILED = 3
+          end
+        end
+
+        # This metadata is currently blank.
+        class AudienceExportMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request to list users in an audience export.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the audience export to retrieve users from.
+        #     Format: `properties/{property}/audienceExports/{audience_export}`
+        # @!attribute [rw] offset
+        #   @return [::Integer]
+        #     Optional. The row count of the start row. The first row is counted as row
+        #     0.
+        #
+        #     When paging, the first request does not specify offset; or equivalently,
+        #     sets offset to 0; the first request returns the first `limit` of rows. The
+        #     second request sets offset to the `limit` of the first request; the second
+        #     request returns the second `limit` of rows.
+        #
+        #     To learn more about this pagination parameter, see
+        #     [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).
+        # @!attribute [rw] limit
+        #   @return [::Integer]
+        #     Optional. The number of rows to return. If unspecified, 10,000 rows are
+        #     returned. The API returns a maximum of 250,000 rows per request, no matter
+        #     how many you ask for. `limit` must be positive.
+        #
+        #     The API can also return fewer rows than the requested `limit`, if there
+        #     aren't as many dimension values as the `limit`.
+        #
+        #     To learn more about this pagination parameter, see
+        #     [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).
+        class QueryAudienceExportRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A list of users in an audience export.
+        # @!attribute [rw] audience_export
+        #   @return [::Google::Analytics::Data::V1beta::AudienceExport]
+        #     Configuration data about AudienceExport being queried. Returned to help
+        #     interpret the audience rows in this response. For example, the dimensions
+        #     in this AudienceExport correspond to the columns in the AudienceRows.
+        # @!attribute [rw] audience_rows
+        #   @return [::Array<::Google::Analytics::Data::V1beta::AudienceRow>]
+        #     Rows for each user in an audience export. The number of rows in this
+        #     response will be less than or equal to request's page size.
+        # @!attribute [rw] row_count
+        #   @return [::Integer]
+        #     The total number of rows in the AudienceExport result. `rowCount` is
+        #     independent of the number of rows returned in the response, the `limit`
+        #     request parameter, and the `offset` request parameter. For example if a
+        #     query returns 175 rows and includes `limit` of 50 in the API request, the
+        #     response will contain `rowCount` of 175 but only 50 rows.
+        #
+        #     To learn more about this pagination parameter, see
+        #     [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).
+        class QueryAudienceExportResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Dimension value attributes for the audience user row.
+        # @!attribute [rw] dimension_values
+        #   @return [::Array<::Google::Analytics::Data::V1beta::AudienceDimensionValue>]
+        #     Each dimension value attribute for an audience user. One dimension value
+        #     will be added for each dimension column requested.
+        class AudienceRow
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # An audience dimension is a user attribute. Specific user attributed are
+        # requested and then later returned in the `QueryAudienceExportResponse`.
+        # @!attribute [rw] dimension_name
+        #   @return [::String]
+        #     Optional. The API name of the dimension. See the [API
+        #     Dimensions](https://developers.google.com/analytics/devguides/reporting/data/v1/audience-list-api-schema#dimensions)
+        #     for the list of dimension names.
+        class AudienceDimension
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The value of a dimension.
+        # @!attribute [rw] value
+        #   @return [::String]
+        #     Value as a string if the dimension type is a string.
+        class AudienceDimensionValue
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
