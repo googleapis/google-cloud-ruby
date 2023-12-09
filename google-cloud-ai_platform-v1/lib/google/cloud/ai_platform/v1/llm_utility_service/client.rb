@@ -186,7 +186,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload count_tokens(endpoint: nil, instances: nil)
+            # @overload count_tokens(endpoint: nil, model: nil, instances: nil, contents: nil)
             #   Pass arguments to `count_tokens` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -195,9 +195,15 @@ module Google
             #     Required. The name of the Endpoint requested to perform token counting.
             #     Format:
             #     `projects/{project}/locations/{location}/endpoints/{endpoint}`
+            #   @param model [::String]
+            #     Required. The name of the publisher model requested to serve the
+            #     prediction. Format:
+            #     `projects/{project}/locations/{location}/publishers/*/models/*`
             #   @param instances [::Array<::Google::Protobuf::Value, ::Hash>]
             #     Required. The instances that are the input to token counting call.
             #     Schema is identical to the prediction schema of the underlying model.
+            #   @param contents [::Array<::Google::Cloud::AIPlatform::V1::Content, ::Hash>]
+            #     Required. Input content.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::AIPlatform::V1::CountTokensResponse]

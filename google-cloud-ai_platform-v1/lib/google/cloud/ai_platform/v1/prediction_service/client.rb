@@ -957,6 +957,115 @@ module Google
             end
 
             ##
+            # Generate content with multimodal inputs with streaming support.
+            #
+            # @overload stream_generate_content(request, options = nil)
+            #   Pass arguments to `stream_generate_content` via a request object, either of type
+            #   {::Google::Cloud::AIPlatform::V1::GenerateContentRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AIPlatform::V1::GenerateContentRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload stream_generate_content(model: nil, contents: nil, tools: nil, safety_settings: nil, generation_config: nil)
+            #   Pass arguments to `stream_generate_content` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param model [::String]
+            #     Required. The name of the publisher model requested to serve the
+            #     prediction. Format:
+            #     `projects/{project}/locations/{location}/publishers/*/models/*`
+            #   @param contents [::Array<::Google::Cloud::AIPlatform::V1::Content, ::Hash>]
+            #     Required. The content of the current conversation with the model.
+            #
+            #     For single-turn queries, this is a single instance. For multi-turn queries,
+            #     this is a repeated field that contains conversation history + latest
+            #     request.
+            #   @param tools [::Array<::Google::Cloud::AIPlatform::V1::Tool, ::Hash>]
+            #     Optional. A list of `Tools` the model may use to generate the next
+            #     response.
+            #
+            #     A `Tool` is a piece of code that enables the system to interact with
+            #     external systems to perform an action, or set of actions, outside of
+            #     knowledge and scope of the model. The only supported tool is currently
+            #     `Function`
+            #   @param safety_settings [::Array<::Google::Cloud::AIPlatform::V1::SafetySetting, ::Hash>]
+            #     Optional. Per request settings for blocking unsafe content.
+            #     Enforced on GenerateContentResponse.candidates.
+            #   @param generation_config [::Google::Cloud::AIPlatform::V1::GenerationConfig, ::Hash]
+            #     Optional. Generation config.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Enumerable<::Google::Cloud::AIPlatform::V1::GenerateContentResponse>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Enumerable<::Google::Cloud::AIPlatform::V1::GenerateContentResponse>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::PredictionService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AIPlatform::V1::GenerateContentRequest.new
+            #
+            #   # Call the stream_generate_content method to start streaming.
+            #   output = client.stream_generate_content request
+            #
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::AIPlatform::V1::GenerateContentResponse
+            #   output.each do |current_response|
+            #     p current_response
+            #   end
+            #
+            def stream_generate_content request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::GenerateContentRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.stream_generate_content.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.model
+                header_params["model"] = request.model
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.stream_generate_content.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.stream_generate_content.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @prediction_service_stub.call_rpc :stream_generate_content, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the PredictionService API.
             #
             # This class represents the configuration for PredictionService,
@@ -1141,6 +1250,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :explain
+                ##
+                # RPC-specific configuration for `stream_generate_content`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :stream_generate_content
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -1160,6 +1274,8 @@ module Google
                   @streaming_raw_predict = ::Gapic::Config::Method.new streaming_raw_predict_config
                   explain_config = parent_rpcs.explain if parent_rpcs.respond_to? :explain
                   @explain = ::Gapic::Config::Method.new explain_config
+                  stream_generate_content_config = parent_rpcs.stream_generate_content if parent_rpcs.respond_to? :stream_generate_content
+                  @stream_generate_content = ::Gapic::Config::Method.new stream_generate_content_config
 
                   yield self if block_given?
                 end

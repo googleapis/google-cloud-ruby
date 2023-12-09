@@ -31,9 +31,9 @@ module Google
         #   @return [::Google::Cloud::AIPlatform::V1::FeatureView::FeatureRegistrySource]
         #     Optional. Configures the features from a Feature Registry source that
         #     need to be loaded onto the FeatureOnlineStore.
-        # @!attribute [r] name
+        # @!attribute [rw] name
         #   @return [::String]
-        #     Output only. Name of the FeatureView. Format:
+        #     Identifier. Name of the FeatureView. Format:
         #     `projects/{project}/locations/{location}/featureOnlineStores/{feature_online_store}/featureViews/{feature_view}`
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
@@ -80,6 +80,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Configuration for Sync. Only one option is set.
           # @!attribute [rw] cron
           #   @return [::String]
           #     Cron schedule (https://en.wikipedia.org/wiki/Cron) to launch scheduled

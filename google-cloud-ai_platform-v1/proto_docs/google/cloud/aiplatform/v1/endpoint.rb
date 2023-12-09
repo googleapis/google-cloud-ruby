@@ -144,6 +144,11 @@ module Google
         #   @return [::Google::Cloud::AIPlatform::V1::AutomaticResources]
         #     A description of resources that to large degree are decided by Vertex
         #     AI, and require only a modest additional configuration.
+        # @!attribute [rw] shared_resources
+        #   @return [::String]
+        #     The resource name of the shared DeploymentResourcePool to deploy on.
+        #     Format:
+        #     `projects/{project}/locations/{location}/deploymentResourcePools/{deployment_resource_pool}`
         # @!attribute [rw] id
         #   @return [::String]
         #     Immutable. The ID of the DeployedModel. If not provided upon deployment,

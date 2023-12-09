@@ -418,7 +418,9 @@ module Google
 
             # Resources that can be shared by multiple
             # {::Google::Cloud::AIPlatform::V1::DeployedModel DeployedModels}. A
-            # pre-configured [DeploymentResourcePool][] is required.
+            # pre-configured
+            # {::Google::Cloud::AIPlatform::V1::DeploymentResourcePool DeploymentResourcePool}
+            # is required.
             SHARED_RESOURCES = 3
           end
         end

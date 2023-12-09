@@ -620,6 +620,87 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
     end
   end
 
+  def test_stream_generate_content
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::AIPlatform::V1::GenerateContentResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a server streaming method.
+    model = "hello world"
+    contents = [{}]
+    tools = [{}]
+    safety_settings = [{}]
+    generation_config = {}
+
+    stream_generate_content_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
+      assert_equal :stream_generate_content, name
+      assert_kind_of ::Google::Cloud::AIPlatform::V1::GenerateContentRequest, request
+      assert_equal "hello world", request["model"]
+      assert_kind_of ::Google::Cloud::AIPlatform::V1::Content, request["contents"].first
+      assert_kind_of ::Google::Cloud::AIPlatform::V1::Tool, request["tools"].first
+      assert_kind_of ::Google::Cloud::AIPlatform::V1::SafetySetting, request["safety_settings"].first
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AIPlatform::V1::GenerationConfig), request["generation_config"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, stream_generate_content_client_stub do
+      # Create client
+      client = ::Google::Cloud::AIPlatform::V1::PredictionService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.stream_generate_content({ model: model, contents: contents, tools: tools, safety_settings: safety_settings, generation_config: generation_config }) do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::AIPlatform::V1::GenerateContentResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.stream_generate_content model: model, contents: contents, tools: tools, safety_settings: safety_settings, generation_config: generation_config do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::AIPlatform::V1::GenerateContentResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.stream_generate_content ::Google::Cloud::AIPlatform::V1::GenerateContentRequest.new(model: model, contents: contents, tools: tools, safety_settings: safety_settings, generation_config: generation_config) do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::AIPlatform::V1::GenerateContentResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.stream_generate_content({ model: model, contents: contents, tools: tools, safety_settings: safety_settings, generation_config: generation_config }, grpc_options) do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::AIPlatform::V1::GenerateContentResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.stream_generate_content(::Google::Cloud::AIPlatform::V1::GenerateContentRequest.new(model: model, contents: contents, tools: tools, safety_settings: safety_settings, generation_config: generation_config), grpc_options) do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::AIPlatform::V1::GenerateContentResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, stream_generate_content_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

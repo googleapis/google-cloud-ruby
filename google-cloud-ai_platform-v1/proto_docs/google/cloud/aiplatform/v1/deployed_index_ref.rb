@@ -28,6 +28,9 @@ module Google
         # @!attribute [rw] deployed_index_id
         #   @return [::String]
         #     Immutable. The ID of the DeployedIndex in the above IndexEndpoint.
+        # @!attribute [r] display_name
+        #   @return [::String]
+        #     Output only. The display name of the DeployedIndex.
         class DeployedIndexRef
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

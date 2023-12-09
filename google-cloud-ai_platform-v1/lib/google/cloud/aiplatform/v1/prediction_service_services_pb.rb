@@ -72,6 +72,8 @@ module Google
             # [explanation_spec][google.cloud.aiplatform.v1.DeployedModel.explanation_spec]
             # populated.
             rpc :Explain, ::Google::Cloud::AIPlatform::V1::ExplainRequest, ::Google::Cloud::AIPlatform::V1::ExplainResponse
+            # Generate content with multimodal inputs with streaming support.
+            rpc :StreamGenerateContent, ::Google::Cloud::AIPlatform::V1::GenerateContentRequest, stream(::Google::Cloud::AIPlatform::V1::GenerateContentResponse)
           end
 
           Stub = Service.rpc_stub_class

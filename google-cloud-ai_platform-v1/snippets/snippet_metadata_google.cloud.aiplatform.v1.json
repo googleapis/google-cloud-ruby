@@ -732,6 +732,206 @@
       ]
     },
     {
+      "region_tag": "aiplatform_v1_generated_DeploymentResourcePoolService_CreateDeploymentResourcePool_sync",
+      "title": "Snippet for the create_deployment_resource_pool call in the DeploymentResourcePoolService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Client#create_deployment_resource_pool. It may require modification in order to execute successfully.",
+      "file": "deployment_resource_pool_service/create_deployment_resource_pool.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_deployment_resource_pool",
+        "full_name": "::Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Client#create_deployment_resource_pool",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::CreateDeploymentResourcePoolRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DeploymentResourcePoolService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Client"
+        },
+        "method": {
+          "short_name": "CreateDeploymentResourcePool",
+          "full_name": "google.cloud.aiplatform.v1.DeploymentResourcePoolService.CreateDeploymentResourcePool",
+          "service": {
+            "short_name": "DeploymentResourcePoolService",
+            "full_name": "google.cloud.aiplatform.v1.DeploymentResourcePoolService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_DeploymentResourcePoolService_GetDeploymentResourcePool_sync",
+      "title": "Snippet for the get_deployment_resource_pool call in the DeploymentResourcePoolService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Client#get_deployment_resource_pool. It may require modification in order to execute successfully.",
+      "file": "deployment_resource_pool_service/get_deployment_resource_pool.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_deployment_resource_pool",
+        "full_name": "::Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Client#get_deployment_resource_pool",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::GetDeploymentResourcePoolRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::DeploymentResourcePool",
+        "client": {
+          "short_name": "DeploymentResourcePoolService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Client"
+        },
+        "method": {
+          "short_name": "GetDeploymentResourcePool",
+          "full_name": "google.cloud.aiplatform.v1.DeploymentResourcePoolService.GetDeploymentResourcePool",
+          "service": {
+            "short_name": "DeploymentResourcePoolService",
+            "full_name": "google.cloud.aiplatform.v1.DeploymentResourcePoolService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_DeploymentResourcePoolService_ListDeploymentResourcePools_sync",
+      "title": "Snippet for the list_deployment_resource_pools call in the DeploymentResourcePoolService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Client#list_deployment_resource_pools. It may require modification in order to execute successfully.",
+      "file": "deployment_resource_pool_service/list_deployment_resource_pools.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_deployment_resource_pools",
+        "full_name": "::Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Client#list_deployment_resource_pools",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::ListDeploymentResourcePoolsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::ListDeploymentResourcePoolsResponse",
+        "client": {
+          "short_name": "DeploymentResourcePoolService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Client"
+        },
+        "method": {
+          "short_name": "ListDeploymentResourcePools",
+          "full_name": "google.cloud.aiplatform.v1.DeploymentResourcePoolService.ListDeploymentResourcePools",
+          "service": {
+            "short_name": "DeploymentResourcePoolService",
+            "full_name": "google.cloud.aiplatform.v1.DeploymentResourcePoolService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_DeploymentResourcePoolService_DeleteDeploymentResourcePool_sync",
+      "title": "Snippet for the delete_deployment_resource_pool call in the DeploymentResourcePoolService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Client#delete_deployment_resource_pool. It may require modification in order to execute successfully.",
+      "file": "deployment_resource_pool_service/delete_deployment_resource_pool.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_deployment_resource_pool",
+        "full_name": "::Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Client#delete_deployment_resource_pool",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::DeleteDeploymentResourcePoolRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DeploymentResourcePoolService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Client"
+        },
+        "method": {
+          "short_name": "DeleteDeploymentResourcePool",
+          "full_name": "google.cloud.aiplatform.v1.DeploymentResourcePoolService.DeleteDeploymentResourcePool",
+          "service": {
+            "short_name": "DeploymentResourcePoolService",
+            "full_name": "google.cloud.aiplatform.v1.DeploymentResourcePoolService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_DeploymentResourcePoolService_QueryDeployedModels_sync",
+      "title": "Snippet for the query_deployed_models call in the DeploymentResourcePoolService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Client#query_deployed_models. It may require modification in order to execute successfully.",
+      "file": "deployment_resource_pool_service/query_deployed_models.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "query_deployed_models",
+        "full_name": "::Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Client#query_deployed_models",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::QueryDeployedModelsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::QueryDeployedModelsResponse",
+        "client": {
+          "short_name": "DeploymentResourcePoolService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Client"
+        },
+        "method": {
+          "short_name": "QueryDeployedModels",
+          "full_name": "google.cloud.aiplatform.v1.DeploymentResourcePoolService.QueryDeployedModels",
+          "service": {
+            "short_name": "DeploymentResourcePoolService",
+            "full_name": "google.cloud.aiplatform.v1.DeploymentResourcePoolService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "aiplatform_v1_generated_EndpointService_CreateEndpoint_sync",
       "title": "Snippet for the create_endpoint call in the EndpointService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::EndpointService::Client#create_endpoint. It may require modification in order to execute successfully.",
@@ -5287,6 +5487,46 @@
         {
           "start": 20,
           "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_PredictionService_StreamGenerateContent_sync",
+      "title": "Snippet for the stream_generate_content call in the PredictionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::PredictionService::Client#stream_generate_content. It may require modification in order to execute successfully.",
+      "file": "prediction_service/stream_generate_content.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "stream_generate_content",
+        "full_name": "::Google::Cloud::AIPlatform::V1::PredictionService::Client#stream_generate_content",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::GenerateContentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::GenerateContentResponse",
+        "client": {
+          "short_name": "PredictionService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::PredictionService::Client"
+        },
+        "method": {
+          "short_name": "StreamGenerateContent",
+          "full_name": "google.cloud.aiplatform.v1.PredictionService.StreamGenerateContent",
+          "service": {
+            "short_name": "PredictionService",
+            "full_name": "google.cloud.aiplatform.v1.PredictionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 44,
           "type": "FULL"
         }
       ]

@@ -968,7 +968,7 @@ module Google
             #
             #     When paginating, all other parameters provided to
             #     {::Google::Cloud::AIPlatform::V1::FeaturestoreService::Client#list_features FeaturestoreService.ListFeatures}
-            #     or or
+            #     or
             #     {::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client#list_features FeatureRegistryService.ListFeatures}
             #     must match the call that provided the page token.
             #   @param order_by [::String]

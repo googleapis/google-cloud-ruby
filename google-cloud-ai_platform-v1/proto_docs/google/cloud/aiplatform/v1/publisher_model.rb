@@ -43,6 +43,9 @@ module Google
         # @!attribute [rw] launch_stage
         #   @return [::Google::Cloud::AIPlatform::V1::PublisherModel::LaunchStage]
         #     Optional. Indicates the launch stage of the model.
+        # @!attribute [rw] version_state
+        #   @return [::Google::Cloud::AIPlatform::V1::PublisherModel::VersionState]
+        #     Optional. Indicates the state of the model version.
         # @!attribute [r] publisher_model_template
         #   @return [::String]
         #     Optional. Output only. Immutable. Used to indicate this model has a
@@ -64,6 +67,12 @@ module Google
           # @!attribute [rw] resource_name
           #   @return [::String]
           #     The resource name of the Google Cloud resource.
+          # @!attribute [rw] use_case
+          #   @return [::String]
+          #     Use case (CUJ) of the resource.
+          # @!attribute [rw] description
+          #   @return [::String]
+          #     Description of the resource.
           class ResourceReference
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -184,6 +193,10 @@ module Google
             # @!attribute [rw] title
             #   @return [::String]
             #     Required. The title of the regional resource reference.
+            # @!attribute [rw] public_artifact_uri
+            #   @return [::String]
+            #     Optional. The signed URI for ephemeral Cloud Storage access to model
+            #     artifact.
             class Deploy
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -230,6 +243,18 @@ module Google
 
             # Used to indicate the PublisherModel is at GA launch stage.
             GA = 4
+          end
+
+          # An enum representing the state of the PublicModelVersion.
+          module VersionState
+            # The version state is unspecified.
+            VERSION_STATE_UNSPECIFIED = 0
+
+            # Used to indicate the version is stable.
+            VERSION_STATE_STABLE = 1
+
+            # Used to indicate the version is unstable.
+            VERSION_STATE_UNSTABLE = 2
           end
         end
       end
