@@ -27,7 +27,8 @@ module Google
         #   @return [::String]
         #     The resource name of the notification.
         #     Format:
-        #     organizations/\\{organization}/locations/\\{location}/notifications/\\{notification}.
+        #     organizations/\\{organization}/locations/\\{location}/notifications/\\{notification}
+        #     or projects/\\{project}/locations/\\{location}/notifications/\\{notification}.
         # @!attribute [rw] subject
         #   @return [::Google::Cloud::AdvisoryNotifications::V1::Subject]
         #     The subject line of the notification.
@@ -136,7 +137,8 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent, which owns this collection of notifications.
-        #     Must be of the form "organizations/\\{organization}/locations/\\{location}".
+        #     Must be of the form "organizations/\\{organization}/locations/\\{location}"
+        #     or "projects/\\{project}/locations/\\{location}"
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of notifications to return. The service may return
@@ -185,7 +187,8 @@ module Google
         #   @return [::String]
         #     Required. A name of the notification to retrieve.
         #     Format:
-        #     organizations/\\{organization}/locations/\\{location}/notifications/\\{notification}.
+        #     organizations/\\{organization}/locations/\\{location}/notifications/\\{notification}
+        #     or projects/\\{projects}/locations/\\{location}/notifications/\\{notification}.
         # @!attribute [rw] language_code
         #   @return [::String]
         #     ISO code for requested localization language. If unset, will be

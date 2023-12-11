@@ -32,6 +32,9 @@ class ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::
 
       path = client.location_path organization: "value0", location: "value1"
       assert_equal "organizations/value0/locations/value1", path
+
+      path = client.location_path project: "value0", location: "value1"
+      assert_equal "projects/value0/locations/value1", path
     end
   end
 
@@ -44,6 +47,9 @@ class ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::
 
       path = client.notification_path organization: "value0", location: "value1", notification: "value2"
       assert_equal "organizations/value0/locations/value1/notifications/value2", path
+
+      path = client.notification_path project: "value0", location: "value1", notification: "value2"
+      assert_equal "projects/value0/locations/value1/notifications/value2", path
     end
   end
 

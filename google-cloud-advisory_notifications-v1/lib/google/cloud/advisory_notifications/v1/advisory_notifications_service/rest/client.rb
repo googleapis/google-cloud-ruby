@@ -165,7 +165,8 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The parent, which owns this collection of notifications.
-              #     Must be of the form "organizations/\\{organization}/locations/\\{location}".
+              #     Must be of the form "organizations/\\{organization}/locations/\\{location}"
+              #     or "projects/\\{project}/locations/\\{location}"
               #   @param page_size [::Integer]
               #     The maximum number of notifications to return. The service may return
               #     fewer than this value. If unspecified or equal to 0, at most 50
@@ -268,7 +269,8 @@ module Google
               #   @param name [::String]
               #     Required. A name of the notification to retrieve.
               #     Format:
-              #     organizations/\\{organization}/locations/\\{location}/notifications/\\{notification}.
+              #     organizations/\\{organization}/locations/\\{location}/notifications/\\{notification}
+              #     or projects/\\{projects}/locations/\\{location}/notifications/\\{notification}.
               #   @param language_code [::String]
               #     ISO code for requested localization language. If unset, will be
               #     interpereted as "en". If the requested language is valid, but not supported
