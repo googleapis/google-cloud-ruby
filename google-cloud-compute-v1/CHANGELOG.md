@@ -1,5 +1,11 @@
 # Release History
 
+### 2.6.0 (2023-12-12)
+
+#### Features
+
+* Update Compute Engine API to revision 20231110 ([#23639](https://github.com/googleapis/google-cloud-ruby/issues/23639)) 
+
 ### 2.5.0 (2023-09-12)
 
 #### Features
