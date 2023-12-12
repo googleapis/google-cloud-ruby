@@ -679,6 +679,15 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_snapshot_settings_service_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Compute.snapshot_settings_service do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::SnapshotSettingsService::Rest::Client, client
+    end
+  end
+
   def test_snapshots_rest
     Gapic::Rest::ClientStub.stub :new, :stub do
       client = Google::Cloud::Compute.snapshots do |config|
