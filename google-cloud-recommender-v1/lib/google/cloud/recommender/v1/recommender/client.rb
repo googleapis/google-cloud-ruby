@@ -232,6 +232,8 @@ module Google
             #
             #     * `severity`
             #
+            #     * `targetResources`
+            #
             #     Examples:
             #
             #     * `stateInfo.state = ACTIVE OR stateInfo.state = DISMISSED`
@@ -240,7 +242,12 @@ module Google
             #
             #     * `severity = CRITICAL OR severity = HIGH`
             #
+            #     * `targetResources :
+            #     //compute.googleapis.com/projects/1234/zones/us-central1-a/instances/instance-1`
+            #
             #     * `stateInfo.state = ACTIVE AND (severity = CRITICAL OR severity = HIGH)`
+            #
+            #     The max allowed filter length is 500 characters.
             #
             #     (These expressions are based on the filter language described at
             #     https://google.aip.dev/160)
@@ -551,6 +558,8 @@ module Google
             #
             #     * `priority`
             #
+            #     * `targetResources`
+            #
             #     Examples:
             #
             #     * `stateInfo.state = ACTIVE OR stateInfo.state = DISMISSED`
@@ -559,7 +568,12 @@ module Google
             #
             #     * `priority = P1 OR priority = P2`
             #
+            #     * `targetResources :
+            #     //compute.googleapis.com/projects/1234/zones/us-central1-a/instances/instance-1`
+            #
             #     * `stateInfo.state = ACTIVE AND (priority = P1 OR priority = P2)`
+            #
+            #     The max allowed filter length is 500 characters.
             #
             #     (These expressions are based on the filter language described at
             #     https://google.aip.dev/160)
@@ -746,7 +760,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Name of the recommendation.
+            #     Required. Name of the recommendation.
             #   @param etag [::String]
             #     Fingerprint of the Recommendation. Provides optimistic locking.
             #

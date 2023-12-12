@@ -264,6 +264,9 @@ module Google
         # @!attribute [rw] duration
         #   @return [::Google::Protobuf::Duration]
         #     Duration for which this cost applies.
+        # @!attribute [rw] cost_in_local_currency
+        #   @return [::Google::Type::Money]
+        #     The approximate cost savings in the billing account's local currency.
         class CostProjection
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -335,7 +338,7 @@ module Google
         #     Use with CategoryType.SUSTAINABILITY
         # @!attribute [rw] reliability_projection
         #   @return [::Google::Cloud::Recommender::V1::ReliabilityProjection]
-        #     Use with CategoryType.RELAIBILITY
+        #     Use with CategoryType.RELIABILITY
         class Impact
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
