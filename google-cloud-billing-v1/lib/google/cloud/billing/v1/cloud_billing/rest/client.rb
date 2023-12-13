@@ -279,7 +279,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload list_billing_accounts(page_size: nil, page_token: nil, filter: nil)
+              # @overload list_billing_accounts(page_size: nil, page_token: nil, filter: nil, parent: nil)
               #   Pass arguments to `list_billing_accounts` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -296,8 +296,16 @@ module Google
               #     This only supports filtering for
               #     [subaccounts](https://cloud.google.com/billing/docs/concepts) under a
               #     single provided parent billing account.
-              #     (e.g. "master_billing_account=billingAccounts/012345-678901-ABCDEF").
+              #     (for example,
+              #     `master_billing_account=billingAccounts/012345-678901-ABCDEF`).
               #     Boolean algebra and other fields are not currently supported.
+              #   @param parent [::String]
+              #     Optional. The parent resource to list billing accounts from.
+              #     Format:
+              #       - `organizations/{organization_id}`, for example,
+              #         `organizations/12345678`
+              #       - `billingAccounts/{billing_account_id}`, for example,
+              #         `billingAccounts/012345-567890-ABCDEF`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Billing::V1::BillingAccount>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -477,7 +485,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload create_billing_account(billing_account: nil)
+              # @overload create_billing_account(billing_account: nil, parent: nil)
               #   Pass arguments to `create_billing_account` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -487,6 +495,13 @@ module Google
               #     Currently CreateBillingAccount only supports subaccount creation, so
               #     any created billing accounts must be under a provided parent billing
               #     account.
+              #   @param parent [::String]
+              #     Optional. The parent to create a billing account from.
+              #     Format:
+              #       - `organizations/{organization_id}`, for example,
+              #         `organizations/12345678`
+              #       - `billingAccounts/{billing_account_id}`, for example,
+              #          `billingAccounts/012345-567890-ABCDEF`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Billing::V1::BillingAccount]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -737,7 +752,8 @@ module Google
               # account, even if the charge occurred before the new billing account was
               # assigned to the project.
               #
-              # The current authenticated user must have ownership privileges for both the
+              # The current authenticated user must have ownership privileges for both
+              # the
               # [project](https://cloud.google.com/docs/permissions-overview#h.bgs0oxofvnoo
               # ) and the [billing
               # account](https://cloud.google.com/billing/docs/how-to/billing-access).
@@ -1103,6 +1119,91 @@ module Google
               end
 
               ##
+              # Changes which parent organization a billing account belongs to.
+              #
+              # @overload move_billing_account(request, options = nil)
+              #   Pass arguments to `move_billing_account` via a request object, either of type
+              #   {::Google::Cloud::Billing::V1::MoveBillingAccountRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Billing::V1::MoveBillingAccountRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload move_billing_account(name: nil, destination_parent: nil)
+              #   Pass arguments to `move_billing_account` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource name of the billing account to move.
+              #     Must be of the form `billingAccounts/{billing_account_id}`.
+              #     The specified billing account cannot be a subaccount, since a subaccount
+              #     always belongs to the same organization as its parent account.
+              #   @param destination_parent [::String]
+              #     Required. The resource name of the Organization to reparent
+              #     the billing account under.
+              #     Must be of the form `organizations/{organization_id}`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Billing::V1::BillingAccount]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Billing::V1::BillingAccount]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/billing/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Billing::V1::CloudBilling::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Billing::V1::MoveBillingAccountRequest.new
+              #
+              #   # Call the move_billing_account method.
+              #   result = client.move_billing_account request
+              #
+              #   # The returned object is of type Google::Cloud::Billing::V1::BillingAccount.
+              #   p result
+              #
+              def move_billing_account request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Billing::V1::MoveBillingAccountRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.move_billing_account.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Billing::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.move_billing_account.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.move_billing_account.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @cloud_billing_stub.move_billing_account request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the CloudBilling REST API.
               #
               # This class represents the configuration for CloudBilling REST,
@@ -1277,6 +1378,11 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :test_iam_permissions
+                  ##
+                  # RPC-specific configuration for `move_billing_account`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :move_billing_account
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -1300,6 +1406,8 @@ module Google
                     @set_iam_policy = ::Gapic::Config::Method.new set_iam_policy_config
                     test_iam_permissions_config = parent_rpcs.test_iam_permissions if parent_rpcs.respond_to? :test_iam_permissions
                     @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
+                    move_billing_account_config = parent_rpcs.move_billing_account if parent_rpcs.respond_to? :move_billing_account
+                    @move_billing_account = ::Gapic::Config::Method.new move_billing_account_config
 
                     yield self if block_given?
                   end

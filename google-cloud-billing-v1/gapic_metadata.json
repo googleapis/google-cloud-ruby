@@ -59,6 +59,11 @@
               "methods": [
                 "test_iam_permissions"
               ]
+            },
+            "MoveBillingAccount": {
+              "methods": [
+                "move_billing_account"
+              ]
             }
           }
         }

@@ -56,6 +56,7 @@
     "snippets/cloud_billing/get_project_billing_info.rb",
     "snippets/cloud_billing/list_billing_accounts.rb",
     "snippets/cloud_billing/list_project_billing_info.rb",
+    "snippets/cloud_billing/move_billing_account.rb",
     "snippets/cloud_billing/set_iam_policy.rb",
     "snippets/cloud_billing/test_iam_permissions.rb",
     "snippets/cloud_billing/update_billing_account.rb",
