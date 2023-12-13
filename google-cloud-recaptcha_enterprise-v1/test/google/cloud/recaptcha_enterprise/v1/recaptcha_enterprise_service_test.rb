@@ -1100,6 +1100,7 @@ class ::Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Clie
 
     # Create request parameters for a unary method.
     project = "hello world"
+    account_id = "hello world"
     hashed_account_id = "hello world"
     page_size = 42
     page_token = "hello world"
@@ -1108,6 +1109,7 @@ class ::Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Clie
       assert_equal :search_related_account_group_memberships, name
       assert_kind_of ::Google::Cloud::RecaptchaEnterprise::V1::SearchRelatedAccountGroupMembershipsRequest, request
       assert_equal "hello world", request["project"]
+      assert_equal "hello world", request["account_id"]
       assert_equal "hello world", request["hashed_account_id"]
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
@@ -1121,35 +1123,35 @@ class ::Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Clie
       end
 
       # Use hash object
-      client.search_related_account_group_memberships({ project: project, hashed_account_id: hashed_account_id, page_size: page_size, page_token: page_token }) do |response, operation|
+      client.search_related_account_group_memberships({ project: project, account_id: account_id, hashed_account_id: hashed_account_id, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.search_related_account_group_memberships project: project, hashed_account_id: hashed_account_id, page_size: page_size, page_token: page_token do |response, operation|
+      client.search_related_account_group_memberships project: project, account_id: account_id, hashed_account_id: hashed_account_id, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.search_related_account_group_memberships ::Google::Cloud::RecaptchaEnterprise::V1::SearchRelatedAccountGroupMembershipsRequest.new(project: project, hashed_account_id: hashed_account_id, page_size: page_size, page_token: page_token) do |response, operation|
+      client.search_related_account_group_memberships ::Google::Cloud::RecaptchaEnterprise::V1::SearchRelatedAccountGroupMembershipsRequest.new(project: project, account_id: account_id, hashed_account_id: hashed_account_id, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.search_related_account_group_memberships({ project: project, hashed_account_id: hashed_account_id, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      client.search_related_account_group_memberships({ project: project, account_id: account_id, hashed_account_id: hashed_account_id, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.search_related_account_group_memberships(::Google::Cloud::RecaptchaEnterprise::V1::SearchRelatedAccountGroupMembershipsRequest.new(project: project, hashed_account_id: hashed_account_id, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      client.search_related_account_group_memberships(::Google::Cloud::RecaptchaEnterprise::V1::SearchRelatedAccountGroupMembershipsRequest.new(project: project, account_id: account_id, hashed_account_id: hashed_account_id, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

@@ -394,7 +394,7 @@ module Google
         # A reCAPTCHA Enterprise assessment resource.
         # @!attribute [r] name
         #   @return [::String]
-        #     Output only. The resource name for the Assessment in the format
+        #     Output only. Identifier. The resource name for the Assessment in the format
         #     `projects/{project}/assessments/{assessment}`.
         # @!attribute [rw] event
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::Event]
@@ -1141,7 +1141,7 @@ module Google
         # Metrics for a single Key.
         # @!attribute [r] name
         #   @return [::String]
-        #     Output only. The name of the metrics, in the format
+        #     Output only. Identifier. The name of the metrics, in the format
         #     `projects/{project}/keys/{key}/metrics`.
         # @!attribute [rw] start_time
         #   @return [::Google::Protobuf::Timestamp]
@@ -1177,7 +1177,7 @@ module Google
         # use reCAPTCHA Enterprise.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The resource name for the Key in the format
+        #     Identifier. The resource name for the Key in the format
         #     `projects/{project}/keys/{key}`.
         # @!attribute [rw] display_name
         #   @return [::String]
@@ -1523,7 +1523,7 @@ module Google
         # to take.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The resource name for the FirewallPolicy in the format
+        #     Identifier. The resource name for the FirewallPolicy in the format
         #     `projects/{project}/firewallpolicies/{firewallpolicy}`.
         # @!attribute [rw] description
         #   @return [::String]
@@ -1638,11 +1638,19 @@ module Google
         #     Required. The name of the project to search related account group
         #     memberships from. Specify the project name in the following format:
         #     `projects/{project}`.
+        # @!attribute [rw] account_id
+        #   @return [::String]
+        #     Optional. The unique stable account identifier used to search connections.
+        #     The identifier should correspond to an `account_id` provided in a previous
+        #     `CreateAssessment` or `AnnotateAssessment` call. Either hashed_account_id
+        #     or account_id must be set, but not both.
         # @!attribute [rw] hashed_account_id
         #   @return [::String]
-        #     Optional. The unique stable hashed user identifier used to search
-        #     connections. The identifier should correspond to a `hashed_account_id`
-        #     provided in a previous `CreateAssessment` or `AnnotateAssessment` call.
+        #     Optional. Deprecated: use `account_id` instead.
+        #     The unique stable hashed account identifier used to search connections. The
+        #     identifier should correspond to a `hashed_account_id` provided in a
+        #     previous `CreateAssessment` or `AnnotateAssessment` call. Either
+        #     hashed_account_id or account_id must be set, but not both.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. The maximum number of groups to return. The service might return
@@ -1678,11 +1686,17 @@ module Google
         # A membership in a group of related accounts.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The resource name for this membership in the format
+        #     Required. Identifier. The resource name for this membership in the format
         #     `projects/{project}/relatedaccountgroups/{relatedaccountgroup}/memberships/{membership}`.
+        # @!attribute [rw] account_id
+        #   @return [::String]
+        #     The unique stable account identifier of the member. The identifier
+        #     corresponds to an `account_id` provided in a previous `CreateAssessment` or
+        #     `AnnotateAssessment` call.
         # @!attribute [rw] hashed_account_id
         #   @return [::String]
-        #     The unique stable hashed user identifier of the member. The identifier
+        #     Deprecated: use `account_id` instead.
+        #     The unique stable hashed account identifier of the member. The identifier
         #     corresponds to a `hashed_account_id` provided in a previous
         #     `CreateAssessment` or `AnnotateAssessment` call.
         class RelatedAccountGroupMembership
@@ -1693,7 +1707,8 @@ module Google
         # A group of related accounts.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The resource name for the related account group in the format
+        #     Required. Identifier. The resource name for the related account group in
+        #     the format
         #     `projects/{project}/relatedaccountgroups/{related_account_group}`.
         class RelatedAccountGroup
           include ::Google::Protobuf::MessageExts
