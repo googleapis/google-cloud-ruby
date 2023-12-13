@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.10.0 (2023-12-13)
+
+#### Features
+
+* Added calls for managing audience exports 
+* Response metadata now includes sampling metadata 
+
 ### 0.9.0 (2023-09-12)
 
 #### Features
