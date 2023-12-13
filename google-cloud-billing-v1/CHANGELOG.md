@@ -1,5 +1,11 @@
 # Release History
 
+### 0.16.0 (2023-12-13)
+
+#### Features
+
+* Billing accounts now have a parent organization, and can be moved between parents ([#23633](https://github.com/googleapis/google-cloud-ruby/issues/23633)) 
+
 ### 0.15.1 (2023-09-26)
 
 #### Documentation
