@@ -149,8 +149,21 @@ module Google
                 @quota_project_id = @config.quota_project
                 @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
+                @operations_client = ::Google::Analytics::Data::V1beta::AnalyticsData::Rest::Operations.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @config.endpoint
+                end
+
                 @analytics_data_stub = ::Google::Analytics::Data::V1beta::AnalyticsData::Rest::ServiceStub.new endpoint: @config.endpoint, credentials: credentials
               end
+
+              ##
+              # Get the associated client for long-running operations.
+              #
+              # @return [::Google::Analytics::Data::V1beta::AnalyticsData::Rest::Operations]
+              #
+              attr_reader :operations_client
 
               # Service calls
 
@@ -959,6 +972,436 @@ module Google
               end
 
               ##
+              # Creates an audience export for later retrieval. This method quickly returns
+              # the audience export's resource name and initiates a long running
+              # asynchronous request to form an audience export. To export the users in an
+              # audience export, first create the audience export through this method and
+              # then send the audience resource name to the `QueryAudienceExport` method.
+              #
+              # See [Creating an Audience
+              # Export](https://developers.google.com/analytics/devguides/reporting/data/v1/audience-list-basics)
+              # for an introduction to Audience Exports with examples.
+              #
+              # An audience export is a snapshot of the users currently in the audience at
+              # the time of audience export creation. Creating audience exports for one
+              # audience on different days will return different results as users enter and
+              # exit the audience.
+              #
+              # Audiences in Google Analytics 4 allow you to segment your users in the ways
+              # that are important to your business. To learn more, see
+              # https://support.google.com/analytics/answer/9267572. Audience exports
+              # contain the users in each audience.
+              #
+              # Audience Export APIs have some methods at alpha and other methods at beta
+              # stability. The intention is to advance methods to beta stability after some
+              # feedback and adoption. To give your feedback on this API, complete the
+              # [Google Analytics Audience Export API
+              # Feedback](https://forms.gle/EeA5u5LW6PEggtCEA) form.
+              #
+              # @overload create_audience_export(request, options = nil)
+              #   Pass arguments to `create_audience_export` via a request object, either of type
+              #   {::Google::Analytics::Data::V1beta::CreateAudienceExportRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Data::V1beta::CreateAudienceExportRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_audience_export(parent: nil, audience_export: nil)
+              #   Pass arguments to `create_audience_export` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where this audience export will be created.
+              #     Format: `properties/{property}`
+              #   @param audience_export [::Google::Analytics::Data::V1beta::AudienceExport, ::Hash]
+              #     Required. The audience export to create.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/data/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Data::V1beta::AnalyticsData::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Data::V1beta::CreateAudienceExportRequest.new
+              #
+              #   # Call the create_audience_export method.
+              #   result = client.create_audience_export request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def create_audience_export request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Data::V1beta::CreateAudienceExportRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_audience_export.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Data::V1beta::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_audience_export.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_audience_export.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_data_stub.create_audience_export request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Retrieves an audience export of users. After creating an audience, the
+              # users are not immediately available for exporting. First, a request to
+              # `CreateAudienceExport` is necessary to create an audience export of users,
+              # and then second, this method is used to retrieve the users in the audience
+              # export.
+              #
+              # See [Creating an Audience
+              # Export](https://developers.google.com/analytics/devguides/reporting/data/v1/audience-list-basics)
+              # for an introduction to Audience Exports with examples.
+              #
+              # Audiences in Google Analytics 4 allow you to segment your users in the ways
+              # that are important to your business. To learn more, see
+              # https://support.google.com/analytics/answer/9267572.
+              #
+              # Audience Export APIs have some methods at alpha and other methods at beta
+              # stability. The intention is to advance methods to beta stability after some
+              # feedback and adoption. To give your feedback on this API, complete the
+              # [Google Analytics Audience Export API
+              # Feedback](https://forms.gle/EeA5u5LW6PEggtCEA) form.
+              #
+              # @overload query_audience_export(request, options = nil)
+              #   Pass arguments to `query_audience_export` via a request object, either of type
+              #   {::Google::Analytics::Data::V1beta::QueryAudienceExportRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Data::V1beta::QueryAudienceExportRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload query_audience_export(name: nil, offset: nil, limit: nil)
+              #   Pass arguments to `query_audience_export` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the audience export to retrieve users from.
+              #     Format: `properties/{property}/audienceExports/{audience_export}`
+              #   @param offset [::Integer]
+              #     Optional. The row count of the start row. The first row is counted as row
+              #     0.
+              #
+              #     When paging, the first request does not specify offset; or equivalently,
+              #     sets offset to 0; the first request returns the first `limit` of rows. The
+              #     second request sets offset to the `limit` of the first request; the second
+              #     request returns the second `limit` of rows.
+              #
+              #     To learn more about this pagination parameter, see
+              #     [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).
+              #   @param limit [::Integer]
+              #     Optional. The number of rows to return. If unspecified, 10,000 rows are
+              #     returned. The API returns a maximum of 250,000 rows per request, no matter
+              #     how many you ask for. `limit` must be positive.
+              #
+              #     The API can also return fewer rows than the requested `limit`, if there
+              #     aren't as many dimension values as the `limit`.
+              #
+              #     To learn more about this pagination parameter, see
+              #     [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Data::V1beta::QueryAudienceExportResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Data::V1beta::QueryAudienceExportResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/data/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Data::V1beta::AnalyticsData::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Data::V1beta::QueryAudienceExportRequest.new
+              #
+              #   # Call the query_audience_export method.
+              #   result = client.query_audience_export request
+              #
+              #   # The returned object is of type Google::Analytics::Data::V1beta::QueryAudienceExportResponse.
+              #   p result
+              #
+              def query_audience_export request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Data::V1beta::QueryAudienceExportRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.query_audience_export.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Data::V1beta::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.query_audience_export.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.query_audience_export.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_data_stub.query_audience_export request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets configuration metadata about a specific audience export. This method
+              # can be used to understand an audience export after it has been created.
+              #
+              # See [Creating an Audience
+              # Export](https://developers.google.com/analytics/devguides/reporting/data/v1/audience-list-basics)
+              # for an introduction to Audience Exports with examples.
+              #
+              # Audience Export APIs have some methods at alpha and other methods at beta
+              # stability. The intention is to advance methods to beta stability after some
+              # feedback and adoption. To give your feedback on this API, complete the
+              # [Google Analytics Audience Export API
+              # Feedback](https://forms.gle/EeA5u5LW6PEggtCEA) form.
+              #
+              # @overload get_audience_export(request, options = nil)
+              #   Pass arguments to `get_audience_export` via a request object, either of type
+              #   {::Google::Analytics::Data::V1beta::GetAudienceExportRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Data::V1beta::GetAudienceExportRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_audience_export(name: nil)
+              #   Pass arguments to `get_audience_export` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The audience export resource name.
+              #     Format: `properties/{property}/audienceExports/{audience_export}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Data::V1beta::AudienceExport]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Data::V1beta::AudienceExport]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/data/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Data::V1beta::AnalyticsData::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Data::V1beta::GetAudienceExportRequest.new
+              #
+              #   # Call the get_audience_export method.
+              #   result = client.get_audience_export request
+              #
+              #   # The returned object is of type Google::Analytics::Data::V1beta::AudienceExport.
+              #   p result
+              #
+              def get_audience_export request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Data::V1beta::GetAudienceExportRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_audience_export.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Data::V1beta::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_audience_export.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_audience_export.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_data_stub.get_audience_export request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists all audience exports for a property. This method can be used for you
+              # to find and reuse existing audience exports rather than creating
+              # unnecessary new audience exports. The same audience can have multiple
+              # audience exports that represent the export of users that were in an
+              # audience on different days.
+              #
+              # See [Creating an Audience
+              # Export](https://developers.google.com/analytics/devguides/reporting/data/v1/audience-list-basics)
+              # for an introduction to Audience Exports with examples.
+              #
+              # Audience Export APIs have some methods at alpha and other methods at beta
+              # stability. The intention is to advance methods to beta stability after some
+              # feedback and adoption. To give your feedback on this API, complete the
+              # [Google Analytics Audience Export API
+              # Feedback](https://forms.gle/EeA5u5LW6PEggtCEA) form.
+              #
+              # @overload list_audience_exports(request, options = nil)
+              #   Pass arguments to `list_audience_exports` via a request object, either of type
+              #   {::Google::Analytics::Data::V1beta::ListAudienceExportsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Data::V1beta::ListAudienceExportsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_audience_exports(parent: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_audience_exports` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. All audience exports for this property will be listed in the
+              #     response. Format: `properties/{property}`
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of audience exports to return. The service may
+              #     return fewer than this value. If unspecified, at most 200 audience exports
+              #     will be returned. The maximum value is 1000 (higher values will be coerced
+              #     to the maximum).
+              #   @param page_token [::String]
+              #     Optional. A page token, received from a previous `ListAudienceExports`
+              #     call. Provide this to retrieve the subsequent page.
+              #
+              #     When paginating, all other parameters provided to `ListAudienceExports`
+              #     must match the call that provided the page token.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Analytics::Data::V1beta::AudienceExport>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Analytics::Data::V1beta::AudienceExport>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/data/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Data::V1beta::AnalyticsData::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Data::V1beta::ListAudienceExportsRequest.new
+              #
+              #   # Call the list_audience_exports method.
+              #   result = client.list_audience_exports request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Analytics::Data::V1beta::AudienceExport.
+              #     p item
+              #   end
+              #
+              def list_audience_exports request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Data::V1beta::ListAudienceExportsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_audience_exports.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Data::V1beta::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_audience_exports.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_audience_exports.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_data_stub.list_audience_exports request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @analytics_data_stub, :list_audience_exports, "audience_exports", request, result, options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the AnalyticsData REST API.
               #
               # This class represents the configuration for AnalyticsData REST,
@@ -1118,6 +1561,26 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :check_compatibility
+                  ##
+                  # RPC-specific configuration for `create_audience_export`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_audience_export
+                  ##
+                  # RPC-specific configuration for `query_audience_export`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :query_audience_export
+                  ##
+                  # RPC-specific configuration for `get_audience_export`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_audience_export
+                  ##
+                  # RPC-specific configuration for `list_audience_exports`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_audience_exports
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -1135,6 +1598,14 @@ module Google
                     @run_realtime_report = ::Gapic::Config::Method.new run_realtime_report_config
                     check_compatibility_config = parent_rpcs.check_compatibility if parent_rpcs.respond_to? :check_compatibility
                     @check_compatibility = ::Gapic::Config::Method.new check_compatibility_config
+                    create_audience_export_config = parent_rpcs.create_audience_export if parent_rpcs.respond_to? :create_audience_export
+                    @create_audience_export = ::Gapic::Config::Method.new create_audience_export_config
+                    query_audience_export_config = parent_rpcs.query_audience_export if parent_rpcs.respond_to? :query_audience_export
+                    @query_audience_export = ::Gapic::Config::Method.new query_audience_export_config
+                    get_audience_export_config = parent_rpcs.get_audience_export if parent_rpcs.respond_to? :get_audience_export
+                    @get_audience_export = ::Gapic::Config::Method.new get_audience_export_config
+                    list_audience_exports_config = parent_rpcs.list_audience_exports if parent_rpcs.respond_to? :list_audience_exports
+                    @list_audience_exports = ::Gapic::Config::Method.new list_audience_exports_config
 
                     yield self if block_given?
                   end

@@ -44,6 +44,26 @@
               "methods": [
                 "check_compatibility"
               ]
+            },
+            "CreateAudienceExport": {
+              "methods": [
+                "create_audience_export"
+              ]
+            },
+            "QueryAudienceExport": {
+              "methods": [
+                "query_audience_export"
+              ]
+            },
+            "GetAudienceExport": {
+              "methods": [
+                "get_audience_export"
+              ]
+            },
+            "ListAudienceExports": {
+              "methods": [
+                "list_audience_exports"
+              ]
             }
           }
         }
