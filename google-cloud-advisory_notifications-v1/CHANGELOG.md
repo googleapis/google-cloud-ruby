@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.7.0 (2023-12-13)
+
+#### Features
+
+* notifications can live underneath projects in addition to underneath organizations  ([#23641](https://github.com/googleapis/google-cloud-ruby/issues/23641)) 
+
 ### 0.6.0 (2023-09-28)
 
 #### Features
