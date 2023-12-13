@@ -1,5 +1,11 @@
 # Release History
 
+### 0.14.0 (2023-12-13)
+
+#### Features
+
+* Added support for severity in AlertPolicy ([#23647](https://github.com/googleapis/google-cloud-ruby/issues/23647)) 
+
 ### 0.13.0 (2023-09-12)
 
 #### Features
