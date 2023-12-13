@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.16.2 (2023-12-13)
+
+#### Documentation
+
+* fix typo in the OccurrenceType documentation 
+
 ### 0.16.1 (2023-11-06)
 
 #### Documentation
