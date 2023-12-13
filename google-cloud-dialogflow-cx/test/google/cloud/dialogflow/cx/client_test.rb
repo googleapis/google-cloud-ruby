@@ -289,6 +289,25 @@ class Google::Cloud::Dialogflow::CX::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_generators_grpc
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Dialogflow::CX.generators transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Dialogflow::CX::V3::Generators::Client, client
+    end
+  end
+
+  def test_generators_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Dialogflow::CX.generators transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Dialogflow::CX::V3::Generators::Rest::Client, client
+    end
+  end
+
   def test_security_settings_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
