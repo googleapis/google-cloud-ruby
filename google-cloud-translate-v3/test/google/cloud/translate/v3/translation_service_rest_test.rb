@@ -647,6 +647,557 @@ class ::Google::Cloud::Translate::V3::TranslationService::Rest::ClientTest < Min
     end
   end
 
+  def test_create_adaptive_mt_dataset
+    # Create test objects.
+    client_result = ::Google::Cloud::Translate::V3::AdaptiveMtDataset.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    adaptive_mt_dataset = {}
+
+    create_adaptive_mt_dataset_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Translate::V3::TranslationService::Rest::ServiceStub.stub :transcode_create_adaptive_mt_dataset_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_adaptive_mt_dataset_client_stub do
+        # Create client
+        client = ::Google::Cloud::Translate::V3::TranslationService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_adaptive_mt_dataset({ parent: parent, adaptive_mt_dataset: adaptive_mt_dataset }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_adaptive_mt_dataset parent: parent, adaptive_mt_dataset: adaptive_mt_dataset do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_adaptive_mt_dataset ::Google::Cloud::Translate::V3::CreateAdaptiveMtDatasetRequest.new(parent: parent, adaptive_mt_dataset: adaptive_mt_dataset) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_adaptive_mt_dataset({ parent: parent, adaptive_mt_dataset: adaptive_mt_dataset }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_adaptive_mt_dataset(::Google::Cloud::Translate::V3::CreateAdaptiveMtDatasetRequest.new(parent: parent, adaptive_mt_dataset: adaptive_mt_dataset), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_adaptive_mt_dataset_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_adaptive_mt_dataset
+    # Create test objects.
+    client_result = ::Google::Protobuf::Empty.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_adaptive_mt_dataset_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Translate::V3::TranslationService::Rest::ServiceStub.stub :transcode_delete_adaptive_mt_dataset_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_adaptive_mt_dataset_client_stub do
+        # Create client
+        client = ::Google::Cloud::Translate::V3::TranslationService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_adaptive_mt_dataset({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_adaptive_mt_dataset name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_adaptive_mt_dataset ::Google::Cloud::Translate::V3::DeleteAdaptiveMtDatasetRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_adaptive_mt_dataset({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_adaptive_mt_dataset(::Google::Cloud::Translate::V3::DeleteAdaptiveMtDatasetRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_adaptive_mt_dataset_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_adaptive_mt_dataset
+    # Create test objects.
+    client_result = ::Google::Cloud::Translate::V3::AdaptiveMtDataset.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_adaptive_mt_dataset_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Translate::V3::TranslationService::Rest::ServiceStub.stub :transcode_get_adaptive_mt_dataset_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_adaptive_mt_dataset_client_stub do
+        # Create client
+        client = ::Google::Cloud::Translate::V3::TranslationService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_adaptive_mt_dataset({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_adaptive_mt_dataset name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_adaptive_mt_dataset ::Google::Cloud::Translate::V3::GetAdaptiveMtDatasetRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_adaptive_mt_dataset({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_adaptive_mt_dataset(::Google::Cloud::Translate::V3::GetAdaptiveMtDatasetRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_adaptive_mt_dataset_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_adaptive_mt_datasets
+    # Create test objects.
+    client_result = ::Google::Cloud::Translate::V3::ListAdaptiveMtDatasetsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+
+    list_adaptive_mt_datasets_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Translate::V3::TranslationService::Rest::ServiceStub.stub :transcode_list_adaptive_mt_datasets_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_adaptive_mt_datasets_client_stub do
+        # Create client
+        client = ::Google::Cloud::Translate::V3::TranslationService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_adaptive_mt_datasets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_adaptive_mt_datasets parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_adaptive_mt_datasets ::Google::Cloud::Translate::V3::ListAdaptiveMtDatasetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_adaptive_mt_datasets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_adaptive_mt_datasets(::Google::Cloud::Translate::V3::ListAdaptiveMtDatasetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_adaptive_mt_datasets_client_stub.call_count
+      end
+    end
+  end
+
+  def test_adaptive_mt_translate
+    # Create test objects.
+    client_result = ::Google::Cloud::Translate::V3::AdaptiveMtTranslateResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    dataset = "hello world"
+    content = ["hello world"]
+
+    adaptive_mt_translate_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Translate::V3::TranslationService::Rest::ServiceStub.stub :transcode_adaptive_mt_translate_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, adaptive_mt_translate_client_stub do
+        # Create client
+        client = ::Google::Cloud::Translate::V3::TranslationService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.adaptive_mt_translate({ parent: parent, dataset: dataset, content: content }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.adaptive_mt_translate parent: parent, dataset: dataset, content: content do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.adaptive_mt_translate ::Google::Cloud::Translate::V3::AdaptiveMtTranslateRequest.new(parent: parent, dataset: dataset, content: content) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.adaptive_mt_translate({ parent: parent, dataset: dataset, content: content }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.adaptive_mt_translate(::Google::Cloud::Translate::V3::AdaptiveMtTranslateRequest.new(parent: parent, dataset: dataset, content: content), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, adaptive_mt_translate_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_adaptive_mt_file
+    # Create test objects.
+    client_result = ::Google::Cloud::Translate::V3::AdaptiveMtFile.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_adaptive_mt_file_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Translate::V3::TranslationService::Rest::ServiceStub.stub :transcode_get_adaptive_mt_file_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_adaptive_mt_file_client_stub do
+        # Create client
+        client = ::Google::Cloud::Translate::V3::TranslationService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_adaptive_mt_file({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_adaptive_mt_file name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_adaptive_mt_file ::Google::Cloud::Translate::V3::GetAdaptiveMtFileRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_adaptive_mt_file({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_adaptive_mt_file(::Google::Cloud::Translate::V3::GetAdaptiveMtFileRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_adaptive_mt_file_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_adaptive_mt_file
+    # Create test objects.
+    client_result = ::Google::Protobuf::Empty.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_adaptive_mt_file_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Translate::V3::TranslationService::Rest::ServiceStub.stub :transcode_delete_adaptive_mt_file_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_adaptive_mt_file_client_stub do
+        # Create client
+        client = ::Google::Cloud::Translate::V3::TranslationService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_adaptive_mt_file({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_adaptive_mt_file name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_adaptive_mt_file ::Google::Cloud::Translate::V3::DeleteAdaptiveMtFileRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_adaptive_mt_file({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_adaptive_mt_file(::Google::Cloud::Translate::V3::DeleteAdaptiveMtFileRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_adaptive_mt_file_client_stub.call_count
+      end
+    end
+  end
+
+  def test_import_adaptive_mt_file
+    # Create test objects.
+    client_result = ::Google::Cloud::Translate::V3::ImportAdaptiveMtFileResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    file_input_source = {}
+
+    import_adaptive_mt_file_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Translate::V3::TranslationService::Rest::ServiceStub.stub :transcode_import_adaptive_mt_file_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, import_adaptive_mt_file_client_stub do
+        # Create client
+        client = ::Google::Cloud::Translate::V3::TranslationService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.import_adaptive_mt_file({ parent: parent, file_input_source: file_input_source }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.import_adaptive_mt_file parent: parent, file_input_source: file_input_source do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.import_adaptive_mt_file ::Google::Cloud::Translate::V3::ImportAdaptiveMtFileRequest.new(parent: parent, file_input_source: file_input_source) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.import_adaptive_mt_file({ parent: parent, file_input_source: file_input_source }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.import_adaptive_mt_file(::Google::Cloud::Translate::V3::ImportAdaptiveMtFileRequest.new(parent: parent, file_input_source: file_input_source), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, import_adaptive_mt_file_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_adaptive_mt_files
+    # Create test objects.
+    client_result = ::Google::Cloud::Translate::V3::ListAdaptiveMtFilesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_adaptive_mt_files_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Translate::V3::TranslationService::Rest::ServiceStub.stub :transcode_list_adaptive_mt_files_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_adaptive_mt_files_client_stub do
+        # Create client
+        client = ::Google::Cloud::Translate::V3::TranslationService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_adaptive_mt_files({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_adaptive_mt_files parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_adaptive_mt_files ::Google::Cloud::Translate::V3::ListAdaptiveMtFilesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_adaptive_mt_files({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_adaptive_mt_files(::Google::Cloud::Translate::V3::ListAdaptiveMtFilesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_adaptive_mt_files_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_adaptive_mt_sentences
+    # Create test objects.
+    client_result = ::Google::Cloud::Translate::V3::ListAdaptiveMtSentencesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_adaptive_mt_sentences_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Translate::V3::TranslationService::Rest::ServiceStub.stub :transcode_list_adaptive_mt_sentences_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_adaptive_mt_sentences_client_stub do
+        # Create client
+        client = ::Google::Cloud::Translate::V3::TranslationService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_adaptive_mt_sentences({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_adaptive_mt_sentences parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_adaptive_mt_sentences ::Google::Cloud::Translate::V3::ListAdaptiveMtSentencesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_adaptive_mt_sentences({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_adaptive_mt_sentences(::Google::Cloud::Translate::V3::ListAdaptiveMtSentencesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_adaptive_mt_sentences_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 
