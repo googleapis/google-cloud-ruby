@@ -125,15 +125,15 @@ module Google
         #     set on a given resource.
         # @!attribute [rw] access_policy
         #   @return [::Google::Identity::AccessContextManager::V1::AccessPolicy]
-        #     Please also refer to the [access policy user
+        #     Also refer to the [access policy user
         #     guide](https://cloud.google.com/access-context-manager/docs/overview#access-policies).
         # @!attribute [rw] access_level
         #   @return [::Google::Identity::AccessContextManager::V1::AccessLevel]
-        #     Please also refer to the [access level user
+        #     Also refer to the [access level user
         #     guide](https://cloud.google.com/access-context-manager/docs/overview#access-levels).
         # @!attribute [rw] service_perimeter
         #   @return [::Google::Identity::AccessContextManager::V1::ServicePerimeter]
-        #     Please also refer to the [service perimeter user
+        #     Also refer to the [service perimeter user
         #     guide](https://cloud.google.com/vpc-service-controls/docs/overview).
         # @!attribute [rw] os_inventory
         #   @return [::Google::Cloud::OsConfig::V1::Inventory]
@@ -203,8 +203,6 @@ module Google
         #     hierarchy](https://cloud.google.com/iam/docs/overview#policy_hierarchy).
         #     Example:
         #     `//cloudresourcemanager.googleapis.com/projects/my_project_123`
-        #
-        #     For third-party assets, this field may be set differently.
         # @!attribute [rw] data
         #   @return [::Google::Protobuf::Struct]
         #     The content of the resource, in which some sensitive fields are removed
@@ -455,8 +453,8 @@ module Google
         #     [CryptoKeyVersion](https://cloud.google.com/kms/docs/reference/rest/v1/projects.locations.keyRings.cryptoKeys.cryptoKeyVersions)
         #     name.
         #
-        #     This field only presents for the purpose of backward compatibility. Please
-        #     use the `kms_keys` field to retrieve Cloud KMS key information. This field
+        #     This field only presents for the purpose of backward compatibility.
+        #     Use the `kms_keys` field to retrieve Cloud KMS key information. This field
         #     is available only when the resource's Protobuf contains it and will only be
         #     populated for [these resource
         #     types](https://cloud.google.com/asset-inventory/docs/legacy-field-names#resource_types_with_the_to_be_deprecated_kmskey_field)
@@ -536,7 +534,7 @@ module Google
         #     metadata fields that are returned by the List or Get APIs provided by the
         #     corresponding Google Cloud service (e.g., Compute Engine). see [API
         #     references and supported searchable
-        #     attributes](https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types)
+        #     attributes](https://cloud.google.com/asset-inventory/docs/supported-asset-types)
         #     to see which fields are included.
         #
         #     You can search values of these fields through free text search. However,
@@ -587,7 +585,7 @@ module Google
         # @!attribute [rw] tag_keys
         #   @return [::Array<::String>]
         #     This field is only present for the purpose of backward compatibility.
-        #     Please use the `tags` field instead.
+        #     Use the `tags` field instead.
         #
         #     TagKey namespaced names, in the format of \\{ORG_ID}/\\{TAG_KEY_SHORT_NAME}.
         #     To search against the `tagKeys`:
@@ -602,7 +600,7 @@ module Google
         # @!attribute [rw] tag_values
         #   @return [::Array<::String>]
         #     This field is only present for the purpose of backward compatibility.
-        #     Please use the `tags` field instead.
+        #     Use the `tags` field instead.
         #
         #     TagValue namespaced names, in the format of
         #     \\{ORG_ID}/\\{TAG_KEY_SHORT_NAME}/\\{TAG_VALUE_SHORT_NAME}.
@@ -619,7 +617,7 @@ module Google
         # @!attribute [rw] tag_value_ids
         #   @return [::Array<::String>]
         #     This field is only present for the purpose of backward compatibility.
-        #     Please use the `tags` field instead.
+        #     Use the `tags` field instead.
         #
         #     TagValue IDs, in the format of tagValues/\\{TAG_VALUE_ID}.
         #     To search against the `tagValueIds`:
@@ -681,10 +679,6 @@ module Google
         #     with the asset.
         #
         #
-        #     Note that both staging & prod SecurityMarks are attached on prod resources.
-        #     In CAS preprod/prod, both staging & prod SecurityMarks are ingested and
-        #     returned in the following `security_marks` map. In that case, the prefix
-        #     "staging." will be added to the keys of all the staging marks.
         #     To search against SCC SecurityMarks field:
         #
         #       * Use a field query:
@@ -745,7 +739,7 @@ module Google
         #
         #     You can find the resource definition for each supported resource type in
         #     this table:
-        #     `https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types`
+        #     `https://cloud.google.com/asset-inventory/docs/supported-asset-types`
         class VersionedResource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -761,7 +755,7 @@ module Google
         #
         #     You can find the supported attached asset types of each resource in this
         #     table:
-        #     `https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types`
+        #     `https://cloud.google.com/asset-inventory/docs/supported-asset-types`
         # @!attribute [rw] versioned_resources
         #   @return [::Array<::Google::Cloud::Asset::V1::VersionedResource>]
         #     Versioned resource representations of this attached resource. This is
