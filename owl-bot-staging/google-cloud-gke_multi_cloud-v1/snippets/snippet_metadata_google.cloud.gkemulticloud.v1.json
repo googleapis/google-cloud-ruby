@@ -1,0 +1,1775 @@
+{
+  "client_library": {
+    "name": "google-cloud-gke_multi_cloud-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.gkemulticloud.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "gkemulticloud_v1_generated_AttachedClusters_CreateAttachedCluster_sync",
+      "title": "Snippet for the create_attached_cluster call in the AttachedClusters service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client#create_attached_cluster. It may require modification in order to execute successfully.",
+      "file": "attached_clusters/create_attached_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_attached_cluster",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client#create_attached_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::CreateAttachedClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AttachedClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client"
+        },
+        "method": {
+          "short_name": "CreateAttachedCluster",
+          "full_name": "google.cloud.gkemulticloud.v1.AttachedClusters.CreateAttachedCluster",
+          "service": {
+            "short_name": "AttachedClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AttachedClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AttachedClusters_UpdateAttachedCluster_sync",
+      "title": "Snippet for the update_attached_cluster call in the AttachedClusters service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client#update_attached_cluster. It may require modification in order to execute successfully.",
+      "file": "attached_clusters/update_attached_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_attached_cluster",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client#update_attached_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::UpdateAttachedClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AttachedClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client"
+        },
+        "method": {
+          "short_name": "UpdateAttachedCluster",
+          "full_name": "google.cloud.gkemulticloud.v1.AttachedClusters.UpdateAttachedCluster",
+          "service": {
+            "short_name": "AttachedClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AttachedClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AttachedClusters_ImportAttachedCluster_sync",
+      "title": "Snippet for the import_attached_cluster call in the AttachedClusters service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client#import_attached_cluster. It may require modification in order to execute successfully.",
+      "file": "attached_clusters/import_attached_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "import_attached_cluster",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client#import_attached_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::ImportAttachedClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AttachedClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client"
+        },
+        "method": {
+          "short_name": "ImportAttachedCluster",
+          "full_name": "google.cloud.gkemulticloud.v1.AttachedClusters.ImportAttachedCluster",
+          "service": {
+            "short_name": "AttachedClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AttachedClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AttachedClusters_GetAttachedCluster_sync",
+      "title": "Snippet for the get_attached_cluster call in the AttachedClusters service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client#get_attached_cluster. It may require modification in order to execute successfully.",
+      "file": "attached_clusters/get_attached_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_attached_cluster",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client#get_attached_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::GetAttachedClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GkeMultiCloud::V1::AttachedCluster",
+        "client": {
+          "short_name": "AttachedClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client"
+        },
+        "method": {
+          "short_name": "GetAttachedCluster",
+          "full_name": "google.cloud.gkemulticloud.v1.AttachedClusters.GetAttachedCluster",
+          "service": {
+            "short_name": "AttachedClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AttachedClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AttachedClusters_ListAttachedClusters_sync",
+      "title": "Snippet for the list_attached_clusters call in the AttachedClusters service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client#list_attached_clusters. It may require modification in order to execute successfully.",
+      "file": "attached_clusters/list_attached_clusters.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_attached_clusters",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client#list_attached_clusters",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::ListAttachedClustersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GkeMultiCloud::V1::ListAttachedClustersResponse",
+        "client": {
+          "short_name": "AttachedClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client"
+        },
+        "method": {
+          "short_name": "ListAttachedClusters",
+          "full_name": "google.cloud.gkemulticloud.v1.AttachedClusters.ListAttachedClusters",
+          "service": {
+            "short_name": "AttachedClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AttachedClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AttachedClusters_DeleteAttachedCluster_sync",
+      "title": "Snippet for the delete_attached_cluster call in the AttachedClusters service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client#delete_attached_cluster. It may require modification in order to execute successfully.",
+      "file": "attached_clusters/delete_attached_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_attached_cluster",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client#delete_attached_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::DeleteAttachedClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AttachedClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client"
+        },
+        "method": {
+          "short_name": "DeleteAttachedCluster",
+          "full_name": "google.cloud.gkemulticloud.v1.AttachedClusters.DeleteAttachedCluster",
+          "service": {
+            "short_name": "AttachedClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AttachedClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AttachedClusters_GetAttachedServerConfig_sync",
+      "title": "Snippet for the get_attached_server_config call in the AttachedClusters service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client#get_attached_server_config. It may require modification in order to execute successfully.",
+      "file": "attached_clusters/get_attached_server_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_attached_server_config",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client#get_attached_server_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::GetAttachedServerConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GkeMultiCloud::V1::AttachedServerConfig",
+        "client": {
+          "short_name": "AttachedClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client"
+        },
+        "method": {
+          "short_name": "GetAttachedServerConfig",
+          "full_name": "google.cloud.gkemulticloud.v1.AttachedClusters.GetAttachedServerConfig",
+          "service": {
+            "short_name": "AttachedClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AttachedClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AttachedClusters_GenerateAttachedClusterInstallManifest_sync",
+      "title": "Snippet for the generate_attached_cluster_install_manifest call in the AttachedClusters service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client#generate_attached_cluster_install_manifest. It may require modification in order to execute successfully.",
+      "file": "attached_clusters/generate_attached_cluster_install_manifest.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "generate_attached_cluster_install_manifest",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client#generate_attached_cluster_install_manifest",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::GenerateAttachedClusterInstallManifestRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GkeMultiCloud::V1::GenerateAttachedClusterInstallManifestResponse",
+        "client": {
+          "short_name": "AttachedClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client"
+        },
+        "method": {
+          "short_name": "GenerateAttachedClusterInstallManifest",
+          "full_name": "google.cloud.gkemulticloud.v1.AttachedClusters.GenerateAttachedClusterInstallManifest",
+          "service": {
+            "short_name": "AttachedClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AttachedClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AttachedClusters_GenerateAttachedClusterAgentToken_sync",
+      "title": "Snippet for the generate_attached_cluster_agent_token call in the AttachedClusters service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client#generate_attached_cluster_agent_token. It may require modification in order to execute successfully.",
+      "file": "attached_clusters/generate_attached_cluster_agent_token.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "generate_attached_cluster_agent_token",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client#generate_attached_cluster_agent_token",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::GenerateAttachedClusterAgentTokenRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GkeMultiCloud::V1::GenerateAttachedClusterAgentTokenResponse",
+        "client": {
+          "short_name": "AttachedClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client"
+        },
+        "method": {
+          "short_name": "GenerateAttachedClusterAgentToken",
+          "full_name": "google.cloud.gkemulticloud.v1.AttachedClusters.GenerateAttachedClusterAgentToken",
+          "service": {
+            "short_name": "AttachedClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AttachedClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AwsClusters_CreateAwsCluster_sync",
+      "title": "Snippet for the create_aws_cluster call in the AwsClusters service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#create_aws_cluster. It may require modification in order to execute successfully.",
+      "file": "aws_clusters/create_aws_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_aws_cluster",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#create_aws_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::CreateAwsClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AwsClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client"
+        },
+        "method": {
+          "short_name": "CreateAwsCluster",
+          "full_name": "google.cloud.gkemulticloud.v1.AwsClusters.CreateAwsCluster",
+          "service": {
+            "short_name": "AwsClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AwsClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AwsClusters_UpdateAwsCluster_sync",
+      "title": "Snippet for the update_aws_cluster call in the AwsClusters service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#update_aws_cluster. It may require modification in order to execute successfully.",
+      "file": "aws_clusters/update_aws_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_aws_cluster",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#update_aws_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::UpdateAwsClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AwsClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client"
+        },
+        "method": {
+          "short_name": "UpdateAwsCluster",
+          "full_name": "google.cloud.gkemulticloud.v1.AwsClusters.UpdateAwsCluster",
+          "service": {
+            "short_name": "AwsClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AwsClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AwsClusters_GetAwsCluster_sync",
+      "title": "Snippet for the get_aws_cluster call in the AwsClusters service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#get_aws_cluster. It may require modification in order to execute successfully.",
+      "file": "aws_clusters/get_aws_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_aws_cluster",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#get_aws_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::GetAwsClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GkeMultiCloud::V1::AwsCluster",
+        "client": {
+          "short_name": "AwsClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client"
+        },
+        "method": {
+          "short_name": "GetAwsCluster",
+          "full_name": "google.cloud.gkemulticloud.v1.AwsClusters.GetAwsCluster",
+          "service": {
+            "short_name": "AwsClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AwsClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AwsClusters_ListAwsClusters_sync",
+      "title": "Snippet for the list_aws_clusters call in the AwsClusters service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#list_aws_clusters. It may require modification in order to execute successfully.",
+      "file": "aws_clusters/list_aws_clusters.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_aws_clusters",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#list_aws_clusters",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::ListAwsClustersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GkeMultiCloud::V1::ListAwsClustersResponse",
+        "client": {
+          "short_name": "AwsClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client"
+        },
+        "method": {
+          "short_name": "ListAwsClusters",
+          "full_name": "google.cloud.gkemulticloud.v1.AwsClusters.ListAwsClusters",
+          "service": {
+            "short_name": "AwsClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AwsClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AwsClusters_DeleteAwsCluster_sync",
+      "title": "Snippet for the delete_aws_cluster call in the AwsClusters service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#delete_aws_cluster. It may require modification in order to execute successfully.",
+      "file": "aws_clusters/delete_aws_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_aws_cluster",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#delete_aws_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::DeleteAwsClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AwsClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client"
+        },
+        "method": {
+          "short_name": "DeleteAwsCluster",
+          "full_name": "google.cloud.gkemulticloud.v1.AwsClusters.DeleteAwsCluster",
+          "service": {
+            "short_name": "AwsClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AwsClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AwsClusters_GenerateAwsClusterAgentToken_sync",
+      "title": "Snippet for the generate_aws_cluster_agent_token call in the AwsClusters service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#generate_aws_cluster_agent_token. It may require modification in order to execute successfully.",
+      "file": "aws_clusters/generate_aws_cluster_agent_token.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "generate_aws_cluster_agent_token",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#generate_aws_cluster_agent_token",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::GenerateAwsClusterAgentTokenRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GkeMultiCloud::V1::GenerateAwsClusterAgentTokenResponse",
+        "client": {
+          "short_name": "AwsClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client"
+        },
+        "method": {
+          "short_name": "GenerateAwsClusterAgentToken",
+          "full_name": "google.cloud.gkemulticloud.v1.AwsClusters.GenerateAwsClusterAgentToken",
+          "service": {
+            "short_name": "AwsClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AwsClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AwsClusters_GenerateAwsAccessToken_sync",
+      "title": "Snippet for the generate_aws_access_token call in the AwsClusters service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#generate_aws_access_token. It may require modification in order to execute successfully.",
+      "file": "aws_clusters/generate_aws_access_token.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "generate_aws_access_token",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#generate_aws_access_token",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::GenerateAwsAccessTokenRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GkeMultiCloud::V1::GenerateAwsAccessTokenResponse",
+        "client": {
+          "short_name": "AwsClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client"
+        },
+        "method": {
+          "short_name": "GenerateAwsAccessToken",
+          "full_name": "google.cloud.gkemulticloud.v1.AwsClusters.GenerateAwsAccessToken",
+          "service": {
+            "short_name": "AwsClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AwsClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AwsClusters_CreateAwsNodePool_sync",
+      "title": "Snippet for the create_aws_node_pool call in the AwsClusters service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#create_aws_node_pool. It may require modification in order to execute successfully.",
+      "file": "aws_clusters/create_aws_node_pool.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_aws_node_pool",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#create_aws_node_pool",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::CreateAwsNodePoolRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AwsClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client"
+        },
+        "method": {
+          "short_name": "CreateAwsNodePool",
+          "full_name": "google.cloud.gkemulticloud.v1.AwsClusters.CreateAwsNodePool",
+          "service": {
+            "short_name": "AwsClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AwsClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AwsClusters_UpdateAwsNodePool_sync",
+      "title": "Snippet for the update_aws_node_pool call in the AwsClusters service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#update_aws_node_pool. It may require modification in order to execute successfully.",
+      "file": "aws_clusters/update_aws_node_pool.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_aws_node_pool",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#update_aws_node_pool",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::UpdateAwsNodePoolRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AwsClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client"
+        },
+        "method": {
+          "short_name": "UpdateAwsNodePool",
+          "full_name": "google.cloud.gkemulticloud.v1.AwsClusters.UpdateAwsNodePool",
+          "service": {
+            "short_name": "AwsClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AwsClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AwsClusters_RollbackAwsNodePoolUpdate_sync",
+      "title": "Snippet for the rollback_aws_node_pool_update call in the AwsClusters service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#rollback_aws_node_pool_update. It may require modification in order to execute successfully.",
+      "file": "aws_clusters/rollback_aws_node_pool_update.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "rollback_aws_node_pool_update",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#rollback_aws_node_pool_update",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::RollbackAwsNodePoolUpdateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AwsClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client"
+        },
+        "method": {
+          "short_name": "RollbackAwsNodePoolUpdate",
+          "full_name": "google.cloud.gkemulticloud.v1.AwsClusters.RollbackAwsNodePoolUpdate",
+          "service": {
+            "short_name": "AwsClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AwsClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AwsClusters_GetAwsNodePool_sync",
+      "title": "Snippet for the get_aws_node_pool call in the AwsClusters service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#get_aws_node_pool. It may require modification in order to execute successfully.",
+      "file": "aws_clusters/get_aws_node_pool.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_aws_node_pool",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#get_aws_node_pool",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::GetAwsNodePoolRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GkeMultiCloud::V1::AwsNodePool",
+        "client": {
+          "short_name": "AwsClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client"
+        },
+        "method": {
+          "short_name": "GetAwsNodePool",
+          "full_name": "google.cloud.gkemulticloud.v1.AwsClusters.GetAwsNodePool",
+          "service": {
+            "short_name": "AwsClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AwsClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AwsClusters_ListAwsNodePools_sync",
+      "title": "Snippet for the list_aws_node_pools call in the AwsClusters service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#list_aws_node_pools. It may require modification in order to execute successfully.",
+      "file": "aws_clusters/list_aws_node_pools.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_aws_node_pools",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#list_aws_node_pools",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::ListAwsNodePoolsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GkeMultiCloud::V1::ListAwsNodePoolsResponse",
+        "client": {
+          "short_name": "AwsClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client"
+        },
+        "method": {
+          "short_name": "ListAwsNodePools",
+          "full_name": "google.cloud.gkemulticloud.v1.AwsClusters.ListAwsNodePools",
+          "service": {
+            "short_name": "AwsClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AwsClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AwsClusters_DeleteAwsNodePool_sync",
+      "title": "Snippet for the delete_aws_node_pool call in the AwsClusters service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#delete_aws_node_pool. It may require modification in order to execute successfully.",
+      "file": "aws_clusters/delete_aws_node_pool.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_aws_node_pool",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#delete_aws_node_pool",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::DeleteAwsNodePoolRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AwsClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client"
+        },
+        "method": {
+          "short_name": "DeleteAwsNodePool",
+          "full_name": "google.cloud.gkemulticloud.v1.AwsClusters.DeleteAwsNodePool",
+          "service": {
+            "short_name": "AwsClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AwsClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AwsClusters_GetAwsOpenIdConfig_sync",
+      "title": "Snippet for the get_aws_open_id_config call in the AwsClusters service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#get_aws_open_id_config. It may require modification in order to execute successfully.",
+      "file": "aws_clusters/get_aws_open_id_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_aws_open_id_config",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#get_aws_open_id_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::GetAwsOpenIdConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GkeMultiCloud::V1::AwsOpenIdConfig",
+        "client": {
+          "short_name": "AwsClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client"
+        },
+        "method": {
+          "short_name": "GetAwsOpenIdConfig",
+          "full_name": "google.cloud.gkemulticloud.v1.AwsClusters.GetAwsOpenIdConfig",
+          "service": {
+            "short_name": "AwsClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AwsClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AwsClusters_GetAwsJsonWebKeys_sync",
+      "title": "Snippet for the get_aws_json_web_keys call in the AwsClusters service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#get_aws_json_web_keys. It may require modification in order to execute successfully.",
+      "file": "aws_clusters/get_aws_json_web_keys.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_aws_json_web_keys",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#get_aws_json_web_keys",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::GetAwsJsonWebKeysRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GkeMultiCloud::V1::AwsJsonWebKeys",
+        "client": {
+          "short_name": "AwsClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client"
+        },
+        "method": {
+          "short_name": "GetAwsJsonWebKeys",
+          "full_name": "google.cloud.gkemulticloud.v1.AwsClusters.GetAwsJsonWebKeys",
+          "service": {
+            "short_name": "AwsClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AwsClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AwsClusters_GetAwsServerConfig_sync",
+      "title": "Snippet for the get_aws_server_config call in the AwsClusters service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#get_aws_server_config. It may require modification in order to execute successfully.",
+      "file": "aws_clusters/get_aws_server_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_aws_server_config",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#get_aws_server_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::GetAwsServerConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GkeMultiCloud::V1::AwsServerConfig",
+        "client": {
+          "short_name": "AwsClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client"
+        },
+        "method": {
+          "short_name": "GetAwsServerConfig",
+          "full_name": "google.cloud.gkemulticloud.v1.AwsClusters.GetAwsServerConfig",
+          "service": {
+            "short_name": "AwsClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AwsClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AzureClusters_CreateAzureClient_sync",
+      "title": "Snippet for the create_azure_client call in the AzureClusters service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#create_azure_client. It may require modification in order to execute successfully.",
+      "file": "azure_clusters/create_azure_client.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_azure_client",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#create_azure_client",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::CreateAzureClientRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AzureClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client"
+        },
+        "method": {
+          "short_name": "CreateAzureClient",
+          "full_name": "google.cloud.gkemulticloud.v1.AzureClusters.CreateAzureClient",
+          "service": {
+            "short_name": "AzureClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AzureClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AzureClusters_GetAzureClient_sync",
+      "title": "Snippet for the get_azure_client call in the AzureClusters service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#get_azure_client. It may require modification in order to execute successfully.",
+      "file": "azure_clusters/get_azure_client.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_azure_client",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#get_azure_client",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::GetAzureClientRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GkeMultiCloud::V1::AzureClient",
+        "client": {
+          "short_name": "AzureClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client"
+        },
+        "method": {
+          "short_name": "GetAzureClient",
+          "full_name": "google.cloud.gkemulticloud.v1.AzureClusters.GetAzureClient",
+          "service": {
+            "short_name": "AzureClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AzureClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AzureClusters_ListAzureClients_sync",
+      "title": "Snippet for the list_azure_clients call in the AzureClusters service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#list_azure_clients. It may require modification in order to execute successfully.",
+      "file": "azure_clusters/list_azure_clients.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_azure_clients",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#list_azure_clients",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::ListAzureClientsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GkeMultiCloud::V1::ListAzureClientsResponse",
+        "client": {
+          "short_name": "AzureClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client"
+        },
+        "method": {
+          "short_name": "ListAzureClients",
+          "full_name": "google.cloud.gkemulticloud.v1.AzureClusters.ListAzureClients",
+          "service": {
+            "short_name": "AzureClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AzureClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AzureClusters_DeleteAzureClient_sync",
+      "title": "Snippet for the delete_azure_client call in the AzureClusters service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#delete_azure_client. It may require modification in order to execute successfully.",
+      "file": "azure_clusters/delete_azure_client.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_azure_client",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#delete_azure_client",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::DeleteAzureClientRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AzureClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client"
+        },
+        "method": {
+          "short_name": "DeleteAzureClient",
+          "full_name": "google.cloud.gkemulticloud.v1.AzureClusters.DeleteAzureClient",
+          "service": {
+            "short_name": "AzureClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AzureClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AzureClusters_CreateAzureCluster_sync",
+      "title": "Snippet for the create_azure_cluster call in the AzureClusters service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#create_azure_cluster. It may require modification in order to execute successfully.",
+      "file": "azure_clusters/create_azure_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_azure_cluster",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#create_azure_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::CreateAzureClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AzureClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client"
+        },
+        "method": {
+          "short_name": "CreateAzureCluster",
+          "full_name": "google.cloud.gkemulticloud.v1.AzureClusters.CreateAzureCluster",
+          "service": {
+            "short_name": "AzureClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AzureClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AzureClusters_UpdateAzureCluster_sync",
+      "title": "Snippet for the update_azure_cluster call in the AzureClusters service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#update_azure_cluster. It may require modification in order to execute successfully.",
+      "file": "azure_clusters/update_azure_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_azure_cluster",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#update_azure_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::UpdateAzureClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AzureClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client"
+        },
+        "method": {
+          "short_name": "UpdateAzureCluster",
+          "full_name": "google.cloud.gkemulticloud.v1.AzureClusters.UpdateAzureCluster",
+          "service": {
+            "short_name": "AzureClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AzureClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AzureClusters_GetAzureCluster_sync",
+      "title": "Snippet for the get_azure_cluster call in the AzureClusters service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#get_azure_cluster. It may require modification in order to execute successfully.",
+      "file": "azure_clusters/get_azure_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_azure_cluster",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#get_azure_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::GetAzureClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GkeMultiCloud::V1::AzureCluster",
+        "client": {
+          "short_name": "AzureClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client"
+        },
+        "method": {
+          "short_name": "GetAzureCluster",
+          "full_name": "google.cloud.gkemulticloud.v1.AzureClusters.GetAzureCluster",
+          "service": {
+            "short_name": "AzureClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AzureClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AzureClusters_ListAzureClusters_sync",
+      "title": "Snippet for the list_azure_clusters call in the AzureClusters service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#list_azure_clusters. It may require modification in order to execute successfully.",
+      "file": "azure_clusters/list_azure_clusters.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_azure_clusters",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#list_azure_clusters",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::ListAzureClustersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GkeMultiCloud::V1::ListAzureClustersResponse",
+        "client": {
+          "short_name": "AzureClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client"
+        },
+        "method": {
+          "short_name": "ListAzureClusters",
+          "full_name": "google.cloud.gkemulticloud.v1.AzureClusters.ListAzureClusters",
+          "service": {
+            "short_name": "AzureClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AzureClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AzureClusters_DeleteAzureCluster_sync",
+      "title": "Snippet for the delete_azure_cluster call in the AzureClusters service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#delete_azure_cluster. It may require modification in order to execute successfully.",
+      "file": "azure_clusters/delete_azure_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_azure_cluster",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#delete_azure_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::DeleteAzureClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AzureClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client"
+        },
+        "method": {
+          "short_name": "DeleteAzureCluster",
+          "full_name": "google.cloud.gkemulticloud.v1.AzureClusters.DeleteAzureCluster",
+          "service": {
+            "short_name": "AzureClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AzureClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AzureClusters_GenerateAzureClusterAgentToken_sync",
+      "title": "Snippet for the generate_azure_cluster_agent_token call in the AzureClusters service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#generate_azure_cluster_agent_token. It may require modification in order to execute successfully.",
+      "file": "azure_clusters/generate_azure_cluster_agent_token.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "generate_azure_cluster_agent_token",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#generate_azure_cluster_agent_token",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::GenerateAzureClusterAgentTokenRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GkeMultiCloud::V1::GenerateAzureClusterAgentTokenResponse",
+        "client": {
+          "short_name": "AzureClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client"
+        },
+        "method": {
+          "short_name": "GenerateAzureClusterAgentToken",
+          "full_name": "google.cloud.gkemulticloud.v1.AzureClusters.GenerateAzureClusterAgentToken",
+          "service": {
+            "short_name": "AzureClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AzureClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AzureClusters_GenerateAzureAccessToken_sync",
+      "title": "Snippet for the generate_azure_access_token call in the AzureClusters service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#generate_azure_access_token. It may require modification in order to execute successfully.",
+      "file": "azure_clusters/generate_azure_access_token.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "generate_azure_access_token",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#generate_azure_access_token",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::GenerateAzureAccessTokenRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GkeMultiCloud::V1::GenerateAzureAccessTokenResponse",
+        "client": {
+          "short_name": "AzureClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client"
+        },
+        "method": {
+          "short_name": "GenerateAzureAccessToken",
+          "full_name": "google.cloud.gkemulticloud.v1.AzureClusters.GenerateAzureAccessToken",
+          "service": {
+            "short_name": "AzureClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AzureClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AzureClusters_CreateAzureNodePool_sync",
+      "title": "Snippet for the create_azure_node_pool call in the AzureClusters service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#create_azure_node_pool. It may require modification in order to execute successfully.",
+      "file": "azure_clusters/create_azure_node_pool.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_azure_node_pool",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#create_azure_node_pool",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::CreateAzureNodePoolRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AzureClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client"
+        },
+        "method": {
+          "short_name": "CreateAzureNodePool",
+          "full_name": "google.cloud.gkemulticloud.v1.AzureClusters.CreateAzureNodePool",
+          "service": {
+            "short_name": "AzureClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AzureClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AzureClusters_UpdateAzureNodePool_sync",
+      "title": "Snippet for the update_azure_node_pool call in the AzureClusters service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#update_azure_node_pool. It may require modification in order to execute successfully.",
+      "file": "azure_clusters/update_azure_node_pool.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_azure_node_pool",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#update_azure_node_pool",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::UpdateAzureNodePoolRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AzureClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client"
+        },
+        "method": {
+          "short_name": "UpdateAzureNodePool",
+          "full_name": "google.cloud.gkemulticloud.v1.AzureClusters.UpdateAzureNodePool",
+          "service": {
+            "short_name": "AzureClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AzureClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AzureClusters_GetAzureNodePool_sync",
+      "title": "Snippet for the get_azure_node_pool call in the AzureClusters service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#get_azure_node_pool. It may require modification in order to execute successfully.",
+      "file": "azure_clusters/get_azure_node_pool.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_azure_node_pool",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#get_azure_node_pool",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::GetAzureNodePoolRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GkeMultiCloud::V1::AzureNodePool",
+        "client": {
+          "short_name": "AzureClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client"
+        },
+        "method": {
+          "short_name": "GetAzureNodePool",
+          "full_name": "google.cloud.gkemulticloud.v1.AzureClusters.GetAzureNodePool",
+          "service": {
+            "short_name": "AzureClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AzureClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AzureClusters_ListAzureNodePools_sync",
+      "title": "Snippet for the list_azure_node_pools call in the AzureClusters service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#list_azure_node_pools. It may require modification in order to execute successfully.",
+      "file": "azure_clusters/list_azure_node_pools.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_azure_node_pools",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#list_azure_node_pools",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::ListAzureNodePoolsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GkeMultiCloud::V1::ListAzureNodePoolsResponse",
+        "client": {
+          "short_name": "AzureClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client"
+        },
+        "method": {
+          "short_name": "ListAzureNodePools",
+          "full_name": "google.cloud.gkemulticloud.v1.AzureClusters.ListAzureNodePools",
+          "service": {
+            "short_name": "AzureClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AzureClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AzureClusters_DeleteAzureNodePool_sync",
+      "title": "Snippet for the delete_azure_node_pool call in the AzureClusters service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#delete_azure_node_pool. It may require modification in order to execute successfully.",
+      "file": "azure_clusters/delete_azure_node_pool.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_azure_node_pool",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#delete_azure_node_pool",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::DeleteAzureNodePoolRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AzureClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client"
+        },
+        "method": {
+          "short_name": "DeleteAzureNodePool",
+          "full_name": "google.cloud.gkemulticloud.v1.AzureClusters.DeleteAzureNodePool",
+          "service": {
+            "short_name": "AzureClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AzureClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AzureClusters_GetAzureOpenIdConfig_sync",
+      "title": "Snippet for the get_azure_open_id_config call in the AzureClusters service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#get_azure_open_id_config. It may require modification in order to execute successfully.",
+      "file": "azure_clusters/get_azure_open_id_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_azure_open_id_config",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#get_azure_open_id_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::GetAzureOpenIdConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GkeMultiCloud::V1::AzureOpenIdConfig",
+        "client": {
+          "short_name": "AzureClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client"
+        },
+        "method": {
+          "short_name": "GetAzureOpenIdConfig",
+          "full_name": "google.cloud.gkemulticloud.v1.AzureClusters.GetAzureOpenIdConfig",
+          "service": {
+            "short_name": "AzureClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AzureClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AzureClusters_GetAzureJsonWebKeys_sync",
+      "title": "Snippet for the get_azure_json_web_keys call in the AzureClusters service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#get_azure_json_web_keys. It may require modification in order to execute successfully.",
+      "file": "azure_clusters/get_azure_json_web_keys.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_azure_json_web_keys",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#get_azure_json_web_keys",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::GetAzureJsonWebKeysRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GkeMultiCloud::V1::AzureJsonWebKeys",
+        "client": {
+          "short_name": "AzureClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client"
+        },
+        "method": {
+          "short_name": "GetAzureJsonWebKeys",
+          "full_name": "google.cloud.gkemulticloud.v1.AzureClusters.GetAzureJsonWebKeys",
+          "service": {
+            "short_name": "AzureClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AzureClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkemulticloud_v1_generated_AzureClusters_GetAzureServerConfig_sync",
+      "title": "Snippet for the get_azure_server_config call in the AzureClusters service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#get_azure_server_config. It may require modification in order to execute successfully.",
+      "file": "azure_clusters/get_azure_server_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_azure_server_config",
+        "full_name": "::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#get_azure_server_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeMultiCloud::V1::GetAzureServerConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GkeMultiCloud::V1::AzureServerConfig",
+        "client": {
+          "short_name": "AzureClusters::Client",
+          "full_name": "::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client"
+        },
+        "method": {
+          "short_name": "GetAzureServerConfig",
+          "full_name": "google.cloud.gkemulticloud.v1.AzureClusters.GetAzureServerConfig",
+          "service": {
+            "short_name": "AzureClusters",
+            "full_name": "google.cloud.gkemulticloud.v1.AzureClusters"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
