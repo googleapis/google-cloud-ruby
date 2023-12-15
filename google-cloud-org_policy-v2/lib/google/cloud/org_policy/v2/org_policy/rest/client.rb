@@ -31,23 +31,23 @@ module Google
             #
             # An interface for managing organization policies.
             #
-            # The Cloud Org Policy service provides a simple mechanism for organizations to
-            # restrict the allowed configurations across their entire Cloud Resource
-            # hierarchy.
+            # The Organization Policy Service provides a simple mechanism for
+            # organizations to restrict the allowed configurations across their entire
+            # resource hierarchy.
             #
-            # You can use a `policy` to configure restrictions in Cloud resources. For
-            # example, you can enforce a `policy` that restricts which Google
-            # Cloud Platform APIs can be activated in a certain part of your resource
-            # hierarchy, or prevents serial port access to VM instances in a particular
-            # folder.
+            # You can use a policy to configure restrictions on resources. For
+            # example, you can enforce a policy that restricts which Google
+            # Cloud APIs can be activated in a certain part of your resource
+            # hierarchy, or prevents serial port access to VM instances in a
+            # particular folder.
             #
-            # `Policies` are inherited down through the resource hierarchy. A `policy`
+            # Policies are inherited down through the resource hierarchy. A policy
             # applied to a parent resource automatically applies to all its child resources
-            # unless overridden with a `policy` lower in the hierarchy.
+            # unless overridden with a policy lower in the hierarchy.
             #
-            # A `constraint` defines an aspect of a resource's configuration that can be
-            # controlled by an organization's policy administrator. `Policies` are a
-            # collection of `constraints` that defines their allowable configuration on a
+            # A constraint defines an aspect of a resource's configuration that can be
+            # controlled by an organization's policy administrator. Policies are a
+            # collection of constraints that defines their allowable configuration on a
             # particular resource and its child resources.
             #
             class Client
@@ -117,6 +117,31 @@ module Google
 
                   default_config.rpcs.delete_policy.timeout = 60.0
                   default_config.rpcs.delete_policy.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14, 4]
+                  }
+
+                  default_config.rpcs.create_custom_constraint.timeout = 60.0
+                  default_config.rpcs.create_custom_constraint.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14, 4]
+                  }
+
+                  default_config.rpcs.update_custom_constraint.timeout = 60.0
+                  default_config.rpcs.update_custom_constraint.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14, 4]
+                  }
+
+                  default_config.rpcs.get_custom_constraint.timeout = 60.0
+                  default_config.rpcs.get_custom_constraint.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14, 4]
+                  }
+
+                  default_config.rpcs.list_custom_constraints.timeout = 60.0
+                  default_config.rpcs.list_custom_constraints.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14, 4]
+                  }
+
+                  default_config.rpcs.delete_custom_constraint.timeout = 60.0
+                  default_config.rpcs.delete_custom_constraint.retry_policy = {
                     initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14, 4]
                   }
 
@@ -190,7 +215,7 @@ module Google
               # Service calls
 
               ##
-              # Lists `Constraints` that could be applied on the specified resource.
+              # Lists constraints that could be applied on the specified resource.
               #
               # @overload list_constraints(request, options = nil)
               #   Pass arguments to `list_constraints` via a request object, either of type
@@ -208,8 +233,9 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The Cloud resource that parents the constraint. Must be in one of
-              #     the following forms:
+              #     Required. The Google Cloud resource that parents the constraint. Must be in
+              #     one of the following forms:
+              #
               #     * `projects/{project_number}`
               #     * `projects/{project_id}`
               #     * `folders/{folder_id}`
@@ -285,7 +311,7 @@ module Google
               end
 
               ##
-              # Retrieves all of the `Policies` that exist on a particular resource.
+              # Retrieves all of the policies that exist on a particular resource.
               #
               # @overload list_policies(request, options = nil)
               #   Pass arguments to `list_policies` via a request object, either of type
@@ -303,9 +329,10 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The target Cloud resource that parents the set of constraints and
-              #     policies that will be returned from this call. Must be in one of the
-              #     following forms:
+              #     Required. The target Google Cloud resource that parents the set of
+              #     constraints and policies that will be returned from this call. Must be in
+              #     one of the following forms:
+              #
               #     * `projects/{project_number}`
               #     * `projects/{project_id}`
               #     * `folders/{folder_id}`
@@ -381,11 +408,11 @@ module Google
               end
 
               ##
-              # Gets a `Policy` on a resource.
+              # Gets a policy on a resource.
               #
-              # If no `Policy` is set on the resource, NOT_FOUND is returned. The
+              # If no policy is set on the resource, `NOT_FOUND` is returned. The
               # `etag` value can be used with `UpdatePolicy()` to update a
-              # `Policy` during read-modify-write.
+              # policy during read-modify-write.
               #
               # @overload get_policy(request, options = nil)
               #   Pass arguments to `get_policy` via a request object, either of type
@@ -403,8 +430,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. Resource name of the policy. See `Policy` for naming
-              #     requirements.
+              #     Required. Resource name of the policy. See
+              #     {::Google::Cloud::OrgPolicy::V2::Policy Policy} for naming requirements.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::OrgPolicy::V2::Policy]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -464,10 +491,10 @@ module Google
               end
 
               ##
-              # Gets the effective `Policy` on a resource. This is the result of merging
-              # `Policies` in the resource hierarchy and evaluating conditions. The
-              # returned `Policy` will not have an `etag` or `condition` set because it is
-              # a computed `Policy` across multiple resources.
+              # Gets the effective policy on a resource. This is the result of merging
+              # policies in the resource hierarchy and evaluating conditions. The
+              # returned policy will not have an `etag` or `condition` set because it is
+              # an evaluated policy across multiple resources.
               # Subtrees of Resource Manager resource hierarchy with 'under:' prefix will
               # not be expanded.
               #
@@ -487,7 +514,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The effective policy to compute. See `Policy` for naming rules.
+              #     Required. The effective policy to compute. See
+              #     {::Google::Cloud::OrgPolicy::V2::Policy Policy} for naming requirements.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::OrgPolicy::V2::Policy]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -547,12 +575,12 @@ module Google
               end
 
               ##
-              # Creates a Policy.
+              # Creates a policy.
               #
               # Returns a `google.rpc.Status` with `google.rpc.Code.NOT_FOUND` if the
               # constraint does not exist.
               # Returns a `google.rpc.Status` with `google.rpc.Code.ALREADY_EXISTS` if the
-              # policy already exists on the given Cloud resource.
+              # policy already exists on the given Google Cloud resource.
               #
               # @overload create_policy(request, options = nil)
               #   Pass arguments to `create_policy` via a request object, either of type
@@ -570,14 +598,15 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The Cloud resource that will parent the new Policy. Must be in
-              #     one of the following forms:
+              #     Required. The Google Cloud resource that will parent the new policy. Must
+              #     be in one of the following forms:
+              #
               #     * `projects/{project_number}`
               #     * `projects/{project_id}`
               #     * `folders/{folder_id}`
               #     * `organizations/{organization_id}`
               #   @param policy [::Google::Cloud::OrgPolicy::V2::Policy, ::Hash]
-              #     Required. `Policy` to create.
+              #     Required. Policy to create.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::OrgPolicy::V2::Policy]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -637,7 +666,7 @@ module Google
               end
 
               ##
-              # Updates a Policy.
+              # Updates a policy.
               #
               # Returns a `google.rpc.Status` with `google.rpc.Code.NOT_FOUND` if the
               # constraint or the policy do not exist.
@@ -663,7 +692,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param policy [::Google::Cloud::OrgPolicy::V2::Policy, ::Hash]
-              #     Required. `Policy` to update.
+              #     Required. Policy to update.
               #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
               #     Field mask used to specify the fields to be overwritten in the policy
               #     by the set. The fields specified in the update_mask are relative to the
@@ -727,10 +756,10 @@ module Google
               end
 
               ##
-              # Deletes a Policy.
+              # Deletes a policy.
               #
               # Returns a `google.rpc.Status` with `google.rpc.Code.NOT_FOUND` if the
-              # constraint or Org Policy does not exist.
+              # constraint or organization policy does not exist.
               #
               # @overload delete_policy(request, options = nil)
               #   Pass arguments to `delete_policy` via a request object, either of type
@@ -742,14 +771,18 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload delete_policy(name: nil)
+              # @overload delete_policy(name: nil, etag: nil)
               #   Pass arguments to `delete_policy` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
               #     Required. Name of the policy to delete.
-              #     See `Policy` for naming rules.
+              #     See the policy entry for naming rules.
+              #   @param etag [::String]
+              #     Optional. The current etag of policy. If an etag is provided and does not
+              #     match the current etag of the policy, deletion will be blocked and an
+              #     ABORTED error will be returned.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Protobuf::Empty]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -801,6 +834,436 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @org_policy_stub.delete_policy request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a custom constraint.
+              #
+              # Returns a `google.rpc.Status` with `google.rpc.Code.NOT_FOUND` if the
+              # organization does not exist.
+              # Returns a `google.rpc.Status` with `google.rpc.Code.ALREADY_EXISTS` if the
+              # constraint already exists on the given organization.
+              #
+              # @overload create_custom_constraint(request, options = nil)
+              #   Pass arguments to `create_custom_constraint` via a request object, either of type
+              #   {::Google::Cloud::OrgPolicy::V2::CreateCustomConstraintRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::OrgPolicy::V2::CreateCustomConstraintRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_custom_constraint(parent: nil, custom_constraint: nil)
+              #   Pass arguments to `create_custom_constraint` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Must be in the following form:
+              #
+              #     * `organizations/{organization_id}`
+              #   @param custom_constraint [::Google::Cloud::OrgPolicy::V2::CustomConstraint, ::Hash]
+              #     Required. Custom constraint to create.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::OrgPolicy::V2::CustomConstraint]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::OrgPolicy::V2::CustomConstraint]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/org_policy/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::OrgPolicy::V2::CreateCustomConstraintRequest.new
+              #
+              #   # Call the create_custom_constraint method.
+              #   result = client.create_custom_constraint request
+              #
+              #   # The returned object is of type Google::Cloud::OrgPolicy::V2::CustomConstraint.
+              #   p result
+              #
+              def create_custom_constraint request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OrgPolicy::V2::CreateCustomConstraintRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_custom_constraint.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::OrgPolicy::V2::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_custom_constraint.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_custom_constraint.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @org_policy_stub.create_custom_constraint request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates a custom constraint.
+              #
+              # Returns a `google.rpc.Status` with `google.rpc.Code.NOT_FOUND` if the
+              # constraint does not exist.
+              #
+              # Note: the supplied policy will perform a full overwrite of all
+              # fields.
+              #
+              # @overload update_custom_constraint(request, options = nil)
+              #   Pass arguments to `update_custom_constraint` via a request object, either of type
+              #   {::Google::Cloud::OrgPolicy::V2::UpdateCustomConstraintRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::OrgPolicy::V2::UpdateCustomConstraintRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_custom_constraint(custom_constraint: nil)
+              #   Pass arguments to `update_custom_constraint` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param custom_constraint [::Google::Cloud::OrgPolicy::V2::CustomConstraint, ::Hash]
+              #     Required. `CustomConstraint` to update.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::OrgPolicy::V2::CustomConstraint]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::OrgPolicy::V2::CustomConstraint]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/org_policy/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::OrgPolicy::V2::UpdateCustomConstraintRequest.new
+              #
+              #   # Call the update_custom_constraint method.
+              #   result = client.update_custom_constraint request
+              #
+              #   # The returned object is of type Google::Cloud::OrgPolicy::V2::CustomConstraint.
+              #   p result
+              #
+              def update_custom_constraint request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OrgPolicy::V2::UpdateCustomConstraintRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_custom_constraint.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::OrgPolicy::V2::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_custom_constraint.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_custom_constraint.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @org_policy_stub.update_custom_constraint request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets a custom constraint.
+              #
+              # Returns a `google.rpc.Status` with `google.rpc.Code.NOT_FOUND` if the
+              # custom constraint does not exist.
+              #
+              # @overload get_custom_constraint(request, options = nil)
+              #   Pass arguments to `get_custom_constraint` via a request object, either of type
+              #   {::Google::Cloud::OrgPolicy::V2::GetCustomConstraintRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::OrgPolicy::V2::GetCustomConstraintRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_custom_constraint(name: nil)
+              #   Pass arguments to `get_custom_constraint` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Resource name of the custom constraint. See the custom constraint
+              #     entry for naming requirements.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::OrgPolicy::V2::CustomConstraint]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::OrgPolicy::V2::CustomConstraint]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/org_policy/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::OrgPolicy::V2::GetCustomConstraintRequest.new
+              #
+              #   # Call the get_custom_constraint method.
+              #   result = client.get_custom_constraint request
+              #
+              #   # The returned object is of type Google::Cloud::OrgPolicy::V2::CustomConstraint.
+              #   p result
+              #
+              def get_custom_constraint request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OrgPolicy::V2::GetCustomConstraintRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_custom_constraint.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::OrgPolicy::V2::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_custom_constraint.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_custom_constraint.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @org_policy_stub.get_custom_constraint request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Retrieves all of the custom constraints that exist on a particular
+              # organization resource.
+              #
+              # @overload list_custom_constraints(request, options = nil)
+              #   Pass arguments to `list_custom_constraints` via a request object, either of type
+              #   {::Google::Cloud::OrgPolicy::V2::ListCustomConstraintsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::OrgPolicy::V2::ListCustomConstraintsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_custom_constraints(parent: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_custom_constraints` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The target Google Cloud resource that parents the set of custom
+              #     constraints that will be returned from this call. Must be in one of the
+              #     following forms:
+              #
+              #     * `organizations/{organization_id}`
+              #   @param page_size [::Integer]
+              #     Size of the pages to be returned. This is currently unsupported and will
+              #     be ignored. The server may at any point start using this field to limit
+              #     page size.
+              #   @param page_token [::String]
+              #     Page token used to retrieve the next page. This is currently unsupported
+              #     and will be ignored. The server may at any point start using this field.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::OrgPolicy::V2::CustomConstraint>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::OrgPolicy::V2::CustomConstraint>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/org_policy/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::OrgPolicy::V2::ListCustomConstraintsRequest.new
+              #
+              #   # Call the list_custom_constraints method.
+              #   result = client.list_custom_constraints request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::OrgPolicy::V2::CustomConstraint.
+              #     p item
+              #   end
+              #
+              def list_custom_constraints request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OrgPolicy::V2::ListCustomConstraintsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_custom_constraints.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::OrgPolicy::V2::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_custom_constraints.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_custom_constraints.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @org_policy_stub.list_custom_constraints request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @org_policy_stub, :list_custom_constraints, "custom_constraints", request, result, options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a custom constraint.
+              #
+              # Returns a `google.rpc.Status` with `google.rpc.Code.NOT_FOUND` if the
+              # constraint does not exist.
+              #
+              # @overload delete_custom_constraint(request, options = nil)
+              #   Pass arguments to `delete_custom_constraint` via a request object, either of type
+              #   {::Google::Cloud::OrgPolicy::V2::DeleteCustomConstraintRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::OrgPolicy::V2::DeleteCustomConstraintRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_custom_constraint(name: nil)
+              #   Pass arguments to `delete_custom_constraint` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Name of the custom constraint to delete.
+              #     See the custom constraint entry for naming rules.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/org_policy/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::OrgPolicy::V2::DeleteCustomConstraintRequest.new
+              #
+              #   # Call the delete_custom_constraint method.
+              #   result = client.delete_custom_constraint request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
+              def delete_custom_constraint request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OrgPolicy::V2::DeleteCustomConstraintRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_custom_constraint.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::OrgPolicy::V2::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_custom_constraint.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_custom_constraint.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @org_policy_stub.delete_custom_constraint request, options do |result, operation|
                   yield result, operation if block_given?
                   return result
                 end
@@ -968,6 +1431,31 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :delete_policy
+                  ##
+                  # RPC-specific configuration for `create_custom_constraint`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_custom_constraint
+                  ##
+                  # RPC-specific configuration for `update_custom_constraint`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_custom_constraint
+                  ##
+                  # RPC-specific configuration for `get_custom_constraint`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_custom_constraint
+                  ##
+                  # RPC-specific configuration for `list_custom_constraints`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_custom_constraints
+                  ##
+                  # RPC-specific configuration for `delete_custom_constraint`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_custom_constraint
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -985,6 +1473,16 @@ module Google
                     @update_policy = ::Gapic::Config::Method.new update_policy_config
                     delete_policy_config = parent_rpcs.delete_policy if parent_rpcs.respond_to? :delete_policy
                     @delete_policy = ::Gapic::Config::Method.new delete_policy_config
+                    create_custom_constraint_config = parent_rpcs.create_custom_constraint if parent_rpcs.respond_to? :create_custom_constraint
+                    @create_custom_constraint = ::Gapic::Config::Method.new create_custom_constraint_config
+                    update_custom_constraint_config = parent_rpcs.update_custom_constraint if parent_rpcs.respond_to? :update_custom_constraint
+                    @update_custom_constraint = ::Gapic::Config::Method.new update_custom_constraint_config
+                    get_custom_constraint_config = parent_rpcs.get_custom_constraint if parent_rpcs.respond_to? :get_custom_constraint
+                    @get_custom_constraint = ::Gapic::Config::Method.new get_custom_constraint_config
+                    list_custom_constraints_config = parent_rpcs.list_custom_constraints if parent_rpcs.respond_to? :list_custom_constraints
+                    @list_custom_constraints = ::Gapic::Config::Method.new list_custom_constraints_config
+                    delete_custom_constraint_config = parent_rpcs.delete_custom_constraint if parent_rpcs.respond_to? :delete_custom_constraint
+                    @delete_custom_constraint = ::Gapic::Config::Method.new delete_custom_constraint_config
 
                     yield self if block_given?
                   end
