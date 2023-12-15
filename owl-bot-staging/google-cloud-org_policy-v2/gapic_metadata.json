@@ -1,0 +1,78 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.orgpolicy.v2",
+  "libraryPackage": "::Google::Cloud::OrgPolicy::V2",
+  "services": {
+    "OrgPolicy": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client",
+          "rpcs": {
+            "ListConstraints": {
+              "methods": [
+                "list_constraints"
+              ]
+            },
+            "ListPolicies": {
+              "methods": [
+                "list_policies"
+              ]
+            },
+            "GetPolicy": {
+              "methods": [
+                "get_policy"
+              ]
+            },
+            "GetEffectivePolicy": {
+              "methods": [
+                "get_effective_policy"
+              ]
+            },
+            "CreatePolicy": {
+              "methods": [
+                "create_policy"
+              ]
+            },
+            "UpdatePolicy": {
+              "methods": [
+                "update_policy"
+              ]
+            },
+            "DeletePolicy": {
+              "methods": [
+                "delete_policy"
+              ]
+            },
+            "CreateCustomConstraint": {
+              "methods": [
+                "create_custom_constraint"
+              ]
+            },
+            "UpdateCustomConstraint": {
+              "methods": [
+                "update_custom_constraint"
+              ]
+            },
+            "GetCustomConstraint": {
+              "methods": [
+                "get_custom_constraint"
+              ]
+            },
+            "ListCustomConstraints": {
+              "methods": [
+                "list_custom_constraints"
+              ]
+            },
+            "DeleteCustomConstraint": {
+              "methods": [
+                "delete_custom_constraint"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
