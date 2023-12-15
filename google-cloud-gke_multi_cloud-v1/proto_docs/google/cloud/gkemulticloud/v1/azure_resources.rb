@@ -55,6 +55,8 @@ module Google
         #     authentication configuration for how the Anthos Multi-Cloud API connects to
         #     Azure APIs.
         #
+        #     Either azure_client or azure_services_authentication should be provided.
+        #
         #     The `AzureClient` resource must reside on the same Google Cloud Platform
         #     project and region as the `AzureCluster`.
         #
@@ -75,6 +77,8 @@ module Google
         # @!attribute [rw] azure_services_authentication
         #   @return [::Google::Cloud::GkeMultiCloud::V1::AzureServicesAuthentication]
         #     Optional. Authentication configuration for management of Azure resources.
+        #
+        #     Either azure_client or azure_services_authentication should be provided.
         # @!attribute [r] state
         #   @return [::Google::Cloud::GkeMultiCloud::V1::AzureCluster::State]
         #     Output only. The current state of the cluster.
@@ -465,9 +469,17 @@ module Google
         # Configuration related to the cluster RBAC settings.
         # @!attribute [rw] admin_users
         #   @return [::Array<::Google::Cloud::GkeMultiCloud::V1::AzureClusterUser>]
-        #     Required. Users that can perform operations as a cluster admin. A managed
+        #     Optional. Users that can perform operations as a cluster admin. A managed
         #     ClusterRoleBinding will be created to grant the `cluster-admin` ClusterRole
         #     to the users. Up to ten admin users can be provided.
+        #
+        #     For more info on RBAC, see
+        #     https://kubernetes.io/docs/reference/access-authn-authz/rbac/#user-facing-roles
+        # @!attribute [rw] admin_groups
+        #   @return [::Array<::Google::Cloud::GkeMultiCloud::V1::AzureClusterGroup>]
+        #     Optional. Groups of users that can perform operations as a cluster admin. A
+        #     managed ClusterRoleBinding will be created to grant the `cluster-admin`
+        #     ClusterRole to the groups. Up to ten admin groups can be provided.
         #
         #     For more info on RBAC, see
         #     https://kubernetes.io/docs/reference/access-authn-authz/rbac/#user-facing-roles
@@ -493,6 +505,15 @@ module Google
         #   @return [::String]
         #     Required. The name of the user, e.g. `my-gcp-id@gmail.com`.
         class AzureClusterUser
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Identities of a group-type subject for Azure clusters.
+        # @!attribute [rw] group
+        #   @return [::String]
+        #     Required. The name of the group, e.g. `my-group@domain.com`.
+        class AzureClusterGroup
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -567,6 +588,9 @@ module Google
         # @!attribute [r] errors
         #   @return [::Array<::Google::Cloud::GkeMultiCloud::V1::AzureNodePoolError>]
         #     Output only. A set of errors found in the node pool.
+        # @!attribute [rw] management
+        #   @return [::Google::Cloud::GkeMultiCloud::V1::AzureNodeManagement]
+        #     Optional. The Management configuration for this node pool.
         class AzureNodePool
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -608,6 +632,19 @@ module Google
           end
         end
 
+        # AzureNodeManagement defines the set of node management features turned on for
+        # an Azure node pool.
+        # @!attribute [rw] auto_repair
+        #   @return [::Boolean]
+        #     Optional. Whether or not the nodes will be automatically repaired. When set
+        #     to true, the nodes in this node pool will be monitored and if they fail
+        #     health checks consistently over a period of time, an automatic repair
+        #     action will be triggered to replace them with new nodes.
+        class AzureNodeManagement
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Parameters that describe the configuration of all node machines
         # on a given node pool.
         # @!attribute [rw] vm_size
@@ -635,8 +672,7 @@ module Google
         # @!attribute [rw] image_type
         #   @return [::String]
         #     Optional. The OS image type to use on node pool instances.
-        #     Can have a value of `ubuntu`, or `windows` if the cluster enables
-        #     the Windows node pool preview feature.
+        #     Can be unspecified, or have a value of `ubuntu`.
         #
         #     When unspecified, it defaults to `ubuntu`.
         # @!attribute [rw] ssh_config
@@ -696,6 +732,44 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # AzureOpenIdConfig is an OIDC discovery document for the cluster.
+        # See the OpenID Connect Discovery 1.0 specification for details.
+        # @!attribute [rw] issuer
+        #   @return [::String]
+        #     OIDC Issuer.
+        # @!attribute [rw] jwks_uri
+        #   @return [::String]
+        #     JSON Web Key uri.
+        # @!attribute [rw] response_types_supported
+        #   @return [::Array<::String>]
+        #     Supported response types.
+        # @!attribute [rw] subject_types_supported
+        #   @return [::Array<::String>]
+        #     Supported subject types.
+        # @!attribute [rw] id_token_signing_alg_values_supported
+        #   @return [::Array<::String>]
+        #     supported ID Token signing Algorithms.
+        # @!attribute [rw] claims_supported
+        #   @return [::Array<::String>]
+        #     Supported claims.
+        # @!attribute [rw] grant_types
+        #   @return [::Array<::String>]
+        #     Supported grant types.
+        class AzureOpenIdConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # AzureJsonWebKeys is a valid JSON Web Key Set as specififed in RFC 7517.
+        # @!attribute [rw] keys
+        #   @return [::Array<::Google::Cloud::GkeMultiCloud::V1::Jwk>]
+        #     The public component of the keys used by the cluster to sign token
+        #     requests.
+        class AzureJsonWebKeys
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # AzureServerConfig contains information about a Google Cloud location, such as
         # supported Azure regions and Kubernetes versions.
         # @!attribute [rw] name
@@ -709,7 +783,10 @@ module Google
         #     for more details on Google Cloud Platform resource names.
         # @!attribute [rw] valid_versions
         #   @return [::Array<::Google::Cloud::GkeMultiCloud::V1::AzureK8sVersionInfo>]
-        #     List of valid Kubernetes versions.
+        #     List of all released Kubernetes versions, including ones which are end of
+        #     life and can no longer be used.  Filter by the `enabled`
+        #     property to limit to currently available versions.
+        #     Valid versions supported for both create and update operations
         # @!attribute [rw] supported_azure_regions
         #   @return [::Array<::String>]
         #     The list of supported Azure regions.
@@ -718,10 +795,30 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Information about a supported Kubernetes version.
+        # Kubernetes version information of GKE cluster on Azure.
         # @!attribute [rw] version
         #   @return [::String]
-        #     A supported Kubernetes version (for example, `1.19.10-gke.1000`)
+        #     Kubernetes version name (for example, `1.19.10-gke.1000`)
+        # @!attribute [rw] enabled
+        #   @return [::Boolean]
+        #     Optional. True if the version is available for cluster creation. If a
+        #     version is enabled for creation, it can be used to create new clusters.
+        #     Otherwise, cluster creation will fail. However, cluster upgrade operations
+        #     may succeed, even if the version is not enabled.
+        # @!attribute [rw] end_of_life
+        #   @return [::Boolean]
+        #     Optional. True if this cluster version belongs to a minor version that has
+        #     reached its end of life and is no longer in scope to receive security and
+        #     bug fixes.
+        # @!attribute [rw] end_of_life_date
+        #   @return [::Google::Type::Date]
+        #     Optional. The estimated date (in Pacific Time) when this cluster version
+        #     will reach its end of life. Or if this version is no longer supported (the
+        #     `end_of_life` field is true), this is the actual date (in Pacific time)
+        #     when the version reached its end of life.
+        # @!attribute [rw] release_date
+        #   @return [::Google::Type::Date]
+        #     Optional. The date (in Pacific Time) when the cluster version was released.
         class AzureK8sVersionInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

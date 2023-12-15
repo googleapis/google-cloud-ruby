@@ -75,6 +75,7 @@ module Google
         #      *   `control_plane.vm_size`.
         #      *   `annotations`.
         #      *   `authorization.admin_users`.
+        #      *   `authorization.admin_groups`.
         #      *   `control_plane.root_volume.size_gib`.
         #      *   `azure_services_authentication`.
         #      *   `azure_services_authentication.tenant_id`.
@@ -150,7 +151,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for `Clusters.DeleteAzureCluster` method.
+        # Request message for `AzureClusters.DeleteAzureCluster` method.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name the
@@ -192,7 +193,8 @@ module Google
         #     Required. The {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster}
         #     resource where this node pool will be created.
         #
-        #     Location names are formatted as `projects/<project-id>/locations/<region>`.
+        #     `AzureCluster` names are formatted as
+        #     `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>`.
         #
         #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
         #     for more details on Google Cloud resource names.
@@ -239,6 +241,8 @@ module Google
         #      *   `autoscaling.min_node_count`.
         #      *   `autoscaling.max_node_count`.
         #      *   `config.ssh_config.authorized_key`.
+        #      *   `management.auto_repair`.
+        #      *   `management`.
         class UpdateAzureNodePoolRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -305,7 +309,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Delete message for `AzureClusters.DeleteAzureNodePool` method.
+        # Request message for `AzureClusters.DeleteAzureNodePool` method.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name the
@@ -339,6 +343,32 @@ module Google
         #     If the provided ETag does not match the current etag of the node pool,
         #     the request will fail and an ABORTED error will be returned.
         class DeleteAzureNodePoolRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # GetAzureOpenIdConfigRequest gets the OIDC discovery document for the
+        # cluster. See the OpenID Connect Discovery 1.0 specification for details.
+        # @!attribute [rw] azure_cluster
+        #   @return [::String]
+        #     Required. The AzureCluster, which owns the OIDC discovery document.
+        #     Format:
+        #     projects/<project-id>/locations/<region>/azureClusters/<cluster-id>
+        class GetAzureOpenIdConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # GetAzureJsonWebKeysRequest gets the public component of the keys used by the
+        # cluster to sign token requests. This will be the jwks_uri for the discover
+        # document returned by getOpenIDConfig. See the OpenID Connect
+        # Discovery 1.0 specification for details.
+        # @!attribute [rw] azure_cluster
+        #   @return [::String]
+        #     Required. The AzureCluster, which owns the JsonWebKeys.
+        #     Format:
+        #     projects/<project-id>/locations/<region>/azureClusters/<cluster-id>
+        class GetAzureJsonWebKeysRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -491,7 +521,7 @@ module Google
         #     authenticate to.
         #
         #     `AzureCluster` names are formatted as
-        #     `projects/<project-id>/locations/<region>/AzureClusters/<cluster-id>`.
+        #     `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>`.
         #
         #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
         #     for more details on Google Cloud resource names.
@@ -508,6 +538,52 @@ module Google
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Timestamp at which the token will expire.
         class GenerateAzureAccessTokenResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] azure_cluster
+        #   @return [::String]
+        #     Required.
+        # @!attribute [rw] subject_token
+        #   @return [::String]
+        #     Required.
+        # @!attribute [rw] subject_token_type
+        #   @return [::String]
+        #     Required.
+        # @!attribute [rw] version
+        #   @return [::String]
+        #     Required.
+        # @!attribute [rw] node_pool_id
+        #   @return [::String]
+        #     Optional.
+        # @!attribute [rw] grant_type
+        #   @return [::String]
+        #     Optional.
+        # @!attribute [rw] audience
+        #   @return [::String]
+        #     Optional.
+        # @!attribute [rw] scope
+        #   @return [::String]
+        #     Optional.
+        # @!attribute [rw] requested_token_type
+        #   @return [::String]
+        #     Optional.
+        # @!attribute [rw] options
+        #   @return [::String]
+        #     Optional.
+        class GenerateAzureClusterAgentTokenRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] access_token
+        #   @return [::String]
+        # @!attribute [rw] expires_in
+        #   @return [::Integer]
+        # @!attribute [rw] token_type
+        #   @return [::String]
+        class GenerateAzureClusterAgentTokenResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

@@ -59,6 +59,8 @@ module Google
             # [Operation][google.longrunning.Operation] resource that can be
             # described to track the status of the operation.
             rpc :DeleteAwsCluster, ::Google::Cloud::GkeMultiCloud::V1::DeleteAwsClusterRequest, ::Google::Longrunning::Operation
+            # Generates an access token for a cluster agent.
+            rpc :GenerateAwsClusterAgentToken, ::Google::Cloud::GkeMultiCloud::V1::GenerateAwsClusterAgentTokenRequest, ::Google::Cloud::GkeMultiCloud::V1::GenerateAwsClusterAgentTokenResponse
             # Generates a short-lived access token to authenticate to a given
             # [AwsCluster][google.cloud.gkemulticloud.v1.AwsCluster] resource.
             rpc :GenerateAwsAccessToken, ::Google::Cloud::GkeMultiCloud::V1::GenerateAwsAccessTokenRequest, ::Google::Cloud::GkeMultiCloud::V1::GenerateAwsAccessTokenResponse
@@ -71,6 +73,13 @@ module Google
             rpc :CreateAwsNodePool, ::Google::Cloud::GkeMultiCloud::V1::CreateAwsNodePoolRequest, ::Google::Longrunning::Operation
             # Updates an [AwsNodePool][google.cloud.gkemulticloud.v1.AwsNodePool].
             rpc :UpdateAwsNodePool, ::Google::Cloud::GkeMultiCloud::V1::UpdateAwsNodePoolRequest, ::Google::Longrunning::Operation
+            # Rolls back a previously aborted or failed
+            # [AwsNodePool][google.cloud.gkemulticloud.v1.AwsNodePool] update request.
+            # Makes no changes if the last update request successfully finished.
+            # If an update request is in progress, you cannot rollback the update.
+            # You must first cancel or let it finish unsuccessfully before you can
+            # rollback.
+            rpc :RollbackAwsNodePoolUpdate, ::Google::Cloud::GkeMultiCloud::V1::RollbackAwsNodePoolUpdateRequest, ::Google::Longrunning::Operation
             # Describes a specific
             # [AwsNodePool][google.cloud.gkemulticloud.v1.AwsNodePool] resource.
             rpc :GetAwsNodePool, ::Google::Cloud::GkeMultiCloud::V1::GetAwsNodePoolRequest, ::Google::Cloud::GkeMultiCloud::V1::AwsNodePool
@@ -85,6 +94,15 @@ module Google
             # [Operation][google.longrunning.Operation] resource that can be
             # described to track the status of the operation.
             rpc :DeleteAwsNodePool, ::Google::Cloud::GkeMultiCloud::V1::DeleteAwsNodePoolRequest, ::Google::Longrunning::Operation
+            # Gets the OIDC discovery document for the cluster.
+            # See the
+            # [OpenID Connect Discovery 1.0
+            # specification](https://openid.net/specs/openid-connect-discovery-1_0.html)
+            # for details.
+            rpc :GetAwsOpenIdConfig, ::Google::Cloud::GkeMultiCloud::V1::GetAwsOpenIdConfigRequest, ::Google::Cloud::GkeMultiCloud::V1::AwsOpenIdConfig
+            # Gets the public component of the cluster signing keys in
+            # JSON Web Key format.
+            rpc :GetAwsJsonWebKeys, ::Google::Cloud::GkeMultiCloud::V1::GetAwsJsonWebKeysRequest, ::Google::Cloud::GkeMultiCloud::V1::AwsJsonWebKeys
             # Returns information, such as supported AWS regions and Kubernetes
             # versions, on a given Google Cloud location.
             rpc :GetAwsServerConfig, ::Google::Cloud::GkeMultiCloud::V1::GetAwsServerConfigRequest, ::Google::Cloud::GkeMultiCloud::V1::AwsServerConfig

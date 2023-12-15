@@ -73,6 +73,8 @@ module Google
         #      *   `annotations`.
         #      *   `control_plane.version`.
         #      *   `authorization.admin_users`.
+        #      *   `authorization.admin_groups`.
+        #      *   `binary_authorization.evaluation_mode`.
         #      *   `control_plane.aws_services_authentication.role_arn`.
         #      *   `control_plane.aws_services_authentication.role_session_name`.
         #      *   `control_plane.config_encryption.kms_key_arn`.
@@ -84,6 +86,7 @@ module Google
         #      *   `control_plane.root_volume.size_gib`.
         #      *   `control_plane.root_volume.volume_type`.
         #      *   `control_plane.root_volume.iops`.
+        #      *   `control_plane.root_volume.throughput`.
         #      *   `control_plane.root_volume.kms_key_arn`.
         #      *   `control_plane.ssh_config`.
         #      *   `control_plane.ssh_config.ec2_key_pair`.
@@ -92,6 +95,7 @@ module Google
         #      *   `logging_config.component_config.enable_components`.
         #      *   `control_plane.tags`.
         #      *   `monitoring_config.managed_prometheus_config.enabled`.
+        #      *   `networking.per_node_pool_sg_rules_disabled`.
         class UpdateAwsClusterRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -179,6 +183,12 @@ module Google
         #     and a completed {::Google::Longrunning::Operation Operation} will be returned.
         #
         #     Useful for idempotent deletion.
+        # @!attribute [rw] ignore_errors
+        #   @return [::Boolean]
+        #     Optional. If set to true, the deletion of
+        #     {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster} resource will
+        #     succeed even if errors occur during deleting in cluster resources. Using
+        #     this parameter may result in orphaned resources in the cluster.
         # @!attribute [rw] etag
         #   @return [::String]
         #     The current etag of the
@@ -249,6 +259,7 @@ module Google
         #      *   `config.config_encryption.kms_key_arn`.
         #      *   `config.security_group_ids`.
         #      *   `config.root_volume.iops`.
+        #      *   `config.root_volume.throughput`.
         #      *   `config.root_volume.kms_key_arn`.
         #      *   `config.root_volume.volume_type`.
         #      *   `config.root_volume.size_gib`.
@@ -264,7 +275,35 @@ module Google
         #      *   `config.autoscaling_metrics_collection`.
         #      *   `config.autoscaling_metrics_collection.granularity`.
         #      *   `config.autoscaling_metrics_collection.metrics`.
+        #      *   `config.instance_type`.
+        #      *   `management.auto_repair`.
+        #      *   `management`.
+        #      *   `update_settings`.
+        #      *   `update_settings.surge_settings`.
+        #      *   `update_settings.surge_settings.max_surge`.
+        #      *   `update_settings.surge_settings.max_unavailable`.
         class UpdateAwsNodePoolRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `AwsClusters.RollbackAwsNodePoolUpdate` method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the
+        #     {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool} resource to
+        #     rollback.
+        #
+        #     `AwsNodePool` names are formatted as
+        #     `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>/awsNodePools/<node-pool-id>`.
+        #
+        #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
+        #     for more details on Google Cloud resource names.
+        # @!attribute [rw] respect_pdb
+        #   @return [::Boolean]
+        #     Optional. Option for rollback to ignore the PodDisruptionBudget when
+        #     draining the node pool nodes. Default value is false.
+        class RollbackAwsNodePoolUpdateRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -353,6 +392,12 @@ module Google
         #     and a completed {::Google::Longrunning::Operation Operation} will be returned.
         #
         #     Useful for idempotent deletion.
+        # @!attribute [rw] ignore_errors
+        #   @return [::Boolean]
+        #     Optional. If set to true, the deletion of
+        #     {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool} resource will
+        #     succeed even if errors occur during deleting in node pool resources. Using
+        #     this parameter may result in orphaned resources in the node pool.
         # @!attribute [rw] etag
         #   @return [::String]
         #     The current ETag of the
@@ -363,6 +408,32 @@ module Google
         #     If the provided ETag does not match the current etag of the node pool,
         #     the request will fail and an ABORTED error will be returned.
         class DeleteAwsNodePoolRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # GetAwsOpenIdConfigRequest gets the OIDC discovery document for the
+        # cluster. See the OpenID Connect Discovery 1.0 specification for details.
+        # @!attribute [rw] aws_cluster
+        #   @return [::String]
+        #     Required. The AwsCluster, which owns the OIDC discovery document.
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}/awsClusters/\\{cluster}
+        class GetAwsOpenIdConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # GetAwsJsonWebKeysRequest gets the public component of the keys used by the
+        # cluster to sign token requests. This will be the jwks_uri for the discover
+        # document returned by getOpenIDConfig. See the OpenID Connect
+        # Discovery 1.0 specification for details.
+        # @!attribute [rw] aws_cluster
+        #   @return [::String]
+        #     Required. The AwsCluster, which owns the JsonWebKeys.
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}/awsClusters/\\{cluster}
+        class GetAwsJsonWebKeysRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -409,6 +480,52 @@ module Google
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Timestamp at which the token will expire.
         class GenerateAwsAccessTokenResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] aws_cluster
+        #   @return [::String]
+        #     Required.
+        # @!attribute [rw] subject_token
+        #   @return [::String]
+        #     Required.
+        # @!attribute [rw] subject_token_type
+        #   @return [::String]
+        #     Required.
+        # @!attribute [rw] version
+        #   @return [::String]
+        #     Required.
+        # @!attribute [rw] node_pool_id
+        #   @return [::String]
+        #     Optional.
+        # @!attribute [rw] grant_type
+        #   @return [::String]
+        #     Optional.
+        # @!attribute [rw] audience
+        #   @return [::String]
+        #     Optional.
+        # @!attribute [rw] scope
+        #   @return [::String]
+        #     Optional.
+        # @!attribute [rw] requested_token_type
+        #   @return [::String]
+        #     Optional.
+        # @!attribute [rw] options
+        #   @return [::String]
+        #     Optional.
+        class GenerateAwsClusterAgentTokenRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] access_token
+        #   @return [::String]
+        # @!attribute [rw] expires_in
+        #   @return [::Integer]
+        # @!attribute [rw] token_type
+        #   @return [::String]
+        class GenerateAwsClusterAgentTokenResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

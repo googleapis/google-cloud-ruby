@@ -75,6 +75,8 @@ module Google
             rpc :GetAttachedServerConfig, ::Google::Cloud::GkeMultiCloud::V1::GetAttachedServerConfigRequest, ::Google::Cloud::GkeMultiCloud::V1::AttachedServerConfig
             # Generates the install manifest to be installed on the target cluster.
             rpc :GenerateAttachedClusterInstallManifest, ::Google::Cloud::GkeMultiCloud::V1::GenerateAttachedClusterInstallManifestRequest, ::Google::Cloud::GkeMultiCloud::V1::GenerateAttachedClusterInstallManifestResponse
+            # Generates an access token for a cluster agent.
+            rpc :GenerateAttachedClusterAgentToken, ::Google::Cloud::GkeMultiCloud::V1::GenerateAttachedClusterAgentTokenRequest, ::Google::Cloud::GkeMultiCloud::V1::GenerateAttachedClusterAgentTokenResponse
           end
 
           Stub = Service.rpc_stub_class
