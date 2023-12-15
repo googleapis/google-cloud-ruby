@@ -479,6 +479,9 @@ module Google
         #   @return [::Array<::Google::Cloud::Dialogflow::V2::SearchKnowledgeAnswer>]
         #     Most relevant snippets extracted from articles in the given knowledge base,
         #     ordered by confidence.
+        # @!attribute [rw] rewritten_query
+        #   @return [::String]
+        #     The rewritten query used to search knowledge.
         class SearchKnowledgeResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -524,11 +527,14 @@ module Google
             # The answer has a unspecified type.
             ANSWER_TYPE_UNSPECIFIED = 0
 
-            # The answer is from FAQ doucments.
+            # The answer is from FAQ documents.
             FAQ = 1
 
             # The answer is from generative model.
             GENERATIVE = 2
+
+            # The answer is from intent matching.
+            INTENT = 3
           end
         end
       end
