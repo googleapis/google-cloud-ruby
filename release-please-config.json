@@ -27,6 +27,10 @@
       "component": "google-analytics-data-v1beta",
       "version_file": "lib/google/analytics/data/v1beta/version.rb"
     },
+    "google-apps-meet-v2beta": {
+      "component": "google-apps-meet-v2beta",
+      "version_file": "lib/google/apps/meet/v2beta/version.rb"
+    },
     "google-area120-tables": {
       "component": "google-area120-tables",
       "version_file": "lib/google/area120/tables/version.rb"
