@@ -1250,6 +1250,46 @@
           "type": "FULL"
         }
       ]
+    },
+    {
+      "region_tag": "alloydb_v1alpha_generated_AlloyDBAdmin_ListDatabases_sync",
+      "title": "Snippet for the list_databases call in the AlloyDBAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1alpha::AlloyDBAdmin::Client#list_databases. It may require modification in order to execute successfully.",
+      "file": "alloy_db_admin/list_databases.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_databases",
+        "full_name": "::Google::Cloud::AlloyDB::V1alpha::AlloyDBAdmin::Client#list_databases",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AlloyDB::V1alpha::ListDatabasesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AlloyDB::V1alpha::ListDatabasesResponse",
+        "client": {
+          "short_name": "AlloyDBAdmin::Client",
+          "full_name": "::Google::Cloud::AlloyDB::V1alpha::AlloyDBAdmin::Client"
+        },
+        "method": {
+          "short_name": "ListDatabases",
+          "full_name": "google.cloud.alloydb.v1alpha.AlloyDBAdmin.ListDatabases",
+          "service": {
+            "short_name": "AlloyDBAdmin",
+            "full_name": "google.cloud.alloydb.v1alpha.AlloyDBAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
     }
   ]
 }
