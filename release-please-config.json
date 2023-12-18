@@ -1271,6 +1271,10 @@
       "component": "google-cloud-tasks-v2beta3",
       "version_file": "lib/google/cloud/tasks/v2beta3/version.rb"
     },
+    "google-cloud-telco_automation-v1": {
+      "component": "google-cloud-telco_automation-v1",
+      "version_file": "lib/google/cloud/telco_automation/v1/version.rb"
+    },
     "google-cloud-text_to_speech": {
       "component": "google-cloud-text_to_speech",
       "version_file": "lib/google/cloud/text_to_speech/version.rb"
