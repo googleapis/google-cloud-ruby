@@ -3560,6 +3560,9 @@ module Google
         # @!attribute [rw] standard_rollout_policy
         #   @return [::Google::Cloud::Container::V1beta1::BlueGreenSettings::StandardRolloutPolicy]
         #     Standard policy for the blue-green upgrade.
+        # @!attribute [rw] autoscaled_rollout_policy
+        #   @return [::Google::Cloud::Container::V1beta1::BlueGreenSettings::AutoscaledRolloutPolicy]
+        #     Autoscaled policy for cluster autoscaler enabled blue-green upgrade.
         # @!attribute [rw] node_pool_soak_duration
         #   @return [::Google::Protobuf::Duration]
         #     Time needed after draining entire blue pool. After this period, blue pool
@@ -3580,6 +3583,13 @@ module Google
           #   @return [::Google::Protobuf::Duration]
           #     Soak time after each batch gets drained. Default to zero.
           class StandardRolloutPolicy
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Autoscaled rollout policy uses cluster autoscaler during
+          # blue-green upgrades to scale both the green and blue pools.
+          class AutoscaledRolloutPolicy
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
