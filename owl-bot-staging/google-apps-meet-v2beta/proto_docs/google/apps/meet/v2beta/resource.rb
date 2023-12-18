@@ -238,6 +238,12 @@ module Google
         # @!attribute [r] state
         #   @return [::Google::Apps::Meet::V2beta::Recording::State]
         #     Output only. Current state.
+        # @!attribute [r] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Timestamp when the recording started.
+        # @!attribute [r] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Timestamp when the recording ended.
         class Recording
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -291,6 +297,12 @@ module Google
         # @!attribute [r] state
         #   @return [::Google::Apps::Meet::V2beta::Transcript::State]
         #     Output only. Current state.
+        # @!attribute [r] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Timestamp when the transcript started.
+        # @!attribute [r] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Timestamp when the transcript stopped.
         class Transcript
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
