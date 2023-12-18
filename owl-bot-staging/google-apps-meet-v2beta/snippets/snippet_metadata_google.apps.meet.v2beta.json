@@ -1,0 +1,655 @@
+{
+  "client_library": {
+    "name": "google-apps-meet-v2beta",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.apps.meet.v2beta",
+        "version": "v2beta"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "meet_v2beta_generated_SpacesService_CreateSpace_sync",
+      "title": "Snippet for the create_space call in the SpacesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::SpacesService::Client#create_space. It may require modification in order to execute successfully.",
+      "file": "spaces_service/create_space.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_space",
+        "full_name": "::Google::Apps::Meet::V2beta::SpacesService::Client#create_space",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Apps::Meet::V2beta::CreateSpaceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Apps::Meet::V2beta::Space",
+        "client": {
+          "short_name": "SpacesService::Client",
+          "full_name": "::Google::Apps::Meet::V2beta::SpacesService::Client"
+        },
+        "method": {
+          "short_name": "CreateSpace",
+          "full_name": "google.apps.meet.v2beta.SpacesService.CreateSpace",
+          "service": {
+            "short_name": "SpacesService",
+            "full_name": "google.apps.meet.v2beta.SpacesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "meet_v2beta_generated_SpacesService_GetSpace_sync",
+      "title": "Snippet for the get_space call in the SpacesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::SpacesService::Client#get_space. It may require modification in order to execute successfully.",
+      "file": "spaces_service/get_space.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_space",
+        "full_name": "::Google::Apps::Meet::V2beta::SpacesService::Client#get_space",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Apps::Meet::V2beta::GetSpaceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Apps::Meet::V2beta::Space",
+        "client": {
+          "short_name": "SpacesService::Client",
+          "full_name": "::Google::Apps::Meet::V2beta::SpacesService::Client"
+        },
+        "method": {
+          "short_name": "GetSpace",
+          "full_name": "google.apps.meet.v2beta.SpacesService.GetSpace",
+          "service": {
+            "short_name": "SpacesService",
+            "full_name": "google.apps.meet.v2beta.SpacesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "meet_v2beta_generated_SpacesService_UpdateSpace_sync",
+      "title": "Snippet for the update_space call in the SpacesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::SpacesService::Client#update_space. It may require modification in order to execute successfully.",
+      "file": "spaces_service/update_space.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_space",
+        "full_name": "::Google::Apps::Meet::V2beta::SpacesService::Client#update_space",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Apps::Meet::V2beta::UpdateSpaceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Apps::Meet::V2beta::Space",
+        "client": {
+          "short_name": "SpacesService::Client",
+          "full_name": "::Google::Apps::Meet::V2beta::SpacesService::Client"
+        },
+        "method": {
+          "short_name": "UpdateSpace",
+          "full_name": "google.apps.meet.v2beta.SpacesService.UpdateSpace",
+          "service": {
+            "short_name": "SpacesService",
+            "full_name": "google.apps.meet.v2beta.SpacesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "meet_v2beta_generated_SpacesService_EndActiveConference_sync",
+      "title": "Snippet for the end_active_conference call in the SpacesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::SpacesService::Client#end_active_conference. It may require modification in order to execute successfully.",
+      "file": "spaces_service/end_active_conference.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "end_active_conference",
+        "full_name": "::Google::Apps::Meet::V2beta::SpacesService::Client#end_active_conference",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Apps::Meet::V2beta::EndActiveConferenceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "SpacesService::Client",
+          "full_name": "::Google::Apps::Meet::V2beta::SpacesService::Client"
+        },
+        "method": {
+          "short_name": "EndActiveConference",
+          "full_name": "google.apps.meet.v2beta.SpacesService.EndActiveConference",
+          "service": {
+            "short_name": "SpacesService",
+            "full_name": "google.apps.meet.v2beta.SpacesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "meet_v2beta_generated_ConferenceRecordsService_GetConferenceRecord_sync",
+      "title": "Snippet for the get_conference_record call in the ConferenceRecordsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#get_conference_record. It may require modification in order to execute successfully.",
+      "file": "conference_records_service/get_conference_record.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_conference_record",
+        "full_name": "::Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#get_conference_record",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Apps::Meet::V2beta::GetConferenceRecordRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Apps::Meet::V2beta::ConferenceRecord",
+        "client": {
+          "short_name": "ConferenceRecordsService::Client",
+          "full_name": "::Google::Apps::Meet::V2beta::ConferenceRecordsService::Client"
+        },
+        "method": {
+          "short_name": "GetConferenceRecord",
+          "full_name": "google.apps.meet.v2beta.ConferenceRecordsService.GetConferenceRecord",
+          "service": {
+            "short_name": "ConferenceRecordsService",
+            "full_name": "google.apps.meet.v2beta.ConferenceRecordsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "meet_v2beta_generated_ConferenceRecordsService_ListConferenceRecords_sync",
+      "title": "Snippet for the list_conference_records call in the ConferenceRecordsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#list_conference_records. It may require modification in order to execute successfully.",
+      "file": "conference_records_service/list_conference_records.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_conference_records",
+        "full_name": "::Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#list_conference_records",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Apps::Meet::V2beta::ListConferenceRecordsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Apps::Meet::V2beta::ListConferenceRecordsResponse",
+        "client": {
+          "short_name": "ConferenceRecordsService::Client",
+          "full_name": "::Google::Apps::Meet::V2beta::ConferenceRecordsService::Client"
+        },
+        "method": {
+          "short_name": "ListConferenceRecords",
+          "full_name": "google.apps.meet.v2beta.ConferenceRecordsService.ListConferenceRecords",
+          "service": {
+            "short_name": "ConferenceRecordsService",
+            "full_name": "google.apps.meet.v2beta.ConferenceRecordsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "meet_v2beta_generated_ConferenceRecordsService_GetParticipant_sync",
+      "title": "Snippet for the get_participant call in the ConferenceRecordsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#get_participant. It may require modification in order to execute successfully.",
+      "file": "conference_records_service/get_participant.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_participant",
+        "full_name": "::Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#get_participant",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Apps::Meet::V2beta::GetParticipantRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Apps::Meet::V2beta::Participant",
+        "client": {
+          "short_name": "ConferenceRecordsService::Client",
+          "full_name": "::Google::Apps::Meet::V2beta::ConferenceRecordsService::Client"
+        },
+        "method": {
+          "short_name": "GetParticipant",
+          "full_name": "google.apps.meet.v2beta.ConferenceRecordsService.GetParticipant",
+          "service": {
+            "short_name": "ConferenceRecordsService",
+            "full_name": "google.apps.meet.v2beta.ConferenceRecordsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "meet_v2beta_generated_ConferenceRecordsService_ListParticipants_sync",
+      "title": "Snippet for the list_participants call in the ConferenceRecordsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#list_participants. It may require modification in order to execute successfully.",
+      "file": "conference_records_service/list_participants.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_participants",
+        "full_name": "::Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#list_participants",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Apps::Meet::V2beta::ListParticipantsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Apps::Meet::V2beta::ListParticipantsResponse",
+        "client": {
+          "short_name": "ConferenceRecordsService::Client",
+          "full_name": "::Google::Apps::Meet::V2beta::ConferenceRecordsService::Client"
+        },
+        "method": {
+          "short_name": "ListParticipants",
+          "full_name": "google.apps.meet.v2beta.ConferenceRecordsService.ListParticipants",
+          "service": {
+            "short_name": "ConferenceRecordsService",
+            "full_name": "google.apps.meet.v2beta.ConferenceRecordsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "meet_v2beta_generated_ConferenceRecordsService_GetParticipantSession_sync",
+      "title": "Snippet for the get_participant_session call in the ConferenceRecordsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#get_participant_session. It may require modification in order to execute successfully.",
+      "file": "conference_records_service/get_participant_session.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_participant_session",
+        "full_name": "::Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#get_participant_session",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Apps::Meet::V2beta::GetParticipantSessionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Apps::Meet::V2beta::ParticipantSession",
+        "client": {
+          "short_name": "ConferenceRecordsService::Client",
+          "full_name": "::Google::Apps::Meet::V2beta::ConferenceRecordsService::Client"
+        },
+        "method": {
+          "short_name": "GetParticipantSession",
+          "full_name": "google.apps.meet.v2beta.ConferenceRecordsService.GetParticipantSession",
+          "service": {
+            "short_name": "ConferenceRecordsService",
+            "full_name": "google.apps.meet.v2beta.ConferenceRecordsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "meet_v2beta_generated_ConferenceRecordsService_ListParticipantSessions_sync",
+      "title": "Snippet for the list_participant_sessions call in the ConferenceRecordsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#list_participant_sessions. It may require modification in order to execute successfully.",
+      "file": "conference_records_service/list_participant_sessions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_participant_sessions",
+        "full_name": "::Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#list_participant_sessions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Apps::Meet::V2beta::ListParticipantSessionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Apps::Meet::V2beta::ListParticipantSessionsResponse",
+        "client": {
+          "short_name": "ConferenceRecordsService::Client",
+          "full_name": "::Google::Apps::Meet::V2beta::ConferenceRecordsService::Client"
+        },
+        "method": {
+          "short_name": "ListParticipantSessions",
+          "full_name": "google.apps.meet.v2beta.ConferenceRecordsService.ListParticipantSessions",
+          "service": {
+            "short_name": "ConferenceRecordsService",
+            "full_name": "google.apps.meet.v2beta.ConferenceRecordsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "meet_v2beta_generated_ConferenceRecordsService_GetRecording_sync",
+      "title": "Snippet for the get_recording call in the ConferenceRecordsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#get_recording. It may require modification in order to execute successfully.",
+      "file": "conference_records_service/get_recording.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_recording",
+        "full_name": "::Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#get_recording",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Apps::Meet::V2beta::GetRecordingRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Apps::Meet::V2beta::Recording",
+        "client": {
+          "short_name": "ConferenceRecordsService::Client",
+          "full_name": "::Google::Apps::Meet::V2beta::ConferenceRecordsService::Client"
+        },
+        "method": {
+          "short_name": "GetRecording",
+          "full_name": "google.apps.meet.v2beta.ConferenceRecordsService.GetRecording",
+          "service": {
+            "short_name": "ConferenceRecordsService",
+            "full_name": "google.apps.meet.v2beta.ConferenceRecordsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "meet_v2beta_generated_ConferenceRecordsService_ListRecordings_sync",
+      "title": "Snippet for the list_recordings call in the ConferenceRecordsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#list_recordings. It may require modification in order to execute successfully.",
+      "file": "conference_records_service/list_recordings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_recordings",
+        "full_name": "::Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#list_recordings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Apps::Meet::V2beta::ListRecordingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Apps::Meet::V2beta::ListRecordingsResponse",
+        "client": {
+          "short_name": "ConferenceRecordsService::Client",
+          "full_name": "::Google::Apps::Meet::V2beta::ConferenceRecordsService::Client"
+        },
+        "method": {
+          "short_name": "ListRecordings",
+          "full_name": "google.apps.meet.v2beta.ConferenceRecordsService.ListRecordings",
+          "service": {
+            "short_name": "ConferenceRecordsService",
+            "full_name": "google.apps.meet.v2beta.ConferenceRecordsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "meet_v2beta_generated_ConferenceRecordsService_GetTranscript_sync",
+      "title": "Snippet for the get_transcript call in the ConferenceRecordsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#get_transcript. It may require modification in order to execute successfully.",
+      "file": "conference_records_service/get_transcript.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_transcript",
+        "full_name": "::Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#get_transcript",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Apps::Meet::V2beta::GetTranscriptRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Apps::Meet::V2beta::Transcript",
+        "client": {
+          "short_name": "ConferenceRecordsService::Client",
+          "full_name": "::Google::Apps::Meet::V2beta::ConferenceRecordsService::Client"
+        },
+        "method": {
+          "short_name": "GetTranscript",
+          "full_name": "google.apps.meet.v2beta.ConferenceRecordsService.GetTranscript",
+          "service": {
+            "short_name": "ConferenceRecordsService",
+            "full_name": "google.apps.meet.v2beta.ConferenceRecordsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "meet_v2beta_generated_ConferenceRecordsService_ListTranscripts_sync",
+      "title": "Snippet for the list_transcripts call in the ConferenceRecordsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#list_transcripts. It may require modification in order to execute successfully.",
+      "file": "conference_records_service/list_transcripts.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_transcripts",
+        "full_name": "::Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#list_transcripts",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Apps::Meet::V2beta::ListTranscriptsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Apps::Meet::V2beta::ListTranscriptsResponse",
+        "client": {
+          "short_name": "ConferenceRecordsService::Client",
+          "full_name": "::Google::Apps::Meet::V2beta::ConferenceRecordsService::Client"
+        },
+        "method": {
+          "short_name": "ListTranscripts",
+          "full_name": "google.apps.meet.v2beta.ConferenceRecordsService.ListTranscripts",
+          "service": {
+            "short_name": "ConferenceRecordsService",
+            "full_name": "google.apps.meet.v2beta.ConferenceRecordsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "meet_v2beta_generated_ConferenceRecordsService_GetTranscriptEntry_sync",
+      "title": "Snippet for the get_transcript_entry call in the ConferenceRecordsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#get_transcript_entry. It may require modification in order to execute successfully.",
+      "file": "conference_records_service/get_transcript_entry.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_transcript_entry",
+        "full_name": "::Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#get_transcript_entry",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Apps::Meet::V2beta::GetTranscriptEntryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Apps::Meet::V2beta::TranscriptEntry",
+        "client": {
+          "short_name": "ConferenceRecordsService::Client",
+          "full_name": "::Google::Apps::Meet::V2beta::ConferenceRecordsService::Client"
+        },
+        "method": {
+          "short_name": "GetTranscriptEntry",
+          "full_name": "google.apps.meet.v2beta.ConferenceRecordsService.GetTranscriptEntry",
+          "service": {
+            "short_name": "ConferenceRecordsService",
+            "full_name": "google.apps.meet.v2beta.ConferenceRecordsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "meet_v2beta_generated_ConferenceRecordsService_ListTranscriptEntries_sync",
+      "title": "Snippet for the list_transcript_entries call in the ConferenceRecordsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#list_transcript_entries. It may require modification in order to execute successfully.",
+      "file": "conference_records_service/list_transcript_entries.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_transcript_entries",
+        "full_name": "::Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#list_transcript_entries",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Apps::Meet::V2beta::ListTranscriptEntriesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Apps::Meet::V2beta::ListTranscriptEntriesResponse",
+        "client": {
+          "short_name": "ConferenceRecordsService::Client",
+          "full_name": "::Google::Apps::Meet::V2beta::ConferenceRecordsService::Client"
+        },
+        "method": {
+          "short_name": "ListTranscriptEntries",
+          "full_name": "google.apps.meet.v2beta.ConferenceRecordsService.ListTranscriptEntries",
+          "service": {
+            "short_name": "ConferenceRecordsService",
+            "full_name": "google.apps.meet.v2beta.ConferenceRecordsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
