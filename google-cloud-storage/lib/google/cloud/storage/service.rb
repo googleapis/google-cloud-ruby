@@ -112,14 +112,16 @@ module Google
         # Creates a new bucket.
         # Returns Google::Apis::StorageV1::Bucket.
         def insert_bucket bucket_gapi, acl: nil, default_acl: nil,
-                          user_project: nil, options: {}
+                          user_project: nil, enable_object_retention: nil,
+                          options: {}
           execute do
             service.insert_bucket \
               @project, bucket_gapi,
               predefined_acl: acl,
               predefined_default_object_acl: default_acl,
               user_project: user_project(user_project),
-              options: options
+              options: options,
+              enable_object_retention: enable_object_retention
           end
         end
 
@@ -582,6 +584,7 @@ module Google
                        if_metageneration_not_match: nil,
                        predefined_acl: nil,
                        user_project: nil,
+                       override_unlocked_retention: nil,
                        options: {}
           file_gapi ||= Google::Apis::StorageV1::Object.new
 
@@ -601,6 +604,7 @@ module Google
                                  if_metageneration_not_match: if_metageneration_not_match,
                                  predefined_acl: predefined_acl,
                                  user_project: user_project(user_project),
+                                 override_unlocked_retention: override_unlocked_retention,
                                  options: options
           end
         end

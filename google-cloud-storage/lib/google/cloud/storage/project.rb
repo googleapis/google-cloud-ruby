@@ -416,7 +416,8 @@ module Google
                           versioning: nil,
                           requester_pays: nil,
                           user_project: nil,
-                          autoclass_enabled: false
+                          autoclass_enabled: false,
+                          enable_object_retention: nil
           params = {
             name: bucket_name,
             location: location,
@@ -440,7 +441,8 @@ module Google
           updater.check_for_mutable_lifecycle!
           gapi = service.insert_bucket \
             new_bucket, acl: acl_rule(acl), default_acl: acl_rule(default_acl),
-                        user_project: user_project
+                        user_project: user_project,
+                        enable_object_retention: enable_object_retention
           Bucket.from_gapi gapi, service, user_project: user_project
         end
 

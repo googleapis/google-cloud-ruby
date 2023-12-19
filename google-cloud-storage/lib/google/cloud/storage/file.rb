@@ -865,7 +865,8 @@ module Google
                    if_generation_match: nil,
                    if_generation_not_match: nil,
                    if_metageneration_match: nil,
-                   if_metageneration_not_match: nil
+                   if_metageneration_not_match: nil,
+                   override_unlocked_retention: nil
           updater = Updater.new gapi
           yield updater
           updater.check_for_changed_metadata!
@@ -875,7 +876,8 @@ module Google
                        if_generation_match: if_generation_match,
                        if_generation_not_match: if_generation_not_match,
                        if_metageneration_match: if_metageneration_match,
-                       if_metageneration_not_match: if_metageneration_not_match
+                       if_metageneration_not_match: if_metageneration_not_match,
+                       override_unlocked_retention: override_unlocked_retention
         end
 
         ##
@@ -1560,6 +1562,46 @@ module Google
           true
         end
 
+        # Mode of object level retention configuration.
+        # Valid values are 'Locked' or 'Unlocked'
+        #
+        # @return [String]
+        def retention_mode
+          @gapi.retention&.mode
+        end
+
+        # The earliest time in RFC 3339 UTC "Zulu" format that the object can
+        # be deleted or replaced.
+        #
+        # @return [DateTime]
+        def retention_retain_until_time
+          @gapi.retention&.retain_until_time
+        end
+
+        # A collection of object level retention parameters.
+        # The full list of available options are outlined at the [JSON API docs]
+        # (https://cloud.google.com/storage/docs/json_api/v1/objects/insert#request-body).
+        #
+        # @return [Google::Apis::StorageV1::Object::Retention]
+        def retention
+          @gapi.retention
+        end
+
+        ##
+        # Update method to update retention parameter of an object / file
+        # It accepts params as a Hash of attributes in the following format:
+        #
+        #     { mode: 'Locked|Unlocked', retain_until_time: '2023-12-19T03:22:23+00:00' }
+        #
+        # @param [Hash(String => String)] new_retention_attributes
+        #
+        def retention= new_retention_attributes
+          @gapi.retention ||= Google::Apis::StorageV1::Object::Retention.new
+          @gapi.retention.mode = new_retention_attributes[:mode]
+          @gapi.retention.retain_until_time = new_retention_attributes[:retain_until_time]
+          update_gapi! :retention, override_unlocked_retention: new_retention_attributes[:override_unlocked_retention]
+        end
+
         ##
         # Public URL to access the file. If the file is not public, requests to
         # the URL will return an error. (See {File::Acl#public!} and
@@ -2015,7 +2057,8 @@ module Google
                          if_generation_match: nil,
                          if_generation_not_match: nil,
                          if_metageneration_match: nil,
-                         if_metageneration_not_match: nil
+                         if_metageneration_not_match: nil,
+                         override_unlocked_retention: nil
           attributes = Array(attributes)
           attributes.flatten!
           return if attributes.empty?
@@ -2044,7 +2087,8 @@ module Google
                                        if_generation_not_match: if_generation_not_match,
                                        if_metageneration_match: if_metageneration_match,
                                        if_metageneration_not_match: if_metageneration_not_match,
-                                       user_project: user_project
+                                       user_project: user_project,
+                                       override_unlocked_retention: override_unlocked_retention
                   end
         end
 
