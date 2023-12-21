@@ -146,9 +146,9 @@ module Google
         end
 
         # KmsConfig is the customer managed encryption key(CMEK) configuration.
-        # @!attribute [r] name
+        # @!attribute [rw] name
         #   @return [::String]
-        #     Output only. Name of the KmsConfig.
+        #     Identifier. Name of the KmsConfig.
         # @!attribute [rw] crypto_key_name
         #   @return [::String]
         #     Required. Customer managed crypto key resource full name. Format:

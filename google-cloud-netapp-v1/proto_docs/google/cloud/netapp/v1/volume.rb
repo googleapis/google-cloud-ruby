@@ -130,9 +130,9 @@ module Google
         end
 
         # Volume provides a filesystem that you can mount.
-        # @!attribute [r] name
+        # @!attribute [rw] name
         #   @return [::String]
-        #     Output only. Name of the volume
+        #     Identifier. Name of the volume
         # @!attribute [r] state
         #   @return [::Google::Cloud::NetApp::V1::Volume::State]
         #     Output only. State of the volume
@@ -226,6 +226,9 @@ module Google
         #   @return [::Boolean]
         #     Output only. Indicates whether the volume is part of a replication
         #     relationship.
+        # @!attribute [rw] backup_config
+        #   @return [::Google::Cloud::NetApp::V1::BackupConfig]
+        #     BackupConfig of the volume.
         # @!attribute [rw] restricted_actions
         #   @return [::Array<::Google::Cloud::NetApp::V1::RestrictedAction>]
         #     Optional. List of actions that are restricted on this volume.
@@ -449,11 +452,36 @@ module Google
         #     Full name of the snapshot resource.
         #     Format:
         #     projects/\\{project}/locations/\\{location}/volumes/\\{volume}/snapshots/\\{snapshot}
+        # @!attribute [rw] source_backup
+        #   @return [::String]
+        #     Full name of the backup resource.
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}/backupVaults/\\{backup_vault_id}/backups/\\{backup_id}
         class RestoreParameters
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # BackupConfig contains backup related config on a volume.
+        # @!attribute [rw] backup_policies
+        #   @return [::Array<::String>]
+        #     Optional. When specified, schedule backups will be created based on the
+        #     policy configuration.
+        # @!attribute [rw] backup_vault
+        #   @return [::String]
+        #     Optional. Name of backup vault.
+        #     Format:
+        #     projects/\\{project_id}/locations/\\{location}/backupVaults/\\{backup_vault_id}
+        # @!attribute [rw] scheduled_backup_enabled
+        #   @return [::Boolean]
+        #     Optional. When set to true, scheduled backup is enabled on the volume.
+        #     This field should be nil when there's no backup policy attached.
+        class BackupConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Protocols is an enum of all the supported network protocols for a volume.
         module Protocols
           # Unspecified protocol
           PROTOCOLS_UNSPECIFIED = 0
@@ -468,6 +496,7 @@ module Google
           SMB = 3
         end
 
+        # AccessType is an enum of all the supported access types for a volume.
         module AccessType
           # Unspecified Access Type
           ACCESS_TYPE_UNSPECIFIED = 0

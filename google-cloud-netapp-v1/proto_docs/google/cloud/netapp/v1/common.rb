@@ -23,10 +23,13 @@ module Google
       module V1
         # The service levels - Storage Pool, Volumes
         module ServiceLevel
+          # Unspecified service level.
           SERVICE_LEVEL_UNSPECIFIED = 0
 
+          # Premium service level.
           PREMIUM = 1
 
+          # Extreme service level.
           EXTREME = 2
 
           # Standard (Software offering)

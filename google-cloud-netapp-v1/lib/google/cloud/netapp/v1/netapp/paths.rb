@@ -44,6 +44,65 @@ module Google
             end
 
             ##
+            # Create a fully-qualified Backup resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/backupVaults/{backup_vault}/backups/{backup}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param backup_vault [String]
+            # @param backup [String]
+            #
+            # @return [::String]
+            def backup_path project:, location:, backup_vault:, backup:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "backup_vault cannot contain /" if backup_vault.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/backupVaults/#{backup_vault}/backups/#{backup}"
+            end
+
+            ##
+            # Create a fully-qualified BackupPolicy resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/backupPolicies/{backup_policy}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param backup_policy [String]
+            #
+            # @return [::String]
+            def backup_policy_path project:, location:, backup_policy:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/backupPolicies/#{backup_policy}"
+            end
+
+            ##
+            # Create a fully-qualified BackupVault resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/backupVaults/{backup_vault}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param backup_vault [String]
+            #
+            # @return [::String]
+            def backup_vault_path project:, location:, backup_vault:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/backupVaults/#{backup_vault}"
+            end
+
+            ##
             # Create a fully-qualified KmsConfig resource string.
             #
             # The resource will be in the following format:
