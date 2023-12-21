@@ -99,7 +99,8 @@ module Google
               # only supports listing fields that have been explicitly overridden. To issue
               # this query, call
               # [FirestoreAdmin.ListFields][google.firestore.admin.v1.FirestoreAdmin.ListFields]
-              # with the filter set to `indexConfig.usesAncestorConfig:false` .
+              # with the filter set to `indexConfig.usesAncestorConfig:false or
+              # `ttlConfig:*`.
               rpc :ListFields, ::Google::Cloud::Firestore::Admin::V1::ListFieldsRequest, ::Google::Cloud::Firestore::Admin::V1::ListFieldsResponse
               # Exports a copy of all or a subset of documents from Google Cloud Firestore
               # to another storage system, such as Google Cloud Storage. Recent updates to
@@ -127,6 +128,8 @@ module Google
               rpc :ListDatabases, ::Google::Cloud::Firestore::Admin::V1::ListDatabasesRequest, ::Google::Cloud::Firestore::Admin::V1::ListDatabasesResponse
               # Updates a database.
               rpc :UpdateDatabase, ::Google::Cloud::Firestore::Admin::V1::UpdateDatabaseRequest, ::Google::Longrunning::Operation
+              # Deletes a database.
+              rpc :DeleteDatabase, ::Google::Cloud::Firestore::Admin::V1::DeleteDatabaseRequest, ::Google::Longrunning::Operation
             end
 
             Stub = Service.rpc_stub_class
