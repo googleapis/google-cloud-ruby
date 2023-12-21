@@ -66,6 +66,24 @@ module Google
 
           Stub = Service.rpc_stub_class
         end
+        module ExportService
+          # Service allows existing Cloud Profiler customers to export their profile data
+          # out of Google Cloud.
+          class Service
+
+            include ::GRPC::GenericService
+
+            self.marshal_class_method = :encode
+            self.unmarshal_class_method = :decode
+            self.service_name = 'google.devtools.cloudprofiler.v2.ExportService'
+
+            # Lists profiles which have been collected so far and for which the caller
+            # has permission to view.
+            rpc :ListProfiles, ::Google::Cloud::Profiler::V2::ListProfilesRequest, ::Google::Cloud::Profiler::V2::ListProfilesResponse
+          end
+
+          Stub = Service.rpc_stub_class
+        end
       end
     end
   end
