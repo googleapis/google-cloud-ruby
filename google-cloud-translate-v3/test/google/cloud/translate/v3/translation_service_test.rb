@@ -743,6 +743,624 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
     end
   end
 
+  def test_create_adaptive_mt_dataset
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Translate::V3::AdaptiveMtDataset.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    adaptive_mt_dataset = {}
+
+    create_adaptive_mt_dataset_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_adaptive_mt_dataset, name
+      assert_kind_of ::Google::Cloud::Translate::V3::CreateAdaptiveMtDatasetRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Translate::V3::AdaptiveMtDataset), request["adaptive_mt_dataset"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_adaptive_mt_dataset_client_stub do
+      # Create client
+      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_adaptive_mt_dataset({ parent: parent, adaptive_mt_dataset: adaptive_mt_dataset }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_adaptive_mt_dataset parent: parent, adaptive_mt_dataset: adaptive_mt_dataset do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_adaptive_mt_dataset ::Google::Cloud::Translate::V3::CreateAdaptiveMtDatasetRequest.new(parent: parent, adaptive_mt_dataset: adaptive_mt_dataset) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_adaptive_mt_dataset({ parent: parent, adaptive_mt_dataset: adaptive_mt_dataset }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_adaptive_mt_dataset(::Google::Cloud::Translate::V3::CreateAdaptiveMtDatasetRequest.new(parent: parent, adaptive_mt_dataset: adaptive_mt_dataset), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_adaptive_mt_dataset_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_adaptive_mt_dataset
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_adaptive_mt_dataset_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_adaptive_mt_dataset, name
+      assert_kind_of ::Google::Cloud::Translate::V3::DeleteAdaptiveMtDatasetRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_adaptive_mt_dataset_client_stub do
+      # Create client
+      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_adaptive_mt_dataset({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_adaptive_mt_dataset name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_adaptive_mt_dataset ::Google::Cloud::Translate::V3::DeleteAdaptiveMtDatasetRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_adaptive_mt_dataset({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_adaptive_mt_dataset(::Google::Cloud::Translate::V3::DeleteAdaptiveMtDatasetRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_adaptive_mt_dataset_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_adaptive_mt_dataset
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Translate::V3::AdaptiveMtDataset.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_adaptive_mt_dataset_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_adaptive_mt_dataset, name
+      assert_kind_of ::Google::Cloud::Translate::V3::GetAdaptiveMtDatasetRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_adaptive_mt_dataset_client_stub do
+      # Create client
+      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_adaptive_mt_dataset({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_adaptive_mt_dataset name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_adaptive_mt_dataset ::Google::Cloud::Translate::V3::GetAdaptiveMtDatasetRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_adaptive_mt_dataset({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_adaptive_mt_dataset(::Google::Cloud::Translate::V3::GetAdaptiveMtDatasetRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_adaptive_mt_dataset_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_adaptive_mt_datasets
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Translate::V3::ListAdaptiveMtDatasetsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+
+    list_adaptive_mt_datasets_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_adaptive_mt_datasets, name
+      assert_kind_of ::Google::Cloud::Translate::V3::ListAdaptiveMtDatasetsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_adaptive_mt_datasets_client_stub do
+      # Create client
+      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_adaptive_mt_datasets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_adaptive_mt_datasets parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_adaptive_mt_datasets ::Google::Cloud::Translate::V3::ListAdaptiveMtDatasetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_adaptive_mt_datasets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_adaptive_mt_datasets(::Google::Cloud::Translate::V3::ListAdaptiveMtDatasetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_adaptive_mt_datasets_client_stub.call_rpc_count
+    end
+  end
+
+  def test_adaptive_mt_translate
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Translate::V3::AdaptiveMtTranslateResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    dataset = "hello world"
+    content = ["hello world"]
+
+    adaptive_mt_translate_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :adaptive_mt_translate, name
+      assert_kind_of ::Google::Cloud::Translate::V3::AdaptiveMtTranslateRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["dataset"]
+      assert_equal ["hello world"], request["content"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, adaptive_mt_translate_client_stub do
+      # Create client
+      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.adaptive_mt_translate({ parent: parent, dataset: dataset, content: content }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.adaptive_mt_translate parent: parent, dataset: dataset, content: content do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.adaptive_mt_translate ::Google::Cloud::Translate::V3::AdaptiveMtTranslateRequest.new(parent: parent, dataset: dataset, content: content) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.adaptive_mt_translate({ parent: parent, dataset: dataset, content: content }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.adaptive_mt_translate(::Google::Cloud::Translate::V3::AdaptiveMtTranslateRequest.new(parent: parent, dataset: dataset, content: content), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, adaptive_mt_translate_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_adaptive_mt_file
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Translate::V3::AdaptiveMtFile.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_adaptive_mt_file_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_adaptive_mt_file, name
+      assert_kind_of ::Google::Cloud::Translate::V3::GetAdaptiveMtFileRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_adaptive_mt_file_client_stub do
+      # Create client
+      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_adaptive_mt_file({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_adaptive_mt_file name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_adaptive_mt_file ::Google::Cloud::Translate::V3::GetAdaptiveMtFileRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_adaptive_mt_file({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_adaptive_mt_file(::Google::Cloud::Translate::V3::GetAdaptiveMtFileRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_adaptive_mt_file_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_adaptive_mt_file
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_adaptive_mt_file_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_adaptive_mt_file, name
+      assert_kind_of ::Google::Cloud::Translate::V3::DeleteAdaptiveMtFileRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_adaptive_mt_file_client_stub do
+      # Create client
+      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_adaptive_mt_file({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_adaptive_mt_file name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_adaptive_mt_file ::Google::Cloud::Translate::V3::DeleteAdaptiveMtFileRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_adaptive_mt_file({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_adaptive_mt_file(::Google::Cloud::Translate::V3::DeleteAdaptiveMtFileRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_adaptive_mt_file_client_stub.call_rpc_count
+    end
+  end
+
+  def test_import_adaptive_mt_file
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Translate::V3::ImportAdaptiveMtFileResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    file_input_source = {}
+
+    import_adaptive_mt_file_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :import_adaptive_mt_file, name
+      assert_kind_of ::Google::Cloud::Translate::V3::ImportAdaptiveMtFileRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Translate::V3::FileInputSource), request["file_input_source"]
+      assert_equal :file_input_source, request.source
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, import_adaptive_mt_file_client_stub do
+      # Create client
+      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.import_adaptive_mt_file({ parent: parent, file_input_source: file_input_source }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.import_adaptive_mt_file parent: parent, file_input_source: file_input_source do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.import_adaptive_mt_file ::Google::Cloud::Translate::V3::ImportAdaptiveMtFileRequest.new(parent: parent, file_input_source: file_input_source) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.import_adaptive_mt_file({ parent: parent, file_input_source: file_input_source }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.import_adaptive_mt_file(::Google::Cloud::Translate::V3::ImportAdaptiveMtFileRequest.new(parent: parent, file_input_source: file_input_source), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, import_adaptive_mt_file_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_adaptive_mt_files
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Translate::V3::ListAdaptiveMtFilesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_adaptive_mt_files_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_adaptive_mt_files, name
+      assert_kind_of ::Google::Cloud::Translate::V3::ListAdaptiveMtFilesRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_adaptive_mt_files_client_stub do
+      # Create client
+      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_adaptive_mt_files({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_adaptive_mt_files parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_adaptive_mt_files ::Google::Cloud::Translate::V3::ListAdaptiveMtFilesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_adaptive_mt_files({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_adaptive_mt_files(::Google::Cloud::Translate::V3::ListAdaptiveMtFilesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_adaptive_mt_files_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_adaptive_mt_sentences
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Translate::V3::ListAdaptiveMtSentencesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_adaptive_mt_sentences_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_adaptive_mt_sentences, name
+      assert_kind_of ::Google::Cloud::Translate::V3::ListAdaptiveMtSentencesRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_adaptive_mt_sentences_client_stub do
+      # Create client
+      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_adaptive_mt_sentences({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_adaptive_mt_sentences parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_adaptive_mt_sentences ::Google::Cloud::Translate::V3::ListAdaptiveMtSentencesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_adaptive_mt_sentences({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_adaptive_mt_sentences(::Google::Cloud::Translate::V3::ListAdaptiveMtSentencesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_adaptive_mt_sentences_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

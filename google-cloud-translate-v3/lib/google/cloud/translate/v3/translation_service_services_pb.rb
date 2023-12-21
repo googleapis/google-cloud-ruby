@@ -72,6 +72,28 @@ module Google
             # if the glossary isn't created yet.
             # Returns NOT_FOUND, if the glossary doesn't exist.
             rpc :DeleteGlossary, ::Google::Cloud::Translate::V3::DeleteGlossaryRequest, ::Google::Longrunning::Operation
+            # Creates an Adaptive MT dataset.
+            rpc :CreateAdaptiveMtDataset, ::Google::Cloud::Translate::V3::CreateAdaptiveMtDatasetRequest, ::Google::Cloud::Translate::V3::AdaptiveMtDataset
+            # Deletes an Adaptive MT dataset, including all its entries and associated
+            # metadata.
+            rpc :DeleteAdaptiveMtDataset, ::Google::Cloud::Translate::V3::DeleteAdaptiveMtDatasetRequest, ::Google::Protobuf::Empty
+            # Gets the Adaptive MT dataset.
+            rpc :GetAdaptiveMtDataset, ::Google::Cloud::Translate::V3::GetAdaptiveMtDatasetRequest, ::Google::Cloud::Translate::V3::AdaptiveMtDataset
+            # Lists all Adaptive MT datasets for which the caller has read permission.
+            rpc :ListAdaptiveMtDatasets, ::Google::Cloud::Translate::V3::ListAdaptiveMtDatasetsRequest, ::Google::Cloud::Translate::V3::ListAdaptiveMtDatasetsResponse
+            # Translate text using Adaptive MT.
+            rpc :AdaptiveMtTranslate, ::Google::Cloud::Translate::V3::AdaptiveMtTranslateRequest, ::Google::Cloud::Translate::V3::AdaptiveMtTranslateResponse
+            # Gets and AdaptiveMtFile
+            rpc :GetAdaptiveMtFile, ::Google::Cloud::Translate::V3::GetAdaptiveMtFileRequest, ::Google::Cloud::Translate::V3::AdaptiveMtFile
+            # Deletes an AdaptiveMtFile along with its sentences.
+            rpc :DeleteAdaptiveMtFile, ::Google::Cloud::Translate::V3::DeleteAdaptiveMtFileRequest, ::Google::Protobuf::Empty
+            # Imports an AdaptiveMtFile and adds all of its sentences into the
+            # AdaptiveMtDataset.
+            rpc :ImportAdaptiveMtFile, ::Google::Cloud::Translate::V3::ImportAdaptiveMtFileRequest, ::Google::Cloud::Translate::V3::ImportAdaptiveMtFileResponse
+            # Lists all AdaptiveMtFiles associated to an AdaptiveMtDataset.
+            rpc :ListAdaptiveMtFiles, ::Google::Cloud::Translate::V3::ListAdaptiveMtFilesRequest, ::Google::Cloud::Translate::V3::ListAdaptiveMtFilesResponse
+            # Lists all AdaptiveMtSentences under a given file/dataset.
+            rpc :ListAdaptiveMtSentences, ::Google::Cloud::Translate::V3::ListAdaptiveMtSentencesRequest, ::Google::Cloud::Translate::V3::ListAdaptiveMtSentencesResponse
           end
 
           Stub = Service.rpc_stub_class
