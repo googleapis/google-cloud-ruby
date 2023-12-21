@@ -823,9 +823,29 @@ module Google
         #     Optional. The method by which conversions will be counted across multiple
         #     events within a session. If this value is not provided, it will be set to
         #     `ONCE_PER_EVENT`.
+        # @!attribute [rw] default_conversion_value
+        #   @return [::Google::Analytics::Admin::V1alpha::ConversionEvent::DefaultConversionValue]
+        #     Optional. Defines a default value/currency for a conversion event.
         class ConversionEvent
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Defines a default value/currency for a conversion event. Both value and
+          # currency must be provided.
+          # @!attribute [rw] value
+          #   @return [::Float]
+          #     This value will be used to populate the value for all conversions
+          #     of the specified event_name where the event "value" parameter is unset.
+          # @!attribute [rw] currency_code
+          #   @return [::String]
+          #     When a conversion event for this event_name has no set currency,
+          #     this currency will be applied as the default. Must be in ISO 4217
+          #     currency code format. See https://en.wikipedia.org/wiki/ISO_4217 for
+          #     more.
+          class DefaultConversionValue
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # The method by which conversions will be counted across multiple events
           # within a session.
@@ -1140,55 +1160,6 @@ module Google
             # for YouTube) before converting.
             # Previously CROSS_CHANNEL_LAST_CLICK
             PAID_AND_ORGANIC_CHANNELS_LAST_CLICK = 2
-
-            # Starting in June 2023, new properties can no longer use this model.
-            # See
-            # [Analytics
-            # Help](https://support.google.com/analytics/answer/9164320#040623)
-            # for more details.
-            # Starting in September 2023, we will sunset this model for all properties.
-            #
-            # Gives all credit for the conversion to the first channel that a customer
-            # clicked (or engaged view through for YouTube) before converting.
-            # Previously CROSS_CHANNEL_FIRST_CLICK
-            PAID_AND_ORGANIC_CHANNELS_FIRST_CLICK = 3
-
-            # Starting in June 2023, new properties can no longer use this model.
-            # See
-            # [Analytics
-            # Help](https://support.google.com/analytics/answer/9164320#040623)
-            # for more details.
-            # Starting in September 2023, we will sunset this model for all properties.
-            #
-            # Distributes the credit for the conversion equally across all the channels
-            # a customer clicked (or engaged view through for YouTube) before
-            # converting.
-            # Previously CROSS_CHANNEL_LINEAR
-            PAID_AND_ORGANIC_CHANNELS_LINEAR = 4
-
-            # Starting in June 2023, new properties can no longer use this model.
-            # See
-            # [Analytics
-            # Help](https://support.google.com/analytics/answer/9164320#040623)
-            # for more details.
-            # Starting in September 2023, we will sunset this model for all properties.
-            #
-            # Attributes 40% credit to the first and last interaction, and the
-            # remaining 20% credit is distributed evenly to the middle interactions.
-            # Previously CROSS_CHANNEL_POSITION_BASED
-            PAID_AND_ORGANIC_CHANNELS_POSITION_BASED = 5
-
-            # Starting in June 2023, new properties can no longer use this model.
-            # See
-            # [Analytics
-            # Help](https://support.google.com/analytics/answer/9164320#040623)
-            # for more details.
-            # Starting in September 2023, we will sunset this model for all properties.
-            #
-            # Gives more credit to the touchpoints that happened closer in time to
-            # the conversion.
-            # Previously CROSS_CHANNEL_TIME_DECAY
-            PAID_AND_ORGANIC_CHANNELS_TIME_DECAY = 6
 
             # Attributes 100% of the conversion value to the last Google Paid channel
             # that the customer clicked through before converting.

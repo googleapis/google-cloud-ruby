@@ -640,14 +640,29 @@
                 "create_subproperty"
               ]
             },
-            "DeleteSubpropertyEventFilter": {
-              "methods": [
-                "delete_subproperty_event_filter"
-              ]
-            },
             "CreateSubpropertyEventFilter": {
               "methods": [
                 "create_subproperty_event_filter"
+              ]
+            },
+            "GetSubpropertyEventFilter": {
+              "methods": [
+                "get_subproperty_event_filter"
+              ]
+            },
+            "ListSubpropertyEventFilters": {
+              "methods": [
+                "list_subproperty_event_filters"
+              ]
+            },
+            "UpdateSubpropertyEventFilter": {
+              "methods": [
+                "update_subproperty_event_filter"
+              ]
+            },
+            "DeleteSubpropertyEventFilter": {
+              "methods": [
+                "delete_subproperty_event_filter"
               ]
             }
           }
