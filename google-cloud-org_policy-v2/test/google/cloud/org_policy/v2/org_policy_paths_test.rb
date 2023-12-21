@@ -23,6 +23,18 @@ require "gapic/grpc/service_stub"
 require "google/cloud/org_policy/v2/org_policy"
 
 class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::ClientPathsTest < Minitest::Test
+  def test_custom_constraint_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.custom_constraint_path organization: "value0", custom_constraint: "value1"
+      assert_equal "organizations/value0/customConstraints/value1", path
+    end
+  end
+
   def test_folder_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do

@@ -290,6 +290,206 @@
           "type": "FULL"
         }
       ]
+    },
+    {
+      "region_tag": "orgpolicy_v2_generated_OrgPolicy_CreateCustomConstraint_sync",
+      "title": "Snippet for the create_custom_constraint call in the OrgPolicy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OrgPolicy::V2::OrgPolicy::Client#create_custom_constraint. It may require modification in order to execute successfully.",
+      "file": "org_policy/create_custom_constraint.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_custom_constraint",
+        "full_name": "::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client#create_custom_constraint",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::OrgPolicy::V2::CreateCustomConstraintRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::OrgPolicy::V2::CustomConstraint",
+        "client": {
+          "short_name": "OrgPolicy::Client",
+          "full_name": "::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client"
+        },
+        "method": {
+          "short_name": "CreateCustomConstraint",
+          "full_name": "google.cloud.orgpolicy.v2.OrgPolicy.CreateCustomConstraint",
+          "service": {
+            "short_name": "OrgPolicy",
+            "full_name": "google.cloud.orgpolicy.v2.OrgPolicy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "orgpolicy_v2_generated_OrgPolicy_UpdateCustomConstraint_sync",
+      "title": "Snippet for the update_custom_constraint call in the OrgPolicy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OrgPolicy::V2::OrgPolicy::Client#update_custom_constraint. It may require modification in order to execute successfully.",
+      "file": "org_policy/update_custom_constraint.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_custom_constraint",
+        "full_name": "::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client#update_custom_constraint",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::OrgPolicy::V2::UpdateCustomConstraintRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::OrgPolicy::V2::CustomConstraint",
+        "client": {
+          "short_name": "OrgPolicy::Client",
+          "full_name": "::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client"
+        },
+        "method": {
+          "short_name": "UpdateCustomConstraint",
+          "full_name": "google.cloud.orgpolicy.v2.OrgPolicy.UpdateCustomConstraint",
+          "service": {
+            "short_name": "OrgPolicy",
+            "full_name": "google.cloud.orgpolicy.v2.OrgPolicy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "orgpolicy_v2_generated_OrgPolicy_GetCustomConstraint_sync",
+      "title": "Snippet for the get_custom_constraint call in the OrgPolicy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OrgPolicy::V2::OrgPolicy::Client#get_custom_constraint. It may require modification in order to execute successfully.",
+      "file": "org_policy/get_custom_constraint.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_custom_constraint",
+        "full_name": "::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client#get_custom_constraint",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::OrgPolicy::V2::GetCustomConstraintRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::OrgPolicy::V2::CustomConstraint",
+        "client": {
+          "short_name": "OrgPolicy::Client",
+          "full_name": "::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client"
+        },
+        "method": {
+          "short_name": "GetCustomConstraint",
+          "full_name": "google.cloud.orgpolicy.v2.OrgPolicy.GetCustomConstraint",
+          "service": {
+            "short_name": "OrgPolicy",
+            "full_name": "google.cloud.orgpolicy.v2.OrgPolicy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "orgpolicy_v2_generated_OrgPolicy_ListCustomConstraints_sync",
+      "title": "Snippet for the list_custom_constraints call in the OrgPolicy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OrgPolicy::V2::OrgPolicy::Client#list_custom_constraints. It may require modification in order to execute successfully.",
+      "file": "org_policy/list_custom_constraints.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_custom_constraints",
+        "full_name": "::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client#list_custom_constraints",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::OrgPolicy::V2::ListCustomConstraintsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::OrgPolicy::V2::ListCustomConstraintsResponse",
+        "client": {
+          "short_name": "OrgPolicy::Client",
+          "full_name": "::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client"
+        },
+        "method": {
+          "short_name": "ListCustomConstraints",
+          "full_name": "google.cloud.orgpolicy.v2.OrgPolicy.ListCustomConstraints",
+          "service": {
+            "short_name": "OrgPolicy",
+            "full_name": "google.cloud.orgpolicy.v2.OrgPolicy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "orgpolicy_v2_generated_OrgPolicy_DeleteCustomConstraint_sync",
+      "title": "Snippet for the delete_custom_constraint call in the OrgPolicy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OrgPolicy::V2::OrgPolicy::Client#delete_custom_constraint. It may require modification in order to execute successfully.",
+      "file": "org_policy/delete_custom_constraint.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_custom_constraint",
+        "full_name": "::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client#delete_custom_constraint",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::OrgPolicy::V2::DeleteCustomConstraintRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "OrgPolicy::Client",
+          "full_name": "::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client"
+        },
+        "method": {
+          "short_name": "DeleteCustomConstraint",
+          "full_name": "google.cloud.orgpolicy.v2.OrgPolicy.DeleteCustomConstraint",
+          "service": {
+            "short_name": "OrgPolicy",
+            "full_name": "google.cloud.orgpolicy.v2.OrgPolicy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
     }
   ]
 }

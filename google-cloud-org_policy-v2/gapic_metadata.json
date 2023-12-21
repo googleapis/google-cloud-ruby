@@ -44,6 +44,31 @@
               "methods": [
                 "delete_policy"
               ]
+            },
+            "CreateCustomConstraint": {
+              "methods": [
+                "create_custom_constraint"
+              ]
+            },
+            "UpdateCustomConstraint": {
+              "methods": [
+                "update_custom_constraint"
+              ]
+            },
+            "GetCustomConstraint": {
+              "methods": [
+                "get_custom_constraint"
+              ]
+            },
+            "ListCustomConstraints": {
+              "methods": [
+                "list_custom_constraints"
+              ]
+            },
+            "DeleteCustomConstraint": {
+              "methods": [
+                "delete_custom_constraint"
+              ]
             }
           }
         }
