@@ -21,6 +21,39 @@ module Google
   module Cloud
     module GkeMultiCloud
       module V1
+        # Jwk is a JSON Web Key as specified in RFC 7517.
+        # @!attribute [rw] kty
+        #   @return [::String]
+        #     Key Type.
+        # @!attribute [rw] alg
+        #   @return [::String]
+        #     Algorithm.
+        # @!attribute [rw] use
+        #   @return [::String]
+        #     Permitted uses for the public keys.
+        # @!attribute [rw] kid
+        #   @return [::String]
+        #     Key ID.
+        # @!attribute [rw] n
+        #   @return [::String]
+        #     Used for RSA keys.
+        # @!attribute [rw] e
+        #   @return [::String]
+        #     Used for RSA keys.
+        # @!attribute [rw] x
+        #   @return [::String]
+        #     Used for ECDSA keys.
+        # @!attribute [rw] y
+        #   @return [::String]
+        #     Used for ECDSA keys.
+        # @!attribute [rw] crv
+        #   @return [::String]
+        #     Used for ECDSA keys.
+        class Jwk
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Workload Identity settings.
         # @!attribute [rw] issuer_uri
         #   @return [::String]
@@ -190,6 +223,29 @@ module Google
         class ManagedPrometheusConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration for Binary Authorization.
+        # @!attribute [rw] evaluation_mode
+        #   @return [::Google::Cloud::GkeMultiCloud::V1::BinaryAuthorization::EvaluationMode]
+        #     Mode of operation for binauthz policy evaluation. If unspecified, defaults
+        #     to DISABLED.
+        class BinaryAuthorization
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Binary Authorization mode of operation.
+          module EvaluationMode
+            # Default value
+            EVALUATION_MODE_UNSPECIFIED = 0
+
+            # Disable BinaryAuthorization
+            DISABLED = 1
+
+            # Enforce Kubernetes admission requests with BinaryAuthorization using the
+            # project's singleton policy.
+            PROJECT_SINGLETON_POLICY_ENFORCE = 2
+          end
         end
       end
     end

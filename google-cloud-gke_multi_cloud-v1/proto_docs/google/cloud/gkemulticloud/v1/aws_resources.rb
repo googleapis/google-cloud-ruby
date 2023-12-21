@@ -106,6 +106,9 @@ module Google
         # @!attribute [rw] monitoring_config
         #   @return [::Google::Cloud::GkeMultiCloud::V1::MonitoringConfig]
         #     Optional. Monitoring configuration for this cluster.
+        # @!attribute [rw] binary_authorization
+        #   @return [::Google::Cloud::GkeMultiCloud::V1::BinaryAuthorization]
+        #     Optional. Binary Authorization configuration for this cluster.
         class AwsCluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -256,9 +259,17 @@ module Google
         # Configuration related to the cluster RBAC settings.
         # @!attribute [rw] admin_users
         #   @return [::Array<::Google::Cloud::GkeMultiCloud::V1::AwsClusterUser>]
-        #     Required. Users that can perform operations as a cluster admin. A managed
+        #     Optional. Users that can perform operations as a cluster admin. A managed
         #     ClusterRoleBinding will be created to grant the `cluster-admin` ClusterRole
         #     to the users. Up to ten admin users can be provided.
+        #
+        #     For more info on RBAC, see
+        #     https://kubernetes.io/docs/reference/access-authn-authz/rbac/#user-facing-roles
+        # @!attribute [rw] admin_groups
+        #   @return [::Array<::Google::Cloud::GkeMultiCloud::V1::AwsClusterGroup>]
+        #     Optional. Groups of users that can perform operations as a cluster admin. A
+        #     managed ClusterRoleBinding will be created to grant the `cluster-admin`
+        #     ClusterRole to the groups. Up to ten admin groups can be provided.
         #
         #     For more info on RBAC, see
         #     https://kubernetes.io/docs/reference/access-authn-authz/rbac/#user-facing-roles
@@ -272,6 +283,15 @@ module Google
         #   @return [::String]
         #     Required. The name of the user, e.g. `my-gcp-id@gmail.com`.
         class AwsClusterUser
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Identities of a group-type subject for AWS clusters.
+        # @!attribute [rw] group
+        #   @return [::String]
+        #     Required. The name of the group, e.g. `my-group@domain.com`.
+        class AwsClusterGroup
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -301,6 +321,12 @@ module Google
         #   @return [::Integer]
         #     Optional. The number of I/O operations per second (IOPS) to provision for
         #     GP3 volume.
+        # @!attribute [rw] throughput
+        #   @return [::Integer]
+        #     Optional. The throughput that the volume supports, in MiB/s. Only valid if
+        #     volume_type is GP3.
+        #
+        #     If the volume_type is GP3 and this is not speficied, it defaults to 125.
         # @!attribute [rw] kms_key_arn
         #   @return [::String]
         #     Optional. The Amazon Resource Name (ARN) of the Customer Managed Key (CMK)
@@ -348,6 +374,13 @@ module Google
         #     Required. All services in the cluster are assigned an IPv4 address from
         #     these ranges. Only a single range is supported. This field cannot be
         #     changed after creation.
+        # @!attribute [rw] per_node_pool_sg_rules_disabled
+        #   @return [::Boolean]
+        #     Optional. Disable the per node pool subnet security group rules on the
+        #     control plane security group. When set to true, you must also provide one
+        #     or more security groups that ensure node pools are able to send requests to
+        #     the control plane on TCP/443 and TCP/8132. Failure to do so may result in
+        #     unavailable node pools.
         class AwsClusterNetworking
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -421,6 +454,12 @@ module Google
         # @!attribute [r] errors
         #   @return [::Array<::Google::Cloud::GkeMultiCloud::V1::AwsNodePoolError>]
         #     Output only. A set of errors found in the node pool.
+        # @!attribute [rw] management
+        #   @return [::Google::Cloud::GkeMultiCloud::V1::AwsNodeManagement]
+        #     Optional. The Management configuration for this node pool.
+        # @!attribute [rw] update_settings
+        #   @return [::Google::Cloud::GkeMultiCloud::V1::UpdateSettings]
+        #     Optional. Update settings control the speed and disruption of the update.
         class AwsNodePool
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -462,12 +501,72 @@ module Google
           end
         end
 
+        # UpdateSettings control the level of parallelism and the level of
+        # disruption caused during the update of a node pool.
+        #
+        # These settings are applicable when the node pool update requires replacing
+        # the existing node pool nodes with the updated ones.
+        #
+        # UpdateSettings are optional. When UpdateSettings are not specified during the
+        # node pool creation, a default is chosen based on the parent cluster's
+        # version. For clusters with minor version 1.27 and later, a default
+        # surge_settings configuration with max_surge = 1 and max_unavailable = 0 is
+        # used. For clusters with older versions, node pool updates use the traditional
+        # rolling update mechanism of updating one node at a time in a
+        # "terminate before create" fashion and update_settings is not applicable.
+        #
+        # Set the surge_settings parameter to use the Surge Update mechanism for
+        # the rolling update of node pool nodes.
+        # 1. max_surge controls the number of additional nodes that can be created
+        # beyond the current size of the node pool temporarily for the time of the
+        # update to increase the number of available nodes.
+        # 2. max_unavailable controls the number of nodes that can be simultaneously
+        # unavailable during the update.
+        # 3. (max_surge + max_unavailable) determines the level of parallelism (i.e.,
+        # the number of nodes being updated at the same time).
+        # @!attribute [rw] surge_settings
+        #   @return [::Google::Cloud::GkeMultiCloud::V1::SurgeSettings]
+        #     Optional. Settings for surge update.
+        class UpdateSettings
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # SurgeSettings contains the parameters for Surge update.
+        # @!attribute [rw] max_surge
+        #   @return [::Integer]
+        #     Optional. The maximum number of nodes that can be created beyond the
+        #     current size of the node pool during the update process.
+        # @!attribute [rw] max_unavailable
+        #   @return [::Integer]
+        #     Optional. The maximum number of nodes that can be simultaneously
+        #     unavailable during the update process. A node is considered unavailable if
+        #     its status is not Ready.
+        class SurgeSettings
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # AwsNodeManagement defines the set of node management features turned on for
+        # an AWS node pool.
+        # @!attribute [rw] auto_repair
+        #   @return [::Boolean]
+        #     Optional. Whether or not the nodes will be automatically repaired. When set
+        #     to true, the nodes in this node pool will be monitored and if they fail
+        #     health checks consistently over a period of time, an automatic repair
+        #     action will be triggered to replace them with new nodes.
+        class AwsNodeManagement
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Parameters that describe the nodes in a cluster.
         # @!attribute [rw] instance_type
         #   @return [::String]
-        #     Optional. The AWS instance type.
+        #     Optional. The EC2 instance type when creating on-Demand instances.
         #
-        #     When unspecified, it uses a default based on the node pool's version.
+        #     If unspecified during node pool creation, a default will be chosen based on
+        #     the node pool version, and assigned to this field.
         # @!attribute [rw] root_volume
         #   @return [::Google::Cloud::GkeMultiCloud::V1::AwsVolumeTemplate]
         #     Optional. Template for the root volume provisioned for node pool nodes.
@@ -496,8 +595,7 @@ module Google
         # @!attribute [rw] image_type
         #   @return [::String]
         #     Optional. The OS image type to use on node pool instances.
-        #     Can have a value of `ubuntu`, or `windows` if the cluster enables
-        #     the Windows node pool preview feature.
+        #     Can be unspecified, or have a value of `ubuntu`.
         #
         #     When unspecified, it defaults to `ubuntu`.
         # @!attribute [rw] ssh_config
@@ -524,6 +622,13 @@ module Google
         #     Auto Scaling group of the node pool.
         #
         #     When unspecified, metrics collection is disabled.
+        # @!attribute [rw] spot_config
+        #   @return [::Google::Cloud::GkeMultiCloud::V1::SpotConfig]
+        #     Optional. Configuration for provisioning EC2 Spot instances
+        #
+        #     When specified, the node pool will provision Spot instances from the set
+        #     of spot_config.instance_types.
+        #     This field is mutually exclusive with `instance_type`.
         class AwsNodeConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -562,13 +667,54 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # AwsOpenIdConfig is an OIDC discovery document for the cluster.
+        # See the OpenID Connect Discovery 1.0 specification for details.
+        # @!attribute [rw] issuer
+        #   @return [::String]
+        #     OIDC Issuer.
+        # @!attribute [rw] jwks_uri
+        #   @return [::String]
+        #     JSON Web Key uri.
+        # @!attribute [rw] response_types_supported
+        #   @return [::Array<::String>]
+        #     Supported response types.
+        # @!attribute [rw] subject_types_supported
+        #   @return [::Array<::String>]
+        #     Supported subject types.
+        # @!attribute [rw] id_token_signing_alg_values_supported
+        #   @return [::Array<::String>]
+        #     supported ID Token signing Algorithms.
+        # @!attribute [rw] claims_supported
+        #   @return [::Array<::String>]
+        #     Supported claims.
+        # @!attribute [rw] grant_types
+        #   @return [::Array<::String>]
+        #     Supported grant types.
+        class AwsOpenIdConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # AwsJsonWebKeys is a valid JSON Web Key Set as specififed in RFC 7517.
+        # @!attribute [rw] keys
+        #   @return [::Array<::Google::Cloud::GkeMultiCloud::V1::Jwk>]
+        #     The public component of the keys used by the cluster to sign token
+        #     requests.
+        class AwsJsonWebKeys
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # AwsServerConfig is the configuration of GKE cluster on AWS.
         # @!attribute [rw] name
         #   @return [::String]
         #     The resource name of the config.
         # @!attribute [rw] valid_versions
         #   @return [::Array<::Google::Cloud::GkeMultiCloud::V1::AwsK8sVersionInfo>]
-        #     List of valid Kubernetes versions.
+        #     List of all released Kubernetes versions, including ones which are end of
+        #     life and can no longer be used.  Filter by the `enabled`
+        #     property to limit to currently available versions.
+        #     Valid versions supported for both create and update operations
         # @!attribute [rw] supported_aws_regions
         #   @return [::Array<::String>]
         #     The list of supported AWS regions.
@@ -581,6 +727,26 @@ module Google
         # @!attribute [rw] version
         #   @return [::String]
         #     Kubernetes version name.
+        # @!attribute [rw] enabled
+        #   @return [::Boolean]
+        #     Optional. True if the version is available for cluster creation. If a
+        #     version is enabled for creation, it can be used to create new clusters.
+        #     Otherwise, cluster creation will fail. However, cluster upgrade operations
+        #     may succeed, even if the version is not enabled.
+        # @!attribute [rw] end_of_life
+        #   @return [::Boolean]
+        #     Optional. True if this cluster version belongs to a minor version that has
+        #     reached its end of life and is no longer in scope to receive security and
+        #     bug fixes.
+        # @!attribute [rw] end_of_life_date
+        #   @return [::Google::Type::Date]
+        #     Optional. The estimated date (in Pacific Time) when this cluster version
+        #     will reach its end of life. Or if this version is no longer supported (the
+        #     `end_of_life` field is true), this is the actual date (in Pacific time)
+        #     when the version reached its end of life.
+        # @!attribute [rw] release_date
+        #   @return [::Google::Type::Date]
+        #     Optional. The date (in Pacific Time) when the cluster version was released.
         class AwsK8sVersionInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -663,6 +829,15 @@ module Google
         #     If you specify Granularity and don't specify any metrics, all metrics are
         #     enabled.
         class AwsAutoscalingGroupMetricsCollection
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # SpotConfig has configuration info for Spot node.
+        # @!attribute [rw] instance_types
+        #   @return [::Array<::String>]
+        #     Required. A list of instance types for creating spot node pool.
+        class SpotConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
