@@ -55,9 +55,9 @@ module Google
         # Replication is a nested resource under Volume, that describes a
         # cross-region replication relationship between 2 volumes in different
         # regions.
-        # @!attribute [r] name
+        # @!attribute [rw] name
         #   @return [::String]
-        #     Output only. The resource name of the Replication.
+        #     Identifier. The resource name of the Replication.
         #     Format:
         #     `projects/{project_id}/locations/{location}/volumes/{volume_id}/replications/{replication_id}`.
         # @!attribute [r] state

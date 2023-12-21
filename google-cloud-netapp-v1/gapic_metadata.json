@@ -189,6 +189,81 @@
               "methods": [
                 "reverse_replication_direction"
               ]
+            },
+            "CreateBackupVault": {
+              "methods": [
+                "create_backup_vault"
+              ]
+            },
+            "GetBackupVault": {
+              "methods": [
+                "get_backup_vault"
+              ]
+            },
+            "ListBackupVaults": {
+              "methods": [
+                "list_backup_vaults"
+              ]
+            },
+            "UpdateBackupVault": {
+              "methods": [
+                "update_backup_vault"
+              ]
+            },
+            "DeleteBackupVault": {
+              "methods": [
+                "delete_backup_vault"
+              ]
+            },
+            "CreateBackup": {
+              "methods": [
+                "create_backup"
+              ]
+            },
+            "GetBackup": {
+              "methods": [
+                "get_backup"
+              ]
+            },
+            "ListBackups": {
+              "methods": [
+                "list_backups"
+              ]
+            },
+            "DeleteBackup": {
+              "methods": [
+                "delete_backup"
+              ]
+            },
+            "UpdateBackup": {
+              "methods": [
+                "update_backup"
+              ]
+            },
+            "CreateBackupPolicy": {
+              "methods": [
+                "create_backup_policy"
+              ]
+            },
+            "GetBackupPolicy": {
+              "methods": [
+                "get_backup_policy"
+              ]
+            },
+            "ListBackupPolicies": {
+              "methods": [
+                "list_backup_policies"
+              ]
+            },
+            "UpdateBackupPolicy": {
+              "methods": [
+                "update_backup_policy"
+              ]
+            },
+            "DeleteBackupPolicy": {
+              "methods": [
+                "delete_backup_policy"
+              ]
             }
           }
         }
