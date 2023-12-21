@@ -61,23 +61,23 @@ module Google
       #
       # An interface for managing organization policies.
       #
-      # The Cloud Org Policy service provides a simple mechanism for organizations to
-      # restrict the allowed configurations across their entire Cloud Resource
-      # hierarchy.
+      # The Organization Policy Service provides a simple mechanism for
+      # organizations to restrict the allowed configurations across their entire
+      # resource hierarchy.
       #
-      # You can use a `policy` to configure restrictions in Cloud resources. For
-      # example, you can enforce a `policy` that restricts which Google
-      # Cloud Platform APIs can be activated in a certain part of your resource
-      # hierarchy, or prevents serial port access to VM instances in a particular
-      # folder.
+      # You can use a policy to configure restrictions on resources. For
+      # example, you can enforce a policy that restricts which Google
+      # Cloud APIs can be activated in a certain part of your resource
+      # hierarchy, or prevents serial port access to VM instances in a
+      # particular folder.
       #
-      # `Policies` are inherited down through the resource hierarchy. A `policy`
+      # Policies are inherited down through the resource hierarchy. A policy
       # applied to a parent resource automatically applies to all its child resources
-      # unless overridden with a `policy` lower in the hierarchy.
+      # unless overridden with a policy lower in the hierarchy.
       #
-      # A `constraint` defines an aspect of a resource's configuration that can be
-      # controlled by an organization's policy administrator. `Policies` are a
-      # collection of `constraints` that defines their allowable configuration on a
+      # A constraint defines an aspect of a resource's configuration that can be
+      # controlled by an organization's policy administrator. Policies are a
+      # collection of constraints that defines their allowable configuration on a
       # particular resource and its child resources.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
