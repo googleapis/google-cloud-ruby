@@ -503,12 +503,14 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::ClientTest < Min
     # Create request parameters for a unary method.
     name = "hello world"
     modifications = [{}]
+    ignore_warnings = true
 
     modify_column_families_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :modify_column_families, name
       assert_kind_of ::Google::Cloud::Bigtable::Admin::V2::ModifyColumnFamiliesRequest, request
       assert_equal "hello world", request["name"]
       assert_kind_of ::Google::Cloud::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification, request["modifications"].first
+      assert_equal true, request["ignore_warnings"]
       refute_nil options
     end
 
@@ -519,31 +521,31 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::ClientTest < Min
       end
 
       # Use hash object
-      client.modify_column_families({ name: name, modifications: modifications }) do |response, operation|
+      client.modify_column_families({ name: name, modifications: modifications, ignore_warnings: ignore_warnings }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.modify_column_families name: name, modifications: modifications do |response, operation|
+      client.modify_column_families name: name, modifications: modifications, ignore_warnings: ignore_warnings do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.modify_column_families ::Google::Cloud::Bigtable::Admin::V2::ModifyColumnFamiliesRequest.new(name: name, modifications: modifications) do |response, operation|
+      client.modify_column_families ::Google::Cloud::Bigtable::Admin::V2::ModifyColumnFamiliesRequest.new(name: name, modifications: modifications, ignore_warnings: ignore_warnings) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.modify_column_families({ name: name, modifications: modifications }, grpc_options) do |response, operation|
+      client.modify_column_families({ name: name, modifications: modifications, ignore_warnings: ignore_warnings }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.modify_column_families(::Google::Cloud::Bigtable::Admin::V2::ModifyColumnFamiliesRequest.new(name: name, modifications: modifications), grpc_options) do |response, operation|
+      client.modify_column_families(::Google::Cloud::Bigtable::Admin::V2::ModifyColumnFamiliesRequest.new(name: name, modifications: modifications, ignore_warnings: ignore_warnings), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
