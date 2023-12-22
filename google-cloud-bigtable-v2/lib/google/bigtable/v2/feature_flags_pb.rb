@@ -5,7 +5,7 @@
 require 'google/protobuf'
 
 
-descriptor_data = "\n&google/bigtable/v2/feature_flags.proto\x12\x12google.bigtable.v2\"\x8a\x01\n\x0c\x46\x65\x61tureFlags\x12\x15\n\rreverse_scans\x18\x01 \x01(\x08\x12\x1e\n\x16mutate_rows_rate_limit\x18\x03 \x01(\x08\x12\x1f\n\x17mutate_rows_rate_limit2\x18\x05 \x01(\x08\x12\"\n\x1alast_scanned_row_responses\x18\x04 \x01(\x08\x42\xbd\x01\n\x16\x63om.google.bigtable.v2B\x11\x46\x65\x61tureFlagsProtoP\x01Z:google.golang.org/genproto/googleapis/bigtable/v2;bigtable\xaa\x02\x18Google.Cloud.Bigtable.V2\xca\x02\x18Google\\Cloud\\Bigtable\\V2\xea\x02\x1bGoogle::Cloud::Bigtable::V2b\x06proto3"
+descriptor_data = "\n&google/bigtable/v2/feature_flags.proto\x12\x12google.bigtable.v2\"\xb6\x01\n\x0c\x46\x65\x61tureFlags\x12\x15\n\rreverse_scans\x18\x01 \x01(\x08\x12\x1e\n\x16mutate_rows_rate_limit\x18\x03 \x01(\x08\x12\x1f\n\x17mutate_rows_rate_limit2\x18\x05 \x01(\x08\x12\"\n\x1alast_scanned_row_responses\x18\x04 \x01(\x08\x12\x16\n\x0erouting_cookie\x18\x06 \x01(\x08\x12\x12\n\nretry_info\x18\x07 \x01(\x08\x42\xbd\x01\n\x16\x63om.google.bigtable.v2B\x11\x46\x65\x61tureFlagsProtoP\x01Z:google.golang.org/genproto/googleapis/bigtable/v2;bigtable\xaa\x02\x18Google.Cloud.Bigtable.V2\xca\x02\x18Google\\Cloud\\Bigtable\\V2\xea\x02\x1bGoogle::Cloud::Bigtable::V2b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
