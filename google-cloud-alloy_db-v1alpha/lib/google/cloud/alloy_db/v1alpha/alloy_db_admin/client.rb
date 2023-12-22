@@ -123,6 +123,11 @@ module Google
                   initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
+                default_config.rpcs.list_databases.timeout = 60.0
+                default_config.rpcs.list_databases.retry_policy = {
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                }
+
                 default_config
               end
               yield @configure if block_given?
@@ -2935,7 +2940,8 @@ module Google
             #     The request ID must be a valid UUID with the exception that zero UUID is
             #     not supported (00000000-0000-0000-0000-000000000000).
             #   @param pem_csr [::String]
-            #     Optional. A pem-encoded X.509 certificate signing request (CSR).
+            #     Optional. A pem-encoded X.509 certificate signing request (CSR). It is
+            #     recommended to use public_key instead.
             #   @param cert_duration [::Google::Protobuf::Duration, ::Hash]
             #     Optional. An optional hint to the endpoint to generate the client
             #     certificate with the requested duration. The duration can be from 1 hour to
@@ -3618,6 +3624,108 @@ module Google
             end
 
             ##
+            # Lists Databases in a given project and location.
+            #
+            # @overload list_databases(request, options = nil)
+            #   Pass arguments to `list_databases` via a request object, either of type
+            #   {::Google::Cloud::AlloyDB::V1alpha::ListDatabasesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AlloyDB::V1alpha::ListDatabasesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_databases(parent: nil, page_size: nil, page_token: nil, filter: nil)
+            #   Pass arguments to `list_databases` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Parent value for ListDatabasesRequest.
+            #   @param page_size [::Integer]
+            #     Optional. The maximum number of databases to return. The service may return
+            #     fewer than this value. If unspecified, an appropriate number of databases
+            #     will be returned. The max value will be 2000, values above max will be
+            #     coerced to max.
+            #   @param page_token [::String]
+            #     Optional. A page token, received from a previous `ListDatabases` call.
+            #     This should be provided to retrieve the subsequent page.
+            #     This field is currently not supported, its value will be ignored if passed.
+            #   @param filter [::String]
+            #     Optional. Filtering results.
+            #     This field is currently not supported, its value will be ignored if passed.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::AlloyDB::V1alpha::Database>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::AlloyDB::V1alpha::Database>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/alloy_db/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AlloyDB::V1alpha::AlloyDBAdmin::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AlloyDB::V1alpha::ListDatabasesRequest.new
+            #
+            #   # Call the list_databases method.
+            #   result = client.list_databases request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::AlloyDB::V1alpha::Database.
+            #     p item
+            #   end
+            #
+            def list_databases request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AlloyDB::V1alpha::ListDatabasesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_databases.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AlloyDB::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_databases.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_databases.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @alloy_db_admin_stub.call_rpc :list_databases, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @alloy_db_admin_stub, :list_databases, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the AlloyDBAdmin API.
             #
             # This class represents the configuration for AlloyDBAdmin,
@@ -3917,6 +4025,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_user
+                ##
+                # RPC-specific configuration for `list_databases`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_databases
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -3982,6 +4095,8 @@ module Google
                   @update_user = ::Gapic::Config::Method.new update_user_config
                   delete_user_config = parent_rpcs.delete_user if parent_rpcs.respond_to? :delete_user
                   @delete_user = ::Gapic::Config::Method.new delete_user_config
+                  list_databases_config = parent_rpcs.list_databases if parent_rpcs.respond_to? :list_databases
+                  @list_databases = ::Gapic::Config::Method.new list_databases_config
 
                   yield self if block_given?
                 end
