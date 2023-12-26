@@ -60,15 +60,17 @@ def delete_dataset_helper dataset_id
 end
 
 def retry_action error, message = nil
+  success = false
   5.times do |count|
     yield
-    return
+    success = true
+    break
   rescue error => e
     puts "\n#{e} Gonna try again"
-    sleep rand(1..3) ** count
+    sleep (2 + (rand(1..3) / 2))**count
   rescue StandardError => e
     puts "\n#{e}"
-    return
+    break
   end
-  raise error, message
+  raise error, message unless success
 end
