@@ -35,6 +35,10 @@ module Google
       # {Google::Cloud::Bigtable::Project#instance}, and
       # {Google::Cloud::Bigtable::Project#create_instance}.
       #
+      # @deprecated Use {Google::Cloud::Bigtable::Admin::V2::Instance} instead.
+      #   See {https://github.com/googleapis/google-cloud-ruby/blob/main/google-cloud-bigtable/MIGRATING.md MIGRATION.md}
+      #   for more info.
+      #
       # @example
       #   require "google/cloud/bigtable"
       #

@@ -28,6 +28,10 @@ module Google
       # A configuration object describing how Cloud Bigtable should treat traffic
       # from a particular end user application.
       #
+      # @deprecated Use {Google::Cloud::Bigtable::Admin::V2::Cluster} instead.
+      #   See {https://github.com/googleapis/google-cloud-ruby/blob/main/google-cloud-bigtable/MIGRATING.md MIGRATION.md}
+      #   for more info.
+      #
       # @example
       #   require "google/cloud/bigtable"
       #
