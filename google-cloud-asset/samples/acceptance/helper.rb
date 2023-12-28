@@ -55,7 +55,7 @@ def delete_dataset_helper dataset_id
   retry_action Google::Cloud::ResourceExhaustedError, RESOURCE_EXHAUSTION_FAILURE_MESSAGE do
     dataset = bigquery_client.dataset dataset_id
     return unless dataset
-    dataset.delete
+    dataset.delete force: true
   end
 end
 
