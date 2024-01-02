@@ -1,0 +1,5 @@
+source "https://rubygems.org"
+
+gemspec
+
+gem "google-cloud-policy_troubleshooter-iam-v3", path: "../google-cloud-policy_troubleshooter-iam-v3"

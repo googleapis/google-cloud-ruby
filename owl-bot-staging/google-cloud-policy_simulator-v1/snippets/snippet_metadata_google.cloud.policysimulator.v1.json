@@ -1,0 +1,135 @@
+{
+  "client_library": {
+    "name": "google-cloud-policy_simulator-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.policysimulator.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "policysimulator_v1_generated_Simulator_GetReplay_sync",
+      "title": "Snippet for the get_replay call in the Simulator service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PolicySimulator::V1::Simulator::Client#get_replay. It may require modification in order to execute successfully.",
+      "file": "simulator/get_replay.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_replay",
+        "full_name": "::Google::Cloud::PolicySimulator::V1::Simulator::Client#get_replay",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::PolicySimulator::V1::GetReplayRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::PolicySimulator::V1::Replay",
+        "client": {
+          "short_name": "Simulator::Client",
+          "full_name": "::Google::Cloud::PolicySimulator::V1::Simulator::Client"
+        },
+        "method": {
+          "short_name": "GetReplay",
+          "full_name": "google.cloud.policysimulator.v1.Simulator.GetReplay",
+          "service": {
+            "short_name": "Simulator",
+            "full_name": "google.cloud.policysimulator.v1.Simulator"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "policysimulator_v1_generated_Simulator_CreateReplay_sync",
+      "title": "Snippet for the create_replay call in the Simulator service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PolicySimulator::V1::Simulator::Client#create_replay. It may require modification in order to execute successfully.",
+      "file": "simulator/create_replay.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_replay",
+        "full_name": "::Google::Cloud::PolicySimulator::V1::Simulator::Client#create_replay",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::PolicySimulator::V1::CreateReplayRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Simulator::Client",
+          "full_name": "::Google::Cloud::PolicySimulator::V1::Simulator::Client"
+        },
+        "method": {
+          "short_name": "CreateReplay",
+          "full_name": "google.cloud.policysimulator.v1.Simulator.CreateReplay",
+          "service": {
+            "short_name": "Simulator",
+            "full_name": "google.cloud.policysimulator.v1.Simulator"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "policysimulator_v1_generated_Simulator_ListReplayResults_sync",
+      "title": "Snippet for the list_replay_results call in the Simulator service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PolicySimulator::V1::Simulator::Client#list_replay_results. It may require modification in order to execute successfully.",
+      "file": "simulator/list_replay_results.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_replay_results",
+        "full_name": "::Google::Cloud::PolicySimulator::V1::Simulator::Client#list_replay_results",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::PolicySimulator::V1::ListReplayResultsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::PolicySimulator::V1::ListReplayResultsResponse",
+        "client": {
+          "short_name": "Simulator::Client",
+          "full_name": "::Google::Cloud::PolicySimulator::V1::Simulator::Client"
+        },
+        "method": {
+          "short_name": "ListReplayResults",
+          "full_name": "google.cloud.policysimulator.v1.Simulator.ListReplayResults",
+          "service": {
+            "short_name": "Simulator",
+            "full_name": "google.cloud.policysimulator.v1.Simulator"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
