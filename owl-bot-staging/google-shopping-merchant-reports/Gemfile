@@ -1,5 +1,0 @@
-source "https://rubygems.org"
-
-gemspec
-
-gem "google-shopping-merchant-reports-v1beta", path: "../google-shopping-merchant-reports-v1beta"
