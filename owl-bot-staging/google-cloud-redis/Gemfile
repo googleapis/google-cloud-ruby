@@ -1,0 +1,6 @@
+source "https://rubygems.org"
+
+gemspec
+
+gem "google-cloud-redis-v1", path: "../google-cloud-redis-v1"
+gem "google-cloud-redis-v1beta1", path: "../google-cloud-redis-v1beta1"

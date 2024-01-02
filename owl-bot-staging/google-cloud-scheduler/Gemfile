@@ -1,0 +1,6 @@
+source "https://rubygems.org"
+
+gemspec
+
+gem "google-cloud-scheduler-v1", path: "../google-cloud-scheduler-v1"
+gem "google-cloud-scheduler-v1beta1", path: "../google-cloud-scheduler-v1beta1"

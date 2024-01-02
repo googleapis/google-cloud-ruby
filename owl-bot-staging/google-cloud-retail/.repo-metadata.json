@@ -1,0 +1,18 @@
+{
+    "api_id": "retail.googleapis.com",
+    "api_shortname": "retail",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-retail/latest",
+    "distribution_name": "google-cloud-retail",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "retail",
+    "name_pretty": "Retail API",
+    "product_documentation": "https://cloud.google.com/retail/docs/apis",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Retail enables you to build an end-to-end personalized recommendation system based on state-of-the-art deep learning ML models, without a need for expertise in ML or recommendation systems.",
+    "ruby-cloud-env-prefix": "RETAIL",
+    "ruby-cloud-product-url": "https://cloud.google.com/retail/docs/apis",
+    "library_type": "GAPIC_AUTO"
+}
