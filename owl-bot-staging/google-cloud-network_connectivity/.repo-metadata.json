@@ -1,0 +1,18 @@
+{
+    "api_id": "networkconnectivity.googleapis.com",
+    "api_shortname": "networkconnectivity",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-network_connectivity/latest",
+    "distribution_name": "google-cloud-network_connectivity",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "networkconnectivity",
+    "name_pretty": "Network Connectivity API",
+    "product_documentation": "https://cloud.google.com/network-connectivity/docs",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Network Connectivity is Google's suite of products that provide enterprise connectivity from your on-premises network or from another cloud provider to your Virtual Private Cloud (VPC) network.",
+    "ruby-cloud-env-prefix": "NETWORK_CONNECTIVITY",
+    "ruby-cloud-product-url": "https://cloud.google.com/network-connectivity/docs",
+    "library_type": "GAPIC_AUTO"
+}

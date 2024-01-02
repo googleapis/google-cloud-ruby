@@ -1,0 +1,92 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.orchestration.airflow.service.v1",
+  "libraryPackage": "::Google::Cloud::Orchestration::Airflow::Service::V1",
+  "services": {
+    "Environments": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client",
+          "rpcs": {
+            "CreateEnvironment": {
+              "methods": [
+                "create_environment"
+              ]
+            },
+            "GetEnvironment": {
+              "methods": [
+                "get_environment"
+              ]
+            },
+            "ListEnvironments": {
+              "methods": [
+                "list_environments"
+              ]
+            },
+            "UpdateEnvironment": {
+              "methods": [
+                "update_environment"
+              ]
+            },
+            "DeleteEnvironment": {
+              "methods": [
+                "delete_environment"
+              ]
+            },
+            "ExecuteAirflowCommand": {
+              "methods": [
+                "execute_airflow_command"
+              ]
+            },
+            "StopAirflowCommand": {
+              "methods": [
+                "stop_airflow_command"
+              ]
+            },
+            "PollAirflowCommand": {
+              "methods": [
+                "poll_airflow_command"
+              ]
+            },
+            "SaveSnapshot": {
+              "methods": [
+                "save_snapshot"
+              ]
+            },
+            "LoadSnapshot": {
+              "methods": [
+                "load_snapshot"
+              ]
+            },
+            "DatabaseFailover": {
+              "methods": [
+                "database_failover"
+              ]
+            },
+            "FetchDatabaseProperties": {
+              "methods": [
+                "fetch_database_properties"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ImageVersions": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Orchestration::Airflow::Service::V1::ImageVersions::Client",
+          "rpcs": {
+            "ListImageVersions": {
+              "methods": [
+                "list_image_versions"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
