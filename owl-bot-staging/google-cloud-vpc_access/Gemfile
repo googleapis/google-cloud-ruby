@@ -1,5 +1,0 @@
-source "https://rubygems.org"
-
-gemspec
-
-gem "google-cloud-vpc_access-v1", path: "../google-cloud-vpc_access-v1"

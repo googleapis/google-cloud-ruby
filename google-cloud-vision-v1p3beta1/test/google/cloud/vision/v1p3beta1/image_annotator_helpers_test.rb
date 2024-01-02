@@ -27,10 +27,6 @@ class HelperMockImageAnnotatorCredentials < Google::Cloud::Vision::V1p3beta1::Im
           "happen since the grpc layer is being mocked."
     end
   end
-
-  def universe_domain
-    "googleapis.com"
-  end
 end
 
 class ImageAnnotatorClientHelpersTest < Minitest::Test
