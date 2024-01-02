@@ -1,0 +1,18 @@
+{
+    "api_id": "monitoring.googleapis.com",
+    "api_shortname": "monitoring",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-monitoring-metrics_scope/latest",
+    "distribution_name": "google-cloud-monitoring-metrics_scope",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "monitoring",
+    "name_pretty": "Cloud Monitoring Metrics Scopes API",
+    "product_documentation": "https://cloud.google.com/monitoring",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Cloud Monitoring collects metrics, events, and metadata from Google Cloud, Amazon Web Services (AWS), hosted uptime probes, and application instrumentation.",
+    "ruby-cloud-env-prefix": "MONITORING",
+    "ruby-cloud-product-url": "https://cloud.google.com/monitoring",
+    "library_type": "GAPIC_AUTO"
+}
