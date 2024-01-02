@@ -1,0 +1,5 @@
+source "https://rubygems.org"
+
+gemspec
+
+gem "google-cloud-tpu-v1", path: "../google-cloud-tpu-v1"
