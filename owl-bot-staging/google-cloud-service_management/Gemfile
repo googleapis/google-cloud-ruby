@@ -1,0 +1,5 @@
+source "https://rubygems.org"
+
+gemspec
+
+gem "google-cloud-service_management-v1", path: "../google-cloud-service_management-v1"

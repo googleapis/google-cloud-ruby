@@ -1,0 +1,118 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.security.privateca.v1beta1",
+  "libraryPackage": "::Google::Cloud::Security::PrivateCA::V1beta1",
+  "services": {
+    "CertificateAuthorityService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client",
+          "rpcs": {
+            "CreateCertificate": {
+              "methods": [
+                "create_certificate"
+              ]
+            },
+            "GetCertificate": {
+              "methods": [
+                "get_certificate"
+              ]
+            },
+            "ListCertificates": {
+              "methods": [
+                "list_certificates"
+              ]
+            },
+            "RevokeCertificate": {
+              "methods": [
+                "revoke_certificate"
+              ]
+            },
+            "UpdateCertificate": {
+              "methods": [
+                "update_certificate"
+              ]
+            },
+            "ActivateCertificateAuthority": {
+              "methods": [
+                "activate_certificate_authority"
+              ]
+            },
+            "CreateCertificateAuthority": {
+              "methods": [
+                "create_certificate_authority"
+              ]
+            },
+            "DisableCertificateAuthority": {
+              "methods": [
+                "disable_certificate_authority"
+              ]
+            },
+            "EnableCertificateAuthority": {
+              "methods": [
+                "enable_certificate_authority"
+              ]
+            },
+            "FetchCertificateAuthorityCsr": {
+              "methods": [
+                "fetch_certificate_authority_csr"
+              ]
+            },
+            "GetCertificateAuthority": {
+              "methods": [
+                "get_certificate_authority"
+              ]
+            },
+            "ListCertificateAuthorities": {
+              "methods": [
+                "list_certificate_authorities"
+              ]
+            },
+            "RestoreCertificateAuthority": {
+              "methods": [
+                "restore_certificate_authority"
+              ]
+            },
+            "ScheduleDeleteCertificateAuthority": {
+              "methods": [
+                "schedule_delete_certificate_authority"
+              ]
+            },
+            "UpdateCertificateAuthority": {
+              "methods": [
+                "update_certificate_authority"
+              ]
+            },
+            "GetCertificateRevocationList": {
+              "methods": [
+                "get_certificate_revocation_list"
+              ]
+            },
+            "ListCertificateRevocationLists": {
+              "methods": [
+                "list_certificate_revocation_lists"
+              ]
+            },
+            "UpdateCertificateRevocationList": {
+              "methods": [
+                "update_certificate_revocation_list"
+              ]
+            },
+            "GetReusableConfig": {
+              "methods": [
+                "get_reusable_config"
+              ]
+            },
+            "ListReusableConfigs": {
+              "methods": [
+                "list_reusable_configs"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

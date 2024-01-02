@@ -1,0 +1,215 @@
+{
+  "client_library": {
+    "name": "google-cloud-shell-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.shell.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "cloudshell_v1_generated_CloudShellService_GetEnvironment_sync",
+      "title": "Snippet for the get_environment call in the CloudShellService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Shell::V1::CloudShellService::Client#get_environment. It may require modification in order to execute successfully.",
+      "file": "cloud_shell_service/get_environment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_environment",
+        "full_name": "::Google::Cloud::Shell::V1::CloudShellService::Client#get_environment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Shell::V1::GetEnvironmentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Shell::V1::Environment",
+        "client": {
+          "short_name": "CloudShellService::Client",
+          "full_name": "::Google::Cloud::Shell::V1::CloudShellService::Client"
+        },
+        "method": {
+          "short_name": "GetEnvironment",
+          "full_name": "google.cloud.shell.v1.CloudShellService.GetEnvironment",
+          "service": {
+            "short_name": "CloudShellService",
+            "full_name": "google.cloud.shell.v1.CloudShellService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudshell_v1_generated_CloudShellService_StartEnvironment_sync",
+      "title": "Snippet for the start_environment call in the CloudShellService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Shell::V1::CloudShellService::Client#start_environment. It may require modification in order to execute successfully.",
+      "file": "cloud_shell_service/start_environment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "start_environment",
+        "full_name": "::Google::Cloud::Shell::V1::CloudShellService::Client#start_environment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Shell::V1::StartEnvironmentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CloudShellService::Client",
+          "full_name": "::Google::Cloud::Shell::V1::CloudShellService::Client"
+        },
+        "method": {
+          "short_name": "StartEnvironment",
+          "full_name": "google.cloud.shell.v1.CloudShellService.StartEnvironment",
+          "service": {
+            "short_name": "CloudShellService",
+            "full_name": "google.cloud.shell.v1.CloudShellService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudshell_v1_generated_CloudShellService_AuthorizeEnvironment_sync",
+      "title": "Snippet for the authorize_environment call in the CloudShellService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Shell::V1::CloudShellService::Client#authorize_environment. It may require modification in order to execute successfully.",
+      "file": "cloud_shell_service/authorize_environment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "authorize_environment",
+        "full_name": "::Google::Cloud::Shell::V1::CloudShellService::Client#authorize_environment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Shell::V1::AuthorizeEnvironmentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CloudShellService::Client",
+          "full_name": "::Google::Cloud::Shell::V1::CloudShellService::Client"
+        },
+        "method": {
+          "short_name": "AuthorizeEnvironment",
+          "full_name": "google.cloud.shell.v1.CloudShellService.AuthorizeEnvironment",
+          "service": {
+            "short_name": "CloudShellService",
+            "full_name": "google.cloud.shell.v1.CloudShellService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudshell_v1_generated_CloudShellService_AddPublicKey_sync",
+      "title": "Snippet for the add_public_key call in the CloudShellService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Shell::V1::CloudShellService::Client#add_public_key. It may require modification in order to execute successfully.",
+      "file": "cloud_shell_service/add_public_key.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "add_public_key",
+        "full_name": "::Google::Cloud::Shell::V1::CloudShellService::Client#add_public_key",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Shell::V1::AddPublicKeyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CloudShellService::Client",
+          "full_name": "::Google::Cloud::Shell::V1::CloudShellService::Client"
+        },
+        "method": {
+          "short_name": "AddPublicKey",
+          "full_name": "google.cloud.shell.v1.CloudShellService.AddPublicKey",
+          "service": {
+            "short_name": "CloudShellService",
+            "full_name": "google.cloud.shell.v1.CloudShellService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudshell_v1_generated_CloudShellService_RemovePublicKey_sync",
+      "title": "Snippet for the remove_public_key call in the CloudShellService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Shell::V1::CloudShellService::Client#remove_public_key. It may require modification in order to execute successfully.",
+      "file": "cloud_shell_service/remove_public_key.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "remove_public_key",
+        "full_name": "::Google::Cloud::Shell::V1::CloudShellService::Client#remove_public_key",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Shell::V1::RemovePublicKeyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CloudShellService::Client",
+          "full_name": "::Google::Cloud::Shell::V1::CloudShellService::Client"
+        },
+        "method": {
+          "short_name": "RemovePublicKey",
+          "full_name": "google.cloud.shell.v1.CloudShellService.RemovePublicKey",
+          "service": {
+            "short_name": "CloudShellService",
+            "full_name": "google.cloud.shell.v1.CloudShellService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
