@@ -1,0 +1,135 @@
+{
+  "client_library": {
+    "name": "google-cloud-commerce-consumer-procurement-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.commerce.consumer.procurement.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "cloudcommerceconsumerprocurement_v1_generated_ConsumerProcurementService_PlaceOrder_sync",
+      "title": "Snippet for the place_order call in the ConsumerProcurementService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Client#place_order. It may require modification in order to execute successfully.",
+      "file": "consumer_procurement_service/place_order.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "place_order",
+        "full_name": "::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Client#place_order",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Commerce::Consumer::Procurement::V1::PlaceOrderRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ConsumerProcurementService::Client",
+          "full_name": "::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Client"
+        },
+        "method": {
+          "short_name": "PlaceOrder",
+          "full_name": "google.cloud.commerce.consumer.procurement.v1.ConsumerProcurementService.PlaceOrder",
+          "service": {
+            "short_name": "ConsumerProcurementService",
+            "full_name": "google.cloud.commerce.consumer.procurement.v1.ConsumerProcurementService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudcommerceconsumerprocurement_v1_generated_ConsumerProcurementService_GetOrder_sync",
+      "title": "Snippet for the get_order call in the ConsumerProcurementService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Client#get_order. It may require modification in order to execute successfully.",
+      "file": "consumer_procurement_service/get_order.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_order",
+        "full_name": "::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Client#get_order",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Commerce::Consumer::Procurement::V1::GetOrderRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Commerce::Consumer::Procurement::V1::Order",
+        "client": {
+          "short_name": "ConsumerProcurementService::Client",
+          "full_name": "::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Client"
+        },
+        "method": {
+          "short_name": "GetOrder",
+          "full_name": "google.cloud.commerce.consumer.procurement.v1.ConsumerProcurementService.GetOrder",
+          "service": {
+            "short_name": "ConsumerProcurementService",
+            "full_name": "google.cloud.commerce.consumer.procurement.v1.ConsumerProcurementService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudcommerceconsumerprocurement_v1_generated_ConsumerProcurementService_ListOrders_sync",
+      "title": "Snippet for the list_orders call in the ConsumerProcurementService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Client#list_orders. It may require modification in order to execute successfully.",
+      "file": "consumer_procurement_service/list_orders.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_orders",
+        "full_name": "::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Client#list_orders",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Commerce::Consumer::Procurement::V1::ListOrdersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Commerce::Consumer::Procurement::V1::ListOrdersResponse",
+        "client": {
+          "short_name": "ConsumerProcurementService::Client",
+          "full_name": "::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Client"
+        },
+        "method": {
+          "short_name": "ListOrders",
+          "full_name": "google.cloud.commerce.consumer.procurement.v1.ConsumerProcurementService.ListOrders",
+          "service": {
+            "short_name": "ConsumerProcurementService",
+            "full_name": "google.cloud.commerce.consumer.procurement.v1.ConsumerProcurementService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
