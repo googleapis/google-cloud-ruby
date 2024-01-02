@@ -1,5 +1,0 @@
-source "https://rubygems.org"
-
-gemspec
-
-gem "google-analytics-admin-v1alpha", path: "../google-analytics-admin-v1alpha"
