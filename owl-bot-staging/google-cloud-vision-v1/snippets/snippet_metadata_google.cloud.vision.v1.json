@@ -1,0 +1,935 @@
+{
+  "client_library": {
+    "name": "google-cloud-vision-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.vision.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "vision_v1_generated_ProductSearch_CreateProductSet_sync",
+      "title": "Snippet for the create_product_set call in the ProductSearch service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1::ProductSearch::Client#create_product_set. It may require modification in order to execute successfully.",
+      "file": "product_search/create_product_set.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_product_set",
+        "full_name": "::Google::Cloud::Vision::V1::ProductSearch::Client#create_product_set",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Vision::V1::CreateProductSetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Vision::V1::ProductSet",
+        "client": {
+          "short_name": "ProductSearch::Client",
+          "full_name": "::Google::Cloud::Vision::V1::ProductSearch::Client"
+        },
+        "method": {
+          "short_name": "CreateProductSet",
+          "full_name": "google.cloud.vision.v1.ProductSearch.CreateProductSet",
+          "service": {
+            "short_name": "ProductSearch",
+            "full_name": "google.cloud.vision.v1.ProductSearch"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vision_v1_generated_ProductSearch_ListProductSets_sync",
+      "title": "Snippet for the list_product_sets call in the ProductSearch service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1::ProductSearch::Client#list_product_sets. It may require modification in order to execute successfully.",
+      "file": "product_search/list_product_sets.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_product_sets",
+        "full_name": "::Google::Cloud::Vision::V1::ProductSearch::Client#list_product_sets",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Vision::V1::ListProductSetsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Vision::V1::ListProductSetsResponse",
+        "client": {
+          "short_name": "ProductSearch::Client",
+          "full_name": "::Google::Cloud::Vision::V1::ProductSearch::Client"
+        },
+        "method": {
+          "short_name": "ListProductSets",
+          "full_name": "google.cloud.vision.v1.ProductSearch.ListProductSets",
+          "service": {
+            "short_name": "ProductSearch",
+            "full_name": "google.cloud.vision.v1.ProductSearch"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vision_v1_generated_ProductSearch_GetProductSet_sync",
+      "title": "Snippet for the get_product_set call in the ProductSearch service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1::ProductSearch::Client#get_product_set. It may require modification in order to execute successfully.",
+      "file": "product_search/get_product_set.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_product_set",
+        "full_name": "::Google::Cloud::Vision::V1::ProductSearch::Client#get_product_set",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Vision::V1::GetProductSetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Vision::V1::ProductSet",
+        "client": {
+          "short_name": "ProductSearch::Client",
+          "full_name": "::Google::Cloud::Vision::V1::ProductSearch::Client"
+        },
+        "method": {
+          "short_name": "GetProductSet",
+          "full_name": "google.cloud.vision.v1.ProductSearch.GetProductSet",
+          "service": {
+            "short_name": "ProductSearch",
+            "full_name": "google.cloud.vision.v1.ProductSearch"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vision_v1_generated_ProductSearch_UpdateProductSet_sync",
+      "title": "Snippet for the update_product_set call in the ProductSearch service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1::ProductSearch::Client#update_product_set. It may require modification in order to execute successfully.",
+      "file": "product_search/update_product_set.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_product_set",
+        "full_name": "::Google::Cloud::Vision::V1::ProductSearch::Client#update_product_set",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Vision::V1::UpdateProductSetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Vision::V1::ProductSet",
+        "client": {
+          "short_name": "ProductSearch::Client",
+          "full_name": "::Google::Cloud::Vision::V1::ProductSearch::Client"
+        },
+        "method": {
+          "short_name": "UpdateProductSet",
+          "full_name": "google.cloud.vision.v1.ProductSearch.UpdateProductSet",
+          "service": {
+            "short_name": "ProductSearch",
+            "full_name": "google.cloud.vision.v1.ProductSearch"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vision_v1_generated_ProductSearch_DeleteProductSet_sync",
+      "title": "Snippet for the delete_product_set call in the ProductSearch service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1::ProductSearch::Client#delete_product_set. It may require modification in order to execute successfully.",
+      "file": "product_search/delete_product_set.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_product_set",
+        "full_name": "::Google::Cloud::Vision::V1::ProductSearch::Client#delete_product_set",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Vision::V1::DeleteProductSetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "ProductSearch::Client",
+          "full_name": "::Google::Cloud::Vision::V1::ProductSearch::Client"
+        },
+        "method": {
+          "short_name": "DeleteProductSet",
+          "full_name": "google.cloud.vision.v1.ProductSearch.DeleteProductSet",
+          "service": {
+            "short_name": "ProductSearch",
+            "full_name": "google.cloud.vision.v1.ProductSearch"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vision_v1_generated_ProductSearch_CreateProduct_sync",
+      "title": "Snippet for the create_product call in the ProductSearch service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1::ProductSearch::Client#create_product. It may require modification in order to execute successfully.",
+      "file": "product_search/create_product.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_product",
+        "full_name": "::Google::Cloud::Vision::V1::ProductSearch::Client#create_product",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Vision::V1::CreateProductRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Vision::V1::Product",
+        "client": {
+          "short_name": "ProductSearch::Client",
+          "full_name": "::Google::Cloud::Vision::V1::ProductSearch::Client"
+        },
+        "method": {
+          "short_name": "CreateProduct",
+          "full_name": "google.cloud.vision.v1.ProductSearch.CreateProduct",
+          "service": {
+            "short_name": "ProductSearch",
+            "full_name": "google.cloud.vision.v1.ProductSearch"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vision_v1_generated_ProductSearch_ListProducts_sync",
+      "title": "Snippet for the list_products call in the ProductSearch service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1::ProductSearch::Client#list_products. It may require modification in order to execute successfully.",
+      "file": "product_search/list_products.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_products",
+        "full_name": "::Google::Cloud::Vision::V1::ProductSearch::Client#list_products",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Vision::V1::ListProductsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Vision::V1::ListProductsResponse",
+        "client": {
+          "short_name": "ProductSearch::Client",
+          "full_name": "::Google::Cloud::Vision::V1::ProductSearch::Client"
+        },
+        "method": {
+          "short_name": "ListProducts",
+          "full_name": "google.cloud.vision.v1.ProductSearch.ListProducts",
+          "service": {
+            "short_name": "ProductSearch",
+            "full_name": "google.cloud.vision.v1.ProductSearch"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vision_v1_generated_ProductSearch_GetProduct_sync",
+      "title": "Snippet for the get_product call in the ProductSearch service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1::ProductSearch::Client#get_product. It may require modification in order to execute successfully.",
+      "file": "product_search/get_product.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_product",
+        "full_name": "::Google::Cloud::Vision::V1::ProductSearch::Client#get_product",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Vision::V1::GetProductRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Vision::V1::Product",
+        "client": {
+          "short_name": "ProductSearch::Client",
+          "full_name": "::Google::Cloud::Vision::V1::ProductSearch::Client"
+        },
+        "method": {
+          "short_name": "GetProduct",
+          "full_name": "google.cloud.vision.v1.ProductSearch.GetProduct",
+          "service": {
+            "short_name": "ProductSearch",
+            "full_name": "google.cloud.vision.v1.ProductSearch"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vision_v1_generated_ProductSearch_UpdateProduct_sync",
+      "title": "Snippet for the update_product call in the ProductSearch service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1::ProductSearch::Client#update_product. It may require modification in order to execute successfully.",
+      "file": "product_search/update_product.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_product",
+        "full_name": "::Google::Cloud::Vision::V1::ProductSearch::Client#update_product",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Vision::V1::UpdateProductRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Vision::V1::Product",
+        "client": {
+          "short_name": "ProductSearch::Client",
+          "full_name": "::Google::Cloud::Vision::V1::ProductSearch::Client"
+        },
+        "method": {
+          "short_name": "UpdateProduct",
+          "full_name": "google.cloud.vision.v1.ProductSearch.UpdateProduct",
+          "service": {
+            "short_name": "ProductSearch",
+            "full_name": "google.cloud.vision.v1.ProductSearch"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vision_v1_generated_ProductSearch_DeleteProduct_sync",
+      "title": "Snippet for the delete_product call in the ProductSearch service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1::ProductSearch::Client#delete_product. It may require modification in order to execute successfully.",
+      "file": "product_search/delete_product.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_product",
+        "full_name": "::Google::Cloud::Vision::V1::ProductSearch::Client#delete_product",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Vision::V1::DeleteProductRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "ProductSearch::Client",
+          "full_name": "::Google::Cloud::Vision::V1::ProductSearch::Client"
+        },
+        "method": {
+          "short_name": "DeleteProduct",
+          "full_name": "google.cloud.vision.v1.ProductSearch.DeleteProduct",
+          "service": {
+            "short_name": "ProductSearch",
+            "full_name": "google.cloud.vision.v1.ProductSearch"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vision_v1_generated_ProductSearch_CreateReferenceImage_sync",
+      "title": "Snippet for the create_reference_image call in the ProductSearch service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1::ProductSearch::Client#create_reference_image. It may require modification in order to execute successfully.",
+      "file": "product_search/create_reference_image.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_reference_image",
+        "full_name": "::Google::Cloud::Vision::V1::ProductSearch::Client#create_reference_image",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Vision::V1::CreateReferenceImageRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Vision::V1::ReferenceImage",
+        "client": {
+          "short_name": "ProductSearch::Client",
+          "full_name": "::Google::Cloud::Vision::V1::ProductSearch::Client"
+        },
+        "method": {
+          "short_name": "CreateReferenceImage",
+          "full_name": "google.cloud.vision.v1.ProductSearch.CreateReferenceImage",
+          "service": {
+            "short_name": "ProductSearch",
+            "full_name": "google.cloud.vision.v1.ProductSearch"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vision_v1_generated_ProductSearch_DeleteReferenceImage_sync",
+      "title": "Snippet for the delete_reference_image call in the ProductSearch service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1::ProductSearch::Client#delete_reference_image. It may require modification in order to execute successfully.",
+      "file": "product_search/delete_reference_image.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_reference_image",
+        "full_name": "::Google::Cloud::Vision::V1::ProductSearch::Client#delete_reference_image",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Vision::V1::DeleteReferenceImageRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "ProductSearch::Client",
+          "full_name": "::Google::Cloud::Vision::V1::ProductSearch::Client"
+        },
+        "method": {
+          "short_name": "DeleteReferenceImage",
+          "full_name": "google.cloud.vision.v1.ProductSearch.DeleteReferenceImage",
+          "service": {
+            "short_name": "ProductSearch",
+            "full_name": "google.cloud.vision.v1.ProductSearch"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vision_v1_generated_ProductSearch_ListReferenceImages_sync",
+      "title": "Snippet for the list_reference_images call in the ProductSearch service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1::ProductSearch::Client#list_reference_images. It may require modification in order to execute successfully.",
+      "file": "product_search/list_reference_images.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_reference_images",
+        "full_name": "::Google::Cloud::Vision::V1::ProductSearch::Client#list_reference_images",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Vision::V1::ListReferenceImagesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Vision::V1::ListReferenceImagesResponse",
+        "client": {
+          "short_name": "ProductSearch::Client",
+          "full_name": "::Google::Cloud::Vision::V1::ProductSearch::Client"
+        },
+        "method": {
+          "short_name": "ListReferenceImages",
+          "full_name": "google.cloud.vision.v1.ProductSearch.ListReferenceImages",
+          "service": {
+            "short_name": "ProductSearch",
+            "full_name": "google.cloud.vision.v1.ProductSearch"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vision_v1_generated_ProductSearch_GetReferenceImage_sync",
+      "title": "Snippet for the get_reference_image call in the ProductSearch service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1::ProductSearch::Client#get_reference_image. It may require modification in order to execute successfully.",
+      "file": "product_search/get_reference_image.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_reference_image",
+        "full_name": "::Google::Cloud::Vision::V1::ProductSearch::Client#get_reference_image",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Vision::V1::GetReferenceImageRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Vision::V1::ReferenceImage",
+        "client": {
+          "short_name": "ProductSearch::Client",
+          "full_name": "::Google::Cloud::Vision::V1::ProductSearch::Client"
+        },
+        "method": {
+          "short_name": "GetReferenceImage",
+          "full_name": "google.cloud.vision.v1.ProductSearch.GetReferenceImage",
+          "service": {
+            "short_name": "ProductSearch",
+            "full_name": "google.cloud.vision.v1.ProductSearch"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vision_v1_generated_ProductSearch_AddProductToProductSet_sync",
+      "title": "Snippet for the add_product_to_product_set call in the ProductSearch service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1::ProductSearch::Client#add_product_to_product_set. It may require modification in order to execute successfully.",
+      "file": "product_search/add_product_to_product_set.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "add_product_to_product_set",
+        "full_name": "::Google::Cloud::Vision::V1::ProductSearch::Client#add_product_to_product_set",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Vision::V1::AddProductToProductSetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "ProductSearch::Client",
+          "full_name": "::Google::Cloud::Vision::V1::ProductSearch::Client"
+        },
+        "method": {
+          "short_name": "AddProductToProductSet",
+          "full_name": "google.cloud.vision.v1.ProductSearch.AddProductToProductSet",
+          "service": {
+            "short_name": "ProductSearch",
+            "full_name": "google.cloud.vision.v1.ProductSearch"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vision_v1_generated_ProductSearch_RemoveProductFromProductSet_sync",
+      "title": "Snippet for the remove_product_from_product_set call in the ProductSearch service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1::ProductSearch::Client#remove_product_from_product_set. It may require modification in order to execute successfully.",
+      "file": "product_search/remove_product_from_product_set.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "remove_product_from_product_set",
+        "full_name": "::Google::Cloud::Vision::V1::ProductSearch::Client#remove_product_from_product_set",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Vision::V1::RemoveProductFromProductSetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "ProductSearch::Client",
+          "full_name": "::Google::Cloud::Vision::V1::ProductSearch::Client"
+        },
+        "method": {
+          "short_name": "RemoveProductFromProductSet",
+          "full_name": "google.cloud.vision.v1.ProductSearch.RemoveProductFromProductSet",
+          "service": {
+            "short_name": "ProductSearch",
+            "full_name": "google.cloud.vision.v1.ProductSearch"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vision_v1_generated_ProductSearch_ListProductsInProductSet_sync",
+      "title": "Snippet for the list_products_in_product_set call in the ProductSearch service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1::ProductSearch::Client#list_products_in_product_set. It may require modification in order to execute successfully.",
+      "file": "product_search/list_products_in_product_set.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_products_in_product_set",
+        "full_name": "::Google::Cloud::Vision::V1::ProductSearch::Client#list_products_in_product_set",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Vision::V1::ListProductsInProductSetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Vision::V1::ListProductsInProductSetResponse",
+        "client": {
+          "short_name": "ProductSearch::Client",
+          "full_name": "::Google::Cloud::Vision::V1::ProductSearch::Client"
+        },
+        "method": {
+          "short_name": "ListProductsInProductSet",
+          "full_name": "google.cloud.vision.v1.ProductSearch.ListProductsInProductSet",
+          "service": {
+            "short_name": "ProductSearch",
+            "full_name": "google.cloud.vision.v1.ProductSearch"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vision_v1_generated_ProductSearch_ImportProductSets_sync",
+      "title": "Snippet for the import_product_sets call in the ProductSearch service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1::ProductSearch::Client#import_product_sets. It may require modification in order to execute successfully.",
+      "file": "product_search/import_product_sets.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "import_product_sets",
+        "full_name": "::Google::Cloud::Vision::V1::ProductSearch::Client#import_product_sets",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Vision::V1::ImportProductSetsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ProductSearch::Client",
+          "full_name": "::Google::Cloud::Vision::V1::ProductSearch::Client"
+        },
+        "method": {
+          "short_name": "ImportProductSets",
+          "full_name": "google.cloud.vision.v1.ProductSearch.ImportProductSets",
+          "service": {
+            "short_name": "ProductSearch",
+            "full_name": "google.cloud.vision.v1.ProductSearch"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vision_v1_generated_ProductSearch_PurgeProducts_sync",
+      "title": "Snippet for the purge_products call in the ProductSearch service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1::ProductSearch::Client#purge_products. It may require modification in order to execute successfully.",
+      "file": "product_search/purge_products.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "purge_products",
+        "full_name": "::Google::Cloud::Vision::V1::ProductSearch::Client#purge_products",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Vision::V1::PurgeProductsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ProductSearch::Client",
+          "full_name": "::Google::Cloud::Vision::V1::ProductSearch::Client"
+        },
+        "method": {
+          "short_name": "PurgeProducts",
+          "full_name": "google.cloud.vision.v1.ProductSearch.PurgeProducts",
+          "service": {
+            "short_name": "ProductSearch",
+            "full_name": "google.cloud.vision.v1.ProductSearch"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vision_v1_generated_ImageAnnotator_BatchAnnotateImages_sync",
+      "title": "Snippet for the batch_annotate_images call in the ImageAnnotator service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1::ImageAnnotator::Client#batch_annotate_images. It may require modification in order to execute successfully.",
+      "file": "image_annotator/batch_annotate_images.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_annotate_images",
+        "full_name": "::Google::Cloud::Vision::V1::ImageAnnotator::Client#batch_annotate_images",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Vision::V1::BatchAnnotateImagesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Vision::V1::BatchAnnotateImagesResponse",
+        "client": {
+          "short_name": "ImageAnnotator::Client",
+          "full_name": "::Google::Cloud::Vision::V1::ImageAnnotator::Client"
+        },
+        "method": {
+          "short_name": "BatchAnnotateImages",
+          "full_name": "google.cloud.vision.v1.ImageAnnotator.BatchAnnotateImages",
+          "service": {
+            "short_name": "ImageAnnotator",
+            "full_name": "google.cloud.vision.v1.ImageAnnotator"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vision_v1_generated_ImageAnnotator_BatchAnnotateFiles_sync",
+      "title": "Snippet for the batch_annotate_files call in the ImageAnnotator service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1::ImageAnnotator::Client#batch_annotate_files. It may require modification in order to execute successfully.",
+      "file": "image_annotator/batch_annotate_files.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_annotate_files",
+        "full_name": "::Google::Cloud::Vision::V1::ImageAnnotator::Client#batch_annotate_files",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Vision::V1::BatchAnnotateFilesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Vision::V1::BatchAnnotateFilesResponse",
+        "client": {
+          "short_name": "ImageAnnotator::Client",
+          "full_name": "::Google::Cloud::Vision::V1::ImageAnnotator::Client"
+        },
+        "method": {
+          "short_name": "BatchAnnotateFiles",
+          "full_name": "google.cloud.vision.v1.ImageAnnotator.BatchAnnotateFiles",
+          "service": {
+            "short_name": "ImageAnnotator",
+            "full_name": "google.cloud.vision.v1.ImageAnnotator"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vision_v1_generated_ImageAnnotator_AsyncBatchAnnotateImages_sync",
+      "title": "Snippet for the async_batch_annotate_images call in the ImageAnnotator service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1::ImageAnnotator::Client#async_batch_annotate_images. It may require modification in order to execute successfully.",
+      "file": "image_annotator/async_batch_annotate_images.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "async_batch_annotate_images",
+        "full_name": "::Google::Cloud::Vision::V1::ImageAnnotator::Client#async_batch_annotate_images",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Vision::V1::AsyncBatchAnnotateImagesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ImageAnnotator::Client",
+          "full_name": "::Google::Cloud::Vision::V1::ImageAnnotator::Client"
+        },
+        "method": {
+          "short_name": "AsyncBatchAnnotateImages",
+          "full_name": "google.cloud.vision.v1.ImageAnnotator.AsyncBatchAnnotateImages",
+          "service": {
+            "short_name": "ImageAnnotator",
+            "full_name": "google.cloud.vision.v1.ImageAnnotator"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vision_v1_generated_ImageAnnotator_AsyncBatchAnnotateFiles_sync",
+      "title": "Snippet for the async_batch_annotate_files call in the ImageAnnotator service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1::ImageAnnotator::Client#async_batch_annotate_files. It may require modification in order to execute successfully.",
+      "file": "image_annotator/async_batch_annotate_files.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "async_batch_annotate_files",
+        "full_name": "::Google::Cloud::Vision::V1::ImageAnnotator::Client#async_batch_annotate_files",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Vision::V1::AsyncBatchAnnotateFilesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ImageAnnotator::Client",
+          "full_name": "::Google::Cloud::Vision::V1::ImageAnnotator::Client"
+        },
+        "method": {
+          "short_name": "AsyncBatchAnnotateFiles",
+          "full_name": "google.cloud.vision.v1.ImageAnnotator.AsyncBatchAnnotateFiles",
+          "service": {
+            "short_name": "ImageAnnotator",
+            "full_name": "google.cloud.vision.v1.ImageAnnotator"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
