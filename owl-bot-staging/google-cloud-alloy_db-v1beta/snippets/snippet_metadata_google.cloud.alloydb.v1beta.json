@@ -1,0 +1,1255 @@
+{
+  "client_library": {
+    "name": "google-cloud-alloy_db-v1beta",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.alloydb.v1beta",
+        "version": "v1beta"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "alloydb_v1beta_generated_AlloyDBAdmin_ListClusters_sync",
+      "title": "Snippet for the list_clusters call in the AlloyDBAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#list_clusters. It may require modification in order to execute successfully.",
+      "file": "alloy_db_admin/list_clusters.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_clusters",
+        "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#list_clusters",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AlloyDB::V1beta::ListClustersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AlloyDB::V1beta::ListClustersResponse",
+        "client": {
+          "short_name": "AlloyDBAdmin::Client",
+          "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client"
+        },
+        "method": {
+          "short_name": "ListClusters",
+          "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin.ListClusters",
+          "service": {
+            "short_name": "AlloyDBAdmin",
+            "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "alloydb_v1beta_generated_AlloyDBAdmin_GetCluster_sync",
+      "title": "Snippet for the get_cluster call in the AlloyDBAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#get_cluster. It may require modification in order to execute successfully.",
+      "file": "alloy_db_admin/get_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_cluster",
+        "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#get_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AlloyDB::V1beta::GetClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AlloyDB::V1beta::Cluster",
+        "client": {
+          "short_name": "AlloyDBAdmin::Client",
+          "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client"
+        },
+        "method": {
+          "short_name": "GetCluster",
+          "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin.GetCluster",
+          "service": {
+            "short_name": "AlloyDBAdmin",
+            "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "alloydb_v1beta_generated_AlloyDBAdmin_CreateCluster_sync",
+      "title": "Snippet for the create_cluster call in the AlloyDBAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#create_cluster. It may require modification in order to execute successfully.",
+      "file": "alloy_db_admin/create_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_cluster",
+        "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#create_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AlloyDB::V1beta::CreateClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AlloyDBAdmin::Client",
+          "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client"
+        },
+        "method": {
+          "short_name": "CreateCluster",
+          "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin.CreateCluster",
+          "service": {
+            "short_name": "AlloyDBAdmin",
+            "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "alloydb_v1beta_generated_AlloyDBAdmin_UpdateCluster_sync",
+      "title": "Snippet for the update_cluster call in the AlloyDBAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#update_cluster. It may require modification in order to execute successfully.",
+      "file": "alloy_db_admin/update_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_cluster",
+        "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#update_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AlloyDB::V1beta::UpdateClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AlloyDBAdmin::Client",
+          "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client"
+        },
+        "method": {
+          "short_name": "UpdateCluster",
+          "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin.UpdateCluster",
+          "service": {
+            "short_name": "AlloyDBAdmin",
+            "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "alloydb_v1beta_generated_AlloyDBAdmin_DeleteCluster_sync",
+      "title": "Snippet for the delete_cluster call in the AlloyDBAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#delete_cluster. It may require modification in order to execute successfully.",
+      "file": "alloy_db_admin/delete_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_cluster",
+        "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#delete_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AlloyDB::V1beta::DeleteClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AlloyDBAdmin::Client",
+          "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client"
+        },
+        "method": {
+          "short_name": "DeleteCluster",
+          "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin.DeleteCluster",
+          "service": {
+            "short_name": "AlloyDBAdmin",
+            "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "alloydb_v1beta_generated_AlloyDBAdmin_PromoteCluster_sync",
+      "title": "Snippet for the promote_cluster call in the AlloyDBAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#promote_cluster. It may require modification in order to execute successfully.",
+      "file": "alloy_db_admin/promote_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "promote_cluster",
+        "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#promote_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AlloyDB::V1beta::PromoteClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AlloyDBAdmin::Client",
+          "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client"
+        },
+        "method": {
+          "short_name": "PromoteCluster",
+          "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin.PromoteCluster",
+          "service": {
+            "short_name": "AlloyDBAdmin",
+            "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "alloydb_v1beta_generated_AlloyDBAdmin_RestoreCluster_sync",
+      "title": "Snippet for the restore_cluster call in the AlloyDBAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#restore_cluster. It may require modification in order to execute successfully.",
+      "file": "alloy_db_admin/restore_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "restore_cluster",
+        "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#restore_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AlloyDB::V1beta::RestoreClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AlloyDBAdmin::Client",
+          "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client"
+        },
+        "method": {
+          "short_name": "RestoreCluster",
+          "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin.RestoreCluster",
+          "service": {
+            "short_name": "AlloyDBAdmin",
+            "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "alloydb_v1beta_generated_AlloyDBAdmin_CreateSecondaryCluster_sync",
+      "title": "Snippet for the create_secondary_cluster call in the AlloyDBAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#create_secondary_cluster. It may require modification in order to execute successfully.",
+      "file": "alloy_db_admin/create_secondary_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_secondary_cluster",
+        "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#create_secondary_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AlloyDB::V1beta::CreateSecondaryClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AlloyDBAdmin::Client",
+          "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client"
+        },
+        "method": {
+          "short_name": "CreateSecondaryCluster",
+          "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin.CreateSecondaryCluster",
+          "service": {
+            "short_name": "AlloyDBAdmin",
+            "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "alloydb_v1beta_generated_AlloyDBAdmin_ListInstances_sync",
+      "title": "Snippet for the list_instances call in the AlloyDBAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#list_instances. It may require modification in order to execute successfully.",
+      "file": "alloy_db_admin/list_instances.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_instances",
+        "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#list_instances",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AlloyDB::V1beta::ListInstancesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AlloyDB::V1beta::ListInstancesResponse",
+        "client": {
+          "short_name": "AlloyDBAdmin::Client",
+          "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client"
+        },
+        "method": {
+          "short_name": "ListInstances",
+          "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin.ListInstances",
+          "service": {
+            "short_name": "AlloyDBAdmin",
+            "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "alloydb_v1beta_generated_AlloyDBAdmin_GetInstance_sync",
+      "title": "Snippet for the get_instance call in the AlloyDBAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#get_instance. It may require modification in order to execute successfully.",
+      "file": "alloy_db_admin/get_instance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_instance",
+        "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#get_instance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AlloyDB::V1beta::GetInstanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AlloyDB::V1beta::Instance",
+        "client": {
+          "short_name": "AlloyDBAdmin::Client",
+          "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client"
+        },
+        "method": {
+          "short_name": "GetInstance",
+          "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin.GetInstance",
+          "service": {
+            "short_name": "AlloyDBAdmin",
+            "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "alloydb_v1beta_generated_AlloyDBAdmin_CreateInstance_sync",
+      "title": "Snippet for the create_instance call in the AlloyDBAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#create_instance. It may require modification in order to execute successfully.",
+      "file": "alloy_db_admin/create_instance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_instance",
+        "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#create_instance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AlloyDB::V1beta::CreateInstanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AlloyDBAdmin::Client",
+          "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client"
+        },
+        "method": {
+          "short_name": "CreateInstance",
+          "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin.CreateInstance",
+          "service": {
+            "short_name": "AlloyDBAdmin",
+            "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "alloydb_v1beta_generated_AlloyDBAdmin_CreateSecondaryInstance_sync",
+      "title": "Snippet for the create_secondary_instance call in the AlloyDBAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#create_secondary_instance. It may require modification in order to execute successfully.",
+      "file": "alloy_db_admin/create_secondary_instance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_secondary_instance",
+        "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#create_secondary_instance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AlloyDB::V1beta::CreateSecondaryInstanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AlloyDBAdmin::Client",
+          "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client"
+        },
+        "method": {
+          "short_name": "CreateSecondaryInstance",
+          "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin.CreateSecondaryInstance",
+          "service": {
+            "short_name": "AlloyDBAdmin",
+            "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "alloydb_v1beta_generated_AlloyDBAdmin_BatchCreateInstances_sync",
+      "title": "Snippet for the batch_create_instances call in the AlloyDBAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#batch_create_instances. It may require modification in order to execute successfully.",
+      "file": "alloy_db_admin/batch_create_instances.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_create_instances",
+        "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#batch_create_instances",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AlloyDB::V1beta::BatchCreateInstancesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AlloyDBAdmin::Client",
+          "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client"
+        },
+        "method": {
+          "short_name": "BatchCreateInstances",
+          "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin.BatchCreateInstances",
+          "service": {
+            "short_name": "AlloyDBAdmin",
+            "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "alloydb_v1beta_generated_AlloyDBAdmin_UpdateInstance_sync",
+      "title": "Snippet for the update_instance call in the AlloyDBAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#update_instance. It may require modification in order to execute successfully.",
+      "file": "alloy_db_admin/update_instance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_instance",
+        "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#update_instance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AlloyDB::V1beta::UpdateInstanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AlloyDBAdmin::Client",
+          "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client"
+        },
+        "method": {
+          "short_name": "UpdateInstance",
+          "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin.UpdateInstance",
+          "service": {
+            "short_name": "AlloyDBAdmin",
+            "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "alloydb_v1beta_generated_AlloyDBAdmin_DeleteInstance_sync",
+      "title": "Snippet for the delete_instance call in the AlloyDBAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#delete_instance. It may require modification in order to execute successfully.",
+      "file": "alloy_db_admin/delete_instance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_instance",
+        "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#delete_instance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AlloyDB::V1beta::DeleteInstanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AlloyDBAdmin::Client",
+          "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client"
+        },
+        "method": {
+          "short_name": "DeleteInstance",
+          "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin.DeleteInstance",
+          "service": {
+            "short_name": "AlloyDBAdmin",
+            "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "alloydb_v1beta_generated_AlloyDBAdmin_FailoverInstance_sync",
+      "title": "Snippet for the failover_instance call in the AlloyDBAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#failover_instance. It may require modification in order to execute successfully.",
+      "file": "alloy_db_admin/failover_instance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "failover_instance",
+        "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#failover_instance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AlloyDB::V1beta::FailoverInstanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AlloyDBAdmin::Client",
+          "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client"
+        },
+        "method": {
+          "short_name": "FailoverInstance",
+          "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin.FailoverInstance",
+          "service": {
+            "short_name": "AlloyDBAdmin",
+            "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "alloydb_v1beta_generated_AlloyDBAdmin_InjectFault_sync",
+      "title": "Snippet for the inject_fault call in the AlloyDBAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#inject_fault. It may require modification in order to execute successfully.",
+      "file": "alloy_db_admin/inject_fault.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "inject_fault",
+        "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#inject_fault",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AlloyDB::V1beta::InjectFaultRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AlloyDBAdmin::Client",
+          "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client"
+        },
+        "method": {
+          "short_name": "InjectFault",
+          "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin.InjectFault",
+          "service": {
+            "short_name": "AlloyDBAdmin",
+            "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "alloydb_v1beta_generated_AlloyDBAdmin_RestartInstance_sync",
+      "title": "Snippet for the restart_instance call in the AlloyDBAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#restart_instance. It may require modification in order to execute successfully.",
+      "file": "alloy_db_admin/restart_instance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "restart_instance",
+        "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#restart_instance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AlloyDB::V1beta::RestartInstanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AlloyDBAdmin::Client",
+          "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client"
+        },
+        "method": {
+          "short_name": "RestartInstance",
+          "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin.RestartInstance",
+          "service": {
+            "short_name": "AlloyDBAdmin",
+            "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "alloydb_v1beta_generated_AlloyDBAdmin_ListBackups_sync",
+      "title": "Snippet for the list_backups call in the AlloyDBAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#list_backups. It may require modification in order to execute successfully.",
+      "file": "alloy_db_admin/list_backups.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_backups",
+        "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#list_backups",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AlloyDB::V1beta::ListBackupsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AlloyDB::V1beta::ListBackupsResponse",
+        "client": {
+          "short_name": "AlloyDBAdmin::Client",
+          "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client"
+        },
+        "method": {
+          "short_name": "ListBackups",
+          "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin.ListBackups",
+          "service": {
+            "short_name": "AlloyDBAdmin",
+            "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "alloydb_v1beta_generated_AlloyDBAdmin_GetBackup_sync",
+      "title": "Snippet for the get_backup call in the AlloyDBAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#get_backup. It may require modification in order to execute successfully.",
+      "file": "alloy_db_admin/get_backup.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_backup",
+        "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#get_backup",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AlloyDB::V1beta::GetBackupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AlloyDB::V1beta::Backup",
+        "client": {
+          "short_name": "AlloyDBAdmin::Client",
+          "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client"
+        },
+        "method": {
+          "short_name": "GetBackup",
+          "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin.GetBackup",
+          "service": {
+            "short_name": "AlloyDBAdmin",
+            "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "alloydb_v1beta_generated_AlloyDBAdmin_CreateBackup_sync",
+      "title": "Snippet for the create_backup call in the AlloyDBAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#create_backup. It may require modification in order to execute successfully.",
+      "file": "alloy_db_admin/create_backup.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_backup",
+        "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#create_backup",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AlloyDB::V1beta::CreateBackupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AlloyDBAdmin::Client",
+          "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client"
+        },
+        "method": {
+          "short_name": "CreateBackup",
+          "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin.CreateBackup",
+          "service": {
+            "short_name": "AlloyDBAdmin",
+            "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "alloydb_v1beta_generated_AlloyDBAdmin_UpdateBackup_sync",
+      "title": "Snippet for the update_backup call in the AlloyDBAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#update_backup. It may require modification in order to execute successfully.",
+      "file": "alloy_db_admin/update_backup.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_backup",
+        "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#update_backup",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AlloyDB::V1beta::UpdateBackupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AlloyDBAdmin::Client",
+          "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client"
+        },
+        "method": {
+          "short_name": "UpdateBackup",
+          "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin.UpdateBackup",
+          "service": {
+            "short_name": "AlloyDBAdmin",
+            "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "alloydb_v1beta_generated_AlloyDBAdmin_DeleteBackup_sync",
+      "title": "Snippet for the delete_backup call in the AlloyDBAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#delete_backup. It may require modification in order to execute successfully.",
+      "file": "alloy_db_admin/delete_backup.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_backup",
+        "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#delete_backup",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AlloyDB::V1beta::DeleteBackupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AlloyDBAdmin::Client",
+          "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client"
+        },
+        "method": {
+          "short_name": "DeleteBackup",
+          "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin.DeleteBackup",
+          "service": {
+            "short_name": "AlloyDBAdmin",
+            "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "alloydb_v1beta_generated_AlloyDBAdmin_ListSupportedDatabaseFlags_sync",
+      "title": "Snippet for the list_supported_database_flags call in the AlloyDBAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#list_supported_database_flags. It may require modification in order to execute successfully.",
+      "file": "alloy_db_admin/list_supported_database_flags.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_supported_database_flags",
+        "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#list_supported_database_flags",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AlloyDB::V1beta::ListSupportedDatabaseFlagsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AlloyDB::V1beta::ListSupportedDatabaseFlagsResponse",
+        "client": {
+          "short_name": "AlloyDBAdmin::Client",
+          "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client"
+        },
+        "method": {
+          "short_name": "ListSupportedDatabaseFlags",
+          "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin.ListSupportedDatabaseFlags",
+          "service": {
+            "short_name": "AlloyDBAdmin",
+            "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "alloydb_v1beta_generated_AlloyDBAdmin_GenerateClientCertificate_sync",
+      "title": "Snippet for the generate_client_certificate call in the AlloyDBAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#generate_client_certificate. It may require modification in order to execute successfully.",
+      "file": "alloy_db_admin/generate_client_certificate.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "generate_client_certificate",
+        "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#generate_client_certificate",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AlloyDB::V1beta::GenerateClientCertificateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AlloyDB::V1beta::GenerateClientCertificateResponse",
+        "client": {
+          "short_name": "AlloyDBAdmin::Client",
+          "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client"
+        },
+        "method": {
+          "short_name": "GenerateClientCertificate",
+          "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin.GenerateClientCertificate",
+          "service": {
+            "short_name": "AlloyDBAdmin",
+            "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "alloydb_v1beta_generated_AlloyDBAdmin_GetConnectionInfo_sync",
+      "title": "Snippet for the get_connection_info call in the AlloyDBAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#get_connection_info. It may require modification in order to execute successfully.",
+      "file": "alloy_db_admin/get_connection_info.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_connection_info",
+        "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#get_connection_info",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AlloyDB::V1beta::GetConnectionInfoRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AlloyDB::V1beta::ConnectionInfo",
+        "client": {
+          "short_name": "AlloyDBAdmin::Client",
+          "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client"
+        },
+        "method": {
+          "short_name": "GetConnectionInfo",
+          "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin.GetConnectionInfo",
+          "service": {
+            "short_name": "AlloyDBAdmin",
+            "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "alloydb_v1beta_generated_AlloyDBAdmin_ListUsers_sync",
+      "title": "Snippet for the list_users call in the AlloyDBAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#list_users. It may require modification in order to execute successfully.",
+      "file": "alloy_db_admin/list_users.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_users",
+        "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#list_users",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AlloyDB::V1beta::ListUsersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AlloyDB::V1beta::ListUsersResponse",
+        "client": {
+          "short_name": "AlloyDBAdmin::Client",
+          "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client"
+        },
+        "method": {
+          "short_name": "ListUsers",
+          "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin.ListUsers",
+          "service": {
+            "short_name": "AlloyDBAdmin",
+            "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "alloydb_v1beta_generated_AlloyDBAdmin_GetUser_sync",
+      "title": "Snippet for the get_user call in the AlloyDBAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#get_user. It may require modification in order to execute successfully.",
+      "file": "alloy_db_admin/get_user.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_user",
+        "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#get_user",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AlloyDB::V1beta::GetUserRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AlloyDB::V1beta::User",
+        "client": {
+          "short_name": "AlloyDBAdmin::Client",
+          "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client"
+        },
+        "method": {
+          "short_name": "GetUser",
+          "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin.GetUser",
+          "service": {
+            "short_name": "AlloyDBAdmin",
+            "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "alloydb_v1beta_generated_AlloyDBAdmin_CreateUser_sync",
+      "title": "Snippet for the create_user call in the AlloyDBAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#create_user. It may require modification in order to execute successfully.",
+      "file": "alloy_db_admin/create_user.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_user",
+        "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#create_user",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AlloyDB::V1beta::CreateUserRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AlloyDB::V1beta::User",
+        "client": {
+          "short_name": "AlloyDBAdmin::Client",
+          "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client"
+        },
+        "method": {
+          "short_name": "CreateUser",
+          "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin.CreateUser",
+          "service": {
+            "short_name": "AlloyDBAdmin",
+            "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "alloydb_v1beta_generated_AlloyDBAdmin_UpdateUser_sync",
+      "title": "Snippet for the update_user call in the AlloyDBAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#update_user. It may require modification in order to execute successfully.",
+      "file": "alloy_db_admin/update_user.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_user",
+        "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#update_user",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AlloyDB::V1beta::UpdateUserRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AlloyDB::V1beta::User",
+        "client": {
+          "short_name": "AlloyDBAdmin::Client",
+          "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client"
+        },
+        "method": {
+          "short_name": "UpdateUser",
+          "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin.UpdateUser",
+          "service": {
+            "short_name": "AlloyDBAdmin",
+            "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "alloydb_v1beta_generated_AlloyDBAdmin_DeleteUser_sync",
+      "title": "Snippet for the delete_user call in the AlloyDBAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#delete_user. It may require modification in order to execute successfully.",
+      "file": "alloy_db_admin/delete_user.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_user",
+        "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#delete_user",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AlloyDB::V1beta::DeleteUserRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "AlloyDBAdmin::Client",
+          "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client"
+        },
+        "method": {
+          "short_name": "DeleteUser",
+          "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin.DeleteUser",
+          "service": {
+            "short_name": "AlloyDBAdmin",
+            "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
