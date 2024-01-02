@@ -1,6 +1,0 @@
-source "https://rubygems.org"
-
-gemspec
-
-gem "google-cloud-secret_manager-v1", path: "../google-cloud-secret_manager-v1"
-gem "google-cloud-secret_manager-v1beta1", path: "../google-cloud-secret_manager-v1beta1"
