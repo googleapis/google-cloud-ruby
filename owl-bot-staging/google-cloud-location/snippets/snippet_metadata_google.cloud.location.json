@@ -1,0 +1,95 @@
+{
+  "client_library": {
+    "name": "google-cloud-location",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.location",
+        "version": "location"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "location_v0_generated_Locations_ListLocations_sync",
+      "title": "Snippet for the list_locations call in the Locations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Location::Locations::Client#list_locations. It may require modification in order to execute successfully.",
+      "file": "locations/list_locations.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_locations",
+        "full_name": "::Google::Cloud::Location::Locations::Client#list_locations",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Location::ListLocationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Location::ListLocationsResponse",
+        "client": {
+          "short_name": "Locations::Client",
+          "full_name": "::Google::Cloud::Location::Locations::Client"
+        },
+        "method": {
+          "short_name": "ListLocations",
+          "full_name": "google.cloud.location.Locations.ListLocations",
+          "service": {
+            "short_name": "Locations",
+            "full_name": "google.cloud.location.Locations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "location_v0_generated_Locations_GetLocation_sync",
+      "title": "Snippet for the get_location call in the Locations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Location::Locations::Client#get_location. It may require modification in order to execute successfully.",
+      "file": "locations/get_location.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_location",
+        "full_name": "::Google::Cloud::Location::Locations::Client#get_location",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Location::GetLocationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Location::Location",
+        "client": {
+          "short_name": "Locations::Client",
+          "full_name": "::Google::Cloud::Location::Locations::Client"
+        },
+        "method": {
+          "short_name": "GetLocation",
+          "full_name": "google.cloud.location.Locations.GetLocation",
+          "service": {
+            "short_name": "Locations",
+            "full_name": "google.cloud.location.Locations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
