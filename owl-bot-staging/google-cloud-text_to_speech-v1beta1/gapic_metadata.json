@@ -1,0 +1,42 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.texttospeech.v1beta1",
+  "libraryPackage": "::Google::Cloud::TextToSpeech::V1beta1",
+  "services": {
+    "TextToSpeech": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Client",
+          "rpcs": {
+            "ListVoices": {
+              "methods": [
+                "list_voices"
+              ]
+            },
+            "SynthesizeSpeech": {
+              "methods": [
+                "synthesize_speech"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "TextToSpeechLongAudioSynthesize": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::TextToSpeech::V1beta1::TextToSpeechLongAudioSynthesize::Client",
+          "rpcs": {
+            "SynthesizeLongAudio": {
+              "methods": [
+                "synthesize_long_audio"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
