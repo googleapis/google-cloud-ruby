@@ -1,0 +1,5 @@
+source "https://rubygems.org"
+
+gemspec
+
+gem "google-cloud-filestore-v1", path: "../google-cloud-filestore-v1"
