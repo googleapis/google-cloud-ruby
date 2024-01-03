@@ -1,5 +1,11 @@
 # Release History
 
+### 0.8.0 (2024-01-03)
+
+#### Features
+
+* Add custom constraints CRUD APIs, proper etag support in Org Policy Update/Delete API ([#23673](https://github.com/googleapis/google-cloud-ruby/issues/23673)) 
+
 ### 0.7.0 (2023-09-12)
 
 #### Features
