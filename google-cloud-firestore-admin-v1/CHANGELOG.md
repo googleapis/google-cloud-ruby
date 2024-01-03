@@ -1,5 +1,14 @@
 # Release History
 
+### 0.13.0 (2024-01-03)
+
+#### Features
+
+* add DeleteDatabase API and delete protection ([#23683](https://github.com/googleapis/google-cloud-ruby/issues/23683)) 
+#### Documentation
+
+* update Database API description 
+
 ### 0.12.0 (2023-12-08)
 
 #### Features
