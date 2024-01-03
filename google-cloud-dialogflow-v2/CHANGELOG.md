@@ -1,5 +1,17 @@
 # Release History
 
+### 0.31.0 (2024-01-03)
+
+#### Features
+
+* add enable_conversation_augmented_query field to HumanAgentAssistantConfig.SuggestionFeatureConfig message 
+* add INTENT field in enum SearchKnowledgeAnswer.AnswerType message 
+* add rewritten_query in field in SearchKnowledgeResponse message 
+* add sections field to HumanAgentAssistantConfig.SuggestionQueryConfig ([#23669](https://github.com/googleapis/google-cloud-ruby/issues/23669)) 
+#### Documentation
+
+* improved comments on audio_config proto 
+
 ### 0.30.0 (2023-10-03)
 
 #### Features
