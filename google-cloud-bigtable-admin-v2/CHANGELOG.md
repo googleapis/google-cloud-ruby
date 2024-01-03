@@ -1,5 +1,11 @@
 # Release History
 
+### 0.20.0 (2024-01-03)
+
+#### Features
+
+* Modify ModifyColumnFamiliesRequest proto to expose ignore_warnings field ([#23665](https://github.com/googleapis/google-cloud-ruby/issues/23665)) 
+
 ### 0.19.0 (2023-10-16)
 
 #### Features
