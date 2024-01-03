@@ -1,5 +1,15 @@
 # Changelog
 
+### 0.3.0 (2024-01-03)
+
+#### Features
+
+* Add support for Backup, Backup Vault, and Backup Policy ([#23687](https://github.com/googleapis/google-cloud-ruby/issues/23687)) 
+* Set field_behavior to IDENTIFIER on the "name" fields 
+#### Documentation
+
+* Comments are updated for several fields/enums 
+
 ### 0.2.0 (2023-09-12)
 
 #### Features
