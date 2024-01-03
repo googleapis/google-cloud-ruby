@@ -1,5 +1,11 @@
 # Release History
 
+### 0.26.0 (2024-01-03)
+
+#### Features
+
+* add `GetSubpropertyEventFilter`, `ListSubpropertyEventFilters` and `UpdateSubpropertyEventFilters` methods ([#23664](https://github.com/googleapis/google-cloud-ruby/issues/23664)) 
+
 ### 0.25.0 (2023-09-12)
 
 #### Features
