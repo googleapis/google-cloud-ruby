@@ -416,12 +416,12 @@ describe Google::Cloud::Storage::Project, :mock_storage do
   it "creates a bucket with object retention enabled" do
     mock = Minitest::Mock.new
 
-    created_bucket = create_bucket_gapi bucket_name, enable_object_retention: bucket_enable_object_retention
+    created_bucket = create_bucket_gapi bucket_name
     resp_bucket = bucket_with_location created_bucket
+    resp_bucket.object_retention = object_retention_param bucket_enable_object_retention
 
     mock.expect :insert_bucket, resp_bucket, [project, created_bucket], predefined_acl: nil,
                   predefined_default_object_acl: nil, user_project: nil,
-                  # object_retention: object_retention_param(bucket_enable_object_retention),
                   enable_object_retention: bucket_enable_object_retention,
                   options: {}
 
