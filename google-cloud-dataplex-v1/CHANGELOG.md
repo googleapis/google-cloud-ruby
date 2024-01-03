@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.17.0 (2024-01-03)
+
+#### Features
+
+* add new field GOVERNANCE_RULE_PROCESSING to enum EventType ([#23671](https://github.com/googleapis/google-cloud-ruby/issues/23671)) 
+
 ### 0.16.0 (2023-12-07)
 
 #### Features
