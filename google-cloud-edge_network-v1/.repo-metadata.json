@@ -8,7 +8,7 @@
     "name": "edgenetwork",
     "name_pretty": "Distributed Cloud Edge Network V1 API",
     "product_documentation": "https://cloud.google.com/distributed-cloud/edge/latest/docs/overview",
-    "release_level": "unreleased",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "Network management API for Distributed Cloud Edge. Note that google-cloud-edge_network-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-edge_network instead. See the readme for more details.",
