@@ -1,5 +1,11 @@
 # Release History
 
+### 0.33.0 (2024-01-03)
+
+#### Features
+
+* Add field `autoscaled_rollout_policy` ([#23682](https://github.com/googleapis/google-cloud-ruby/issues/23682)) 
+
 ### 0.32.0 (2023-12-04)
 
 #### Features
