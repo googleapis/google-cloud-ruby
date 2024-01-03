@@ -170,8 +170,7 @@ are using. Install this library as a RubyGem, or add it to your Gemfile.
 ### Authentication
 
 Most API calls must be accompanied by authentication information proving that
-the caller has sufficient permissions to make the call. For an overview of
-authentication with Google, see https://cloud.google.com/docs/authentication.
+the caller has sufficient permissions to make the call.
 
 These API client libraries provide several mechanisms for attaching credentials
 to API calls.
@@ -192,8 +191,9 @@ to API calls.
     field in the client configuration. This can be set globally on the client
     class or provided when you construct a client object.
 
-See https://cloud.google.com/docs/authentication/production for more information
-on these and other methods of providing credentials.
+For more information, see the authentication documentation for the
+client library you are using, or the
+[Cloud authentication documentation](https://cloud.google.com/docs/authentication).
 
 ## Supported Ruby Versions
 
