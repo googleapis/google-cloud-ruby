@@ -595,6 +595,10 @@
       "component": "google-cloud-domains-v1beta1",
       "version_file": "lib/google/cloud/domains/v1beta1/version.rb"
     },
+    "google-cloud-edge_network": {
+      "component": "google-cloud-edge_network",
+      "version_file": "lib/google/cloud/edge_network/version.rb"
+    },
     "google-cloud-edge_network-v1": {
       "component": "google-cloud-edge_network-v1",
       "version_file": "lib/google/cloud/edge_network/v1/version.rb"
