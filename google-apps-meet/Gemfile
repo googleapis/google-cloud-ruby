@@ -1,0 +1,5 @@
+source "https://rubygems.org"
+
+gemspec
+
+gem "google-apps-meet-v2beta", path: "../google-apps-meet-v2beta"
