@@ -1,0 +1,17 @@
+{
+    "api_id": "meet.googleapis.com",
+    "api_shortname": "meet",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-apps-meet/latest",
+    "distribution_name": "google-apps-meet",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "meet",
+    "name_pretty": "Google Meet API",
+    "product_documentation": "https://developers.google.com/meet/api/guides/overview",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Create and manage meetings in Google Meet.",
+    "ruby-cloud-product-url": "https://developers.google.com/meet/api/guides/overview",
+    "library_type": "GAPIC_MANUAL"
+}
