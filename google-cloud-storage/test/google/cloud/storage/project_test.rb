@@ -412,7 +412,6 @@ describe Google::Cloud::Storage::Project, :mock_storage do
     _(bucket.default_event_based_hold?).must_equal false
   end
 
-  focus
   it "creates a bucket with object retention enabled" do
     mock = Minitest::Mock.new
 
@@ -424,7 +423,6 @@ describe Google::Cloud::Storage::Project, :mock_storage do
                   predefined_default_object_acl: nil, user_project: nil,
                   enable_object_retention: bucket_enable_object_retention,
                   options: {}
-
 
     storage.service.mocked_service = mock
 
