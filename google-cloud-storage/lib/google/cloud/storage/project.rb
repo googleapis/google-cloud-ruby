@@ -372,6 +372,8 @@ module Google
         #   bucket instance and its files.
         #
         #   See also {Bucket#requester_pays=} and {Bucket#requester_pays}.
+        # @param [Boolean] enable_object_retention
+        #   When set to true, object retention is enabled for this bucket.
         #
         # @yield [bucket] a block for configuring the bucket before it is
         #   created

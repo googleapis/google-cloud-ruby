@@ -825,6 +825,9 @@ module Google
         # @param [Integer] if_metageneration_not_match Makes the operation
         #   conditional on whether the file's current metageneration does not
         #   match the given value.
+        # @param [Boolean] override_unlocked_retention
+        #   Must be true to remove the retention configuration, reduce its unlocked
+        #   retention period, or change its mode from unlocked to locked.
         #
         # @yield [file] a block yielding a delegate object for updating the file
         #
