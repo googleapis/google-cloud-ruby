@@ -1182,9 +1182,9 @@ module Google
         #     Optional. Glossaries to be applied. It's keyed by target language code.
         # @!attribute [rw] format_conversions
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Optional. File format conversion map to be applied to all input files.
-        #     Map's key is the original mime_type. Map's value is the target mime_type of
-        #     translated documents.
+        #     Optional. The file format conversion map that is applied to all input
+        #     files. The map key is the original mime_type. The map value is the target
+        #     mime_type of translated documents.
         #
         #     Supported file format conversion includes:
         #     - `application/pdf` to

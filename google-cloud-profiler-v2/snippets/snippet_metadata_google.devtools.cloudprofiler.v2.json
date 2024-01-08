@@ -130,6 +130,46 @@
           "type": "FULL"
         }
       ]
+    },
+    {
+      "region_tag": "cloudprofiler_v2_generated_ExportService_ListProfiles_sync",
+      "title": "Snippet for the list_profiles call in the ExportService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Profiler::V2::ExportService::Client#list_profiles. It may require modification in order to execute successfully.",
+      "file": "export_service/list_profiles.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_profiles",
+        "full_name": "::Google::Cloud::Profiler::V2::ExportService::Client#list_profiles",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Profiler::V2::ListProfilesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Profiler::V2::ListProfilesResponse",
+        "client": {
+          "short_name": "ExportService::Client",
+          "full_name": "::Google::Cloud::Profiler::V2::ExportService::Client"
+        },
+        "method": {
+          "short_name": "ListProfiles",
+          "full_name": "google.devtools.cloudprofiler.v2.ExportService.ListProfiles",
+          "service": {
+            "short_name": "ExportService",
+            "full_name": "google.devtools.cloudprofiler.v2.ExportService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
     }
   ]
 }

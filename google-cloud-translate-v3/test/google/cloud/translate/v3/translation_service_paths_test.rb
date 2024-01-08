@@ -23,6 +23,30 @@ require "gapic/grpc/service_stub"
 require "google/cloud/translate/v3/translation_service"
 
 class ::Google::Cloud::Translate::V3::TranslationService::ClientPathsTest < Minitest::Test
+  def test_adaptive_mt_dataset_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.adaptive_mt_dataset_path project: "value0", location: "value1", dataset: "value2"
+      assert_equal "projects/value0/locations/value1/adaptiveMtDatasets/value2", path
+    end
+  end
+
+  def test_adaptive_mt_file_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.adaptive_mt_file_path project: "value0", location: "value1", dataset: "value2", file: "value3"
+      assert_equal "projects/value0/locations/value1/adaptiveMtDatasets/value2/adaptiveMtFiles/value3", path
+    end
+  end
+
   def test_glossary_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do

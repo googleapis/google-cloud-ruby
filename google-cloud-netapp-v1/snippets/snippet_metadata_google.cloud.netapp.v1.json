@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-netapp-v1",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "language": "RUBY",
     "apis": [
       {
@@ -1435,6 +1435,606 @@
         "method": {
           "short_name": "ReverseReplicationDirection",
           "full_name": "google.cloud.netapp.v1.NetApp.ReverseReplicationDirection",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_CreateBackupVault_sync",
+      "title": "Snippet for the create_backup_vault call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#create_backup_vault. It may require modification in order to execute successfully.",
+      "file": "netapp/create_backup_vault.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_backup_vault",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#create_backup_vault",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::CreateBackupVaultRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "CreateBackupVault",
+          "full_name": "google.cloud.netapp.v1.NetApp.CreateBackupVault",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_GetBackupVault_sync",
+      "title": "Snippet for the get_backup_vault call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#get_backup_vault. It may require modification in order to execute successfully.",
+      "file": "netapp/get_backup_vault.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_backup_vault",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#get_backup_vault",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::GetBackupVaultRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetApp::V1::BackupVault",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "GetBackupVault",
+          "full_name": "google.cloud.netapp.v1.NetApp.GetBackupVault",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_ListBackupVaults_sync",
+      "title": "Snippet for the list_backup_vaults call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#list_backup_vaults. It may require modification in order to execute successfully.",
+      "file": "netapp/list_backup_vaults.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_backup_vaults",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#list_backup_vaults",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::ListBackupVaultsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetApp::V1::ListBackupVaultsResponse",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "ListBackupVaults",
+          "full_name": "google.cloud.netapp.v1.NetApp.ListBackupVaults",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_UpdateBackupVault_sync",
+      "title": "Snippet for the update_backup_vault call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#update_backup_vault. It may require modification in order to execute successfully.",
+      "file": "netapp/update_backup_vault.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_backup_vault",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#update_backup_vault",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::UpdateBackupVaultRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "UpdateBackupVault",
+          "full_name": "google.cloud.netapp.v1.NetApp.UpdateBackupVault",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_DeleteBackupVault_sync",
+      "title": "Snippet for the delete_backup_vault call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#delete_backup_vault. It may require modification in order to execute successfully.",
+      "file": "netapp/delete_backup_vault.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_backup_vault",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#delete_backup_vault",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::DeleteBackupVaultRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "DeleteBackupVault",
+          "full_name": "google.cloud.netapp.v1.NetApp.DeleteBackupVault",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_CreateBackup_sync",
+      "title": "Snippet for the create_backup call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#create_backup. It may require modification in order to execute successfully.",
+      "file": "netapp/create_backup.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_backup",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#create_backup",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::CreateBackupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "CreateBackup",
+          "full_name": "google.cloud.netapp.v1.NetApp.CreateBackup",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_GetBackup_sync",
+      "title": "Snippet for the get_backup call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#get_backup. It may require modification in order to execute successfully.",
+      "file": "netapp/get_backup.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_backup",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#get_backup",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::GetBackupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetApp::V1::Backup",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "GetBackup",
+          "full_name": "google.cloud.netapp.v1.NetApp.GetBackup",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_ListBackups_sync",
+      "title": "Snippet for the list_backups call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#list_backups. It may require modification in order to execute successfully.",
+      "file": "netapp/list_backups.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_backups",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#list_backups",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::ListBackupsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetApp::V1::ListBackupsResponse",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "ListBackups",
+          "full_name": "google.cloud.netapp.v1.NetApp.ListBackups",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_DeleteBackup_sync",
+      "title": "Snippet for the delete_backup call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#delete_backup. It may require modification in order to execute successfully.",
+      "file": "netapp/delete_backup.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_backup",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#delete_backup",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::DeleteBackupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "DeleteBackup",
+          "full_name": "google.cloud.netapp.v1.NetApp.DeleteBackup",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_UpdateBackup_sync",
+      "title": "Snippet for the update_backup call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#update_backup. It may require modification in order to execute successfully.",
+      "file": "netapp/update_backup.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_backup",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#update_backup",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::UpdateBackupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "UpdateBackup",
+          "full_name": "google.cloud.netapp.v1.NetApp.UpdateBackup",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_CreateBackupPolicy_sync",
+      "title": "Snippet for the create_backup_policy call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#create_backup_policy. It may require modification in order to execute successfully.",
+      "file": "netapp/create_backup_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_backup_policy",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#create_backup_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::CreateBackupPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "CreateBackupPolicy",
+          "full_name": "google.cloud.netapp.v1.NetApp.CreateBackupPolicy",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_GetBackupPolicy_sync",
+      "title": "Snippet for the get_backup_policy call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#get_backup_policy. It may require modification in order to execute successfully.",
+      "file": "netapp/get_backup_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_backup_policy",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#get_backup_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::GetBackupPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetApp::V1::BackupPolicy",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "GetBackupPolicy",
+          "full_name": "google.cloud.netapp.v1.NetApp.GetBackupPolicy",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_ListBackupPolicies_sync",
+      "title": "Snippet for the list_backup_policies call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#list_backup_policies. It may require modification in order to execute successfully.",
+      "file": "netapp/list_backup_policies.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_backup_policies",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#list_backup_policies",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::ListBackupPoliciesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetApp::V1::ListBackupPoliciesResponse",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "ListBackupPolicies",
+          "full_name": "google.cloud.netapp.v1.NetApp.ListBackupPolicies",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_UpdateBackupPolicy_sync",
+      "title": "Snippet for the update_backup_policy call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#update_backup_policy. It may require modification in order to execute successfully.",
+      "file": "netapp/update_backup_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_backup_policy",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#update_backup_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::UpdateBackupPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "UpdateBackupPolicy",
+          "full_name": "google.cloud.netapp.v1.NetApp.UpdateBackupPolicy",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_DeleteBackupPolicy_sync",
+      "title": "Snippet for the delete_backup_policy call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#delete_backup_policy. It may require modification in order to execute successfully.",
+      "file": "netapp/delete_backup_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_backup_policy",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#delete_backup_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::DeleteBackupPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "DeleteBackupPolicy",
+          "full_name": "google.cloud.netapp.v1.NetApp.DeleteBackupPolicy",
           "service": {
             "short_name": "NetApp",
             "full_name": "google.cloud.netapp.v1.NetApp"

@@ -1,0 +1,5 @@
+source "https://rubygems.org"
+
+gemspec
+
+gem "google-cloud-telco_automation-v1", path: "../google-cloud-telco_automation-v1"

@@ -63,6 +63,11 @@ module Google
       # distributors retrieve and combine a variety of data in Cloud Channel for
       # multiple products (Google Cloud, Google Voice, and Google Workspace.)
       #
+      # Deprecated: This service is being deprecated. Please use [Export Channel
+      # Services data to
+      # BigQuery](https://cloud.google.com/channel/docs/rebilling/export-data-to-bigquery)
+      # instead.
+      #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
       # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.

@@ -334,6 +334,9 @@ module Google
           #     families. Entries are applied in order, meaning that earlier modifications
           #     can be masked by later ones (in the case of repeated updates to the same
           #     family, for example).
+          # @!attribute [rw] ignore_warnings
+          #   @return [::Boolean]
+          #     Optional. If true, ignore safety checks when modifying the column families.
           class ModifyColumnFamiliesRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

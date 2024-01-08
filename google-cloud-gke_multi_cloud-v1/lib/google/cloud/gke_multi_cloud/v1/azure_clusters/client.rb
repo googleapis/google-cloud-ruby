@@ -95,6 +95,11 @@ module Google
 
                 default_config.rpcs.delete_azure_cluster.timeout = 60.0
 
+                default_config.rpcs.generate_azure_cluster_agent_token.timeout = 60.0
+                default_config.rpcs.generate_azure_cluster_agent_token.retry_policy = {
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                }
+
                 default_config.rpcs.generate_azure_access_token.timeout = 60.0
                 default_config.rpcs.generate_azure_access_token.retry_policy = {
                   initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
@@ -115,6 +120,16 @@ module Google
                 }
 
                 default_config.rpcs.delete_azure_node_pool.timeout = 60.0
+
+                default_config.rpcs.get_azure_open_id_config.timeout = 60.0
+                default_config.rpcs.get_azure_open_id_config.retry_policy = {
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                }
+
+                default_config.rpcs.get_azure_json_web_keys.timeout = 60.0
+                default_config.rpcs.get_azure_json_web_keys.retry_policy = {
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                }
 
                 default_config.rpcs.get_azure_server_config.timeout = 60.0
                 default_config.rpcs.get_azure_server_config.retry_policy = {
@@ -815,6 +830,7 @@ module Google
             #      *   `control_plane.vm_size`.
             #      *   `annotations`.
             #      *   `authorization.admin_users`.
+            #      *   `authorization.admin_groups`.
             #      *   `control_plane.root_volume.size_gib`.
             #      *   `azure_services_authentication`.
             #      *   `azure_services_authentication.tenant_id`.
@@ -1227,6 +1243,109 @@ module Google
             end
 
             ##
+            # Generates an access token for a cluster agent.
+            #
+            # @overload generate_azure_cluster_agent_token(request, options = nil)
+            #   Pass arguments to `generate_azure_cluster_agent_token` via a request object, either of type
+            #   {::Google::Cloud::GkeMultiCloud::V1::GenerateAzureClusterAgentTokenRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::GkeMultiCloud::V1::GenerateAzureClusterAgentTokenRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload generate_azure_cluster_agent_token(azure_cluster: nil, subject_token: nil, subject_token_type: nil, version: nil, node_pool_id: nil, grant_type: nil, audience: nil, scope: nil, requested_token_type: nil, options: nil)
+            #   Pass arguments to `generate_azure_cluster_agent_token` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param azure_cluster [::String]
+            #     Required.
+            #   @param subject_token [::String]
+            #     Required.
+            #   @param subject_token_type [::String]
+            #     Required.
+            #   @param version [::String]
+            #     Required.
+            #   @param node_pool_id [::String]
+            #     Optional.
+            #   @param grant_type [::String]
+            #     Optional.
+            #   @param audience [::String]
+            #     Optional.
+            #   @param scope [::String]
+            #     Optional.
+            #   @param requested_token_type [::String]
+            #     Optional.
+            #   @param options [::String]
+            #     Optional.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::GkeMultiCloud::V1::GenerateAzureClusterAgentTokenResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::GkeMultiCloud::V1::GenerateAzureClusterAgentTokenResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/gke_multi_cloud/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::GkeMultiCloud::V1::GenerateAzureClusterAgentTokenRequest.new
+            #
+            #   # Call the generate_azure_cluster_agent_token method.
+            #   result = client.generate_azure_cluster_agent_token request
+            #
+            #   # The returned object is of type Google::Cloud::GkeMultiCloud::V1::GenerateAzureClusterAgentTokenResponse.
+            #   p result
+            #
+            def generate_azure_cluster_agent_token request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeMultiCloud::V1::GenerateAzureClusterAgentTokenRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.generate_azure_cluster_agent_token.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::GkeMultiCloud::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.azure_cluster
+                header_params["azure_cluster"] = request.azure_cluster
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.generate_azure_cluster_agent_token.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.generate_azure_cluster_agent_token.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @azure_clusters_stub.call_rpc :generate_azure_cluster_agent_token, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Generates a short-lived access token to authenticate to a given
             # {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster} resource.
             #
@@ -1251,7 +1370,7 @@ module Google
             #     authenticate to.
             #
             #     `AzureCluster` names are formatted as
-            #     `projects/<project-id>/locations/<region>/AzureClusters/<cluster-id>`.
+            #     `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>`.
             #
             #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
             #     for more details on Google Cloud resource names.
@@ -1348,7 +1467,8 @@ module Google
             #     Required. The {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster}
             #     resource where this node pool will be created.
             #
-            #     Location names are formatted as `projects/<project-id>/locations/<region>`.
+            #     `AzureCluster` names are formatted as
+            #     `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>`.
             #
             #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
             #     for more details on Google Cloud resource names.
@@ -1474,6 +1594,8 @@ module Google
             #      *   `autoscaling.min_node_count`.
             #      *   `autoscaling.max_node_count`.
             #      *   `config.ssh_config.authorized_key`.
+            #      *   `management.auto_repair`.
+            #      *   `management`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -1877,6 +1999,185 @@ module Google
             end
 
             ##
+            # Gets the OIDC discovery document for the cluster.
+            # See the
+            # [OpenID Connect Discovery 1.0
+            # specification](https://openid.net/specs/openid-connect-discovery-1_0.html)
+            # for details.
+            #
+            # @overload get_azure_open_id_config(request, options = nil)
+            #   Pass arguments to `get_azure_open_id_config` via a request object, either of type
+            #   {::Google::Cloud::GkeMultiCloud::V1::GetAzureOpenIdConfigRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::GkeMultiCloud::V1::GetAzureOpenIdConfigRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_azure_open_id_config(azure_cluster: nil)
+            #   Pass arguments to `get_azure_open_id_config` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param azure_cluster [::String]
+            #     Required. The AzureCluster, which owns the OIDC discovery document.
+            #     Format:
+            #     projects/<project-id>/locations/<region>/azureClusters/<cluster-id>
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::GkeMultiCloud::V1::AzureOpenIdConfig]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::GkeMultiCloud::V1::AzureOpenIdConfig]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/gke_multi_cloud/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::GkeMultiCloud::V1::GetAzureOpenIdConfigRequest.new
+            #
+            #   # Call the get_azure_open_id_config method.
+            #   result = client.get_azure_open_id_config request
+            #
+            #   # The returned object is of type Google::Cloud::GkeMultiCloud::V1::AzureOpenIdConfig.
+            #   p result
+            #
+            def get_azure_open_id_config request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeMultiCloud::V1::GetAzureOpenIdConfigRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_azure_open_id_config.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::GkeMultiCloud::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.azure_cluster
+                header_params["azure_cluster"] = request.azure_cluster
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_azure_open_id_config.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_azure_open_id_config.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @azure_clusters_stub.call_rpc :get_azure_open_id_config, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets the public component of the cluster signing keys in
+            # JSON Web Key format.
+            #
+            # @overload get_azure_json_web_keys(request, options = nil)
+            #   Pass arguments to `get_azure_json_web_keys` via a request object, either of type
+            #   {::Google::Cloud::GkeMultiCloud::V1::GetAzureJsonWebKeysRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::GkeMultiCloud::V1::GetAzureJsonWebKeysRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_azure_json_web_keys(azure_cluster: nil)
+            #   Pass arguments to `get_azure_json_web_keys` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param azure_cluster [::String]
+            #     Required. The AzureCluster, which owns the JsonWebKeys.
+            #     Format:
+            #     projects/<project-id>/locations/<region>/azureClusters/<cluster-id>
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::GkeMultiCloud::V1::AzureJsonWebKeys]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::GkeMultiCloud::V1::AzureJsonWebKeys]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/gke_multi_cloud/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::GkeMultiCloud::V1::GetAzureJsonWebKeysRequest.new
+            #
+            #   # Call the get_azure_json_web_keys method.
+            #   result = client.get_azure_json_web_keys request
+            #
+            #   # The returned object is of type Google::Cloud::GkeMultiCloud::V1::AzureJsonWebKeys.
+            #   p result
+            #
+            def get_azure_json_web_keys request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeMultiCloud::V1::GetAzureJsonWebKeysRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_azure_json_web_keys.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::GkeMultiCloud::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.azure_cluster
+                header_params["azure_cluster"] = request.azure_cluster
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_azure_json_web_keys.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_azure_json_web_keys.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @azure_clusters_stub.call_rpc :get_azure_json_web_keys, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Returns information, such as supported Azure regions and Kubernetes
             # versions, on a given Google Cloud location.
             #
@@ -2161,6 +2462,11 @@ module Google
                 #
                 attr_reader :delete_azure_cluster
                 ##
+                # RPC-specific configuration for `generate_azure_cluster_agent_token`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :generate_azure_cluster_agent_token
+                ##
                 # RPC-specific configuration for `generate_azure_access_token`
                 # @return [::Gapic::Config::Method]
                 #
@@ -2191,6 +2497,16 @@ module Google
                 #
                 attr_reader :delete_azure_node_pool
                 ##
+                # RPC-specific configuration for `get_azure_open_id_config`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_azure_open_id_config
+                ##
+                # RPC-specific configuration for `get_azure_json_web_keys`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_azure_json_web_keys
+                ##
                 # RPC-specific configuration for `get_azure_server_config`
                 # @return [::Gapic::Config::Method]
                 #
@@ -2216,6 +2532,8 @@ module Google
                   @list_azure_clusters = ::Gapic::Config::Method.new list_azure_clusters_config
                   delete_azure_cluster_config = parent_rpcs.delete_azure_cluster if parent_rpcs.respond_to? :delete_azure_cluster
                   @delete_azure_cluster = ::Gapic::Config::Method.new delete_azure_cluster_config
+                  generate_azure_cluster_agent_token_config = parent_rpcs.generate_azure_cluster_agent_token if parent_rpcs.respond_to? :generate_azure_cluster_agent_token
+                  @generate_azure_cluster_agent_token = ::Gapic::Config::Method.new generate_azure_cluster_agent_token_config
                   generate_azure_access_token_config = parent_rpcs.generate_azure_access_token if parent_rpcs.respond_to? :generate_azure_access_token
                   @generate_azure_access_token = ::Gapic::Config::Method.new generate_azure_access_token_config
                   create_azure_node_pool_config = parent_rpcs.create_azure_node_pool if parent_rpcs.respond_to? :create_azure_node_pool
@@ -2228,6 +2546,10 @@ module Google
                   @list_azure_node_pools = ::Gapic::Config::Method.new list_azure_node_pools_config
                   delete_azure_node_pool_config = parent_rpcs.delete_azure_node_pool if parent_rpcs.respond_to? :delete_azure_node_pool
                   @delete_azure_node_pool = ::Gapic::Config::Method.new delete_azure_node_pool_config
+                  get_azure_open_id_config_config = parent_rpcs.get_azure_open_id_config if parent_rpcs.respond_to? :get_azure_open_id_config
+                  @get_azure_open_id_config = ::Gapic::Config::Method.new get_azure_open_id_config_config
+                  get_azure_json_web_keys_config = parent_rpcs.get_azure_json_web_keys if parent_rpcs.respond_to? :get_azure_json_web_keys
+                  @get_azure_json_web_keys = ::Gapic::Config::Method.new get_azure_json_web_keys_config
                   get_azure_server_config_config = parent_rpcs.get_azure_server_config if parent_rpcs.respond_to? :get_azure_server_config
                   @get_azure_server_config = ::Gapic::Config::Method.new get_azure_server_config_config
 

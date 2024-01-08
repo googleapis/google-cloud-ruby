@@ -57,6 +57,9 @@ module Google
         #     You can list all supported versions on a given Google Cloud region by
         #     calling
         #     {::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client#get_attached_server_config GetAttachedServerConfig}.
+        # @!attribute [rw] proxy_config
+        #   @return [::Google::Cloud::GkeMultiCloud::V1::AttachedProxyConfig]
+        #     Optional. Proxy configuration for outbound HTTP(S) traffic.
         class GenerateAttachedClusterInstallManifestRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -136,6 +139,9 @@ module Google
         #     Required. The Kubernetes distribution of the underlying attached cluster.
         #
         #     Supported values: ["eks", "aks"].
+        # @!attribute [rw] proxy_config
+        #   @return [::Google::Cloud::GkeMultiCloud::V1::AttachedProxyConfig]
+        #     Optional. Proxy configuration for outbound HTTP(S) traffic.
         class ImportAttachedClusterRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -157,12 +163,16 @@ module Google
         #     fields from
         #     {::Google::Cloud::GkeMultiCloud::V1::AttachedCluster AttachedCluster}:
         #
-        #      *   `description`.
         #      *   `annotations`.
-        #      *   `platform_version`.
+        #      *   `authorization.admin_groups`.
         #      *   `authorization.admin_users`.
+        #      *   `binary_authorization.evaluation_mode`.
+        #      *   `description`.
         #      *   `logging_config.component_config.enable_components`.
         #      *   `monitoring_config.managed_prometheus_config.enabled`.
+        #      *   `platform_version`.
+        #      *   `proxy_config.kubernetes_secret.name`.
+        #      *   `proxy_config.kubernetes_secret.namespace`.
         class UpdateAttachedClusterRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -285,6 +295,49 @@ module Google
         #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
         #     for more details on Google Cloud resource names.
         class GetAttachedServerConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] attached_cluster
+        #   @return [::String]
+        #     Required.
+        # @!attribute [rw] subject_token
+        #   @return [::String]
+        #     Required.
+        # @!attribute [rw] subject_token_type
+        #   @return [::String]
+        #     Required.
+        # @!attribute [rw] version
+        #   @return [::String]
+        #     Required.
+        # @!attribute [rw] grant_type
+        #   @return [::String]
+        #     Optional.
+        # @!attribute [rw] audience
+        #   @return [::String]
+        #     Optional.
+        # @!attribute [rw] scope
+        #   @return [::String]
+        #     Optional.
+        # @!attribute [rw] requested_token_type
+        #   @return [::String]
+        #     Optional.
+        # @!attribute [rw] options
+        #   @return [::String]
+        #     Optional.
+        class GenerateAttachedClusterAgentTokenRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] access_token
+        #   @return [::String]
+        # @!attribute [rw] expires_in
+        #   @return [::Integer]
+        # @!attribute [rw] token_type
+        #   @return [::String]
+        class GenerateAttachedClusterAgentTokenResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

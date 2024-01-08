@@ -198,10 +198,10 @@ module Google
         #     is used.
         # @!attribute [rw] session_ttl
         #   @return [::Google::Protobuf::Duration]
-        #     Optional. Sets Dialogflow CX session life time.
+        #     Optional. Configure lifetime of the Dialogflow session.
         #     By default, a Dialogflow CX session remains active and its data is stored
-        #     for 30 minutes after the last request is sent for the session. This value
-        #     should be no longer than 1 day.
+        #     for 30 minutes after the last request is sent for the session.
+        #     This value should be no longer than 1 day.
         class AutomatedAgentConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -257,6 +257,10 @@ module Google
           #     can prevent those queries from being stored at answer records.
           #
           #     Supported features: KNOWLEDGE_SEARCH.
+          # @!attribute [rw] enable_conversation_augmented_query
+          #   @return [::Boolean]
+          #     Optional. Enable including conversation context during query answer
+          #     generation. Supported features: KNOWLEDGE_SEARCH.
           # @!attribute [rw] suggestion_trigger_settings
           #   @return [::Google::Cloud::Dialogflow::V2::HumanAgentAssistantConfig::SuggestionTriggerSettings]
           #     Settings of suggestion trigger.
@@ -340,6 +344,10 @@ module Google
           #   @return [::Google::Cloud::Dialogflow::V2::HumanAgentAssistantConfig::SuggestionQueryConfig::ContextFilterSettings]
           #     Determines how recent conversation context is filtered when generating
           #     suggestions. If unspecified, no messages will be dropped.
+          # @!attribute [rw] sections
+          #   @return [::Google::Cloud::Dialogflow::V2::HumanAgentAssistantConfig::SuggestionQueryConfig::Sections]
+          #     Optional. The customized sections chosen to return when requesting a
+          #     summary of a conversation.
           class SuggestionQueryConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -416,6 +424,57 @@ module Google
             class ContextFilterSettings
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Custom sections to return when requesting a summary of a conversation.
+            # This is only supported when `baseline_model_version` == '2.0'.
+            #
+            # Supported features: CONVERSATION_SUMMARIZATION,
+            # CONVERSATION_SUMMARIZATION_VOICE.
+            # @!attribute [rw] section_types
+            #   @return [::Array<::Google::Cloud::Dialogflow::V2::HumanAgentAssistantConfig::SuggestionQueryConfig::Sections::SectionType>]
+            #     The selected sections chosen to return when requesting a summary of a
+            #     conversation. A duplicate selected section will be treated as a single
+            #     selected section. If section types are not provided, the default will
+            #     be \\{SITUATION, ACTION, RESULT}.
+            class Sections
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Selectable sections to return when requesting a summary of a
+              # conversation.
+              module SectionType
+                # Undefined section type, does not return anything.
+                SECTION_TYPE_UNSPECIFIED = 0
+
+                # What the customer needs help with or has question about.
+                # Section name: "situation".
+                SITUATION = 1
+
+                # What the agent does to help the customer.
+                # Section name: "action".
+                ACTION = 2
+
+                # Result of the customer service. A single word describing the result
+                # of the conversation.
+                # Section name: "resolution".
+                RESOLUTION = 3
+
+                # Reason for cancellation if the customer requests for a cancellation.
+                # "N/A" otherwise.
+                # Section name: "reason_for_cancellation".
+                REASON_FOR_CANCELLATION = 4
+
+                # "Unsatisfied" or "Satisfied" depending on the customer's feelings at
+                # the end of the conversation.
+                # Section name: "customer_satisfaction".
+                CUSTOMER_SATISFACTION = 5
+
+                # Key entities extracted from the conversation, such as ticket number,
+                # order number, dollar amount, etc.
+                # Section names are prefixed by "entities/".
+                ENTITIES = 6
+              end
             end
           end
 

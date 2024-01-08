@@ -1,0 +1,1455 @@
+{
+  "client_library": {
+    "name": "google-cloud-telco_automation-v1",
+    "version": "0.1.0",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.telcoautomation.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "telcoautomation_v1_generated_TelcoAutomation_ListOrchestrationClusters_sync",
+      "title": "Snippet for the list_orchestration_clusters call in the TelcoAutomation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#list_orchestration_clusters. It may require modification in order to execute successfully.",
+      "file": "telco_automation/list_orchestration_clusters.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_orchestration_clusters",
+        "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#list_orchestration_clusters",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::TelcoAutomation::V1::ListOrchestrationClustersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::TelcoAutomation::V1::ListOrchestrationClustersResponse",
+        "client": {
+          "short_name": "TelcoAutomation::Client",
+          "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client"
+        },
+        "method": {
+          "short_name": "ListOrchestrationClusters",
+          "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation.ListOrchestrationClusters",
+          "service": {
+            "short_name": "TelcoAutomation",
+            "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "telcoautomation_v1_generated_TelcoAutomation_GetOrchestrationCluster_sync",
+      "title": "Snippet for the get_orchestration_cluster call in the TelcoAutomation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#get_orchestration_cluster. It may require modification in order to execute successfully.",
+      "file": "telco_automation/get_orchestration_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_orchestration_cluster",
+        "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#get_orchestration_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::TelcoAutomation::V1::GetOrchestrationClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::TelcoAutomation::V1::OrchestrationCluster",
+        "client": {
+          "short_name": "TelcoAutomation::Client",
+          "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client"
+        },
+        "method": {
+          "short_name": "GetOrchestrationCluster",
+          "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation.GetOrchestrationCluster",
+          "service": {
+            "short_name": "TelcoAutomation",
+            "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "telcoautomation_v1_generated_TelcoAutomation_CreateOrchestrationCluster_sync",
+      "title": "Snippet for the create_orchestration_cluster call in the TelcoAutomation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#create_orchestration_cluster. It may require modification in order to execute successfully.",
+      "file": "telco_automation/create_orchestration_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_orchestration_cluster",
+        "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#create_orchestration_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::TelcoAutomation::V1::CreateOrchestrationClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "TelcoAutomation::Client",
+          "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client"
+        },
+        "method": {
+          "short_name": "CreateOrchestrationCluster",
+          "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation.CreateOrchestrationCluster",
+          "service": {
+            "short_name": "TelcoAutomation",
+            "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "telcoautomation_v1_generated_TelcoAutomation_DeleteOrchestrationCluster_sync",
+      "title": "Snippet for the delete_orchestration_cluster call in the TelcoAutomation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#delete_orchestration_cluster. It may require modification in order to execute successfully.",
+      "file": "telco_automation/delete_orchestration_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_orchestration_cluster",
+        "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#delete_orchestration_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::TelcoAutomation::V1::DeleteOrchestrationClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "TelcoAutomation::Client",
+          "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client"
+        },
+        "method": {
+          "short_name": "DeleteOrchestrationCluster",
+          "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation.DeleteOrchestrationCluster",
+          "service": {
+            "short_name": "TelcoAutomation",
+            "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "telcoautomation_v1_generated_TelcoAutomation_ListEdgeSlms_sync",
+      "title": "Snippet for the list_edge_slms call in the TelcoAutomation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#list_edge_slms. It may require modification in order to execute successfully.",
+      "file": "telco_automation/list_edge_slms.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_edge_slms",
+        "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#list_edge_slms",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::TelcoAutomation::V1::ListEdgeSlmsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::TelcoAutomation::V1::ListEdgeSlmsResponse",
+        "client": {
+          "short_name": "TelcoAutomation::Client",
+          "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client"
+        },
+        "method": {
+          "short_name": "ListEdgeSlms",
+          "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation.ListEdgeSlms",
+          "service": {
+            "short_name": "TelcoAutomation",
+            "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "telcoautomation_v1_generated_TelcoAutomation_GetEdgeSlm_sync",
+      "title": "Snippet for the get_edge_slm call in the TelcoAutomation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#get_edge_slm. It may require modification in order to execute successfully.",
+      "file": "telco_automation/get_edge_slm.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_edge_slm",
+        "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#get_edge_slm",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::TelcoAutomation::V1::GetEdgeSlmRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::TelcoAutomation::V1::EdgeSlm",
+        "client": {
+          "short_name": "TelcoAutomation::Client",
+          "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client"
+        },
+        "method": {
+          "short_name": "GetEdgeSlm",
+          "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation.GetEdgeSlm",
+          "service": {
+            "short_name": "TelcoAutomation",
+            "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "telcoautomation_v1_generated_TelcoAutomation_CreateEdgeSlm_sync",
+      "title": "Snippet for the create_edge_slm call in the TelcoAutomation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#create_edge_slm. It may require modification in order to execute successfully.",
+      "file": "telco_automation/create_edge_slm.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_edge_slm",
+        "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#create_edge_slm",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::TelcoAutomation::V1::CreateEdgeSlmRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "TelcoAutomation::Client",
+          "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client"
+        },
+        "method": {
+          "short_name": "CreateEdgeSlm",
+          "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation.CreateEdgeSlm",
+          "service": {
+            "short_name": "TelcoAutomation",
+            "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "telcoautomation_v1_generated_TelcoAutomation_DeleteEdgeSlm_sync",
+      "title": "Snippet for the delete_edge_slm call in the TelcoAutomation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#delete_edge_slm. It may require modification in order to execute successfully.",
+      "file": "telco_automation/delete_edge_slm.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_edge_slm",
+        "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#delete_edge_slm",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::TelcoAutomation::V1::DeleteEdgeSlmRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "TelcoAutomation::Client",
+          "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client"
+        },
+        "method": {
+          "short_name": "DeleteEdgeSlm",
+          "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation.DeleteEdgeSlm",
+          "service": {
+            "short_name": "TelcoAutomation",
+            "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "telcoautomation_v1_generated_TelcoAutomation_CreateBlueprint_sync",
+      "title": "Snippet for the create_blueprint call in the TelcoAutomation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#create_blueprint. It may require modification in order to execute successfully.",
+      "file": "telco_automation/create_blueprint.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_blueprint",
+        "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#create_blueprint",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::TelcoAutomation::V1::CreateBlueprintRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::TelcoAutomation::V1::Blueprint",
+        "client": {
+          "short_name": "TelcoAutomation::Client",
+          "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client"
+        },
+        "method": {
+          "short_name": "CreateBlueprint",
+          "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation.CreateBlueprint",
+          "service": {
+            "short_name": "TelcoAutomation",
+            "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "telcoautomation_v1_generated_TelcoAutomation_UpdateBlueprint_sync",
+      "title": "Snippet for the update_blueprint call in the TelcoAutomation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#update_blueprint. It may require modification in order to execute successfully.",
+      "file": "telco_automation/update_blueprint.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_blueprint",
+        "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#update_blueprint",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::TelcoAutomation::V1::UpdateBlueprintRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::TelcoAutomation::V1::Blueprint",
+        "client": {
+          "short_name": "TelcoAutomation::Client",
+          "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client"
+        },
+        "method": {
+          "short_name": "UpdateBlueprint",
+          "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation.UpdateBlueprint",
+          "service": {
+            "short_name": "TelcoAutomation",
+            "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "telcoautomation_v1_generated_TelcoAutomation_GetBlueprint_sync",
+      "title": "Snippet for the get_blueprint call in the TelcoAutomation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#get_blueprint. It may require modification in order to execute successfully.",
+      "file": "telco_automation/get_blueprint.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_blueprint",
+        "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#get_blueprint",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::TelcoAutomation::V1::GetBlueprintRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::TelcoAutomation::V1::Blueprint",
+        "client": {
+          "short_name": "TelcoAutomation::Client",
+          "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client"
+        },
+        "method": {
+          "short_name": "GetBlueprint",
+          "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation.GetBlueprint",
+          "service": {
+            "short_name": "TelcoAutomation",
+            "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "telcoautomation_v1_generated_TelcoAutomation_DeleteBlueprint_sync",
+      "title": "Snippet for the delete_blueprint call in the TelcoAutomation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#delete_blueprint. It may require modification in order to execute successfully.",
+      "file": "telco_automation/delete_blueprint.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_blueprint",
+        "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#delete_blueprint",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::TelcoAutomation::V1::DeleteBlueprintRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "TelcoAutomation::Client",
+          "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client"
+        },
+        "method": {
+          "short_name": "DeleteBlueprint",
+          "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation.DeleteBlueprint",
+          "service": {
+            "short_name": "TelcoAutomation",
+            "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "telcoautomation_v1_generated_TelcoAutomation_ListBlueprints_sync",
+      "title": "Snippet for the list_blueprints call in the TelcoAutomation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#list_blueprints. It may require modification in order to execute successfully.",
+      "file": "telco_automation/list_blueprints.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_blueprints",
+        "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#list_blueprints",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::TelcoAutomation::V1::ListBlueprintsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::TelcoAutomation::V1::ListBlueprintsResponse",
+        "client": {
+          "short_name": "TelcoAutomation::Client",
+          "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client"
+        },
+        "method": {
+          "short_name": "ListBlueprints",
+          "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation.ListBlueprints",
+          "service": {
+            "short_name": "TelcoAutomation",
+            "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "telcoautomation_v1_generated_TelcoAutomation_ApproveBlueprint_sync",
+      "title": "Snippet for the approve_blueprint call in the TelcoAutomation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#approve_blueprint. It may require modification in order to execute successfully.",
+      "file": "telco_automation/approve_blueprint.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "approve_blueprint",
+        "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#approve_blueprint",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::TelcoAutomation::V1::ApproveBlueprintRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::TelcoAutomation::V1::Blueprint",
+        "client": {
+          "short_name": "TelcoAutomation::Client",
+          "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client"
+        },
+        "method": {
+          "short_name": "ApproveBlueprint",
+          "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation.ApproveBlueprint",
+          "service": {
+            "short_name": "TelcoAutomation",
+            "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "telcoautomation_v1_generated_TelcoAutomation_ProposeBlueprint_sync",
+      "title": "Snippet for the propose_blueprint call in the TelcoAutomation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#propose_blueprint. It may require modification in order to execute successfully.",
+      "file": "telco_automation/propose_blueprint.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "propose_blueprint",
+        "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#propose_blueprint",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::TelcoAutomation::V1::ProposeBlueprintRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::TelcoAutomation::V1::Blueprint",
+        "client": {
+          "short_name": "TelcoAutomation::Client",
+          "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client"
+        },
+        "method": {
+          "short_name": "ProposeBlueprint",
+          "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation.ProposeBlueprint",
+          "service": {
+            "short_name": "TelcoAutomation",
+            "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "telcoautomation_v1_generated_TelcoAutomation_RejectBlueprint_sync",
+      "title": "Snippet for the reject_blueprint call in the TelcoAutomation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#reject_blueprint. It may require modification in order to execute successfully.",
+      "file": "telco_automation/reject_blueprint.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "reject_blueprint",
+        "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#reject_blueprint",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::TelcoAutomation::V1::RejectBlueprintRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::TelcoAutomation::V1::Blueprint",
+        "client": {
+          "short_name": "TelcoAutomation::Client",
+          "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client"
+        },
+        "method": {
+          "short_name": "RejectBlueprint",
+          "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation.RejectBlueprint",
+          "service": {
+            "short_name": "TelcoAutomation",
+            "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "telcoautomation_v1_generated_TelcoAutomation_ListBlueprintRevisions_sync",
+      "title": "Snippet for the list_blueprint_revisions call in the TelcoAutomation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#list_blueprint_revisions. It may require modification in order to execute successfully.",
+      "file": "telco_automation/list_blueprint_revisions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_blueprint_revisions",
+        "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#list_blueprint_revisions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::TelcoAutomation::V1::ListBlueprintRevisionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::TelcoAutomation::V1::ListBlueprintRevisionsResponse",
+        "client": {
+          "short_name": "TelcoAutomation::Client",
+          "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client"
+        },
+        "method": {
+          "short_name": "ListBlueprintRevisions",
+          "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation.ListBlueprintRevisions",
+          "service": {
+            "short_name": "TelcoAutomation",
+            "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "telcoautomation_v1_generated_TelcoAutomation_SearchBlueprintRevisions_sync",
+      "title": "Snippet for the search_blueprint_revisions call in the TelcoAutomation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#search_blueprint_revisions. It may require modification in order to execute successfully.",
+      "file": "telco_automation/search_blueprint_revisions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "search_blueprint_revisions",
+        "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#search_blueprint_revisions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::TelcoAutomation::V1::SearchBlueprintRevisionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::TelcoAutomation::V1::SearchBlueprintRevisionsResponse",
+        "client": {
+          "short_name": "TelcoAutomation::Client",
+          "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client"
+        },
+        "method": {
+          "short_name": "SearchBlueprintRevisions",
+          "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation.SearchBlueprintRevisions",
+          "service": {
+            "short_name": "TelcoAutomation",
+            "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "telcoautomation_v1_generated_TelcoAutomation_SearchDeploymentRevisions_sync",
+      "title": "Snippet for the search_deployment_revisions call in the TelcoAutomation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#search_deployment_revisions. It may require modification in order to execute successfully.",
+      "file": "telco_automation/search_deployment_revisions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "search_deployment_revisions",
+        "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#search_deployment_revisions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::TelcoAutomation::V1::SearchDeploymentRevisionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::TelcoAutomation::V1::SearchDeploymentRevisionsResponse",
+        "client": {
+          "short_name": "TelcoAutomation::Client",
+          "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client"
+        },
+        "method": {
+          "short_name": "SearchDeploymentRevisions",
+          "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation.SearchDeploymentRevisions",
+          "service": {
+            "short_name": "TelcoAutomation",
+            "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "telcoautomation_v1_generated_TelcoAutomation_DiscardBlueprintChanges_sync",
+      "title": "Snippet for the discard_blueprint_changes call in the TelcoAutomation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#discard_blueprint_changes. It may require modification in order to execute successfully.",
+      "file": "telco_automation/discard_blueprint_changes.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "discard_blueprint_changes",
+        "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#discard_blueprint_changes",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::TelcoAutomation::V1::DiscardBlueprintChangesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::TelcoAutomation::V1::DiscardBlueprintChangesResponse",
+        "client": {
+          "short_name": "TelcoAutomation::Client",
+          "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client"
+        },
+        "method": {
+          "short_name": "DiscardBlueprintChanges",
+          "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation.DiscardBlueprintChanges",
+          "service": {
+            "short_name": "TelcoAutomation",
+            "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "telcoautomation_v1_generated_TelcoAutomation_ListPublicBlueprints_sync",
+      "title": "Snippet for the list_public_blueprints call in the TelcoAutomation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#list_public_blueprints. It may require modification in order to execute successfully.",
+      "file": "telco_automation/list_public_blueprints.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_public_blueprints",
+        "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#list_public_blueprints",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::TelcoAutomation::V1::ListPublicBlueprintsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::TelcoAutomation::V1::ListPublicBlueprintsResponse",
+        "client": {
+          "short_name": "TelcoAutomation::Client",
+          "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client"
+        },
+        "method": {
+          "short_name": "ListPublicBlueprints",
+          "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation.ListPublicBlueprints",
+          "service": {
+            "short_name": "TelcoAutomation",
+            "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "telcoautomation_v1_generated_TelcoAutomation_GetPublicBlueprint_sync",
+      "title": "Snippet for the get_public_blueprint call in the TelcoAutomation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#get_public_blueprint. It may require modification in order to execute successfully.",
+      "file": "telco_automation/get_public_blueprint.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_public_blueprint",
+        "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#get_public_blueprint",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::TelcoAutomation::V1::GetPublicBlueprintRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::TelcoAutomation::V1::PublicBlueprint",
+        "client": {
+          "short_name": "TelcoAutomation::Client",
+          "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client"
+        },
+        "method": {
+          "short_name": "GetPublicBlueprint",
+          "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation.GetPublicBlueprint",
+          "service": {
+            "short_name": "TelcoAutomation",
+            "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "telcoautomation_v1_generated_TelcoAutomation_CreateDeployment_sync",
+      "title": "Snippet for the create_deployment call in the TelcoAutomation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#create_deployment. It may require modification in order to execute successfully.",
+      "file": "telco_automation/create_deployment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_deployment",
+        "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#create_deployment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::TelcoAutomation::V1::CreateDeploymentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::TelcoAutomation::V1::Deployment",
+        "client": {
+          "short_name": "TelcoAutomation::Client",
+          "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client"
+        },
+        "method": {
+          "short_name": "CreateDeployment",
+          "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation.CreateDeployment",
+          "service": {
+            "short_name": "TelcoAutomation",
+            "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "telcoautomation_v1_generated_TelcoAutomation_UpdateDeployment_sync",
+      "title": "Snippet for the update_deployment call in the TelcoAutomation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#update_deployment. It may require modification in order to execute successfully.",
+      "file": "telco_automation/update_deployment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_deployment",
+        "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#update_deployment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::TelcoAutomation::V1::UpdateDeploymentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::TelcoAutomation::V1::Deployment",
+        "client": {
+          "short_name": "TelcoAutomation::Client",
+          "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client"
+        },
+        "method": {
+          "short_name": "UpdateDeployment",
+          "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation.UpdateDeployment",
+          "service": {
+            "short_name": "TelcoAutomation",
+            "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "telcoautomation_v1_generated_TelcoAutomation_GetDeployment_sync",
+      "title": "Snippet for the get_deployment call in the TelcoAutomation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#get_deployment. It may require modification in order to execute successfully.",
+      "file": "telco_automation/get_deployment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_deployment",
+        "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#get_deployment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::TelcoAutomation::V1::GetDeploymentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::TelcoAutomation::V1::Deployment",
+        "client": {
+          "short_name": "TelcoAutomation::Client",
+          "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client"
+        },
+        "method": {
+          "short_name": "GetDeployment",
+          "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation.GetDeployment",
+          "service": {
+            "short_name": "TelcoAutomation",
+            "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "telcoautomation_v1_generated_TelcoAutomation_RemoveDeployment_sync",
+      "title": "Snippet for the remove_deployment call in the TelcoAutomation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#remove_deployment. It may require modification in order to execute successfully.",
+      "file": "telco_automation/remove_deployment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "remove_deployment",
+        "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#remove_deployment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::TelcoAutomation::V1::RemoveDeploymentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "TelcoAutomation::Client",
+          "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client"
+        },
+        "method": {
+          "short_name": "RemoveDeployment",
+          "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation.RemoveDeployment",
+          "service": {
+            "short_name": "TelcoAutomation",
+            "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "telcoautomation_v1_generated_TelcoAutomation_ListDeployments_sync",
+      "title": "Snippet for the list_deployments call in the TelcoAutomation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#list_deployments. It may require modification in order to execute successfully.",
+      "file": "telco_automation/list_deployments.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_deployments",
+        "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#list_deployments",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::TelcoAutomation::V1::ListDeploymentsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::TelcoAutomation::V1::ListDeploymentsResponse",
+        "client": {
+          "short_name": "TelcoAutomation::Client",
+          "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client"
+        },
+        "method": {
+          "short_name": "ListDeployments",
+          "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation.ListDeployments",
+          "service": {
+            "short_name": "TelcoAutomation",
+            "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "telcoautomation_v1_generated_TelcoAutomation_ListDeploymentRevisions_sync",
+      "title": "Snippet for the list_deployment_revisions call in the TelcoAutomation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#list_deployment_revisions. It may require modification in order to execute successfully.",
+      "file": "telco_automation/list_deployment_revisions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_deployment_revisions",
+        "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#list_deployment_revisions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::TelcoAutomation::V1::ListDeploymentRevisionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::TelcoAutomation::V1::ListDeploymentRevisionsResponse",
+        "client": {
+          "short_name": "TelcoAutomation::Client",
+          "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client"
+        },
+        "method": {
+          "short_name": "ListDeploymentRevisions",
+          "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation.ListDeploymentRevisions",
+          "service": {
+            "short_name": "TelcoAutomation",
+            "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "telcoautomation_v1_generated_TelcoAutomation_DiscardDeploymentChanges_sync",
+      "title": "Snippet for the discard_deployment_changes call in the TelcoAutomation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#discard_deployment_changes. It may require modification in order to execute successfully.",
+      "file": "telco_automation/discard_deployment_changes.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "discard_deployment_changes",
+        "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#discard_deployment_changes",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::TelcoAutomation::V1::DiscardDeploymentChangesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::TelcoAutomation::V1::DiscardDeploymentChangesResponse",
+        "client": {
+          "short_name": "TelcoAutomation::Client",
+          "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client"
+        },
+        "method": {
+          "short_name": "DiscardDeploymentChanges",
+          "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation.DiscardDeploymentChanges",
+          "service": {
+            "short_name": "TelcoAutomation",
+            "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "telcoautomation_v1_generated_TelcoAutomation_ApplyDeployment_sync",
+      "title": "Snippet for the apply_deployment call in the TelcoAutomation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#apply_deployment. It may require modification in order to execute successfully.",
+      "file": "telco_automation/apply_deployment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "apply_deployment",
+        "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#apply_deployment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::TelcoAutomation::V1::ApplyDeploymentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::TelcoAutomation::V1::Deployment",
+        "client": {
+          "short_name": "TelcoAutomation::Client",
+          "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client"
+        },
+        "method": {
+          "short_name": "ApplyDeployment",
+          "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation.ApplyDeployment",
+          "service": {
+            "short_name": "TelcoAutomation",
+            "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "telcoautomation_v1_generated_TelcoAutomation_ComputeDeploymentStatus_sync",
+      "title": "Snippet for the compute_deployment_status call in the TelcoAutomation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#compute_deployment_status. It may require modification in order to execute successfully.",
+      "file": "telco_automation/compute_deployment_status.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "compute_deployment_status",
+        "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#compute_deployment_status",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::TelcoAutomation::V1::ComputeDeploymentStatusRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::TelcoAutomation::V1::ComputeDeploymentStatusResponse",
+        "client": {
+          "short_name": "TelcoAutomation::Client",
+          "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client"
+        },
+        "method": {
+          "short_name": "ComputeDeploymentStatus",
+          "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation.ComputeDeploymentStatus",
+          "service": {
+            "short_name": "TelcoAutomation",
+            "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "telcoautomation_v1_generated_TelcoAutomation_RollbackDeployment_sync",
+      "title": "Snippet for the rollback_deployment call in the TelcoAutomation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#rollback_deployment. It may require modification in order to execute successfully.",
+      "file": "telco_automation/rollback_deployment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "rollback_deployment",
+        "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#rollback_deployment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::TelcoAutomation::V1::RollbackDeploymentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::TelcoAutomation::V1::Deployment",
+        "client": {
+          "short_name": "TelcoAutomation::Client",
+          "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client"
+        },
+        "method": {
+          "short_name": "RollbackDeployment",
+          "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation.RollbackDeployment",
+          "service": {
+            "short_name": "TelcoAutomation",
+            "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "telcoautomation_v1_generated_TelcoAutomation_GetHydratedDeployment_sync",
+      "title": "Snippet for the get_hydrated_deployment call in the TelcoAutomation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#get_hydrated_deployment. It may require modification in order to execute successfully.",
+      "file": "telco_automation/get_hydrated_deployment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_hydrated_deployment",
+        "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#get_hydrated_deployment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::TelcoAutomation::V1::GetHydratedDeploymentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::TelcoAutomation::V1::HydratedDeployment",
+        "client": {
+          "short_name": "TelcoAutomation::Client",
+          "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client"
+        },
+        "method": {
+          "short_name": "GetHydratedDeployment",
+          "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation.GetHydratedDeployment",
+          "service": {
+            "short_name": "TelcoAutomation",
+            "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "telcoautomation_v1_generated_TelcoAutomation_ListHydratedDeployments_sync",
+      "title": "Snippet for the list_hydrated_deployments call in the TelcoAutomation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#list_hydrated_deployments. It may require modification in order to execute successfully.",
+      "file": "telco_automation/list_hydrated_deployments.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_hydrated_deployments",
+        "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#list_hydrated_deployments",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::TelcoAutomation::V1::ListHydratedDeploymentsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::TelcoAutomation::V1::ListHydratedDeploymentsResponse",
+        "client": {
+          "short_name": "TelcoAutomation::Client",
+          "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client"
+        },
+        "method": {
+          "short_name": "ListHydratedDeployments",
+          "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation.ListHydratedDeployments",
+          "service": {
+            "short_name": "TelcoAutomation",
+            "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "telcoautomation_v1_generated_TelcoAutomation_UpdateHydratedDeployment_sync",
+      "title": "Snippet for the update_hydrated_deployment call in the TelcoAutomation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#update_hydrated_deployment. It may require modification in order to execute successfully.",
+      "file": "telco_automation/update_hydrated_deployment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_hydrated_deployment",
+        "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#update_hydrated_deployment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::TelcoAutomation::V1::UpdateHydratedDeploymentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::TelcoAutomation::V1::HydratedDeployment",
+        "client": {
+          "short_name": "TelcoAutomation::Client",
+          "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client"
+        },
+        "method": {
+          "short_name": "UpdateHydratedDeployment",
+          "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation.UpdateHydratedDeployment",
+          "service": {
+            "short_name": "TelcoAutomation",
+            "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "telcoautomation_v1_generated_TelcoAutomation_ApplyHydratedDeployment_sync",
+      "title": "Snippet for the apply_hydrated_deployment call in the TelcoAutomation service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#apply_hydrated_deployment. It may require modification in order to execute successfully.",
+      "file": "telco_automation/apply_hydrated_deployment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "apply_hydrated_deployment",
+        "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client#apply_hydrated_deployment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::TelcoAutomation::V1::ApplyHydratedDeploymentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::TelcoAutomation::V1::HydratedDeployment",
+        "client": {
+          "short_name": "TelcoAutomation::Client",
+          "full_name": "::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client"
+        },
+        "method": {
+          "short_name": "ApplyHydratedDeployment",
+          "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation.ApplyHydratedDeployment",
+          "service": {
+            "short_name": "TelcoAutomation",
+            "full_name": "google.cloud.telcoautomation.v1.TelcoAutomation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}

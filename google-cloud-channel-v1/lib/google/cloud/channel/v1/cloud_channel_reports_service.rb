@@ -37,6 +37,11 @@ module Google
         # distributors retrieve and combine a variety of data in Cloud Channel for
         # multiple products (Google Cloud, Google Voice, and Google Workspace.)
         #
+        # Deprecated: This service is being deprecated. Please use [Export Channel
+        # Services data to
+        # BigQuery](https://cloud.google.com/channel/docs/rebilling/export-data-to-bigquery)
+        # instead.
+        #
         # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/channel/v1/cloud_channel_reports_service"

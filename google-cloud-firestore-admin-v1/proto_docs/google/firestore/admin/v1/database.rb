@@ -23,12 +23,22 @@ module Google
       module Admin
         module V1
           # A Cloud Firestore Database.
-          # Currently only one database is allowed per cloud project; this database
-          # must have a `database_id` of '(default)'.
           # @!attribute [rw] name
           #   @return [::String]
           #     The resource name of the Database.
           #     Format: `projects/{project}/databases/{database}`
+          # @!attribute [r] uid
+          #   @return [::String]
+          #     Output only. The system-generated UUID4 for this Database.
+          # @!attribute [r] create_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The timestamp at which this database was created. Databases
+          #     created before 2016 do not populate create_time.
+          # @!attribute [r] update_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The timestamp at which this database was most recently
+          #     updated. Note this only includes updates to the database resource and not
+          #     data contained by the database.
           # @!attribute [rw] location_id
           #   @return [::String]
           #     The location of the database. Available locations are listed at
@@ -78,6 +88,9 @@ module Google
           #
           #     This value may be empty in which case the appid to use for URL-encoded keys
           #     is the project_id (eg: foo instead of v~foo).
+          # @!attribute [rw] delete_protection_state
+          #   @return [::Google::Cloud::Firestore::Admin::V1::Database::DeleteProtectionState]
+          #     State of delete protection for the database.
           # @!attribute [rw] etag
           #   @return [::String]
           #     This checksum is computed by the server based on the value of other
@@ -163,6 +176,18 @@ module Google
               #
               # This is the default setting for databases created with the Firestore API.
               DISABLED = 2
+            end
+
+            # The delete protection state of the database.
+            module DeleteProtectionState
+              # The default value. Delete protection type is not specified
+              DELETE_PROTECTION_STATE_UNSPECIFIED = 0
+
+              # Delete protection is disabled
+              DELETE_PROTECTION_DISABLED = 1
+
+              # Delete protection is enabled
+              DELETE_PROTECTION_ENABLED = 2
             end
           end
         end

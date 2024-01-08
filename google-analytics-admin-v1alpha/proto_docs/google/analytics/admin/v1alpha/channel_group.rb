@@ -143,11 +143,12 @@ module Google
         #     The description of the Channel Group. Max length of 256 characters.
         # @!attribute [rw] grouping_rule
         #   @return [::Array<::Google::Analytics::Admin::V1alpha::GroupingRule>]
-        #     Required. The grouping rules of channels. Maximum number of rules is 25.
+        #     Required. The grouping rules of channels. Maximum number of rules is 50.
         # @!attribute [r] system_defined
         #   @return [::Boolean]
-        #     Output only. Default Channel Group defined by Google, which cannot be
-        #     updated.
+        #     Output only. If true, then this channel group is the Default Channel Group
+        #     predefined by Google Analytics. Display name and grouping rules cannot be
+        #     updated for this channel group.
         class ChannelGroup
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

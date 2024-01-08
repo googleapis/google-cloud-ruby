@@ -86,6 +86,8 @@ module Google
             # [Operation][google.longrunning.Operation] resource that can be
             # described to track the status of the operation.
             rpc :DeleteAzureCluster, ::Google::Cloud::GkeMultiCloud::V1::DeleteAzureClusterRequest, ::Google::Longrunning::Operation
+            # Generates an access token for a cluster agent.
+            rpc :GenerateAzureClusterAgentToken, ::Google::Cloud::GkeMultiCloud::V1::GenerateAzureClusterAgentTokenRequest, ::Google::Cloud::GkeMultiCloud::V1::GenerateAzureClusterAgentTokenResponse
             # Generates a short-lived access token to authenticate to a given
             # [AzureCluster][google.cloud.gkemulticloud.v1.AzureCluster] resource.
             rpc :GenerateAzureAccessToken, ::Google::Cloud::GkeMultiCloud::V1::GenerateAzureAccessTokenRequest, ::Google::Cloud::GkeMultiCloud::V1::GenerateAzureAccessTokenResponse
@@ -113,6 +115,15 @@ module Google
             # [Operation][google.longrunning.Operation] resource that can be
             # described to track the status of the operation.
             rpc :DeleteAzureNodePool, ::Google::Cloud::GkeMultiCloud::V1::DeleteAzureNodePoolRequest, ::Google::Longrunning::Operation
+            # Gets the OIDC discovery document for the cluster.
+            # See the
+            # [OpenID Connect Discovery 1.0
+            # specification](https://openid.net/specs/openid-connect-discovery-1_0.html)
+            # for details.
+            rpc :GetAzureOpenIdConfig, ::Google::Cloud::GkeMultiCloud::V1::GetAzureOpenIdConfigRequest, ::Google::Cloud::GkeMultiCloud::V1::AzureOpenIdConfig
+            # Gets the public component of the cluster signing keys in
+            # JSON Web Key format.
+            rpc :GetAzureJsonWebKeys, ::Google::Cloud::GkeMultiCloud::V1::GetAzureJsonWebKeysRequest, ::Google::Cloud::GkeMultiCloud::V1::AzureJsonWebKeys
             # Returns information, such as supported Azure regions and Kubernetes
             # versions, on a given Google Cloud location.
             rpc :GetAzureServerConfig, ::Google::Cloud::GkeMultiCloud::V1::GetAzureServerConfigRequest, ::Google::Cloud::GkeMultiCloud::V1::AzureServerConfig

@@ -1,5 +1,12 @@
 # Release History
 
+### 0.28.0 (2024-01-04)
+
+#### Features
+
+* Support for directly attached and effective tags ([#23370](https://github.com/googleapis/google-cloud-ruby/issues/23370)) 
+* Support for Security Command Center security marks 
+
 ### 0.27.0 (2023-09-12)
 
 #### Features

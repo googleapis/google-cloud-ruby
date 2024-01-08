@@ -17,6 +17,9 @@ require "google/cloud/pubsub"
 require_relative "helper"
 require_relative "../quickstart"
 
+class EmptyResponseError < StandardError
+end
+
 describe "Asset Quickstart" do
   parallelize_me!
 
@@ -115,15 +118,19 @@ describe "Asset Quickstart" do
     after do
       delete_dataset_helper dataset.dataset_id
     end
+
     it "searches all datasets with the given name" do
       project = ENV["GOOGLE_CLOUD_PROJECT"]
-      out, _err = capture_io do
-        search_all_resources(
-          scope: "projects/#{project}",
-          query: "name:#{dataset_name}"
-        )
+      retry_action EmptyResponseError do
+        out, _err = capture_io do
+          search_all_resources(
+            scope: "projects/#{project}",
+            query: "name:#{dataset_name}"
+          )
+        end
+        raise EmptyResponseError if out.empty?
+        assert_match(/#{dataset_name}/, out)
       end
-      assert_match(/#{dataset_name}/, out)
     end
   end
 
