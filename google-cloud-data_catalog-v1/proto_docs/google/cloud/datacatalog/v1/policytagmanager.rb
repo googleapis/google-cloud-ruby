@@ -45,9 +45,9 @@ module Google
         # + Partner data
         # + Public data
         # ```
-        # @!attribute [r] name
+        # @!attribute [rw] name
         #   @return [::String]
-        #     Output only. Resource name of this taxonomy in URL format.
+        #     Identifier. Resource name of this taxonomy in URL format.
         #
         #     Note: Policy tag manager generates unique taxonomy IDs.
         # @!attribute [rw] display_name
@@ -120,9 +120,9 @@ module Google
         # ```
         #
         # Where the "Geolocation" policy tag contains three children.
-        # @!attribute [r] name
+        # @!attribute [rw] name
         #   @return [::String]
-        #     Output only. Resource name of this policy tag in the URL format.
+        #     Identifier. Resource name of this policy tag in the URL format.
         #
         #     The policy tag manager generates unique taxonomy IDs and policy tag IDs.
         # @!attribute [rw] display_name
