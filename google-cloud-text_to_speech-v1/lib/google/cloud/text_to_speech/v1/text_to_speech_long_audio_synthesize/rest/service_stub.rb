@@ -91,10 +91,10 @@ module Google
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :post,
-                                                          uri_template: "/v1/{parent}:SynthesizeLongAudio",
+                                                          uri_template: "/v1/{parent}:synthesizeLongAudio",
                                                           body: "*",
                                                           matches: [
-                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/voices/[^/]+/?$}, false]
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
