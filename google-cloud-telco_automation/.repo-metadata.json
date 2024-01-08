@@ -8,7 +8,7 @@
     "name": "telcoautomation",
     "name_pretty": "Telco Automation API",
     "product_documentation": "https://cloud.google.com/telecom-network-automation",
-    "release_level": "unreleased",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "APIs to automate 5G deployment and management of cloud infrastructure and network functions.",
