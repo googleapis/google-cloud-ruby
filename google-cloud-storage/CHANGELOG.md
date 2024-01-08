@@ -1,5 +1,11 @@
 # Release History
 
+### 1.46.0 (2024-01-08)
+
+#### Features
+
+* support match_glob for Object.list 
+
 ### 1.45.0 (2023-11-06)
 
 #### Features
