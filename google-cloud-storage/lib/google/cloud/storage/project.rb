@@ -388,6 +388,13 @@ module Google
         #
         #   bucket = storage.create_bucket "my-bucket"
         #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.create_bucket "my-bucket", enable_object_retention: true
+        #
         # @example Configure the bucket in a block:
         #   require "google/cloud/storage"
         #
