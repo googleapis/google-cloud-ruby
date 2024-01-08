@@ -23,27 +23,32 @@ module Google
       module V1
         # Payload proto for "clouddeploy.googleapis.com/rollout_update"
         # Platform Log event that describes the rollout update event.
+        # @!attribute [rw] message
+        #   @return [::String]
+        #     Debug message for when a rollout update event occurs.
         # @!attribute [rw] pipeline_uid
         #   @return [::String]
         #     Unique identifier of the pipeline.
         # @!attribute [rw] release_uid
         #   @return [::String]
         #     Unique identifier of the release.
+        # @!attribute [rw] release
+        #   @return [::String]
+        #     The name of the `Release`.
         # @!attribute [rw] rollout
         #   @return [::String]
         #     The name of the rollout.
+        #     rollout_uid is not in this log message because we write some of these log
+        #     messages at rollout creation time, before we've generated the uid.
         # @!attribute [rw] target_id
         #   @return [::String]
         #     ID of the target.
-        # @!attribute [rw] rollout_update_type
-        #   @return [::Google::Cloud::Deploy::V1::RolloutUpdateEvent::RolloutUpdateType]
-        #     The type of the rollout update.
-        # @!attribute [rw] message
-        #   @return [::String]
-        #     Debug message for when a rollout update event occurs.
         # @!attribute [rw] type
         #   @return [::Google::Cloud::Deploy::V1::Type]
         #     Type of this notification, e.g. for a rollout update event.
+        # @!attribute [rw] rollout_update_type
+        #   @return [::Google::Cloud::Deploy::V1::RolloutUpdateEvent::RolloutUpdateType]
+        #     The type of the rollout update.
         class RolloutUpdateEvent
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -514,9 +514,9 @@ module Google
               #     Required. The `DeliveryPipeline` to create.
               #   @param request_id [::String]
               #     Optional. A request ID to identify requests. Specify a unique request ID
-              #     so that if you must retry your request, the server will know to ignore
-              #     the request if it has already been completed. The server will guarantee
-              #     that for at least 60 minutes since the first request.
+              #     so that if you must retry your request, the server knows to ignore the
+              #     request if it has already been completed. The server guarantees that for
+              #     at least 60 minutes after the first request.
               #
               #     For example, consider a situation where you make an initial request and the
               #     request times out. If you make the request again with the same request ID,
@@ -617,15 +617,15 @@ module Google
               #     Required. Field mask is used to specify the fields to be overwritten in the
               #     `DeliveryPipeline` resource by the update.
               #     The fields specified in the update_mask are relative to the resource, not
-              #     the full request. A field will be overwritten if it is in the mask. If the
-              #     user does not provide a mask then all fields will be overwritten.
+              #     the full request. A field will be overwritten if it's in the mask. If the
+              #     user doesn't provide a mask then all fields are overwritten.
               #   @param delivery_pipeline [::Google::Cloud::Deploy::V1::DeliveryPipeline, ::Hash]
               #     Required. The `DeliveryPipeline` to update.
               #   @param request_id [::String]
               #     Optional. A request ID to identify requests. Specify a unique request ID
-              #     so that if you must retry your request, the server will know to ignore
-              #     the request if it has already been completed. The server will guarantee
-              #     that for at least 60 minutes since the first request.
+              #     so that if you must retry your request, the server knows to ignore the
+              #     request if it has already been completed. The server guarantees that for
+              #     at least 60 minutes after the first request.
               #
               #     For example, consider a situation where you make an initial request and the
               #     request times out. If you make the request again with the same request ID,
@@ -730,9 +730,9 @@ module Google
               #     `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}`.
               #   @param request_id [::String]
               #     Optional. A request ID to identify requests. Specify a unique request ID
-              #     so that if you must retry your request, the server will know to ignore
-              #     the request if it has already been completed. The server will guarantee
-              #     that for at least 60 minutes after the first request.
+              #     so that if you must retry your request, the server knows to ignore the
+              #     request if it has already been completed. The server guarantees that for
+              #     at least 60 minutes after the first request.
               #
               #     For example, consider a situation where you make an initial request and the
               #     request times out. If you make the request again with the same request ID,
@@ -1125,9 +1125,9 @@ module Google
               #     Required. The `Target` to create.
               #   @param request_id [::String]
               #     Optional. A request ID to identify requests. Specify a unique request ID
-              #     so that if you must retry your request, the server will know to ignore
-              #     the request if it has already been completed. The server will guarantee
-              #     that for at least 60 minutes since the first request.
+              #     so that if you must retry your request, the server knows to ignore the
+              #     request if it has already been completed. The server guarantees that for
+              #     at least 60 minutes after the first request.
               #
               #     For example, consider a situation where you make an initial request and the
               #     request times out. If you make the request again with the same request ID,
@@ -1228,15 +1228,15 @@ module Google
               #     Required. Field mask is used to specify the fields to be overwritten in the
               #     Target resource by the update.
               #     The fields specified in the update_mask are relative to the resource, not
-              #     the full request. A field will be overwritten if it is in the mask. If the
-              #     user does not provide a mask then all fields will be overwritten.
+              #     the full request. A field will be overwritten if it's in the mask. If the
+              #     user doesn't provide a mask then all fields are overwritten.
               #   @param target [::Google::Cloud::Deploy::V1::Target, ::Hash]
               #     Required. The `Target` to update.
               #   @param request_id [::String]
               #     Optional. A request ID to identify requests. Specify a unique request ID
-              #     so that if you must retry your request, the server will know to ignore
-              #     the request if it has already been completed. The server will guarantee
-              #     that for at least 60 minutes since the first request.
+              #     so that if you must retry your request, the server knows to ignore the
+              #     request if it has already been completed. The server guarantees that for
+              #     at least 60 minutes after the first request.
               #
               #     For example, consider a situation where you make an initial request and the
               #     request times out. If you make the request again with the same request ID,
@@ -1341,9 +1341,9 @@ module Google
               #     `projects/{project_id}/locations/{location_name}/targets/{target_name}`.
               #   @param request_id [::String]
               #     Optional. A request ID to identify requests. Specify a unique request ID
-              #     so that if you must retry your request, the server will know to ignore
-              #     the request if it has already been completed. The server will guarantee
-              #     that for at least 60 minutes after the first request.
+              #     so that if you must retry your request, the server knows to ignore the
+              #     request if it has already been completed. The server guarantees that for
+              #     at least 60 minutes after the first request.
               #
               #     For example, consider a situation where you make an initial request and the
               #     request times out. If you make the request again with the same request ID,
@@ -1628,7 +1628,7 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The parent collection in which the `CustomTargetType` should be
-              #     created in. Format should be
+              #     created. Format should be
               #     `projects/{project_id}/locations/{location_name}`.
               #   @param custom_target_type_id [::String]
               #     Required. ID of the `CustomTargetType`.
@@ -1636,9 +1636,9 @@ module Google
               #     Required. The `CustomTargetType` to create.
               #   @param request_id [::String]
               #     Optional. A request ID to identify requests. Specify a unique request ID
-              #     so that if you must retry your request, the server will know to ignore
-              #     the request if it has already been completed. The server will guarantee
-              #     that for at least 60 minutes since the first request.
+              #     so that if you must retry your request, the server knows to ignore the
+              #     request if it has already been completed. The server guarantees that for
+              #     at least 60 minutes after the first request.
               #
               #     For example, consider a situation where you make an initial request and the
               #     request times out. If you make the request again with the same request ID,
@@ -1739,15 +1739,15 @@ module Google
               #     Required. Field mask is used to specify the fields to be overwritten in the
               #     `CustomTargetType` resource by the update.
               #     The fields specified in the update_mask are relative to the resource, not
-              #     the full request. A field will be overwritten if it is in the mask. If the
-              #     user does not provide a mask then all fields will be overwritten.
+              #     the full request. A field will be overwritten if it's in the mask. If the
+              #     user doesn't provide a mask then all fields are overwritten.
               #   @param custom_target_type [::Google::Cloud::Deploy::V1::CustomTargetType, ::Hash]
               #     Required. The `CustomTargetType` to update.
               #   @param request_id [::String]
               #     Optional. A request ID to identify requests. Specify a unique request ID
-              #     so that if you must retry your request, the server will know to ignore
-              #     the request if it has already been completed. The server will guarantee
-              #     that for at least 60 minutes since the first request.
+              #     so that if you must retry your request, the server knows to ignore the
+              #     request if it has already been completed. The server guarantees that for
+              #     at least 60 minutes after the first request.
               #
               #     For example, consider a situation where you make an initial request and the
               #     request times out. If you make the request again with the same request ID,
@@ -1852,9 +1852,9 @@ module Google
               #     `projects/{project_id}/locations/{location_name}/customTargetTypes/{custom_target_type}`.
               #   @param request_id [::String]
               #     Optional. A request ID to identify requests. Specify a unique request ID
-              #     so that if you must retry your request, the server will know to ignore
-              #     the request if it has already been completed. The server will guarantee
-              #     that for at least 60 minutes after the first request.
+              #     so that if you must retry your request, the server knows to ignore the
+              #     request if it has already been completed. The server guarantees that for
+              #     at least 60 minutes after the first request.
               #
               #     For example, consider a situation where you make an initial request and the
               #     request times out. If you make the request again with the same request ID,
@@ -2147,9 +2147,9 @@ module Google
               #     Required. The `Release` to create.
               #   @param request_id [::String]
               #     Optional. A request ID to identify requests. Specify a unique request ID
-              #     so that if you must retry your request, the server will know to ignore
-              #     the request if it has already been completed. The server will guarantee
-              #     that for at least 60 minutes since the first request.
+              #     so that if you must retry your request, the server knows to ignore the
+              #     request if it has already been completed. The server guarantees that for
+              #     at least 60 minutes after the first request.
               #
               #     For example, consider a situation where you make an initial request and the
               #     request times out. If you make the request again with the same request ID,
@@ -2754,9 +2754,9 @@ module Google
               #     Required. The `Rollout` to create.
               #   @param request_id [::String]
               #     Optional. A request ID to identify requests. Specify a unique request ID
-              #     so that if you must retry your request, the server will know to ignore
-              #     the request if it has already been completed. The server will guarantee
-              #     that for at least 60 minutes since the first request.
+              #     so that if you must retry your request, the server knows to ignore the
+              #     request if it has already been completed. The server guarantees that for
+              #     at least 60 minutes after the first request.
               #
               #     For example, consider a situation where you make an initial request and the
               #     request times out. If you make the request again with the same request ID,
@@ -3367,9 +3367,9 @@ module Google
               #     Required. The `Automation` to create.
               #   @param request_id [::String]
               #     Optional. A request ID to identify requests. Specify a unique request ID
-              #     so that if you must retry your request, the server will know to ignore
-              #     the request if it has already been completed. The server will guarantee
-              #     that for at least 60 minutes since the first request.
+              #     so that if you must retry your request, the server knows to ignore the
+              #     request if it has already been completed. The server guarantees that for
+              #     at least 60 minutes after the first request.
               #
               #     For example, consider a situation where you make an initial request and the
               #     request times out. If you make the request again with the same request ID,
@@ -3470,15 +3470,15 @@ module Google
               #     Required. Field mask is used to specify the fields to be overwritten in the
               #     `Automation` resource by the update.
               #     The fields specified in the update_mask are relative to the resource, not
-              #     the full request. A field will be overwritten if it is in the mask. If the
-              #     user does not provide a mask then all fields will be overwritten.
+              #     the full request. A field will be overwritten if it's in the mask. If the
+              #     user doesn't provide a mask then all fields are overwritten.
               #   @param automation [::Google::Cloud::Deploy::V1::Automation, ::Hash]
               #     Required. The `Automation` to update.
               #   @param request_id [::String]
               #     Optional. A request ID to identify requests. Specify a unique request ID
-              #     so that if you must retry your request, the server will know to ignore
-              #     the request if it has already been completed. The server will guarantee
-              #     that for at least 60 minutes since the first request.
+              #     so that if you must retry your request, the server knows to ignore the
+              #     request if it has already been completed. The server guarantees that for
+              #     at least 60 minutes after the first request.
               #
               #     For example, consider a situation where you make an initial request and the
               #     request times out. If you make the request again with the same request ID,
@@ -3583,9 +3583,9 @@ module Google
               #     `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}/automations/{automation_name}`.
               #   @param request_id [::String]
               #     Optional. A request ID to identify requests. Specify a unique request ID
-              #     so that if you must retry your request, the server will know to ignore
-              #     the request if it has already been completed. The server will guarantee
-              #     that for at least 60 minutes after the first request.
+              #     so that if you must retry your request, the server knows to ignore the
+              #     request if it has already been completed. The server guarantees that for
+              #     at least 60 minutes after the first request.
               #
               #     For example, consider a situation where you make an initial request and the
               #     request times out. If you make the request again with the same request ID,
