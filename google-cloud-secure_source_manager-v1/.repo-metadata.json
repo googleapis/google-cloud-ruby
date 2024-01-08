@@ -8,7 +8,7 @@
     "name": "securesourcemanager",
     "name_pretty": "Secure Source Manager V1 API",
     "product_documentation": "https://cloud.google.com/secure-source-manager/docs/overview",
-    "release_level": "unreleased",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "Regionally deployed, single-tenant managed source code repository hosted on Google Cloud. Note that google-cloud-secure_source_manager-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-secure_source_manager instead. See the readme for more details.",
