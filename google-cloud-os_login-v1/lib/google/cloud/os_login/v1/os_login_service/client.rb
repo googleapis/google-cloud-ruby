@@ -631,7 +631,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload import_ssh_public_key(parent: nil, ssh_public_key: nil, project_id: nil)
+            # @overload import_ssh_public_key(parent: nil, ssh_public_key: nil, project_id: nil, regions: nil)
             #   Pass arguments to `import_ssh_public_key` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -642,6 +642,10 @@ module Google
             #     Optional. The SSH public key and expiration time.
             #   @param project_id [::String]
             #     The project ID of the Google Cloud Platform project.
+            #   @param regions [::Array<::String>]
+            #     Optional. The regions to which to assert that the key was written.
+            #     If unspecified, defaults to all regions.
+            #     Regions are listed at https://cloud.google.com/about/locations#region.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::OsLogin::V1::ImportSshPublicKeyResponse]
