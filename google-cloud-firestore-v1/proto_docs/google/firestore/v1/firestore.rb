@@ -377,6 +377,11 @@ module Google
         #     This must be a microsecond precision timestamp within the past one hour,
         #     or if Point-in-Time Recovery is enabled, can additionally be a whole
         #     minute timestamp within the past 7 days.
+        # @!attribute [rw] mode
+        #   @return [::Google::Cloud::Firestore::V1::QueryMode]
+        #     Optional. The mode in which the query request is processed. This field is
+        #     optional, and when not provided, it defaults to `NORMAL` mode where no
+        #     additional statistics will be returned with the query results.
         class RunQueryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -411,6 +416,13 @@ module Google
         #   @return [::Boolean]
         #     If present, Firestore has completely finished the request and no more
         #     documents will be returned.
+        # @!attribute [rw] stats
+        #   @return [::Google::Cloud::Firestore::V1::ResultSetStats]
+        #     Query plan and execution statistics. Note that the returned stats are
+        #     subject to change as Firestore evolves.
+        #
+        #     This is only present when the request specifies a mode other than `NORMAL`
+        #     and is sent only once with the last response in the stream.
         class RunQueryResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -447,6 +459,11 @@ module Google
         #     This must be a microsecond precision timestamp within the past one hour,
         #     or if Point-in-Time Recovery is enabled, can additionally be a whole
         #     minute timestamp within the past 7 days.
+        # @!attribute [rw] mode
+        #   @return [::Google::Cloud::Firestore::V1::QueryMode]
+        #     Optional. The mode in which the query request is processed. This field is
+        #     optional, and when not provided, it defaults to `NORMAL` mode where no
+        #     additional statistics will be returned with the query results.
         class RunAggregationQueryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -475,6 +492,13 @@ module Google
         #     If the query returns no results, a response with `read_time` and no
         #     `result` will be sent, and this represents the time at which the query
         #     was run.
+        # @!attribute [rw] stats
+        #   @return [::Google::Cloud::Firestore::V1::ResultSetStats]
+        #     Query plan and execution statistics. Note that the returned stats are
+        #     subject to change as Firestore evolves.
+        #
+        #     This is only present when the request specifies a mode other than `NORMAL`
+        #     and is sent only once with the last response in the stream.
         class RunAggregationQueryResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
