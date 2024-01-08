@@ -259,7 +259,12 @@ module Google
         #     `ignore_null` is `true`. In that case, such `null` rows are trivially
         #     considered passing.
         #
-        #     This field is only valid for row-level type rules.
+        #     This field is only valid for the following type of rules:
+        #
+        #     * RangeExpectation
+        #     * RegexExpectation
+        #     * SetExpectation
+        #     * UniquenessExpectation
         # @!attribute [rw] dimension
         #   @return [::String]
         #     Required. The dimension a rule belongs to. Results are also aggregated at
