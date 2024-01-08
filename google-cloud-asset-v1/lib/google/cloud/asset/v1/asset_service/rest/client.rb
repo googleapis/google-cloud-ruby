@@ -1122,31 +1122,31 @@ module Google
               #     * `labels.env:*` to find Google Cloud resources that have a label `env`.
               #     * `tagKeys:env` to find Google Cloud resources that have directly
               #       attached tags where the
-              #       [`TagKey`](https://cloud.google.com/resource-manager/reference/rest/v3/tagKeys#resource:-tagkey)
-              #       .`namespacedName` contains `env`.
+              #       [`TagKey.namespacedName`](https://cloud.google.com/resource-manager/reference/rest/v3/tagKeys#resource:-tagkey)
+              #       contains `env`.
               #     * `tagValues:prod*` to find Google Cloud resources that have directly
               #       attached tags where the
-              #       [`TagValue`](https://cloud.google.com/resource-manager/reference/rest/v3/tagValues#resource:-tagvalue)
-              #       .`namespacedName` contains a word prefixed by `prod`.
+              #       [`TagValue.namespacedName`](https://cloud.google.com/resource-manager/reference/rest/v3/tagValues#resource:-tagvalue)
+              #       contains a word prefixed by `prod`.
               #     * `tagValueIds=tagValues/123` to find Google Cloud resources that have
               #       directly attached tags where the
-              #       [`TagValue`](https://cloud.google.com/resource-manager/reference/rest/v3/tagValues#resource:-tagvalue)
-              #       .`name` is exactly `tagValues/123`.
+              #       [`TagValue.name`](https://cloud.google.com/resource-manager/reference/rest/v3/tagValues#resource:-tagvalue)
+              #       is exactly `tagValues/123`.
               #     * `effectiveTagKeys:env` to find Google Cloud resources that have
               #       directly attached or inherited tags where the
-              #       [`TagKey`](https://cloud.google.com/resource-manager/reference/rest/v3/tagKeys#resource:-tagkey)
-              #       .`namespacedName` contains `env`.
+              #       [`TagKey.namespacedName`](https://cloud.google.com/resource-manager/reference/rest/v3/tagKeys#resource:-tagkey)
+              #       contains `env`.
               #     * `effectiveTagValues:prod*` to find Google Cloud resources that have
               #       directly attached or inherited tags where the
-              #       [`TagValue`](https://cloud.google.com/resource-manager/reference/rest/v3/tagValues#resource:-tagvalue)
-              #       .`namespacedName` contains a word prefixed by `prod`.
+              #       [`TagValue.namespacedName`](https://cloud.google.com/resource-manager/reference/rest/v3/tagValues#resource:-tagvalue)
+              #       contains a word prefixed by `prod`.
               #     * `effectiveTagValueIds=tagValues/123` to find Google Cloud resources that
               #        have directly attached or inherited tags where the
-              #       [`TagValue`](https://cloud.google.com/resource-manager/reference/rest/v3/tagValues#resource:-tagvalue)
-              #       .`name` is exactly `tagValues/123`.
+              #       [`TagValue.name`](https://cloud.google.com/resource-manager/reference/rest/v3/tagValues#resource:-tagvalue)
+              #       is exactly `tagValues/123`.
               #     * `kmsKey:key` to find Google Cloud resources encrypted with a
               #       customer-managed encryption key whose name contains `key` as a word. This
-              #       field is deprecated. Please use the `kmsKeys` field to retrieve Cloud KMS
+              #       field is deprecated. Use the `kmsKeys` field to retrieve Cloud KMS
               #       key information.
               #     * `kmsKeys:key` to find Google Cloud resources encrypted with
               #       customer-managed encryption keys whose name contains the word `key`.
@@ -1158,6 +1158,10 @@ module Google
               #       Compute Engine instances that have relationships with `instance-group-1`
               #       in the Compute Engine instance group resource name, for relationship type
               #       `INSTANCE_TO_INSTANCEGROUP`.
+              #     * `sccSecurityMarks.key=value` to find Cloud resources that are attached
+              #       with security marks whose key is `key` and value is `value`.
+              #     * `sccSecurityMarks.key:*` to find Cloud resources that are attached with
+              #       security marks whose key is `key`.
               #     * `state:ACTIVE` to find Google Cloud resources whose state contains
               #       `ACTIVE` as a word.
               #     * `NOT state:ACTIVE` to find Google Cloud resources whose state doesn't
@@ -1179,7 +1183,7 @@ module Google
               #   @param asset_types [::Array<::String>]
               #     Optional. A list of asset types that this request searches for. If empty,
               #     it will search all the [searchable asset
-              #     types](https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types).
+              #     types](https://cloud.google.com/asset-inventory/docs/supported-asset-types).
               #
               #     Regular expressions are also supported. For example:
               #
@@ -1407,7 +1411,7 @@ module Google
               #     Optional. A list of asset types that the IAM policies are attached to. If
               #     empty, it will search the IAM policies that are attached to all the
               #     [searchable asset
-              #     types](https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types).
+              #     types](https://cloud.google.com/asset-inventory/docs/supported-asset-types).
               #
               #     Regular expressions are also supported. For example:
               #
@@ -1526,7 +1530,7 @@ module Google
               #     If both `analysis_query` and `saved_analysis_query` are provided, they
               #     will be merged together with the `saved_analysis_query` as base and
               #     the `analysis_query` as overrides. For more details of the merge behavior,
-              #     please refer to the
+              #     refer to the
               #     [MergeFrom](https://developers.google.com/protocol-buffers/docs/reference/cpp/google.protobuf.message#Message.MergeFrom.details)
               #     page.
               #
@@ -1642,7 +1646,7 @@ module Google
               #     If both `analysis_query` and `saved_analysis_query` are provided, they
               #     will be merged together with the `saved_analysis_query` as base and
               #     the `analysis_query` as overrides. For more details of the merge behavior,
-              #     please refer to the
+              #     refer to the
               #     [MergeFrom](https://developers.google.com/protocol-buffers/docs/reference/cpp/google.protobuf.message#Message.MergeFrom.details)
               #     doc.
               #
@@ -2440,7 +2444,7 @@ module Google
               #     Required. The names refer to the [full_resource_names]
               #     (https://cloud.google.com/asset-inventory/docs/resource-name-format)
               #     of [searchable asset
-              #     types](https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types).
+              #     types](https://cloud.google.com/asset-inventory/docs/supported-asset-types).
               #     A maximum of 20 resources' effective policies can be retrieved in a batch.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesResponse]
@@ -2530,12 +2534,15 @@ module Google
               #   @param filter [::String]
               #     The expression to filter
               #     {::Google::Cloud::Asset::V1::AnalyzeOrgPoliciesResponse#org_policy_results AnalyzeOrgPoliciesResponse.org_policy_results}.
-              #     The only supported field is `consolidated_policy.attached_resource`, and
-              #     the only supported operator is `=`.
+              #     Filtering is currently available for bare literal values and the following
+              #     fields:
+              #     * consolidated_policy.attached_resource
+              #     * consolidated_policy.rules.enforce
               #
-              #     Example:
+              #     When filtering by a specific field, the only supported operator is `=`.
+              #     For example, filtering by
               #     consolidated_policy.attached_resource="//cloudresourcemanager.googleapis.com/folders/001"
-              #     will return the org policy results of"folders/001".
+              #     will return all the Organization Policy results attached to "folders/001".
               #   @param page_size [::Integer]
               #     The maximum number of items to return per page. If unspecified,
               #     {::Google::Cloud::Asset::V1::AnalyzeOrgPoliciesResponse#org_policy_results AnalyzeOrgPoliciesResponse.org_policy_results}
@@ -2636,13 +2643,17 @@ module Google
               #     The analysis only contains organization policies for the provided
               #     constraint.
               #   @param filter [::String]
-              #     The expression to filter the governed containers in result.
-              #     The only supported field is `parent`, and the only supported operator is
-              #     `=`.
+              #     The expression to filter
+              #     {::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedContainersResponse#governed_containers AnalyzeOrgPolicyGovernedContainersResponse.governed_containers}.
+              #     Filtering is currently available for bare literal values and the following
+              #     fields:
+              #     * parent
+              #     * consolidated_policy.rules.enforce
               #
-              #     Example:
-              #     parent="//cloudresourcemanager.googleapis.com/folders/001" will return all
-              #     containers under "folders/001".
+              #     When filtering by a specific field, the only supported operator is `=`.
+              #     For example, filtering by
+              #     parent="//cloudresourcemanager.googleapis.com/folders/001"
+              #     will return all the containers under "folders/001".
               #   @param page_size [::Integer]
               #     The maximum number of items to return per page. If unspecified,
               #     {::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedContainersResponse#governed_containers AnalyzeOrgPolicyGovernedContainersResponse.governed_containers}
@@ -2730,7 +2741,7 @@ module Google
               #
               # This RPC only returns either resources of types supported by [searchable
               # asset
-              # types](https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types),
+              # types](https://cloud.google.com/asset-inventory/docs/supported-asset-types),
               # or IAM policies.
               #
               # @overload analyze_org_policy_governed_assets(request, options = nil)
@@ -2760,18 +2771,33 @@ module Google
               #     analysis only contains analyzed organization policies for the provided
               #     constraint.
               #   @param filter [::String]
-              #     The expression to filter the governed assets in result. The only supported
-              #     fields for governed resources are `governed_resource.project` and
-              #     `governed_resource.folders`. The only supported fields for governed iam
-              #     policies are `governed_iam_policy.project` and
-              #     `governed_iam_policy.folders`. The only supported operator is `=`.
+              #     The expression to filter
+              #     {::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedAssetsResponse#governed_assets AnalyzeOrgPolicyGovernedAssetsResponse.governed_assets}.
               #
-              #     Example 1: governed_resource.project="projects/12345678" filter will return
-              #     all governed resources under projects/12345678 including the project
-              #     ifself, if applicable.
+              #     For governed resources, filtering is currently available for bare literal
+              #     values and the following fields:
+              #     * governed_resource.project
+              #     * governed_resource.folders
+              #     * consolidated_policy.rules.enforce
+              #     When filtering by `governed_resource.project` or
+              #     `consolidated_policy.rules.enforce`, the only supported operator is `=`.
+              #     When filtering by `governed_resource.folders`, the supported operators
+              #     are `=` and `:`.
+              #     For example, filtering by `governed_resource.project="projects/12345678"`
+              #     will return all the governed resources under "projects/12345678",
+              #     including the project itself if applicable.
               #
-              #     Example 2: governed_iam_policy.folders="folders/12345678" filter will
-              #     return all governed iam policies under folders/12345678, if applicable.
+              #     For governed IAM policies, filtering is currently available for bare
+              #     literal values and the following fields:
+              #     * governed_iam_policy.project
+              #     * governed_iam_policy.folders
+              #     * consolidated_policy.rules.enforce
+              #     When filtering by `governed_iam_policy.project` or
+              #     `consolidated_policy.rules.enforce`, the only supported operator is `=`.
+              #     When filtering by `governed_iam_policy.folders`, the supported operators
+              #     are `=` and `:`.
+              #     For example, filtering by `governed_iam_policy.folders:"folders/12345678"`
+              #     will return all the governed IAM policies under "folders/001".
               #   @param page_size [::Integer]
               #     The maximum number of items to return per page. If unspecified,
               #     {::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedAssetsResponse#governed_assets AnalyzeOrgPolicyGovernedAssetsResponse.governed_assets}
