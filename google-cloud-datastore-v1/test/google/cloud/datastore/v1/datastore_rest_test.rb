@@ -132,6 +132,7 @@ class ::Google::Cloud::Datastore::V1::Datastore::Rest::ClientTest < Minitest::Te
     partition_id = {}
     read_options = {}
     query = {}
+    mode = :NORMAL
 
     run_query_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -147,27 +148,27 @@ class ::Google::Cloud::Datastore::V1::Datastore::Rest::ClientTest < Minitest::Te
         end
 
         # Use hash object
-        client.run_query({ project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, query: query }) do |_result, response|
+        client.run_query({ project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, query: query, mode: mode }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.run_query project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, query: query do |_result, response|
+        client.run_query project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, query: query, mode: mode do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.run_query ::Google::Cloud::Datastore::V1::RunQueryRequest.new(project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, query: query) do |_result, response|
+        client.run_query ::Google::Cloud::Datastore::V1::RunQueryRequest.new(project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, query: query, mode: mode) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.run_query({ project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, query: query }, call_options) do |_result, response|
+        client.run_query({ project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, query: query, mode: mode }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.run_query(::Google::Cloud::Datastore::V1::RunQueryRequest.new(project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, query: query), call_options) do |_result, response|
+        client.run_query(::Google::Cloud::Datastore::V1::RunQueryRequest.new(project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, query: query, mode: mode), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -190,6 +191,7 @@ class ::Google::Cloud::Datastore::V1::Datastore::Rest::ClientTest < Minitest::Te
     partition_id = {}
     read_options = {}
     aggregation_query = {}
+    mode = :NORMAL
 
     run_aggregation_query_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -205,27 +207,27 @@ class ::Google::Cloud::Datastore::V1::Datastore::Rest::ClientTest < Minitest::Te
         end
 
         # Use hash object
-        client.run_aggregation_query({ project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, aggregation_query: aggregation_query }) do |_result, response|
+        client.run_aggregation_query({ project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, aggregation_query: aggregation_query, mode: mode }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.run_aggregation_query project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, aggregation_query: aggregation_query do |_result, response|
+        client.run_aggregation_query project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, aggregation_query: aggregation_query, mode: mode do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.run_aggregation_query ::Google::Cloud::Datastore::V1::RunAggregationQueryRequest.new(project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, aggregation_query: aggregation_query) do |_result, response|
+        client.run_aggregation_query ::Google::Cloud::Datastore::V1::RunAggregationQueryRequest.new(project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, aggregation_query: aggregation_query, mode: mode) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.run_aggregation_query({ project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, aggregation_query: aggregation_query }, call_options) do |_result, response|
+        client.run_aggregation_query({ project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, aggregation_query: aggregation_query, mode: mode }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.run_aggregation_query(::Google::Cloud::Datastore::V1::RunAggregationQueryRequest.new(project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, aggregation_query: aggregation_query), call_options) do |_result, response|
+        client.run_aggregation_query(::Google::Cloud::Datastore::V1::RunAggregationQueryRequest.new(project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, aggregation_query: aggregation_query, mode: mode), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

@@ -124,6 +124,7 @@ class ::Google::Cloud::Datastore::V1::Datastore::ClientTest < Minitest::Test
     partition_id = {}
     read_options = {}
     query = {}
+    mode = :NORMAL
 
     run_query_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :run_query, name
@@ -134,6 +135,7 @@ class ::Google::Cloud::Datastore::V1::Datastore::ClientTest < Minitest::Test
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Datastore::V1::ReadOptions), request["read_options"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Datastore::V1::Query), request["query"]
       assert_equal :query, request.query_type
+      assert_equal :NORMAL, request["mode"]
       refute_nil options
     end
 
@@ -144,31 +146,31 @@ class ::Google::Cloud::Datastore::V1::Datastore::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.run_query({ project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, query: query }) do |response, operation|
+      client.run_query({ project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, query: query, mode: mode }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.run_query project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, query: query do |response, operation|
+      client.run_query project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, query: query, mode: mode do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.run_query ::Google::Cloud::Datastore::V1::RunQueryRequest.new(project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, query: query) do |response, operation|
+      client.run_query ::Google::Cloud::Datastore::V1::RunQueryRequest.new(project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, query: query, mode: mode) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.run_query({ project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, query: query }, grpc_options) do |response, operation|
+      client.run_query({ project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, query: query, mode: mode }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.run_query(::Google::Cloud::Datastore::V1::RunQueryRequest.new(project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, query: query), grpc_options) do |response, operation|
+      client.run_query(::Google::Cloud::Datastore::V1::RunQueryRequest.new(project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, query: query, mode: mode), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -191,6 +193,7 @@ class ::Google::Cloud::Datastore::V1::Datastore::ClientTest < Minitest::Test
     partition_id = {}
     read_options = {}
     aggregation_query = {}
+    mode = :NORMAL
 
     run_aggregation_query_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :run_aggregation_query, name
@@ -201,6 +204,7 @@ class ::Google::Cloud::Datastore::V1::Datastore::ClientTest < Minitest::Test
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Datastore::V1::ReadOptions), request["read_options"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Datastore::V1::AggregationQuery), request["aggregation_query"]
       assert_equal :aggregation_query, request.query_type
+      assert_equal :NORMAL, request["mode"]
       refute_nil options
     end
 
@@ -211,31 +215,31 @@ class ::Google::Cloud::Datastore::V1::Datastore::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.run_aggregation_query({ project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, aggregation_query: aggregation_query }) do |response, operation|
+      client.run_aggregation_query({ project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, aggregation_query: aggregation_query, mode: mode }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.run_aggregation_query project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, aggregation_query: aggregation_query do |response, operation|
+      client.run_aggregation_query project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, aggregation_query: aggregation_query, mode: mode do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.run_aggregation_query ::Google::Cloud::Datastore::V1::RunAggregationQueryRequest.new(project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, aggregation_query: aggregation_query) do |response, operation|
+      client.run_aggregation_query ::Google::Cloud::Datastore::V1::RunAggregationQueryRequest.new(project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, aggregation_query: aggregation_query, mode: mode) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.run_aggregation_query({ project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, aggregation_query: aggregation_query }, grpc_options) do |response, operation|
+      client.run_aggregation_query({ project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, aggregation_query: aggregation_query, mode: mode }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.run_aggregation_query(::Google::Cloud::Datastore::V1::RunAggregationQueryRequest.new(project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, aggregation_query: aggregation_query), grpc_options) do |response, operation|
+      client.run_aggregation_query(::Google::Cloud::Datastore::V1::RunAggregationQueryRequest.new(project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, aggregation_query: aggregation_query, mode: mode), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
