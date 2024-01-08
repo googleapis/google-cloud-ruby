@@ -1,0 +1,20 @@
+{
+    "api_id": "automl.googleapis.com",
+    "api_shortname": "automl",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-automl/latest",
+    "distribution_name": "google-cloud-automl",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "automl",
+    "name_pretty": "Cloud AutoML API",
+    "product_documentation": "https://cloud.google.com/automl",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "AutoML makes the power of machine learning available to you even if you have limited knowledge of machine learning. You can use AutoML to build on Google's machine learning capabilities to create your own custom machine learning models that are tailored to your business needs, and then integrate those models into your applications and web sites.",
+    "ruby-cloud-env-prefix": "AUTOML",
+    "ruby-cloud-product-url": "https://cloud.google.com/automl",
+    "ruby-cloud-path-override": "auto_ml=automl",
+    "ruby-cloud-namespace-override": "AutoMl=AutoML",
+    "library_type": "GAPIC_AUTO"
+}
