@@ -8,7 +8,7 @@
     "name": "edgenetwork",
     "name_pretty": "Distributed Cloud Edge Network API",
     "product_documentation": "https://cloud.google.com/distributed-cloud/edge/latest/docs/overview",
-    "release_level": "unreleased",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "Network management API for Distributed Cloud Edge.",
