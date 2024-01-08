@@ -95,8 +95,8 @@ module Google
 
         # Contains text input to be synthesized. Either `text` or `ssml` must be
         # supplied. Supplying both or neither returns
-        # [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]. The input size is limited to 5000
-        # bytes.
+        # [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]. The
+        # input size is limited to 5000 bytes.
         # @!attribute [rw] text
         #   @return [::String]
         #     The raw text to be synthesized.
@@ -104,7 +104,8 @@ module Google
         #   @return [::String]
         #     The SSML document to be synthesized. The SSML document must be valid
         #     and well-formed. Otherwise the RPC will fail and return
-        #     [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]. For more information, see
+        #     [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]. For
+        #     more information, see
         #     [SSML](https://cloud.google.com/text-to-speech/docs/ssml).
         class SynthesisInput
           include ::Google::Protobuf::MessageExts
@@ -114,9 +115,9 @@ module Google
         # Description of which voice to use for a synthesis request.
         # @!attribute [rw] language_code
         #   @return [::String]
-        #     Required. The language (and potentially also the region) of the voice expressed as a
-        #     [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag, e.g.
-        #     "en-US". This should not include a script tag (e.g. use
+        #     Required. The language (and potentially also the region) of the voice
+        #     expressed as a [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt)
+        #     language tag, e.g. "en-US". This should not include a script tag (e.g. use
         #     "cmn-cn" rather than "cmn-Hant-cn"), because the script will be inferred
         #     from the input provided in the SynthesisInput.  The TTS service
         #     will use this parameter to help choose an appropriate voice.  Note that
@@ -199,14 +200,13 @@ module Google
         #     Required. The name of the AutoML model that synthesizes the custom voice.
         # @!attribute [rw] reported_usage
         #   @return [::Google::Cloud::TextToSpeech::V1beta1::CustomVoiceParams::ReportedUsage]
-        #     Optional. The usage of the synthesized audio to be reported.
+        #     Optional. Deprecated. The usage of the synthesized audio to be reported.
         class CustomVoiceParams
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # The usage of the synthesized audio. You must report your honest and
-          # correct usage of the service as it's regulated by contract and will cause
-          # significant difference in billing.
+          # Deprecated. The usage of the synthesized audio. Usage does not affect
+          # billing.
           module ReportedUsage
             # Request with reported usage unspecified will be rejected.
             REPORTED_USAGE_UNSPECIFIED = 0
@@ -278,7 +278,8 @@ module Google
         # Configuration to set up audio encoder. The encoding determines the output
         # audio format that we'd like.
         module AudioEncoding
-          # Not specified. Will return result [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT].
+          # Not specified. Will return result
+          # [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT].
           AUDIO_ENCODING_UNSPECIFIED = 0
 
           # Uncompressed 16-bit signed little-endian samples (Linear PCM).
