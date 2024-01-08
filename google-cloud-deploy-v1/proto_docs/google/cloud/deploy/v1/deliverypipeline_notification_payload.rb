@@ -27,6 +27,9 @@ module Google
         # @!attribute [rw] message
         #   @return [::String]
         #     Debug message for when a notification fails to send.
+        # @!attribute [rw] pipeline_uid
+        #   @return [::String]
+        #     Unique identifier of the `DeliveryPipeline`.
         # @!attribute [rw] delivery_pipeline
         #   @return [::String]
         #     The name of the `Delivery Pipeline`.

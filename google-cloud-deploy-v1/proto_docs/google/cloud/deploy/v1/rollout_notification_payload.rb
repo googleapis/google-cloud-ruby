@@ -33,15 +33,21 @@ module Google
         # @!attribute [rw] release_uid
         #   @return [::String]
         #     Unique identifier of the `Release`.
+        # @!attribute [rw] release
+        #   @return [::String]
+        #     The name of the `Release`.
+        # @!attribute [rw] rollout_uid
+        #   @return [::String]
+        #     Unique identifier of the `Rollout`.
         # @!attribute [rw] rollout
         #   @return [::String]
         #     The name of the `Rollout`.
-        # @!attribute [rw] type
-        #   @return [::Google::Cloud::Deploy::V1::Type]
-        #     Type of this notification, e.g. for a Pub/Sub failure.
         # @!attribute [rw] target_id
         #   @return [::String]
         #     ID of the `Target` that the rollout is deployed to.
+        # @!attribute [rw] type
+        #   @return [::Google::Cloud::Deploy::V1::Type]
+        #     Type of this notification, e.g. for a Pub/Sub failure.
         class RolloutNotificationEvent
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

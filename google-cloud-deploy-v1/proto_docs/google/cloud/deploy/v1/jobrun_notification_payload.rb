@@ -36,9 +36,15 @@ module Google
         # @!attribute [rw] release_uid
         #   @return [::String]
         #     Unique identifier of the `Release`.
+        # @!attribute [rw] release
+        #   @return [::String]
+        #     The name of the `Release`.
         # @!attribute [rw] rollout_uid
         #   @return [::String]
         #     Unique identifier of the `Rollout`.
+        # @!attribute [rw] rollout
+        #   @return [::String]
+        #     The name of the `Rollout`.
         # @!attribute [rw] target_id
         #   @return [::String]
         #     ID of the `Target`.
