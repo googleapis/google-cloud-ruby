@@ -30,6 +30,10 @@ module Google
       #
       # A backup of a Cloud Bigtable table. See {Cluster#create_backup}, {Cluster#backup} and {Cluster#backups}.
       #
+      # @deprecated Use {Google::Cloud::Bigtable::Admin::V2::Backup} instead.
+      #   See {https://github.com/googleapis/google-cloud-ruby/blob/main/google-cloud-bigtable/MIGRATING.md MIGRATION.md}
+      #   for more info.
+      #
       # @example
       #   require "google/cloud/bigtable"
       #

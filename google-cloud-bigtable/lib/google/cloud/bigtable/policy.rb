@@ -32,6 +32,10 @@ module Google
       # value associated with the policy. It writes the policy only if the
       # `etag` values match.
       #
+      # @deprecated Use {Google::Iam::V1::Policy} instead.
+      #   See {https://github.com/googleapis/google-cloud-ruby/blob/main/google-cloud-bigtable/MIGRATING.md MIGRATION.md}
+      #   for more info.
+      #
       # @see https://cloud.google.com/bigtable/docs/access-control Permissions and roles
       #
       # @attr [String] etag Used to check if the policy has changed since

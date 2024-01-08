@@ -84,6 +84,10 @@ module Google
         ##
         # Retrieves the list of Bigtable instances for the project.
         #
+        # @deprecated Use {Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#list_instances} instead.
+        #   See {https://github.com/googleapis/google-cloud-ruby/blob/main/google-cloud-bigtable/MIGRATING.md MIGRATION.md}
+        #   for more info.
+        #
         # @param token [String] The `token` value returned by the last call to
         #   `instances`; indicates that this is a continuation of a call
         #   and that the system should return the next page of data.
@@ -109,6 +113,10 @@ module Google
         ##
         # Gets an existing Bigtable instance.
         #
+        # @deprecated Use {Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#get_instance} instead.
+        #   See {https://github.com/googleapis/google-cloud-ruby/blob/main/google-cloud-bigtable/MIGRATING.md MIGRATION.md}
+        #   for more info.
+        #
         # @param instance_id [String] Existing instance ID.
         # @return [Google::Cloud::Bigtable::Instance, nil]
         #
@@ -133,6 +141,10 @@ module Google
 
         ##
         # Creates a Bigtable instance.
+        #
+        # @deprecated Use {Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#create_instance} instead.
+        #   See {https://github.com/googleapis/google-cloud-ruby/blob/main/google-cloud-bigtable/MIGRATING.md MIGRATION.md}
+        #   for more info.
         #
         # @see https://cloud.google.com/compute/docs/regions-zones Cluster zone locations
         #
@@ -242,6 +254,10 @@ module Google
         ##
         # Lists all clusters in the project.
         #
+        # @deprecated Use {Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#list_clusters} instead.
+        #   See {https://github.com/googleapis/google-cloud-ruby/blob/main/google-cloud-bigtable/MIGRATING.md MIGRATION.md}
+        #   for more info.
+        #
         # @param token [String] The `token` value returned by the last call to
         #   `clusters` indicates that this is a continuation of a call
         #   and the system should return the next page of data.
@@ -266,6 +282,10 @@ module Google
         ##
         # Lists all tables for the given instance.
         #
+        # @deprecated Use {Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#list_tables} instead.
+        #   See {https://github.com/googleapis/google-cloud-ruby/blob/main/google-cloud-bigtable/MIGRATING.md MIGRATION.md}
+        #   for more info.
+        #
         # @param instance_id [String] Existing instance Id.
         # @return [Array<Google::Cloud::Bigtable::Table>]
         #   (See {Google::Cloud::Bigtable::Table::List})
@@ -289,6 +309,10 @@ module Google
         ##
         # Returns a table representation. If `perform_lookup` is `false` (the default), a sparse representation will be
         # returned without performing an RPC and without verifying that the table resource exists.
+        #
+        # @deprecated Use {Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#get_table} instead.
+        #   See {https://github.com/googleapis/google-cloud-ruby/blob/main/google-cloud-bigtable/MIGRATING.md MIGRATION.md}
+        #   for more info.
         #
         # @param instance_id [String] Existing instance Id.
         # @param table_id [String] Existing table Id.
@@ -357,6 +381,10 @@ module Google
         # Creates a new table in the specified instance.
         # The table can be created with a full set of initial column families,
         # specified in the request.
+        #
+        # @deprecated Use {Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#create_table} instead.
+        #   See {https://github.com/googleapis/google-cloud-ruby/blob/main/google-cloud-bigtable/MIGRATING.md MIGRATION.md}
+        #   for more info.
         #
         # @param instance_id [String]
         #   The unique ID of the instance in which to create the table.
@@ -437,6 +465,10 @@ module Google
         ##
         # Permanently deletes the specified table and all of its data.
         #
+        # @deprecated Use {Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#delete_table} instead.
+        #   See {https://github.com/googleapis/google-cloud-ruby/blob/main/google-cloud-bigtable/MIGRATING.md MIGRATION.md}
+        #   for more info.
+        #
         # @param instance_id [String]
         #  The unique ID of the instance the table is in.
         # @param table_id [String]
@@ -457,6 +489,10 @@ module Google
         ##
         # Creates a copy of the backup at the desired location. Copy of the backup won't be created
         # if the backup is already a copied one.
+        #
+        # @deprecated Use {Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#copy_backup} instead.
+        #   See {https://github.com/googleapis/google-cloud-ruby/blob/main/google-cloud-bigtable/MIGRATING.md MIGRATION.md}
+        #   for more info.
         #
         # @param dest_project_id [String] Existing project ID. Copy of the backup
         #   will be created in this project. Required.

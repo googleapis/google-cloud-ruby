@@ -22,6 +22,7 @@ module Google
         ##
         # AppProfile::List is a special-case array with additional
         # values.
+        #
         class List < DelegateClass(::Array)
           # @private
           # The gRPC Service object.
