@@ -144,7 +144,7 @@ module Google
             #
             # This RPC only returns either resources of types supported by [searchable
             # asset
-            # types](https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types),
+            # types](https://cloud.google.com/asset-inventory/docs/supported-asset-types),
             # or IAM policies.
             rpc :AnalyzeOrgPolicyGovernedAssets, ::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedAssetsRequest, ::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedAssetsResponse
           end
