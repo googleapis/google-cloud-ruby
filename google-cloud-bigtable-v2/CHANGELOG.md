@@ -1,5 +1,11 @@
 # Release History
 
+### 0.16.0 (2024-01-03)
+
+#### Features
+
+* Add fields routing cookie and retry info ([#23681](https://github.com/googleapis/google-cloud-ruby/issues/23681)) 
+
 ### 0.15.0 (2023-09-14)
 
 #### Features

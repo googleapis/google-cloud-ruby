@@ -954,7 +954,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload modify_column_families(name: nil, modifications: nil)
+              # @overload modify_column_families(name: nil, modifications: nil, ignore_warnings: nil)
               #   Pass arguments to `modify_column_families` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -968,6 +968,8 @@ module Google
               #     families. Entries are applied in order, meaning that earlier modifications
               #     can be masked by later ones (in the case of repeated updates to the same
               #     family, for example).
+              #   @param ignore_warnings [::Boolean]
+              #     Optional. If true, ignore safety checks when modifying the column families.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Cloud::Bigtable::Admin::V2::Table]

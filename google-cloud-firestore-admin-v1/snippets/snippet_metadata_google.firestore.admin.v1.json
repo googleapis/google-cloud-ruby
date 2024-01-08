@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-firestore-admin-v1",
-    "version": "0.12.0",
+    "version": "0.13.0",
     "language": "RUBY",
     "apis": [
       {
@@ -515,6 +515,46 @@
         "method": {
           "short_name": "UpdateDatabase",
           "full_name": "google.firestore.admin.v1.FirestoreAdmin.UpdateDatabase",
+          "service": {
+            "short_name": "FirestoreAdmin",
+            "full_name": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "firestore_v1_generated_FirestoreAdmin_DeleteDatabase_sync",
+      "title": "Snippet for the delete_database call in the FirestoreAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#delete_database. It may require modification in order to execute successfully.",
+      "file": "firestore_admin/delete_database.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_database",
+        "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#delete_database",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::Admin::V1::DeleteDatabaseRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "FirestoreAdmin::Client",
+          "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client"
+        },
+        "method": {
+          "short_name": "DeleteDatabase",
+          "full_name": "google.firestore.admin.v1.FirestoreAdmin.DeleteDatabase",
           "service": {
             "short_name": "FirestoreAdmin",
             "full_name": "google.firestore.admin.v1.FirestoreAdmin"

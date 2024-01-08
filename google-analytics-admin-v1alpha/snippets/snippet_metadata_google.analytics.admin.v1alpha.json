@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-analytics-admin-v1alpha",
-    "version": "0.25.0",
+    "version": "0.26.0",
     "language": "RUBY",
     "apis": [
       {
@@ -5052,46 +5052,6 @@
       ]
     },
     {
-      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteSubpropertyEventFilter_sync",
-      "title": "Snippet for the delete_subproperty_event_filter call in the AnalyticsAdminService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#delete_subproperty_event_filter. It may require modification in order to execute successfully.",
-      "file": "analytics_admin_service/delete_subproperty_event_filter.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "delete_subproperty_event_filter",
-        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#delete_subproperty_event_filter",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Analytics::Admin::V1alpha::DeleteSubpropertyEventFilterRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Protobuf::Empty",
-        "client": {
-          "short_name": "AnalyticsAdminService::Client",
-          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
-        },
-        "method": {
-          "short_name": "DeleteSubpropertyEventFilter",
-          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.DeleteSubpropertyEventFilter",
-          "service": {
-            "short_name": "AnalyticsAdminService",
-            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 41,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
       "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateSubpropertyEventFilter_sync",
       "title": "Snippet for the create_subproperty_event_filter call in the AnalyticsAdminService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#create_subproperty_event_filter. It may require modification in order to execute successfully.",
@@ -5115,6 +5075,166 @@
         "method": {
           "short_name": "CreateSubpropertyEventFilter",
           "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.CreateSubpropertyEventFilter",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetSubpropertyEventFilter_sync",
+      "title": "Snippet for the get_subproperty_event_filter call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#get_subproperty_event_filter. It may require modification in order to execute successfully.",
+      "file": "analytics_admin_service/get_subproperty_event_filter.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_subproperty_event_filter",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#get_subproperty_event_filter",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::GetSubpropertyEventFilterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::SubpropertyEventFilter",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "GetSubpropertyEventFilter",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.GetSubpropertyEventFilter",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListSubpropertyEventFilters_sync",
+      "title": "Snippet for the list_subproperty_event_filters call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#list_subproperty_event_filters. It may require modification in order to execute successfully.",
+      "file": "analytics_admin_service/list_subproperty_event_filters.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_subproperty_event_filters",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#list_subproperty_event_filters",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::ListSubpropertyEventFiltersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::ListSubpropertyEventFiltersResponse",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "ListSubpropertyEventFilters",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.ListSubpropertyEventFilters",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateSubpropertyEventFilter_sync",
+      "title": "Snippet for the update_subproperty_event_filter call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#update_subproperty_event_filter. It may require modification in order to execute successfully.",
+      "file": "analytics_admin_service/update_subproperty_event_filter.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_subproperty_event_filter",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#update_subproperty_event_filter",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::UpdateSubpropertyEventFilterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::SubpropertyEventFilter",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "UpdateSubpropertyEventFilter",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.UpdateSubpropertyEventFilter",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteSubpropertyEventFilter_sync",
+      "title": "Snippet for the delete_subproperty_event_filter call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#delete_subproperty_event_filter. It may require modification in order to execute successfully.",
+      "file": "analytics_admin_service/delete_subproperty_event_filter.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_subproperty_event_filter",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#delete_subproperty_event_filter",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::DeleteSubpropertyEventFilterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "DeleteSubpropertyEventFilter",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.DeleteSubpropertyEventFilter",
           "service": {
             "short_name": "AnalyticsAdminService",
             "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"

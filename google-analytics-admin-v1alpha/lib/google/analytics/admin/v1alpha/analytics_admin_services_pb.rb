@@ -253,8 +253,10 @@ module Google
             # records of each time a user reads Google Analytics reporting data. Access
             # records are retained for up to 2 years.
             #
-            # Data Access Reports can be requested for a property. The property must be
-            # in Google Analytics 360. This method is only available to Administrators.
+            # Data Access Reports can be requested for a property. Reports may be
+            # requested for any property, but dimensions that aren't related to quota can
+            # only be requested on Google Analytics 360 properties. This method is only
+            # available to Administrators.
             #
             # These data access records include GA4 UI Reporting, GA4 UI Explorations,
             # GA4 Data API, and other products like Firebase & Admob that can retrieve
@@ -383,10 +385,16 @@ module Google
             # Create a subproperty and a subproperty event filter that applies to the
             # created subproperty.
             rpc :CreateSubproperty, ::Google::Analytics::Admin::V1alpha::CreateSubpropertyRequest, ::Google::Analytics::Admin::V1alpha::CreateSubpropertyResponse
-            # Deletes a subproperty event filter.
-            rpc :DeleteSubpropertyEventFilter, ::Google::Analytics::Admin::V1alpha::DeleteSubpropertyEventFilterRequest, ::Google::Protobuf::Empty
             # Creates a subproperty Event Filter.
             rpc :CreateSubpropertyEventFilter, ::Google::Analytics::Admin::V1alpha::CreateSubpropertyEventFilterRequest, ::Google::Analytics::Admin::V1alpha::SubpropertyEventFilter
+            # Lookup for a single subproperty Event Filter.
+            rpc :GetSubpropertyEventFilter, ::Google::Analytics::Admin::V1alpha::GetSubpropertyEventFilterRequest, ::Google::Analytics::Admin::V1alpha::SubpropertyEventFilter
+            # List all subproperty Event Filters on a property.
+            rpc :ListSubpropertyEventFilters, ::Google::Analytics::Admin::V1alpha::ListSubpropertyEventFiltersRequest, ::Google::Analytics::Admin::V1alpha::ListSubpropertyEventFiltersResponse
+            # Updates a subproperty Event Filter.
+            rpc :UpdateSubpropertyEventFilter, ::Google::Analytics::Admin::V1alpha::UpdateSubpropertyEventFilterRequest, ::Google::Analytics::Admin::V1alpha::SubpropertyEventFilter
+            # Deletes a subproperty event filter.
+            rpc :DeleteSubpropertyEventFilter, ::Google::Analytics::Admin::V1alpha::DeleteSubpropertyEventFilterRequest, ::Google::Protobuf::Empty
           end
 
           Stub = Service.rpc_stub_class

@@ -35,6 +35,42 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientPathsTest < Minitest::Test
     end
   end
 
+  def test_backup_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.backup_path project: "value0", location: "value1", backup_vault: "value2", backup: "value3"
+      assert_equal "projects/value0/locations/value1/backupVaults/value2/backups/value3", path
+    end
+  end
+
+  def test_backup_policy_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.backup_policy_path project: "value0", location: "value1", backup_policy: "value2"
+      assert_equal "projects/value0/locations/value1/backupPolicies/value2", path
+    end
+  end
+
+  def test_backup_vault_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.backup_vault_path project: "value0", location: "value1", backup_vault: "value2"
+      assert_equal "projects/value0/locations/value1/backupVaults/value2", path
+    end
+  end
+
   def test_kms_config_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do

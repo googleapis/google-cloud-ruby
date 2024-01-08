@@ -113,9 +113,9 @@ module Google
         end
 
         # Snapshot is a point-in-time version of a Volume's content.
-        # @!attribute [r] name
+        # @!attribute [rw] name
         #   @return [::String]
-        #     Output only. The resource name of the snapshot.
+        #     Identifier. The resource name of the snapshot.
         #     Format:
         #     `projects/{project_id}/locations/{location}/volumes/{volume_id}/snapshots/{snapshot_id}`.
         # @!attribute [r] state

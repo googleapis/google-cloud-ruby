@@ -74,6 +74,11 @@
               "methods": [
                 "update_database"
               ]
+            },
+            "DeleteDatabase": {
+              "methods": [
+                "delete_database"
+              ]
             }
           }
         }

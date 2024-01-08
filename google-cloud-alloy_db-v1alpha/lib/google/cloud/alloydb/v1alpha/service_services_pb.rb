@@ -118,6 +118,8 @@ module Google
             rpc :UpdateUser, ::Google::Cloud::AlloyDB::V1alpha::UpdateUserRequest, ::Google::Cloud::AlloyDB::V1alpha::User
             # Deletes a single User.
             rpc :DeleteUser, ::Google::Cloud::AlloyDB::V1alpha::DeleteUserRequest, ::Google::Protobuf::Empty
+            # Lists Databases in a given project and location.
+            rpc :ListDatabases, ::Google::Cloud::AlloyDB::V1alpha::ListDatabasesRequest, ::Google::Cloud::AlloyDB::V1alpha::ListDatabasesResponse
           end
 
           Stub = Service.rpc_stub_class

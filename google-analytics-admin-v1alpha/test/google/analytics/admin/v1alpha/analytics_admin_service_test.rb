@@ -7698,64 +7698,6 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     end
   end
 
-  def test_delete_subproperty_event_filter
-    # Create GRPC objects.
-    grpc_response = ::Google::Protobuf::Empty.new
-    grpc_operation = GRPC::ActiveCall::Operation.new nil
-    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    grpc_options = {}
-
-    # Create request parameters for a unary method.
-    name = "hello world"
-
-    delete_subproperty_event_filter_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
-      assert_equal :delete_subproperty_event_filter, name
-      assert_kind_of ::Google::Analytics::Admin::V1alpha::DeleteSubpropertyEventFilterRequest, request
-      assert_equal "hello world", request["name"]
-      refute_nil options
-    end
-
-    Gapic::ServiceStub.stub :new, delete_subproperty_event_filter_client_stub do
-      # Create client
-      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
-        config.credentials = grpc_channel
-      end
-
-      # Use hash object
-      client.delete_subproperty_event_filter({ name: name }) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use named arguments
-      client.delete_subproperty_event_filter name: name do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object
-      client.delete_subproperty_event_filter ::Google::Analytics::Admin::V1alpha::DeleteSubpropertyEventFilterRequest.new(name: name) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use hash object with options
-      client.delete_subproperty_event_filter({ name: name }, grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object with options
-      client.delete_subproperty_event_filter(::Google::Analytics::Admin::V1alpha::DeleteSubpropertyEventFilterRequest.new(name: name), grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Verify method calls
-      assert_equal 5, delete_subproperty_event_filter_client_stub.call_rpc_count
-    end
-  end
-
   def test_create_subproperty_event_filter
     # Create GRPC objects.
     grpc_response = ::Google::Analytics::Admin::V1alpha::SubpropertyEventFilter.new
@@ -7813,6 +7755,249 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
 
       # Verify method calls
       assert_equal 5, create_subproperty_event_filter_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_subproperty_event_filter
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::SubpropertyEventFilter.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_subproperty_event_filter_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_subproperty_event_filter, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::GetSubpropertyEventFilterRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_subproperty_event_filter_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_subproperty_event_filter({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_subproperty_event_filter name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_subproperty_event_filter ::Google::Analytics::Admin::V1alpha::GetSubpropertyEventFilterRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_subproperty_event_filter({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_subproperty_event_filter(::Google::Analytics::Admin::V1alpha::GetSubpropertyEventFilterRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_subproperty_event_filter_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_subproperty_event_filters
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::ListSubpropertyEventFiltersResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_subproperty_event_filters_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_subproperty_event_filters, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::ListSubpropertyEventFiltersRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_subproperty_event_filters_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_subproperty_event_filters({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_subproperty_event_filters parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_subproperty_event_filters ::Google::Analytics::Admin::V1alpha::ListSubpropertyEventFiltersRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_subproperty_event_filters({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_subproperty_event_filters(::Google::Analytics::Admin::V1alpha::ListSubpropertyEventFiltersRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_subproperty_event_filters_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_subproperty_event_filter
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::SubpropertyEventFilter.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    subproperty_event_filter = {}
+    update_mask = {}
+
+    update_subproperty_event_filter_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_subproperty_event_filter, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::UpdateSubpropertyEventFilterRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::SubpropertyEventFilter), request["subproperty_event_filter"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_subproperty_event_filter_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_subproperty_event_filter({ subproperty_event_filter: subproperty_event_filter, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_subproperty_event_filter subproperty_event_filter: subproperty_event_filter, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_subproperty_event_filter ::Google::Analytics::Admin::V1alpha::UpdateSubpropertyEventFilterRequest.new(subproperty_event_filter: subproperty_event_filter, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_subproperty_event_filter({ subproperty_event_filter: subproperty_event_filter, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_subproperty_event_filter(::Google::Analytics::Admin::V1alpha::UpdateSubpropertyEventFilterRequest.new(subproperty_event_filter: subproperty_event_filter, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_subproperty_event_filter_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_subproperty_event_filter
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_subproperty_event_filter_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_subproperty_event_filter, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::DeleteSubpropertyEventFilterRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_subproperty_event_filter_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_subproperty_event_filter({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_subproperty_event_filter name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_subproperty_event_filter ::Google::Analytics::Admin::V1alpha::DeleteSubpropertyEventFilterRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_subproperty_event_filter({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_subproperty_event_filter(::Google::Analytics::Admin::V1alpha::DeleteSubpropertyEventFilterRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_subproperty_event_filter_client_stub.call_rpc_count
     end
   end
 

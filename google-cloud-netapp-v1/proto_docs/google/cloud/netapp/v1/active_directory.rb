@@ -108,9 +108,9 @@ module Google
         end
 
         # ActiveDirectory is the public representation of the active directory config.
-        # @!attribute [r] name
+        # @!attribute [rw] name
         #   @return [::String]
-        #     Output only. The resource name of the active directory.
+        #     Identifier. The resource name of the active directory.
         #     Format:
         #     `projects/{project_number}/locations/{location_id}/activeDirectories/{active_directory_id}`.
         # @!attribute [r] create_time

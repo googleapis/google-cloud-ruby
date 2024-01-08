@@ -6980,60 +6980,6 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ClientTe
     end
   end
 
-  def test_delete_subproperty_event_filter
-    # Create test objects.
-    client_result = ::Google::Protobuf::Empty.new
-    http_response = OpenStruct.new body: client_result.to_json
-
-    call_options = {}
-
-    # Create request parameters for a unary method.
-    name = "hello world"
-
-    delete_subproperty_event_filter_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
-      assert options.metadata.key? :"x-goog-api-client"
-      assert options.metadata[:"x-goog-api-client"].include? "rest"
-      refute options.metadata[:"x-goog-api-client"].include? "grpc"
-    end
-
-    ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ServiceStub.stub :transcode_delete_subproperty_event_filter_request, ["", "", {}] do
-      Gapic::Rest::ClientStub.stub :new, delete_subproperty_event_filter_client_stub do
-        # Create client
-        client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new do |config|
-          config.credentials = :dummy_value
-        end
-
-        # Use hash object
-        client.delete_subproperty_event_filter({ name: name }) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use named arguments
-        client.delete_subproperty_event_filter name: name do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object
-        client.delete_subproperty_event_filter ::Google::Analytics::Admin::V1alpha::DeleteSubpropertyEventFilterRequest.new(name: name) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use hash object with options
-        client.delete_subproperty_event_filter({ name: name }, call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object with options
-        client.delete_subproperty_event_filter(::Google::Analytics::Admin::V1alpha::DeleteSubpropertyEventFilterRequest.new(name: name), call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Verify method calls
-        assert_equal 5, delete_subproperty_event_filter_client_stub.call_count
-      end
-    end
-  end
-
   def test_create_subproperty_event_filter
     # Create test objects.
     client_result = ::Google::Analytics::Admin::V1alpha::SubpropertyEventFilter.new
@@ -7085,6 +7031,225 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ClientTe
 
         # Verify method calls
         assert_equal 5, create_subproperty_event_filter_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_subproperty_event_filter
+    # Create test objects.
+    client_result = ::Google::Analytics::Admin::V1alpha::SubpropertyEventFilter.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_subproperty_event_filter_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ServiceStub.stub :transcode_get_subproperty_event_filter_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_subproperty_event_filter_client_stub do
+        # Create client
+        client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_subproperty_event_filter({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_subproperty_event_filter name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_subproperty_event_filter ::Google::Analytics::Admin::V1alpha::GetSubpropertyEventFilterRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_subproperty_event_filter({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_subproperty_event_filter(::Google::Analytics::Admin::V1alpha::GetSubpropertyEventFilterRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_subproperty_event_filter_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_subproperty_event_filters
+    # Create test objects.
+    client_result = ::Google::Analytics::Admin::V1alpha::ListSubpropertyEventFiltersResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_subproperty_event_filters_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ServiceStub.stub :transcode_list_subproperty_event_filters_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_subproperty_event_filters_client_stub do
+        # Create client
+        client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_subproperty_event_filters({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_subproperty_event_filters parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_subproperty_event_filters ::Google::Analytics::Admin::V1alpha::ListSubpropertyEventFiltersRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_subproperty_event_filters({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_subproperty_event_filters(::Google::Analytics::Admin::V1alpha::ListSubpropertyEventFiltersRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_subproperty_event_filters_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_subproperty_event_filter
+    # Create test objects.
+    client_result = ::Google::Analytics::Admin::V1alpha::SubpropertyEventFilter.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    subproperty_event_filter = {}
+    update_mask = {}
+
+    update_subproperty_event_filter_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ServiceStub.stub :transcode_update_subproperty_event_filter_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_subproperty_event_filter_client_stub do
+        # Create client
+        client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_subproperty_event_filter({ subproperty_event_filter: subproperty_event_filter, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_subproperty_event_filter subproperty_event_filter: subproperty_event_filter, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_subproperty_event_filter ::Google::Analytics::Admin::V1alpha::UpdateSubpropertyEventFilterRequest.new(subproperty_event_filter: subproperty_event_filter, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_subproperty_event_filter({ subproperty_event_filter: subproperty_event_filter, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_subproperty_event_filter(::Google::Analytics::Admin::V1alpha::UpdateSubpropertyEventFilterRequest.new(subproperty_event_filter: subproperty_event_filter, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_subproperty_event_filter_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_subproperty_event_filter
+    # Create test objects.
+    client_result = ::Google::Protobuf::Empty.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_subproperty_event_filter_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ServiceStub.stub :transcode_delete_subproperty_event_filter_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_subproperty_event_filter_client_stub do
+        # Create client
+        client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_subproperty_event_filter({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_subproperty_event_filter name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_subproperty_event_filter ::Google::Analytics::Admin::V1alpha::DeleteSubpropertyEventFilterRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_subproperty_event_filter({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_subproperty_event_filter(::Google::Analytics::Admin::V1alpha::DeleteSubpropertyEventFilterRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_subproperty_event_filter_client_stub.call_count
       end
     end
   end

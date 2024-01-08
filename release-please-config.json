@@ -27,6 +27,14 @@
       "component": "google-analytics-data-v1beta",
       "version_file": "lib/google/analytics/data/v1beta/version.rb"
     },
+    "google-apps-meet": {
+      "component": "google-apps-meet",
+      "version_file": "lib/google/apps/meet/version.rb"
+    },
+    "google-apps-meet-v2beta": {
+      "component": "google-apps-meet-v2beta",
+      "version_file": "lib/google/apps/meet/v2beta/version.rb"
+    },
     "google-area120-tables": {
       "component": "google-area120-tables",
       "version_file": "lib/google/area120/tables/version.rb"
@@ -591,6 +599,14 @@
       "component": "google-cloud-domains-v1beta1",
       "version_file": "lib/google/cloud/domains/v1beta1/version.rb"
     },
+    "google-cloud-edge_network": {
+      "component": "google-cloud-edge_network",
+      "version_file": "lib/google/cloud/edge_network/version.rb"
+    },
+    "google-cloud-edge_network-v1": {
+      "component": "google-cloud-edge_network-v1",
+      "version_file": "lib/google/cloud/edge_network/v1/version.rb"
+    },
     "google-cloud-error_reporting": {
       "component": "google-cloud-error_reporting",
       "version_file": "lib/google/cloud/error_reporting/version.rb"
@@ -1111,6 +1127,10 @@
       "component": "google-cloud-secret_manager-v1beta1",
       "version_file": "lib/google/cloud/secret_manager/v1beta1/version.rb"
     },
+    "google-cloud-secure_source_manager-v1": {
+      "component": "google-cloud-secure_source_manager-v1",
+      "version_file": "lib/google/cloud/secure_source_manager/v1/version.rb"
+    },
     "google-cloud-security-private_ca": {
       "component": "google-cloud-security-private_ca",
       "version_file": "lib/google/cloud/security/private_ca/version.rb"
@@ -1270,6 +1290,14 @@
     "google-cloud-tasks-v2beta3": {
       "component": "google-cloud-tasks-v2beta3",
       "version_file": "lib/google/cloud/tasks/v2beta3/version.rb"
+    },
+    "google-cloud-telco_automation": {
+      "component": "google-cloud-telco_automation",
+      "version_file": "lib/google/cloud/telco_automation/version.rb"
+    },
+    "google-cloud-telco_automation-v1": {
+      "component": "google-cloud-telco_automation-v1",
+      "version_file": "lib/google/cloud/telco_automation/v1/version.rb"
     },
     "google-cloud-text_to_speech": {
       "component": "google-cloud-text_to_speech",

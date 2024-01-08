@@ -81,6 +81,11 @@ module Google
 
                 default_config.rpcs.delete_aws_cluster.timeout = 60.0
 
+                default_config.rpcs.generate_aws_cluster_agent_token.timeout = 60.0
+                default_config.rpcs.generate_aws_cluster_agent_token.retry_policy = {
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                }
+
                 default_config.rpcs.generate_aws_access_token.timeout = 60.0
                 default_config.rpcs.generate_aws_access_token.retry_policy = {
                   initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
@@ -89,6 +94,8 @@ module Google
                 default_config.rpcs.create_aws_node_pool.timeout = 60.0
 
                 default_config.rpcs.update_aws_node_pool.timeout = 60.0
+
+                default_config.rpcs.rollback_aws_node_pool_update.timeout = 60.0
 
                 default_config.rpcs.get_aws_node_pool.timeout = 60.0
                 default_config.rpcs.get_aws_node_pool.retry_policy = {
@@ -101,6 +108,16 @@ module Google
                 }
 
                 default_config.rpcs.delete_aws_node_pool.timeout = 60.0
+
+                default_config.rpcs.get_aws_open_id_config.timeout = 60.0
+                default_config.rpcs.get_aws_open_id_config.retry_policy = {
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                }
+
+                default_config.rpcs.get_aws_json_web_keys.timeout = 60.0
+                default_config.rpcs.get_aws_json_web_keys.retry_policy = {
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                }
 
                 default_config.rpcs.get_aws_server_config.timeout = 60.0
                 default_config.rpcs.get_aws_server_config.retry_policy = {
@@ -353,6 +370,8 @@ module Google
             #      *   `annotations`.
             #      *   `control_plane.version`.
             #      *   `authorization.admin_users`.
+            #      *   `authorization.admin_groups`.
+            #      *   `binary_authorization.evaluation_mode`.
             #      *   `control_plane.aws_services_authentication.role_arn`.
             #      *   `control_plane.aws_services_authentication.role_session_name`.
             #      *   `control_plane.config_encryption.kms_key_arn`.
@@ -364,6 +383,7 @@ module Google
             #      *   `control_plane.root_volume.size_gib`.
             #      *   `control_plane.root_volume.volume_type`.
             #      *   `control_plane.root_volume.iops`.
+            #      *   `control_plane.root_volume.throughput`.
             #      *   `control_plane.root_volume.kms_key_arn`.
             #      *   `control_plane.ssh_config`.
             #      *   `control_plane.ssh_config.ec2_key_pair`.
@@ -372,6 +392,7 @@ module Google
             #      *   `logging_config.component_config.enable_components`.
             #      *   `control_plane.tags`.
             #      *   `monitoring_config.managed_prometheus_config.enabled`.
+            #      *   `networking.per_node_pool_sg_rules_disabled`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -669,7 +690,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload delete_aws_cluster(name: nil, validate_only: nil, allow_missing: nil, etag: nil)
+            # @overload delete_aws_cluster(name: nil, validate_only: nil, allow_missing: nil, ignore_errors: nil, etag: nil)
             #   Pass arguments to `delete_aws_cluster` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -692,6 +713,11 @@ module Google
             #     and a completed {::Google::Longrunning::Operation Operation} will be returned.
             #
             #     Useful for idempotent deletion.
+            #   @param ignore_errors [::Boolean]
+            #     Optional. If set to true, the deletion of
+            #     {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster} resource will
+            #     succeed even if errors occur during deleting in cluster resources. Using
+            #     this parameter may result in orphaned resources in the cluster.
             #   @param etag [::String]
             #     The current etag of the
             #     {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster}.
@@ -766,6 +792,109 @@ module Google
 
               @aws_clusters_stub.call_rpc :delete_aws_cluster, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Generates an access token for a cluster agent.
+            #
+            # @overload generate_aws_cluster_agent_token(request, options = nil)
+            #   Pass arguments to `generate_aws_cluster_agent_token` via a request object, either of type
+            #   {::Google::Cloud::GkeMultiCloud::V1::GenerateAwsClusterAgentTokenRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::GkeMultiCloud::V1::GenerateAwsClusterAgentTokenRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload generate_aws_cluster_agent_token(aws_cluster: nil, subject_token: nil, subject_token_type: nil, version: nil, node_pool_id: nil, grant_type: nil, audience: nil, scope: nil, requested_token_type: nil, options: nil)
+            #   Pass arguments to `generate_aws_cluster_agent_token` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param aws_cluster [::String]
+            #     Required.
+            #   @param subject_token [::String]
+            #     Required.
+            #   @param subject_token_type [::String]
+            #     Required.
+            #   @param version [::String]
+            #     Required.
+            #   @param node_pool_id [::String]
+            #     Optional.
+            #   @param grant_type [::String]
+            #     Optional.
+            #   @param audience [::String]
+            #     Optional.
+            #   @param scope [::String]
+            #     Optional.
+            #   @param requested_token_type [::String]
+            #     Optional.
+            #   @param options [::String]
+            #     Optional.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::GkeMultiCloud::V1::GenerateAwsClusterAgentTokenResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::GkeMultiCloud::V1::GenerateAwsClusterAgentTokenResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/gke_multi_cloud/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::GkeMultiCloud::V1::GenerateAwsClusterAgentTokenRequest.new
+            #
+            #   # Call the generate_aws_cluster_agent_token method.
+            #   result = client.generate_aws_cluster_agent_token request
+            #
+            #   # The returned object is of type Google::Cloud::GkeMultiCloud::V1::GenerateAwsClusterAgentTokenResponse.
+            #   p result
+            #
+            def generate_aws_cluster_agent_token request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeMultiCloud::V1::GenerateAwsClusterAgentTokenRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.generate_aws_cluster_agent_token.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::GkeMultiCloud::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.aws_cluster
+                header_params["aws_cluster"] = request.aws_cluster
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.generate_aws_cluster_agent_token.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.generate_aws_cluster_agent_token.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @aws_clusters_stub.call_rpc :generate_aws_cluster_agent_token, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -1023,6 +1152,7 @@ module Google
             #      *   `config.config_encryption.kms_key_arn`.
             #      *   `config.security_group_ids`.
             #      *   `config.root_volume.iops`.
+            #      *   `config.root_volume.throughput`.
             #      *   `config.root_volume.kms_key_arn`.
             #      *   `config.root_volume.volume_type`.
             #      *   `config.root_volume.size_gib`.
@@ -1038,6 +1168,13 @@ module Google
             #      *   `config.autoscaling_metrics_collection`.
             #      *   `config.autoscaling_metrics_collection.granularity`.
             #      *   `config.autoscaling_metrics_collection.metrics`.
+            #      *   `config.instance_type`.
+            #      *   `management.auto_repair`.
+            #      *   `management`.
+            #      *   `update_settings`.
+            #      *   `update_settings.surge_settings`.
+            #      *   `update_settings.surge_settings.max_surge`.
+            #      *   `update_settings.surge_settings.max_unavailable`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -1103,6 +1240,115 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @aws_clusters_stub.call_rpc :update_aws_node_pool, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Rolls back a previously aborted or failed
+            # {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool} update request.
+            # Makes no changes if the last update request successfully finished.
+            # If an update request is in progress, you cannot rollback the update.
+            # You must first cancel or let it finish unsuccessfully before you can
+            # rollback.
+            #
+            # @overload rollback_aws_node_pool_update(request, options = nil)
+            #   Pass arguments to `rollback_aws_node_pool_update` via a request object, either of type
+            #   {::Google::Cloud::GkeMultiCloud::V1::RollbackAwsNodePoolUpdateRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::GkeMultiCloud::V1::RollbackAwsNodePoolUpdateRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload rollback_aws_node_pool_update(name: nil, respect_pdb: nil)
+            #   Pass arguments to `rollback_aws_node_pool_update` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the
+            #     {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool} resource to
+            #     rollback.
+            #
+            #     `AwsNodePool` names are formatted as
+            #     `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>/awsNodePools/<node-pool-id>`.
+            #
+            #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
+            #     for more details on Google Cloud resource names.
+            #   @param respect_pdb [::Boolean]
+            #     Optional. Option for rollback to ignore the PodDisruptionBudget when
+            #     draining the node pool nodes. Default value is false.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/gke_multi_cloud/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::GkeMultiCloud::V1::RollbackAwsNodePoolUpdateRequest.new
+            #
+            #   # Call the rollback_aws_node_pool_update method.
+            #   result = client.rollback_aws_node_pool_update request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def rollback_aws_node_pool_update request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeMultiCloud::V1::RollbackAwsNodePoolUpdateRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.rollback_aws_node_pool_update.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::GkeMultiCloud::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.rollback_aws_node_pool_update.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.rollback_aws_node_pool_update.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @aws_clusters_stub.call_rpc :rollback_aws_node_pool_update, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
@@ -1334,7 +1580,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload delete_aws_node_pool(name: nil, validate_only: nil, allow_missing: nil, etag: nil)
+            # @overload delete_aws_node_pool(name: nil, validate_only: nil, allow_missing: nil, ignore_errors: nil, etag: nil)
             #   Pass arguments to `delete_aws_node_pool` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1358,6 +1604,11 @@ module Google
             #     and a completed {::Google::Longrunning::Operation Operation} will be returned.
             #
             #     Useful for idempotent deletion.
+            #   @param ignore_errors [::Boolean]
+            #     Optional. If set to true, the deletion of
+            #     {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool} resource will
+            #     succeed even if errors occur during deleting in node pool resources. Using
+            #     this parameter may result in orphaned resources in the node pool.
             #   @param etag [::String]
             #     The current ETag of the
             #     {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool}.
@@ -1432,6 +1683,185 @@ module Google
 
               @aws_clusters_stub.call_rpc :delete_aws_node_pool, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets the OIDC discovery document for the cluster.
+            # See the
+            # [OpenID Connect Discovery 1.0
+            # specification](https://openid.net/specs/openid-connect-discovery-1_0.html)
+            # for details.
+            #
+            # @overload get_aws_open_id_config(request, options = nil)
+            #   Pass arguments to `get_aws_open_id_config` via a request object, either of type
+            #   {::Google::Cloud::GkeMultiCloud::V1::GetAwsOpenIdConfigRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::GkeMultiCloud::V1::GetAwsOpenIdConfigRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_aws_open_id_config(aws_cluster: nil)
+            #   Pass arguments to `get_aws_open_id_config` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param aws_cluster [::String]
+            #     Required. The AwsCluster, which owns the OIDC discovery document.
+            #     Format:
+            #     projects/\\{project}/locations/\\{location}/awsClusters/\\{cluster}
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::GkeMultiCloud::V1::AwsOpenIdConfig]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::GkeMultiCloud::V1::AwsOpenIdConfig]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/gke_multi_cloud/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::GkeMultiCloud::V1::GetAwsOpenIdConfigRequest.new
+            #
+            #   # Call the get_aws_open_id_config method.
+            #   result = client.get_aws_open_id_config request
+            #
+            #   # The returned object is of type Google::Cloud::GkeMultiCloud::V1::AwsOpenIdConfig.
+            #   p result
+            #
+            def get_aws_open_id_config request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeMultiCloud::V1::GetAwsOpenIdConfigRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_aws_open_id_config.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::GkeMultiCloud::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.aws_cluster
+                header_params["aws_cluster"] = request.aws_cluster
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_aws_open_id_config.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_aws_open_id_config.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @aws_clusters_stub.call_rpc :get_aws_open_id_config, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets the public component of the cluster signing keys in
+            # JSON Web Key format.
+            #
+            # @overload get_aws_json_web_keys(request, options = nil)
+            #   Pass arguments to `get_aws_json_web_keys` via a request object, either of type
+            #   {::Google::Cloud::GkeMultiCloud::V1::GetAwsJsonWebKeysRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::GkeMultiCloud::V1::GetAwsJsonWebKeysRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_aws_json_web_keys(aws_cluster: nil)
+            #   Pass arguments to `get_aws_json_web_keys` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param aws_cluster [::String]
+            #     Required. The AwsCluster, which owns the JsonWebKeys.
+            #     Format:
+            #     projects/\\{project}/locations/\\{location}/awsClusters/\\{cluster}
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::GkeMultiCloud::V1::AwsJsonWebKeys]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::GkeMultiCloud::V1::AwsJsonWebKeys]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/gke_multi_cloud/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::GkeMultiCloud::V1::GetAwsJsonWebKeysRequest.new
+            #
+            #   # Call the get_aws_json_web_keys method.
+            #   result = client.get_aws_json_web_keys request
+            #
+            #   # The returned object is of type Google::Cloud::GkeMultiCloud::V1::AwsJsonWebKeys.
+            #   p result
+            #
+            def get_aws_json_web_keys request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeMultiCloud::V1::GetAwsJsonWebKeysRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_aws_json_web_keys.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::GkeMultiCloud::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.aws_cluster
+                header_params["aws_cluster"] = request.aws_cluster
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_aws_json_web_keys.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_aws_json_web_keys.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @aws_clusters_stub.call_rpc :get_aws_json_web_keys, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -1704,6 +2134,11 @@ module Google
                 #
                 attr_reader :delete_aws_cluster
                 ##
+                # RPC-specific configuration for `generate_aws_cluster_agent_token`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :generate_aws_cluster_agent_token
+                ##
                 # RPC-specific configuration for `generate_aws_access_token`
                 # @return [::Gapic::Config::Method]
                 #
@@ -1719,6 +2154,11 @@ module Google
                 #
                 attr_reader :update_aws_node_pool
                 ##
+                # RPC-specific configuration for `rollback_aws_node_pool_update`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :rollback_aws_node_pool_update
+                ##
                 # RPC-specific configuration for `get_aws_node_pool`
                 # @return [::Gapic::Config::Method]
                 #
@@ -1733,6 +2173,16 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_aws_node_pool
+                ##
+                # RPC-specific configuration for `get_aws_open_id_config`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_aws_open_id_config
+                ##
+                # RPC-specific configuration for `get_aws_json_web_keys`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_aws_json_web_keys
                 ##
                 # RPC-specific configuration for `get_aws_server_config`
                 # @return [::Gapic::Config::Method]
@@ -1751,18 +2201,26 @@ module Google
                   @list_aws_clusters = ::Gapic::Config::Method.new list_aws_clusters_config
                   delete_aws_cluster_config = parent_rpcs.delete_aws_cluster if parent_rpcs.respond_to? :delete_aws_cluster
                   @delete_aws_cluster = ::Gapic::Config::Method.new delete_aws_cluster_config
+                  generate_aws_cluster_agent_token_config = parent_rpcs.generate_aws_cluster_agent_token if parent_rpcs.respond_to? :generate_aws_cluster_agent_token
+                  @generate_aws_cluster_agent_token = ::Gapic::Config::Method.new generate_aws_cluster_agent_token_config
                   generate_aws_access_token_config = parent_rpcs.generate_aws_access_token if parent_rpcs.respond_to? :generate_aws_access_token
                   @generate_aws_access_token = ::Gapic::Config::Method.new generate_aws_access_token_config
                   create_aws_node_pool_config = parent_rpcs.create_aws_node_pool if parent_rpcs.respond_to? :create_aws_node_pool
                   @create_aws_node_pool = ::Gapic::Config::Method.new create_aws_node_pool_config
                   update_aws_node_pool_config = parent_rpcs.update_aws_node_pool if parent_rpcs.respond_to? :update_aws_node_pool
                   @update_aws_node_pool = ::Gapic::Config::Method.new update_aws_node_pool_config
+                  rollback_aws_node_pool_update_config = parent_rpcs.rollback_aws_node_pool_update if parent_rpcs.respond_to? :rollback_aws_node_pool_update
+                  @rollback_aws_node_pool_update = ::Gapic::Config::Method.new rollback_aws_node_pool_update_config
                   get_aws_node_pool_config = parent_rpcs.get_aws_node_pool if parent_rpcs.respond_to? :get_aws_node_pool
                   @get_aws_node_pool = ::Gapic::Config::Method.new get_aws_node_pool_config
                   list_aws_node_pools_config = parent_rpcs.list_aws_node_pools if parent_rpcs.respond_to? :list_aws_node_pools
                   @list_aws_node_pools = ::Gapic::Config::Method.new list_aws_node_pools_config
                   delete_aws_node_pool_config = parent_rpcs.delete_aws_node_pool if parent_rpcs.respond_to? :delete_aws_node_pool
                   @delete_aws_node_pool = ::Gapic::Config::Method.new delete_aws_node_pool_config
+                  get_aws_open_id_config_config = parent_rpcs.get_aws_open_id_config if parent_rpcs.respond_to? :get_aws_open_id_config
+                  @get_aws_open_id_config = ::Gapic::Config::Method.new get_aws_open_id_config_config
+                  get_aws_json_web_keys_config = parent_rpcs.get_aws_json_web_keys if parent_rpcs.respond_to? :get_aws_json_web_keys
+                  @get_aws_json_web_keys = ::Gapic::Config::Method.new get_aws_json_web_keys_config
                   get_aws_server_config_config = parent_rpcs.get_aws_server_config if parent_rpcs.respond_to? :get_aws_server_config
                   @get_aws_server_config = ::Gapic::Config::Method.new get_aws_server_config_config
 

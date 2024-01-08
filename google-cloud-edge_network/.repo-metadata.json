@@ -1,0 +1,17 @@
+{
+    "api_id": "edgenetwork.googleapis.com",
+    "api_shortname": "edgenetwork",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-edge_network/latest",
+    "distribution_name": "google-cloud-edge_network",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "edgenetwork",
+    "name_pretty": "Distributed Cloud Edge Network API",
+    "product_documentation": "https://cloud.google.com/distributed-cloud/edge/latest/docs/overview",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Network management API for Distributed Cloud Edge.",
+    "ruby-cloud-product-url": "https://cloud.google.com/distributed-cloud/edge/latest/docs/overview",
+    "library_type": "GAPIC_MANUAL"
+}

@@ -877,6 +877,71 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::ClientTest < Minite
     end
   end
 
+  def test_delete_database
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    etag = "hello world"
+
+    delete_database_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_database, name
+      assert_kind_of ::Google::Cloud::Firestore::Admin::V1::DeleteDatabaseRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["etag"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_database_client_stub do
+      # Create client
+      client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_database({ name: name, etag: etag }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_database name: name, etag: etag do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_database ::Google::Cloud::Firestore::Admin::V1::DeleteDatabaseRequest.new(name: name, etag: etag) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_database({ name: name, etag: etag }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_database(::Google::Cloud::Firestore::Admin::V1::DeleteDatabaseRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_database_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

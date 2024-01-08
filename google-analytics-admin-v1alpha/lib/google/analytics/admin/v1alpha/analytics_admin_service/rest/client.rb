@@ -6853,8 +6853,10 @@ module Google
               # records of each time a user reads Google Analytics reporting data. Access
               # records are retained for up to 2 years.
               #
-              # Data Access Reports can be requested for a property. The property must be
-              # in Google Analytics 360. This method is only available to Administrators.
+              # Data Access Reports can be requested for a property. Reports may be
+              # requested for any property, but dimensions that aren't related to quota can
+              # only be requested on Google Analytics 360 properties. This method is only
+              # available to Administrators.
               #
               # These data access records include GA4 UI Reporting, GA4 UI Explorations,
               # GA4 Data API, and other products like Firebase & Admob that can retrieve
@@ -10889,87 +10891,6 @@ module Google
               end
 
               ##
-              # Deletes a subproperty event filter.
-              #
-              # @overload delete_subproperty_event_filter(request, options = nil)
-              #   Pass arguments to `delete_subproperty_event_filter` via a request object, either of type
-              #   {::Google::Analytics::Admin::V1alpha::DeleteSubpropertyEventFilterRequest} or an equivalent Hash.
-              #
-              #   @param request [::Google::Analytics::Admin::V1alpha::DeleteSubpropertyEventFilterRequest, ::Hash]
-              #     A request object representing the call parameters. Required. To specify no
-              #     parameters, or to keep all the default parameter values, pass an empty Hash.
-              #   @param options [::Gapic::CallOptions, ::Hash]
-              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @overload delete_subproperty_event_filter(name: nil)
-              #   Pass arguments to `delete_subproperty_event_filter` via keyword arguments. Note that at
-              #   least one keyword argument is required. To specify no parameters, or to keep all
-              #   the default parameter values, pass an empty Hash as a request object (see above).
-              #
-              #   @param name [::String]
-              #     Required. Resource name of the subproperty event filter to delete.
-              #     Format:
-              #     properties/property_id/subpropertyEventFilters/subproperty_event_filter
-              #     Example: properties/123/subpropertyEventFilters/456
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Protobuf::Empty]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Google::Protobuf::Empty]
-              #
-              # @raise [::Google::Cloud::Error] if the REST call is aborted.
-              #
-              # @example Basic example
-              #   require "google/analytics/admin/v1alpha"
-              #
-              #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
-              #
-              #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Analytics::Admin::V1alpha::DeleteSubpropertyEventFilterRequest.new
-              #
-              #   # Call the delete_subproperty_event_filter method.
-              #   result = client.delete_subproperty_event_filter request
-              #
-              #   # The returned object is of type Google::Protobuf::Empty.
-              #   p result
-              #
-              def delete_subproperty_event_filter request, options = nil
-                raise ::ArgumentError, "request must be provided" if request.nil?
-
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::DeleteSubpropertyEventFilterRequest
-
-                # Converts hash and nil to an options object
-                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-                # Customize the options with defaults
-                call_metadata = @config.rpcs.delete_subproperty_event_filter.metadata.to_h
-
-                # Set x-goog-api-client and x-goog-user-project headers
-                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                  lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
-                  transports_version_send: [:rest]
-
-                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-                options.apply_defaults timeout:      @config.rpcs.delete_subproperty_event_filter.timeout,
-                                       metadata:     call_metadata,
-                                       retry_policy: @config.rpcs.delete_subproperty_event_filter.retry_policy
-
-                options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata,
-                                       retry_policy: @config.retry_policy
-
-                @analytics_admin_service_stub.delete_subproperty_event_filter request, options do |result, operation|
-                  yield result, operation if block_given?
-                  return result
-                end
-              rescue ::Gapic::Rest::Error => e
-                raise ::Google::Cloud::Error.from_error(e)
-              end
-
-              ##
               # Creates a subproperty Event Filter.
               #
               # @overload create_subproperty_event_filter(request, options = nil)
@@ -11043,6 +10964,347 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @analytics_admin_service_stub.create_subproperty_event_filter request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lookup for a single subproperty Event Filter.
+              #
+              # @overload get_subproperty_event_filter(request, options = nil)
+              #   Pass arguments to `get_subproperty_event_filter` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::GetSubpropertyEventFilterRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::GetSubpropertyEventFilterRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_subproperty_event_filter(name: nil)
+              #   Pass arguments to `get_subproperty_event_filter` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Resource name of the subproperty event filter to lookup.
+              #     Format:
+              #     properties/property_id/subpropertyEventFilters/subproperty_event_filter
+              #     Example: properties/123/subpropertyEventFilters/456
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::SubpropertyEventFilter]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::SubpropertyEventFilter]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::GetSubpropertyEventFilterRequest.new
+              #
+              #   # Call the get_subproperty_event_filter method.
+              #   result = client.get_subproperty_event_filter request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::SubpropertyEventFilter.
+              #   p result
+              #
+              def get_subproperty_event_filter request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::GetSubpropertyEventFilterRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_subproperty_event_filter.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_subproperty_event_filter.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_subproperty_event_filter.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.get_subproperty_event_filter request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # List all subproperty Event Filters on a property.
+              #
+              # @overload list_subproperty_event_filters(request, options = nil)
+              #   Pass arguments to `list_subproperty_event_filters` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::ListSubpropertyEventFiltersRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::ListSubpropertyEventFiltersRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_subproperty_event_filters(parent: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_subproperty_event_filters` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Resource name of the ordinary property.
+              #     Format: properties/property_id
+              #     Example: properties/123
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of resources to return. The service may return
+              #     fewer than this value, even if there are additional pages. If unspecified,
+              #     at most 50 resources will be returned. The maximum value is 200; (higher
+              #     values will be coerced to the maximum)
+              #   @param page_token [::String]
+              #     Optional. A page token, received from a previous
+              #     `ListSubpropertyEventFilters` call. Provide this to retrieve the subsequent
+              #     page. When paginating, all other parameters provided to
+              #     `ListSubpropertyEventFilters` must match the call that provided the page
+              #     token.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Analytics::Admin::V1alpha::SubpropertyEventFilter>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Analytics::Admin::V1alpha::SubpropertyEventFilter>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::ListSubpropertyEventFiltersRequest.new
+              #
+              #   # Call the list_subproperty_event_filters method.
+              #   result = client.list_subproperty_event_filters request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Analytics::Admin::V1alpha::SubpropertyEventFilter.
+              #     p item
+              #   end
+              #
+              def list_subproperty_event_filters request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::ListSubpropertyEventFiltersRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_subproperty_event_filters.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_subproperty_event_filters.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_subproperty_event_filters.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.list_subproperty_event_filters request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @analytics_admin_service_stub, :list_subproperty_event_filters, "subproperty_event_filters", request, result, options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates a subproperty Event Filter.
+              #
+              # @overload update_subproperty_event_filter(request, options = nil)
+              #   Pass arguments to `update_subproperty_event_filter` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::UpdateSubpropertyEventFilterRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::UpdateSubpropertyEventFilterRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_subproperty_event_filter(subproperty_event_filter: nil, update_mask: nil)
+              #   Pass arguments to `update_subproperty_event_filter` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param subproperty_event_filter [::Google::Analytics::Admin::V1alpha::SubpropertyEventFilter, ::Hash]
+              #     Required. The subproperty event filter to update.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Required. The list of fields to update. Field names must be in snake case
+              #     (for example, "field_to_update"). Omitted fields will not be updated. To
+              #     replace the entire entity, use one path with the string "*" to match all
+              #     fields.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::SubpropertyEventFilter]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::SubpropertyEventFilter]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::UpdateSubpropertyEventFilterRequest.new
+              #
+              #   # Call the update_subproperty_event_filter method.
+              #   result = client.update_subproperty_event_filter request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::SubpropertyEventFilter.
+              #   p result
+              #
+              def update_subproperty_event_filter request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::UpdateSubpropertyEventFilterRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_subproperty_event_filter.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_subproperty_event_filter.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_subproperty_event_filter.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.update_subproperty_event_filter request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a subproperty event filter.
+              #
+              # @overload delete_subproperty_event_filter(request, options = nil)
+              #   Pass arguments to `delete_subproperty_event_filter` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::DeleteSubpropertyEventFilterRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::DeleteSubpropertyEventFilterRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_subproperty_event_filter(name: nil)
+              #   Pass arguments to `delete_subproperty_event_filter` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Resource name of the subproperty event filter to delete.
+              #     Format:
+              #     properties/property_id/subpropertyEventFilters/subproperty_event_filter
+              #     Example: properties/123/subpropertyEventFilters/456
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::DeleteSubpropertyEventFilterRequest.new
+              #
+              #   # Call the delete_subproperty_event_filter method.
+              #   result = client.delete_subproperty_event_filter request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
+              def delete_subproperty_event_filter request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::DeleteSubpropertyEventFilterRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_subproperty_event_filter.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_subproperty_event_filter.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_subproperty_event_filter.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.delete_subproperty_event_filter request, options do |result, operation|
                   yield result, operation if block_given?
                   return result
                 end
@@ -11806,15 +12068,30 @@ module Google
                   #
                   attr_reader :create_subproperty
                   ##
-                  # RPC-specific configuration for `delete_subproperty_event_filter`
-                  # @return [::Gapic::Config::Method]
-                  #
-                  attr_reader :delete_subproperty_event_filter
-                  ##
                   # RPC-specific configuration for `create_subproperty_event_filter`
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :create_subproperty_event_filter
+                  ##
+                  # RPC-specific configuration for `get_subproperty_event_filter`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_subproperty_event_filter
+                  ##
+                  # RPC-specific configuration for `list_subproperty_event_filters`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_subproperty_event_filters
+                  ##
+                  # RPC-specific configuration for `update_subproperty_event_filter`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_subproperty_event_filter
+                  ##
+                  # RPC-specific configuration for `delete_subproperty_event_filter`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_subproperty_event_filter
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -12070,10 +12347,16 @@ module Google
                     @delete_rollup_property_source_link = ::Gapic::Config::Method.new delete_rollup_property_source_link_config
                     create_subproperty_config = parent_rpcs.create_subproperty if parent_rpcs.respond_to? :create_subproperty
                     @create_subproperty = ::Gapic::Config::Method.new create_subproperty_config
-                    delete_subproperty_event_filter_config = parent_rpcs.delete_subproperty_event_filter if parent_rpcs.respond_to? :delete_subproperty_event_filter
-                    @delete_subproperty_event_filter = ::Gapic::Config::Method.new delete_subproperty_event_filter_config
                     create_subproperty_event_filter_config = parent_rpcs.create_subproperty_event_filter if parent_rpcs.respond_to? :create_subproperty_event_filter
                     @create_subproperty_event_filter = ::Gapic::Config::Method.new create_subproperty_event_filter_config
+                    get_subproperty_event_filter_config = parent_rpcs.get_subproperty_event_filter if parent_rpcs.respond_to? :get_subproperty_event_filter
+                    @get_subproperty_event_filter = ::Gapic::Config::Method.new get_subproperty_event_filter_config
+                    list_subproperty_event_filters_config = parent_rpcs.list_subproperty_event_filters if parent_rpcs.respond_to? :list_subproperty_event_filters
+                    @list_subproperty_event_filters = ::Gapic::Config::Method.new list_subproperty_event_filters_config
+                    update_subproperty_event_filter_config = parent_rpcs.update_subproperty_event_filter if parent_rpcs.respond_to? :update_subproperty_event_filter
+                    @update_subproperty_event_filter = ::Gapic::Config::Method.new update_subproperty_event_filter_config
+                    delete_subproperty_event_filter_config = parent_rpcs.delete_subproperty_event_filter if parent_rpcs.respond_to? :delete_subproperty_event_filter
+                    @delete_subproperty_event_filter = ::Gapic::Config::Method.new delete_subproperty_event_filter_config
 
                     yield self if block_given?
                   end

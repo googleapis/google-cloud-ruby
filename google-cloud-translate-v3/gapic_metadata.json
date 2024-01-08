@@ -59,6 +59,56 @@
               "methods": [
                 "delete_glossary"
               ]
+            },
+            "CreateAdaptiveMtDataset": {
+              "methods": [
+                "create_adaptive_mt_dataset"
+              ]
+            },
+            "DeleteAdaptiveMtDataset": {
+              "methods": [
+                "delete_adaptive_mt_dataset"
+              ]
+            },
+            "GetAdaptiveMtDataset": {
+              "methods": [
+                "get_adaptive_mt_dataset"
+              ]
+            },
+            "ListAdaptiveMtDatasets": {
+              "methods": [
+                "list_adaptive_mt_datasets"
+              ]
+            },
+            "AdaptiveMtTranslate": {
+              "methods": [
+                "adaptive_mt_translate"
+              ]
+            },
+            "GetAdaptiveMtFile": {
+              "methods": [
+                "get_adaptive_mt_file"
+              ]
+            },
+            "DeleteAdaptiveMtFile": {
+              "methods": [
+                "delete_adaptive_mt_file"
+              ]
+            },
+            "ImportAdaptiveMtFile": {
+              "methods": [
+                "import_adaptive_mt_file"
+              ]
+            },
+            "ListAdaptiveMtFiles": {
+              "methods": [
+                "list_adaptive_mt_files"
+              ]
+            },
+            "ListAdaptiveMtSentences": {
+              "methods": [
+                "list_adaptive_mt_sentences"
+              ]
             }
           }
         }

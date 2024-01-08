@@ -47,6 +47,14 @@ module Google
         #   @return [::Boolean]
         #     Notify the server that the client supports the last_scanned_row field
         #     in ReadRowsResponse for long-running scans.
+        # @!attribute [rw] routing_cookie
+        #   @return [::Boolean]
+        #     Notify the server that the client supports using encoded routing cookie
+        #     strings to retry requests with.
+        # @!attribute [rw] retry_info
+        #   @return [::Boolean]
+        #     Notify the server that the client supports using retry info back off
+        #     durations to retry requests with.
         class FeatureFlags
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
