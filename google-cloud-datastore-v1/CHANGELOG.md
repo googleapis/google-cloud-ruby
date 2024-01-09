@@ -1,5 +1,12 @@
 # Release History
 
+### 0.15.0 (2024-01-09)
+
+#### Features
+
+* Support query modes for run_query and run_aggregation_query RPCs 
+* Support stats returned from run_query and run_aggregation_query RPCs 
+
 ### 0.14.0 (2023-09-12)
 
 #### Features
