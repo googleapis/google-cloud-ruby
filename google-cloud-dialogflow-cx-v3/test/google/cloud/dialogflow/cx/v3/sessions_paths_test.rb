@@ -23,6 +23,21 @@ require "gapic/grpc/service_stub"
 require "google/cloud/dialogflow/cx/v3/sessions"
 
 class ::Google::Cloud::Dialogflow::CX::V3::Sessions::ClientPathsTest < Minitest::Test
+  def test_data_store_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Dialogflow::CX::V3::Sessions::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.data_store_path project: "value0", location: "value1", data_store: "value2"
+      assert_equal "projects/value0/locations/value1/dataStores/value2", path
+
+      path = client.data_store_path project: "value0", location: "value1", collection: "value2", data_store: "value3"
+      assert_equal "projects/value0/locations/value1/collections/value2/dataStores/value3", path
+    end
+  end
+
   def test_entity_type_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do

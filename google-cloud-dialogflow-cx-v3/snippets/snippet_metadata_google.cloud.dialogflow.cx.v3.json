@@ -1212,46 +1212,6 @@
       ]
     },
     {
-      "region_tag": "dialogflow_v3_generated_EntityTypes_ListEntityTypes_sync",
-      "title": "Snippet for the list_entity_types call in the EntityTypes service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::EntityTypes::Client#list_entity_types. It may require modification in order to execute successfully.",
-      "file": "entity_types/list_entity_types.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "list_entity_types",
-        "full_name": "::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Client#list_entity_types",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::Dialogflow::CX::V3::ListEntityTypesRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Cloud::Dialogflow::CX::V3::ListEntityTypesResponse",
-        "client": {
-          "short_name": "EntityTypes::Client",
-          "full_name": "::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Client"
-        },
-        "method": {
-          "short_name": "ListEntityTypes",
-          "full_name": "google.cloud.dialogflow.cx.v3.EntityTypes.ListEntityTypes",
-          "service": {
-            "short_name": "EntityTypes",
-            "full_name": "google.cloud.dialogflow.cx.v3.EntityTypes"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 45,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
       "region_tag": "dialogflow_v3_generated_EntityTypes_GetEntityType_sync",
       "title": "Snippet for the get_entity_type call in the EntityTypes service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::EntityTypes::Client#get_entity_type. It may require modification in order to execute successfully.",
@@ -1407,6 +1367,46 @@
         {
           "start": 20,
           "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v3_generated_EntityTypes_ListEntityTypes_sync",
+      "title": "Snippet for the list_entity_types call in the EntityTypes service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::EntityTypes::Client#list_entity_types. It may require modification in order to execute successfully.",
+      "file": "entity_types/list_entity_types.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_entity_types",
+        "full_name": "::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Client#list_entity_types",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::CX::V3::ListEntityTypesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::CX::V3::ListEntityTypesResponse",
+        "client": {
+          "short_name": "EntityTypes::Client",
+          "full_name": "::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Client"
+        },
+        "method": {
+          "short_name": "ListEntityTypes",
+          "full_name": "google.cloud.dialogflow.cx.v3.EntityTypes.ListEntityTypes",
+          "service": {
+            "short_name": "EntityTypes",
+            "full_name": "google.cloud.dialogflow.cx.v3.EntityTypes"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
           "type": "FULL"
         }
       ]
@@ -2035,6 +2035,46 @@
         "method": {
           "short_name": "FulfillIntent",
           "full_name": "google.cloud.dialogflow.cx.v3.Sessions.FulfillIntent",
+          "service": {
+            "short_name": "Sessions",
+            "full_name": "google.cloud.dialogflow.cx.v3.Sessions"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v3_generated_Sessions_SubmitAnswerFeedback_sync",
+      "title": "Snippet for the submit_answer_feedback call in the Sessions service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Sessions::Client#submit_answer_feedback. It may require modification in order to execute successfully.",
+      "file": "sessions/submit_answer_feedback.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "submit_answer_feedback",
+        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Sessions::Client#submit_answer_feedback",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::CX::V3::SubmitAnswerFeedbackRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::CX::V3::AnswerFeedback",
+        "client": {
+          "short_name": "Sessions::Client",
+          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Sessions::Client"
+        },
+        "method": {
+          "short_name": "SubmitAnswerFeedback",
+          "full_name": "google.cloud.dialogflow.cx.v3.Sessions.SubmitAnswerFeedback",
           "service": {
             "short_name": "Sessions",
             "full_name": "google.cloud.dialogflow.cx.v3.Sessions"
@@ -3558,6 +3598,206 @@
           "service": {
             "short_name": "Experiments",
             "full_name": "google.cloud.dialogflow.cx.v3.Experiments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v3_generated_Generators_ListGenerators_sync",
+      "title": "Snippet for the list_generators call in the Generators service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Generators::Client#list_generators. It may require modification in order to execute successfully.",
+      "file": "generators/list_generators.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_generators",
+        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Generators::Client#list_generators",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::CX::V3::ListGeneratorsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::CX::V3::ListGeneratorsResponse",
+        "client": {
+          "short_name": "Generators::Client",
+          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Generators::Client"
+        },
+        "method": {
+          "short_name": "ListGenerators",
+          "full_name": "google.cloud.dialogflow.cx.v3.Generators.ListGenerators",
+          "service": {
+            "short_name": "Generators",
+            "full_name": "google.cloud.dialogflow.cx.v3.Generators"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v3_generated_Generators_GetGenerator_sync",
+      "title": "Snippet for the get_generator call in the Generators service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Generators::Client#get_generator. It may require modification in order to execute successfully.",
+      "file": "generators/get_generator.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_generator",
+        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Generators::Client#get_generator",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::CX::V3::GetGeneratorRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::CX::V3::Generator",
+        "client": {
+          "short_name": "Generators::Client",
+          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Generators::Client"
+        },
+        "method": {
+          "short_name": "GetGenerator",
+          "full_name": "google.cloud.dialogflow.cx.v3.Generators.GetGenerator",
+          "service": {
+            "short_name": "Generators",
+            "full_name": "google.cloud.dialogflow.cx.v3.Generators"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v3_generated_Generators_CreateGenerator_sync",
+      "title": "Snippet for the create_generator call in the Generators service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Generators::Client#create_generator. It may require modification in order to execute successfully.",
+      "file": "generators/create_generator.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_generator",
+        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Generators::Client#create_generator",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::CX::V3::CreateGeneratorRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::CX::V3::Generator",
+        "client": {
+          "short_name": "Generators::Client",
+          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Generators::Client"
+        },
+        "method": {
+          "short_name": "CreateGenerator",
+          "full_name": "google.cloud.dialogflow.cx.v3.Generators.CreateGenerator",
+          "service": {
+            "short_name": "Generators",
+            "full_name": "google.cloud.dialogflow.cx.v3.Generators"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v3_generated_Generators_UpdateGenerator_sync",
+      "title": "Snippet for the update_generator call in the Generators service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Generators::Client#update_generator. It may require modification in order to execute successfully.",
+      "file": "generators/update_generator.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_generator",
+        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Generators::Client#update_generator",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::CX::V3::UpdateGeneratorRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::CX::V3::Generator",
+        "client": {
+          "short_name": "Generators::Client",
+          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Generators::Client"
+        },
+        "method": {
+          "short_name": "UpdateGenerator",
+          "full_name": "google.cloud.dialogflow.cx.v3.Generators.UpdateGenerator",
+          "service": {
+            "short_name": "Generators",
+            "full_name": "google.cloud.dialogflow.cx.v3.Generators"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v3_generated_Generators_DeleteGenerator_sync",
+      "title": "Snippet for the delete_generator call in the Generators service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Generators::Client#delete_generator. It may require modification in order to execute successfully.",
+      "file": "generators/delete_generator.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_generator",
+        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Generators::Client#delete_generator",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::CX::V3::DeleteGeneratorRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "Generators::Client",
+          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Generators::Client"
+        },
+        "method": {
+          "short_name": "DeleteGenerator",
+          "full_name": "google.cloud.dialogflow.cx.v3.Generators.DeleteGenerator",
+          "service": {
+            "short_name": "Generators",
+            "full_name": "google.cloud.dialogflow.cx.v3.Generators"
           }
         }
       },

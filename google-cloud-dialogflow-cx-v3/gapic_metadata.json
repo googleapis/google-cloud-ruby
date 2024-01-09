@@ -205,11 +205,6 @@
         "grpc": {
           "libraryClient": "::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Client",
           "rpcs": {
-            "ListEntityTypes": {
-              "methods": [
-                "list_entity_types"
-              ]
-            },
             "GetEntityType": {
               "methods": [
                 "get_entity_type"
@@ -228,6 +223,11 @@
             "DeleteEntityType": {
               "methods": [
                 "delete_entity_type"
+              ]
+            },
+            "ListEntityTypes": {
+              "methods": [
+                "list_entity_types"
               ]
             }
           }
@@ -335,6 +335,11 @@
             "FulfillIntent": {
               "methods": [
                 "fulfill_intent"
+              ]
+            },
+            "SubmitAnswerFeedback": {
+              "methods": [
+                "submit_answer_feedback"
               ]
             }
           }
@@ -570,6 +575,40 @@
             "StopExperiment": {
               "methods": [
                 "stop_experiment"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Generators": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dialogflow::CX::V3::Generators::Client",
+          "rpcs": {
+            "ListGenerators": {
+              "methods": [
+                "list_generators"
+              ]
+            },
+            "GetGenerator": {
+              "methods": [
+                "get_generator"
+              ]
+            },
+            "CreateGenerator": {
+              "methods": [
+                "create_generator"
+              ]
+            },
+            "UpdateGenerator": {
+              "methods": [
+                "update_generator"
+              ]
+            },
+            "DeleteGenerator": {
+              "methods": [
+                "delete_generator"
               ]
             }
           }
