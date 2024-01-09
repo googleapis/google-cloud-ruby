@@ -1,5 +1,17 @@
 # Changelog
 
+### 0.16.0 (2024-01-09)
+
+#### Features
+
+* Added more information to certain notification events ([#23745](https://github.com/googleapis/google-cloud-ruby/issues/23745)) 
+* Delivery pipeline notification events report the pipeline UID 
+* Job run notification events report the release and rollout names 
+* Release notification events report the pipeline and release UIDs 
+* Release render events report the event type and pipeline UID 
+* Rollout notification events report the release name and rollout UID 
+* Rollout update events report the release name 
+
 ### 0.15.0 (2023-12-08)
 
 #### Features
