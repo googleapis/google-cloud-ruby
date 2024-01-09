@@ -1,0 +1,17 @@
+{
+    "api_id": "cloudquotas.googleapis.com",
+    "api_shortname": "cloudquotas",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-cloud_quotas/latest",
+    "distribution_name": "google-cloud-cloud_quotas",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "cloudquotas",
+    "name_pretty": "Cloud Quotas API",
+    "product_documentation": "https://cloud.google.com/docs/quota/api-overview",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Cloud Quotas API provides Google Cloud service consumers with management and observability for resource usage, quotas, and restrictions of the services they consume.",
+    "ruby-cloud-product-url": "https://cloud.google.com/docs/quota/api-overview",
+    "library_type": "GAPIC_AUTO"
+}
