@@ -1,5 +1,11 @@
 # Release History
 
+### 1.47.0 (2024-01-09)
+
+#### Features
+
+* support for object lock / retention ([#23732](https://github.com/googleapis/google-cloud-ruby/issues/23732)) 
+
 ### 1.46.0 (2024-01-08)
 
 #### Features
