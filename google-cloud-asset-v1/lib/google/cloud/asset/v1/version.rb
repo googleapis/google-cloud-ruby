@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Asset
       module V1
-        VERSION = "0.28.0"
+        VERSION = "0.28.1"
       end
     end
   end
