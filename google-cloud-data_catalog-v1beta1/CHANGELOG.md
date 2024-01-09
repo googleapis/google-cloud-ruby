@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.2.1 (2024-01-09)
+
+#### Documentation
+
+* Correct documentation of identifier fields ([#23741](https://github.com/googleapis/google-cloud-ruby/issues/23741)) 
+
 ### 0.2.0 (2023-09-12)
 
 #### Features
