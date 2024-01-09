@@ -125,6 +125,11 @@ module Google
         # @!attribute [rw] view
         #   @return [::Google::Cloud::OsLogin::V1beta::LoginProfileView]
         #     The view configures whether to retrieve security keys information.
+        # @!attribute [rw] regions
+        #   @return [::Array<::String>]
+        #     Optional. The regions to which to assert that the key was written.
+        #     If unspecified, defaults to all regions.
+        #     Regions are listed at https://cloud.google.com/about/locations#region.
         class ImportSshPublicKeyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
