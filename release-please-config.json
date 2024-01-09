@@ -1131,6 +1131,10 @@
       "component": "google-cloud-secret_manager-v1beta1",
       "version_file": "lib/google/cloud/secret_manager/v1beta1/version.rb"
     },
+    "google-cloud-secure_source_manager": {
+      "component": "google-cloud-secure_source_manager",
+      "version_file": "lib/google/cloud/secure_source_manager/version.rb"
+    },
     "google-cloud-secure_source_manager-v1": {
       "component": "google-cloud-secure_source_manager-v1",
       "version_file": "lib/google/cloud/secure_source_manager/v1/version.rb"
