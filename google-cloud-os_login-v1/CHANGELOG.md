@@ -1,5 +1,11 @@
 # Release History
 
+### 0.10.0 (2024-01-09)
+
+#### Features
+
+* Support the regions parameter to import_ssh_public_key ([#23757](https://github.com/googleapis/google-cloud-ruby/issues/23757)) 
+
 ### 0.9.0 (2023-09-12)
 
 #### Features
