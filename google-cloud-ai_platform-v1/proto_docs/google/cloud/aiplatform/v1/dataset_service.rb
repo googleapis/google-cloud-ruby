@@ -399,6 +399,7 @@ module Google
         #     Format:
         #     `projects/{project}/locations/{location}/datasets/{dataset}`
         # @!attribute [rw] saved_query
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     The resource name of a SavedQuery(annotation set in UI).
         #     Format:
@@ -426,6 +427,7 @@ module Google
         #     * `data_item=1`
         #     * `has_annotation(5)`
         # @!attribute [rw] annotations_filter
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     An expression for filtering the Annotations that will be returned per
         #     DataItem.
@@ -451,6 +453,7 @@ module Google
         #     Requested page size. Server may return fewer results than requested.
         #     Default and maximum page size is 100.
         # @!attribute [rw] order_by
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     A comma-separated list of fields to order by, sorted in ascending order.
         #     Use "desc" after a field name for descending.

@@ -142,6 +142,7 @@ module Google
 
         # Response message for QueryDeployedModels method.
         # @!attribute [rw] deployed_models
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::DeployedModel>]
         #     DEPRECATED Use deployed_model_refs instead.
         # @!attribute [rw] next_page_token

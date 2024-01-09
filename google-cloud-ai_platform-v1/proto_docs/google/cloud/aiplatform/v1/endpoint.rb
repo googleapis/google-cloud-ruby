@@ -95,6 +95,7 @@ module Google
         #     Where `{project}` is a project number, as in `12345`, and `{network}` is
         #     network name.
         # @!attribute [rw] enable_private_service_connect
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
         #     Deprecated: If true, expose the Endpoint via private service connect.
         #
