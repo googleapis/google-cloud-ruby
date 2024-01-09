@@ -685,7 +685,7 @@ module Google
           #     Optional. Data Stores where the boosting configuration is applied. The full
           #     names of the referenced data stores. Formats:
           #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`
-          #     `projects/{project}/locations/{location}/dataStores/{data_store}
+          #     `projects/{project}/locations/{location}/dataStores/{data_store}`
           # @!attribute [rw] spec
           #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::BoostSpec>]
           #     Optional. A list of boosting specifications.
@@ -700,7 +700,7 @@ module Google
           #     Optional. Data Stores where the boosting configuration is applied. The full
           #     names of the referenced data stores. Formats:
           #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`
-          #     `projects/{project}/locations/{location}/dataStores/{data_store}
+          #     `projects/{project}/locations/{location}/dataStores/{data_store}`
           # @!attribute [rw] filter
           #   @return [::String]
           #     Optional. The filter expression to be applied.
