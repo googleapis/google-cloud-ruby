@@ -176,9 +176,28 @@ module Google
             #     randomly choose for each data block whether to read the rows in that data
             #     block. For more details, see
             #     https://cloud.google.com/bigquery/docs/table-sampling)
+            # @!attribute [rw] response_compression_codec
+            #   @return [::Google::Cloud::Bigquery::Storage::V1::ReadSession::TableReadOptions::ResponseCompressionCodec]
+            #     Optional. Set response_compression_codec when creating a read session to
+            #     enable application-level compression of ReadRows responses.
             class TableReadOptions
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Specifies which compression codec to attempt on the entire serialized
+              # response payload (either Arrow record batch or Avro rows). This is
+              # not to be confused with the Apache Arrow native compression codecs
+              # specified in ArrowSerializationOptions. For performance reasons, when
+              # creating a read session requesting Arrow responses, setting both native
+              # Arrow compression and application-level response compression will not be
+              # allowed - choose, at most, one kind of compression.
+              module ResponseCompressionCodec
+                # Default is no compression.
+                RESPONSE_COMPRESSION_CODEC_UNSPECIFIED = 0
+
+                # Use raw LZ4 compression.
+                RESPONSE_COMPRESSION_CODEC_LZ4 = 2
+              end
             end
           end
 
