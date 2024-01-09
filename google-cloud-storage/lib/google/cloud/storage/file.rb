@@ -1598,6 +1598,24 @@ module Google
         #
         # @param [Hash(String => String)] new_retention_attributes
         #
+        # @example Update retention parameters for the File / Object
+        #   require "google/cloud/storage"
+        #   storage = Google::Cloud::Storage.new
+        #   bucket = storage.bucket "my-bucket"
+        #   file = bucket.file "avatars/heidi/400x400.png"
+        #   retention_params = { mode: 'Unlocked', retain_until_time: '2023-12-19T03:22:23+00:00'.to_datetime }
+        #   file.retention = retention_params
+        #
+        # @example Update retention parameters for the File / Object with override enabled
+        #   require "google/cloud/storage"
+        #   storage = Google::Cloud::Storage.new
+        #   bucket = storage.bucket "my-bucket"
+        #   file = bucket.file "avatars/heidi/400x400.png"
+        #   retention_params = { mode: 'Unlocked',
+        #                        retain_until_time: '2023-12-19T03:22:23+00:00'.to_datetime,
+        #                        override_unlocked_retention: true }
+        #   file.retention = retention_params
+        #
         def retention= new_retention_attributes
           @gapi.retention ||= Google::Apis::StorageV1::Object::Retention.new
           @gapi.retention.mode = new_retention_attributes[:mode]
