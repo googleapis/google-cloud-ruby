@@ -1,5 +1,11 @@
 # Release History
 
+### 0.13.0 (2024-01-09)
+
+#### Features
+
+* added field `ImportSshPublicKeyRequest.regions` ([#23767](https://github.com/googleapis/google-cloud-ruby/issues/23767)) 
+
 ### 0.12.0 (2023-10-23)
 
 #### Features
