@@ -357,6 +357,7 @@ class ::Google::Cloud::OsLogin::V1beta::OsLoginService::ClientTest < Minitest::T
     ssh_public_key = {}
     project_id = "hello world"
     view = :LOGIN_PROFILE_VIEW_UNSPECIFIED
+    regions = ["hello world"]
 
     import_ssh_public_key_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :import_ssh_public_key, name
@@ -365,6 +366,7 @@ class ::Google::Cloud::OsLogin::V1beta::OsLoginService::ClientTest < Minitest::T
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::OsLogin::Common::SshPublicKey), request["ssh_public_key"]
       assert_equal "hello world", request["project_id"]
       assert_equal :LOGIN_PROFILE_VIEW_UNSPECIFIED, request["view"]
+      assert_equal ["hello world"], request["regions"]
       refute_nil options
     end
 
@@ -375,31 +377,31 @@ class ::Google::Cloud::OsLogin::V1beta::OsLoginService::ClientTest < Minitest::T
       end
 
       # Use hash object
-      client.import_ssh_public_key({ parent: parent, ssh_public_key: ssh_public_key, project_id: project_id, view: view }) do |response, operation|
+      client.import_ssh_public_key({ parent: parent, ssh_public_key: ssh_public_key, project_id: project_id, view: view, regions: regions }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.import_ssh_public_key parent: parent, ssh_public_key: ssh_public_key, project_id: project_id, view: view do |response, operation|
+      client.import_ssh_public_key parent: parent, ssh_public_key: ssh_public_key, project_id: project_id, view: view, regions: regions do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.import_ssh_public_key ::Google::Cloud::OsLogin::V1beta::ImportSshPublicKeyRequest.new(parent: parent, ssh_public_key: ssh_public_key, project_id: project_id, view: view) do |response, operation|
+      client.import_ssh_public_key ::Google::Cloud::OsLogin::V1beta::ImportSshPublicKeyRequest.new(parent: parent, ssh_public_key: ssh_public_key, project_id: project_id, view: view, regions: regions) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.import_ssh_public_key({ parent: parent, ssh_public_key: ssh_public_key, project_id: project_id, view: view }, grpc_options) do |response, operation|
+      client.import_ssh_public_key({ parent: parent, ssh_public_key: ssh_public_key, project_id: project_id, view: view, regions: regions }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.import_ssh_public_key(::Google::Cloud::OsLogin::V1beta::ImportSshPublicKeyRequest.new(parent: parent, ssh_public_key: ssh_public_key, project_id: project_id, view: view), grpc_options) do |response, operation|
+      client.import_ssh_public_key(::Google::Cloud::OsLogin::V1beta::ImportSshPublicKeyRequest.new(parent: parent, ssh_public_key: ssh_public_key, project_id: project_id, view: view, regions: regions), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
