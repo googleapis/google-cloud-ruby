@@ -1,5 +1,11 @@
 # Release History
 
+### 0.20.1 (2024-01-09)
+
+#### Documentation
+
+* Correct documentation of identifier fields ([#23747](https://github.com/googleapis/google-cloud-ruby/issues/23747)) 
+
 ### 0.20.0 (2023-09-29)
 
 #### Features
