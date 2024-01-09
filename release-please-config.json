@@ -359,6 +359,10 @@
       "component": "google-cloud-cloud_dms-v1",
       "version_file": "lib/google/cloud/cloud_dms/v1/version.rb"
     },
+    "google-cloud-cloud_quotas": {
+      "component": "google-cloud-cloud_quotas",
+      "version_file": "lib/google/cloud/cloud_quotas/version.rb"
+    },
     "google-cloud-cloud_quotas-v1": {
       "component": "google-cloud-cloud_quotas-v1",
       "version_file": "lib/google/cloud/cloud_quotas/v1/version.rb"
