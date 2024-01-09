@@ -1539,6 +1539,35 @@ describe Google::Cloud::Storage::File, :mock_storage do
     _(file.kms_key).must_equal kms_key
   end
 
+  describe "object lock" do
+    let(:bucket_name) { "object-lock-bucket" }
+    let(:retention_retain_until_time) { DateTime.new 2023, 12, 31, 4, 5, 6 }
+    let(:retention_mode_unlocked) { "Unlocked" }
+    let(:retention_mode_locked) { "Locked" }
+
+    let(:file_hash) { random_file_hash bucket_name, "file.ext", retention_params: { mode: retention_mode_unlocked, retain_until_time: retention_retain_until_time } }
+    let(:file_gapi) { Google::Apis::StorageV1::Object.from_json file_hash.to_json }
+    let(:file) { Google::Cloud::Storage::File.from_gapi file_gapi, storage.service }
+    let(:file_user_project) { Google::Cloud::Storage::File.from_gapi file_gapi, storage.service, user_project: true }
+
+    it "can create file with future retain_until_time" do
+      retention_params = { mode: retention_mode_unlocked, retain_until_time: retention_retain_until_time }
+      patch_file_gapi = Google::Apis::StorageV1::Object.new retention: Google::Apis::StorageV1::Object::Retention.from_json(file_retention_hash(retention_params).to_json)
+
+      mock = Minitest::Mock.new
+
+      mock.expect :patch_object, file_gapi, [bucket_name, file.name, patch_file_gapi], **patch_object_args(options: {retries: 0})
+      file.service.mocked_service = mock
+      file.retention = retention_params
+
+      mock.verify
+
+      _(file.retention).must_be_kind_of Google::Apis::StorageV1::Object::Retention
+      _(file.retention.mode).must_equal retention_mode_unlocked
+      _(file.retention.retain_until_time).must_equal retention_retain_until_time
+    end
+  end
+
   def gzip_data data
     gz = StringIO.new("")
     z = Zlib::GzipWriter.new(gz)

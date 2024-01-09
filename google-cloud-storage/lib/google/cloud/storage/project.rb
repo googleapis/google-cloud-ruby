@@ -372,6 +372,8 @@ module Google
         #   bucket instance and its files.
         #
         #   See also {Bucket#requester_pays=} and {Bucket#requester_pays}.
+        # @param [Boolean] enable_object_retention
+        #   When set to true, object retention is enabled for this bucket.
         #
         # @yield [bucket] a block for configuring the bucket before it is
         #   created
@@ -385,6 +387,13 @@ module Google
         #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.create_bucket "my-bucket"
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.create_bucket "my-bucket", enable_object_retention: true
         #
         # @example Configure the bucket in a block:
         #   require "google/cloud/storage"
@@ -416,7 +425,8 @@ module Google
                           versioning: nil,
                           requester_pays: nil,
                           user_project: nil,
-                          autoclass_enabled: false
+                          autoclass_enabled: false,
+                          enable_object_retention: nil
           params = {
             name: bucket_name,
             location: location,
@@ -440,7 +450,8 @@ module Google
           updater.check_for_mutable_lifecycle!
           gapi = service.insert_bucket \
             new_bucket, acl: acl_rule(acl), default_acl: acl_rule(default_acl),
-                        user_project: user_project
+                        user_project: user_project,
+                        enable_object_retention: enable_object_retention
           Bucket.from_gapi gapi, service, user_project: user_project
         end
 

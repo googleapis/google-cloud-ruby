@@ -20,7 +20,7 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency "google-cloud-core", "~> 1.6"
   gem.add_dependency "google-apis-iamcredentials_v1", "~> 0.1"
-  gem.add_dependency "google-apis-storage_v1", "~> 0.29.0"
+  gem.add_dependency "google-apis-storage_v1", "~> 0.31.0"
   gem.add_dependency "googleauth", ">= 0.16.2", "< 2.a"
   gem.add_dependency "digest-crc", "~> 0.4"
   gem.add_dependency "addressable", "~> 2.8"

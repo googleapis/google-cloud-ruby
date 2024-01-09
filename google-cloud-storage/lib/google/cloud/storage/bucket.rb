@@ -119,6 +119,15 @@ module Google
         end
 
         ##
+        # The object retention configuration of the bucket
+        #
+        # @return [Google::Apis::StorageV1::Bucket::ObjectRetention]
+        #
+        def object_retention
+          @gapi.object_retention
+        end
+
+        ##
         # The name of the bucket.
         #
         # @return [String]
