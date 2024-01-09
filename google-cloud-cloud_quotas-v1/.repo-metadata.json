@@ -8,7 +8,7 @@
     "name": "cloudquotas",
     "name_pretty": "Cloud Quotas V1 API",
     "product_documentation": "https://cloud.google.com/docs/quota/api-overview",
-    "release_level": "unreleased",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "Cloud Quotas API provides Google Cloud service consumers with management and observability for resource usage, quotas, and restrictions of the services they consume. Note that google-cloud-cloud_quotas-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-cloud_quotas instead. See the readme for more details.",
