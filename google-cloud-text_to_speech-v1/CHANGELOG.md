@@ -1,5 +1,11 @@
 # Release History
 
+### 0.11.1 (2024-01-09)
+
+#### Bug Fixes
+
+* Fixed HTTP binding for long audio synthesis when calling via REST ([#23723](https://github.com/googleapis/google-cloud-ruby/issues/23723)) 
+
 ### 0.11.0 (2023-09-12)
 
 #### Features
