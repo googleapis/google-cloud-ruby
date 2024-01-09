@@ -1,0 +1,735 @@
+{
+  "client_library": {
+    "name": "google-cloud-security_center_management-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.securitycentermanagement.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "securitycentermanagement_v1_generated_SecurityCenterManagement_ListEffectiveSecurityHealthAnalyticsCustomModules_sync",
+      "title": "Snippet for the list_effective_security_health_analytics_custom_modules call in the SecurityCenterManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#list_effective_security_health_analytics_custom_modules. It may require modification in order to execute successfully.",
+      "file": "security_center_management/list_effective_security_health_analytics_custom_modules.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_effective_security_health_analytics_custom_modules",
+        "full_name": "::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#list_effective_security_health_analytics_custom_modules",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenterManagement::V1::ListEffectiveSecurityHealthAnalyticsCustomModulesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenterManagement::V1::ListEffectiveSecurityHealthAnalyticsCustomModulesResponse",
+        "client": {
+          "short_name": "SecurityCenterManagement::Client",
+          "full_name": "::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client"
+        },
+        "method": {
+          "short_name": "ListEffectiveSecurityHealthAnalyticsCustomModules",
+          "full_name": "google.cloud.securitycentermanagement.v1.SecurityCenterManagement.ListEffectiveSecurityHealthAnalyticsCustomModules",
+          "service": {
+            "short_name": "SecurityCenterManagement",
+            "full_name": "google.cloud.securitycentermanagement.v1.SecurityCenterManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycentermanagement_v1_generated_SecurityCenterManagement_GetEffectiveSecurityHealthAnalyticsCustomModule_sync",
+      "title": "Snippet for the get_effective_security_health_analytics_custom_module call in the SecurityCenterManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#get_effective_security_health_analytics_custom_module. It may require modification in order to execute successfully.",
+      "file": "security_center_management/get_effective_security_health_analytics_custom_module.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_effective_security_health_analytics_custom_module",
+        "full_name": "::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#get_effective_security_health_analytics_custom_module",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenterManagement::V1::GetEffectiveSecurityHealthAnalyticsCustomModuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenterManagement::V1::EffectiveSecurityHealthAnalyticsCustomModule",
+        "client": {
+          "short_name": "SecurityCenterManagement::Client",
+          "full_name": "::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client"
+        },
+        "method": {
+          "short_name": "GetEffectiveSecurityHealthAnalyticsCustomModule",
+          "full_name": "google.cloud.securitycentermanagement.v1.SecurityCenterManagement.GetEffectiveSecurityHealthAnalyticsCustomModule",
+          "service": {
+            "short_name": "SecurityCenterManagement",
+            "full_name": "google.cloud.securitycentermanagement.v1.SecurityCenterManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycentermanagement_v1_generated_SecurityCenterManagement_ListSecurityHealthAnalyticsCustomModules_sync",
+      "title": "Snippet for the list_security_health_analytics_custom_modules call in the SecurityCenterManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#list_security_health_analytics_custom_modules. It may require modification in order to execute successfully.",
+      "file": "security_center_management/list_security_health_analytics_custom_modules.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_security_health_analytics_custom_modules",
+        "full_name": "::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#list_security_health_analytics_custom_modules",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenterManagement::V1::ListSecurityHealthAnalyticsCustomModulesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenterManagement::V1::ListSecurityHealthAnalyticsCustomModulesResponse",
+        "client": {
+          "short_name": "SecurityCenterManagement::Client",
+          "full_name": "::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client"
+        },
+        "method": {
+          "short_name": "ListSecurityHealthAnalyticsCustomModules",
+          "full_name": "google.cloud.securitycentermanagement.v1.SecurityCenterManagement.ListSecurityHealthAnalyticsCustomModules",
+          "service": {
+            "short_name": "SecurityCenterManagement",
+            "full_name": "google.cloud.securitycentermanagement.v1.SecurityCenterManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycentermanagement_v1_generated_SecurityCenterManagement_ListDescendantSecurityHealthAnalyticsCustomModules_sync",
+      "title": "Snippet for the list_descendant_security_health_analytics_custom_modules call in the SecurityCenterManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#list_descendant_security_health_analytics_custom_modules. It may require modification in order to execute successfully.",
+      "file": "security_center_management/list_descendant_security_health_analytics_custom_modules.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_descendant_security_health_analytics_custom_modules",
+        "full_name": "::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#list_descendant_security_health_analytics_custom_modules",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenterManagement::V1::ListDescendantSecurityHealthAnalyticsCustomModulesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenterManagement::V1::ListDescendantSecurityHealthAnalyticsCustomModulesResponse",
+        "client": {
+          "short_name": "SecurityCenterManagement::Client",
+          "full_name": "::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client"
+        },
+        "method": {
+          "short_name": "ListDescendantSecurityHealthAnalyticsCustomModules",
+          "full_name": "google.cloud.securitycentermanagement.v1.SecurityCenterManagement.ListDescendantSecurityHealthAnalyticsCustomModules",
+          "service": {
+            "short_name": "SecurityCenterManagement",
+            "full_name": "google.cloud.securitycentermanagement.v1.SecurityCenterManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycentermanagement_v1_generated_SecurityCenterManagement_GetSecurityHealthAnalyticsCustomModule_sync",
+      "title": "Snippet for the get_security_health_analytics_custom_module call in the SecurityCenterManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#get_security_health_analytics_custom_module. It may require modification in order to execute successfully.",
+      "file": "security_center_management/get_security_health_analytics_custom_module.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_security_health_analytics_custom_module",
+        "full_name": "::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#get_security_health_analytics_custom_module",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenterManagement::V1::GetSecurityHealthAnalyticsCustomModuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenterManagement::V1::SecurityHealthAnalyticsCustomModule",
+        "client": {
+          "short_name": "SecurityCenterManagement::Client",
+          "full_name": "::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client"
+        },
+        "method": {
+          "short_name": "GetSecurityHealthAnalyticsCustomModule",
+          "full_name": "google.cloud.securitycentermanagement.v1.SecurityCenterManagement.GetSecurityHealthAnalyticsCustomModule",
+          "service": {
+            "short_name": "SecurityCenterManagement",
+            "full_name": "google.cloud.securitycentermanagement.v1.SecurityCenterManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycentermanagement_v1_generated_SecurityCenterManagement_CreateSecurityHealthAnalyticsCustomModule_sync",
+      "title": "Snippet for the create_security_health_analytics_custom_module call in the SecurityCenterManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#create_security_health_analytics_custom_module. It may require modification in order to execute successfully.",
+      "file": "security_center_management/create_security_health_analytics_custom_module.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_security_health_analytics_custom_module",
+        "full_name": "::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#create_security_health_analytics_custom_module",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenterManagement::V1::CreateSecurityHealthAnalyticsCustomModuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenterManagement::V1::SecurityHealthAnalyticsCustomModule",
+        "client": {
+          "short_name": "SecurityCenterManagement::Client",
+          "full_name": "::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client"
+        },
+        "method": {
+          "short_name": "CreateSecurityHealthAnalyticsCustomModule",
+          "full_name": "google.cloud.securitycentermanagement.v1.SecurityCenterManagement.CreateSecurityHealthAnalyticsCustomModule",
+          "service": {
+            "short_name": "SecurityCenterManagement",
+            "full_name": "google.cloud.securitycentermanagement.v1.SecurityCenterManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycentermanagement_v1_generated_SecurityCenterManagement_UpdateSecurityHealthAnalyticsCustomModule_sync",
+      "title": "Snippet for the update_security_health_analytics_custom_module call in the SecurityCenterManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#update_security_health_analytics_custom_module. It may require modification in order to execute successfully.",
+      "file": "security_center_management/update_security_health_analytics_custom_module.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_security_health_analytics_custom_module",
+        "full_name": "::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#update_security_health_analytics_custom_module",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenterManagement::V1::UpdateSecurityHealthAnalyticsCustomModuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenterManagement::V1::SecurityHealthAnalyticsCustomModule",
+        "client": {
+          "short_name": "SecurityCenterManagement::Client",
+          "full_name": "::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client"
+        },
+        "method": {
+          "short_name": "UpdateSecurityHealthAnalyticsCustomModule",
+          "full_name": "google.cloud.securitycentermanagement.v1.SecurityCenterManagement.UpdateSecurityHealthAnalyticsCustomModule",
+          "service": {
+            "short_name": "SecurityCenterManagement",
+            "full_name": "google.cloud.securitycentermanagement.v1.SecurityCenterManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycentermanagement_v1_generated_SecurityCenterManagement_DeleteSecurityHealthAnalyticsCustomModule_sync",
+      "title": "Snippet for the delete_security_health_analytics_custom_module call in the SecurityCenterManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#delete_security_health_analytics_custom_module. It may require modification in order to execute successfully.",
+      "file": "security_center_management/delete_security_health_analytics_custom_module.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_security_health_analytics_custom_module",
+        "full_name": "::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#delete_security_health_analytics_custom_module",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenterManagement::V1::DeleteSecurityHealthAnalyticsCustomModuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "SecurityCenterManagement::Client",
+          "full_name": "::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client"
+        },
+        "method": {
+          "short_name": "DeleteSecurityHealthAnalyticsCustomModule",
+          "full_name": "google.cloud.securitycentermanagement.v1.SecurityCenterManagement.DeleteSecurityHealthAnalyticsCustomModule",
+          "service": {
+            "short_name": "SecurityCenterManagement",
+            "full_name": "google.cloud.securitycentermanagement.v1.SecurityCenterManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycentermanagement_v1_generated_SecurityCenterManagement_SimulateSecurityHealthAnalyticsCustomModule_sync",
+      "title": "Snippet for the simulate_security_health_analytics_custom_module call in the SecurityCenterManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#simulate_security_health_analytics_custom_module. It may require modification in order to execute successfully.",
+      "file": "security_center_management/simulate_security_health_analytics_custom_module.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "simulate_security_health_analytics_custom_module",
+        "full_name": "::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#simulate_security_health_analytics_custom_module",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenterManagement::V1::SimulateSecurityHealthAnalyticsCustomModuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenterManagement::V1::SimulateSecurityHealthAnalyticsCustomModuleResponse",
+        "client": {
+          "short_name": "SecurityCenterManagement::Client",
+          "full_name": "::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client"
+        },
+        "method": {
+          "short_name": "SimulateSecurityHealthAnalyticsCustomModule",
+          "full_name": "google.cloud.securitycentermanagement.v1.SecurityCenterManagement.SimulateSecurityHealthAnalyticsCustomModule",
+          "service": {
+            "short_name": "SecurityCenterManagement",
+            "full_name": "google.cloud.securitycentermanagement.v1.SecurityCenterManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycentermanagement_v1_generated_SecurityCenterManagement_ListEffectiveEventThreatDetectionCustomModules_sync",
+      "title": "Snippet for the list_effective_event_threat_detection_custom_modules call in the SecurityCenterManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#list_effective_event_threat_detection_custom_modules. It may require modification in order to execute successfully.",
+      "file": "security_center_management/list_effective_event_threat_detection_custom_modules.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_effective_event_threat_detection_custom_modules",
+        "full_name": "::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#list_effective_event_threat_detection_custom_modules",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenterManagement::V1::ListEffectiveEventThreatDetectionCustomModulesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenterManagement::V1::ListEffectiveEventThreatDetectionCustomModulesResponse",
+        "client": {
+          "short_name": "SecurityCenterManagement::Client",
+          "full_name": "::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client"
+        },
+        "method": {
+          "short_name": "ListEffectiveEventThreatDetectionCustomModules",
+          "full_name": "google.cloud.securitycentermanagement.v1.SecurityCenterManagement.ListEffectiveEventThreatDetectionCustomModules",
+          "service": {
+            "short_name": "SecurityCenterManagement",
+            "full_name": "google.cloud.securitycentermanagement.v1.SecurityCenterManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycentermanagement_v1_generated_SecurityCenterManagement_GetEffectiveEventThreatDetectionCustomModule_sync",
+      "title": "Snippet for the get_effective_event_threat_detection_custom_module call in the SecurityCenterManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#get_effective_event_threat_detection_custom_module. It may require modification in order to execute successfully.",
+      "file": "security_center_management/get_effective_event_threat_detection_custom_module.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_effective_event_threat_detection_custom_module",
+        "full_name": "::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#get_effective_event_threat_detection_custom_module",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenterManagement::V1::GetEffectiveEventThreatDetectionCustomModuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenterManagement::V1::EffectiveEventThreatDetectionCustomModule",
+        "client": {
+          "short_name": "SecurityCenterManagement::Client",
+          "full_name": "::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client"
+        },
+        "method": {
+          "short_name": "GetEffectiveEventThreatDetectionCustomModule",
+          "full_name": "google.cloud.securitycentermanagement.v1.SecurityCenterManagement.GetEffectiveEventThreatDetectionCustomModule",
+          "service": {
+            "short_name": "SecurityCenterManagement",
+            "full_name": "google.cloud.securitycentermanagement.v1.SecurityCenterManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycentermanagement_v1_generated_SecurityCenterManagement_ListEventThreatDetectionCustomModules_sync",
+      "title": "Snippet for the list_event_threat_detection_custom_modules call in the SecurityCenterManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#list_event_threat_detection_custom_modules. It may require modification in order to execute successfully.",
+      "file": "security_center_management/list_event_threat_detection_custom_modules.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_event_threat_detection_custom_modules",
+        "full_name": "::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#list_event_threat_detection_custom_modules",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenterManagement::V1::ListEventThreatDetectionCustomModulesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenterManagement::V1::ListEventThreatDetectionCustomModulesResponse",
+        "client": {
+          "short_name": "SecurityCenterManagement::Client",
+          "full_name": "::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client"
+        },
+        "method": {
+          "short_name": "ListEventThreatDetectionCustomModules",
+          "full_name": "google.cloud.securitycentermanagement.v1.SecurityCenterManagement.ListEventThreatDetectionCustomModules",
+          "service": {
+            "short_name": "SecurityCenterManagement",
+            "full_name": "google.cloud.securitycentermanagement.v1.SecurityCenterManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycentermanagement_v1_generated_SecurityCenterManagement_ListDescendantEventThreatDetectionCustomModules_sync",
+      "title": "Snippet for the list_descendant_event_threat_detection_custom_modules call in the SecurityCenterManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#list_descendant_event_threat_detection_custom_modules. It may require modification in order to execute successfully.",
+      "file": "security_center_management/list_descendant_event_threat_detection_custom_modules.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_descendant_event_threat_detection_custom_modules",
+        "full_name": "::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#list_descendant_event_threat_detection_custom_modules",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenterManagement::V1::ListDescendantEventThreatDetectionCustomModulesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenterManagement::V1::ListDescendantEventThreatDetectionCustomModulesResponse",
+        "client": {
+          "short_name": "SecurityCenterManagement::Client",
+          "full_name": "::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client"
+        },
+        "method": {
+          "short_name": "ListDescendantEventThreatDetectionCustomModules",
+          "full_name": "google.cloud.securitycentermanagement.v1.SecurityCenterManagement.ListDescendantEventThreatDetectionCustomModules",
+          "service": {
+            "short_name": "SecurityCenterManagement",
+            "full_name": "google.cloud.securitycentermanagement.v1.SecurityCenterManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycentermanagement_v1_generated_SecurityCenterManagement_GetEventThreatDetectionCustomModule_sync",
+      "title": "Snippet for the get_event_threat_detection_custom_module call in the SecurityCenterManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#get_event_threat_detection_custom_module. It may require modification in order to execute successfully.",
+      "file": "security_center_management/get_event_threat_detection_custom_module.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_event_threat_detection_custom_module",
+        "full_name": "::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#get_event_threat_detection_custom_module",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenterManagement::V1::GetEventThreatDetectionCustomModuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenterManagement::V1::EventThreatDetectionCustomModule",
+        "client": {
+          "short_name": "SecurityCenterManagement::Client",
+          "full_name": "::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client"
+        },
+        "method": {
+          "short_name": "GetEventThreatDetectionCustomModule",
+          "full_name": "google.cloud.securitycentermanagement.v1.SecurityCenterManagement.GetEventThreatDetectionCustomModule",
+          "service": {
+            "short_name": "SecurityCenterManagement",
+            "full_name": "google.cloud.securitycentermanagement.v1.SecurityCenterManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycentermanagement_v1_generated_SecurityCenterManagement_CreateEventThreatDetectionCustomModule_sync",
+      "title": "Snippet for the create_event_threat_detection_custom_module call in the SecurityCenterManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#create_event_threat_detection_custom_module. It may require modification in order to execute successfully.",
+      "file": "security_center_management/create_event_threat_detection_custom_module.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_event_threat_detection_custom_module",
+        "full_name": "::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#create_event_threat_detection_custom_module",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenterManagement::V1::CreateEventThreatDetectionCustomModuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenterManagement::V1::EventThreatDetectionCustomModule",
+        "client": {
+          "short_name": "SecurityCenterManagement::Client",
+          "full_name": "::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client"
+        },
+        "method": {
+          "short_name": "CreateEventThreatDetectionCustomModule",
+          "full_name": "google.cloud.securitycentermanagement.v1.SecurityCenterManagement.CreateEventThreatDetectionCustomModule",
+          "service": {
+            "short_name": "SecurityCenterManagement",
+            "full_name": "google.cloud.securitycentermanagement.v1.SecurityCenterManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycentermanagement_v1_generated_SecurityCenterManagement_UpdateEventThreatDetectionCustomModule_sync",
+      "title": "Snippet for the update_event_threat_detection_custom_module call in the SecurityCenterManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#update_event_threat_detection_custom_module. It may require modification in order to execute successfully.",
+      "file": "security_center_management/update_event_threat_detection_custom_module.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_event_threat_detection_custom_module",
+        "full_name": "::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#update_event_threat_detection_custom_module",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenterManagement::V1::UpdateEventThreatDetectionCustomModuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenterManagement::V1::EventThreatDetectionCustomModule",
+        "client": {
+          "short_name": "SecurityCenterManagement::Client",
+          "full_name": "::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client"
+        },
+        "method": {
+          "short_name": "UpdateEventThreatDetectionCustomModule",
+          "full_name": "google.cloud.securitycentermanagement.v1.SecurityCenterManagement.UpdateEventThreatDetectionCustomModule",
+          "service": {
+            "short_name": "SecurityCenterManagement",
+            "full_name": "google.cloud.securitycentermanagement.v1.SecurityCenterManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycentermanagement_v1_generated_SecurityCenterManagement_DeleteEventThreatDetectionCustomModule_sync",
+      "title": "Snippet for the delete_event_threat_detection_custom_module call in the SecurityCenterManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#delete_event_threat_detection_custom_module. It may require modification in order to execute successfully.",
+      "file": "security_center_management/delete_event_threat_detection_custom_module.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_event_threat_detection_custom_module",
+        "full_name": "::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#delete_event_threat_detection_custom_module",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenterManagement::V1::DeleteEventThreatDetectionCustomModuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "SecurityCenterManagement::Client",
+          "full_name": "::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client"
+        },
+        "method": {
+          "short_name": "DeleteEventThreatDetectionCustomModule",
+          "full_name": "google.cloud.securitycentermanagement.v1.SecurityCenterManagement.DeleteEventThreatDetectionCustomModule",
+          "service": {
+            "short_name": "SecurityCenterManagement",
+            "full_name": "google.cloud.securitycentermanagement.v1.SecurityCenterManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycentermanagement_v1_generated_SecurityCenterManagement_ValidateEventThreatDetectionCustomModule_sync",
+      "title": "Snippet for the validate_event_threat_detection_custom_module call in the SecurityCenterManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#validate_event_threat_detection_custom_module. It may require modification in order to execute successfully.",
+      "file": "security_center_management/validate_event_threat_detection_custom_module.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "validate_event_threat_detection_custom_module",
+        "full_name": "::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#validate_event_threat_detection_custom_module",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenterManagement::V1::ValidateEventThreatDetectionCustomModuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenterManagement::V1::ValidateEventThreatDetectionCustomModuleResponse",
+        "client": {
+          "short_name": "SecurityCenterManagement::Client",
+          "full_name": "::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client"
+        },
+        "method": {
+          "short_name": "ValidateEventThreatDetectionCustomModule",
+          "full_name": "google.cloud.securitycentermanagement.v1.SecurityCenterManagement.ValidateEventThreatDetectionCustomModule",
+          "service": {
+            "short_name": "SecurityCenterManagement",
+            "full_name": "google.cloud.securitycentermanagement.v1.SecurityCenterManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}

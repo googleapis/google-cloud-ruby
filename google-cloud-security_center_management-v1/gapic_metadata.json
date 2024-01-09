@@ -1,0 +1,108 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.securitycentermanagement.v1",
+  "libraryPackage": "::Google::Cloud::SecurityCenterManagement::V1",
+  "services": {
+    "SecurityCenterManagement": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client",
+          "rpcs": {
+            "ListEffectiveSecurityHealthAnalyticsCustomModules": {
+              "methods": [
+                "list_effective_security_health_analytics_custom_modules"
+              ]
+            },
+            "GetEffectiveSecurityHealthAnalyticsCustomModule": {
+              "methods": [
+                "get_effective_security_health_analytics_custom_module"
+              ]
+            },
+            "ListSecurityHealthAnalyticsCustomModules": {
+              "methods": [
+                "list_security_health_analytics_custom_modules"
+              ]
+            },
+            "ListDescendantSecurityHealthAnalyticsCustomModules": {
+              "methods": [
+                "list_descendant_security_health_analytics_custom_modules"
+              ]
+            },
+            "GetSecurityHealthAnalyticsCustomModule": {
+              "methods": [
+                "get_security_health_analytics_custom_module"
+              ]
+            },
+            "CreateSecurityHealthAnalyticsCustomModule": {
+              "methods": [
+                "create_security_health_analytics_custom_module"
+              ]
+            },
+            "UpdateSecurityHealthAnalyticsCustomModule": {
+              "methods": [
+                "update_security_health_analytics_custom_module"
+              ]
+            },
+            "DeleteSecurityHealthAnalyticsCustomModule": {
+              "methods": [
+                "delete_security_health_analytics_custom_module"
+              ]
+            },
+            "SimulateSecurityHealthAnalyticsCustomModule": {
+              "methods": [
+                "simulate_security_health_analytics_custom_module"
+              ]
+            },
+            "ListEffectiveEventThreatDetectionCustomModules": {
+              "methods": [
+                "list_effective_event_threat_detection_custom_modules"
+              ]
+            },
+            "GetEffectiveEventThreatDetectionCustomModule": {
+              "methods": [
+                "get_effective_event_threat_detection_custom_module"
+              ]
+            },
+            "ListEventThreatDetectionCustomModules": {
+              "methods": [
+                "list_event_threat_detection_custom_modules"
+              ]
+            },
+            "ListDescendantEventThreatDetectionCustomModules": {
+              "methods": [
+                "list_descendant_event_threat_detection_custom_modules"
+              ]
+            },
+            "GetEventThreatDetectionCustomModule": {
+              "methods": [
+                "get_event_threat_detection_custom_module"
+              ]
+            },
+            "CreateEventThreatDetectionCustomModule": {
+              "methods": [
+                "create_event_threat_detection_custom_module"
+              ]
+            },
+            "UpdateEventThreatDetectionCustomModule": {
+              "methods": [
+                "update_event_threat_detection_custom_module"
+              ]
+            },
+            "DeleteEventThreatDetectionCustomModule": {
+              "methods": [
+                "delete_event_threat_detection_custom_module"
+              ]
+            },
+            "ValidateEventThreatDetectionCustomModule": {
+              "methods": [
+                "validate_event_threat_detection_custom_module"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

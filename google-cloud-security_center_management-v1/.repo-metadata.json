@@ -1,0 +1,17 @@
+{
+    "api_id": "securitycentermanagement.googleapis.com",
+    "api_shortname": "securitycentermanagement",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-security_center_management-v1/latest",
+    "distribution_name": "google-cloud-security_center_management-v1",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "securitycentermanagement",
+    "name_pretty": "Security Center Management V1 API",
+    "product_documentation": "https://cloud.google.com/securitycentermanagement/docs/overview",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "google-cloud-security_center_management-v1 is the official client library for the Security Center Management V1 API. Note that google-cloud-security_center_management-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-security_center_management instead. See the readme for more details.",
+    "ruby-cloud-product-url": "https://cloud.google.com/securitycentermanagement/docs/overview",
+    "library_type": "GAPIC_AUTO"
+}
