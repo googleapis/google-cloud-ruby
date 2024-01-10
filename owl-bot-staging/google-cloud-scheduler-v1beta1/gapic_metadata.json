@@ -1,0 +1,58 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.scheduler.v1beta1",
+  "libraryPackage": "::Google::Cloud::Scheduler::V1beta1",
+  "services": {
+    "CloudScheduler": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client",
+          "rpcs": {
+            "ListJobs": {
+              "methods": [
+                "list_jobs"
+              ]
+            },
+            "GetJob": {
+              "methods": [
+                "get_job"
+              ]
+            },
+            "CreateJob": {
+              "methods": [
+                "create_job"
+              ]
+            },
+            "UpdateJob": {
+              "methods": [
+                "update_job"
+              ]
+            },
+            "DeleteJob": {
+              "methods": [
+                "delete_job"
+              ]
+            },
+            "PauseJob": {
+              "methods": [
+                "pause_job"
+              ]
+            },
+            "ResumeJob": {
+              "methods": [
+                "resume_job"
+              ]
+            },
+            "RunJob": {
+              "methods": [
+                "run_job"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
