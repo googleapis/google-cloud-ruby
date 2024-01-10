@@ -15,11 +15,33 @@
 # limitations under the License.
 
 
-Google::Cloud::PubSub::V1::Publisher::Client.configure do |config|
-  config.channel_args ||= {}
-  config.channel_args["grpc.max_send_message_length"] = -1
-  config.channel_args["grpc.max_receive_message_length"] = -1
-  config.channel_args["grpc.keepalive_time_ms"] = 300_000
-  # Set max metadata size to 4 MB.
-  config.channel_args["grpc.max_metadata_size"] = 4 * 1024 * 1024
+module Google
+  module Cloud
+    module PubSub
+      module V1
+        module Publisher
+          class Client # rubocop:disable Style/Documentation
+            class << self
+              alias configure_internal configure
+
+              def configure
+                @configure ||= begin
+                  config = configure_internal
+                  config.channel_args ||= {}
+                  config.channel_args["grpc.max_send_message_length"] = -1
+                  config.channel_args["grpc.max_receive_message_length"] = -1
+                  config.channel_args["grpc.keepalive_time_ms"] = 300_000
+                  # Set max metadata size to 4 MB.
+                  config.channel_args["grpc.max_metadata_size"] = 4 * 1024 * 1024
+                  config
+                end
+                yield @configure if block_given?
+                @configure
+              end
+            end
+          end
+        end
+      end
+    end
+  end
 end
