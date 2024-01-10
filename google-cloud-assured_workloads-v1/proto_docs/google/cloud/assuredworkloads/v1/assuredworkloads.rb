@@ -172,6 +172,7 @@ module Google
         #     Format:
         #     folders/\\{folder_id}
         # @!attribute [rw] kms_settings
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::AssuredWorkloads::V1::Workload::KMSSettings]
         #     Input only. Settings used to create a CMEK crypto key. When set, a project with a KMS
         #     CMEK key is provisioned.
@@ -247,6 +248,7 @@ module Google
           # This message is deprecated.
           # In order to create a Keyring, callers should specify,
           # ENCRYPTION_KEYS_PROJECT or KEYRING in ResourceSettings.resource_type field.
+          # @deprecated This message is deprecated and may be removed in the next major version update.
           # @!attribute [rw] next_rotation_time
           #   @return [::Google::Protobuf::Timestamp]
           #     Required. Input only. Immutable. The time at which the Key Management Service will automatically create a
@@ -472,6 +474,7 @@ module Google
         #   @return [::String]
         #     Required. Business justification explaining the need for violation acknowledgement
         # @!attribute [rw] non_compliant_org_policy
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Optional. This field is deprecated and will be removed in future version of the API.
         #     Name of the OrgPolicy which was modified with non-compliant change and

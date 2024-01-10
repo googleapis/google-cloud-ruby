@@ -141,6 +141,7 @@ module Google
         #     topic](https://cloud.google.com/compute/docs/instances/os-inventory-management)
         #     for more information.
         # @!attribute [rw] related_assets
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::Asset::V1::RelatedAssets]
         #     DEPRECATED. This field only presents for the purpose of
         #     backward-compatibility. The server will never generate responses with this
@@ -220,6 +221,7 @@ module Google
         # backward-compatibility. The server will never populate this message in
         # responses.
         # The detailed related assets with the `relationship_type`.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] relationship_attributes
         #   @return [::Google::Cloud::Asset::V1::RelationshipAttributes]
         #     The detailed relationship attributes.
@@ -236,6 +238,7 @@ module Google
         # responses.
         # The relationship attributes which include  `type`, `source_resource_type`,
         # `target_resource_type` and `action`.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] type
         #   @return [::String]
         #     The unique identifier of the relationship type. Example:
@@ -446,6 +449,7 @@ module Google
         #     * Use a field query. Example: `networkTags:internal`
         #     * Use a free text query. Example: `internal`
         # @!attribute [rw] kms_key
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     The Cloud KMS
         #     [CryptoKey](https://cloud.google.com/kms/docs/reference/rest/v1/projects.locations.keyRings.cryptoKeys)
@@ -583,6 +587,7 @@ module Google
         #     See [supported relationship
         #     types](https://cloud.google.com/asset-inventory/docs/supported-asset-types#supported_relationship_types).
         # @!attribute [rw] tag_keys
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Array<::String>]
         #     This field is only present for the purpose of backward compatibility.
         #     Use the `tags` field instead.
@@ -598,6 +603,7 @@ module Google
         #     * Use a free text query. Example:
         #         - `env`
         # @!attribute [rw] tag_values
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Array<::String>]
         #     This field is only present for the purpose of backward compatibility.
         #     Use the `tags` field instead.
@@ -615,6 +621,7 @@ module Google
         #     * Use a free text query. Example:
         #         - `prod`
         # @!attribute [rw] tag_value_ids
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Array<::String>]
         #     This field is only present for the purpose of backward compatibility.
         #     Use the `tags` field instead.

@@ -14,7 +14,7 @@
     {
       "region_tag": "artifactregistry_v1beta2_generated_ArtifactRegistry_ImportAptArtifacts_sync",
       "title": "Snippet for the import_apt_artifacts call in the ArtifactRegistry service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#import_apt_artifacts. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#import_apt_artifacts.",
       "file": "artifact_registry/import_apt_artifacts.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "artifactregistry_v1beta2_generated_ArtifactRegistry_ImportYumArtifacts_sync",
       "title": "Snippet for the import_yum_artifacts call in the ArtifactRegistry service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#import_yum_artifacts. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#import_yum_artifacts.",
       "file": "artifact_registry/import_yum_artifacts.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "artifactregistry_v1beta2_generated_ArtifactRegistry_ListRepositories_sync",
       "title": "Snippet for the list_repositories call in the ArtifactRegistry service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#list_repositories. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#list_repositories.",
       "file": "artifact_registry/list_repositories.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -134,7 +134,7 @@
     {
       "region_tag": "artifactregistry_v1beta2_generated_ArtifactRegistry_GetRepository_sync",
       "title": "Snippet for the get_repository call in the ArtifactRegistry service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#get_repository. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#get_repository.",
       "file": "artifact_registry/get_repository.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -174,7 +174,7 @@
     {
       "region_tag": "artifactregistry_v1beta2_generated_ArtifactRegistry_CreateRepository_sync",
       "title": "Snippet for the create_repository call in the ArtifactRegistry service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#create_repository. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#create_repository.",
       "file": "artifact_registry/create_repository.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,7 +206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -214,7 +214,7 @@
     {
       "region_tag": "artifactregistry_v1beta2_generated_ArtifactRegistry_UpdateRepository_sync",
       "title": "Snippet for the update_repository call in the ArtifactRegistry service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#update_repository. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#update_repository.",
       "file": "artifact_registry/update_repository.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,7 +246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -254,7 +254,7 @@
     {
       "region_tag": "artifactregistry_v1beta2_generated_ArtifactRegistry_DeleteRepository_sync",
       "title": "Snippet for the delete_repository call in the ArtifactRegistry service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#delete_repository. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#delete_repository.",
       "file": "artifact_registry/delete_repository.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,7 +286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -294,7 +294,7 @@
     {
       "region_tag": "artifactregistry_v1beta2_generated_ArtifactRegistry_ListPackages_sync",
       "title": "Snippet for the list_packages call in the ArtifactRegistry service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#list_packages. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#list_packages.",
       "file": "artifact_registry/list_packages.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,7 +326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -334,7 +334,7 @@
     {
       "region_tag": "artifactregistry_v1beta2_generated_ArtifactRegistry_GetPackage_sync",
       "title": "Snippet for the get_package call in the ArtifactRegistry service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#get_package. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#get_package.",
       "file": "artifact_registry/get_package.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,7 +366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -374,7 +374,7 @@
     {
       "region_tag": "artifactregistry_v1beta2_generated_ArtifactRegistry_DeletePackage_sync",
       "title": "Snippet for the delete_package call in the ArtifactRegistry service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#delete_package. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#delete_package.",
       "file": "artifact_registry/delete_package.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,7 +406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -414,7 +414,7 @@
     {
       "region_tag": "artifactregistry_v1beta2_generated_ArtifactRegistry_ListVersions_sync",
       "title": "Snippet for the list_versions call in the ArtifactRegistry service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#list_versions. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#list_versions.",
       "file": "artifact_registry/list_versions.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,7 +446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -454,7 +454,7 @@
     {
       "region_tag": "artifactregistry_v1beta2_generated_ArtifactRegistry_GetVersion_sync",
       "title": "Snippet for the get_version call in the ArtifactRegistry service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#get_version. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#get_version.",
       "file": "artifact_registry/get_version.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,7 +486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -494,7 +494,7 @@
     {
       "region_tag": "artifactregistry_v1beta2_generated_ArtifactRegistry_DeleteVersion_sync",
       "title": "Snippet for the delete_version call in the ArtifactRegistry service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#delete_version. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#delete_version.",
       "file": "artifact_registry/delete_version.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,7 +526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -534,7 +534,7 @@
     {
       "region_tag": "artifactregistry_v1beta2_generated_ArtifactRegistry_ListFiles_sync",
       "title": "Snippet for the list_files call in the ArtifactRegistry service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#list_files. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#list_files.",
       "file": "artifact_registry/list_files.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,7 +566,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -574,7 +574,7 @@
     {
       "region_tag": "artifactregistry_v1beta2_generated_ArtifactRegistry_GetFile_sync",
       "title": "Snippet for the get_file call in the ArtifactRegistry service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#get_file. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#get_file.",
       "file": "artifact_registry/get_file.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,7 +606,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -614,7 +614,7 @@
     {
       "region_tag": "artifactregistry_v1beta2_generated_ArtifactRegistry_ListTags_sync",
       "title": "Snippet for the list_tags call in the ArtifactRegistry service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#list_tags. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#list_tags.",
       "file": "artifact_registry/list_tags.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,7 +646,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -654,7 +654,7 @@
     {
       "region_tag": "artifactregistry_v1beta2_generated_ArtifactRegistry_GetTag_sync",
       "title": "Snippet for the get_tag call in the ArtifactRegistry service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#get_tag. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#get_tag.",
       "file": "artifact_registry/get_tag.rb",
       "language": "RUBY",
       "client_method": {
@@ -686,7 +686,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -694,7 +694,7 @@
     {
       "region_tag": "artifactregistry_v1beta2_generated_ArtifactRegistry_CreateTag_sync",
       "title": "Snippet for the create_tag call in the ArtifactRegistry service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#create_tag. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#create_tag.",
       "file": "artifact_registry/create_tag.rb",
       "language": "RUBY",
       "client_method": {
@@ -726,7 +726,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -734,7 +734,7 @@
     {
       "region_tag": "artifactregistry_v1beta2_generated_ArtifactRegistry_UpdateTag_sync",
       "title": "Snippet for the update_tag call in the ArtifactRegistry service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#update_tag. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#update_tag.",
       "file": "artifact_registry/update_tag.rb",
       "language": "RUBY",
       "client_method": {
@@ -766,7 +766,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -774,7 +774,7 @@
     {
       "region_tag": "artifactregistry_v1beta2_generated_ArtifactRegistry_DeleteTag_sync",
       "title": "Snippet for the delete_tag call in the ArtifactRegistry service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#delete_tag. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#delete_tag.",
       "file": "artifact_registry/delete_tag.rb",
       "language": "RUBY",
       "client_method": {
@@ -806,7 +806,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -814,7 +814,7 @@
     {
       "region_tag": "artifactregistry_v1beta2_generated_ArtifactRegistry_SetIamPolicy_sync",
       "title": "Snippet for the set_iam_policy call in the ArtifactRegistry service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#set_iam_policy. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#set_iam_policy.",
       "file": "artifact_registry/set_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -846,7 +846,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -854,7 +854,7 @@
     {
       "region_tag": "artifactregistry_v1beta2_generated_ArtifactRegistry_GetIamPolicy_sync",
       "title": "Snippet for the get_iam_policy call in the ArtifactRegistry service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#get_iam_policy. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#get_iam_policy.",
       "file": "artifact_registry/get_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -886,7 +886,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -894,7 +894,7 @@
     {
       "region_tag": "artifactregistry_v1beta2_generated_ArtifactRegistry_TestIamPermissions_sync",
       "title": "Snippet for the test_iam_permissions call in the ArtifactRegistry service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#test_iam_permissions. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#test_iam_permissions.",
       "file": "artifact_registry/test_iam_permissions.rb",
       "language": "RUBY",
       "client_method": {
@@ -926,7 +926,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -934,7 +934,7 @@
     {
       "region_tag": "artifactregistry_v1beta2_generated_ArtifactRegistry_GetProjectSettings_sync",
       "title": "Snippet for the get_project_settings call in the ArtifactRegistry service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#get_project_settings. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#get_project_settings.",
       "file": "artifact_registry/get_project_settings.rb",
       "language": "RUBY",
       "client_method": {
@@ -966,7 +966,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -974,7 +974,7 @@
     {
       "region_tag": "artifactregistry_v1beta2_generated_ArtifactRegistry_UpdateProjectSettings_sync",
       "title": "Snippet for the update_project_settings call in the ArtifactRegistry service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#update_project_settings. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#update_project_settings.",
       "file": "artifact_registry/update_project_settings.rb",
       "language": "RUBY",
       "client_method": {
@@ -1006,7 +1006,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
