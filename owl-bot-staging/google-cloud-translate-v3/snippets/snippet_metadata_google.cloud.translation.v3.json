@@ -1,0 +1,815 @@
+{
+  "client_library": {
+    "name": "google-cloud-translate-v3",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.translation.v3",
+        "version": "v3"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "translate_v3_generated_TranslationService_TranslateText_sync",
+      "title": "Snippet for the translate_text call in the TranslationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Translate::V3::TranslationService::Client#translate_text.",
+      "file": "translation_service/translate_text.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "translate_text",
+        "full_name": "::Google::Cloud::Translate::V3::TranslationService::Client#translate_text",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Translate::V3::TranslateTextRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Translate::V3::TranslateTextResponse",
+        "client": {
+          "short_name": "TranslationService::Client",
+          "full_name": "::Google::Cloud::Translate::V3::TranslationService::Client"
+        },
+        "method": {
+          "short_name": "TranslateText",
+          "full_name": "google.cloud.translation.v3.TranslationService.TranslateText",
+          "service": {
+            "short_name": "TranslationService",
+            "full_name": "google.cloud.translation.v3.TranslationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "translate_v3_generated_TranslationService_DetectLanguage_sync",
+      "title": "Snippet for the detect_language call in the TranslationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Translate::V3::TranslationService::Client#detect_language.",
+      "file": "translation_service/detect_language.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "detect_language",
+        "full_name": "::Google::Cloud::Translate::V3::TranslationService::Client#detect_language",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Translate::V3::DetectLanguageRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Translate::V3::DetectLanguageResponse",
+        "client": {
+          "short_name": "TranslationService::Client",
+          "full_name": "::Google::Cloud::Translate::V3::TranslationService::Client"
+        },
+        "method": {
+          "short_name": "DetectLanguage",
+          "full_name": "google.cloud.translation.v3.TranslationService.DetectLanguage",
+          "service": {
+            "short_name": "TranslationService",
+            "full_name": "google.cloud.translation.v3.TranslationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "translate_v3_generated_TranslationService_GetSupportedLanguages_sync",
+      "title": "Snippet for the get_supported_languages call in the TranslationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Translate::V3::TranslationService::Client#get_supported_languages.",
+      "file": "translation_service/get_supported_languages.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_supported_languages",
+        "full_name": "::Google::Cloud::Translate::V3::TranslationService::Client#get_supported_languages",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Translate::V3::GetSupportedLanguagesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Translate::V3::SupportedLanguages",
+        "client": {
+          "short_name": "TranslationService::Client",
+          "full_name": "::Google::Cloud::Translate::V3::TranslationService::Client"
+        },
+        "method": {
+          "short_name": "GetSupportedLanguages",
+          "full_name": "google.cloud.translation.v3.TranslationService.GetSupportedLanguages",
+          "service": {
+            "short_name": "TranslationService",
+            "full_name": "google.cloud.translation.v3.TranslationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "translate_v3_generated_TranslationService_TranslateDocument_sync",
+      "title": "Snippet for the translate_document call in the TranslationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Translate::V3::TranslationService::Client#translate_document.",
+      "file": "translation_service/translate_document.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "translate_document",
+        "full_name": "::Google::Cloud::Translate::V3::TranslationService::Client#translate_document",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Translate::V3::TranslateDocumentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Translate::V3::TranslateDocumentResponse",
+        "client": {
+          "short_name": "TranslationService::Client",
+          "full_name": "::Google::Cloud::Translate::V3::TranslationService::Client"
+        },
+        "method": {
+          "short_name": "TranslateDocument",
+          "full_name": "google.cloud.translation.v3.TranslationService.TranslateDocument",
+          "service": {
+            "short_name": "TranslationService",
+            "full_name": "google.cloud.translation.v3.TranslationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "translate_v3_generated_TranslationService_BatchTranslateText_sync",
+      "title": "Snippet for the batch_translate_text call in the TranslationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Translate::V3::TranslationService::Client#batch_translate_text.",
+      "file": "translation_service/batch_translate_text.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_translate_text",
+        "full_name": "::Google::Cloud::Translate::V3::TranslationService::Client#batch_translate_text",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Translate::V3::BatchTranslateTextRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "TranslationService::Client",
+          "full_name": "::Google::Cloud::Translate::V3::TranslationService::Client"
+        },
+        "method": {
+          "short_name": "BatchTranslateText",
+          "full_name": "google.cloud.translation.v3.TranslationService.BatchTranslateText",
+          "service": {
+            "short_name": "TranslationService",
+            "full_name": "google.cloud.translation.v3.TranslationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "translate_v3_generated_TranslationService_BatchTranslateDocument_sync",
+      "title": "Snippet for the batch_translate_document call in the TranslationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Translate::V3::TranslationService::Client#batch_translate_document.",
+      "file": "translation_service/batch_translate_document.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_translate_document",
+        "full_name": "::Google::Cloud::Translate::V3::TranslationService::Client#batch_translate_document",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Translate::V3::BatchTranslateDocumentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "TranslationService::Client",
+          "full_name": "::Google::Cloud::Translate::V3::TranslationService::Client"
+        },
+        "method": {
+          "short_name": "BatchTranslateDocument",
+          "full_name": "google.cloud.translation.v3.TranslationService.BatchTranslateDocument",
+          "service": {
+            "short_name": "TranslationService",
+            "full_name": "google.cloud.translation.v3.TranslationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "translate_v3_generated_TranslationService_CreateGlossary_sync",
+      "title": "Snippet for the create_glossary call in the TranslationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Translate::V3::TranslationService::Client#create_glossary.",
+      "file": "translation_service/create_glossary.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_glossary",
+        "full_name": "::Google::Cloud::Translate::V3::TranslationService::Client#create_glossary",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Translate::V3::CreateGlossaryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "TranslationService::Client",
+          "full_name": "::Google::Cloud::Translate::V3::TranslationService::Client"
+        },
+        "method": {
+          "short_name": "CreateGlossary",
+          "full_name": "google.cloud.translation.v3.TranslationService.CreateGlossary",
+          "service": {
+            "short_name": "TranslationService",
+            "full_name": "google.cloud.translation.v3.TranslationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "translate_v3_generated_TranslationService_ListGlossaries_sync",
+      "title": "Snippet for the list_glossaries call in the TranslationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Translate::V3::TranslationService::Client#list_glossaries.",
+      "file": "translation_service/list_glossaries.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_glossaries",
+        "full_name": "::Google::Cloud::Translate::V3::TranslationService::Client#list_glossaries",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Translate::V3::ListGlossariesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Translate::V3::ListGlossariesResponse",
+        "client": {
+          "short_name": "TranslationService::Client",
+          "full_name": "::Google::Cloud::Translate::V3::TranslationService::Client"
+        },
+        "method": {
+          "short_name": "ListGlossaries",
+          "full_name": "google.cloud.translation.v3.TranslationService.ListGlossaries",
+          "service": {
+            "short_name": "TranslationService",
+            "full_name": "google.cloud.translation.v3.TranslationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "translate_v3_generated_TranslationService_GetGlossary_sync",
+      "title": "Snippet for the get_glossary call in the TranslationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Translate::V3::TranslationService::Client#get_glossary.",
+      "file": "translation_service/get_glossary.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_glossary",
+        "full_name": "::Google::Cloud::Translate::V3::TranslationService::Client#get_glossary",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Translate::V3::GetGlossaryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Translate::V3::Glossary",
+        "client": {
+          "short_name": "TranslationService::Client",
+          "full_name": "::Google::Cloud::Translate::V3::TranslationService::Client"
+        },
+        "method": {
+          "short_name": "GetGlossary",
+          "full_name": "google.cloud.translation.v3.TranslationService.GetGlossary",
+          "service": {
+            "short_name": "TranslationService",
+            "full_name": "google.cloud.translation.v3.TranslationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "translate_v3_generated_TranslationService_DeleteGlossary_sync",
+      "title": "Snippet for the delete_glossary call in the TranslationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Translate::V3::TranslationService::Client#delete_glossary.",
+      "file": "translation_service/delete_glossary.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_glossary",
+        "full_name": "::Google::Cloud::Translate::V3::TranslationService::Client#delete_glossary",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Translate::V3::DeleteGlossaryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "TranslationService::Client",
+          "full_name": "::Google::Cloud::Translate::V3::TranslationService::Client"
+        },
+        "method": {
+          "short_name": "DeleteGlossary",
+          "full_name": "google.cloud.translation.v3.TranslationService.DeleteGlossary",
+          "service": {
+            "short_name": "TranslationService",
+            "full_name": "google.cloud.translation.v3.TranslationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "translate_v3_generated_TranslationService_CreateAdaptiveMtDataset_sync",
+      "title": "Snippet for the create_adaptive_mt_dataset call in the TranslationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Translate::V3::TranslationService::Client#create_adaptive_mt_dataset.",
+      "file": "translation_service/create_adaptive_mt_dataset.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_adaptive_mt_dataset",
+        "full_name": "::Google::Cloud::Translate::V3::TranslationService::Client#create_adaptive_mt_dataset",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Translate::V3::CreateAdaptiveMtDatasetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Translate::V3::AdaptiveMtDataset",
+        "client": {
+          "short_name": "TranslationService::Client",
+          "full_name": "::Google::Cloud::Translate::V3::TranslationService::Client"
+        },
+        "method": {
+          "short_name": "CreateAdaptiveMtDataset",
+          "full_name": "google.cloud.translation.v3.TranslationService.CreateAdaptiveMtDataset",
+          "service": {
+            "short_name": "TranslationService",
+            "full_name": "google.cloud.translation.v3.TranslationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "translate_v3_generated_TranslationService_DeleteAdaptiveMtDataset_sync",
+      "title": "Snippet for the delete_adaptive_mt_dataset call in the TranslationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Translate::V3::TranslationService::Client#delete_adaptive_mt_dataset.",
+      "file": "translation_service/delete_adaptive_mt_dataset.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_adaptive_mt_dataset",
+        "full_name": "::Google::Cloud::Translate::V3::TranslationService::Client#delete_adaptive_mt_dataset",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Translate::V3::DeleteAdaptiveMtDatasetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "TranslationService::Client",
+          "full_name": "::Google::Cloud::Translate::V3::TranslationService::Client"
+        },
+        "method": {
+          "short_name": "DeleteAdaptiveMtDataset",
+          "full_name": "google.cloud.translation.v3.TranslationService.DeleteAdaptiveMtDataset",
+          "service": {
+            "short_name": "TranslationService",
+            "full_name": "google.cloud.translation.v3.TranslationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "translate_v3_generated_TranslationService_GetAdaptiveMtDataset_sync",
+      "title": "Snippet for the get_adaptive_mt_dataset call in the TranslationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Translate::V3::TranslationService::Client#get_adaptive_mt_dataset.",
+      "file": "translation_service/get_adaptive_mt_dataset.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_adaptive_mt_dataset",
+        "full_name": "::Google::Cloud::Translate::V3::TranslationService::Client#get_adaptive_mt_dataset",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Translate::V3::GetAdaptiveMtDatasetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Translate::V3::AdaptiveMtDataset",
+        "client": {
+          "short_name": "TranslationService::Client",
+          "full_name": "::Google::Cloud::Translate::V3::TranslationService::Client"
+        },
+        "method": {
+          "short_name": "GetAdaptiveMtDataset",
+          "full_name": "google.cloud.translation.v3.TranslationService.GetAdaptiveMtDataset",
+          "service": {
+            "short_name": "TranslationService",
+            "full_name": "google.cloud.translation.v3.TranslationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "translate_v3_generated_TranslationService_ListAdaptiveMtDatasets_sync",
+      "title": "Snippet for the list_adaptive_mt_datasets call in the TranslationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Translate::V3::TranslationService::Client#list_adaptive_mt_datasets.",
+      "file": "translation_service/list_adaptive_mt_datasets.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_adaptive_mt_datasets",
+        "full_name": "::Google::Cloud::Translate::V3::TranslationService::Client#list_adaptive_mt_datasets",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Translate::V3::ListAdaptiveMtDatasetsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Translate::V3::ListAdaptiveMtDatasetsResponse",
+        "client": {
+          "short_name": "TranslationService::Client",
+          "full_name": "::Google::Cloud::Translate::V3::TranslationService::Client"
+        },
+        "method": {
+          "short_name": "ListAdaptiveMtDatasets",
+          "full_name": "google.cloud.translation.v3.TranslationService.ListAdaptiveMtDatasets",
+          "service": {
+            "short_name": "TranslationService",
+            "full_name": "google.cloud.translation.v3.TranslationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "translate_v3_generated_TranslationService_AdaptiveMtTranslate_sync",
+      "title": "Snippet for the adaptive_mt_translate call in the TranslationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Translate::V3::TranslationService::Client#adaptive_mt_translate.",
+      "file": "translation_service/adaptive_mt_translate.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "adaptive_mt_translate",
+        "full_name": "::Google::Cloud::Translate::V3::TranslationService::Client#adaptive_mt_translate",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Translate::V3::AdaptiveMtTranslateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Translate::V3::AdaptiveMtTranslateResponse",
+        "client": {
+          "short_name": "TranslationService::Client",
+          "full_name": "::Google::Cloud::Translate::V3::TranslationService::Client"
+        },
+        "method": {
+          "short_name": "AdaptiveMtTranslate",
+          "full_name": "google.cloud.translation.v3.TranslationService.AdaptiveMtTranslate",
+          "service": {
+            "short_name": "TranslationService",
+            "full_name": "google.cloud.translation.v3.TranslationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "translate_v3_generated_TranslationService_GetAdaptiveMtFile_sync",
+      "title": "Snippet for the get_adaptive_mt_file call in the TranslationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Translate::V3::TranslationService::Client#get_adaptive_mt_file.",
+      "file": "translation_service/get_adaptive_mt_file.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_adaptive_mt_file",
+        "full_name": "::Google::Cloud::Translate::V3::TranslationService::Client#get_adaptive_mt_file",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Translate::V3::GetAdaptiveMtFileRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Translate::V3::AdaptiveMtFile",
+        "client": {
+          "short_name": "TranslationService::Client",
+          "full_name": "::Google::Cloud::Translate::V3::TranslationService::Client"
+        },
+        "method": {
+          "short_name": "GetAdaptiveMtFile",
+          "full_name": "google.cloud.translation.v3.TranslationService.GetAdaptiveMtFile",
+          "service": {
+            "short_name": "TranslationService",
+            "full_name": "google.cloud.translation.v3.TranslationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "translate_v3_generated_TranslationService_DeleteAdaptiveMtFile_sync",
+      "title": "Snippet for the delete_adaptive_mt_file call in the TranslationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Translate::V3::TranslationService::Client#delete_adaptive_mt_file.",
+      "file": "translation_service/delete_adaptive_mt_file.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_adaptive_mt_file",
+        "full_name": "::Google::Cloud::Translate::V3::TranslationService::Client#delete_adaptive_mt_file",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Translate::V3::DeleteAdaptiveMtFileRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "TranslationService::Client",
+          "full_name": "::Google::Cloud::Translate::V3::TranslationService::Client"
+        },
+        "method": {
+          "short_name": "DeleteAdaptiveMtFile",
+          "full_name": "google.cloud.translation.v3.TranslationService.DeleteAdaptiveMtFile",
+          "service": {
+            "short_name": "TranslationService",
+            "full_name": "google.cloud.translation.v3.TranslationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "translate_v3_generated_TranslationService_ImportAdaptiveMtFile_sync",
+      "title": "Snippet for the import_adaptive_mt_file call in the TranslationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Translate::V3::TranslationService::Client#import_adaptive_mt_file.",
+      "file": "translation_service/import_adaptive_mt_file.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "import_adaptive_mt_file",
+        "full_name": "::Google::Cloud::Translate::V3::TranslationService::Client#import_adaptive_mt_file",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Translate::V3::ImportAdaptiveMtFileRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Translate::V3::ImportAdaptiveMtFileResponse",
+        "client": {
+          "short_name": "TranslationService::Client",
+          "full_name": "::Google::Cloud::Translate::V3::TranslationService::Client"
+        },
+        "method": {
+          "short_name": "ImportAdaptiveMtFile",
+          "full_name": "google.cloud.translation.v3.TranslationService.ImportAdaptiveMtFile",
+          "service": {
+            "short_name": "TranslationService",
+            "full_name": "google.cloud.translation.v3.TranslationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "translate_v3_generated_TranslationService_ListAdaptiveMtFiles_sync",
+      "title": "Snippet for the list_adaptive_mt_files call in the TranslationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Translate::V3::TranslationService::Client#list_adaptive_mt_files.",
+      "file": "translation_service/list_adaptive_mt_files.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_adaptive_mt_files",
+        "full_name": "::Google::Cloud::Translate::V3::TranslationService::Client#list_adaptive_mt_files",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Translate::V3::ListAdaptiveMtFilesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Translate::V3::ListAdaptiveMtFilesResponse",
+        "client": {
+          "short_name": "TranslationService::Client",
+          "full_name": "::Google::Cloud::Translate::V3::TranslationService::Client"
+        },
+        "method": {
+          "short_name": "ListAdaptiveMtFiles",
+          "full_name": "google.cloud.translation.v3.TranslationService.ListAdaptiveMtFiles",
+          "service": {
+            "short_name": "TranslationService",
+            "full_name": "google.cloud.translation.v3.TranslationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "translate_v3_generated_TranslationService_ListAdaptiveMtSentences_sync",
+      "title": "Snippet for the list_adaptive_mt_sentences call in the TranslationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Translate::V3::TranslationService::Client#list_adaptive_mt_sentences.",
+      "file": "translation_service/list_adaptive_mt_sentences.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_adaptive_mt_sentences",
+        "full_name": "::Google::Cloud::Translate::V3::TranslationService::Client#list_adaptive_mt_sentences",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Translate::V3::ListAdaptiveMtSentencesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Translate::V3::ListAdaptiveMtSentencesResponse",
+        "client": {
+          "short_name": "TranslationService::Client",
+          "full_name": "::Google::Cloud::Translate::V3::TranslationService::Client"
+        },
+        "method": {
+          "short_name": "ListAdaptiveMtSentences",
+          "full_name": "google.cloud.translation.v3.TranslationService.ListAdaptiveMtSentences",
+          "service": {
+            "short_name": "TranslationService",
+            "full_name": "google.cloud.translation.v3.TranslationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
