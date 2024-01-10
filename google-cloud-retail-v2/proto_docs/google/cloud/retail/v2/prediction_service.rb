@@ -61,6 +61,7 @@ module Google
         #     default. The maximum allowed value is 100. Values above 100 will be coerced
         #     to 100.
         # @!attribute [rw] page_token
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     This field is not used; leave it unset.
         # @!attribute [rw] filter

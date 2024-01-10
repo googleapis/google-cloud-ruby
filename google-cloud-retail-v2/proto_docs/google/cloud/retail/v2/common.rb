@@ -384,6 +384,7 @@ module Google
         #     {::Google::Cloud::Retail::V2::CustomAttribute#numbers numbers} should be set.
         #     Otherwise, an INVALID_ARGUMENT error is returned.
         # @!attribute [rw] searchable
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
         #     This field is normally ignored unless
         #     {::Google::Cloud::Retail::V2::AttributesConfig#attribute_config_level AttributesConfig.attribute_config_level}
@@ -399,6 +400,7 @@ module Google
         #     Only set if type {::Google::Cloud::Retail::V2::CustomAttribute#text text} is
         #     set. Otherwise, a INVALID_ARGUMENT error is returned.
         # @!attribute [rw] indexable
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
         #     This field is normally ignored unless
         #     {::Google::Cloud::Retail::V2::AttributesConfig#attribute_config_level AttributesConfig.attribute_config_level}

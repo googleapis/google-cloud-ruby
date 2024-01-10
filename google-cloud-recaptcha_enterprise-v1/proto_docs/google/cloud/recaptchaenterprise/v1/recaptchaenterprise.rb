@@ -314,6 +314,7 @@ module Google
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::AccountVerificationInfo::Result]
         #     Output only. Result of the latest account verification challenge.
         # @!attribute [rw] username
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Username of the account that is being verified. Deprecated. Customers
         #     should now provide the hashed account ID field in Event.
@@ -458,6 +459,7 @@ module Google
         #     same action provided at token generation time on client-side platforms
         #     already integrated with recaptcha enterprise.
         # @!attribute [rw] hashed_account_id
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Optional. Deprecated: use `user_info.account_id` instead.
         #     Unique stable hashed user identifier for the request. The identifier must
@@ -1645,6 +1647,7 @@ module Google
         #     `CreateAssessment` or `AnnotateAssessment` call. Either hashed_account_id
         #     or account_id must be set, but not both.
         # @!attribute [rw] hashed_account_id
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Optional. Deprecated: use `account_id` instead.
         #     The unique stable hashed account identifier used to search connections. The
@@ -1694,6 +1697,7 @@ module Google
         #     corresponds to an `account_id` provided in a previous `CreateAssessment` or
         #     `AnnotateAssessment` call.
         # @!attribute [rw] hashed_account_id
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Deprecated: use `account_id` instead.
         #     The unique stable hashed account identifier of the member. The identifier

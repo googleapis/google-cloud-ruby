@@ -14,7 +14,7 @@
     {
       "region_tag": "redis_v1_generated_CloudRedisCluster_ListClusters_sync",
       "title": "Snippet for the list_clusters call in the CloudRedisCluster service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Client#list_clusters. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Client#list_clusters.",
       "file": "cloud_redis_cluster/list_clusters.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "redis_v1_generated_CloudRedisCluster_GetCluster_sync",
       "title": "Snippet for the get_cluster call in the CloudRedisCluster service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Client#get_cluster. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Client#get_cluster.",
       "file": "cloud_redis_cluster/get_cluster.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "redis_v1_generated_CloudRedisCluster_UpdateCluster_sync",
       "title": "Snippet for the update_cluster call in the CloudRedisCluster service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Client#update_cluster. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Client#update_cluster.",
       "file": "cloud_redis_cluster/update_cluster.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -134,7 +134,7 @@
     {
       "region_tag": "redis_v1_generated_CloudRedisCluster_DeleteCluster_sync",
       "title": "Snippet for the delete_cluster call in the CloudRedisCluster service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Client#delete_cluster. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Client#delete_cluster.",
       "file": "cloud_redis_cluster/delete_cluster.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -174,7 +174,7 @@
     {
       "region_tag": "redis_v1_generated_CloudRedisCluster_CreateCluster_sync",
       "title": "Snippet for the create_cluster call in the CloudRedisCluster service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Client#create_cluster. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Client#create_cluster.",
       "file": "cloud_redis_cluster/create_cluster.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,7 +206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
