@@ -77,6 +77,7 @@ module Google
 
           # Scan authentication configuration.
           # @!attribute [rw] google_account
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::Google::Cloud::WebSecurityScanner::V1::ScanConfig::Authentication::GoogleAccount]
           #     Authentication using a Google account.
           # @!attribute [rw] custom_account
@@ -90,6 +91,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
             # Describes authentication configuration that uses a Google account.
+            # @deprecated This message is deprecated and may be removed in the next major version update.
             # @!attribute [rw] username
             #   @return [::String]
             #     Required. The user name of the Google account.

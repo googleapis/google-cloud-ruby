@@ -14,7 +14,7 @@
     {
       "region_tag": "websecurityscanner_v1beta_generated_WebSecurityScanner_CreateScanConfig_sync",
       "title": "Snippet for the create_scan_config call in the WebSecurityScanner service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client#create_scan_config. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client#create_scan_config.",
       "file": "web_security_scanner/create_scan_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "websecurityscanner_v1beta_generated_WebSecurityScanner_DeleteScanConfig_sync",
       "title": "Snippet for the delete_scan_config call in the WebSecurityScanner service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client#delete_scan_config. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client#delete_scan_config.",
       "file": "web_security_scanner/delete_scan_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "websecurityscanner_v1beta_generated_WebSecurityScanner_GetScanConfig_sync",
       "title": "Snippet for the get_scan_config call in the WebSecurityScanner service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client#get_scan_config. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client#get_scan_config.",
       "file": "web_security_scanner/get_scan_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -134,7 +134,7 @@
     {
       "region_tag": "websecurityscanner_v1beta_generated_WebSecurityScanner_ListScanConfigs_sync",
       "title": "Snippet for the list_scan_configs call in the WebSecurityScanner service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client#list_scan_configs. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client#list_scan_configs.",
       "file": "web_security_scanner/list_scan_configs.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -174,7 +174,7 @@
     {
       "region_tag": "websecurityscanner_v1beta_generated_WebSecurityScanner_UpdateScanConfig_sync",
       "title": "Snippet for the update_scan_config call in the WebSecurityScanner service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client#update_scan_config. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client#update_scan_config.",
       "file": "web_security_scanner/update_scan_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,7 +206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -214,7 +214,7 @@
     {
       "region_tag": "websecurityscanner_v1beta_generated_WebSecurityScanner_StartScanRun_sync",
       "title": "Snippet for the start_scan_run call in the WebSecurityScanner service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client#start_scan_run. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client#start_scan_run.",
       "file": "web_security_scanner/start_scan_run.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,7 +246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -254,7 +254,7 @@
     {
       "region_tag": "websecurityscanner_v1beta_generated_WebSecurityScanner_GetScanRun_sync",
       "title": "Snippet for the get_scan_run call in the WebSecurityScanner service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client#get_scan_run. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client#get_scan_run.",
       "file": "web_security_scanner/get_scan_run.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,7 +286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -294,7 +294,7 @@
     {
       "region_tag": "websecurityscanner_v1beta_generated_WebSecurityScanner_ListScanRuns_sync",
       "title": "Snippet for the list_scan_runs call in the WebSecurityScanner service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client#list_scan_runs. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client#list_scan_runs.",
       "file": "web_security_scanner/list_scan_runs.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,7 +326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -334,7 +334,7 @@
     {
       "region_tag": "websecurityscanner_v1beta_generated_WebSecurityScanner_StopScanRun_sync",
       "title": "Snippet for the stop_scan_run call in the WebSecurityScanner service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client#stop_scan_run. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client#stop_scan_run.",
       "file": "web_security_scanner/stop_scan_run.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,7 +366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -374,7 +374,7 @@
     {
       "region_tag": "websecurityscanner_v1beta_generated_WebSecurityScanner_ListCrawledUrls_sync",
       "title": "Snippet for the list_crawled_urls call in the WebSecurityScanner service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client#list_crawled_urls. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client#list_crawled_urls.",
       "file": "web_security_scanner/list_crawled_urls.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,7 +406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -414,7 +414,7 @@
     {
       "region_tag": "websecurityscanner_v1beta_generated_WebSecurityScanner_GetFinding_sync",
       "title": "Snippet for the get_finding call in the WebSecurityScanner service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client#get_finding. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client#get_finding.",
       "file": "web_security_scanner/get_finding.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,7 +446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -454,7 +454,7 @@
     {
       "region_tag": "websecurityscanner_v1beta_generated_WebSecurityScanner_ListFindings_sync",
       "title": "Snippet for the list_findings call in the WebSecurityScanner service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client#list_findings. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client#list_findings.",
       "file": "web_security_scanner/list_findings.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,7 +486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -494,7 +494,7 @@
     {
       "region_tag": "websecurityscanner_v1beta_generated_WebSecurityScanner_ListFindingTypeStats_sync",
       "title": "Snippet for the list_finding_type_stats call in the WebSecurityScanner service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client#list_finding_type_stats. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client#list_finding_type_stats.",
       "file": "web_security_scanner/list_finding_type_stats.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,7 +526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
