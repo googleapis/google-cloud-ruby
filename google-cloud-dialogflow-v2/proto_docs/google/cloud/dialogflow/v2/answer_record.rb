@@ -75,6 +75,7 @@ module Google
         #     chronological order. Format: `projects/<Project ID>/locations/<Location
         #     ID>`.
         # @!attribute [rw] filter
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Optional. Filters to restrict results to specific answer records.
         #

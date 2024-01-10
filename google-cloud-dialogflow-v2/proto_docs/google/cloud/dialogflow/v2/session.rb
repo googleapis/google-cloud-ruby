@@ -382,6 +382,7 @@ module Google
         #
         #     3. an event that specifies which intent to trigger.
         # @!attribute [rw] single_utterance
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
         #     Please use
         #     {::Google::Cloud::Dialogflow::V2::InputAudioConfig#single_utterance InputAudioConfig.single_utterance}

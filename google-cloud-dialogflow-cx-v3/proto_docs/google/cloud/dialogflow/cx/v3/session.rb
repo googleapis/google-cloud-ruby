@@ -816,6 +816,7 @@ module Google
           #     fields are filled in this message, including but not limited to `name` and
           #     `display_name`.
           # @!attribute [rw] intent
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::Google::Cloud::Dialogflow::CX::V3::Intent]
           #     The {::Google::Cloud::Dialogflow::CX::V3::Intent Intent} that matched the
           #     conversational query. Some, not all fields are filled in this message,
@@ -824,6 +825,7 @@ module Google
           #     {::Google::Cloud::Dialogflow::CX::V3::QueryResult#match QueryResult.match}
           #     instead.
           # @!attribute [rw] intent_detection_confidence
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::Float]
           #     The intent detection confidence. Values range from 0.0 (completely
           #     uncertain) to 1.0 (completely certain).

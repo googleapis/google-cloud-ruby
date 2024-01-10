@@ -22,9 +22,14 @@ require "google/cloud/dialogflow/cx/v3"
 ##
 # Snippet for the submit_answer_feedback call in the Sessions service
 #
+# This snippet has been automatically generated and should be regarded as a code
+# template only. It will require modifications to work:
+# - It may require correct/in-range values for request initialization.
+# - It may require specifying regional endpoints when creating the service
+# client as shown in https://cloud.google.com/ruby/docs/reference.
+#
 # This is an auto-generated example demonstrating basic usage of
-# Google::Cloud::Dialogflow::CX::V3::Sessions::Client#submit_answer_feedback. It
-# may require modification in order to execute successfully.
+# Google::Cloud::Dialogflow::CX::V3::Sessions::Client#submit_answer_feedback.
 #
 def submit_answer_feedback
   # Create a client object. The client can be reused for multiple calls.

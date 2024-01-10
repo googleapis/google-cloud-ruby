@@ -82,6 +82,7 @@ module Google
         #     or
         #     `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
         # @!attribute [rw] document
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::DocumentAI::V1beta3::Document]
         #     The document payload, the
         #     {::Google::Cloud::DocumentAI::V1beta3::Document#content content} and
@@ -155,6 +156,7 @@ module Google
         #     The document payload, will populate fields based on the processor's
         #     behavior.
         # @!attribute [rw] human_review_operation
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     The name of the operation triggered by the processed document. If the human
         #     review process isn't triggered, this field is empty. It has the same
@@ -179,9 +181,11 @@ module Google
         #     or
         #     `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
         # @!attribute [rw] input_configs
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Array<::Google::Cloud::DocumentAI::V1beta3::BatchProcessRequest::BatchInputConfig>]
         #     The input config for each single document in the batch process.
         # @!attribute [rw] output_config
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::DocumentAI::V1beta3::BatchProcessRequest::BatchOutputConfig]
         #     The overall output config for batch process.
         # @!attribute [rw] input_documents
@@ -206,6 +210,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # The message for input config in batch process.
+          # @deprecated This message is deprecated and may be removed in the next major version update.
           # @!attribute [rw] gcs_source
           #   @return [::String]
           #     The Cloud Storage location as the source of the document.
@@ -226,6 +231,7 @@ module Google
           # The output configuration in the
           # {::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client#batch_process_documents BatchProcessDocuments}
           # method.
+          # @deprecated This message is deprecated and may be removed in the next major version update.
           # @!attribute [rw] gcs_destination
           #   @return [::String]
           #     The output Cloud Storage directory to put the processed documents.
@@ -279,6 +285,7 @@ module Google
           #     {::Google::Cloud::DocumentAI::V1beta3::DocumentOutputConfig::GcsOutputConfig#gcs_uri DocumentOutputConfig.GcsOutputConfig.gcs_uri})
           #     of the processed document if it was successful, otherwise empty.
           # @!attribute [rw] human_review_operation
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::String]
           #     The name of the operation triggered by the processed document. If the
           #     human review process isn't triggered, this field will be empty. It has
@@ -825,6 +832,7 @@ module Google
         #     [HumanReviewConfig][google.cloud.documentai.v1beta3.HumanReviewConfig] that
         #     the document will be reviewed with.
         # @!attribute [rw] document
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::DocumentAI::V1beta3::Document]
         #     The document that needs human review.
         # @!attribute [rw] enable_schema_validation

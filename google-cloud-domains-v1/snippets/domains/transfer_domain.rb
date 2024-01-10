@@ -22,9 +22,14 @@ require "google/cloud/domains/v1"
 ##
 # Snippet for the transfer_domain call in the Domains service
 #
+# This snippet has been automatically generated and should be regarded as a code
+# template only. It will require modifications to work:
+# - It may require correct/in-range values for request initialization.
+# - It may require specifying regional endpoints when creating the service
+# client as shown in https://cloud.google.com/ruby/docs/reference.
+#
 # This is an auto-generated example demonstrating basic usage of
-# Google::Cloud::Domains::V1::Domains::Client#transfer_domain. It may require
-# modification in order to execute successfully.
+# Google::Cloud::Domains::V1::Domains::Client#transfer_domain.
 #
 def transfer_domain
   # Create a client object. The client can be reused for multiple calls.
