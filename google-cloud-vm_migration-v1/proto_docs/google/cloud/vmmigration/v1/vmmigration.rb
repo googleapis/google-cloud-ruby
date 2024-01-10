@@ -39,6 +39,7 @@ module Google
         #   @return [::Google::Protobuf::Duration]
         #     The accumulated duration the replication cycle was paused.
         # @!attribute [rw] progress_percent
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Integer]
         #     The current progress in percentage of this cycle.
         #     Was replaced by 'steps' field, which breaks down the cycle progression more

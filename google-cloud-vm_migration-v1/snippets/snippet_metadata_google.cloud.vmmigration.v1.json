@@ -14,7 +14,7 @@
     {
       "region_tag": "vmmigration_v1_generated_VMMigration_ListSources_sync",
       "title": "Snippet for the list_sources call in the VMMigration service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#list_sources. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#list_sources.",
       "file": "vm_migration/list_sources.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "vmmigration_v1_generated_VMMigration_GetSource_sync",
       "title": "Snippet for the get_source call in the VMMigration service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#get_source. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#get_source.",
       "file": "vm_migration/get_source.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "vmmigration_v1_generated_VMMigration_CreateSource_sync",
       "title": "Snippet for the create_source call in the VMMigration service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#create_source. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#create_source.",
       "file": "vm_migration/create_source.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -134,7 +134,7 @@
     {
       "region_tag": "vmmigration_v1_generated_VMMigration_UpdateSource_sync",
       "title": "Snippet for the update_source call in the VMMigration service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#update_source. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#update_source.",
       "file": "vm_migration/update_source.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -174,7 +174,7 @@
     {
       "region_tag": "vmmigration_v1_generated_VMMigration_DeleteSource_sync",
       "title": "Snippet for the delete_source call in the VMMigration service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#delete_source. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#delete_source.",
       "file": "vm_migration/delete_source.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,7 +206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -214,7 +214,7 @@
     {
       "region_tag": "vmmigration_v1_generated_VMMigration_FetchInventory_sync",
       "title": "Snippet for the fetch_inventory call in the VMMigration service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#fetch_inventory. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#fetch_inventory.",
       "file": "vm_migration/fetch_inventory.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,7 +246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -254,7 +254,7 @@
     {
       "region_tag": "vmmigration_v1_generated_VMMigration_ListUtilizationReports_sync",
       "title": "Snippet for the list_utilization_reports call in the VMMigration service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#list_utilization_reports. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#list_utilization_reports.",
       "file": "vm_migration/list_utilization_reports.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,7 +286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -294,7 +294,7 @@
     {
       "region_tag": "vmmigration_v1_generated_VMMigration_GetUtilizationReport_sync",
       "title": "Snippet for the get_utilization_report call in the VMMigration service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#get_utilization_report. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#get_utilization_report.",
       "file": "vm_migration/get_utilization_report.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,7 +326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -334,7 +334,7 @@
     {
       "region_tag": "vmmigration_v1_generated_VMMigration_CreateUtilizationReport_sync",
       "title": "Snippet for the create_utilization_report call in the VMMigration service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#create_utilization_report. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#create_utilization_report.",
       "file": "vm_migration/create_utilization_report.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,7 +366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -374,7 +374,7 @@
     {
       "region_tag": "vmmigration_v1_generated_VMMigration_DeleteUtilizationReport_sync",
       "title": "Snippet for the delete_utilization_report call in the VMMigration service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#delete_utilization_report. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#delete_utilization_report.",
       "file": "vm_migration/delete_utilization_report.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,7 +406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -414,7 +414,7 @@
     {
       "region_tag": "vmmigration_v1_generated_VMMigration_ListDatacenterConnectors_sync",
       "title": "Snippet for the list_datacenter_connectors call in the VMMigration service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#list_datacenter_connectors. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#list_datacenter_connectors.",
       "file": "vm_migration/list_datacenter_connectors.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,7 +446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -454,7 +454,7 @@
     {
       "region_tag": "vmmigration_v1_generated_VMMigration_GetDatacenterConnector_sync",
       "title": "Snippet for the get_datacenter_connector call in the VMMigration service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#get_datacenter_connector. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#get_datacenter_connector.",
       "file": "vm_migration/get_datacenter_connector.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,7 +486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -494,7 +494,7 @@
     {
       "region_tag": "vmmigration_v1_generated_VMMigration_CreateDatacenterConnector_sync",
       "title": "Snippet for the create_datacenter_connector call in the VMMigration service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#create_datacenter_connector. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#create_datacenter_connector.",
       "file": "vm_migration/create_datacenter_connector.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,7 +526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -534,7 +534,7 @@
     {
       "region_tag": "vmmigration_v1_generated_VMMigration_DeleteDatacenterConnector_sync",
       "title": "Snippet for the delete_datacenter_connector call in the VMMigration service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#delete_datacenter_connector. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#delete_datacenter_connector.",
       "file": "vm_migration/delete_datacenter_connector.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,7 +566,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -574,7 +574,7 @@
     {
       "region_tag": "vmmigration_v1_generated_VMMigration_UpgradeAppliance_sync",
       "title": "Snippet for the upgrade_appliance call in the VMMigration service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#upgrade_appliance. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#upgrade_appliance.",
       "file": "vm_migration/upgrade_appliance.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,7 +606,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -614,7 +614,7 @@
     {
       "region_tag": "vmmigration_v1_generated_VMMigration_CreateMigratingVm_sync",
       "title": "Snippet for the create_migrating_vm call in the VMMigration service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#create_migrating_vm. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#create_migrating_vm.",
       "file": "vm_migration/create_migrating_vm.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,7 +646,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -654,7 +654,7 @@
     {
       "region_tag": "vmmigration_v1_generated_VMMigration_ListMigratingVms_sync",
       "title": "Snippet for the list_migrating_vms call in the VMMigration service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#list_migrating_vms. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#list_migrating_vms.",
       "file": "vm_migration/list_migrating_vms.rb",
       "language": "RUBY",
       "client_method": {
@@ -686,7 +686,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -694,7 +694,7 @@
     {
       "region_tag": "vmmigration_v1_generated_VMMigration_GetMigratingVm_sync",
       "title": "Snippet for the get_migrating_vm call in the VMMigration service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#get_migrating_vm. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#get_migrating_vm.",
       "file": "vm_migration/get_migrating_vm.rb",
       "language": "RUBY",
       "client_method": {
@@ -726,7 +726,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -734,7 +734,7 @@
     {
       "region_tag": "vmmigration_v1_generated_VMMigration_UpdateMigratingVm_sync",
       "title": "Snippet for the update_migrating_vm call in the VMMigration service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#update_migrating_vm. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#update_migrating_vm.",
       "file": "vm_migration/update_migrating_vm.rb",
       "language": "RUBY",
       "client_method": {
@@ -766,7 +766,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -774,7 +774,7 @@
     {
       "region_tag": "vmmigration_v1_generated_VMMigration_DeleteMigratingVm_sync",
       "title": "Snippet for the delete_migrating_vm call in the VMMigration service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#delete_migrating_vm. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#delete_migrating_vm.",
       "file": "vm_migration/delete_migrating_vm.rb",
       "language": "RUBY",
       "client_method": {
@@ -806,7 +806,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -814,7 +814,7 @@
     {
       "region_tag": "vmmigration_v1_generated_VMMigration_StartMigration_sync",
       "title": "Snippet for the start_migration call in the VMMigration service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#start_migration. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#start_migration.",
       "file": "vm_migration/start_migration.rb",
       "language": "RUBY",
       "client_method": {
@@ -846,7 +846,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -854,7 +854,7 @@
     {
       "region_tag": "vmmigration_v1_generated_VMMigration_ResumeMigration_sync",
       "title": "Snippet for the resume_migration call in the VMMigration service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#resume_migration. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#resume_migration.",
       "file": "vm_migration/resume_migration.rb",
       "language": "RUBY",
       "client_method": {
@@ -886,7 +886,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -894,7 +894,7 @@
     {
       "region_tag": "vmmigration_v1_generated_VMMigration_PauseMigration_sync",
       "title": "Snippet for the pause_migration call in the VMMigration service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#pause_migration. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#pause_migration.",
       "file": "vm_migration/pause_migration.rb",
       "language": "RUBY",
       "client_method": {
@@ -926,7 +926,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -934,7 +934,7 @@
     {
       "region_tag": "vmmigration_v1_generated_VMMigration_FinalizeMigration_sync",
       "title": "Snippet for the finalize_migration call in the VMMigration service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#finalize_migration. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#finalize_migration.",
       "file": "vm_migration/finalize_migration.rb",
       "language": "RUBY",
       "client_method": {
@@ -966,7 +966,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -974,7 +974,7 @@
     {
       "region_tag": "vmmigration_v1_generated_VMMigration_CreateCloneJob_sync",
       "title": "Snippet for the create_clone_job call in the VMMigration service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#create_clone_job. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#create_clone_job.",
       "file": "vm_migration/create_clone_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -1006,7 +1006,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1014,7 +1014,7 @@
     {
       "region_tag": "vmmigration_v1_generated_VMMigration_CancelCloneJob_sync",
       "title": "Snippet for the cancel_clone_job call in the VMMigration service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#cancel_clone_job. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#cancel_clone_job.",
       "file": "vm_migration/cancel_clone_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -1046,7 +1046,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1054,7 +1054,7 @@
     {
       "region_tag": "vmmigration_v1_generated_VMMigration_ListCloneJobs_sync",
       "title": "Snippet for the list_clone_jobs call in the VMMigration service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#list_clone_jobs. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#list_clone_jobs.",
       "file": "vm_migration/list_clone_jobs.rb",
       "language": "RUBY",
       "client_method": {
@@ -1086,7 +1086,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1094,7 +1094,7 @@
     {
       "region_tag": "vmmigration_v1_generated_VMMigration_GetCloneJob_sync",
       "title": "Snippet for the get_clone_job call in the VMMigration service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#get_clone_job. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#get_clone_job.",
       "file": "vm_migration/get_clone_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -1126,7 +1126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1134,7 +1134,7 @@
     {
       "region_tag": "vmmigration_v1_generated_VMMigration_CreateCutoverJob_sync",
       "title": "Snippet for the create_cutover_job call in the VMMigration service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#create_cutover_job. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#create_cutover_job.",
       "file": "vm_migration/create_cutover_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -1166,7 +1166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1174,7 +1174,7 @@
     {
       "region_tag": "vmmigration_v1_generated_VMMigration_CancelCutoverJob_sync",
       "title": "Snippet for the cancel_cutover_job call in the VMMigration service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#cancel_cutover_job. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#cancel_cutover_job.",
       "file": "vm_migration/cancel_cutover_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -1206,7 +1206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1214,7 +1214,7 @@
     {
       "region_tag": "vmmigration_v1_generated_VMMigration_ListCutoverJobs_sync",
       "title": "Snippet for the list_cutover_jobs call in the VMMigration service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#list_cutover_jobs. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#list_cutover_jobs.",
       "file": "vm_migration/list_cutover_jobs.rb",
       "language": "RUBY",
       "client_method": {
@@ -1246,7 +1246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1254,7 +1254,7 @@
     {
       "region_tag": "vmmigration_v1_generated_VMMigration_GetCutoverJob_sync",
       "title": "Snippet for the get_cutover_job call in the VMMigration service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#get_cutover_job. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#get_cutover_job.",
       "file": "vm_migration/get_cutover_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -1286,7 +1286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1294,7 +1294,7 @@
     {
       "region_tag": "vmmigration_v1_generated_VMMigration_ListGroups_sync",
       "title": "Snippet for the list_groups call in the VMMigration service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#list_groups. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#list_groups.",
       "file": "vm_migration/list_groups.rb",
       "language": "RUBY",
       "client_method": {
@@ -1326,7 +1326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1334,7 +1334,7 @@
     {
       "region_tag": "vmmigration_v1_generated_VMMigration_GetGroup_sync",
       "title": "Snippet for the get_group call in the VMMigration service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#get_group. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#get_group.",
       "file": "vm_migration/get_group.rb",
       "language": "RUBY",
       "client_method": {
@@ -1366,7 +1366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1374,7 +1374,7 @@
     {
       "region_tag": "vmmigration_v1_generated_VMMigration_CreateGroup_sync",
       "title": "Snippet for the create_group call in the VMMigration service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#create_group. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#create_group.",
       "file": "vm_migration/create_group.rb",
       "language": "RUBY",
       "client_method": {
@@ -1406,7 +1406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1414,7 +1414,7 @@
     {
       "region_tag": "vmmigration_v1_generated_VMMigration_UpdateGroup_sync",
       "title": "Snippet for the update_group call in the VMMigration service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#update_group. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#update_group.",
       "file": "vm_migration/update_group.rb",
       "language": "RUBY",
       "client_method": {
@@ -1446,7 +1446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1454,7 +1454,7 @@
     {
       "region_tag": "vmmigration_v1_generated_VMMigration_DeleteGroup_sync",
       "title": "Snippet for the delete_group call in the VMMigration service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#delete_group. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#delete_group.",
       "file": "vm_migration/delete_group.rb",
       "language": "RUBY",
       "client_method": {
@@ -1486,7 +1486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1494,7 +1494,7 @@
     {
       "region_tag": "vmmigration_v1_generated_VMMigration_AddGroupMigration_sync",
       "title": "Snippet for the add_group_migration call in the VMMigration service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#add_group_migration. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#add_group_migration.",
       "file": "vm_migration/add_group_migration.rb",
       "language": "RUBY",
       "client_method": {
@@ -1526,7 +1526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1534,7 +1534,7 @@
     {
       "region_tag": "vmmigration_v1_generated_VMMigration_RemoveGroupMigration_sync",
       "title": "Snippet for the remove_group_migration call in the VMMigration service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#remove_group_migration. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#remove_group_migration.",
       "file": "vm_migration/remove_group_migration.rb",
       "language": "RUBY",
       "client_method": {
@@ -1566,7 +1566,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1574,7 +1574,7 @@
     {
       "region_tag": "vmmigration_v1_generated_VMMigration_ListTargetProjects_sync",
       "title": "Snippet for the list_target_projects call in the VMMigration service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#list_target_projects. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#list_target_projects.",
       "file": "vm_migration/list_target_projects.rb",
       "language": "RUBY",
       "client_method": {
@@ -1606,7 +1606,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1614,7 +1614,7 @@
     {
       "region_tag": "vmmigration_v1_generated_VMMigration_GetTargetProject_sync",
       "title": "Snippet for the get_target_project call in the VMMigration service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#get_target_project. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#get_target_project.",
       "file": "vm_migration/get_target_project.rb",
       "language": "RUBY",
       "client_method": {
@@ -1646,7 +1646,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1654,7 +1654,7 @@
     {
       "region_tag": "vmmigration_v1_generated_VMMigration_CreateTargetProject_sync",
       "title": "Snippet for the create_target_project call in the VMMigration service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#create_target_project. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#create_target_project.",
       "file": "vm_migration/create_target_project.rb",
       "language": "RUBY",
       "client_method": {
@@ -1686,7 +1686,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1694,7 +1694,7 @@
     {
       "region_tag": "vmmigration_v1_generated_VMMigration_UpdateTargetProject_sync",
       "title": "Snippet for the update_target_project call in the VMMigration service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#update_target_project. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#update_target_project.",
       "file": "vm_migration/update_target_project.rb",
       "language": "RUBY",
       "client_method": {
@@ -1726,7 +1726,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1734,7 +1734,7 @@
     {
       "region_tag": "vmmigration_v1_generated_VMMigration_DeleteTargetProject_sync",
       "title": "Snippet for the delete_target_project call in the VMMigration service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#delete_target_project. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#delete_target_project.",
       "file": "vm_migration/delete_target_project.rb",
       "language": "RUBY",
       "client_method": {
@@ -1766,7 +1766,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1774,7 +1774,7 @@
     {
       "region_tag": "vmmigration_v1_generated_VMMigration_ListReplicationCycles_sync",
       "title": "Snippet for the list_replication_cycles call in the VMMigration service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#list_replication_cycles. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#list_replication_cycles.",
       "file": "vm_migration/list_replication_cycles.rb",
       "language": "RUBY",
       "client_method": {
@@ -1806,7 +1806,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1814,7 +1814,7 @@
     {
       "region_tag": "vmmigration_v1_generated_VMMigration_GetReplicationCycle_sync",
       "title": "Snippet for the get_replication_cycle call in the VMMigration service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#get_replication_cycle. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#get_replication_cycle.",
       "file": "vm_migration/get_replication_cycle.rb",
       "language": "RUBY",
       "client_method": {
@@ -1846,7 +1846,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
