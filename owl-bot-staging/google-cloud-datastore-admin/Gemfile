@@ -1,0 +1,5 @@
+source "https://rubygems.org"
+
+gemspec
+
+gem "google-cloud-datastore-admin-v1", path: "../google-cloud-datastore-admin-v1"

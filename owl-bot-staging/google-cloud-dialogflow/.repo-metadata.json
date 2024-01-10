@@ -1,0 +1,18 @@
+{
+    "api_id": "dialogflow.googleapis.com",
+    "api_shortname": "dialogflow",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-dialogflow/latest",
+    "distribution_name": "google-cloud-dialogflow",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "dialogflow",
+    "name_pretty": "Dialogflow API",
+    "product_documentation": "https://cloud.google.com/dialogflow",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Dialogflow is an end-to-end, build-once deploy-everywhere development suite for creating conversational interfaces for websites, mobile applications, popular messaging platforms, and IoT devices. You can use it to build interfaces (such as chatbots and conversational IVR) that enable natural and rich interactions between your users and your business. This client is for Dialogflow ES, providing the standard agent type suitable for small and simple agents.",
+    "ruby-cloud-env-prefix": "DIALOGFLOW",
+    "ruby-cloud-product-url": "https://cloud.google.com/dialogflow",
+    "library_type": "GAPIC_AUTO"
+}
