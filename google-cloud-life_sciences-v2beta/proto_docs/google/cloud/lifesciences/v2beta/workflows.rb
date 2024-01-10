@@ -423,6 +423,7 @@ module Google
         #     To test a pipeline against the beta release of Container-Optimized OS,
         #     use the value `projects/cos-cloud/global/images/family/cos-beta`.
         # @!attribute [rw] nvidia_driver_version
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     The NVIDIA driver version to use when attaching an NVIDIA GPU accelerator.
         #     The version specified here must be compatible with the GPU libraries

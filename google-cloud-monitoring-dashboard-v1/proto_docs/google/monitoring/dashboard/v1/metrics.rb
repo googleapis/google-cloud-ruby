@@ -69,6 +69,7 @@ module Google
           #   @return [::Google::Cloud::Monitoring::Dashboard::V1::PickTimeSeriesFilter]
           #     Ranking based time series filter.
           # @!attribute [rw] statistical_time_series_filter
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::Google::Cloud::Monitoring::Dashboard::V1::StatisticalTimeSeriesFilter]
           #     Statistics based time series filter.
           #     Note: This field is deprecated and completely ignored by the API.
@@ -93,6 +94,7 @@ module Google
           #   @return [::Google::Cloud::Monitoring::Dashboard::V1::PickTimeSeriesFilter]
           #     Ranking based time series filter.
           # @!attribute [rw] statistical_time_series_filter
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::Google::Cloud::Monitoring::Dashboard::V1::StatisticalTimeSeriesFilter]
           #     Statistics based time series filter.
           #     Note: This field is deprecated and completely ignored by the API.
