@@ -1,0 +1,1855 @@
+{
+  "client_library": {
+    "name": "google-cloud-bigtable-admin-v2",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.bigtable.admin.v2",
+        "version": "v2"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_CreateInstance_sync",
+      "title": "Snippet for the create_instance call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#create_instance.",
+      "file": "bigtable_instance_admin/create_instance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_instance",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#create_instance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::CreateInstanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BigtableInstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "CreateInstance",
+          "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin.CreateInstance",
+          "service": {
+            "short_name": "BigtableInstanceAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_GetInstance_sync",
+      "title": "Snippet for the get_instance call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#get_instance.",
+      "file": "bigtable_instance_admin/get_instance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_instance",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#get_instance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::GetInstanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigtable::Admin::V2::Instance",
+        "client": {
+          "short_name": "BigtableInstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "GetInstance",
+          "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin.GetInstance",
+          "service": {
+            "short_name": "BigtableInstanceAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_ListInstances_sync",
+      "title": "Snippet for the list_instances call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#list_instances.",
+      "file": "bigtable_instance_admin/list_instances.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_instances",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#list_instances",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::ListInstancesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigtable::Admin::V2::ListInstancesResponse",
+        "client": {
+          "short_name": "BigtableInstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "ListInstances",
+          "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin.ListInstances",
+          "service": {
+            "short_name": "BigtableInstanceAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_UpdateInstance_sync",
+      "title": "Snippet for the update_instance call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#update_instance.",
+      "file": "bigtable_instance_admin/update_instance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_instance",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#update_instance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::Instance",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigtable::Admin::V2::Instance",
+        "client": {
+          "short_name": "BigtableInstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "UpdateInstance",
+          "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin.UpdateInstance",
+          "service": {
+            "short_name": "BigtableInstanceAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_PartialUpdateInstance_sync",
+      "title": "Snippet for the partial_update_instance call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#partial_update_instance.",
+      "file": "bigtable_instance_admin/partial_update_instance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "partial_update_instance",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#partial_update_instance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::PartialUpdateInstanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BigtableInstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "PartialUpdateInstance",
+          "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin.PartialUpdateInstance",
+          "service": {
+            "short_name": "BigtableInstanceAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_DeleteInstance_sync",
+      "title": "Snippet for the delete_instance call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#delete_instance.",
+      "file": "bigtable_instance_admin/delete_instance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_instance",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#delete_instance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::DeleteInstanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "BigtableInstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "DeleteInstance",
+          "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin.DeleteInstance",
+          "service": {
+            "short_name": "BigtableInstanceAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_CreateCluster_sync",
+      "title": "Snippet for the create_cluster call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#create_cluster.",
+      "file": "bigtable_instance_admin/create_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_cluster",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#create_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::CreateClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BigtableInstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "CreateCluster",
+          "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin.CreateCluster",
+          "service": {
+            "short_name": "BigtableInstanceAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_GetCluster_sync",
+      "title": "Snippet for the get_cluster call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#get_cluster.",
+      "file": "bigtable_instance_admin/get_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_cluster",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#get_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::GetClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigtable::Admin::V2::Cluster",
+        "client": {
+          "short_name": "BigtableInstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "GetCluster",
+          "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin.GetCluster",
+          "service": {
+            "short_name": "BigtableInstanceAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_ListClusters_sync",
+      "title": "Snippet for the list_clusters call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#list_clusters.",
+      "file": "bigtable_instance_admin/list_clusters.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_clusters",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#list_clusters",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::ListClustersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigtable::Admin::V2::ListClustersResponse",
+        "client": {
+          "short_name": "BigtableInstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "ListClusters",
+          "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin.ListClusters",
+          "service": {
+            "short_name": "BigtableInstanceAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_UpdateCluster_sync",
+      "title": "Snippet for the update_cluster call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#update_cluster.",
+      "file": "bigtable_instance_admin/update_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_cluster",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#update_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::Cluster",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BigtableInstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "UpdateCluster",
+          "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin.UpdateCluster",
+          "service": {
+            "short_name": "BigtableInstanceAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_PartialUpdateCluster_sync",
+      "title": "Snippet for the partial_update_cluster call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#partial_update_cluster.",
+      "file": "bigtable_instance_admin/partial_update_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "partial_update_cluster",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#partial_update_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::PartialUpdateClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BigtableInstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "PartialUpdateCluster",
+          "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin.PartialUpdateCluster",
+          "service": {
+            "short_name": "BigtableInstanceAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_DeleteCluster_sync",
+      "title": "Snippet for the delete_cluster call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#delete_cluster.",
+      "file": "bigtable_instance_admin/delete_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_cluster",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#delete_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::DeleteClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "BigtableInstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "DeleteCluster",
+          "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin.DeleteCluster",
+          "service": {
+            "short_name": "BigtableInstanceAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_CreateAppProfile_sync",
+      "title": "Snippet for the create_app_profile call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#create_app_profile.",
+      "file": "bigtable_instance_admin/create_app_profile.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_app_profile",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#create_app_profile",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::CreateAppProfileRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigtable::Admin::V2::AppProfile",
+        "client": {
+          "short_name": "BigtableInstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "CreateAppProfile",
+          "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin.CreateAppProfile",
+          "service": {
+            "short_name": "BigtableInstanceAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_GetAppProfile_sync",
+      "title": "Snippet for the get_app_profile call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#get_app_profile.",
+      "file": "bigtable_instance_admin/get_app_profile.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_app_profile",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#get_app_profile",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::GetAppProfileRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigtable::Admin::V2::AppProfile",
+        "client": {
+          "short_name": "BigtableInstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "GetAppProfile",
+          "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin.GetAppProfile",
+          "service": {
+            "short_name": "BigtableInstanceAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_ListAppProfiles_sync",
+      "title": "Snippet for the list_app_profiles call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#list_app_profiles.",
+      "file": "bigtable_instance_admin/list_app_profiles.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_app_profiles",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#list_app_profiles",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::ListAppProfilesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigtable::Admin::V2::ListAppProfilesResponse",
+        "client": {
+          "short_name": "BigtableInstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "ListAppProfiles",
+          "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin.ListAppProfiles",
+          "service": {
+            "short_name": "BigtableInstanceAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_UpdateAppProfile_sync",
+      "title": "Snippet for the update_app_profile call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#update_app_profile.",
+      "file": "bigtable_instance_admin/update_app_profile.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_app_profile",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#update_app_profile",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::UpdateAppProfileRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BigtableInstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "UpdateAppProfile",
+          "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin.UpdateAppProfile",
+          "service": {
+            "short_name": "BigtableInstanceAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_DeleteAppProfile_sync",
+      "title": "Snippet for the delete_app_profile call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#delete_app_profile.",
+      "file": "bigtable_instance_admin/delete_app_profile.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_app_profile",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#delete_app_profile",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::DeleteAppProfileRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "BigtableInstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "DeleteAppProfile",
+          "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin.DeleteAppProfile",
+          "service": {
+            "short_name": "BigtableInstanceAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_GetIamPolicy_sync",
+      "title": "Snippet for the get_iam_policy call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#get_iam_policy.",
+      "file": "bigtable_instance_admin/get_iam_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_iam_policy",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#get_iam_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::GetIamPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::Policy",
+        "client": {
+          "short_name": "BigtableInstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "GetIamPolicy",
+          "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin.GetIamPolicy",
+          "service": {
+            "short_name": "BigtableInstanceAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_SetIamPolicy_sync",
+      "title": "Snippet for the set_iam_policy call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#set_iam_policy.",
+      "file": "bigtable_instance_admin/set_iam_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "set_iam_policy",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#set_iam_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::SetIamPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::Policy",
+        "client": {
+          "short_name": "BigtableInstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "SetIamPolicy",
+          "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin.SetIamPolicy",
+          "service": {
+            "short_name": "BigtableInstanceAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_TestIamPermissions_sync",
+      "title": "Snippet for the test_iam_permissions call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#test_iam_permissions.",
+      "file": "bigtable_instance_admin/test_iam_permissions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "test_iam_permissions",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#test_iam_permissions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::TestIamPermissionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::TestIamPermissionsResponse",
+        "client": {
+          "short_name": "BigtableInstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "TestIamPermissions",
+          "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin.TestIamPermissions",
+          "service": {
+            "short_name": "BigtableInstanceAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_ListHotTablets_sync",
+      "title": "Snippet for the list_hot_tablets call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#list_hot_tablets.",
+      "file": "bigtable_instance_admin/list_hot_tablets.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_hot_tablets",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#list_hot_tablets",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::ListHotTabletsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigtable::Admin::V2::ListHotTabletsResponse",
+        "client": {
+          "short_name": "BigtableInstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "ListHotTablets",
+          "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin.ListHotTablets",
+          "service": {
+            "short_name": "BigtableInstanceAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_CreateTable_sync",
+      "title": "Snippet for the create_table call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#create_table.",
+      "file": "bigtable_table_admin/create_table.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_table",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#create_table",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::CreateTableRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigtable::Admin::V2::Table",
+        "client": {
+          "short_name": "BigtableTableAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client"
+        },
+        "method": {
+          "short_name": "CreateTable",
+          "full_name": "google.bigtable.admin.v2.BigtableTableAdmin.CreateTable",
+          "service": {
+            "short_name": "BigtableTableAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableTableAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_CreateTableFromSnapshot_sync",
+      "title": "Snippet for the create_table_from_snapshot call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#create_table_from_snapshot.",
+      "file": "bigtable_table_admin/create_table_from_snapshot.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_table_from_snapshot",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#create_table_from_snapshot",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::CreateTableFromSnapshotRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BigtableTableAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client"
+        },
+        "method": {
+          "short_name": "CreateTableFromSnapshot",
+          "full_name": "google.bigtable.admin.v2.BigtableTableAdmin.CreateTableFromSnapshot",
+          "service": {
+            "short_name": "BigtableTableAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableTableAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_ListTables_sync",
+      "title": "Snippet for the list_tables call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#list_tables.",
+      "file": "bigtable_table_admin/list_tables.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_tables",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#list_tables",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::ListTablesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigtable::Admin::V2::ListTablesResponse",
+        "client": {
+          "short_name": "BigtableTableAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client"
+        },
+        "method": {
+          "short_name": "ListTables",
+          "full_name": "google.bigtable.admin.v2.BigtableTableAdmin.ListTables",
+          "service": {
+            "short_name": "BigtableTableAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableTableAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_GetTable_sync",
+      "title": "Snippet for the get_table call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#get_table.",
+      "file": "bigtable_table_admin/get_table.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_table",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#get_table",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::GetTableRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigtable::Admin::V2::Table",
+        "client": {
+          "short_name": "BigtableTableAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client"
+        },
+        "method": {
+          "short_name": "GetTable",
+          "full_name": "google.bigtable.admin.v2.BigtableTableAdmin.GetTable",
+          "service": {
+            "short_name": "BigtableTableAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableTableAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_UpdateTable_sync",
+      "title": "Snippet for the update_table call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#update_table.",
+      "file": "bigtable_table_admin/update_table.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_table",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#update_table",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::UpdateTableRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BigtableTableAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client"
+        },
+        "method": {
+          "short_name": "UpdateTable",
+          "full_name": "google.bigtable.admin.v2.BigtableTableAdmin.UpdateTable",
+          "service": {
+            "short_name": "BigtableTableAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableTableAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_DeleteTable_sync",
+      "title": "Snippet for the delete_table call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#delete_table.",
+      "file": "bigtable_table_admin/delete_table.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_table",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#delete_table",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::DeleteTableRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "BigtableTableAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client"
+        },
+        "method": {
+          "short_name": "DeleteTable",
+          "full_name": "google.bigtable.admin.v2.BigtableTableAdmin.DeleteTable",
+          "service": {
+            "short_name": "BigtableTableAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableTableAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_UndeleteTable_sync",
+      "title": "Snippet for the undelete_table call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#undelete_table.",
+      "file": "bigtable_table_admin/undelete_table.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "undelete_table",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#undelete_table",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::UndeleteTableRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BigtableTableAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client"
+        },
+        "method": {
+          "short_name": "UndeleteTable",
+          "full_name": "google.bigtable.admin.v2.BigtableTableAdmin.UndeleteTable",
+          "service": {
+            "short_name": "BigtableTableAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableTableAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_ModifyColumnFamilies_sync",
+      "title": "Snippet for the modify_column_families call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#modify_column_families.",
+      "file": "bigtable_table_admin/modify_column_families.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "modify_column_families",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#modify_column_families",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::ModifyColumnFamiliesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigtable::Admin::V2::Table",
+        "client": {
+          "short_name": "BigtableTableAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client"
+        },
+        "method": {
+          "short_name": "ModifyColumnFamilies",
+          "full_name": "google.bigtable.admin.v2.BigtableTableAdmin.ModifyColumnFamilies",
+          "service": {
+            "short_name": "BigtableTableAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableTableAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_DropRowRange_sync",
+      "title": "Snippet for the drop_row_range call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#drop_row_range.",
+      "file": "bigtable_table_admin/drop_row_range.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "drop_row_range",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#drop_row_range",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::DropRowRangeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "BigtableTableAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client"
+        },
+        "method": {
+          "short_name": "DropRowRange",
+          "full_name": "google.bigtable.admin.v2.BigtableTableAdmin.DropRowRange",
+          "service": {
+            "short_name": "BigtableTableAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableTableAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_GenerateConsistencyToken_sync",
+      "title": "Snippet for the generate_consistency_token call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#generate_consistency_token.",
+      "file": "bigtable_table_admin/generate_consistency_token.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "generate_consistency_token",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#generate_consistency_token",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::GenerateConsistencyTokenRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigtable::Admin::V2::GenerateConsistencyTokenResponse",
+        "client": {
+          "short_name": "BigtableTableAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client"
+        },
+        "method": {
+          "short_name": "GenerateConsistencyToken",
+          "full_name": "google.bigtable.admin.v2.BigtableTableAdmin.GenerateConsistencyToken",
+          "service": {
+            "short_name": "BigtableTableAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableTableAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_CheckConsistency_sync",
+      "title": "Snippet for the check_consistency call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#check_consistency.",
+      "file": "bigtable_table_admin/check_consistency.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "check_consistency",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#check_consistency",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::CheckConsistencyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigtable::Admin::V2::CheckConsistencyResponse",
+        "client": {
+          "short_name": "BigtableTableAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client"
+        },
+        "method": {
+          "short_name": "CheckConsistency",
+          "full_name": "google.bigtable.admin.v2.BigtableTableAdmin.CheckConsistency",
+          "service": {
+            "short_name": "BigtableTableAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableTableAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_SnapshotTable_sync",
+      "title": "Snippet for the snapshot_table call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#snapshot_table.",
+      "file": "bigtable_table_admin/snapshot_table.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "snapshot_table",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#snapshot_table",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::SnapshotTableRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BigtableTableAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client"
+        },
+        "method": {
+          "short_name": "SnapshotTable",
+          "full_name": "google.bigtable.admin.v2.BigtableTableAdmin.SnapshotTable",
+          "service": {
+            "short_name": "BigtableTableAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableTableAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_GetSnapshot_sync",
+      "title": "Snippet for the get_snapshot call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#get_snapshot.",
+      "file": "bigtable_table_admin/get_snapshot.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_snapshot",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#get_snapshot",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::GetSnapshotRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigtable::Admin::V2::Snapshot",
+        "client": {
+          "short_name": "BigtableTableAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client"
+        },
+        "method": {
+          "short_name": "GetSnapshot",
+          "full_name": "google.bigtable.admin.v2.BigtableTableAdmin.GetSnapshot",
+          "service": {
+            "short_name": "BigtableTableAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableTableAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_ListSnapshots_sync",
+      "title": "Snippet for the list_snapshots call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#list_snapshots.",
+      "file": "bigtable_table_admin/list_snapshots.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_snapshots",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#list_snapshots",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::ListSnapshotsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigtable::Admin::V2::ListSnapshotsResponse",
+        "client": {
+          "short_name": "BigtableTableAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client"
+        },
+        "method": {
+          "short_name": "ListSnapshots",
+          "full_name": "google.bigtable.admin.v2.BigtableTableAdmin.ListSnapshots",
+          "service": {
+            "short_name": "BigtableTableAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableTableAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_DeleteSnapshot_sync",
+      "title": "Snippet for the delete_snapshot call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#delete_snapshot.",
+      "file": "bigtable_table_admin/delete_snapshot.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_snapshot",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#delete_snapshot",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::DeleteSnapshotRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "BigtableTableAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client"
+        },
+        "method": {
+          "short_name": "DeleteSnapshot",
+          "full_name": "google.bigtable.admin.v2.BigtableTableAdmin.DeleteSnapshot",
+          "service": {
+            "short_name": "BigtableTableAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableTableAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_CreateBackup_sync",
+      "title": "Snippet for the create_backup call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#create_backup.",
+      "file": "bigtable_table_admin/create_backup.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_backup",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#create_backup",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::CreateBackupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BigtableTableAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client"
+        },
+        "method": {
+          "short_name": "CreateBackup",
+          "full_name": "google.bigtable.admin.v2.BigtableTableAdmin.CreateBackup",
+          "service": {
+            "short_name": "BigtableTableAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableTableAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_GetBackup_sync",
+      "title": "Snippet for the get_backup call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#get_backup.",
+      "file": "bigtable_table_admin/get_backup.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_backup",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#get_backup",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::GetBackupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigtable::Admin::V2::Backup",
+        "client": {
+          "short_name": "BigtableTableAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client"
+        },
+        "method": {
+          "short_name": "GetBackup",
+          "full_name": "google.bigtable.admin.v2.BigtableTableAdmin.GetBackup",
+          "service": {
+            "short_name": "BigtableTableAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableTableAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_UpdateBackup_sync",
+      "title": "Snippet for the update_backup call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#update_backup.",
+      "file": "bigtable_table_admin/update_backup.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_backup",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#update_backup",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::UpdateBackupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigtable::Admin::V2::Backup",
+        "client": {
+          "short_name": "BigtableTableAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client"
+        },
+        "method": {
+          "short_name": "UpdateBackup",
+          "full_name": "google.bigtable.admin.v2.BigtableTableAdmin.UpdateBackup",
+          "service": {
+            "short_name": "BigtableTableAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableTableAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_DeleteBackup_sync",
+      "title": "Snippet for the delete_backup call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#delete_backup.",
+      "file": "bigtable_table_admin/delete_backup.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_backup",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#delete_backup",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::DeleteBackupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "BigtableTableAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client"
+        },
+        "method": {
+          "short_name": "DeleteBackup",
+          "full_name": "google.bigtable.admin.v2.BigtableTableAdmin.DeleteBackup",
+          "service": {
+            "short_name": "BigtableTableAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableTableAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_ListBackups_sync",
+      "title": "Snippet for the list_backups call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#list_backups.",
+      "file": "bigtable_table_admin/list_backups.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_backups",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#list_backups",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::ListBackupsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigtable::Admin::V2::ListBackupsResponse",
+        "client": {
+          "short_name": "BigtableTableAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client"
+        },
+        "method": {
+          "short_name": "ListBackups",
+          "full_name": "google.bigtable.admin.v2.BigtableTableAdmin.ListBackups",
+          "service": {
+            "short_name": "BigtableTableAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableTableAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_RestoreTable_sync",
+      "title": "Snippet for the restore_table call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#restore_table.",
+      "file": "bigtable_table_admin/restore_table.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "restore_table",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#restore_table",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::RestoreTableRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BigtableTableAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client"
+        },
+        "method": {
+          "short_name": "RestoreTable",
+          "full_name": "google.bigtable.admin.v2.BigtableTableAdmin.RestoreTable",
+          "service": {
+            "short_name": "BigtableTableAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableTableAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_CopyBackup_sync",
+      "title": "Snippet for the copy_backup call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#copy_backup.",
+      "file": "bigtable_table_admin/copy_backup.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "copy_backup",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#copy_backup",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::CopyBackupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BigtableTableAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client"
+        },
+        "method": {
+          "short_name": "CopyBackup",
+          "full_name": "google.bigtable.admin.v2.BigtableTableAdmin.CopyBackup",
+          "service": {
+            "short_name": "BigtableTableAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableTableAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_GetIamPolicy_sync",
+      "title": "Snippet for the get_iam_policy call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#get_iam_policy.",
+      "file": "bigtable_table_admin/get_iam_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_iam_policy",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#get_iam_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::GetIamPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::Policy",
+        "client": {
+          "short_name": "BigtableTableAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client"
+        },
+        "method": {
+          "short_name": "GetIamPolicy",
+          "full_name": "google.bigtable.admin.v2.BigtableTableAdmin.GetIamPolicy",
+          "service": {
+            "short_name": "BigtableTableAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableTableAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_SetIamPolicy_sync",
+      "title": "Snippet for the set_iam_policy call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#set_iam_policy.",
+      "file": "bigtable_table_admin/set_iam_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "set_iam_policy",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#set_iam_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::SetIamPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::Policy",
+        "client": {
+          "short_name": "BigtableTableAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client"
+        },
+        "method": {
+          "short_name": "SetIamPolicy",
+          "full_name": "google.bigtable.admin.v2.BigtableTableAdmin.SetIamPolicy",
+          "service": {
+            "short_name": "BigtableTableAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableTableAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_TestIamPermissions_sync",
+      "title": "Snippet for the test_iam_permissions call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#test_iam_permissions.",
+      "file": "bigtable_table_admin/test_iam_permissions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "test_iam_permissions",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#test_iam_permissions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::TestIamPermissionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::TestIamPermissionsResponse",
+        "client": {
+          "short_name": "BigtableTableAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client"
+        },
+        "method": {
+          "short_name": "TestIamPermissions",
+          "full_name": "google.bigtable.admin.v2.BigtableTableAdmin.TestIamPermissions",
+          "service": {
+            "short_name": "BigtableTableAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableTableAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
