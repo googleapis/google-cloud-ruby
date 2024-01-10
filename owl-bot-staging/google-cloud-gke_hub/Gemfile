@@ -1,0 +1,6 @@
+source "https://rubygems.org"
+
+gemspec
+
+gem "google-cloud-gke_hub-v1", path: "../google-cloud-gke_hub-v1"
+gem "google-cloud-gke_hub-v1beta1", path: "../google-cloud-gke_hub-v1beta1"
