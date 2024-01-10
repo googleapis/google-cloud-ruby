@@ -1,5 +1,16 @@
 # Changelog
 
+### 0.23.0 (2024-01-10)
+
+#### Features
+
+* Query results include whether answer feedback is allowed 
+* Support answer feedback collection settings in the Agent resource 
+* Support barge-in behavior configuration during input audio streaming 
+* Support end-user metadata and UCS search query configuration in query parameters 
+* Support Generators service including CRUD operations on generator resources ([#23555](https://github.com/googleapis/google-cloud-ruby/issues/23555)) 
+* Support submit_answer_feedback RPC 
+
 ### 0.22.0 (2023-09-29)
 
 #### Features
