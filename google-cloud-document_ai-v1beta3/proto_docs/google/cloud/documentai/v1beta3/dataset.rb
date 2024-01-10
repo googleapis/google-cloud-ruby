@@ -126,6 +126,7 @@ module Google
           #   @return [::String]
           #     Required. The Cloud Storage URI where the actual document is stored.
           # @!attribute [rw] cw_doc_id
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::String]
           #     Id of the document (indexed) managed by Content Warehouse.
           class GCSManagedDocumentId

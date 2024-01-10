@@ -108,6 +108,7 @@ module Google
         #     offsets. If false or unspecified, Speech doesn't return any word-level
         #     information.
         # @!attribute [rw] phrase_hints
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Array<::String>]
         #     A list of strings containing words and phrases that the speech
         #     recognizer should recognize with higher likelihood.

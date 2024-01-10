@@ -148,6 +148,7 @@ module Google
         #   @return [::Boolean]
         #     Includes symbol level OCR information if set to true.
         # @!attribute [rw] compute_style_info
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
         #     Turn on font identification model and return font style information.
         #     Deprecated, use

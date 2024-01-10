@@ -22,9 +22,14 @@ require "google/cloud/deploy/v1"
 ##
 # Snippet for the update_custom_target_type call in the CloudDeploy service
 #
+# This snippet has been automatically generated and should be regarded as a code
+# template only. It will require modifications to work:
+# - It may require correct/in-range values for request initialization.
+# - It may require specifying regional endpoints when creating the service
+# client as shown in https://cloud.google.com/ruby/docs/reference.
+#
 # This is an auto-generated example demonstrating basic usage of
-# Google::Cloud::Deploy::V1::CloudDeploy::Client#update_custom_target_type. It
-# may require modification in order to execute successfully.
+# Google::Cloud::Deploy::V1::CloudDeploy::Client#update_custom_target_type.
 #
 def update_custom_target_type
   # Create a client object. The client can be reused for multiple calls.

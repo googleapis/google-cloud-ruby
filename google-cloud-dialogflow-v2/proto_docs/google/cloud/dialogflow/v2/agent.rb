@@ -68,6 +68,7 @@ module Google
         #   @return [::Boolean]
         #     Optional. Determines whether this agent should log conversation queries.
         # @!attribute [rw] match_mode
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::Dialogflow::V2::Agent::MatchMode]
         #     Optional. Determines how intents are detected from user queries.
         # @!attribute [rw] classification_threshold
