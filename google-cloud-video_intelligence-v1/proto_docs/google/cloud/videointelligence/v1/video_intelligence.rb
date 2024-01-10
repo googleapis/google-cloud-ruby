@@ -391,6 +391,7 @@ module Google
         end
 
         # Deprecated. No effect.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] normalized_bounding_boxes
         #   @return [::Array<::Google::Cloud::VideoIntelligence::V1::NormalizedBoundingBox>]
         #     Normalized Bounding boxes in a frame.
@@ -406,6 +407,7 @@ module Google
         end
 
         # Deprecated. No effect.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] thumbnail
         #   @return [::String]
         #     Thumbnail of a representative face view (in JPEG format).
@@ -529,6 +531,7 @@ module Google
         #     Label annotations on frame level.
         #     There is exactly one element for each unique label.
         # @!attribute [rw] face_annotations
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Array<::Google::Cloud::VideoIntelligence::V1::FaceAnnotation>]
         #     Deprecated. Please use `face_detection_annotations` instead.
         # @!attribute [rw] face_detection_annotations
