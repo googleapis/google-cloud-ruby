@@ -374,6 +374,7 @@ module Google
         # @!attribute [rw] network_config
         #   @return [::Google::Cloud::AlloyDB::V1alpha::Cluster::NetworkConfig]
         # @!attribute [rw] network
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Required. The resource link for the VPC network in which cluster resources
         #     are created and from which they are accessible via Private IP. The network
@@ -409,6 +410,7 @@ module Google
         #     For more information on the defaults, consult the
         #     documentation for the message type.
         # @!attribute [rw] ssl_config
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::AlloyDB::V1alpha::SslConfig]
         #     SSL configuration for this AlloyDB cluster.
         # @!attribute [rw] encryption_config
@@ -1007,6 +1009,7 @@ module Google
         #     ONLY when enable_public_ip is set. This is the connection endpoint for an
         #     end-user application.
         # @!attribute [r] pem_certificate_chain
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Array<::String>]
         #     Output only. The pem-encoded chain that may be used to verify the X.509
         #     certificate. Expected to be in issuer-to-root order according to RFC 5246.

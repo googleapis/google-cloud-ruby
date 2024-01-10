@@ -956,6 +956,7 @@ module Google
         #     The request ID must be a valid UUID with the exception that zero UUID is
         #     not supported (00000000-0000-0000-0000-000000000000).
         # @!attribute [rw] pem_csr
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Optional. A pem-encoded X.509 certificate signing request (CSR). It is
         #     recommended to use public_key instead.
@@ -981,6 +982,7 @@ module Google
 
         # Message returned by a GenerateClientCertificate operation.
         # @!attribute [r] pem_certificate
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Output only. The pem-encoded, signed X.509 certificate.
         # @!attribute [r] pem_certificate_chain

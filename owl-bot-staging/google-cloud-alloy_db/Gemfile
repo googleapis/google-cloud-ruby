@@ -1,6 +1,0 @@
-source "https://rubygems.org"
-
-gemspec
-
-gem "google-cloud-alloy_db-v1", path: "../google-cloud-alloy_db-v1"
-gem "google-cloud-alloy_db-v1beta", path: "../google-cloud-alloy_db-v1beta"
