@@ -192,6 +192,7 @@ module Google
         #   @return [::String]
         #     Current version of the Data Fusion. Only specifiable in Update.
         # @!attribute [r] service_account
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Output only. Deprecated. Use tenant_project_id instead to extract the tenant project ID.
         # @!attribute [rw] display_name

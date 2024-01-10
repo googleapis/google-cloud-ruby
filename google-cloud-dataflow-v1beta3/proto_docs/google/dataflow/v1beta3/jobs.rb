@@ -678,6 +678,7 @@ module Google
         #   @return [::String]
         #     The project which owns the jobs.
         # @!attribute [rw] view
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::Dataflow::V1beta3::JobView]
         #     Deprecated. ListJobs always returns summaries now.
         #     Use GetJob for other JobViews.

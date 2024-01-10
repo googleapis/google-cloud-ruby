@@ -193,6 +193,7 @@ module Google
         #     identifies the disk within that project, for example
         #     "myproject-1014-104817-4c2-harness-0-disk-1".
         # @!attribute [rw] deprecated_persistent_directory
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     DEPRECATED. The location of the persistent state for this range, as a
         #     persistent directory in the worker local filesystem.
