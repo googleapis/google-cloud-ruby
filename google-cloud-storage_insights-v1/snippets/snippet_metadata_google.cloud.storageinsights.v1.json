@@ -14,7 +14,7 @@
     {
       "region_tag": "storageinsights_v1_generated_StorageInsights_ListReportConfigs_sync",
       "title": "Snippet for the list_report_configs call in the StorageInsights service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageInsights::V1::StorageInsights::Client#list_report_configs. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageInsights::V1::StorageInsights::Client#list_report_configs.",
       "file": "storage_insights/list_report_configs.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "storageinsights_v1_generated_StorageInsights_GetReportConfig_sync",
       "title": "Snippet for the get_report_config call in the StorageInsights service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageInsights::V1::StorageInsights::Client#get_report_config. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageInsights::V1::StorageInsights::Client#get_report_config.",
       "file": "storage_insights/get_report_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "storageinsights_v1_generated_StorageInsights_CreateReportConfig_sync",
       "title": "Snippet for the create_report_config call in the StorageInsights service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageInsights::V1::StorageInsights::Client#create_report_config. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageInsights::V1::StorageInsights::Client#create_report_config.",
       "file": "storage_insights/create_report_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -134,7 +134,7 @@
     {
       "region_tag": "storageinsights_v1_generated_StorageInsights_UpdateReportConfig_sync",
       "title": "Snippet for the update_report_config call in the StorageInsights service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageInsights::V1::StorageInsights::Client#update_report_config. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageInsights::V1::StorageInsights::Client#update_report_config.",
       "file": "storage_insights/update_report_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -174,7 +174,7 @@
     {
       "region_tag": "storageinsights_v1_generated_StorageInsights_DeleteReportConfig_sync",
       "title": "Snippet for the delete_report_config call in the StorageInsights service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageInsights::V1::StorageInsights::Client#delete_report_config. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageInsights::V1::StorageInsights::Client#delete_report_config.",
       "file": "storage_insights/delete_report_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,7 +206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -214,7 +214,7 @@
     {
       "region_tag": "storageinsights_v1_generated_StorageInsights_ListReportDetails_sync",
       "title": "Snippet for the list_report_details call in the StorageInsights service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageInsights::V1::StorageInsights::Client#list_report_details. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageInsights::V1::StorageInsights::Client#list_report_details.",
       "file": "storage_insights/list_report_details.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,7 +246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -254,7 +254,7 @@
     {
       "region_tag": "storageinsights_v1_generated_StorageInsights_GetReportDetail_sync",
       "title": "Snippet for the get_report_detail call in the StorageInsights service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageInsights::V1::StorageInsights::Client#get_report_detail. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageInsights::V1::StorageInsights::Client#get_report_detail.",
       "file": "storage_insights/get_report_detail.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,7 +286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]

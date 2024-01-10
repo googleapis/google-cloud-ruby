@@ -14,7 +14,7 @@
     {
       "region_tag": "serviceusage_v1_generated_ServiceUsage_EnableService_sync",
       "title": "Snippet for the enable_service call in the ServiceUsage service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceUsage::V1::ServiceUsage::Client#enable_service. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceUsage::V1::ServiceUsage::Client#enable_service.",
       "file": "service_usage/enable_service.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "serviceusage_v1_generated_ServiceUsage_DisableService_sync",
       "title": "Snippet for the disable_service call in the ServiceUsage service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceUsage::V1::ServiceUsage::Client#disable_service. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceUsage::V1::ServiceUsage::Client#disable_service.",
       "file": "service_usage/disable_service.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "serviceusage_v1_generated_ServiceUsage_GetService_sync",
       "title": "Snippet for the get_service call in the ServiceUsage service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceUsage::V1::ServiceUsage::Client#get_service. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceUsage::V1::ServiceUsage::Client#get_service.",
       "file": "service_usage/get_service.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -134,7 +134,7 @@
     {
       "region_tag": "serviceusage_v1_generated_ServiceUsage_ListServices_sync",
       "title": "Snippet for the list_services call in the ServiceUsage service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceUsage::V1::ServiceUsage::Client#list_services. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceUsage::V1::ServiceUsage::Client#list_services.",
       "file": "service_usage/list_services.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -174,7 +174,7 @@
     {
       "region_tag": "serviceusage_v1_generated_ServiceUsage_BatchEnableServices_sync",
       "title": "Snippet for the batch_enable_services call in the ServiceUsage service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceUsage::V1::ServiceUsage::Client#batch_enable_services. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceUsage::V1::ServiceUsage::Client#batch_enable_services.",
       "file": "service_usage/batch_enable_services.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,7 +206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -214,7 +214,7 @@
     {
       "region_tag": "serviceusage_v1_generated_ServiceUsage_BatchGetServices_sync",
       "title": "Snippet for the batch_get_services call in the ServiceUsage service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceUsage::V1::ServiceUsage::Client#batch_get_services. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceUsage::V1::ServiceUsage::Client#batch_get_services.",
       "file": "service_usage/batch_get_services.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,7 +246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]

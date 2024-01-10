@@ -44,6 +44,7 @@ module Google
     #   @return [::String]
     #     The canonical name of this endpoint.
     # @!attribute [rw] aliases
+    #   @deprecated This field is deprecated and may be removed in the next major version update.
     #   @return [::Array<::String>]
     #     Unimplemented. Dot not use.
     #
