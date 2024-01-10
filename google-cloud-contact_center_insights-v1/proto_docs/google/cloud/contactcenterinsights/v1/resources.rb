@@ -722,6 +722,7 @@ module Google
 
           # Configs for the input data used to create the issue model.
           # @!attribute [rw] medium
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::Google::Cloud::ContactCenterInsights::V1::Conversation::Medium]
           #     Medium of conversations used in training data. This field is being
           #     deprecated. To specify the medium to be used in training a new issue
@@ -1360,6 +1361,7 @@ module Google
         #   @return [::String]
         #     A user-specified ID representing the participant.
         # @!attribute [rw] dialogflow_participant
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Deprecated. Use `dialogflow_participant_name` instead.
         #     The name of the Dialogflow participant. Format:

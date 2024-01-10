@@ -1,5 +1,0 @@
-source "https://rubygems.org"
-
-gemspec
-
-gem "google-cloud-compute-v1", path: "../google-cloud-compute-v1"

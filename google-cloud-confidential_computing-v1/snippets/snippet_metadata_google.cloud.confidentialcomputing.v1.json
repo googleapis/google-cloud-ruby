@@ -14,7 +14,7 @@
     {
       "region_tag": "confidentialcomputing_v1_generated_ConfidentialComputing_CreateChallenge_sync",
       "title": "Snippet for the create_challenge call in the ConfidentialComputing service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfidentialComputing::V1::ConfidentialComputing::Client#create_challenge. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfidentialComputing::V1::ConfidentialComputing::Client#create_challenge.",
       "file": "confidential_computing/create_challenge.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "confidentialcomputing_v1_generated_ConfidentialComputing_VerifyAttestation_sync",
       "title": "Snippet for the verify_attestation call in the ConfidentialComputing service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfidentialComputing::V1::ConfidentialComputing::Client#verify_attestation. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfidentialComputing::V1::ConfidentialComputing::Client#verify_attestation.",
       "file": "confidential_computing/verify_attestation.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]

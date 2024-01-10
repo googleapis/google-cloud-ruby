@@ -14,7 +14,7 @@
     {
       "region_tag": "cloudcommerceconsumerprocurement_v1_generated_ConsumerProcurementService_PlaceOrder_sync",
       "title": "Snippet for the place_order call in the ConsumerProcurementService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Client#place_order. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Client#place_order.",
       "file": "consumer_procurement_service/place_order.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "cloudcommerceconsumerprocurement_v1_generated_ConsumerProcurementService_GetOrder_sync",
       "title": "Snippet for the get_order call in the ConsumerProcurementService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Client#get_order. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Client#get_order.",
       "file": "consumer_procurement_service/get_order.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "cloudcommerceconsumerprocurement_v1_generated_ConsumerProcurementService_ListOrders_sync",
       "title": "Snippet for the list_orders call in the ConsumerProcurementService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Client#list_orders. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Client#list_orders.",
       "file": "consumer_procurement_service/list_orders.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
