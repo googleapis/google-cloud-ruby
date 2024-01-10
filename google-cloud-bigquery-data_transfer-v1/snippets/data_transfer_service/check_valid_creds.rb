@@ -22,9 +22,14 @@ require "google/cloud/bigquery/data_transfer/v1"
 ##
 # Snippet for the check_valid_creds call in the DataTransferService service
 #
+# This snippet has been automatically generated and should be regarded as a code
+# template only. It will require modifications to work:
+# - It may require correct/in-range values for request initialization.
+# - It may require specifying regional endpoints when creating the service
+# client as shown in https://cloud.google.com/ruby/docs/reference.
+#
 # This is an auto-generated example demonstrating basic usage of
 # Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client#check_valid_creds.
-# It may require modification in order to execute successfully.
 #
 def check_valid_creds
   # Create a client object. The client can be reused for multiple calls.

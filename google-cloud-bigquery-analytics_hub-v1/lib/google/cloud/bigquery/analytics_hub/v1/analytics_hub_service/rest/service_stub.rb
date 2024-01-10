@@ -31,14 +31,26 @@ module Google
               # including transcoding, making the REST call, and deserialing the response.
               #
               class ServiceStub
-                def initialize endpoint:, credentials:
+                def initialize endpoint:, endpoint_template:, universe_domain:, credentials:
                   # These require statements are intentionally placed here to initialize
                   # the REST modules only when it's required.
                   require "gapic/rest"
 
-                  @client_stub = ::Gapic::Rest::ClientStub.new endpoint: endpoint, credentials: credentials,
+                  @client_stub = ::Gapic::Rest::ClientStub.new endpoint: endpoint,
+                                                               endpoint_template: endpoint_template,
+                                                               universe_domain: universe_domain,
+                                                               credentials: credentials,
                                                                numeric_enums: false,
                                                                raise_faraday_errors: false
+                end
+
+                ##
+                # The effective universe domain
+                #
+                # @return [String]
+                #
+                def universe_domain
+                  @client_stub.universe_domain
                 end
 
                 ##

@@ -22,9 +22,14 @@ require "google/cloud/beyond_corp/app_connections/v1"
 ##
 # Snippet for the create_app_connection call in the AppConnectionsService service
 #
+# This snippet has been automatically generated and should be regarded as a code
+# template only. It will require modifications to work:
+# - It may require correct/in-range values for request initialization.
+# - It may require specifying regional endpoints when creating the service
+# client as shown in https://cloud.google.com/ruby/docs/reference.
+#
 # This is an auto-generated example demonstrating basic usage of
 # Google::Cloud::BeyondCorp::AppConnections::V1::AppConnectionsService::Client#create_app_connection.
-# It may require modification in order to execute successfully.
 #
 def create_app_connection
   # Create a client object. The client can be reused for multiple calls.
