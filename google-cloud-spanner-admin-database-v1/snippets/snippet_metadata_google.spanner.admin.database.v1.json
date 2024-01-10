@@ -14,7 +14,7 @@
     {
       "region_tag": "spanner_v1_generated_DatabaseAdmin_ListDatabases_sync",
       "title": "Snippet for the list_databases call in the DatabaseAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#list_databases. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#list_databases.",
       "file": "database_admin/list_databases.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "spanner_v1_generated_DatabaseAdmin_CreateDatabase_sync",
       "title": "Snippet for the create_database call in the DatabaseAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#create_database. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#create_database.",
       "file": "database_admin/create_database.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "spanner_v1_generated_DatabaseAdmin_GetDatabase_sync",
       "title": "Snippet for the get_database call in the DatabaseAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#get_database. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#get_database.",
       "file": "database_admin/get_database.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -134,7 +134,7 @@
     {
       "region_tag": "spanner_v1_generated_DatabaseAdmin_UpdateDatabase_sync",
       "title": "Snippet for the update_database call in the DatabaseAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#update_database. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#update_database.",
       "file": "database_admin/update_database.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -174,7 +174,7 @@
     {
       "region_tag": "spanner_v1_generated_DatabaseAdmin_UpdateDatabaseDdl_sync",
       "title": "Snippet for the update_database_ddl call in the DatabaseAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#update_database_ddl. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#update_database_ddl.",
       "file": "database_admin/update_database_ddl.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,7 +206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -214,7 +214,7 @@
     {
       "region_tag": "spanner_v1_generated_DatabaseAdmin_DropDatabase_sync",
       "title": "Snippet for the drop_database call in the DatabaseAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#drop_database. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#drop_database.",
       "file": "database_admin/drop_database.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,7 +246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -254,7 +254,7 @@
     {
       "region_tag": "spanner_v1_generated_DatabaseAdmin_GetDatabaseDdl_sync",
       "title": "Snippet for the get_database_ddl call in the DatabaseAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#get_database_ddl. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#get_database_ddl.",
       "file": "database_admin/get_database_ddl.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,7 +286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -294,7 +294,7 @@
     {
       "region_tag": "spanner_v1_generated_DatabaseAdmin_SetIamPolicy_sync",
       "title": "Snippet for the set_iam_policy call in the DatabaseAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#set_iam_policy. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#set_iam_policy.",
       "file": "database_admin/set_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,7 +326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -334,7 +334,7 @@
     {
       "region_tag": "spanner_v1_generated_DatabaseAdmin_GetIamPolicy_sync",
       "title": "Snippet for the get_iam_policy call in the DatabaseAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#get_iam_policy. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#get_iam_policy.",
       "file": "database_admin/get_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,7 +366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -374,7 +374,7 @@
     {
       "region_tag": "spanner_v1_generated_DatabaseAdmin_TestIamPermissions_sync",
       "title": "Snippet for the test_iam_permissions call in the DatabaseAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#test_iam_permissions. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#test_iam_permissions.",
       "file": "database_admin/test_iam_permissions.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,7 +406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -414,7 +414,7 @@
     {
       "region_tag": "spanner_v1_generated_DatabaseAdmin_CreateBackup_sync",
       "title": "Snippet for the create_backup call in the DatabaseAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#create_backup. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#create_backup.",
       "file": "database_admin/create_backup.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,7 +446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -454,7 +454,7 @@
     {
       "region_tag": "spanner_v1_generated_DatabaseAdmin_CopyBackup_sync",
       "title": "Snippet for the copy_backup call in the DatabaseAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#copy_backup. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#copy_backup.",
       "file": "database_admin/copy_backup.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,7 +486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -494,7 +494,7 @@
     {
       "region_tag": "spanner_v1_generated_DatabaseAdmin_GetBackup_sync",
       "title": "Snippet for the get_backup call in the DatabaseAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#get_backup. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#get_backup.",
       "file": "database_admin/get_backup.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,7 +526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -534,7 +534,7 @@
     {
       "region_tag": "spanner_v1_generated_DatabaseAdmin_UpdateBackup_sync",
       "title": "Snippet for the update_backup call in the DatabaseAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#update_backup. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#update_backup.",
       "file": "database_admin/update_backup.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,7 +566,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -574,7 +574,7 @@
     {
       "region_tag": "spanner_v1_generated_DatabaseAdmin_DeleteBackup_sync",
       "title": "Snippet for the delete_backup call in the DatabaseAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#delete_backup. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#delete_backup.",
       "file": "database_admin/delete_backup.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,7 +606,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -614,7 +614,7 @@
     {
       "region_tag": "spanner_v1_generated_DatabaseAdmin_ListBackups_sync",
       "title": "Snippet for the list_backups call in the DatabaseAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#list_backups. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#list_backups.",
       "file": "database_admin/list_backups.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,7 +646,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -654,7 +654,7 @@
     {
       "region_tag": "spanner_v1_generated_DatabaseAdmin_RestoreDatabase_sync",
       "title": "Snippet for the restore_database call in the DatabaseAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#restore_database. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#restore_database.",
       "file": "database_admin/restore_database.rb",
       "language": "RUBY",
       "client_method": {
@@ -686,7 +686,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -694,7 +694,7 @@
     {
       "region_tag": "spanner_v1_generated_DatabaseAdmin_ListDatabaseOperations_sync",
       "title": "Snippet for the list_database_operations call in the DatabaseAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#list_database_operations. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#list_database_operations.",
       "file": "database_admin/list_database_operations.rb",
       "language": "RUBY",
       "client_method": {
@@ -726,7 +726,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -734,7 +734,7 @@
     {
       "region_tag": "spanner_v1_generated_DatabaseAdmin_ListBackupOperations_sync",
       "title": "Snippet for the list_backup_operations call in the DatabaseAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#list_backup_operations. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#list_backup_operations.",
       "file": "database_admin/list_backup_operations.rb",
       "language": "RUBY",
       "client_method": {
@@ -766,7 +766,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -774,7 +774,7 @@
     {
       "region_tag": "spanner_v1_generated_DatabaseAdmin_ListDatabaseRoles_sync",
       "title": "Snippet for the list_database_roles call in the DatabaseAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#list_database_roles. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#list_database_roles.",
       "file": "database_admin/list_database_roles.rb",
       "language": "RUBY",
       "client_method": {
@@ -806,7 +806,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]

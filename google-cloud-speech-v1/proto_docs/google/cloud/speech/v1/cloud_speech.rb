@@ -451,6 +451,7 @@ module Google
         #     flexibility by allowing the system to automatically determine the correct
         #     number of speakers. If not set, the default value is 6.
         # @!attribute [r] speaker_tag
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Integer]
         #     Output only. Unused.
         class SpeakerDiarizationConfig
@@ -459,6 +460,7 @@ module Google
         end
 
         # Description of audio data to be recognized.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] interaction_type
         #   @return [::Google::Cloud::Speech::V1::RecognitionMetadata::InteractionType]
         #     The use case most closely describing the audio content to be recognized.
@@ -953,6 +955,7 @@ module Google
         #     to be always provided.
         #     The default of 0.0 is a sentinel value indicating `confidence` was not set.
         # @!attribute [r] speaker_tag
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Integer]
         #     Output only. A distinct integer value is assigned for every speaker within
         #     the audio. This field specifies which one of those speakers was detected to

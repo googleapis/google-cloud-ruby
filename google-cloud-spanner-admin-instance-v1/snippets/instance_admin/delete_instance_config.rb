@@ -22,9 +22,14 @@ require "google/cloud/spanner/admin/instance/v1"
 ##
 # Snippet for the delete_instance_config call in the InstanceAdmin service
 #
+# This snippet has been automatically generated and should be regarded as a code
+# template only. It will require modifications to work:
+# - It may require correct/in-range values for request initialization.
+# - It may require specifying regional endpoints when creating the service
+# client as shown in https://cloud.google.com/ruby/docs/reference.
+#
 # This is an auto-generated example demonstrating basic usage of
 # Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#delete_instance_config.
-# It may require modification in order to execute successfully.
 #
 def delete_instance_config
   # Create a client object. The client can be reused for multiple calls.

@@ -14,7 +14,7 @@
     {
       "region_tag": "servicemanagement_v1_generated_ServiceManager_ListServices_sync",
       "title": "Snippet for the list_services call in the ServiceManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceManagement::V1::ServiceManager::Client#list_services. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceManagement::V1::ServiceManager::Client#list_services.",
       "file": "service_manager/list_services.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "servicemanagement_v1_generated_ServiceManager_GetService_sync",
       "title": "Snippet for the get_service call in the ServiceManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceManagement::V1::ServiceManager::Client#get_service. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceManagement::V1::ServiceManager::Client#get_service.",
       "file": "service_manager/get_service.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "servicemanagement_v1_generated_ServiceManager_CreateService_sync",
       "title": "Snippet for the create_service call in the ServiceManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceManagement::V1::ServiceManager::Client#create_service. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceManagement::V1::ServiceManager::Client#create_service.",
       "file": "service_manager/create_service.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -134,7 +134,7 @@
     {
       "region_tag": "servicemanagement_v1_generated_ServiceManager_DeleteService_sync",
       "title": "Snippet for the delete_service call in the ServiceManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceManagement::V1::ServiceManager::Client#delete_service. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceManagement::V1::ServiceManager::Client#delete_service.",
       "file": "service_manager/delete_service.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -174,7 +174,7 @@
     {
       "region_tag": "servicemanagement_v1_generated_ServiceManager_UndeleteService_sync",
       "title": "Snippet for the undelete_service call in the ServiceManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceManagement::V1::ServiceManager::Client#undelete_service. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceManagement::V1::ServiceManager::Client#undelete_service.",
       "file": "service_manager/undelete_service.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,7 +206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -214,7 +214,7 @@
     {
       "region_tag": "servicemanagement_v1_generated_ServiceManager_ListServiceConfigs_sync",
       "title": "Snippet for the list_service_configs call in the ServiceManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceManagement::V1::ServiceManager::Client#list_service_configs. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceManagement::V1::ServiceManager::Client#list_service_configs.",
       "file": "service_manager/list_service_configs.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,7 +246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -254,7 +254,7 @@
     {
       "region_tag": "servicemanagement_v1_generated_ServiceManager_GetServiceConfig_sync",
       "title": "Snippet for the get_service_config call in the ServiceManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceManagement::V1::ServiceManager::Client#get_service_config. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceManagement::V1::ServiceManager::Client#get_service_config.",
       "file": "service_manager/get_service_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,7 +286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -294,7 +294,7 @@
     {
       "region_tag": "servicemanagement_v1_generated_ServiceManager_CreateServiceConfig_sync",
       "title": "Snippet for the create_service_config call in the ServiceManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceManagement::V1::ServiceManager::Client#create_service_config. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceManagement::V1::ServiceManager::Client#create_service_config.",
       "file": "service_manager/create_service_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,7 +326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -334,7 +334,7 @@
     {
       "region_tag": "servicemanagement_v1_generated_ServiceManager_SubmitConfigSource_sync",
       "title": "Snippet for the submit_config_source call in the ServiceManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceManagement::V1::ServiceManager::Client#submit_config_source. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceManagement::V1::ServiceManager::Client#submit_config_source.",
       "file": "service_manager/submit_config_source.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,7 +366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -374,7 +374,7 @@
     {
       "region_tag": "servicemanagement_v1_generated_ServiceManager_ListServiceRollouts_sync",
       "title": "Snippet for the list_service_rollouts call in the ServiceManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceManagement::V1::ServiceManager::Client#list_service_rollouts. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceManagement::V1::ServiceManager::Client#list_service_rollouts.",
       "file": "service_manager/list_service_rollouts.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,7 +406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -414,7 +414,7 @@
     {
       "region_tag": "servicemanagement_v1_generated_ServiceManager_GetServiceRollout_sync",
       "title": "Snippet for the get_service_rollout call in the ServiceManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceManagement::V1::ServiceManager::Client#get_service_rollout. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceManagement::V1::ServiceManager::Client#get_service_rollout.",
       "file": "service_manager/get_service_rollout.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,7 +446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -454,7 +454,7 @@
     {
       "region_tag": "servicemanagement_v1_generated_ServiceManager_CreateServiceRollout_sync",
       "title": "Snippet for the create_service_rollout call in the ServiceManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceManagement::V1::ServiceManager::Client#create_service_rollout. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceManagement::V1::ServiceManager::Client#create_service_rollout.",
       "file": "service_manager/create_service_rollout.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,7 +486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -494,7 +494,7 @@
     {
       "region_tag": "servicemanagement_v1_generated_ServiceManager_GenerateConfigReport_sync",
       "title": "Snippet for the generate_config_report call in the ServiceManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceManagement::V1::ServiceManager::Client#generate_config_report. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceManagement::V1::ServiceManager::Client#generate_config_report.",
       "file": "service_manager/generate_config_report.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,7 +526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]

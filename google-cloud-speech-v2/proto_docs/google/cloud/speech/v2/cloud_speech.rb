@@ -111,6 +111,7 @@ module Google
         #   @return [::Google::Cloud::Speech::V2::UndeletePhraseSetRequest]
         #     The UndeletePhraseSetRequest that spawned the Operation.
         # @!attribute [rw] update_config_request
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::Speech::V2::UpdateConfigRequest]
         #     The UpdateConfigRequest that spawned the Operation.
         # @!attribute [rw] progress_percent
@@ -259,6 +260,7 @@ module Google
         #     User-settable, human-readable name for the Recognizer. Must be 63
         #     characters or less.
         # @!attribute [rw] model
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Optional. This field is now deprecated. Prefer the
         #     {::Google::Cloud::Speech::V2::RecognitionConfig#model `model`} field in the
@@ -274,6 +276,7 @@ module Google
         #     Supported
         #     Models](https://cloud.google.com/speech-to-text/v2/docs/speech-to-text-supported-languages).
         # @!attribute [rw] language_codes
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Array<::String>]
         #     Optional. This field is now deprecated. Prefer the
         #     {::Google::Cloud::Speech::V2::RecognitionConfig#language_codes `language_codes`}
@@ -1091,9 +1094,11 @@ module Google
         #     the
         #     [RecognitionOutputConfig][[google.cloud.speech.v2.RecognitionOutputConfig].
         # @!attribute [rw] uri
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Deprecated. Use `cloud_storage_result.native_format_uri` instead.
         # @!attribute [rw] transcript
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::Speech::V2::BatchRecognizeResults]
         #     Deprecated. Use `inline_result.transcript` instead.
         class BatchRecognizeFileResult
