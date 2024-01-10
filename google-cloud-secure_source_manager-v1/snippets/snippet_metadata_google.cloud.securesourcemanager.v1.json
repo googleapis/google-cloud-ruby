@@ -14,7 +14,7 @@
     {
       "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_ListInstances_sync",
       "title": "Snippet for the list_instances call in the SecureSourceManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#list_instances. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#list_instances.",
       "file": "secure_source_manager/list_instances.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_GetInstance_sync",
       "title": "Snippet for the get_instance call in the SecureSourceManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#get_instance. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#get_instance.",
       "file": "secure_source_manager/get_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_CreateInstance_sync",
       "title": "Snippet for the create_instance call in the SecureSourceManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#create_instance. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#create_instance.",
       "file": "secure_source_manager/create_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -134,7 +134,7 @@
     {
       "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_DeleteInstance_sync",
       "title": "Snippet for the delete_instance call in the SecureSourceManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#delete_instance. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#delete_instance.",
       "file": "secure_source_manager/delete_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -174,7 +174,7 @@
     {
       "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_ListRepositories_sync",
       "title": "Snippet for the list_repositories call in the SecureSourceManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#list_repositories. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#list_repositories.",
       "file": "secure_source_manager/list_repositories.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,7 +206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -214,7 +214,7 @@
     {
       "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_GetRepository_sync",
       "title": "Snippet for the get_repository call in the SecureSourceManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#get_repository. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#get_repository.",
       "file": "secure_source_manager/get_repository.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,7 +246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -254,7 +254,7 @@
     {
       "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_CreateRepository_sync",
       "title": "Snippet for the create_repository call in the SecureSourceManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#create_repository. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#create_repository.",
       "file": "secure_source_manager/create_repository.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,7 +286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -294,7 +294,7 @@
     {
       "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_DeleteRepository_sync",
       "title": "Snippet for the delete_repository call in the SecureSourceManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#delete_repository. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#delete_repository.",
       "file": "secure_source_manager/delete_repository.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,7 +326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -334,7 +334,7 @@
     {
       "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_GetIamPolicyRepo_sync",
       "title": "Snippet for the get_iam_policy_repo call in the SecureSourceManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#get_iam_policy_repo. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#get_iam_policy_repo.",
       "file": "secure_source_manager/get_iam_policy_repo.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,7 +366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -374,7 +374,7 @@
     {
       "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_SetIamPolicyRepo_sync",
       "title": "Snippet for the set_iam_policy_repo call in the SecureSourceManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#set_iam_policy_repo. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#set_iam_policy_repo.",
       "file": "secure_source_manager/set_iam_policy_repo.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,7 +406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -414,7 +414,7 @@
     {
       "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_TestIamPermissionsRepo_sync",
       "title": "Snippet for the test_iam_permissions_repo call in the SecureSourceManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#test_iam_permissions_repo. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#test_iam_permissions_repo.",
       "file": "secure_source_manager/test_iam_permissions_repo.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,7 +446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
