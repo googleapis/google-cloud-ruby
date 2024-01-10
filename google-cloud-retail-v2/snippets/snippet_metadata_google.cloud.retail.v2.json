@@ -14,7 +14,7 @@
     {
       "region_tag": "retail_v2_generated_CatalogService_ListCatalogs_sync",
       "title": "Snippet for the list_catalogs call in the CatalogService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::CatalogService::Client#list_catalogs. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::CatalogService::Client#list_catalogs.",
       "file": "catalog_service/list_catalogs.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "retail_v2_generated_CatalogService_UpdateCatalog_sync",
       "title": "Snippet for the update_catalog call in the CatalogService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::CatalogService::Client#update_catalog. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::CatalogService::Client#update_catalog.",
       "file": "catalog_service/update_catalog.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "retail_v2_generated_CatalogService_SetDefaultBranch_sync",
       "title": "Snippet for the set_default_branch call in the CatalogService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::CatalogService::Client#set_default_branch. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::CatalogService::Client#set_default_branch.",
       "file": "catalog_service/set_default_branch.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -134,7 +134,7 @@
     {
       "region_tag": "retail_v2_generated_CatalogService_GetDefaultBranch_sync",
       "title": "Snippet for the get_default_branch call in the CatalogService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::CatalogService::Client#get_default_branch. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::CatalogService::Client#get_default_branch.",
       "file": "catalog_service/get_default_branch.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -174,7 +174,7 @@
     {
       "region_tag": "retail_v2_generated_CatalogService_GetCompletionConfig_sync",
       "title": "Snippet for the get_completion_config call in the CatalogService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::CatalogService::Client#get_completion_config. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::CatalogService::Client#get_completion_config.",
       "file": "catalog_service/get_completion_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,7 +206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -214,7 +214,7 @@
     {
       "region_tag": "retail_v2_generated_CatalogService_UpdateCompletionConfig_sync",
       "title": "Snippet for the update_completion_config call in the CatalogService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::CatalogService::Client#update_completion_config. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::CatalogService::Client#update_completion_config.",
       "file": "catalog_service/update_completion_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,7 +246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -254,7 +254,7 @@
     {
       "region_tag": "retail_v2_generated_CatalogService_GetAttributesConfig_sync",
       "title": "Snippet for the get_attributes_config call in the CatalogService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::CatalogService::Client#get_attributes_config. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::CatalogService::Client#get_attributes_config.",
       "file": "catalog_service/get_attributes_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,7 +286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -294,7 +294,7 @@
     {
       "region_tag": "retail_v2_generated_CatalogService_UpdateAttributesConfig_sync",
       "title": "Snippet for the update_attributes_config call in the CatalogService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::CatalogService::Client#update_attributes_config. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::CatalogService::Client#update_attributes_config.",
       "file": "catalog_service/update_attributes_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,7 +326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -334,7 +334,7 @@
     {
       "region_tag": "retail_v2_generated_CatalogService_AddCatalogAttribute_sync",
       "title": "Snippet for the add_catalog_attribute call in the CatalogService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::CatalogService::Client#add_catalog_attribute. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::CatalogService::Client#add_catalog_attribute.",
       "file": "catalog_service/add_catalog_attribute.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,7 +366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -374,7 +374,7 @@
     {
       "region_tag": "retail_v2_generated_CatalogService_RemoveCatalogAttribute_sync",
       "title": "Snippet for the remove_catalog_attribute call in the CatalogService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::CatalogService::Client#remove_catalog_attribute. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::CatalogService::Client#remove_catalog_attribute.",
       "file": "catalog_service/remove_catalog_attribute.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,7 +406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -414,7 +414,7 @@
     {
       "region_tag": "retail_v2_generated_CatalogService_ReplaceCatalogAttribute_sync",
       "title": "Snippet for the replace_catalog_attribute call in the CatalogService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::CatalogService::Client#replace_catalog_attribute. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::CatalogService::Client#replace_catalog_attribute.",
       "file": "catalog_service/replace_catalog_attribute.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,7 +446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -454,7 +454,7 @@
     {
       "region_tag": "retail_v2_generated_CompletionService_CompleteQuery_sync",
       "title": "Snippet for the complete_query call in the CompletionService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::CompletionService::Client#complete_query. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::CompletionService::Client#complete_query.",
       "file": "completion_service/complete_query.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,7 +486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -494,7 +494,7 @@
     {
       "region_tag": "retail_v2_generated_CompletionService_ImportCompletionData_sync",
       "title": "Snippet for the import_completion_data call in the CompletionService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::CompletionService::Client#import_completion_data. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::CompletionService::Client#import_completion_data.",
       "file": "completion_service/import_completion_data.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,7 +526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -534,7 +534,7 @@
     {
       "region_tag": "retail_v2_generated_ControlService_CreateControl_sync",
       "title": "Snippet for the create_control call in the ControlService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ControlService::Client#create_control. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ControlService::Client#create_control.",
       "file": "control_service/create_control.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,7 +566,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -574,7 +574,7 @@
     {
       "region_tag": "retail_v2_generated_ControlService_DeleteControl_sync",
       "title": "Snippet for the delete_control call in the ControlService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ControlService::Client#delete_control. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ControlService::Client#delete_control.",
       "file": "control_service/delete_control.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,7 +606,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -614,7 +614,7 @@
     {
       "region_tag": "retail_v2_generated_ControlService_UpdateControl_sync",
       "title": "Snippet for the update_control call in the ControlService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ControlService::Client#update_control. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ControlService::Client#update_control.",
       "file": "control_service/update_control.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,7 +646,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -654,7 +654,7 @@
     {
       "region_tag": "retail_v2_generated_ControlService_GetControl_sync",
       "title": "Snippet for the get_control call in the ControlService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ControlService::Client#get_control. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ControlService::Client#get_control.",
       "file": "control_service/get_control.rb",
       "language": "RUBY",
       "client_method": {
@@ -686,7 +686,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -694,7 +694,7 @@
     {
       "region_tag": "retail_v2_generated_ControlService_ListControls_sync",
       "title": "Snippet for the list_controls call in the ControlService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ControlService::Client#list_controls. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ControlService::Client#list_controls.",
       "file": "control_service/list_controls.rb",
       "language": "RUBY",
       "client_method": {
@@ -726,7 +726,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -734,7 +734,7 @@
     {
       "region_tag": "retail_v2_generated_ModelService_CreateModel_sync",
       "title": "Snippet for the create_model call in the ModelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ModelService::Client#create_model. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ModelService::Client#create_model.",
       "file": "model_service/create_model.rb",
       "language": "RUBY",
       "client_method": {
@@ -766,7 +766,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -774,7 +774,7 @@
     {
       "region_tag": "retail_v2_generated_ModelService_GetModel_sync",
       "title": "Snippet for the get_model call in the ModelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ModelService::Client#get_model. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ModelService::Client#get_model.",
       "file": "model_service/get_model.rb",
       "language": "RUBY",
       "client_method": {
@@ -806,7 +806,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -814,7 +814,7 @@
     {
       "region_tag": "retail_v2_generated_ModelService_PauseModel_sync",
       "title": "Snippet for the pause_model call in the ModelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ModelService::Client#pause_model. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ModelService::Client#pause_model.",
       "file": "model_service/pause_model.rb",
       "language": "RUBY",
       "client_method": {
@@ -846,7 +846,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -854,7 +854,7 @@
     {
       "region_tag": "retail_v2_generated_ModelService_ResumeModel_sync",
       "title": "Snippet for the resume_model call in the ModelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ModelService::Client#resume_model. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ModelService::Client#resume_model.",
       "file": "model_service/resume_model.rb",
       "language": "RUBY",
       "client_method": {
@@ -886,7 +886,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -894,7 +894,7 @@
     {
       "region_tag": "retail_v2_generated_ModelService_DeleteModel_sync",
       "title": "Snippet for the delete_model call in the ModelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ModelService::Client#delete_model. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ModelService::Client#delete_model.",
       "file": "model_service/delete_model.rb",
       "language": "RUBY",
       "client_method": {
@@ -926,7 +926,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -934,7 +934,7 @@
     {
       "region_tag": "retail_v2_generated_ModelService_ListModels_sync",
       "title": "Snippet for the list_models call in the ModelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ModelService::Client#list_models. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ModelService::Client#list_models.",
       "file": "model_service/list_models.rb",
       "language": "RUBY",
       "client_method": {
@@ -966,7 +966,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -974,7 +974,7 @@
     {
       "region_tag": "retail_v2_generated_ModelService_UpdateModel_sync",
       "title": "Snippet for the update_model call in the ModelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ModelService::Client#update_model. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ModelService::Client#update_model.",
       "file": "model_service/update_model.rb",
       "language": "RUBY",
       "client_method": {
@@ -1006,7 +1006,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1014,7 +1014,7 @@
     {
       "region_tag": "retail_v2_generated_ModelService_TuneModel_sync",
       "title": "Snippet for the tune_model call in the ModelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ModelService::Client#tune_model. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ModelService::Client#tune_model.",
       "file": "model_service/tune_model.rb",
       "language": "RUBY",
       "client_method": {
@@ -1046,7 +1046,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1054,7 +1054,7 @@
     {
       "region_tag": "retail_v2_generated_PredictionService_Predict_sync",
       "title": "Snippet for the predict call in the PredictionService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::PredictionService::Client#predict. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::PredictionService::Client#predict.",
       "file": "prediction_service/predict.rb",
       "language": "RUBY",
       "client_method": {
@@ -1086,7 +1086,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1094,7 +1094,7 @@
     {
       "region_tag": "retail_v2_generated_ProductService_CreateProduct_sync",
       "title": "Snippet for the create_product call in the ProductService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ProductService::Client#create_product. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ProductService::Client#create_product.",
       "file": "product_service/create_product.rb",
       "language": "RUBY",
       "client_method": {
@@ -1126,7 +1126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1134,7 +1134,7 @@
     {
       "region_tag": "retail_v2_generated_ProductService_GetProduct_sync",
       "title": "Snippet for the get_product call in the ProductService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ProductService::Client#get_product. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ProductService::Client#get_product.",
       "file": "product_service/get_product.rb",
       "language": "RUBY",
       "client_method": {
@@ -1166,7 +1166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1174,7 +1174,7 @@
     {
       "region_tag": "retail_v2_generated_ProductService_ListProducts_sync",
       "title": "Snippet for the list_products call in the ProductService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ProductService::Client#list_products. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ProductService::Client#list_products.",
       "file": "product_service/list_products.rb",
       "language": "RUBY",
       "client_method": {
@@ -1206,7 +1206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1214,7 +1214,7 @@
     {
       "region_tag": "retail_v2_generated_ProductService_UpdateProduct_sync",
       "title": "Snippet for the update_product call in the ProductService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ProductService::Client#update_product. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ProductService::Client#update_product.",
       "file": "product_service/update_product.rb",
       "language": "RUBY",
       "client_method": {
@@ -1246,7 +1246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1254,7 +1254,7 @@
     {
       "region_tag": "retail_v2_generated_ProductService_DeleteProduct_sync",
       "title": "Snippet for the delete_product call in the ProductService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ProductService::Client#delete_product. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ProductService::Client#delete_product.",
       "file": "product_service/delete_product.rb",
       "language": "RUBY",
       "client_method": {
@@ -1286,7 +1286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1294,7 +1294,7 @@
     {
       "region_tag": "retail_v2_generated_ProductService_ImportProducts_sync",
       "title": "Snippet for the import_products call in the ProductService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ProductService::Client#import_products. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ProductService::Client#import_products.",
       "file": "product_service/import_products.rb",
       "language": "RUBY",
       "client_method": {
@@ -1326,7 +1326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1334,7 +1334,7 @@
     {
       "region_tag": "retail_v2_generated_ProductService_SetInventory_sync",
       "title": "Snippet for the set_inventory call in the ProductService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ProductService::Client#set_inventory. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ProductService::Client#set_inventory.",
       "file": "product_service/set_inventory.rb",
       "language": "RUBY",
       "client_method": {
@@ -1366,7 +1366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1374,7 +1374,7 @@
     {
       "region_tag": "retail_v2_generated_ProductService_AddFulfillmentPlaces_sync",
       "title": "Snippet for the add_fulfillment_places call in the ProductService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ProductService::Client#add_fulfillment_places. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ProductService::Client#add_fulfillment_places.",
       "file": "product_service/add_fulfillment_places.rb",
       "language": "RUBY",
       "client_method": {
@@ -1406,7 +1406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1414,7 +1414,7 @@
     {
       "region_tag": "retail_v2_generated_ProductService_RemoveFulfillmentPlaces_sync",
       "title": "Snippet for the remove_fulfillment_places call in the ProductService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ProductService::Client#remove_fulfillment_places. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ProductService::Client#remove_fulfillment_places.",
       "file": "product_service/remove_fulfillment_places.rb",
       "language": "RUBY",
       "client_method": {
@@ -1446,7 +1446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1454,7 +1454,7 @@
     {
       "region_tag": "retail_v2_generated_ProductService_AddLocalInventories_sync",
       "title": "Snippet for the add_local_inventories call in the ProductService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ProductService::Client#add_local_inventories. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ProductService::Client#add_local_inventories.",
       "file": "product_service/add_local_inventories.rb",
       "language": "RUBY",
       "client_method": {
@@ -1486,7 +1486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1494,7 +1494,7 @@
     {
       "region_tag": "retail_v2_generated_ProductService_RemoveLocalInventories_sync",
       "title": "Snippet for the remove_local_inventories call in the ProductService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ProductService::Client#remove_local_inventories. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ProductService::Client#remove_local_inventories.",
       "file": "product_service/remove_local_inventories.rb",
       "language": "RUBY",
       "client_method": {
@@ -1526,7 +1526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1534,7 +1534,7 @@
     {
       "region_tag": "retail_v2_generated_SearchService_Search_sync",
       "title": "Snippet for the search call in the SearchService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::SearchService::Client#search. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::SearchService::Client#search.",
       "file": "search_service/search.rb",
       "language": "RUBY",
       "client_method": {
@@ -1566,7 +1566,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1574,7 +1574,7 @@
     {
       "region_tag": "retail_v2_generated_ServingConfigService_CreateServingConfig_sync",
       "title": "Snippet for the create_serving_config call in the ServingConfigService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ServingConfigService::Client#create_serving_config. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ServingConfigService::Client#create_serving_config.",
       "file": "serving_config_service/create_serving_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -1606,7 +1606,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1614,7 +1614,7 @@
     {
       "region_tag": "retail_v2_generated_ServingConfigService_DeleteServingConfig_sync",
       "title": "Snippet for the delete_serving_config call in the ServingConfigService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ServingConfigService::Client#delete_serving_config. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ServingConfigService::Client#delete_serving_config.",
       "file": "serving_config_service/delete_serving_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -1646,7 +1646,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1654,7 +1654,7 @@
     {
       "region_tag": "retail_v2_generated_ServingConfigService_UpdateServingConfig_sync",
       "title": "Snippet for the update_serving_config call in the ServingConfigService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ServingConfigService::Client#update_serving_config. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ServingConfigService::Client#update_serving_config.",
       "file": "serving_config_service/update_serving_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -1686,7 +1686,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1694,7 +1694,7 @@
     {
       "region_tag": "retail_v2_generated_ServingConfigService_GetServingConfig_sync",
       "title": "Snippet for the get_serving_config call in the ServingConfigService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ServingConfigService::Client#get_serving_config. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ServingConfigService::Client#get_serving_config.",
       "file": "serving_config_service/get_serving_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -1726,7 +1726,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1734,7 +1734,7 @@
     {
       "region_tag": "retail_v2_generated_ServingConfigService_ListServingConfigs_sync",
       "title": "Snippet for the list_serving_configs call in the ServingConfigService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ServingConfigService::Client#list_serving_configs. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ServingConfigService::Client#list_serving_configs.",
       "file": "serving_config_service/list_serving_configs.rb",
       "language": "RUBY",
       "client_method": {
@@ -1766,7 +1766,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1774,7 +1774,7 @@
     {
       "region_tag": "retail_v2_generated_ServingConfigService_AddControl_sync",
       "title": "Snippet for the add_control call in the ServingConfigService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ServingConfigService::Client#add_control. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ServingConfigService::Client#add_control.",
       "file": "serving_config_service/add_control.rb",
       "language": "RUBY",
       "client_method": {
@@ -1806,7 +1806,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1814,7 +1814,7 @@
     {
       "region_tag": "retail_v2_generated_ServingConfigService_RemoveControl_sync",
       "title": "Snippet for the remove_control call in the ServingConfigService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ServingConfigService::Client#remove_control. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ServingConfigService::Client#remove_control.",
       "file": "serving_config_service/remove_control.rb",
       "language": "RUBY",
       "client_method": {
@@ -1846,7 +1846,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1854,7 +1854,7 @@
     {
       "region_tag": "retail_v2_generated_UserEventService_WriteUserEvent_sync",
       "title": "Snippet for the write_user_event call in the UserEventService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::UserEventService::Client#write_user_event. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::UserEventService::Client#write_user_event.",
       "file": "user_event_service/write_user_event.rb",
       "language": "RUBY",
       "client_method": {
@@ -1886,7 +1886,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1894,7 +1894,7 @@
     {
       "region_tag": "retail_v2_generated_UserEventService_CollectUserEvent_sync",
       "title": "Snippet for the collect_user_event call in the UserEventService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::UserEventService::Client#collect_user_event. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::UserEventService::Client#collect_user_event.",
       "file": "user_event_service/collect_user_event.rb",
       "language": "RUBY",
       "client_method": {
@@ -1926,7 +1926,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1934,7 +1934,7 @@
     {
       "region_tag": "retail_v2_generated_UserEventService_PurgeUserEvents_sync",
       "title": "Snippet for the purge_user_events call in the UserEventService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::UserEventService::Client#purge_user_events. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::UserEventService::Client#purge_user_events.",
       "file": "user_event_service/purge_user_events.rb",
       "language": "RUBY",
       "client_method": {
@@ -1966,7 +1966,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1974,7 +1974,7 @@
     {
       "region_tag": "retail_v2_generated_UserEventService_ImportUserEvents_sync",
       "title": "Snippet for the import_user_events call in the UserEventService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::UserEventService::Client#import_user_events. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::UserEventService::Client#import_user_events.",
       "file": "user_event_service/import_user_events.rb",
       "language": "RUBY",
       "client_method": {
@@ -2006,7 +2006,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -2014,7 +2014,7 @@
     {
       "region_tag": "retail_v2_generated_UserEventService_RejoinUserEvents_sync",
       "title": "Snippet for the rejoin_user_events call in the UserEventService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::UserEventService::Client#rejoin_user_events. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::UserEventService::Client#rejoin_user_events.",
       "file": "user_event_service/rejoin_user_events.rb",
       "language": "RUBY",
       "client_method": {
@@ -2046,7 +2046,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]

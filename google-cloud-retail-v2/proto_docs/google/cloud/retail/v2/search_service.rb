@@ -127,6 +127,7 @@ module Google
         #     A maximum of 200 values are allowed. Otherwise, an INVALID_ARGUMENT error
         #     is returned.
         # @!attribute [rw] dynamic_facet_spec
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::Retail::V2::SearchRequest::DynamicFacetSpec]
         #     Deprecated. Refer to https://cloud.google.com/retail/docs/configs#dynamic
         #     to enable dynamic facets. Do not set this field.

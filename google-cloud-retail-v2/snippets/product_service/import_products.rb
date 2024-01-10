@@ -22,9 +22,14 @@ require "google/cloud/retail/v2"
 ##
 # Snippet for the import_products call in the ProductService service
 #
+# This snippet has been automatically generated and should be regarded as a code
+# template only. It will require modifications to work:
+# - It may require correct/in-range values for request initialization.
+# - It may require specifying regional endpoints when creating the service
+# client as shown in https://cloud.google.com/ruby/docs/reference.
+#
 # This is an auto-generated example demonstrating basic usage of
-# Google::Cloud::Retail::V2::ProductService::Client#import_products. It may
-# require modification in order to execute successfully.
+# Google::Cloud::Retail::V2::ProductService::Client#import_products.
 #
 def import_products
   # Create a client object. The client can be reused for multiple calls.

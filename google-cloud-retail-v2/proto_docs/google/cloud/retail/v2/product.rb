@@ -420,6 +420,7 @@ module Google
         #     purely describes product freshness regardless of when it is available on
         #     search and recommendation.
         # @!attribute [rw] retrievable_fields
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Protobuf::FieldMask]
         #     Indicates which fields in the {::Google::Cloud::Retail::V2::Product Product}s
         #     are returned in {::Google::Cloud::Retail::V2::SearchResponse SearchResponse}.

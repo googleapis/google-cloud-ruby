@@ -483,6 +483,7 @@ module Google
         #     Output only. The end time of any upcoming scheduled maintenance for this
         #     instance.
         # @!attribute [rw] can_reschedule
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
         #     If the scheduled maintenance can be rescheduled, default is true.
         # @!attribute [r] schedule_deadline_time
