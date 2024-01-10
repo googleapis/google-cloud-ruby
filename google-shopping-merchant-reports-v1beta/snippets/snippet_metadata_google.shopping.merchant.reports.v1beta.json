@@ -14,7 +14,7 @@
     {
       "region_tag": "merchantapi_v1beta_generated_ReportService_Search_sync",
       "title": "Snippet for the search call in the ReportService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Reports::V1beta::ReportService::Client#search. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Reports::V1beta::ReportService::Client#search.",
       "file": "report_service/search.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
