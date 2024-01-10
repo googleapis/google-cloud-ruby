@@ -1,0 +1,213 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.vmwareengine.v1",
+  "libraryPackage": "::Google::Cloud::VmwareEngine::V1",
+  "services": {
+    "VmwareEngine": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client",
+          "rpcs": {
+            "ListPrivateClouds": {
+              "methods": [
+                "list_private_clouds"
+              ]
+            },
+            "GetPrivateCloud": {
+              "methods": [
+                "get_private_cloud"
+              ]
+            },
+            "CreatePrivateCloud": {
+              "methods": [
+                "create_private_cloud"
+              ]
+            },
+            "UpdatePrivateCloud": {
+              "methods": [
+                "update_private_cloud"
+              ]
+            },
+            "DeletePrivateCloud": {
+              "methods": [
+                "delete_private_cloud"
+              ]
+            },
+            "UndeletePrivateCloud": {
+              "methods": [
+                "undelete_private_cloud"
+              ]
+            },
+            "ListClusters": {
+              "methods": [
+                "list_clusters"
+              ]
+            },
+            "GetCluster": {
+              "methods": [
+                "get_cluster"
+              ]
+            },
+            "CreateCluster": {
+              "methods": [
+                "create_cluster"
+              ]
+            },
+            "UpdateCluster": {
+              "methods": [
+                "update_cluster"
+              ]
+            },
+            "DeleteCluster": {
+              "methods": [
+                "delete_cluster"
+              ]
+            },
+            "ListSubnets": {
+              "methods": [
+                "list_subnets"
+              ]
+            },
+            "GetSubnet": {
+              "methods": [
+                "get_subnet"
+              ]
+            },
+            "UpdateSubnet": {
+              "methods": [
+                "update_subnet"
+              ]
+            },
+            "ListNodeTypes": {
+              "methods": [
+                "list_node_types"
+              ]
+            },
+            "GetNodeType": {
+              "methods": [
+                "get_node_type"
+              ]
+            },
+            "ShowNsxCredentials": {
+              "methods": [
+                "show_nsx_credentials"
+              ]
+            },
+            "ShowVcenterCredentials": {
+              "methods": [
+                "show_vcenter_credentials"
+              ]
+            },
+            "ResetNsxCredentials": {
+              "methods": [
+                "reset_nsx_credentials"
+              ]
+            },
+            "ResetVcenterCredentials": {
+              "methods": [
+                "reset_vcenter_credentials"
+              ]
+            },
+            "CreateHcxActivationKey": {
+              "methods": [
+                "create_hcx_activation_key"
+              ]
+            },
+            "ListHcxActivationKeys": {
+              "methods": [
+                "list_hcx_activation_keys"
+              ]
+            },
+            "GetHcxActivationKey": {
+              "methods": [
+                "get_hcx_activation_key"
+              ]
+            },
+            "GetNetworkPolicy": {
+              "methods": [
+                "get_network_policy"
+              ]
+            },
+            "ListNetworkPolicies": {
+              "methods": [
+                "list_network_policies"
+              ]
+            },
+            "CreateNetworkPolicy": {
+              "methods": [
+                "create_network_policy"
+              ]
+            },
+            "UpdateNetworkPolicy": {
+              "methods": [
+                "update_network_policy"
+              ]
+            },
+            "DeleteNetworkPolicy": {
+              "methods": [
+                "delete_network_policy"
+              ]
+            },
+            "CreateVmwareEngineNetwork": {
+              "methods": [
+                "create_vmware_engine_network"
+              ]
+            },
+            "UpdateVmwareEngineNetwork": {
+              "methods": [
+                "update_vmware_engine_network"
+              ]
+            },
+            "DeleteVmwareEngineNetwork": {
+              "methods": [
+                "delete_vmware_engine_network"
+              ]
+            },
+            "GetVmwareEngineNetwork": {
+              "methods": [
+                "get_vmware_engine_network"
+              ]
+            },
+            "ListVmwareEngineNetworks": {
+              "methods": [
+                "list_vmware_engine_networks"
+              ]
+            },
+            "CreatePrivateConnection": {
+              "methods": [
+                "create_private_connection"
+              ]
+            },
+            "GetPrivateConnection": {
+              "methods": [
+                "get_private_connection"
+              ]
+            },
+            "ListPrivateConnections": {
+              "methods": [
+                "list_private_connections"
+              ]
+            },
+            "UpdatePrivateConnection": {
+              "methods": [
+                "update_private_connection"
+              ]
+            },
+            "DeletePrivateConnection": {
+              "methods": [
+                "delete_private_connection"
+              ]
+            },
+            "ListPrivateConnectionPeeringRoutes": {
+              "methods": [
+                "list_private_connection_peering_routes"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
