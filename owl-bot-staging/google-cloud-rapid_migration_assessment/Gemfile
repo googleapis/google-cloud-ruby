@@ -1,0 +1,5 @@
+source "https://rubygems.org"
+
+gemspec
+
+gem "google-cloud-rapid_migration_assessment-v1", path: "../google-cloud-rapid_migration_assessment-v1"
