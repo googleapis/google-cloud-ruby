@@ -3,6 +3,7 @@
     ".gitignore",
     ".repo-metadata.json",
     ".rubocop.yml",
+    ".toys.rb",
     ".yardopts",
     "CHANGELOG.md",
     "Gemfile",
