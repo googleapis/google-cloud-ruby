@@ -452,9 +452,11 @@ module Google
         #   @return [::Google::Cloud::GkeHub::V1beta1::MembershipState::Code]
         #     Output only. The current state of the Membership resource.
         # @!attribute [rw] description
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     This field is never set by the Hub Service.
         # @!attribute [rw] update_time
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Protobuf::Timestamp]
         #     This field is never set by the Hub Service.
         class MembershipState
@@ -733,6 +735,7 @@ module Google
 
         # The information required from end users to use GKE Connect.
         # @!attribute [rw] name
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Do not set.
         # @!attribute [rw] proxy

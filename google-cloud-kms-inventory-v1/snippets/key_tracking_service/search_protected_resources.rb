@@ -22,9 +22,14 @@ require "google/cloud/kms/inventory/v1"
 ##
 # Snippet for the search_protected_resources call in the KeyTrackingService service
 #
+# This snippet has been automatically generated and should be regarded as a code
+# template only. It will require modifications to work:
+# - It may require correct/in-range values for request initialization.
+# - It may require specifying regional endpoints when creating the service
+# client as shown in https://cloud.google.com/ruby/docs/reference.
+#
 # This is an auto-generated example demonstrating basic usage of
 # Google::Cloud::Kms::Inventory::V1::KeyTrackingService::Client#search_protected_resources.
-# It may require modification in order to execute successfully.
 #
 def search_protected_resources
   # Create a client object. The client can be reused for multiple calls.
