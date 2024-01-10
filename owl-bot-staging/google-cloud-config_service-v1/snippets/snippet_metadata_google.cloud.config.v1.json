@@ -1,0 +1,655 @@
+{
+  "client_library": {
+    "name": "google-cloud-config_service-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.config.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "inframanager_v1_generated_Config_ListDeployments_sync",
+      "title": "Snippet for the list_deployments call in the Config service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#list_deployments.",
+      "file": "config/list_deployments.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_deployments",
+        "full_name": "::Google::Cloud::ConfigService::V1::Config::Client#list_deployments",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ConfigService::V1::ListDeploymentsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ConfigService::V1::ListDeploymentsResponse",
+        "client": {
+          "short_name": "Config::Client",
+          "full_name": "::Google::Cloud::ConfigService::V1::Config::Client"
+        },
+        "method": {
+          "short_name": "ListDeployments",
+          "full_name": "google.cloud.config.v1.Config.ListDeployments",
+          "service": {
+            "short_name": "Config",
+            "full_name": "google.cloud.config.v1.Config"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "inframanager_v1_generated_Config_GetDeployment_sync",
+      "title": "Snippet for the get_deployment call in the Config service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#get_deployment.",
+      "file": "config/get_deployment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_deployment",
+        "full_name": "::Google::Cloud::ConfigService::V1::Config::Client#get_deployment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ConfigService::V1::GetDeploymentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ConfigService::V1::Deployment",
+        "client": {
+          "short_name": "Config::Client",
+          "full_name": "::Google::Cloud::ConfigService::V1::Config::Client"
+        },
+        "method": {
+          "short_name": "GetDeployment",
+          "full_name": "google.cloud.config.v1.Config.GetDeployment",
+          "service": {
+            "short_name": "Config",
+            "full_name": "google.cloud.config.v1.Config"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "inframanager_v1_generated_Config_CreateDeployment_sync",
+      "title": "Snippet for the create_deployment call in the Config service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#create_deployment.",
+      "file": "config/create_deployment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_deployment",
+        "full_name": "::Google::Cloud::ConfigService::V1::Config::Client#create_deployment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ConfigService::V1::CreateDeploymentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Config::Client",
+          "full_name": "::Google::Cloud::ConfigService::V1::Config::Client"
+        },
+        "method": {
+          "short_name": "CreateDeployment",
+          "full_name": "google.cloud.config.v1.Config.CreateDeployment",
+          "service": {
+            "short_name": "Config",
+            "full_name": "google.cloud.config.v1.Config"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "inframanager_v1_generated_Config_UpdateDeployment_sync",
+      "title": "Snippet for the update_deployment call in the Config service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#update_deployment.",
+      "file": "config/update_deployment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_deployment",
+        "full_name": "::Google::Cloud::ConfigService::V1::Config::Client#update_deployment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ConfigService::V1::UpdateDeploymentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Config::Client",
+          "full_name": "::Google::Cloud::ConfigService::V1::Config::Client"
+        },
+        "method": {
+          "short_name": "UpdateDeployment",
+          "full_name": "google.cloud.config.v1.Config.UpdateDeployment",
+          "service": {
+            "short_name": "Config",
+            "full_name": "google.cloud.config.v1.Config"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "inframanager_v1_generated_Config_DeleteDeployment_sync",
+      "title": "Snippet for the delete_deployment call in the Config service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#delete_deployment.",
+      "file": "config/delete_deployment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_deployment",
+        "full_name": "::Google::Cloud::ConfigService::V1::Config::Client#delete_deployment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ConfigService::V1::DeleteDeploymentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Config::Client",
+          "full_name": "::Google::Cloud::ConfigService::V1::Config::Client"
+        },
+        "method": {
+          "short_name": "DeleteDeployment",
+          "full_name": "google.cloud.config.v1.Config.DeleteDeployment",
+          "service": {
+            "short_name": "Config",
+            "full_name": "google.cloud.config.v1.Config"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "inframanager_v1_generated_Config_ListRevisions_sync",
+      "title": "Snippet for the list_revisions call in the Config service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#list_revisions.",
+      "file": "config/list_revisions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_revisions",
+        "full_name": "::Google::Cloud::ConfigService::V1::Config::Client#list_revisions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ConfigService::V1::ListRevisionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ConfigService::V1::ListRevisionsResponse",
+        "client": {
+          "short_name": "Config::Client",
+          "full_name": "::Google::Cloud::ConfigService::V1::Config::Client"
+        },
+        "method": {
+          "short_name": "ListRevisions",
+          "full_name": "google.cloud.config.v1.Config.ListRevisions",
+          "service": {
+            "short_name": "Config",
+            "full_name": "google.cloud.config.v1.Config"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "inframanager_v1_generated_Config_GetRevision_sync",
+      "title": "Snippet for the get_revision call in the Config service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#get_revision.",
+      "file": "config/get_revision.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_revision",
+        "full_name": "::Google::Cloud::ConfigService::V1::Config::Client#get_revision",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ConfigService::V1::GetRevisionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ConfigService::V1::Revision",
+        "client": {
+          "short_name": "Config::Client",
+          "full_name": "::Google::Cloud::ConfigService::V1::Config::Client"
+        },
+        "method": {
+          "short_name": "GetRevision",
+          "full_name": "google.cloud.config.v1.Config.GetRevision",
+          "service": {
+            "short_name": "Config",
+            "full_name": "google.cloud.config.v1.Config"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "inframanager_v1_generated_Config_GetResource_sync",
+      "title": "Snippet for the get_resource call in the Config service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#get_resource.",
+      "file": "config/get_resource.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_resource",
+        "full_name": "::Google::Cloud::ConfigService::V1::Config::Client#get_resource",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ConfigService::V1::GetResourceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ConfigService::V1::Resource",
+        "client": {
+          "short_name": "Config::Client",
+          "full_name": "::Google::Cloud::ConfigService::V1::Config::Client"
+        },
+        "method": {
+          "short_name": "GetResource",
+          "full_name": "google.cloud.config.v1.Config.GetResource",
+          "service": {
+            "short_name": "Config",
+            "full_name": "google.cloud.config.v1.Config"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "inframanager_v1_generated_Config_ListResources_sync",
+      "title": "Snippet for the list_resources call in the Config service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#list_resources.",
+      "file": "config/list_resources.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_resources",
+        "full_name": "::Google::Cloud::ConfigService::V1::Config::Client#list_resources",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ConfigService::V1::ListResourcesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ConfigService::V1::ListResourcesResponse",
+        "client": {
+          "short_name": "Config::Client",
+          "full_name": "::Google::Cloud::ConfigService::V1::Config::Client"
+        },
+        "method": {
+          "short_name": "ListResources",
+          "full_name": "google.cloud.config.v1.Config.ListResources",
+          "service": {
+            "short_name": "Config",
+            "full_name": "google.cloud.config.v1.Config"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "inframanager_v1_generated_Config_ExportDeploymentStatefile_sync",
+      "title": "Snippet for the export_deployment_statefile call in the Config service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#export_deployment_statefile.",
+      "file": "config/export_deployment_statefile.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "export_deployment_statefile",
+        "full_name": "::Google::Cloud::ConfigService::V1::Config::Client#export_deployment_statefile",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ConfigService::V1::ExportDeploymentStatefileRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ConfigService::V1::Statefile",
+        "client": {
+          "short_name": "Config::Client",
+          "full_name": "::Google::Cloud::ConfigService::V1::Config::Client"
+        },
+        "method": {
+          "short_name": "ExportDeploymentStatefile",
+          "full_name": "google.cloud.config.v1.Config.ExportDeploymentStatefile",
+          "service": {
+            "short_name": "Config",
+            "full_name": "google.cloud.config.v1.Config"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "inframanager_v1_generated_Config_ExportRevisionStatefile_sync",
+      "title": "Snippet for the export_revision_statefile call in the Config service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#export_revision_statefile.",
+      "file": "config/export_revision_statefile.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "export_revision_statefile",
+        "full_name": "::Google::Cloud::ConfigService::V1::Config::Client#export_revision_statefile",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ConfigService::V1::ExportRevisionStatefileRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ConfigService::V1::Statefile",
+        "client": {
+          "short_name": "Config::Client",
+          "full_name": "::Google::Cloud::ConfigService::V1::Config::Client"
+        },
+        "method": {
+          "short_name": "ExportRevisionStatefile",
+          "full_name": "google.cloud.config.v1.Config.ExportRevisionStatefile",
+          "service": {
+            "short_name": "Config",
+            "full_name": "google.cloud.config.v1.Config"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "inframanager_v1_generated_Config_ImportStatefile_sync",
+      "title": "Snippet for the import_statefile call in the Config service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#import_statefile.",
+      "file": "config/import_statefile.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "import_statefile",
+        "full_name": "::Google::Cloud::ConfigService::V1::Config::Client#import_statefile",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ConfigService::V1::ImportStatefileRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ConfigService::V1::Statefile",
+        "client": {
+          "short_name": "Config::Client",
+          "full_name": "::Google::Cloud::ConfigService::V1::Config::Client"
+        },
+        "method": {
+          "short_name": "ImportStatefile",
+          "full_name": "google.cloud.config.v1.Config.ImportStatefile",
+          "service": {
+            "short_name": "Config",
+            "full_name": "google.cloud.config.v1.Config"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "inframanager_v1_generated_Config_DeleteStatefile_sync",
+      "title": "Snippet for the delete_statefile call in the Config service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#delete_statefile.",
+      "file": "config/delete_statefile.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_statefile",
+        "full_name": "::Google::Cloud::ConfigService::V1::Config::Client#delete_statefile",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ConfigService::V1::DeleteStatefileRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "Config::Client",
+          "full_name": "::Google::Cloud::ConfigService::V1::Config::Client"
+        },
+        "method": {
+          "short_name": "DeleteStatefile",
+          "full_name": "google.cloud.config.v1.Config.DeleteStatefile",
+          "service": {
+            "short_name": "Config",
+            "full_name": "google.cloud.config.v1.Config"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "inframanager_v1_generated_Config_LockDeployment_sync",
+      "title": "Snippet for the lock_deployment call in the Config service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#lock_deployment.",
+      "file": "config/lock_deployment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "lock_deployment",
+        "full_name": "::Google::Cloud::ConfigService::V1::Config::Client#lock_deployment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ConfigService::V1::LockDeploymentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Config::Client",
+          "full_name": "::Google::Cloud::ConfigService::V1::Config::Client"
+        },
+        "method": {
+          "short_name": "LockDeployment",
+          "full_name": "google.cloud.config.v1.Config.LockDeployment",
+          "service": {
+            "short_name": "Config",
+            "full_name": "google.cloud.config.v1.Config"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "inframanager_v1_generated_Config_UnlockDeployment_sync",
+      "title": "Snippet for the unlock_deployment call in the Config service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#unlock_deployment.",
+      "file": "config/unlock_deployment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "unlock_deployment",
+        "full_name": "::Google::Cloud::ConfigService::V1::Config::Client#unlock_deployment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ConfigService::V1::UnlockDeploymentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Config::Client",
+          "full_name": "::Google::Cloud::ConfigService::V1::Config::Client"
+        },
+        "method": {
+          "short_name": "UnlockDeployment",
+          "full_name": "google.cloud.config.v1.Config.UnlockDeployment",
+          "service": {
+            "short_name": "Config",
+            "full_name": "google.cloud.config.v1.Config"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "inframanager_v1_generated_Config_ExportLockInfo_sync",
+      "title": "Snippet for the export_lock_info call in the Config service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#export_lock_info.",
+      "file": "config/export_lock_info.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "export_lock_info",
+        "full_name": "::Google::Cloud::ConfigService::V1::Config::Client#export_lock_info",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ConfigService::V1::ExportLockInfoRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ConfigService::V1::LockInfo",
+        "client": {
+          "short_name": "Config::Client",
+          "full_name": "::Google::Cloud::ConfigService::V1::Config::Client"
+        },
+        "method": {
+          "short_name": "ExportLockInfo",
+          "full_name": "google.cloud.config.v1.Config.ExportLockInfo",
+          "service": {
+            "short_name": "Config",
+            "full_name": "google.cloud.config.v1.Config"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
