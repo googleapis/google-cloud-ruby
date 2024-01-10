@@ -14,7 +14,7 @@
     {
       "region_tag": "edgenetwork_v1_generated_EdgeNetwork_InitializeZone_sync",
       "title": "Snippet for the initialize_zone call in the EdgeNetwork service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#initialize_zone. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#initialize_zone.",
       "file": "edge_network/initialize_zone.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "edgenetwork_v1_generated_EdgeNetwork_ListZones_sync",
       "title": "Snippet for the list_zones call in the EdgeNetwork service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#list_zones. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#list_zones.",
       "file": "edge_network/list_zones.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "edgenetwork_v1_generated_EdgeNetwork_GetZone_sync",
       "title": "Snippet for the get_zone call in the EdgeNetwork service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#get_zone. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#get_zone.",
       "file": "edge_network/get_zone.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -134,7 +134,7 @@
     {
       "region_tag": "edgenetwork_v1_generated_EdgeNetwork_ListNetworks_sync",
       "title": "Snippet for the list_networks call in the EdgeNetwork service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#list_networks. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#list_networks.",
       "file": "edge_network/list_networks.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -174,7 +174,7 @@
     {
       "region_tag": "edgenetwork_v1_generated_EdgeNetwork_GetNetwork_sync",
       "title": "Snippet for the get_network call in the EdgeNetwork service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#get_network. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#get_network.",
       "file": "edge_network/get_network.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,7 +206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -214,7 +214,7 @@
     {
       "region_tag": "edgenetwork_v1_generated_EdgeNetwork_DiagnoseNetwork_sync",
       "title": "Snippet for the diagnose_network call in the EdgeNetwork service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#diagnose_network. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#diagnose_network.",
       "file": "edge_network/diagnose_network.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,7 +246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -254,7 +254,7 @@
     {
       "region_tag": "edgenetwork_v1_generated_EdgeNetwork_CreateNetwork_sync",
       "title": "Snippet for the create_network call in the EdgeNetwork service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#create_network. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#create_network.",
       "file": "edge_network/create_network.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,7 +286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -294,7 +294,7 @@
     {
       "region_tag": "edgenetwork_v1_generated_EdgeNetwork_DeleteNetwork_sync",
       "title": "Snippet for the delete_network call in the EdgeNetwork service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#delete_network. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#delete_network.",
       "file": "edge_network/delete_network.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,7 +326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -334,7 +334,7 @@
     {
       "region_tag": "edgenetwork_v1_generated_EdgeNetwork_ListSubnets_sync",
       "title": "Snippet for the list_subnets call in the EdgeNetwork service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#list_subnets. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#list_subnets.",
       "file": "edge_network/list_subnets.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,7 +366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -374,7 +374,7 @@
     {
       "region_tag": "edgenetwork_v1_generated_EdgeNetwork_GetSubnet_sync",
       "title": "Snippet for the get_subnet call in the EdgeNetwork service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#get_subnet. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#get_subnet.",
       "file": "edge_network/get_subnet.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,7 +406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -414,7 +414,7 @@
     {
       "region_tag": "edgenetwork_v1_generated_EdgeNetwork_CreateSubnet_sync",
       "title": "Snippet for the create_subnet call in the EdgeNetwork service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#create_subnet. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#create_subnet.",
       "file": "edge_network/create_subnet.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,7 +446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -454,7 +454,7 @@
     {
       "region_tag": "edgenetwork_v1_generated_EdgeNetwork_UpdateSubnet_sync",
       "title": "Snippet for the update_subnet call in the EdgeNetwork service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#update_subnet. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#update_subnet.",
       "file": "edge_network/update_subnet.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,7 +486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -494,7 +494,7 @@
     {
       "region_tag": "edgenetwork_v1_generated_EdgeNetwork_DeleteSubnet_sync",
       "title": "Snippet for the delete_subnet call in the EdgeNetwork service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#delete_subnet. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#delete_subnet.",
       "file": "edge_network/delete_subnet.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,7 +526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -534,7 +534,7 @@
     {
       "region_tag": "edgenetwork_v1_generated_EdgeNetwork_ListInterconnects_sync",
       "title": "Snippet for the list_interconnects call in the EdgeNetwork service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#list_interconnects. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#list_interconnects.",
       "file": "edge_network/list_interconnects.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,7 +566,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -574,7 +574,7 @@
     {
       "region_tag": "edgenetwork_v1_generated_EdgeNetwork_GetInterconnect_sync",
       "title": "Snippet for the get_interconnect call in the EdgeNetwork service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#get_interconnect. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#get_interconnect.",
       "file": "edge_network/get_interconnect.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,7 +606,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -614,7 +614,7 @@
     {
       "region_tag": "edgenetwork_v1_generated_EdgeNetwork_DiagnoseInterconnect_sync",
       "title": "Snippet for the diagnose_interconnect call in the EdgeNetwork service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#diagnose_interconnect. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#diagnose_interconnect.",
       "file": "edge_network/diagnose_interconnect.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,7 +646,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -654,7 +654,7 @@
     {
       "region_tag": "edgenetwork_v1_generated_EdgeNetwork_ListInterconnectAttachments_sync",
       "title": "Snippet for the list_interconnect_attachments call in the EdgeNetwork service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#list_interconnect_attachments. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#list_interconnect_attachments.",
       "file": "edge_network/list_interconnect_attachments.rb",
       "language": "RUBY",
       "client_method": {
@@ -686,7 +686,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -694,7 +694,7 @@
     {
       "region_tag": "edgenetwork_v1_generated_EdgeNetwork_GetInterconnectAttachment_sync",
       "title": "Snippet for the get_interconnect_attachment call in the EdgeNetwork service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#get_interconnect_attachment. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#get_interconnect_attachment.",
       "file": "edge_network/get_interconnect_attachment.rb",
       "language": "RUBY",
       "client_method": {
@@ -726,7 +726,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -734,7 +734,7 @@
     {
       "region_tag": "edgenetwork_v1_generated_EdgeNetwork_CreateInterconnectAttachment_sync",
       "title": "Snippet for the create_interconnect_attachment call in the EdgeNetwork service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#create_interconnect_attachment. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#create_interconnect_attachment.",
       "file": "edge_network/create_interconnect_attachment.rb",
       "language": "RUBY",
       "client_method": {
@@ -766,7 +766,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -774,7 +774,7 @@
     {
       "region_tag": "edgenetwork_v1_generated_EdgeNetwork_DeleteInterconnectAttachment_sync",
       "title": "Snippet for the delete_interconnect_attachment call in the EdgeNetwork service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#delete_interconnect_attachment. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#delete_interconnect_attachment.",
       "file": "edge_network/delete_interconnect_attachment.rb",
       "language": "RUBY",
       "client_method": {
@@ -806,7 +806,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -814,7 +814,7 @@
     {
       "region_tag": "edgenetwork_v1_generated_EdgeNetwork_ListRouters_sync",
       "title": "Snippet for the list_routers call in the EdgeNetwork service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#list_routers. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#list_routers.",
       "file": "edge_network/list_routers.rb",
       "language": "RUBY",
       "client_method": {
@@ -846,7 +846,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -854,7 +854,7 @@
     {
       "region_tag": "edgenetwork_v1_generated_EdgeNetwork_GetRouter_sync",
       "title": "Snippet for the get_router call in the EdgeNetwork service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#get_router. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#get_router.",
       "file": "edge_network/get_router.rb",
       "language": "RUBY",
       "client_method": {
@@ -886,7 +886,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -894,7 +894,7 @@
     {
       "region_tag": "edgenetwork_v1_generated_EdgeNetwork_DiagnoseRouter_sync",
       "title": "Snippet for the diagnose_router call in the EdgeNetwork service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#diagnose_router. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#diagnose_router.",
       "file": "edge_network/diagnose_router.rb",
       "language": "RUBY",
       "client_method": {
@@ -926,7 +926,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -934,7 +934,7 @@
     {
       "region_tag": "edgenetwork_v1_generated_EdgeNetwork_CreateRouter_sync",
       "title": "Snippet for the create_router call in the EdgeNetwork service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#create_router. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#create_router.",
       "file": "edge_network/create_router.rb",
       "language": "RUBY",
       "client_method": {
@@ -966,7 +966,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -974,7 +974,7 @@
     {
       "region_tag": "edgenetwork_v1_generated_EdgeNetwork_UpdateRouter_sync",
       "title": "Snippet for the update_router call in the EdgeNetwork service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#update_router. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#update_router.",
       "file": "edge_network/update_router.rb",
       "language": "RUBY",
       "client_method": {
@@ -1006,7 +1006,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1014,7 +1014,7 @@
     {
       "region_tag": "edgenetwork_v1_generated_EdgeNetwork_DeleteRouter_sync",
       "title": "Snippet for the delete_router call in the EdgeNetwork service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#delete_router. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#delete_router.",
       "file": "edge_network/delete_router.rb",
       "language": "RUBY",
       "client_method": {
@@ -1046,7 +1046,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]

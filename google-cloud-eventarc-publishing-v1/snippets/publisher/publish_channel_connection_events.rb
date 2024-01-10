@@ -22,9 +22,14 @@ require "google/cloud/eventarc/publishing/v1"
 ##
 # Snippet for the publish_channel_connection_events call in the Publisher service
 #
+# This snippet has been automatically generated and should be regarded as a code
+# template only. It will require modifications to work:
+# - It may require correct/in-range values for request initialization.
+# - It may require specifying regional endpoints when creating the service
+# client as shown in https://cloud.google.com/ruby/docs/reference.
+#
 # This is an auto-generated example demonstrating basic usage of
 # Google::Cloud::Eventarc::Publishing::V1::Publisher::Client#publish_channel_connection_events.
-# It may require modification in order to execute successfully.
 #
 def publish_channel_connection_events
   # Create a client object. The client can be reused for multiple calls.
