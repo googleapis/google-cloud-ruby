@@ -42,6 +42,7 @@ module Google
         #   @return [::Google::Cloud::OrgPolicy::V2::PolicySpec]
         #     Basic information about the Organization Policy.
         # @!attribute [rw] alternate
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::OrgPolicy::V2::AlternatePolicySpec]
         #     Deprecated.
         # @!attribute [rw] dry_run_spec

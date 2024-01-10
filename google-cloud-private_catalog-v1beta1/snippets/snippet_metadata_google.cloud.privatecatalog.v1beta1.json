@@ -14,7 +14,7 @@
     {
       "region_tag": "cloudprivatecatalog_v1beta1_generated_PrivateCatalog_SearchCatalogs_sync",
       "title": "Snippet for the search_catalogs call in the PrivateCatalog service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::Client#search_catalogs. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::Client#search_catalogs.",
       "file": "private_catalog/search_catalogs.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "cloudprivatecatalog_v1beta1_generated_PrivateCatalog_SearchProducts_sync",
       "title": "Snippet for the search_products call in the PrivateCatalog service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::Client#search_products. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::Client#search_products.",
       "file": "private_catalog/search_products.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "cloudprivatecatalog_v1beta1_generated_PrivateCatalog_SearchVersions_sync",
       "title": "Snippet for the search_versions call in the PrivateCatalog service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::Client#search_versions. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::Client#search_versions.",
       "file": "private_catalog/search_versions.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]

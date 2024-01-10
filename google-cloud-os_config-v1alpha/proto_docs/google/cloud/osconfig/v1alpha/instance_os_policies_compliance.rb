@@ -33,6 +33,7 @@ module Google
         #
         # For more information, see [View
         # compliance](https://cloud.google.com/compute/docs/os-configuration-management/view-compliance).
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The `InstanceOSPoliciesCompliance` API resource name.
@@ -80,6 +81,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Compliance data for an OS policy
+          # @deprecated This message is deprecated and may be removed in the next major version update.
           # @!attribute [rw] os_policy_id
           #   @return [::String]
           #     The OS policy id
@@ -105,6 +107,7 @@ module Google
 
         # A request message for getting OS policies compliance data for the given
         # Compute Engine VM instance.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. API resource name for instance OS policies compliance resource.
@@ -123,6 +126,7 @@ module Google
 
         # A request message for listing OS policies compliance data for all Compute
         # Engine VMs in the given location.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource name.
@@ -150,6 +154,7 @@ module Google
 
         # A response message for listing OS policies compliance data for all Compute
         # Engine VMs in the given location.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] instance_os_policies_compliances
         #   @return [::Array<::Google::Cloud::OsConfig::V1alpha::InstanceOSPoliciesCompliance>]
         #     List of instance OS policies compliance objects.
