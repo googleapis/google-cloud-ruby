@@ -1,5 +1,11 @@
 # Release History
 
+### 0.24.0 (2024-01-10)
+
+#### Features
+
+* add ability to request compressed ReadRowsResponse rows ([#23771](https://github.com/googleapis/google-cloud-ruby/issues/23771)) 
+
 ### 0.23.0 (2023-09-12)
 
 #### Features
