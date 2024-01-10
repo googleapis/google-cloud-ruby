@@ -41,6 +41,7 @@ module Google
           #   @return [::String]
           #     IPC-serialized Arrow RecordBatch.
           # @!attribute [rw] row_count
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::Integer]
           #     [Deprecated] The count of rows in `serialized_record_batch`.
           #     Please use the format-independent ReadRowsResponse.row_count instead.

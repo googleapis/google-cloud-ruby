@@ -1533,6 +1533,7 @@ module Google
         # GitHubEventsConfig describes the configuration of a trigger that creates a
         # build whenever a GitHub event is received.
         # @!attribute [rw] installation_id
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Integer]
         #     The installationID that emits the GitHub event.
         # @!attribute [rw] owner
@@ -1819,6 +1820,7 @@ module Google
         #     Option to define build log streaming behavior to Cloud
         #     Storage.
         # @!attribute [rw] worker_pool
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     This field deprecated; please use `pool.name` instead.
         # @!attribute [rw] pool

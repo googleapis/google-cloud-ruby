@@ -14,7 +14,7 @@
     {
       "region_tag": "binaryauthorization_v1beta1_generated_BinauthzManagementService_GetPolicy_sync",
       "title": "Snippet for the get_policy call in the BinauthzManagementService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client#get_policy. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client#get_policy.",
       "file": "binauthz_management_service/get_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "binaryauthorization_v1beta1_generated_BinauthzManagementService_UpdatePolicy_sync",
       "title": "Snippet for the update_policy call in the BinauthzManagementService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client#update_policy. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client#update_policy.",
       "file": "binauthz_management_service/update_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "binaryauthorization_v1beta1_generated_BinauthzManagementService_CreateAttestor_sync",
       "title": "Snippet for the create_attestor call in the BinauthzManagementService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client#create_attestor. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client#create_attestor.",
       "file": "binauthz_management_service/create_attestor.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -134,7 +134,7 @@
     {
       "region_tag": "binaryauthorization_v1beta1_generated_BinauthzManagementService_GetAttestor_sync",
       "title": "Snippet for the get_attestor call in the BinauthzManagementService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client#get_attestor. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client#get_attestor.",
       "file": "binauthz_management_service/get_attestor.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -174,7 +174,7 @@
     {
       "region_tag": "binaryauthorization_v1beta1_generated_BinauthzManagementService_UpdateAttestor_sync",
       "title": "Snippet for the update_attestor call in the BinauthzManagementService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client#update_attestor. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client#update_attestor.",
       "file": "binauthz_management_service/update_attestor.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,7 +206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -214,7 +214,7 @@
     {
       "region_tag": "binaryauthorization_v1beta1_generated_BinauthzManagementService_ListAttestors_sync",
       "title": "Snippet for the list_attestors call in the BinauthzManagementService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client#list_attestors. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client#list_attestors.",
       "file": "binauthz_management_service/list_attestors.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,7 +246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -254,7 +254,7 @@
     {
       "region_tag": "binaryauthorization_v1beta1_generated_BinauthzManagementService_DeleteAttestor_sync",
       "title": "Snippet for the delete_attestor call in the BinauthzManagementService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client#delete_attestor. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client#delete_attestor.",
       "file": "binauthz_management_service/delete_attestor.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,7 +286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -294,7 +294,7 @@
     {
       "region_tag": "binaryauthorization_v1beta1_generated_SystemPolicy_GetSystemPolicy_sync",
       "title": "Snippet for the get_system_policy call in the SystemPolicy service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BinaryAuthorization::V1beta1::SystemPolicy::Client#get_system_policy. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BinaryAuthorization::V1beta1::SystemPolicy::Client#get_system_policy.",
       "file": "system_policy/get_system_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,7 +326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]

@@ -1,5 +1,0 @@
-source "https://rubygems.org"
-
-gemspec
-
-gem "google-cloud-bigquery-reservation-v1", path: "../google-cloud-bigquery-reservation-v1"

@@ -265,6 +265,7 @@ module Google
           #   @return [::Google::Cloud::Bigtable::Admin::V2::AppProfile::SingleClusterRouting]
           #     Use a single-cluster routing policy.
           # @!attribute [rw] priority
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::Google::Cloud::Bigtable::Admin::V2::AppProfile::Priority]
           #     This field has been deprecated in favor of `standard_isolation.priority`.
           #     If you set this field, `standard_isolation.priority` will be set instead.

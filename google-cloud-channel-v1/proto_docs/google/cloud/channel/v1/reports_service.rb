@@ -23,6 +23,7 @@ module Google
       module V1
         # Request message for
         # {::Google::Cloud::Channel::V1::CloudChannelReportsService::Client#run_report_job CloudChannelReportsService.RunReportJob}.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The report's resource name. Specifies the account and report used
@@ -58,6 +59,7 @@ module Google
 
         # Response message for
         # {::Google::Cloud::Channel::V1::CloudChannelReportsService::Client#run_report_job CloudChannelReportsService.RunReportJob}.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] report_job
         #   @return [::Google::Cloud::Channel::V1::ReportJob]
         #     Pass `report_job.name` to
@@ -75,6 +77,7 @@ module Google
 
         # Request message for
         # {::Google::Cloud::Channel::V1::CloudChannelReportsService::Client#fetch_report_results CloudChannelReportsService.FetchReportResults}.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] report_job
         #   @return [::String]
         #     Required. The report job created by
@@ -109,6 +112,7 @@ module Google
         # Response message for
         # {::Google::Cloud::Channel::V1::CloudChannelReportsService::Client#fetch_report_results CloudChannelReportsService.FetchReportResults}.
         # Contains a tabular representation of the report results.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] report_metadata
         #   @return [::Google::Cloud::Channel::V1::ReportResultsMetadata]
         #     The metadata for the report results (display name, columns, row count, and
@@ -129,6 +133,7 @@ module Google
 
         # Request message for
         # {::Google::Cloud::Channel::V1::CloudChannelReportsService::Client#list_reports CloudChannelReportsService.ListReports}.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the partner account to list available
@@ -159,6 +164,7 @@ module Google
 
         # Response message for
         # {::Google::Cloud::Channel::V1::CloudChannelReportsService::Client#list_reports CloudChannelReportsService.ListReports}.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] reports
         #   @return [::Array<::Google::Cloud::Channel::V1::Report>]
         #     The reports available to the partner.
@@ -175,6 +181,7 @@ module Google
         # The result of a [RunReportJob][] operation. Contains the name to use in
         # {::Google::Cloud::Channel::V1::FetchReportResultsRequest#report_job FetchReportResultsRequest.report_job}
         # and the status of the operation.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of a report job.
@@ -192,6 +199,7 @@ module Google
         # {::Google::Cloud::Channel::V1::CloudChannelReportsService::Client#run_report_job CloudChannelReportsService.RunReportJob}
         # and
         # {::Google::Cloud::Channel::V1::CloudChannelReportsService::Client#fetch_report_results CloudChannelReportsService.FetchReportResults}.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] report
         #   @return [::Google::Cloud::Channel::V1::Report]
         #     Details of the completed report.
@@ -216,6 +224,7 @@ module Google
 
         # The definition of a report column. Specifies the data properties
         # in the corresponding position of the report rows.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] column_id
         #   @return [::String]
         #     The unique name of the column (for example, customer_domain,
@@ -260,6 +269,7 @@ module Google
         end
 
         # A representation of usage or invoice date ranges.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] usage_start_date_time
         #   @return [::Google::Type::DateTime]
         #     The earliest usage date time (inclusive).
@@ -294,6 +304,7 @@ module Google
         end
 
         # A row of report values.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] values
         #   @return [::Array<::Google::Cloud::Channel::V1::ReportValue>]
         #     The list of values in the row.
@@ -307,6 +318,7 @@ module Google
         end
 
         # A single report value.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] string_value
         #   @return [::String]
         #     A value of type `string`.
@@ -334,6 +346,7 @@ module Google
         end
 
         # Status of a report generation process.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] state
         #   @return [::Google::Cloud::Channel::V1::ReportStatus::State]
         #     The current state of the report generation process.
@@ -369,6 +382,7 @@ module Google
         # The ID and description of a report that was used to generate report data.
         # For example, "Google Cloud Daily Spend", "Google Workspace License Activity",
         # etc.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The report's resource name. Specifies the account and report used
