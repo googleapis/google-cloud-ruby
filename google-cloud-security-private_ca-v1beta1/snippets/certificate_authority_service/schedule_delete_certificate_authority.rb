@@ -22,9 +22,14 @@ require "google/cloud/security/private_ca/v1beta1"
 ##
 # Snippet for the schedule_delete_certificate_authority call in the CertificateAuthorityService service
 #
+# This snippet has been automatically generated and should be regarded as a code
+# template only. It will require modifications to work:
+# - It may require correct/in-range values for request initialization.
+# - It may require specifying regional endpoints when creating the service
+# client as shown in https://cloud.google.com/ruby/docs/reference.
+#
 # This is an auto-generated example demonstrating basic usage of
 # Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client#schedule_delete_certificate_authority.
-# It may require modification in order to execute successfully.
 #
 def schedule_delete_certificate_authority
   # Create a client object. The client can be reused for multiple calls.

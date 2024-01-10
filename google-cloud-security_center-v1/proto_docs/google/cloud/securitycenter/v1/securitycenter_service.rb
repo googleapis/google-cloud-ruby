@@ -55,6 +55,7 @@ module Google
         #     * integer literals without quotes.
         #     * boolean literals `true` and `false` without quotes.
         # @!attribute [rw] mute_annotation
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     This can be a mute configuration name or any identifier for mute/unmute
         #     of findings based on the filter.

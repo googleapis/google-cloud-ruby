@@ -22,9 +22,14 @@ require "google/cloud/security/public_ca/v1beta1"
 ##
 # Snippet for the create_external_account_key call in the PublicCertificateAuthorityService service
 #
+# This snippet has been automatically generated and should be regarded as a code
+# template only. It will require modifications to work:
+# - It may require correct/in-range values for request initialization.
+# - It may require specifying regional endpoints when creating the service
+# client as shown in https://cloud.google.com/ruby/docs/reference.
+#
 # This is an auto-generated example demonstrating basic usage of
 # Google::Cloud::Security::PublicCA::V1beta1::PublicCertificateAuthorityService::Client#create_external_account_key.
-# It may require modification in order to execute successfully.
 #
 def create_external_account_key
   # Create a client object. The client can be reused for multiple calls.
