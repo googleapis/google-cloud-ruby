@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-dialogflow-cx-v3",
-    "version": "0.22.0",
+    "version": "0.23.0",
     "language": "RUBY",
     "apis": [
       {
