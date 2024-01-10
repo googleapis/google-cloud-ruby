@@ -211,6 +211,7 @@ module Google
         #     setting job {::Google::Cloud::Talent::V4::Job#addresses Job.addresses} to the
         #     same location level as this field is strongly recommended.
         # @!attribute [rw] visibility
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::Talent::V4::Visibility]
         #     Deprecated. The job is only visible to the owner.
         #
