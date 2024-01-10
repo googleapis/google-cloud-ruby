@@ -187,6 +187,7 @@ module Google
         #   @return [::String]
         #     Required. The name of the AutoML model that synthesizes the custom voice.
         # @!attribute [rw] reported_usage
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::TextToSpeech::V1::CustomVoiceParams::ReportedUsage]
         #     Optional. Deprecated. The usage of the synthesized audio to be reported.
         class CustomVoiceParams

@@ -22,9 +22,14 @@ require "google/cloud/tpu/v1"
 ##
 # Snippet for the list_nodes call in the Tpu service
 #
+# This snippet has been automatically generated and should be regarded as a code
+# template only. It will require modifications to work:
+# - It may require correct/in-range values for request initialization.
+# - It may require specifying regional endpoints when creating the service
+# client as shown in https://cloud.google.com/ruby/docs/reference.
+#
 # This is an auto-generated example demonstrating basic usage of
-# Google::Cloud::Tpu::V1::Tpu::Client#list_nodes. It may require modification in
-# order to execute successfully.
+# Google::Cloud::Tpu::V1::Tpu::Client#list_nodes.
 #
 def list_nodes
   # Create a client object. The client can be reused for multiple calls.

@@ -56,11 +56,13 @@ module Google
         #   @return [::String]
         #     Required. The type of hardware accelerators associated with this node.
         # @!attribute [rw] ip_address
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Output only. DEPRECATED! Use network_endpoints instead.
         #     The network address for the TPU Node as visible to Compute Engine
         #     instances.
         # @!attribute [rw] port
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Output only. DEPRECATED! Use network_endpoints instead.
         #     The network port for the TPU Node as visible to Compute Engine instances.

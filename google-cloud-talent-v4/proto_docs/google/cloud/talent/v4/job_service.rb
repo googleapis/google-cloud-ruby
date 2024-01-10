@@ -400,6 +400,7 @@ module Google
         #     Controls over how job documents get ranked on top of existing relevance
         #     score (determined by API algorithm).
         # @!attribute [rw] disable_keyword_match
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
         #     This field is deprecated. Please use
         #     {::Google::Cloud::Talent::V4::SearchJobsRequest#keyword_match_mode SearchJobsRequest.keyword_match_mode}

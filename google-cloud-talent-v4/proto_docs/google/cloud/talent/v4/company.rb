@@ -80,6 +80,7 @@ module Google
         #   @return [::String]
         #     A URI that hosts the employer's company logo.
         # @!attribute [rw] keyword_searchable_job_custom_attributes
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Array<::String>]
         #     This field is deprecated. Please set the searchability of the custom
         #     attribute in the
