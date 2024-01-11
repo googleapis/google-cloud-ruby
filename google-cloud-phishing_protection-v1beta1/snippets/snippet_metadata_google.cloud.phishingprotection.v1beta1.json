@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-phishing_protection-v1beta1",
-    "version": "0.7.0",
+    "version": "0.8.0",
     "language": "RUBY",
     "apis": [
       {
