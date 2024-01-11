@@ -75,6 +75,7 @@ module Google
           #   @return [::Google::Cloud::Dataform::V1beta1::Repository::GitRemoteSettings::SshAuthenticationConfig]
           #     Optional. Authentication fields for remote uris using SSH protocol.
           # @!attribute [r] token_status
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::Google::Cloud::Dataform::V1beta1::Repository::GitRemoteSettings::TokenStatus]
           #     Output only. Deprecated: The field does not contain any token status
           #     information. Instead use

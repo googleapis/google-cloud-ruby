@@ -227,6 +227,7 @@ module Google
         #     The \\{partition_value_path} segment consists of an ordered sequence of
         #     partition values separated by "/". All values must be provided.
         # @!attribute [rw] etag
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Optional. The etag associated with the partition.
         class DeletePartitionRequest
@@ -395,6 +396,7 @@ module Google
         #     for example, `gs://bucket/path/to/entity/key1=value1/key2=value2`. Or
         #     `projects/<project_id>/datasets/<dataset_id>/tables/<table_id>`
         # @!attribute [rw] etag
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Optional. The etag for this partition.
         class Partition

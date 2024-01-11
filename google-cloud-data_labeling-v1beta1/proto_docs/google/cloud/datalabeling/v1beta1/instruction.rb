@@ -44,6 +44,7 @@ module Google
         #   @return [::Google::Cloud::DataLabeling::V1beta1::DataType]
         #     Required. The data type of this instruction.
         # @!attribute [rw] csv_instruction
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::DataLabeling::V1beta1::CsvInstruction]
         #     Deprecated: this instruction format is not supported any more.
         #     Instruction from a CSV file, such as for classification task.

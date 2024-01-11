@@ -129,6 +129,7 @@ module Google
           #
           #     By default, all results are returned, starred or not.
           # @!attribute [rw] include_public_tag_templates
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::Boolean]
           #     Optional. This field is deprecated. The search mechanism for public and
           #     private tag templates is the same.
