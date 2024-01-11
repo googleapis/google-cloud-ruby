@@ -5293,6 +5293,7 @@ module Google
         #   @return [::Google::Cloud::Dlp::V2::InfoType]
         #     The infoType.
         # @!attribute [rw] estimated_prevalence
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Integer]
         #     Not populated for predicted infotypes.
         class InfoTypeSummary

@@ -83,6 +83,7 @@ module Google
           #     Optional. The HTTP request headers to send together with fulfillment
           #     requests.
           # @!attribute [rw] is_cloud_function
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::Boolean]
           #     Optional. Indicates if generic web service is created through Cloud
           #     Functions integration. Defaults to false.

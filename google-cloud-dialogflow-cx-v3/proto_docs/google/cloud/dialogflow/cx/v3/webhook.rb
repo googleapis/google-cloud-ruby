@@ -63,9 +63,11 @@ module Google
             #     Required. The webhook URI for receiving POST requests. It must use https
             #     protocol.
             # @!attribute [rw] username
+            #   @deprecated This field is deprecated and may be removed in the next major version update.
             #   @return [::String]
             #     The user name for HTTP Basic authentication.
             # @!attribute [rw] password
+            #   @deprecated This field is deprecated and may be removed in the next major version update.
             #   @return [::String]
             #     The password for HTTP Basic authentication.
             # @!attribute [rw] request_headers

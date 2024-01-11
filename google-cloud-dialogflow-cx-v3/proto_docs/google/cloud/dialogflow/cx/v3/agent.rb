@@ -100,6 +100,7 @@ module Google
           #     reference for the agent. Format: `projects/<Project ID>/locations/<Location
           #     ID>/securitySettings/<Security Settings ID>`.
           # @!attribute [rw] enable_stackdriver_logging
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::Boolean]
           #     Indicates if stackdriver logging is enabled for the agent.
           #     Please use

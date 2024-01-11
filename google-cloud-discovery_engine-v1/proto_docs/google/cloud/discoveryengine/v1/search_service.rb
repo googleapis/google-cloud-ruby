@@ -438,11 +438,13 @@ module Google
 
             # A specification for configuring snippets in a search response.
             # @!attribute [rw] max_snippet_count
+            #   @deprecated This field is deprecated and may be removed in the next major version update.
             #   @return [::Integer]
             #     [DEPRECATED] This field is deprecated. To control snippet return, use
             #     `return_snippet` field. For backwards compatibility, we will return
             #     snippet if max_snippet_count > 0.
             # @!attribute [rw] reference_only
+            #   @deprecated This field is deprecated and may be removed in the next major version update.
             #   @return [::Boolean]
             #     [DEPRECATED] This field is deprecated and will have no affect on the
             #     snippet.
