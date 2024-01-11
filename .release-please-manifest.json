@@ -551,7 +551,7 @@
   "google-cloud-run-v2+FILLER": "0.0.0",
   "google-cloud-scheduler": "2.4.0",
   "google-cloud-scheduler+FILLER": "0.0.0",
-  "google-cloud-scheduler-v1": "0.9.1",
+  "google-cloud-scheduler-v1": "0.10.0",
   "google-cloud-scheduler-v1+FILLER": "0.0.0",
   "google-cloud-scheduler-v1beta1": "0.10.0",
   "google-cloud-scheduler-v1beta1+FILLER": "0.0.0",
