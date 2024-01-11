@@ -621,7 +621,7 @@
   "google-cloud-storage+FILLER": "0.0.0",
   "google-cloud-storage_insights": "1.0.0",
   "google-cloud-storage_insights+FILLER": "0.0.0",
-  "google-cloud-storage_insights-v1": "0.3.0",
+  "google-cloud-storage_insights-v1": "0.4.0",
   "google-cloud-storage_insights-v1+FILLER": "0.0.0",
   "google-cloud-storage_transfer": "1.2.0",
   "google-cloud-storage_transfer+FILLER": "0.0.0",
