@@ -54,6 +54,7 @@ module Google
         #     A map associating each custom highlighter resource name with its respective
         #     number of matches in the set of conversations.
         # @!attribute [rw] issue_matches
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Protobuf::Map{::String => ::Integer}]
         #     A map associating each issue resource name with its respective number of
         #     matches in the set of conversations. Key has the format:

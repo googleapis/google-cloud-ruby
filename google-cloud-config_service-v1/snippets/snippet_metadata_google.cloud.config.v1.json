@@ -14,7 +14,7 @@
     {
       "region_tag": "inframanager_v1_generated_Config_ListDeployments_sync",
       "title": "Snippet for the list_deployments call in the Config service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#list_deployments. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#list_deployments.",
       "file": "config/list_deployments.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "inframanager_v1_generated_Config_GetDeployment_sync",
       "title": "Snippet for the get_deployment call in the Config service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#get_deployment. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#get_deployment.",
       "file": "config/get_deployment.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "inframanager_v1_generated_Config_CreateDeployment_sync",
       "title": "Snippet for the create_deployment call in the Config service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#create_deployment. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#create_deployment.",
       "file": "config/create_deployment.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -134,7 +134,7 @@
     {
       "region_tag": "inframanager_v1_generated_Config_UpdateDeployment_sync",
       "title": "Snippet for the update_deployment call in the Config service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#update_deployment. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#update_deployment.",
       "file": "config/update_deployment.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -174,7 +174,7 @@
     {
       "region_tag": "inframanager_v1_generated_Config_DeleteDeployment_sync",
       "title": "Snippet for the delete_deployment call in the Config service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#delete_deployment. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#delete_deployment.",
       "file": "config/delete_deployment.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,7 +206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -214,7 +214,7 @@
     {
       "region_tag": "inframanager_v1_generated_Config_ListRevisions_sync",
       "title": "Snippet for the list_revisions call in the Config service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#list_revisions. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#list_revisions.",
       "file": "config/list_revisions.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,7 +246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -254,7 +254,7 @@
     {
       "region_tag": "inframanager_v1_generated_Config_GetRevision_sync",
       "title": "Snippet for the get_revision call in the Config service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#get_revision. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#get_revision.",
       "file": "config/get_revision.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,7 +286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -294,7 +294,7 @@
     {
       "region_tag": "inframanager_v1_generated_Config_GetResource_sync",
       "title": "Snippet for the get_resource call in the Config service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#get_resource. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#get_resource.",
       "file": "config/get_resource.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,7 +326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -334,7 +334,7 @@
     {
       "region_tag": "inframanager_v1_generated_Config_ListResources_sync",
       "title": "Snippet for the list_resources call in the Config service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#list_resources. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#list_resources.",
       "file": "config/list_resources.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,7 +366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -374,7 +374,7 @@
     {
       "region_tag": "inframanager_v1_generated_Config_ExportDeploymentStatefile_sync",
       "title": "Snippet for the export_deployment_statefile call in the Config service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#export_deployment_statefile. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#export_deployment_statefile.",
       "file": "config/export_deployment_statefile.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,7 +406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -414,7 +414,7 @@
     {
       "region_tag": "inframanager_v1_generated_Config_ExportRevisionStatefile_sync",
       "title": "Snippet for the export_revision_statefile call in the Config service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#export_revision_statefile. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#export_revision_statefile.",
       "file": "config/export_revision_statefile.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,7 +446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -454,7 +454,7 @@
     {
       "region_tag": "inframanager_v1_generated_Config_ImportStatefile_sync",
       "title": "Snippet for the import_statefile call in the Config service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#import_statefile. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#import_statefile.",
       "file": "config/import_statefile.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,7 +486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -494,7 +494,7 @@
     {
       "region_tag": "inframanager_v1_generated_Config_DeleteStatefile_sync",
       "title": "Snippet for the delete_statefile call in the Config service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#delete_statefile. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#delete_statefile.",
       "file": "config/delete_statefile.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,7 +526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -534,7 +534,7 @@
     {
       "region_tag": "inframanager_v1_generated_Config_LockDeployment_sync",
       "title": "Snippet for the lock_deployment call in the Config service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#lock_deployment. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#lock_deployment.",
       "file": "config/lock_deployment.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,7 +566,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -574,7 +574,7 @@
     {
       "region_tag": "inframanager_v1_generated_Config_UnlockDeployment_sync",
       "title": "Snippet for the unlock_deployment call in the Config service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#unlock_deployment. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#unlock_deployment.",
       "file": "config/unlock_deployment.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,7 +606,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -614,7 +614,7 @@
     {
       "region_tag": "inframanager_v1_generated_Config_ExportLockInfo_sync",
       "title": "Snippet for the export_lock_info call in the Config service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#export_lock_info. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#export_lock_info.",
       "file": "config/export_lock_info.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,7 +646,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
