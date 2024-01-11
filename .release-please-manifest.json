@@ -259,7 +259,7 @@
   "google-cloud-datastream+FILLER": "0.0.0",
   "google-cloud-datastream-v1": "0.8.0",
   "google-cloud-datastream-v1+FILLER": "0.0.0",
-  "google-cloud-datastream-v1alpha1": "0.5.0",
+  "google-cloud-datastream-v1alpha1": "0.6.0",
   "google-cloud-datastream-v1alpha1+FILLER": "0.0.0",
   "google-cloud-deploy": "1.0.0",
   "google-cloud-deploy+FILLER": "0.0.0",
