@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Channel
       module V1
-        VERSION = "0.22.1"
+        VERSION = "0.23.0"
       end
     end
   end
