@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Profiler
       module V2
-        VERSION = "0.8.0"
+        VERSION = "0.9.0"
       end
     end
   end
