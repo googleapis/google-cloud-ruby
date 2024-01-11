@@ -1,5 +1,14 @@
 # Release History
 
+### 0.20.0 (2024-01-11)
+
+#### Features
+
+* Support for universe_domain ([#23783](https://github.com/googleapis/google-cloud-ruby/issues/23783)) 
+#### Bug Fixes
+
+* Subscriber and publisher configs honor the base default configs from the high-level pubsub client ([#23796](https://github.com/googleapis/google-cloud-ruby/issues/23796)) 
+
 ### 0.19.0 (2023-12-08)
 
 #### Features
