@@ -415,6 +415,7 @@ module Google
           #   @return [::Integer]
           #     The number of accelerators of this type.
           # @!attribute [rw] install_gpu_drivers
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::Boolean]
           #     Deprecated: please use instances[0].install_gpu_drivers instead.
           # @!attribute [rw] driver_version

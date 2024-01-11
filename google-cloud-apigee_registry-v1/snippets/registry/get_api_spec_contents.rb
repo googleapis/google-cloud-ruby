@@ -22,9 +22,14 @@ require "google/cloud/apigee_registry/v1"
 ##
 # Snippet for the get_api_spec_contents call in the Registry service
 #
+# This snippet has been automatically generated and should be regarded as a code
+# template only. It will require modifications to work:
+# - It may require correct/in-range values for request initialization.
+# - It may require specifying regional endpoints when creating the service
+# client as shown in https://cloud.google.com/ruby/docs/reference.
+#
 # This is an auto-generated example demonstrating basic usage of
-# Google::Cloud::ApigeeRegistry::V1::Registry::Client#get_api_spec_contents. It
-# may require modification in order to execute successfully.
+# Google::Cloud::ApigeeRegistry::V1::Registry::Client#get_api_spec_contents.
 #
 def get_api_spec_contents
   # Create a client object. The client can be reused for multiple calls.

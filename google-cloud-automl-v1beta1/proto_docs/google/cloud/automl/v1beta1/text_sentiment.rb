@@ -73,6 +73,7 @@ module Google
         #     Only set for the overall model evaluation, not for evaluation of a single
         #     annotation spec.
         # @!attribute [rw] annotation_spec_id
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Array<::String>]
         #     Output only. The annotation spec ids used for this evaluation.
         #     Deprecated .

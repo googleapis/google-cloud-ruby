@@ -80,6 +80,7 @@ module Google
         #     Output only. The Area Under Precision-Recall Curve metric. Micro-averaged
         #     for the overall evaluation.
         # @!attribute [rw] base_au_prc
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Float]
         #     Output only. The Area Under Precision-Recall Curve metric based on priors.
         #     Micro-averaged for the overall evaluation.

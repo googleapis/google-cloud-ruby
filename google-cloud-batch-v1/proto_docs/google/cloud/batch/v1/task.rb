@@ -324,6 +324,7 @@ module Google
         #     Default policy means if the exit code is 0, exit task.
         #     If task ends with non-zero exit code, retry the task with max_retry_count.
         # @!attribute [rw] environments
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Deprecated: please use environment(non-plural) instead.
         # @!attribute [rw] volumes
