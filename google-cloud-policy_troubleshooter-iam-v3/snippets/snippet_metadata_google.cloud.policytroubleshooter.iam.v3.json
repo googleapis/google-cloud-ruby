@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-policy_troubleshooter-iam-v3",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "language": "RUBY",
     "apis": [
       {
