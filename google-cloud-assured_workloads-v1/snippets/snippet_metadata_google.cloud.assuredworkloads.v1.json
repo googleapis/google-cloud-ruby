@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-assured_workloads-v1",
-    "version": "0.8.0",
+    "version": "0.9.0",
     "language": "RUBY",
     "apis": [
       {
