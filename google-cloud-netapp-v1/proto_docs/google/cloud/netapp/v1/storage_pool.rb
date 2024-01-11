@@ -163,6 +163,7 @@ module Google
         #   @return [::Google::Cloud::NetApp::V1::EncryptionType]
         #     Output only. Specifies the current pool encryption key source.
         # @!attribute [rw] global_access_allowed
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
         #     Deprecated. Used to allow SO pool to access AD or DNS server from other
         #     regions.

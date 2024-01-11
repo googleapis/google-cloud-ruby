@@ -285,9 +285,11 @@ module Google
 
         # DEPRECATED. Used to hold per-time-series error status.
         # @!attribute [rw] time_series
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::Monitoring::V3::TimeSeries]
         #     DEPRECATED. Time series ID that resulted in the `status` error.
         # @!attribute [rw] status
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Rpc::Status]
         #     DEPRECATED. The status of the requested write operation for `time_series`.
         class CreateTimeSeriesError

@@ -23,6 +23,7 @@ module Google
       module V3
         # An internal checker allows Uptime checks to run on private/internal GCP
         # resources.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] name
         #   @return [::String]
         #     A unique resource name for this InternalChecker. The format is:
@@ -148,12 +149,14 @@ module Google
         #     minimum of 3 locations.  Not specifying this field will result in Uptime
         #     checks running from all available regions.
         # @!attribute [rw] is_internal
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
         #     If this is `true`, then checks are made only from the 'internal_checkers'.
         #     If it is `false`, then checks are made only from the 'selected_regions'.
         #     It is an error to provide 'selected_regions' when is_internal is `true`,
         #     or to provide 'internal_checkers' when is_internal is `false`.
         # @!attribute [rw] internal_checkers
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Array<::Google::Cloud::Monitoring::V3::InternalChecker>]
         #     The internal checkers that this check will egress from. If `is_internal` is
         #     `true` and this list is empty, the check will egress from all the

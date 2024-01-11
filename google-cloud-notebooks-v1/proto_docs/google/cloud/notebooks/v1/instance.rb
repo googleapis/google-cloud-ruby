@@ -381,6 +381,7 @@ module Google
           #   @return [::Google::Protobuf::Timestamp]
           #     The time that this instance upgrade history entry is created.
           # @!attribute [rw] target_image
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::String]
           #     Target VM Image. Format: `ainotebooks-vm/project/image-name/name`.
           # @!attribute [rw] action

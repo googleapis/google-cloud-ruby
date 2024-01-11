@@ -53,6 +53,7 @@ module Google
         #     channel of the corresponding type. Each label includes a
         #     description for how that field should be populated.
         # @!attribute [rw] supported_tiers
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Array<::Google::Cloud::Monitoring::V3::ServiceTier>]
         #     The tiers that support this notification channel; the project service tier
         #     must be one of the supported_tiers.
