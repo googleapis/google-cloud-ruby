@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-workflows-executions-v1beta",
-    "version": "0.6.0",
+    "version": "0.7.0",
     "language": "RUBY",
     "apis": [
       {
