@@ -4,6 +4,12 @@
 
 * Clarify Finding#event_time description
 
+### 0.13.0 (2024-01-11)
+
+#### Features
+
+* Support for universe_domain ([#23785](https://github.com/googleapis/google-cloud-ruby/issues/23785)) 
+
 ### 0.12.0 (2023-09-12)
 
 #### Features
