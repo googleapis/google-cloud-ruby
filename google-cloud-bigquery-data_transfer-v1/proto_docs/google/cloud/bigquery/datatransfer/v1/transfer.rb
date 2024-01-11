@@ -283,6 +283,7 @@ module Google
           end
 
           # DEPRECATED. Represents data transfer type.
+          # @deprecated This enum is deprecated and may be removed in the next major version update.
           module TransferType
             # Invalid or Unknown transfer type placeholder.
             TRANSFER_TYPE_UNSPECIFIED = 0

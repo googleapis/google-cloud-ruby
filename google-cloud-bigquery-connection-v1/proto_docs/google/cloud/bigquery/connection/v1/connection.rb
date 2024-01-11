@@ -255,6 +255,7 @@ module Google
 
           # Connection properties specific to Amazon Web Services (AWS).
           # @!attribute [rw] cross_account_role
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::Google::Cloud::Bigquery::Connection::V1::AwsCrossAccountRole]
           #     Authentication using Google owned AWS IAM user's access key to assume
           #     into customer's AWS IAM Role.
