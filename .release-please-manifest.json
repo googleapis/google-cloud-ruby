@@ -353,7 +353,7 @@
   "google-cloud-gke_hub-v1beta1+FILLER": "0.0.0",
   "google-cloud-gke_multi_cloud": "1.0.0",
   "google-cloud-gke_multi_cloud+FILLER": "0.0.0",
-  "google-cloud-gke_multi_cloud-v1": "0.7.0",
+  "google-cloud-gke_multi_cloud-v1": "0.8.0",
   "google-cloud-gke_multi_cloud-v1+FILLER": "0.0.0",
   "google-cloud-gsuite_add_ons": "0.2.0",
   "google-cloud-gsuite_add_ons+FILLER": "0.0.0",
