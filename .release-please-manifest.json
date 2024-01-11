@@ -413,7 +413,7 @@
   "google-cloud-memcache-v1beta2+FILLER": "0.0.0",
   "google-cloud-metastore": "1.3.0",
   "google-cloud-metastore+FILLER": "0.0.0",
-  "google-cloud-metastore-v1": "0.11.0",
+  "google-cloud-metastore-v1": "0.12.0",
   "google-cloud-metastore-v1+FILLER": "0.0.0",
   "google-cloud-metastore-v1beta": "0.11.0",
   "google-cloud-metastore-v1beta+FILLER": "0.0.0",
