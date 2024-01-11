@@ -14,7 +14,7 @@
     {
       "region_tag": "connectgateway_v1beta1_generated_GatewayService_GetResource_sync",
       "title": "Snippet for the get_resource call in the GatewayService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayService::Client#get_resource. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayService::Client#get_resource.",
       "file": "gateway_service/get_resource.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "connectgateway_v1beta1_generated_GatewayService_PostResource_sync",
       "title": "Snippet for the post_resource call in the GatewayService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayService::Client#post_resource. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayService::Client#post_resource.",
       "file": "gateway_service/post_resource.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "connectgateway_v1beta1_generated_GatewayService_DeleteResource_sync",
       "title": "Snippet for the delete_resource call in the GatewayService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayService::Client#delete_resource. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayService::Client#delete_resource.",
       "file": "gateway_service/delete_resource.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -134,7 +134,7 @@
     {
       "region_tag": "connectgateway_v1beta1_generated_GatewayService_PutResource_sync",
       "title": "Snippet for the put_resource call in the GatewayService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayService::Client#put_resource. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayService::Client#put_resource.",
       "file": "gateway_service/put_resource.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -174,7 +174,7 @@
     {
       "region_tag": "connectgateway_v1beta1_generated_GatewayService_PatchResource_sync",
       "title": "Snippet for the patch_resource call in the GatewayService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayService::Client#patch_resource. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayService::Client#patch_resource.",
       "file": "gateway_service/patch_resource.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,7 +206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]

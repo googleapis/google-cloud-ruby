@@ -14,7 +14,7 @@
     {
       "region_tag": "kmsinventory_v1_generated_KeyDashboardService_ListCryptoKeys_sync",
       "title": "Snippet for the list_crypto_keys call in the KeyDashboardService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::Inventory::V1::KeyDashboardService::Client#list_crypto_keys. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::Inventory::V1::KeyDashboardService::Client#list_crypto_keys.",
       "file": "key_dashboard_service/list_crypto_keys.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "kmsinventory_v1_generated_KeyTrackingService_GetProtectedResourcesSummary_sync",
       "title": "Snippet for the get_protected_resources_summary call in the KeyTrackingService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::Inventory::V1::KeyTrackingService::Client#get_protected_resources_summary. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::Inventory::V1::KeyTrackingService::Client#get_protected_resources_summary.",
       "file": "key_tracking_service/get_protected_resources_summary.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "kmsinventory_v1_generated_KeyTrackingService_SearchProtectedResources_sync",
       "title": "Snippet for the search_protected_resources call in the KeyTrackingService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::Inventory::V1::KeyTrackingService::Client#search_protected_resources. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::Inventory::V1::KeyTrackingService::Client#search_protected_resources.",
       "file": "key_tracking_service/search_protected_resources.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]

@@ -295,6 +295,7 @@ module Google
           #   @return [::String]
           #     Token indicating the state of the syncer.
           # @!attribute [rw] last_sync
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::String]
           #     Deprecated: use last_sync_time instead.
           #     Timestamp of when ACM last successfully synced the repo
