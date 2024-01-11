@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.11.0 (2024-01-11)
+
+#### Features
+
+* Support for universe_domain ([#23780](https://github.com/googleapis/google-cloud-ruby/issues/23780)) 
+
 ### 0.10.1 (2023-09-25)
 
 #### Documentation
