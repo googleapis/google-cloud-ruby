@@ -42,6 +42,8 @@ module Google
         # BigQuery](https://cloud.google.com/channel/docs/rebilling/export-data-to-bigquery)
         # instead.
         #
+        # @deprecated This service is deprecated and may be removed in the next major version update.
+        #
         # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/channel/v1/cloud_channel_reports_service"

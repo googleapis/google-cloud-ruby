@@ -29,15 +29,28 @@ module Google
             # Service stub contains baseline method implementations
             # including transcoding, making the REST call, and deserialing the response.
             #
+            # @deprecated This service is deprecated and may be removed in the next major version update.
             class ServiceStub
-              def initialize endpoint:, credentials:
+              def initialize endpoint:, endpoint_template:, universe_domain:, credentials:
                 # These require statements are intentionally placed here to initialize
                 # the REST modules only when it's required.
                 require "gapic/rest"
 
-                @client_stub = ::Gapic::Rest::ClientStub.new endpoint: endpoint, credentials: credentials,
+                @client_stub = ::Gapic::Rest::ClientStub.new endpoint: endpoint,
+                                                             endpoint_template: endpoint_template,
+                                                             universe_domain: universe_domain,
+                                                             credentials: credentials,
                                                              numeric_enums: true,
                                                              raise_faraday_errors: false
+              end
+
+              ##
+              # The effective universe domain
+              #
+              # @return [String]
+              #
+              def universe_domain
+                @client_stub.universe_domain
               end
 
               ##

@@ -22,9 +22,14 @@ require "google/cloud/bigtable/admin/v2"
 ##
 # Snippet for the get_snapshot call in the BigtableTableAdmin service
 #
+# This snippet has been automatically generated and should be regarded as a code
+# template only. It will require modifications to work:
+# - It may require correct/in-range values for request initialization.
+# - It may require specifying regional endpoints when creating the service
+# client as shown in https://cloud.google.com/ruby/docs/reference.
+#
 # This is an auto-generated example demonstrating basic usage of
 # Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#get_snapshot.
-# It may require modification in order to execute successfully.
 #
 def get_snapshot
   # Create a client object. The client can be reused for multiple calls.

@@ -22,9 +22,14 @@ require "google/cloud/bigquery/storage/v1"
 ##
 # Snippet for the split_read_stream call in the BigQueryRead service
 #
+# This snippet has been automatically generated and should be regarded as a code
+# template only. It will require modifications to work:
+# - It may require correct/in-range values for request initialization.
+# - It may require specifying regional endpoints when creating the service
+# client as shown in https://cloud.google.com/ruby/docs/reference.
+#
 # This is an auto-generated example demonstrating basic usage of
 # Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client#split_read_stream.
-# It may require modification in order to execute successfully.
 #
 def split_read_stream
   # Create a client object. The client can be reused for multiple calls.

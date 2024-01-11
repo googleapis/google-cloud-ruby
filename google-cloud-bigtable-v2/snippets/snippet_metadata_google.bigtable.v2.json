@@ -14,7 +14,7 @@
     {
       "region_tag": "bigtable_v2_generated_Bigtable_ReadRows_sync",
       "title": "Snippet for the read_rows call in the Bigtable service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::V2::Bigtable::Client#read_rows. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::V2::Bigtable::Client#read_rows.",
       "file": "bigtable/read_rows.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 49,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "bigtable_v2_generated_Bigtable_SampleRowKeys_sync",
       "title": "Snippet for the sample_row_keys call in the Bigtable service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::V2::Bigtable::Client#sample_row_keys. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::V2::Bigtable::Client#sample_row_keys.",
       "file": "bigtable/sample_row_keys.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 49,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "bigtable_v2_generated_Bigtable_MutateRow_sync",
       "title": "Snippet for the mutate_row call in the Bigtable service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::V2::Bigtable::Client#mutate_row. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::V2::Bigtable::Client#mutate_row.",
       "file": "bigtable/mutate_row.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -134,7 +134,7 @@
     {
       "region_tag": "bigtable_v2_generated_Bigtable_MutateRows_sync",
       "title": "Snippet for the mutate_rows call in the Bigtable service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::V2::Bigtable::Client#mutate_rows. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::V2::Bigtable::Client#mutate_rows.",
       "file": "bigtable/mutate_rows.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 49,
           "type": "FULL"
         }
       ]
@@ -174,7 +174,7 @@
     {
       "region_tag": "bigtable_v2_generated_Bigtable_CheckAndMutateRow_sync",
       "title": "Snippet for the check_and_mutate_row call in the Bigtable service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::V2::Bigtable::Client#check_and_mutate_row. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::V2::Bigtable::Client#check_and_mutate_row.",
       "file": "bigtable/check_and_mutate_row.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,7 +206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -214,7 +214,7 @@
     {
       "region_tag": "bigtable_v2_generated_Bigtable_PingAndWarm_sync",
       "title": "Snippet for the ping_and_warm call in the Bigtable service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::V2::Bigtable::Client#ping_and_warm. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::V2::Bigtable::Client#ping_and_warm.",
       "file": "bigtable/ping_and_warm.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,7 +246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -254,7 +254,7 @@
     {
       "region_tag": "bigtable_v2_generated_Bigtable_ReadModifyWriteRow_sync",
       "title": "Snippet for the read_modify_write_row call in the Bigtable service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::V2::Bigtable::Client#read_modify_write_row. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::V2::Bigtable::Client#read_modify_write_row.",
       "file": "bigtable/read_modify_write_row.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,7 +286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -294,7 +294,7 @@
     {
       "region_tag": "bigtable_v2_generated_Bigtable_GenerateInitialChangeStreamPartitions_sync",
       "title": "Snippet for the generate_initial_change_stream_partitions call in the Bigtable service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::V2::Bigtable::Client#generate_initial_change_stream_partitions. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::V2::Bigtable::Client#generate_initial_change_stream_partitions.",
       "file": "bigtable/generate_initial_change_stream_partitions.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,7 +326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 49,
           "type": "FULL"
         }
       ]
@@ -334,7 +334,7 @@
     {
       "region_tag": "bigtable_v2_generated_Bigtable_ReadChangeStream_sync",
       "title": "Snippet for the read_change_stream call in the Bigtable service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::V2::Bigtable::Client#read_change_stream. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::V2::Bigtable::Client#read_change_stream.",
       "file": "bigtable/read_change_stream.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,7 +366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 49,
           "type": "FULL"
         }
       ]

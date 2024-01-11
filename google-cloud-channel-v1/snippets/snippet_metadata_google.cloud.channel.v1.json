@@ -14,7 +14,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelReportsService_RunReportJob_sync",
       "title": "Snippet for the run_report_job call in the CloudChannelReportsService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelReportsService::Client#run_report_job. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelReportsService::Client#run_report_job.",
       "file": "cloud_channel_reports_service/run_report_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelReportsService_FetchReportResults_sync",
       "title": "Snippet for the fetch_report_results call in the CloudChannelReportsService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelReportsService::Client#fetch_report_results. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelReportsService::Client#fetch_report_results.",
       "file": "cloud_channel_reports_service/fetch_report_results.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelReportsService_ListReports_sync",
       "title": "Snippet for the list_reports call in the CloudChannelReportsService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelReportsService::Client#list_reports. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelReportsService::Client#list_reports.",
       "file": "cloud_channel_reports_service/list_reports.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -134,7 +134,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_ListCustomers_sync",
       "title": "Snippet for the list_customers call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_customers. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_customers.",
       "file": "cloud_channel_service/list_customers.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -174,7 +174,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_GetCustomer_sync",
       "title": "Snippet for the get_customer call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#get_customer. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#get_customer.",
       "file": "cloud_channel_service/get_customer.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,7 +206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -214,7 +214,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_CheckCloudIdentityAccountsExist_sync",
       "title": "Snippet for the check_cloud_identity_accounts_exist call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#check_cloud_identity_accounts_exist. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#check_cloud_identity_accounts_exist.",
       "file": "cloud_channel_service/check_cloud_identity_accounts_exist.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,7 +246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -254,7 +254,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_CreateCustomer_sync",
       "title": "Snippet for the create_customer call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#create_customer. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#create_customer.",
       "file": "cloud_channel_service/create_customer.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,7 +286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -294,7 +294,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_UpdateCustomer_sync",
       "title": "Snippet for the update_customer call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#update_customer. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#update_customer.",
       "file": "cloud_channel_service/update_customer.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,7 +326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -334,7 +334,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_DeleteCustomer_sync",
       "title": "Snippet for the delete_customer call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#delete_customer. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#delete_customer.",
       "file": "cloud_channel_service/delete_customer.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,7 +366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -374,7 +374,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_ImportCustomer_sync",
       "title": "Snippet for the import_customer call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#import_customer. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#import_customer.",
       "file": "cloud_channel_service/import_customer.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,7 +406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -414,7 +414,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_ProvisionCloudIdentity_sync",
       "title": "Snippet for the provision_cloud_identity call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#provision_cloud_identity. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#provision_cloud_identity.",
       "file": "cloud_channel_service/provision_cloud_identity.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,7 +446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -454,7 +454,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_ListEntitlements_sync",
       "title": "Snippet for the list_entitlements call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_entitlements. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_entitlements.",
       "file": "cloud_channel_service/list_entitlements.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,7 +486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -494,7 +494,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_ListTransferableSkus_sync",
       "title": "Snippet for the list_transferable_skus call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_transferable_skus. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_transferable_skus.",
       "file": "cloud_channel_service/list_transferable_skus.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,7 +526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -534,7 +534,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_ListTransferableOffers_sync",
       "title": "Snippet for the list_transferable_offers call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_transferable_offers. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_transferable_offers.",
       "file": "cloud_channel_service/list_transferable_offers.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,7 +566,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -574,7 +574,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_GetEntitlement_sync",
       "title": "Snippet for the get_entitlement call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#get_entitlement. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#get_entitlement.",
       "file": "cloud_channel_service/get_entitlement.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,7 +606,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -614,7 +614,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_CreateEntitlement_sync",
       "title": "Snippet for the create_entitlement call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#create_entitlement. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#create_entitlement.",
       "file": "cloud_channel_service/create_entitlement.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,7 +646,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -654,7 +654,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_ChangeParameters_sync",
       "title": "Snippet for the change_parameters call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#change_parameters. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#change_parameters.",
       "file": "cloud_channel_service/change_parameters.rb",
       "language": "RUBY",
       "client_method": {
@@ -686,7 +686,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -694,7 +694,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_ChangeRenewalSettings_sync",
       "title": "Snippet for the change_renewal_settings call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#change_renewal_settings. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#change_renewal_settings.",
       "file": "cloud_channel_service/change_renewal_settings.rb",
       "language": "RUBY",
       "client_method": {
@@ -726,7 +726,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -734,7 +734,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_ChangeOffer_sync",
       "title": "Snippet for the change_offer call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#change_offer. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#change_offer.",
       "file": "cloud_channel_service/change_offer.rb",
       "language": "RUBY",
       "client_method": {
@@ -766,7 +766,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -774,7 +774,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_StartPaidService_sync",
       "title": "Snippet for the start_paid_service call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#start_paid_service. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#start_paid_service.",
       "file": "cloud_channel_service/start_paid_service.rb",
       "language": "RUBY",
       "client_method": {
@@ -806,7 +806,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -814,7 +814,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_SuspendEntitlement_sync",
       "title": "Snippet for the suspend_entitlement call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#suspend_entitlement. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#suspend_entitlement.",
       "file": "cloud_channel_service/suspend_entitlement.rb",
       "language": "RUBY",
       "client_method": {
@@ -846,7 +846,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -854,7 +854,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_CancelEntitlement_sync",
       "title": "Snippet for the cancel_entitlement call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#cancel_entitlement. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#cancel_entitlement.",
       "file": "cloud_channel_service/cancel_entitlement.rb",
       "language": "RUBY",
       "client_method": {
@@ -886,7 +886,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -894,7 +894,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_ActivateEntitlement_sync",
       "title": "Snippet for the activate_entitlement call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#activate_entitlement. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#activate_entitlement.",
       "file": "cloud_channel_service/activate_entitlement.rb",
       "language": "RUBY",
       "client_method": {
@@ -926,7 +926,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -934,7 +934,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_TransferEntitlements_sync",
       "title": "Snippet for the transfer_entitlements call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#transfer_entitlements. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#transfer_entitlements.",
       "file": "cloud_channel_service/transfer_entitlements.rb",
       "language": "RUBY",
       "client_method": {
@@ -966,7 +966,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -974,7 +974,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_TransferEntitlementsToGoogle_sync",
       "title": "Snippet for the transfer_entitlements_to_google call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#transfer_entitlements_to_google. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#transfer_entitlements_to_google.",
       "file": "cloud_channel_service/transfer_entitlements_to_google.rb",
       "language": "RUBY",
       "client_method": {
@@ -1006,7 +1006,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1014,7 +1014,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_ListChannelPartnerLinks_sync",
       "title": "Snippet for the list_channel_partner_links call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_channel_partner_links. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_channel_partner_links.",
       "file": "cloud_channel_service/list_channel_partner_links.rb",
       "language": "RUBY",
       "client_method": {
@@ -1046,7 +1046,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1054,7 +1054,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_GetChannelPartnerLink_sync",
       "title": "Snippet for the get_channel_partner_link call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#get_channel_partner_link. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#get_channel_partner_link.",
       "file": "cloud_channel_service/get_channel_partner_link.rb",
       "language": "RUBY",
       "client_method": {
@@ -1086,7 +1086,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1094,7 +1094,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_CreateChannelPartnerLink_sync",
       "title": "Snippet for the create_channel_partner_link call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#create_channel_partner_link. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#create_channel_partner_link.",
       "file": "cloud_channel_service/create_channel_partner_link.rb",
       "language": "RUBY",
       "client_method": {
@@ -1126,7 +1126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1134,7 +1134,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_UpdateChannelPartnerLink_sync",
       "title": "Snippet for the update_channel_partner_link call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#update_channel_partner_link. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#update_channel_partner_link.",
       "file": "cloud_channel_service/update_channel_partner_link.rb",
       "language": "RUBY",
       "client_method": {
@@ -1166,7 +1166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1174,7 +1174,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_GetCustomerRepricingConfig_sync",
       "title": "Snippet for the get_customer_repricing_config call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#get_customer_repricing_config. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#get_customer_repricing_config.",
       "file": "cloud_channel_service/get_customer_repricing_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -1206,7 +1206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1214,7 +1214,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_ListCustomerRepricingConfigs_sync",
       "title": "Snippet for the list_customer_repricing_configs call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_customer_repricing_configs. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_customer_repricing_configs.",
       "file": "cloud_channel_service/list_customer_repricing_configs.rb",
       "language": "RUBY",
       "client_method": {
@@ -1246,7 +1246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1254,7 +1254,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_CreateCustomerRepricingConfig_sync",
       "title": "Snippet for the create_customer_repricing_config call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#create_customer_repricing_config. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#create_customer_repricing_config.",
       "file": "cloud_channel_service/create_customer_repricing_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -1286,7 +1286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1294,7 +1294,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_UpdateCustomerRepricingConfig_sync",
       "title": "Snippet for the update_customer_repricing_config call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#update_customer_repricing_config. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#update_customer_repricing_config.",
       "file": "cloud_channel_service/update_customer_repricing_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -1326,7 +1326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1334,7 +1334,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_DeleteCustomerRepricingConfig_sync",
       "title": "Snippet for the delete_customer_repricing_config call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#delete_customer_repricing_config. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#delete_customer_repricing_config.",
       "file": "cloud_channel_service/delete_customer_repricing_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -1366,7 +1366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1374,7 +1374,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_GetChannelPartnerRepricingConfig_sync",
       "title": "Snippet for the get_channel_partner_repricing_config call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#get_channel_partner_repricing_config. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#get_channel_partner_repricing_config.",
       "file": "cloud_channel_service/get_channel_partner_repricing_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -1406,7 +1406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1414,7 +1414,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_ListChannelPartnerRepricingConfigs_sync",
       "title": "Snippet for the list_channel_partner_repricing_configs call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_channel_partner_repricing_configs. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_channel_partner_repricing_configs.",
       "file": "cloud_channel_service/list_channel_partner_repricing_configs.rb",
       "language": "RUBY",
       "client_method": {
@@ -1446,7 +1446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1454,7 +1454,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_CreateChannelPartnerRepricingConfig_sync",
       "title": "Snippet for the create_channel_partner_repricing_config call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#create_channel_partner_repricing_config. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#create_channel_partner_repricing_config.",
       "file": "cloud_channel_service/create_channel_partner_repricing_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -1486,7 +1486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1494,7 +1494,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_UpdateChannelPartnerRepricingConfig_sync",
       "title": "Snippet for the update_channel_partner_repricing_config call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#update_channel_partner_repricing_config. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#update_channel_partner_repricing_config.",
       "file": "cloud_channel_service/update_channel_partner_repricing_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -1526,7 +1526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1534,7 +1534,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_DeleteChannelPartnerRepricingConfig_sync",
       "title": "Snippet for the delete_channel_partner_repricing_config call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#delete_channel_partner_repricing_config. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#delete_channel_partner_repricing_config.",
       "file": "cloud_channel_service/delete_channel_partner_repricing_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -1566,7 +1566,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1574,7 +1574,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_ListSkuGroups_sync",
       "title": "Snippet for the list_sku_groups call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_sku_groups. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_sku_groups.",
       "file": "cloud_channel_service/list_sku_groups.rb",
       "language": "RUBY",
       "client_method": {
@@ -1606,7 +1606,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1614,7 +1614,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_ListSkuGroupBillableSkus_sync",
       "title": "Snippet for the list_sku_group_billable_skus call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_sku_group_billable_skus. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_sku_group_billable_skus.",
       "file": "cloud_channel_service/list_sku_group_billable_skus.rb",
       "language": "RUBY",
       "client_method": {
@@ -1646,7 +1646,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1654,7 +1654,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_LookupOffer_sync",
       "title": "Snippet for the lookup_offer call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#lookup_offer. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#lookup_offer.",
       "file": "cloud_channel_service/lookup_offer.rb",
       "language": "RUBY",
       "client_method": {
@@ -1686,7 +1686,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1694,7 +1694,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_ListProducts_sync",
       "title": "Snippet for the list_products call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_products. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_products.",
       "file": "cloud_channel_service/list_products.rb",
       "language": "RUBY",
       "client_method": {
@@ -1726,7 +1726,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1734,7 +1734,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_ListSkus_sync",
       "title": "Snippet for the list_skus call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_skus. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_skus.",
       "file": "cloud_channel_service/list_skus.rb",
       "language": "RUBY",
       "client_method": {
@@ -1766,7 +1766,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1774,7 +1774,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_ListOffers_sync",
       "title": "Snippet for the list_offers call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_offers. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_offers.",
       "file": "cloud_channel_service/list_offers.rb",
       "language": "RUBY",
       "client_method": {
@@ -1806,7 +1806,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1814,7 +1814,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_ListPurchasableSkus_sync",
       "title": "Snippet for the list_purchasable_skus call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_purchasable_skus. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_purchasable_skus.",
       "file": "cloud_channel_service/list_purchasable_skus.rb",
       "language": "RUBY",
       "client_method": {
@@ -1846,7 +1846,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1854,7 +1854,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_ListPurchasableOffers_sync",
       "title": "Snippet for the list_purchasable_offers call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_purchasable_offers. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_purchasable_offers.",
       "file": "cloud_channel_service/list_purchasable_offers.rb",
       "language": "RUBY",
       "client_method": {
@@ -1886,7 +1886,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1894,7 +1894,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_QueryEligibleBillingAccounts_sync",
       "title": "Snippet for the query_eligible_billing_accounts call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#query_eligible_billing_accounts. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#query_eligible_billing_accounts.",
       "file": "cloud_channel_service/query_eligible_billing_accounts.rb",
       "language": "RUBY",
       "client_method": {
@@ -1926,7 +1926,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1934,7 +1934,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_RegisterSubscriber_sync",
       "title": "Snippet for the register_subscriber call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#register_subscriber. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#register_subscriber.",
       "file": "cloud_channel_service/register_subscriber.rb",
       "language": "RUBY",
       "client_method": {
@@ -1966,7 +1966,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1974,7 +1974,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_UnregisterSubscriber_sync",
       "title": "Snippet for the unregister_subscriber call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#unregister_subscriber. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#unregister_subscriber.",
       "file": "cloud_channel_service/unregister_subscriber.rb",
       "language": "RUBY",
       "client_method": {
@@ -2006,7 +2006,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -2014,7 +2014,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_ListSubscribers_sync",
       "title": "Snippet for the list_subscribers call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_subscribers. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_subscribers.",
       "file": "cloud_channel_service/list_subscribers.rb",
       "language": "RUBY",
       "client_method": {
@@ -2046,7 +2046,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -2054,7 +2054,7 @@
     {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_ListEntitlementChanges_sync",
       "title": "Snippet for the list_entitlement_changes call in the CloudChannelService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_entitlement_changes. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_entitlement_changes.",
       "file": "cloud_channel_service/list_entitlement_changes.rb",
       "language": "RUBY",
       "client_method": {
@@ -2086,7 +2086,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]

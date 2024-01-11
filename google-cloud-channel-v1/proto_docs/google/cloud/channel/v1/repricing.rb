@@ -82,6 +82,7 @@ module Google
         #     and
         #     {::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig ChannelPartnerRepricingConfig}.
         # @!attribute [rw] channel_partner_granularity
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::Channel::V1::RepricingConfig::ChannelPartnerGranularity]
         #     Applies the repricing configuration at the channel partner level.
         #     Only
@@ -127,6 +128,7 @@ module Google
           # Deprecated: This is no longer supported. Use
           # {::Google::Cloud::Channel::V1::RepricingConfig::EntitlementGranularity RepricingConfig.EntitlementGranularity}
           # instead.
+          # @deprecated This message is deprecated and may be removed in the next major version update.
           class ChannelPartnerGranularity
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

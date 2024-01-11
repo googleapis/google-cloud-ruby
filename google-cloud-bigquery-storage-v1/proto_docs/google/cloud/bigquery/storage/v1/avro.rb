@@ -37,6 +37,7 @@ module Google
           #   @return [::String]
           #     Binary serialized rows in a block.
           # @!attribute [rw] row_count
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::Integer]
           #     [Deprecated] The count of rows in the returning block.
           #     Please use the format-independent ReadRowsResponse.row_count instead.
