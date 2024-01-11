@@ -22,9 +22,14 @@ require "google/cloud/gke_backup/v1"
 ##
 # Snippet for the delete_backup_plan call in the BackupForGKE service
 #
+# This snippet has been automatically generated and should be regarded as a code
+# template only. It will require modifications to work:
+# - It may require correct/in-range values for request initialization.
+# - It may require specifying regional endpoints when creating the service
+# client as shown in https://cloud.google.com/ruby/docs/reference.
+#
 # This is an auto-generated example demonstrating basic usage of
-# Google::Cloud::GkeBackup::V1::BackupForGKE::Client#delete_backup_plan. It may
-# require modification in order to execute successfully.
+# Google::Cloud::GkeBackup::V1::BackupForGKE::Client#delete_backup_plan.
 #
 def delete_backup_plan
   # Create a client object. The client can be reused for multiple calls.
