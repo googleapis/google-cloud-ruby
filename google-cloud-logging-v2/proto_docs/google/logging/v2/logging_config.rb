@@ -207,6 +207,7 @@ module Google
         #     If a log entry is matched by both `filter` and one of `exclusion_filters`
         #     it will not be exported.
         # @!attribute [rw] output_version_format
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::Logging::V2::LogSink::VersionFormat]
         #     Deprecated. This field is unused.
         # @!attribute [r] writer_identity

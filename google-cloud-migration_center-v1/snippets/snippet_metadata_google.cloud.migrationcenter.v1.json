@@ -14,7 +14,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_ListAssets_sync",
       "title": "Snippet for the list_assets call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#list_assets. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#list_assets.",
       "file": "migration_center/list_assets.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_GetAsset_sync",
       "title": "Snippet for the get_asset call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#get_asset. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#get_asset.",
       "file": "migration_center/get_asset.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_UpdateAsset_sync",
       "title": "Snippet for the update_asset call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#update_asset. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#update_asset.",
       "file": "migration_center/update_asset.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -134,7 +134,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_BatchUpdateAssets_sync",
       "title": "Snippet for the batch_update_assets call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#batch_update_assets. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#batch_update_assets.",
       "file": "migration_center/batch_update_assets.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -174,7 +174,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_DeleteAsset_sync",
       "title": "Snippet for the delete_asset call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#delete_asset. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#delete_asset.",
       "file": "migration_center/delete_asset.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,7 +206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -214,7 +214,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_BatchDeleteAssets_sync",
       "title": "Snippet for the batch_delete_assets call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#batch_delete_assets. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#batch_delete_assets.",
       "file": "migration_center/batch_delete_assets.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,7 +246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -254,7 +254,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_ReportAssetFrames_sync",
       "title": "Snippet for the report_asset_frames call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#report_asset_frames. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#report_asset_frames.",
       "file": "migration_center/report_asset_frames.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,7 +286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -294,7 +294,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_AggregateAssetsValues_sync",
       "title": "Snippet for the aggregate_assets_values call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#aggregate_assets_values. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#aggregate_assets_values.",
       "file": "migration_center/aggregate_assets_values.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,7 +326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -334,7 +334,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_CreateImportJob_sync",
       "title": "Snippet for the create_import_job call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#create_import_job. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#create_import_job.",
       "file": "migration_center/create_import_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,7 +366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -374,7 +374,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_ListImportJobs_sync",
       "title": "Snippet for the list_import_jobs call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#list_import_jobs. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#list_import_jobs.",
       "file": "migration_center/list_import_jobs.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,7 +406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -414,7 +414,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_GetImportJob_sync",
       "title": "Snippet for the get_import_job call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#get_import_job. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#get_import_job.",
       "file": "migration_center/get_import_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,7 +446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -454,7 +454,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_DeleteImportJob_sync",
       "title": "Snippet for the delete_import_job call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#delete_import_job. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#delete_import_job.",
       "file": "migration_center/delete_import_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,7 +486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -494,7 +494,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_UpdateImportJob_sync",
       "title": "Snippet for the update_import_job call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#update_import_job. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#update_import_job.",
       "file": "migration_center/update_import_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,7 +526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -534,7 +534,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_ValidateImportJob_sync",
       "title": "Snippet for the validate_import_job call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#validate_import_job. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#validate_import_job.",
       "file": "migration_center/validate_import_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,7 +566,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -574,7 +574,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_RunImportJob_sync",
       "title": "Snippet for the run_import_job call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#run_import_job. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#run_import_job.",
       "file": "migration_center/run_import_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,7 +606,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -614,7 +614,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_GetImportDataFile_sync",
       "title": "Snippet for the get_import_data_file call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#get_import_data_file. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#get_import_data_file.",
       "file": "migration_center/get_import_data_file.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,7 +646,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -654,7 +654,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_ListImportDataFiles_sync",
       "title": "Snippet for the list_import_data_files call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#list_import_data_files. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#list_import_data_files.",
       "file": "migration_center/list_import_data_files.rb",
       "language": "RUBY",
       "client_method": {
@@ -686,7 +686,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -694,7 +694,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_CreateImportDataFile_sync",
       "title": "Snippet for the create_import_data_file call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#create_import_data_file. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#create_import_data_file.",
       "file": "migration_center/create_import_data_file.rb",
       "language": "RUBY",
       "client_method": {
@@ -726,7 +726,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -734,7 +734,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_DeleteImportDataFile_sync",
       "title": "Snippet for the delete_import_data_file call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#delete_import_data_file. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#delete_import_data_file.",
       "file": "migration_center/delete_import_data_file.rb",
       "language": "RUBY",
       "client_method": {
@@ -766,7 +766,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -774,7 +774,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_ListGroups_sync",
       "title": "Snippet for the list_groups call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#list_groups. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#list_groups.",
       "file": "migration_center/list_groups.rb",
       "language": "RUBY",
       "client_method": {
@@ -806,7 +806,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -814,7 +814,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_GetGroup_sync",
       "title": "Snippet for the get_group call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#get_group. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#get_group.",
       "file": "migration_center/get_group.rb",
       "language": "RUBY",
       "client_method": {
@@ -846,7 +846,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -854,7 +854,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_CreateGroup_sync",
       "title": "Snippet for the create_group call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#create_group. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#create_group.",
       "file": "migration_center/create_group.rb",
       "language": "RUBY",
       "client_method": {
@@ -886,7 +886,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -894,7 +894,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_UpdateGroup_sync",
       "title": "Snippet for the update_group call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#update_group. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#update_group.",
       "file": "migration_center/update_group.rb",
       "language": "RUBY",
       "client_method": {
@@ -926,7 +926,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -934,7 +934,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_DeleteGroup_sync",
       "title": "Snippet for the delete_group call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#delete_group. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#delete_group.",
       "file": "migration_center/delete_group.rb",
       "language": "RUBY",
       "client_method": {
@@ -966,7 +966,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -974,7 +974,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_AddAssetsToGroup_sync",
       "title": "Snippet for the add_assets_to_group call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#add_assets_to_group. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#add_assets_to_group.",
       "file": "migration_center/add_assets_to_group.rb",
       "language": "RUBY",
       "client_method": {
@@ -1006,7 +1006,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1014,7 +1014,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_RemoveAssetsFromGroup_sync",
       "title": "Snippet for the remove_assets_from_group call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#remove_assets_from_group. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#remove_assets_from_group.",
       "file": "migration_center/remove_assets_from_group.rb",
       "language": "RUBY",
       "client_method": {
@@ -1046,7 +1046,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1054,7 +1054,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_ListErrorFrames_sync",
       "title": "Snippet for the list_error_frames call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#list_error_frames. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#list_error_frames.",
       "file": "migration_center/list_error_frames.rb",
       "language": "RUBY",
       "client_method": {
@@ -1086,7 +1086,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1094,7 +1094,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_GetErrorFrame_sync",
       "title": "Snippet for the get_error_frame call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#get_error_frame. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#get_error_frame.",
       "file": "migration_center/get_error_frame.rb",
       "language": "RUBY",
       "client_method": {
@@ -1126,7 +1126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1134,7 +1134,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_ListSources_sync",
       "title": "Snippet for the list_sources call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#list_sources. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#list_sources.",
       "file": "migration_center/list_sources.rb",
       "language": "RUBY",
       "client_method": {
@@ -1166,7 +1166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1174,7 +1174,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_GetSource_sync",
       "title": "Snippet for the get_source call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#get_source. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#get_source.",
       "file": "migration_center/get_source.rb",
       "language": "RUBY",
       "client_method": {
@@ -1206,7 +1206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1214,7 +1214,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_CreateSource_sync",
       "title": "Snippet for the create_source call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#create_source. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#create_source.",
       "file": "migration_center/create_source.rb",
       "language": "RUBY",
       "client_method": {
@@ -1246,7 +1246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1254,7 +1254,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_UpdateSource_sync",
       "title": "Snippet for the update_source call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#update_source. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#update_source.",
       "file": "migration_center/update_source.rb",
       "language": "RUBY",
       "client_method": {
@@ -1286,7 +1286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1294,7 +1294,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_DeleteSource_sync",
       "title": "Snippet for the delete_source call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#delete_source. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#delete_source.",
       "file": "migration_center/delete_source.rb",
       "language": "RUBY",
       "client_method": {
@@ -1326,7 +1326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1334,7 +1334,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_ListPreferenceSets_sync",
       "title": "Snippet for the list_preference_sets call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#list_preference_sets. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#list_preference_sets.",
       "file": "migration_center/list_preference_sets.rb",
       "language": "RUBY",
       "client_method": {
@@ -1366,7 +1366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1374,7 +1374,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_GetPreferenceSet_sync",
       "title": "Snippet for the get_preference_set call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#get_preference_set. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#get_preference_set.",
       "file": "migration_center/get_preference_set.rb",
       "language": "RUBY",
       "client_method": {
@@ -1406,7 +1406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1414,7 +1414,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_CreatePreferenceSet_sync",
       "title": "Snippet for the create_preference_set call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#create_preference_set. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#create_preference_set.",
       "file": "migration_center/create_preference_set.rb",
       "language": "RUBY",
       "client_method": {
@@ -1446,7 +1446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1454,7 +1454,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_UpdatePreferenceSet_sync",
       "title": "Snippet for the update_preference_set call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#update_preference_set. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#update_preference_set.",
       "file": "migration_center/update_preference_set.rb",
       "language": "RUBY",
       "client_method": {
@@ -1486,7 +1486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1494,7 +1494,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_DeletePreferenceSet_sync",
       "title": "Snippet for the delete_preference_set call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#delete_preference_set. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#delete_preference_set.",
       "file": "migration_center/delete_preference_set.rb",
       "language": "RUBY",
       "client_method": {
@@ -1526,7 +1526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1534,7 +1534,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_GetSettings_sync",
       "title": "Snippet for the get_settings call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#get_settings. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#get_settings.",
       "file": "migration_center/get_settings.rb",
       "language": "RUBY",
       "client_method": {
@@ -1566,7 +1566,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1574,7 +1574,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_UpdateSettings_sync",
       "title": "Snippet for the update_settings call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#update_settings. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#update_settings.",
       "file": "migration_center/update_settings.rb",
       "language": "RUBY",
       "client_method": {
@@ -1606,7 +1606,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1614,7 +1614,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_CreateReportConfig_sync",
       "title": "Snippet for the create_report_config call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#create_report_config. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#create_report_config.",
       "file": "migration_center/create_report_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -1646,7 +1646,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1654,7 +1654,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_GetReportConfig_sync",
       "title": "Snippet for the get_report_config call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#get_report_config. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#get_report_config.",
       "file": "migration_center/get_report_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -1686,7 +1686,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1694,7 +1694,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_ListReportConfigs_sync",
       "title": "Snippet for the list_report_configs call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#list_report_configs. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#list_report_configs.",
       "file": "migration_center/list_report_configs.rb",
       "language": "RUBY",
       "client_method": {
@@ -1726,7 +1726,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1734,7 +1734,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_DeleteReportConfig_sync",
       "title": "Snippet for the delete_report_config call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#delete_report_config. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#delete_report_config.",
       "file": "migration_center/delete_report_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -1766,7 +1766,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1774,7 +1774,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_CreateReport_sync",
       "title": "Snippet for the create_report call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#create_report. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#create_report.",
       "file": "migration_center/create_report.rb",
       "language": "RUBY",
       "client_method": {
@@ -1806,7 +1806,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1814,7 +1814,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_GetReport_sync",
       "title": "Snippet for the get_report call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#get_report. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#get_report.",
       "file": "migration_center/get_report.rb",
       "language": "RUBY",
       "client_method": {
@@ -1846,7 +1846,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1854,7 +1854,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_ListReports_sync",
       "title": "Snippet for the list_reports call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#list_reports. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#list_reports.",
       "file": "migration_center/list_reports.rb",
       "language": "RUBY",
       "client_method": {
@@ -1886,7 +1886,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1894,7 +1894,7 @@
     {
       "region_tag": "migrationcenter_v1_generated_MigrationCenter_DeleteReport_sync",
       "title": "Snippet for the delete_report call in the MigrationCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#delete_report. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#delete_report.",
       "file": "migration_center/delete_report.rb",
       "language": "RUBY",
       "client_method": {
@@ -1926,7 +1926,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]

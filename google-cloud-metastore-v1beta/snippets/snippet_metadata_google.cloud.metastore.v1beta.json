@@ -14,7 +14,7 @@
     {
       "region_tag": "metastore_v1beta_generated_DataprocMetastore_ListServices_sync",
       "title": "Snippet for the list_services call in the DataprocMetastore service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#list_services. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#list_services.",
       "file": "dataproc_metastore/list_services.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "metastore_v1beta_generated_DataprocMetastore_GetService_sync",
       "title": "Snippet for the get_service call in the DataprocMetastore service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#get_service. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#get_service.",
       "file": "dataproc_metastore/get_service.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "metastore_v1beta_generated_DataprocMetastore_CreateService_sync",
       "title": "Snippet for the create_service call in the DataprocMetastore service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#create_service. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#create_service.",
       "file": "dataproc_metastore/create_service.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -134,7 +134,7 @@
     {
       "region_tag": "metastore_v1beta_generated_DataprocMetastore_UpdateService_sync",
       "title": "Snippet for the update_service call in the DataprocMetastore service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#update_service. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#update_service.",
       "file": "dataproc_metastore/update_service.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -174,7 +174,7 @@
     {
       "region_tag": "metastore_v1beta_generated_DataprocMetastore_DeleteService_sync",
       "title": "Snippet for the delete_service call in the DataprocMetastore service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#delete_service. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#delete_service.",
       "file": "dataproc_metastore/delete_service.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,7 +206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -214,7 +214,7 @@
     {
       "region_tag": "metastore_v1beta_generated_DataprocMetastore_ListMetadataImports_sync",
       "title": "Snippet for the list_metadata_imports call in the DataprocMetastore service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#list_metadata_imports. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#list_metadata_imports.",
       "file": "dataproc_metastore/list_metadata_imports.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,7 +246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -254,7 +254,7 @@
     {
       "region_tag": "metastore_v1beta_generated_DataprocMetastore_GetMetadataImport_sync",
       "title": "Snippet for the get_metadata_import call in the DataprocMetastore service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#get_metadata_import. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#get_metadata_import.",
       "file": "dataproc_metastore/get_metadata_import.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,7 +286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -294,7 +294,7 @@
     {
       "region_tag": "metastore_v1beta_generated_DataprocMetastore_CreateMetadataImport_sync",
       "title": "Snippet for the create_metadata_import call in the DataprocMetastore service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#create_metadata_import. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#create_metadata_import.",
       "file": "dataproc_metastore/create_metadata_import.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,7 +326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -334,7 +334,7 @@
     {
       "region_tag": "metastore_v1beta_generated_DataprocMetastore_UpdateMetadataImport_sync",
       "title": "Snippet for the update_metadata_import call in the DataprocMetastore service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#update_metadata_import. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#update_metadata_import.",
       "file": "dataproc_metastore/update_metadata_import.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,7 +366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -374,7 +374,7 @@
     {
       "region_tag": "metastore_v1beta_generated_DataprocMetastore_ExportMetadata_sync",
       "title": "Snippet for the export_metadata call in the DataprocMetastore service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#export_metadata. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#export_metadata.",
       "file": "dataproc_metastore/export_metadata.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,7 +406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -414,7 +414,7 @@
     {
       "region_tag": "metastore_v1beta_generated_DataprocMetastore_RestoreService_sync",
       "title": "Snippet for the restore_service call in the DataprocMetastore service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#restore_service. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#restore_service.",
       "file": "dataproc_metastore/restore_service.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,7 +446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -454,7 +454,7 @@
     {
       "region_tag": "metastore_v1beta_generated_DataprocMetastore_ListBackups_sync",
       "title": "Snippet for the list_backups call in the DataprocMetastore service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#list_backups. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#list_backups.",
       "file": "dataproc_metastore/list_backups.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,7 +486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -494,7 +494,7 @@
     {
       "region_tag": "metastore_v1beta_generated_DataprocMetastore_GetBackup_sync",
       "title": "Snippet for the get_backup call in the DataprocMetastore service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#get_backup. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#get_backup.",
       "file": "dataproc_metastore/get_backup.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,7 +526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -534,7 +534,7 @@
     {
       "region_tag": "metastore_v1beta_generated_DataprocMetastore_CreateBackup_sync",
       "title": "Snippet for the create_backup call in the DataprocMetastore service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#create_backup. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#create_backup.",
       "file": "dataproc_metastore/create_backup.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,7 +566,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -574,7 +574,7 @@
     {
       "region_tag": "metastore_v1beta_generated_DataprocMetastore_DeleteBackup_sync",
       "title": "Snippet for the delete_backup call in the DataprocMetastore service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#delete_backup. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#delete_backup.",
       "file": "dataproc_metastore/delete_backup.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,7 +606,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -614,7 +614,7 @@
     {
       "region_tag": "metastore_v1beta_generated_DataprocMetastore_RemoveIamPolicy_sync",
       "title": "Snippet for the remove_iam_policy call in the DataprocMetastore service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#remove_iam_policy. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#remove_iam_policy.",
       "file": "dataproc_metastore/remove_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,7 +646,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -654,7 +654,7 @@
     {
       "region_tag": "metastore_v1beta_generated_DataprocMetastore_QueryMetadata_sync",
       "title": "Snippet for the query_metadata call in the DataprocMetastore service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#query_metadata. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#query_metadata.",
       "file": "dataproc_metastore/query_metadata.rb",
       "language": "RUBY",
       "client_method": {
@@ -686,7 +686,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -694,7 +694,7 @@
     {
       "region_tag": "metastore_v1beta_generated_DataprocMetastore_MoveTableToDatabase_sync",
       "title": "Snippet for the move_table_to_database call in the DataprocMetastore service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#move_table_to_database. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#move_table_to_database.",
       "file": "dataproc_metastore/move_table_to_database.rb",
       "language": "RUBY",
       "client_method": {
@@ -726,7 +726,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -734,7 +734,7 @@
     {
       "region_tag": "metastore_v1beta_generated_DataprocMetastore_AlterMetadataResourceLocation_sync",
       "title": "Snippet for the alter_metadata_resource_location call in the DataprocMetastore service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#alter_metadata_resource_location. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#alter_metadata_resource_location.",
       "file": "dataproc_metastore/alter_metadata_resource_location.rb",
       "language": "RUBY",
       "client_method": {
@@ -766,7 +766,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -774,7 +774,7 @@
     {
       "region_tag": "metastore_v1beta_generated_DataprocMetastoreFederation_ListFederations_sync",
       "title": "Snippet for the list_federations call in the DataprocMetastoreFederation service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastoreFederation::Client#list_federations. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastoreFederation::Client#list_federations.",
       "file": "dataproc_metastore_federation/list_federations.rb",
       "language": "RUBY",
       "client_method": {
@@ -806,7 +806,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -814,7 +814,7 @@
     {
       "region_tag": "metastore_v1beta_generated_DataprocMetastoreFederation_GetFederation_sync",
       "title": "Snippet for the get_federation call in the DataprocMetastoreFederation service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastoreFederation::Client#get_federation. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastoreFederation::Client#get_federation.",
       "file": "dataproc_metastore_federation/get_federation.rb",
       "language": "RUBY",
       "client_method": {
@@ -846,7 +846,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -854,7 +854,7 @@
     {
       "region_tag": "metastore_v1beta_generated_DataprocMetastoreFederation_CreateFederation_sync",
       "title": "Snippet for the create_federation call in the DataprocMetastoreFederation service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastoreFederation::Client#create_federation. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastoreFederation::Client#create_federation.",
       "file": "dataproc_metastore_federation/create_federation.rb",
       "language": "RUBY",
       "client_method": {
@@ -886,7 +886,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -894,7 +894,7 @@
     {
       "region_tag": "metastore_v1beta_generated_DataprocMetastoreFederation_UpdateFederation_sync",
       "title": "Snippet for the update_federation call in the DataprocMetastoreFederation service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastoreFederation::Client#update_federation. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastoreFederation::Client#update_federation.",
       "file": "dataproc_metastore_federation/update_federation.rb",
       "language": "RUBY",
       "client_method": {
@@ -926,7 +926,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -934,7 +934,7 @@
     {
       "region_tag": "metastore_v1beta_generated_DataprocMetastoreFederation_DeleteFederation_sync",
       "title": "Snippet for the delete_federation call in the DataprocMetastoreFederation service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastoreFederation::Client#delete_federation. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1beta::DataprocMetastoreFederation::Client#delete_federation.",
       "file": "dataproc_metastore_federation/delete_federation.rb",
       "language": "RUBY",
       "client_method": {
@@ -966,7 +966,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]

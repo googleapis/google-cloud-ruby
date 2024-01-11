@@ -184,6 +184,7 @@ module Google
 
       # Additional annotations that can be used to guide the usage of a metric.
       # @!attribute [rw] launch_stage
+      #   @deprecated This field is deprecated and may be removed in the next major version update.
       #   @return [::Google::Api::LaunchStage]
       #     Deprecated. Must use the
       #     {::Google::Api::MetricDescriptor#launch_stage MetricDescriptor.launch_stage}

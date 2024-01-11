@@ -1918,6 +1918,7 @@ module Google
 
         # Details about the BIOS.
         # @!attribute [rw] bios_name
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     BIOS name.
         #     This fields is deprecated. Please use the `id` field instead.
@@ -3200,6 +3201,7 @@ module Google
 
         # A resource that reports the import job errors at row level.
         # @!attribute [rw] row_number
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Integer]
         #     The row number where the error was detected.
         # @!attribute [rw] vm_name
@@ -3752,6 +3754,7 @@ module Google
           #   @return [::Google::Cloud::MigrationCenter::V1::ReportSummary::AssetAggregateStats]
           #     Summary statistics for all the assets in this group.
           # @!attribute [rw] overlapping_asset_count
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::Integer]
           #     This field is deprecated, do not rely on it having a value.
           # @!attribute [rw] preference_set_findings
