@@ -41,11 +41,15 @@ describe Google::Cloud::Storage::Bucket, :generate_signed_post_policy_v4, :stora
       "x-goog-signature"
     ]
 
-    form_data = [["file", File.open(data)]]
-
+    # For some weird (as yet unidentified) reason, keeping file as the first value
+    # makes the http request fail intermittently with a 400 error.
+    # Moving file as the last entry in the form_data array works fine.
+    # Updating this in multiple places in this file.
+    form_data= []
     post_object.fields.each do |key, value|
       form_data.push [key, value]
     end
+    form_data.push ["file", File.open(data)]
 
     http = Net::HTTP.new uri.host, uri.port
     http.use_ssl = true
@@ -94,11 +98,11 @@ describe Google::Cloud::Storage::Bucket, :generate_signed_post_policy_v4, :stora
       "x-goog-signature"
     ]
 
-    form_data = [["file", File.open(data)]]
-
+    form_data = []
     post_object.fields.each do |key, value|
       form_data.push [key, value]
     end
+    form_data.push ["file", File.open(data)]
 
     http = Net::HTTP.new uri.host, uri.port
     http.use_ssl = true
@@ -129,11 +133,11 @@ describe Google::Cloud::Storage::Bucket, :generate_signed_post_policy_v4, :stora
       "x-goog-signature"
     ]
 
-    form_data = [["file", File.open(data)]]
-
+    form_data = []
     post_object.fields.each do |key, value|
       form_data.push [key, value]
     end
+    form_data.push ["file", File.open(data)]
 
     http = Net::HTTP.new uri.host, uri.port
     http.use_ssl = true
@@ -169,11 +173,11 @@ describe Google::Cloud::Storage::Bucket, :generate_signed_post_policy_v4, :stora
       "x-goog-signature"
     ]
 
-    form_data = [["file", File.open(data)]]
-
+    form_data = []
     post_object.fields.each do |key, value|
       form_data.push [key, value]
     end
+    form_data.push ["file", File.open(data)]
 
     http = Net::HTTP.new uri.host, uri.port
     http.use_ssl = true
@@ -208,11 +212,11 @@ describe Google::Cloud::Storage::Bucket, :generate_signed_post_policy_v4, :stora
       "x-goog-signature"
     ]
 
-    form_data = [["file", File.open(data)]]
-
+    form_data = []
     post_object.fields.each do |key, value|
       form_data.push [key, value]
     end
+    form_data.push ["file", File.open(data)]
 
     http = Net::HTTP.new uri.host, uri.port
     http.use_ssl = true
@@ -249,13 +253,13 @@ describe Google::Cloud::Storage::Bucket, :generate_signed_post_policy_v4, :stora
     request = Net::HTTP::Post.new post_object.url
 
     form_data = [
-      ["file", File.open(data_csv)],
       ["key", post_object.fields["key"]],
       ["policy", post_object.fields["policy"]],
       ["x-goog-algorithm", post_object.fields["x-goog-algorithm"]],
       ["x-goog-credential", post_object.fields["x-goog-credential"]],
       ["x-goog-date", post_object.fields["x-goog-date"]],
       ["x-goog-signature", post_object.fields["x-goog-signature"]],
+      ["file", File.open(data_csv)],
     ]
 
     request.set_form form_data, "multipart/form-data"
