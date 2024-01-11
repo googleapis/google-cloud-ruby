@@ -14,7 +14,7 @@
     {
       "region_tag": "meet_v2beta_generated_SpacesService_CreateSpace_sync",
       "title": "Snippet for the create_space call in the SpacesService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::SpacesService::Client#create_space. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::SpacesService::Client#create_space.",
       "file": "spaces_service/create_space.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "meet_v2beta_generated_SpacesService_GetSpace_sync",
       "title": "Snippet for the get_space call in the SpacesService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::SpacesService::Client#get_space. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::SpacesService::Client#get_space.",
       "file": "spaces_service/get_space.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "meet_v2beta_generated_SpacesService_UpdateSpace_sync",
       "title": "Snippet for the update_space call in the SpacesService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::SpacesService::Client#update_space. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::SpacesService::Client#update_space.",
       "file": "spaces_service/update_space.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -134,7 +134,7 @@
     {
       "region_tag": "meet_v2beta_generated_SpacesService_EndActiveConference_sync",
       "title": "Snippet for the end_active_conference call in the SpacesService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::SpacesService::Client#end_active_conference. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::SpacesService::Client#end_active_conference.",
       "file": "spaces_service/end_active_conference.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -174,7 +174,7 @@
     {
       "region_tag": "meet_v2beta_generated_ConferenceRecordsService_GetConferenceRecord_sync",
       "title": "Snippet for the get_conference_record call in the ConferenceRecordsService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#get_conference_record. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#get_conference_record.",
       "file": "conference_records_service/get_conference_record.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,7 +206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -214,7 +214,7 @@
     {
       "region_tag": "meet_v2beta_generated_ConferenceRecordsService_ListConferenceRecords_sync",
       "title": "Snippet for the list_conference_records call in the ConferenceRecordsService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#list_conference_records. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#list_conference_records.",
       "file": "conference_records_service/list_conference_records.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,7 +246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -254,7 +254,7 @@
     {
       "region_tag": "meet_v2beta_generated_ConferenceRecordsService_GetParticipant_sync",
       "title": "Snippet for the get_participant call in the ConferenceRecordsService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#get_participant. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#get_participant.",
       "file": "conference_records_service/get_participant.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,7 +286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -294,7 +294,7 @@
     {
       "region_tag": "meet_v2beta_generated_ConferenceRecordsService_ListParticipants_sync",
       "title": "Snippet for the list_participants call in the ConferenceRecordsService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#list_participants. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#list_participants.",
       "file": "conference_records_service/list_participants.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,7 +326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -334,7 +334,7 @@
     {
       "region_tag": "meet_v2beta_generated_ConferenceRecordsService_GetParticipantSession_sync",
       "title": "Snippet for the get_participant_session call in the ConferenceRecordsService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#get_participant_session. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#get_participant_session.",
       "file": "conference_records_service/get_participant_session.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,7 +366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -374,7 +374,7 @@
     {
       "region_tag": "meet_v2beta_generated_ConferenceRecordsService_ListParticipantSessions_sync",
       "title": "Snippet for the list_participant_sessions call in the ConferenceRecordsService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#list_participant_sessions. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#list_participant_sessions.",
       "file": "conference_records_service/list_participant_sessions.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,7 +406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -414,7 +414,7 @@
     {
       "region_tag": "meet_v2beta_generated_ConferenceRecordsService_GetRecording_sync",
       "title": "Snippet for the get_recording call in the ConferenceRecordsService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#get_recording. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#get_recording.",
       "file": "conference_records_service/get_recording.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,7 +446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -454,7 +454,7 @@
     {
       "region_tag": "meet_v2beta_generated_ConferenceRecordsService_ListRecordings_sync",
       "title": "Snippet for the list_recordings call in the ConferenceRecordsService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#list_recordings. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#list_recordings.",
       "file": "conference_records_service/list_recordings.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,7 +486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -494,7 +494,7 @@
     {
       "region_tag": "meet_v2beta_generated_ConferenceRecordsService_GetTranscript_sync",
       "title": "Snippet for the get_transcript call in the ConferenceRecordsService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#get_transcript. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#get_transcript.",
       "file": "conference_records_service/get_transcript.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,7 +526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -534,7 +534,7 @@
     {
       "region_tag": "meet_v2beta_generated_ConferenceRecordsService_ListTranscripts_sync",
       "title": "Snippet for the list_transcripts call in the ConferenceRecordsService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#list_transcripts. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#list_transcripts.",
       "file": "conference_records_service/list_transcripts.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,7 +566,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -574,7 +574,7 @@
     {
       "region_tag": "meet_v2beta_generated_ConferenceRecordsService_GetTranscriptEntry_sync",
       "title": "Snippet for the get_transcript_entry call in the ConferenceRecordsService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#get_transcript_entry. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#get_transcript_entry.",
       "file": "conference_records_service/get_transcript_entry.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,7 +606,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -614,7 +614,7 @@
     {
       "region_tag": "meet_v2beta_generated_ConferenceRecordsService_ListTranscriptEntries_sync",
       "title": "Snippet for the list_transcript_entries call in the ConferenceRecordsService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#list_transcript_entries. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#list_transcript_entries.",
       "file": "conference_records_service/list_transcript_entries.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,7 +646,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]

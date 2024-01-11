@@ -14,7 +14,7 @@
     {
       "region_tag": "apikeys_v2_generated_ApiKeys_CreateKey_sync",
       "title": "Snippet for the create_key call in the ApiKeys service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiKeys::V2::ApiKeys::Client#create_key. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiKeys::V2::ApiKeys::Client#create_key.",
       "file": "api_keys/create_key.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "apikeys_v2_generated_ApiKeys_ListKeys_sync",
       "title": "Snippet for the list_keys call in the ApiKeys service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiKeys::V2::ApiKeys::Client#list_keys. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiKeys::V2::ApiKeys::Client#list_keys.",
       "file": "api_keys/list_keys.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "apikeys_v2_generated_ApiKeys_GetKey_sync",
       "title": "Snippet for the get_key call in the ApiKeys service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiKeys::V2::ApiKeys::Client#get_key. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiKeys::V2::ApiKeys::Client#get_key.",
       "file": "api_keys/get_key.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -134,7 +134,7 @@
     {
       "region_tag": "apikeys_v2_generated_ApiKeys_GetKeyString_sync",
       "title": "Snippet for the get_key_string call in the ApiKeys service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiKeys::V2::ApiKeys::Client#get_key_string. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiKeys::V2::ApiKeys::Client#get_key_string.",
       "file": "api_keys/get_key_string.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -174,7 +174,7 @@
     {
       "region_tag": "apikeys_v2_generated_ApiKeys_UpdateKey_sync",
       "title": "Snippet for the update_key call in the ApiKeys service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiKeys::V2::ApiKeys::Client#update_key. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiKeys::V2::ApiKeys::Client#update_key.",
       "file": "api_keys/update_key.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,7 +206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -214,7 +214,7 @@
     {
       "region_tag": "apikeys_v2_generated_ApiKeys_DeleteKey_sync",
       "title": "Snippet for the delete_key call in the ApiKeys service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiKeys::V2::ApiKeys::Client#delete_key. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiKeys::V2::ApiKeys::Client#delete_key.",
       "file": "api_keys/delete_key.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,7 +246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -254,7 +254,7 @@
     {
       "region_tag": "apikeys_v2_generated_ApiKeys_UndeleteKey_sync",
       "title": "Snippet for the undelete_key call in the ApiKeys service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiKeys::V2::ApiKeys::Client#undelete_key. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiKeys::V2::ApiKeys::Client#undelete_key.",
       "file": "api_keys/undelete_key.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,7 +286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -294,7 +294,7 @@
     {
       "region_tag": "apikeys_v2_generated_ApiKeys_LookupKey_sync",
       "title": "Snippet for the lookup_key call in the ApiKeys service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiKeys::V2::ApiKeys::Client#lookup_key. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiKeys::V2::ApiKeys::Client#lookup_key.",
       "file": "api_keys/lookup_key.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,7 +326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]

@@ -21,6 +21,7 @@ module Google
   module Api
     # Required information for every language.
     # @!attribute [rw] reference_docs_uri
+    #   @deprecated This field is deprecated and may be removed in the next major version update.
     #   @return [::String]
     #     Link to automatically generated reference documentation.  Example:
     #     https://cloud.google.com/nodejs/docs/reference/asset/latest

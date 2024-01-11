@@ -14,7 +14,7 @@
     {
       "region_tag": "apigateway_v1_generated_ApiGatewayService_ListGateways_sync",
       "title": "Snippet for the list_gateways call in the ApiGatewayService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiGateway::V1::ApiGatewayService::Client#list_gateways. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiGateway::V1::ApiGatewayService::Client#list_gateways.",
       "file": "api_gateway_service/list_gateways.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "apigateway_v1_generated_ApiGatewayService_GetGateway_sync",
       "title": "Snippet for the get_gateway call in the ApiGatewayService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiGateway::V1::ApiGatewayService::Client#get_gateway. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiGateway::V1::ApiGatewayService::Client#get_gateway.",
       "file": "api_gateway_service/get_gateway.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "apigateway_v1_generated_ApiGatewayService_CreateGateway_sync",
       "title": "Snippet for the create_gateway call in the ApiGatewayService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiGateway::V1::ApiGatewayService::Client#create_gateway. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiGateway::V1::ApiGatewayService::Client#create_gateway.",
       "file": "api_gateway_service/create_gateway.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -134,7 +134,7 @@
     {
       "region_tag": "apigateway_v1_generated_ApiGatewayService_UpdateGateway_sync",
       "title": "Snippet for the update_gateway call in the ApiGatewayService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiGateway::V1::ApiGatewayService::Client#update_gateway. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiGateway::V1::ApiGatewayService::Client#update_gateway.",
       "file": "api_gateway_service/update_gateway.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -174,7 +174,7 @@
     {
       "region_tag": "apigateway_v1_generated_ApiGatewayService_DeleteGateway_sync",
       "title": "Snippet for the delete_gateway call in the ApiGatewayService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiGateway::V1::ApiGatewayService::Client#delete_gateway. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiGateway::V1::ApiGatewayService::Client#delete_gateway.",
       "file": "api_gateway_service/delete_gateway.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,7 +206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -214,7 +214,7 @@
     {
       "region_tag": "apigateway_v1_generated_ApiGatewayService_ListApis_sync",
       "title": "Snippet for the list_apis call in the ApiGatewayService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiGateway::V1::ApiGatewayService::Client#list_apis. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiGateway::V1::ApiGatewayService::Client#list_apis.",
       "file": "api_gateway_service/list_apis.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,7 +246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -254,7 +254,7 @@
     {
       "region_tag": "apigateway_v1_generated_ApiGatewayService_GetApi_sync",
       "title": "Snippet for the get_api call in the ApiGatewayService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiGateway::V1::ApiGatewayService::Client#get_api. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiGateway::V1::ApiGatewayService::Client#get_api.",
       "file": "api_gateway_service/get_api.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,7 +286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -294,7 +294,7 @@
     {
       "region_tag": "apigateway_v1_generated_ApiGatewayService_CreateApi_sync",
       "title": "Snippet for the create_api call in the ApiGatewayService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiGateway::V1::ApiGatewayService::Client#create_api. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiGateway::V1::ApiGatewayService::Client#create_api.",
       "file": "api_gateway_service/create_api.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,7 +326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -334,7 +334,7 @@
     {
       "region_tag": "apigateway_v1_generated_ApiGatewayService_UpdateApi_sync",
       "title": "Snippet for the update_api call in the ApiGatewayService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiGateway::V1::ApiGatewayService::Client#update_api. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiGateway::V1::ApiGatewayService::Client#update_api.",
       "file": "api_gateway_service/update_api.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,7 +366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -374,7 +374,7 @@
     {
       "region_tag": "apigateway_v1_generated_ApiGatewayService_DeleteApi_sync",
       "title": "Snippet for the delete_api call in the ApiGatewayService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiGateway::V1::ApiGatewayService::Client#delete_api. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiGateway::V1::ApiGatewayService::Client#delete_api.",
       "file": "api_gateway_service/delete_api.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,7 +406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -414,7 +414,7 @@
     {
       "region_tag": "apigateway_v1_generated_ApiGatewayService_ListApiConfigs_sync",
       "title": "Snippet for the list_api_configs call in the ApiGatewayService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiGateway::V1::ApiGatewayService::Client#list_api_configs. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiGateway::V1::ApiGatewayService::Client#list_api_configs.",
       "file": "api_gateway_service/list_api_configs.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,7 +446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -454,7 +454,7 @@
     {
       "region_tag": "apigateway_v1_generated_ApiGatewayService_GetApiConfig_sync",
       "title": "Snippet for the get_api_config call in the ApiGatewayService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiGateway::V1::ApiGatewayService::Client#get_api_config. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiGateway::V1::ApiGatewayService::Client#get_api_config.",
       "file": "api_gateway_service/get_api_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,7 +486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -494,7 +494,7 @@
     {
       "region_tag": "apigateway_v1_generated_ApiGatewayService_CreateApiConfig_sync",
       "title": "Snippet for the create_api_config call in the ApiGatewayService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiGateway::V1::ApiGatewayService::Client#create_api_config. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiGateway::V1::ApiGatewayService::Client#create_api_config.",
       "file": "api_gateway_service/create_api_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,7 +526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -534,7 +534,7 @@
     {
       "region_tag": "apigateway_v1_generated_ApiGatewayService_UpdateApiConfig_sync",
       "title": "Snippet for the update_api_config call in the ApiGatewayService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiGateway::V1::ApiGatewayService::Client#update_api_config. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiGateway::V1::ApiGatewayService::Client#update_api_config.",
       "file": "api_gateway_service/update_api_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,7 +566,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -574,7 +574,7 @@
     {
       "region_tag": "apigateway_v1_generated_ApiGatewayService_DeleteApiConfig_sync",
       "title": "Snippet for the delete_api_config call in the ApiGatewayService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiGateway::V1::ApiGatewayService::Client#delete_api_config. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiGateway::V1::ApiGatewayService::Client#delete_api_config.",
       "file": "api_gateway_service/delete_api_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,7 +606,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]

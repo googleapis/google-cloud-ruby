@@ -22,9 +22,14 @@ require "google/analytics/data/v1beta"
 ##
 # Snippet for the get_metadata call in the AnalyticsData service
 #
+# This snippet has been automatically generated and should be regarded as a code
+# template only. It will require modifications to work:
+# - It may require correct/in-range values for request initialization.
+# - It may require specifying regional endpoints when creating the service
+# client as shown in https://cloud.google.com/ruby/docs/reference.
+#
 # This is an auto-generated example demonstrating basic usage of
-# Google::Analytics::Data::V1beta::AnalyticsData::Client#get_metadata. It may
-# require modification in order to execute successfully.
+# Google::Analytics::Data::V1beta::AnalyticsData::Client#get_metadata.
 #
 def get_metadata
   # Create a client object. The client can be reused for multiple calls.

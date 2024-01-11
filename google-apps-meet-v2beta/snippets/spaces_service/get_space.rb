@@ -22,9 +22,14 @@ require "google/apps/meet/v2beta"
 ##
 # Snippet for the get_space call in the SpacesService service
 #
+# This snippet has been automatically generated and should be regarded as a code
+# template only. It will require modifications to work:
+# - It may require correct/in-range values for request initialization.
+# - It may require specifying regional endpoints when creating the service
+# client as shown in https://cloud.google.com/ruby/docs/reference.
+#
 # This is an auto-generated example demonstrating basic usage of
-# Google::Apps::Meet::V2beta::SpacesService::Client#get_space. It may require
-# modification in order to execute successfully.
+# Google::Apps::Meet::V2beta::SpacesService::Client#get_space.
 #
 def get_space
   # Create a client object. The client can be reused for multiple calls.
