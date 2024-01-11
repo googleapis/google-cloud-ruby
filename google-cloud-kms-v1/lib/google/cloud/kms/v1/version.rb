@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Kms
       module V1
-        VERSION = "0.23.0"
+        VERSION = "0.24.0"
       end
     end
   end
