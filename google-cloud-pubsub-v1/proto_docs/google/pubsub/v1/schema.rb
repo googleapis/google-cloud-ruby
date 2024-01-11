@@ -201,6 +201,7 @@ module Google
         #
         #     Example: `projects/123/schemas/my-schema@c7cfa2a8`
         # @!attribute [rw] revision_id
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Optional. This field is deprecated and should not be used for specifying
         #     the revision ID. The revision ID should be specified via the `name`

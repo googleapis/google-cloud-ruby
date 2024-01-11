@@ -22,9 +22,14 @@ require "google/cloud/org_policy/v2"
 ##
 # Snippet for the list_policies call in the OrgPolicy service
 #
+# This snippet has been automatically generated and should be regarded as a code
+# template only. It will require modifications to work:
+# - It may require correct/in-range values for request initialization.
+# - It may require specifying regional endpoints when creating the service
+# client as shown in https://cloud.google.com/ruby/docs/reference.
+#
 # This is an auto-generated example demonstrating basic usage of
-# Google::Cloud::OrgPolicy::V2::OrgPolicy::Client#list_policies. It may require
-# modification in order to execute successfully.
+# Google::Cloud::OrgPolicy::V2::OrgPolicy::Client#list_policies.
 #
 def list_policies
   # Create a client object. The client can be reused for multiple calls.

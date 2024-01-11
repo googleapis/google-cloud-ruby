@@ -14,7 +14,7 @@
     {
       "region_tag": "osconfig_v1alpha_generated_OsConfigZonalService_CreateOSPolicyAssignment_sync",
       "title": "Snippet for the create_os_policy_assignment call in the OsConfigZonalService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client#create_os_policy_assignment. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client#create_os_policy_assignment.",
       "file": "os_config_zonal_service/create_os_policy_assignment.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "osconfig_v1alpha_generated_OsConfigZonalService_UpdateOSPolicyAssignment_sync",
       "title": "Snippet for the update_os_policy_assignment call in the OsConfigZonalService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client#update_os_policy_assignment. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client#update_os_policy_assignment.",
       "file": "os_config_zonal_service/update_os_policy_assignment.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "osconfig_v1alpha_generated_OsConfigZonalService_GetOSPolicyAssignment_sync",
       "title": "Snippet for the get_os_policy_assignment call in the OsConfigZonalService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client#get_os_policy_assignment. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client#get_os_policy_assignment.",
       "file": "os_config_zonal_service/get_os_policy_assignment.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -134,7 +134,7 @@
     {
       "region_tag": "osconfig_v1alpha_generated_OsConfigZonalService_ListOSPolicyAssignments_sync",
       "title": "Snippet for the list_os_policy_assignments call in the OsConfigZonalService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client#list_os_policy_assignments. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client#list_os_policy_assignments.",
       "file": "os_config_zonal_service/list_os_policy_assignments.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -174,7 +174,7 @@
     {
       "region_tag": "osconfig_v1alpha_generated_OsConfigZonalService_ListOSPolicyAssignmentRevisions_sync",
       "title": "Snippet for the list_os_policy_assignment_revisions call in the OsConfigZonalService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client#list_os_policy_assignment_revisions. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client#list_os_policy_assignment_revisions.",
       "file": "os_config_zonal_service/list_os_policy_assignment_revisions.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,7 +206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -214,7 +214,7 @@
     {
       "region_tag": "osconfig_v1alpha_generated_OsConfigZonalService_DeleteOSPolicyAssignment_sync",
       "title": "Snippet for the delete_os_policy_assignment call in the OsConfigZonalService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client#delete_os_policy_assignment. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client#delete_os_policy_assignment.",
       "file": "os_config_zonal_service/delete_os_policy_assignment.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,7 +246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -254,7 +254,7 @@
     {
       "region_tag": "osconfig_v1alpha_generated_OsConfigZonalService_GetInstanceOSPoliciesCompliance_sync",
       "title": "Snippet for the get_instance_os_policies_compliance call in the OsConfigZonalService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client#get_instance_os_policies_compliance. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client#get_instance_os_policies_compliance.",
       "file": "os_config_zonal_service/get_instance_os_policies_compliance.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,7 +286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -294,7 +294,7 @@
     {
       "region_tag": "osconfig_v1alpha_generated_OsConfigZonalService_ListInstanceOSPoliciesCompliances_sync",
       "title": "Snippet for the list_instance_os_policies_compliances call in the OsConfigZonalService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client#list_instance_os_policies_compliances. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client#list_instance_os_policies_compliances.",
       "file": "os_config_zonal_service/list_instance_os_policies_compliances.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,7 +326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -334,7 +334,7 @@
     {
       "region_tag": "osconfig_v1alpha_generated_OsConfigZonalService_GetOSPolicyAssignmentReport_sync",
       "title": "Snippet for the get_os_policy_assignment_report call in the OsConfigZonalService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client#get_os_policy_assignment_report. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client#get_os_policy_assignment_report.",
       "file": "os_config_zonal_service/get_os_policy_assignment_report.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,7 +366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -374,7 +374,7 @@
     {
       "region_tag": "osconfig_v1alpha_generated_OsConfigZonalService_ListOSPolicyAssignmentReports_sync",
       "title": "Snippet for the list_os_policy_assignment_reports call in the OsConfigZonalService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client#list_os_policy_assignment_reports. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client#list_os_policy_assignment_reports.",
       "file": "os_config_zonal_service/list_os_policy_assignment_reports.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,7 +406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -414,7 +414,7 @@
     {
       "region_tag": "osconfig_v1alpha_generated_OsConfigZonalService_GetInventory_sync",
       "title": "Snippet for the get_inventory call in the OsConfigZonalService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client#get_inventory. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client#get_inventory.",
       "file": "os_config_zonal_service/get_inventory.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,7 +446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -454,7 +454,7 @@
     {
       "region_tag": "osconfig_v1alpha_generated_OsConfigZonalService_ListInventories_sync",
       "title": "Snippet for the list_inventories call in the OsConfigZonalService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client#list_inventories. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client#list_inventories.",
       "file": "os_config_zonal_service/list_inventories.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,7 +486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -494,7 +494,7 @@
     {
       "region_tag": "osconfig_v1alpha_generated_OsConfigZonalService_GetVulnerabilityReport_sync",
       "title": "Snippet for the get_vulnerability_report call in the OsConfigZonalService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client#get_vulnerability_report. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client#get_vulnerability_report.",
       "file": "os_config_zonal_service/get_vulnerability_report.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,7 +526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -534,7 +534,7 @@
     {
       "region_tag": "osconfig_v1alpha_generated_OsConfigZonalService_ListVulnerabilityReports_sync",
       "title": "Snippet for the list_vulnerability_reports call in the OsConfigZonalService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client#list_vulnerability_reports. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client#list_vulnerability_reports.",
       "file": "os_config_zonal_service/list_vulnerability_reports.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,7 +566,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]

@@ -941,6 +941,7 @@ module Google
         #     Required. The subscription from which messages should be pulled.
         #     Format is `projects/{project}/subscriptions/{sub}`.
         # @!attribute [rw] return_immediately
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
         #     Optional. If this field set to true, the system will respond immediately
         #     even if it there are no messages available to return in the `Pull`
