@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-bigquery-migration-v2",
-    "version": "0.9.0",
+    "version": "0.9.1",
     "language": "RUBY",
     "apis": [
       {
