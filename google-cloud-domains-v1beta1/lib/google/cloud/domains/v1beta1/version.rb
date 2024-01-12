@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Domains
       module V1beta1
-        VERSION = "0.8.0"
+        VERSION = "0.8.1"
       end
     end
   end
