@@ -1,5 +1,0 @@
-source "https://rubygems.org"
-
-gemspec
-
-gem "google-cloud-dialogflow-v2", path: "../google-cloud-dialogflow-v2"
