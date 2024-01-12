@@ -217,7 +217,7 @@
   "google-cloud-data_catalog-lineage-v1+FILLER": "0.0.0",
   "google-cloud-data_catalog-v1": "0.21.0",
   "google-cloud-data_catalog-v1+FILLER": "0.0.0",
-  "google-cloud-data_catalog-v1beta1": "0.3.0",
+  "google-cloud-data_catalog-v1beta1": "0.3.1",
   "google-cloud-data_catalog-v1beta1+FILLER": "0.0.0",
   "google-cloud-data_fusion": "1.2.0",
   "google-cloud-data_fusion+FILLER": "0.0.0",
