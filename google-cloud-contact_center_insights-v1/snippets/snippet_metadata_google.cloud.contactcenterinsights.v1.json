@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-contact_center_insights-v1",
-    "version": "0.20.0",
+    "version": "0.20.1",
     "language": "RUBY",
     "apis": [
       {
