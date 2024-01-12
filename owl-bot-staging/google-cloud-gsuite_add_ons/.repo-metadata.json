@@ -1,0 +1,19 @@
+{
+    "api_id": "gsuiteaddons.googleapis.com",
+    "api_shortname": "gsuiteaddons",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-gsuite_add_ons/latest",
+    "distribution_name": "google-cloud-gsuite_add_ons",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "gsuiteaddons",
+    "name_pretty": "Google Workspace Add-ons API",
+    "product_documentation": "https://developers.google.com/workspace/add-ons/",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Add-ons are customized applications that integrate with Google Workspace productivity applications.",
+    "ruby-cloud-product-url": "https://developers.google.com/workspace/add-ons/",
+    "ruby-cloud-path-override": "g_suite_add_ons=gsuite_add_ons",
+    "ruby-cloud-namespace-override": "GsuiteAddOns=GSuiteAddOns",
+    "library_type": "GAPIC_AUTO"
+}
