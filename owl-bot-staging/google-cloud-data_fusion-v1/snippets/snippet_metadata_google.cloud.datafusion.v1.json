@@ -1,0 +1,295 @@
+{
+  "client_library": {
+    "name": "google-cloud-data_fusion-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.datafusion.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "datafusion_v1_generated_DataFusion_ListAvailableVersions_sync",
+      "title": "Snippet for the list_available_versions call in the DataFusion service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataFusion::V1::DataFusion::Client#list_available_versions.",
+      "file": "data_fusion/list_available_versions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_available_versions",
+        "full_name": "::Google::Cloud::DataFusion::V1::DataFusion::Client#list_available_versions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataFusion::V1::ListAvailableVersionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataFusion::V1::ListAvailableVersionsResponse",
+        "client": {
+          "short_name": "DataFusion::Client",
+          "full_name": "::Google::Cloud::DataFusion::V1::DataFusion::Client"
+        },
+        "method": {
+          "short_name": "ListAvailableVersions",
+          "full_name": "google.cloud.datafusion.v1.DataFusion.ListAvailableVersions",
+          "service": {
+            "short_name": "DataFusion",
+            "full_name": "google.cloud.datafusion.v1.DataFusion"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datafusion_v1_generated_DataFusion_ListInstances_sync",
+      "title": "Snippet for the list_instances call in the DataFusion service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataFusion::V1::DataFusion::Client#list_instances.",
+      "file": "data_fusion/list_instances.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_instances",
+        "full_name": "::Google::Cloud::DataFusion::V1::DataFusion::Client#list_instances",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataFusion::V1::ListInstancesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataFusion::V1::ListInstancesResponse",
+        "client": {
+          "short_name": "DataFusion::Client",
+          "full_name": "::Google::Cloud::DataFusion::V1::DataFusion::Client"
+        },
+        "method": {
+          "short_name": "ListInstances",
+          "full_name": "google.cloud.datafusion.v1.DataFusion.ListInstances",
+          "service": {
+            "short_name": "DataFusion",
+            "full_name": "google.cloud.datafusion.v1.DataFusion"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datafusion_v1_generated_DataFusion_GetInstance_sync",
+      "title": "Snippet for the get_instance call in the DataFusion service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataFusion::V1::DataFusion::Client#get_instance.",
+      "file": "data_fusion/get_instance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_instance",
+        "full_name": "::Google::Cloud::DataFusion::V1::DataFusion::Client#get_instance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataFusion::V1::GetInstanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataFusion::V1::Instance",
+        "client": {
+          "short_name": "DataFusion::Client",
+          "full_name": "::Google::Cloud::DataFusion::V1::DataFusion::Client"
+        },
+        "method": {
+          "short_name": "GetInstance",
+          "full_name": "google.cloud.datafusion.v1.DataFusion.GetInstance",
+          "service": {
+            "short_name": "DataFusion",
+            "full_name": "google.cloud.datafusion.v1.DataFusion"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datafusion_v1_generated_DataFusion_CreateInstance_sync",
+      "title": "Snippet for the create_instance call in the DataFusion service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataFusion::V1::DataFusion::Client#create_instance.",
+      "file": "data_fusion/create_instance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_instance",
+        "full_name": "::Google::Cloud::DataFusion::V1::DataFusion::Client#create_instance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataFusion::V1::CreateInstanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DataFusion::Client",
+          "full_name": "::Google::Cloud::DataFusion::V1::DataFusion::Client"
+        },
+        "method": {
+          "short_name": "CreateInstance",
+          "full_name": "google.cloud.datafusion.v1.DataFusion.CreateInstance",
+          "service": {
+            "short_name": "DataFusion",
+            "full_name": "google.cloud.datafusion.v1.DataFusion"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datafusion_v1_generated_DataFusion_DeleteInstance_sync",
+      "title": "Snippet for the delete_instance call in the DataFusion service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataFusion::V1::DataFusion::Client#delete_instance.",
+      "file": "data_fusion/delete_instance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_instance",
+        "full_name": "::Google::Cloud::DataFusion::V1::DataFusion::Client#delete_instance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataFusion::V1::DeleteInstanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DataFusion::Client",
+          "full_name": "::Google::Cloud::DataFusion::V1::DataFusion::Client"
+        },
+        "method": {
+          "short_name": "DeleteInstance",
+          "full_name": "google.cloud.datafusion.v1.DataFusion.DeleteInstance",
+          "service": {
+            "short_name": "DataFusion",
+            "full_name": "google.cloud.datafusion.v1.DataFusion"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datafusion_v1_generated_DataFusion_UpdateInstance_sync",
+      "title": "Snippet for the update_instance call in the DataFusion service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataFusion::V1::DataFusion::Client#update_instance.",
+      "file": "data_fusion/update_instance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_instance",
+        "full_name": "::Google::Cloud::DataFusion::V1::DataFusion::Client#update_instance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataFusion::V1::UpdateInstanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DataFusion::Client",
+          "full_name": "::Google::Cloud::DataFusion::V1::DataFusion::Client"
+        },
+        "method": {
+          "short_name": "UpdateInstance",
+          "full_name": "google.cloud.datafusion.v1.DataFusion.UpdateInstance",
+          "service": {
+            "short_name": "DataFusion",
+            "full_name": "google.cloud.datafusion.v1.DataFusion"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datafusion_v1_generated_DataFusion_RestartInstance_sync",
+      "title": "Snippet for the restart_instance call in the DataFusion service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataFusion::V1::DataFusion::Client#restart_instance.",
+      "file": "data_fusion/restart_instance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "restart_instance",
+        "full_name": "::Google::Cloud::DataFusion::V1::DataFusion::Client#restart_instance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataFusion::V1::RestartInstanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DataFusion::Client",
+          "full_name": "::Google::Cloud::DataFusion::V1::DataFusion::Client"
+        },
+        "method": {
+          "short_name": "RestartInstance",
+          "full_name": "google.cloud.datafusion.v1.DataFusion.RestartInstance",
+          "service": {
+            "short_name": "DataFusion",
+            "full_name": "google.cloud.datafusion.v1.DataFusion"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}

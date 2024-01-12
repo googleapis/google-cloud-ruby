@@ -1,0 +1,5 @@
+source "https://rubygems.org"
+
+gemspec
+
+gem "google-cloud-data_catalog-lineage-v1", path: "../google-cloud-data_catalog-lineage-v1"

@@ -1,0 +1,1375 @@
+{
+  "client_library": {
+    "name": "google-cloud-dataproc-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.dataproc.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "dataproc_v1_generated_AutoscalingPolicyService_CreateAutoscalingPolicy_sync",
+      "title": "Snippet for the create_autoscaling_policy call in the AutoscalingPolicyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client#create_autoscaling_policy.",
+      "file": "autoscaling_policy_service/create_autoscaling_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_autoscaling_policy",
+        "full_name": "::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client#create_autoscaling_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::CreateAutoscalingPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataproc::V1::AutoscalingPolicy",
+        "client": {
+          "short_name": "AutoscalingPolicyService::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client"
+        },
+        "method": {
+          "short_name": "CreateAutoscalingPolicy",
+          "full_name": "google.cloud.dataproc.v1.AutoscalingPolicyService.CreateAutoscalingPolicy",
+          "service": {
+            "short_name": "AutoscalingPolicyService",
+            "full_name": "google.cloud.dataproc.v1.AutoscalingPolicyService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_AutoscalingPolicyService_UpdateAutoscalingPolicy_sync",
+      "title": "Snippet for the update_autoscaling_policy call in the AutoscalingPolicyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client#update_autoscaling_policy.",
+      "file": "autoscaling_policy_service/update_autoscaling_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_autoscaling_policy",
+        "full_name": "::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client#update_autoscaling_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::UpdateAutoscalingPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataproc::V1::AutoscalingPolicy",
+        "client": {
+          "short_name": "AutoscalingPolicyService::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client"
+        },
+        "method": {
+          "short_name": "UpdateAutoscalingPolicy",
+          "full_name": "google.cloud.dataproc.v1.AutoscalingPolicyService.UpdateAutoscalingPolicy",
+          "service": {
+            "short_name": "AutoscalingPolicyService",
+            "full_name": "google.cloud.dataproc.v1.AutoscalingPolicyService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_AutoscalingPolicyService_GetAutoscalingPolicy_sync",
+      "title": "Snippet for the get_autoscaling_policy call in the AutoscalingPolicyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client#get_autoscaling_policy.",
+      "file": "autoscaling_policy_service/get_autoscaling_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_autoscaling_policy",
+        "full_name": "::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client#get_autoscaling_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::GetAutoscalingPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataproc::V1::AutoscalingPolicy",
+        "client": {
+          "short_name": "AutoscalingPolicyService::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client"
+        },
+        "method": {
+          "short_name": "GetAutoscalingPolicy",
+          "full_name": "google.cloud.dataproc.v1.AutoscalingPolicyService.GetAutoscalingPolicy",
+          "service": {
+            "short_name": "AutoscalingPolicyService",
+            "full_name": "google.cloud.dataproc.v1.AutoscalingPolicyService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_AutoscalingPolicyService_ListAutoscalingPolicies_sync",
+      "title": "Snippet for the list_autoscaling_policies call in the AutoscalingPolicyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client#list_autoscaling_policies.",
+      "file": "autoscaling_policy_service/list_autoscaling_policies.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_autoscaling_policies",
+        "full_name": "::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client#list_autoscaling_policies",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::ListAutoscalingPoliciesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataproc::V1::ListAutoscalingPoliciesResponse",
+        "client": {
+          "short_name": "AutoscalingPolicyService::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client"
+        },
+        "method": {
+          "short_name": "ListAutoscalingPolicies",
+          "full_name": "google.cloud.dataproc.v1.AutoscalingPolicyService.ListAutoscalingPolicies",
+          "service": {
+            "short_name": "AutoscalingPolicyService",
+            "full_name": "google.cloud.dataproc.v1.AutoscalingPolicyService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_AutoscalingPolicyService_DeleteAutoscalingPolicy_sync",
+      "title": "Snippet for the delete_autoscaling_policy call in the AutoscalingPolicyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client#delete_autoscaling_policy.",
+      "file": "autoscaling_policy_service/delete_autoscaling_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_autoscaling_policy",
+        "full_name": "::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client#delete_autoscaling_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::DeleteAutoscalingPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "AutoscalingPolicyService::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client"
+        },
+        "method": {
+          "short_name": "DeleteAutoscalingPolicy",
+          "full_name": "google.cloud.dataproc.v1.AutoscalingPolicyService.DeleteAutoscalingPolicy",
+          "service": {
+            "short_name": "AutoscalingPolicyService",
+            "full_name": "google.cloud.dataproc.v1.AutoscalingPolicyService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_BatchController_CreateBatch_sync",
+      "title": "Snippet for the create_batch call in the BatchController service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::BatchController::Client#create_batch.",
+      "file": "batch_controller/create_batch.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_batch",
+        "full_name": "::Google::Cloud::Dataproc::V1::BatchController::Client#create_batch",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::CreateBatchRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BatchController::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::BatchController::Client"
+        },
+        "method": {
+          "short_name": "CreateBatch",
+          "full_name": "google.cloud.dataproc.v1.BatchController.CreateBatch",
+          "service": {
+            "short_name": "BatchController",
+            "full_name": "google.cloud.dataproc.v1.BatchController"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_BatchController_GetBatch_sync",
+      "title": "Snippet for the get_batch call in the BatchController service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::BatchController::Client#get_batch.",
+      "file": "batch_controller/get_batch.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_batch",
+        "full_name": "::Google::Cloud::Dataproc::V1::BatchController::Client#get_batch",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::GetBatchRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataproc::V1::Batch",
+        "client": {
+          "short_name": "BatchController::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::BatchController::Client"
+        },
+        "method": {
+          "short_name": "GetBatch",
+          "full_name": "google.cloud.dataproc.v1.BatchController.GetBatch",
+          "service": {
+            "short_name": "BatchController",
+            "full_name": "google.cloud.dataproc.v1.BatchController"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_BatchController_ListBatches_sync",
+      "title": "Snippet for the list_batches call in the BatchController service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::BatchController::Client#list_batches.",
+      "file": "batch_controller/list_batches.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_batches",
+        "full_name": "::Google::Cloud::Dataproc::V1::BatchController::Client#list_batches",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::ListBatchesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataproc::V1::ListBatchesResponse",
+        "client": {
+          "short_name": "BatchController::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::BatchController::Client"
+        },
+        "method": {
+          "short_name": "ListBatches",
+          "full_name": "google.cloud.dataproc.v1.BatchController.ListBatches",
+          "service": {
+            "short_name": "BatchController",
+            "full_name": "google.cloud.dataproc.v1.BatchController"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_BatchController_DeleteBatch_sync",
+      "title": "Snippet for the delete_batch call in the BatchController service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::BatchController::Client#delete_batch.",
+      "file": "batch_controller/delete_batch.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_batch",
+        "full_name": "::Google::Cloud::Dataproc::V1::BatchController::Client#delete_batch",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::DeleteBatchRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "BatchController::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::BatchController::Client"
+        },
+        "method": {
+          "short_name": "DeleteBatch",
+          "full_name": "google.cloud.dataproc.v1.BatchController.DeleteBatch",
+          "service": {
+            "short_name": "BatchController",
+            "full_name": "google.cloud.dataproc.v1.BatchController"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_ClusterController_CreateCluster_sync",
+      "title": "Snippet for the create_cluster call in the ClusterController service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::ClusterController::Client#create_cluster.",
+      "file": "cluster_controller/create_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_cluster",
+        "full_name": "::Google::Cloud::Dataproc::V1::ClusterController::Client#create_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::CreateClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ClusterController::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::ClusterController::Client"
+        },
+        "method": {
+          "short_name": "CreateCluster",
+          "full_name": "google.cloud.dataproc.v1.ClusterController.CreateCluster",
+          "service": {
+            "short_name": "ClusterController",
+            "full_name": "google.cloud.dataproc.v1.ClusterController"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_ClusterController_UpdateCluster_sync",
+      "title": "Snippet for the update_cluster call in the ClusterController service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::ClusterController::Client#update_cluster.",
+      "file": "cluster_controller/update_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_cluster",
+        "full_name": "::Google::Cloud::Dataproc::V1::ClusterController::Client#update_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::UpdateClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ClusterController::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::ClusterController::Client"
+        },
+        "method": {
+          "short_name": "UpdateCluster",
+          "full_name": "google.cloud.dataproc.v1.ClusterController.UpdateCluster",
+          "service": {
+            "short_name": "ClusterController",
+            "full_name": "google.cloud.dataproc.v1.ClusterController"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_ClusterController_StopCluster_sync",
+      "title": "Snippet for the stop_cluster call in the ClusterController service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::ClusterController::Client#stop_cluster.",
+      "file": "cluster_controller/stop_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "stop_cluster",
+        "full_name": "::Google::Cloud::Dataproc::V1::ClusterController::Client#stop_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::StopClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ClusterController::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::ClusterController::Client"
+        },
+        "method": {
+          "short_name": "StopCluster",
+          "full_name": "google.cloud.dataproc.v1.ClusterController.StopCluster",
+          "service": {
+            "short_name": "ClusterController",
+            "full_name": "google.cloud.dataproc.v1.ClusterController"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_ClusterController_StartCluster_sync",
+      "title": "Snippet for the start_cluster call in the ClusterController service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::ClusterController::Client#start_cluster.",
+      "file": "cluster_controller/start_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "start_cluster",
+        "full_name": "::Google::Cloud::Dataproc::V1::ClusterController::Client#start_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::StartClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ClusterController::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::ClusterController::Client"
+        },
+        "method": {
+          "short_name": "StartCluster",
+          "full_name": "google.cloud.dataproc.v1.ClusterController.StartCluster",
+          "service": {
+            "short_name": "ClusterController",
+            "full_name": "google.cloud.dataproc.v1.ClusterController"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_ClusterController_DeleteCluster_sync",
+      "title": "Snippet for the delete_cluster call in the ClusterController service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::ClusterController::Client#delete_cluster.",
+      "file": "cluster_controller/delete_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_cluster",
+        "full_name": "::Google::Cloud::Dataproc::V1::ClusterController::Client#delete_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::DeleteClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ClusterController::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::ClusterController::Client"
+        },
+        "method": {
+          "short_name": "DeleteCluster",
+          "full_name": "google.cloud.dataproc.v1.ClusterController.DeleteCluster",
+          "service": {
+            "short_name": "ClusterController",
+            "full_name": "google.cloud.dataproc.v1.ClusterController"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_ClusterController_GetCluster_sync",
+      "title": "Snippet for the get_cluster call in the ClusterController service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::ClusterController::Client#get_cluster.",
+      "file": "cluster_controller/get_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_cluster",
+        "full_name": "::Google::Cloud::Dataproc::V1::ClusterController::Client#get_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::GetClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataproc::V1::Cluster",
+        "client": {
+          "short_name": "ClusterController::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::ClusterController::Client"
+        },
+        "method": {
+          "short_name": "GetCluster",
+          "full_name": "google.cloud.dataproc.v1.ClusterController.GetCluster",
+          "service": {
+            "short_name": "ClusterController",
+            "full_name": "google.cloud.dataproc.v1.ClusterController"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_ClusterController_ListClusters_sync",
+      "title": "Snippet for the list_clusters call in the ClusterController service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::ClusterController::Client#list_clusters.",
+      "file": "cluster_controller/list_clusters.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_clusters",
+        "full_name": "::Google::Cloud::Dataproc::V1::ClusterController::Client#list_clusters",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::ListClustersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataproc::V1::ListClustersResponse",
+        "client": {
+          "short_name": "ClusterController::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::ClusterController::Client"
+        },
+        "method": {
+          "short_name": "ListClusters",
+          "full_name": "google.cloud.dataproc.v1.ClusterController.ListClusters",
+          "service": {
+            "short_name": "ClusterController",
+            "full_name": "google.cloud.dataproc.v1.ClusterController"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_ClusterController_DiagnoseCluster_sync",
+      "title": "Snippet for the diagnose_cluster call in the ClusterController service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::ClusterController::Client#diagnose_cluster.",
+      "file": "cluster_controller/diagnose_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "diagnose_cluster",
+        "full_name": "::Google::Cloud::Dataproc::V1::ClusterController::Client#diagnose_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::DiagnoseClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ClusterController::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::ClusterController::Client"
+        },
+        "method": {
+          "short_name": "DiagnoseCluster",
+          "full_name": "google.cloud.dataproc.v1.ClusterController.DiagnoseCluster",
+          "service": {
+            "short_name": "ClusterController",
+            "full_name": "google.cloud.dataproc.v1.ClusterController"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_JobController_SubmitJob_sync",
+      "title": "Snippet for the submit_job call in the JobController service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::JobController::Client#submit_job.",
+      "file": "job_controller/submit_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "submit_job",
+        "full_name": "::Google::Cloud::Dataproc::V1::JobController::Client#submit_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::SubmitJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataproc::V1::Job",
+        "client": {
+          "short_name": "JobController::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::JobController::Client"
+        },
+        "method": {
+          "short_name": "SubmitJob",
+          "full_name": "google.cloud.dataproc.v1.JobController.SubmitJob",
+          "service": {
+            "short_name": "JobController",
+            "full_name": "google.cloud.dataproc.v1.JobController"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_JobController_SubmitJobAsOperation_sync",
+      "title": "Snippet for the submit_job_as_operation call in the JobController service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::JobController::Client#submit_job_as_operation.",
+      "file": "job_controller/submit_job_as_operation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "submit_job_as_operation",
+        "full_name": "::Google::Cloud::Dataproc::V1::JobController::Client#submit_job_as_operation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::SubmitJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "JobController::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::JobController::Client"
+        },
+        "method": {
+          "short_name": "SubmitJobAsOperation",
+          "full_name": "google.cloud.dataproc.v1.JobController.SubmitJobAsOperation",
+          "service": {
+            "short_name": "JobController",
+            "full_name": "google.cloud.dataproc.v1.JobController"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_JobController_GetJob_sync",
+      "title": "Snippet for the get_job call in the JobController service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::JobController::Client#get_job.",
+      "file": "job_controller/get_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_job",
+        "full_name": "::Google::Cloud::Dataproc::V1::JobController::Client#get_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::GetJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataproc::V1::Job",
+        "client": {
+          "short_name": "JobController::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::JobController::Client"
+        },
+        "method": {
+          "short_name": "GetJob",
+          "full_name": "google.cloud.dataproc.v1.JobController.GetJob",
+          "service": {
+            "short_name": "JobController",
+            "full_name": "google.cloud.dataproc.v1.JobController"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_JobController_ListJobs_sync",
+      "title": "Snippet for the list_jobs call in the JobController service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::JobController::Client#list_jobs.",
+      "file": "job_controller/list_jobs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_jobs",
+        "full_name": "::Google::Cloud::Dataproc::V1::JobController::Client#list_jobs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::ListJobsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataproc::V1::ListJobsResponse",
+        "client": {
+          "short_name": "JobController::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::JobController::Client"
+        },
+        "method": {
+          "short_name": "ListJobs",
+          "full_name": "google.cloud.dataproc.v1.JobController.ListJobs",
+          "service": {
+            "short_name": "JobController",
+            "full_name": "google.cloud.dataproc.v1.JobController"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_JobController_UpdateJob_sync",
+      "title": "Snippet for the update_job call in the JobController service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::JobController::Client#update_job.",
+      "file": "job_controller/update_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_job",
+        "full_name": "::Google::Cloud::Dataproc::V1::JobController::Client#update_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::UpdateJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataproc::V1::Job",
+        "client": {
+          "short_name": "JobController::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::JobController::Client"
+        },
+        "method": {
+          "short_name": "UpdateJob",
+          "full_name": "google.cloud.dataproc.v1.JobController.UpdateJob",
+          "service": {
+            "short_name": "JobController",
+            "full_name": "google.cloud.dataproc.v1.JobController"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_JobController_CancelJob_sync",
+      "title": "Snippet for the cancel_job call in the JobController service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::JobController::Client#cancel_job.",
+      "file": "job_controller/cancel_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "cancel_job",
+        "full_name": "::Google::Cloud::Dataproc::V1::JobController::Client#cancel_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::CancelJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataproc::V1::Job",
+        "client": {
+          "short_name": "JobController::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::JobController::Client"
+        },
+        "method": {
+          "short_name": "CancelJob",
+          "full_name": "google.cloud.dataproc.v1.JobController.CancelJob",
+          "service": {
+            "short_name": "JobController",
+            "full_name": "google.cloud.dataproc.v1.JobController"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_JobController_DeleteJob_sync",
+      "title": "Snippet for the delete_job call in the JobController service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::JobController::Client#delete_job.",
+      "file": "job_controller/delete_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_job",
+        "full_name": "::Google::Cloud::Dataproc::V1::JobController::Client#delete_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::DeleteJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "JobController::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::JobController::Client"
+        },
+        "method": {
+          "short_name": "DeleteJob",
+          "full_name": "google.cloud.dataproc.v1.JobController.DeleteJob",
+          "service": {
+            "short_name": "JobController",
+            "full_name": "google.cloud.dataproc.v1.JobController"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_NodeGroupController_CreateNodeGroup_sync",
+      "title": "Snippet for the create_node_group call in the NodeGroupController service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::NodeGroupController::Client#create_node_group.",
+      "file": "node_group_controller/create_node_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_node_group",
+        "full_name": "::Google::Cloud::Dataproc::V1::NodeGroupController::Client#create_node_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::CreateNodeGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NodeGroupController::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::NodeGroupController::Client"
+        },
+        "method": {
+          "short_name": "CreateNodeGroup",
+          "full_name": "google.cloud.dataproc.v1.NodeGroupController.CreateNodeGroup",
+          "service": {
+            "short_name": "NodeGroupController",
+            "full_name": "google.cloud.dataproc.v1.NodeGroupController"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_NodeGroupController_ResizeNodeGroup_sync",
+      "title": "Snippet for the resize_node_group call in the NodeGroupController service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::NodeGroupController::Client#resize_node_group.",
+      "file": "node_group_controller/resize_node_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "resize_node_group",
+        "full_name": "::Google::Cloud::Dataproc::V1::NodeGroupController::Client#resize_node_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::ResizeNodeGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NodeGroupController::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::NodeGroupController::Client"
+        },
+        "method": {
+          "short_name": "ResizeNodeGroup",
+          "full_name": "google.cloud.dataproc.v1.NodeGroupController.ResizeNodeGroup",
+          "service": {
+            "short_name": "NodeGroupController",
+            "full_name": "google.cloud.dataproc.v1.NodeGroupController"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_NodeGroupController_GetNodeGroup_sync",
+      "title": "Snippet for the get_node_group call in the NodeGroupController service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::NodeGroupController::Client#get_node_group.",
+      "file": "node_group_controller/get_node_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_node_group",
+        "full_name": "::Google::Cloud::Dataproc::V1::NodeGroupController::Client#get_node_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::GetNodeGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataproc::V1::NodeGroup",
+        "client": {
+          "short_name": "NodeGroupController::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::NodeGroupController::Client"
+        },
+        "method": {
+          "short_name": "GetNodeGroup",
+          "full_name": "google.cloud.dataproc.v1.NodeGroupController.GetNodeGroup",
+          "service": {
+            "short_name": "NodeGroupController",
+            "full_name": "google.cloud.dataproc.v1.NodeGroupController"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_WorkflowTemplateService_CreateWorkflowTemplate_sync",
+      "title": "Snippet for the create_workflow_template call in the WorkflowTemplateService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#create_workflow_template.",
+      "file": "workflow_template_service/create_workflow_template.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_workflow_template",
+        "full_name": "::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#create_workflow_template",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::CreateWorkflowTemplateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataproc::V1::WorkflowTemplate",
+        "client": {
+          "short_name": "WorkflowTemplateService::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client"
+        },
+        "method": {
+          "short_name": "CreateWorkflowTemplate",
+          "full_name": "google.cloud.dataproc.v1.WorkflowTemplateService.CreateWorkflowTemplate",
+          "service": {
+            "short_name": "WorkflowTemplateService",
+            "full_name": "google.cloud.dataproc.v1.WorkflowTemplateService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_WorkflowTemplateService_GetWorkflowTemplate_sync",
+      "title": "Snippet for the get_workflow_template call in the WorkflowTemplateService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#get_workflow_template.",
+      "file": "workflow_template_service/get_workflow_template.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_workflow_template",
+        "full_name": "::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#get_workflow_template",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::GetWorkflowTemplateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataproc::V1::WorkflowTemplate",
+        "client": {
+          "short_name": "WorkflowTemplateService::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client"
+        },
+        "method": {
+          "short_name": "GetWorkflowTemplate",
+          "full_name": "google.cloud.dataproc.v1.WorkflowTemplateService.GetWorkflowTemplate",
+          "service": {
+            "short_name": "WorkflowTemplateService",
+            "full_name": "google.cloud.dataproc.v1.WorkflowTemplateService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_WorkflowTemplateService_InstantiateWorkflowTemplate_sync",
+      "title": "Snippet for the instantiate_workflow_template call in the WorkflowTemplateService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#instantiate_workflow_template.",
+      "file": "workflow_template_service/instantiate_workflow_template.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "instantiate_workflow_template",
+        "full_name": "::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#instantiate_workflow_template",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::InstantiateWorkflowTemplateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "WorkflowTemplateService::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client"
+        },
+        "method": {
+          "short_name": "InstantiateWorkflowTemplate",
+          "full_name": "google.cloud.dataproc.v1.WorkflowTemplateService.InstantiateWorkflowTemplate",
+          "service": {
+            "short_name": "WorkflowTemplateService",
+            "full_name": "google.cloud.dataproc.v1.WorkflowTemplateService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_WorkflowTemplateService_InstantiateInlineWorkflowTemplate_sync",
+      "title": "Snippet for the instantiate_inline_workflow_template call in the WorkflowTemplateService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#instantiate_inline_workflow_template.",
+      "file": "workflow_template_service/instantiate_inline_workflow_template.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "instantiate_inline_workflow_template",
+        "full_name": "::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#instantiate_inline_workflow_template",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::InstantiateInlineWorkflowTemplateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "WorkflowTemplateService::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client"
+        },
+        "method": {
+          "short_name": "InstantiateInlineWorkflowTemplate",
+          "full_name": "google.cloud.dataproc.v1.WorkflowTemplateService.InstantiateInlineWorkflowTemplate",
+          "service": {
+            "short_name": "WorkflowTemplateService",
+            "full_name": "google.cloud.dataproc.v1.WorkflowTemplateService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_WorkflowTemplateService_UpdateWorkflowTemplate_sync",
+      "title": "Snippet for the update_workflow_template call in the WorkflowTemplateService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#update_workflow_template.",
+      "file": "workflow_template_service/update_workflow_template.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_workflow_template",
+        "full_name": "::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#update_workflow_template",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::UpdateWorkflowTemplateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataproc::V1::WorkflowTemplate",
+        "client": {
+          "short_name": "WorkflowTemplateService::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client"
+        },
+        "method": {
+          "short_name": "UpdateWorkflowTemplate",
+          "full_name": "google.cloud.dataproc.v1.WorkflowTemplateService.UpdateWorkflowTemplate",
+          "service": {
+            "short_name": "WorkflowTemplateService",
+            "full_name": "google.cloud.dataproc.v1.WorkflowTemplateService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_WorkflowTemplateService_ListWorkflowTemplates_sync",
+      "title": "Snippet for the list_workflow_templates call in the WorkflowTemplateService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#list_workflow_templates.",
+      "file": "workflow_template_service/list_workflow_templates.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_workflow_templates",
+        "full_name": "::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#list_workflow_templates",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::ListWorkflowTemplatesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataproc::V1::ListWorkflowTemplatesResponse",
+        "client": {
+          "short_name": "WorkflowTemplateService::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client"
+        },
+        "method": {
+          "short_name": "ListWorkflowTemplates",
+          "full_name": "google.cloud.dataproc.v1.WorkflowTemplateService.ListWorkflowTemplates",
+          "service": {
+            "short_name": "WorkflowTemplateService",
+            "full_name": "google.cloud.dataproc.v1.WorkflowTemplateService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_WorkflowTemplateService_DeleteWorkflowTemplate_sync",
+      "title": "Snippet for the delete_workflow_template call in the WorkflowTemplateService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#delete_workflow_template.",
+      "file": "workflow_template_service/delete_workflow_template.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_workflow_template",
+        "full_name": "::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#delete_workflow_template",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::DeleteWorkflowTemplateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "WorkflowTemplateService::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client"
+        },
+        "method": {
+          "short_name": "DeleteWorkflowTemplate",
+          "full_name": "google.cloud.dataproc.v1.WorkflowTemplateService.DeleteWorkflowTemplate",
+          "service": {
+            "short_name": "WorkflowTemplateService",
+            "full_name": "google.cloud.dataproc.v1.WorkflowTemplateService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
