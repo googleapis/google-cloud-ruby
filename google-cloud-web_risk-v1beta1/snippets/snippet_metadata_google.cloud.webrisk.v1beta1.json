@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-web_risk-v1beta1",
-    "version": "0.9.0",
+    "version": "0.9.1",
     "language": "RUBY",
     "apis": [
       {
