@@ -23,8 +23,18 @@ require "gapic/grpc"
 require "gapic/rest"
 
 class Google::Apps::Meet::ClientConstructionMinitest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_spaces_service_grpc
-    Gapic::ServiceStub.stub :new, :stub do
+    Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Apps::Meet.spaces_service transport: :grpc do |config|
         config.credentials = grpc_channel
@@ -34,7 +44,7 @@ class Google::Apps::Meet::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_spaces_service_rest
-    Gapic::Rest::ClientStub.stub :new, :stub do
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Apps::Meet.spaces_service transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
@@ -43,7 +53,7 @@ class Google::Apps::Meet::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_conference_records_service_grpc
-    Gapic::ServiceStub.stub :new, :stub do
+    Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Apps::Meet.conference_records_service transport: :grpc do |config|
         config.credentials = grpc_channel
@@ -53,7 +63,7 @@ class Google::Apps::Meet::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_conference_records_service_rest
-    Gapic::Rest::ClientStub.stub :new, :stub do
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Apps::Meet.conference_records_service transport: :rest do |config|
         config.credentials = :dummy_credentials
       end

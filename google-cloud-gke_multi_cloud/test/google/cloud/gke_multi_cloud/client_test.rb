@@ -22,8 +22,18 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Cloud::GkeMultiCloud::ClientConstructionMinitest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_attached_clusters_grpc
-    Gapic::ServiceStub.stub :new, :stub do
+    Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::GkeMultiCloud.attached_clusters do |config|
         config.credentials = grpc_channel
@@ -33,7 +43,7 @@ class Google::Cloud::GkeMultiCloud::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_aws_clusters_grpc
-    Gapic::ServiceStub.stub :new, :stub do
+    Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::GkeMultiCloud.aws_clusters do |config|
         config.credentials = grpc_channel
@@ -43,7 +53,7 @@ class Google::Cloud::GkeMultiCloud::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_azure_clusters_grpc
-    Gapic::ServiceStub.stub :new, :stub do
+    Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::GkeMultiCloud.azure_clusters do |config|
         config.credentials = grpc_channel
