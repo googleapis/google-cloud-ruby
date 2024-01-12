@@ -1,5 +1,0 @@
-source "https://rubygems.org"
-
-gemspec
-
-gem "google-cloud-managed_identities-v1", path: "../google-cloud-managed_identities-v1"
