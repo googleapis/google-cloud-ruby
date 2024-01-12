@@ -53,6 +53,15 @@ module Google
               end
 
               ##
+              # The effective endpoint
+              #
+              # @return [String]
+              #
+              def endpoint
+                @client_stub.endpoint
+              end
+
+              ##
               # Baseline implementation for the create_build REST call
               #
               # @param request_pb [::Google::Cloud::Build::V1::CreateBuildRequest]

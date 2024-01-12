@@ -45,6 +45,14 @@ class ::Google::Cloud::Datastream::V1::Datastream::ClientTest < Minitest::Test
 
       @response
     end
+
+    def endpoint
+      "endpoint.example.com"
+    end
+
+    def universe_domain
+      "example.com"
+    end
   end
 
   def test_list_connection_profiles
@@ -1687,7 +1695,8 @@ class ::Google::Cloud::Datastream::V1::Datastream::ClientTest < Minitest::Test
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
     client = block_config = config = nil
-    Gapic::ServiceStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil, nil
+    Gapic::ServiceStub.stub :new, dummy_stub do
       client = ::Google::Cloud::Datastream::V1::Datastream::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -1705,7 +1714,8 @@ class ::Google::Cloud::Datastream::V1::Datastream::ClientTest < Minitest::Test
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
     client = nil
-    Gapic::ServiceStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil, nil
+    Gapic::ServiceStub.stub :new, dummy_stub do
       client = ::Google::Cloud::Datastream::V1::Datastream::Client.new do |config|
         config.credentials = grpc_channel
       end

@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/bare_metal_solution/v2/bare_metal_solution"
 
 class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_instance_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -37,7 +47,7 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::ClientPathsTest
 
   def test_instance_config_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -49,7 +59,7 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::ClientPathsTest
 
   def test_interconnect_attachment_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -61,7 +71,7 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::ClientPathsTest
 
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -73,7 +83,7 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::ClientPathsTest
 
   def test_lun_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -85,7 +95,7 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::ClientPathsTest
 
   def test_nfs_share_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -97,7 +107,7 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::ClientPathsTest
 
   def test_network_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -109,7 +119,7 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::ClientPathsTest
 
   def test_network_config_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -121,7 +131,7 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::ClientPathsTest
 
   def test_provisioning_config_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -133,7 +143,7 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::ClientPathsTest
 
   def test_server_network_template_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -145,7 +155,7 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::ClientPathsTest
 
   def test_ssh_key_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -157,7 +167,7 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::ClientPathsTest
 
   def test_volume_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -169,7 +179,7 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::ClientPathsTest
 
   def test_volume_config_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -181,7 +191,7 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::ClientPathsTest
 
   def test_volume_snapshot_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new do |config|
         config.credentials = grpc_channel
       end

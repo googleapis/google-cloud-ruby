@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/service_directory/v1beta1/lookup_service"
 
 class ::Google::Cloud::ServiceDirectory::V1beta1::LookupService::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_service_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::ServiceDirectory::V1beta1::LookupService::Client.new do |config|
         config.credentials = grpc_channel
       end

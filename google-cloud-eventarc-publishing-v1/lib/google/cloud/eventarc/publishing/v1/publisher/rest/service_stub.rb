@@ -54,6 +54,15 @@ module Google
                 end
 
                 ##
+                # The effective endpoint
+                #
+                # @return [String]
+                #
+                def endpoint
+                  @client_stub.endpoint
+                end
+
+                ##
                 # Baseline implementation for the publish_channel_connection_events REST call
                 #
                 # @param request_pb [::Google::Cloud::Eventarc::Publishing::V1::PublishChannelConnectionEventsRequest]

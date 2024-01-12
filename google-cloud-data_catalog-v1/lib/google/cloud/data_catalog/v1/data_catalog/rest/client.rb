@@ -157,19 +157,19 @@ module Google
                   config.universe_domain = @config.universe_domain
                 end
 
-                @iam_policy_client = Google::Iam::V1::IAMPolicy::Rest::Client.new do |config|
-                  config.credentials = credentials
-                  config.quota_project = @quota_project_id
-                  config.endpoint = @config.endpoint
-                  config.universe_domain = @config.universe_domain
-                end
-
                 @data_catalog_stub = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ServiceStub.new(
                   endpoint: @config.endpoint,
                   endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
                   universe_domain: @config.universe_domain,
                   credentials: credentials
                 )
+
+                @iam_policy_client = Google::Iam::V1::IAMPolicy::Rest::Client.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @data_catalog_stub.endpoint
+                  config.universe_domain = @data_catalog_stub.universe_domain
+                end
               end
 
               ##

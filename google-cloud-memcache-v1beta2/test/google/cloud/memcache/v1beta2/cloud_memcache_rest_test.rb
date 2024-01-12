@@ -60,6 +60,14 @@ class ::Google::Cloud::Memcache::V1beta2::CloudMemcache::Rest::ClientTest < Mini
 
       @response
     end
+
+    def endpoint
+      "endpoint.example.com"
+    end
+
+    def universe_domain
+      "example.com"
+    end
   end
 
   def test_list_instances
@@ -567,7 +575,8 @@ class ::Google::Cloud::Memcache::V1beta2::CloudMemcache::Rest::ClientTest < Mini
     credentials_token = :dummy_value
 
     client = block_config = config = nil
-    Gapic::Rest::ClientStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil
+    Gapic::Rest::ClientStub.stub :new, dummy_stub do
       client = ::Google::Cloud::Memcache::V1beta2::CloudMemcache::Rest::Client.new do |config|
         config.credentials = credentials_token
       end

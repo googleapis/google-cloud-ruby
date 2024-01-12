@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/talent/v4/event_service"
 
 class ::Google::Cloud::Talent::V4::EventService::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_tenant_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Talent::V4::EventService::Client.new do |config|
         config.credentials = grpc_channel
       end

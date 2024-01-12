@@ -158,20 +158,20 @@ module Google
                     config.universe_domain = @config.universe_domain
                   end
 
-                  @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
-                    config.credentials = credentials
-                    config.quota_project = @quota_project_id
-                    config.endpoint = @config.endpoint
-                    config.universe_domain = @config.universe_domain
-                    config.bindings_override = @config.bindings_override
-                  end
-
                   @test_cases_stub = ::Google::Cloud::Dialogflow::CX::V3::TestCases::Rest::ServiceStub.new(
                     endpoint: @config.endpoint,
                     endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
                     universe_domain: @config.universe_domain,
                     credentials: credentials
                   )
+
+                  @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
+                    config.credentials = credentials
+                    config.quota_project = @quota_project_id
+                    config.endpoint = @test_cases_stub.endpoint
+                    config.universe_domain = @test_cases_stub.universe_domain
+                    config.bindings_override = @config.bindings_override
+                  end
                 end
 
                 ##

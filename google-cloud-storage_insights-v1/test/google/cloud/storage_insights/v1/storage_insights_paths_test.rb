@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/storage_insights/v1/storage_insights"
 
 class ::Google::Cloud::StorageInsights::V1::StorageInsights::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::StorageInsights::V1::StorageInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -37,7 +47,7 @@ class ::Google::Cloud::StorageInsights::V1::StorageInsights::ClientPathsTest < M
 
   def test_report_config_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::StorageInsights::V1::StorageInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -49,7 +59,7 @@ class ::Google::Cloud::StorageInsights::V1::StorageInsights::ClientPathsTest < M
 
   def test_report_detail_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::StorageInsights::V1::StorageInsights::Client.new do |config|
         config.credentials = grpc_channel
       end

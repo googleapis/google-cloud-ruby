@@ -60,6 +60,14 @@ class ::Google::Cloud::Security::PublicCA::V1beta1::PublicCertificateAuthoritySe
 
       @response
     end
+
+    def endpoint
+      "endpoint.example.com"
+    end
+
+    def universe_domain
+      "example.com"
+    end
   end
 
   def test_create_external_account_key
@@ -121,7 +129,8 @@ class ::Google::Cloud::Security::PublicCA::V1beta1::PublicCertificateAuthoritySe
     credentials_token = :dummy_value
 
     client = block_config = config = nil
-    Gapic::Rest::ClientStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil
+    Gapic::Rest::ClientStub.stub :new, dummy_stub do
       client = ::Google::Cloud::Security::PublicCA::V1beta1::PublicCertificateAuthorityService::Rest::Client.new do |config|
         config.credentials = credentials_token
       end

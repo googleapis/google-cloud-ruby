@@ -54,6 +54,15 @@ module Google
                 end
 
                 ##
+                # The effective endpoint
+                #
+                # @return [String]
+                #
+                def endpoint
+                  @client_stub.endpoint
+                end
+
+                ##
                 # Baseline implementation for the process_open_lineage_run_event REST call
                 #
                 # @param request_pb [::Google::Cloud::DataCatalog::Lineage::V1::ProcessOpenLineageRunEventRequest]

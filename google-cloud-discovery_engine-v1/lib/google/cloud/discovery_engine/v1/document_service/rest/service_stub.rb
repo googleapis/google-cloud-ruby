@@ -53,6 +53,15 @@ module Google
               end
 
               ##
+              # The effective endpoint
+              #
+              # @return [String]
+              #
+              def endpoint
+                @client_stub.endpoint
+              end
+
+              ##
               # Baseline implementation for the get_document REST call
               #
               # @param request_pb [::Google::Cloud::DiscoveryEngine::V1::GetDocumentRequest]

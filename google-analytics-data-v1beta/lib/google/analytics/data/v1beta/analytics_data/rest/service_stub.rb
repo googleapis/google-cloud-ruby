@@ -53,6 +53,15 @@ module Google
               end
 
               ##
+              # The effective endpoint
+              #
+              # @return [String]
+              #
+              def endpoint
+                @client_stub.endpoint
+              end
+
+              ##
               # Baseline implementation for the run_report REST call
               #
               # @param request_pb [::Google::Analytics::Data::V1beta::RunReportRequest]

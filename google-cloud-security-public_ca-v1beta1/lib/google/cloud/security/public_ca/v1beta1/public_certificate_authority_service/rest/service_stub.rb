@@ -54,6 +54,15 @@ module Google
                 end
 
                 ##
+                # The effective endpoint
+                #
+                # @return [String]
+                #
+                def endpoint
+                  @client_stub.endpoint
+                end
+
+                ##
                 # Baseline implementation for the create_external_account_key REST call
                 #
                 # @param request_pb [::Google::Cloud::Security::PublicCA::V1beta1::CreateExternalAccountKeyRequest]

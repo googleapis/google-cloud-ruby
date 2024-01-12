@@ -54,6 +54,15 @@ module Google
                 end
 
                 ##
+                # The effective endpoint
+                #
+                # @return [String]
+                #
+                def endpoint
+                  @client_stub.endpoint
+                end
+
+                ##
                 # Baseline implementation for the search REST call
                 #
                 # @param request_pb [::Google::Shopping::Merchant::Reports::V1beta::SearchRequest]

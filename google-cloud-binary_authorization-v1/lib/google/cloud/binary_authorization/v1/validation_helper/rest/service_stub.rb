@@ -53,6 +53,15 @@ module Google
               end
 
               ##
+              # The effective endpoint
+              #
+              # @return [String]
+              #
+              def endpoint
+                @client_stub.endpoint
+              end
+
+              ##
               # Baseline implementation for the validate_attestation_occurrence REST call
               #
               # @param request_pb [::Google::Cloud::BinaryAuthorization::V1::ValidateAttestationOccurrenceRequest]

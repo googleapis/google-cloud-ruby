@@ -54,6 +54,15 @@ module Google
                 end
 
                 ##
+                # The effective endpoint
+                #
+                # @return [String]
+                #
+                def endpoint
+                  @client_stub.endpoint
+                end
+
+                ##
                 # Baseline implementation for the create_channel REST call
                 #
                 # @param request_pb [::Google::Cloud::Video::LiveStream::V1::CreateChannelRequest]

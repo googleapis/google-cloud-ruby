@@ -186,13 +186,6 @@ module Google
                 config.universe_domain = @config.universe_domain
               end
 
-              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
-                config.credentials = credentials
-                config.quota_project = @quota_project_id
-                config.endpoint = @config.endpoint
-                config.universe_domain = @config.universe_domain
-              end
-
               @cloud_memcache_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::Memcache::V1beta2::CloudMemcache::Stub,
                 credentials: credentials,
@@ -203,6 +196,13 @@ module Google
                 interceptors: @config.interceptors,
                 channel_pool_config: @config.channel_pool
               )
+
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @cloud_memcache_stub.endpoint
+                config.universe_domain = @cloud_memcache_stub.universe_domain
+              end
             end
 
             ##

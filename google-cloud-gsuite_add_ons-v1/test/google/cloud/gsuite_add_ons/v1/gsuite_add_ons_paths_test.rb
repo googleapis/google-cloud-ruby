@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/gsuite_add_ons/v1/gsuite_add_ons"
 
 class ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_authorization_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -37,7 +47,7 @@ class ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::ClientPathsTest < Minites
 
   def test_deployment_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -49,7 +59,7 @@ class ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::ClientPathsTest < Minites
 
   def test_install_status_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -61,7 +71,7 @@ class ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::ClientPathsTest < Minites
 
   def test_project_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client.new do |config|
         config.credentials = grpc_channel
       end

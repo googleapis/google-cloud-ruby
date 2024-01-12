@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/shell/v1/cloud_shell_service"
 
 class ::Google::Cloud::Shell::V1::CloudShellService::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_environment_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Shell::V1::CloudShellService::Client.new do |config|
         config.credentials = grpc_channel
       end

@@ -149,19 +149,19 @@ module Google
                 @quota_project_id = @config.quota_project
                 @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
-                @iam_policy_client = Google::Iam::V1::IAMPolicy::Rest::Client.new do |config|
-                  config.credentials = credentials
-                  config.quota_project = @quota_project_id
-                  config.endpoint = @config.endpoint
-                  config.universe_domain = @config.universe_domain
-                end
-
                 @policy_tag_manager_serialization_stub = ::Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::Rest::ServiceStub.new(
                   endpoint: @config.endpoint,
                   endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
                   universe_domain: @config.universe_domain,
                   credentials: credentials
                 )
+
+                @iam_policy_client = Google::Iam::V1::IAMPolicy::Rest::Client.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @policy_tag_manager_serialization_stub.endpoint
+                  config.universe_domain = @policy_tag_manager_serialization_stub.universe_domain
+                end
               end
 
               ##

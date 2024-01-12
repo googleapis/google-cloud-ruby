@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/text_to_speech/v1beta1/text_to_speech"
 
 class ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_model_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Client.new do |config|
         config.credentials = grpc_channel
       end

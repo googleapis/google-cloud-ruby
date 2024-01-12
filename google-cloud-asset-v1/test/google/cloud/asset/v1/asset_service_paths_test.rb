@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/asset/v1/asset_service"
 
 class ::Google::Cloud::Asset::V1::AssetService::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_feed_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Asset::V1::AssetService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -43,7 +53,7 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientPathsTest < Minitest::Test
 
   def test_folder_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Asset::V1::AssetService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -55,7 +65,7 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientPathsTest < Minitest::Test
 
   def test_organization_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Asset::V1::AssetService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -67,7 +77,7 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientPathsTest < Minitest::Test
 
   def test_project_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Asset::V1::AssetService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -79,7 +89,7 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientPathsTest < Minitest::Test
 
   def test_saved_query_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Asset::V1::AssetService::Client.new do |config|
         config.credentials = grpc_channel
       end

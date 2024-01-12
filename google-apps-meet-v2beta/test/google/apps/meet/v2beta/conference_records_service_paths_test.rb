@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/apps/meet/v2beta/conference_records_service"
 
 class ::Google::Apps::Meet::V2beta::ConferenceRecordsService::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_conference_record_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -37,7 +47,7 @@ class ::Google::Apps::Meet::V2beta::ConferenceRecordsService::ClientPathsTest < 
 
   def test_participant_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -49,7 +59,7 @@ class ::Google::Apps::Meet::V2beta::ConferenceRecordsService::ClientPathsTest < 
 
   def test_participant_session_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -61,7 +71,7 @@ class ::Google::Apps::Meet::V2beta::ConferenceRecordsService::ClientPathsTest < 
 
   def test_recording_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -73,7 +83,7 @@ class ::Google::Apps::Meet::V2beta::ConferenceRecordsService::ClientPathsTest < 
 
   def test_transcript_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -85,7 +95,7 @@ class ::Google::Apps::Meet::V2beta::ConferenceRecordsService::ClientPathsTest < 
 
   def test_transcript_entry_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Client.new do |config|
         config.credentials = grpc_channel
       end

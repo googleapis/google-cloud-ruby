@@ -181,20 +181,20 @@ module Google
                   config.universe_domain = @config.universe_domain
                 end
 
-                @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
-                  config.credentials = credentials
-                  config.quota_project = @quota_project_id
-                  config.endpoint = @config.endpoint
-                  config.universe_domain = @config.universe_domain
-                  config.bindings_override = @config.bindings_override
-                end
-
                 @cloud_memcache_stub = ::Google::Cloud::Memcache::V1::CloudMemcache::Rest::ServiceStub.new(
                   endpoint: @config.endpoint,
                   endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
                   universe_domain: @config.universe_domain,
                   credentials: credentials
                 )
+
+                @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @cloud_memcache_stub.endpoint
+                  config.universe_domain = @cloud_memcache_stub.universe_domain
+                  config.bindings_override = @config.bindings_override
+                end
               end
 
               ##

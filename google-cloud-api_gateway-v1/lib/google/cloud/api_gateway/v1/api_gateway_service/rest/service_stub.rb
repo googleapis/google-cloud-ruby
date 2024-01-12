@@ -53,6 +53,15 @@ module Google
               end
 
               ##
+              # The effective endpoint
+              #
+              # @return [String]
+              #
+              def endpoint
+                @client_stub.endpoint
+              end
+
+              ##
               # Baseline implementation for the list_gateways REST call
               #
               # @param request_pb [::Google::Cloud::ApiGateway::V1::ListGatewaysRequest]

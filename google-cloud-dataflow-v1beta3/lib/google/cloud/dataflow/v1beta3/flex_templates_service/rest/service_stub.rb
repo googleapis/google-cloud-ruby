@@ -53,6 +53,15 @@ module Google
               end
 
               ##
+              # The effective endpoint
+              #
+              # @return [String]
+              #
+              def endpoint
+                @client_stub.endpoint
+              end
+
+              ##
               # Baseline implementation for the launch_flex_template REST call
               #
               # @param request_pb [::Google::Cloud::Dataflow::V1beta3::LaunchFlexTemplateRequest]

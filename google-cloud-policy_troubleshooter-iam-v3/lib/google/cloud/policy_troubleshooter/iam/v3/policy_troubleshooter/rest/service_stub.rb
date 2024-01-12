@@ -54,6 +54,15 @@ module Google
                 end
 
                 ##
+                # The effective endpoint
+                #
+                # @return [String]
+                #
+                def endpoint
+                  @client_stub.endpoint
+                end
+
+                ##
                 # Baseline implementation for the troubleshoot_iam_policy REST call
                 #
                 # @param request_pb [::Google::Cloud::PolicyTroubleshooter::Iam::V3::TroubleshootIamPolicyRequest]

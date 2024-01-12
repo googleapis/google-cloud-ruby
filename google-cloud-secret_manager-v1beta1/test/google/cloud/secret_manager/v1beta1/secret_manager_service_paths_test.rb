@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/secret_manager/v1beta1/secret_manager_service"
 
 class ::Google::Cloud::SecretManager::V1beta1::SecretManagerService::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_project_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::SecretManager::V1beta1::SecretManagerService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -37,7 +47,7 @@ class ::Google::Cloud::SecretManager::V1beta1::SecretManagerService::ClientPaths
 
   def test_secret_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::SecretManager::V1beta1::SecretManagerService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -49,7 +59,7 @@ class ::Google::Cloud::SecretManager::V1beta1::SecretManagerService::ClientPaths
 
   def test_secret_version_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::SecretManager::V1beta1::SecretManagerService::Client.new do |config|
         config.credentials = grpc_channel
       end

@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/area120/tables/v1alpha1/tables_service"
 
 class ::Google::Area120::Tables::V1alpha1::TablesService::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_row_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -37,7 +47,7 @@ class ::Google::Area120::Tables::V1alpha1::TablesService::ClientPathsTest < Mini
 
   def test_table_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -49,7 +59,7 @@ class ::Google::Area120::Tables::V1alpha1::TablesService::ClientPathsTest < Mini
 
   def test_workspace_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new do |config|
         config.credentials = grpc_channel
       end

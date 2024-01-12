@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/beyond_corp/client_connector_services/v1/client_connector_services_service"
 
 class ::Google::Cloud::BeyondCorp::ClientConnectorServices::V1::ClientConnectorServicesService::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_client_connector_service_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::BeyondCorp::ClientConnectorServices::V1::ClientConnectorServicesService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -37,7 +47,7 @@ class ::Google::Cloud::BeyondCorp::ClientConnectorServices::V1::ClientConnectorS
 
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::BeyondCorp::ClientConnectorServices::V1::ClientConnectorServicesService::Client.new do |config|
         config.credentials = grpc_channel
       end

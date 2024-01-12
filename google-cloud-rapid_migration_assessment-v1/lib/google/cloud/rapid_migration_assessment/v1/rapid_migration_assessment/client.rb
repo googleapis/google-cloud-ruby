@@ -183,13 +183,6 @@ module Google
                 config.universe_domain = @config.universe_domain
               end
 
-              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
-                config.credentials = credentials
-                config.quota_project = @quota_project_id
-                config.endpoint = @config.endpoint
-                config.universe_domain = @config.universe_domain
-              end
-
               @rapid_migration_assessment_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::Stub,
                 credentials: credentials,
@@ -200,6 +193,13 @@ module Google
                 interceptors: @config.interceptors,
                 channel_pool_config: @config.channel_pool
               )
+
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @rapid_migration_assessment_stub.endpoint
+                config.universe_domain = @rapid_migration_assessment_stub.universe_domain
+              end
             end
 
             ##

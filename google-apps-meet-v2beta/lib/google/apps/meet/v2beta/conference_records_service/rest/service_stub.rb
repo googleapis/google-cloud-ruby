@@ -53,6 +53,15 @@ module Google
               end
 
               ##
+              # The effective endpoint
+              #
+              # @return [String]
+              #
+              def endpoint
+                @client_stub.endpoint
+              end
+
+              ##
               # Baseline implementation for the get_conference_record REST call
               #
               # @param request_pb [::Google::Apps::Meet::V2beta::GetConferenceRecordRequest]

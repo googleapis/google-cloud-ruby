@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/iap/v1/identity_aware_proxy_admin_service"
 
 class ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_tunnel_dest_group_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -37,7 +47,7 @@ class ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::ClientPathsTest 
 
   def test_tunnel_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end

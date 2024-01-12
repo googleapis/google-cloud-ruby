@@ -53,6 +53,15 @@ module Google
               end
 
               ##
+              # The effective endpoint
+              #
+              # @return [String]
+              #
+              def endpoint
+                @client_stub.endpoint
+              end
+
+              ##
               # Baseline implementation for the synthesize_long_audio REST call
               #
               # @param request_pb [::Google::Cloud::TextToSpeech::V1beta1::SynthesizeLongAudioRequest]

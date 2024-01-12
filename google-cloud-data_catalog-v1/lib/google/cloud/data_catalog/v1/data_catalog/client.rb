@@ -160,13 +160,6 @@ module Google
                 config.universe_domain = @config.universe_domain
               end
 
-              @iam_policy_client = Google::Iam::V1::IAMPolicy::Client.new do |config|
-                config.credentials = credentials
-                config.quota_project = @quota_project_id
-                config.endpoint = @config.endpoint
-                config.universe_domain = @config.universe_domain
-              end
-
               @data_catalog_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::DataCatalog::V1::DataCatalog::Stub,
                 credentials: credentials,
@@ -177,6 +170,13 @@ module Google
                 interceptors: @config.interceptors,
                 channel_pool_config: @config.channel_pool
               )
+
+              @iam_policy_client = Google::Iam::V1::IAMPolicy::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @data_catalog_stub.endpoint
+                config.universe_domain = @data_catalog_stub.universe_domain
+              end
             end
 
             ##

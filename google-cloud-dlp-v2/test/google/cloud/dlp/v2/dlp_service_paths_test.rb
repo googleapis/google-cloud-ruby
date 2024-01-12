@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/dlp/v2/dlp_service"
 
 class ::Google::Cloud::Dlp::V2::DlpService::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_deidentify_template_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Dlp::V2::DlpService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -46,7 +56,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientPathsTest < Minitest::Test
 
   def test_discovery_config_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Dlp::V2::DlpService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -58,7 +68,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientPathsTest < Minitest::Test
 
   def test_dlp_job_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Dlp::V2::DlpService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -73,7 +83,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientPathsTest < Minitest::Test
 
   def test_inspect_template_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Dlp::V2::DlpService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -94,7 +104,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientPathsTest < Minitest::Test
 
   def test_job_trigger_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Dlp::V2::DlpService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -109,7 +119,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientPathsTest < Minitest::Test
 
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Dlp::V2::DlpService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -121,7 +131,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientPathsTest < Minitest::Test
 
   def test_organization_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Dlp::V2::DlpService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -133,7 +143,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientPathsTest < Minitest::Test
 
   def test_organization_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Dlp::V2::DlpService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -145,7 +155,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientPathsTest < Minitest::Test
 
   def test_project_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Dlp::V2::DlpService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -157,7 +167,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientPathsTest < Minitest::Test
 
   def test_stored_info_type_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Dlp::V2::DlpService::Client.new do |config|
         config.credentials = grpc_channel
       end

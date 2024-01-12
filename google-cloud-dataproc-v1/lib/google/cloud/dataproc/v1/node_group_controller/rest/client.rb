@@ -152,20 +152,20 @@ module Google
                   config.universe_domain = @config.universe_domain
                 end
 
-                @iam_policy_client = Google::Iam::V1::IAMPolicy::Rest::Client.new do |config|
-                  config.credentials = credentials
-                  config.quota_project = @quota_project_id
-                  config.endpoint = @config.endpoint
-                  config.universe_domain = @config.universe_domain
-                  config.bindings_override = @config.bindings_override
-                end
-
                 @node_group_controller_stub = ::Google::Cloud::Dataproc::V1::NodeGroupController::Rest::ServiceStub.new(
                   endpoint: @config.endpoint,
                   endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
                   universe_domain: @config.universe_domain,
                   credentials: credentials
                 )
+
+                @iam_policy_client = Google::Iam::V1::IAMPolicy::Rest::Client.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @node_group_controller_stub.endpoint
+                  config.universe_domain = @node_group_controller_stub.universe_domain
+                  config.bindings_override = @config.bindings_override
+                end
               end
 
               ##

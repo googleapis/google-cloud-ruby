@@ -54,6 +54,15 @@ module Google
                 end
 
                 ##
+                # The effective endpoint
+                #
+                # @return [String]
+                #
+                def endpoint
+                  @client_stub.endpoint
+                end
+
+                ##
                 # Baseline implementation for the list_regional_inventories REST call
                 #
                 # @param request_pb [::Google::Shopping::Merchant::Inventories::V1beta::ListRegionalInventoriesRequest]

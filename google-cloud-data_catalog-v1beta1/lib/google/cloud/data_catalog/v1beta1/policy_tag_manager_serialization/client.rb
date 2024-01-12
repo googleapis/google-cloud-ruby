@@ -150,13 +150,6 @@ module Google
               @quota_project_id = @config.quota_project
               @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
-              @iam_policy_client = Google::Iam::V1::IAMPolicy::Client.new do |config|
-                config.credentials = credentials
-                config.quota_project = @quota_project_id
-                config.endpoint = @config.endpoint
-                config.universe_domain = @config.universe_domain
-              end
-
               @policy_tag_manager_serialization_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::DataCatalog::V1beta1::PolicyTagManagerSerialization::Stub,
                 credentials: credentials,
@@ -167,6 +160,13 @@ module Google
                 interceptors: @config.interceptors,
                 channel_pool_config: @config.channel_pool
               )
+
+              @iam_policy_client = Google::Iam::V1::IAMPolicy::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @policy_tag_manager_serialization_stub.endpoint
+                config.universe_domain = @policy_tag_manager_serialization_stub.universe_domain
+              end
             end
 
             ##

@@ -23,8 +23,18 @@ require "gapic/grpc/service_stub"
 require "google/cloud/pubsub/v1/subscriber"
 
 class ::Google::Cloud::PubSub::V1::Subscriber::HelpersTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_config_channel_args
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       ::Google::Auth::Credentials.stub :default, :my_creds do
         ::Google::Cloud::PubSub::V1::Subscriber::Client.new do |config|
           channel_args = config.channel_args

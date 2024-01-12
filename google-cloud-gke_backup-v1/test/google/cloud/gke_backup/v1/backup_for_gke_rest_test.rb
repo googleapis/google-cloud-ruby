@@ -60,6 +60,14 @@ class ::Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::ClientTest < Minitest:
 
       @response
     end
+
+    def endpoint
+      "endpoint.example.com"
+    end
+
+    def universe_domain
+      "example.com"
+    end
   end
 
   def test_create_backup_plan
@@ -1405,7 +1413,8 @@ class ::Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::ClientTest < Minitest:
     credentials_token = :dummy_value
 
     client = block_config = config = nil
-    Gapic::Rest::ClientStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil
+    Gapic::Rest::ClientStub.stub :new, dummy_stub do
       client = ::Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::Client.new do |config|
         config.credentials = credentials_token
       end

@@ -53,6 +53,15 @@ module Google
               end
 
               ##
+              # The effective endpoint
+              #
+              # @return [String]
+              #
+              def endpoint
+                @client_stub.endpoint
+              end
+
+              ##
               # Baseline implementation for the list_access_policies REST call
               #
               # @param request_pb [::Google::Identity::AccessContextManager::V1::ListAccessPoliciesRequest]

@@ -53,6 +53,15 @@ module Google
               end
 
               ##
+              # The effective endpoint
+              #
+              # @return [String]
+              #
+              def endpoint
+                @client_stub.endpoint
+              end
+
+              ##
               # Baseline implementation for the create_catalog_item REST call
               #
               # @param request_pb [::Google::Cloud::RecommendationEngine::V1beta1::CreateCatalogItemRequest]

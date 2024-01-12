@@ -60,6 +60,14 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Rest::ClientTest < Mi
 
       @response
     end
+
+    def endpoint
+      "endpoint.example.com"
+    end
+
+    def universe_domain
+      "example.com"
+    end
   end
 
   def test_bulk_mute_findings
@@ -2567,7 +2575,8 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Rest::ClientTest < Mi
     credentials_token = :dummy_value
 
     client = block_config = config = nil
-    Gapic::Rest::ClientStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil
+    Gapic::Rest::ClientStub.stub :new, dummy_stub do
       client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Rest::Client.new do |config|
         config.credentials = credentials_token
       end

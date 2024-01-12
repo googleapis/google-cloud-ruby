@@ -53,6 +53,15 @@ module Google
               end
 
               ##
+              # The effective endpoint
+              #
+              # @return [String]
+              #
+              def endpoint
+                @client_stub.endpoint
+              end
+
+              ##
               # Baseline implementation for the list_conversation_profiles REST call
               #
               # @param request_pb [::Google::Cloud::Dialogflow::V2::ListConversationProfilesRequest]
