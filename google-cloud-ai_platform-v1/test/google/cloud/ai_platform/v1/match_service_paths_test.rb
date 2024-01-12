@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/ai_platform/v1/match_service"
 
 class ::Google::Cloud::AIPlatform::V1::MatchService::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_index_endpoint_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::AIPlatform::V1::MatchService::Client.new do |config|
         config.credentials = grpc_channel
       end

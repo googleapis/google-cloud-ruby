@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/ai_platform/v1/dataset_service"
 
 class ::Google::Cloud::AIPlatform::V1::DatasetService::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_annotation_spec_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -37,7 +47,7 @@ class ::Google::Cloud::AIPlatform::V1::DatasetService::ClientPathsTest < Minites
 
   def test_data_item_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -49,7 +59,7 @@ class ::Google::Cloud::AIPlatform::V1::DatasetService::ClientPathsTest < Minites
 
   def test_dataset_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -61,7 +71,7 @@ class ::Google::Cloud::AIPlatform::V1::DatasetService::ClientPathsTest < Minites
 
   def test_dataset_version_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -73,7 +83,7 @@ class ::Google::Cloud::AIPlatform::V1::DatasetService::ClientPathsTest < Minites
 
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -85,7 +95,7 @@ class ::Google::Cloud::AIPlatform::V1::DatasetService::ClientPathsTest < Minites
 
   def test_saved_query_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
         config.credentials = grpc_channel
       end

@@ -149,20 +149,6 @@ module Google
               @quota_project_id = @config.quota_project
               @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
-              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
-                config.credentials = credentials
-                config.quota_project = @quota_project_id
-                config.endpoint = @config.endpoint
-                config.universe_domain = @config.universe_domain
-              end
-
-              @iam_policy_client = Google::Iam::V1::IAMPolicy::Client.new do |config|
-                config.credentials = credentials
-                config.quota_project = @quota_project_id
-                config.endpoint = @config.endpoint
-                config.universe_domain = @config.universe_domain
-              end
-
               @match_service_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::AIPlatform::V1::MatchService::Stub,
                 credentials: credentials,
@@ -173,6 +159,20 @@ module Google
                 interceptors: @config.interceptors,
                 channel_pool_config: @config.channel_pool
               )
+
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @match_service_stub.endpoint
+                config.universe_domain = @match_service_stub.universe_domain
+              end
+
+              @iam_policy_client = Google::Iam::V1::IAMPolicy::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @match_service_stub.endpoint
+                config.universe_domain = @match_service_stub.universe_domain
+              end
             end
 
             ##

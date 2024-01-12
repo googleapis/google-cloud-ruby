@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/ai_platform/v1/deployment_resource_pool_service"
 
 class ::Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_deployment_resource_pool_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -37,7 +47,7 @@ class ::Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::ClientPath
 
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -49,7 +59,7 @@ class ::Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::ClientPath
 
   def test_project_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Client.new do |config|
         config.credentials = grpc_channel
       end

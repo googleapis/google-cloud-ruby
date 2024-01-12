@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/ai_platform/v1/vizier_service"
 
 class ::Google::Cloud::AIPlatform::V1::VizierService::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_custom_job_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::AIPlatform::V1::VizierService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -37,7 +47,7 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::ClientPathsTest < Minitest
 
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::AIPlatform::V1::VizierService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -49,7 +59,7 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::ClientPathsTest < Minitest
 
   def test_study_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::AIPlatform::V1::VizierService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -61,7 +71,7 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::ClientPathsTest < Minitest
 
   def test_trial_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::AIPlatform::V1::VizierService::Client.new do |config|
         config.credentials = grpc_channel
       end

@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/ai_platform/v1/metadata_service"
 
 class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_artifact_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -37,7 +47,7 @@ class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientPathsTest < Minite
 
   def test_context_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -49,7 +59,7 @@ class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientPathsTest < Minite
 
   def test_execution_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -61,7 +71,7 @@ class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientPathsTest < Minite
 
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -73,7 +83,7 @@ class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientPathsTest < Minite
 
   def test_metadata_schema_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -85,7 +95,7 @@ class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientPathsTest < Minite
 
   def test_metadata_store_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
         config.credentials = grpc_channel
       end
