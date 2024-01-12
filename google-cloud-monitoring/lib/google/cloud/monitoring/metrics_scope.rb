@@ -29,7 +29,7 @@ require "google/cloud/config"
 
 # Set the default configuration
 ::Google::Cloud.configure.add_config! :monitoring_metrics_scope do |config|
-  config.add_field! :endpoint,      "monitoring.googleapis.com", match: ::String
+  config.add_field! :endpoint,      nil, match: ::String
   config.add_field! :credentials,   nil, match: [::String, ::Hash, ::Google::Auth::Credentials]
   config.add_field! :scope,         nil, match: [::Array, ::String]
   config.add_field! :lib_name,      nil, match: ::String
@@ -39,6 +39,7 @@ require "google/cloud/config"
   config.add_field! :metadata,      nil, match: ::Hash
   config.add_field! :retry_policy,  nil, match: [::Hash, ::Proc]
   config.add_field! :quota_project, nil, match: ::String
+  config.add_field! :universe_domain, nil, match: ::String
 end
 
 module Google
