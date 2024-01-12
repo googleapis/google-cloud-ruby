@@ -1,5 +1,0 @@
-source "https://rubygems.org"
-
-gemspec
-
-gem "google-cloud-org_policy-v2", path: "../google-cloud-org_policy-v2"
