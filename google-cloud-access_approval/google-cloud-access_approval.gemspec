@@ -22,7 +22,7 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 2.6"
 
-  gem.add_dependency "google-cloud-access_approval-v1", ">= 0.8", "< 2.a"
+  gem.add_dependency "google-cloud-access_approval-v1", ">= 0.11", "< 2.a"
   gem.add_dependency "google-cloud-core", "~> 1.6"
 
   gem.add_development_dependency "google-style", "~> 1.26.1"
