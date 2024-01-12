@@ -1,5 +1,0 @@
-source "https://rubygems.org"
-
-gemspec
-
-gem "google-cloud-beyond_corp-client_gateways-v1", path: "../google-cloud-beyond_corp-client_gateways-v1"
