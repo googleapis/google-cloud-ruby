@@ -91,6 +91,7 @@ flag :editor, accept: String
 flag :disable_edit
 flag :enable_automerge
 flag :dry_run
+flag :automerge_delay, accept: Integer, default: 0
 
 include :exec
 include :terminal
@@ -165,6 +166,10 @@ def check_automerge pr_data
     puts "Automerging (#{@automerge_count}/#{@automerge_count_max}) ..."
   end
   handle_merge pr_data
+  if automerge_delay.positive?
+    puts "Delaying #{automerge_delay} secs between automerges ..."
+    sleep automerge_delay
+  end
   @automerge_count += 1
   true
 end
