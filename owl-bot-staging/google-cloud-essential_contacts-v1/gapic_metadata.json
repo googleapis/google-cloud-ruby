@@ -1,0 +1,53 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.essentialcontacts.v1",
+  "libraryPackage": "::Google::Cloud::EssentialContacts::V1",
+  "services": {
+    "EssentialContactsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Client",
+          "rpcs": {
+            "CreateContact": {
+              "methods": [
+                "create_contact"
+              ]
+            },
+            "UpdateContact": {
+              "methods": [
+                "update_contact"
+              ]
+            },
+            "ListContacts": {
+              "methods": [
+                "list_contacts"
+              ]
+            },
+            "GetContact": {
+              "methods": [
+                "get_contact"
+              ]
+            },
+            "DeleteContact": {
+              "methods": [
+                "delete_contact"
+              ]
+            },
+            "ComputeContacts": {
+              "methods": [
+                "compute_contacts"
+              ]
+            },
+            "SendTestMessage": {
+              "methods": [
+                "send_test_message"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
