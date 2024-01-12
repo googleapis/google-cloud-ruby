@@ -21,7 +21,7 @@ module Google
   module Cloud
     module BareMetalSolution
       module V2
-        VERSION = "0.7.0"
+        VERSION = "0.7.1"
       end
     end
   end
