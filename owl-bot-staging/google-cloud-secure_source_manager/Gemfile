@@ -1,5 +1,0 @@
-source "https://rubygems.org"
-
-gemspec
-
-gem "google-cloud-secure_source_manager-v1", path: "../google-cloud-secure_source_manager-v1"
