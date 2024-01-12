@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-network_security-v1beta1",
-    "version": "0.7.0",
+    "version": "0.7.1",
     "language": "RUBY",
     "apis": [
       {
