@@ -226,7 +226,7 @@ module Google
             #   @param parent [::String]
             #     Required. The resource name of the Location to create FeatureOnlineStores.
             #     Format:
-            #     `projects/{project}/locations/{location}'`
+            #     `projects/{project}/locations/{location}`
             #   @param feature_online_store [::Google::Cloud::AIPlatform::V1::FeatureOnlineStore, ::Hash]
             #     Required. The FeatureOnlineStore to create.
             #   @param feature_online_store_id [::String]

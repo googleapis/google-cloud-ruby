@@ -200,8 +200,9 @@ module Google
         # @!attribute [rw] exported_files
         #   @return [::Array<::String>]
         #     All of the files that are exported in this export operation. For custom
-        #     code training export, only three (training, validation and test) GCS paths
-        #     in wildcard format are populated (e.g., gs://.../training-*).
+        #     code training export, only three (training, validation and test)
+        #     Cloud Storage paths in wildcard format are populated
+        #     (for example, gs://.../training-*).
         # @!attribute [rw] data_stats
         #   @return [::Google::Cloud::AIPlatform::V1::Model::DataStats]
         #     Only present for custom code training export use case. Records data stats,
