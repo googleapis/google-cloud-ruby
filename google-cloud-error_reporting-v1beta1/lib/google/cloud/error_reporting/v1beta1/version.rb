@@ -21,7 +21,7 @@ module Google
   module Cloud
     module ErrorReporting
       module V1beta1
-        VERSION = "0.9.0"
+        VERSION = "0.9.1"
       end
     end
   end
