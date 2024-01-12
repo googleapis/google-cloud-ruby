@@ -23,10 +23,10 @@ Gem::Specification.new do |gem|
   gem.required_ruby_version = ">= 2.6"
 
   gem.add_dependency "google-cloud-core", "~> 1.6"
-  gem.add_dependency "google-cloud-video_intelligence-v1", ">= 0.8", "< 2.a"
-  gem.add_dependency "google-cloud-video_intelligence-v1beta2", ">= 0.6", "< 2.a"
-  gem.add_dependency "google-cloud-video_intelligence-v1p1beta1", ">= 0.6", "< 2.a"
-  gem.add_dependency "google-cloud-video_intelligence-v1p2beta1", ">= 0.7", "< 2.a"
+  gem.add_dependency "google-cloud-video_intelligence-v1", ">= 0.11", "< 2.a"
+  gem.add_dependency "google-cloud-video_intelligence-v1beta2", ">= 0.9", "< 2.a"
+  gem.add_dependency "google-cloud-video_intelligence-v1p1beta1", ">= 0.9", "< 2.a"
+  gem.add_dependency "google-cloud-video_intelligence-v1p2beta1", ">= 0.10", "< 2.a"
 
   gem.add_development_dependency "google-style", "~> 1.26.1"
   gem.add_development_dependency "minitest", "~> 5.16"
