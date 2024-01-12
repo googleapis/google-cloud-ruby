@@ -1,0 +1,5 @@
+source "https://rubygems.org"
+
+gemspec
+
+gem "google-shopping-merchant-inventories-v1beta", path: "../google-shopping-merchant-inventories-v1beta"
