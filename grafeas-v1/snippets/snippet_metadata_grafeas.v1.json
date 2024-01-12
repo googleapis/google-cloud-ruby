@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "grafeas-v1",
-    "version": "0.14.0",
+    "version": "0.14.1",
     "language": "RUBY",
     "apis": [
       {
