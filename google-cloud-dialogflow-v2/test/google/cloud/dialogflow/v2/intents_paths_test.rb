@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/dialogflow/v2/intents"
 
 class ::Google::Cloud::Dialogflow::V2::Intents::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_agent_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Dialogflow::V2::Intents::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -40,7 +50,7 @@ class ::Google::Cloud::Dialogflow::V2::Intents::ClientPathsTest < Minitest::Test
 
   def test_context_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Dialogflow::V2::Intents::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -61,7 +71,7 @@ class ::Google::Cloud::Dialogflow::V2::Intents::ClientPathsTest < Minitest::Test
 
   def test_intent_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Dialogflow::V2::Intents::Client.new do |config|
         config.credentials = grpc_channel
       end

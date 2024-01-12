@@ -152,20 +152,20 @@ module Google
                   config.universe_domain = @config.universe_domain
                 end
 
-                @iam_policy_client = Google::Iam::V1::IAMPolicy::Rest::Client.new do |config|
-                  config.credentials = credentials
-                  config.quota_project = @quota_project_id
-                  config.endpoint = @config.endpoint
-                  config.universe_domain = @config.universe_domain
-                  config.bindings_override = @config.bindings_override
-                end
-
                 @service_manager_stub = ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::ServiceStub.new(
                   endpoint: @config.endpoint,
                   endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
                   universe_domain: @config.universe_domain,
                   credentials: credentials
                 )
+
+                @iam_policy_client = Google::Iam::V1::IAMPolicy::Rest::Client.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @service_manager_stub.endpoint
+                  config.universe_domain = @service_manager_stub.universe_domain
+                  config.bindings_override = @config.bindings_override
+                end
               end
 
               ##

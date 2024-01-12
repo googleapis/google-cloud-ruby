@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/support/v2/case_attachment_service"
 
 class ::Google::Cloud::Support::V2::CaseAttachmentService::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_case_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Support::V2::CaseAttachmentService::Client.new do |config|
         config.credentials = grpc_channel
       end

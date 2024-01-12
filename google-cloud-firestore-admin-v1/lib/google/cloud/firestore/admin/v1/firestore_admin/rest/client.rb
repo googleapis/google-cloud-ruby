@@ -212,19 +212,19 @@ module Google
                     config.universe_domain = @config.universe_domain
                   end
 
-                  @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
-                    config.credentials = credentials
-                    config.quota_project = @quota_project_id
-                    config.endpoint = @config.endpoint
-                    config.universe_domain = @config.universe_domain
-                  end
-
                   @firestore_admin_stub = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ServiceStub.new(
                     endpoint: @config.endpoint,
                     endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
                     universe_domain: @config.universe_domain,
                     credentials: credentials
                   )
+
+                  @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
+                    config.credentials = credentials
+                    config.quota_project = @quota_project_id
+                    config.endpoint = @firestore_admin_stub.endpoint
+                    config.universe_domain = @firestore_admin_stub.universe_domain
+                  end
                 end
 
                 ##

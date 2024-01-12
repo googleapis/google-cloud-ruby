@@ -53,6 +53,15 @@ module Google
               end
 
               ##
+              # The effective endpoint
+              #
+              # @return [String]
+              #
+              def endpoint
+                @client_stub.endpoint
+              end
+
+              ##
               # Baseline implementation for the execute_patch_job REST call
               #
               # @param request_pb [::Google::Cloud::OsConfig::V1::ExecutePatchJobRequest]

@@ -156,20 +156,20 @@ module Google
                 @quota_project_id = @config.quota_project
                 @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
-                @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
-                  config.credentials = credentials
-                  config.quota_project = @quota_project_id
-                  config.endpoint = @config.endpoint
-                  config.universe_domain = @config.universe_domain
-                  config.bindings_override = @config.bindings_override
-                end
-
                 @confidential_computing_stub = ::Google::Cloud::ConfidentialComputing::V1::ConfidentialComputing::Rest::ServiceStub.new(
                   endpoint: @config.endpoint,
                   endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
                   universe_domain: @config.universe_domain,
                   credentials: credentials
                 )
+
+                @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @confidential_computing_stub.endpoint
+                  config.universe_domain = @confidential_computing_stub.universe_domain
+                  config.bindings_override = @config.bindings_override
+                end
               end
 
               ##

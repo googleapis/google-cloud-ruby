@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/essential_contacts/v1/essential_contacts_service"
 
 class ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_contact_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -43,7 +53,7 @@ class ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::ClientPa
 
   def test_folder_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -55,7 +65,7 @@ class ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::ClientPa
 
   def test_organization_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -67,7 +77,7 @@ class ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::ClientPa
 
   def test_project_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Client.new do |config|
         config.credentials = grpc_channel
       end

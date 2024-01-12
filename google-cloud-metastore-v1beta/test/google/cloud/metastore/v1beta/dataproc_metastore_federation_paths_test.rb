@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/metastore/v1beta/dataproc_metastore_federation"
 
 class ::Google::Cloud::Metastore::V1beta::DataprocMetastoreFederation::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_federation_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Metastore::V1beta::DataprocMetastoreFederation::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -37,7 +47,7 @@ class ::Google::Cloud::Metastore::V1beta::DataprocMetastoreFederation::ClientPat
 
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Metastore::V1beta::DataprocMetastoreFederation::Client.new do |config|
         config.credentials = grpc_channel
       end

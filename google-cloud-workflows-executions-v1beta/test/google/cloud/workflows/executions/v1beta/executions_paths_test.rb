@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/workflows/executions/v1beta/executions"
 
 class ::Google::Cloud::Workflows::Executions::V1beta::Executions::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_execution_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Workflows::Executions::V1beta::Executions::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -37,7 +47,7 @@ class ::Google::Cloud::Workflows::Executions::V1beta::Executions::ClientPathsTes
 
   def test_workflow_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Workflows::Executions::V1beta::Executions::Client.new do |config|
         config.credentials = grpc_channel
       end

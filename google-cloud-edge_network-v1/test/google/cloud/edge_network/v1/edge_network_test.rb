@@ -45,6 +45,14 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::ClientTest < Minitest::Test
 
       @response
     end
+
+    def endpoint
+      "endpoint.example.com"
+    end
+
+    def universe_domain
+      "example.com"
+    end
   end
 
   def test_initialize_zone
@@ -1727,7 +1735,8 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::ClientTest < Minitest::Test
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
     client = block_config = config = nil
-    Gapic::ServiceStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil, nil
+    Gapic::ServiceStub.stub :new, dummy_stub do
       client = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -1745,7 +1754,8 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::ClientTest < Minitest::Test
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
     client = nil
-    Gapic::ServiceStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil, nil
+    Gapic::ServiceStub.stub :new, dummy_stub do
       client = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client.new do |config|
         config.credentials = grpc_channel
       end

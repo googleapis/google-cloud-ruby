@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/edge_network/v1/edge_network"
 
 class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_interconnect_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -37,7 +47,7 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::ClientPathsTest < Minitest:
 
   def test_interconnect_attachment_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -49,7 +59,7 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::ClientPathsTest < Minitest:
 
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -61,7 +71,7 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::ClientPathsTest < Minitest:
 
   def test_network_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -73,7 +83,7 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::ClientPathsTest < Minitest:
 
   def test_router_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -85,7 +95,7 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::ClientPathsTest < Minitest:
 
   def test_subnet_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -97,7 +107,7 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::ClientPathsTest < Minitest:
 
   def test_zone_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client.new do |config|
         config.credentials = grpc_channel
       end

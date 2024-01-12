@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/dataplex/v1/content_service"
 
 class ::Google::Cloud::Dataplex::V1::ContentService::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_content_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Dataplex::V1::ContentService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -37,7 +47,7 @@ class ::Google::Cloud::Dataplex::V1::ContentService::ClientPathsTest < Minitest:
 
   def test_lake_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Dataplex::V1::ContentService::Client.new do |config|
         config.credentials = grpc_channel
       end

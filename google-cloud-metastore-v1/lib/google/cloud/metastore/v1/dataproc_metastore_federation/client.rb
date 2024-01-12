@@ -167,20 +167,6 @@ module Google
                 config.universe_domain = @config.universe_domain
               end
 
-              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
-                config.credentials = credentials
-                config.quota_project = @quota_project_id
-                config.endpoint = @config.endpoint
-                config.universe_domain = @config.universe_domain
-              end
-
-              @iam_policy_client = Google::Iam::V1::IAMPolicy::Client.new do |config|
-                config.credentials = credentials
-                config.quota_project = @quota_project_id
-                config.endpoint = @config.endpoint
-                config.universe_domain = @config.universe_domain
-              end
-
               @dataproc_metastore_federation_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::Metastore::V1::DataprocMetastoreFederation::Stub,
                 credentials: credentials,
@@ -191,6 +177,20 @@ module Google
                 interceptors: @config.interceptors,
                 channel_pool_config: @config.channel_pool
               )
+
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @dataproc_metastore_federation_stub.endpoint
+                config.universe_domain = @dataproc_metastore_federation_stub.universe_domain
+              end
+
+              @iam_policy_client = Google::Iam::V1::IAMPolicy::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @dataproc_metastore_federation_stub.endpoint
+                config.universe_domain = @dataproc_metastore_federation_stub.universe_domain
+              end
             end
 
             ##

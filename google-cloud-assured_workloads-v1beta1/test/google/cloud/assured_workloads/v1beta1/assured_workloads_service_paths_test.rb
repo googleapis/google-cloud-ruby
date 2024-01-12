@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/assured_workloads/v1beta1/assured_workloads_service"
 
 class ::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -37,7 +47,7 @@ class ::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Clien
 
   def test_workload_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client.new do |config|
         config.credentials = grpc_channel
       end

@@ -251,28 +251,28 @@ module Google
                   config.universe_domain = @config.universe_domain
                 end
 
-                @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
-                  config.credentials = credentials
-                  config.quota_project = @quota_project_id
-                  config.endpoint = @config.endpoint
-                  config.universe_domain = @config.universe_domain
-                  config.bindings_override = @config.bindings_override
-                end
-
-                @iam_policy_client = Google::Iam::V1::IAMPolicy::Rest::Client.new do |config|
-                  config.credentials = credentials
-                  config.quota_project = @quota_project_id
-                  config.endpoint = @config.endpoint
-                  config.universe_domain = @config.universe_domain
-                  config.bindings_override = @config.bindings_override
-                end
-
                 @vmware_engine_stub = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ServiceStub.new(
                   endpoint: @config.endpoint,
                   endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
                   universe_domain: @config.universe_domain,
                   credentials: credentials
                 )
+
+                @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @vmware_engine_stub.endpoint
+                  config.universe_domain = @vmware_engine_stub.universe_domain
+                  config.bindings_override = @config.bindings_override
+                end
+
+                @iam_policy_client = Google::Iam::V1::IAMPolicy::Rest::Client.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @vmware_engine_stub.endpoint
+                  config.universe_domain = @vmware_engine_stub.universe_domain
+                  config.bindings_override = @config.bindings_override
+                end
               end
 
               ##

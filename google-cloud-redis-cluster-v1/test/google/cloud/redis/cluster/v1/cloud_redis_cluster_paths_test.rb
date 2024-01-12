@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/redis/cluster/v1/cloud_redis_cluster"
 
 class ::Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_cluster_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -37,7 +47,7 @@ class ::Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::ClientPathsTest < 
 
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Client.new do |config|
         config.credentials = grpc_channel
       end

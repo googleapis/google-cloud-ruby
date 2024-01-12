@@ -53,6 +53,15 @@ module Google
               end
 
               ##
+              # The effective endpoint
+              #
+              # @return [String]
+              #
+              def endpoint
+                @client_stub.endpoint
+              end
+
+              ##
               # Baseline implementation for the get_billing_account REST call
               #
               # @param request_pb [::Google::Cloud::Billing::V1::GetBillingAccountRequest]

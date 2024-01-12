@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/data_catalog/v1beta1/policy_tag_manager"
 
 class ::Google::Cloud::DataCatalog::V1beta1::PolicyTagManager::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::DataCatalog::V1beta1::PolicyTagManager::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -37,7 +47,7 @@ class ::Google::Cloud::DataCatalog::V1beta1::PolicyTagManager::ClientPathsTest <
 
   def test_policy_tag_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::DataCatalog::V1beta1::PolicyTagManager::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -49,7 +59,7 @@ class ::Google::Cloud::DataCatalog::V1beta1::PolicyTagManager::ClientPathsTest <
 
   def test_taxonomy_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::DataCatalog::V1beta1::PolicyTagManager::Client.new do |config|
         config.credentials = grpc_channel
       end

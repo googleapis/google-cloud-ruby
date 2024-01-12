@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/retail/v2/serving_config_service"
 
 class ::Google::Cloud::Retail::V2::ServingConfigService::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_catalog_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Retail::V2::ServingConfigService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -37,7 +47,7 @@ class ::Google::Cloud::Retail::V2::ServingConfigService::ClientPathsTest < Minit
 
   def test_serving_config_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Retail::V2::ServingConfigService::Client.new do |config|
         config.credentials = grpc_channel
       end

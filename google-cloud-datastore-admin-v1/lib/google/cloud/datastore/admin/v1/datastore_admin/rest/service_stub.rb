@@ -54,6 +54,15 @@ module Google
                 end
 
                 ##
+                # The effective endpoint
+                #
+                # @return [String]
+                #
+                def endpoint
+                  @client_stub.endpoint
+                end
+
+                ##
                 # Baseline implementation for the export_entities REST call
                 #
                 # @param request_pb [::Google::Cloud::Datastore::Admin::V1::ExportEntitiesRequest]

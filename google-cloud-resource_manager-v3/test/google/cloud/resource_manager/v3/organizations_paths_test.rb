@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/resource_manager/v3/organizations"
 
 class ::Google::Cloud::ResourceManager::V3::Organizations::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_organization_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::ResourceManager::V3::Organizations::Client.new do |config|
         config.credentials = grpc_channel
       end

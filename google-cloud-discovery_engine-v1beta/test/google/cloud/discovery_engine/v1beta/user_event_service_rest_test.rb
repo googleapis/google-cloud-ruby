@@ -60,6 +60,14 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::UserEventService::Rest::ClientTe
 
       @response
     end
+
+    def endpoint
+      "endpoint.example.com"
+    end
+
+    def universe_domain
+      "example.com"
+    end
   end
 
   def test_write_user_event
@@ -234,7 +242,8 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::UserEventService::Rest::ClientTe
     credentials_token = :dummy_value
 
     client = block_config = config = nil
-    Gapic::Rest::ClientStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil
+    Gapic::Rest::ClientStub.stub :new, dummy_stub do
       client = ::Google::Cloud::DiscoveryEngine::V1beta::UserEventService::Rest::Client.new do |config|
         config.credentials = credentials_token
       end

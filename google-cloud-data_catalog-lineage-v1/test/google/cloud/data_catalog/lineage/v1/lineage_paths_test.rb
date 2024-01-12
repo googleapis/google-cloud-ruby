@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/data_catalog/lineage/v1/lineage"
 
 class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_lineage_event_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -37,7 +47,7 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::ClientPathsTest < Mini
 
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -49,7 +59,7 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::ClientPathsTest < Mini
 
   def test_process_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -61,7 +71,7 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::ClientPathsTest < Mini
 
   def test_run_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client.new do |config|
         config.credentials = grpc_channel
       end

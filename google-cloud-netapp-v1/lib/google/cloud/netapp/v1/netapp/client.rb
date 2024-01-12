@@ -310,13 +310,6 @@ module Google
                 config.universe_domain = @config.universe_domain
               end
 
-              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
-                config.credentials = credentials
-                config.quota_project = @quota_project_id
-                config.endpoint = @config.endpoint
-                config.universe_domain = @config.universe_domain
-              end
-
               @net_app_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::NetApp::V1::NetApp::Stub,
                 credentials: credentials,
@@ -327,6 +320,13 @@ module Google
                 interceptors: @config.interceptors,
                 channel_pool_config: @config.channel_pool
               )
+
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @net_app_stub.endpoint
+                config.universe_domain = @net_app_stub.universe_domain
+              end
             end
 
             ##

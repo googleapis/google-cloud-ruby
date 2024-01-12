@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/support/v2/case_service"
 
 class ::Google::Cloud::Support::V2::CaseService::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_case_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Support::V2::CaseService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -40,7 +50,7 @@ class ::Google::Cloud::Support::V2::CaseService::ClientPathsTest < Minitest::Tes
 
   def test_organization_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Support::V2::CaseService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -52,7 +62,7 @@ class ::Google::Cloud::Support::V2::CaseService::ClientPathsTest < Minitest::Tes
 
   def test_project_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Support::V2::CaseService::Client.new do |config|
         config.credentials = grpc_channel
       end

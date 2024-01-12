@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/vmware_engine/v1/vmware_engine"
 
 class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_cluster_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -37,7 +47,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::ClientPathsTest < Minites
 
   def test_hcx_activation_key_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -49,7 +59,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::ClientPathsTest < Minites
 
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -61,7 +71,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::ClientPathsTest < Minites
 
   def test_network_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -73,7 +83,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::ClientPathsTest < Minites
 
   def test_network_policy_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -85,7 +95,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::ClientPathsTest < Minites
 
   def test_node_type_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -97,7 +107,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::ClientPathsTest < Minites
 
   def test_private_cloud_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -109,7 +119,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::ClientPathsTest < Minites
 
   def test_private_connection_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -121,7 +131,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::ClientPathsTest < Minites
 
   def test_subnet_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -133,7 +143,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::ClientPathsTest < Minites
 
   def test_vmware_engine_network_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
         config.credentials = grpc_channel
       end

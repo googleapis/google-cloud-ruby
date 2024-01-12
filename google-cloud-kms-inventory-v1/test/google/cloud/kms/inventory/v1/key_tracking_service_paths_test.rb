@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/kms/inventory/v1/key_tracking_service"
 
 class ::Google::Cloud::Kms::Inventory::V1::KeyTrackingService::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_organization_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Kms::Inventory::V1::KeyTrackingService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -37,7 +47,7 @@ class ::Google::Cloud::Kms::Inventory::V1::KeyTrackingService::ClientPathsTest <
 
   def test_protected_resources_summary_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Kms::Inventory::V1::KeyTrackingService::Client.new do |config|
         config.credentials = grpc_channel
       end

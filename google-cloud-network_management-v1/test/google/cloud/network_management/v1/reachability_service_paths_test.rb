@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/network_management/v1/reachability_service"
 
 class ::Google::Cloud::NetworkManagement::V1::ReachabilityService::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_connectivity_test_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::NetworkManagement::V1::ReachabilityService::Client.new do |config|
         config.credentials = grpc_channel
       end

@@ -151,19 +151,19 @@ module Google
                   config.universe_domain = @config.universe_domain
                 end
 
-                @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
-                  config.credentials = credentials
-                  config.quota_project = @quota_project_id
-                  config.endpoint = @config.endpoint
-                  config.universe_domain = @config.universe_domain
-                end
-
                 @jobs_stub = ::Google::Cloud::Run::V2::Jobs::Rest::ServiceStub.new(
                   endpoint: @config.endpoint,
                   endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
                   universe_domain: @config.universe_domain,
                   credentials: credentials
                 )
+
+                @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @jobs_stub.endpoint
+                  config.universe_domain = @jobs_stub.universe_domain
+                end
               end
 
               ##

@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/cloud_quotas/v1/cloud_quotas"
 
 class ::Google::Cloud::CloudQuotas::V1::CloudQuotas::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::CloudQuotas::V1::CloudQuotas::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -43,7 +53,7 @@ class ::Google::Cloud::CloudQuotas::V1::CloudQuotas::ClientPathsTest < Minitest:
 
   def test_quota_info_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::CloudQuotas::V1::CloudQuotas::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -61,7 +71,7 @@ class ::Google::Cloud::CloudQuotas::V1::CloudQuotas::ClientPathsTest < Minitest:
 
   def test_quota_preference_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::CloudQuotas::V1::CloudQuotas::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -79,7 +89,7 @@ class ::Google::Cloud::CloudQuotas::V1::CloudQuotas::ClientPathsTest < Minitest:
 
   def test_service_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::CloudQuotas::V1::CloudQuotas::Client.new do |config|
         config.credentials = grpc_channel
       end

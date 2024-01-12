@@ -53,6 +53,15 @@ module Google
               end
 
               ##
+              # The effective endpoint
+              #
+              # @return [String]
+              #
+              def endpoint
+                @client_stub.endpoint
+              end
+
+              ##
               # Baseline implementation for the get_replay REST call
               #
               # @param request_pb [::Google::Cloud::PolicySimulator::V1::GetReplayRequest]

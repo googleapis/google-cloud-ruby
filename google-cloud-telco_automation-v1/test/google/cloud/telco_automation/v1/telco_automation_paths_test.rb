@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/telco_automation/v1/telco_automation"
 
 class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_blueprint_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -37,7 +47,7 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::ClientPathsTest < M
 
   def test_deployment_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -49,7 +59,7 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::ClientPathsTest < M
 
   def test_edge_slm_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -61,7 +71,7 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::ClientPathsTest < M
 
   def test_hydrated_deployment_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -73,7 +83,7 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::ClientPathsTest < M
 
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -85,7 +95,7 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::ClientPathsTest < M
 
   def test_orchestration_cluster_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -97,7 +107,7 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::ClientPathsTest < M
 
   def test_public_blueprint_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
         config.credentials = grpc_channel
       end

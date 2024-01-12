@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/iam/credentials/v1/iam_credentials"
 
 class ::Google::Iam::Credentials::V1::IAMCredentials::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_service_account_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Iam::Credentials::V1::IAMCredentials::Client.new do |config|
         config.credentials = grpc_channel
       end

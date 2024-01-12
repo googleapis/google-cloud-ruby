@@ -53,6 +53,15 @@ module Google
               end
 
               ##
+              # The effective endpoint
+              #
+              # @return [String]
+              #
+              def endpoint
+                @client_stub.endpoint
+              end
+
+              ##
               # Baseline implementation for the search_catalogs REST call
               #
               # @param request_pb [::Google::Cloud::PrivateCatalog::V1beta1::SearchCatalogsRequest]

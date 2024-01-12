@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/org_policy/v2/org_policy"
 
 class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_custom_constraint_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -37,7 +47,7 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::ClientPathsTest < Minitest::Tes
 
   def test_folder_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -49,7 +59,7 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::ClientPathsTest < Minitest::Tes
 
   def test_organization_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -61,7 +71,7 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::ClientPathsTest < Minitest::Tes
 
   def test_policy_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -79,7 +89,7 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::ClientPathsTest < Minitest::Tes
 
   def test_project_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client.new do |config|
         config.credentials = grpc_channel
       end

@@ -45,6 +45,14 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
 
       @response
     end
+
+    def endpoint
+      "endpoint.example.com"
+    end
+
+    def universe_domain
+      "example.com"
+    end
   end
 
   def test_get_account
@@ -8005,7 +8013,8 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
     client = block_config = config = nil
-    Gapic::ServiceStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil, nil
+    Gapic::ServiceStub.stub :new, dummy_stub do
       client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end

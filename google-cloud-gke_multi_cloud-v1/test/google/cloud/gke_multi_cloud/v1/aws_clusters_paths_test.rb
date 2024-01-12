@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/gke_multi_cloud/v1/aws_clusters"
 
 class ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_aws_cluster_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -37,7 +47,7 @@ class ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::ClientPathsTest < Minites
 
   def test_aws_node_pool_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -49,7 +59,7 @@ class ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::ClientPathsTest < Minites
 
   def test_aws_server_config_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -61,7 +71,7 @@ class ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::ClientPathsTest < Minites
 
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client.new do |config|
         config.credentials = grpc_channel
       end

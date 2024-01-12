@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/dataqna/v1alpha/auto_suggestion_service"
 
 class ::Google::Cloud::DataQnA::V1alpha::AutoSuggestionService::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::DataQnA::V1alpha::AutoSuggestionService::Client.new do |config|
         config.credentials = grpc_channel
       end

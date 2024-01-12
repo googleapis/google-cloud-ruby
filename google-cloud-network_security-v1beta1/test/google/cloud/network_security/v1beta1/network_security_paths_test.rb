@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/network_security/v1beta1/network_security"
 
 class ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_authorization_policy_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -37,7 +47,7 @@ class ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::ClientPathsTes
 
   def test_client_tls_policy_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -49,7 +59,7 @@ class ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::ClientPathsTes
 
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -61,7 +71,7 @@ class ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::ClientPathsTes
 
   def test_server_tls_policy_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Client.new do |config|
         config.credentials = grpc_channel
       end

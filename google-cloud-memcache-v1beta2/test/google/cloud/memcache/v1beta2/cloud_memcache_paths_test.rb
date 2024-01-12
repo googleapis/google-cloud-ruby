@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/memcache/v1beta2/cloud_memcache"
 
 class ::Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_instance_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -37,7 +47,7 @@ class ::Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientPathsTest < Minit
 
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new do |config|
         config.credentials = grpc_channel
       end

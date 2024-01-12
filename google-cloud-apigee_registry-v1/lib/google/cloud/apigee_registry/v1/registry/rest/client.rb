@@ -314,28 +314,28 @@ module Google
                 @quota_project_id = @config.quota_project
                 @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
-                @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
-                  config.credentials = credentials
-                  config.quota_project = @quota_project_id
-                  config.endpoint = @config.endpoint
-                  config.universe_domain = @config.universe_domain
-                  config.bindings_override = @config.bindings_override
-                end
-
-                @iam_policy_client = Google::Iam::V1::IAMPolicy::Rest::Client.new do |config|
-                  config.credentials = credentials
-                  config.quota_project = @quota_project_id
-                  config.endpoint = @config.endpoint
-                  config.universe_domain = @config.universe_domain
-                  config.bindings_override = @config.bindings_override
-                end
-
                 @registry_stub = ::Google::Cloud::ApigeeRegistry::V1::Registry::Rest::ServiceStub.new(
                   endpoint: @config.endpoint,
                   endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
                   universe_domain: @config.universe_domain,
                   credentials: credentials
                 )
+
+                @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @registry_stub.endpoint
+                  config.universe_domain = @registry_stub.universe_domain
+                  config.bindings_override = @config.bindings_override
+                end
+
+                @iam_policy_client = Google::Iam::V1::IAMPolicy::Rest::Client.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @registry_stub.endpoint
+                  config.universe_domain = @registry_stub.universe_domain
+                  config.bindings_override = @config.bindings_override
+                end
               end
 
               ##

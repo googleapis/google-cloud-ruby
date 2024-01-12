@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/rapid_migration_assessment/v1/rapid_migration_assessment"
 
 class ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_annotation_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -37,7 +47,7 @@ class ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::C
 
   def test_collector_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -49,7 +59,7 @@ class ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::C
 
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::Client.new do |config|
         config.credentials = grpc_channel
       end

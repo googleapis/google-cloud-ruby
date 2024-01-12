@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/netapp/v1/netapp"
 
 class ::Google::Cloud::NetApp::V1::NetApp::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_active_directory_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -37,7 +47,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientPathsTest < Minitest::Test
 
   def test_backup_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -49,7 +59,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientPathsTest < Minitest::Test
 
   def test_backup_policy_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -61,7 +71,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientPathsTest < Minitest::Test
 
   def test_backup_vault_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -73,7 +83,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientPathsTest < Minitest::Test
 
   def test_kms_config_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -85,7 +95,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientPathsTest < Minitest::Test
 
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -97,7 +107,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientPathsTest < Minitest::Test
 
   def test_network_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -109,7 +119,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientPathsTest < Minitest::Test
 
   def test_replication_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -121,7 +131,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientPathsTest < Minitest::Test
 
   def test_snapshot_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -133,7 +143,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientPathsTest < Minitest::Test
 
   def test_storage_pool_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -145,7 +155,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientPathsTest < Minitest::Test
 
   def test_volume_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
         config.credentials = grpc_channel
       end

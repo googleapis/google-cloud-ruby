@@ -159,13 +159,6 @@ module Google
                 config.universe_domain = @config.universe_domain
               end
 
-              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
-                config.credentials = credentials
-                config.quota_project = @quota_project_id
-                config.endpoint = @config.endpoint
-                config.universe_domain = @config.universe_domain
-              end
-
               @conversation_models_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::Dialogflow::V2::ConversationModels::Stub,
                 credentials: credentials,
@@ -176,6 +169,13 @@ module Google
                 interceptors: @config.interceptors,
                 channel_pool_config: @config.channel_pool
               )
+
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @conversation_models_stub.endpoint
+                config.universe_domain = @conversation_models_stub.universe_domain
+              end
             end
 
             ##

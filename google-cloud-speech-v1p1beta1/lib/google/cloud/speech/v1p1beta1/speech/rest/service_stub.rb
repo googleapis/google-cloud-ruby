@@ -53,6 +53,15 @@ module Google
               end
 
               ##
+              # The effective endpoint
+              #
+              # @return [String]
+              #
+              def endpoint
+                @client_stub.endpoint
+              end
+
+              ##
               # Baseline implementation for the recognize REST call
               #
               # @param request_pb [::Google::Cloud::Speech::V1p1beta1::RecognizeRequest]

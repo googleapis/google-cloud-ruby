@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/discovery_engine/v1beta/recommendation_service"
 
 class ::Google::Cloud::DiscoveryEngine::V1beta::RecommendationService::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_document_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::DiscoveryEngine::V1beta::RecommendationService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -40,7 +50,7 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::RecommendationService::ClientPat
 
   def test_serving_config_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::DiscoveryEngine::V1beta::RecommendationService::Client.new do |config|
         config.credentials = grpc_channel
       end

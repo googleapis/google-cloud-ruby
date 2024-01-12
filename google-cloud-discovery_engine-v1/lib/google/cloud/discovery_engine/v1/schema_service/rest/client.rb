@@ -156,19 +156,19 @@ module Google
                   config.universe_domain = @config.universe_domain
                 end
 
-                @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
-                  config.credentials = credentials
-                  config.quota_project = @quota_project_id
-                  config.endpoint = @config.endpoint
-                  config.universe_domain = @config.universe_domain
-                end
-
                 @schema_service_stub = ::Google::Cloud::DiscoveryEngine::V1::SchemaService::Rest::ServiceStub.new(
                   endpoint: @config.endpoint,
                   endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
                   universe_domain: @config.universe_domain,
                   credentials: credentials
                 )
+
+                @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @schema_service_stub.endpoint
+                  config.universe_domain = @schema_service_stub.universe_domain
+                end
               end
 
               ##

@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/advisory_notifications/v1/advisory_notifications_service"
 
 class ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -40,7 +50,7 @@ class ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::
 
   def test_notification_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -55,7 +65,7 @@ class ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::
 
   def test_settings_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::Client.new do |config|
         config.credentials = grpc_channel
       end

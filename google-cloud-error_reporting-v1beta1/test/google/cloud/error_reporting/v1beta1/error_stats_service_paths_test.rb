@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/error_reporting/v1beta1/error_stats_service"
 
 class ::Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_project_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::Client.new do |config|
         config.credentials = grpc_channel
       end

@@ -55,6 +55,15 @@ module Google
                   end
 
                   ##
+                  # The effective endpoint
+                  #
+                  # @return [String]
+                  #
+                  def endpoint
+                    @client_stub.endpoint
+                  end
+
+                  ##
                   # Baseline implementation for the create_environment REST call
                   #
                   # @param request_pb [::Google::Cloud::Orchestration::Airflow::Service::V1::CreateEnvironmentRequest]

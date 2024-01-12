@@ -53,6 +53,15 @@ module Google
               end
 
               ##
+              # The effective endpoint
+              #
+              # @return [String]
+              #
+              def endpoint
+                @client_stub.endpoint
+              end
+
+              ##
               # Baseline implementation for the get_table REST call
               #
               # @param request_pb [::Google::Area120::Tables::V1alpha1::GetTableRequest]
