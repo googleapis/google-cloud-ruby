@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-video-stitcher-v1",
-    "version": "0.8.0",
+    "version": "0.8.1",
     "language": "RUBY",
     "apis": [
       {
