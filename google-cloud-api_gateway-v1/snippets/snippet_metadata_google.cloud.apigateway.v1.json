@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-api_gateway-v1",
-    "version": "0.6.0",
+    "version": "0.6.1",
     "language": "RUBY",
     "apis": [
       {
