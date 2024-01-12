@@ -225,7 +225,7 @@
   "google-cloud-data_fusion-v1+FILLER": "0.0.0",
   "google-cloud-data_labeling": "0.3.0",
   "google-cloud-data_labeling+FILLER": "0.0.0",
-  "google-cloud-data_labeling-v1beta1": "0.7.0",
+  "google-cloud-data_labeling-v1beta1": "0.7.1",
   "google-cloud-data_labeling-v1beta1+FILLER": "0.0.0",
   "google-cloud-dataflow": "0.3.0",
   "google-cloud-dataflow+FILLER": "0.0.0",
