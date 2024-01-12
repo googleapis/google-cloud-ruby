@@ -641,7 +641,7 @@
   "google-cloud-tasks+FILLER": "0.0.0",
   "google-cloud-tasks-v2": "0.10.0",
   "google-cloud-tasks-v2+FILLER": "0.0.0",
-  "google-cloud-tasks-v2beta2": "0.11.0",
+  "google-cloud-tasks-v2beta2": "0.11.1",
   "google-cloud-tasks-v2beta2+FILLER": "0.0.0",
   "google-cloud-tasks-v2beta3": "0.12.1",
   "google-cloud-tasks-v2beta3+FILLER": "0.0.0",
