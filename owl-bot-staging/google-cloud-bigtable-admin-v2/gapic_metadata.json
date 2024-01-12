@@ -1,0 +1,257 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.bigtable.admin.v2",
+  "libraryPackage": "::Google::Cloud::Bigtable::Admin::V2",
+  "services": {
+    "BigtableInstanceAdmin": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client",
+          "rpcs": {
+            "CreateInstance": {
+              "methods": [
+                "create_instance"
+              ]
+            },
+            "GetInstance": {
+              "methods": [
+                "get_instance"
+              ]
+            },
+            "ListInstances": {
+              "methods": [
+                "list_instances"
+              ]
+            },
+            "UpdateInstance": {
+              "methods": [
+                "update_instance"
+              ]
+            },
+            "PartialUpdateInstance": {
+              "methods": [
+                "partial_update_instance"
+              ]
+            },
+            "DeleteInstance": {
+              "methods": [
+                "delete_instance"
+              ]
+            },
+            "CreateCluster": {
+              "methods": [
+                "create_cluster"
+              ]
+            },
+            "GetCluster": {
+              "methods": [
+                "get_cluster"
+              ]
+            },
+            "ListClusters": {
+              "methods": [
+                "list_clusters"
+              ]
+            },
+            "UpdateCluster": {
+              "methods": [
+                "update_cluster"
+              ]
+            },
+            "PartialUpdateCluster": {
+              "methods": [
+                "partial_update_cluster"
+              ]
+            },
+            "DeleteCluster": {
+              "methods": [
+                "delete_cluster"
+              ]
+            },
+            "CreateAppProfile": {
+              "methods": [
+                "create_app_profile"
+              ]
+            },
+            "GetAppProfile": {
+              "methods": [
+                "get_app_profile"
+              ]
+            },
+            "ListAppProfiles": {
+              "methods": [
+                "list_app_profiles"
+              ]
+            },
+            "UpdateAppProfile": {
+              "methods": [
+                "update_app_profile"
+              ]
+            },
+            "DeleteAppProfile": {
+              "methods": [
+                "delete_app_profile"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            },
+            "ListHotTablets": {
+              "methods": [
+                "list_hot_tablets"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "BigtableTableAdmin": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client",
+          "rpcs": {
+            "CreateTable": {
+              "methods": [
+                "create_table"
+              ]
+            },
+            "CreateTableFromSnapshot": {
+              "methods": [
+                "create_table_from_snapshot"
+              ]
+            },
+            "ListTables": {
+              "methods": [
+                "list_tables"
+              ]
+            },
+            "GetTable": {
+              "methods": [
+                "get_table"
+              ]
+            },
+            "UpdateTable": {
+              "methods": [
+                "update_table"
+              ]
+            },
+            "DeleteTable": {
+              "methods": [
+                "delete_table"
+              ]
+            },
+            "UndeleteTable": {
+              "methods": [
+                "undelete_table"
+              ]
+            },
+            "ModifyColumnFamilies": {
+              "methods": [
+                "modify_column_families"
+              ]
+            },
+            "DropRowRange": {
+              "methods": [
+                "drop_row_range"
+              ]
+            },
+            "GenerateConsistencyToken": {
+              "methods": [
+                "generate_consistency_token"
+              ]
+            },
+            "CheckConsistency": {
+              "methods": [
+                "check_consistency"
+              ]
+            },
+            "SnapshotTable": {
+              "methods": [
+                "snapshot_table"
+              ]
+            },
+            "GetSnapshot": {
+              "methods": [
+                "get_snapshot"
+              ]
+            },
+            "ListSnapshots": {
+              "methods": [
+                "list_snapshots"
+              ]
+            },
+            "DeleteSnapshot": {
+              "methods": [
+                "delete_snapshot"
+              ]
+            },
+            "CreateBackup": {
+              "methods": [
+                "create_backup"
+              ]
+            },
+            "GetBackup": {
+              "methods": [
+                "get_backup"
+              ]
+            },
+            "UpdateBackup": {
+              "methods": [
+                "update_backup"
+              ]
+            },
+            "DeleteBackup": {
+              "methods": [
+                "delete_backup"
+              ]
+            },
+            "ListBackups": {
+              "methods": [
+                "list_backups"
+              ]
+            },
+            "RestoreTable": {
+              "methods": [
+                "restore_table"
+              ]
+            },
+            "CopyBackup": {
+              "methods": [
+                "copy_backup"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
