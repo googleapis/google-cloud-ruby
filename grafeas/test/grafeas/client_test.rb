@@ -22,8 +22,18 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Grafeas::ClientConstructionMinitest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_grafeas_grpc
-    Gapic::ServiceStub.stub :new, :stub do
+    Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Grafeas.grafeas do |config|
         config.credentials = grpc_channel

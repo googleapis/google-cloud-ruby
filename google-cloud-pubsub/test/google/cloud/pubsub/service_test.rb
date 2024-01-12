@@ -17,6 +17,16 @@ require "gapic/grpc/service_stub"
 require "google/cloud/pubsub/v1"
 
 describe Google::Cloud::PubSub::Service do
+  class PubSubServiceTestDummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+
+    def universe_domain
+      "example.com"
+    end
+  end
+
   let(:project) { "test" }
   let(:credentials) { :this_channel_is_insecure }
   let(:timeout) { 123.4 }
@@ -48,12 +58,13 @@ describe Google::Cloud::PubSub::Service do
       config.credentials = :this_channel_is_insecure
     end.configure
   end
+  let(:dummy_stub) { PubSubServiceTestDummyStub.new }
 
   it "configures the V1::Subscriber::Client" do
     # Clear all environment variables
     ENV.stub :[], nil do
       Google::Auth::Credentials.stub :default, credentials do
-        Gapic::ServiceStub.stub :new, nil do
+        Gapic::ServiceStub.stub :new, dummy_stub do
           service = Google::Cloud::PubSub::Service.new project, nil
           _(service.project).must_equal project
           config = service.subscriber.configure
@@ -73,7 +84,7 @@ describe Google::Cloud::PubSub::Service do
     # Clear all environment variables
     ENV.stub :[], nil do
       Google::Auth::Credentials.stub :default, credentials do
-        Gapic::ServiceStub.stub :new, nil do
+        Gapic::ServiceStub.stub :new, dummy_stub do
           service = Google::Cloud::PubSub::Service.new project, nil, host: endpoint_2, timeout: timeout
           _(service.project).must_equal project
           config = service.subscriber.configure
@@ -93,7 +104,7 @@ describe Google::Cloud::PubSub::Service do
     # Clear all environment variables
     ENV.stub :[], nil do
       Google::Auth::Credentials.stub :default, credentials do
-        Gapic::ServiceStub.stub :new, nil do
+        Gapic::ServiceStub.stub :new, dummy_stub do
           service = Google::Cloud::PubSub::Service.new project, nil
           _(service.project).must_equal project
           config = service.publisher.configure
@@ -113,7 +124,7 @@ describe Google::Cloud::PubSub::Service do
     # Clear all environment variables
     ENV.stub :[], nil do
       Google::Auth::Credentials.stub :default, credentials do
-        Gapic::ServiceStub.stub :new, nil do
+        Gapic::ServiceStub.stub :new, dummy_stub do
           service = Google::Cloud::PubSub::Service.new project, nil, host: endpoint_2, timeout: timeout
           _(service.project).must_equal project
           config = service.publisher.configure
@@ -133,7 +144,7 @@ describe Google::Cloud::PubSub::Service do
     # Clear all environment variables
     ENV.stub :[], nil do
       Google::Auth::Credentials.stub :default, credentials do
-        Gapic::ServiceStub.stub :new, nil do
+        Gapic::ServiceStub.stub :new, dummy_stub do
           service = Google::Cloud::PubSub::Service.new project, nil
           _(service.project).must_equal project
           config = service.iam.configure
@@ -153,7 +164,7 @@ describe Google::Cloud::PubSub::Service do
     # Clear all environment variables
     ENV.stub :[], nil do
       Google::Auth::Credentials.stub :default, credentials do
-        Gapic::ServiceStub.stub :new, nil do
+        Gapic::ServiceStub.stub :new, dummy_stub do
           service = Google::Cloud::PubSub::Service.new project, nil, host: endpoint_2, timeout: timeout
           _(service.project).must_equal project
           config = service.iam.configure
@@ -173,7 +184,7 @@ describe Google::Cloud::PubSub::Service do
     # Clear all environment variables
     ENV.stub :[], nil do
       Google::Auth::Credentials.stub :default, credentials do
-        Gapic::ServiceStub.stub :new, nil do
+        Gapic::ServiceStub.stub :new, dummy_stub do
           service = Google::Cloud::PubSub::Service.new project, nil
           _(service.project).must_equal project
           config = service.schemas.configure
@@ -193,7 +204,7 @@ describe Google::Cloud::PubSub::Service do
     # Clear all environment variables
     ENV.stub :[], nil do
       Google::Auth::Credentials.stub :default, credentials do
-        Gapic::ServiceStub.stub :new, nil do
+        Gapic::ServiceStub.stub :new, dummy_stub do
           service = Google::Cloud::PubSub::Service.new project, nil, host: endpoint_2, timeout: timeout
           _(service.project).must_equal project
           config = service.schemas.configure

@@ -22,8 +22,18 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Cloud::Monitoring::ClientConstructionMinitest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_alert_policy_service_grpc
-    Gapic::ServiceStub.stub :new, :stub do
+    Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Monitoring.alert_policy_service do |config|
         config.credentials = grpc_channel
@@ -33,7 +43,7 @@ class Google::Cloud::Monitoring::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_group_service_grpc
-    Gapic::ServiceStub.stub :new, :stub do
+    Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Monitoring.group_service do |config|
         config.credentials = grpc_channel
@@ -43,7 +53,7 @@ class Google::Cloud::Monitoring::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_metric_service_grpc
-    Gapic::ServiceStub.stub :new, :stub do
+    Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Monitoring.metric_service do |config|
         config.credentials = grpc_channel
@@ -53,7 +63,7 @@ class Google::Cloud::Monitoring::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_notification_channel_service_grpc
-    Gapic::ServiceStub.stub :new, :stub do
+    Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Monitoring.notification_channel_service do |config|
         config.credentials = grpc_channel
@@ -63,7 +73,7 @@ class Google::Cloud::Monitoring::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_query_service_grpc
-    Gapic::ServiceStub.stub :new, :stub do
+    Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Monitoring.query_service do |config|
         config.credentials = grpc_channel
@@ -73,7 +83,7 @@ class Google::Cloud::Monitoring::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_service_monitoring_service_grpc
-    Gapic::ServiceStub.stub :new, :stub do
+    Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Monitoring.service_monitoring_service do |config|
         config.credentials = grpc_channel
@@ -83,7 +93,7 @@ class Google::Cloud::Monitoring::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_snooze_service_grpc
-    Gapic::ServiceStub.stub :new, :stub do
+    Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Monitoring.snooze_service do |config|
         config.credentials = grpc_channel
@@ -93,7 +103,7 @@ class Google::Cloud::Monitoring::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_uptime_check_service_grpc
-    Gapic::ServiceStub.stub :new, :stub do
+    Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Monitoring.uptime_check_service do |config|
         config.credentials = grpc_channel

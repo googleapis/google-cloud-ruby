@@ -23,8 +23,18 @@ require "gapic/grpc"
 require "gapic/rest"
 
 class Google::Cloud::MigrationCenter::ClientConstructionMinitest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_migration_center_grpc
-    Gapic::ServiceStub.stub :new, :stub do
+    Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::MigrationCenter.migration_center transport: :grpc do |config|
         config.credentials = grpc_channel
@@ -34,7 +44,7 @@ class Google::Cloud::MigrationCenter::ClientConstructionMinitest < Minitest::Tes
   end
 
   def test_migration_center_rest
-    Gapic::Rest::ClientStub.stub :new, :stub do
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::MigrationCenter.migration_center transport: :rest do |config|
         config.credentials = :dummy_credentials
       end

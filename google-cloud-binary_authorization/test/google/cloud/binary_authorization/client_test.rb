@@ -23,8 +23,18 @@ require "gapic/grpc"
 require "gapic/rest"
 
 class Google::Cloud::BinaryAuthorization::ClientConstructionMinitest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_binauthz_management_service_grpc
-    Gapic::ServiceStub.stub :new, :stub do
+    Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::BinaryAuthorization.binauthz_management_service transport: :grpc do |config|
         config.credentials = grpc_channel
@@ -34,7 +44,7 @@ class Google::Cloud::BinaryAuthorization::ClientConstructionMinitest < Minitest:
   end
 
   def test_binauthz_management_service_rest
-    Gapic::Rest::ClientStub.stub :new, :stub do
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::BinaryAuthorization.binauthz_management_service transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
@@ -43,7 +53,7 @@ class Google::Cloud::BinaryAuthorization::ClientConstructionMinitest < Minitest:
   end
 
   def test_system_policy_grpc
-    Gapic::ServiceStub.stub :new, :stub do
+    Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::BinaryAuthorization.system_policy transport: :grpc do |config|
         config.credentials = grpc_channel
@@ -53,7 +63,7 @@ class Google::Cloud::BinaryAuthorization::ClientConstructionMinitest < Minitest:
   end
 
   def test_system_policy_rest
-    Gapic::Rest::ClientStub.stub :new, :stub do
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::BinaryAuthorization.system_policy transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
@@ -62,7 +72,7 @@ class Google::Cloud::BinaryAuthorization::ClientConstructionMinitest < Minitest:
   end
 
   def test_validation_helper_grpc
-    Gapic::ServiceStub.stub :new, :stub do
+    Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::BinaryAuthorization.validation_helper transport: :grpc do |config|
         config.credentials = grpc_channel
@@ -72,7 +82,7 @@ class Google::Cloud::BinaryAuthorization::ClientConstructionMinitest < Minitest:
   end
 
   def test_validation_helper_rest
-    Gapic::Rest::ClientStub.stub :new, :stub do
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::BinaryAuthorization.validation_helper transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
