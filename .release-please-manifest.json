@@ -375,7 +375,7 @@
   "google-cloud-kms+FILLER": "0.0.0",
   "google-cloud-kms-inventory": "1.0.0",
   "google-cloud-kms-inventory+FILLER": "0.0.0",
-  "google-cloud-kms-inventory-v1": "0.8.0",
+  "google-cloud-kms-inventory-v1": "0.8.1",
   "google-cloud-kms-inventory-v1+FILLER": "0.0.0",
   "google-cloud-kms-v1": "0.24.1",
   "google-cloud-kms-v1+FILLER": "0.0.0",
