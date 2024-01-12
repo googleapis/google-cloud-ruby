@@ -1,0 +1,213 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.privacy.dlp.v2",
+  "libraryPackage": "::Google::Cloud::Dlp::V2",
+  "services": {
+    "DlpService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dlp::V2::DlpService::Client",
+          "rpcs": {
+            "InspectContent": {
+              "methods": [
+                "inspect_content"
+              ]
+            },
+            "RedactImage": {
+              "methods": [
+                "redact_image"
+              ]
+            },
+            "DeidentifyContent": {
+              "methods": [
+                "deidentify_content"
+              ]
+            },
+            "ReidentifyContent": {
+              "methods": [
+                "reidentify_content"
+              ]
+            },
+            "ListInfoTypes": {
+              "methods": [
+                "list_info_types"
+              ]
+            },
+            "CreateInspectTemplate": {
+              "methods": [
+                "create_inspect_template"
+              ]
+            },
+            "UpdateInspectTemplate": {
+              "methods": [
+                "update_inspect_template"
+              ]
+            },
+            "GetInspectTemplate": {
+              "methods": [
+                "get_inspect_template"
+              ]
+            },
+            "ListInspectTemplates": {
+              "methods": [
+                "list_inspect_templates"
+              ]
+            },
+            "DeleteInspectTemplate": {
+              "methods": [
+                "delete_inspect_template"
+              ]
+            },
+            "CreateDeidentifyTemplate": {
+              "methods": [
+                "create_deidentify_template"
+              ]
+            },
+            "UpdateDeidentifyTemplate": {
+              "methods": [
+                "update_deidentify_template"
+              ]
+            },
+            "GetDeidentifyTemplate": {
+              "methods": [
+                "get_deidentify_template"
+              ]
+            },
+            "ListDeidentifyTemplates": {
+              "methods": [
+                "list_deidentify_templates"
+              ]
+            },
+            "DeleteDeidentifyTemplate": {
+              "methods": [
+                "delete_deidentify_template"
+              ]
+            },
+            "CreateJobTrigger": {
+              "methods": [
+                "create_job_trigger"
+              ]
+            },
+            "UpdateJobTrigger": {
+              "methods": [
+                "update_job_trigger"
+              ]
+            },
+            "HybridInspectJobTrigger": {
+              "methods": [
+                "hybrid_inspect_job_trigger"
+              ]
+            },
+            "GetJobTrigger": {
+              "methods": [
+                "get_job_trigger"
+              ]
+            },
+            "ListJobTriggers": {
+              "methods": [
+                "list_job_triggers"
+              ]
+            },
+            "DeleteJobTrigger": {
+              "methods": [
+                "delete_job_trigger"
+              ]
+            },
+            "ActivateJobTrigger": {
+              "methods": [
+                "activate_job_trigger"
+              ]
+            },
+            "CreateDiscoveryConfig": {
+              "methods": [
+                "create_discovery_config"
+              ]
+            },
+            "UpdateDiscoveryConfig": {
+              "methods": [
+                "update_discovery_config"
+              ]
+            },
+            "GetDiscoveryConfig": {
+              "methods": [
+                "get_discovery_config"
+              ]
+            },
+            "ListDiscoveryConfigs": {
+              "methods": [
+                "list_discovery_configs"
+              ]
+            },
+            "DeleteDiscoveryConfig": {
+              "methods": [
+                "delete_discovery_config"
+              ]
+            },
+            "CreateDlpJob": {
+              "methods": [
+                "create_dlp_job"
+              ]
+            },
+            "ListDlpJobs": {
+              "methods": [
+                "list_dlp_jobs"
+              ]
+            },
+            "GetDlpJob": {
+              "methods": [
+                "get_dlp_job"
+              ]
+            },
+            "DeleteDlpJob": {
+              "methods": [
+                "delete_dlp_job"
+              ]
+            },
+            "CancelDlpJob": {
+              "methods": [
+                "cancel_dlp_job"
+              ]
+            },
+            "CreateStoredInfoType": {
+              "methods": [
+                "create_stored_info_type"
+              ]
+            },
+            "UpdateStoredInfoType": {
+              "methods": [
+                "update_stored_info_type"
+              ]
+            },
+            "GetStoredInfoType": {
+              "methods": [
+                "get_stored_info_type"
+              ]
+            },
+            "ListStoredInfoTypes": {
+              "methods": [
+                "list_stored_info_types"
+              ]
+            },
+            "DeleteStoredInfoType": {
+              "methods": [
+                "delete_stored_info_type"
+              ]
+            },
+            "HybridInspectDlpJob": {
+              "methods": [
+                "hybrid_inspect_dlp_job"
+              ]
+            },
+            "FinishDlpJob": {
+              "methods": [
+                "finish_dlp_job"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
