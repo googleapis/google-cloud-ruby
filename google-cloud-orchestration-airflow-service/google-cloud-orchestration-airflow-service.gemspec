@@ -23,7 +23,7 @@ Gem::Specification.new do |gem|
   gem.required_ruby_version = ">= 2.6"
 
   gem.add_dependency "google-cloud-core", "~> 1.6"
-  gem.add_dependency "google-cloud-orchestration-airflow-service-v1", ">= 0.4", "< 2.a"
+  gem.add_dependency "google-cloud-orchestration-airflow-service-v1", ">= 0.9", "< 2.a"
 
   gem.add_development_dependency "google-style", "~> 1.26.1"
   gem.add_development_dependency "minitest", "~> 5.16"
