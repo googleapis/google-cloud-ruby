@@ -89,6 +89,31 @@
               "methods": [
                 "export_lock_info"
               ]
+            },
+            "CreatePreview": {
+              "methods": [
+                "create_preview"
+              ]
+            },
+            "GetPreview": {
+              "methods": [
+                "get_preview"
+              ]
+            },
+            "ListPreviews": {
+              "methods": [
+                "list_previews"
+              ]
+            },
+            "DeletePreview": {
+              "methods": [
+                "delete_preview"
+              ]
+            },
+            "ExportPreviewResult": {
+              "methods": [
+                "export_preview_result"
+              ]
             }
           }
         }

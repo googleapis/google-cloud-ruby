@@ -69,6 +69,17 @@ module Google
             rpc :UnlockDeployment, ::Google::Cloud::ConfigService::V1::UnlockDeploymentRequest, ::Google::Longrunning::Operation
             # Exports the lock info on a locked deployment.
             rpc :ExportLockInfo, ::Google::Cloud::ConfigService::V1::ExportLockInfoRequest, ::Google::Cloud::ConfigService::V1::LockInfo
+            # Creates a [Preview][google.cloud.config.v1.Preview].
+            rpc :CreatePreview, ::Google::Cloud::ConfigService::V1::CreatePreviewRequest, ::Google::Longrunning::Operation
+            # Gets details about a [Preview][google.cloud.config.v1.Preview].
+            rpc :GetPreview, ::Google::Cloud::ConfigService::V1::GetPreviewRequest, ::Google::Cloud::ConfigService::V1::Preview
+            # Lists [Preview][google.cloud.config.v1.Preview]s in a given project and
+            # location.
+            rpc :ListPreviews, ::Google::Cloud::ConfigService::V1::ListPreviewsRequest, ::Google::Cloud::ConfigService::V1::ListPreviewsResponse
+            # Deletes a [Preview][google.cloud.config.v1.Preview].
+            rpc :DeletePreview, ::Google::Cloud::ConfigService::V1::DeletePreviewRequest, ::Google::Longrunning::Operation
+            # Export [Preview][google.cloud.config.v1.Preview] results.
+            rpc :ExportPreviewResult, ::Google::Cloud::ConfigService::V1::ExportPreviewResultRequest, ::Google::Cloud::ConfigService::V1::ExportPreviewResultResponse
           end
 
           Stub = Service.rpc_stub_class

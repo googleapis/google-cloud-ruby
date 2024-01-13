@@ -959,6 +959,284 @@ class ::Google::Cloud::ConfigService::V1::Config::Rest::ClientTest < Minitest::T
     end
   end
 
+  def test_create_preview
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    preview_id = "hello world"
+    preview = {}
+    request_id = "hello world"
+
+    create_preview_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ConfigService::V1::Config::Rest::ServiceStub.stub :transcode_create_preview_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_preview_client_stub do
+        # Create client
+        client = ::Google::Cloud::ConfigService::V1::Config::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_preview({ parent: parent, preview_id: preview_id, preview: preview, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_preview parent: parent, preview_id: preview_id, preview: preview, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_preview ::Google::Cloud::ConfigService::V1::CreatePreviewRequest.new(parent: parent, preview_id: preview_id, preview: preview, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_preview({ parent: parent, preview_id: preview_id, preview: preview, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_preview(::Google::Cloud::ConfigService::V1::CreatePreviewRequest.new(parent: parent, preview_id: preview_id, preview: preview, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_preview_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_preview
+    # Create test objects.
+    client_result = ::Google::Cloud::ConfigService::V1::Preview.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_preview_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ConfigService::V1::Config::Rest::ServiceStub.stub :transcode_get_preview_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_preview_client_stub do
+        # Create client
+        client = ::Google::Cloud::ConfigService::V1::Config::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_preview({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_preview name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_preview ::Google::Cloud::ConfigService::V1::GetPreviewRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_preview({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_preview(::Google::Cloud::ConfigService::V1::GetPreviewRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_preview_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_previews
+    # Create test objects.
+    client_result = ::Google::Cloud::ConfigService::V1::ListPreviewsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_previews_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ConfigService::V1::Config::Rest::ServiceStub.stub :transcode_list_previews_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_previews_client_stub do
+        # Create client
+        client = ::Google::Cloud::ConfigService::V1::Config::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_previews({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_previews parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_previews ::Google::Cloud::ConfigService::V1::ListPreviewsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_previews({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_previews(::Google::Cloud::ConfigService::V1::ListPreviewsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_previews_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_preview
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+
+    delete_preview_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ConfigService::V1::Config::Rest::ServiceStub.stub :transcode_delete_preview_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_preview_client_stub do
+        # Create client
+        client = ::Google::Cloud::ConfigService::V1::Config::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_preview({ name: name, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_preview name: name, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_preview ::Google::Cloud::ConfigService::V1::DeletePreviewRequest.new(name: name, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_preview({ name: name, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_preview(::Google::Cloud::ConfigService::V1::DeletePreviewRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_preview_client_stub.call_count
+      end
+    end
+  end
+
+  def test_export_preview_result
+    # Create test objects.
+    client_result = ::Google::Cloud::ConfigService::V1::ExportPreviewResultResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+
+    export_preview_result_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ConfigService::V1::Config::Rest::ServiceStub.stub :transcode_export_preview_result_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, export_preview_result_client_stub do
+        # Create client
+        client = ::Google::Cloud::ConfigService::V1::Config::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.export_preview_result({ parent: parent }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.export_preview_result parent: parent do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.export_preview_result ::Google::Cloud::ConfigService::V1::ExportPreviewResultRequest.new(parent: parent) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.export_preview_result({ parent: parent }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.export_preview_result(::Google::Cloud::ConfigService::V1::ExportPreviewResultRequest.new(parent: parent), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, export_preview_result_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 
