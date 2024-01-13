@@ -1195,6 +1195,10 @@
       "component": "google-cloud-service_directory-v1beta1",
       "version_file": "lib/google/cloud/service_directory/v1beta1/version.rb"
     },
+    "google-cloud-service_health-v1": {
+      "component": "google-cloud-service_health-v1",
+      "version_file": "lib/google/cloud/service_health/v1/version.rb"
+    },
     "google-cloud-service_management": {
       "component": "google-cloud-service_management",
       "version_file": "lib/google/cloud/service_management/version.rb"
