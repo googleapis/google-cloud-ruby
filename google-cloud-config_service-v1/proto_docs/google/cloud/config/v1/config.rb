@@ -537,6 +537,9 @@ module Google
         # @!attribute [r] deployment_metadata
         #   @return [::Google::Cloud::ConfigService::V1::DeploymentOperationMetadata]
         #     Output only. Metadata about the deployment operation state.
+        # @!attribute [r] preview_metadata
+        #   @return [::Google::Cloud::ConfigService::V1::PreviewOperationMetadata]
+        #     Output only. Metadata about the preview operation state.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time when the operation was created.
@@ -1073,6 +1076,389 @@ module Google
         #   @return [::Google::Protobuf::Timestamp]
         #     Time that the lock was taken.
         class LockInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A preview represents a set of actions Infra Manager would perform
+        # to move the resources towards the desired state as specified in the
+        # configuration.
+        # @!attribute [rw] terraform_blueprint
+        #   @return [::Google::Cloud::ConfigService::V1::TerraformBlueprint]
+        #     The terraform blueprint to preview.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. Resource name of the preview. Resource name can be user
+        #     provided or server generated ID if unspecified. Format:
+        #     `projects/{project}/locations/{location}/previews/{preview}`
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Time the preview was created.
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. User-defined labels for the preview.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::ConfigService::V1::Preview::State]
+        #     Output only. Current state of the preview.
+        # @!attribute [rw] deployment
+        #   @return [::String]
+        #     Optional. Optional deployment reference. If specified, the preview will be
+        #     performed using the provided deployment's current state and use any
+        #     relevant fields from the deployment unless explicitly specified in the
+        #     preview create request.
+        # @!attribute [rw] preview_mode
+        #   @return [::Google::Cloud::ConfigService::V1::Preview::PreviewMode]
+        #     Optional. Current mode of preview.
+        # @!attribute [rw] service_account
+        #   @return [::String]
+        #     Optional. Optional service account. If omitted, the deployment resource
+        #     reference must be provided, and the service account attached to the
+        #     deployment will be used.
+        # @!attribute [rw] artifacts_gcs_bucket
+        #   @return [::String]
+        #     Optional. User-defined location of Cloud Build logs, artifacts, and
+        #     in Google Cloud Storage.
+        #     Format: `gs://{bucket}/{folder}`
+        #     A default bucket will be bootstrapped if the field is not set or empty
+        #     Default Bucket Format: `gs://<project number>-<region>-blueprint-config`
+        #     Constraints:
+        #     - The bucket needs to be in the same project as the deployment
+        #     - The path cannot be within the path of `gcs_source`
+        #     If omitted and deployment resource ref provided has artifacts_gcs_bucket
+        #     defined, that artifact bucket is used.
+        # @!attribute [rw] worker_pool
+        #   @return [::String]
+        #     Optional. The user-specified Worker Pool resource in which the Cloud Build
+        #     job will execute. Format
+        #     projects/\\{project}/locations/\\{location}/workerPools/\\{workerPoolId} If this
+        #     field is unspecified, the default Cloud Build worker pool will be used. If
+        #     omitted and deployment resource ref provided has worker_pool defined, that
+        #     worker pool is used.
+        # @!attribute [r] error_code
+        #   @return [::Google::Cloud::ConfigService::V1::Preview::ErrorCode]
+        #     Output only. Code describing any errors that may have occurred.
+        # @!attribute [r] error_status
+        #   @return [::Google::Rpc::Status]
+        #     Output only. Additional information regarding the current state.
+        # @!attribute [r] build
+        #   @return [::String]
+        #     Output only. Cloud Build instance UUID associated with this preview.
+        # @!attribute [r] tf_errors
+        #   @return [::Array<::Google::Cloud::ConfigService::V1::TerraformError>]
+        #     Output only. Summary of errors encountered during Terraform preview.
+        #     It has a size limit of 10, i.e. only top 10 errors will be summarized here.
+        # @!attribute [r] error_logs
+        #   @return [::String]
+        #     Output only. Link to tf-error.ndjson file, which contains the full list of
+        #     the errors encountered during a Terraform preview.
+        #     Format: `gs://{bucket}/{object}`.
+        # @!attribute [r] preview_artifacts
+        #   @return [::Google::Cloud::ConfigService::V1::PreviewArtifacts]
+        #     Output only. Artifacts from preview.
+        # @!attribute [r] logs
+        #   @return [::String]
+        #     Output only. Location of preview logs in `gs://{bucket}/{object}` format.
+        class Preview
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Possible states of a preview.
+          module State
+            # The default value. This value is used if the state is unknown.
+            STATE_UNSPECIFIED = 0
+
+            # The preview is being created.
+            CREATING = 1
+
+            # The preview has succeeded.
+            SUCCEEDED = 2
+
+            # The preview is being applied.
+            APPLYING = 3
+
+            # The preview is stale. A preview can become stale if a revision has been
+            # applied after this preview was created.
+            STALE = 4
+
+            # The preview is being deleted.
+            DELETING = 5
+
+            # The preview has encountered an unexpected error.
+            FAILED = 6
+
+            # The preview has been deleted.
+            DELETED = 7
+          end
+
+          # Preview mode provides options for customizing preview operations.
+          module PreviewMode
+            # Unspecified policy, default mode will be used.
+            PREVIEW_MODE_UNSPECIFIED = 0
+
+            # DEFAULT mode generates an execution plan for reconciling current resource
+            # state into expected resource state.
+            DEFAULT = 1
+
+            # DELETE mode generates as execution plan for destroying current resources.
+            DELETE = 2
+          end
+
+          # Possible errors that can occur with previews.
+          module ErrorCode
+            # No error code was specified.
+            ERROR_CODE_UNSPECIFIED = 0
+
+            # Cloud Build failed due to a permissions issue.
+            CLOUD_BUILD_PERMISSION_DENIED = 1
+
+            # Cloud Storage bucket failed to create due to a permissions issue.
+            BUCKET_CREATION_PERMISSION_DENIED = 2
+
+            # Cloud Storage bucket failed for a non-permissions-related issue.
+            BUCKET_CREATION_FAILED = 3
+
+            # Acquiring lock on provided deployment reference failed.
+            DEPLOYMENT_LOCK_ACQUIRE_FAILED = 4
+
+            # Preview encountered an error when trying to access Cloud Build API.
+            PREVIEW_BUILD_API_FAILED = 5
+
+            # Preview created a build but build failed and logs were generated.
+            PREVIEW_BUILD_RUN_FAILED = 6
+          end
+        end
+
+        # Ephemeral metadata content describing the state of a preview operation.
+        # @!attribute [rw] step
+        #   @return [::Google::Cloud::ConfigService::V1::PreviewOperationMetadata::PreviewStep]
+        #     The current step the preview operation is running.
+        # @!attribute [rw] preview_artifacts
+        #   @return [::Google::Cloud::ConfigService::V1::PreviewArtifacts]
+        #     Artifacts from preview.
+        # @!attribute [r] logs
+        #   @return [::String]
+        #     Output only. Location of preview logs in `gs://{bucket}/{object}` format.
+        # @!attribute [r] build
+        #   @return [::String]
+        #     Output only. Cloud Build instance UUID associated with this preview.
+        class PreviewOperationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The possible steps a preview may be running.
+          module PreviewStep
+            # Unspecified preview step.
+            PREVIEW_STEP_UNSPECIFIED = 0
+
+            # Infra Manager is creating a Google Cloud Storage bucket to store
+            # artifacts and metadata about the preview.
+            PREPARING_STORAGE_BUCKET = 1
+
+            # Downloading the blueprint onto the Google Cloud Storage bucket.
+            DOWNLOADING_BLUEPRINT = 2
+
+            # Initializing Terraform using `terraform init`.
+            RUNNING_TF_INIT = 3
+
+            # Running `terraform plan`.
+            RUNNING_TF_PLAN = 4
+
+            # Fetching a deployment.
+            FETCHING_DEPLOYMENT = 5
+
+            # Locking a deployment.
+            LOCKING_DEPLOYMENT = 6
+
+            # Unlocking a deployment.
+            UNLOCKING_DEPLOYMENT = 7
+
+            # Operation was successful.
+            SUCCEEDED = 8
+
+            # Operation failed.
+            FAILED = 9
+          end
+        end
+
+        # Artifacts created by preview.
+        # @!attribute [r] content
+        #   @return [::String]
+        #     Output only. Location of a blueprint copy and other content in Google Cloud
+        #     Storage. Format: `gs://{bucket}/{object}`
+        # @!attribute [r] artifacts
+        #   @return [::String]
+        #     Output only. Location of artifacts in Google Cloud Storage.
+        #     Format: `gs://{bucket}/{object}`
+        class PreviewArtifacts
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request to create a preview.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent in whose context the Preview is created. The parent
+        #     value is in the format: 'projects/\\{project_id}/locations/\\{location}'.
+        # @!attribute [rw] preview_id
+        #   @return [::String]
+        #     Optional. The preview ID.
+        # @!attribute [rw] preview
+        #   @return [::Google::Cloud::ConfigService::V1::Preview]
+        #     Required. {::Google::Cloud::ConfigService::V1::Preview Preview} resource to be created.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional request ID to identify requests. Specify a unique
+        #     request ID so that if you must retry your request, the server will know to
+        #     ignore the request if it has already been completed. The server will
+        #     guarantee that for at least 60 minutes since the first request.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request ID,
+        #     the server can check if original operation with the same request ID was
+        #     received, and if so, will ignore the second request. This prevents clients
+        #     from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class CreatePreviewRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request to get details about a preview.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the preview. Format:
+        #     'projects/\\{project_id}/locations/\\{location}/previews/\\{preview}'.
+        class GetPreviewRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request to list all previews for a given project and location.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent in whose context the Previews are listed. The parent
+        #     value is in the format: 'projects/\\{project_id}/locations/\\{location}'.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. When requesting a page of resources, 'page_size' specifies number
+        #     of resources to return. If unspecified or set to 0, all resources will be
+        #     returned.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. Token returned by previous call to 'ListDeployments' which
+        #     specifies the position in the list from where to continue listing the
+        #     resources.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Lists the Deployments that match the filter expression. A filter
+        #     expression filters the resources listed in the response. The expression
+        #     must be of the form '\\{field} \\{operator} \\{value}' where operators: '<', '>',
+        #     '<=', '>=', '!=', '=', ':' are supported (colon ':' represents a HAS
+        #     operator which is roughly synonymous with equality). \\{field} can refer to a
+        #     proto or JSON field, or a synthetic field. Field names can be camelCase or
+        #     snake_case.
+        #
+        #     Examples:
+        #     - Filter by name:
+        #       name = "projects/foo/locations/us-central1/deployments/bar
+        #
+        #     - Filter by labels:
+        #       - Resources that have a key called 'foo'
+        #         labels.foo:*
+        #       - Resources that have a key called 'foo' whose value is 'bar'
+        #         labels.foo = bar
+        #
+        #     - Filter by state:
+        #       - Deployments in CREATING state.
+        #         state=CREATING
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. Field to use to sort the list.
+        class ListPreviewsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A response to a `ListPreviews` call. Contains a list of Previews.
+        # @!attribute [rw] previews
+        #   @return [::Array<::Google::Cloud::ConfigService::V1::Preview>]
+        #     List of [Previews][]s.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     Token to be supplied to the next ListPreviews request via `page_token`
+        #     to obtain the next set of results.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Locations that could not be reached.
+        class ListPreviewsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request to delete a preview.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the Preview in the format:
+        #     'projects/\\{project_id}/locations/\\{location}/previews/\\{preview}'.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional request ID to identify requests. Specify a unique
+        #     request ID so that if you must retry your request, the server will know to
+        #     ignore the request if it has already been completed. The server will
+        #     guarantee that for at least 60 minutes after the first request.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request ID,
+        #     the server can check if original operation with the same request ID was
+        #     received, and if so, will ignore the second request. This prevents clients
+        #     from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class DeletePreviewRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request to export preview results.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The preview whose results should be exported. The preview value
+        #     is in the format:
+        #     'projects/\\{project_id}/locations/\\{location}/previews/\\{preview}'.
+        class ExportPreviewResultRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A response to `ExportPreviewResult` call. Contains preview results.
+        # @!attribute [r] result
+        #   @return [::Google::Cloud::ConfigService::V1::PreviewResult]
+        #     Output only. Signed URLs for accessing the plan files.
+        class ExportPreviewResultResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Contains a signed Cloud Storage URLs.
+        # @!attribute [r] binary_signed_uri
+        #   @return [::String]
+        #     Output only. Plan binary signed URL
+        # @!attribute [r] json_signed_uri
+        #   @return [::String]
+        #     Output only. Plan JSON signed URL
+        class PreviewResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
