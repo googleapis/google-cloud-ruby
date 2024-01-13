@@ -826,7 +826,7 @@ module Google
               # only supports listing fields that have been explicitly overridden. To issue
               # this query, call
               # {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_fields FirestoreAdmin.ListFields}
-              # with the filter set to `indexConfig.usesAncestorConfig:false or
+              # with the filter set to `indexConfig.usesAncestorConfig:false` or
               # `ttlConfig:*`.
               #
               # @overload list_fields(request, options = nil)

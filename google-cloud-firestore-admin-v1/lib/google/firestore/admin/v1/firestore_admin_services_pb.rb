@@ -99,7 +99,7 @@ module Google
               # only supports listing fields that have been explicitly overridden. To issue
               # this query, call
               # [FirestoreAdmin.ListFields][google.firestore.admin.v1.FirestoreAdmin.ListFields]
-              # with the filter set to `indexConfig.usesAncestorConfig:false or
+              # with the filter set to `indexConfig.usesAncestorConfig:false` or
               # `ttlConfig:*`.
               rpc :ListFields, ::Google::Cloud::Firestore::Admin::V1::ListFieldsRequest, ::Google::Cloud::Firestore::Admin::V1::ListFieldsResponse
               # Exports a copy of all or a subset of documents from Google Cloud Firestore
