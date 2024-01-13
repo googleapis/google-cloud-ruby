@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/servicehealth/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-service_health/$1
