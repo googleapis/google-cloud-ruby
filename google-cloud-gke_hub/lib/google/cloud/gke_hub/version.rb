@@ -20,7 +20,7 @@
 module Google
   module Cloud
     module GkeHub
-      VERSION = "1.2.1"
+      VERSION = "1.3.0"
     end
   end
 end
