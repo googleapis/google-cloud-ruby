@@ -243,7 +243,7 @@
   "google-cloud-dataproc+FILLER": "0.0.0",
   "google-cloud-dataproc-v1": "0.23.1",
   "google-cloud-dataproc-v1+FILLER": "0.0.0",
-  "google-cloud-dataqna": "0.3.1",
+  "google-cloud-dataqna": "0.4.0",
   "google-cloud-dataqna+FILLER": "0.0.0",
   "google-cloud-dataqna-v1alpha": "0.6.1",
   "google-cloud-dataqna-v1alpha+FILLER": "0.0.0",
