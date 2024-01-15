@@ -107,7 +107,7 @@
   "google-cloud-bigquery-connection+FILLER": "0.0.0",
   "google-cloud-bigquery-connection-v1": "0.17.1",
   "google-cloud-bigquery-connection-v1+FILLER": "0.0.0",
-  "google-cloud-bigquery-data_exchange": "0.2.0",
+  "google-cloud-bigquery-data_exchange": "0.3.0",
   "google-cloud-bigquery-data_exchange+FILLER": "0.0.0",
   "google-cloud-bigquery-data_exchange-v1beta1": "0.6.1",
   "google-cloud-bigquery-data_exchange-v1beta1+FILLER": "0.0.0",
