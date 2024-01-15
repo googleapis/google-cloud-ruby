@@ -371,7 +371,7 @@
   "google-cloud-iot+FILLER": "0.0.0",
   "google-cloud-iot-v1": "0.9.1",
   "google-cloud-iot-v1+FILLER": "0.0.0",
-  "google-cloud-kms": "2.5.1",
+  "google-cloud-kms": "2.6.0",
   "google-cloud-kms+FILLER": "0.0.0",
   "google-cloud-kms-inventory": "1.1.0",
   "google-cloud-kms-inventory+FILLER": "0.0.0",
