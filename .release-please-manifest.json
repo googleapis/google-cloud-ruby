@@ -459,7 +459,7 @@
   "google-cloud-optimization+FILLER": "0.0.0",
   "google-cloud-optimization-v1": "0.8.1",
   "google-cloud-optimization-v1+FILLER": "0.0.0",
-  "google-cloud-orchestration-airflow-service": "1.2.0",
+  "google-cloud-orchestration-airflow-service": "1.3.0",
   "google-cloud-orchestration-airflow-service+FILLER": "0.0.0",
   "google-cloud-orchestration-airflow-service-v1": "0.9.1",
   "google-cloud-orchestration-airflow-service-v1+FILLER": "0.0.0",
