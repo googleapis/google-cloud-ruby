@@ -463,7 +463,7 @@
   "google-cloud-orchestration-airflow-service+FILLER": "0.0.0",
   "google-cloud-orchestration-airflow-service-v1": "0.9.1",
   "google-cloud-orchestration-airflow-service-v1+FILLER": "0.0.0",
-  "google-cloud-org_policy": "1.2.1",
+  "google-cloud-org_policy": "1.3.0",
   "google-cloud-org_policy+FILLER": "0.0.0",
   "google-cloud-org_policy-v2": "0.9.1",
   "google-cloud-org_policy-v2+FILLER": "0.0.0",
