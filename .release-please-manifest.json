@@ -741,7 +741,7 @@
   "google-cloud-workflows-v1+FILLER": "0.0.0",
   "google-cloud-workflows-v1beta": "0.8.1",
   "google-cloud-workflows-v1beta+FILLER": "0.0.0",
-  "google-iam-client": "0.2.0",
+  "google-iam-client": "0.3.0",
   "google-iam-client+FILLER": "0.0.0",
   "google-iam-credentials": "1.3.0",
   "google-iam-credentials+FILLER": "0.0.0",
