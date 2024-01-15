@@ -523,7 +523,7 @@
   "google-cloud-recommender+FILLER": "0.0.0",
   "google-cloud-recommender-v1": "0.17.1",
   "google-cloud-recommender-v1+FILLER": "0.0.0",
-  "google-cloud-redis": "1.4.0",
+  "google-cloud-redis": "1.5.0",
   "google-cloud-redis+FILLER": "0.0.0",
   "google-cloud-redis-cluster": "0.1.0",
   "google-cloud-redis-cluster+FILLER": "0.0.0",
