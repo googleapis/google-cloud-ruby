@@ -20,7 +20,7 @@
 module Google
   module Cloud
     module Redis
-      VERSION = "1.4.0"
+      VERSION = "1.5.0"
     end
   end
 end
