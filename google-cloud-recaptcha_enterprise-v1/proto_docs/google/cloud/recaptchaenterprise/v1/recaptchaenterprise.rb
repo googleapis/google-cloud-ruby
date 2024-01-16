@@ -317,7 +317,7 @@ module Google
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Username of the account that is being verified. Deprecated. Customers
-        #     should now provide the hashed account ID field in Event.
+        #     should now provide the `account_id` field in `event.user_info`.
         class AccountVerificationInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
