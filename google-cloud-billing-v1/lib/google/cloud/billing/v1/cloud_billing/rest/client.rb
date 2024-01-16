@@ -1160,7 +1160,7 @@ module Google
               #     The specified billing account cannot be a subaccount, since a subaccount
               #     always belongs to the same organization as its parent account.
               #   @param destination_parent [::String]
-              #     Required. The resource name of the Organization to reparent
+              #     Required. The resource name of the Organization to move
               #     the billing account under.
               #     Must be of the form `organizations/{organization_id}`.
               # @yield [result, operation] Access the result along with the TransportOperation object
