@@ -650,46 +650,6 @@
           "type": "FULL"
         }
       ]
-    },
-    {
-      "region_tag": "cloudtasks_v2beta3_generated_CloudTasks_BufferTask_sync",
-      "title": "Snippet for the buffer_task call in the CloudTasks service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta3::CloudTasks::Client#buffer_task.",
-      "file": "cloud_tasks/buffer_task.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "buffer_task",
-        "full_name": "::Google::Cloud::Tasks::V2beta3::CloudTasks::Client#buffer_task",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::Tasks::V2beta3::BufferTaskRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Cloud::Tasks::V2beta3::BufferTaskResponse",
-        "client": {
-          "short_name": "CloudTasks::Client",
-          "full_name": "::Google::Cloud::Tasks::V2beta3::CloudTasks::Client"
-        },
-        "method": {
-          "short_name": "BufferTask",
-          "full_name": "google.cloud.tasks.v2beta3.CloudTasks.BufferTask",
-          "service": {
-            "short_name": "CloudTasks",
-            "full_name": "google.cloud.tasks.v2beta3.CloudTasks"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 46,
-          "type": "FULL"
-        }
-      ]
     }
   ]
 }
