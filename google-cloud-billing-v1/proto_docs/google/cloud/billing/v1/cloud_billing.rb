@@ -34,8 +34,8 @@ module Google
         #   @return [::Boolean]
         #     Output only. True if the billing account is open, and will therefore be
         #     charged for any usage on associated projects. False if the billing account
-        #     is closed, and therefore projects associated with it will be unable to use
-        #     paid services.
+        #     is closed, and therefore projects associated with it are unable to use paid
+        #     services.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     The display name given to the billing account, such as `My Billing
@@ -254,7 +254,7 @@ module Google
         #     always belongs to the same organization as its parent account.
         # @!attribute [rw] destination_parent
         #   @return [::String]
-        #     Required. The resource name of the Organization to reparent
+        #     Required. The resource name of the Organization to move
         #     the billing account under.
         #     Must be of the form `organizations/{organization_id}`.
         class MoveBillingAccountRequest
