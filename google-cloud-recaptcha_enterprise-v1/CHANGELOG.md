@@ -1,5 +1,11 @@
 # Release History
 
+### 0.17.2 (2024-01-18)
+
+#### Documentation
+
+* Minor clarification to AccountVerificationInfo#username description ([#24432](https://github.com/googleapis/google-cloud-ruby/issues/24432)) 
+
 ### 0.17.1 (2024-01-12)
 
 #### Bug Fixes
