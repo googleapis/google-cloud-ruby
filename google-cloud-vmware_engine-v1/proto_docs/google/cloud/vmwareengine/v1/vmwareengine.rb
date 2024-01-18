@@ -390,6 +390,308 @@ module Google
         end
 
         # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_nodes VmwareEngine.ListNodes}
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the cluster to be queried for nodes.
+        #     Resource names are schemeless URIs that follow the conventions in
+        #     https://cloud.google.com/apis/design/resource_names.
+        #     For example:
+        #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud/clusters/my-cluster`
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of nodes to return in one page.
+        #     The service may return fewer than this value.
+        #     The maximum value is coerced to 1000.
+        #     The default value of this field is 500.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous `ListNodes` call.
+        #     Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to
+        #     `ListNodes` must match the call that provided the page
+        #     token.
+        class ListNodesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_nodes VmwareEngine.ListNodes}
+        # @!attribute [rw] nodes
+        #   @return [::Array<::Google::Cloud::VmwareEngine::V1::Node>]
+        #     The nodes.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListNodesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#get_node VmwareEngine.GetNode}
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the node to retrieve.
+        #     For example:
+        #     `projects/{project}/locations/{location}/privateClouds/{private_cloud}/clusters/{cluster}/nodes/{node}`
+        class GetNodeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_external_addresses VmwareEngine.ListExternalAddresses}
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the private cloud to be queried for
+        #     external IP addresses.
+        #     Resource names are schemeless URIs that follow the conventions in
+        #     https://cloud.google.com/apis/design/resource_names.
+        #     For example:
+        #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of external IP addresses to return in one page.
+        #     The service may return fewer than this value.
+        #     The maximum value is coerced to 1000.
+        #     The default value of this field is 500.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous `ListExternalAddresses` call.
+        #     Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to
+        #     `ListExternalAddresses` must match the call that provided the page token.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     A filter expression that matches resources returned in the response.
+        #     The expression must specify the field name, a comparison
+        #     operator, and the value that you want to use for filtering. The value
+        #     must be a string, a number, or a boolean. The comparison operator
+        #     must be `=`, `!=`, `>`, or `<`.
+        #
+        #     For example, if you are filtering a list of IP addresses, you can
+        #     exclude the ones named `example-ip` by specifying
+        #     `name != "example-ip"`.
+        #
+        #     To filter on multiple expressions, provide each separate expression within
+        #     parentheses. For example:
+        #     ```
+        #     (name = "example-ip")
+        #     (createTime > "2021-04-12T08:15:10.40Z")
+        #     ```
+        #
+        #     By default, each expression is an `AND` expression. However, you
+        #     can include `AND` and `OR` expressions explicitly.
+        #     For example:
+        #     ```
+        #     (name = "example-ip-1") AND
+        #     (createTime > "2021-04-12T08:15:10.40Z") OR
+        #     (name = "example-ip-2")
+        #     ```
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Sorts list results by a certain order. By default, returned results
+        #     are ordered by `name` in ascending order.
+        #     You can also sort results in descending order based on the `name` value
+        #     using `orderBy="name desc"`.
+        #     Currently, only ordering by `name` is supported.
+        class ListExternalAddressesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_external_addresses VmwareEngine.ListExternalAddresses}
+        # @!attribute [rw] external_addresses
+        #   @return [::Array<::Google::Cloud::VmwareEngine::V1::ExternalAddress>]
+        #     A list of external IP addresses.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Locations that could not be reached when making an aggregated query using
+        #     wildcards.
+        class ListExternalAddressesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#fetch_network_policy_external_addresses VmwareEngine.FetchNetworkPolicyExternalAddresses}
+        # @!attribute [rw] network_policy
+        #   @return [::String]
+        #     Required. The resource name of the network policy to query for assigned
+        #     external IP addresses. Resource names are schemeless URIs that follow the
+        #     conventions in https://cloud.google.com/apis/design/resource_names. For
+        #     example:
+        #     `projects/my-project/locations/us-central1/networkPolicies/my-policy`
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of external IP addresses to return in one page.
+        #     The service may return fewer than this value.
+        #     The maximum value is coerced to 1000.
+        #     The default value of this field is 500.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous
+        #     `FetchNetworkPolicyExternalAddresses` call. Provide this to retrieve the
+        #     subsequent page.
+        #
+        #     When paginating, all parameters provided to
+        #     `FetchNetworkPolicyExternalAddresses`, except for `page_size` and
+        #     `page_token`, must match the call that provided the page token.
+        class FetchNetworkPolicyExternalAddressesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#fetch_network_policy_external_addresses VmwareEngine.FetchNetworkPolicyExternalAddresses}
+        # @!attribute [rw] external_addresses
+        #   @return [::Array<::Google::Cloud::VmwareEngine::V1::ExternalAddress>]
+        #     A list of external IP addresses assigned to VMware workload VMs within the
+        #     scope of the given network policy.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class FetchNetworkPolicyExternalAddressesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#get_external_address VmwareEngine.GetExternalAddress}
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the external IP address to retrieve.
+        #     Resource names are schemeless URIs that follow the conventions in
+        #     https://cloud.google.com/apis/design/resource_names.
+        #     For example:
+        #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud/externalAddresses/my-ip`
+        class GetExternalAddressRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#create_external_address VmwareEngine.CreateExternalAddress}
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the private cloud
+        #     to create a new external IP address in.
+        #     Resource names are schemeless URIs that follow the conventions in
+        #     https://cloud.google.com/apis/design/resource_names.
+        #     For example:
+        #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
+        # @!attribute [rw] external_address
+        #   @return [::Google::Cloud::VmwareEngine::V1::ExternalAddress]
+        #     Required. The initial description of a new external IP address.
+        # @!attribute [rw] external_address_id
+        #   @return [::String]
+        #     Required. The user-provided identifier of the `ExternalAddress` to be
+        #     created. This identifier must be unique among `ExternalAddress` resources
+        #     within the parent and becomes the final token in the name URI. The
+        #     identifier must meet the following requirements:
+        #
+        #     * Only contains 1-63 alphanumeric characters and hyphens
+        #     * Begins with an alphabetical character
+        #     * Ends with a non-hyphen character
+        #     * Not formatted as a UUID
+        #     * Complies with [RFC 1034](https://datatracker.ietf.org/doc/html/rfc1034)
+        #     (section 3.5)
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A request ID to identify requests. Specify a unique request ID
+        #     so that if you must retry your request, the server will know to ignore
+        #     the request if it has already been completed. The server guarantees that a
+        #     request doesn't result in creation of duplicate commitments for at least 60
+        #     minutes.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request ID,
+        #     the server can check if the original operation with the same request ID was
+        #     received, and if so, will ignore the second request. This prevents clients
+        #     from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class CreateExternalAddressRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#update_external_address VmwareEngine.UpdateExternalAddress}
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. Field mask is used to specify the fields to be overwritten in the
+        #     `ExternalAddress` resource by the update.
+        #     The fields specified in the `update_mask` are relative to the resource, not
+        #     the full request. A field will be overwritten if it is in the mask. If the
+        #     user does not provide a mask then all fields will be overwritten.
+        # @!attribute [rw] external_address
+        #   @return [::Google::Cloud::VmwareEngine::V1::ExternalAddress]
+        #     Required. External IP address description.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A request ID to identify requests. Specify a unique request ID
+        #     so that if you must retry your request, the server will know to ignore
+        #     the request if it has already been completed. The server guarantees that a
+        #     request doesn't result in creation of duplicate commitments for at least 60
+        #     minutes.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request ID,
+        #     the server can check if the original operation with the same request ID was
+        #     received, and if so, will ignore the second request. This prevents clients
+        #     from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class UpdateExternalAddressRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#delete_external_address VmwareEngine.DeleteExternalAddress}
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the external IP address to delete.
+        #     Resource names are schemeless URIs that follow the conventions in
+        #     https://cloud.google.com/apis/design/resource_names.
+        #     For example:
+        #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud/externalAddresses/my-ip`
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A request ID to identify requests. Specify a unique request ID
+        #     so that if you must retry your request, the server will know to ignore
+        #     the request if it has already been completed. The server guarantees that a
+        #     request doesn't result in creation of duplicate commitments for at least 60
+        #     minutes.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request
+        #     ID, the server can check if the original operation with the same request ID
+        #     was received, and if so, will ignore the second request. This prevents
+        #     clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class DeleteExternalAddressRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
         # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_subnets VmwareEngine.ListSubnets}
         # @!attribute [rw] parent
         #   @return [::String]
@@ -462,6 +764,415 @@ module Google
         #   @return [::Google::Cloud::VmwareEngine::V1::Subnet]
         #     Required. Subnet description.
         class UpdateSubnetRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_external_access_rules VmwareEngine.ListExternalAccessRules}
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the network policy to query for external
+        #     access firewall rules. Resource names are schemeless URIs that follow the
+        #     conventions in https://cloud.google.com/apis/design/resource_names. For
+        #     example:
+        #     `projects/my-project/locations/us-central1/networkPolicies/my-policy`
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of external access rules to return in one page.
+        #     The service may return fewer than this value.
+        #     The maximum value is coerced to 1000.
+        #     The default value of this field is 500.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous `ListExternalAccessRulesRequest`
+        #     call. Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to
+        #     `ListExternalAccessRulesRequest` must match the call that provided the page
+        #     token.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     A filter expression that matches resources returned in the response.
+        #     The expression must specify the field name, a comparison
+        #     operator, and the value that you want to use for filtering. The value
+        #     must be a string, a number, or a boolean. The comparison operator
+        #     must be `=`, `!=`, `>`, or `<`.
+        #
+        #     For example, if you are filtering a list of external access rules, you can
+        #     exclude the ones named `example-rule` by specifying
+        #     `name != "example-rule"`.
+        #
+        #     To filter on multiple expressions, provide each separate expression within
+        #     parentheses. For example:
+        #     ```
+        #     (name = "example-rule")
+        #     (createTime > "2021-04-12T08:15:10.40Z")
+        #     ```
+        #
+        #     By default, each expression is an `AND` expression. However, you
+        #     can include `AND` and `OR` expressions explicitly.
+        #     For example:
+        #     ```
+        #     (name = "example-rule-1") AND
+        #     (createTime > "2021-04-12T08:15:10.40Z") OR
+        #     (name = "example-rule-2")
+        #     ```
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Sorts list results by a certain order. By default, returned results
+        #     are ordered by `name` in ascending order.
+        #     You can also sort results in descending order based on the `name` value
+        #     using `orderBy="name desc"`.
+        #     Currently, only ordering by `name` is supported.
+        class ListExternalAccessRulesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_external_access_rules VmwareEngine.ListExternalAccessRules}
+        # @!attribute [rw] external_access_rules
+        #   @return [::Array<::Google::Cloud::VmwareEngine::V1::ExternalAccessRule>]
+        #     A list of external access firewall rules.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Locations that could not be reached when making an aggregated query using
+        #     wildcards.
+        class ListExternalAccessRulesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#get_external_access_rule VmwareEngine.GetExternalAccessRule}
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the external access firewall rule to
+        #     retrieve. Resource names are schemeless URIs that follow the conventions in
+        #     https://cloud.google.com/apis/design/resource_names.
+        #     For example:
+        #     `projects/my-project/locations/us-central1/networkPolicies/my-policy/externalAccessRules/my-rule`
+        class GetExternalAccessRuleRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#create_external_access_rule VmwareEngine.CreateExternalAccessRule}
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the network policy
+        #     to create a new external access firewall rule in.
+        #     Resource names are schemeless URIs that follow the conventions in
+        #     https://cloud.google.com/apis/design/resource_names.
+        #     For example:
+        #     `projects/my-project/locations/us-central1/networkPolicies/my-policy`
+        # @!attribute [rw] external_access_rule
+        #   @return [::Google::Cloud::VmwareEngine::V1::ExternalAccessRule]
+        #     Required. The initial description of a new external access rule.
+        # @!attribute [rw] external_access_rule_id
+        #   @return [::String]
+        #     Required. The user-provided identifier of the `ExternalAccessRule` to be
+        #     created. This identifier must be unique among `ExternalAccessRule`
+        #     resources within the parent and becomes the final token in the name URI.
+        #     The identifier must meet the following requirements:
+        #
+        #     * Only contains 1-63 alphanumeric characters and hyphens
+        #     * Begins with an alphabetical character
+        #     * Ends with a non-hyphen character
+        #     * Not formatted as a UUID
+        #     * Complies with [RFC 1034](https://datatracker.ietf.org/doc/html/rfc1034)
+        #     (section 3.5)
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     A request ID to identify requests. Specify a unique request ID
+        #     so that if you must retry your request, the server will know to ignore
+        #     the request if it has already been completed. The server guarantees that a
+        #     request doesn't result in creation of duplicate commitments for at least 60
+        #     minutes.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request ID,
+        #     the server can check if the original operation with the same request ID was
+        #     received, and if so, will ignore the second request. This prevents clients
+        #     from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class CreateExternalAccessRuleRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#update_external_access_rule VmwareEngine.UpdateExternalAccessRule}
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. Field mask is used to specify the fields to be overwritten in the
+        #     `ExternalAccessRule` resource by the update.
+        #     The fields specified in the `update_mask` are relative to the resource, not
+        #     the full request. A field will be overwritten if it is in the mask. If the
+        #     user does not provide a mask then all fields will be overwritten.
+        # @!attribute [rw] external_access_rule
+        #   @return [::Google::Cloud::VmwareEngine::V1::ExternalAccessRule]
+        #     Required. Description of the external access rule.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A request ID to identify requests. Specify a unique request ID
+        #     so that if you must retry your request, the server will know to ignore
+        #     the request if it has already been completed. The server guarantees that a
+        #     request doesn't result in creation of duplicate commitments for at least 60
+        #     minutes.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request ID,
+        #     the server can check if the original operation with the same request ID was
+        #     received, and if so, will ignore the second request. This prevents clients
+        #     from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class UpdateExternalAccessRuleRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#delete_external_access_rule VmwareEngine.DeleteExternalAccessRule}
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the external access firewall rule to delete.
+        #     Resource names are schemeless URIs that follow the conventions in
+        #     https://cloud.google.com/apis/design/resource_names.
+        #     For example:
+        #     `projects/my-project/locations/us-central1/networkPolicies/my-policy/externalAccessRules/my-rule`
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A request ID to identify requests. Specify a unique request ID
+        #     so that if you must retry your request, the server will know to ignore
+        #     the request if it has already been completed. The server guarantees that a
+        #     request doesn't result in creation of duplicate commitments for at least 60
+        #     minutes.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request
+        #     ID, the server can check if the original operation with the same request ID
+        #     was received, and if so, will ignore the second request. This prevents
+        #     clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class DeleteExternalAccessRuleRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_logging_servers VmwareEngine.ListLoggingServers}
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the private cloud to be queried for
+        #     logging servers.
+        #     Resource names are schemeless URIs that follow the conventions in
+        #     https://cloud.google.com/apis/design/resource_names.
+        #     For example:
+        #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of logging servers to return in one page.
+        #     The service may return fewer than this value.
+        #     The maximum value is coerced to 1000.
+        #     The default value of this field is 500.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous `ListLoggingServersRequest` call.
+        #     Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to
+        #     `ListLoggingServersRequest` must match the call that provided the page
+        #     token.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     A filter expression that matches resources returned in the response.
+        #     The expression must specify the field name, a comparison
+        #     operator, and the value that you want to use for filtering. The value
+        #     must be a string, a number, or a boolean. The comparison operator
+        #     must be `=`, `!=`, `>`, or `<`.
+        #
+        #     For example, if you are filtering a list of logging servers, you can
+        #     exclude the ones named `example-server` by specifying
+        #     `name != "example-server"`.
+        #
+        #     To filter on multiple expressions, provide each separate expression within
+        #     parentheses. For example:
+        #     ```
+        #     (name = "example-server")
+        #     (createTime > "2021-04-12T08:15:10.40Z")
+        #     ```
+        #
+        #     By default, each expression is an `AND` expression. However, you
+        #     can include `AND` and `OR` expressions explicitly.
+        #     For example:
+        #     ```
+        #     (name = "example-server-1") AND
+        #     (createTime > "2021-04-12T08:15:10.40Z") OR
+        #     (name = "example-server-2")
+        #     ```
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Sorts list results by a certain order. By default, returned results
+        #     are ordered by `name` in ascending order.
+        #     You can also sort results in descending order based on the `name` value
+        #     using `orderBy="name desc"`.
+        #     Currently, only ordering by `name` is supported.
+        class ListLoggingServersRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_logging_servers VmwareEngine.ListLoggingServers}
+        # @!attribute [rw] logging_servers
+        #   @return [::Array<::Google::Cloud::VmwareEngine::V1::LoggingServer>]
+        #     A list of Logging Servers.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be send as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Locations that could not be reached when making an aggregated query using
+        #     wildcards.
+        class ListLoggingServersResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#get_logging_server VmwareEngine.GetLoggingServer}
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the Logging Server to retrieve.
+        #     Resource names are schemeless URIs that follow the conventions in
+        #     https://cloud.google.com/apis/design/resource_names.
+        #     For example:
+        #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud/loggingServers/my-logging-server`
+        class GetLoggingServerRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#create_logging_server VmwareEngine.CreateLoggingServer}
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the private cloud
+        #     to create a new Logging Server in.
+        #     Resource names are schemeless URIs that follow the conventions in
+        #     https://cloud.google.com/apis/design/resource_names.
+        #     For example:
+        #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
+        # @!attribute [rw] logging_server
+        #   @return [::Google::Cloud::VmwareEngine::V1::LoggingServer]
+        #     Required. The initial description of a new logging server.
+        # @!attribute [rw] logging_server_id
+        #   @return [::String]
+        #     Required. The user-provided identifier of the `LoggingServer` to be
+        #     created. This identifier must be unique among `LoggingServer` resources
+        #     within the parent and becomes the final token in the name URI.
+        #     The identifier must meet the following requirements:
+        #
+        #     * Only contains 1-63 alphanumeric characters and hyphens
+        #     * Begins with an alphabetical character
+        #     * Ends with a non-hyphen character
+        #     * Not formatted as a UUID
+        #     * Complies with [RFC 1034](https://datatracker.ietf.org/doc/html/rfc1034)
+        #     (section 3.5)
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A request ID to identify requests. Specify a unique request ID
+        #     so that if you must retry your request, the server will know to ignore
+        #     the request if it has already been completed. The server guarantees that a
+        #     request doesn't result in creation of duplicate commitments for at least 60
+        #     minutes.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request ID,
+        #     the server can check if original operation with the same request ID was
+        #     received, and if so, will ignore the second request. This prevents clients
+        #     from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class CreateLoggingServerRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#update_logging_server VmwareEngine.UpdateLoggingServer}
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. Field mask is used to specify the fields to be overwritten in the
+        #     `LoggingServer` resource by the update.
+        #     The fields specified in the `update_mask` are relative to the resource, not
+        #     the full request. A field will be overwritten if it is in the mask. If the
+        #     user does not provide a mask then all fields will be overwritten.
+        # @!attribute [rw] logging_server
+        #   @return [::Google::Cloud::VmwareEngine::V1::LoggingServer]
+        #     Required. Logging server description.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A request ID to identify requests. Specify a unique request ID
+        #     so that if you must retry your request, the server will know to ignore
+        #     the request if it has already been completed. The server guarantees that a
+        #     request doesn't result in creation of duplicate commitments for at least 60
+        #     minutes.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request ID,
+        #     the server can check if original operation with the same request ID was
+        #     received, and if so, will ignore the second request. This prevents clients
+        #     from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class UpdateLoggingServerRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#delete_logging_server VmwareEngine.DeleteLoggingServer}
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the logging server to delete.
+        #     Resource names are schemeless URIs that follow the conventions in
+        #     https://cloud.google.com/apis/design/resource_names.
+        #     For example:
+        #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud/loggingServers/my-logging-server`
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A request ID to identify requests. Specify a unique request ID
+        #     so that if you must retry your request, the server will know to ignore
+        #     the request if it has already been completed. The server guarantees that a
+        #     request doesn't result in creation of duplicate commitments for at least 60
+        #     minutes.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request
+        #     ID, the server can check if original operation with the same request ID
+        #     was received, and if so, will ignore the second request. This prevents
+        #     clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class DeleteLoggingServerRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -609,6 +1320,18 @@ module Google
         #     https://cloud.google.com/apis/design/resource_names.
         #     For example:
         #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
+        # @!attribute [rw] username
+        #   @return [::String]
+        #     Optional. The username of the user to be queried for credentials.
+        #     The default value of this field is CloudOwner@gve.local.
+        #     The provided value must be one of the following:
+        #     CloudOwner@gve.local,
+        #     solution-user-01@gve.local,
+        #     solution-user-02@gve.local,
+        #     solution-user-03@gve.local,
+        #     solution-user-04@gve.local,
+        #     solution-user-05@gve.local,
+        #     zertoadmin@gve.local.
         class ShowVcenterCredentialsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -671,6 +1394,17 @@ module Google
         #
         #     The request ID must be a valid UUID with the exception that zero UUID is
         #     not supported (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] username
+        #   @return [::String]
+        #     Optional. The username of the user to be to reset the credentials.
+        #     The default value of this field is CloudOwner@gve.local.
+        #     The provided value should be one of the following:
+        #     solution-user-01@gve.local,
+        #     solution-user-02@gve.local,
+        #     solution-user-03@gve.local,
+        #     solution-user-04@gve.local,
+        #     solution-user-05@gve.local,
+        #     zertoadmin@gve.local.
         class ResetVcenterCredentialsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -779,6 +1513,299 @@ module Google
         #     The request ID must be a valid UUID with the exception that zero UUID is
         #     not supported (00000000-0000-0000-0000-000000000000).
         class CreateHcxActivationKeyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#get_dns_forwarding VmwareEngine.GetDnsForwarding}
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of a `DnsForwarding` to retrieve.
+        #     Resource names are schemeless URIs that follow the conventions in
+        #     https://cloud.google.com/apis/design/resource_names.
+        #     For example:
+        #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud/dnsForwarding`
+        class GetDnsForwardingRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#update_dns_forwarding VmwareEngine.UpdateDnsForwarding}
+        # @!attribute [rw] dns_forwarding
+        #   @return [::Google::Cloud::VmwareEngine::V1::DnsForwarding]
+        #     Required. DnsForwarding config details.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. Field mask is used to specify the fields to be overwritten in the
+        #     `DnsForwarding` resource by the update.
+        #     The fields specified in the `update_mask` are relative to the resource, not
+        #     the full request. A field will be overwritten if it is in the mask. If the
+        #     user does not provide a mask then all fields will be overwritten.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A request ID to identify requests. Specify a unique request ID
+        #     so that if you must retry your request, the server will know to ignore
+        #     the request if it has already been completed. The server guarantees that a
+        #     request doesn't result in creation of duplicate commitments for at least 60
+        #     minutes.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request ID,
+        #     the server can check if original operation with the same request ID was
+        #     received, and if so, will ignore the second request. This prevents clients
+        #     from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class UpdateDnsForwardingRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#create_network_peering VmwareEngine.CreateNetworkPeering}
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the location to create the new network
+        #     peering in. This value is always `global`, because `NetworkPeering` is a
+        #     global resource. Resource names are schemeless URIs that follow the
+        #     conventions in https://cloud.google.com/apis/design/resource_names. For
+        #     example: `projects/my-project/locations/global`
+        # @!attribute [rw] network_peering_id
+        #   @return [::String]
+        #     Required. The user-provided identifier of the new `NetworkPeering`.
+        #     This identifier must be unique among `NetworkPeering` resources within the
+        #     parent and becomes the final token in the name URI.
+        #     The identifier must meet the following requirements:
+        #
+        #     * Only contains 1-63 alphanumeric characters and hyphens
+        #     * Begins with an alphabetical character
+        #     * Ends with a non-hyphen character
+        #     * Not formatted as a UUID
+        #     * Complies with [RFC 1034](https://datatracker.ietf.org/doc/html/rfc1034)
+        #     (section 3.5)
+        # @!attribute [rw] network_peering
+        #   @return [::Google::Cloud::VmwareEngine::V1::NetworkPeering]
+        #     Required. The initial description of the new network peering.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A request ID to identify requests. Specify a unique request ID
+        #     so that if you must retry your request, the server will know to ignore
+        #     the request if it has already been completed. The server guarantees that a
+        #     request doesn't result in creation of duplicate commitments for at least 60
+        #     minutes.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request
+        #     ID, the server can check if original operation with the same request ID
+        #     was received, and if so, will ignore the second request. This prevents
+        #     clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class CreateNetworkPeeringRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#delete_network_peering VmwareEngine.DeleteNetworkPeering}
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the network peering to be deleted.
+        #     Resource names are schemeless URIs that follow the conventions in
+        #     https://cloud.google.com/apis/design/resource_names.
+        #     For example:
+        #     `projects/my-project/locations/global/networkPeerings/my-peering`
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A request ID to identify requests. Specify a unique request ID
+        #     so that if you must retry your request, the server will know to ignore
+        #     the request if it has already been completed. The server guarantees that a
+        #     request doesn't result in creation of duplicate commitments for at least 60
+        #     minutes.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request
+        #     ID, the server can check if original operation with the same request ID
+        #     was received, and if so, will ignore the second request. This prevents
+        #     clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class DeleteNetworkPeeringRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#get_network_peering VmwareEngine.GetNetworkPeering}
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the network peering to retrieve.
+        #     Resource names are schemeless URIs that follow the conventions in
+        #     https://cloud.google.com/apis/design/resource_names.
+        #     For example:
+        #     `projects/my-project/locations/global/networkPeerings/my-peering`
+        class GetNetworkPeeringRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_network_peerings VmwareEngine.ListNetworkPeerings}
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the location (global) to query for
+        #     network peerings. Resource names are schemeless URIs that follow the
+        #     conventions in https://cloud.google.com/apis/design/resource_names. For
+        #     example: `projects/my-project/locations/global`
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of network peerings to return in one page.
+        #     The maximum value is coerced to 1000.
+        #     The default value of this field is 500.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous `ListNetworkPeerings` call.
+        #     Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to
+        #     `ListNetworkPeerings` must match the call that provided the page
+        #     token.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     A filter expression that matches resources returned in the response.
+        #     The expression must specify the field name, a comparison
+        #     operator, and the value that you want to use for filtering. The value
+        #     must be a string, a number, or a boolean. The comparison operator
+        #     must be `=`, `!=`, `>`, or `<`.
+        #
+        #     For example, if you are filtering a list of network peerings, you can
+        #     exclude the ones named `example-peering` by specifying
+        #     `name != "example-peering"`.
+        #
+        #     To filter on multiple expressions, provide each separate expression within
+        #     parentheses. For example:
+        #     ```
+        #     (name = "example-peering")
+        #     (createTime > "2021-04-12T08:15:10.40Z")
+        #     ```
+        #
+        #     By default, each expression is an `AND` expression. However, you
+        #     can include `AND` and `OR` expressions explicitly.
+        #     For example:
+        #     ```
+        #     (name = "example-peering-1") AND
+        #     (createTime > "2021-04-12T08:15:10.40Z") OR
+        #     (name = "example-peering-2")
+        #     ```
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Sorts list results by a certain order. By default, returned results
+        #     are ordered by `name` in ascending order.
+        #     You can also sort results in descending order based on the `name` value
+        #     using `orderBy="name desc"`.
+        #     Currently, only ordering by `name` is supported.
+        class ListNetworkPeeringsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#update_network_peering VmwareEngine.UpdateNetworkPeering}
+        # @!attribute [rw] network_peering
+        #   @return [::Google::Cloud::VmwareEngine::V1::NetworkPeering]
+        #     Required. Network peering description.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. Field mask is used to specify the fields to be overwritten in the
+        #     `NetworkPeering` resource by the update.
+        #     The fields specified in the `update_mask` are relative to the resource, not
+        #     the full request. A field will be overwritten if it is in the mask. If the
+        #     user does not provide a mask then all fields will be overwritten.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A request ID to identify requests. Specify a unique request ID
+        #     so that if you must retry your request, the server will know to ignore
+        #     the request if it has already been completed. The server guarantees that a
+        #     request doesn't result in creation of duplicate commitments for at least 60
+        #     minutes.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request
+        #     ID, the server can check if original operation with the same request ID
+        #     was received, and if so, will ignore the second request. This prevents
+        #     clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class UpdateNetworkPeeringRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_network_peerings VmwareEngine.ListNetworkPeerings}
+        # @!attribute [rw] network_peerings
+        #   @return [::Array<::Google::Cloud::VmwareEngine::V1::NetworkPeering>]
+        #     A list of network peerings.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Unreachable resources.
+        class ListNetworkPeeringsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_peering_routes VmwareEngine.ListPeeringRoutes}
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the network peering to retrieve peering
+        #     routes from. Resource names are schemeless URIs that follow the conventions
+        #     in https://cloud.google.com/apis/design/resource_names. For example:
+        #     `projects/my-project/locations/global/networkPeerings/my-peering`
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of peering routes to return in one page.
+        #     The service may return fewer than this value.
+        #     The maximum value is coerced to 1000.
+        #     The default value of this field is 500.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous `ListPeeringRoutes` call.
+        #     Provide this to retrieve the subsequent page.
+        #     When paginating, all other parameters provided to `ListPeeringRoutes` must
+        #     match the call that provided the page token.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     A filter expression that matches resources returned in the response.
+        #     Currently, only filtering on the `direction` field is supported. To return
+        #     routes imported from the peer network, provide "direction=INCOMING". To
+        #     return routes exported from the VMware Engine network, provide
+        #     "direction=OUTGOING". Other filter expressions return an error.
+        class ListPeeringRoutesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_peering_routes VmwareEngine.ListPeeringRoutes}
+        # @!attribute [rw] peering_routes
+        #   @return [::Array<::Google::Cloud::VmwareEngine::V1::PeeringRoute>]
+        #     A list of peering routes.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListPeeringRoutesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -983,6 +2010,240 @@ module Google
         #     The request ID must be a valid UUID with the exception that zero UUID is
         #     not supported (00000000-0000-0000-0000-000000000000).
         class DeleteNetworkPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_management_dns_zone_bindings VmwareEngine.ListManagementDnsZoneBindings}
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the private cloud to be queried for
+        #     management DNS zone bindings.
+        #     Resource names are schemeless URIs that follow the conventions in
+        #     https://cloud.google.com/apis/design/resource_names.
+        #     For example:
+        #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of management DNS zone bindings to return in one page.
+        #     The service may return fewer than this value.
+        #     The maximum value is coerced to 1000.
+        #     The default value of this field is 500.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous `ListManagementDnsZoneBindings`
+        #     call. Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to
+        #     `ListManagementDnsZoneBindings` must match the call that provided the page
+        #     token.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     A filter expression that matches resources returned in the response.
+        #     The expression must specify the field name, a comparison
+        #     operator, and the value that you want to use for filtering. The value
+        #     must be a string, a number, or a boolean. The comparison operator
+        #     must be `=`, `!=`, `>`, or `<`.
+        #
+        #     For example, if you are filtering a list of Management DNS Zone Bindings,
+        #     you can exclude the ones named `example-management-dns-zone-binding` by
+        #     specifying `name != "example-management-dns-zone-binding"`.
+        #
+        #     To filter on multiple expressions, provide each separate expression within
+        #     parentheses. For example:
+        #     ```
+        #     (name = "example-management-dns-zone-binding")
+        #     (createTime > "2021-04-12T08:15:10.40Z")
+        #     ```
+        #
+        #     By default, each expression is an `AND` expression. However, you
+        #     can include `AND` and `OR` expressions explicitly.
+        #     For example:
+        #     ```
+        #     (name = "example-management-dns-zone-binding-1") AND
+        #     (createTime > "2021-04-12T08:15:10.40Z") OR
+        #     (name = "example-management-dns-zone-binding-2")
+        #     ```
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Sorts list results by a certain order. By default, returned results
+        #     are ordered by `name` in ascending order.
+        #     You can also sort results in descending order based on the `name` value
+        #     using `orderBy="name desc"`.
+        #     Currently, only ordering by `name` is supported.
+        class ListManagementDnsZoneBindingsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_management_dns_zone_bindings VmwareEngine.ListManagementDnsZoneBindings}
+        # @!attribute [rw] management_dns_zone_bindings
+        #   @return [::Array<::Google::Cloud::VmwareEngine::V1::ManagementDnsZoneBinding>]
+        #     A list of management DNS zone bindings.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Locations that could not be reached when making an aggregated query using
+        #     wildcards.
+        class ListManagementDnsZoneBindingsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#get_management_dns_zone_binding VmwareEngine.GetManagementDnsZoneBinding}
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the management DNS zone binding to
+        #     retrieve. Resource names are schemeless URIs that follow the conventions in
+        #     https://cloud.google.com/apis/design/resource_names.
+        #     For example:
+        #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud/managementDnsZoneBindings/my-management-dns-zone-binding`
+        class GetManagementDnsZoneBindingRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for [VmwareEngine.CreateManagementDnsZoneBindings][]
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the private cloud
+        #     to create a new management DNS zone binding for.
+        #     Resource names are schemeless URIs that follow the conventions in
+        #     https://cloud.google.com/apis/design/resource_names.
+        #     For example:
+        #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
+        # @!attribute [rw] management_dns_zone_binding
+        #   @return [::Google::Cloud::VmwareEngine::V1::ManagementDnsZoneBinding]
+        #     Required. The initial values for a new management DNS zone binding.
+        # @!attribute [rw] management_dns_zone_binding_id
+        #   @return [::String]
+        #     Required. The user-provided identifier of the `ManagementDnsZoneBinding`
+        #     resource to be created. This identifier must be unique among
+        #     `ManagementDnsZoneBinding` resources within the parent and becomes the
+        #     final token in the name URI. The identifier must meet the following
+        #     requirements:
+        #
+        #     * Only contains 1-63 alphanumeric characters and hyphens
+        #     * Begins with an alphabetical character
+        #     * Ends with a non-hyphen character
+        #     * Not formatted as a UUID
+        #     * Complies with [RFC 1034](https://datatracker.ietf.org/doc/html/rfc1034)
+        #     (section 3.5)
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A request ID to identify requests. Specify a unique request ID
+        #     so that if you must retry your request, the server will know to ignore
+        #     the request if it has already been completed. The server guarantees that a
+        #     request doesn't result in creation of duplicate commitments for at least 60
+        #     minutes.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request ID,
+        #     the server can check if the original operation with the same request ID was
+        #     received, and if so, will ignore the second request. This prevents clients
+        #     from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class CreateManagementDnsZoneBindingRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#update_management_dns_zone_binding VmwareEngine.UpdateManagementDnsZoneBinding}
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. Field mask is used to specify the fields to be overwritten in the
+        #     `ManagementDnsZoneBinding` resource by the update.
+        #     The fields specified in the `update_mask` are relative to the resource, not
+        #     the full request. A field will be overwritten if it is in the mask. If the
+        #     user does not provide a mask then all fields will be overwritten.
+        # @!attribute [rw] management_dns_zone_binding
+        #   @return [::Google::Cloud::VmwareEngine::V1::ManagementDnsZoneBinding]
+        #     Required. New values to update the management DNS zone binding with.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A request ID to identify requests. Specify a unique request ID
+        #     so that if you must retry your request, the server will know to ignore
+        #     the request if it has already been completed. The server guarantees that a
+        #     request doesn't result in creation of duplicate commitments for at least 60
+        #     minutes.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request ID,
+        #     the server can check if the original operation with the same request ID was
+        #     received, and if so, will ignore the second request. This prevents clients
+        #     from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class UpdateManagementDnsZoneBindingRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#delete_management_dns_zone_binding VmwareEngine.DeleteManagementDnsZoneBinding}
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the management DNS zone binding to delete.
+        #     Resource names are schemeless URIs that follow the conventions in
+        #     https://cloud.google.com/apis/design/resource_names.
+        #     For example:
+        #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud/managementDnsZoneBindings/my-management-dns-zone-binding`
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A request ID to identify requests. Specify a unique request ID
+        #     so that if you must retry your request, the server will know to ignore
+        #     the request if it has already been completed. The server guarantees that a
+        #     request doesn't result in creation of duplicate commitments for at least 60
+        #     minutes.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request
+        #     ID, the server can check if the original operation with the same request ID
+        #     was received, and if so, will ignore the second request. This prevents
+        #     clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class DeleteManagementDnsZoneBindingRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for [VmwareEngine.RepairManagementDnsZoneBindings][]
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the management DNS zone binding to repair.
+        #     Resource names are schemeless URIs that follow the conventions in
+        #     https://cloud.google.com/apis/design/resource_names.
+        #     For example:
+        #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud/managementDnsZoneBindings/my-management-dns-zone-binding`
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A request ID to identify requests. Specify a unique request ID
+        #     so that if you must retry your request, the server will know to ignore
+        #     the request if it has already been completed. The server guarantees that a
+        #     request doesn't result in creation of duplicate commitments for at least 60
+        #     minutes.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request ID,
+        #     the server can check if the original operation with the same request ID was
+        #     received, and if so, will ignore the second request. This prevents clients
+        #     from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class RepairManagementDnsZoneBindingRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1434,6 +2695,93 @@ module Google
         #     A token, which can be sent as `page_token` to retrieve the next page.
         #     If this field is omitted, there are no subsequent pages.
         class ListPrivateConnectionPeeringRoutesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#grant_dns_bind_permission VmwareEngine.GrantDnsBindPermission}
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the resource which stores the users/service accounts
+        #     having the permission to bind to the corresponding intranet VPC of the
+        #     consumer project. DnsBindPermission is a global resource. Resource names
+        #     are schemeless URIs that follow the conventions in
+        #     https://cloud.google.com/apis/design/resource_names. For example:
+        #     `projects/my-project/locations/global/dnsBindPermission`
+        # @!attribute [rw] principal
+        #   @return [::Google::Cloud::VmwareEngine::V1::Principal]
+        #     Required. The consumer provided user/service account which needs to be
+        #     granted permission to bind with the intranet VPC corresponding to the
+        #     consumer project.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A request ID to identify requests. Specify a unique request ID
+        #     so that if you must retry your request, the server will know to ignore
+        #     the request if it has already been completed. The server guarantees that a
+        #     request doesn't result in creation of duplicate commitments for at least 60
+        #     minutes.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request
+        #     ID, the server can check if original operation with the same request ID
+        #     was received, and if so, will ignore the second request. This prevents
+        #     clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class GrantDnsBindPermissionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#revoke_dns_bind_permission VmwareEngine.RevokeDnsBindPermission}
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the resource which stores the users/service accounts
+        #     having the permission to bind to the corresponding intranet VPC of the
+        #     consumer project. DnsBindPermission is a global resource. Resource names
+        #     are schemeless URIs that follow the conventions in
+        #     https://cloud.google.com/apis/design/resource_names. For example:
+        #     `projects/my-project/locations/global/dnsBindPermission`
+        # @!attribute [rw] principal
+        #   @return [::Google::Cloud::VmwareEngine::V1::Principal]
+        #     Required. The consumer provided user/service account which needs to be
+        #     granted permission to bind with the intranet VPC corresponding to the
+        #     consumer project.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A request ID to identify requests. Specify a unique request ID
+        #     so that if you must retry your request, the server will know to ignore
+        #     the request if it has already been completed. The server guarantees that a
+        #     request doesn't result in creation of duplicate commitments for at least 60
+        #     minutes.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request
+        #     ID, the server can check if original operation with the same request ID
+        #     was received, and if so, will ignore the second request. This prevents
+        #     clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class RevokeDnsBindPermissionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#get_dns_bind_permission VmwareEngine.GetDnsBindPermission}
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the resource which stores the users/service accounts
+        #     having the permission to bind to the corresponding intranet VPC of the
+        #     consumer project. DnsBindPermission is a global resource. Resource names
+        #     are schemeless URIs that follow the conventions in
+        #     https://cloud.google.com/apis/design/resource_names. For example:
+        #     `projects/my-project/locations/global/dnsBindPermission`
+        class GetDnsBindPermissionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

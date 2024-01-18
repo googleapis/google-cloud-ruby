@@ -46,6 +46,12 @@ module Google
         #     * `managementIpAddressLayoutVersion=2`: Indicates the latest IP address
         #     layout used by all newly created private clouds. This version supports all
         #     current features.
+        # @!attribute [r] dns_server_ip
+        #   @return [::String]
+        #     Output only. DNS Server IP of the Private Cloud.
+        #     All DNS queries can be forwarded to this address for name resolution of
+        #     Private Cloud's management entities like vCenter, NSX-T Manager and
+        #     ESXi hosts.
         class NetworkConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -66,7 +72,29 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Represents a private cloud resource. Private clouds are zonal resources.
+        # Configuration of a stretched cluster.
+        # @!attribute [rw] preferred_location
+        #   @return [::String]
+        #     Required. Zone that will remain operational when connection between the two
+        #     zones is lost. Specify the resource name of a zone that belongs to the
+        #     region of the private cloud. For example:
+        #     `projects/{project}/locations/europe-west3-a` where `{project}` can either
+        #     be a project number or a project ID.
+        # @!attribute [rw] secondary_location
+        #   @return [::String]
+        #     Required. Additional zone for a higher level of availability and load
+        #     balancing. Specify the resource name of a zone that belongs to the region
+        #     of the private cloud. For example:
+        #     `projects/{project}/locations/europe-west3-b` where `{project}` can either
+        #     be a project number or a project ID.
+        class StretchedClusterConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents a private cloud resource. Private clouds of type `STANDARD` and
+        # `TIME_LIMITED` are zonal resources, `STRETCHED` private clouds are
+        # regional.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The resource name of this private cloud.
@@ -139,6 +167,10 @@ module Google
           #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::VmwareEngine::V1::NodeTypeConfig}]
           #     Required. The map of cluster node types in this cluster, where the key is
           #     canonical identifier of the node type (corresponds to the `NodeType`).
+          # @!attribute [rw] stretched_cluster_config
+          #   @return [::Google::Cloud::VmwareEngine::V1::StretchedClusterConfig]
+          #     Optional. Configuration of a stretched cluster. Required for STRETCHED
+          #     private clouds.
           class ManagementCluster
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -189,6 +221,10 @@ module Google
             # can be converted into standard private cloud by expanding it up to 3
             # or more nodes.
             TIME_LIMITED = 1
+
+            # Stretched private cloud is a regional resource with redundancy,
+            # with a minimum of 6 nodes, nodes count has to be even.
+            STRETCHED = 2
           end
         end
 
@@ -221,6 +257,10 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::VmwareEngine::V1::NodeTypeConfig}]
         #     Required. The map of cluster node types in this cluster, where the key is
         #     canonical identifier of the node type (corresponds to the `NodeType`).
+        # @!attribute [rw] stretched_cluster_config
+        #   @return [::Google::Cloud::VmwareEngine::V1::StretchedClusterConfig]
+        #     Optional. Configuration of a stretched cluster. Required for clusters that
+        #     belong to a STRETCHED private cloud.
         class Cluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -258,6 +298,111 @@ module Google
           end
         end
 
+        # Node in a cluster.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. The resource name of this node.
+        #     Resource names are schemeless URIs that follow the conventions in
+        #     https://cloud.google.com/apis/design/resource_names.
+        #     For example:
+        #     projects/my-project/locations/us-central1-a/privateClouds/my-cloud/clusters/my-cluster/nodes/my-node
+        # @!attribute [r] fqdn
+        #   @return [::String]
+        #     Output only. Fully qualified domain name of the node.
+        # @!attribute [r] internal_ip
+        #   @return [::String]
+        #     Output only. Internal IP address of the node.
+        # @!attribute [r] node_type_id
+        #   @return [::String]
+        #     Output only. The canonical identifier of the node type (corresponds to the
+        #     `NodeType`).
+        #     For example: standard-72.
+        # @!attribute [r] version
+        #   @return [::String]
+        #     Output only. The version number of the VMware ESXi
+        #     management component in this cluster.
+        # @!attribute [r] custom_core_count
+        #   @return [::Integer]
+        #     Output only. Customized number of cores
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::VmwareEngine::V1::Node::State]
+        #     Output only. The state of the appliance.
+        class Node
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Enum State defines possible states of a node in a cluster.
+          module State
+            # The default value. This value should never be used.
+            STATE_UNSPECIFIED = 0
+
+            # Node is operational and can be used by the user.
+            ACTIVE = 1
+
+            # Node is being provisioned.
+            CREATING = 2
+
+            # Node is in a failed state.
+            FAILED = 3
+
+            # Node is undergoing maintenance, e.g.: during private cloud upgrade.
+            UPGRADING = 4
+          end
+        end
+
+        # Represents an allocated external IP address and its corresponding internal IP
+        # address in a private cloud.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. The resource name of this external IP address.
+        #     Resource names are schemeless URIs that follow the conventions in
+        #     https://cloud.google.com/apis/design/resource_names.
+        #     For example:
+        #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud/externalAddresses/my-address`
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Creation time of this resource.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Last update time of this resource.
+        # @!attribute [rw] internal_ip
+        #   @return [::String]
+        #     The internal IP address of a workload VM.
+        # @!attribute [r] external_ip
+        #   @return [::String]
+        #     Output only. The external IP address of a workload VM.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::VmwareEngine::V1::ExternalAddress::State]
+        #     Output only. The state of the resource.
+        # @!attribute [r] uid
+        #   @return [::String]
+        #     Output only. System-generated unique identifier for the resource.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     User-provided description for this resource.
+        class ExternalAddress
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Enum State defines possible states of external addresses.
+          module State
+            # The default value. This value should never be used.
+            STATE_UNSPECIFIED = 0
+
+            # The address is ready.
+            ACTIVE = 1
+
+            # The address is being created.
+            CREATING = 2
+
+            # The address is being updated.
+            UPDATING = 3
+
+            # The address is being deleted.
+            DELETING = 4
+          end
+        end
+
         # Subnet in a private cloud. Either `management` subnets (such as vMotion) that
         # are read-only, or `userDefined`, which can also be updated.
         # @!attribute [r] name
@@ -281,6 +426,9 @@ module Google
         # @!attribute [r] state
         #   @return [::Google::Cloud::VmwareEngine::V1::Subnet::State]
         #     Output only. The state of the resource.
+        # @!attribute [r] vlan_id
+        #   @return [::Integer]
+        #     Output only. VLAN ID of the VLAN on which the subnet is configured
         class Subnet
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -308,6 +456,195 @@ module Google
             # Last operation on the subnet did not succeed. Subnet's payload is
             # reverted back to its most recent working state.
             FAILED = 6
+          end
+        end
+
+        # External access firewall rules for filtering incoming traffic destined to
+        # `ExternalAddress` resources.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. The resource name of this external access rule.
+        #     Resource names are schemeless URIs that follow the conventions in
+        #     https://cloud.google.com/apis/design/resource_names.
+        #     For example:
+        #     `projects/my-project/locations/us-central1/networkPolicies/my-policy/externalAccessRules/my-rule`
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Creation time of this resource.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Last update time of this resource.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     User-provided description for this external access rule.
+        # @!attribute [rw] priority
+        #   @return [::Integer]
+        #     External access rule priority, which determines the external access rule to
+        #     use when multiple rules apply. If multiple rules have the same priority,
+        #     their ordering is non-deterministic. If specific ordering is required,
+        #     assign unique priorities to enforce such ordering. The external access rule
+        #     priority is an integer from 100 to 4096, both inclusive. Lower integers
+        #     indicate higher precedence. For example, a rule with priority `100` has
+        #     higher precedence than a rule with priority `101`.
+        # @!attribute [rw] action
+        #   @return [::Google::Cloud::VmwareEngine::V1::ExternalAccessRule::Action]
+        #     The action that the external access rule performs.
+        # @!attribute [rw] ip_protocol
+        #   @return [::String]
+        #     The IP protocol to which the external access rule applies. This value can
+        #     be one of the following three protocol strings (not case-sensitive):
+        #     `tcp`, `udp`, or `icmp`.
+        # @!attribute [rw] source_ip_ranges
+        #   @return [::Array<::Google::Cloud::VmwareEngine::V1::ExternalAccessRule::IpRange>]
+        #     If source ranges are specified, the external access rule applies only to
+        #     traffic that has a source IP address in these ranges. These ranges can
+        #     either be expressed in the CIDR format or as an IP address. As only inbound
+        #     rules are supported, `ExternalAddress` resources cannot be the source IP
+        #     addresses of an external access rule. To match all source addresses,
+        #     specify `0.0.0.0/0`.
+        # @!attribute [rw] source_ports
+        #   @return [::Array<::String>]
+        #     A list of source ports to which the external access rule applies. This
+        #     field is only applicable for the UDP or TCP protocol.
+        #     Each entry must be either an integer or a range. For example: `["22"]`,
+        #     `["80","443"]`, or `["12345-12349"]`. To match all source ports, specify
+        #     `["0-65535"]`.
+        # @!attribute [rw] destination_ip_ranges
+        #   @return [::Array<::Google::Cloud::VmwareEngine::V1::ExternalAccessRule::IpRange>]
+        #     If destination ranges are specified, the external access rule applies only
+        #     to the traffic that has a destination IP address in these ranges. The
+        #     specified IP addresses must have reserved external IP addresses in the
+        #     scope of the parent network policy. To match all external IP addresses in
+        #     the scope of the parent network policy, specify `0.0.0.0/0`. To match a
+        #     specific external IP address, specify it using the
+        #     `IpRange.external_address` property.
+        # @!attribute [rw] destination_ports
+        #   @return [::Array<::String>]
+        #     A list of destination ports to which the external access rule applies. This
+        #     field is only applicable for the UDP or TCP protocol.
+        #     Each entry must be either an integer or a range. For example: `["22"]`,
+        #     `["80","443"]`, or `["12345-12349"]`. To match all destination ports,
+        #     specify `["0-65535"]`.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::VmwareEngine::V1::ExternalAccessRule::State]
+        #     Output only. The state of the resource.
+        # @!attribute [r] uid
+        #   @return [::String]
+        #     Output only. System-generated unique identifier for the resource.
+        class ExternalAccessRule
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # An IP range provided in any one of the supported formats.
+          # @!attribute [rw] ip_address
+          #   @return [::String]
+          #     A single IP address. For example: `10.0.0.5`.
+          # @!attribute [rw] ip_address_range
+          #   @return [::String]
+          #     An IP address range in the CIDR format. For example: `10.0.0.0/24`.
+          # @!attribute [rw] external_address
+          #   @return [::String]
+          #     The name of an `ExternalAddress` resource. The external address must
+          #     have been reserved in the scope of this external access rule's parent
+          #     network policy.  Provide the external address name in the form of
+          #     `projects/{project}/locations/{location}/privateClouds/{private_cloud}/externalAddresses/{external_address}`.
+          #     For example:
+          #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud/externalAddresses/my-address`.
+          class IpRange
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Action determines whether the external access rule permits or blocks
+          # traffic, subject to the other components of the rule matching the traffic.
+          module Action
+            # Defaults to allow.
+            ACTION_UNSPECIFIED = 0
+
+            # Allows connections that match the other specified components.
+            ALLOW = 1
+
+            # Blocks connections that match the other specified components.
+            DENY = 2
+          end
+
+          # Defines possible states of external access firewall rules.
+          module State
+            # The default value. This value is used if the state is omitted.
+            STATE_UNSPECIFIED = 0
+
+            # The rule is ready.
+            ACTIVE = 1
+
+            # The rule is being created.
+            CREATING = 2
+
+            # The rule is being updated.
+            UPDATING = 3
+
+            # The rule is being deleted.
+            DELETING = 4
+          end
+        end
+
+        # Logging server to receive vCenter or ESXi logs.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. The resource name of this logging server.
+        #     Resource names are schemeless URIs that follow the conventions in
+        #     https://cloud.google.com/apis/design/resource_names.
+        #     For example:
+        #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud/loggingServers/my-logging-server`
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Creation time of this resource.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Last update time of this resource.
+        # @!attribute [rw] hostname
+        #   @return [::String]
+        #     Required. Fully-qualified domain name (FQDN) or IP Address of the logging
+        #     server.
+        # @!attribute [rw] port
+        #   @return [::Integer]
+        #     Required. Port number at which the logging server receives logs.
+        # @!attribute [rw] protocol
+        #   @return [::Google::Cloud::VmwareEngine::V1::LoggingServer::Protocol]
+        #     Required. Protocol used by vCenter to send logs to a logging server.
+        # @!attribute [rw] source_type
+        #   @return [::Google::Cloud::VmwareEngine::V1::LoggingServer::SourceType]
+        #     Required. The type of component that produces logs that will be forwarded
+        #     to this logging server.
+        # @!attribute [r] uid
+        #   @return [::String]
+        #     Output only. System-generated unique identifier for the resource.
+        class LoggingServer
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Defines possible protocols used to send logs to
+          # a logging server.
+          module Protocol
+            # Unspecified communications protocol. This is the default value.
+            PROTOCOL_UNSPECIFIED = 0
+
+            # UDP
+            UDP = 1
+
+            # TCP
+            TCP = 2
+          end
+
+          # Defines possible types of component that produces logs.
+          module SourceType
+            # The default value. This value should never be used.
+            SOURCE_TYPE_UNSPECIFIED = 0
+
+            # Logs produced by ESXI hosts
+            ESXI = 1
+
+            # Logs produced by vCenter server
+            VCSA = 2
           end
         end
 
@@ -342,9 +679,42 @@ module Google
         # @!attribute [r] available_custom_core_counts
         #   @return [::Array<::Integer>]
         #     Output only. List of possible values of custom core count.
+        # @!attribute [r] kind
+        #   @return [::Google::Cloud::VmwareEngine::V1::NodeType::Kind]
+        #     Output only. The type of the resource.
+        # @!attribute [r] families
+        #   @return [::Array<::String>]
+        #     Output only. Families of the node type.
+        #     For node types to be in the same cluster
+        #     they must share at least one element in the `families`.
+        # @!attribute [r] capabilities
+        #   @return [::Array<::Google::Cloud::VmwareEngine::V1::NodeType::Capability>]
+        #     Output only. Capabilities of this node type.
         class NodeType
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Enum Kind defines possible types of a NodeType.
+          module Kind
+            # The default value. This value should never be used.
+            KIND_UNSPECIFIED = 0
+
+            # Standard HCI node.
+            STANDARD = 1
+
+            # Storage only Node.
+            STORAGE_ONLY = 2
+          end
+
+          # Capability of a node type.
+          module Capability
+            # The default value. This value is used if the capability is omitted or
+            # unknown.
+            CAPABILITY_UNSPECIFIED = 0
+
+            # This node type supports stretch clusters.
+            STRETCHED_CLUSTERS = 1
+          end
         end
 
         # Credentials for a private cloud.
@@ -493,6 +863,178 @@ module Google
 
             # The appliance is being deployed.
             CREATING = 2
+          end
+        end
+
+        # DNS forwarding config.
+        # This config defines a list of domain to name server mappings,
+        # and is attached to the private cloud for custom domain resolution.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. The resource name of this DNS profile.
+        #     Resource names are schemeless URIs that follow the conventions in
+        #     https://cloud.google.com/apis/design/resource_names.
+        #     For example:
+        #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud/dnsForwarding`
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Creation time of this resource.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Last update time of this resource.
+        # @!attribute [rw] forwarding_rules
+        #   @return [::Array<::Google::Cloud::VmwareEngine::V1::DnsForwarding::ForwardingRule>]
+        #     Required. List of domain mappings to configure
+        class DnsForwarding
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # A forwarding rule is a mapping of a `domain` to `name_servers`.
+          # This mapping allows VMware Engine to resolve domains for attached private
+          # clouds by forwarding DNS requests for a given domain to the specified
+          # nameservers.
+          # @!attribute [rw] domain
+          #   @return [::String]
+          #     Required. Domain used to resolve a `name_servers` list.
+          # @!attribute [rw] name_servers
+          #   @return [::Array<::String>]
+          #     Required. List of DNS servers to use for domain resolution
+          class ForwardingRule
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Details of a network peering.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. The resource name of the network peering. NetworkPeering is a
+        #     global resource and location can only be global. Resource names are
+        #     scheme-less URIs that follow the conventions in
+        #     https://cloud.google.com/apis/design/resource_names.
+        #     For example:
+        #     `projects/my-project/locations/global/networkPeerings/my-peering`
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Creation time of this resource.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Last update time of this resource.
+        # @!attribute [rw] peer_network
+        #   @return [::String]
+        #     Required. The relative resource name of the network to peer with
+        #     a standard VMware Engine network. The provided network can be a
+        #     consumer VPC network or another standard VMware Engine network. If the
+        #     `peer_network_type` is VMWARE_ENGINE_NETWORK, specify the name in the form:
+        #     `projects/{project}/locations/global/vmwareEngineNetworks/{vmware_engine_network_id}`.
+        #     Otherwise specify the name in the form:
+        #     `projects/{project}/global/networks/{network_id}`, where
+        #     `{project}` can either be a project number or a project ID.
+        # @!attribute [rw] export_custom_routes
+        #   @return [::Boolean]
+        #     Optional. True if custom routes are exported to the peered network;
+        #     false otherwise. The default value is true.
+        # @!attribute [rw] import_custom_routes
+        #   @return [::Boolean]
+        #     Optional. True if custom routes are imported from the peered network;
+        #     false otherwise. The default value is true.
+        # @!attribute [rw] exchange_subnet_routes
+        #   @return [::Boolean]
+        #     Optional. True if full mesh connectivity is created and managed
+        #     automatically between peered networks; false otherwise. Currently this
+        #     field is always true because Google Compute Engine automatically creates
+        #     and manages subnetwork routes between two VPC networks when peering state
+        #     is 'ACTIVE'.
+        # @!attribute [rw] export_custom_routes_with_public_ip
+        #   @return [::Boolean]
+        #     Optional. True if all subnet routes with a public IP address range are
+        #     exported; false otherwise. The default value is true. IPv4 special-use
+        #     ranges (https://en.wikipedia.org/wiki/IPv4#Special_addresses) are always
+        #     exported to peers and are not controlled by this field.
+        # @!attribute [rw] import_custom_routes_with_public_ip
+        #   @return [::Boolean]
+        #     Optional. True if all subnet routes with public IP address range are
+        #     imported; false otherwise. The default value is true. IPv4 special-use
+        #     ranges (https://en.wikipedia.org/wiki/IPv4#Special_addresses) are always
+        #     imported to peers and are not controlled by this field.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::VmwareEngine::V1::NetworkPeering::State]
+        #     Output only. State of the network peering. This field
+        #     has a value of 'ACTIVE' when there's a matching configuration in the peer
+        #     network. New values may be added to this enum when appropriate.
+        # @!attribute [r] state_details
+        #   @return [::String]
+        #     Output only. Output Only. Details about the current state of the network
+        #     peering.
+        # @!attribute [rw] peer_mtu
+        #   @return [::Integer]
+        #     Optional. Maximum transmission unit (MTU) in bytes.
+        #     The default value is `1500`. If a value of `0` is provided for this field,
+        #     VMware Engine uses the default value instead.
+        # @!attribute [rw] peer_network_type
+        #   @return [::Google::Cloud::VmwareEngine::V1::NetworkPeering::PeerNetworkType]
+        #     Required. The type of the network to peer with the VMware Engine network.
+        # @!attribute [r] uid
+        #   @return [::String]
+        #     Output only. System-generated unique identifier for the resource.
+        # @!attribute [rw] vmware_engine_network
+        #   @return [::String]
+        #     Required. The relative resource name of the VMware Engine network.
+        #     Specify the name in the following form:
+        #     `projects/{project}/locations/{location}/vmwareEngineNetworks/{vmware_engine_network_id}`
+        #     where `{project}` can either be a project number or a project ID.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     Optional. User-provided description for this network peering.
+        class NetworkPeering
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Possible states of a network peering.
+          module State
+            # Unspecified network peering state. This is the default value.
+            STATE_UNSPECIFIED = 0
+
+            # The peering is not active.
+            INACTIVE = 1
+
+            # The peering is active.
+            ACTIVE = 2
+
+            # The peering is being created.
+            CREATING = 3
+
+            # The peering is being deleted.
+            DELETING = 4
+          end
+
+          # Type or purpose of the network peering connection.
+          module PeerNetworkType
+            # Unspecified
+            PEER_NETWORK_TYPE_UNSPECIFIED = 0
+
+            # Peering connection used for connecting to another VPC network established
+            # by the same user. For example, a peering connection to another VPC
+            # network in the same project or to an on-premises network.
+            STANDARD = 1
+
+            # Peering connection used for connecting to another VMware Engine network.
+            VMWARE_ENGINE_NETWORK = 2
+
+            # Peering connection used for establishing [private services
+            # access](https://cloud.google.com/vpc/docs/private-services-access).
+            PRIVATE_SERVICES_ACCESS = 3
+
+            # Peering connection used for connecting to NetApp Cloud Volumes.
+            NETAPP_CLOUD_VOLUMES = 4
+
+            # Peering connection used for connecting to third-party services. Most
+            # third-party services require manual setup of reverse peering on the VPC
+            # network associated with the third-party service.
+            THIRD_PARTY_SERVICE = 5
+
+            # Peering connection used for connecting to Dell PowerScale Filers
+            DELL_POWERSCALE = 6
           end
         end
 
@@ -645,6 +1187,72 @@ module Google
           end
         end
 
+        # Represents a binding between a network and the management DNS zone.
+        # A management DNS zone is the Cloud DNS cross-project binding zone that
+        # VMware Engine creates for each private cloud. It contains FQDNs and
+        # corresponding IP addresses for the private cloud's ESXi hosts and management
+        # VM appliances like vCenter and NSX Manager.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. The resource name of this binding.
+        #     Resource names are schemeless URIs that follow the conventions in
+        #     https://cloud.google.com/apis/design/resource_names.
+        #     For example:
+        #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud/managementDnsZoneBindings/my-management-dns-zone-binding`
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Creation time of this resource.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Last update time of this resource.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::VmwareEngine::V1::ManagementDnsZoneBinding::State]
+        #     Output only. The state of the resource.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     User-provided description for this resource.
+        # @!attribute [rw] vpc_network
+        #   @return [::String]
+        #     Network to bind is a standard consumer VPC.
+        #     Specify the name in the following form for consumer
+        #     VPC network: `projects/{project}/global/networks/{network_id}`.
+        #     `{project}` can either be a project number or a project ID.
+        # @!attribute [rw] vmware_engine_network
+        #   @return [::String]
+        #     Network to bind is a VMware Engine network.
+        #     Specify the name in the following form for VMware engine network:
+        #     `projects/{project}/locations/global/vmwareEngineNetworks/{vmware_engine_network_id}`.
+        #     `{project}` can either be a project number or a project ID.
+        # @!attribute [r] uid
+        #   @return [::String]
+        #     Output only. System-generated unique identifier for the resource.
+        class ManagementDnsZoneBinding
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Enum State defines possible states of binding between the consumer VPC
+          # network and the management DNS zone.
+          module State
+            # The default value. This value should never be used.
+            STATE_UNSPECIFIED = 0
+
+            # The binding is ready.
+            ACTIVE = 1
+
+            # The binding is being created.
+            CREATING = 2
+
+            # The binding is being updated.
+            UPDATING = 3
+
+            # The binding is being deleted.
+            DELETING = 4
+
+            # The binding has failed.
+            FAILED = 5
+          end
+        end
+
         # VMware Engine network resource that provides connectivity for VMware Engine
         # private clouds.
         # @!attribute [r] name
@@ -750,6 +1358,9 @@ module Google
             # of type `STANDARD`. This network type is no longer used for new VMware
             # Engine private cloud deployments.
             LEGACY = 1
+
+            # Standard network type used for private cloud connectivity.
+            STANDARD = 2
           end
         end
 
@@ -894,6 +1505,60 @@ module Google
             # The peering is in inactive state.
             PEERING_INACTIVE = 2
           end
+        end
+
+        # VmwareEngine specific metadata for the given
+        # `::Google::Cloud::Location::Location`. It is
+        # returned as a content of the `google.cloud.location.Location.metadata` field.
+        # @!attribute [r] capabilities
+        #   @return [::Array<::Google::Cloud::VmwareEngine::V1::LocationMetadata::Capability>]
+        #     Output only. Capabilities of this location.
+        class LocationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Capability of a location.
+          module Capability
+            # The default value. This value is used if the capability is omitted or
+            # unknown.
+            CAPABILITY_UNSPECIFIED = 0
+
+            # Stretch clusters are supported in this location.
+            STRETCHED_CLUSTERS = 1
+          end
+        end
+
+        # DnsBindPermission resource that contains the accounts having the consumer DNS
+        # bind permission on the corresponding intranet VPC of the consumer project.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Required. Output only. The name of the resource which stores the
+        #     users/service accounts having the permission to bind to the corresponding
+        #     intranet VPC of the consumer project. DnsBindPermission is a global
+        #     resource and location can only be global. Resource names are schemeless
+        #     URIs that follow the conventions in
+        #     https://cloud.google.com/apis/design/resource_names. For example:
+        #     `projects/my-project/locations/global/dnsBindPermission`
+        # @!attribute [r] principals
+        #   @return [::Array<::Google::Cloud::VmwareEngine::V1::Principal>]
+        #     Output only. Users/Service accounts which have access for binding on the
+        #     intranet VPC project corresponding to the consumer project.
+        class DnsBindPermission
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Users/Service accounts which have access for DNS binding on the intranet
+        # VPC corresponding to the consumer project.
+        # @!attribute [rw] user
+        #   @return [::String]
+        #     The user who needs to be granted permission.
+        # @!attribute [rw] service_account
+        #   @return [::String]
+        #     The service account which needs to be granted the permission.
+        class Principal
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

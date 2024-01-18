@@ -38,9 +38,9 @@ module Google
             # Retrieves a `PrivateCloud` resource by its resource name.
             rpc :GetPrivateCloud, ::Google::Cloud::VmwareEngine::V1::GetPrivateCloudRequest, ::Google::Cloud::VmwareEngine::V1::PrivateCloud
             # Creates a new `PrivateCloud` resource in a given project and location.
-            # Private clouds can only be created in zones, regional private clouds are
-            # not supported.
-            #
+            # Private clouds of type `STANDARD` and
+            # `TIME_LIMITED` are zonal resources, `STRETCHED` private clouds are
+            # regional.
             # Creating a private cloud also creates a [management
             # cluster](https://cloud.google.com/vmware-engine/docs/concepts-vmware-components)
             # for that private cloud.
@@ -84,8 +84,7 @@ module Google
             # use in the parent private cloud and requires sufficient [node
             # quota](https://cloud.google.com/vmware-engine/quotas).
             rpc :CreateCluster, ::Google::Cloud::VmwareEngine::V1::CreateClusterRequest, ::Google::Longrunning::Operation
-            # Modifies a `Cluster` resource. Only the following fields can be updated:
-            # `node_type_configs.*.node_count`. Only fields specified in `updateMask` are
+            # Modifies a `Cluster` resource. Only fields specified in `updateMask` are
             # applied.
             #
             # During operation processing, the resource is temporarily in the `ACTIVE`
@@ -98,6 +97,34 @@ module Google
             # You cannot delete the management cluster of a private cloud using this
             # method.
             rpc :DeleteCluster, ::Google::Cloud::VmwareEngine::V1::DeleteClusterRequest, ::Google::Longrunning::Operation
+            # Lists nodes in a given cluster.
+            rpc :ListNodes, ::Google::Cloud::VmwareEngine::V1::ListNodesRequest, ::Google::Cloud::VmwareEngine::V1::ListNodesResponse
+            # Gets details of a single node.
+            rpc :GetNode, ::Google::Cloud::VmwareEngine::V1::GetNodeRequest, ::Google::Cloud::VmwareEngine::V1::Node
+            # Lists external IP addresses assigned to VMware workload VMs in a given
+            # private cloud.
+            rpc :ListExternalAddresses, ::Google::Cloud::VmwareEngine::V1::ListExternalAddressesRequest, ::Google::Cloud::VmwareEngine::V1::ListExternalAddressesResponse
+            # Lists external IP addresses assigned to VMware workload VMs within the
+            # scope of the given network policy.
+            rpc :FetchNetworkPolicyExternalAddresses, ::Google::Cloud::VmwareEngine::V1::FetchNetworkPolicyExternalAddressesRequest, ::Google::Cloud::VmwareEngine::V1::FetchNetworkPolicyExternalAddressesResponse
+            # Gets details of a single external IP address.
+            rpc :GetExternalAddress, ::Google::Cloud::VmwareEngine::V1::GetExternalAddressRequest, ::Google::Cloud::VmwareEngine::V1::ExternalAddress
+            # Creates a new `ExternalAddress` resource in a given private cloud. The
+            # network policy that corresponds to the private cloud must have the external
+            # IP address network service enabled (`NetworkPolicy.external_ip`).
+            rpc :CreateExternalAddress, ::Google::Cloud::VmwareEngine::V1::CreateExternalAddressRequest, ::Google::Longrunning::Operation
+            # Updates the parameters of a single external IP address.
+            # Only fields specified in `update_mask` are applied.
+            #
+            # During operation processing, the resource is temporarily in the `ACTIVE`
+            # state before the operation fully completes. For that period of time, you
+            # can't update the resource. Use the operation status to determine when the
+            # processing fully completes.
+            rpc :UpdateExternalAddress, ::Google::Cloud::VmwareEngine::V1::UpdateExternalAddressRequest, ::Google::Longrunning::Operation
+            # Deletes a single external IP address. When you delete an external IP
+            # address, connectivity between the external IP address and the corresponding
+            # internal IP address is lost.
+            rpc :DeleteExternalAddress, ::Google::Cloud::VmwareEngine::V1::DeleteExternalAddressRequest, ::Google::Longrunning::Operation
             # Lists subnets in a given private cloud.
             rpc :ListSubnets, ::Google::Cloud::VmwareEngine::V1::ListSubnetsRequest, ::Google::Cloud::VmwareEngine::V1::ListSubnetsResponse
             # Gets details of a single subnet.
@@ -109,6 +136,29 @@ module Google
             # `google.longrunning.Operation` (LRO). The returned LRO will only have
             # `done` and `response` fields.
             rpc :UpdateSubnet, ::Google::Cloud::VmwareEngine::V1::UpdateSubnetRequest, ::Google::Longrunning::Operation
+            # Lists `ExternalAccessRule` resources in the specified network policy.
+            rpc :ListExternalAccessRules, ::Google::Cloud::VmwareEngine::V1::ListExternalAccessRulesRequest, ::Google::Cloud::VmwareEngine::V1::ListExternalAccessRulesResponse
+            # Gets details of a single external access rule.
+            rpc :GetExternalAccessRule, ::Google::Cloud::VmwareEngine::V1::GetExternalAccessRuleRequest, ::Google::Cloud::VmwareEngine::V1::ExternalAccessRule
+            # Creates a new external access rule in a given network policy.
+            rpc :CreateExternalAccessRule, ::Google::Cloud::VmwareEngine::V1::CreateExternalAccessRuleRequest, ::Google::Longrunning::Operation
+            # Updates the parameters of a single external access rule.
+            # Only fields specified in `update_mask` are applied.
+            rpc :UpdateExternalAccessRule, ::Google::Cloud::VmwareEngine::V1::UpdateExternalAccessRuleRequest, ::Google::Longrunning::Operation
+            # Deletes a single external access rule.
+            rpc :DeleteExternalAccessRule, ::Google::Cloud::VmwareEngine::V1::DeleteExternalAccessRuleRequest, ::Google::Longrunning::Operation
+            # Lists logging servers configured for a given private
+            # cloud.
+            rpc :ListLoggingServers, ::Google::Cloud::VmwareEngine::V1::ListLoggingServersRequest, ::Google::Cloud::VmwareEngine::V1::ListLoggingServersResponse
+            # Gets details of a logging server.
+            rpc :GetLoggingServer, ::Google::Cloud::VmwareEngine::V1::GetLoggingServerRequest, ::Google::Cloud::VmwareEngine::V1::LoggingServer
+            # Create a new logging server for a given private cloud.
+            rpc :CreateLoggingServer, ::Google::Cloud::VmwareEngine::V1::CreateLoggingServerRequest, ::Google::Longrunning::Operation
+            # Updates the parameters of a single logging server.
+            # Only fields specified in `update_mask` are applied.
+            rpc :UpdateLoggingServer, ::Google::Cloud::VmwareEngine::V1::UpdateLoggingServerRequest, ::Google::Longrunning::Operation
+            # Deletes a single logging server.
+            rpc :DeleteLoggingServer, ::Google::Cloud::VmwareEngine::V1::DeleteLoggingServerRequest, ::Google::Longrunning::Operation
             # Lists node types
             rpc :ListNodeTypes, ::Google::Cloud::VmwareEngine::V1::ListNodeTypesRequest, ::Google::Cloud::VmwareEngine::V1::ListNodeTypesResponse
             # Gets details of a single `NodeType`.
@@ -121,6 +171,35 @@ module Google
             rpc :ResetNsxCredentials, ::Google::Cloud::VmwareEngine::V1::ResetNsxCredentialsRequest, ::Google::Longrunning::Operation
             # Resets credentials of the Vcenter appliance.
             rpc :ResetVcenterCredentials, ::Google::Cloud::VmwareEngine::V1::ResetVcenterCredentialsRequest, ::Google::Longrunning::Operation
+            # Gets details of the `DnsForwarding` config.
+            rpc :GetDnsForwarding, ::Google::Cloud::VmwareEngine::V1::GetDnsForwardingRequest, ::Google::Cloud::VmwareEngine::V1::DnsForwarding
+            # Updates the parameters of the `DnsForwarding` config, like associated
+            # domains. Only fields specified in `update_mask` are applied.
+            rpc :UpdateDnsForwarding, ::Google::Cloud::VmwareEngine::V1::UpdateDnsForwardingRequest, ::Google::Longrunning::Operation
+            # Retrieves a `NetworkPeering` resource by its resource name. The resource
+            # contains details of the network peering, such as peered
+            # networks, import and export custom route configurations, and peering state.
+            # NetworkPeering is a global resource and location can only be global.
+            rpc :GetNetworkPeering, ::Google::Cloud::VmwareEngine::V1::GetNetworkPeeringRequest, ::Google::Cloud::VmwareEngine::V1::NetworkPeering
+            # Lists `NetworkPeering` resources in a given project. NetworkPeering is a
+            # global resource and location can only be global.
+            rpc :ListNetworkPeerings, ::Google::Cloud::VmwareEngine::V1::ListNetworkPeeringsRequest, ::Google::Cloud::VmwareEngine::V1::ListNetworkPeeringsResponse
+            # Creates a new network peering between the peer network and VMware Engine
+            # network provided in a `NetworkPeering` resource. NetworkPeering is a
+            # global resource and location can only be global.
+            rpc :CreateNetworkPeering, ::Google::Cloud::VmwareEngine::V1::CreateNetworkPeeringRequest, ::Google::Longrunning::Operation
+            # Deletes a `NetworkPeering` resource. When a network peering is deleted for
+            # a VMware Engine network, the peer network becomes inaccessible to that
+            # VMware Engine network. NetworkPeering is a global resource and location can
+            # only be global.
+            rpc :DeleteNetworkPeering, ::Google::Cloud::VmwareEngine::V1::DeleteNetworkPeeringRequest, ::Google::Longrunning::Operation
+            # Modifies a `NetworkPeering` resource. Only the `description` field can be
+            # updated. Only fields specified in `updateMask` are applied. NetworkPeering
+            # is a global resource and location can only be global.
+            rpc :UpdateNetworkPeering, ::Google::Cloud::VmwareEngine::V1::UpdateNetworkPeeringRequest, ::Google::Longrunning::Operation
+            # Lists the network peering routes exchanged over a peering connection.
+            # NetworkPeering is a global resource and location can only be global.
+            rpc :ListPeeringRoutes, ::Google::Cloud::VmwareEngine::V1::ListPeeringRoutesRequest, ::Google::Cloud::VmwareEngine::V1::ListPeeringRoutesResponse
             # Creates a new HCX activation key in a given private cloud.
             rpc :CreateHcxActivationKey, ::Google::Cloud::VmwareEngine::V1::CreateHcxActivationKeyRequest, ::Google::Longrunning::Operation
             # Lists `HcxActivationKey` resources in a given private cloud.
@@ -152,6 +231,28 @@ module Google
             # when `NetworkService.state` is set to `RECONCILING` for either its external
             # IP or internet access service.
             rpc :DeleteNetworkPolicy, ::Google::Cloud::VmwareEngine::V1::DeleteNetworkPolicyRequest, ::Google::Longrunning::Operation
+            # Lists Consumer VPCs bound to Management DNS Zone of a given private cloud.
+            rpc :ListManagementDnsZoneBindings, ::Google::Cloud::VmwareEngine::V1::ListManagementDnsZoneBindingsRequest, ::Google::Cloud::VmwareEngine::V1::ListManagementDnsZoneBindingsResponse
+            # Retrieves a 'ManagementDnsZoneBinding' resource by its resource name.
+            rpc :GetManagementDnsZoneBinding, ::Google::Cloud::VmwareEngine::V1::GetManagementDnsZoneBindingRequest, ::Google::Cloud::VmwareEngine::V1::ManagementDnsZoneBinding
+            # Creates a new `ManagementDnsZoneBinding` resource in a private cloud.
+            # This RPC creates the DNS binding and the resource that represents the
+            # DNS binding of the consumer VPC network to the management DNS zone. A
+            # management DNS zone is the Cloud DNS cross-project binding zone that
+            # VMware Engine creates for each private cloud. It contains FQDNs and
+            # corresponding IP addresses for the private cloud's ESXi hosts and
+            # management VM appliances like vCenter and NSX Manager.
+            rpc :CreateManagementDnsZoneBinding, ::Google::Cloud::VmwareEngine::V1::CreateManagementDnsZoneBindingRequest, ::Google::Longrunning::Operation
+            # Updates a `ManagementDnsZoneBinding` resource.
+            # Only fields specified in `update_mask` are applied.
+            rpc :UpdateManagementDnsZoneBinding, ::Google::Cloud::VmwareEngine::V1::UpdateManagementDnsZoneBindingRequest, ::Google::Longrunning::Operation
+            # Deletes a `ManagementDnsZoneBinding` resource. When a management DNS zone
+            # binding is deleted, the corresponding consumer VPC network is no longer
+            # bound to the management DNS zone.
+            rpc :DeleteManagementDnsZoneBinding, ::Google::Cloud::VmwareEngine::V1::DeleteManagementDnsZoneBindingRequest, ::Google::Longrunning::Operation
+            # Retries to create a `ManagementDnsZoneBinding` resource that is
+            # in failed state.
+            rpc :RepairManagementDnsZoneBinding, ::Google::Cloud::VmwareEngine::V1::RepairManagementDnsZoneBindingRequest, ::Google::Longrunning::Operation
             # Creates a new VMware Engine network that can be used by a private cloud.
             rpc :CreateVmwareEngineNetwork, ::Google::Cloud::VmwareEngine::V1::CreateVmwareEngineNetworkRequest, ::Google::Longrunning::Operation
             # Modifies a VMware Engine network resource. Only the following fields can be
@@ -189,6 +290,19 @@ module Google
             rpc :DeletePrivateConnection, ::Google::Cloud::VmwareEngine::V1::DeletePrivateConnectionRequest, ::Google::Longrunning::Operation
             # Lists the private connection routes exchanged over a peering connection.
             rpc :ListPrivateConnectionPeeringRoutes, ::Google::Cloud::VmwareEngine::V1::ListPrivateConnectionPeeringRoutesRequest, ::Google::Cloud::VmwareEngine::V1::ListPrivateConnectionPeeringRoutesResponse
+            # Grants the bind permission to the customer provided principal(user /
+            # service account) to bind their DNS zone with the intranet VPC associated
+            # with the project. DnsBindPermission is a global resource and location can
+            # only be global.
+            rpc :GrantDnsBindPermission, ::Google::Cloud::VmwareEngine::V1::GrantDnsBindPermissionRequest, ::Google::Longrunning::Operation
+            # Gets all the principals having bind permission on the intranet VPC
+            # associated with the consumer project granted by the Grant API.
+            # DnsBindPermission is a global resource and location can only be global.
+            rpc :GetDnsBindPermission, ::Google::Cloud::VmwareEngine::V1::GetDnsBindPermissionRequest, ::Google::Cloud::VmwareEngine::V1::DnsBindPermission
+            # Revokes the bind permission from the customer provided principal(user /
+            # service account) on the intranet VPC associated with the consumer project.
+            # DnsBindPermission is a global resource and location can only be global.
+            rpc :RevokeDnsBindPermission, ::Google::Cloud::VmwareEngine::V1::RevokeDnsBindPermissionRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class
