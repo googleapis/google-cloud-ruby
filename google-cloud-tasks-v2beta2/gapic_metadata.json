@@ -114,11 +114,6 @@
               "methods": [
                 "run_task"
               ]
-            },
-            "BufferTask": {
-              "methods": [
-                "buffer_task"
-              ]
             }
           }
         }

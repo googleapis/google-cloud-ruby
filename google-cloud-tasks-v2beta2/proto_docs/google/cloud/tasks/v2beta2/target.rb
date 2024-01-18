@@ -427,7 +427,7 @@ module Google
         #     This map contains the header field names and values.
         #     Headers can be set when running the
         #     {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#create_task task is created} or
-        #     {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#buffer_task task is created}.
+        #     [task is created][google.cloud.tasks.v2beta2.CloudTasks.BufferTask].
         #
         #     These headers represent a subset of the headers that will accompany the
         #     task's HTTP request. Some HTTP request headers will be ignored or replaced.
@@ -620,7 +620,7 @@ module Google
         #     This map contains the header field names and values.
         #     Headers will be set when running the
         #     {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#create_task task is created} and/or
-        #     {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#buffer_task task is created}.
+        #     [task is created][google.cloud.tasks.v2beta2.CloudTasks.BufferTask].
         #
         #     These headers represent a subset of the headers that will accompany the
         #     task's HTTP request. Some HTTP request headers will be ignored or replaced.

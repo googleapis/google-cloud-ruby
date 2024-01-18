@@ -602,40 +602,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
-        # LINT.IfChange
-        # Request message for
-        # {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#buffer_task BufferTask}.
-        # @!attribute [rw] queue
-        #   @return [::String]
-        #     Required. The parent queue name. For example:
-        #     projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
-        #
-        #     The queue must already exist.
-        # @!attribute [rw] task_id
-        #   @return [::String]
-        #     Optional. Task ID for the task being created. If not provided, a random
-        #     task ID is assigned to the task.
-        # @!attribute [rw] body
-        #   @return [::Google::Api::HttpBody]
-        #     Optional. Body of the HTTP request.
-        #
-        #     The body can take any generic value. The value is written to the
-        #     [HttpRequest][payload] of the [Task].
-        class BufferTaskRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Response message for
-        # {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#buffer_task BufferTask}.
-        # @!attribute [rw] task
-        #   @return [::Google::Cloud::Tasks::V2beta2::Task]
-        #     The created task.
-        class BufferTaskResponse
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
       end
     end
   end
