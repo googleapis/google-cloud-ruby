@@ -18,6 +18,14 @@ require "google/cloud/pubsub"
 describe Google::Cloud do
   let(:default_host) { "pubsub.googleapis.com" }
   let(:default_scopes) { ["https://www.googleapis.com/auth/cloud-platform", "https://www.googleapis.com/auth/pubsub"] }
+  let(:default_credentials) do
+    creds = OpenStruct.new empty: true
+    def creds.is_a? target
+      target == Google::Auth::Credentials
+    end
+    creds
+  end
+
   describe "#pubsub" do
     it "calls out to Google::Cloud.pubsub" do
       gcloud = Google::Cloud.new
@@ -66,13 +74,6 @@ describe Google::Cloud do
   end
 
   describe ".pubsub" do
-    let(:default_credentials) do
-      creds = OpenStruct.new empty: true
-      def creds.is_a? target
-        target == Google::Auth::Credentials
-      end
-      creds
-    end
     let(:found_credentials) { "{}" }
 
     it "gets defaults for project_id and keyfile" do
@@ -96,11 +97,12 @@ describe Google::Cloud do
         _(scope).must_equal default_scopes
         "pubsub-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, universe_domain: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "pubsub-credentials"
         _(timeout).must_be :nil?
-        _(host).must_equal default_host
+        _(host).must_be :nil?
+        _(universe_domain).must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -123,13 +125,6 @@ describe Google::Cloud do
   end
 
   describe "PubSub.new" do
-    let(:default_credentials) do
-      creds = OpenStruct.new empty: true
-      def creds.is_a? target
-        target == Google::Auth::Credentials
-      end
-      creds
-    end
     let(:found_credentials) { "{}" }
 
     after do
@@ -157,11 +152,12 @@ describe Google::Cloud do
         _(scope).must_equal default_scopes
         "pubsub-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, universe_domain: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "pubsub-credentials"
         _(timeout).must_be :nil?
-        _(host).must_equal default_host
+        _(host).must_be :nil?
+        _(universe_domain).must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -188,11 +184,12 @@ describe Google::Cloud do
         _(scope).must_equal default_scopes
         "pubsub-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, universe_domain: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "pubsub-credentials"
         _(timeout).must_be :nil?
-        _(host).must_equal default_host
+        _(host).must_be :nil?
+        _(universe_domain).must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -234,11 +231,12 @@ describe Google::Cloud do
     it "allows timeout to be set" do
       timeout = 123.4
 
-      stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, universe_domain: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal default_credentials
         _(timeout).must_equal timeout
-        _(host).must_equal default_host
+        _(host).must_be :nil?
+        _(universe_domain).must_be :nil?
       }
 
       # Clear all environment variables
@@ -257,11 +255,12 @@ describe Google::Cloud do
     it "allows endpoint to be set" do
       endpoint = "localhost:4567"
 
-      stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, universe_domain: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal default_credentials
         _(timeout).must_be :nil?
         _(host).must_equal endpoint
+        _(universe_domain).must_be :nil?
         OpenStruct.new project: project, credentials: credentials
       }
 
@@ -272,6 +271,34 @@ describe Google::Cloud do
           Google::Cloud::PubSub::Credentials.stub :default, default_credentials do
             Google::Cloud::PubSub::Service.stub :new, stubbed_service do
               pubsub = Google::Cloud::PubSub.new endpoint: endpoint
+              _(pubsub).must_be_kind_of Google::Cloud::PubSub::Project
+              _(pubsub.project).must_equal "project-id"
+              _(pubsub.service.credentials).must_equal default_credentials
+            end
+          end
+        end
+      end
+    end
+
+    it "allows universe_domain to be set" do
+      actual_universe_domain = "myuniverse.com"
+
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, universe_domain: nil) {
+        _(project).must_equal "project-id"
+        _(credentials).must_equal default_credentials
+        _(timeout).must_be :nil?
+        _(host).must_be :nil?
+        _(universe_domain).must_equal actual_universe_domain
+        OpenStruct.new project: project, credentials: credentials
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        # Get project_id from Google Compute Engine
+        Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
+          Google::Cloud::PubSub::Credentials.stub :default, default_credentials do
+            Google::Cloud::PubSub::Service.stub :new, stubbed_service do
+              pubsub = Google::Cloud::PubSub.new universe_domain: actual_universe_domain
               _(pubsub).must_be_kind_of Google::Cloud::PubSub::Project
               _(pubsub.project).must_equal "project-id"
               _(pubsub.service.credentials).must_equal default_credentials
@@ -304,12 +331,13 @@ describe Google::Cloud do
         _(scope).must_equal default_scopes
         OpenStruct.new project_id: "project-id"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, universe_domain: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_be_kind_of OpenStruct
         _(credentials.project_id).must_equal "project-id"
         _(timeout).must_be :nil?
-        _(host).must_equal default_host
+        _(host).must_be :nil?
+        _(universe_domain).must_be :nil?
         OpenStruct.new project: project
       }
       empty_env = OpenStruct.new
@@ -347,11 +375,12 @@ describe Google::Cloud do
         _(scope).must_equal default_scopes
         "pubsub-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, universe_domain: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "pubsub-credentials"
         _(timeout).must_be :nil?
-        _(host).must_equal default_host
+        _(host).must_be :nil?
+        _(universe_domain).must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -384,11 +413,12 @@ describe Google::Cloud do
         _(scope).must_equal default_scopes
         "pubsub-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, universe_domain: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "pubsub-credentials"
         _(timeout).must_be :nil?
-        _(host).must_equal default_host
+        _(host).must_be :nil?
+        _(universe_domain).must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -421,7 +451,7 @@ describe Google::Cloud do
         _(scope).must_equal default_scopes
         "pubsub-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, universe_domain: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "pubsub-credentials"
         _(timeout).must_equal 42.0
@@ -458,7 +488,7 @@ describe Google::Cloud do
         _(scope).must_equal default_scopes
         "pubsub-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, universe_domain: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "pubsub-credentials"
         _(timeout).must_equal 42.0
@@ -484,6 +514,34 @@ describe Google::Cloud do
                 _(pubsub.service).must_be_kind_of OpenStruct
               end
             end
+          end
+        end
+      end
+    end
+
+    it "uses pubsub config for endpoint and universe_domain" do
+      actual_endpoint = "myendpoint.com"
+      actual_universe_domain = "mydomain.com"
+
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, universe_domain: nil) {
+        _(host).must_equal actual_endpoint
+        _(universe_domain).must_equal actual_universe_domain
+        OpenStruct.new project: project
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        # Set new configuration
+        Google::Cloud::PubSub.configure do |config|
+          config.project_id = "project-id"
+          config.endpoint = actual_endpoint
+          config.universe_domain = actual_universe_domain
+        end
+
+        Google::Cloud::PubSub::Credentials.stub :default, default_credentials do
+          Google::Cloud::PubSub::Service.stub :new, stubbed_service do
+            pubsub = Google::Cloud::PubSub.new
+            _(pubsub).must_be_kind_of Google::Cloud::PubSub::Project
           end
         end
       end

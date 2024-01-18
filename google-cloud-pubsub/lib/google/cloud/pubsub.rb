@@ -62,6 +62,7 @@ module Google
       # @param [String] project Alias for the `project_id` argument. Deprecated.
       # @param [String] keyfile Alias for the `credentials` argument.
       #   Deprecated.
+      # @param universe_domain [String] A custom universe domain. Optional.
       #
       # @return [Google::Cloud::PubSub::Project]
       #
@@ -77,34 +78,36 @@ module Google
                    credentials: nil,
                    scope: nil,
                    timeout: nil,
+                   universe_domain: nil,
                    endpoint: nil,
                    emulator_host: nil,
                    project: nil,
                    keyfile: nil
-        project_id    ||= (project || default_project_id)
-        scope         ||= configure.scope
-        timeout       ||= configure.timeout
-        endpoint      ||= configure.endpoint
+        project_id ||= (project || default_project_id)
+        scope ||= configure.scope
+        timeout ||= configure.timeout
+        endpoint ||= configure.endpoint
+        universe_domain ||= configure.universe_domain
         emulator_host ||= configure.emulator_host
 
         if emulator_host
-          project_id = project_id.to_s # Always cast to a string
-          raise ArgumentError, "project_id is missing" if project_id.empty?
-
-          service = PubSub::Service.new project_id, :this_channel_is_insecure, host: emulator_host, timeout: timeout
-          return PubSub::Project.new service
-        end
-
-        credentials ||= (keyfile || default_credentials(scope: scope))
-        unless credentials.is_a? Google::Auth::Credentials
-          credentials = PubSub::Credentials.new credentials, scope: scope
+          credentials = :this_channel_is_insecure
+          endpoint = emulator_host
+        else
+          credentials ||= (keyfile || default_credentials(scope: scope))
+          unless credentials.is_a? Google::Auth::Credentials
+            credentials = PubSub::Credentials.new credentials, scope: scope
+          end
         end
 
         project_id ||= credentials.project_id if credentials.respond_to? :project_id
         project_id = project_id.to_s # Always cast to a string
         raise ArgumentError, "project_id is missing" if project_id.empty?
 
-        service = PubSub::Service.new project_id, credentials, host: endpoint, timeout: timeout
+        service = PubSub::Service.new project_id, credentials,
+                                      host: endpoint,
+                                      timeout: timeout,
+                                      universe_domain: universe_domain
         PubSub::Project.new service
       end
 
