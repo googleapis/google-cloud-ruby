@@ -952,62 +952,6 @@ class ::Google::Cloud::Tasks::V2beta3::CloudTasks::Rest::ClientTest < Minitest::
     end
   end
 
-  def test_buffer_task
-    # Create test objects.
-    client_result = ::Google::Cloud::Tasks::V2beta3::BufferTaskResponse.new
-    http_response = OpenStruct.new body: client_result.to_json
-
-    call_options = {}
-
-    # Create request parameters for a unary method.
-    queue = "hello world"
-    task_id = "hello world"
-    body = {}
-
-    buffer_task_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
-      assert options.metadata.key? :"x-goog-api-client"
-      assert options.metadata[:"x-goog-api-client"].include? "rest"
-      refute options.metadata[:"x-goog-api-client"].include? "grpc"
-    end
-
-    ::Google::Cloud::Tasks::V2beta3::CloudTasks::Rest::ServiceStub.stub :transcode_buffer_task_request, ["", "", {}] do
-      Gapic::Rest::ClientStub.stub :new, buffer_task_client_stub do
-        # Create client
-        client = ::Google::Cloud::Tasks::V2beta3::CloudTasks::Rest::Client.new do |config|
-          config.credentials = :dummy_value
-        end
-
-        # Use hash object
-        client.buffer_task({ queue: queue, task_id: task_id, body: body }) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use named arguments
-        client.buffer_task queue: queue, task_id: task_id, body: body do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object
-        client.buffer_task ::Google::Cloud::Tasks::V2beta3::BufferTaskRequest.new(queue: queue, task_id: task_id, body: body) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use hash object with options
-        client.buffer_task({ queue: queue, task_id: task_id, body: body }, call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object with options
-        client.buffer_task(::Google::Cloud::Tasks::V2beta3::BufferTaskRequest.new(queue: queue, task_id: task_id, body: body), call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Verify method calls
-        assert_equal 5, buffer_task_client_stub.call_count
-      end
-    end
-  end
-
   def test_configure
     credentials_token = :dummy_value
 
