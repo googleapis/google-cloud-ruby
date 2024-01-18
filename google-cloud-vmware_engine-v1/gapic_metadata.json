@@ -65,6 +65,46 @@
                 "delete_cluster"
               ]
             },
+            "ListNodes": {
+              "methods": [
+                "list_nodes"
+              ]
+            },
+            "GetNode": {
+              "methods": [
+                "get_node"
+              ]
+            },
+            "ListExternalAddresses": {
+              "methods": [
+                "list_external_addresses"
+              ]
+            },
+            "FetchNetworkPolicyExternalAddresses": {
+              "methods": [
+                "fetch_network_policy_external_addresses"
+              ]
+            },
+            "GetExternalAddress": {
+              "methods": [
+                "get_external_address"
+              ]
+            },
+            "CreateExternalAddress": {
+              "methods": [
+                "create_external_address"
+              ]
+            },
+            "UpdateExternalAddress": {
+              "methods": [
+                "update_external_address"
+              ]
+            },
+            "DeleteExternalAddress": {
+              "methods": [
+                "delete_external_address"
+              ]
+            },
             "ListSubnets": {
               "methods": [
                 "list_subnets"
@@ -78,6 +118,56 @@
             "UpdateSubnet": {
               "methods": [
                 "update_subnet"
+              ]
+            },
+            "ListExternalAccessRules": {
+              "methods": [
+                "list_external_access_rules"
+              ]
+            },
+            "GetExternalAccessRule": {
+              "methods": [
+                "get_external_access_rule"
+              ]
+            },
+            "CreateExternalAccessRule": {
+              "methods": [
+                "create_external_access_rule"
+              ]
+            },
+            "UpdateExternalAccessRule": {
+              "methods": [
+                "update_external_access_rule"
+              ]
+            },
+            "DeleteExternalAccessRule": {
+              "methods": [
+                "delete_external_access_rule"
+              ]
+            },
+            "ListLoggingServers": {
+              "methods": [
+                "list_logging_servers"
+              ]
+            },
+            "GetLoggingServer": {
+              "methods": [
+                "get_logging_server"
+              ]
+            },
+            "CreateLoggingServer": {
+              "methods": [
+                "create_logging_server"
+              ]
+            },
+            "UpdateLoggingServer": {
+              "methods": [
+                "update_logging_server"
+              ]
+            },
+            "DeleteLoggingServer": {
+              "methods": [
+                "delete_logging_server"
               ]
             },
             "ListNodeTypes": {
@@ -108,6 +198,46 @@
             "ResetVcenterCredentials": {
               "methods": [
                 "reset_vcenter_credentials"
+              ]
+            },
+            "GetDnsForwarding": {
+              "methods": [
+                "get_dns_forwarding"
+              ]
+            },
+            "UpdateDnsForwarding": {
+              "methods": [
+                "update_dns_forwarding"
+              ]
+            },
+            "GetNetworkPeering": {
+              "methods": [
+                "get_network_peering"
+              ]
+            },
+            "ListNetworkPeerings": {
+              "methods": [
+                "list_network_peerings"
+              ]
+            },
+            "CreateNetworkPeering": {
+              "methods": [
+                "create_network_peering"
+              ]
+            },
+            "DeleteNetworkPeering": {
+              "methods": [
+                "delete_network_peering"
+              ]
+            },
+            "UpdateNetworkPeering": {
+              "methods": [
+                "update_network_peering"
+              ]
+            },
+            "ListPeeringRoutes": {
+              "methods": [
+                "list_peering_routes"
               ]
             },
             "CreateHcxActivationKey": {
@@ -148,6 +278,36 @@
             "DeleteNetworkPolicy": {
               "methods": [
                 "delete_network_policy"
+              ]
+            },
+            "ListManagementDnsZoneBindings": {
+              "methods": [
+                "list_management_dns_zone_bindings"
+              ]
+            },
+            "GetManagementDnsZoneBinding": {
+              "methods": [
+                "get_management_dns_zone_binding"
+              ]
+            },
+            "CreateManagementDnsZoneBinding": {
+              "methods": [
+                "create_management_dns_zone_binding"
+              ]
+            },
+            "UpdateManagementDnsZoneBinding": {
+              "methods": [
+                "update_management_dns_zone_binding"
+              ]
+            },
+            "DeleteManagementDnsZoneBinding": {
+              "methods": [
+                "delete_management_dns_zone_binding"
+              ]
+            },
+            "RepairManagementDnsZoneBinding": {
+              "methods": [
+                "repair_management_dns_zone_binding"
               ]
             },
             "CreateVmwareEngineNetwork": {
@@ -203,6 +363,21 @@
             "ListPrivateConnectionPeeringRoutes": {
               "methods": [
                 "list_private_connection_peering_routes"
+              ]
+            },
+            "GrantDnsBindPermission": {
+              "methods": [
+                "grant_dns_bind_permission"
+              ]
+            },
+            "GetDnsBindPermission": {
+              "methods": [
+                "get_dns_bind_permission"
+              ]
+            },
+            "RevokeDnsBindPermission": {
+              "methods": [
+                "revoke_dns_bind_permission"
               ]
             }
           }

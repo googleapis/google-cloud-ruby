@@ -45,6 +45,54 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::ClientPathsTest < Minites
     end
   end
 
+  def test_dns_bind_permission_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.dns_bind_permission_path project: "value0", location: "value1"
+      assert_equal "projects/value0/locations/value1/dnsBindPermission", path
+    end
+  end
+
+  def test_dns_forwarding_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.dns_forwarding_path project: "value0", location: "value1", private_cloud: "value2"
+      assert_equal "projects/value0/locations/value1/privateClouds/value2/dnsForwarding", path
+    end
+  end
+
+  def test_external_access_rule_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.external_access_rule_path project: "value0", location: "value1", network_policy: "value2", external_access_rule: "value3"
+      assert_equal "projects/value0/locations/value1/networkPolicies/value2/externalAccessRules/value3", path
+    end
+  end
+
+  def test_external_address_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.external_address_path project: "value0", location: "value1", private_cloud: "value2", external_address: "value3"
+      assert_equal "projects/value0/locations/value1/privateClouds/value2/externalAddresses/value3", path
+    end
+  end
+
   def test_hcx_activation_key_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -69,6 +117,30 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::ClientPathsTest < Minites
     end
   end
 
+  def test_logging_server_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.logging_server_path project: "value0", location: "value1", private_cloud: "value2", logging_server: "value3"
+      assert_equal "projects/value0/locations/value1/privateClouds/value2/loggingServers/value3", path
+    end
+  end
+
+  def test_management_dns_zone_binding_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.management_dns_zone_binding_path project: "value0", location: "value1", private_cloud: "value2", management_dns_zone_binding: "value3"
+      assert_equal "projects/value0/locations/value1/privateClouds/value2/managementDnsZoneBindings/value3", path
+    end
+  end
+
   def test_network_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -81,6 +153,18 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::ClientPathsTest < Minites
     end
   end
 
+  def test_network_peering_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.network_peering_path project: "value0", location: "value1", network_peering: "value2"
+      assert_equal "projects/value0/locations/value1/networkPeerings/value2", path
+    end
+  end
+
   def test_network_policy_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -90,6 +174,18 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::ClientPathsTest < Minites
 
       path = client.network_policy_path project: "value0", location: "value1", network_policy: "value2"
       assert_equal "projects/value0/locations/value1/networkPolicies/value2", path
+    end
+  end
+
+  def test_node_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.node_path project: "value0", location: "value1", private_cloud: "value2", cluster: "value3", node: "value4"
+      assert_equal "projects/value0/locations/value1/privateClouds/value2/clusters/value3/nodes/value4", path
     end
   end
 
