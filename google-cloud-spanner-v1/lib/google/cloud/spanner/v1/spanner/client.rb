@@ -1615,7 +1615,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload commit(session: nil, transaction_id: nil, single_use_transaction: nil, mutations: nil, return_commit_stats: nil, request_options: nil)
+            # @overload commit(session: nil, transaction_id: nil, single_use_transaction: nil, mutations: nil, return_commit_stats: nil, max_commit_delay: nil, request_options: nil)
             #   Pass arguments to `commit` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1642,6 +1642,12 @@ module Google
             #     If `true`, then statistics related to the transaction will be included in
             #     the {::Google::Cloud::Spanner::V1::CommitResponse#commit_stats CommitResponse}.
             #     Default value is `false`.
+            #   @param max_commit_delay [::Google::Protobuf::Duration, ::Hash]
+            #     Optional. The amount of latency this request is willing to incur in order
+            #     to improve throughput. If this field is not set, Spanner assumes requests
+            #     are relatively latency sensitive and automatically determines an
+            #     appropriate delay time. You can specify a batching delay value between 0
+            #     and 500 ms.
             #   @param request_options [::Google::Cloud::Spanner::V1::RequestOptions, ::Hash]
             #     Common options for this request.
             #

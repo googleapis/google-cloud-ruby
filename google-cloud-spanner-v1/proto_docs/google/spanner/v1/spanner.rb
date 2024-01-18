@@ -912,6 +912,13 @@ module Google
         #     If `true`, then statistics related to the transaction will be included in
         #     the {::Google::Cloud::Spanner::V1::CommitResponse#commit_stats CommitResponse}.
         #     Default value is `false`.
+        # @!attribute [rw] max_commit_delay
+        #   @return [::Google::Protobuf::Duration]
+        #     Optional. The amount of latency this request is willing to incur in order
+        #     to improve throughput. If this field is not set, Spanner assumes requests
+        #     are relatively latency sensitive and automatically determines an
+        #     appropriate delay time. You can specify a batching delay value between 0
+        #     and 500 ms.
         # @!attribute [rw] request_options
         #   @return [::Google::Cloud::Spanner::V1::RequestOptions]
         #     Common options for this request.
