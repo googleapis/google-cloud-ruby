@@ -22,6 +22,14 @@ module Google
     module Firestore
       module V1
         # A Firestore query.
+        #
+        # The query stages are executed in the following order:
+        # 1. from
+        # 2. where
+        # 3. select
+        # 4. order_by + start_at + end_at
+        # 5. offset
+        # 6. limit
         # @!attribute [rw] select
         #   @return [::Google::Cloud::Firestore::V1::StructuredQuery::Projection]
         #     Optional sub-set of the fields to return.
