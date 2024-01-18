@@ -1,5 +1,11 @@
 # Release History
 
+### 0.11.2 (2024-01-18)
+
+#### Bug Fixes
+
+* Removed buffer_task RPC which is not supported and wasn't working ([#24436](https://github.com/googleapis/google-cloud-ruby/issues/24436)) 
+
 ### 0.11.1 (2024-01-12)
 
 #### Bug Fixes
