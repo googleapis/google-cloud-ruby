@@ -1,5 +1,11 @@
 # Release History
 
+### 0.20.2 (2024-01-19)
+
+#### Bug Fixes
+
+* Fix universe_domain and endpoint compatibility in deprecated embedded IAM client ([#24446](https://github.com/googleapis/google-cloud-ruby/issues/24446)) 
+
 ### 0.20.1 (2024-01-12)
 
 #### Bug Fixes
