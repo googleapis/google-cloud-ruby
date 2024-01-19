@@ -1,5 +1,25 @@
 # Changelog
 
+### 0.7.0 (2024-01-19)
+
+#### Features
+
+* Support fetch_network_policy_external_addresses RPC 
+* Support for NetworkConfig#dns_server_ip 
+* Support for node kind, families, and capabilities 
+* Support for stretched cluster configs 
+* Support for Subnet#vlan_id 
+* Support for the optional username argument to show_vcenter_credentials and reset_vcenter_credentials 
+* Support get and update operations on DNS forwarding resources 
+* Support get, grant, and revoke operations on DNS bind permissions 
+* Support getting and listing nodes 
+* Support list_peering_routes RPC 
+* Support listing and CRUD operations on external access rules 
+* Support listing and CRUD operations on external addresses 
+* Support listing and CRUD operations on logging servers 
+* Support listing and CRUD operations on network peering resources 
+* Support listing, repair, and CRUD operations on management DNS zone bindings 
+
 ### 0.6.1 (2024-01-12)
 
 #### Bug Fixes
