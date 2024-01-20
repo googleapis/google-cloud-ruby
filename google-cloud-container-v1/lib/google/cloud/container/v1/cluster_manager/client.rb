@@ -2083,8 +2083,6 @@ module Google
             ##
             # Gets the public component of the cluster signing keys in
             # JSON Web Key format.
-            # This API is not yet intended for general use, and is not available for all
-            # clusters.
             #
             # @overload get_json_web_keys(request, options = nil)
             #   Pass arguments to `get_json_web_keys` via a request object, either of type

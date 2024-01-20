@@ -1996,6 +1996,9 @@ module Google
         #   @return [::Google::Cloud::Container::V1::ResourceManagerTags]
         #     The desired resource manager tags that apply to all auto-provisioned node
         #     pools in autopilot clusters and node auto-provisioning enabled clusters.
+        # @!attribute [rw] desired_in_transit_encryption_config
+        #   @return [::Google::Cloud::Container::V1::InTransitEncryptionConfig]
+        #     Specify the details of in-transit encryption.
         class ClusterUpdate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -4384,6 +4387,9 @@ module Google
         # @!attribute [rw] enable_fqdn_network_policy
         #   @return [::Boolean]
         #     Whether FQDN Network Policy is enabled on this cluster.
+        # @!attribute [rw] in_transit_encryption_config
+        #   @return [::Google::Cloud::Container::V1::InTransitEncryptionConfig]
+        #     Specify the details of in-transit encryption.
         class NetworkConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -5528,6 +5534,19 @@ module Google
 
           # Access type external (all v6 addresses are external IPs)
           EXTERNAL = 2
+        end
+
+        # Options for in-transit encryption.
+        module InTransitEncryptionConfig
+          # Unspecified, will be inferred as default -
+          # IN_TRANSIT_ENCRYPTION_UNSPECIFIED.
+          IN_TRANSIT_ENCRYPTION_CONFIG_UNSPECIFIED = 0
+
+          # In-transit encryption is disabled.
+          IN_TRANSIT_ENCRYPTION_DISABLED = 1
+
+          # Data in-transit is encrypted using inter-node transparent encryption.
+          IN_TRANSIT_ENCRYPTION_INTER_NODE_TRANSPARENT = 2
         end
       end
     end
