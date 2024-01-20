@@ -20,7 +20,7 @@ gem "google-cloud-logging", path: master ? "../../google-cloud-logging" : nil
 
 group :test do
   gem "google-cloud-storage"
-  gem "google-style", "~> 1.25.1"
+  gem "google-style", ">= 1.25.1", "< 1.27.2"
   gem "minitest", "~> 5.14"
   gem "minitest-focus", "~> 1.1"
   gem "minitest-rg", "~> 5.2"

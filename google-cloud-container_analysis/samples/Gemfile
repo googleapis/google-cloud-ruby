@@ -25,7 +25,7 @@ gem "grafeas-v1", path: master ? "../../grafeas-v1" : nil
 gem "google-cloud-pubsub", "~> 2.0"
 
 group :test do
-  gem "google-style", "~> 1.25.1"
+  gem "google-style", ">= 1.25.1", "< 1.27.2"
   gem "irb"
   gem "minitest", "~> 5.14"
   gem "minitest-focus", "~> 1.1"

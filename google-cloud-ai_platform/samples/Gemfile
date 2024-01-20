@@ -19,7 +19,7 @@ master = ENV["GOOGLE_CLOUD_SAMPLES_TEST"] == "master"
 gem "google-cloud-ai_platform", path: master ? "../../google-cloud-ai_platform" : nil
 
 group :test do
-  gem "google-style", "~> 1.26.2"
+  gem "google-style", ">= 1.26.2", "< 1.28"
   gem "minitest", "~> 5.17"
   gem "minitest-focus", "~> 1.4"
   gem "minitest-rg", "~> 5.2"

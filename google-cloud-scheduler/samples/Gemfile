@@ -22,7 +22,7 @@ gem "google-cloud-scheduler-v1beta1", path: master ? "../../google-cloud-schedul
 gem "sinatra"
 
 group :test do
-  gem "google-style", "~> 1.25.1"
+  gem "google-style", ">= 1.25.1", "< 1.27.2"
   gem "minitest", "~> 5.14"
   gem "rack-test"
   gem "rake"
