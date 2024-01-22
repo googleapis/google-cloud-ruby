@@ -639,9 +639,24 @@ module Google
           # @!attribute [rw] subnet_status
           #   @return [::Array<::Google::Cloud::EdgeNetwork::V1::SubnetStatus>]
           #     A list of status for the subnets under the current network.
+          # @!attribute [rw] macsec_status_internal_links
+          #   @return [::Google::Cloud::EdgeNetwork::V1::DiagnoseNetworkResponse::NetworkStatus::MacsecStatus]
+          #     The MACsec status of internal links.
           class NetworkStatus
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Denotes the status of MACsec sessions for the links of a zone.
+            module MacsecStatus
+              # MACsec status not specified, likely due to missing metrics.
+              MACSEC_STATUS_UNSPECIFIED = 0
+
+              # All relevant links have at least one MACsec session up.
+              SECURE = 1
+
+              # At least one relevant link does not have any MACsec sessions up.
+              UNSECURE = 2
+            end
           end
         end
 
