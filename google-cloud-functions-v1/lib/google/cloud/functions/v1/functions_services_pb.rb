@@ -38,13 +38,13 @@ module Google
             # Returns a function with the given name from the requested project.
             rpc :GetFunction, ::Google::Cloud::Functions::V1::GetFunctionRequest, ::Google::Cloud::Functions::V1::CloudFunction
             # Creates a new function. If a function with the given name already exists in
-            # the specified project, the long running operation returns an
+            # the specified project, the long running operation will return
             # `ALREADY_EXISTS` error.
             rpc :CreateFunction, ::Google::Cloud::Functions::V1::CreateFunctionRequest, ::Google::Longrunning::Operation
             # Updates existing function.
             rpc :UpdateFunction, ::Google::Cloud::Functions::V1::UpdateFunctionRequest, ::Google::Longrunning::Operation
             # Deletes a function with the given name from the specified project. If the
-            # given function is used by some trigger, the trigger is updated to
+            # given function is used by some trigger, the trigger will be updated to
             # remove this function.
             rpc :DeleteFunction, ::Google::Cloud::Functions::V1::DeleteFunctionRequest, ::Google::Longrunning::Operation
             # Synchronously invokes a deployed Cloud Function. To be used for testing
@@ -69,19 +69,19 @@ module Google
             #   attached, the identity from the credentials would be used, but that
             #   identity does not have permissions to upload files to the URL.
             #
-            # When making an HTTP PUT request, these two headers must be specified:
+            # When making a HTTP PUT request, these two headers need to be specified:
             #
             # * `content-type: application/zip`
             # * `x-goog-content-length-range: 0,104857600`
             #
-            # And this header must NOT be specified:
+            # And this header SHOULD NOT be specified:
             #
             # * `Authorization: Bearer YOUR_TOKEN`
             rpc :GenerateUploadUrl, ::Google::Cloud::Functions::V1::GenerateUploadUrlRequest, ::Google::Cloud::Functions::V1::GenerateUploadUrlResponse
             # Returns a signed URL for downloading deployed function source code.
-            # The URL is only valid for a limited period and must be used within
+            # The URL is only valid for a limited period and should be used within
             # minutes after generation.
-            # For more information about the signed URL usage, see:
+            # For more information about the signed URL usage see:
             # https://cloud.google.com/storage/docs/access-control/signed-urls
             rpc :GenerateDownloadUrl, ::Google::Cloud::Functions::V1::GenerateDownloadUrlRequest, ::Google::Cloud::Functions::V1::GenerateDownloadUrlResponse
             # Sets the IAM access control policy on the specified function.
@@ -93,7 +93,7 @@ module Google
             rpc :GetIamPolicy, ::Google::Iam::V1::GetIamPolicyRequest, ::Google::Iam::V1::Policy
             # Tests the specified permissions against the IAM access control policy
             # for a function.
-            # If the function does not exist, this returns an empty set of
+            # If the function does not exist, this will return an empty set of
             # permissions, not a NOT_FOUND error.
             rpc :TestIamPermissions, ::Google::Iam::V1::TestIamPermissionsRequest, ::Google::Iam::V1::TestIamPermissionsResponse
           end
