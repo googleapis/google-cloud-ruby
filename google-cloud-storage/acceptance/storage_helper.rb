@@ -181,22 +181,23 @@ end
 def clean_up_storage_buckets proj = $storage, names = $bucket_names, user_project: nil
   puts "Cleaning up storage buckets after tests for #{proj.project}."
   names.each do |bucket_name|
-    if b = proj.bucket(bucket_name, user_project: user_project)
-      begin
-        b.files(versions: true).all do |file|
-          file.delete generation: true
-        end
-        # Add one second delay between bucket deletes to avoid rate limiting errors
-        sleep 1
-        safe_gcs_execute { b.delete }
-      rescue => e
-        puts "Error while cleaning up bucket #{b.name}\n\n#{e}"
-      end
-    end
+    bucket = proj.bucket bucket_name, user_project: user_project
+    clean_up_storage_bucket bucket if bucket
   end
 rescue => e
   puts "Error while cleaning up storage buckets after tests.\n\n#{e}"
   raise e
+end
+
+def clean_up_storage_bucket bucket
+  bucket.files(versions: true).all do |file|
+    file.delete generation: true
+  end
+  # Add one second delay between bucket deletes to avoid rate limiting errors
+  sleep 1
+  safe_gcs_execute { bucket.delete }
+rescue => e
+  puts "Error while cleaning up bucket #{bucket.name}\n\n#{e}"
 end
 
 Minitest.after_run do
@@ -209,5 +210,35 @@ Minitest.after_run do
          "are present in the environment: \n" \
          "GCLOUD_TEST_STORAGE_REQUESTER_PAYS_PROJECT and \n" \
          "GCLOUD_TEST_STORAGE_REQUESTER_PAYS_KEYFILE or GCLOUD_TEST_STORAGE_REQUESTER_PAYS_KEYFILE_JSON"
+  end
+
+  # Delete things that are more than a day old
+  time_threshold = Time.now.to_i - 86400
+
+  $storage.buckets(prefix: "object-lock-bucket-", max: 200).each do |bucket|
+    if bucket.name =~ /object-lock-bucket-(\d+)/
+      if Regexp.last_match[1].to_i < time_threshold
+        puts "Cleaning up old test bucket: #{bucket.name} ..."
+        clean_up_storage_bucket bucket
+      end
+    end
+  end
+
+  [
+    "gcloud-ruby-acceptance-",
+    "single_use_gcloud-ruby-acceptance-",
+    "ruby-storage-samples-test-",
+    "ruby-transcoder-samples-test-"
+  ].each do |prefix|
+    $storage.buckets(prefix: prefix, max: 100).each do |bucket|
+      if bucket.name =~ /#{prefix}(\d+-\d+-\d+)t(\d+)-(\d+)-(\d+)z/
+        m = Regexp.last_match
+        bucket_time = DateTime.parse("#{m[1]}t#{m[2]}:#{m[3]}:#{m[4]}z").to_time.to_i
+        if bucket_time < time_threshold
+          puts "Cleaning up old test bucket: #{bucket.name} ..."
+          clean_up_storage_bucket bucket
+        end
+      end
+    end
   end
 end

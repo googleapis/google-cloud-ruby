@@ -859,6 +859,11 @@ describe Google::Cloud::Storage::File, :storage do
   end
 
   describe "object retention" do
+    # Note: While it would be best if we could clean up these buckets after
+    # each test, some of them have retention and cannot be deleted without
+    # incurring additional delays. So instead we delete things (including
+    # objects lingering from previous runs) at the end of the entire test run
+    # (see the bottom of storage_helper.rb).
     let(:object_lock_bucket) { storage.create_bucket("object-lock-bucket-#{Time.now.to_i}", enable_object_retention: true) }
     let(:data) { StringIO.new "Hello World!" }
 
