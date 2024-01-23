@@ -60,6 +60,74 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Settings for an ingestion data source on a topic.
+        # @!attribute [rw] aws_kinesis
+        #   @return [::Google::Cloud::PubSub::V1::IngestionDataSourceSettings::AwsKinesis]
+        #     Optional. Amazon Kinesis Data Streams.
+        class IngestionDataSourceSettings
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Ingestion settings for Amazon Kinesis Data Streams.
+          # @!attribute [r] state
+          #   @return [::Google::Cloud::PubSub::V1::IngestionDataSourceSettings::AwsKinesis::State]
+          #     Output only. An output-only field that indicates the state of the Kinesis
+          #     ingestion source.
+          # @!attribute [rw] stream_arn
+          #   @return [::String]
+          #     Required. The Kinesis stream ARN to ingest data from.
+          # @!attribute [rw] consumer_arn
+          #   @return [::String]
+          #     Required. The Kinesis consumer ARN to used for ingestion in Enhanced
+          #     Fan-Out mode. The consumer must be already created and ready to be used.
+          # @!attribute [rw] aws_role_arn
+          #   @return [::String]
+          #     Required. AWS role ARN to be used for Federated Identity authentication
+          #     with Kinesis. Check the Pub/Sub docs for how to set up this role and the
+          #     required permissions that need to be attached to it.
+          # @!attribute [rw] gcp_service_account
+          #   @return [::String]
+          #     Required. The GCP service account to be used for Federated Identity
+          #     authentication with Kinesis (via a `AssumeRoleWithWebIdentity` call for
+          #     the provided role). The `aws_role_arn` must be set up with
+          #     `accounts.google.com:sub` equals to this service account number.
+          class AwsKinesis
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Possible states for managed ingestion from Amazon Kinesis Data Streams.
+            module State
+              # Default value. This value is unused.
+              STATE_UNSPECIFIED = 0
+
+              # Ingestion is active.
+              ACTIVE = 1
+
+              # Permission denied encountered while consuming data from Kinesis.
+              # This can happen if:
+              #   - The provided `aws_role_arn` does not exist or does not have the
+              #     appropriate permissions attached.
+              #   - The provided `aws_role_arn` is not set up properly for Identity
+              #     Federation using `gcp_service_account`.
+              #   - The Pub/Sub SA is not granted the
+              #     `iam.serviceAccounts.getOpenIdToken` permission on
+              #     `gcp_service_account`.
+              KINESIS_PERMISSION_DENIED = 2
+
+              # Permission denied encountered while publishing to the topic. This can
+              # happen due to Pub/Sub SA has not been granted the [appropriate publish
+              # permissions](https://cloud.google.com/pubsub/docs/access-control#pubsub.publisher)
+              PUBLISH_PERMISSION_DENIED = 3
+
+              # The Kinesis stream does not exist.
+              STREAM_NOT_FOUND = 4
+
+              # The Kinesis consumer does not exist.
+              CONSUMER_NOT_FOUND = 5
+            end
+          end
+        end
+
         # A topic resource.
         # @!attribute [rw] name
         #   @return [::String]
@@ -101,6 +169,13 @@ module Google
         #     that is up to `message_retention_duration` in the past. If this field is
         #     not set, message retention is controlled by settings on individual
         #     subscriptions. Cannot be more than 31 days or less than 10 minutes.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::PubSub::V1::Topic::State]
+        #     Output only. An output-only field indicating the state of the topic.
+        # @!attribute [rw] ingestion_data_source_settings
+        #   @return [::Google::Cloud::PubSub::V1::IngestionDataSourceSettings]
+        #     Optional. Settings for managed ingestion from a data source into this
+        #     topic.
         class Topic
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -112,6 +187,20 @@ module Google
           class LabelsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The state of the topic.
+          module State
+            # Default value. This value is unused.
+            STATE_UNSPECIFIED = 0
+
+            # The topic does not have any persistent errors.
+            ACTIVE = 1
+
+            # Ingestion from the data source has encountered a permanent error.
+            # See the more detailed error state in the corresponding ingestion
+            # source configuration.
+            INGESTION_RESOURCE_ERROR = 2
           end
         end
 
