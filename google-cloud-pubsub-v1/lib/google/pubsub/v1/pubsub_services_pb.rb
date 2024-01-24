@@ -37,8 +37,8 @@ module Google
             # Creates the given topic with the given name. See the [resource name rules]
             # (https://cloud.google.com/pubsub/docs/pubsub-basics#resource_names).
             rpc :CreateTopic, ::Google::Cloud::PubSub::V1::Topic, ::Google::Cloud::PubSub::V1::Topic
-            # Updates an existing topic. Note that certain properties of a
-            # topic are not modifiable.
+            # Updates an existing topic by updating the fields specified in the update
+            # mask. Note that certain properties of a topic are not modifiable.
             rpc :UpdateTopic, ::Google::Cloud::PubSub::V1::UpdateTopicRequest, ::Google::Cloud::PubSub::V1::Topic
             # Adds one or more messages to the topic. Returns `NOT_FOUND` if the topic
             # does not exist.
@@ -96,8 +96,9 @@ module Google
             rpc :CreateSubscription, ::Google::Cloud::PubSub::V1::Subscription, ::Google::Cloud::PubSub::V1::Subscription
             # Gets the configuration details of a subscription.
             rpc :GetSubscription, ::Google::Cloud::PubSub::V1::GetSubscriptionRequest, ::Google::Cloud::PubSub::V1::Subscription
-            # Updates an existing subscription. Note that certain properties of a
-            # subscription, such as its topic, are not modifiable.
+            # Updates an existing subscription by updating the fields specified in the
+            # update mask. Note that certain properties of a subscription, such as its
+            # topic, are not modifiable.
             rpc :UpdateSubscription, ::Google::Cloud::PubSub::V1::UpdateSubscriptionRequest, ::Google::Cloud::PubSub::V1::Subscription
             # Lists matching subscriptions.
             rpc :ListSubscriptions, ::Google::Cloud::PubSub::V1::ListSubscriptionsRequest, ::Google::Cloud::PubSub::V1::ListSubscriptionsResponse
@@ -167,7 +168,8 @@ module Google
             # generated name is populated in the returned Snapshot object. Note that for
             # REST API requests, you must specify a name in the request.
             rpc :CreateSnapshot, ::Google::Cloud::PubSub::V1::CreateSnapshotRequest, ::Google::Cloud::PubSub::V1::Snapshot
-            # Updates an existing snapshot. Snapshots are used in
+            # Updates an existing snapshot by updating the fields specified in the update
+            # mask. Snapshots are used in
             # [Seek](https://cloud.google.com/pubsub/docs/replay-overview) operations,
             # which allow you to manage message acknowledgments in bulk. That is, you can
             # set the acknowledgment state of messages in an existing subscription to the
