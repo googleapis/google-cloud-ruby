@@ -927,6 +927,7 @@ module Google
           #   | `DATETIME`   | `DateTime`                           | `DATETIME` does not support time zone.           |
           #   | `DATE`       | `Date`                               |                                                  |
           #   | `GEOGRAPHY`  | `String` (WKT or GeoJSON)            | NOT AUTOMATIC: Must be mapped using `types`.     |
+          #   | `JSON`       | `String` (Stringified JSON)          | String, as JSON does not have a schema to verify.|
           #   | `TIMESTAMP`  | `Time`                               |                                                  |
           #   | `TIME`       | `Google::Cloud::BigQuery::Time`      |                                                  |
           #   | `BYTES`      | `File`, `IO`, `StringIO`, or similar |                                                  |
@@ -964,6 +965,7 @@ module Google
           #   | `DATETIME`   | `DateTime`                           | `DATETIME` does not support time zone.           |
           #   | `DATE`       | `Date`                               |                                                  |
           #   | `GEOGRAPHY`  | `String` (WKT or GeoJSON)            | NOT AUTOMATIC: Must be mapped using `types`.     |
+          #   | `JSON`       | `String` (Stringified JSON)          | String, as JSON does not have a schema to verify.|
           #   | `TIMESTAMP`  | `Time`                               |                                                  |
           #   | `TIME`       | `Google::Cloud::BigQuery::Time`      |                                                  |
           #   | `BYTES`      | `File`, `IO`, `StringIO`, or similar |                                                  |
@@ -990,6 +992,7 @@ module Google
           #   * `:DATETIME`
           #   * `:DATE`
           #   * `:GEOGRAPHY`
+          #   * `:JSON`
           #   * `:TIMESTAMP`
           #   * `:TIME`
           #   * `:BYTES`
