@@ -191,6 +191,23 @@ module Google
             # @!attribute [rw] database_dialect
             #   @return [::Google::Cloud::Spanner::Admin::Database::V1::DatabaseDialect]
             #     Optional. The dialect of the Cloud Spanner Database.
+            # @!attribute [rw] proto_descriptors
+            #   @return [::String]
+            #     Optional. Proto descriptors used by CREATE/ALTER PROTO BUNDLE statements in
+            #     'extra_statements' above.
+            #     Contains a protobuf-serialized
+            #     [google.protobuf.FileDescriptorSet](https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/descriptor.proto).
+            #     To generate it, [install](https://grpc.io/docs/protoc-installation/) and
+            #     run `protoc` with --include_imports and --descriptor_set_out. For example,
+            #     to generate for moon/shot/app.proto, run
+            #     ```
+            #     $protoc  --proto_path=/app_path --proto_path=/lib_path \
+            #              --include_imports \
+            #              --descriptor_set_out=descriptors.data \
+            #              moon/shot/app.proto
+            #     ```
+            #     For more details, see protobuffer [self
+            #     description](https://developers.google.com/protocol-buffers/docs/techniques#self-description).
             class CreateDatabaseRequest
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -295,6 +312,22 @@ module Google
             #     underscore. If the named operation already exists,
             #     {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#update_database_ddl UpdateDatabaseDdl} returns
             #     `ALREADY_EXISTS`.
+            # @!attribute [rw] proto_descriptors
+            #   @return [::String]
+            #     Optional. Proto descriptors used by CREATE/ALTER PROTO BUNDLE statements.
+            #     Contains a protobuf-serialized
+            #     [google.protobuf.FileDescriptorSet](https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/descriptor.proto).
+            #     To generate it, [install](https://grpc.io/docs/protoc-installation/) and
+            #     run `protoc` with --include_imports and --descriptor_set_out. For example,
+            #     to generate for moon/shot/app.proto, run
+            #     ```
+            #     $protoc  --proto_path=/app_path --proto_path=/lib_path \
+            #              --include_imports \
+            #              --descriptor_set_out=descriptors.data \
+            #              moon/shot/app.proto
+            #     ```
+            #     For more details, see protobuffer [self
+            #     description](https://developers.google.com/protocol-buffers/docs/techniques#self-description).
             class UpdateDatabaseDdlRequest
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -386,6 +419,13 @@ module Google
             #   @return [::Array<::String>]
             #     A list of formatted DDL statements defining the schema of the database
             #     specified in the request.
+            # @!attribute [rw] proto_descriptors
+            #   @return [::String]
+            #     Proto descriptors stored in the database.
+            #     Contains a protobuf-serialized
+            #     [google.protobuf.FileDescriptorSet](https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/descriptor.proto).
+            #     For more details, see protobuffer [self
+            #     description](https://developers.google.com/protocol-buffers/docs/techniques#self-description).
             class GetDatabaseDdlResponse
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
