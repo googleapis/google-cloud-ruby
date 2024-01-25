@@ -533,7 +533,6 @@ class ::Google::Cloud::Firestore::V1::Firestore::Rest::ClientTest < Minitest::Te
     parent = "hello world"
     structured_query = {}
     transaction = "hello world"
-    mode = :NORMAL
 
     run_query_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, is_server_streaming:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -549,27 +548,27 @@ class ::Google::Cloud::Firestore::V1::Firestore::Rest::ClientTest < Minitest::Te
         end
 
         # Use hash object
-        client.run_query({ parent: parent, structured_query: structured_query, transaction: transaction, mode: mode }) do |_result, response|
+        client.run_query({ parent: parent, structured_query: structured_query, transaction: transaction }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use named arguments
-        client.run_query parent: parent, structured_query: structured_query, transaction: transaction, mode: mode do |_result, response|
+        client.run_query parent: parent, structured_query: structured_query, transaction: transaction do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use protobuf object
-        client.run_query ::Google::Cloud::Firestore::V1::RunQueryRequest.new(parent: parent, structured_query: structured_query, transaction: transaction, mode: mode) do |_result, response|
+        client.run_query ::Google::Cloud::Firestore::V1::RunQueryRequest.new(parent: parent, structured_query: structured_query, transaction: transaction) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use hash object with options
-        client.run_query({ parent: parent, structured_query: structured_query, transaction: transaction, mode: mode }, call_options) do |_result, response|
+        client.run_query({ parent: parent, structured_query: structured_query, transaction: transaction }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use protobuf object with options
-        client.run_query(::Google::Cloud::Firestore::V1::RunQueryRequest.new(parent: parent, structured_query: structured_query, transaction: transaction, mode: mode), call_options) do |_result, response|
+        client.run_query(::Google::Cloud::Firestore::V1::RunQueryRequest.new(parent: parent, structured_query: structured_query, transaction: transaction), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
@@ -590,7 +589,6 @@ class ::Google::Cloud::Firestore::V1::Firestore::Rest::ClientTest < Minitest::Te
     parent = "hello world"
     structured_aggregation_query = {}
     transaction = "hello world"
-    mode = :NORMAL
 
     run_aggregation_query_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, is_server_streaming:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -606,27 +604,27 @@ class ::Google::Cloud::Firestore::V1::Firestore::Rest::ClientTest < Minitest::Te
         end
 
         # Use hash object
-        client.run_aggregation_query({ parent: parent, structured_aggregation_query: structured_aggregation_query, transaction: transaction, mode: mode }) do |_result, response|
+        client.run_aggregation_query({ parent: parent, structured_aggregation_query: structured_aggregation_query, transaction: transaction }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use named arguments
-        client.run_aggregation_query parent: parent, structured_aggregation_query: structured_aggregation_query, transaction: transaction, mode: mode do |_result, response|
+        client.run_aggregation_query parent: parent, structured_aggregation_query: structured_aggregation_query, transaction: transaction do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use protobuf object
-        client.run_aggregation_query ::Google::Cloud::Firestore::V1::RunAggregationQueryRequest.new(parent: parent, structured_aggregation_query: structured_aggregation_query, transaction: transaction, mode: mode) do |_result, response|
+        client.run_aggregation_query ::Google::Cloud::Firestore::V1::RunAggregationQueryRequest.new(parent: parent, structured_aggregation_query: structured_aggregation_query, transaction: transaction) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use hash object with options
-        client.run_aggregation_query({ parent: parent, structured_aggregation_query: structured_aggregation_query, transaction: transaction, mode: mode }, call_options) do |_result, response|
+        client.run_aggregation_query({ parent: parent, structured_aggregation_query: structured_aggregation_query, transaction: transaction }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use protobuf object with options
-        client.run_aggregation_query(::Google::Cloud::Firestore::V1::RunAggregationQueryRequest.new(parent: parent, structured_aggregation_query: structured_aggregation_query, transaction: transaction, mode: mode), call_options) do |_result, response|
+        client.run_aggregation_query(::Google::Cloud::Firestore::V1::RunAggregationQueryRequest.new(parent: parent, structured_aggregation_query: structured_aggregation_query, transaction: transaction), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
