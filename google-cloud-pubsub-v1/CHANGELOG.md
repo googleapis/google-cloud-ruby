@@ -1,5 +1,13 @@
 # Release History
 
+### 0.21.0 (2024-01-25)
+
+#### Features
+
+* add ingestion_data_source_settings field to Topic 
+* add state field to Topic 
+* Added enforce_in_transit flag in the message storage policy ([#24470](https://github.com/googleapis/google-cloud-ruby/issues/24470)) 
+
 ### 0.20.2 (2024-01-19)
 
 #### Bug Fixes
