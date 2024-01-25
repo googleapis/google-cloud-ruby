@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.21.0 (2024-01-25)
+
+#### Features
+
+* Support for Conversation QualityMetadata ([#24472](https://github.com/googleapis/google-cloud-ruby/issues/24472)) 
+
 ### 0.20.1 (2024-01-12)
 
 #### Bug Fixes
