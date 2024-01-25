@@ -4288,7 +4288,7 @@ module Google
           ##
           # Adds an json field to the schema.
           #
-          # See {Schema#json}. 
+          # See {Schema#json}.
           # https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types#json_type
           #
           # @param [String] name The field name. The name must contain only
@@ -4340,7 +4340,7 @@ module Google
           #
           # @!group Schema
           def json name, description: nil, mode: :nullable, policy_tags: nil,
-                    default_value_expression: nil
+                   default_value_expression: nil
             schema.json name, description: description, mode: mode, policy_tags: policy_tags,
                         default_value_expression: default_value_expression
           end

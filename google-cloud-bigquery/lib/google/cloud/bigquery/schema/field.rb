@@ -99,7 +99,7 @@ module Google
           #   * `FLOAT`
           #   * `FLOAT64` (same as `FLOAT`)
           #   * `GEOGRAPHY`
-          #   * `JSON` 
+          #   * `JSON`
           #   * `INTEGER`
           #   * `INT64` (same as `INTEGER`)
           #   * `NUMERIC`
@@ -127,7 +127,7 @@ module Google
           #   * `FLOAT`
           #   * `FLOAT64` (same as `FLOAT`)
           #   * `GEOGRAPHY`
-          #   * `JSON` 
+          #   * `JSON`
           #   * `INTEGER`
           #   * `INT64` (same as `INTEGER`)
           #   * `NUMERIC`

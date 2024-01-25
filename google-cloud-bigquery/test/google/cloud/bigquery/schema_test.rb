@@ -106,6 +106,11 @@ describe Google::Cloud::Bigquery::Schema, :mock_bigquery do
           "name" => "home",
           "type" => "GEOGRAPHY",
           "mode" => "NULLABLE"
+        },
+        {
+          "name" => "address",
+          "type" => "JSON",
+          "mode" => "NULLABLE"
         }
       ]
     }
@@ -131,7 +136,9 @@ describe Google::Cloud::Bigquery::Schema, :mock_bigquery do
   it "has basic values" do
     _(schema).must_be_kind_of Google::Cloud::Bigquery::Schema
     _(schema.fields).wont_be :empty?
-    _(schema.fields.map(&:name)).must_equal ["name", "age", "score", "pi", "my_bignumeric", "active", "avatar", "started_at", "duration", "target_end", "birthday", "alts", "home"]
+    _(schema.fields.map(&:name)).must_equal ["name", "age", "score", "pi", "my_bignumeric", "active", 
+                                             "avatar", "started_at", "duration", "target_end", 
+                                             "birthday", "alts", "home", "address"]
   end
 
   it "can access fields with a symbol" do
@@ -256,6 +263,13 @@ describe Google::Cloud::Bigquery::Schema, :mock_bigquery do
     _(schema.field(:home).mode).must_equal "NULLABLE"
     _(schema.field(:home)).must_be :geography?
     _(schema.field(:home)).must_be :nullable?
+
+    _(schema.field(:address)).must_be_kind_of Google::Cloud::Bigquery::Schema::Field
+    _(schema.field(:address).name).must_equal "address"
+    _(schema.field(:address).type).must_equal "JSON"
+    _(schema.field(:address).mode).must_equal "NULLABLE"
+    _(schema.field(:address)).must_be :json?
+    _(schema.field(:address)).must_be :nullable?
   end
 
   it "can access fields with a string" do
@@ -379,6 +393,13 @@ describe Google::Cloud::Bigquery::Schema, :mock_bigquery do
     _(schema.field("home").mode).must_equal "NULLABLE"
     _(schema.field("home")).must_be :geography?
     _(schema.field("home")).must_be :nullable?
+
+    _(schema.field("address")).must_be_kind_of Google::Cloud::Bigquery::Schema::Field
+    _(schema.field("address").name).must_equal "address"
+    _(schema.field("address").type).must_equal "JSON"
+    _(schema.field("address").mode).must_equal "NULLABLE"
+    _(schema.field("address")).must_be :json?
+    _(schema.field("address")).must_be :nullable?
   end
 
   it "can load the schema from a File" do
@@ -567,7 +588,7 @@ describe Google::Cloud::Bigquery::Schema, :mock_bigquery do
         file.delete
       end
     end
-    _(json.length).must_equal 13
+    _(json.length).must_equal 14
 
     name = json.find { |record| record["name"] == "name" }
     _(name["type"]).must_equal "STRING"
@@ -640,6 +661,10 @@ describe Google::Cloud::Bigquery::Schema, :mock_bigquery do
     home = json.find { |record| record["name"] == "home" }
     _(home["type"]).must_equal "GEOGRAPHY"
     _(home["mode"]).must_equal "NULLABLE"
+
+    address = json.find { |record| record["name"] == "address" }
+    _(address["type"]).must_equal "JSON"
+    _(address["mode"]).must_equal "NULLABLE"
   end
 
   it "can dump the schema as JSON to a filename" do
@@ -655,7 +680,7 @@ describe Google::Cloud::Bigquery::Schema, :mock_bigquery do
         file.delete
       end
     end
-    _(json.length).must_equal 13
+    _(json.length).must_equal 14
 
     name = json.find { |record| record["name"] == "name" }
     _(name["type"]).must_equal "STRING"
@@ -728,6 +753,10 @@ describe Google::Cloud::Bigquery::Schema, :mock_bigquery do
     home = json.find { |record| record["name"] == "home" }
     _(home["type"]).must_equal "GEOGRAPHY"
     _(home["mode"]).must_equal "NULLABLE"
+
+    address = json.find { |record| record["name"] == "address" }
+    _(address["type"]).must_equal "JSON"
+    _(address["mode"]).must_equal "NULLABLE"
   end
 
   it "can load a schema with the class method" do
@@ -751,10 +780,10 @@ describe Google::Cloud::Bigquery::Schema, :mock_bigquery do
         file.delete
       end
     end
-    _(json.length).must_equal 13
+    _(json.length).must_equal 14
 
     fields = json.map { |record| record["name"] }
     _(fields).wont_be :empty?
-    _(fields).must_equal %w[name age score pi my_bignumeric active avatar started_at duration target_end birthday alts home]
+    _(fields).must_equal %w[name age score pi my_bignumeric active avatar started_at duration target_end birthday alts home address]
   end
 end

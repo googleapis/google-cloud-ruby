@@ -1534,7 +1534,7 @@ module Google
           ##
           # Adds an json field to the schema.
           #
-          # See {Schema#json}. 
+          # See {Schema#json}.
           # https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types#json_type
           #
           # @param [String] name The field name. The name must contain only

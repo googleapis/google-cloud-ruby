@@ -187,6 +187,11 @@ class MockBigquery < Minitest::Spec
           "name" => "home",
           "type" => "GEOGRAPHY",
           "mode" => "NULLABLE"
+        },
+        {
+          "name" => "address",
+          "type" => "JSON",
+          "mode" => "NULLABLE"
         }
       ]
     }
@@ -207,7 +212,8 @@ class MockBigquery < Minitest::Spec
           { "v" => "04:00:00" },
           { "v" => "2017-01-01 00:00:00" },
           { "v" => "1968-10-20" },
-          { "v" => "POINT(-122.335503 47.625536)" }
+          { "v" => "POINT(-122.335503 47.625536)" },
+          { "v" => { "name" => "Alice", "age" => 30 }.to_json }
         ]
       },
       {
@@ -223,12 +229,14 @@ class MockBigquery < Minitest::Spec
           { "v" => "04:32:10.555555" },
           { "v" => nil },
           { "v" => nil },
+          { "v" => nil },
           { "v" => nil }
         ]
       },
       {
         "f" => [
           { "v" => "Sally" },
+          { "v" => nil },
           { "v" => nil },
           { "v" => nil },
           { "v" => nil },

@@ -397,6 +397,52 @@ describe Google::Cloud::Bigquery::Convert, :to_query_param do
     end
   end
 
+  describe :JSON do
+    let(:json_value) { { "name" => "Alice", "age" => 30} }
+    
+    it "does NOT identify by value" do
+      expected = Google::Apis::BigqueryV2::QueryParameter.new(
+        parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
+          type: "STRING"
+        ),
+        parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
+          value: json_value.to_json
+        )
+      )
+
+      actual = Google::Cloud::Bigquery::Convert.to_query_param json_value.to_json
+      assert_equal expected.to_h, actual.to_h
+    end
+
+    it "allows string when using type" do
+      expected = Google::Apis::BigqueryV2::QueryParameter.new(
+        parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
+          type: "JSON"
+        ),
+        parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
+          value: json_value.to_json
+        )
+      )
+
+      actual = Google::Cloud::Bigquery::Convert.to_query_param json_value.to_json, :JSON
+      assert_equal expected.to_h, actual.to_h
+    end
+
+    it "allows nil when using type" do
+      expected = Google::Apis::BigqueryV2::QueryParameter.new(
+        parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
+          type: "JSON"
+        ),
+        parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
+          value: nil
+        )
+      )
+
+      actual = Google::Cloud::Bigquery::Convert.to_query_param nil, :JSON
+      assert_equal expected.to_h, actual.to_h
+    end
+  end
+
   describe :TIMESTAMP do
     it "identifies by value" do
       expected = Google::Apis::BigqueryV2::QueryParameter.new(
