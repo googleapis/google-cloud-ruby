@@ -1,5 +1,12 @@
 # Release History
 
+### 0.28.0 (2024-01-25)
+
+#### Features
+
+* Support for calculated metrics in change history 
+* Support for CRUD operations on calculated metrics ([#24471](https://github.com/googleapis/google-cloud-ruby/issues/24471)) 
+
 ### 0.27.1 (2024-01-12)
 
 #### Bug Fixes
