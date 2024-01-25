@@ -81,7 +81,7 @@ module Google
 
                 default_config.rpcs.publish.timeout = 60.0
                 default_config.rpcs.publish.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 4.0, retry_codes: [10, 1, 13, 8, 2, 14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 4, retry_codes: [10, 1, 13, 8, 2, 14, 4]
                 }
 
                 default_config.rpcs.get_topic.timeout = 60.0
@@ -248,27 +248,28 @@ module Google
             #     signs (`%`). It must be between 3 and 255 characters in length, and it
             #     must not start with `"goog"`.
             #   @param labels [::Hash{::String => ::String}]
-            #     See [Creating and managing labels]
+            #     Optional. See [Creating and managing labels]
             #     (https://cloud.google.com/pubsub/docs/labels).
             #   @param message_storage_policy [::Google::Cloud::PubSub::V1::MessageStoragePolicy, ::Hash]
-            #     Policy constraining the set of Google Cloud Platform regions where messages
-            #     published to the topic may be stored. If not present, then no constraints
-            #     are in effect.
+            #     Optional. Policy constraining the set of Google Cloud Platform regions
+            #     where messages published to the topic may be stored. If not present, then
+            #     no constraints are in effect.
             #   @param kms_key_name [::String]
-            #     The resource name of the Cloud KMS CryptoKey to be used to protect access
-            #     to messages published on this topic.
+            #     Optional. The resource name of the Cloud KMS CryptoKey to be used to
+            #     protect access to messages published on this topic.
             #
             #     The expected format is `projects/*/locations/*/keyRings/*/cryptoKeys/*`.
             #   @param schema_settings [::Google::Cloud::PubSub::V1::SchemaSettings, ::Hash]
-            #     Settings for validating messages published against a schema.
+            #     Optional. Settings for validating messages published against a schema.
             #   @param satisfies_pzs [::Boolean]
-            #     Reserved for future use. This field is set only in responses from the
-            #     server; it is ignored if it is set in any requests.
+            #     Optional. Reserved for future use. This field is set only in responses from
+            #     the server; it is ignored if it is set in any requests.
             #   @param message_retention_duration [::Google::Protobuf::Duration, ::Hash]
-            #     Indicates the minimum duration to retain a message after it is published to
-            #     the topic. If this field is set, messages published to the topic in the
-            #     last `message_retention_duration` are always available to subscribers. For
-            #     instance, it allows any attached subscription to [seek to a
+            #     Optional. Indicates the minimum duration to retain a message after it is
+            #     published to the topic. If this field is set, messages published to the
+            #     topic in the last `message_retention_duration` are always available to
+            #     subscribers. For instance, it allows any attached subscription to [seek to
+            #     a
             #     timestamp](https://cloud.google.com/pubsub/docs/replay-overview#seek_to_a_time)
             #     that is up to `message_retention_duration` in the past. If this field is
             #     not set, message retention is controlled by settings on individual
@@ -342,8 +343,8 @@ module Google
             end
 
             ##
-            # Updates an existing topic. Note that certain properties of a
-            # topic are not modifiable.
+            # Updates an existing topic by updating the fields specified in the update
+            # mask. Note that certain properties of a topic are not modifiable.
             #
             # @overload update_topic(request, options = nil)
             #   Pass arguments to `update_topic` via a request object, either of type
@@ -630,11 +631,11 @@ module Google
             #     Required. The name of the project in which to list topics.
             #     Format is `projects/{project-id}`.
             #   @param page_size [::Integer]
-            #     Maximum number of topics to return.
+            #     Optional. Maximum number of topics to return.
             #   @param page_token [::String]
-            #     The value returned by the last `ListTopicsResponse`; indicates that this is
-            #     a continuation of a prior `ListTopics` call, and that the system should
-            #     return the next page of data.
+            #     Optional. The value returned by the last `ListTopicsResponse`; indicates
+            #     that this is a continuation of a prior `ListTopics` call, and that the
+            #     system should return the next page of data.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::PubSub::V1::Topic>]
@@ -727,11 +728,11 @@ module Google
             #     Required. The name of the topic that subscriptions are attached to.
             #     Format is `projects/{project}/topics/{topic}`.
             #   @param page_size [::Integer]
-            #     Maximum number of subscription names to return.
+            #     Optional. Maximum number of subscription names to return.
             #   @param page_token [::String]
-            #     The value returned by the last `ListTopicSubscriptionsResponse`; indicates
-            #     that this is a continuation of a prior `ListTopicSubscriptions` call, and
-            #     that the system should return the next page of data.
+            #     Optional. The value returned by the last `ListTopicSubscriptionsResponse`;
+            #     indicates that this is a continuation of a prior `ListTopicSubscriptions`
+            #     call, and that the system should return the next page of data.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::PubSub::V1::ListTopicSubscriptionsResponse]
@@ -823,11 +824,11 @@ module Google
             #     Required. The name of the topic that snapshots are attached to.
             #     Format is `projects/{project}/topics/{topic}`.
             #   @param page_size [::Integer]
-            #     Maximum number of snapshot names to return.
+            #     Optional. Maximum number of snapshot names to return.
             #   @param page_token [::String]
-            #     The value returned by the last `ListTopicSnapshotsResponse`; indicates
-            #     that this is a continuation of a prior `ListTopicSnapshots` call, and
-            #     that the system should return the next page of data.
+            #     Optional. The value returned by the last `ListTopicSnapshotsResponse`;
+            #     indicates that this is a continuation of a prior `ListTopicSnapshots` call,
+            #     and that the system should return the next page of data.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::PubSub::V1::ListTopicSnapshotsResponse]

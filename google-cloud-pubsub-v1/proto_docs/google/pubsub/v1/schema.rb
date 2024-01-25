@@ -74,8 +74,8 @@ module Google
         #     The ID to use for the schema, which will become the final component of
         #     the schema's resource name.
         #
-        #     See https://cloud.google.com/pubsub/docs/admin#resource_names for resource
-        #     name constraints.
+        #     See https://cloud.google.com/pubsub/docs/pubsub-basics#resource_names for
+        #     resource name constraints.
         class CreateSchemaRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
