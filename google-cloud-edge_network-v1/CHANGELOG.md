@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.3.0 (2024-01-25)
+
+#### Features
+
+* add MACsec status for internal links ([#24461](https://github.com/googleapis/google-cloud-ruby/issues/24461)) 
+
 ### 0.2.1 (2024-01-12)
 
 #### Bug Fixes
