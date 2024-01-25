@@ -4812,6 +4812,206 @@
       ]
     },
     {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetCalculatedMetric_sync",
+      "title": "Snippet for the get_calculated_metric call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#get_calculated_metric.",
+      "file": "analytics_admin_service/get_calculated_metric.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_calculated_metric",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#get_calculated_metric",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::GetCalculatedMetricRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::CalculatedMetric",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "GetCalculatedMetric",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.GetCalculatedMetric",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateCalculatedMetric_sync",
+      "title": "Snippet for the create_calculated_metric call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#create_calculated_metric.",
+      "file": "analytics_admin_service/create_calculated_metric.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_calculated_metric",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#create_calculated_metric",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::CreateCalculatedMetricRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::CalculatedMetric",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "CreateCalculatedMetric",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.CreateCalculatedMetric",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListCalculatedMetrics_sync",
+      "title": "Snippet for the list_calculated_metrics call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#list_calculated_metrics.",
+      "file": "analytics_admin_service/list_calculated_metrics.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_calculated_metrics",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#list_calculated_metrics",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::ListCalculatedMetricsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::ListCalculatedMetricsResponse",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "ListCalculatedMetrics",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.ListCalculatedMetrics",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateCalculatedMetric_sync",
+      "title": "Snippet for the update_calculated_metric call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#update_calculated_metric.",
+      "file": "analytics_admin_service/update_calculated_metric.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_calculated_metric",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#update_calculated_metric",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::UpdateCalculatedMetricRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::CalculatedMetric",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "UpdateCalculatedMetric",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.UpdateCalculatedMetric",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteCalculatedMetric_sync",
+      "title": "Snippet for the delete_calculated_metric call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#delete_calculated_metric.",
+      "file": "analytics_admin_service/delete_calculated_metric.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_calculated_metric",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#delete_calculated_metric",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::DeleteCalculatedMetricRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "DeleteCalculatedMetric",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.DeleteCalculatedMetric",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateRollupProperty_sync",
       "title": "Snippet for the create_rollup_property call in the AnalyticsAdminService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#create_rollup_property.",

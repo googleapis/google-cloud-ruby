@@ -610,6 +610,31 @@
                 "get_data_redaction_settings"
               ]
             },
+            "GetCalculatedMetric": {
+              "methods": [
+                "get_calculated_metric"
+              ]
+            },
+            "CreateCalculatedMetric": {
+              "methods": [
+                "create_calculated_metric"
+              ]
+            },
+            "ListCalculatedMetrics": {
+              "methods": [
+                "list_calculated_metrics"
+              ]
+            },
+            "UpdateCalculatedMetric": {
+              "methods": [
+                "update_calculated_metric"
+              ]
+            },
+            "DeleteCalculatedMetric": {
+              "methods": [
+                "delete_calculated_metric"
+              ]
+            },
             "CreateRollupProperty": {
               "methods": [
                 "create_rollup_property"

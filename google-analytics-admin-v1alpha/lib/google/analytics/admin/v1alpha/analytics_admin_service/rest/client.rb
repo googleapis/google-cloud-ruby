@@ -2877,10 +2877,12 @@ module Google
               #
               #   @param account [::String]
               #     Required. The account resource for which to return change history
-              #     resources.
+              #     resources. Format: accounts/\\{account} Example: "accounts/100"
               #   @param property [::String]
               #     Optional. Resource name for a child property. If set, only return changes
               #     made to this property or its child resources.
+              #     Format: properties/\\{propertyId}
+              #     Example: "properties/100"
               #   @param resource_type [::Array<::Google::Analytics::Admin::V1alpha::ChangeHistoryResourceType>]
               #     Optional. If set, only return changes if they are for a resource that
               #     matches at least one of these types.
@@ -10398,6 +10400,431 @@ module Google
               end
 
               ##
+              # Lookup for a single CalculatedMetric.
+              #
+              # @overload get_calculated_metric(request, options = nil)
+              #   Pass arguments to `get_calculated_metric` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::GetCalculatedMetricRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::GetCalculatedMetricRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_calculated_metric(name: nil)
+              #   Pass arguments to `get_calculated_metric` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the CalculatedMetric to get.
+              #     Format: properties/\\{property_id}/calculatedMetrics/\\{calculated_metric_id}
+              #     Example: properties/1234/calculatedMetrics/Metric01
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::CalculatedMetric]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::CalculatedMetric]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::GetCalculatedMetricRequest.new
+              #
+              #   # Call the get_calculated_metric method.
+              #   result = client.get_calculated_metric request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::CalculatedMetric.
+              #   p result
+              #
+              def get_calculated_metric request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::GetCalculatedMetricRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_calculated_metric.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_calculated_metric.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_calculated_metric.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.get_calculated_metric request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a CalculatedMetric.
+              #
+              # @overload create_calculated_metric(request, options = nil)
+              #   Pass arguments to `create_calculated_metric` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::CreateCalculatedMetricRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::CreateCalculatedMetricRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_calculated_metric(parent: nil, calculated_metric_id: nil, calculated_metric: nil)
+              #   Pass arguments to `create_calculated_metric` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Format: properties/\\{property_id}
+              #     Example: properties/1234
+              #   @param calculated_metric_id [::String]
+              #     Required. The ID to use for the calculated metric which will become the
+              #     final component of the calculated metric's resource name.
+              #
+              #     This value should be 1-80 characters and valid characters are
+              #     /[a-zA-Z0-9_]/, no spaces allowed. calculated_metric_id must be unique
+              #     between all calculated metrics under a property. The calculated_metric_id
+              #     is used when referencing this calculated metric from external APIs, for
+              #     example, "calcMetric:\\{calculated_metric_id}".
+              #   @param calculated_metric [::Google::Analytics::Admin::V1alpha::CalculatedMetric, ::Hash]
+              #     Required. The CalculatedMetric to create.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::CalculatedMetric]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::CalculatedMetric]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::CreateCalculatedMetricRequest.new
+              #
+              #   # Call the create_calculated_metric method.
+              #   result = client.create_calculated_metric request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::CalculatedMetric.
+              #   p result
+              #
+              def create_calculated_metric request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::CreateCalculatedMetricRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_calculated_metric.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_calculated_metric.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_calculated_metric.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.create_calculated_metric request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists CalculatedMetrics on a property.
+              #
+              # @overload list_calculated_metrics(request, options = nil)
+              #   Pass arguments to `list_calculated_metrics` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::ListCalculatedMetricsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::ListCalculatedMetricsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_calculated_metrics(parent: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_calculated_metrics` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Example format: properties/1234
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of resources to return.
+              #     If unspecified, at most 50 resources will be returned.
+              #     The maximum value is 200 (higher values will be coerced to the maximum).
+              #   @param page_token [::String]
+              #     Optional. A page token, received from a previous `ListCalculatedMetrics`
+              #     call. Provide this to retrieve the subsequent page.
+              #
+              #     When paginating, all other parameters provided to `ListCalculatedMetrics`
+              #     must match the call that provided the page token.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Analytics::Admin::V1alpha::CalculatedMetric>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Analytics::Admin::V1alpha::CalculatedMetric>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::ListCalculatedMetricsRequest.new
+              #
+              #   # Call the list_calculated_metrics method.
+              #   result = client.list_calculated_metrics request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Analytics::Admin::V1alpha::CalculatedMetric.
+              #     p item
+              #   end
+              #
+              def list_calculated_metrics request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::ListCalculatedMetricsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_calculated_metrics.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_calculated_metrics.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_calculated_metrics.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.list_calculated_metrics request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @analytics_admin_service_stub, :list_calculated_metrics, "calculated_metrics", request, result, options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates a CalculatedMetric on a property.
+              #
+              # @overload update_calculated_metric(request, options = nil)
+              #   Pass arguments to `update_calculated_metric` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::UpdateCalculatedMetricRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::UpdateCalculatedMetricRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_calculated_metric(calculated_metric: nil, update_mask: nil)
+              #   Pass arguments to `update_calculated_metric` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param calculated_metric [::Google::Analytics::Admin::V1alpha::CalculatedMetric, ::Hash]
+              #     Required. The CalculatedMetric to update
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Required. The list of fields to be updated. Omitted fields will not be
+              #     updated. To replace the entire entity, use one path with the string "*" to
+              #     match all fields.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::CalculatedMetric]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::CalculatedMetric]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::UpdateCalculatedMetricRequest.new
+              #
+              #   # Call the update_calculated_metric method.
+              #   result = client.update_calculated_metric request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::CalculatedMetric.
+              #   p result
+              #
+              def update_calculated_metric request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::UpdateCalculatedMetricRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_calculated_metric.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_calculated_metric.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_calculated_metric.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.update_calculated_metric request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a CalculatedMetric on a property.
+              #
+              # @overload delete_calculated_metric(request, options = nil)
+              #   Pass arguments to `delete_calculated_metric` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::DeleteCalculatedMetricRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::DeleteCalculatedMetricRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_calculated_metric(name: nil)
+              #   Pass arguments to `delete_calculated_metric` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the CalculatedMetric to delete.
+              #     Format: properties/\\{property_id}/calculatedMetrics/\\{calculated_metric_id}
+              #     Example: properties/1234/calculatedMetrics/Metric01
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::DeleteCalculatedMetricRequest.new
+              #
+              #   # Call the delete_calculated_metric method.
+              #   result = client.delete_calculated_metric request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
+              def delete_calculated_metric request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::DeleteCalculatedMetricRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_calculated_metric.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_calculated_metric.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_calculated_metric.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.delete_calculated_metric request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Create a roll-up property and all roll-up property source links.
               #
               # @overload create_rollup_property(request, options = nil)
@@ -12064,6 +12491,31 @@ module Google
                   #
                   attr_reader :get_data_redaction_settings
                   ##
+                  # RPC-specific configuration for `get_calculated_metric`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_calculated_metric
+                  ##
+                  # RPC-specific configuration for `create_calculated_metric`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_calculated_metric
+                  ##
+                  # RPC-specific configuration for `list_calculated_metrics`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_calculated_metrics
+                  ##
+                  # RPC-specific configuration for `update_calculated_metric`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_calculated_metric
+                  ##
+                  # RPC-specific configuration for `delete_calculated_metric`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_calculated_metric
+                  ##
                   # RPC-specific configuration for `create_rollup_property`
                   # @return [::Gapic::Config::Method]
                   #
@@ -12361,6 +12813,16 @@ module Google
                     @update_data_redaction_settings = ::Gapic::Config::Method.new update_data_redaction_settings_config
                     get_data_redaction_settings_config = parent_rpcs.get_data_redaction_settings if parent_rpcs.respond_to? :get_data_redaction_settings
                     @get_data_redaction_settings = ::Gapic::Config::Method.new get_data_redaction_settings_config
+                    get_calculated_metric_config = parent_rpcs.get_calculated_metric if parent_rpcs.respond_to? :get_calculated_metric
+                    @get_calculated_metric = ::Gapic::Config::Method.new get_calculated_metric_config
+                    create_calculated_metric_config = parent_rpcs.create_calculated_metric if parent_rpcs.respond_to? :create_calculated_metric
+                    @create_calculated_metric = ::Gapic::Config::Method.new create_calculated_metric_config
+                    list_calculated_metrics_config = parent_rpcs.list_calculated_metrics if parent_rpcs.respond_to? :list_calculated_metrics
+                    @list_calculated_metrics = ::Gapic::Config::Method.new list_calculated_metrics_config
+                    update_calculated_metric_config = parent_rpcs.update_calculated_metric if parent_rpcs.respond_to? :update_calculated_metric
+                    @update_calculated_metric = ::Gapic::Config::Method.new update_calculated_metric_config
+                    delete_calculated_metric_config = parent_rpcs.delete_calculated_metric if parent_rpcs.respond_to? :delete_calculated_metric
+                    @delete_calculated_metric = ::Gapic::Config::Method.new delete_calculated_metric_config
                     create_rollup_property_config = parent_rpcs.create_rollup_property if parent_rpcs.respond_to? :create_rollup_property
                     @create_rollup_property = ::Gapic::Config::Method.new create_rollup_property_config
                     get_rollup_property_source_link_config = parent_rpcs.get_rollup_property_source_link if parent_rpcs.respond_to? :get_rollup_property_source_link

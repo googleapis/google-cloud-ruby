@@ -562,11 +562,13 @@ module Google
         # @!attribute [rw] account
         #   @return [::String]
         #     Required. The account resource for which to return change history
-        #     resources.
+        #     resources. Format: accounts/\\{account} Example: "accounts/100"
         # @!attribute [rw] property
         #   @return [::String]
         #     Optional. Resource name for a child property. If set, only return changes
         #     made to this property or its child resources.
+        #     Format: properties/\\{propertyId}
+        #     Example: "properties/100"
         # @!attribute [rw] resource_type
         #   @return [::Array<::Google::Analytics::Admin::V1alpha::ChangeHistoryResourceType>]
         #     Optional. If set, only return changes if they are for a resource that
@@ -1316,6 +1318,99 @@ module Google
         #     Required. The name of the CustomMetric to get.
         #     Example format: properties/1234/customMetrics/5678
         class GetCustomMetricRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for CreateCalculatedMetric RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Format: properties/\\{property_id}
+        #     Example: properties/1234
+        # @!attribute [rw] calculated_metric_id
+        #   @return [::String]
+        #     Required. The ID to use for the calculated metric which will become the
+        #     final component of the calculated metric's resource name.
+        #
+        #     This value should be 1-80 characters and valid characters are
+        #     /[a-zA-Z0-9_]/, no spaces allowed. calculated_metric_id must be unique
+        #     between all calculated metrics under a property. The calculated_metric_id
+        #     is used when referencing this calculated metric from external APIs, for
+        #     example, "calcMetric:\\{calculated_metric_id}".
+        # @!attribute [rw] calculated_metric
+        #   @return [::Google::Analytics::Admin::V1alpha::CalculatedMetric]
+        #     Required. The CalculatedMetric to create.
+        class CreateCalculatedMetricRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for UpdateCalculatedMetric RPC.
+        # @!attribute [rw] calculated_metric
+        #   @return [::Google::Analytics::Admin::V1alpha::CalculatedMetric]
+        #     Required. The CalculatedMetric to update
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The list of fields to be updated. Omitted fields will not be
+        #     updated. To replace the entire entity, use one path with the string "*" to
+        #     match all fields.
+        class UpdateCalculatedMetricRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for DeleteCalculatedMetric RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the CalculatedMetric to delete.
+        #     Format: properties/\\{property_id}/calculatedMetrics/\\{calculated_metric_id}
+        #     Example: properties/1234/calculatedMetrics/Metric01
+        class DeleteCalculatedMetricRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ListCalculatedMetrics RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Example format: properties/1234
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of resources to return.
+        #     If unspecified, at most 50 resources will be returned.
+        #     The maximum value is 200 (higher values will be coerced to the maximum).
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A page token, received from a previous `ListCalculatedMetrics`
+        #     call. Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to `ListCalculatedMetrics`
+        #     must match the call that provided the page token.
+        class ListCalculatedMetricsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ListCalculatedMetrics RPC.
+        # @!attribute [rw] calculated_metrics
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::CalculatedMetric>]
+        #     List of CalculatedMetrics.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListCalculatedMetricsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for GetCalculatedMetric RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the CalculatedMetric to get.
+        #     Format: properties/\\{property_id}/calculatedMetrics/\\{calculated_metric_id}
+        #     Example: properties/1234/calculatedMetrics/Metric01
+        class GetCalculatedMetricRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
