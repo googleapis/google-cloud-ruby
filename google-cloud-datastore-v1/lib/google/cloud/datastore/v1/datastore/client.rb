@@ -301,7 +301,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload run_query(project_id: nil, database_id: nil, partition_id: nil, read_options: nil, query: nil, gql_query: nil, mode: nil)
+            # @overload run_query(project_id: nil, database_id: nil, partition_id: nil, read_options: nil, query: nil, gql_query: nil)
             #   Pass arguments to `run_query` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -324,10 +324,6 @@ module Google
             #     The query to run.
             #   @param gql_query [::Google::Cloud::Datastore::V1::GqlQuery, ::Hash]
             #     The GQL query to run. This query must be a non-aggregation query.
-            #   @param mode [::Google::Cloud::Datastore::V1::QueryMode]
-            #     Optional. The mode in which the query request is processed. This field is
-            #     optional, and when not provided, it defaults to `NORMAL` mode where no
-            #     additional statistics will be returned with the query results.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Datastore::V1::RunQueryResponse]
@@ -409,7 +405,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload run_aggregation_query(project_id: nil, database_id: nil, partition_id: nil, read_options: nil, aggregation_query: nil, gql_query: nil, mode: nil)
+            # @overload run_aggregation_query(project_id: nil, database_id: nil, partition_id: nil, read_options: nil, aggregation_query: nil, gql_query: nil)
             #   Pass arguments to `run_aggregation_query` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -432,10 +428,6 @@ module Google
             #     The query to run.
             #   @param gql_query [::Google::Cloud::Datastore::V1::GqlQuery, ::Hash]
             #     The GQL query to run. This query must be an aggregation query.
-            #   @param mode [::Google::Cloud::Datastore::V1::QueryMode]
-            #     Optional. The mode in which the query request is processed. This field is
-            #     optional, and when not provided, it defaults to `NORMAL` mode where no
-            #     additional statistics will be returned with the query results.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Datastore::V1::RunAggregationQueryResponse]

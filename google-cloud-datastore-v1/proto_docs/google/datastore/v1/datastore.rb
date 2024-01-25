@@ -100,11 +100,6 @@ module Google
         # @!attribute [rw] gql_query
         #   @return [::Google::Cloud::Datastore::V1::GqlQuery]
         #     The GQL query to run. This query must be a non-aggregation query.
-        # @!attribute [rw] mode
-        #   @return [::Google::Cloud::Datastore::V1::QueryMode]
-        #     Optional. The mode in which the query request is processed. This field is
-        #     optional, and when not provided, it defaults to `NORMAL` mode where no
-        #     additional statistics will be returned with the query results.
         class RunQueryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -127,12 +122,6 @@ module Google
         #     {::Google::Cloud::Datastore::V1::ReadOptions#new_transaction ReadOptions.new_transaction}
         #     was set in
         #     {::Google::Cloud::Datastore::V1::RunQueryRequest#read_options RunQueryRequest.read_options}.
-        # @!attribute [rw] stats
-        #   @return [::Google::Cloud::Datastore::V1::ResultSetStats]
-        #     Query plan and execution statistics. Note that the returned stats are
-        #     subject to change as Firestore evolves.
-        #
-        #     This is only present when the request specifies a mode other than `NORMAL`.
         class RunQueryResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -164,11 +153,6 @@ module Google
         # @!attribute [rw] gql_query
         #   @return [::Google::Cloud::Datastore::V1::GqlQuery]
         #     The GQL query to run. This query must be an aggregation query.
-        # @!attribute [rw] mode
-        #   @return [::Google::Cloud::Datastore::V1::QueryMode]
-        #     Optional. The mode in which the query request is processed. This field is
-        #     optional, and when not provided, it defaults to `NORMAL` mode where no
-        #     additional statistics will be returned with the query results.
         class RunAggregationQueryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -191,12 +175,6 @@ module Google
         #     {::Google::Cloud::Datastore::V1::ReadOptions#new_transaction ReadOptions.new_transaction}
         #     was set in
         #     {::Google::Cloud::Datastore::V1::RunAggregationQueryRequest#read_options RunAggregationQueryRequest.read_options}.
-        # @!attribute [rw] stats
-        #   @return [::Google::Cloud::Datastore::V1::ResultSetStats]
-        #     Query plan and execution statistics. Note that the returned stats are
-        #     subject to change as Firestore evolves.
-        #
-        #     This is only present when the request specifies a mode other than `NORMAL`.
         class RunAggregationQueryResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
