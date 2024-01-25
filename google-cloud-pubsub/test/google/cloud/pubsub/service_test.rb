@@ -32,6 +32,8 @@ describe Google::Cloud::PubSub::Service do
   let(:timeout) { 123.4 }
   let(:endpoint) { "pubsub.googleapis.com" }
   let(:endpoint_2) { "localhost:4567" }
+  let(:universe_domain) { "googleapis.com" }
+  let(:universe_domain_2) { "mydomain.com" }
 
   # Values below are hardcoded in Service.
   let(:lib_name) { "gccl" }
@@ -70,31 +72,35 @@ describe Google::Cloud::PubSub::Service do
           config = service.subscriber.configure
           _(config).must_be_kind_of Google::Cloud::PubSub::V1::Subscriber::Client::Configuration
           _(config.timeout).must_be :nil?
-          _(config.endpoint).must_equal endpoint
+          _(config.endpoint).must_be :nil?
+          _(config.universe_domain).must_equal universe_domain
           _(config.lib_name).must_equal lib_name
           _(config.lib_version).must_equal lib_version
           _(config.metadata).must_equal expected_metadata
           assert_config_rpcs_equals subscriber_default_config.rpcs, 16, config.rpcs
+          _(service.universe_domain).must_equal universe_domain
         end
       end
     end
   end
 
-  it "configures the V1::Subscriber::Client with host and timeout" do
+  it "configures the V1::Subscriber::Client with host, universe_domain, and timeout" do
     # Clear all environment variables
     ENV.stub :[], nil do
       Google::Auth::Credentials.stub :default, credentials do
         Gapic::ServiceStub.stub :new, dummy_stub do
-          service = Google::Cloud::PubSub::Service.new project, nil, host: endpoint_2, timeout: timeout
+          service = Google::Cloud::PubSub::Service.new project, nil, host: endpoint_2, timeout: timeout, universe_domain: universe_domain_2
           _(service.project).must_equal project
           config = service.subscriber.configure
           _(config).must_be_kind_of Google::Cloud::PubSub::V1::Subscriber::Client::Configuration
           _(config.timeout).must_equal timeout
           _(config.endpoint).must_equal endpoint_2
+          _(config.universe_domain).must_equal universe_domain_2
           _(config.lib_name).must_equal lib_name
           _(config.lib_version).must_equal lib_version
           _(config.metadata).must_equal expected_metadata
           assert_config_rpcs_equals subscriber_default_config.rpcs, 16, config.rpcs, timeout: timeout
+          _(service.universe_domain).must_equal universe_domain_2
         end
       end
     end
@@ -110,11 +116,13 @@ describe Google::Cloud::PubSub::Service do
           config = service.publisher.configure
           _(config).must_be_kind_of Google::Cloud::PubSub::V1::Publisher::Client::Configuration
           _(config.timeout).must_be :nil?
-          _(config.endpoint).must_equal endpoint
+          _(config.endpoint).must_be :nil?
+          _(config.universe_domain).must_equal universe_domain
           _(config.lib_name).must_equal lib_name
           _(config.lib_version).must_equal lib_version
           _(config.metadata).must_equal expected_metadata
           assert_config_rpcs_equals publisher_default_config.rpcs, 9, config.rpcs
+          _(service.universe_domain).must_equal universe_domain
         end
       end
     end
@@ -125,56 +133,18 @@ describe Google::Cloud::PubSub::Service do
     ENV.stub :[], nil do
       Google::Auth::Credentials.stub :default, credentials do
         Gapic::ServiceStub.stub :new, dummy_stub do
-          service = Google::Cloud::PubSub::Service.new project, nil, host: endpoint_2, timeout: timeout
+          service = Google::Cloud::PubSub::Service.new project, nil, host: endpoint_2, timeout: timeout, universe_domain: universe_domain_2
           _(service.project).must_equal project
           config = service.publisher.configure
           _(config).must_be_kind_of Google::Cloud::PubSub::V1::Publisher::Client::Configuration
           _(config.timeout).must_equal timeout
           _(config.endpoint).must_equal endpoint_2
+          _(config.universe_domain).must_equal universe_domain_2
           _(config.lib_name).must_equal lib_name
           _(config.lib_version).must_equal lib_version
           _(config.metadata).must_equal expected_metadata
           assert_config_rpcs_equals publisher_default_config.rpcs, 9, config.rpcs, timeout: timeout
-        end
-      end
-    end
-  end
-
-  it "configures the V1::IAMPolicy::Client" do
-    # Clear all environment variables
-    ENV.stub :[], nil do
-      Google::Auth::Credentials.stub :default, credentials do
-        Gapic::ServiceStub.stub :new, dummy_stub do
-          service = Google::Cloud::PubSub::Service.new project, nil
-          _(service.project).must_equal project
-          config = service.iam.configure
-          _(config).must_be_kind_of Google::Cloud::PubSub::V1::IAMPolicy::Client::Configuration
-          _(config.timeout).must_be :nil?
-          _(config.endpoint).must_equal endpoint
-          _(config.lib_name).must_equal lib_name
-          _(config.lib_version).must_equal lib_version
-          _(config.metadata).must_equal expected_metadata
-          assert_config_rpcs_equals iam_policy_default_config.rpcs, 3, config.rpcs
-        end
-      end
-    end
-  end
-
-  it "configures the V1::IAMPolicy::Client with host and timeout" do
-    # Clear all environment variables
-    ENV.stub :[], nil do
-      Google::Auth::Credentials.stub :default, credentials do
-        Gapic::ServiceStub.stub :new, dummy_stub do
-          service = Google::Cloud::PubSub::Service.new project, nil, host: endpoint_2, timeout: timeout
-          _(service.project).must_equal project
-          config = service.iam.configure
-          _(config).must_be_kind_of Google::Cloud::PubSub::V1::IAMPolicy::Client::Configuration
-          _(config.timeout).must_equal timeout
-          _(config.endpoint).must_equal endpoint_2
-          _(config.lib_name).must_equal lib_name
-          _(config.lib_version).must_equal lib_version
-          _(config.metadata).must_equal expected_metadata
-          assert_config_rpcs_equals iam_policy_default_config.rpcs, 3, config.rpcs, timeout: timeout
+          _(service.universe_domain).must_equal universe_domain_2
         end
       end
     end
@@ -190,11 +160,13 @@ describe Google::Cloud::PubSub::Service do
           config = service.schemas.configure
           _(config).must_be_kind_of Google::Cloud::PubSub::V1::SchemaService::Client::Configuration
           _(config.timeout).must_be :nil?
-          _(config.endpoint).must_equal endpoint
+          _(config.endpoint).must_be :nil?
+          _(config.universe_domain).must_equal universe_domain
           _(config.lib_name).must_equal lib_name
           _(config.lib_version).must_equal lib_version
           _(config.metadata).must_equal expected_metadata
           assert_config_rpcs_equals schema_service_default_config.rpcs, 10, config.rpcs
+          _(service.universe_domain).must_equal universe_domain
         end
       end
     end
@@ -205,16 +177,18 @@ describe Google::Cloud::PubSub::Service do
     ENV.stub :[], nil do
       Google::Auth::Credentials.stub :default, credentials do
         Gapic::ServiceStub.stub :new, dummy_stub do
-          service = Google::Cloud::PubSub::Service.new project, nil, host: endpoint_2, timeout: timeout
+          service = Google::Cloud::PubSub::Service.new project, nil, host: endpoint_2, timeout: timeout, universe_domain: universe_domain_2
           _(service.project).must_equal project
           config = service.schemas.configure
           _(config).must_be_kind_of Google::Cloud::PubSub::V1::SchemaService::Client::Configuration
           _(config.timeout).must_equal timeout
           _(config.endpoint).must_equal endpoint_2
+          _(config.universe_domain).must_equal universe_domain_2
           _(config.lib_name).must_equal lib_name
           _(config.lib_version).must_equal lib_version
           _(config.metadata).must_equal expected_metadata
           assert_config_rpcs_equals schema_service_default_config.rpcs, 10, config.rpcs, timeout: timeout
+          _(service.universe_domain).must_equal universe_domain_2
         end
       end
     end

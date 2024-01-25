@@ -110,7 +110,7 @@ module Google
 end
 
 # Set the default pubsub configuration
-Google::Cloud.configure.add_config! :pubsub do |config|
+Google::Cloud.configure.add_config! :pubsub do |config| # rubocop:disable Metrics/BlockLength
   default_project = Google::Cloud::Config.deferred do
     ENV["PUBSUB_PROJECT"]
   end
@@ -136,5 +136,6 @@ Google::Cloud.configure.add_config! :pubsub do |config|
   config.add_field! :timeout, nil, match: Numeric
   config.add_field! :emulator_host, default_emulator, match: String, allow_nil: true
   config.add_field! :on_error, nil, match: Proc
-  config.add_field! :endpoint, "pubsub.googleapis.com", match: String
+  config.add_field! :endpoint, nil, match: String
+  config.add_field! :universe_domain, nil, match: String
 end

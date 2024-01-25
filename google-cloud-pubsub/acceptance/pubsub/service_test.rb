@@ -21,6 +21,7 @@ describe Google::Cloud::PubSub::Service do
   let(:timeout) { 123.4 }
   let(:pubsub) { Google::Cloud::PubSub.new timeout: timeout }
   let(:endpoint) { "pubsub.googleapis.com" }
+  let(:universe_domain) { "googleapis.com" }
   let(:config_metadata) { { "google-cloud-resource-prefix": "projects/#{pubsub.project_id}" } }
 
   let(:subscriber_default_config) do
@@ -49,7 +50,8 @@ describe Google::Cloud::PubSub::Service do
     config = pubsub.service.subscriber.configure
     _(config).must_be_kind_of Google::Cloud::PubSub::V1::Subscriber::Client::Configuration
     _(config.timeout).must_equal timeout
-    _(config.endpoint).must_equal endpoint
+    _(config.endpoint).must_be :nil?
+    _(config.universe_domain).must_equal universe_domain
     _(config.lib_name).must_equal "gccl"
     _(config.lib_version).must_equal Google::Cloud::PubSub::VERSION
     _(config.metadata).must_equal config_metadata
@@ -61,7 +63,8 @@ describe Google::Cloud::PubSub::Service do
     config = pubsub.service.publisher.configure
     _(config).must_be_kind_of Google::Cloud::PubSub::V1::Publisher::Client::Configuration
     _(config.timeout).must_equal timeout
-    _(config.endpoint).must_equal endpoint
+    _(config.endpoint).must_be :nil?
+    _(config.universe_domain).must_equal universe_domain
     _(config.lib_name).must_equal "gccl"
     _(config.lib_version).must_equal Google::Cloud::PubSub::VERSION
     _(config.metadata).must_equal config_metadata
@@ -71,9 +74,10 @@ describe Google::Cloud::PubSub::Service do
   it "configures the V1::IAMPolicy::Client" do
     _(pubsub.project_id).wont_be :empty?
     config = pubsub.service.iam.configure
-    _(config).must_be_kind_of Google::Cloud::PubSub::V1::IAMPolicy::Client::Configuration
+    _(config).must_be_kind_of Google::Iam::V1::IAMPolicy::Client::Configuration
     _(config.timeout).must_equal timeout
     _(config.endpoint).must_equal endpoint
+    _(config.universe_domain).must_equal universe_domain
     _(config.lib_name).must_equal "gccl"
     _(config.lib_version).must_equal Google::Cloud::PubSub::VERSION
     _(config.metadata).must_equal config_metadata
@@ -85,7 +89,8 @@ describe Google::Cloud::PubSub::Service do
     config = pubsub.service.schemas.configure
     _(config).must_be_kind_of Google::Cloud::PubSub::V1::SchemaService::Client::Configuration
     _(config.timeout).must_equal timeout
-    _(config.endpoint).must_equal endpoint
+    _(config.endpoint).must_be :nil?
+    _(config.universe_domain).must_equal universe_domain
     _(config.lib_name).must_equal "gccl"
     _(config.lib_version).must_equal Google::Cloud::PubSub::VERSION
     _(config.metadata).must_equal config_metadata

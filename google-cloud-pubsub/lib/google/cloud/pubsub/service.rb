@@ -37,14 +37,17 @@ module Google
         # value to be replaced for unit testing.
         attr_accessor :client_id
 
+        attr_reader :universe_domain
+
         ##
         # Creates a new Service instance.
-        def initialize project, credentials, host: nil, timeout: nil
+        def initialize project, credentials, host: nil, timeout: nil, universe_domain: nil
           @project = project
           @credentials = credentials
           @host = host
           @timeout = timeout
           @client_id = SecureRandom.uuid.freeze
+          @universe_domain = universe_domain || ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"] || "googleapis.com"
         end
 
         def subscriber
@@ -53,6 +56,7 @@ module Google
             config.credentials = credentials if credentials
             override_client_config_timeouts config if timeout
             config.endpoint = host if host
+            config.universe_domain = universe_domain
             config.lib_name = "gccl"
             config.lib_version = Google::Cloud::PubSub::VERSION
             config.metadata = { "google-cloud-resource-prefix": "projects/#{@project}" }
@@ -66,6 +70,7 @@ module Google
             config.credentials = credentials if credentials
             override_client_config_timeouts config if timeout
             config.endpoint = host if host
+            config.universe_domain = universe_domain
             config.lib_name = "gccl"
             config.lib_version = Google::Cloud::PubSub::VERSION
             config.metadata = { "google-cloud-resource-prefix": "projects/#{@project}" }
@@ -75,13 +80,15 @@ module Google
 
         def iam
           return mocked_iam if mocked_iam
-          @iam ||= V1::IAMPolicy::Client.new do |config|
-            config.credentials = credentials if credentials
-            override_client_config_timeouts config if timeout
-            config.endpoint = host if host
-            config.lib_name = "gccl"
-            config.lib_version = Google::Cloud::PubSub::VERSION
-            config.metadata = { "google-cloud-resource-prefix": "projects/#{@project}" }
+          @iam ||= begin
+            iam = (@publisher || @subscriber || @schemas || subscriber).iam_policy_client
+            iam.configure do |config|
+              override_client_config_timeouts config if timeout
+              config.lib_name = "gccl"
+              config.lib_version = Google::Cloud::PubSub::VERSION
+              config.metadata = { "google-cloud-resource-prefix": "projects/#{@project}" }
+            end
+            iam
           end
         end
         attr_accessor :mocked_iam
@@ -92,6 +99,7 @@ module Google
             config.credentials = credentials if credentials
             override_client_config_timeouts config if timeout
             config.endpoint = host if host
+            config.universe_domain = universe_domain
             config.lib_name = "gccl"
             config.lib_version = Google::Cloud::PubSub::VERSION
             config.metadata = { "google-cloud-resource-prefix": "projects/#{@project}" }
