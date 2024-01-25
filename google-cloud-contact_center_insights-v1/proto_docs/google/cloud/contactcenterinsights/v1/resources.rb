@@ -61,6 +61,9 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     A map for the user to specify any custom fields. A maximum of 20 labels per
         #     conversation is allowed, with a maximum of 256 characters per entry.
+        # @!attribute [rw] quality_metadata
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::Conversation::QualityMetadata]
+        #     Conversation metadata related to quality management.
         # @!attribute [r] transcript
         #   @return [::Google::Cloud::ContactCenterInsights::V1::Conversation::Transcript]
         #     Output only. The conversation transcript.
@@ -106,6 +109,43 @@ module Google
           class CallMetadata
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Conversation metadata related to quality management.
+          # @!attribute [rw] customer_satisfaction_rating
+          #   @return [::Integer]
+          #     An arbitrary integer value indicating the customer's satisfaction rating.
+          # @!attribute [rw] wait_duration
+          #   @return [::Google::Protobuf::Duration]
+          #     The amount of time the customer waited to connect with an agent.
+          # @!attribute [rw] menu_path
+          #   @return [::String]
+          #     An arbitrary string value specifying the menu path the customer took.
+          # @!attribute [rw] agent_info
+          #   @return [::Array<::Google::Cloud::ContactCenterInsights::V1::Conversation::QualityMetadata::AgentInfo>]
+          #     Information about agents involved in the call.
+          class QualityMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Information about an agent involved in the conversation.
+            # @!attribute [rw] agent_id
+            #   @return [::String]
+            #     A user-specified string representing the agent.
+            # @!attribute [rw] display_name
+            #   @return [::String]
+            #     The agent's name.
+            # @!attribute [rw] team
+            #   @return [::String]
+            #     A user-specified string representing the agent's team.
+            # @!attribute [rw] disposition_code
+            #   @return [::String]
+            #     A user-provided string indicating the outcome of the agent's segment of
+            #     the call.
+            class AgentInfo
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
 
           # A message representing the transcript of a conversation.
