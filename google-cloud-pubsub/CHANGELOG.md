@@ -1,5 +1,11 @@
 # Release History
 
+### 2.16.0 (2024-01-25)
+
+#### Features
+
+* Support for universe_domain ([#24437](https://github.com/googleapis/google-cloud-ruby/issues/24437)) 
+
 ### 2.15.5 (2023-11-06)
 
 #### Bug Fixes
