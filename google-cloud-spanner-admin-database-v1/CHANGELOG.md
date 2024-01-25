@@ -1,5 +1,11 @@
 # Release History
 
+### 0.17.0 (2024-01-25)
+
+#### Features
+
+* Support proto descriptors when creating a database or getting or updating a database DDL ([#24468](https://github.com/googleapis/google-cloud-ruby/issues/24468)) 
+
 ### 0.16.1 (2024-01-12)
 
 #### Bug Fixes
