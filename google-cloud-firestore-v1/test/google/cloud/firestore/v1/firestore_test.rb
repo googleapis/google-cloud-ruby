@@ -593,7 +593,6 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
     parent = "hello world"
     structured_query = {}
     transaction = "hello world"
-    mode = :NORMAL
 
     run_query_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
       assert_equal :run_query, name
@@ -603,7 +602,6 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       assert_equal :structured_query, request.query_type
       assert_equal "hello world", request["transaction"]
       assert_equal :transaction, request.consistency_selector
-      assert_equal :NORMAL, request["mode"]
       refute_nil options
     end
 
@@ -614,7 +612,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.run_query({ parent: parent, structured_query: structured_query, transaction: transaction, mode: mode }) do |response, operation|
+      client.run_query({ parent: parent, structured_query: structured_query, transaction: transaction }) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Firestore::V1::RunQueryResponse, r
@@ -623,7 +621,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use named arguments
-      client.run_query parent: parent, structured_query: structured_query, transaction: transaction, mode: mode do |response, operation|
+      client.run_query parent: parent, structured_query: structured_query, transaction: transaction do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Firestore::V1::RunQueryResponse, r
@@ -632,7 +630,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.run_query ::Google::Cloud::Firestore::V1::RunQueryRequest.new(parent: parent, structured_query: structured_query, transaction: transaction, mode: mode) do |response, operation|
+      client.run_query ::Google::Cloud::Firestore::V1::RunQueryRequest.new(parent: parent, structured_query: structured_query, transaction: transaction) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Firestore::V1::RunQueryResponse, r
@@ -641,7 +639,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use hash object with options
-      client.run_query({ parent: parent, structured_query: structured_query, transaction: transaction, mode: mode }, grpc_options) do |response, operation|
+      client.run_query({ parent: parent, structured_query: structured_query, transaction: transaction }, grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Firestore::V1::RunQueryResponse, r
@@ -650,7 +648,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.run_query(::Google::Cloud::Firestore::V1::RunQueryRequest.new(parent: parent, structured_query: structured_query, transaction: transaction, mode: mode), grpc_options) do |response, operation|
+      client.run_query(::Google::Cloud::Firestore::V1::RunQueryRequest.new(parent: parent, structured_query: structured_query, transaction: transaction), grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Firestore::V1::RunQueryResponse, r
@@ -674,7 +672,6 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
     parent = "hello world"
     structured_aggregation_query = {}
     transaction = "hello world"
-    mode = :NORMAL
 
     run_aggregation_query_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
       assert_equal :run_aggregation_query, name
@@ -684,7 +681,6 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       assert_equal :structured_aggregation_query, request.query_type
       assert_equal "hello world", request["transaction"]
       assert_equal :transaction, request.consistency_selector
-      assert_equal :NORMAL, request["mode"]
       refute_nil options
     end
 
@@ -695,7 +691,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.run_aggregation_query({ parent: parent, structured_aggregation_query: structured_aggregation_query, transaction: transaction, mode: mode }) do |response, operation|
+      client.run_aggregation_query({ parent: parent, structured_aggregation_query: structured_aggregation_query, transaction: transaction }) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Firestore::V1::RunAggregationQueryResponse, r
@@ -704,7 +700,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use named arguments
-      client.run_aggregation_query parent: parent, structured_aggregation_query: structured_aggregation_query, transaction: transaction, mode: mode do |response, operation|
+      client.run_aggregation_query parent: parent, structured_aggregation_query: structured_aggregation_query, transaction: transaction do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Firestore::V1::RunAggregationQueryResponse, r
@@ -713,7 +709,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.run_aggregation_query ::Google::Cloud::Firestore::V1::RunAggregationQueryRequest.new(parent: parent, structured_aggregation_query: structured_aggregation_query, transaction: transaction, mode: mode) do |response, operation|
+      client.run_aggregation_query ::Google::Cloud::Firestore::V1::RunAggregationQueryRequest.new(parent: parent, structured_aggregation_query: structured_aggregation_query, transaction: transaction) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Firestore::V1::RunAggregationQueryResponse, r
@@ -722,7 +718,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use hash object with options
-      client.run_aggregation_query({ parent: parent, structured_aggregation_query: structured_aggregation_query, transaction: transaction, mode: mode }, grpc_options) do |response, operation|
+      client.run_aggregation_query({ parent: parent, structured_aggregation_query: structured_aggregation_query, transaction: transaction }, grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Firestore::V1::RunAggregationQueryResponse, r
@@ -731,7 +727,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.run_aggregation_query(::Google::Cloud::Firestore::V1::RunAggregationQueryRequest.new(parent: parent, structured_aggregation_query: structured_aggregation_query, transaction: transaction, mode: mode), grpc_options) do |response, operation|
+      client.run_aggregation_query(::Google::Cloud::Firestore::V1::RunAggregationQueryRequest.new(parent: parent, structured_aggregation_query: structured_aggregation_query, transaction: transaction), grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Firestore::V1::RunAggregationQueryResponse, r
