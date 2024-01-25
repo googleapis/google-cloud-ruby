@@ -36,6 +36,11 @@ module Google
         # @private
         attr_accessor :credentials
 
+        # @private
+        def universe_domain
+          service.universe_domain
+        end
+
         ##
         # Creates a new Service instance.
         # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
@@ -43,7 +48,7 @@ module Google
                        timeout: nil, open_timeout: nil, read_timeout: nil,
                        send_timeout: nil, host: nil, quota_project: nil,
                        max_elapsed_time: nil, base_interval: nil, max_interval: nil,
-                       multiplier: nil, upload_chunk_size: nil
+                       multiplier: nil, upload_chunk_size: nil, universe_domain: nil
           @project = project
           @credentials = credentials
           @service = API::StorageService.new
@@ -68,6 +73,7 @@ module Google
           @service.request_options.upload_chunk_size = upload_chunk_size if upload_chunk_size
           @service.authorization = @credentials.client if @credentials
           @service.root_url = host if host
+          @service.universe_domain = universe_domain
         end
         # rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 

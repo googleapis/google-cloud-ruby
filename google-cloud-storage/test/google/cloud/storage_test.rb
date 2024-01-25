@@ -126,7 +126,7 @@ describe Google::Cloud do
         "storage-credentials"
       }
       stubbed_service = ->(project, credentials, retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil, host: nil, quota_project: nil, max_elapsed_time: nil, base_interval: nil,
-        max_interval: nil, multiplier: nil, upload_chunk_size: nil) {
+        max_interval: nil, multiplier: nil, upload_chunk_size: nil, universe_domain: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "storage-credentials"
         _(retries).must_be :nil?
@@ -134,8 +134,8 @@ describe Google::Cloud do
         _(open_timeout).must_be :nil?
         _(read_timeout).must_be :nil?
         _(send_timeout).must_be :nil?
-        # TODO: Remove once discovery document is updated.
-        _(host).must_equal "https://storage.googleapis.com/"
+        _(host).must_be :nil?
+        _(universe_domain).must_be :nil?
         _(max_elapsed_time).must_be :nil?
         _(base_interval).must_be :nil?
         _(max_interval).must_be :nil?
@@ -166,7 +166,7 @@ describe Google::Cloud do
   describe "Storage.anonymous" do
     it "uses provided options" do
       stubbed_service = ->(project, credentials, retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil, host: nil, quota_project: nil, max_elapsed_time: nil, base_interval: nil,
-        max_interval: nil, multiplier: nil, upload_chunk_size: nil) {
+        max_interval: nil, multiplier: nil, upload_chunk_size: nil, universe_domain: nil) {
         _(project).must_be :nil?
         _(credentials).must_be :nil?
         _(retries).must_equal 5
@@ -175,6 +175,7 @@ describe Google::Cloud do
         _(read_timeout).must_equal 30
         _(send_timeout).must_equal 60
         _(host).must_equal "storage-endpoint2.example.com"
+        _(universe_domain).must_equal "myuniverse1.com"
         _(max_elapsed_time).must_equal 1000
         _(base_interval).must_equal 2
         _(max_interval).must_equal 30
@@ -186,7 +187,7 @@ describe Google::Cloud do
       ENV.stub :[], nil do
         Google::Cloud::Storage::Service.stub :new, stubbed_service do
           storage = Google::Cloud::Storage.anonymous retries: 5, timeout: 60, read_timeout: 30, endpoint: "storage-endpoint2.example.com", max_elapsed_time: 1000, base_interval: 2, max_interval: 30,
-            multiplier: 1, upload_chunk_size: 100
+            multiplier: 1, upload_chunk_size: 100, universe_domain: "myuniverse1.com"
           _(storage).must_be_kind_of Google::Cloud::Storage::Project
           _(storage.project).must_be :nil?
           _(storage.service.credentials).must_be :nil?
@@ -220,9 +221,9 @@ describe Google::Cloud do
       end
     end
 
-    it "uses provided endpoint" do
+    it "uses provided endpoint and universe_domain" do
       stubbed_service = ->(project, credentials, retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil, host: nil, quota_project: nil, max_elapsed_time: nil, base_interval: nil,
-        max_interval: nil, multiplier: nil, upload_chunk_size: nil) {
+        max_interval: nil, multiplier: nil, upload_chunk_size: nil, universe_domain: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal default_credentials
         _(retries).must_be :nil?
@@ -231,6 +232,7 @@ describe Google::Cloud do
         _(read_timeout).must_be :nil?
         _(send_timeout).must_be :nil?
         _(host).must_equal "storage-endpoint2.example.com"
+        _(universe_domain).must_equal "myuniverse2.com"
         _(max_elapsed_time).must_be :nil?
         _(base_interval).must_be :nil?
         _(max_interval).must_be :nil?
@@ -243,7 +245,9 @@ describe Google::Cloud do
       ENV.stub :[], nil do
         Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
           Google::Cloud::Storage::Service.stub :new, stubbed_service do
-            storage = Google::Cloud::Storage.new credentials: default_credentials, endpoint: "storage-endpoint2.example.com"
+            storage = Google::Cloud::Storage.new credentials: default_credentials,
+                                                 endpoint: "storage-endpoint2.example.com",
+                                                 universe_domain: "myuniverse2.com"
             _(storage).must_be_kind_of Google::Cloud::Storage::Project
             _(storage.project).must_equal "project-id"
             _(storage.service).must_be_kind_of OpenStruct
@@ -259,7 +263,7 @@ describe Google::Cloud do
         "storage-credentials"
       }
       stubbed_service = ->(project, credentials, retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil, host: nil, quota_project: nil, max_elapsed_time: nil, base_interval: nil,
-        max_interval: nil, multiplier: nil, upload_chunk_size: nil) {
+        max_interval: nil, multiplier: nil, upload_chunk_size: nil, universe_domain: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "storage-credentials"
         _(retries).must_be :nil?
@@ -267,8 +271,8 @@ describe Google::Cloud do
         _(open_timeout).must_be :nil?
         _(read_timeout).must_be :nil?
         _(send_timeout).must_be :nil?
-        # TODO: Remove once discovery document is updated.
-        _(host).must_equal "https://storage.googleapis.com/"
+        _(host).must_be :nil?
+        _(universe_domain).must_be :nil?
         _(max_elapsed_time).must_be :nil?
         _(base_interval).must_be :nil?
         _(max_interval).must_be :nil?
@@ -301,7 +305,7 @@ describe Google::Cloud do
         "storage-credentials"
       }
       stubbed_service = ->(project, credentials, retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil, host: nil, quota_project: nil, max_elapsed_time: nil, base_interval: nil,
-        max_interval: nil, multiplier: nil, upload_chunk_size: nil) {
+        max_interval: nil, multiplier: nil, upload_chunk_size: nil, universe_domain: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "storage-credentials"
         _(retries).must_be :nil?
@@ -309,8 +313,8 @@ describe Google::Cloud do
         _(open_timeout).must_be :nil?
         _(read_timeout).must_be :nil?
         _(send_timeout).must_be :nil?
-        # TODO: Remove once discovery document is updated.
-        _(host).must_equal "https://storage.googleapis.com/"
+        _(host).must_be :nil?
+        _(universe_domain).must_be :nil?
         _(max_elapsed_time).must_be :nil?
         _(base_interval).must_be :nil?
         _(max_interval).must_be :nil?
@@ -343,7 +347,7 @@ describe Google::Cloud do
         OpenStruct.new project_id: "project-id"
       }
       stubbed_service = ->(project, credentials, retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil, host: nil, quota_project: nil, max_elapsed_time: nil, base_interval: nil,
-        max_interval: nil, multiplier: nil, upload_chunk_size: nil) {
+        max_interval: nil, multiplier: nil, upload_chunk_size: nil, universe_domain: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_be_kind_of OpenStruct
         _(credentials.project_id).must_equal "project-id"
@@ -352,8 +356,8 @@ describe Google::Cloud do
         _(open_timeout).must_be :nil?
         _(read_timeout).must_be :nil?
         _(send_timeout).must_be :nil?
-        # TODO: Remove once discovery document is updated.
-        _(host).must_equal "https://storage.googleapis.com/"
+        _(host).must_be :nil?
+        _(universe_domain).must_be :nil?
         _(max_elapsed_time).must_be :nil?
         _(base_interval).must_be :nil?
         _(max_interval).must_be :nil?
@@ -397,7 +401,7 @@ describe Google::Cloud do
         "storage-credentials"
       }
       stubbed_service = ->(project, credentials, retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil, host: nil, quota_project: nil, max_elapsed_time: nil, base_interval: nil,
-        max_interval: nil, multiplier: nil, upload_chunk_size: nil) {
+        max_interval: nil, multiplier: nil, upload_chunk_size: nil, universe_domain: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "storage-credentials"
         _(retries).must_be :nil?
@@ -405,8 +409,8 @@ describe Google::Cloud do
         _(open_timeout).must_be :nil?
         _(read_timeout).must_be :nil?
         _(send_timeout).must_be :nil?
-        # TODO: Remove once discovery document is updated.
-        _(host).must_equal "https://storage.googleapis.com/"
+        _(host).must_be :nil?
+        _(universe_domain).must_be :nil?
         _(max_elapsed_time).must_be :nil?
         _(base_interval).must_be :nil?
         _(max_interval).must_be :nil?
@@ -445,7 +449,7 @@ describe Google::Cloud do
         "storage-credentials"
       }
       stubbed_service = ->(project, credentials, retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil, host: nil, quota_project: nil, max_elapsed_time: nil, base_interval: nil,
-        max_interval: nil, multiplier: nil, upload_chunk_size: nil) {
+        max_interval: nil, multiplier: nil, upload_chunk_size: nil, universe_domain: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "storage-credentials"
         _(retries).must_be :nil?
@@ -453,8 +457,8 @@ describe Google::Cloud do
         _(open_timeout).must_be :nil?
         _(read_timeout).must_be :nil?
         _(send_timeout).must_be :nil?
-        # TODO: Remove once discovery document is updated.
-        _(host).must_equal "https://storage.googleapis.com/"
+        _(host).must_be :nil?
+        _(universe_domain).must_be :nil?
         _(max_elapsed_time).must_be :nil?
         _(base_interval).must_be :nil?
         _(max_interval).must_be :nil?
@@ -493,7 +497,7 @@ describe Google::Cloud do
         "storage-credentials"
       }
       stubbed_service = ->(project, credentials, retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil, host: nil, quota_project: nil, max_elapsed_time: nil, base_interval: nil,
-        max_interval: nil, multiplier: nil, upload_chunk_size: nil) {
+        max_interval: nil, multiplier: nil, upload_chunk_size: nil, universe_domain: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "storage-credentials"
         _(retries).must_equal 3
@@ -501,8 +505,8 @@ describe Google::Cloud do
         _(open_timeout).must_equal 24
         _(read_timeout).must_equal 42
         _(send_timeout).must_equal 42
-        # TODO: Remove once discovery document is updated.
-        _(host).must_equal "https://storage.googleapis.com/"
+        _(host).must_be :nil?
+        _(universe_domain).must_be :nil?
         _(max_elapsed_time).must_equal 1000
         _(base_interval).must_equal 2
         _(max_interval).must_equal 30
@@ -549,7 +553,7 @@ describe Google::Cloud do
         "storage-credentials"
       }
       stubbed_service = ->(project, credentials, retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil, host: nil, quota_project: nil, max_elapsed_time: nil, base_interval: nil,
-        max_interval: nil, multiplier: nil, upload_chunk_size: nil) {
+        max_interval: nil, multiplier: nil, upload_chunk_size: nil, universe_domain: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "storage-credentials"
         _(retries).must_equal 3
@@ -557,6 +561,8 @@ describe Google::Cloud do
         _(open_timeout).must_equal 42
         _(read_timeout).must_equal 24
         _(send_timeout).must_equal 42
+        _(host).must_be :nil?
+        _(universe_domain).must_be :nil?
         _(max_elapsed_time).must_equal 1000
         _(base_interval).must_equal 2
         _(max_interval).must_equal 30
@@ -596,14 +602,14 @@ describe Google::Cloud do
       end
     end
 
-    it "uses storage config for endpoint" do
+    it "uses storage config for endpoint and universe_domain" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         _(keyfile).must_equal "path/to/keyfile.json"
         _(scope).must_be :nil?
         "storage-credentials"
       }
       stubbed_service = ->(project, credentials, retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil, host: nil, quota_project: nil, max_elapsed_time: nil, base_interval: nil,
-        max_interval: nil, multiplier: nil, upload_chunk_size: nil) {
+        max_interval: nil, multiplier: nil, upload_chunk_size: nil, universe_domain: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "storage-credentials"
         _(retries).must_equal 3
@@ -612,6 +618,7 @@ describe Google::Cloud do
         _(read_timeout).must_equal 42
         _(send_timeout).must_equal 24
         _(host).must_equal "storage-endpoint2.example.com"
+        _(universe_domain).must_equal "myuniverse3.com"
         _(max_elapsed_time).must_equal 1000
         _(base_interval).must_equal 2
         _(max_interval).must_equal 30
@@ -630,6 +637,7 @@ describe Google::Cloud do
           config.timeout = 42
           config.send_timeout = 24
           config.endpoint = "storage-endpoint2.example.com"
+          config.universe_domain = "myuniverse3.com"
           config.max_elapsed_time = 1000
           config.base_interval = 2.0
           config.max_interval = 30
@@ -659,7 +667,7 @@ describe Google::Cloud do
         "storage-credentials"
       }
       stubbed_service = ->(project, credentials, retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil, host: nil, quota_project: nil, max_elapsed_time: nil, base_interval: nil,
-        max_interval: nil, multiplier: nil, upload_chunk_size: nil) {
+        max_interval: nil, multiplier: nil, upload_chunk_size: nil, universe_domain: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "storage-credentials"
         _(retries).must_equal 3
@@ -667,6 +675,8 @@ describe Google::Cloud do
         _(open_timeout).must_equal 24
         _(read_timeout).must_equal 42
         _(send_timeout).must_equal 42
+        _(host).must_be :nil?
+        _(universe_domain).must_be :nil?
         _(quota_project).must_equal "project-id-2"
         _(max_elapsed_time).must_equal 1000
         _(base_interval).must_equal 2

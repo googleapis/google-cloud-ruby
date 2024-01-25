@@ -39,6 +39,50 @@ describe Google::Cloud::Storage::Project, :mock_storage do
   let(:kms_key) { "path/to/encryption_key_name" }
   let(:bucket_retention_period) { 86400 }
   let(:metageneration) { 6 }
+  let(:default_credentials) do
+    creds = OpenStruct.new empty: true
+    def creds.is_a? target
+      target == Google::Auth::Credentials
+    end
+    creds
+  end
+
+  it "defaults to the correct endpoint and universe domain" do
+    service = Google::Cloud::Storage::Service.new "my-project", default_credentials
+    _(service.universe_domain).must_equal "googleapis.com"
+    _(service.service.root_url).must_equal "https://storage.googleapis.com/"
+    project = Google::Cloud::Storage::Project.new service
+    _(project.universe_domain).must_equal "googleapis.com"
+  end
+
+  it "supports setting a universe domain argument" do
+    service = Google::Cloud::Storage::Service.new "my-project", default_credentials, universe_domain: "mydomain1.com"
+    _(service.universe_domain).must_equal "mydomain1.com"
+    _(service.service.root_url).must_equal "https://storage.mydomain1.com/"
+    project = Google::Cloud::Storage::Project.new service
+    _(project.universe_domain).must_equal "mydomain1.com"
+  end
+
+  it "supports setting a universe domain via environment variable" do
+    ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"] = "mydomain2.com"
+    service = Google::Cloud::Storage::Service.new "my-project", default_credentials
+    _(service.universe_domain).must_equal "mydomain2.com"
+    _(service.service.root_url).must_equal "https://storage.mydomain2.com/"
+    project = Google::Cloud::Storage::Project.new service
+    _(project.universe_domain).must_equal "mydomain2.com"
+  ensure
+    ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"] = nil
+  end
+
+  it "overrides universe domain with endpoint" do
+    service = Google::Cloud::Storage::Service.new "my-project", default_credentials,
+                                                  host: "https://storage.example.com/",
+                                                  universe_domain: "mydomain3.com"
+    _(service.universe_domain).must_equal "mydomain3.com"
+    _(service.service.root_url).must_equal "https://storage.example.com/"
+    project = Google::Cloud::Storage::Project.new service
+    _(project.universe_domain).must_equal "mydomain3.com"
+  end
 
   it "adds custom headers to the request options" do
     headers = {

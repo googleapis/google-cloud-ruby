@@ -63,6 +63,15 @@ module Google
         end
 
         ##
+        # The universe domain the client is connected to
+        #
+        # @return [String]
+        #
+        def universe_domain
+          service.universe_domain
+        end
+
+        ##
         # The Storage project connected to.
         #
         # @return [String]
