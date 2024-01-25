@@ -131,11 +131,13 @@ class ::Google::Cloud::Functions::V1::CloudFunctionsService::ClientTest < Minite
 
     # Create request parameters for a unary method.
     name = "hello world"
+    version_id = 42
 
     get_function_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_function, name
       assert_kind_of ::Google::Cloud::Functions::V1::GetFunctionRequest, request
       assert_equal "hello world", request["name"]
+      assert_equal 42, request["version_id"]
       refute_nil options
     end
 
@@ -146,31 +148,31 @@ class ::Google::Cloud::Functions::V1::CloudFunctionsService::ClientTest < Minite
       end
 
       # Use hash object
-      client.get_function({ name: name }) do |response, operation|
+      client.get_function({ name: name, version_id: version_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_function name: name do |response, operation|
+      client.get_function name: name, version_id: version_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_function ::Google::Cloud::Functions::V1::GetFunctionRequest.new(name: name) do |response, operation|
+      client.get_function ::Google::Cloud::Functions::V1::GetFunctionRequest.new(name: name, version_id: version_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_function({ name: name }, grpc_options) do |response, operation|
+      client.get_function({ name: name, version_id: version_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_function(::Google::Cloud::Functions::V1::GetFunctionRequest.new(name: name), grpc_options) do |response, operation|
+      client.get_function(::Google::Cloud::Functions::V1::GetFunctionRequest.new(name: name, version_id: version_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
