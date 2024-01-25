@@ -1,5 +1,14 @@
 # Release History
 
+### 0.34.0 (2024-01-25)
+
+#### Features
+
+* add fields desired_in_transit_encryption_config and in_transit_encryption_config ([#24458](https://github.com/googleapis/google-cloud-ruby/issues/24458)) 
+#### Documentation
+
+* Remove Not GA comments for GetOpenIDConfig and GetJSONWebKeys 
+
 ### 0.33.1 (2024-01-12)
 
 #### Bug Fixes
