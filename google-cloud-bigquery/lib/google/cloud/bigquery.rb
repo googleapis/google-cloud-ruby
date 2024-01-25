@@ -67,12 +67,13 @@ module Google
       #   table = dataset.table "my_table"
       #
       def self.new project_id: nil, credentials: nil, scope: nil, retries: nil, timeout: nil, endpoint: nil,
-                   project: nil, keyfile: nil
+                   project: nil, keyfile: nil, universe_domain: nil
         scope       ||= configure.scope
         retries     ||= configure.retries
         timeout     ||= configure.timeout
         endpoint    ||= configure.endpoint
         credentials ||= (keyfile || default_credentials(scope: scope))
+        universe_domain ||= configure.universe_domain
 
         unless credentials.is_a? Google::Auth::Credentials
           credentials = Bigquery::Credentials.new credentials, scope: scope
@@ -84,7 +85,8 @@ module Google
         Bigquery::Project.new(
           Bigquery::Service.new(
             project_id, credentials,
-            retries: retries, timeout: timeout, host: endpoint, quota_project: configure.quota_project
+            retries: retries, timeout: timeout, host: endpoint,
+            quota_project: configure.quota_project, universe_domain: universe_domain
           )
         )
       end

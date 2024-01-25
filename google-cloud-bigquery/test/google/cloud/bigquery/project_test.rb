@@ -20,6 +20,19 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
   let(:service_account_resp) { OpenStruct.new email: email }
   let(:dataset_id) { "my_dataset" }
   let(:filter) { "labels.foo:bar" }
+  let(:default_credentials) do
+    creds = OpenStruct.new empty: true
+    def creds.is_a? target
+      target == Google::Auth::Credentials
+    end
+    creds
+  end
+
+  it "gets the universe domain" do
+    service = Google::Cloud::Bigquery::Service.new "my-project", default_credentials
+    project = Google::Cloud::Bigquery::Project.new service
+    _(project.universe_domain).must_equal "googleapis.com"
+  end
 
   it "gets and memoizes its service_account_email" do
     mock = Minitest::Mock.new

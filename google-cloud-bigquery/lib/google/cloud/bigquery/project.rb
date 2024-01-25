@@ -68,6 +68,15 @@ module Google
         end
 
         ##
+        # The universe domain the client is connected to
+        #
+        # @return [String]
+        #
+        def universe_domain
+          service.universe_domain
+        end
+
+        ##
         # The BigQuery project connected to.
         #
         # @example

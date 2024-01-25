@@ -140,4 +140,5 @@ Google::Cloud.configure.add_config! :bigquery do |config|
   config.add_field! :retries, nil, match: Integer
   config.add_field! :timeout, nil, match: Integer
   config.add_field! :endpoint, default_endpoint, match: String, allow_nil: true
+  config.add_field! :universe_domain, nil, match: String, allow_nil: true
 end
