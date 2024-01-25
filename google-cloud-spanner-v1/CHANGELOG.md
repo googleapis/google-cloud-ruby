@@ -1,5 +1,11 @@
 # Release History
 
+### 0.22.0 (2024-01-25)
+
+#### Features
+
+* Support for the FLOAT32 type ([#24469](https://github.com/googleapis/google-cloud-ruby/issues/24469)) 
+
 ### 0.21.0 (2024-01-18)
 
 #### Features
