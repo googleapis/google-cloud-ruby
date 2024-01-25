@@ -382,7 +382,7 @@ module Google
                 #   @param options [::Gapic::CallOptions, ::Hash]
                 #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
                 #
-                # @overload create_database(parent: nil, create_statement: nil, extra_statements: nil, encryption_config: nil, database_dialect: nil)
+                # @overload create_database(parent: nil, create_statement: nil, extra_statements: nil, encryption_config: nil, database_dialect: nil, proto_descriptors: nil)
                 #   Pass arguments to `create_database` via keyword arguments. Note that at
                 #   least one keyword argument is required. To specify no parameters, or to keep all
                 #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -407,6 +407,22 @@ module Google
                 #     Google default encryption.
                 #   @param database_dialect [::Google::Cloud::Spanner::Admin::Database::V1::DatabaseDialect]
                 #     Optional. The dialect of the Cloud Spanner Database.
+                #   @param proto_descriptors [::String]
+                #     Optional. Proto descriptors used by CREATE/ALTER PROTO BUNDLE statements in
+                #     'extra_statements' above.
+                #     Contains a protobuf-serialized
+                #     [google.protobuf.FileDescriptorSet](https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/descriptor.proto).
+                #     To generate it, [install](https://grpc.io/docs/protoc-installation/) and
+                #     run `protoc` with --include_imports and --descriptor_set_out. For example,
+                #     to generate for moon/shot/app.proto, run
+                #     ```
+                #     $protoc  --proto_path=/app_path --proto_path=/lib_path \
+                #              --include_imports \
+                #              --descriptor_set_out=descriptors.data \
+                #              moon/shot/app.proto
+                #     ```
+                #     For more details, see protobuffer [self
+                #     description](https://developers.google.com/protocol-buffers/docs/techniques#self-description).
                 #
                 # @yield [response, operation] Access the result along with the RPC operation
                 # @yieldparam response [::Gapic::Operation]
@@ -718,7 +734,7 @@ module Google
                 #   @param options [::Gapic::CallOptions, ::Hash]
                 #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
                 #
-                # @overload update_database_ddl(database: nil, statements: nil, operation_id: nil)
+                # @overload update_database_ddl(database: nil, statements: nil, operation_id: nil, proto_descriptors: nil)
                 #   Pass arguments to `update_database_ddl` via keyword arguments. Note that at
                 #   least one keyword argument is required. To specify no parameters, or to keep all
                 #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -747,6 +763,21 @@ module Google
                 #     underscore. If the named operation already exists,
                 #     {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#update_database_ddl UpdateDatabaseDdl} returns
                 #     `ALREADY_EXISTS`.
+                #   @param proto_descriptors [::String]
+                #     Optional. Proto descriptors used by CREATE/ALTER PROTO BUNDLE statements.
+                #     Contains a protobuf-serialized
+                #     [google.protobuf.FileDescriptorSet](https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/descriptor.proto).
+                #     To generate it, [install](https://grpc.io/docs/protoc-installation/) and
+                #     run `protoc` with --include_imports and --descriptor_set_out. For example,
+                #     to generate for moon/shot/app.proto, run
+                #     ```
+                #     $protoc  --proto_path=/app_path --proto_path=/lib_path \
+                #              --include_imports \
+                #              --descriptor_set_out=descriptors.data \
+                #              moon/shot/app.proto
+                #     ```
+                #     For more details, see protobuffer [self
+                #     description](https://developers.google.com/protocol-buffers/docs/techniques#self-description).
                 #
                 # @yield [response, operation] Access the result along with the RPC operation
                 # @yieldparam response [::Gapic::Operation]
