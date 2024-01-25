@@ -1,5 +1,11 @@
 # Release History
 
+### 0.14.0 (2024-01-25)
+
+#### Features
+
+* Support getting a specific version of a function ([#24463](https://github.com/googleapis/google-cloud-ruby/issues/24463)) 
+
 ### 0.13.1 (2024-01-12)
 
 #### Bug Fixes
