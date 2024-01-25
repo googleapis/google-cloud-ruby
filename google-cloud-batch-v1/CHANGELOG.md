@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.16.0 (2024-01-25)
+
+#### Features
+
+* Container runnables support using image streaming 
+* Support running a task group as non-root 
+* Support tags in the allocation policy 
+* Support the use_generic_task_monitored_resource cloud logging option 
+
 ### 0.15.1 (2024-01-12)
 
 #### Bug Fixes
