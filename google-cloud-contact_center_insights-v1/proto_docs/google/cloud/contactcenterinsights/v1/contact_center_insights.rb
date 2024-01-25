@@ -368,14 +368,14 @@ module Google
           #     the conversations.
           # @!attribute [rw] agent_channel
           #   @return [::Integer]
-          #     Optional. For audio conversations, this field indicates which of the
-          #     channels, 1 or 2, contains the agent. Note that this must be set for
-          #     audio conversations to be properly displayed and analyzed.
+          #     Optional. Indicates which of the channels, 1 or 2, contains the agent.
+          #     Note that this must be set for conversations to be properly displayed and
+          #     analyzed.
           # @!attribute [rw] customer_channel
           #   @return [::Integer]
-          #     Optional. For audio conversations, this field indicates which of the
-          #     channels, 1 or 2, contains the customer. Note that this must be set for
-          #     audio conversations to be properly displayed and analyzed.
+          #     Optional. Indicates which of the channels, 1 or 2, contains the agent.
+          #     Note that this must be set for conversations to be properly displayed and
+          #     analyzed.
           class ConversationConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
