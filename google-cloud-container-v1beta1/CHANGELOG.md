@@ -1,5 +1,11 @@
 # Release History
 
+### 0.34.2 (2024-01-25)
+
+#### Documentation
+
+* Remove Not GA comments for GetOpenIDConfig and GetJSONWebKeys ([#24457](https://github.com/googleapis/google-cloud-ruby/issues/24457)) 
+
 ### 0.34.1 (2024-01-12)
 
 #### Bug Fixes
