@@ -364,6 +364,16 @@ module Google
             rpc :UpdateDataRedactionSettings, ::Google::Analytics::Admin::V1alpha::UpdateDataRedactionSettingsRequest, ::Google::Analytics::Admin::V1alpha::DataRedactionSettings
             # Lookup for a single DataRedactionSettings.
             rpc :GetDataRedactionSettings, ::Google::Analytics::Admin::V1alpha::GetDataRedactionSettingsRequest, ::Google::Analytics::Admin::V1alpha::DataRedactionSettings
+            # Lookup for a single CalculatedMetric.
+            rpc :GetCalculatedMetric, ::Google::Analytics::Admin::V1alpha::GetCalculatedMetricRequest, ::Google::Analytics::Admin::V1alpha::CalculatedMetric
+            # Creates a CalculatedMetric.
+            rpc :CreateCalculatedMetric, ::Google::Analytics::Admin::V1alpha::CreateCalculatedMetricRequest, ::Google::Analytics::Admin::V1alpha::CalculatedMetric
+            # Lists CalculatedMetrics on a property.
+            rpc :ListCalculatedMetrics, ::Google::Analytics::Admin::V1alpha::ListCalculatedMetricsRequest, ::Google::Analytics::Admin::V1alpha::ListCalculatedMetricsResponse
+            # Updates a CalculatedMetric on a property.
+            rpc :UpdateCalculatedMetric, ::Google::Analytics::Admin::V1alpha::UpdateCalculatedMetricRequest, ::Google::Analytics::Admin::V1alpha::CalculatedMetric
+            # Deletes a CalculatedMetric on a property.
+            rpc :DeleteCalculatedMetric, ::Google::Analytics::Admin::V1alpha::DeleteCalculatedMetricRequest, ::Google::Protobuf::Empty
             # Create a roll-up property and all roll-up property source links.
             rpc :CreateRollupProperty, ::Google::Analytics::Admin::V1alpha::CreateRollupPropertyRequest, ::Google::Analytics::Admin::V1alpha::CreateRollupPropertyResponse
             # Lookup for a single roll-up property source Link.

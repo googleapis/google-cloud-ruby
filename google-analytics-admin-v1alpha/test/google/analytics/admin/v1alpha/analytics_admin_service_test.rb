@@ -7341,6 +7341,311 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     end
   end
 
+  def test_get_calculated_metric
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::CalculatedMetric.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_calculated_metric_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_calculated_metric, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::GetCalculatedMetricRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_calculated_metric_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_calculated_metric({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_calculated_metric name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_calculated_metric ::Google::Analytics::Admin::V1alpha::GetCalculatedMetricRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_calculated_metric({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_calculated_metric(::Google::Analytics::Admin::V1alpha::GetCalculatedMetricRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_calculated_metric_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_calculated_metric
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::CalculatedMetric.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    calculated_metric_id = "hello world"
+    calculated_metric = {}
+
+    create_calculated_metric_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_calculated_metric, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::CreateCalculatedMetricRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["calculated_metric_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::CalculatedMetric), request["calculated_metric"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_calculated_metric_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_calculated_metric({ parent: parent, calculated_metric_id: calculated_metric_id, calculated_metric: calculated_metric }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_calculated_metric parent: parent, calculated_metric_id: calculated_metric_id, calculated_metric: calculated_metric do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_calculated_metric ::Google::Analytics::Admin::V1alpha::CreateCalculatedMetricRequest.new(parent: parent, calculated_metric_id: calculated_metric_id, calculated_metric: calculated_metric) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_calculated_metric({ parent: parent, calculated_metric_id: calculated_metric_id, calculated_metric: calculated_metric }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_calculated_metric(::Google::Analytics::Admin::V1alpha::CreateCalculatedMetricRequest.new(parent: parent, calculated_metric_id: calculated_metric_id, calculated_metric: calculated_metric), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_calculated_metric_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_calculated_metrics
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::ListCalculatedMetricsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_calculated_metrics_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_calculated_metrics, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::ListCalculatedMetricsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_calculated_metrics_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_calculated_metrics({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_calculated_metrics parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_calculated_metrics ::Google::Analytics::Admin::V1alpha::ListCalculatedMetricsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_calculated_metrics({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_calculated_metrics(::Google::Analytics::Admin::V1alpha::ListCalculatedMetricsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_calculated_metrics_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_calculated_metric
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::CalculatedMetric.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    calculated_metric = {}
+    update_mask = {}
+
+    update_calculated_metric_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_calculated_metric, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::UpdateCalculatedMetricRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::CalculatedMetric), request["calculated_metric"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_calculated_metric_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_calculated_metric({ calculated_metric: calculated_metric, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_calculated_metric calculated_metric: calculated_metric, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_calculated_metric ::Google::Analytics::Admin::V1alpha::UpdateCalculatedMetricRequest.new(calculated_metric: calculated_metric, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_calculated_metric({ calculated_metric: calculated_metric, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_calculated_metric(::Google::Analytics::Admin::V1alpha::UpdateCalculatedMetricRequest.new(calculated_metric: calculated_metric, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_calculated_metric_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_calculated_metric
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_calculated_metric_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_calculated_metric, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::DeleteCalculatedMetricRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_calculated_metric_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_calculated_metric({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_calculated_metric name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_calculated_metric ::Google::Analytics::Admin::V1alpha::DeleteCalculatedMetricRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_calculated_metric({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_calculated_metric(::Google::Analytics::Admin::V1alpha::DeleteCalculatedMetricRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_calculated_metric_client_stub.call_rpc_count
+    end
+  end
+
   def test_create_rollup_property
     # Create GRPC objects.
     grpc_response = ::Google::Analytics::Admin::V1alpha::CreateRollupPropertyResponse.new

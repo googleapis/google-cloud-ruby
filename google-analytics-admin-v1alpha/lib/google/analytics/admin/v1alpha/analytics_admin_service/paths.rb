@@ -143,6 +143,23 @@ module Google
             end
 
             ##
+            # Create a fully-qualified CalculatedMetric resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `properties/{property}/calculatedMetrics/{calculated_metric}`
+            #
+            # @param property [String]
+            # @param calculated_metric [String]
+            #
+            # @return [::String]
+            def calculated_metric_path property:, calculated_metric:
+              raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
+
+              "properties/#{property}/calculatedMetrics/#{calculated_metric}"
+            end
+
+            ##
             # Create a fully-qualified ChannelGroup resource string.
             #
             # The resource will be in the following format:

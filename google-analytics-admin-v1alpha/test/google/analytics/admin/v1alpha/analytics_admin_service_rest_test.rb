@@ -6658,6 +6658,281 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ClientTe
     end
   end
 
+  def test_get_calculated_metric
+    # Create test objects.
+    client_result = ::Google::Analytics::Admin::V1alpha::CalculatedMetric.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_calculated_metric_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ServiceStub.stub :transcode_get_calculated_metric_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_calculated_metric_client_stub do
+        # Create client
+        client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_calculated_metric({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_calculated_metric name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_calculated_metric ::Google::Analytics::Admin::V1alpha::GetCalculatedMetricRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_calculated_metric({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_calculated_metric(::Google::Analytics::Admin::V1alpha::GetCalculatedMetricRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_calculated_metric_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_calculated_metric
+    # Create test objects.
+    client_result = ::Google::Analytics::Admin::V1alpha::CalculatedMetric.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    calculated_metric_id = "hello world"
+    calculated_metric = {}
+
+    create_calculated_metric_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ServiceStub.stub :transcode_create_calculated_metric_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_calculated_metric_client_stub do
+        # Create client
+        client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_calculated_metric({ parent: parent, calculated_metric_id: calculated_metric_id, calculated_metric: calculated_metric }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_calculated_metric parent: parent, calculated_metric_id: calculated_metric_id, calculated_metric: calculated_metric do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_calculated_metric ::Google::Analytics::Admin::V1alpha::CreateCalculatedMetricRequest.new(parent: parent, calculated_metric_id: calculated_metric_id, calculated_metric: calculated_metric) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_calculated_metric({ parent: parent, calculated_metric_id: calculated_metric_id, calculated_metric: calculated_metric }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_calculated_metric(::Google::Analytics::Admin::V1alpha::CreateCalculatedMetricRequest.new(parent: parent, calculated_metric_id: calculated_metric_id, calculated_metric: calculated_metric), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_calculated_metric_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_calculated_metrics
+    # Create test objects.
+    client_result = ::Google::Analytics::Admin::V1alpha::ListCalculatedMetricsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_calculated_metrics_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ServiceStub.stub :transcode_list_calculated_metrics_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_calculated_metrics_client_stub do
+        # Create client
+        client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_calculated_metrics({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_calculated_metrics parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_calculated_metrics ::Google::Analytics::Admin::V1alpha::ListCalculatedMetricsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_calculated_metrics({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_calculated_metrics(::Google::Analytics::Admin::V1alpha::ListCalculatedMetricsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_calculated_metrics_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_calculated_metric
+    # Create test objects.
+    client_result = ::Google::Analytics::Admin::V1alpha::CalculatedMetric.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    calculated_metric = {}
+    update_mask = {}
+
+    update_calculated_metric_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ServiceStub.stub :transcode_update_calculated_metric_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_calculated_metric_client_stub do
+        # Create client
+        client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_calculated_metric({ calculated_metric: calculated_metric, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_calculated_metric calculated_metric: calculated_metric, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_calculated_metric ::Google::Analytics::Admin::V1alpha::UpdateCalculatedMetricRequest.new(calculated_metric: calculated_metric, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_calculated_metric({ calculated_metric: calculated_metric, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_calculated_metric(::Google::Analytics::Admin::V1alpha::UpdateCalculatedMetricRequest.new(calculated_metric: calculated_metric, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_calculated_metric_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_calculated_metric
+    # Create test objects.
+    client_result = ::Google::Protobuf::Empty.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_calculated_metric_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ServiceStub.stub :transcode_delete_calculated_metric_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_calculated_metric_client_stub do
+        # Create client
+        client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_calculated_metric({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_calculated_metric name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_calculated_metric ::Google::Analytics::Admin::V1alpha::DeleteCalculatedMetricRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_calculated_metric({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_calculated_metric(::Google::Analytics::Admin::V1alpha::DeleteCalculatedMetricRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_calculated_metric_client_stub.call_count
+      end
+    end
+  end
+
   def test_create_rollup_property
     # Create test objects.
     client_result = ::Google::Analytics::Admin::V1alpha::CreateRollupPropertyResponse.new

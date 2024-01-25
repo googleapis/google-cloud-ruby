@@ -647,6 +647,9 @@ module Google
           # @!attribute [rw] event_create_rule
           #   @return [::Google::Analytics::Admin::V1alpha::EventCreateRule]
           #     A snapshot of an EventCreateRule resource in change history.
+          # @!attribute [rw] calculated_metric
+          #   @return [::Google::Analytics::Admin::V1alpha::CalculatedMetric]
+          #     A snapshot of a CalculatedMetric resource in change history.
           class ChangeHistoryResource
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -841,7 +844,7 @@ module Google
           #     When a conversion event for this event_name has no set currency,
           #     this currency will be applied as the default. Must be in ISO 4217
           #     currency code format. See https://en.wikipedia.org/wiki/ISO_4217 for
-          #     more.
+          #     more information.
           class DefaultConversionValue
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1028,6 +1031,100 @@ module Google
 
           # Labels that mark the data in this custom metric as data that should be
           # restricted to specific users.
+          module RestrictedMetricType
+            # Type unknown or unspecified.
+            RESTRICTED_METRIC_TYPE_UNSPECIFIED = 0
+
+            # Metric reports cost data.
+            COST_DATA = 1
+
+            # Metric reports revenue data.
+            REVENUE_DATA = 2
+          end
+        end
+
+        # A definition for a calculated metric.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. Resource name for this CalculatedMetric.
+        #     Format: 'properties/\\{property_id}/calculatedMetrics/\\{calculated_metric_id}'
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     Optional. Description for this calculated metric.
+        #     Max length of 4096 characters.
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     Required. Display name for this calculated metric as shown in the
+        #     Google Analytics UI. Max length 82 characters.
+        # @!attribute [r] calculated_metric_id
+        #   @return [::String]
+        #     Output only. The ID to use for the calculated metric. In the UI, this is
+        #     referred to as the "API name."
+        #
+        #     The calculated_metric_id is used when referencing this calculated metric
+        #     from external APIs. For example, "calcMetric:\\{calculated_metric_id}".
+        # @!attribute [rw] metric_unit
+        #   @return [::Google::Analytics::Admin::V1alpha::CalculatedMetric::MetricUnit]
+        #     Required. The type for the calculated metric's value.
+        # @!attribute [r] restricted_metric_type
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::CalculatedMetric::RestrictedMetricType>]
+        #     Output only. Types of restricted data that this metric contains.
+        # @!attribute [rw] formula
+        #   @return [::String]
+        #     Required. The calculated metric's definition. Maximum number of unique
+        #     referenced custom metrics is 5. Formulas supports the following operations:
+        #     + (addition),  - (subtraction), - (negative),  * (multiplication), /
+        #     (division), () (parenthesis). Any valid real numbers are acceptable that
+        #     fit in a Long (64bit integer) or a Double (64 bit floating point number).
+        #     Example formula:
+        #       "( customEvent:parameter_name + cartPurchaseQuantity ) / 2.0"
+        # @!attribute [r] invalid_metric_reference
+        #   @return [::Boolean]
+        #     Output only. If true, this calculated metric has a invalid metric
+        #     reference. Anything using a calculated metric with invalid_metric_reference
+        #     set to true may fail, produce warnings, or produce unexpected results.
+        class CalculatedMetric
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Possible types of representing the calculated metric's value.
+          module MetricUnit
+            # MetricUnit unspecified or missing.
+            METRIC_UNIT_UNSPECIFIED = 0
+
+            # This metric uses default units.
+            STANDARD = 1
+
+            # This metric measures a currency.
+            CURRENCY = 2
+
+            # This metric measures feet.
+            FEET = 3
+
+            # This metric measures miles.
+            MILES = 4
+
+            # This metric measures meters.
+            METERS = 5
+
+            # This metric measures kilometers.
+            KILOMETERS = 6
+
+            # This metric measures milliseconds.
+            MILLISECONDS = 7
+
+            # This metric measures seconds.
+            SECONDS = 8
+
+            # This metric measures minutes.
+            MINUTES = 9
+
+            # This metric measures hours.
+            HOURS = 10
+          end
+
+          # Labels that mark the data in calculated metric used in conjunction with
+          # user roles that restrict access to cost and/or revenue metrics.
           module RestrictedMetricType
             # Type unknown or unspecified.
             RESTRICTED_METRIC_TYPE_UNSPECIFIED = 0
@@ -1600,6 +1697,9 @@ module Google
 
           # EventCreateRule resource
           EVENT_CREATE_RULE = 29
+
+          # CalculatedMetric resource
+          CALCULATED_METRIC = 31
         end
 
         # Status of the Google Signals settings.
