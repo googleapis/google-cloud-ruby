@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Datastore
       module V1
-        VERSION = "0.16.1"
+        VERSION = "0.16.2"
       end
     end
   end
