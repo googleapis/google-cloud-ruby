@@ -1,5 +1,12 @@
 # Release History
 
+### 0.16.2 (2024-01-25)
+
+#### Bug Fixes
+
+* BREAKING CHANGE: Removed unsupported query mode argument 
+* BREAKING CHANGE: Removed unsupported query stats field from query responses 
+
 ### 0.16.1 (2024-01-12)
 
 #### Bug Fixes
