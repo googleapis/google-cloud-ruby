@@ -37,6 +37,14 @@ describe Google::Cloud::Bigquery::Service do
     end
     creds
   end
+  let(:default_universe_credentials) do
+    client = OpenStruct.new universe_domain: "googleapis.com"
+    creds = OpenStruct.new empty: true, client: client
+    def creds.is_a? target
+      target == Google::Auth::Credentials
+    end
+    creds
+  end
 
   it "creates a Google::Apis::BigqueryV2::BigqueryService" do
     mock_credentials = Minitest::Mock.new
@@ -88,6 +96,18 @@ describe Google::Cloud::Bigquery::Service do
                                                    universe_domain: "mydomain3.com"
     _(service.universe_domain).must_equal "mydomain3.com"
     _(service.service.root_url).must_equal "https://bigquery.example.com/"
+  end
+
+  it "allows credentials with matching universe domain" do
+    service = Google::Cloud::Bigquery::Service.new "my-project", default_universe_credentials
+    service.service
+  end
+
+  it "errors on credentials with non-matching universe domain" do
+    service = Google::Cloud::Bigquery::Service.new "my-project", default_universe_credentials, universe_domain: "wronguniverse.com"
+    expect do
+      service.service
+    end.must_raise Google::Cloud::Error
   end
 
   it "returns table ref from standard sql format with project, dataset, table and no default ref" do

@@ -82,6 +82,12 @@ module Google
             service.authorization = @credentials.client
             service.universe_domain = @universe_domain
             service.root_url = host if host
+            begin
+              service.verify_universe_domain!
+            rescue Google::Apis::UniverseDomainError => e
+              # TODO: Create a Google::Cloud::Error subclass for this.
+              raise Google::Cloud::Error, e.message
+            end
             service
           end
         end
