@@ -1,5 +1,11 @@
 # Release History
 
+### 1.48.1 (2024-01-26)
+
+#### Bug Fixes
+
+* Raise an error on mismatching universe domain ([#24486](https://github.com/googleapis/google-cloud-ruby/issues/24486)) 
+
 ### 1.48.0 (2024-01-25)
 
 #### Features
