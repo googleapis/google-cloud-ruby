@@ -19,6 +19,7 @@ Gem::Specification.new do |gem|
   gem.required_ruby_version = ">= 2.7"
 
   gem.add_dependency "google-cloud-core", "~> 1.6"
+  gem.add_dependency "google-apis-core", "~> 0.13"
   gem.add_dependency "google-apis-iamcredentials_v1", "~> 0.18"
   gem.add_dependency "google-apis-storage_v1", "~> 0.33"
   gem.add_dependency "googleauth", "~> 1.9"
