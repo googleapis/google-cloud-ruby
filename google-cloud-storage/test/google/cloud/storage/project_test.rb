@@ -46,6 +46,14 @@ describe Google::Cloud::Storage::Project, :mock_storage do
     end
     creds
   end
+  let(:default_universe_credentials) do
+    client = OpenStruct.new universe_domain: "googleapis.com"
+    creds = OpenStruct.new empty: true, client: client
+    def creds.is_a? target
+      target == Google::Auth::Credentials
+    end
+    creds
+  end
 
   it "defaults to the correct endpoint and universe domain" do
     service = Google::Cloud::Storage::Service.new "my-project", default_credentials
@@ -82,6 +90,16 @@ describe Google::Cloud::Storage::Project, :mock_storage do
     _(service.service.root_url).must_equal "https://storage.example.com/"
     project = Google::Cloud::Storage::Project.new service
     _(project.universe_domain).must_equal "mydomain3.com"
+  end
+
+  it "allows credentials with matching universe domain" do
+    Google::Cloud::Storage::Service.new "my-project", default_universe_credentials
+  end
+
+  it "errors on credentials with non-matching universe domain" do
+    expect do
+      Google::Cloud::Storage::Service.new "my-project", default_universe_credentials, universe_domain: "wrongdomain.com"
+    end.must_raise Google::Cloud::Error
   end
 
   it "adds custom headers to the request options" do

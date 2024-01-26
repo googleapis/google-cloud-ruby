@@ -74,6 +74,12 @@ module Google
           @service.authorization = @credentials.client if @credentials
           @service.root_url = host if host
           @service.universe_domain = universe_domain
+          begin
+            @service.verify_universe_domain!
+          rescue Google::Apis::UniverseDomainError => e
+            # TODO: Create a Google::Cloud::Error subclass for this.
+            raise Google::Cloud::Error, e.message
+          end
         end
         # rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
