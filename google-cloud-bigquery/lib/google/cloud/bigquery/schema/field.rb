@@ -462,7 +462,7 @@ module Google
           ##
           # Checks if the type of the field is `JSON`.
           #
-          # @return [Boolean] `true` when `GEOGRAPHY`, `false` otherwise.
+          # @return [Boolean] `true` when `JSON`, `false` otherwise.
           #
           def json?
             type == "JSON"
