@@ -33,6 +33,9 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. A mapping of property names to values, which are used to
         #     configure workload execution.
+        # @!attribute [rw] repository_config
+        #   @return [::Google::Cloud::Dataproc::V1::RepositoryConfig]
+        #     Optional. Dependency repository configuration.
         class RuntimeConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -75,18 +78,34 @@ module Google
         # @!attribute [rw] kms_key
         #   @return [::String]
         #     Optional. The Cloud KMS key to use for encryption.
+        # @!attribute [rw] idle_ttl
+        #   @return [::Google::Protobuf::Duration]
+        #     Optional. Applies to sessions only. The duration to keep the session alive
+        #     while it's idling. Exceeding this threshold causes the session to
+        #     terminate. This field cannot be set on a batch workload. Minimum value is
+        #     10 minutes; maximum value is 14 days (see JSON representation of
+        #     [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json)).
+        #     Defaults to 1 hour if not set.
+        #     If both `ttl` and `idle_ttl` are specified for an interactive session,
+        #     the conditions are treated as `OR` conditions: the workload will be
+        #     terminated when it has been idle for `idle_ttl` or when `ttl` has been
+        #     exceeded, whichever occurs first.
         # @!attribute [rw] ttl
         #   @return [::Google::Protobuf::Duration]
-        #     Optional. The duration after which the workload will be terminated.
-        #     When the workload passes this ttl, it will be unconditionally killed
-        #     without waiting for ongoing work to finish.
-        #     Minimum value is 10 minutes; maximum value is 14 days (see JSON
-        #     representation of
-        #     [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json)).
-        #     If both ttl and idle_ttl are specified, the conditions are treated as
-        #     and OR: the workload will be terminated when it has been idle for idle_ttl
-        #     or when the ttl has passed, whichever comes first.
-        #     If ttl is not specified for a session, it defaults to 24h.
+        #     Optional. The duration after which the workload will be terminated,
+        #     specified as the JSON representation for
+        #     [Duration](https://protobuf.dev/programming-guides/proto3/#json).
+        #     When the workload exceeds this duration, it will be unconditionally
+        #     terminated without waiting for ongoing work to finish. If `ttl` is not
+        #     specified for a batch workload, the workload will be allowed to run until
+        #     it exits naturally (or run forever without exiting). If `ttl` is not
+        #     specified for an interactive session, it defaults to 24 hours. If `ttl` is
+        #     not specified for a batch that uses 2.1+ runtime version, it defaults to 4
+        #     hours. Minimum value is 10 minutes; maximum value is 14 days. If both `ttl`
+        #     and `idle_ttl` are specified (for an interactive session), the conditions
+        #     are treated as `OR` conditions: the workload will be terminated when it has
+        #     been idle for `idle_ttl` or when `ttl` has been exceeded, whichever occurs
+        #     first.
         # @!attribute [rw] staging_bucket
         #   @return [::String]
         #     Optional. A Cloud Storage bucket used to stage workload dependencies,
@@ -146,9 +165,17 @@ module Google
         #     Output only. A URI pointing to the location of the diagnostics tarball.
         # @!attribute [r] approximate_usage
         #   @return [::Google::Cloud::Dataproc::V1::UsageMetrics]
-        #     Output only. Approximate workload resource usage calculated after workload
-        #     finishes (see [Dataproc Serverless pricing]
+        #     Output only. Approximate workload resource usage, calculated when
+        #     the workload completes (see [Dataproc Serverless pricing]
         #     (https://cloud.google.com/dataproc-serverless/pricing)).
+        #
+        #     **Note:** This metric calculation may change in the future, for
+        #     example, to capture cumulative workload resource
+        #     consumption during workload execution (see the
+        #     [Dataproc Serverless release notes]
+        #     (https://cloud.google.com/dataproc-serverless/docs/release-notes)
+        #     for announcements, changes, fixes
+        #     and other Dataproc developments).
         # @!attribute [r] current_usage
         #   @return [::Google::Cloud::Dataproc::V1::UsageSnapshot]
         #     Output only. Snapshot of current workload resource usage.
@@ -177,12 +204,20 @@ module Google
         #     Optional. Shuffle storage usage in (`GB` x `seconds`) (see
         #     [Dataproc Serverless pricing]
         #     (https://cloud.google.com/dataproc-serverless/pricing)).
+        # @!attribute [rw] milli_accelerator_seconds
+        #   @return [::Integer]
+        #     Optional. Accelerator usage in (`milliAccelerator` x `seconds`) (see
+        #     [Dataproc Serverless pricing]
+        #     (https://cloud.google.com/dataproc-serverless/pricing)).
+        # @!attribute [rw] accelerator_type
+        #   @return [::String]
+        #     Optional. Accelerator type being used, if any
         class UsageMetrics
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The usage snaphot represents the resources consumed by a workload at a
+        # The usage snapshot represents the resources consumed by a workload at a
         # specified time.
         # @!attribute [rw] milli_dcu
         #   @return [::Integer]
@@ -193,6 +228,23 @@ module Google
         #   @return [::Integer]
         #     Optional. Shuffle Storage in gigabytes (GB). (see [Dataproc Serverless
         #     pricing] (https://cloud.google.com/dataproc-serverless/pricing))
+        # @!attribute [rw] milli_dcu_premium
+        #   @return [::Integer]
+        #     Optional. Milli (one-thousandth) Dataproc Compute Units (DCUs) charged at
+        #     premium tier (see [Dataproc Serverless pricing]
+        #     (https://cloud.google.com/dataproc-serverless/pricing)).
+        # @!attribute [rw] shuffle_storage_gb_premium
+        #   @return [::Integer]
+        #     Optional. Shuffle Storage in gigabytes (GB) charged at premium tier. (see
+        #     [Dataproc Serverless pricing]
+        #     (https://cloud.google.com/dataproc-serverless/pricing))
+        # @!attribute [rw] milli_accelerator
+        #   @return [::Integer]
+        #     Optional. Milli (one-thousandth) accelerator. (see [Dataproc
+        #     Serverless pricing] (https://cloud.google.com/dataproc-serverless/pricing))
+        # @!attribute [rw] accelerator_type
+        #   @return [::String]
+        #     Optional. Accelerator type being used, if any
         # @!attribute [rw] snapshot_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Optional. The timestamp of the usage snapshot.
@@ -456,16 +508,33 @@ module Google
           end
         end
 
+        # Configuration for dependency repositories
+        # @!attribute [rw] pypi_repository_config
+        #   @return [::Google::Cloud::Dataproc::V1::PyPiRepositoryConfig]
+        #     Optional. Configuration for PyPi repository.
+        class RepositoryConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration for PyPi repository
+        # @!attribute [rw] pypi_repository
+        #   @return [::String]
+        #     Optional. PyPi repository address
+        class PyPiRepositoryConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Cluster components that can be activated.
         module Component
           # Unspecified component. Specifying this will cause Cluster creation to fail.
           COMPONENT_UNSPECIFIED = 0
 
           # The Anaconda python distribution. The Anaconda component is not supported
-          # in the Dataproc
-          # <a
-          # href="/dataproc/docs/concepts/versioning/dataproc-release-2.0">2.0
-          # image</a>. The 2.0 image is pre-installed with Miniconda.
+          # in the Dataproc [2.0 image]
+          # (/https://cloud.google.com/dataproc/docs/concepts/versioning/dataproc-release-2.0).
+          # The 2.0 image is pre-installed with Miniconda.
           ANACONDA = 5
 
           # Docker

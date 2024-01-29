@@ -185,6 +185,74 @@
         }
       }
     },
+    "SessionController": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dataproc::V1::SessionController::Client",
+          "rpcs": {
+            "CreateSession": {
+              "methods": [
+                "create_session"
+              ]
+            },
+            "GetSession": {
+              "methods": [
+                "get_session"
+              ]
+            },
+            "ListSessions": {
+              "methods": [
+                "list_sessions"
+              ]
+            },
+            "TerminateSession": {
+              "methods": [
+                "terminate_session"
+              ]
+            },
+            "DeleteSession": {
+              "methods": [
+                "delete_session"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SessionTemplateController": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dataproc::V1::SessionTemplateController::Client",
+          "rpcs": {
+            "CreateSessionTemplate": {
+              "methods": [
+                "create_session_template"
+              ]
+            },
+            "UpdateSessionTemplate": {
+              "methods": [
+                "update_session_template"
+              ]
+            },
+            "GetSessionTemplate": {
+              "methods": [
+                "get_session_template"
+              ]
+            },
+            "ListSessionTemplates": {
+              "methods": [
+                "list_session_templates"
+              ]
+            },
+            "DeleteSessionTemplate": {
+              "methods": [
+                "delete_session_template"
+              ]
+            }
+          }
+        }
+      }
+    },
     "WorkflowTemplateService": {
       "clients": {
         "grpc": {
