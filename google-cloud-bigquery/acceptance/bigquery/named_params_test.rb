@@ -246,7 +246,7 @@ describe Google::Cloud::Bigquery, :named_params, :bigquery do
     _(JSON.parse(rows.first[:value])).must_equal value
   end
 
-  it "queries the data with a nil parameter and geography type" do
+  it "queries the data with a nil parameter and json type" do
     rows = bigquery.query "SELECT @value AS value", params: { value: nil }, types: { value: :JSON }
 
     _(rows.class).must_equal Google::Cloud::Bigquery::Data
