@@ -1,15 +1,19 @@
 # Release History
 
-### 0.10.1 (2024-01-29)
+### 0.11.0 (2024-01-29)
+
+#### Features
+
+* Added a bloom filter of unchanged document names (#21547)
+* Uses binary protobuf definitions for better forward compatibility (#21675)
+* Support SUM/AVG aggregations in Firestore (#22673)
+* Support for universe_domain (#23779)
+* Support for channel pool configuration (#22920)
 
 #### Bug Fixes
 
-* Ensure endpoints are correct for mixin clients ([#24032](https://github.com/googleapis/google-cloud-ruby/issues/24032)) 
-* BREAKING CHANGE: Removed unsupported query mode argument 
-* BREAKING CHANGE: Removed unsupported query stats field from query responses 
-#### Documentation
-
-* Minor documentation updates ([#24451](https://github.com/googleapis/google-cloud-ruby/issues/24451)) 
+* Set request params header using resource prefix
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified
 
 ### 0.10.0 (2023-02-17)
 
