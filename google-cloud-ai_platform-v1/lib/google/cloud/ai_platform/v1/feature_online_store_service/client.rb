@@ -29,6 +29,8 @@ module Google
           ##
           # Client for the FeatureOnlineStoreService service.
           #
+          # A service for fetching feature values from the online store.
+          #
           class Client
             # @private
             DEFAULT_ENDPOINT_TEMPLATE = "aiplatform.$UNIVERSE_DOMAIN$"

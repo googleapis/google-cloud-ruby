@@ -24,6 +24,7 @@ module Google
     module AIPlatform
       module V1
         module FeatureOnlineStoreService
+          # A service for fetching feature values from the online store.
           class Service
 
             include ::GRPC::GenericService

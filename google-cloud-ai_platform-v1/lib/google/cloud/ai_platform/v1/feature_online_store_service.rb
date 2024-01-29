@@ -31,6 +31,8 @@ module Google
     module AIPlatform
       module V1
         ##
+        # A service for fetching feature values from the online store.
+        #
         # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/ai_platform/v1/feature_online_store_service"

@@ -205,6 +205,7 @@ module Google
           end
         end
 
+        # The alert config for model monitoring.
         # @!attribute [rw] email_alert_config
         #   @return [::Google::Cloud::AIPlatform::V1::ModelMonitoringAlertConfig::EmailAlertConfig]
         #     Email alert config.
