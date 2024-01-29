@@ -207,6 +207,10 @@ module Google
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
       #
+      # ## About FeatureOnlineStoreService
+      #
+      # A service for fetching feature values from the online store.
+      #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
       # @return [::Object] A client object for the specified version.
