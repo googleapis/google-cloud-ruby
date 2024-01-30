@@ -21,6 +21,8 @@ require "google/cloud/dataproc/v1/batch_controller"
 require "google/cloud/dataproc/v1/cluster_controller"
 require "google/cloud/dataproc/v1/job_controller"
 require "google/cloud/dataproc/v1/node_group_controller"
+require "google/cloud/dataproc/v1/session_controller"
+require "google/cloud/dataproc/v1/session_template_controller"
 require "google/cloud/dataproc/v1/workflow_template_service"
 require "google/cloud/dataproc/v1/version"
 

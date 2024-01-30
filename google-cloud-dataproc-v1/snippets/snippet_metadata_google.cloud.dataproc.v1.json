@@ -1092,6 +1092,406 @@
       ]
     },
     {
+      "region_tag": "dataproc_v1_generated_SessionController_CreateSession_sync",
+      "title": "Snippet for the create_session call in the SessionController service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::SessionController::Client#create_session.",
+      "file": "session_controller/create_session.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_session",
+        "full_name": "::Google::Cloud::Dataproc::V1::SessionController::Client#create_session",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::CreateSessionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SessionController::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::SessionController::Client"
+        },
+        "method": {
+          "short_name": "CreateSession",
+          "full_name": "google.cloud.dataproc.v1.SessionController.CreateSession",
+          "service": {
+            "short_name": "SessionController",
+            "full_name": "google.cloud.dataproc.v1.SessionController"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_SessionController_GetSession_sync",
+      "title": "Snippet for the get_session call in the SessionController service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::SessionController::Client#get_session.",
+      "file": "session_controller/get_session.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_session",
+        "full_name": "::Google::Cloud::Dataproc::V1::SessionController::Client#get_session",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::GetSessionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataproc::V1::Session",
+        "client": {
+          "short_name": "SessionController::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::SessionController::Client"
+        },
+        "method": {
+          "short_name": "GetSession",
+          "full_name": "google.cloud.dataproc.v1.SessionController.GetSession",
+          "service": {
+            "short_name": "SessionController",
+            "full_name": "google.cloud.dataproc.v1.SessionController"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_SessionController_ListSessions_sync",
+      "title": "Snippet for the list_sessions call in the SessionController service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::SessionController::Client#list_sessions.",
+      "file": "session_controller/list_sessions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_sessions",
+        "full_name": "::Google::Cloud::Dataproc::V1::SessionController::Client#list_sessions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::ListSessionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataproc::V1::ListSessionsResponse",
+        "client": {
+          "short_name": "SessionController::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::SessionController::Client"
+        },
+        "method": {
+          "short_name": "ListSessions",
+          "full_name": "google.cloud.dataproc.v1.SessionController.ListSessions",
+          "service": {
+            "short_name": "SessionController",
+            "full_name": "google.cloud.dataproc.v1.SessionController"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_SessionController_TerminateSession_sync",
+      "title": "Snippet for the terminate_session call in the SessionController service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::SessionController::Client#terminate_session.",
+      "file": "session_controller/terminate_session.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "terminate_session",
+        "full_name": "::Google::Cloud::Dataproc::V1::SessionController::Client#terminate_session",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::TerminateSessionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SessionController::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::SessionController::Client"
+        },
+        "method": {
+          "short_name": "TerminateSession",
+          "full_name": "google.cloud.dataproc.v1.SessionController.TerminateSession",
+          "service": {
+            "short_name": "SessionController",
+            "full_name": "google.cloud.dataproc.v1.SessionController"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_SessionController_DeleteSession_sync",
+      "title": "Snippet for the delete_session call in the SessionController service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::SessionController::Client#delete_session.",
+      "file": "session_controller/delete_session.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_session",
+        "full_name": "::Google::Cloud::Dataproc::V1::SessionController::Client#delete_session",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::DeleteSessionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SessionController::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::SessionController::Client"
+        },
+        "method": {
+          "short_name": "DeleteSession",
+          "full_name": "google.cloud.dataproc.v1.SessionController.DeleteSession",
+          "service": {
+            "short_name": "SessionController",
+            "full_name": "google.cloud.dataproc.v1.SessionController"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_SessionTemplateController_CreateSessionTemplate_sync",
+      "title": "Snippet for the create_session_template call in the SessionTemplateController service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::SessionTemplateController::Client#create_session_template.",
+      "file": "session_template_controller/create_session_template.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_session_template",
+        "full_name": "::Google::Cloud::Dataproc::V1::SessionTemplateController::Client#create_session_template",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::CreateSessionTemplateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataproc::V1::SessionTemplate",
+        "client": {
+          "short_name": "SessionTemplateController::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::SessionTemplateController::Client"
+        },
+        "method": {
+          "short_name": "CreateSessionTemplate",
+          "full_name": "google.cloud.dataproc.v1.SessionTemplateController.CreateSessionTemplate",
+          "service": {
+            "short_name": "SessionTemplateController",
+            "full_name": "google.cloud.dataproc.v1.SessionTemplateController"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_SessionTemplateController_UpdateSessionTemplate_sync",
+      "title": "Snippet for the update_session_template call in the SessionTemplateController service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::SessionTemplateController::Client#update_session_template.",
+      "file": "session_template_controller/update_session_template.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_session_template",
+        "full_name": "::Google::Cloud::Dataproc::V1::SessionTemplateController::Client#update_session_template",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::UpdateSessionTemplateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataproc::V1::SessionTemplate",
+        "client": {
+          "short_name": "SessionTemplateController::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::SessionTemplateController::Client"
+        },
+        "method": {
+          "short_name": "UpdateSessionTemplate",
+          "full_name": "google.cloud.dataproc.v1.SessionTemplateController.UpdateSessionTemplate",
+          "service": {
+            "short_name": "SessionTemplateController",
+            "full_name": "google.cloud.dataproc.v1.SessionTemplateController"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_SessionTemplateController_GetSessionTemplate_sync",
+      "title": "Snippet for the get_session_template call in the SessionTemplateController service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::SessionTemplateController::Client#get_session_template.",
+      "file": "session_template_controller/get_session_template.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_session_template",
+        "full_name": "::Google::Cloud::Dataproc::V1::SessionTemplateController::Client#get_session_template",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::GetSessionTemplateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataproc::V1::SessionTemplate",
+        "client": {
+          "short_name": "SessionTemplateController::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::SessionTemplateController::Client"
+        },
+        "method": {
+          "short_name": "GetSessionTemplate",
+          "full_name": "google.cloud.dataproc.v1.SessionTemplateController.GetSessionTemplate",
+          "service": {
+            "short_name": "SessionTemplateController",
+            "full_name": "google.cloud.dataproc.v1.SessionTemplateController"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_SessionTemplateController_ListSessionTemplates_sync",
+      "title": "Snippet for the list_session_templates call in the SessionTemplateController service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::SessionTemplateController::Client#list_session_templates.",
+      "file": "session_template_controller/list_session_templates.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_session_templates",
+        "full_name": "::Google::Cloud::Dataproc::V1::SessionTemplateController::Client#list_session_templates",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::ListSessionTemplatesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataproc::V1::ListSessionTemplatesResponse",
+        "client": {
+          "short_name": "SessionTemplateController::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::SessionTemplateController::Client"
+        },
+        "method": {
+          "short_name": "ListSessionTemplates",
+          "full_name": "google.cloud.dataproc.v1.SessionTemplateController.ListSessionTemplates",
+          "service": {
+            "short_name": "SessionTemplateController",
+            "full_name": "google.cloud.dataproc.v1.SessionTemplateController"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_SessionTemplateController_DeleteSessionTemplate_sync",
+      "title": "Snippet for the delete_session_template call in the SessionTemplateController service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::SessionTemplateController::Client#delete_session_template.",
+      "file": "session_template_controller/delete_session_template.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_session_template",
+        "full_name": "::Google::Cloud::Dataproc::V1::SessionTemplateController::Client#delete_session_template",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::DeleteSessionTemplateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "SessionTemplateController::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::SessionTemplateController::Client"
+        },
+        "method": {
+          "short_name": "DeleteSessionTemplate",
+          "full_name": "google.cloud.dataproc.v1.SessionTemplateController.DeleteSessionTemplate",
+          "service": {
+            "short_name": "SessionTemplateController",
+            "full_name": "google.cloud.dataproc.v1.SessionTemplateController"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "dataproc_v1_generated_WorkflowTemplateService_CreateWorkflowTemplate_sync",
       "title": "Snippet for the create_workflow_template call in the WorkflowTemplateService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#create_workflow_template.",
