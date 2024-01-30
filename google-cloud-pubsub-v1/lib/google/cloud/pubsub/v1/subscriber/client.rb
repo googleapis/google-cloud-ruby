@@ -33,6 +33,9 @@ module Google
           # establishing a bi-directional stream using the `StreamingPull` method.
           #
           class Client
+            # @private
+            DEFAULT_ENDPOINT_TEMPLATE = "pubsub.$UNIVERSE_DOMAIN$"
+
             include Paths
 
             # @private
@@ -109,7 +112,7 @@ module Google
 
                 default_config.rpcs.streaming_pull.timeout = 900.0
                 default_config.rpcs.streaming_pull.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 4.0, retry_codes: [4, 8, 10, 13, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 4, retry_codes: [4, 8, 10, 13, 14]
                 }
 
                 default_config.rpcs.modify_push_config.timeout = 60.0
@@ -174,6 +177,15 @@ module Google
             end
 
             ##
+            # The effective universe domain
+            #
+            # @return [String]
+            #
+            def universe_domain
+              @subscriber_stub.universe_domain
+            end
+
+            ##
             # Create a new Subscriber client object.
             #
             # @example
@@ -206,8 +218,9 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
-                                       !@config.endpoint.split(".").first.include?("-")
+              enable_self_signed_jwt = @config.endpoint.nil? ||
+                                       (@config.endpoint == Configuration::DEFAULT_ENDPOINT &&
+                                       !@config.endpoint.split(".").first.include?("-"))
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(::String) || credentials.is_a?(::Hash)
@@ -216,20 +229,23 @@ module Google
               @quota_project_id = @config.quota_project
               @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
-              @iam_policy_client = Google::Iam::V1::IAMPolicy::Client.new do |config|
-                config.credentials = credentials
-                config.quota_project = @quota_project_id
-                config.endpoint = @config.endpoint
-              end
-
               @subscriber_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::PubSub::V1::Subscriber::Stub,
-                credentials:  credentials,
-                endpoint:     @config.endpoint,
+                credentials: credentials,
+                endpoint: @config.endpoint,
+                endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
+                universe_domain: @config.universe_domain,
                 channel_args: @config.channel_args,
                 interceptors: @config.interceptors,
                 channel_pool_config: @config.channel_pool
               )
+
+              @iam_policy_client = Google::Iam::V1::IAMPolicy::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @subscriber_stub.endpoint
+                config.universe_domain = @subscriber_stub.universe_domain
+              end
             end
 
             ##
@@ -281,20 +297,20 @@ module Google
             #     messages. Format is `projects/{project}/topics/{topic}`. The value of this
             #     field will be `_deleted-topic_` if the topic has been deleted.
             #   @param push_config [::Google::Cloud::PubSub::V1::PushConfig, ::Hash]
-            #     If push delivery is used with this subscription, this field is
+            #     Optional. If push delivery is used with this subscription, this field is
             #     used to configure it.
             #   @param bigquery_config [::Google::Cloud::PubSub::V1::BigQueryConfig, ::Hash]
-            #     If delivery to BigQuery is used with this subscription, this field is
-            #     used to configure it.
-            #   @param cloud_storage_config [::Google::Cloud::PubSub::V1::CloudStorageConfig, ::Hash]
-            #     If delivery to Google Cloud Storage is used with this subscription, this
+            #     Optional. If delivery to BigQuery is used with this subscription, this
             #     field is used to configure it.
+            #   @param cloud_storage_config [::Google::Cloud::PubSub::V1::CloudStorageConfig, ::Hash]
+            #     Optional. If delivery to Google Cloud Storage is used with this
+            #     subscription, this field is used to configure it.
             #   @param ack_deadline_seconds [::Integer]
-            #     The approximate amount of time (on a best-effort basis) Pub/Sub waits for
-            #     the subscriber to acknowledge receipt before resending the message. In the
-            #     interval after the message is delivered and before it is acknowledged, it
-            #     is considered to be _outstanding_. During that time period, the
-            #     message will not be redelivered (on a best-effort basis).
+            #     Optional. The approximate amount of time (on a best-effort basis) Pub/Sub
+            #     waits for the subscriber to acknowledge receipt before resending the
+            #     message. In the interval after the message is delivered and before it is
+            #     acknowledged, it is considered to be _outstanding_. During that time
+            #     period, the message will not be redelivered (on a best-effort basis).
             #
             #     For pull subscriptions, this value is used as the initial value for the ack
             #     deadline. To override this value for a given message, call
@@ -311,67 +327,67 @@ module Google
             #     If the subscriber never acknowledges the message, the Pub/Sub
             #     system will eventually redeliver the message.
             #   @param retain_acked_messages [::Boolean]
-            #     Indicates whether to retain acknowledged messages. If true, then
+            #     Optional. Indicates whether to retain acknowledged messages. If true, then
             #     messages are not expunged from the subscription's backlog, even if they are
             #     acknowledged, until they fall out of the `message_retention_duration`
             #     window. This must be true if you would like to [`Seek` to a timestamp]
             #     (https://cloud.google.com/pubsub/docs/replay-overview#seek_to_a_time) in
             #     the past to replay previously-acknowledged messages.
             #   @param message_retention_duration [::Google::Protobuf::Duration, ::Hash]
-            #     How long to retain unacknowledged messages in the subscription's backlog,
-            #     from the moment a message is published.
-            #     If `retain_acked_messages` is true, then this also configures the retention
-            #     of acknowledged messages, and thus configures how far back in time a `Seek`
-            #     can be done. Defaults to 7 days. Cannot be more than 7 days or less than 10
-            #     minutes.
+            #     Optional. How long to retain unacknowledged messages in the subscription's
+            #     backlog, from the moment a message is published. If `retain_acked_messages`
+            #     is true, then this also configures the retention of acknowledged messages,
+            #     and thus configures how far back in time a `Seek` can be done. Defaults to
+            #     7 days. Cannot be more than 7 days or less than 10 minutes.
             #   @param labels [::Hash{::String => ::String}]
-            #     See [Creating and managing
+            #     Optional. See [Creating and managing
             #     labels](https://cloud.google.com/pubsub/docs/labels).
             #   @param enable_message_ordering [::Boolean]
-            #     If true, messages published with the same `ordering_key` in `PubsubMessage`
-            #     will be delivered to the subscribers in the order in which they
-            #     are received by the Pub/Sub system. Otherwise, they may be delivered in
-            #     any order.
+            #     Optional. If true, messages published with the same `ordering_key` in
+            #     `PubsubMessage` will be delivered to the subscribers in the order in which
+            #     they are received by the Pub/Sub system. Otherwise, they may be delivered
+            #     in any order.
             #   @param expiration_policy [::Google::Cloud::PubSub::V1::ExpirationPolicy, ::Hash]
-            #     A policy that specifies the conditions for this subscription's expiration.
-            #     A subscription is considered active as long as any connected subscriber is
-            #     successfully consuming messages from the subscription or is issuing
-            #     operations on the subscription. If `expiration_policy` is not set, a
-            #     *default policy* with `ttl` of 31 days will be used. The minimum allowed
+            #     Optional. A policy that specifies the conditions for this subscription's
+            #     expiration. A subscription is considered active as long as any connected
+            #     subscriber is successfully consuming messages from the subscription or is
+            #     issuing operations on the subscription. If `expiration_policy` is not set,
+            #     a *default policy* with `ttl` of 31 days will be used. The minimum allowed
             #     value for `expiration_policy.ttl` is 1 day. If `expiration_policy` is set,
             #     but `expiration_policy.ttl` is not set, the subscription never expires.
             #   @param filter [::String]
-            #     An expression written in the Pub/Sub [filter
+            #     Optional. An expression written in the Pub/Sub [filter
             #     language](https://cloud.google.com/pubsub/docs/filtering). If non-empty,
             #     then only `PubsubMessage`s whose `attributes` field matches the filter are
             #     delivered on this subscription. If empty, then no messages are filtered
             #     out.
             #   @param dead_letter_policy [::Google::Cloud::PubSub::V1::DeadLetterPolicy, ::Hash]
-            #     A policy that specifies the conditions for dead lettering messages in
-            #     this subscription. If dead_letter_policy is not set, dead lettering
-            #     is disabled.
+            #     Optional. A policy that specifies the conditions for dead lettering
+            #     messages in this subscription. If dead_letter_policy is not set, dead
+            #     lettering is disabled.
             #
-            #     The Cloud Pub/Sub service account associated with this subscriptions's
+            #     The Pub/Sub service account associated with this subscriptions's
             #     parent project (i.e.,
             #     service-\\{project_number}@gcp-sa-pubsub.iam.gserviceaccount.com) must have
             #     permission to Acknowledge() messages on this subscription.
             #   @param retry_policy [::Google::Cloud::PubSub::V1::RetryPolicy, ::Hash]
-            #     A policy that specifies how Pub/Sub retries message delivery for this
-            #     subscription.
+            #     Optional. A policy that specifies how Pub/Sub retries message delivery for
+            #     this subscription.
             #
             #     If not set, the default retry policy is applied. This generally implies
             #     that messages will be retried as soon as possible for healthy subscribers.
             #     RetryPolicy will be triggered on NACKs or acknowledgement deadline
             #     exceeded events for a given message.
             #   @param detached [::Boolean]
-            #     Indicates whether the subscription is detached from its topic. Detached
-            #     subscriptions don't receive messages from their topic and don't retain any
-            #     backlog. `Pull` and `StreamingPull` requests will return
+            #     Optional. Indicates whether the subscription is detached from its topic.
+            #     Detached subscriptions don't receive messages from their topic and don't
+            #     retain any backlog. `Pull` and `StreamingPull` requests will return
             #     FAILED_PRECONDITION. If the subscription is a push subscription, pushes to
             #     the endpoint will not be made.
             #   @param enable_exactly_once_delivery [::Boolean]
-            #     If true, Pub/Sub provides the following guarantees for the delivery of
-            #     a message with a given value of `message_id` on this subscription:
+            #     Optional. If true, Pub/Sub provides the following guarantees for the
+            #     delivery of a message with a given value of `message_id` on this
+            #     subscription:
             #
             #     * The message sent to a subscriber is guaranteed not to be resent
             #     before the message's acknowledgement deadline expires.
@@ -533,8 +549,9 @@ module Google
             end
 
             ##
-            # Updates an existing subscription. Note that certain properties of a
-            # subscription, such as its topic, are not modifiable.
+            # Updates an existing subscription by updating the fields specified in the
+            # update mask. Note that certain properties of a subscription, such as its
+            # topic, are not modifiable.
             #
             # @overload update_subscription(request, options = nil)
             #   Pass arguments to `update_subscription` via a request object, either of type
@@ -643,11 +660,11 @@ module Google
             #     Required. The name of the project in which to list subscriptions.
             #     Format is `projects/{project-id}`.
             #   @param page_size [::Integer]
-            #     Maximum number of subscriptions to return.
+            #     Optional. Maximum number of subscriptions to return.
             #   @param page_token [::String]
-            #     The value returned by the last `ListSubscriptionsResponse`; indicates that
-            #     this is a continuation of a prior `ListSubscriptions` call, and that the
-            #     system should return the next page of data.
+            #     Optional. The value returned by the last `ListSubscriptionsResponse`;
+            #     indicates that this is a continuation of a prior `ListSubscriptions` call,
+            #     and that the system should return the next page of data.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::PubSub::V1::Subscription>]
@@ -843,7 +860,8 @@ module Google
             #     delivery to another subscriber client. This typically results in an
             #     increase in the rate of message redeliveries (that is, duplicates).
             #     The minimum deadline you can specify is 0 seconds.
-            #     The maximum deadline you can specify is 600 seconds (10 minutes).
+            #     The maximum deadline you can specify in a single request is 600 seconds
+            #     (10 minutes).
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Protobuf::Empty]
@@ -1401,11 +1419,11 @@ module Google
             #     Required. The name of the project in which to list snapshots.
             #     Format is `projects/{project-id}`.
             #   @param page_size [::Integer]
-            #     Maximum number of snapshots to return.
+            #     Optional. Maximum number of snapshots to return.
             #   @param page_token [::String]
-            #     The value returned by the last `ListSnapshotsResponse`; indicates that this
-            #     is a continuation of a prior `ListSnapshots` call, and that the system
-            #     should return the next page of data.
+            #     Optional. The value returned by the last `ListSnapshotsResponse`; indicates
+            #     that this is a continuation of a prior `ListSnapshots` call, and that the
+            #     system should return the next page of data.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::PubSub::V1::Snapshot>]
@@ -1527,7 +1545,7 @@ module Google
             #          successful completion of the CreateSnapshot request.
             #     Format is `projects/{project}/subscriptions/{sub}`.
             #   @param labels [::Hash{::String => ::String}]
-            #     See [Creating and managing
+            #     Optional. See [Creating and managing
             #     labels](https://cloud.google.com/pubsub/docs/labels).
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -1595,7 +1613,8 @@ module Google
             end
 
             ##
-            # Updates an existing snapshot. Snapshots are used in
+            # Updates an existing snapshot by updating the fields specified in the update
+            # mask. Snapshots are used in
             # [Seek](https://cloud.google.com/pubsub/docs/replay-overview) operations,
             # which allow you to manage message acknowledgments in bulk. That is, you can
             # set the acknowledgment state of messages in an existing subscription to the
@@ -1807,7 +1826,7 @@ module Google
             #   @param subscription [::String]
             #     Required. The subscription to affect.
             #   @param time [::Google::Protobuf::Timestamp, ::Hash]
-            #     The time to seek to.
+            #     Optional. The time to seek to.
             #     Messages retained in the subscription that were published before this
             #     time are marked as acknowledged, and messages retained in the
             #     subscription that were published after this time are marked as
@@ -1819,9 +1838,9 @@ module Google
             #     creation time), only retained messages will be marked as unacknowledged,
             #     and already-expunged messages will not be restored.
             #   @param snapshot [::String]
-            #     The snapshot to seek to. The snapshot's topic must be the same as that of
-            #     the provided subscription.
-            #     Format is `projects/{project}/snapshots/{snap}`.
+            #     Optional. The snapshot to seek to. The snapshot's topic must be the same
+            #     as that of the provided subscription. Format is
+            #     `projects/{project}/snapshots/{snap}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::PubSub::V1::SeekResponse]
@@ -1917,9 +1936,9 @@ module Google
             #   end
             #
             # @!attribute [rw] endpoint
-            #   The hostname or hostname:port of the service endpoint.
-            #   Defaults to `"pubsub.googleapis.com"`.
-            #   @return [::String]
+            #   A custom service endpoint, as a hostname or hostname:port. The default is
+            #   nil, indicating to use the default endpoint in the current universe domain.
+            #   @return [::String,nil]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
             #    *  (`String`) The path to a service account key file in JSON format
@@ -1965,13 +1984,20 @@ module Google
             # @!attribute [rw] quota_project
             #   A separate project against which to charge quota.
             #   @return [::String]
+            # @!attribute [rw] universe_domain
+            #   The universe domain within which to make requests. This determines the
+            #   default endpoint URL. The default value of nil uses the environment
+            #   universe (usually the default "googleapis.com" universe).
+            #   @return [::String,nil]
             #
             class Configuration
               extend ::Gapic::Config
 
+              # @private
+              # The endpoint specific to the default "googleapis.com" universe. Deprecated.
               DEFAULT_ENDPOINT = "pubsub.googleapis.com"
 
-              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
+              config_attr :endpoint,      nil, ::String, nil
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
@@ -1986,6 +2012,7 @@ module Google
               config_attr :metadata,      nil, ::Hash, nil
               config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
               config_attr :quota_project, nil, ::String, nil
+              config_attr :universe_domain, nil, ::String, nil
 
               # @private
               def initialize parent_config = nil

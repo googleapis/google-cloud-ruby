@@ -34,6 +34,7 @@ module Google
         #     Token identifying which result to start with; returned by a previous list
         #     call.
         # @!attribute [rw] consumer_id
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Include services consumed by the specified consumer.
         #

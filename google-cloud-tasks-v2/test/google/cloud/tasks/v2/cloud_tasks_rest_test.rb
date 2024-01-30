@@ -60,6 +60,14 @@ class ::Google::Cloud::Tasks::V2::CloudTasks::Rest::ClientTest < Minitest::Test
 
       @response
     end
+
+    def endpoint
+      "endpoint.example.com"
+    end
+
+    def universe_domain
+      "example.com"
+    end
   end
 
   def test_list_queues
@@ -946,7 +954,8 @@ class ::Google::Cloud::Tasks::V2::CloudTasks::Rest::ClientTest < Minitest::Test
     credentials_token = :dummy_value
 
     client = block_config = config = nil
-    Gapic::Rest::ClientStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil
+    Gapic::Rest::ClientStub.stub :new, dummy_stub do
       client = ::Google::Cloud::Tasks::V2::CloudTasks::Rest::Client.new do |config|
         config.credentials = credentials_token
       end

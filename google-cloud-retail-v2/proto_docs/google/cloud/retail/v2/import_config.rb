@@ -164,6 +164,7 @@ module Google
         #     If no updateMask is specified, requires products.create permission.
         #     If updateMask is specified, requires products.update permission.
         # @!attribute [rw] request_id
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Deprecated. This field has no effect.
         # @!attribute [rw] input_config
@@ -309,6 +310,7 @@ module Google
         #   @return [::Integer]
         #     Count of entries that encountered errors while processing.
         # @!attribute [rw] request_id
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Deprecated. This field is never set.
         # @!attribute [rw] notification_pubsub_topic

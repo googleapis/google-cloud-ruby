@@ -1,5 +1,42 @@
 # Changelog
 
+### 0.18.1 (2024-01-12)
+
+#### Bug Fixes
+
+* Ensure endpoints are correct for mixin clients ([#24032](https://github.com/googleapis/google-cloud-ruby/issues/24032)) 
+
+### 0.18.0 (2024-01-11)
+
+#### Features
+
+* Support for universe_domain ([#23777](https://github.com/googleapis/google-cloud-ruby/issues/23777)) 
+
+### 0.17.0 (2024-01-03)
+
+#### Features
+
+* add new field GOVERNANCE_RULE_PROCESSING to enum EventType ([#23671](https://github.com/googleapis/google-cloud-ruby/issues/23671)) 
+
+### 0.16.0 (2023-12-07)
+
+#### Features
+
+* add data quality score to DataQualityResult ([#23583](https://github.com/googleapis/google-cloud-ruby/issues/23583)) 
+
+### 0.15.0 (2023-12-04)
+
+#### Features
+
+* support more event types 
+* support score, dimension_score, colun_score for DataQualityResult 
+
+### 0.14.0 (2023-11-02)
+
+#### Features
+
+* Support GovernanceEvent ([#23489](https://github.com/googleapis/google-cloud-ruby/issues/23489)) 
+
 ### 0.13.0 (2023-10-16)
 
 #### Features

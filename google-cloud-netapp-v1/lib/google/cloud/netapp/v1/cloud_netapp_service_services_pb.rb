@@ -110,6 +110,39 @@ module Google
             # Reverses direction of replication. Source becomes destination and
             # destination becomes source.
             rpc :ReverseReplicationDirection, ::Google::Cloud::NetApp::V1::ReverseReplicationDirectionRequest, ::Google::Longrunning::Operation
+            # Creates new backup vault
+            rpc :CreateBackupVault, ::Google::Cloud::NetApp::V1::CreateBackupVaultRequest, ::Google::Longrunning::Operation
+            # Returns the description of the specified backup vault
+            rpc :GetBackupVault, ::Google::Cloud::NetApp::V1::GetBackupVaultRequest, ::Google::Cloud::NetApp::V1::BackupVault
+            # Returns list of all available backup vaults.
+            rpc :ListBackupVaults, ::Google::Cloud::NetApp::V1::ListBackupVaultsRequest, ::Google::Cloud::NetApp::V1::ListBackupVaultsResponse
+            # Updates the settings of a specific backup vault.
+            rpc :UpdateBackupVault, ::Google::Cloud::NetApp::V1::UpdateBackupVaultRequest, ::Google::Longrunning::Operation
+            # Warning! This operation will permanently delete the backup vault.
+            rpc :DeleteBackupVault, ::Google::Cloud::NetApp::V1::DeleteBackupVaultRequest, ::Google::Longrunning::Operation
+            # Creates a backup from the volume specified in the request
+            # The backup can be created from the given snapshot if specified in the
+            # request. If no snapshot specified, there'll be a new snapshot taken to
+            # initiate the backup creation.
+            rpc :CreateBackup, ::Google::Cloud::NetApp::V1::CreateBackupRequest, ::Google::Longrunning::Operation
+            # Returns the description of the specified backup
+            rpc :GetBackup, ::Google::Cloud::NetApp::V1::GetBackupRequest, ::Google::Cloud::NetApp::V1::Backup
+            # Returns descriptions of all backups for a backupVault.
+            rpc :ListBackups, ::Google::Cloud::NetApp::V1::ListBackupsRequest, ::Google::Cloud::NetApp::V1::ListBackupsResponse
+            # Warning! This operation will permanently delete the backup.
+            rpc :DeleteBackup, ::Google::Cloud::NetApp::V1::DeleteBackupRequest, ::Google::Longrunning::Operation
+            # Update backup with full spec.
+            rpc :UpdateBackup, ::Google::Cloud::NetApp::V1::UpdateBackupRequest, ::Google::Longrunning::Operation
+            # Creates new backup policy
+            rpc :CreateBackupPolicy, ::Google::Cloud::NetApp::V1::CreateBackupPolicyRequest, ::Google::Longrunning::Operation
+            # Returns the description of the specified backup policy by backup_policy_id.
+            rpc :GetBackupPolicy, ::Google::Cloud::NetApp::V1::GetBackupPolicyRequest, ::Google::Cloud::NetApp::V1::BackupPolicy
+            # Returns list of all available backup policies.
+            rpc :ListBackupPolicies, ::Google::Cloud::NetApp::V1::ListBackupPoliciesRequest, ::Google::Cloud::NetApp::V1::ListBackupPoliciesResponse
+            # Updates settings of a specific backup policy.
+            rpc :UpdateBackupPolicy, ::Google::Cloud::NetApp::V1::UpdateBackupPolicyRequest, ::Google::Longrunning::Operation
+            # Warning! This operation will permanently delete the backup policy.
+            rpc :DeleteBackupPolicy, ::Google::Cloud::NetApp::V1::DeleteBackupPolicyRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

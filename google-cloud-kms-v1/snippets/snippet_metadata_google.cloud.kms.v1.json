@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-kms-v1",
-    "version": "0.23.0",
+    "version": "0.24.1",
     "language": "RUBY",
     "apis": [
       {
@@ -14,7 +14,7 @@
     {
       "region_tag": "cloudkms_v1_generated_EkmService_ListEkmConnections_sync",
       "title": "Snippet for the list_ekm_connections call in the EkmService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::EkmService::Client#list_ekm_connections. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::EkmService::Client#list_ekm_connections.",
       "file": "ekm_service/list_ekm_connections.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "cloudkms_v1_generated_EkmService_GetEkmConnection_sync",
       "title": "Snippet for the get_ekm_connection call in the EkmService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::EkmService::Client#get_ekm_connection. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::EkmService::Client#get_ekm_connection.",
       "file": "ekm_service/get_ekm_connection.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "cloudkms_v1_generated_EkmService_CreateEkmConnection_sync",
       "title": "Snippet for the create_ekm_connection call in the EkmService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::EkmService::Client#create_ekm_connection. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::EkmService::Client#create_ekm_connection.",
       "file": "ekm_service/create_ekm_connection.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -134,7 +134,7 @@
     {
       "region_tag": "cloudkms_v1_generated_EkmService_UpdateEkmConnection_sync",
       "title": "Snippet for the update_ekm_connection call in the EkmService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::EkmService::Client#update_ekm_connection. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::EkmService::Client#update_ekm_connection.",
       "file": "ekm_service/update_ekm_connection.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -174,7 +174,7 @@
     {
       "region_tag": "cloudkms_v1_generated_EkmService_GetEkmConfig_sync",
       "title": "Snippet for the get_ekm_config call in the EkmService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::EkmService::Client#get_ekm_config. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::EkmService::Client#get_ekm_config.",
       "file": "ekm_service/get_ekm_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,7 +206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -214,7 +214,7 @@
     {
       "region_tag": "cloudkms_v1_generated_EkmService_UpdateEkmConfig_sync",
       "title": "Snippet for the update_ekm_config call in the EkmService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::EkmService::Client#update_ekm_config. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::EkmService::Client#update_ekm_config.",
       "file": "ekm_service/update_ekm_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,7 +246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -254,7 +254,7 @@
     {
       "region_tag": "cloudkms_v1_generated_EkmService_VerifyConnectivity_sync",
       "title": "Snippet for the verify_connectivity call in the EkmService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::EkmService::Client#verify_connectivity. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::EkmService::Client#verify_connectivity.",
       "file": "ekm_service/verify_connectivity.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,7 +286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -294,7 +294,7 @@
     {
       "region_tag": "cloudkms_v1_generated_KeyManagementService_ListKeyRings_sync",
       "title": "Snippet for the list_key_rings call in the KeyManagementService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#list_key_rings. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#list_key_rings.",
       "file": "key_management_service/list_key_rings.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,7 +326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -334,7 +334,7 @@
     {
       "region_tag": "cloudkms_v1_generated_KeyManagementService_ListCryptoKeys_sync",
       "title": "Snippet for the list_crypto_keys call in the KeyManagementService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#list_crypto_keys. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#list_crypto_keys.",
       "file": "key_management_service/list_crypto_keys.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,7 +366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -374,7 +374,7 @@
     {
       "region_tag": "cloudkms_v1_generated_KeyManagementService_ListCryptoKeyVersions_sync",
       "title": "Snippet for the list_crypto_key_versions call in the KeyManagementService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#list_crypto_key_versions. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#list_crypto_key_versions.",
       "file": "key_management_service/list_crypto_key_versions.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,7 +406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -414,7 +414,7 @@
     {
       "region_tag": "cloudkms_v1_generated_KeyManagementService_ListImportJobs_sync",
       "title": "Snippet for the list_import_jobs call in the KeyManagementService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#list_import_jobs. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#list_import_jobs.",
       "file": "key_management_service/list_import_jobs.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,7 +446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -454,7 +454,7 @@
     {
       "region_tag": "cloudkms_v1_generated_KeyManagementService_GetKeyRing_sync",
       "title": "Snippet for the get_key_ring call in the KeyManagementService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#get_key_ring. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#get_key_ring.",
       "file": "key_management_service/get_key_ring.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,7 +486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -494,7 +494,7 @@
     {
       "region_tag": "cloudkms_v1_generated_KeyManagementService_GetCryptoKey_sync",
       "title": "Snippet for the get_crypto_key call in the KeyManagementService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#get_crypto_key. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#get_crypto_key.",
       "file": "key_management_service/get_crypto_key.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,7 +526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -534,7 +534,7 @@
     {
       "region_tag": "cloudkms_v1_generated_KeyManagementService_GetCryptoKeyVersion_sync",
       "title": "Snippet for the get_crypto_key_version call in the KeyManagementService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#get_crypto_key_version. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#get_crypto_key_version.",
       "file": "key_management_service/get_crypto_key_version.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,7 +566,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -574,7 +574,7 @@
     {
       "region_tag": "cloudkms_v1_generated_KeyManagementService_GetPublicKey_sync",
       "title": "Snippet for the get_public_key call in the KeyManagementService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#get_public_key. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#get_public_key.",
       "file": "key_management_service/get_public_key.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,7 +606,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -614,7 +614,7 @@
     {
       "region_tag": "cloudkms_v1_generated_KeyManagementService_GetImportJob_sync",
       "title": "Snippet for the get_import_job call in the KeyManagementService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#get_import_job. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#get_import_job.",
       "file": "key_management_service/get_import_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,7 +646,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -654,7 +654,7 @@
     {
       "region_tag": "cloudkms_v1_generated_KeyManagementService_CreateKeyRing_sync",
       "title": "Snippet for the create_key_ring call in the KeyManagementService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#create_key_ring. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#create_key_ring.",
       "file": "key_management_service/create_key_ring.rb",
       "language": "RUBY",
       "client_method": {
@@ -686,7 +686,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -694,7 +694,7 @@
     {
       "region_tag": "cloudkms_v1_generated_KeyManagementService_CreateCryptoKey_sync",
       "title": "Snippet for the create_crypto_key call in the KeyManagementService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#create_crypto_key. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#create_crypto_key.",
       "file": "key_management_service/create_crypto_key.rb",
       "language": "RUBY",
       "client_method": {
@@ -726,7 +726,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -734,7 +734,7 @@
     {
       "region_tag": "cloudkms_v1_generated_KeyManagementService_CreateCryptoKeyVersion_sync",
       "title": "Snippet for the create_crypto_key_version call in the KeyManagementService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#create_crypto_key_version. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#create_crypto_key_version.",
       "file": "key_management_service/create_crypto_key_version.rb",
       "language": "RUBY",
       "client_method": {
@@ -766,7 +766,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -774,7 +774,7 @@
     {
       "region_tag": "cloudkms_v1_generated_KeyManagementService_ImportCryptoKeyVersion_sync",
       "title": "Snippet for the import_crypto_key_version call in the KeyManagementService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#import_crypto_key_version. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#import_crypto_key_version.",
       "file": "key_management_service/import_crypto_key_version.rb",
       "language": "RUBY",
       "client_method": {
@@ -806,7 +806,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -814,7 +814,7 @@
     {
       "region_tag": "cloudkms_v1_generated_KeyManagementService_CreateImportJob_sync",
       "title": "Snippet for the create_import_job call in the KeyManagementService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#create_import_job. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#create_import_job.",
       "file": "key_management_service/create_import_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -846,7 +846,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -854,7 +854,7 @@
     {
       "region_tag": "cloudkms_v1_generated_KeyManagementService_UpdateCryptoKey_sync",
       "title": "Snippet for the update_crypto_key call in the KeyManagementService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#update_crypto_key. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#update_crypto_key.",
       "file": "key_management_service/update_crypto_key.rb",
       "language": "RUBY",
       "client_method": {
@@ -886,7 +886,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -894,7 +894,7 @@
     {
       "region_tag": "cloudkms_v1_generated_KeyManagementService_UpdateCryptoKeyVersion_sync",
       "title": "Snippet for the update_crypto_key_version call in the KeyManagementService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#update_crypto_key_version. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#update_crypto_key_version.",
       "file": "key_management_service/update_crypto_key_version.rb",
       "language": "RUBY",
       "client_method": {
@@ -926,7 +926,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -934,7 +934,7 @@
     {
       "region_tag": "cloudkms_v1_generated_KeyManagementService_UpdateCryptoKeyPrimaryVersion_sync",
       "title": "Snippet for the update_crypto_key_primary_version call in the KeyManagementService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#update_crypto_key_primary_version. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#update_crypto_key_primary_version.",
       "file": "key_management_service/update_crypto_key_primary_version.rb",
       "language": "RUBY",
       "client_method": {
@@ -966,7 +966,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -974,7 +974,7 @@
     {
       "region_tag": "cloudkms_v1_generated_KeyManagementService_DestroyCryptoKeyVersion_sync",
       "title": "Snippet for the destroy_crypto_key_version call in the KeyManagementService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#destroy_crypto_key_version. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#destroy_crypto_key_version.",
       "file": "key_management_service/destroy_crypto_key_version.rb",
       "language": "RUBY",
       "client_method": {
@@ -1006,7 +1006,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1014,7 +1014,7 @@
     {
       "region_tag": "cloudkms_v1_generated_KeyManagementService_RestoreCryptoKeyVersion_sync",
       "title": "Snippet for the restore_crypto_key_version call in the KeyManagementService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#restore_crypto_key_version. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#restore_crypto_key_version.",
       "file": "key_management_service/restore_crypto_key_version.rb",
       "language": "RUBY",
       "client_method": {
@@ -1046,7 +1046,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1054,7 +1054,7 @@
     {
       "region_tag": "cloudkms_v1_generated_KeyManagementService_Encrypt_sync",
       "title": "Snippet for the encrypt call in the KeyManagementService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#encrypt. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#encrypt.",
       "file": "key_management_service/encrypt.rb",
       "language": "RUBY",
       "client_method": {
@@ -1086,7 +1086,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1094,7 +1094,7 @@
     {
       "region_tag": "cloudkms_v1_generated_KeyManagementService_Decrypt_sync",
       "title": "Snippet for the decrypt call in the KeyManagementService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#decrypt. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#decrypt.",
       "file": "key_management_service/decrypt.rb",
       "language": "RUBY",
       "client_method": {
@@ -1126,7 +1126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1134,7 +1134,7 @@
     {
       "region_tag": "cloudkms_v1_generated_KeyManagementService_RawEncrypt_sync",
       "title": "Snippet for the raw_encrypt call in the KeyManagementService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#raw_encrypt. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#raw_encrypt.",
       "file": "key_management_service/raw_encrypt.rb",
       "language": "RUBY",
       "client_method": {
@@ -1166,7 +1166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1174,7 +1174,7 @@
     {
       "region_tag": "cloudkms_v1_generated_KeyManagementService_RawDecrypt_sync",
       "title": "Snippet for the raw_decrypt call in the KeyManagementService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#raw_decrypt. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#raw_decrypt.",
       "file": "key_management_service/raw_decrypt.rb",
       "language": "RUBY",
       "client_method": {
@@ -1206,7 +1206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1214,7 +1214,7 @@
     {
       "region_tag": "cloudkms_v1_generated_KeyManagementService_AsymmetricSign_sync",
       "title": "Snippet for the asymmetric_sign call in the KeyManagementService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#asymmetric_sign. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#asymmetric_sign.",
       "file": "key_management_service/asymmetric_sign.rb",
       "language": "RUBY",
       "client_method": {
@@ -1246,7 +1246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1254,7 +1254,7 @@
     {
       "region_tag": "cloudkms_v1_generated_KeyManagementService_AsymmetricDecrypt_sync",
       "title": "Snippet for the asymmetric_decrypt call in the KeyManagementService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#asymmetric_decrypt. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#asymmetric_decrypt.",
       "file": "key_management_service/asymmetric_decrypt.rb",
       "language": "RUBY",
       "client_method": {
@@ -1286,7 +1286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1294,7 +1294,7 @@
     {
       "region_tag": "cloudkms_v1_generated_KeyManagementService_MacSign_sync",
       "title": "Snippet for the mac_sign call in the KeyManagementService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#mac_sign. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#mac_sign.",
       "file": "key_management_service/mac_sign.rb",
       "language": "RUBY",
       "client_method": {
@@ -1326,7 +1326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1334,7 +1334,7 @@
     {
       "region_tag": "cloudkms_v1_generated_KeyManagementService_MacVerify_sync",
       "title": "Snippet for the mac_verify call in the KeyManagementService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#mac_verify. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#mac_verify.",
       "file": "key_management_service/mac_verify.rb",
       "language": "RUBY",
       "client_method": {
@@ -1366,7 +1366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1374,7 +1374,7 @@
     {
       "region_tag": "cloudkms_v1_generated_KeyManagementService_GenerateRandomBytes_sync",
       "title": "Snippet for the generate_random_bytes call in the KeyManagementService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#generate_random_bytes. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#generate_random_bytes.",
       "file": "key_management_service/generate_random_bytes.rb",
       "language": "RUBY",
       "client_method": {
@@ -1406,7 +1406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]

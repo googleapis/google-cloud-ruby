@@ -34,6 +34,9 @@ module Google
             #
             class Client
               # @private
+              DEFAULT_ENDPOINT_TEMPLATE = "compute.$UNIVERSE_DOMAIN$"
+
+              # @private
               attr_reader :firewalls_stub
 
               ##
@@ -110,6 +113,15 @@ module Google
               end
 
               ##
+              # The effective universe domain
+              #
+              # @return [String]
+              #
+              def universe_domain
+                @firewalls_stub.universe_domain
+              end
+
+              ##
               # Create a new Firewalls REST client object.
               #
               # @example
@@ -136,8 +148,9 @@ module Google
                 credentials = @config.credentials
                 # Use self-signed JWT if the endpoint is unchanged from default,
                 # but only if the default endpoint does not have a region prefix.
-                enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
-                                         !@config.endpoint.split(".").first.include?("-")
+                enable_self_signed_jwt = @config.endpoint.nil? ||
+                                         (@config.endpoint == Configuration::DEFAULT_ENDPOINT &&
+                                         !@config.endpoint.split(".").first.include?("-"))
                 credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
                 if credentials.is_a?(::String) || credentials.is_a?(::Hash)
@@ -151,9 +164,15 @@ module Google
                   config.credentials = credentials
                   config.quota_project = @quota_project_id
                   config.endpoint = @config.endpoint
+                  config.universe_domain = @config.universe_domain
                 end
 
-                @firewalls_stub = ::Google::Cloud::Compute::V1::Firewalls::Rest::ServiceStub.new endpoint: @config.endpoint, credentials: credentials
+                @firewalls_stub = ::Google::Cloud::Compute::V1::Firewalls::Rest::ServiceStub.new(
+                  endpoint: @config.endpoint,
+                  endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
+                  universe_domain: @config.universe_domain,
+                  credentials: credentials
+                )
               end
 
               ##
@@ -444,7 +463,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param filter [::String]
-              #     A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:` operator can be used with string fields to match substrings. For non-string fields it is equivalent to the `=` operator. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`.
+              #     A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
               #   @param max_results [::Integer]
               #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
               #   @param order_by [::String]
@@ -728,9 +747,9 @@ module Google
               #   end
               #
               # @!attribute [rw] endpoint
-              #   The hostname or hostname:port of the service endpoint.
-              #   Defaults to `"compute.googleapis.com"`.
-              #   @return [::String]
+              #   A custom service endpoint, as a hostname or hostname:port. The default is
+              #   nil, indicating to use the default endpoint in the current universe domain.
+              #   @return [::String,nil]
               # @!attribute [rw] credentials
               #   Credentials to send with calls. You may provide any of the following types:
               #    *  (`String`) The path to a service account key file in JSON format
@@ -767,13 +786,20 @@ module Google
               # @!attribute [rw] quota_project
               #   A separate project against which to charge quota.
               #   @return [::String]
+              # @!attribute [rw] universe_domain
+              #   The universe domain within which to make requests. This determines the
+              #   default endpoint URL. The default value of nil uses the environment
+              #   universe (usually the default "googleapis.com" universe).
+              #   @return [::String,nil]
               #
               class Configuration
                 extend ::Gapic::Config
 
+                # @private
+                # The endpoint specific to the default "googleapis.com" universe. Deprecated.
                 DEFAULT_ENDPOINT = "compute.googleapis.com"
 
-                config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
+                config_attr :endpoint,      nil, ::String, nil
                 config_attr :credentials,   nil do |value|
                   allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                   allowed.any? { |klass| klass === value }
@@ -785,6 +811,7 @@ module Google
                 config_attr :metadata,      nil, ::Hash, nil
                 config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
                 config_attr :quota_project, nil, ::String, nil
+                config_attr :universe_domain, nil, ::String, nil
 
                 # @private
                 def initialize parent_config = nil

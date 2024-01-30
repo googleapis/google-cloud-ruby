@@ -30,6 +30,9 @@ module Google
           # Google Kubernetes Engine Cluster Manager v1
           #
           class Client
+            # @private
+            DEFAULT_ENDPOINT_TEMPLATE = "container.$UNIVERSE_DOMAIN$"
+
             include Paths
 
             # @private
@@ -178,6 +181,15 @@ module Google
             end
 
             ##
+            # The effective universe domain
+            #
+            # @return [String]
+            #
+            def universe_domain
+              @cluster_manager_stub.universe_domain
+            end
+
+            ##
             # Create a new ClusterManager client object.
             #
             # @example
@@ -210,8 +222,9 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
-                                       !@config.endpoint.split(".").first.include?("-")
+              enable_self_signed_jwt = @config.endpoint.nil? ||
+                                       (@config.endpoint == Configuration::DEFAULT_ENDPOINT &&
+                                       !@config.endpoint.split(".").first.include?("-"))
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(::String) || credentials.is_a?(::Hash)
@@ -222,8 +235,10 @@ module Google
 
               @cluster_manager_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::Container::V1::ClusterManager::Stub,
-                credentials:  credentials,
-                endpoint:     @config.endpoint,
+                credentials: credentials,
+                endpoint: @config.endpoint,
+                endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
+                universe_domain: @config.universe_domain,
                 channel_args: @config.channel_args,
                 interceptors: @config.interceptors,
                 channel_pool_config: @config.channel_pool
@@ -651,7 +666,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload update_node_pool(project_id: nil, zone: nil, cluster_id: nil, node_pool_id: nil, node_version: nil, image_type: nil, name: nil, locations: nil, workload_metadata_config: nil, upgrade_settings: nil, tags: nil, taints: nil, labels: nil, linux_node_config: nil, kubelet_config: nil, node_network_config: nil, gcfs_config: nil, confidential_nodes: nil, gvnic: nil, etag: nil, fast_socket: nil, logging_config: nil, resource_labels: nil, windows_node_config: nil, machine_type: nil, disk_type: nil, disk_size_gb: nil)
+            # @overload update_node_pool(project_id: nil, zone: nil, cluster_id: nil, node_pool_id: nil, node_version: nil, image_type: nil, name: nil, locations: nil, workload_metadata_config: nil, upgrade_settings: nil, tags: nil, taints: nil, labels: nil, linux_node_config: nil, kubelet_config: nil, node_network_config: nil, gcfs_config: nil, confidential_nodes: nil, gvnic: nil, etag: nil, fast_socket: nil, logging_config: nil, resource_labels: nil, windows_node_config: nil, machine_type: nil, disk_type: nil, disk_size_gb: nil, resource_manager_tags: nil)
             #   Pass arguments to `update_node_pool` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -754,6 +769,10 @@ module Google
             #     The smallest allowed disk size is 10GB.
             #     Initiates an upgrade operation that migrates the nodes in the
             #     node pool to the specified disk size.
+            #   @param resource_manager_tags [::Google::Cloud::Container::V1::ResourceManagerTags, ::Hash]
+            #     Desired resource manager tag keys and values to be attached to the nodes
+            #     for managing Compute Engine firewalls using Network Firewall Policies.
+            #     Existing tags will be replaced with new values.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Container::V1::Operation]
@@ -2064,8 +2083,6 @@ module Google
             ##
             # Gets the public component of the cluster signing keys in
             # JSON Web Key format.
-            # This API is not yet intended for general use, and is not available for all
-            # clusters.
             #
             # @overload get_json_web_keys(request, options = nil)
             #   Pass arguments to `get_json_web_keys` via a request object, either of type
@@ -3782,9 +3799,9 @@ module Google
             #   end
             #
             # @!attribute [rw] endpoint
-            #   The hostname or hostname:port of the service endpoint.
-            #   Defaults to `"container.googleapis.com"`.
-            #   @return [::String]
+            #   A custom service endpoint, as a hostname or hostname:port. The default is
+            #   nil, indicating to use the default endpoint in the current universe domain.
+            #   @return [::String,nil]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
             #    *  (`String`) The path to a service account key file in JSON format
@@ -3830,13 +3847,20 @@ module Google
             # @!attribute [rw] quota_project
             #   A separate project against which to charge quota.
             #   @return [::String]
+            # @!attribute [rw] universe_domain
+            #   The universe domain within which to make requests. This determines the
+            #   default endpoint URL. The default value of nil uses the environment
+            #   universe (usually the default "googleapis.com" universe).
+            #   @return [::String,nil]
             #
             class Configuration
               extend ::Gapic::Config
 
+              # @private
+              # The endpoint specific to the default "googleapis.com" universe. Deprecated.
               DEFAULT_ENDPOINT = "container.googleapis.com"
 
-              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
+              config_attr :endpoint,      nil, ::String, nil
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
@@ -3851,6 +3875,7 @@ module Google
               config_attr :metadata,      nil, ::Hash, nil
               config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
               config_attr :quota_project, nil, ::String, nil
+              config_attr :universe_domain, nil, ::String, nil
 
               # @private
               def initialize parent_config = nil

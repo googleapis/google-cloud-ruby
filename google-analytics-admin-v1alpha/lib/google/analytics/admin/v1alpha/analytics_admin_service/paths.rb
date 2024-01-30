@@ -143,6 +143,23 @@ module Google
             end
 
             ##
+            # Create a fully-qualified CalculatedMetric resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `properties/{property}/calculatedMetrics/{calculated_metric}`
+            #
+            # @param property [String]
+            # @param calculated_metric [String]
+            #
+            # @return [::String]
+            def calculated_metric_path property:, calculated_metric:
+              raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
+
+              "properties/#{property}/calculatedMetrics/#{calculated_metric}"
+            end
+
+            ##
             # Create a fully-qualified ChannelGroup resource string.
             #
             # The resource will be in the following format:
@@ -208,6 +225,23 @@ module Google
               raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
 
               "properties/#{property}/customMetrics/#{custom_metric}"
+            end
+
+            ##
+            # Create a fully-qualified DataRedactionSettings resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `properties/{property}/dataStreams/{data_stream}/dataRedactionSettings`
+            #
+            # @param property [String]
+            # @param data_stream [String]
+            #
+            # @return [::String]
+            def data_redaction_settings_path property:, data_stream:
+              raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
+
+              "properties/#{property}/dataStreams/#{data_stream}/dataRedactionSettings"
             end
 
             ##
@@ -441,6 +475,23 @@ module Google
             end
 
             ##
+            # Create a fully-qualified RollupPropertySourceLink resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `properties/{property}/rollupPropertySourceLinks/{rollup_property_source_link}`
+            #
+            # @param property [String]
+            # @param rollup_property_source_link [String]
+            #
+            # @return [::String]
+            def rollup_property_source_link_path property:, rollup_property_source_link:
+              raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
+
+              "properties/#{property}/rollupPropertySourceLinks/#{rollup_property_source_link}"
+            end
+
+            ##
             # Create a fully-qualified SKAdNetworkConversionValueSchema resource string.
             #
             # The resource will be in the following format:
@@ -477,42 +528,20 @@ module Google
             end
 
             ##
-            # Create a fully-qualified UserLink resource string.
+            # Create a fully-qualified SubpropertyEventFilter resource string.
             #
-            # @overload user_link_path(account:, user_link:)
-            #   The resource will be in the following format:
+            # The resource will be in the following format:
             #
-            #   `accounts/{account}/userLinks/{user_link}`
+            # `properties/{property}/subpropertyEventFilters/{sub_property_event_filter}`
             #
-            #   @param account [String]
-            #   @param user_link [String]
-            #
-            # @overload user_link_path(property:, user_link:)
-            #   The resource will be in the following format:
-            #
-            #   `properties/{property}/userLinks/{user_link}`
-            #
-            #   @param property [String]
-            #   @param user_link [String]
+            # @param property [String]
+            # @param sub_property_event_filter [String]
             #
             # @return [::String]
-            def user_link_path **args
-              resources = {
-                "account:user_link" => (proc do |account:, user_link:|
-                  raise ::ArgumentError, "account cannot contain /" if account.to_s.include? "/"
+            def subproperty_event_filter_path property:, sub_property_event_filter:
+              raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
 
-                  "accounts/#{account}/userLinks/#{user_link}"
-                end),
-                "property:user_link" => (proc do |property:, user_link:|
-                  raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
-
-                  "properties/#{property}/userLinks/#{user_link}"
-                end)
-              }
-
-              resource = resources[args.keys.sort.join(":")]
-              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
-              resource.call(**args)
+              "properties/#{property}/subpropertyEventFilters/#{sub_property_event_filter}"
             end
 
             extend self

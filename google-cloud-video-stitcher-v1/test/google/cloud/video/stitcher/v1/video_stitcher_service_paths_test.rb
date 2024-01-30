@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/video/stitcher/v1/video_stitcher_service"
 
 class ::Google::Cloud::Video::Stitcher::V1::VideoStitcherService::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_cdn_key_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -37,7 +47,7 @@ class ::Google::Cloud::Video::Stitcher::V1::VideoStitcherService::ClientPathsTes
 
   def test_live_ad_tag_detail_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -49,7 +59,7 @@ class ::Google::Cloud::Video::Stitcher::V1::VideoStitcherService::ClientPathsTes
 
   def test_live_config_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -61,7 +71,7 @@ class ::Google::Cloud::Video::Stitcher::V1::VideoStitcherService::ClientPathsTes
 
   def test_live_session_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -73,7 +83,7 @@ class ::Google::Cloud::Video::Stitcher::V1::VideoStitcherService::ClientPathsTes
 
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -85,7 +95,7 @@ class ::Google::Cloud::Video::Stitcher::V1::VideoStitcherService::ClientPathsTes
 
   def test_slate_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -97,7 +107,7 @@ class ::Google::Cloud::Video::Stitcher::V1::VideoStitcherService::ClientPathsTes
 
   def test_vod_ad_tag_detail_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -109,7 +119,7 @@ class ::Google::Cloud::Video::Stitcher::V1::VideoStitcherService::ClientPathsTes
 
   def test_vod_session_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -121,7 +131,7 @@ class ::Google::Cloud::Video::Stitcher::V1::VideoStitcherService::ClientPathsTes
 
   def test_vod_stitch_detail_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client.new do |config|
         config.credentials = grpc_channel
       end

@@ -27,9 +27,20 @@ module Google
         #   @return [::String]
         #     Debug message for when a render transition occurs. Provides further
         #     details as rendering progresses through render states.
+        # @!attribute [rw] pipeline_uid
+        #   @return [::String]
+        #     Unique identifier of the `DeliveryPipeline`.
         # @!attribute [rw] release
         #   @return [::String]
-        #     The name of the `Release`.
+        #     The name of the release.
+        #     release_uid is not in this log message because we write some of these log
+        #     messages at release creation time, before we've generated the uid.
+        # @!attribute [rw] type
+        #   @return [::Google::Cloud::Deploy::V1::Type]
+        #     Type of this notification, e.g. for a release render state change event.
+        # @!attribute [rw] release_render_state
+        #   @return [::Google::Cloud::Deploy::V1::Release::RenderState]
+        #     The state of the release render.
         class ReleaseRenderEvent
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

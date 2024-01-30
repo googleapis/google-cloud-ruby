@@ -58,8 +58,7 @@ module Google
         #   @return [::Google::Analytics::Admin::V1alpha::PropertyType]
         #     Immutable. The property type for this Property resource. When creating a
         #     property, if the type is "PROPERTY_TYPE_UNSPECIFIED", then
-        #     "ORDINARY_PROPERTY" will be implied. "SUBPROPERTY" and "ROLLUP_PROPERTY"
-        #     types cannot yet be created with the Google Analytics Admin API.
+        #     "ORDINARY_PROPERTY" will be implied.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time when the entity was originally created.
@@ -222,62 +221,6 @@ module Google
             # iOS app data stream.
             IOS_APP_DATA_STREAM = 3
           end
-        end
-
-        # A resource message representing a user's permissions on an Account or
-        # Property resource.
-        # @!attribute [r] name
-        #   @return [::String]
-        #     Output only. Example format: properties/1234/userLinks/5678
-        # @!attribute [rw] email_address
-        #   @return [::String]
-        #     Immutable. Email address of the user to link
-        # @!attribute [rw] direct_roles
-        #   @return [::Array<::String>]
-        #     Roles directly assigned to this user for this account or property.
-        #
-        #     Valid values:
-        #     predefinedRoles/viewer
-        #     predefinedRoles/analyst
-        #     predefinedRoles/editor
-        #     predefinedRoles/admin
-        #     predefinedRoles/no-cost-data
-        #     predefinedRoles/no-revenue-data
-        #
-        #     Excludes roles that are inherited from a higher-level entity, group,
-        #     or organization admin role.
-        #
-        #     A UserLink that is updated to have an empty list of direct_roles will be
-        #     deleted.
-        class UserLink
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Read-only resource used to summarize a principal's effective roles.
-        # @!attribute [rw] name
-        #   @return [::String]
-        #     Example format: properties/1234/userLinks/5678
-        # @!attribute [rw] email_address
-        #   @return [::String]
-        #     Email address of the linked user
-        # @!attribute [rw] direct_roles
-        #   @return [::Array<::String>]
-        #     Roles directly assigned to this user for this entity.
-        #
-        #     Format: predefinedRoles/viewer
-        #
-        #     Excludes roles that are inherited from an account (if this is for a
-        #     property), group, or organization admin role.
-        # @!attribute [rw] effective_roles
-        #   @return [::Array<::String>]
-        #     Union of all permissions a user has at this account or property (includes
-        #     direct permissions, group-inherited permissions, etc.).
-        #
-        #     Format: predefinedRoles/viewer
-        class AuditUserLink
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A link between a GA4 property and a Firebase project.
@@ -688,6 +631,9 @@ module Google
           # @!attribute [rw] enhanced_measurement_settings
           #   @return [::Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings]
           #     A snapshot of EnhancedMeasurementSettings resource in change history.
+          # @!attribute [rw] data_redaction_settings
+          #   @return [::Google::Analytics::Admin::V1alpha::DataRedactionSettings]
+          #     A snapshot of DataRedactionSettings resource in change history.
           # @!attribute [rw] skadnetwork_conversion_value_schema
           #   @return [::Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema]
           #     A snapshot of SKAdNetworkConversionValueSchema resource in change
@@ -701,6 +647,9 @@ module Google
           # @!attribute [rw] event_create_rule
           #   @return [::Google::Analytics::Admin::V1alpha::EventCreateRule]
           #     A snapshot of an EventCreateRule resource in change history.
+          # @!attribute [rw] calculated_metric
+          #   @return [::Google::Analytics::Admin::V1alpha::CalculatedMetric]
+          #     A snapshot of a CalculatedMetric resource in change history.
           class ChangeHistoryResource
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -877,9 +826,29 @@ module Google
         #     Optional. The method by which conversions will be counted across multiple
         #     events within a session. If this value is not provided, it will be set to
         #     `ONCE_PER_EVENT`.
+        # @!attribute [rw] default_conversion_value
+        #   @return [::Google::Analytics::Admin::V1alpha::ConversionEvent::DefaultConversionValue]
+        #     Optional. Defines a default value/currency for a conversion event.
         class ConversionEvent
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Defines a default value/currency for a conversion event. Both value and
+          # currency must be provided.
+          # @!attribute [rw] value
+          #   @return [::Float]
+          #     This value will be used to populate the value for all conversions
+          #     of the specified event_name where the event "value" parameter is unset.
+          # @!attribute [rw] currency_code
+          #   @return [::String]
+          #     When a conversion event for this event_name has no set currency,
+          #     this currency will be applied as the default. Must be in ISO 4217
+          #     currency code format. See https://en.wikipedia.org/wiki/ISO_4217 for
+          #     more information.
+          class DefaultConversionValue
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # The method by which conversions will be counted across multiple events
           # within a session.
@@ -1074,6 +1043,100 @@ module Google
           end
         end
 
+        # A definition for a calculated metric.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. Resource name for this CalculatedMetric.
+        #     Format: 'properties/\\{property_id}/calculatedMetrics/\\{calculated_metric_id}'
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     Optional. Description for this calculated metric.
+        #     Max length of 4096 characters.
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     Required. Display name for this calculated metric as shown in the
+        #     Google Analytics UI. Max length 82 characters.
+        # @!attribute [r] calculated_metric_id
+        #   @return [::String]
+        #     Output only. The ID to use for the calculated metric. In the UI, this is
+        #     referred to as the "API name."
+        #
+        #     The calculated_metric_id is used when referencing this calculated metric
+        #     from external APIs. For example, "calcMetric:\\{calculated_metric_id}".
+        # @!attribute [rw] metric_unit
+        #   @return [::Google::Analytics::Admin::V1alpha::CalculatedMetric::MetricUnit]
+        #     Required. The type for the calculated metric's value.
+        # @!attribute [r] restricted_metric_type
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::CalculatedMetric::RestrictedMetricType>]
+        #     Output only. Types of restricted data that this metric contains.
+        # @!attribute [rw] formula
+        #   @return [::String]
+        #     Required. The calculated metric's definition. Maximum number of unique
+        #     referenced custom metrics is 5. Formulas supports the following operations:
+        #     + (addition),  - (subtraction), - (negative),  * (multiplication), /
+        #     (division), () (parenthesis). Any valid real numbers are acceptable that
+        #     fit in a Long (64bit integer) or a Double (64 bit floating point number).
+        #     Example formula:
+        #       "( customEvent:parameter_name + cartPurchaseQuantity ) / 2.0"
+        # @!attribute [r] invalid_metric_reference
+        #   @return [::Boolean]
+        #     Output only. If true, this calculated metric has a invalid metric
+        #     reference. Anything using a calculated metric with invalid_metric_reference
+        #     set to true may fail, produce warnings, or produce unexpected results.
+        class CalculatedMetric
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Possible types of representing the calculated metric's value.
+          module MetricUnit
+            # MetricUnit unspecified or missing.
+            METRIC_UNIT_UNSPECIFIED = 0
+
+            # This metric uses default units.
+            STANDARD = 1
+
+            # This metric measures a currency.
+            CURRENCY = 2
+
+            # This metric measures feet.
+            FEET = 3
+
+            # This metric measures miles.
+            MILES = 4
+
+            # This metric measures meters.
+            METERS = 5
+
+            # This metric measures kilometers.
+            KILOMETERS = 6
+
+            # This metric measures milliseconds.
+            MILLISECONDS = 7
+
+            # This metric measures seconds.
+            SECONDS = 8
+
+            # This metric measures minutes.
+            MINUTES = 9
+
+            # This metric measures hours.
+            HOURS = 10
+          end
+
+          # Labels that mark the data in calculated metric used in conjunction with
+          # user roles that restrict access to cost and/or revenue metrics.
+          module RestrictedMetricType
+            # Type unknown or unspecified.
+            RESTRICTED_METRIC_TYPE_UNSPECIFIED = 0
+
+            # Metric reports cost data.
+            COST_DATA = 1
+
+            # Metric reports revenue data.
+            REVENUE_DATA = 2
+          end
+        end
+
         # Settings values for data retention. This is a singleton resource.
         # @!attribute [r] name
         #   @return [::String]
@@ -1194,55 +1257,6 @@ module Google
             # for YouTube) before converting.
             # Previously CROSS_CHANNEL_LAST_CLICK
             PAID_AND_ORGANIC_CHANNELS_LAST_CLICK = 2
-
-            # Starting in June 2023, new properties can no longer use this model.
-            # See
-            # [Analytics
-            # Help](https://support.google.com/analytics/answer/9164320#040623)
-            # for more details.
-            # Starting in September 2023, we will sunset this model for all properties.
-            #
-            # Gives all credit for the conversion to the first channel that a customer
-            # clicked (or engaged view through for YouTube) before converting.
-            # Previously CROSS_CHANNEL_FIRST_CLICK
-            PAID_AND_ORGANIC_CHANNELS_FIRST_CLICK = 3
-
-            # Starting in June 2023, new properties can no longer use this model.
-            # See
-            # [Analytics
-            # Help](https://support.google.com/analytics/answer/9164320#040623)
-            # for more details.
-            # Starting in September 2023, we will sunset this model for all properties.
-            #
-            # Distributes the credit for the conversion equally across all the channels
-            # a customer clicked (or engaged view through for YouTube) before
-            # converting.
-            # Previously CROSS_CHANNEL_LINEAR
-            PAID_AND_ORGANIC_CHANNELS_LINEAR = 4
-
-            # Starting in June 2023, new properties can no longer use this model.
-            # See
-            # [Analytics
-            # Help](https://support.google.com/analytics/answer/9164320#040623)
-            # for more details.
-            # Starting in September 2023, we will sunset this model for all properties.
-            #
-            # Attributes 40% credit to the first and last interaction, and the
-            # remaining 20% credit is distributed evenly to the middle interactions.
-            # Previously CROSS_CHANNEL_POSITION_BASED
-            PAID_AND_ORGANIC_CHANNELS_POSITION_BASED = 5
-
-            # Starting in June 2023, new properties can no longer use this model.
-            # See
-            # [Analytics
-            # Help](https://support.google.com/analytics/answer/9164320#040623)
-            # for more details.
-            # Starting in September 2023, we will sunset this model for all properties.
-            #
-            # Gives more credit to the touchpoints that happened closer in time to
-            # the conversion.
-            # Previously CROSS_CHANNEL_TIME_DECAY
-            PAID_AND_ORGANIC_CHANNELS_TIME_DECAY = 6
 
             # Attributes 100% of the conversion value to the last Google Paid channel
             # that the customer clicked through before converting.
@@ -1420,6 +1434,37 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Settings for client-side data redaction. Singleton resource under a Web
+        # Stream.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. Name of this Data Redaction Settings resource.
+        #     Format:
+        #     properties/\\{property_id}/dataStreams/\\{data_stream}/dataRedactionSettings
+        #     Example: "properties/1000/dataStreams/2000/dataRedactionSettings"
+        # @!attribute [rw] email_redaction_enabled
+        #   @return [::Boolean]
+        #     If enabled, any event parameter or user property values that look like an
+        #     email will be redacted.
+        # @!attribute [rw] query_parameter_redaction_enabled
+        #   @return [::Boolean]
+        #     Query Parameter redaction removes the key and value portions of a
+        #     query parameter if it is in the configured set of query parameters.
+        #
+        #     If enabled, URL query replacement logic will be run for the Stream. Any
+        #     query parameters defined in query_parameter_keys will be redacted.
+        # @!attribute [rw] query_parameter_keys
+        #   @return [::Array<::String>]
+        #     The query parameter keys to apply redaction logic to if present in the URL.
+        #     Query parameter matching is case-insensitive.
+        #
+        #     Must contain at least one element if query_parameter_replacement_enabled
+        #     is true. Keys cannot contain commas.
+        class DataRedactionSettings
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A link between a GA4 Property and an AdSense for Content ad client.
         # @!attribute [r] name
         #   @return [::String]
@@ -1431,6 +1476,23 @@ module Google
         #     Immutable. The AdSense ad client code that the GA4 property is linked to.
         #     Example format: "ca-pub-1234567890"
         class AdSenseLink
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A link that references a source property under the parent rollup property.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. Resource name of this RollupPropertySourceLink.
+        #     Format:
+        #     'properties/\\{property_id}/rollupPropertySourceLinks/\\{rollup_property_source_link}'
+        #     Format: 'properties/123/rollupPropertySourceLinks/456'
+        # @!attribute [rw] source_property
+        #   @return [::String]
+        #     Immutable. Resource name of the source property.
+        #     Format: properties/\\{property_id}
+        #     Example: "properties/789"
+        class RollupPropertySourceLink
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1621,6 +1683,9 @@ module Google
           # EnhancedMeasurementSettings resource
           ENHANCED_MEASUREMENT_SETTINGS = 24
 
+          # DataRedactionSettings resource
+          DATA_REDACTION_SETTINGS = 25
+
           # SKAdNetworkConversionValueSchema resource
           SKADNETWORK_CONVERSION_VALUE_SCHEMA = 26
 
@@ -1632,6 +1697,9 @@ module Google
 
           # EventCreateRule resource
           EVENT_CREATE_RULE = 29
+
+          # CalculatedMetric resource
+          CALCULATED_METRIC = 31
         end
 
         # Status of the Google Signals settings.

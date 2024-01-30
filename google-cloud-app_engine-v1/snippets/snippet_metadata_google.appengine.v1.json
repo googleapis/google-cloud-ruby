@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-app_engine-v1",
-    "version": "0.8.0",
+    "version": "0.9.1",
     "language": "RUBY",
     "apis": [
       {
@@ -14,7 +14,7 @@
     {
       "region_tag": "appengine_v1_generated_Applications_GetApplication_sync",
       "title": "Snippet for the get_application call in the Applications service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::Applications::Client#get_application. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::Applications::Client#get_application.",
       "file": "applications/get_application.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "appengine_v1_generated_Applications_CreateApplication_sync",
       "title": "Snippet for the create_application call in the Applications service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::Applications::Client#create_application. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::Applications::Client#create_application.",
       "file": "applications/create_application.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "appengine_v1_generated_Applications_UpdateApplication_sync",
       "title": "Snippet for the update_application call in the Applications service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::Applications::Client#update_application. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::Applications::Client#update_application.",
       "file": "applications/update_application.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -134,7 +134,7 @@
     {
       "region_tag": "appengine_v1_generated_Applications_RepairApplication_sync",
       "title": "Snippet for the repair_application call in the Applications service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::Applications::Client#repair_application. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::Applications::Client#repair_application.",
       "file": "applications/repair_application.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -174,7 +174,7 @@
     {
       "region_tag": "appengine_v1_generated_Services_ListServices_sync",
       "title": "Snippet for the list_services call in the Services service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::Services::Client#list_services. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::Services::Client#list_services.",
       "file": "services/list_services.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,7 +206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -214,7 +214,7 @@
     {
       "region_tag": "appengine_v1_generated_Services_GetService_sync",
       "title": "Snippet for the get_service call in the Services service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::Services::Client#get_service. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::Services::Client#get_service.",
       "file": "services/get_service.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,7 +246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -254,7 +254,7 @@
     {
       "region_tag": "appengine_v1_generated_Services_UpdateService_sync",
       "title": "Snippet for the update_service call in the Services service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::Services::Client#update_service. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::Services::Client#update_service.",
       "file": "services/update_service.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,7 +286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -294,7 +294,7 @@
     {
       "region_tag": "appengine_v1_generated_Services_DeleteService_sync",
       "title": "Snippet for the delete_service call in the Services service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::Services::Client#delete_service. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::Services::Client#delete_service.",
       "file": "services/delete_service.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,7 +326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -334,7 +334,7 @@
     {
       "region_tag": "appengine_v1_generated_Versions_ListVersions_sync",
       "title": "Snippet for the list_versions call in the Versions service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::Versions::Client#list_versions. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::Versions::Client#list_versions.",
       "file": "versions/list_versions.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,7 +366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -374,7 +374,7 @@
     {
       "region_tag": "appengine_v1_generated_Versions_GetVersion_sync",
       "title": "Snippet for the get_version call in the Versions service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::Versions::Client#get_version. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::Versions::Client#get_version.",
       "file": "versions/get_version.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,7 +406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -414,7 +414,7 @@
     {
       "region_tag": "appengine_v1_generated_Versions_CreateVersion_sync",
       "title": "Snippet for the create_version call in the Versions service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::Versions::Client#create_version. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::Versions::Client#create_version.",
       "file": "versions/create_version.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,7 +446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -454,7 +454,7 @@
     {
       "region_tag": "appengine_v1_generated_Versions_UpdateVersion_sync",
       "title": "Snippet for the update_version call in the Versions service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::Versions::Client#update_version. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::Versions::Client#update_version.",
       "file": "versions/update_version.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,7 +486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -494,7 +494,7 @@
     {
       "region_tag": "appengine_v1_generated_Versions_DeleteVersion_sync",
       "title": "Snippet for the delete_version call in the Versions service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::Versions::Client#delete_version. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::Versions::Client#delete_version.",
       "file": "versions/delete_version.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,7 +526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -534,7 +534,7 @@
     {
       "region_tag": "appengine_v1_generated_Instances_ListInstances_sync",
       "title": "Snippet for the list_instances call in the Instances service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::Instances::Client#list_instances. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::Instances::Client#list_instances.",
       "file": "instances/list_instances.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,7 +566,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -574,7 +574,7 @@
     {
       "region_tag": "appengine_v1_generated_Instances_GetInstance_sync",
       "title": "Snippet for the get_instance call in the Instances service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::Instances::Client#get_instance. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::Instances::Client#get_instance.",
       "file": "instances/get_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,7 +606,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -614,7 +614,7 @@
     {
       "region_tag": "appengine_v1_generated_Instances_DeleteInstance_sync",
       "title": "Snippet for the delete_instance call in the Instances service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::Instances::Client#delete_instance. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::Instances::Client#delete_instance.",
       "file": "instances/delete_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,7 +646,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -654,7 +654,7 @@
     {
       "region_tag": "appengine_v1_generated_Instances_DebugInstance_sync",
       "title": "Snippet for the debug_instance call in the Instances service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::Instances::Client#debug_instance. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::Instances::Client#debug_instance.",
       "file": "instances/debug_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -686,7 +686,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -694,7 +694,7 @@
     {
       "region_tag": "appengine_v1_generated_Firewall_ListIngressRules_sync",
       "title": "Snippet for the list_ingress_rules call in the Firewall service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::Firewall::Client#list_ingress_rules. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::Firewall::Client#list_ingress_rules.",
       "file": "firewall/list_ingress_rules.rb",
       "language": "RUBY",
       "client_method": {
@@ -726,7 +726,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -734,7 +734,7 @@
     {
       "region_tag": "appengine_v1_generated_Firewall_BatchUpdateIngressRules_sync",
       "title": "Snippet for the batch_update_ingress_rules call in the Firewall service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::Firewall::Client#batch_update_ingress_rules. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::Firewall::Client#batch_update_ingress_rules.",
       "file": "firewall/batch_update_ingress_rules.rb",
       "language": "RUBY",
       "client_method": {
@@ -766,7 +766,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -774,7 +774,7 @@
     {
       "region_tag": "appengine_v1_generated_Firewall_CreateIngressRule_sync",
       "title": "Snippet for the create_ingress_rule call in the Firewall service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::Firewall::Client#create_ingress_rule. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::Firewall::Client#create_ingress_rule.",
       "file": "firewall/create_ingress_rule.rb",
       "language": "RUBY",
       "client_method": {
@@ -806,7 +806,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -814,7 +814,7 @@
     {
       "region_tag": "appengine_v1_generated_Firewall_GetIngressRule_sync",
       "title": "Snippet for the get_ingress_rule call in the Firewall service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::Firewall::Client#get_ingress_rule. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::Firewall::Client#get_ingress_rule.",
       "file": "firewall/get_ingress_rule.rb",
       "language": "RUBY",
       "client_method": {
@@ -846,7 +846,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -854,7 +854,7 @@
     {
       "region_tag": "appengine_v1_generated_Firewall_UpdateIngressRule_sync",
       "title": "Snippet for the update_ingress_rule call in the Firewall service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::Firewall::Client#update_ingress_rule. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::Firewall::Client#update_ingress_rule.",
       "file": "firewall/update_ingress_rule.rb",
       "language": "RUBY",
       "client_method": {
@@ -886,7 +886,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -894,7 +894,7 @@
     {
       "region_tag": "appengine_v1_generated_Firewall_DeleteIngressRule_sync",
       "title": "Snippet for the delete_ingress_rule call in the Firewall service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::Firewall::Client#delete_ingress_rule. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::Firewall::Client#delete_ingress_rule.",
       "file": "firewall/delete_ingress_rule.rb",
       "language": "RUBY",
       "client_method": {
@@ -926,7 +926,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -934,7 +934,7 @@
     {
       "region_tag": "appengine_v1_generated_AuthorizedDomains_ListAuthorizedDomains_sync",
       "title": "Snippet for the list_authorized_domains call in the AuthorizedDomains service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::AuthorizedDomains::Client#list_authorized_domains. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::AuthorizedDomains::Client#list_authorized_domains.",
       "file": "authorized_domains/list_authorized_domains.rb",
       "language": "RUBY",
       "client_method": {
@@ -966,7 +966,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -974,7 +974,7 @@
     {
       "region_tag": "appengine_v1_generated_AuthorizedCertificates_ListAuthorizedCertificates_sync",
       "title": "Snippet for the list_authorized_certificates call in the AuthorizedCertificates service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::AuthorizedCertificates::Client#list_authorized_certificates. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::AuthorizedCertificates::Client#list_authorized_certificates.",
       "file": "authorized_certificates/list_authorized_certificates.rb",
       "language": "RUBY",
       "client_method": {
@@ -1006,7 +1006,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1014,7 +1014,7 @@
     {
       "region_tag": "appengine_v1_generated_AuthorizedCertificates_GetAuthorizedCertificate_sync",
       "title": "Snippet for the get_authorized_certificate call in the AuthorizedCertificates service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::AuthorizedCertificates::Client#get_authorized_certificate. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::AuthorizedCertificates::Client#get_authorized_certificate.",
       "file": "authorized_certificates/get_authorized_certificate.rb",
       "language": "RUBY",
       "client_method": {
@@ -1046,7 +1046,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1054,7 +1054,7 @@
     {
       "region_tag": "appengine_v1_generated_AuthorizedCertificates_CreateAuthorizedCertificate_sync",
       "title": "Snippet for the create_authorized_certificate call in the AuthorizedCertificates service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::AuthorizedCertificates::Client#create_authorized_certificate. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::AuthorizedCertificates::Client#create_authorized_certificate.",
       "file": "authorized_certificates/create_authorized_certificate.rb",
       "language": "RUBY",
       "client_method": {
@@ -1086,7 +1086,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1094,7 +1094,7 @@
     {
       "region_tag": "appengine_v1_generated_AuthorizedCertificates_UpdateAuthorizedCertificate_sync",
       "title": "Snippet for the update_authorized_certificate call in the AuthorizedCertificates service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::AuthorizedCertificates::Client#update_authorized_certificate. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::AuthorizedCertificates::Client#update_authorized_certificate.",
       "file": "authorized_certificates/update_authorized_certificate.rb",
       "language": "RUBY",
       "client_method": {
@@ -1126,7 +1126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1134,7 +1134,7 @@
     {
       "region_tag": "appengine_v1_generated_AuthorizedCertificates_DeleteAuthorizedCertificate_sync",
       "title": "Snippet for the delete_authorized_certificate call in the AuthorizedCertificates service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::AuthorizedCertificates::Client#delete_authorized_certificate. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::AuthorizedCertificates::Client#delete_authorized_certificate.",
       "file": "authorized_certificates/delete_authorized_certificate.rb",
       "language": "RUBY",
       "client_method": {
@@ -1166,7 +1166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1174,7 +1174,7 @@
     {
       "region_tag": "appengine_v1_generated_DomainMappings_ListDomainMappings_sync",
       "title": "Snippet for the list_domain_mappings call in the DomainMappings service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::DomainMappings::Client#list_domain_mappings. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::DomainMappings::Client#list_domain_mappings.",
       "file": "domain_mappings/list_domain_mappings.rb",
       "language": "RUBY",
       "client_method": {
@@ -1206,7 +1206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1214,7 +1214,7 @@
     {
       "region_tag": "appengine_v1_generated_DomainMappings_GetDomainMapping_sync",
       "title": "Snippet for the get_domain_mapping call in the DomainMappings service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::DomainMappings::Client#get_domain_mapping. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::DomainMappings::Client#get_domain_mapping.",
       "file": "domain_mappings/get_domain_mapping.rb",
       "language": "RUBY",
       "client_method": {
@@ -1246,7 +1246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1254,7 +1254,7 @@
     {
       "region_tag": "appengine_v1_generated_DomainMappings_CreateDomainMapping_sync",
       "title": "Snippet for the create_domain_mapping call in the DomainMappings service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::DomainMappings::Client#create_domain_mapping. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::DomainMappings::Client#create_domain_mapping.",
       "file": "domain_mappings/create_domain_mapping.rb",
       "language": "RUBY",
       "client_method": {
@@ -1286,7 +1286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1294,7 +1294,7 @@
     {
       "region_tag": "appengine_v1_generated_DomainMappings_UpdateDomainMapping_sync",
       "title": "Snippet for the update_domain_mapping call in the DomainMappings service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::DomainMappings::Client#update_domain_mapping. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::DomainMappings::Client#update_domain_mapping.",
       "file": "domain_mappings/update_domain_mapping.rb",
       "language": "RUBY",
       "client_method": {
@@ -1326,7 +1326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1334,7 +1334,7 @@
     {
       "region_tag": "appengine_v1_generated_DomainMappings_DeleteDomainMapping_sync",
       "title": "Snippet for the delete_domain_mapping call in the DomainMappings service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::DomainMappings::Client#delete_domain_mapping. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppEngine::V1::DomainMappings::Client#delete_domain_mapping.",
       "file": "domain_mappings/delete_domain_mapping.rb",
       "language": "RUBY",
       "client_method": {
@@ -1366,7 +1366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]

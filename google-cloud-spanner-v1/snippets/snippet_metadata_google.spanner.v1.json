@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-spanner-v1",
-    "version": "0.17.0",
+    "version": "0.22.0",
     "language": "RUBY",
     "apis": [
       {
@@ -14,7 +14,7 @@
     {
       "region_tag": "spanner_v1_generated_Spanner_CreateSession_sync",
       "title": "Snippet for the create_session call in the Spanner service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::V1::Spanner::Client#create_session. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::V1::Spanner::Client#create_session.",
       "file": "spanner/create_session.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "spanner_v1_generated_Spanner_BatchCreateSessions_sync",
       "title": "Snippet for the batch_create_sessions call in the Spanner service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::V1::Spanner::Client#batch_create_sessions. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::V1::Spanner::Client#batch_create_sessions.",
       "file": "spanner/batch_create_sessions.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "spanner_v1_generated_Spanner_GetSession_sync",
       "title": "Snippet for the get_session call in the Spanner service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::V1::Spanner::Client#get_session. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::V1::Spanner::Client#get_session.",
       "file": "spanner/get_session.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -134,7 +134,7 @@
     {
       "region_tag": "spanner_v1_generated_Spanner_ListSessions_sync",
       "title": "Snippet for the list_sessions call in the Spanner service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::V1::Spanner::Client#list_sessions. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::V1::Spanner::Client#list_sessions.",
       "file": "spanner/list_sessions.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -174,7 +174,7 @@
     {
       "region_tag": "spanner_v1_generated_Spanner_DeleteSession_sync",
       "title": "Snippet for the delete_session call in the Spanner service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::V1::Spanner::Client#delete_session. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::V1::Spanner::Client#delete_session.",
       "file": "spanner/delete_session.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,7 +206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -214,7 +214,7 @@
     {
       "region_tag": "spanner_v1_generated_Spanner_ExecuteSql_sync",
       "title": "Snippet for the execute_sql call in the Spanner service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::V1::Spanner::Client#execute_sql. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::V1::Spanner::Client#execute_sql.",
       "file": "spanner/execute_sql.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,7 +246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -254,7 +254,7 @@
     {
       "region_tag": "spanner_v1_generated_Spanner_ExecuteStreamingSql_sync",
       "title": "Snippet for the execute_streaming_sql call in the Spanner service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::V1::Spanner::Client#execute_streaming_sql. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::V1::Spanner::Client#execute_streaming_sql.",
       "file": "spanner/execute_streaming_sql.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,7 +286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 49,
           "type": "FULL"
         }
       ]
@@ -294,7 +294,7 @@
     {
       "region_tag": "spanner_v1_generated_Spanner_ExecuteBatchDml_sync",
       "title": "Snippet for the execute_batch_dml call in the Spanner service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::V1::Spanner::Client#execute_batch_dml. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::V1::Spanner::Client#execute_batch_dml.",
       "file": "spanner/execute_batch_dml.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,7 +326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -334,7 +334,7 @@
     {
       "region_tag": "spanner_v1_generated_Spanner_Read_sync",
       "title": "Snippet for the read call in the Spanner service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::V1::Spanner::Client#read. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::V1::Spanner::Client#read.",
       "file": "spanner/read.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,7 +366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -374,7 +374,7 @@
     {
       "region_tag": "spanner_v1_generated_Spanner_StreamingRead_sync",
       "title": "Snippet for the streaming_read call in the Spanner service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::V1::Spanner::Client#streaming_read. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::V1::Spanner::Client#streaming_read.",
       "file": "spanner/streaming_read.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,7 +406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 49,
           "type": "FULL"
         }
       ]
@@ -414,7 +414,7 @@
     {
       "region_tag": "spanner_v1_generated_Spanner_BeginTransaction_sync",
       "title": "Snippet for the begin_transaction call in the Spanner service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::V1::Spanner::Client#begin_transaction. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::V1::Spanner::Client#begin_transaction.",
       "file": "spanner/begin_transaction.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,7 +446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -454,7 +454,7 @@
     {
       "region_tag": "spanner_v1_generated_Spanner_Commit_sync",
       "title": "Snippet for the commit call in the Spanner service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::V1::Spanner::Client#commit. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::V1::Spanner::Client#commit.",
       "file": "spanner/commit.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,7 +486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -494,7 +494,7 @@
     {
       "region_tag": "spanner_v1_generated_Spanner_Rollback_sync",
       "title": "Snippet for the rollback call in the Spanner service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::V1::Spanner::Client#rollback. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::V1::Spanner::Client#rollback.",
       "file": "spanner/rollback.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,7 +526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -534,7 +534,7 @@
     {
       "region_tag": "spanner_v1_generated_Spanner_PartitionQuery_sync",
       "title": "Snippet for the partition_query call in the Spanner service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::V1::Spanner::Client#partition_query. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::V1::Spanner::Client#partition_query.",
       "file": "spanner/partition_query.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,7 +566,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -574,7 +574,7 @@
     {
       "region_tag": "spanner_v1_generated_Spanner_PartitionRead_sync",
       "title": "Snippet for the partition_read call in the Spanner service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::V1::Spanner::Client#partition_read. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::V1::Spanner::Client#partition_read.",
       "file": "spanner/partition_read.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,7 +606,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -614,7 +614,7 @@
     {
       "region_tag": "spanner_v1_generated_Spanner_BatchWrite_sync",
       "title": "Snippet for the batch_write call in the Spanner service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::V1::Spanner::Client#batch_write. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::V1::Spanner::Client#batch_write.",
       "file": "spanner/batch_write.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,7 +646,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 49,
           "type": "FULL"
         }
       ]

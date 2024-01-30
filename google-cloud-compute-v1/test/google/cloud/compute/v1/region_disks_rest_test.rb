@@ -60,6 +60,14 @@ class ::Google::Cloud::Compute::V1::RegionDisks::Rest::ClientTest < Minitest::Te
 
       @response
     end
+
+    def endpoint
+      "endpoint.example.com"
+    end
+
+    def universe_domain
+      "example.com"
+    end
   end
 
   def test_add_resource_policies
@@ -1047,7 +1055,8 @@ class ::Google::Cloud::Compute::V1::RegionDisks::Rest::ClientTest < Minitest::Te
     credentials_token = :dummy_value
 
     client = block_config = config = nil
-    Gapic::Rest::ClientStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil
+    Gapic::Rest::ClientStub.stub :new, dummy_stub do
       client = ::Google::Cloud::Compute::V1::RegionDisks::Rest::Client.new do |config|
         config.credentials = credentials_token
       end

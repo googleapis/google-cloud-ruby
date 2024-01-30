@@ -30,6 +30,9 @@ module Google
           # The API Gateway Service is the interface for managing API Gateways.
           #
           class Client
+            # @private
+            DEFAULT_ENDPOINT_TEMPLATE = "apigateway.$UNIVERSE_DOMAIN$"
+
             include Paths
 
             # @private
@@ -136,6 +139,15 @@ module Google
             end
 
             ##
+            # The effective universe domain
+            #
+            # @return [String]
+            #
+            def universe_domain
+              @api_gateway_service_stub.universe_domain
+            end
+
+            ##
             # Create a new ApiGatewayService client object.
             #
             # @example
@@ -168,8 +180,9 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
-                                       !@config.endpoint.split(".").first.include?("-")
+              enable_self_signed_jwt = @config.endpoint.nil? ||
+                                       (@config.endpoint == Configuration::DEFAULT_ENDPOINT &&
+                                       !@config.endpoint.split(".").first.include?("-"))
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(::String) || credentials.is_a?(::Hash)
@@ -182,12 +195,15 @@ module Google
                 config.credentials = credentials
                 config.quota_project = @quota_project_id
                 config.endpoint = @config.endpoint
+                config.universe_domain = @config.universe_domain
               end
 
               @api_gateway_service_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Stub,
-                credentials:  credentials,
-                endpoint:     @config.endpoint,
+                credentials: credentials,
+                endpoint: @config.endpoint,
+                endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
+                universe_domain: @config.universe_domain,
                 channel_args: @config.channel_args,
                 interceptors: @config.interceptors,
                 channel_pool_config: @config.channel_pool
@@ -1667,9 +1683,9 @@ module Google
             #   end
             #
             # @!attribute [rw] endpoint
-            #   The hostname or hostname:port of the service endpoint.
-            #   Defaults to `"apigateway.googleapis.com"`.
-            #   @return [::String]
+            #   A custom service endpoint, as a hostname or hostname:port. The default is
+            #   nil, indicating to use the default endpoint in the current universe domain.
+            #   @return [::String,nil]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
             #    *  (`String`) The path to a service account key file in JSON format
@@ -1715,13 +1731,20 @@ module Google
             # @!attribute [rw] quota_project
             #   A separate project against which to charge quota.
             #   @return [::String]
+            # @!attribute [rw] universe_domain
+            #   The universe domain within which to make requests. This determines the
+            #   default endpoint URL. The default value of nil uses the environment
+            #   universe (usually the default "googleapis.com" universe).
+            #   @return [::String,nil]
             #
             class Configuration
               extend ::Gapic::Config
 
+              # @private
+              # The endpoint specific to the default "googleapis.com" universe. Deprecated.
               DEFAULT_ENDPOINT = "apigateway.googleapis.com"
 
-              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
+              config_attr :endpoint,      nil, ::String, nil
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
@@ -1736,6 +1759,7 @@ module Google
               config_attr :metadata,      nil, ::Hash, nil
               config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
               config_attr :quota_project, nil, ::String, nil
+              config_attr :universe_domain, nil, ::String, nil
 
               # @private
               def initialize parent_config = nil

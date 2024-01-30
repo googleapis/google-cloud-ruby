@@ -23,8 +23,18 @@ require "gapic/grpc"
 require "gapic/rest"
 
 class Google::Cloud::Dialogflow::ClientConstructionMinitest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_agents_grpc
-    Gapic::ServiceStub.stub :new, :stub do
+    Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dialogflow.agents transport: :grpc do |config|
         config.credentials = grpc_channel
@@ -34,7 +44,7 @@ class Google::Cloud::Dialogflow::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_agents_rest
-    Gapic::Rest::ClientStub.stub :new, :stub do
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::Dialogflow.agents transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
@@ -43,7 +53,7 @@ class Google::Cloud::Dialogflow::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_contexts_grpc
-    Gapic::ServiceStub.stub :new, :stub do
+    Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dialogflow.contexts transport: :grpc do |config|
         config.credentials = grpc_channel
@@ -53,7 +63,7 @@ class Google::Cloud::Dialogflow::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_contexts_rest
-    Gapic::Rest::ClientStub.stub :new, :stub do
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::Dialogflow.contexts transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
@@ -62,7 +72,7 @@ class Google::Cloud::Dialogflow::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_intents_grpc
-    Gapic::ServiceStub.stub :new, :stub do
+    Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dialogflow.intents transport: :grpc do |config|
         config.credentials = grpc_channel
@@ -72,7 +82,7 @@ class Google::Cloud::Dialogflow::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_intents_rest
-    Gapic::Rest::ClientStub.stub :new, :stub do
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::Dialogflow.intents transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
@@ -81,7 +91,7 @@ class Google::Cloud::Dialogflow::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_entity_types_grpc
-    Gapic::ServiceStub.stub :new, :stub do
+    Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dialogflow.entity_types transport: :grpc do |config|
         config.credentials = grpc_channel
@@ -91,7 +101,7 @@ class Google::Cloud::Dialogflow::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_entity_types_rest
-    Gapic::Rest::ClientStub.stub :new, :stub do
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::Dialogflow.entity_types transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
@@ -100,7 +110,7 @@ class Google::Cloud::Dialogflow::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_session_entity_types_grpc
-    Gapic::ServiceStub.stub :new, :stub do
+    Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dialogflow.session_entity_types transport: :grpc do |config|
         config.credentials = grpc_channel
@@ -110,7 +120,7 @@ class Google::Cloud::Dialogflow::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_session_entity_types_rest
-    Gapic::Rest::ClientStub.stub :new, :stub do
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::Dialogflow.session_entity_types transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
@@ -119,7 +129,7 @@ class Google::Cloud::Dialogflow::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_sessions_grpc
-    Gapic::ServiceStub.stub :new, :stub do
+    Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dialogflow.sessions transport: :grpc do |config|
         config.credentials = grpc_channel
@@ -129,7 +139,7 @@ class Google::Cloud::Dialogflow::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_sessions_rest
-    Gapic::Rest::ClientStub.stub :new, :stub do
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::Dialogflow.sessions transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
@@ -138,7 +148,7 @@ class Google::Cloud::Dialogflow::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_participants_grpc
-    Gapic::ServiceStub.stub :new, :stub do
+    Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dialogflow.participants transport: :grpc do |config|
         config.credentials = grpc_channel
@@ -148,7 +158,7 @@ class Google::Cloud::Dialogflow::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_participants_rest
-    Gapic::Rest::ClientStub.stub :new, :stub do
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::Dialogflow.participants transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
@@ -157,7 +167,7 @@ class Google::Cloud::Dialogflow::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_answer_records_grpc
-    Gapic::ServiceStub.stub :new, :stub do
+    Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dialogflow.answer_records transport: :grpc do |config|
         config.credentials = grpc_channel
@@ -167,7 +177,7 @@ class Google::Cloud::Dialogflow::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_answer_records_rest
-    Gapic::Rest::ClientStub.stub :new, :stub do
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::Dialogflow.answer_records transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
@@ -176,7 +186,7 @@ class Google::Cloud::Dialogflow::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_conversation_profiles_grpc
-    Gapic::ServiceStub.stub :new, :stub do
+    Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dialogflow.conversation_profiles transport: :grpc do |config|
         config.credentials = grpc_channel
@@ -186,7 +196,7 @@ class Google::Cloud::Dialogflow::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_conversation_profiles_rest
-    Gapic::Rest::ClientStub.stub :new, :stub do
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::Dialogflow.conversation_profiles transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
@@ -195,7 +205,7 @@ class Google::Cloud::Dialogflow::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_conversations_grpc
-    Gapic::ServiceStub.stub :new, :stub do
+    Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dialogflow.conversations transport: :grpc do |config|
         config.credentials = grpc_channel
@@ -205,7 +215,7 @@ class Google::Cloud::Dialogflow::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_conversations_rest
-    Gapic::Rest::ClientStub.stub :new, :stub do
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::Dialogflow.conversations transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
@@ -214,7 +224,7 @@ class Google::Cloud::Dialogflow::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_conversation_datasets_grpc
-    Gapic::ServiceStub.stub :new, :stub do
+    Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dialogflow.conversation_datasets transport: :grpc do |config|
         config.credentials = grpc_channel
@@ -224,7 +234,7 @@ class Google::Cloud::Dialogflow::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_conversation_datasets_rest
-    Gapic::Rest::ClientStub.stub :new, :stub do
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::Dialogflow.conversation_datasets transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
@@ -233,7 +243,7 @@ class Google::Cloud::Dialogflow::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_conversation_models_grpc
-    Gapic::ServiceStub.stub :new, :stub do
+    Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dialogflow.conversation_models transport: :grpc do |config|
         config.credentials = grpc_channel
@@ -243,7 +253,7 @@ class Google::Cloud::Dialogflow::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_conversation_models_rest
-    Gapic::Rest::ClientStub.stub :new, :stub do
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::Dialogflow.conversation_models transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
@@ -252,7 +262,7 @@ class Google::Cloud::Dialogflow::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_documents_grpc
-    Gapic::ServiceStub.stub :new, :stub do
+    Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dialogflow.documents transport: :grpc do |config|
         config.credentials = grpc_channel
@@ -262,7 +272,7 @@ class Google::Cloud::Dialogflow::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_documents_rest
-    Gapic::Rest::ClientStub.stub :new, :stub do
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::Dialogflow.documents transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
@@ -271,7 +281,7 @@ class Google::Cloud::Dialogflow::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_fulfillments_grpc
-    Gapic::ServiceStub.stub :new, :stub do
+    Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dialogflow.fulfillments transport: :grpc do |config|
         config.credentials = grpc_channel
@@ -281,7 +291,7 @@ class Google::Cloud::Dialogflow::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_fulfillments_rest
-    Gapic::Rest::ClientStub.stub :new, :stub do
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::Dialogflow.fulfillments transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
@@ -290,7 +300,7 @@ class Google::Cloud::Dialogflow::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_environments_grpc
-    Gapic::ServiceStub.stub :new, :stub do
+    Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dialogflow.environments transport: :grpc do |config|
         config.credentials = grpc_channel
@@ -300,7 +310,7 @@ class Google::Cloud::Dialogflow::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_environments_rest
-    Gapic::Rest::ClientStub.stub :new, :stub do
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::Dialogflow.environments transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
@@ -309,7 +319,7 @@ class Google::Cloud::Dialogflow::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_knowledge_bases_grpc
-    Gapic::ServiceStub.stub :new, :stub do
+    Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dialogflow.knowledge_bases transport: :grpc do |config|
         config.credentials = grpc_channel
@@ -319,7 +329,7 @@ class Google::Cloud::Dialogflow::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_knowledge_bases_rest
-    Gapic::Rest::ClientStub.stub :new, :stub do
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::Dialogflow.knowledge_bases transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
@@ -328,7 +338,7 @@ class Google::Cloud::Dialogflow::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_versions_grpc
-    Gapic::ServiceStub.stub :new, :stub do
+    Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dialogflow.versions transport: :grpc do |config|
         config.credentials = grpc_channel
@@ -338,7 +348,7 @@ class Google::Cloud::Dialogflow::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_versions_rest
-    Gapic::Rest::ClientStub.stub :new, :stub do
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::Dialogflow.versions transport: :rest do |config|
         config.credentials = :dummy_credentials
       end

@@ -1,5 +1,28 @@
 # Changelog
 
+### 0.24.1 (2024-01-12)
+
+#### Bug Fixes
+
+* Ensure endpoints are correct for mixin clients ([#24032](https://github.com/googleapis/google-cloud-ruby/issues/24032)) 
+
+### 0.24.0 (2024-01-11)
+
+#### Features
+
+* Support for universe_domain ([#23778](https://github.com/googleapis/google-cloud-ruby/issues/23778)) 
+
+### 0.23.0 (2024-01-10)
+
+#### Features
+
+* Query results include whether answer feedback is allowed 
+* Support answer feedback collection settings in the Agent resource 
+* Support barge-in behavior configuration during input audio streaming 
+* Support end-user metadata and UCS search query configuration in query parameters 
+* Support Generators service including CRUD operations on generator resources ([#23555](https://github.com/googleapis/google-cloud-ruby/issues/23555)) 
+* Support submit_answer_feedback RPC 
+
 ### 0.22.0 (2023-09-29)
 
 #### Features

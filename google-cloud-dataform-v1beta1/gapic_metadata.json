@@ -35,6 +35,31 @@
                 "delete_repository"
               ]
             },
+            "CommitRepositoryChanges": {
+              "methods": [
+                "commit_repository_changes"
+              ]
+            },
+            "ReadRepositoryFile": {
+              "methods": [
+                "read_repository_file"
+              ]
+            },
+            "QueryRepositoryDirectoryContents": {
+              "methods": [
+                "query_repository_directory_contents"
+              ]
+            },
+            "FetchRepositoryHistory": {
+              "methods": [
+                "fetch_repository_history"
+              ]
+            },
+            "ComputeRepositoryAccessTokenStatus": {
+              "methods": [
+                "compute_repository_access_token_status"
+              ]
+            },
             "FetchRemoteBranches": {
               "methods": [
                 "fetch_remote_branches"
@@ -140,6 +165,31 @@
                 "write_file"
               ]
             },
+            "ListReleaseConfigs": {
+              "methods": [
+                "list_release_configs"
+              ]
+            },
+            "GetReleaseConfig": {
+              "methods": [
+                "get_release_config"
+              ]
+            },
+            "CreateReleaseConfig": {
+              "methods": [
+                "create_release_config"
+              ]
+            },
+            "UpdateReleaseConfig": {
+              "methods": [
+                "update_release_config"
+              ]
+            },
+            "DeleteReleaseConfig": {
+              "methods": [
+                "delete_release_config"
+              ]
+            },
             "ListCompilationResults": {
               "methods": [
                 "list_compilation_results"
@@ -158,6 +208,31 @@
             "QueryCompilationResultActions": {
               "methods": [
                 "query_compilation_result_actions"
+              ]
+            },
+            "ListWorkflowConfigs": {
+              "methods": [
+                "list_workflow_configs"
+              ]
+            },
+            "GetWorkflowConfig": {
+              "methods": [
+                "get_workflow_config"
+              ]
+            },
+            "CreateWorkflowConfig": {
+              "methods": [
+                "create_workflow_config"
+              ]
+            },
+            "UpdateWorkflowConfig": {
+              "methods": [
+                "update_workflow_config"
+              ]
+            },
+            "DeleteWorkflowConfig": {
+              "methods": [
+                "delete_workflow_config"
               ]
             },
             "ListWorkflowInvocations": {

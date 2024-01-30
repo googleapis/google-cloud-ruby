@@ -34,6 +34,9 @@ module Google
             #
             class Client
               # @private
+              DEFAULT_ENDPOINT_TEMPLATE = "compute.$UNIVERSE_DOMAIN$"
+
+              # @private
               attr_reader :region_network_endpoint_groups_stub
 
               ##
@@ -65,7 +68,11 @@ module Google
                                   end
                   default_config = Client::Configuration.new parent_config
 
+                  default_config.rpcs.attach_network_endpoints.timeout = 600.0
+
                   default_config.rpcs.delete.timeout = 600.0
+
+                  default_config.rpcs.detach_network_endpoints.timeout = 600.0
 
                   default_config.rpcs.get.timeout = 600.0
                   default_config.rpcs.get.retry_policy = {
@@ -78,6 +85,8 @@ module Google
                   default_config.rpcs.list.retry_policy = {
                     initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
+
+                  default_config.rpcs.list_network_endpoints.timeout = 600.0
 
                   default_config
                 end
@@ -103,6 +112,15 @@ module Google
               def configure
                 yield @config if block_given?
                 @config
+              end
+
+              ##
+              # The effective universe domain
+              #
+              # @return [String]
+              #
+              def universe_domain
+                @region_network_endpoint_groups_stub.universe_domain
               end
 
               ##
@@ -132,8 +150,9 @@ module Google
                 credentials = @config.credentials
                 # Use self-signed JWT if the endpoint is unchanged from default,
                 # but only if the default endpoint does not have a region prefix.
-                enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
-                                         !@config.endpoint.split(".").first.include?("-")
+                enable_self_signed_jwt = @config.endpoint.nil? ||
+                                         (@config.endpoint == Configuration::DEFAULT_ENDPOINT &&
+                                         !@config.endpoint.split(".").first.include?("-"))
                 credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
                 if credentials.is_a?(::String) || credentials.is_a?(::Hash)
@@ -147,9 +166,15 @@ module Google
                   config.credentials = credentials
                   config.quota_project = @quota_project_id
                   config.endpoint = @config.endpoint
+                  config.universe_domain = @config.universe_domain
                 end
 
-                @region_network_endpoint_groups_stub = ::Google::Cloud::Compute::V1::RegionNetworkEndpointGroups::Rest::ServiceStub.new endpoint: @config.endpoint, credentials: credentials
+                @region_network_endpoint_groups_stub = ::Google::Cloud::Compute::V1::RegionNetworkEndpointGroups::Rest::ServiceStub.new(
+                  endpoint: @config.endpoint,
+                  endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
+                  universe_domain: @config.universe_domain,
+                  credentials: credentials
+                )
               end
 
               ##
@@ -160,6 +185,101 @@ module Google
               attr_reader :region_operations
 
               # Service calls
+
+              ##
+              # Attach a list of network endpoints to the specified network endpoint group.
+              #
+              # @overload attach_network_endpoints(request, options = nil)
+              #   Pass arguments to `attach_network_endpoints` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::AttachNetworkEndpointsRegionNetworkEndpointGroupRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::AttachNetworkEndpointsRegionNetworkEndpointGroupRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload attach_network_endpoints(network_endpoint_group: nil, project: nil, region: nil, region_network_endpoint_groups_attach_endpoints_request_resource: nil, request_id: nil)
+              #   Pass arguments to `attach_network_endpoints` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param network_endpoint_group [::String]
+              #     The name of the network endpoint group where you are attaching network endpoints to. It should comply with RFC1035.
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param region [::String]
+              #     The name of the region where you want to create the network endpoint group. It should comply with RFC1035.
+              #   @param region_network_endpoint_groups_attach_endpoints_request_resource [::Google::Cloud::Compute::V1::RegionNetworkEndpointGroupsAttachEndpointsRequest, ::Hash]
+              #     The body resource for this request
+              #   @param request_id [::String]
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::GenericLRO::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::RegionNetworkEndpointGroups::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::AttachNetworkEndpointsRegionNetworkEndpointGroupRequest.new
+              #
+              #   # Call the attach_network_endpoints method.
+              #   result = client.attach_network_endpoints request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
+              def attach_network_endpoints request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::AttachNetworkEndpointsRegionNetworkEndpointGroupRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.attach_network_endpoints.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.attach_network_endpoints.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.attach_network_endpoints.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @region_network_endpoint_groups_stub.attach_network_endpoints request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::RegionOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: region_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "region" => request.region
+                    },
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
 
               ##
               # Deletes the specified network endpoint group. Note that the NEG cannot be deleted if it is configured as a backend of a backend service.
@@ -238,6 +358,101 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @region_network_endpoint_groups_stub.delete request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::RegionOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: region_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "region" => request.region
+                    },
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Detach the network endpoint from the specified network endpoint group.
+              #
+              # @overload detach_network_endpoints(request, options = nil)
+              #   Pass arguments to `detach_network_endpoints` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::DetachNetworkEndpointsRegionNetworkEndpointGroupRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::DetachNetworkEndpointsRegionNetworkEndpointGroupRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload detach_network_endpoints(network_endpoint_group: nil, project: nil, region: nil, region_network_endpoint_groups_detach_endpoints_request_resource: nil, request_id: nil)
+              #   Pass arguments to `detach_network_endpoints` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param network_endpoint_group [::String]
+              #     The name of the network endpoint group you are detaching network endpoints from. It should comply with RFC1035.
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param region [::String]
+              #     The name of the region where the network endpoint group is located. It should comply with RFC1035.
+              #   @param region_network_endpoint_groups_detach_endpoints_request_resource [::Google::Cloud::Compute::V1::RegionNetworkEndpointGroupsDetachEndpointsRequest, ::Hash]
+              #     The body resource for this request
+              #   @param request_id [::String]
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000). end_interface: MixerMutationRequestBuilder
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::GenericLRO::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::RegionNetworkEndpointGroups::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::DetachNetworkEndpointsRegionNetworkEndpointGroupRequest.new
+              #
+              #   # Call the detach_network_endpoints method.
+              #   result = client.detach_network_endpoints request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
+              def detach_network_endpoints request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::DetachNetworkEndpointsRegionNetworkEndpointGroupRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.detach_network_endpoints.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.detach_network_endpoints.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.detach_network_endpoints.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @region_network_endpoint_groups_stub.detach_network_endpoints request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::RegionOperations::Rest::NonstandardLro.create_operation(
                     operation: result,
                     client: region_operations,
@@ -448,7 +663,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param filter [::String]
-              #     A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:` operator can be used with string fields to match substrings. For non-string fields it is equivalent to the `=` operator. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`.
+              #     A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
               #   @param max_results [::Integer]
               #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
               #   @param order_by [::String]
@@ -521,6 +736,99 @@ module Google
               end
 
               ##
+              # Lists the network endpoints in the specified network endpoint group.
+              #
+              # @overload list_network_endpoints(request, options = nil)
+              #   Pass arguments to `list_network_endpoints` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::ListNetworkEndpointsRegionNetworkEndpointGroupsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::ListNetworkEndpointsRegionNetworkEndpointGroupsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_network_endpoints(filter: nil, max_results: nil, network_endpoint_group: nil, order_by: nil, page_token: nil, project: nil, region: nil, return_partial_success: nil)
+              #   Pass arguments to `list_network_endpoints` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param filter [::String]
+              #     A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+              #   @param max_results [::Integer]
+              #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+              #   @param network_endpoint_group [::String]
+              #     The name of the network endpoint group from which you want to generate a list of included network endpoints. It should comply with RFC1035.
+              #   @param order_by [::String]
+              #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+              #   @param page_token [::String]
+              #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param region [::String]
+              #     The name of the region where the network endpoint group is located. It should comply with RFC1035.
+              #   @param return_partial_success [::Boolean]
+              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::NetworkEndpointWithHealthStatus>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::NetworkEndpointWithHealthStatus>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::RegionNetworkEndpointGroups::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::ListNetworkEndpointsRegionNetworkEndpointGroupsRequest.new
+              #
+              #   # Call the list_network_endpoints method.
+              #   result = client.list_network_endpoints request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::NetworkEndpointGroupsListNetworkEndpoints.
+              #   p result
+              #
+              def list_network_endpoints request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::ListNetworkEndpointsRegionNetworkEndpointGroupsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_network_endpoints.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_network_endpoints.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_network_endpoints.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @region_network_endpoint_groups_stub.list_network_endpoints request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @region_network_endpoint_groups_stub, :list_network_endpoints, "items", request, result, options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the RegionNetworkEndpointGroups REST API.
               #
               # This class represents the configuration for RegionNetworkEndpointGroups REST,
@@ -536,23 +844,23 @@ module Google
               # @example
               #
               #   # Modify the global config, setting the timeout for
-              #   # delete to 20 seconds,
+              #   # attach_network_endpoints to 20 seconds,
               #   # and all remaining timeouts to 10 seconds.
               #   ::Google::Cloud::Compute::V1::RegionNetworkEndpointGroups::Rest::Client.configure do |config|
               #     config.timeout = 10.0
-              #     config.rpcs.delete.timeout = 20.0
+              #     config.rpcs.attach_network_endpoints.timeout = 20.0
               #   end
               #
               #   # Apply the above configuration only to a new client.
               #   client = ::Google::Cloud::Compute::V1::RegionNetworkEndpointGroups::Rest::Client.new do |config|
               #     config.timeout = 10.0
-              #     config.rpcs.delete.timeout = 20.0
+              #     config.rpcs.attach_network_endpoints.timeout = 20.0
               #   end
               #
               # @!attribute [rw] endpoint
-              #   The hostname or hostname:port of the service endpoint.
-              #   Defaults to `"compute.googleapis.com"`.
-              #   @return [::String]
+              #   A custom service endpoint, as a hostname or hostname:port. The default is
+              #   nil, indicating to use the default endpoint in the current universe domain.
+              #   @return [::String,nil]
               # @!attribute [rw] credentials
               #   Credentials to send with calls. You may provide any of the following types:
               #    *  (`String`) The path to a service account key file in JSON format
@@ -589,13 +897,20 @@ module Google
               # @!attribute [rw] quota_project
               #   A separate project against which to charge quota.
               #   @return [::String]
+              # @!attribute [rw] universe_domain
+              #   The universe domain within which to make requests. This determines the
+              #   default endpoint URL. The default value of nil uses the environment
+              #   universe (usually the default "googleapis.com" universe).
+              #   @return [::String,nil]
               #
               class Configuration
                 extend ::Gapic::Config
 
+                # @private
+                # The endpoint specific to the default "googleapis.com" universe. Deprecated.
                 DEFAULT_ENDPOINT = "compute.googleapis.com"
 
-                config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
+                config_attr :endpoint,      nil, ::String, nil
                 config_attr :credentials,   nil do |value|
                   allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                   allowed.any? { |klass| klass === value }
@@ -607,6 +922,7 @@ module Google
                 config_attr :metadata,      nil, ::Hash, nil
                 config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
                 config_attr :quota_project, nil, ::String, nil
+                config_attr :universe_domain, nil, ::String, nil
 
                 # @private
                 def initialize parent_config = nil
@@ -646,10 +962,20 @@ module Google
                 #
                 class Rpcs
                   ##
+                  # RPC-specific configuration for `attach_network_endpoints`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :attach_network_endpoints
+                  ##
                   # RPC-specific configuration for `delete`
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :delete
+                  ##
+                  # RPC-specific configuration for `detach_network_endpoints`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :detach_network_endpoints
                   ##
                   # RPC-specific configuration for `get`
                   # @return [::Gapic::Config::Method]
@@ -665,17 +991,28 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :list
+                  ##
+                  # RPC-specific configuration for `list_network_endpoints`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_network_endpoints
 
                   # @private
                   def initialize parent_rpcs = nil
+                    attach_network_endpoints_config = parent_rpcs.attach_network_endpoints if parent_rpcs.respond_to? :attach_network_endpoints
+                    @attach_network_endpoints = ::Gapic::Config::Method.new attach_network_endpoints_config
                     delete_config = parent_rpcs.delete if parent_rpcs.respond_to? :delete
                     @delete = ::Gapic::Config::Method.new delete_config
+                    detach_network_endpoints_config = parent_rpcs.detach_network_endpoints if parent_rpcs.respond_to? :detach_network_endpoints
+                    @detach_network_endpoints = ::Gapic::Config::Method.new detach_network_endpoints_config
                     get_config = parent_rpcs.get if parent_rpcs.respond_to? :get
                     @get = ::Gapic::Config::Method.new get_config
                     insert_config = parent_rpcs.insert if parent_rpcs.respond_to? :insert
                     @insert = ::Gapic::Config::Method.new insert_config
                     list_config = parent_rpcs.list if parent_rpcs.respond_to? :list
                     @list = ::Gapic::Config::Method.new list_config
+                    list_network_endpoints_config = parent_rpcs.list_network_endpoints if parent_rpcs.respond_to? :list_network_endpoints
+                    @list_network_endpoints = ::Gapic::Config::Method.new list_network_endpoints_config
 
                     yield self if block_given?
                   end

@@ -64,6 +64,7 @@ module Google
     #     The number of seconds to wait for a response from a request. The default
     #     varies based on the request protocol and deployment environment.
     # @!attribute [rw] min_deadline
+    #   @deprecated This field is deprecated and may be removed in the next major version update.
     #   @return [::Float]
     #     Deprecated, do not use.
     # @!attribute [rw] operation_deadline

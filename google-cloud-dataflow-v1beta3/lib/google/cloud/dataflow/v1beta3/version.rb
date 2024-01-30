@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Dataflow
       module V1beta3
-        VERSION = "0.7.0"
+        VERSION = "0.8.1"
       end
     end
   end

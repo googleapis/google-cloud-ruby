@@ -45,6 +45,14 @@ class ::Google::Cloud::Tasks::V2beta2::CloudTasks::ClientTest < Minitest::Test
 
       @response
     end
+
+    def endpoint
+      "endpoint.example.com"
+    end
+
+    def universe_domain
+      "example.com"
+    end
   end
 
   def test_list_queues
@@ -1334,73 +1342,12 @@ class ::Google::Cloud::Tasks::V2beta2::CloudTasks::ClientTest < Minitest::Test
     end
   end
 
-  def test_buffer_task
-    # Create GRPC objects.
-    grpc_response = ::Google::Cloud::Tasks::V2beta2::BufferTaskResponse.new
-    grpc_operation = GRPC::ActiveCall::Operation.new nil
-    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    grpc_options = {}
-
-    # Create request parameters for a unary method.
-    queue = "hello world"
-    task_id = "hello world"
-    body = {}
-
-    buffer_task_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
-      assert_equal :buffer_task, name
-      assert_kind_of ::Google::Cloud::Tasks::V2beta2::BufferTaskRequest, request
-      assert_equal "hello world", request["queue"]
-      assert_equal "hello world", request["task_id"]
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Api::HttpBody), request["body"]
-      refute_nil options
-    end
-
-    Gapic::ServiceStub.stub :new, buffer_task_client_stub do
-      # Create client
-      client = ::Google::Cloud::Tasks::V2beta2::CloudTasks::Client.new do |config|
-        config.credentials = grpc_channel
-      end
-
-      # Use hash object
-      client.buffer_task({ queue: queue, task_id: task_id, body: body }) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use named arguments
-      client.buffer_task queue: queue, task_id: task_id, body: body do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object
-      client.buffer_task ::Google::Cloud::Tasks::V2beta2::BufferTaskRequest.new(queue: queue, task_id: task_id, body: body) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use hash object with options
-      client.buffer_task({ queue: queue, task_id: task_id, body: body }, grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object with options
-      client.buffer_task(::Google::Cloud::Tasks::V2beta2::BufferTaskRequest.new(queue: queue, task_id: task_id, body: body), grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Verify method calls
-      assert_equal 5, buffer_task_client_stub.call_rpc_count
-    end
-  end
-
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
     client = block_config = config = nil
-    Gapic::ServiceStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil, nil
+    Gapic::ServiceStub.stub :new, dummy_stub do
       client = ::Google::Cloud::Tasks::V2beta2::CloudTasks::Client.new do |config|
         config.credentials = grpc_channel
       end

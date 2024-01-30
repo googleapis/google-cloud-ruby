@@ -42,6 +42,13 @@ module Google
         #     to different SQL types depending on the SQL dialect. {::Google::Cloud::Spanner::V1::Type#type_annotation type_annotation}
         #     typically is not needed to process the content of a value (it doesn't
         #     affect serialization) and clients can ignore it on the read path.
+        # @!attribute [rw] proto_type_fqn
+        #   @return [::String]
+        #     If {::Google::Cloud::Spanner::V1::Type#code code} ==
+        #     {::Google::Cloud::Spanner::V1::TypeCode::PROTO PROTO} or
+        #     {::Google::Cloud::Spanner::V1::Type#code code} ==
+        #     {::Google::Cloud::Spanner::V1::TypeCode::ENUM ENUM}, then `proto_type_fqn` is the fully
+        #     qualified name of the proto type representing the proto/enum definition.
         class Type
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -100,6 +107,10 @@ module Google
           # `"-Infinity"`.
           FLOAT64 = 3
 
+          # Encoded as `number`, or the strings `"NaN"`, `"Infinity"`, or
+          # `"-Infinity"`.
+          FLOAT32 = 15
+
           # Encoded as `string` in RFC 3339 timestamp format. The time zone
           # must be present, and must be `"Z"`.
           #
@@ -149,6 +160,13 @@ module Google
           #   preserved.
           # - JSON array elements will have their order preserved.
           JSON = 11
+
+          # Encoded as a base64-encoded `string`, as described in RFC 4648,
+          # section 4.
+          PROTO = 13
+
+          # Encoded as `string`, in decimal format.
+          ENUM = 14
         end
 
         # `TypeAnnotationCode` is used as a part of {::Google::Cloud::Spanner::V1::Type Type} to
@@ -175,6 +193,11 @@ module Google
           # {::Google::Cloud::Spanner::V1::TypeCode::JSON JSON} when a client interacts with PostgreSQL-enabled
           # Spanner databases.
           PG_JSONB = 3
+
+          # PostgreSQL compatible OID type. This annotation can be used by a client
+          # interacting with PostgreSQL-enabled Spanner database to specify that a
+          # value should be treated using the semantics of the OID type.
+          PG_OID = 4
         end
       end
     end

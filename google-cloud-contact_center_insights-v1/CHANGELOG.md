@@ -1,5 +1,36 @@
 # Changelog
 
+### 0.21.0 (2024-01-25)
+
+#### Features
+
+* Support for Conversation QualityMetadata ([#24472](https://github.com/googleapis/google-cloud-ruby/issues/24472)) 
+
+### 0.20.1 (2024-01-12)
+
+#### Bug Fixes
+
+* Ensure endpoints are correct for mixin clients ([#24032](https://github.com/googleapis/google-cloud-ruby/issues/24032)) 
+
+### 0.20.0 (2024-01-11)
+
+#### Features
+
+* Support for universe_domain ([#23776](https://github.com/googleapis/google-cloud-ruby/issues/23776)) 
+
+### 0.19.1 (2023-12-04)
+
+#### Documentation
+
+* Update IngestConversations and BulkAnalyzeConversations comments ([#23561](https://github.com/googleapis/google-cloud-ruby/issues/23561)) 
+
+### 0.19.0 (2023-11-07)
+
+#### Features
+
+* Support bulk audio import via the IngestConversations API ([#23521](https://github.com/googleapis/google-cloud-ruby/issues/23521)) 
+* Support BulkDeleteConversations API ([#23521](https://github.com/googleapis/google-cloud-ruby/issues/23521)) 
+
 ### 0.18.0 (2023-09-28)
 
 #### Features

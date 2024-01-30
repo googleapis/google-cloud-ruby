@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/contact_center_insights/v1/contact_center_insights"
 
 class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_analysis_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -37,7 +47,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientP
 
   def test_conversation_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -49,7 +59,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientP
 
   def test_conversation_profile_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -61,7 +71,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientP
 
   def test_issue_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -73,7 +83,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientP
 
   def test_issue_model_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -85,7 +95,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientP
 
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -97,7 +107,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientP
 
   def test_participant_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -112,7 +122,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientP
 
   def test_phrase_matcher_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -124,7 +134,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientP
 
   def test_recognizer_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -136,7 +146,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientP
 
   def test_settings_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -148,7 +158,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientP
 
   def test_view_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
         config.credentials = grpc_channel
       end

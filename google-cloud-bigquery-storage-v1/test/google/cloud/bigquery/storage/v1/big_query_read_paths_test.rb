@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/bigquery/storage/v1/big_query_read"
 
 class ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_project_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -37,7 +47,7 @@ class ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::ClientPathsTest < Mi
 
   def test_read_session_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -49,7 +59,7 @@ class ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::ClientPathsTest < Mi
 
   def test_read_stream_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -61,7 +71,7 @@ class ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::ClientPathsTest < Mi
 
   def test_table_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client.new do |config|
         config.credentials = grpc_channel
       end

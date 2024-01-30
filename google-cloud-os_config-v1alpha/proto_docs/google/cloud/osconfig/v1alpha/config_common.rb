@@ -23,6 +23,7 @@ module Google
       module V1alpha
         # Step performed by the OS Config agent for configuring an `OSPolicyResource`
         # to its desired state.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] type
         #   @return [::Google::Cloud::OsConfig::V1alpha::OSPolicyResourceConfigStep::Type]
         #     Configuration step type.
@@ -38,6 +39,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Supported configuration step types
+          # @deprecated This enum is deprecated and may be removed in the next major version update.
           module Type
             # Default value. This value is unused.
             TYPE_UNSPECIFIED = 0
@@ -62,6 +64,7 @@ module Google
           end
 
           # Supported outcomes for a configuration step.
+          # @deprecated This enum is deprecated and may be removed in the next major version update.
           module Outcome
             # Default value. This value is unused.
             OUTCOME_UNSPECIFIED = 0
@@ -75,6 +78,7 @@ module Google
         end
 
         # Compliance data for an OS policy resource.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] os_policy_resource_id
         #   @return [::String]
         #     The id of the OS policy resource.
@@ -93,6 +97,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # ExecResource specific output.
+          # @deprecated This message is deprecated and may be removed in the next major version update.
           # @!attribute [rw] enforcement_output
           #   @return [::String]
           #     Output from Enforcement phase output file (if run).
@@ -104,6 +109,7 @@ module Google
         end
 
         # Supported OSPolicy compliance states.
+        # @deprecated This enum is deprecated and may be removed in the next major version update.
         module OSPolicyComplianceState
           # Default value. This value is unused.
           OS_POLICY_COMPLIANCE_STATE_UNSPECIFIED = 0

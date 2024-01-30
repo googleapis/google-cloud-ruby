@@ -1,5 +1,24 @@
 # Release History
 
+### 0.20.1 (2024-01-12)
+
+#### Bug Fixes
+
+* Ensure endpoints are correct for mixin clients ([#24032](https://github.com/googleapis/google-cloud-ruby/issues/24032)) 
+
+### 0.20.0 (2024-01-11)
+
+#### Features
+
+* Support for universe_domain ([#23778](https://github.com/googleapis/google-cloud-ruby/issues/23778)) 
+
+### 0.19.0 (2023-10-27)
+
+#### Features
+
+* support discovery API service 
+* support min_likelihood_per_info_type, deidentify options, sensitivity_score, last_modified, action_details, exclude_from_analysis 
+
 ### 0.18.0 (2023-09-12)
 
 #### Features

@@ -60,6 +60,14 @@ class ::Google::Cloud::Compute::V1::RegionBackendServices::Rest::ClientTest < Mi
 
       @response
     end
+
+    def endpoint
+      "endpoint.example.com"
+    end
+
+    def universe_domain
+      "example.com"
+    end
   end
 
   def test_delete
@@ -406,6 +414,66 @@ class ::Google::Cloud::Compute::V1::RegionBackendServices::Rest::ClientTest < Mi
     end
   end
 
+  def test_list_usable
+    # Create test objects.
+    client_result = ::Google::Cloud::Compute::V1::BackendServiceListUsable.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    filter = "hello world"
+    max_results = 42
+    order_by = "hello world"
+    page_token = "hello world"
+    project = "hello world"
+    region = "hello world"
+    return_partial_success = true
+
+    list_usable_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Compute::V1::RegionBackendServices::Rest::ServiceStub.stub :transcode_list_usable_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_usable_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::RegionBackendServices::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_usable({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_usable filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_usable ::Google::Cloud::Compute::V1::ListUsableRegionBackendServicesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_usable({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_usable(::Google::Cloud::Compute::V1::ListUsableRegionBackendServicesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_usable_client_stub.call_count
+      end
+    end
+  end
+
   def test_patch
     # Create test objects.
     client_result = ::Google::Cloud::Compute::V1::Operation.new
@@ -521,6 +589,121 @@ class ::Google::Cloud::Compute::V1::RegionBackendServices::Rest::ClientTest < Mi
     end
   end
 
+  def test_set_security_policy
+    # Create test objects.
+    client_result = ::Google::Cloud::Compute::V1::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    backend_service = "hello world"
+    project = "hello world"
+    region = "hello world"
+    request_id = "hello world"
+    security_policy_reference_resource = {}
+
+    set_security_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Compute::V1::RegionBackendServices::Rest::ServiceStub.stub :transcode_set_security_policy_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, set_security_policy_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::RegionBackendServices::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.set_security_policy({ backend_service: backend_service, project: project, region: region, request_id: request_id, security_policy_reference_resource: security_policy_reference_resource }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.set_security_policy backend_service: backend_service, project: project, region: region, request_id: request_id, security_policy_reference_resource: security_policy_reference_resource do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.set_security_policy ::Google::Cloud::Compute::V1::SetSecurityPolicyRegionBackendServiceRequest.new(backend_service: backend_service, project: project, region: region, request_id: request_id, security_policy_reference_resource: security_policy_reference_resource) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.set_security_policy({ backend_service: backend_service, project: project, region: region, request_id: request_id, security_policy_reference_resource: security_policy_reference_resource }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.set_security_policy(::Google::Cloud::Compute::V1::SetSecurityPolicyRegionBackendServiceRequest.new(backend_service: backend_service, project: project, region: region, request_id: request_id, security_policy_reference_resource: security_policy_reference_resource), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, set_security_policy_client_stub.call_count
+      end
+    end
+  end
+
+  def test_test_iam_permissions
+    # Create test objects.
+    client_result = ::Google::Cloud::Compute::V1::TestPermissionsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    project = "hello world"
+    region = "hello world"
+    resource = "hello world"
+    test_permissions_request_resource = {}
+
+    test_iam_permissions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Compute::V1::RegionBackendServices::Rest::ServiceStub.stub :transcode_test_iam_permissions_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, test_iam_permissions_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::RegionBackendServices::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.test_iam_permissions({ project: project, region: region, resource: resource, test_permissions_request_resource: test_permissions_request_resource }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.test_iam_permissions project: project, region: region, resource: resource, test_permissions_request_resource: test_permissions_request_resource do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.test_iam_permissions ::Google::Cloud::Compute::V1::TestIamPermissionsRegionBackendServiceRequest.new(project: project, region: region, resource: resource, test_permissions_request_resource: test_permissions_request_resource) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.test_iam_permissions({ project: project, region: region, resource: resource, test_permissions_request_resource: test_permissions_request_resource }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.test_iam_permissions(::Google::Cloud::Compute::V1::TestIamPermissionsRegionBackendServiceRequest.new(project: project, region: region, resource: resource, test_permissions_request_resource: test_permissions_request_resource), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, test_iam_permissions_client_stub.call_count
+      end
+    end
+  end
+
   def test_update
     # Create test objects.
     client_result = ::Google::Cloud::Compute::V1::Operation.new
@@ -583,7 +766,8 @@ class ::Google::Cloud::Compute::V1::RegionBackendServices::Rest::ClientTest < Mi
     credentials_token = :dummy_value
 
     client = block_config = config = nil
-    Gapic::Rest::ClientStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil
+    Gapic::Rest::ClientStub.stub :new, dummy_stub do
       client = ::Google::Cloud::Compute::V1::RegionBackendServices::Rest::Client.new do |config|
         config.credentials = credentials_token
       end

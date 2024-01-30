@@ -261,6 +261,7 @@ module Google
         #   @return [::Array<::String>]
         #     Network tags configured on the instance.
         # @!attribute [rw] service_account
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Service account authorized for the instance.
         class InstanceInfo

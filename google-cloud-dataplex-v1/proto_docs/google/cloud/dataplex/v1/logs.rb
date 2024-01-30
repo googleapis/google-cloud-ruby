@@ -338,6 +338,102 @@ module Google
           end
         end
 
+        # Payload associated with Governance related log events.
+        # @!attribute [rw] message
+        #   @return [::String]
+        #     The log message.
+        # @!attribute [rw] event_type
+        #   @return [::Google::Cloud::Dataplex::V1::GovernanceEvent::EventType]
+        #     The type of the event.
+        # @!attribute [rw] entity
+        #   @return [::Google::Cloud::Dataplex::V1::GovernanceEvent::Entity]
+        #     Entity resource information if the log event is associated with a
+        #     specific entity.
+        class GovernanceEvent
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Information about Entity resource that the log event is associated with.
+          # @!attribute [rw] entity
+          #   @return [::String]
+          #     The Entity resource the log event is associated with.
+          #     Format:
+          #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}`
+          # @!attribute [rw] entity_type
+          #   @return [::Google::Cloud::Dataplex::V1::GovernanceEvent::Entity::EntityType]
+          #     Type of entity.
+          class Entity
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Type of entity.
+            module EntityType
+              # An unspecified Entity type.
+              ENTITY_TYPE_UNSPECIFIED = 0
+
+              # Table entity type.
+              TABLE = 1
+
+              # Fileset entity type.
+              FILESET = 2
+            end
+          end
+
+          # Type of governance log event.
+          module EventType
+            # An unspecified event type.
+            EVENT_TYPE_UNSPECIFIED = 0
+
+            # Resource IAM policy update event.
+            RESOURCE_IAM_POLICY_UPDATE = 1
+
+            # BigQuery table create event.
+            BIGQUERY_TABLE_CREATE = 2
+
+            # BigQuery table update event.
+            BIGQUERY_TABLE_UPDATE = 3
+
+            # BigQuery table delete event.
+            BIGQUERY_TABLE_DELETE = 4
+
+            # BigQuery connection create event.
+            BIGQUERY_CONNECTION_CREATE = 5
+
+            # BigQuery connection update event.
+            BIGQUERY_CONNECTION_UPDATE = 6
+
+            # BigQuery connection delete event.
+            BIGQUERY_CONNECTION_DELETE = 7
+
+            # BigQuery taxonomy created.
+            BIGQUERY_TAXONOMY_CREATE = 10
+
+            # BigQuery policy tag created.
+            BIGQUERY_POLICY_TAG_CREATE = 11
+
+            # BigQuery policy tag deleted.
+            BIGQUERY_POLICY_TAG_DELETE = 12
+
+            # BigQuery set iam policy for policy tag.
+            BIGQUERY_POLICY_TAG_SET_IAM_POLICY = 13
+
+            # Access policy update event.
+            ACCESS_POLICY_UPDATE = 14
+
+            # Number of resources matched with particular Query.
+            GOVERNANCE_RULE_MATCHED_RESOURCES = 15
+
+            # Rule processing exceeds the allowed limit.
+            GOVERNANCE_RULE_SEARCH_LIMIT_EXCEEDS = 16
+
+            # Rule processing errors.
+            GOVERNANCE_RULE_ERRORS = 17
+
+            # Governance rule prcoessing Event.
+            GOVERNANCE_RULE_PROCESSING = 18
+          end
+        end
+
         # These messages contain information about the execution of a datascan.
         # The monitored resource is 'DataScan'
         # Next ID: 13
@@ -415,6 +511,28 @@ module Google
           #     The key of the map is the name of the dimension.
           #     The value is the bool value depicting whether the dimension result was
           #     `pass` or not.
+          # @!attribute [rw] score
+          #   @return [::Float]
+          #     The table-level data quality score for the data scan job.
+          #
+          #     The data quality score ranges between [0, 100] (up to two decimal
+          #     points).
+          # @!attribute [rw] dimension_score
+          #   @return [::Google::Protobuf::Map{::String => ::Float}]
+          #     The score of each dimension for data quality result.
+          #     The key of the map is the name of the dimension.
+          #     The value is the data quality score for the dimension.
+          #
+          #     The score ranges between [0, 100] (up to two decimal
+          #     points).
+          # @!attribute [rw] column_score
+          #   @return [::Google::Protobuf::Map{::String => ::Float}]
+          #     The score of each column scanned in the data scan job.
+          #     The key of the map is the name of the column.
+          #     The value is the data quality score for the column.
+          #
+          #     The score ranges between [0, 100] (up to two decimal
+          #     points).
           class DataQualityResult
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -424,6 +542,24 @@ module Google
             # @!attribute [rw] value
             #   @return [::Boolean]
             class DimensionPassedEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::Float]
+            class DimensionScoreEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::Float]
+            class ColumnScoreEntry
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end

@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-media_translation-v1beta1",
-    "version": "0.7.0",
+    "version": "0.8.1",
     "language": "RUBY",
     "apis": [
       {
@@ -14,7 +14,7 @@
     {
       "region_tag": "mediatranslation_v1beta1_generated_SpeechTranslationService_StreamingTranslateSpeech_sync",
       "title": "Snippet for the streaming_translate_speech call in the SpeechTranslationService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MediaTranslation::V1beta1::SpeechTranslationService::Client#streaming_translate_speech. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MediaTranslation::V1beta1::SpeechTranslationService::Client#streaming_translate_speech.",
       "file": "speech_translation_service/streaming_translate_speech.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 50,
+          "end": 55,
           "type": "FULL"
         }
       ]

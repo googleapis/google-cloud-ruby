@@ -45,6 +45,14 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::ClientTest < Minitest::Te
 
       @response
     end
+
+    def endpoint
+      "endpoint.example.com"
+    end
+
+    def universe_domain
+      "example.com"
+    end
   end
 
   def test_list_private_clouds
@@ -783,6 +791,528 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::ClientTest < Minitest::Te
     end
   end
 
+  def test_list_nodes
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::VmwareEngine::V1::ListNodesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_nodes_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_nodes, name
+      assert_kind_of ::Google::Cloud::VmwareEngine::V1::ListNodesRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_nodes_client_stub do
+      # Create client
+      client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_nodes({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_nodes parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_nodes ::Google::Cloud::VmwareEngine::V1::ListNodesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_nodes({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_nodes(::Google::Cloud::VmwareEngine::V1::ListNodesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_nodes_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_node
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::VmwareEngine::V1::Node.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_node_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_node, name
+      assert_kind_of ::Google::Cloud::VmwareEngine::V1::GetNodeRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_node_client_stub do
+      # Create client
+      client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_node({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_node name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_node ::Google::Cloud::VmwareEngine::V1::GetNodeRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_node({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_node(::Google::Cloud::VmwareEngine::V1::GetNodeRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_node_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_external_addresses
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::VmwareEngine::V1::ListExternalAddressesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_external_addresses_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_external_addresses, name
+      assert_kind_of ::Google::Cloud::VmwareEngine::V1::ListExternalAddressesRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_external_addresses_client_stub do
+      # Create client
+      client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_external_addresses({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_external_addresses parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_external_addresses ::Google::Cloud::VmwareEngine::V1::ListExternalAddressesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_external_addresses({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_external_addresses(::Google::Cloud::VmwareEngine::V1::ListExternalAddressesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_external_addresses_client_stub.call_rpc_count
+    end
+  end
+
+  def test_fetch_network_policy_external_addresses
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::VmwareEngine::V1::FetchNetworkPolicyExternalAddressesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    network_policy = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    fetch_network_policy_external_addresses_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :fetch_network_policy_external_addresses, name
+      assert_kind_of ::Google::Cloud::VmwareEngine::V1::FetchNetworkPolicyExternalAddressesRequest, request
+      assert_equal "hello world", request["network_policy"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, fetch_network_policy_external_addresses_client_stub do
+      # Create client
+      client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.fetch_network_policy_external_addresses({ network_policy: network_policy, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.fetch_network_policy_external_addresses network_policy: network_policy, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.fetch_network_policy_external_addresses ::Google::Cloud::VmwareEngine::V1::FetchNetworkPolicyExternalAddressesRequest.new(network_policy: network_policy, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.fetch_network_policy_external_addresses({ network_policy: network_policy, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.fetch_network_policy_external_addresses(::Google::Cloud::VmwareEngine::V1::FetchNetworkPolicyExternalAddressesRequest.new(network_policy: network_policy, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, fetch_network_policy_external_addresses_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_external_address
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::VmwareEngine::V1::ExternalAddress.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_external_address_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_external_address, name
+      assert_kind_of ::Google::Cloud::VmwareEngine::V1::GetExternalAddressRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_external_address_client_stub do
+      # Create client
+      client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_external_address({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_external_address name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_external_address ::Google::Cloud::VmwareEngine::V1::GetExternalAddressRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_external_address({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_external_address(::Google::Cloud::VmwareEngine::V1::GetExternalAddressRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_external_address_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_external_address
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    external_address = {}
+    external_address_id = "hello world"
+    request_id = "hello world"
+
+    create_external_address_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_external_address, name
+      assert_kind_of ::Google::Cloud::VmwareEngine::V1::CreateExternalAddressRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::VmwareEngine::V1::ExternalAddress), request["external_address"]
+      assert_equal "hello world", request["external_address_id"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_external_address_client_stub do
+      # Create client
+      client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_external_address({ parent: parent, external_address: external_address, external_address_id: external_address_id, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_external_address parent: parent, external_address: external_address, external_address_id: external_address_id, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_external_address ::Google::Cloud::VmwareEngine::V1::CreateExternalAddressRequest.new(parent: parent, external_address: external_address, external_address_id: external_address_id, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_external_address({ parent: parent, external_address: external_address, external_address_id: external_address_id, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_external_address(::Google::Cloud::VmwareEngine::V1::CreateExternalAddressRequest.new(parent: parent, external_address: external_address, external_address_id: external_address_id, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_external_address_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_external_address
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    external_address = {}
+    request_id = "hello world"
+
+    update_external_address_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_external_address, name
+      assert_kind_of ::Google::Cloud::VmwareEngine::V1::UpdateExternalAddressRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::VmwareEngine::V1::ExternalAddress), request["external_address"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_external_address_client_stub do
+      # Create client
+      client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_external_address({ update_mask: update_mask, external_address: external_address, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_external_address update_mask: update_mask, external_address: external_address, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_external_address ::Google::Cloud::VmwareEngine::V1::UpdateExternalAddressRequest.new(update_mask: update_mask, external_address: external_address, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_external_address({ update_mask: update_mask, external_address: external_address, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_external_address(::Google::Cloud::VmwareEngine::V1::UpdateExternalAddressRequest.new(update_mask: update_mask, external_address: external_address, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_external_address_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_external_address
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+
+    delete_external_address_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_external_address, name
+      assert_kind_of ::Google::Cloud::VmwareEngine::V1::DeleteExternalAddressRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_external_address_client_stub do
+      # Create client
+      client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_external_address({ name: name, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_external_address name: name, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_external_address ::Google::Cloud::VmwareEngine::V1::DeleteExternalAddressRequest.new(name: name, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_external_address({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_external_address(::Google::Cloud::VmwareEngine::V1::DeleteExternalAddressRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_external_address_client_stub.call_rpc_count
+    end
+  end
+
   def test_list_subnets
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::VmwareEngine::V1::ListSubnetsResponse.new
@@ -970,6 +1500,666 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::ClientTest < Minitest::Te
 
       # Verify method calls
       assert_equal 5, update_subnet_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_external_access_rules
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::VmwareEngine::V1::ListExternalAccessRulesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_external_access_rules_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_external_access_rules, name
+      assert_kind_of ::Google::Cloud::VmwareEngine::V1::ListExternalAccessRulesRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_external_access_rules_client_stub do
+      # Create client
+      client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_external_access_rules({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_external_access_rules parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_external_access_rules ::Google::Cloud::VmwareEngine::V1::ListExternalAccessRulesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_external_access_rules({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_external_access_rules(::Google::Cloud::VmwareEngine::V1::ListExternalAccessRulesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_external_access_rules_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_external_access_rule
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::VmwareEngine::V1::ExternalAccessRule.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_external_access_rule_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_external_access_rule, name
+      assert_kind_of ::Google::Cloud::VmwareEngine::V1::GetExternalAccessRuleRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_external_access_rule_client_stub do
+      # Create client
+      client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_external_access_rule({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_external_access_rule name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_external_access_rule ::Google::Cloud::VmwareEngine::V1::GetExternalAccessRuleRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_external_access_rule({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_external_access_rule(::Google::Cloud::VmwareEngine::V1::GetExternalAccessRuleRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_external_access_rule_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_external_access_rule
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    external_access_rule = {}
+    external_access_rule_id = "hello world"
+    request_id = "hello world"
+
+    create_external_access_rule_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_external_access_rule, name
+      assert_kind_of ::Google::Cloud::VmwareEngine::V1::CreateExternalAccessRuleRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::VmwareEngine::V1::ExternalAccessRule), request["external_access_rule"]
+      assert_equal "hello world", request["external_access_rule_id"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_external_access_rule_client_stub do
+      # Create client
+      client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_external_access_rule({ parent: parent, external_access_rule: external_access_rule, external_access_rule_id: external_access_rule_id, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_external_access_rule parent: parent, external_access_rule: external_access_rule, external_access_rule_id: external_access_rule_id, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_external_access_rule ::Google::Cloud::VmwareEngine::V1::CreateExternalAccessRuleRequest.new(parent: parent, external_access_rule: external_access_rule, external_access_rule_id: external_access_rule_id, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_external_access_rule({ parent: parent, external_access_rule: external_access_rule, external_access_rule_id: external_access_rule_id, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_external_access_rule(::Google::Cloud::VmwareEngine::V1::CreateExternalAccessRuleRequest.new(parent: parent, external_access_rule: external_access_rule, external_access_rule_id: external_access_rule_id, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_external_access_rule_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_external_access_rule
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    external_access_rule = {}
+    request_id = "hello world"
+
+    update_external_access_rule_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_external_access_rule, name
+      assert_kind_of ::Google::Cloud::VmwareEngine::V1::UpdateExternalAccessRuleRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::VmwareEngine::V1::ExternalAccessRule), request["external_access_rule"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_external_access_rule_client_stub do
+      # Create client
+      client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_external_access_rule({ update_mask: update_mask, external_access_rule: external_access_rule, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_external_access_rule update_mask: update_mask, external_access_rule: external_access_rule, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_external_access_rule ::Google::Cloud::VmwareEngine::V1::UpdateExternalAccessRuleRequest.new(update_mask: update_mask, external_access_rule: external_access_rule, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_external_access_rule({ update_mask: update_mask, external_access_rule: external_access_rule, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_external_access_rule(::Google::Cloud::VmwareEngine::V1::UpdateExternalAccessRuleRequest.new(update_mask: update_mask, external_access_rule: external_access_rule, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_external_access_rule_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_external_access_rule
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+
+    delete_external_access_rule_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_external_access_rule, name
+      assert_kind_of ::Google::Cloud::VmwareEngine::V1::DeleteExternalAccessRuleRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_external_access_rule_client_stub do
+      # Create client
+      client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_external_access_rule({ name: name, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_external_access_rule name: name, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_external_access_rule ::Google::Cloud::VmwareEngine::V1::DeleteExternalAccessRuleRequest.new(name: name, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_external_access_rule({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_external_access_rule(::Google::Cloud::VmwareEngine::V1::DeleteExternalAccessRuleRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_external_access_rule_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_logging_servers
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::VmwareEngine::V1::ListLoggingServersResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_logging_servers_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_logging_servers, name
+      assert_kind_of ::Google::Cloud::VmwareEngine::V1::ListLoggingServersRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_logging_servers_client_stub do
+      # Create client
+      client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_logging_servers({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_logging_servers parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_logging_servers ::Google::Cloud::VmwareEngine::V1::ListLoggingServersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_logging_servers({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_logging_servers(::Google::Cloud::VmwareEngine::V1::ListLoggingServersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_logging_servers_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_logging_server
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::VmwareEngine::V1::LoggingServer.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_logging_server_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_logging_server, name
+      assert_kind_of ::Google::Cloud::VmwareEngine::V1::GetLoggingServerRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_logging_server_client_stub do
+      # Create client
+      client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_logging_server({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_logging_server name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_logging_server ::Google::Cloud::VmwareEngine::V1::GetLoggingServerRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_logging_server({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_logging_server(::Google::Cloud::VmwareEngine::V1::GetLoggingServerRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_logging_server_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_logging_server
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    logging_server = {}
+    logging_server_id = "hello world"
+    request_id = "hello world"
+
+    create_logging_server_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_logging_server, name
+      assert_kind_of ::Google::Cloud::VmwareEngine::V1::CreateLoggingServerRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::VmwareEngine::V1::LoggingServer), request["logging_server"]
+      assert_equal "hello world", request["logging_server_id"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_logging_server_client_stub do
+      # Create client
+      client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_logging_server({ parent: parent, logging_server: logging_server, logging_server_id: logging_server_id, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_logging_server parent: parent, logging_server: logging_server, logging_server_id: logging_server_id, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_logging_server ::Google::Cloud::VmwareEngine::V1::CreateLoggingServerRequest.new(parent: parent, logging_server: logging_server, logging_server_id: logging_server_id, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_logging_server({ parent: parent, logging_server: logging_server, logging_server_id: logging_server_id, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_logging_server(::Google::Cloud::VmwareEngine::V1::CreateLoggingServerRequest.new(parent: parent, logging_server: logging_server, logging_server_id: logging_server_id, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_logging_server_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_logging_server
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    logging_server = {}
+    request_id = "hello world"
+
+    update_logging_server_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_logging_server, name
+      assert_kind_of ::Google::Cloud::VmwareEngine::V1::UpdateLoggingServerRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::VmwareEngine::V1::LoggingServer), request["logging_server"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_logging_server_client_stub do
+      # Create client
+      client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_logging_server({ update_mask: update_mask, logging_server: logging_server, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_logging_server update_mask: update_mask, logging_server: logging_server, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_logging_server ::Google::Cloud::VmwareEngine::V1::UpdateLoggingServerRequest.new(update_mask: update_mask, logging_server: logging_server, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_logging_server({ update_mask: update_mask, logging_server: logging_server, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_logging_server(::Google::Cloud::VmwareEngine::V1::UpdateLoggingServerRequest.new(update_mask: update_mask, logging_server: logging_server, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_logging_server_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_logging_server
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+
+    delete_logging_server_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_logging_server, name
+      assert_kind_of ::Google::Cloud::VmwareEngine::V1::DeleteLoggingServerRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_logging_server_client_stub do
+      # Create client
+      client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_logging_server({ name: name, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_logging_server name: name, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_logging_server ::Google::Cloud::VmwareEngine::V1::DeleteLoggingServerRequest.new(name: name, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_logging_server({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_logging_server(::Google::Cloud::VmwareEngine::V1::DeleteLoggingServerRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_logging_server_client_stub.call_rpc_count
     end
   end
 
@@ -1167,11 +2357,13 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::ClientTest < Minitest::Te
 
     # Create request parameters for a unary method.
     private_cloud = "hello world"
+    username = "hello world"
 
     show_vcenter_credentials_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :show_vcenter_credentials, name
       assert_kind_of ::Google::Cloud::VmwareEngine::V1::ShowVcenterCredentialsRequest, request
       assert_equal "hello world", request["private_cloud"]
+      assert_equal "hello world", request["username"]
       refute_nil options
     end
 
@@ -1182,31 +2374,31 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::ClientTest < Minitest::Te
       end
 
       # Use hash object
-      client.show_vcenter_credentials({ private_cloud: private_cloud }) do |response, operation|
+      client.show_vcenter_credentials({ private_cloud: private_cloud, username: username }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.show_vcenter_credentials private_cloud: private_cloud do |response, operation|
+      client.show_vcenter_credentials private_cloud: private_cloud, username: username do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.show_vcenter_credentials ::Google::Cloud::VmwareEngine::V1::ShowVcenterCredentialsRequest.new(private_cloud: private_cloud) do |response, operation|
+      client.show_vcenter_credentials ::Google::Cloud::VmwareEngine::V1::ShowVcenterCredentialsRequest.new(private_cloud: private_cloud, username: username) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.show_vcenter_credentials({ private_cloud: private_cloud }, grpc_options) do |response, operation|
+      client.show_vcenter_credentials({ private_cloud: private_cloud, username: username }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.show_vcenter_credentials(::Google::Cloud::VmwareEngine::V1::ShowVcenterCredentialsRequest.new(private_cloud: private_cloud), grpc_options) do |response, operation|
+      client.show_vcenter_credentials(::Google::Cloud::VmwareEngine::V1::ShowVcenterCredentialsRequest.new(private_cloud: private_cloud, username: username), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1291,12 +2483,14 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::ClientTest < Minitest::Te
     # Create request parameters for a unary method.
     private_cloud = "hello world"
     request_id = "hello world"
+    username = "hello world"
 
     reset_vcenter_credentials_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :reset_vcenter_credentials, name
       assert_kind_of ::Google::Cloud::VmwareEngine::V1::ResetVcenterCredentialsRequest, request
       assert_equal "hello world", request["private_cloud"]
       assert_equal "hello world", request["request_id"]
+      assert_equal "hello world", request["username"]
       refute_nil options
     end
 
@@ -1307,35 +2501,35 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::ClientTest < Minitest::Te
       end
 
       # Use hash object
-      client.reset_vcenter_credentials({ private_cloud: private_cloud, request_id: request_id }) do |response, operation|
+      client.reset_vcenter_credentials({ private_cloud: private_cloud, request_id: request_id, username: username }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.reset_vcenter_credentials private_cloud: private_cloud, request_id: request_id do |response, operation|
+      client.reset_vcenter_credentials private_cloud: private_cloud, request_id: request_id, username: username do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.reset_vcenter_credentials ::Google::Cloud::VmwareEngine::V1::ResetVcenterCredentialsRequest.new(private_cloud: private_cloud, request_id: request_id) do |response, operation|
+      client.reset_vcenter_credentials ::Google::Cloud::VmwareEngine::V1::ResetVcenterCredentialsRequest.new(private_cloud: private_cloud, request_id: request_id, username: username) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.reset_vcenter_credentials({ private_cloud: private_cloud, request_id: request_id }, grpc_options) do |response, operation|
+      client.reset_vcenter_credentials({ private_cloud: private_cloud, request_id: request_id, username: username }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.reset_vcenter_credentials(::Google::Cloud::VmwareEngine::V1::ResetVcenterCredentialsRequest.new(private_cloud: private_cloud, request_id: request_id), grpc_options) do |response, operation|
+      client.reset_vcenter_credentials(::Google::Cloud::VmwareEngine::V1::ResetVcenterCredentialsRequest.new(private_cloud: private_cloud, request_id: request_id, username: username), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1343,6 +2537,530 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::ClientTest < Minitest::Te
 
       # Verify method calls
       assert_equal 5, reset_vcenter_credentials_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_dns_forwarding
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::VmwareEngine::V1::DnsForwarding.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_dns_forwarding_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_dns_forwarding, name
+      assert_kind_of ::Google::Cloud::VmwareEngine::V1::GetDnsForwardingRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_dns_forwarding_client_stub do
+      # Create client
+      client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_dns_forwarding({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_dns_forwarding name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_dns_forwarding ::Google::Cloud::VmwareEngine::V1::GetDnsForwardingRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_dns_forwarding({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_dns_forwarding(::Google::Cloud::VmwareEngine::V1::GetDnsForwardingRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_dns_forwarding_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_dns_forwarding
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    dns_forwarding = {}
+    update_mask = {}
+    request_id = "hello world"
+
+    update_dns_forwarding_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_dns_forwarding, name
+      assert_kind_of ::Google::Cloud::VmwareEngine::V1::UpdateDnsForwardingRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::VmwareEngine::V1::DnsForwarding), request["dns_forwarding"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_dns_forwarding_client_stub do
+      # Create client
+      client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_dns_forwarding({ dns_forwarding: dns_forwarding, update_mask: update_mask, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_dns_forwarding dns_forwarding: dns_forwarding, update_mask: update_mask, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_dns_forwarding ::Google::Cloud::VmwareEngine::V1::UpdateDnsForwardingRequest.new(dns_forwarding: dns_forwarding, update_mask: update_mask, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_dns_forwarding({ dns_forwarding: dns_forwarding, update_mask: update_mask, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_dns_forwarding(::Google::Cloud::VmwareEngine::V1::UpdateDnsForwardingRequest.new(dns_forwarding: dns_forwarding, update_mask: update_mask, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_dns_forwarding_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_network_peering
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::VmwareEngine::V1::NetworkPeering.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_network_peering_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_network_peering, name
+      assert_kind_of ::Google::Cloud::VmwareEngine::V1::GetNetworkPeeringRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_network_peering_client_stub do
+      # Create client
+      client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_network_peering({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_network_peering name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_network_peering ::Google::Cloud::VmwareEngine::V1::GetNetworkPeeringRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_network_peering({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_network_peering(::Google::Cloud::VmwareEngine::V1::GetNetworkPeeringRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_network_peering_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_network_peerings
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::VmwareEngine::V1::ListNetworkPeeringsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_network_peerings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_network_peerings, name
+      assert_kind_of ::Google::Cloud::VmwareEngine::V1::ListNetworkPeeringsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_network_peerings_client_stub do
+      # Create client
+      client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_network_peerings({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_network_peerings parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_network_peerings ::Google::Cloud::VmwareEngine::V1::ListNetworkPeeringsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_network_peerings({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_network_peerings(::Google::Cloud::VmwareEngine::V1::ListNetworkPeeringsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_network_peerings_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_network_peering
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    network_peering_id = "hello world"
+    network_peering = {}
+    request_id = "hello world"
+
+    create_network_peering_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_network_peering, name
+      assert_kind_of ::Google::Cloud::VmwareEngine::V1::CreateNetworkPeeringRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["network_peering_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::VmwareEngine::V1::NetworkPeering), request["network_peering"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_network_peering_client_stub do
+      # Create client
+      client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_network_peering({ parent: parent, network_peering_id: network_peering_id, network_peering: network_peering, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_network_peering parent: parent, network_peering_id: network_peering_id, network_peering: network_peering, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_network_peering ::Google::Cloud::VmwareEngine::V1::CreateNetworkPeeringRequest.new(parent: parent, network_peering_id: network_peering_id, network_peering: network_peering, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_network_peering({ parent: parent, network_peering_id: network_peering_id, network_peering: network_peering, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_network_peering(::Google::Cloud::VmwareEngine::V1::CreateNetworkPeeringRequest.new(parent: parent, network_peering_id: network_peering_id, network_peering: network_peering, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_network_peering_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_network_peering
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+
+    delete_network_peering_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_network_peering, name
+      assert_kind_of ::Google::Cloud::VmwareEngine::V1::DeleteNetworkPeeringRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_network_peering_client_stub do
+      # Create client
+      client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_network_peering({ name: name, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_network_peering name: name, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_network_peering ::Google::Cloud::VmwareEngine::V1::DeleteNetworkPeeringRequest.new(name: name, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_network_peering({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_network_peering(::Google::Cloud::VmwareEngine::V1::DeleteNetworkPeeringRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_network_peering_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_network_peering
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    network_peering = {}
+    update_mask = {}
+    request_id = "hello world"
+
+    update_network_peering_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_network_peering, name
+      assert_kind_of ::Google::Cloud::VmwareEngine::V1::UpdateNetworkPeeringRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::VmwareEngine::V1::NetworkPeering), request["network_peering"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_network_peering_client_stub do
+      # Create client
+      client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_network_peering({ network_peering: network_peering, update_mask: update_mask, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_network_peering network_peering: network_peering, update_mask: update_mask, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_network_peering ::Google::Cloud::VmwareEngine::V1::UpdateNetworkPeeringRequest.new(network_peering: network_peering, update_mask: update_mask, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_network_peering({ network_peering: network_peering, update_mask: update_mask, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_network_peering(::Google::Cloud::VmwareEngine::V1::UpdateNetworkPeeringRequest.new(network_peering: network_peering, update_mask: update_mask, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_network_peering_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_peering_routes
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::VmwareEngine::V1::ListPeeringRoutesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+
+    list_peering_routes_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_peering_routes, name
+      assert_kind_of ::Google::Cloud::VmwareEngine::V1::ListPeeringRoutesRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_peering_routes_client_stub do
+      # Create client
+      client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_peering_routes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_peering_routes parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_peering_routes ::Google::Cloud::VmwareEngine::V1::ListPeeringRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_peering_routes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_peering_routes(::Google::Cloud::VmwareEngine::V1::ListPeeringRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_peering_routes_client_stub.call_rpc_count
     end
   end
 
@@ -1867,6 +3585,401 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::ClientTest < Minitest::Te
 
       # Verify method calls
       assert_equal 5, delete_network_policy_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_management_dns_zone_bindings
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::VmwareEngine::V1::ListManagementDnsZoneBindingsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_management_dns_zone_bindings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_management_dns_zone_bindings, name
+      assert_kind_of ::Google::Cloud::VmwareEngine::V1::ListManagementDnsZoneBindingsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_management_dns_zone_bindings_client_stub do
+      # Create client
+      client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_management_dns_zone_bindings({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_management_dns_zone_bindings parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_management_dns_zone_bindings ::Google::Cloud::VmwareEngine::V1::ListManagementDnsZoneBindingsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_management_dns_zone_bindings({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_management_dns_zone_bindings(::Google::Cloud::VmwareEngine::V1::ListManagementDnsZoneBindingsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_management_dns_zone_bindings_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_management_dns_zone_binding
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::VmwareEngine::V1::ManagementDnsZoneBinding.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_management_dns_zone_binding_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_management_dns_zone_binding, name
+      assert_kind_of ::Google::Cloud::VmwareEngine::V1::GetManagementDnsZoneBindingRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_management_dns_zone_binding_client_stub do
+      # Create client
+      client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_management_dns_zone_binding({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_management_dns_zone_binding name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_management_dns_zone_binding ::Google::Cloud::VmwareEngine::V1::GetManagementDnsZoneBindingRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_management_dns_zone_binding({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_management_dns_zone_binding(::Google::Cloud::VmwareEngine::V1::GetManagementDnsZoneBindingRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_management_dns_zone_binding_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_management_dns_zone_binding
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    management_dns_zone_binding = {}
+    management_dns_zone_binding_id = "hello world"
+    request_id = "hello world"
+
+    create_management_dns_zone_binding_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_management_dns_zone_binding, name
+      assert_kind_of ::Google::Cloud::VmwareEngine::V1::CreateManagementDnsZoneBindingRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::VmwareEngine::V1::ManagementDnsZoneBinding), request["management_dns_zone_binding"]
+      assert_equal "hello world", request["management_dns_zone_binding_id"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_management_dns_zone_binding_client_stub do
+      # Create client
+      client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_management_dns_zone_binding({ parent: parent, management_dns_zone_binding: management_dns_zone_binding, management_dns_zone_binding_id: management_dns_zone_binding_id, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_management_dns_zone_binding parent: parent, management_dns_zone_binding: management_dns_zone_binding, management_dns_zone_binding_id: management_dns_zone_binding_id, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_management_dns_zone_binding ::Google::Cloud::VmwareEngine::V1::CreateManagementDnsZoneBindingRequest.new(parent: parent, management_dns_zone_binding: management_dns_zone_binding, management_dns_zone_binding_id: management_dns_zone_binding_id, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_management_dns_zone_binding({ parent: parent, management_dns_zone_binding: management_dns_zone_binding, management_dns_zone_binding_id: management_dns_zone_binding_id, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_management_dns_zone_binding(::Google::Cloud::VmwareEngine::V1::CreateManagementDnsZoneBindingRequest.new(parent: parent, management_dns_zone_binding: management_dns_zone_binding, management_dns_zone_binding_id: management_dns_zone_binding_id, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_management_dns_zone_binding_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_management_dns_zone_binding
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    management_dns_zone_binding = {}
+    request_id = "hello world"
+
+    update_management_dns_zone_binding_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_management_dns_zone_binding, name
+      assert_kind_of ::Google::Cloud::VmwareEngine::V1::UpdateManagementDnsZoneBindingRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::VmwareEngine::V1::ManagementDnsZoneBinding), request["management_dns_zone_binding"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_management_dns_zone_binding_client_stub do
+      # Create client
+      client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_management_dns_zone_binding({ update_mask: update_mask, management_dns_zone_binding: management_dns_zone_binding, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_management_dns_zone_binding update_mask: update_mask, management_dns_zone_binding: management_dns_zone_binding, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_management_dns_zone_binding ::Google::Cloud::VmwareEngine::V1::UpdateManagementDnsZoneBindingRequest.new(update_mask: update_mask, management_dns_zone_binding: management_dns_zone_binding, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_management_dns_zone_binding({ update_mask: update_mask, management_dns_zone_binding: management_dns_zone_binding, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_management_dns_zone_binding(::Google::Cloud::VmwareEngine::V1::UpdateManagementDnsZoneBindingRequest.new(update_mask: update_mask, management_dns_zone_binding: management_dns_zone_binding, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_management_dns_zone_binding_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_management_dns_zone_binding
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+
+    delete_management_dns_zone_binding_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_management_dns_zone_binding, name
+      assert_kind_of ::Google::Cloud::VmwareEngine::V1::DeleteManagementDnsZoneBindingRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_management_dns_zone_binding_client_stub do
+      # Create client
+      client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_management_dns_zone_binding({ name: name, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_management_dns_zone_binding name: name, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_management_dns_zone_binding ::Google::Cloud::VmwareEngine::V1::DeleteManagementDnsZoneBindingRequest.new(name: name, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_management_dns_zone_binding({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_management_dns_zone_binding(::Google::Cloud::VmwareEngine::V1::DeleteManagementDnsZoneBindingRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_management_dns_zone_binding_client_stub.call_rpc_count
+    end
+  end
+
+  def test_repair_management_dns_zone_binding
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+
+    repair_management_dns_zone_binding_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :repair_management_dns_zone_binding, name
+      assert_kind_of ::Google::Cloud::VmwareEngine::V1::RepairManagementDnsZoneBindingRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, repair_management_dns_zone_binding_client_stub do
+      # Create client
+      client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.repair_management_dns_zone_binding({ name: name, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.repair_management_dns_zone_binding name: name, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.repair_management_dns_zone_binding ::Google::Cloud::VmwareEngine::V1::RepairManagementDnsZoneBindingRequest.new(name: name, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.repair_management_dns_zone_binding({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.repair_management_dns_zone_binding(::Google::Cloud::VmwareEngine::V1::RepairManagementDnsZoneBindingRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, repair_management_dns_zone_binding_client_stub.call_rpc_count
     end
   end
 
@@ -2599,11 +4712,204 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::ClientTest < Minitest::Te
     end
   end
 
+  def test_grant_dns_bind_permission
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    principal = {}
+    request_id = "hello world"
+
+    grant_dns_bind_permission_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :grant_dns_bind_permission, name
+      assert_kind_of ::Google::Cloud::VmwareEngine::V1::GrantDnsBindPermissionRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::VmwareEngine::V1::Principal), request["principal"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, grant_dns_bind_permission_client_stub do
+      # Create client
+      client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.grant_dns_bind_permission({ name: name, principal: principal, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.grant_dns_bind_permission name: name, principal: principal, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.grant_dns_bind_permission ::Google::Cloud::VmwareEngine::V1::GrantDnsBindPermissionRequest.new(name: name, principal: principal, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.grant_dns_bind_permission({ name: name, principal: principal, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.grant_dns_bind_permission(::Google::Cloud::VmwareEngine::V1::GrantDnsBindPermissionRequest.new(name: name, principal: principal, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, grant_dns_bind_permission_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_dns_bind_permission
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::VmwareEngine::V1::DnsBindPermission.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_dns_bind_permission_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_dns_bind_permission, name
+      assert_kind_of ::Google::Cloud::VmwareEngine::V1::GetDnsBindPermissionRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_dns_bind_permission_client_stub do
+      # Create client
+      client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_dns_bind_permission({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_dns_bind_permission name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_dns_bind_permission ::Google::Cloud::VmwareEngine::V1::GetDnsBindPermissionRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_dns_bind_permission({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_dns_bind_permission(::Google::Cloud::VmwareEngine::V1::GetDnsBindPermissionRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_dns_bind_permission_client_stub.call_rpc_count
+    end
+  end
+
+  def test_revoke_dns_bind_permission
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    principal = {}
+    request_id = "hello world"
+
+    revoke_dns_bind_permission_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :revoke_dns_bind_permission, name
+      assert_kind_of ::Google::Cloud::VmwareEngine::V1::RevokeDnsBindPermissionRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::VmwareEngine::V1::Principal), request["principal"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, revoke_dns_bind_permission_client_stub do
+      # Create client
+      client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.revoke_dns_bind_permission({ name: name, principal: principal, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.revoke_dns_bind_permission name: name, principal: principal, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.revoke_dns_bind_permission ::Google::Cloud::VmwareEngine::V1::RevokeDnsBindPermissionRequest.new(name: name, principal: principal, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.revoke_dns_bind_permission({ name: name, principal: principal, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.revoke_dns_bind_permission(::Google::Cloud::VmwareEngine::V1::RevokeDnsBindPermissionRequest.new(name: name, principal: principal, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, revoke_dns_bind_permission_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
     client = block_config = config = nil
-    Gapic::ServiceStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil, nil
+    Gapic::ServiceStub.stub :new, dummy_stub do
       client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -2621,7 +4927,8 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::ClientTest < Minitest::Te
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
     client = nil
-    Gapic::ServiceStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil, nil
+    Gapic::ServiceStub.stub :new, dummy_stub do
       client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new do |config|
         config.credentials = grpc_channel
       end

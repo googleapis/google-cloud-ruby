@@ -388,6 +388,7 @@ module Google
         #   @return [::String]
         #     The IP address of the network interface to use for peering.
         # @!attribute [rw] network_interface
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         class RouterApplianceInstance
           include ::Google::Protobuf::MessageExts

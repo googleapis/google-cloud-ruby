@@ -1,5 +1,24 @@
 # Changelog
 
+### 0.6.1 (2024-01-12)
+
+#### Bug Fixes
+
+* Ensure endpoints are correct for mixin clients ([#24032](https://github.com/googleapis/google-cloud-ruby/issues/24032)) 
+
+### 0.6.0 (2024-01-11)
+
+#### Features
+
+* Support for universe_domain ([#23777](https://github.com/googleapis/google-cloud-ruby/issues/23777)) 
+
+### 0.5.0 (2023-11-14)
+
+#### Features
+
+* Support for the process_open_lineage_run_event RPC 
+* Support the allow_missing parameter to update_run 
+
 ### 0.4.0 (2023-09-12)
 
 #### Features

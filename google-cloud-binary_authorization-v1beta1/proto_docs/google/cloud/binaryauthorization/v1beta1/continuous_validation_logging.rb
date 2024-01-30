@@ -62,6 +62,12 @@ module Google
             # @!attribute [rw] image
             #   @return [::String]
             #     The name of the image.
+            # @!attribute [rw] container_name
+            #   @return [::String]
+            #     The name of the container.
+            # @!attribute [rw] container_type
+            #   @return [::Google::Cloud::BinaryAuthorization::V1beta1::ContinuousValidationEvent::ContinuousValidationPodEvent::ImageDetails::ContainerType]
+            #     The container type that this image belongs to.
             # @!attribute [rw] result
             #   @return [::Google::Cloud::BinaryAuthorization::V1beta1::ContinuousValidationEvent::ContinuousValidationPodEvent::ImageDetails::AuditResult]
             #     The result of the audit for this image.
@@ -129,6 +135,23 @@ module Google
                   # the check.
                   NON_CONFORMANT = 1
                 end
+              end
+
+              # The container type.
+              module ContainerType
+                # The container type should always be specified. This is an error.
+                CONTAINER_TYPE_UNSPECIFIED = 0
+
+                # A regular deployment.
+                CONTAINER = 1
+
+                # Init container defined as specified at
+                # https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
+                INIT_CONTAINER = 2
+
+                # Ephemeral container defined as specified at
+                # https://kubernetes.io/docs/concepts/workloads/pods/ephemeral-containers/
+                EPHEMERAL_CONTAINER = 3
               end
 
               # Result of the audit.

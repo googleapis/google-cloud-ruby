@@ -23,15 +23,49 @@ require "gapic/grpc/service_stub"
 require "google/analytics/data/v1beta/analytics_data"
 
 class ::Google::Analytics::Data::V1beta::AnalyticsData::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
+  def test_audience_export_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Analytics::Data::V1beta::AnalyticsData::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.audience_export_path property: "value0", audience_export: "value1"
+      assert_equal "properties/value0/audienceExports/value1", path
+    end
+  end
+
   def test_metadata_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Analytics::Data::V1beta::AnalyticsData::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       path = client.metadata_path property: "value0"
       assert_equal "properties/value0/metadata", path
+    end
+  end
+
+  def test_property_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Analytics::Data::V1beta::AnalyticsData::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.property_path property: "value0"
+      assert_equal "properties/value0", path
     end
   end
 end

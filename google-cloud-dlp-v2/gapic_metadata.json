@@ -120,6 +120,31 @@
                 "activate_job_trigger"
               ]
             },
+            "CreateDiscoveryConfig": {
+              "methods": [
+                "create_discovery_config"
+              ]
+            },
+            "UpdateDiscoveryConfig": {
+              "methods": [
+                "update_discovery_config"
+              ]
+            },
+            "GetDiscoveryConfig": {
+              "methods": [
+                "get_discovery_config"
+              ]
+            },
+            "ListDiscoveryConfigs": {
+              "methods": [
+                "list_discovery_configs"
+              ]
+            },
+            "DeleteDiscoveryConfig": {
+              "methods": [
+                "delete_discovery_config"
+              ]
+            },
             "CreateDlpJob": {
               "methods": [
                 "create_dlp_job"

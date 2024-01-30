@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/analytics/admin/v1alpha/analytics_admin_service"
 
 class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_access_binding_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -40,7 +50,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientPathsTes
 
   def test_account_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -52,7 +62,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientPathsTes
 
   def test_ad_sense_link_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -64,7 +74,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientPathsTes
 
   def test_attribution_settings_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -76,7 +86,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientPathsTes
 
   def test_audience_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -88,7 +98,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientPathsTes
 
   def test_big_query_link_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -98,9 +108,21 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientPathsTes
     end
   end
 
+  def test_calculated_metric_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.calculated_metric_path property: "value0", calculated_metric: "value1"
+      assert_equal "properties/value0/calculatedMetrics/value1", path
+    end
+  end
+
   def test_channel_group_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -112,7 +134,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientPathsTes
 
   def test_conversion_event_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -124,7 +146,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientPathsTes
 
   def test_custom_dimension_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -136,7 +158,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientPathsTes
 
   def test_custom_metric_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -146,9 +168,21 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientPathsTes
     end
   end
 
+  def test_data_redaction_settings_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.data_redaction_settings_path property: "value0", data_stream: "value1"
+      assert_equal "properties/value0/dataStreams/value1/dataRedactionSettings", path
+    end
+  end
+
   def test_data_retention_settings_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -160,7 +194,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientPathsTes
 
   def test_data_sharing_settings_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -172,7 +206,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientPathsTes
 
   def test_data_stream_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -184,7 +218,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientPathsTes
 
   def test_display_video360_advertiser_link_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -196,7 +230,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientPathsTes
 
   def test_display_video360_advertiser_link_proposal_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -208,7 +242,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientPathsTes
 
   def test_enhanced_measurement_settings_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -220,7 +254,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientPathsTes
 
   def test_event_create_rule_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -232,7 +266,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientPathsTes
 
   def test_expanded_data_set_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -244,7 +278,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientPathsTes
 
   def test_firebase_link_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -256,7 +290,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientPathsTes
 
   def test_global_site_tag_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -268,7 +302,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientPathsTes
 
   def test_google_ads_link_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -280,7 +314,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientPathsTes
 
   def test_google_signals_settings_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -292,7 +326,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientPathsTes
 
   def test_measurement_protocol_secret_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -304,7 +338,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientPathsTes
 
   def test_property_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -314,9 +348,21 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientPathsTes
     end
   end
 
+  def test_rollup_property_source_link_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.rollup_property_source_link_path property: "value0", rollup_property_source_link: "value1"
+      assert_equal "properties/value0/rollupPropertySourceLinks/value1", path
+    end
+  end
+
   def test_sk_ad_network_conversion_value_schema_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -328,7 +374,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientPathsTes
 
   def test_search_ads360_link_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -338,18 +384,15 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientPathsTes
     end
   end
 
-  def test_user_link_path
+  def test_subproperty_event_filter_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
-      path = client.user_link_path account: "value0", user_link: "value1"
-      assert_equal "accounts/value0/userLinks/value1", path
-
-      path = client.user_link_path property: "value0", user_link: "value1"
-      assert_equal "properties/value0/userLinks/value1", path
+      path = client.subproperty_event_filter_path property: "value0", sub_property_event_filter: "value1"
+      assert_equal "properties/value0/subpropertyEventFilters/value1", path
     end
   end
 end

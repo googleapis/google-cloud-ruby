@@ -37,8 +37,11 @@ module Google
           #     or numbers, spaces or characters like `_-:&.`
           # @!attribute [rw] attributes
           #   @return [::Google::Protobuf::Map{::String => ::Google::Protobuf::Value}]
-          #     Optional. The attributes of the process. Can be anything, for example,
-          #     "author". Up to 100 attributes are allowed.
+          #     Optional. The attributes of the process. Should only be used for the
+          #     purpose of non-semantic management (classifying, describing or labeling the
+          #     process).
+          #
+          #     Up to 100 attributes are allowed.
           # @!attribute [rw] origin
           #   @return [::Google::Cloud::DataCatalog::Lineage::V1::Origin]
           #     Optional. The origin of this process and its runs and lineage events.
@@ -72,8 +75,10 @@ module Google
           #     or numbers, spaces or characters like `_-:&.`
           # @!attribute [rw] attributes
           #   @return [::Google::Protobuf::Map{::String => ::Google::Protobuf::Value}]
-          #     Optional. The attributes of the run. Can be anything, for example, a string
-          #     with an SQL request. Up to 100 attributes are allowed.
+          #     Optional. The attributes of the run. Should only be used for the purpose of
+          #     non-semantic management (classifying, describing or labeling the run).
+          #
+          #     Up to 100 attributes are allowed.
           # @!attribute [rw] start_time
           #   @return [::Google::Protobuf::Timestamp]
           #     Required. The timestamp of the start of the run.
@@ -131,7 +136,7 @@ module Google
           #     Optional. List of source-target pairs. Can't contain more than 100 tuples.
           # @!attribute [rw] start_time
           #   @return [::Google::Protobuf::Timestamp]
-          #     Optional. The beginning of the transformation which resulted in this
+          #     Required. The beginning of the transformation which resulted in this
           #     lineage event. For streaming scenarios, it should be the beginning of the
           #     period from which the lineage is being reported.
           # @!attribute [rw] end_time
@@ -159,16 +164,9 @@ module Google
           # The soft reference to everything you can attach a lineage event to.
           # @!attribute [rw] fully_qualified_name
           #   @return [::String]
-          #     Required. Fully Qualified Name of the entity. Useful for referencing
-          #     entities that aren't represented as GCP resources, for example, tables in
-          #     Dataproc Metastore API.
-          #
-          #     Examples:
-          #
-          #       * `bigquery:dataset.project_id.dataset_id`
-          #       * `bigquery:table.project_id.dataset_id.table_id`
-          #       * `pubsub:project_id.topic_id`
-          #       * `dataproc_metastore:projectId.locationId.instanceId.databaseId.tableId`
+          #     Required. [Fully Qualified Name
+          #     (FQN)](https://cloud.google.com/data-catalog/docs/fully-qualified-names)
+          #     of the entity.
           class EntityReference
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -225,7 +223,51 @@ module Google
 
               # The resource deletion operation.
               DELETE = 1
+
+              # The resource creation operation.
+              CREATE = 2
             end
+          end
+
+          # Request message for
+          # [ProcessOpenLineageRunEvent][google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEvent].
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The name of the project and its location that should own the
+          #     process, run, and lineage event.
+          # @!attribute [rw] open_lineage
+          #   @return [::Google::Protobuf::Struct]
+          #     Required. OpenLineage message following OpenLineage format:
+          #     https://github.com/OpenLineage/OpenLineage/blob/main/spec/OpenLineage.json
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     A unique identifier for this request. Restricted to 36 ASCII characters.
+          #     A random UUID is recommended. This request is idempotent only if a
+          #     `request_id` is provided.
+          class ProcessOpenLineageRunEventRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Response message for
+          # [ProcessOpenLineageRunEvent][google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEvent].
+          # @!attribute [rw] process
+          #   @return [::String]
+          #     Created process name.
+          #     Format: `projects/{project}/locations/{location}/processes/{process}`.
+          # @!attribute [rw] run
+          #   @return [::String]
+          #     Created run name.
+          #     Format:
+          #     `projects/{project}/locations/{location}/processes/{process}/runs/{run}`.
+          # @!attribute [rw] lineage_events
+          #   @return [::Array<::String>]
+          #     Created lineage event names.
+          #     Format:
+          #     `projects/{project}/locations/{location}/processes/{process}/runs/{run}/lineageEvents/{lineage_event}`.
+          class ProcessOpenLineageRunEventResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Request message for
@@ -360,6 +402,9 @@ module Google
           #   @return [::Google::Protobuf::FieldMask]
           #     The list of fields to update. Currently not used. The whole message is
           #     updated.
+          # @!attribute [rw] allow_missing
+          #   @return [::Boolean]
+          #     If set to true and the run is not found, the request creates it.
           class UpdateRunRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -511,7 +556,7 @@ module Google
           # {::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#search_links SearchLinks}.
           # @!attribute [rw] parent
           #   @return [::String]
-          #     Required. The project and location you want search in the format `projects/*/locations/*`
+          #     Required. The project and location you want search in.
           # @!attribute [rw] source
           #   @return [::Google::Cloud::DataCatalog::Lineage::V1::EntityReference]
           #     Optional. Send asset information in the **source** field to retrieve all
@@ -585,7 +630,7 @@ module Google
           # {::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#batch_search_link_processes BatchSearchLinkProcesses}.
           # @!attribute [rw] parent
           #   @return [::String]
-          #     Required. The project and location you want search in the format `projects/*/locations/*`
+          #     Required. The project and location where you want to search.
           # @!attribute [rw] links
           #   @return [::Array<::String>]
           #     Required. An array of links to check for their associated LineageProcesses.
@@ -664,6 +709,10 @@ module Google
           # @!attribute [rw] source_type
           #   @return [::Google::Cloud::DataCatalog::Lineage::V1::Origin::SourceType]
           #     Type of the source.
+          #
+          #     Use of a source_type other than `CUSTOM` for process creation
+          #     or updating is highly discouraged, and may be restricted in the future
+          #     without notice.
           # @!attribute [rw] name
           #   @return [::String]
           #     If the source_type isn't CUSTOM, the value of this field should be a GCP
@@ -698,6 +747,9 @@ module Google
 
               # Looker Studio
               LOOKER_STUDIO = 5
+
+              # Dataproc
+              DATAPROC = 6
             end
           end
         end

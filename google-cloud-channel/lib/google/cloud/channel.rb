@@ -29,7 +29,7 @@ require "google/cloud/config"
 
 # Set the default configuration
 ::Google::Cloud.configure.add_config! :channel do |config|
-  config.add_field! :endpoint,      "cloudchannel.googleapis.com", match: ::String
+  config.add_field! :endpoint,      nil, match: ::String
   config.add_field! :credentials,   nil, match: [::String, ::Hash, ::Google::Auth::Credentials]
   config.add_field! :scope,         nil, match: [::Array, ::String]
   config.add_field! :lib_name,      nil, match: ::String
@@ -39,6 +39,7 @@ require "google/cloud/config"
   config.add_field! :metadata,      nil, match: ::Hash
   config.add_field! :retry_policy,  nil, match: [::Hash, ::Proc]
   config.add_field! :quota_project, nil, match: ::String
+  config.add_field! :universe_domain, nil, match: ::String
 end
 
 module Google
@@ -62,6 +63,11 @@ module Google
       # CloudChannelReportsService lets Google Cloud resellers and
       # distributors retrieve and combine a variety of data in Cloud Channel for
       # multiple products (Google Cloud, Google Voice, and Google Workspace.)
+      #
+      # Deprecated: This service is being deprecated. Please use [Export Channel
+      # Services data to
+      # BigQuery](https://cloud.google.com/channel/docs/rebilling/export-data-to-bigquery)
+      # instead.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.

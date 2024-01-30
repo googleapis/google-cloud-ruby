@@ -223,6 +223,7 @@ module Google
         #     Label that may be used to identify this request, reported back in the
         #     {::Google::Cloud::Optimization::V1::OptimizeToursResponse#request_label OptimizeToursResponse.request_label}.
         # @!attribute [rw] populate_travel_step_polylines
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
         #     Deprecated: Use
         #     {::Google::Cloud::Optimization::V1::OptimizeToursRequest#populate_transition_polylines OptimizeToursRequest.populate_transition_polylines}
@@ -305,6 +306,7 @@ module Google
         #   @return [::Google::Cloud::Optimization::V1::OptimizeToursResponse::Metrics]
         #     Duration, distance and usage metrics for this solution.
         # @!attribute [rw] total_cost
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Float]
         #     Deprecated: Use
         #     {::Google::Cloud::Optimization::V1::OptimizeToursResponse::Metrics#total_cost Metrics.total_cost}
@@ -603,6 +605,7 @@ module Google
         #   @return [::Array<::Google::Cloud::Optimization::V1::ShipmentModel::PrecedenceRule>]
         #     Set of precedence rules which must be enforced in the model.
         # @!attribute [rw] break_rules
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Array<::Google::Cloud::Optimization::V1::ShipmentModel::BreakRule>]
         #     Deprecated: No longer used.
         #     Set of break rules used in the model.
@@ -694,6 +697,7 @@ module Google
           # * before the vehicle start (the vehicle may not start in the middle of
           #   a break), in which case it does not affect the vehicle start time.
           # * after the vehicle end (ditto, with the vehicle end time).
+          # @deprecated This message is deprecated and may be removed in the next major version update.
           # @!attribute [rw] break_requests
           #   @return [::Array<::Google::Cloud::Optimization::V1::ShipmentModel::BreakRule::BreakRequest>]
           #     Sequence of breaks. See the `BreakRequest` message.
@@ -901,6 +905,7 @@ module Google
         #     related pickup/delivery visits from the performing route.
         #     `precedence_rules` that reference ignored shipments will also be ignored.
         # @!attribute [rw] demands
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Array<::Google::Cloud::Optimization::V1::CapacityQuantity>]
         #     Deprecated: Use
         #     {::Google::Cloud::Optimization::V1::Shipment#load_demands Shipment.load_demands}
@@ -988,6 +993,7 @@ module Google
           #     response as `visit_label` in the corresponding
           #     {::Google::Cloud::Optimization::V1::ShipmentRoute::Visit ShipmentRoute.Visit}.
           # @!attribute [rw] demands
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::Array<::Google::Cloud::Optimization::V1::CapacityQuantity>]
           #     Deprecated: Use
           #     {::Google::Cloud::Optimization::V1::Shipment::VisitRequest#load_demands VisitRequest.load_demands}
@@ -1336,6 +1342,7 @@ module Google
         #     If a shipment has a non-empty `allowed_vehicle_indices` field and all of
         #     the allowed vehicles are ignored, it is skipped in the response.
         # @!attribute [rw] break_rule_indices
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Array<::Integer>]
         #     Deprecated: No longer used.
         #     Indices in the `break_rule` field in the source
@@ -1344,16 +1351,19 @@ module Google
         #
         #     As of 2018/03, at most one rule index per vehicle can be specified.
         # @!attribute [rw] capacities
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Array<::Google::Cloud::Optimization::V1::CapacityQuantity>]
         #     Deprecated: Use
         #     {::Google::Cloud::Optimization::V1::Vehicle#load_limits Vehicle.load_limits}
         #     instead.
         # @!attribute [rw] start_load_intervals
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Array<::Google::Cloud::Optimization::V1::CapacityQuantityInterval>]
         #     Deprecated: Use
         #     {::Google::Cloud::Optimization::V1::Vehicle::LoadLimit#start_load_interval Vehicle.LoadLimit.start_load_interval}
         #     instead.
         # @!attribute [rw] end_load_intervals
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Array<::Google::Cloud::Optimization::V1::CapacityQuantityInterval>]
         #     Deprecated: Use
         #     {::Google::Cloud::Optimization::V1::Vehicle::LoadLimit#end_load_interval Vehicle.LoadLimit.end_load_interval}
@@ -1591,6 +1601,7 @@ module Google
         # Deprecated: Use
         # {::Google::Cloud::Optimization::V1::Vehicle::LoadLimit::Interval Vehicle.LoadLimit.Interval}
         # instead.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] type
         #   @return [::String]
         # @!attribute [rw] value
@@ -1603,6 +1614,7 @@ module Google
         # Deprecated: Use
         # {::Google::Cloud::Optimization::V1::Vehicle::LoadLimit::Interval Vehicle.LoadLimit.Interval}
         # instead.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] type
         #   @return [::String]
         # @!attribute [rw] min_value
@@ -1996,6 +2008,7 @@ module Google
         #   @return [::Float]
         #     Total cost of the route. The sum of all costs in the cost map.
         # @!attribute [rw] end_loads
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Array<::Google::Cloud::Optimization::V1::CapacityQuantity>]
         #     Deprecated: Use
         #     {::Google::Cloud::Optimization::V1::ShipmentRoute::Transition#vehicle_loads Transition.vehicle_loads}
@@ -2006,11 +2019,13 @@ module Google
         #     loads for quantity types unconstrained by intervals and that don't have any
         #     non-zero demand on the route.
         # @!attribute [rw] travel_steps
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Array<::Google::Cloud::Optimization::V1::ShipmentRoute::TravelStep>]
         #     Deprecated: Use
         #     {::Google::Cloud::Optimization::V1::ShipmentRoute#transitions ShipmentRoute.transitions}
         #     instead. Ordered list of travel steps for the route.
         # @!attribute [rw] vehicle_detour
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Protobuf::Duration]
         #     Deprecated: No longer used.
         #     This field will only be populated at the
@@ -2023,6 +2038,7 @@ module Google
         #     It is equal to `vehicle_end_time` - `vehicle_start_time` - travel duration
         #     from the vehicle's start_location to its `end_location`.
         # @!attribute [rw] delay_before_vehicle_end
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::Optimization::V1::ShipmentRoute::Delay]
         #     Deprecated: Delay occurring before the vehicle end. See
         #     {::Google::Cloud::Optimization::V1::TransitionAttributes#delay TransitionAttributes.delay}.
@@ -2034,6 +2050,7 @@ module Google
           # {::Google::Cloud::Optimization::V1::ShipmentRoute::Transition#delay_duration ShipmentRoute.Transition.delay_duration}
           # instead. Time interval spent on the route resulting from a
           # {::Google::Cloud::Optimization::V1::TransitionAttributes#delay TransitionAttributes.delay}.
+          # @deprecated This message is deprecated and may be removed in the next major version update.
           # @!attribute [rw] start_time
           #   @return [::Google::Protobuf::Timestamp]
           #     Start of the delay.
@@ -2098,6 +2115,7 @@ module Google
           #     {::Google::Cloud::Optimization::V1::Shipment::VisitRequest#label VisitRequest.label},
           #     if specified in the `VisitRequest`.
           # @!attribute [rw] arrival_loads
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::Array<::Google::Cloud::Optimization::V1::CapacityQuantity>]
           #     Deprecated: Use
           #     {::Google::Cloud::Optimization::V1::ShipmentRoute::Transition#vehicle_loads Transition.vehicle_loads}
@@ -2109,11 +2127,13 @@ module Google
           #     Exception: we omit loads for quantity types unconstrained by intervals
           #     and that don't have any non-zero demand on the route.
           # @!attribute [rw] delay_before_start
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::Google::Cloud::Optimization::V1::ShipmentRoute::Delay]
           #     Deprecated: Use
           #     {::Google::Cloud::Optimization::V1::ShipmentRoute::Transition#delay_duration ShipmentRoute.Transition.delay_duration}
           #     instead. Delay occurring before the visit starts.
           # @!attribute [rw] demands
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::Array<::Google::Cloud::Optimization::V1::CapacityQuantity>]
           #     Deprecated: Use
           #     {::Google::Cloud::Optimization::V1::ShipmentRoute::Visit#load_demands Visit.load_demands}
@@ -2201,6 +2221,7 @@ module Google
           #     either added or subtracted to get the next transition's loads, depending
           #     on whether the visit was a pickup or a delivery.
           # @!attribute [rw] loads
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::Array<::Google::Cloud::Optimization::V1::CapacityQuantity>]
           #     Deprecated: Use
           #     {::Google::Cloud::Optimization::V1::ShipmentRoute::Transition#vehicle_loads Transition.vehicle_loads}
@@ -2270,6 +2291,7 @@ module Google
           #
           # If the vehicle does not have a start_ and/or end_location, the
           # corresponding travel metrics are 0 and/or empty.
+          # @deprecated This message is deprecated and may be removed in the next major version update.
           # @!attribute [rw] duration
           #   @return [::Google::Protobuf::Duration]
           #     Duration of the travel step.
@@ -2459,6 +2481,7 @@ module Google
         #     (resp.
         #     {::Google::Cloud::Optimization::V1::AggregatedMetrics#max_loads ShipmentRoute.metrics.max_loads}.
         # @!attribute [rw] costs
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Protobuf::Map{::String => ::Float}]
         #     Deprecated: Use
         #     {::Google::Cloud::Optimization::V1::ShipmentRoute#route_costs ShipmentRoute.route_costs}
@@ -2466,6 +2489,7 @@ module Google
         #     {::Google::Cloud::Optimization::V1::OptimizeToursResponse::Metrics#costs OptimizeToursResponse.Metrics.costs}
         #     instead.
         # @!attribute [rw] total_cost
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Float]
         #     Deprecated: Use
         #     {::Google::Cloud::Optimization::V1::ShipmentRoute#route_total_cost ShipmentRoute.route_total_cost}

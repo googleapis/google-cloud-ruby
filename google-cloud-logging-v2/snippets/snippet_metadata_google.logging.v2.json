@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-logging-v2",
-    "version": "0.11.0",
+    "version": "0.12.1",
     "language": "RUBY",
     "apis": [
       {
@@ -14,7 +14,7 @@
     {
       "region_tag": "logging_v2_generated_LoggingService_DeleteLog_sync",
       "title": "Snippet for the delete_log call in the LoggingService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::LoggingService::Client#delete_log. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::LoggingService::Client#delete_log.",
       "file": "logging_service/delete_log.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "logging_v2_generated_LoggingService_WriteLogEntries_sync",
       "title": "Snippet for the write_log_entries call in the LoggingService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::LoggingService::Client#write_log_entries. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::LoggingService::Client#write_log_entries.",
       "file": "logging_service/write_log_entries.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "logging_v2_generated_LoggingService_ListLogEntries_sync",
       "title": "Snippet for the list_log_entries call in the LoggingService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::LoggingService::Client#list_log_entries. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::LoggingService::Client#list_log_entries.",
       "file": "logging_service/list_log_entries.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -134,7 +134,7 @@
     {
       "region_tag": "logging_v2_generated_LoggingService_ListMonitoredResourceDescriptors_sync",
       "title": "Snippet for the list_monitored_resource_descriptors call in the LoggingService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::LoggingService::Client#list_monitored_resource_descriptors. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::LoggingService::Client#list_monitored_resource_descriptors.",
       "file": "logging_service/list_monitored_resource_descriptors.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -174,7 +174,7 @@
     {
       "region_tag": "logging_v2_generated_LoggingService_ListLogs_sync",
       "title": "Snippet for the list_logs call in the LoggingService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::LoggingService::Client#list_logs. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::LoggingService::Client#list_logs.",
       "file": "logging_service/list_logs.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,7 +206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -214,7 +214,7 @@
     {
       "region_tag": "logging_v2_generated_LoggingService_TailLogEntries_sync",
       "title": "Snippet for the tail_log_entries call in the LoggingService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::LoggingService::Client#tail_log_entries. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::LoggingService::Client#tail_log_entries.",
       "file": "logging_service/tail_log_entries.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,7 +246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 50,
+          "end": 55,
           "type": "FULL"
         }
       ]
@@ -254,7 +254,7 @@
     {
       "region_tag": "logging_v2_generated_ConfigService_ListBuckets_sync",
       "title": "Snippet for the list_buckets call in the ConfigService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#list_buckets. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#list_buckets.",
       "file": "config_service/list_buckets.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,7 +286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -294,7 +294,7 @@
     {
       "region_tag": "logging_v2_generated_ConfigService_GetBucket_sync",
       "title": "Snippet for the get_bucket call in the ConfigService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#get_bucket. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#get_bucket.",
       "file": "config_service/get_bucket.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,7 +326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -334,7 +334,7 @@
     {
       "region_tag": "logging_v2_generated_ConfigService_CreateBucketAsync_sync",
       "title": "Snippet for the create_bucket_async call in the ConfigService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#create_bucket_async. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#create_bucket_async.",
       "file": "config_service/create_bucket_async.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,7 +366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -374,7 +374,7 @@
     {
       "region_tag": "logging_v2_generated_ConfigService_UpdateBucketAsync_sync",
       "title": "Snippet for the update_bucket_async call in the ConfigService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#update_bucket_async. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#update_bucket_async.",
       "file": "config_service/update_bucket_async.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,7 +406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -414,7 +414,7 @@
     {
       "region_tag": "logging_v2_generated_ConfigService_CreateBucket_sync",
       "title": "Snippet for the create_bucket call in the ConfigService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#create_bucket. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#create_bucket.",
       "file": "config_service/create_bucket.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,7 +446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -454,7 +454,7 @@
     {
       "region_tag": "logging_v2_generated_ConfigService_UpdateBucket_sync",
       "title": "Snippet for the update_bucket call in the ConfigService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#update_bucket. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#update_bucket.",
       "file": "config_service/update_bucket.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,7 +486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -494,7 +494,7 @@
     {
       "region_tag": "logging_v2_generated_ConfigService_DeleteBucket_sync",
       "title": "Snippet for the delete_bucket call in the ConfigService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#delete_bucket. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#delete_bucket.",
       "file": "config_service/delete_bucket.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,7 +526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -534,7 +534,7 @@
     {
       "region_tag": "logging_v2_generated_ConfigService_UndeleteBucket_sync",
       "title": "Snippet for the undelete_bucket call in the ConfigService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#undelete_bucket. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#undelete_bucket.",
       "file": "config_service/undelete_bucket.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,7 +566,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -574,7 +574,7 @@
     {
       "region_tag": "logging_v2_generated_ConfigService_ListViews_sync",
       "title": "Snippet for the list_views call in the ConfigService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#list_views. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#list_views.",
       "file": "config_service/list_views.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,7 +606,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -614,7 +614,7 @@
     {
       "region_tag": "logging_v2_generated_ConfigService_GetView_sync",
       "title": "Snippet for the get_view call in the ConfigService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#get_view. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#get_view.",
       "file": "config_service/get_view.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,7 +646,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -654,7 +654,7 @@
     {
       "region_tag": "logging_v2_generated_ConfigService_CreateView_sync",
       "title": "Snippet for the create_view call in the ConfigService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#create_view. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#create_view.",
       "file": "config_service/create_view.rb",
       "language": "RUBY",
       "client_method": {
@@ -686,7 +686,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -694,7 +694,7 @@
     {
       "region_tag": "logging_v2_generated_ConfigService_UpdateView_sync",
       "title": "Snippet for the update_view call in the ConfigService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#update_view. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#update_view.",
       "file": "config_service/update_view.rb",
       "language": "RUBY",
       "client_method": {
@@ -726,7 +726,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -734,7 +734,7 @@
     {
       "region_tag": "logging_v2_generated_ConfigService_DeleteView_sync",
       "title": "Snippet for the delete_view call in the ConfigService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#delete_view. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#delete_view.",
       "file": "config_service/delete_view.rb",
       "language": "RUBY",
       "client_method": {
@@ -766,7 +766,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -774,7 +774,7 @@
     {
       "region_tag": "logging_v2_generated_ConfigService_ListSinks_sync",
       "title": "Snippet for the list_sinks call in the ConfigService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#list_sinks. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#list_sinks.",
       "file": "config_service/list_sinks.rb",
       "language": "RUBY",
       "client_method": {
@@ -806,7 +806,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -814,7 +814,7 @@
     {
       "region_tag": "logging_v2_generated_ConfigService_GetSink_sync",
       "title": "Snippet for the get_sink call in the ConfigService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#get_sink. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#get_sink.",
       "file": "config_service/get_sink.rb",
       "language": "RUBY",
       "client_method": {
@@ -846,7 +846,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -854,7 +854,7 @@
     {
       "region_tag": "logging_v2_generated_ConfigService_CreateSink_sync",
       "title": "Snippet for the create_sink call in the ConfigService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#create_sink. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#create_sink.",
       "file": "config_service/create_sink.rb",
       "language": "RUBY",
       "client_method": {
@@ -886,7 +886,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -894,7 +894,7 @@
     {
       "region_tag": "logging_v2_generated_ConfigService_UpdateSink_sync",
       "title": "Snippet for the update_sink call in the ConfigService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#update_sink. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#update_sink.",
       "file": "config_service/update_sink.rb",
       "language": "RUBY",
       "client_method": {
@@ -926,7 +926,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -934,7 +934,7 @@
     {
       "region_tag": "logging_v2_generated_ConfigService_DeleteSink_sync",
       "title": "Snippet for the delete_sink call in the ConfigService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#delete_sink. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#delete_sink.",
       "file": "config_service/delete_sink.rb",
       "language": "RUBY",
       "client_method": {
@@ -966,7 +966,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -974,7 +974,7 @@
     {
       "region_tag": "logging_v2_generated_ConfigService_CreateLink_sync",
       "title": "Snippet for the create_link call in the ConfigService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#create_link. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#create_link.",
       "file": "config_service/create_link.rb",
       "language": "RUBY",
       "client_method": {
@@ -1006,7 +1006,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1014,7 +1014,7 @@
     {
       "region_tag": "logging_v2_generated_ConfigService_DeleteLink_sync",
       "title": "Snippet for the delete_link call in the ConfigService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#delete_link. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#delete_link.",
       "file": "config_service/delete_link.rb",
       "language": "RUBY",
       "client_method": {
@@ -1046,7 +1046,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1054,7 +1054,7 @@
     {
       "region_tag": "logging_v2_generated_ConfigService_ListLinks_sync",
       "title": "Snippet for the list_links call in the ConfigService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#list_links. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#list_links.",
       "file": "config_service/list_links.rb",
       "language": "RUBY",
       "client_method": {
@@ -1086,7 +1086,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1094,7 +1094,7 @@
     {
       "region_tag": "logging_v2_generated_ConfigService_GetLink_sync",
       "title": "Snippet for the get_link call in the ConfigService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#get_link. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#get_link.",
       "file": "config_service/get_link.rb",
       "language": "RUBY",
       "client_method": {
@@ -1126,7 +1126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1134,7 +1134,7 @@
     {
       "region_tag": "logging_v2_generated_ConfigService_ListExclusions_sync",
       "title": "Snippet for the list_exclusions call in the ConfigService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#list_exclusions. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#list_exclusions.",
       "file": "config_service/list_exclusions.rb",
       "language": "RUBY",
       "client_method": {
@@ -1166,7 +1166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1174,7 +1174,7 @@
     {
       "region_tag": "logging_v2_generated_ConfigService_GetExclusion_sync",
       "title": "Snippet for the get_exclusion call in the ConfigService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#get_exclusion. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#get_exclusion.",
       "file": "config_service/get_exclusion.rb",
       "language": "RUBY",
       "client_method": {
@@ -1206,7 +1206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1214,7 +1214,7 @@
     {
       "region_tag": "logging_v2_generated_ConfigService_CreateExclusion_sync",
       "title": "Snippet for the create_exclusion call in the ConfigService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#create_exclusion. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#create_exclusion.",
       "file": "config_service/create_exclusion.rb",
       "language": "RUBY",
       "client_method": {
@@ -1246,7 +1246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1254,7 +1254,7 @@
     {
       "region_tag": "logging_v2_generated_ConfigService_UpdateExclusion_sync",
       "title": "Snippet for the update_exclusion call in the ConfigService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#update_exclusion. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#update_exclusion.",
       "file": "config_service/update_exclusion.rb",
       "language": "RUBY",
       "client_method": {
@@ -1286,7 +1286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1294,7 +1294,7 @@
     {
       "region_tag": "logging_v2_generated_ConfigService_DeleteExclusion_sync",
       "title": "Snippet for the delete_exclusion call in the ConfigService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#delete_exclusion. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#delete_exclusion.",
       "file": "config_service/delete_exclusion.rb",
       "language": "RUBY",
       "client_method": {
@@ -1326,7 +1326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1334,7 +1334,7 @@
     {
       "region_tag": "logging_v2_generated_ConfigService_GetCmekSettings_sync",
       "title": "Snippet for the get_cmek_settings call in the ConfigService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#get_cmek_settings. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#get_cmek_settings.",
       "file": "config_service/get_cmek_settings.rb",
       "language": "RUBY",
       "client_method": {
@@ -1366,7 +1366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1374,7 +1374,7 @@
     {
       "region_tag": "logging_v2_generated_ConfigService_UpdateCmekSettings_sync",
       "title": "Snippet for the update_cmek_settings call in the ConfigService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#update_cmek_settings. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#update_cmek_settings.",
       "file": "config_service/update_cmek_settings.rb",
       "language": "RUBY",
       "client_method": {
@@ -1406,7 +1406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1414,7 +1414,7 @@
     {
       "region_tag": "logging_v2_generated_ConfigService_GetSettings_sync",
       "title": "Snippet for the get_settings call in the ConfigService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#get_settings. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#get_settings.",
       "file": "config_service/get_settings.rb",
       "language": "RUBY",
       "client_method": {
@@ -1446,7 +1446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1454,7 +1454,7 @@
     {
       "region_tag": "logging_v2_generated_ConfigService_UpdateSettings_sync",
       "title": "Snippet for the update_settings call in the ConfigService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#update_settings. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#update_settings.",
       "file": "config_service/update_settings.rb",
       "language": "RUBY",
       "client_method": {
@@ -1486,7 +1486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1494,7 +1494,7 @@
     {
       "region_tag": "logging_v2_generated_ConfigService_CopyLogEntries_sync",
       "title": "Snippet for the copy_log_entries call in the ConfigService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#copy_log_entries. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#copy_log_entries.",
       "file": "config_service/copy_log_entries.rb",
       "language": "RUBY",
       "client_method": {
@@ -1526,7 +1526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1534,7 +1534,7 @@
     {
       "region_tag": "logging_v2_generated_MetricsService_ListLogMetrics_sync",
       "title": "Snippet for the list_log_metrics call in the MetricsService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::MetricsService::Client#list_log_metrics. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::MetricsService::Client#list_log_metrics.",
       "file": "metrics_service/list_log_metrics.rb",
       "language": "RUBY",
       "client_method": {
@@ -1566,7 +1566,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1574,7 +1574,7 @@
     {
       "region_tag": "logging_v2_generated_MetricsService_GetLogMetric_sync",
       "title": "Snippet for the get_log_metric call in the MetricsService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::MetricsService::Client#get_log_metric. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::MetricsService::Client#get_log_metric.",
       "file": "metrics_service/get_log_metric.rb",
       "language": "RUBY",
       "client_method": {
@@ -1606,7 +1606,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1614,7 +1614,7 @@
     {
       "region_tag": "logging_v2_generated_MetricsService_CreateLogMetric_sync",
       "title": "Snippet for the create_log_metric call in the MetricsService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::MetricsService::Client#create_log_metric. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::MetricsService::Client#create_log_metric.",
       "file": "metrics_service/create_log_metric.rb",
       "language": "RUBY",
       "client_method": {
@@ -1646,7 +1646,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1654,7 +1654,7 @@
     {
       "region_tag": "logging_v2_generated_MetricsService_UpdateLogMetric_sync",
       "title": "Snippet for the update_log_metric call in the MetricsService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::MetricsService::Client#update_log_metric. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::MetricsService::Client#update_log_metric.",
       "file": "metrics_service/update_log_metric.rb",
       "language": "RUBY",
       "client_method": {
@@ -1686,7 +1686,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1694,7 +1694,7 @@
     {
       "region_tag": "logging_v2_generated_MetricsService_DeleteLogMetric_sync",
       "title": "Snippet for the delete_log_metric call in the MetricsService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::MetricsService::Client#delete_log_metric. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::MetricsService::Client#delete_log_metric.",
       "file": "metrics_service/delete_log_metric.rb",
       "language": "RUBY",
       "client_method": {
@@ -1726,7 +1726,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]

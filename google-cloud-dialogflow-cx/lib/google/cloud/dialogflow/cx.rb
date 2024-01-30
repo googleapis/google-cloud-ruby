@@ -29,7 +29,7 @@ require "google/cloud/config"
 
 # Set the default configuration
 ::Google::Cloud.configure.add_config! :dialogflow_cx do |config|
-  config.add_field! :endpoint,      "dialogflow.googleapis.com", match: ::String
+  config.add_field! :endpoint,      nil, match: ::String
   config.add_field! :credentials,   nil, match: [::String, ::Hash, ::Google::Auth::Credentials]
   config.add_field! :scope,         nil, match: [::Array, ::String]
   config.add_field! :lib_name,      nil, match: ::String
@@ -39,6 +39,7 @@ require "google/cloud/config"
   config.add_field! :metadata,      nil, match: ::Hash
   config.add_field! :retry_policy,  nil, match: [::Hash, ::Proc]
   config.add_field! :quota_project, nil, match: ::String
+  config.add_field! :universe_domain, nil, match: ::String
 end
 
 module Google
@@ -524,6 +525,40 @@ module Google
                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                          .first
           service_module = Google::Cloud::Dialogflow::CX.const_get(package_name).const_get(:Experiments)
+          service_module = service_module.const_get(:Rest) if transport == :rest
+          service_module.const_get(:Client).new(&block)
+        end
+
+        ##
+        # Create a new client object for Generators.
+        #
+        # By default, this returns an instance of
+        # [Google::Cloud::Dialogflow::CX::V3::Generators::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dialogflow-cx-v3/latest/Google-Cloud-Dialogflow-CX-V3-Generators-Client)
+        # for a gRPC client for version V3 of the API.
+        # However, you can specify a different API version by passing it in the
+        # `version` parameter. If the Generators service is
+        # supported by that API version, and the corresponding gem is available, the
+        # appropriate versioned client will be returned.
+        # You can also specify a different transport by passing `:rest` or `:grpc` in
+        # the `transport` parameter.
+        #
+        # ## About Generators
+        #
+        # Service for managing Generators
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v3`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+        # @return [::Object] A client object for the specified version.
+        #
+        def self.generators version: :v3, transport: :grpc, &block
+          require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
+
+          package_name = Google::Cloud::Dialogflow::CX
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          service_module = Google::Cloud::Dialogflow::CX.const_get(package_name).const_get(:Generators)
           service_module = service_module.const_get(:Rest) if transport == :rest
           service_module.const_get(:Client).new(&block)
         end

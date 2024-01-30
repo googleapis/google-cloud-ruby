@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-tasks-v2beta3",
-    "version": "0.11.0",
+    "version": "0.12.2",
     "language": "RUBY",
     "apis": [
       {
@@ -14,7 +14,7 @@
     {
       "region_tag": "cloudtasks_v2beta3_generated_CloudTasks_ListQueues_sync",
       "title": "Snippet for the list_queues call in the CloudTasks service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta3::CloudTasks::Client#list_queues. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta3::CloudTasks::Client#list_queues.",
       "file": "cloud_tasks/list_queues.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "cloudtasks_v2beta3_generated_CloudTasks_GetQueue_sync",
       "title": "Snippet for the get_queue call in the CloudTasks service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta3::CloudTasks::Client#get_queue. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta3::CloudTasks::Client#get_queue.",
       "file": "cloud_tasks/get_queue.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "cloudtasks_v2beta3_generated_CloudTasks_CreateQueue_sync",
       "title": "Snippet for the create_queue call in the CloudTasks service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta3::CloudTasks::Client#create_queue. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta3::CloudTasks::Client#create_queue.",
       "file": "cloud_tasks/create_queue.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -134,7 +134,7 @@
     {
       "region_tag": "cloudtasks_v2beta3_generated_CloudTasks_UpdateQueue_sync",
       "title": "Snippet for the update_queue call in the CloudTasks service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta3::CloudTasks::Client#update_queue. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta3::CloudTasks::Client#update_queue.",
       "file": "cloud_tasks/update_queue.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -174,7 +174,7 @@
     {
       "region_tag": "cloudtasks_v2beta3_generated_CloudTasks_DeleteQueue_sync",
       "title": "Snippet for the delete_queue call in the CloudTasks service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta3::CloudTasks::Client#delete_queue. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta3::CloudTasks::Client#delete_queue.",
       "file": "cloud_tasks/delete_queue.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,7 +206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -214,7 +214,7 @@
     {
       "region_tag": "cloudtasks_v2beta3_generated_CloudTasks_PurgeQueue_sync",
       "title": "Snippet for the purge_queue call in the CloudTasks service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta3::CloudTasks::Client#purge_queue. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta3::CloudTasks::Client#purge_queue.",
       "file": "cloud_tasks/purge_queue.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,7 +246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -254,7 +254,7 @@
     {
       "region_tag": "cloudtasks_v2beta3_generated_CloudTasks_PauseQueue_sync",
       "title": "Snippet for the pause_queue call in the CloudTasks service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta3::CloudTasks::Client#pause_queue. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta3::CloudTasks::Client#pause_queue.",
       "file": "cloud_tasks/pause_queue.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,7 +286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -294,7 +294,7 @@
     {
       "region_tag": "cloudtasks_v2beta3_generated_CloudTasks_ResumeQueue_sync",
       "title": "Snippet for the resume_queue call in the CloudTasks service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta3::CloudTasks::Client#resume_queue. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta3::CloudTasks::Client#resume_queue.",
       "file": "cloud_tasks/resume_queue.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,7 +326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -334,7 +334,7 @@
     {
       "region_tag": "cloudtasks_v2beta3_generated_CloudTasks_GetIamPolicy_sync",
       "title": "Snippet for the get_iam_policy call in the CloudTasks service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta3::CloudTasks::Client#get_iam_policy. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta3::CloudTasks::Client#get_iam_policy.",
       "file": "cloud_tasks/get_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,7 +366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -374,7 +374,7 @@
     {
       "region_tag": "cloudtasks_v2beta3_generated_CloudTasks_SetIamPolicy_sync",
       "title": "Snippet for the set_iam_policy call in the CloudTasks service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta3::CloudTasks::Client#set_iam_policy. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta3::CloudTasks::Client#set_iam_policy.",
       "file": "cloud_tasks/set_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,7 +406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -414,7 +414,7 @@
     {
       "region_tag": "cloudtasks_v2beta3_generated_CloudTasks_TestIamPermissions_sync",
       "title": "Snippet for the test_iam_permissions call in the CloudTasks service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta3::CloudTasks::Client#test_iam_permissions. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta3::CloudTasks::Client#test_iam_permissions.",
       "file": "cloud_tasks/test_iam_permissions.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,7 +446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -454,7 +454,7 @@
     {
       "region_tag": "cloudtasks_v2beta3_generated_CloudTasks_ListTasks_sync",
       "title": "Snippet for the list_tasks call in the CloudTasks service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta3::CloudTasks::Client#list_tasks. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta3::CloudTasks::Client#list_tasks.",
       "file": "cloud_tasks/list_tasks.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,7 +486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -494,7 +494,7 @@
     {
       "region_tag": "cloudtasks_v2beta3_generated_CloudTasks_GetTask_sync",
       "title": "Snippet for the get_task call in the CloudTasks service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta3::CloudTasks::Client#get_task. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta3::CloudTasks::Client#get_task.",
       "file": "cloud_tasks/get_task.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,7 +526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -534,7 +534,7 @@
     {
       "region_tag": "cloudtasks_v2beta3_generated_CloudTasks_CreateTask_sync",
       "title": "Snippet for the create_task call in the CloudTasks service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta3::CloudTasks::Client#create_task. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta3::CloudTasks::Client#create_task.",
       "file": "cloud_tasks/create_task.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,7 +566,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -574,7 +574,7 @@
     {
       "region_tag": "cloudtasks_v2beta3_generated_CloudTasks_DeleteTask_sync",
       "title": "Snippet for the delete_task call in the CloudTasks service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta3::CloudTasks::Client#delete_task. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta3::CloudTasks::Client#delete_task.",
       "file": "cloud_tasks/delete_task.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,7 +606,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -614,7 +614,7 @@
     {
       "region_tag": "cloudtasks_v2beta3_generated_CloudTasks_RunTask_sync",
       "title": "Snippet for the run_task call in the CloudTasks service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta3::CloudTasks::Client#run_task. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta3::CloudTasks::Client#run_task.",
       "file": "cloud_tasks/run_task.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,47 +646,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "cloudtasks_v2beta3_generated_CloudTasks_BufferTask_sync",
-      "title": "Snippet for the buffer_task call in the CloudTasks service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tasks::V2beta3::CloudTasks::Client#buffer_task. It may require modification in order to execute successfully.",
-      "file": "cloud_tasks/buffer_task.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "buffer_task",
-        "full_name": "::Google::Cloud::Tasks::V2beta3::CloudTasks::Client#buffer_task",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::Tasks::V2beta3::BufferTaskRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Cloud::Tasks::V2beta3::BufferTaskResponse",
-        "client": {
-          "short_name": "CloudTasks::Client",
-          "full_name": "::Google::Cloud::Tasks::V2beta3::CloudTasks::Client"
-        },
-        "method": {
-          "short_name": "BufferTask",
-          "full_name": "google.cloud.tasks.v2beta3.CloudTasks.BufferTask",
-          "service": {
-            "short_name": "CloudTasks",
-            "full_name": "google.cloud.tasks.v2beta3.CloudTasks"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]

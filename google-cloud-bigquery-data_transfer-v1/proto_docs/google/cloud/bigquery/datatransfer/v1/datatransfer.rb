@@ -128,9 +128,11 @@ module Google
           #     scopes needed by a data source to prepare data and ingest them into
           #     BigQuery, e.g., https://www.googleapis.com/auth/bigquery
           # @!attribute [rw] transfer_type
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::Google::Cloud::Bigquery::DataTransfer::V1::TransferType]
           #     Deprecated. This field has no effect.
           # @!attribute [rw] supports_multiple_transfers
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::Boolean]
           #     Deprecated. This field has no effect.
           # @!attribute [rw] update_deadline_seconds

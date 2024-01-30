@@ -33,7 +33,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request for {::Google::Cloud::Spanner::V1::Spanner::Client#batch_create_sessions BatchCreateSessions}.
+        # The request for
+        # {::Google::Cloud::Spanner::V1::Spanner::Client#batch_create_sessions BatchCreateSessions}.
         # @!attribute [rw] database
         #   @return [::String]
         #     Required. The database in which the new sessions are created.
@@ -46,13 +47,15 @@ module Google
         #     The API may return fewer than the requested number of sessions. If a
         #     specific number of sessions are desired, the client can make additional
         #     calls to BatchCreateSessions (adjusting
-        #     {::Google::Cloud::Spanner::V1::BatchCreateSessionsRequest#session_count session_count} as necessary).
+        #     {::Google::Cloud::Spanner::V1::BatchCreateSessionsRequest#session_count session_count}
+        #     as necessary).
         class BatchCreateSessionsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response for {::Google::Cloud::Spanner::V1::Spanner::Client#batch_create_sessions BatchCreateSessions}.
+        # The response for
+        # {::Google::Cloud::Spanner::V1::Spanner::Client#batch_create_sessions BatchCreateSessions}.
         # @!attribute [rw] session
         #   @return [::Array<::Google::Cloud::Spanner::V1::Session>]
         #     The freshly created sessions.
@@ -120,7 +123,8 @@ module Google
         # @!attribute [rw] page_token
         #   @return [::String]
         #     If non-empty, `page_token` should contain a
-        #     {::Google::Cloud::Spanner::V1::ListSessionsResponse#next_page_token next_page_token} from a previous
+        #     {::Google::Cloud::Spanner::V1::ListSessionsResponse#next_page_token next_page_token}
+        #     from a previous
         #     {::Google::Cloud::Spanner::V1::ListSessionsResponse ListSessionsResponse}.
         # @!attribute [rw] filter
         #   @return [::String]
@@ -146,8 +150,8 @@ module Google
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     `next_page_token` can be sent in a subsequent
-        #     {::Google::Cloud::Spanner::V1::Spanner::Client#list_sessions ListSessions} call to fetch more of the matching
-        #     sessions.
+        #     {::Google::Cloud::Spanner::V1::Spanner::Client#list_sessions ListSessions} call to fetch more
+        #     of the matching sessions.
         class ListSessionsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -226,6 +230,93 @@ module Google
           end
         end
 
+        # The DirectedReadOptions can be used to indicate which replicas or regions
+        # should be used for non-transactional reads or queries.
+        #
+        # DirectedReadOptions may only be specified for a read-only transaction,
+        # otherwise the API will return an `INVALID_ARGUMENT` error.
+        # @!attribute [rw] include_replicas
+        #   @return [::Google::Cloud::Spanner::V1::DirectedReadOptions::IncludeReplicas]
+        #     Include_replicas indicates the order of replicas (as they appear in
+        #     this list) to process the request. If auto_failover_disabled is set to
+        #     true and all replicas are exhausted without finding a healthy replica,
+        #     Spanner will wait for a replica in the list to become available, requests
+        #     may fail due to `DEADLINE_EXCEEDED` errors.
+        # @!attribute [rw] exclude_replicas
+        #   @return [::Google::Cloud::Spanner::V1::DirectedReadOptions::ExcludeReplicas]
+        #     Exclude_replicas indicates that should be excluded from serving
+        #     requests. Spanner will not route requests to the replicas in this list.
+        class DirectedReadOptions
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The directed read replica selector.
+          # Callers must provide one or more of the following fields for replica
+          # selection:
+          #
+          #   * `location` - The location must be one of the regions within the
+          #      multi-region configuration of your database.
+          #   * `type` - The type of the replica.
+          #
+          # Some examples of using replica_selectors are:
+          #
+          #   * `location:us-east1` --> The "us-east1" replica(s) of any available type
+          #                             will be used to process the request.
+          #   * `type:READ_ONLY`    --> The "READ_ONLY" type replica(s) in nearest
+          # .                            available location will be used to process the
+          #                             request.
+          #   * `location:us-east1 type:READ_ONLY` --> The "READ_ONLY" type replica(s)
+          #                          in location "us-east1" will be used to process
+          #                          the request.
+          # @!attribute [rw] location
+          #   @return [::String]
+          #     The location or region of the serving requests, e.g. "us-east1".
+          # @!attribute [rw] type
+          #   @return [::Google::Cloud::Spanner::V1::DirectedReadOptions::ReplicaSelection::Type]
+          #     The type of replica.
+          class ReplicaSelection
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Indicates the type of replica.
+            module Type
+              # Not specified.
+              TYPE_UNSPECIFIED = 0
+
+              # Read-write replicas support both reads and writes.
+              READ_WRITE = 1
+
+              # Read-only replicas only support reads (not writes).
+              READ_ONLY = 2
+            end
+          end
+
+          # An IncludeReplicas contains a repeated set of ReplicaSelection which
+          # indicates the order in which replicas should be considered.
+          # @!attribute [rw] replica_selections
+          #   @return [::Array<::Google::Cloud::Spanner::V1::DirectedReadOptions::ReplicaSelection>]
+          #     The directed read replica selector.
+          # @!attribute [rw] auto_failover_disabled
+          #   @return [::Boolean]
+          #     If true, Spanner will not route requests to a replica outside the
+          #     include_replicas list when all of the specified replicas are unavailable
+          #     or unhealthy. Default value is `false`.
+          class IncludeReplicas
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # An ExcludeReplicas contains a repeated set of ReplicaSelection that should
+          # be excluded from serving requests.
+          # @!attribute [rw] replica_selections
+          #   @return [::Array<::Google::Cloud::Spanner::V1::DirectedReadOptions::ReplicaSelection>]
+          #     The directed read replica selector.
+          class ExcludeReplicas
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # The request for {::Google::Cloud::Spanner::V1::Spanner::Client#execute_sql ExecuteSql} and
         # {::Google::Cloud::Spanner::V1::Spanner::Client#execute_streaming_sql ExecuteStreamingSql}.
         # @!attribute [rw] session
@@ -265,7 +356,8 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Spanner::V1::Type}]
         #     It is not always possible for Cloud Spanner to infer the right SQL type
         #     from a JSON value.  For example, values of type `BYTES` and values
-        #     of type `STRING` both appear in {::Google::Cloud::Spanner::V1::ExecuteSqlRequest#params params} as JSON strings.
+        #     of type `STRING` both appear in
+        #     {::Google::Cloud::Spanner::V1::ExecuteSqlRequest#params params} as JSON strings.
         #
         #     In these cases, `param_types` can be used to specify the exact
         #     SQL type for some or all of the SQL statement parameters. See the
@@ -275,15 +367,18 @@ module Google
         #   @return [::String]
         #     If this request is resuming a previously interrupted SQL statement
         #     execution, `resume_token` should be copied from the last
-        #     {::Google::Cloud::Spanner::V1::PartialResultSet PartialResultSet} yielded before the interruption. Doing this
-        #     enables the new SQL statement execution to resume where the last one left
-        #     off. The rest of the request parameters must exactly match the
-        #     request that yielded this token.
+        #     {::Google::Cloud::Spanner::V1::PartialResultSet PartialResultSet} yielded before the
+        #     interruption. Doing this enables the new SQL statement execution to resume
+        #     where the last one left off. The rest of the request parameters must
+        #     exactly match the request that yielded this token.
         # @!attribute [rw] query_mode
         #   @return [::Google::Cloud::Spanner::V1::ExecuteSqlRequest::QueryMode]
         #     Used to control the amount of debugging information returned in
-        #     {::Google::Cloud::Spanner::V1::ResultSetStats ResultSetStats}. If {::Google::Cloud::Spanner::V1::ExecuteSqlRequest#partition_token partition_token} is set, {::Google::Cloud::Spanner::V1::ExecuteSqlRequest#query_mode query_mode} can only
-        #     be set to {::Google::Cloud::Spanner::V1::ExecuteSqlRequest::QueryMode::NORMAL QueryMode.NORMAL}.
+        #     {::Google::Cloud::Spanner::V1::ResultSetStats ResultSetStats}. If
+        #     {::Google::Cloud::Spanner::V1::ExecuteSqlRequest#partition_token partition_token} is
+        #     set, {::Google::Cloud::Spanner::V1::ExecuteSqlRequest#query_mode query_mode} can only
+        #     be set to
+        #     {::Google::Cloud::Spanner::V1::ExecuteSqlRequest::QueryMode::NORMAL QueryMode.NORMAL}.
         # @!attribute [rw] partition_token
         #   @return [::String]
         #     If present, results will be restricted to the specified partition
@@ -308,13 +403,16 @@ module Google
         # @!attribute [rw] request_options
         #   @return [::Google::Cloud::Spanner::V1::RequestOptions]
         #     Common options for this request.
+        # @!attribute [rw] directed_read_options
+        #   @return [::Google::Cloud::Spanner::V1::DirectedReadOptions]
+        #     Directed read options for this request.
         # @!attribute [rw] data_boost_enabled
         #   @return [::Boolean]
         #     If this is for a partitioned query and this field is set to `true`, the
-        #     request will be executed via Spanner independent compute resources.
+        #     request is executed with Spanner Data Boost independent compute resources.
         #
         #     If the field is set to `true` but the request does not set
-        #     `partition_token`, the API will return an `INVALID_ARGUMENT` error.
+        #     `partition_token`, the API returns an `INVALID_ARGUMENT` error.
         class ExecuteSqlRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -412,17 +510,17 @@ module Google
         #     transaction.
         # @!attribute [rw] statements
         #   @return [::Array<::Google::Cloud::Spanner::V1::ExecuteBatchDmlRequest::Statement>]
-        #     Required. The list of statements to execute in this batch. Statements are executed
-        #     serially, such that the effects of statement `i` are visible to statement
-        #     `i+1`. Each statement must be a DML statement. Execution stops at the
-        #     first failed statement; the remaining statements are not executed.
+        #     Required. The list of statements to execute in this batch. Statements are
+        #     executed serially, such that the effects of statement `i` are visible to
+        #     statement `i+1`. Each statement must be a DML statement. Execution stops at
+        #     the first failed statement; the remaining statements are not executed.
         #
         #     Callers must provide at least one statement.
         # @!attribute [rw] seqno
         #   @return [::Integer]
-        #     Required. A per-transaction sequence number used to identify this request. This field
-        #     makes each request idempotent such that if the request is received multiple
-        #     times, at most one will succeed.
+        #     Required. A per-transaction sequence number used to identify this request.
+        #     This field makes each request idempotent such that if the request is
+        #     received multiple times, at most one will succeed.
         #
         #     The sequence number must be monotonically increasing within the
         #     transaction. If a request arrives for the first time with an out-of-order
@@ -457,7 +555,9 @@ module Google
           #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Spanner::V1::Type}]
           #     It is not always possible for Cloud Spanner to infer the right SQL type
           #     from a JSON value.  For example, values of type `BYTES` and values
-          #     of type `STRING` both appear in {::Google::Cloud::Spanner::V1::ExecuteBatchDmlRequest::Statement#params params} as JSON strings.
+          #     of type `STRING` both appear in
+          #     {::Google::Cloud::Spanner::V1::ExecuteBatchDmlRequest::Statement#params params} as
+          #     JSON strings.
           #
           #     In these cases, `param_types` can be used to specify the exact
           #     SQL type for some or all of the SQL statement parameters. See the
@@ -478,39 +578,48 @@ module Google
           end
         end
 
-        # The response for {::Google::Cloud::Spanner::V1::Spanner::Client#execute_batch_dml ExecuteBatchDml}. Contains a list
-        # of {::Google::Cloud::Spanner::V1::ResultSet ResultSet} messages, one for each DML statement that has successfully
-        # executed, in the same order as the statements in the request. If a statement
-        # fails, the status in the response body identifies the cause of the failure.
+        # The response for
+        # {::Google::Cloud::Spanner::V1::Spanner::Client#execute_batch_dml ExecuteBatchDml}. Contains a list
+        # of {::Google::Cloud::Spanner::V1::ResultSet ResultSet} messages, one for each DML
+        # statement that has successfully executed, in the same order as the statements
+        # in the request. If a statement fails, the status in the response body
+        # identifies the cause of the failure.
         #
         # To check for DML statements that failed, use the following approach:
         #
-        # 1. Check the status in the response message. The [google.rpc.Code][google.rpc.Code] enum
+        # 1. Check the status in the response message. The
+        # [google.rpc.Code][google.rpc.Code] enum
         #    value `OK` indicates that all statements were executed successfully.
         # 2. If the status was not `OK`, check the number of result sets in the
-        #    response. If the response contains `N` {::Google::Cloud::Spanner::V1::ResultSet ResultSet} messages, then
-        #    statement `N+1` in the request failed.
+        #    response. If the response contains `N`
+        #    {::Google::Cloud::Spanner::V1::ResultSet ResultSet} messages, then statement `N+1` in
+        #    the request failed.
         #
         # Example 1:
         #
         # * Request: 5 DML statements, all executed successfully.
-        # * Response: 5 {::Google::Cloud::Spanner::V1::ResultSet ResultSet} messages, with the status `OK`.
+        # * Response: 5 {::Google::Cloud::Spanner::V1::ResultSet ResultSet} messages, with the
+        # status `OK`.
         #
         # Example 2:
         #
         # * Request: 5 DML statements. The third statement has a syntax error.
-        # * Response: 2 {::Google::Cloud::Spanner::V1::ResultSet ResultSet} messages, and a syntax error (`INVALID_ARGUMENT`)
-        #   status. The number of {::Google::Cloud::Spanner::V1::ResultSet ResultSet} messages indicates that the third
-        #   statement failed, and the fourth and fifth statements were not executed.
+        # * Response: 2 {::Google::Cloud::Spanner::V1::ResultSet ResultSet} messages, and a syntax
+        # error (`INVALID_ARGUMENT`)
+        #   status. The number of {::Google::Cloud::Spanner::V1::ResultSet ResultSet} messages
+        #   indicates that the third statement failed, and the fourth and fifth
+        #   statements were not executed.
         # @!attribute [rw] result_sets
         #   @return [::Array<::Google::Cloud::Spanner::V1::ResultSet>]
-        #     One {::Google::Cloud::Spanner::V1::ResultSet ResultSet} for each statement in the request that ran successfully,
-        #     in the same order as the statements in the request. Each {::Google::Cloud::Spanner::V1::ResultSet ResultSet} does
-        #     not contain any rows. The {::Google::Cloud::Spanner::V1::ResultSetStats ResultSetStats} in each {::Google::Cloud::Spanner::V1::ResultSet ResultSet} contain
-        #     the number of rows modified by the statement.
+        #     One {::Google::Cloud::Spanner::V1::ResultSet ResultSet} for each statement in the
+        #     request that ran successfully, in the same order as the statements in the
+        #     request. Each {::Google::Cloud::Spanner::V1::ResultSet ResultSet} does not contain any
+        #     rows. The {::Google::Cloud::Spanner::V1::ResultSetStats ResultSetStats} in each
+        #     {::Google::Cloud::Spanner::V1::ResultSet ResultSet} contain the number of rows
+        #     modified by the statement.
         #
-        #     Only the first {::Google::Cloud::Spanner::V1::ResultSet ResultSet} in the response contains valid
-        #     {::Google::Cloud::Spanner::V1::ResultSetMetadata ResultSetMetadata}.
+        #     Only the first {::Google::Cloud::Spanner::V1::ResultSet ResultSet} in the response
+        #     contains valid {::Google::Cloud::Spanner::V1::ResultSetMetadata ResultSetMetadata}.
         # @!attribute [rw] status
         #   @return [::Google::Rpc::Status]
         #     If all DML statements are executed successfully, the status is `OK`.
@@ -555,15 +664,16 @@ module Google
         #     transactions are not.
         # @!attribute [rw] sql
         #   @return [::String]
-        #     Required. The query request to generate partitions for. The request will fail if
-        #     the query is not root partitionable. The query plan of a root
-        #     partitionable query has a single distributed union operator. A distributed
-        #     union operator conceptually divides one or more tables into multiple
-        #     splits, remotely evaluates a subquery independently on each split, and
-        #     then unions all results.
+        #     Required. The query request to generate partitions for. The request will
+        #     fail if the query is not root partitionable. For a query to be root
+        #     partitionable, it needs to satisfy a few conditions. For example, the first
+        #     operator in the query execution plan must be a distributed union operator.
+        #     For more information about other conditions, see [Read data in
+        #     parallel](https://cloud.google.com/spanner/docs/reads#read_data_in_parallel).
         #
-        #     This must not contain DML commands, such as INSERT, UPDATE, or
-        #     DELETE. Use {::Google::Cloud::Spanner::V1::Spanner::Client#execute_streaming_sql ExecuteStreamingSql} with a
+        #     The query request must not contain DML commands, such as INSERT, UPDATE, or
+        #     DELETE. Use
+        #     {::Google::Cloud::Spanner::V1::Spanner::Client#execute_streaming_sql ExecuteStreamingSql} with a
         #     PartitionedDml transaction for large, partition-friendly DML operations.
         # @!attribute [rw] params
         #   @return [::Google::Protobuf::Struct]
@@ -583,7 +693,8 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Spanner::V1::Type}]
         #     It is not always possible for Cloud Spanner to infer the right SQL type
         #     from a JSON value.  For example, values of type `BYTES` and values
-        #     of type `STRING` both appear in {::Google::Cloud::Spanner::V1::PartitionQueryRequest#params params} as JSON strings.
+        #     of type `STRING` both appear in
+        #     {::Google::Cloud::Spanner::V1::PartitionQueryRequest#params params} as JSON strings.
         #
         #     In these cases, `param_types` can be used to specify the exact
         #     SQL type for some or all of the SQL query parameters. See the
@@ -619,18 +730,24 @@ module Google
         #     Required. The name of the table in the database to be read.
         # @!attribute [rw] index
         #   @return [::String]
-        #     If non-empty, the name of an index on {::Google::Cloud::Spanner::V1::PartitionReadRequest#table table}. This index is
-        #     used instead of the table primary key when interpreting {::Google::Cloud::Spanner::V1::PartitionReadRequest#key_set key_set}
-        #     and sorting result rows. See {::Google::Cloud::Spanner::V1::PartitionReadRequest#key_set key_set} for further information.
+        #     If non-empty, the name of an index on
+        #     {::Google::Cloud::Spanner::V1::PartitionReadRequest#table table}. This index is used
+        #     instead of the table primary key when interpreting
+        #     {::Google::Cloud::Spanner::V1::PartitionReadRequest#key_set key_set} and sorting
+        #     result rows. See {::Google::Cloud::Spanner::V1::PartitionReadRequest#key_set key_set}
+        #     for further information.
         # @!attribute [rw] columns
         #   @return [::Array<::String>]
-        #     The columns of {::Google::Cloud::Spanner::V1::PartitionReadRequest#table table} to be returned for each row matching
-        #     this request.
+        #     The columns of {::Google::Cloud::Spanner::V1::PartitionReadRequest#table table} to be
+        #     returned for each row matching this request.
         # @!attribute [rw] key_set
         #   @return [::Google::Cloud::Spanner::V1::KeySet]
         #     Required. `key_set` identifies the rows to be yielded. `key_set` names the
-        #     primary keys of the rows in {::Google::Cloud::Spanner::V1::PartitionReadRequest#table table} to be yielded, unless {::Google::Cloud::Spanner::V1::PartitionReadRequest#index index}
-        #     is present. If {::Google::Cloud::Spanner::V1::PartitionReadRequest#index index} is present, then {::Google::Cloud::Spanner::V1::PartitionReadRequest#key_set key_set} instead names
+        #     primary keys of the rows in
+        #     {::Google::Cloud::Spanner::V1::PartitionReadRequest#table table} to be yielded, unless
+        #     {::Google::Cloud::Spanner::V1::PartitionReadRequest#index index} is present. If
+        #     {::Google::Cloud::Spanner::V1::PartitionReadRequest#index index} is present, then
+        #     {::Google::Cloud::Spanner::V1::PartitionReadRequest#key_set key_set} instead names
         #     index keys in {::Google::Cloud::Spanner::V1::PartitionReadRequest#index index}.
         #
         #     It is not an error for the `key_set` to name rows that do not
@@ -682,24 +799,31 @@ module Google
         #     Required. The name of the table in the database to be read.
         # @!attribute [rw] index
         #   @return [::String]
-        #     If non-empty, the name of an index on {::Google::Cloud::Spanner::V1::ReadRequest#table table}. This index is
-        #     used instead of the table primary key when interpreting {::Google::Cloud::Spanner::V1::ReadRequest#key_set key_set}
-        #     and sorting result rows. See {::Google::Cloud::Spanner::V1::ReadRequest#key_set key_set} for further information.
+        #     If non-empty, the name of an index on
+        #     {::Google::Cloud::Spanner::V1::ReadRequest#table table}. This index is used instead of
+        #     the table primary key when interpreting
+        #     {::Google::Cloud::Spanner::V1::ReadRequest#key_set key_set} and sorting result rows.
+        #     See {::Google::Cloud::Spanner::V1::ReadRequest#key_set key_set} for further
+        #     information.
         # @!attribute [rw] columns
         #   @return [::Array<::String>]
-        #     Required. The columns of {::Google::Cloud::Spanner::V1::ReadRequest#table table} to be returned for each row matching
-        #     this request.
+        #     Required. The columns of {::Google::Cloud::Spanner::V1::ReadRequest#table table} to be
+        #     returned for each row matching this request.
         # @!attribute [rw] key_set
         #   @return [::Google::Cloud::Spanner::V1::KeySet]
         #     Required. `key_set` identifies the rows to be yielded. `key_set` names the
-        #     primary keys of the rows in {::Google::Cloud::Spanner::V1::ReadRequest#table table} to be yielded, unless {::Google::Cloud::Spanner::V1::ReadRequest#index index}
-        #     is present. If {::Google::Cloud::Spanner::V1::ReadRequest#index index} is present, then {::Google::Cloud::Spanner::V1::ReadRequest#key_set key_set} instead names
-        #     index keys in {::Google::Cloud::Spanner::V1::ReadRequest#index index}.
+        #     primary keys of the rows in {::Google::Cloud::Spanner::V1::ReadRequest#table table} to
+        #     be yielded, unless {::Google::Cloud::Spanner::V1::ReadRequest#index index} is present.
+        #     If {::Google::Cloud::Spanner::V1::ReadRequest#index index} is present, then
+        #     {::Google::Cloud::Spanner::V1::ReadRequest#key_set key_set} instead names index keys
+        #     in {::Google::Cloud::Spanner::V1::ReadRequest#index index}.
         #
-        #     If the {::Google::Cloud::Spanner::V1::ReadRequest#partition_token partition_token} field is empty, rows are yielded
-        #     in table primary key order (if {::Google::Cloud::Spanner::V1::ReadRequest#index index} is empty) or index key order
-        #     (if {::Google::Cloud::Spanner::V1::ReadRequest#index index} is non-empty).  If the {::Google::Cloud::Spanner::V1::ReadRequest#partition_token partition_token} field is not
-        #     empty, rows will be yielded in an unspecified order.
+        #     If the {::Google::Cloud::Spanner::V1::ReadRequest#partition_token partition_token}
+        #     field is empty, rows are yielded in table primary key order (if
+        #     {::Google::Cloud::Spanner::V1::ReadRequest#index index} is empty) or index key order
+        #     (if {::Google::Cloud::Spanner::V1::ReadRequest#index index} is non-empty).  If the
+        #     {::Google::Cloud::Spanner::V1::ReadRequest#partition_token partition_token} field is
+        #     not empty, rows will be yielded in an unspecified order.
         #
         #     It is not an error for the `key_set` to name rows that do not
         #     exist in the database. Read yields nothing for nonexistent rows.
@@ -712,9 +836,9 @@ module Google
         #   @return [::String]
         #     If this request is resuming a previously interrupted read,
         #     `resume_token` should be copied from the last
-        #     {::Google::Cloud::Spanner::V1::PartialResultSet PartialResultSet} yielded before the interruption. Doing this
-        #     enables the new read to resume where the last read left off. The
-        #     rest of the request parameters must exactly match the request
+        #     {::Google::Cloud::Spanner::V1::PartialResultSet PartialResultSet} yielded before the
+        #     interruption. Doing this enables the new read to resume where the last read
+        #     left off. The rest of the request parameters must exactly match the request
         #     that yielded this token.
         # @!attribute [rw] partition_token
         #   @return [::String]
@@ -725,19 +849,23 @@ module Google
         # @!attribute [rw] request_options
         #   @return [::Google::Cloud::Spanner::V1::RequestOptions]
         #     Common options for this request.
+        # @!attribute [rw] directed_read_options
+        #   @return [::Google::Cloud::Spanner::V1::DirectedReadOptions]
+        #     Directed read options for this request.
         # @!attribute [rw] data_boost_enabled
         #   @return [::Boolean]
         #     If this is for a partitioned read and this field is set to `true`, the
-        #     request will be executed via Spanner independent compute resources.
+        #     request is executed with Spanner Data Boost independent compute resources.
         #
         #     If the field is set to `true` but the request does not set
-        #     `partition_token`, the API will return an `INVALID_ARGUMENT` error.
+        #     `partition_token`, the API returns an `INVALID_ARGUMENT` error.
         class ReadRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request for {::Google::Cloud::Spanner::V1::Spanner::Client#begin_transaction BeginTransaction}.
+        # The request for
+        # {::Google::Cloud::Spanner::V1::Spanner::Client#begin_transaction BeginTransaction}.
         # @!attribute [rw] session
         #   @return [::String]
         #     Required. The session in which the transaction runs.
@@ -782,8 +910,15 @@ module Google
         # @!attribute [rw] return_commit_stats
         #   @return [::Boolean]
         #     If `true`, then statistics related to the transaction will be included in
-        #     the {::Google::Cloud::Spanner::V1::CommitResponse#commit_stats CommitResponse}. Default value is
-        #     `false`.
+        #     the {::Google::Cloud::Spanner::V1::CommitResponse#commit_stats CommitResponse}.
+        #     Default value is `false`.
+        # @!attribute [rw] max_commit_delay
+        #   @return [::Google::Protobuf::Duration]
+        #     Optional. The amount of latency this request is willing to incur in order
+        #     to improve throughput. If this field is not set, Spanner assumes requests
+        #     are relatively latency sensitive and automatically determines an
+        #     appropriate delay time. You can specify a batching delay value between 0
+        #     and 500 ms.
         # @!attribute [rw] request_options
         #   @return [::Google::Cloud::Spanner::V1::RequestOptions]
         #     Common options for this request.

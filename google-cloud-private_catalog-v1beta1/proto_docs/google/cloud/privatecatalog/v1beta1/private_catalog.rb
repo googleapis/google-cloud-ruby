@@ -373,6 +373,7 @@ module Google
         #   @return [::String]
         #     Output only. The asset resource name if an asset is hosted by Private Catalog.
         # @!attribute [r] gcs_path
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Output only. The cloud storage object path.
         # @!attribute [r] git_source
@@ -388,6 +389,7 @@ module Google
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The last update timestamp of the asset reference.
         # @!attribute [rw] version
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     The version of the source used for this asset reference.
         class AssetReference

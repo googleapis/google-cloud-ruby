@@ -32,6 +32,9 @@ module Google
             # Service to manage Security and Privacy Notifications.
             #
             class Client
+              # @private
+              DEFAULT_ENDPOINT_TEMPLATE = "advisorynotifications.$UNIVERSE_DOMAIN$"
+
               include Paths
 
               # @private
@@ -103,6 +106,15 @@ module Google
               end
 
               ##
+              # The effective universe domain
+              #
+              # @return [String]
+              #
+              def universe_domain
+                @advisory_notifications_service_stub.universe_domain
+              end
+
+              ##
               # Create a new AdvisoryNotificationsService REST client object.
               #
               # @example
@@ -129,8 +141,9 @@ module Google
                 credentials = @config.credentials
                 # Use self-signed JWT if the endpoint is unchanged from default,
                 # but only if the default endpoint does not have a region prefix.
-                enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
-                                         !@config.endpoint.split(".").first.include?("-")
+                enable_self_signed_jwt = @config.endpoint.nil? ||
+                                         (@config.endpoint == Configuration::DEFAULT_ENDPOINT &&
+                                         !@config.endpoint.split(".").first.include?("-"))
                 credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
                 if credentials.is_a?(::String) || credentials.is_a?(::Hash)
@@ -140,7 +153,12 @@ module Google
                 @quota_project_id = @config.quota_project
                 @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
-                @advisory_notifications_service_stub = ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::Rest::ServiceStub.new endpoint: @config.endpoint, credentials: credentials
+                @advisory_notifications_service_stub = ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::Rest::ServiceStub.new(
+                  endpoint: @config.endpoint,
+                  endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
+                  universe_domain: @config.universe_domain,
+                  credentials: credentials
+                )
               end
 
               # Service calls
@@ -165,7 +183,8 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The parent, which owns this collection of notifications.
-              #     Must be of the form "organizations/\\{organization}/locations/\\{location}".
+              #     Must be of the form "organizations/\\{organization}/locations/\\{location}"
+              #     or "projects/\\{project}/locations/\\{location}"
               #   @param page_size [::Integer]
               #     The maximum number of notifications to return. The service may return
               #     fewer than this value. If unspecified or equal to 0, at most 50
@@ -268,7 +287,8 @@ module Google
               #   @param name [::String]
               #     Required. A name of the notification to retrieve.
               #     Format:
-              #     organizations/\\{organization}/locations/\\{location}/notifications/\\{notification}.
+              #     organizations/\\{organization}/locations/\\{location}/notifications/\\{notification}
+              #     or projects/\\{projects}/locations/\\{location}/notifications/\\{notification}.
               #   @param language_code [::String]
               #     ISO code for requested localization language. If unset, will be
               #     interpereted as "en". If the requested language is valid, but not supported
@@ -521,9 +541,9 @@ module Google
               #   end
               #
               # @!attribute [rw] endpoint
-              #   The hostname or hostname:port of the service endpoint.
-              #   Defaults to `"advisorynotifications.googleapis.com"`.
-              #   @return [::String]
+              #   A custom service endpoint, as a hostname or hostname:port. The default is
+              #   nil, indicating to use the default endpoint in the current universe domain.
+              #   @return [::String,nil]
               # @!attribute [rw] credentials
               #   Credentials to send with calls. You may provide any of the following types:
               #    *  (`String`) The path to a service account key file in JSON format
@@ -560,13 +580,20 @@ module Google
               # @!attribute [rw] quota_project
               #   A separate project against which to charge quota.
               #   @return [::String]
+              # @!attribute [rw] universe_domain
+              #   The universe domain within which to make requests. This determines the
+              #   default endpoint URL. The default value of nil uses the environment
+              #   universe (usually the default "googleapis.com" universe).
+              #   @return [::String,nil]
               #
               class Configuration
                 extend ::Gapic::Config
 
+                # @private
+                # The endpoint specific to the default "googleapis.com" universe. Deprecated.
                 DEFAULT_ENDPOINT = "advisorynotifications.googleapis.com"
 
-                config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
+                config_attr :endpoint,      nil, ::String, nil
                 config_attr :credentials,   nil do |value|
                   allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                   allowed.any? { |klass| klass === value }
@@ -578,6 +605,7 @@ module Google
                 config_attr :metadata,      nil, ::Hash, nil
                 config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
                 config_attr :quota_project, nil, ::String, nil
+                config_attr :universe_domain, nil, ::String, nil
 
                 # @private
                 def initialize parent_config = nil

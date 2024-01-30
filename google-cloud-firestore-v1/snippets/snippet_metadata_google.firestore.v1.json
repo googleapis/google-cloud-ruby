@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-firestore-v1",
-    "version": "0.10.0",
+    "version": "0.11.0",
     "language": "RUBY",
     "apis": [
       {
@@ -14,7 +14,7 @@
     {
       "region_tag": "firestore_v1_generated_Firestore_GetDocument_sync",
       "title": "Snippet for the get_document call in the Firestore service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#get_document. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#get_document.",
       "file": "firestore/get_document.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "firestore_v1_generated_Firestore_ListDocuments_sync",
       "title": "Snippet for the list_documents call in the Firestore service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#list_documents. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#list_documents.",
       "file": "firestore/list_documents.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "firestore_v1_generated_Firestore_UpdateDocument_sync",
       "title": "Snippet for the update_document call in the Firestore service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#update_document. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#update_document.",
       "file": "firestore/update_document.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -134,7 +134,7 @@
     {
       "region_tag": "firestore_v1_generated_Firestore_DeleteDocument_sync",
       "title": "Snippet for the delete_document call in the Firestore service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#delete_document. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#delete_document.",
       "file": "firestore/delete_document.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -174,7 +174,7 @@
     {
       "region_tag": "firestore_v1_generated_Firestore_BatchGetDocuments_sync",
       "title": "Snippet for the batch_get_documents call in the Firestore service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#batch_get_documents. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#batch_get_documents.",
       "file": "firestore/batch_get_documents.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,7 +206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 49,
           "type": "FULL"
         }
       ]
@@ -214,7 +214,7 @@
     {
       "region_tag": "firestore_v1_generated_Firestore_BeginTransaction_sync",
       "title": "Snippet for the begin_transaction call in the Firestore service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#begin_transaction. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#begin_transaction.",
       "file": "firestore/begin_transaction.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,7 +246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -254,7 +254,7 @@
     {
       "region_tag": "firestore_v1_generated_Firestore_Commit_sync",
       "title": "Snippet for the commit call in the Firestore service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#commit. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#commit.",
       "file": "firestore/commit.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,7 +286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -294,7 +294,7 @@
     {
       "region_tag": "firestore_v1_generated_Firestore_Rollback_sync",
       "title": "Snippet for the rollback call in the Firestore service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#rollback. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#rollback.",
       "file": "firestore/rollback.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,7 +326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -334,7 +334,7 @@
     {
       "region_tag": "firestore_v1_generated_Firestore_RunQuery_sync",
       "title": "Snippet for the run_query call in the Firestore service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#run_query. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#run_query.",
       "file": "firestore/run_query.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,7 +366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 49,
           "type": "FULL"
         }
       ]
@@ -374,7 +374,7 @@
     {
       "region_tag": "firestore_v1_generated_Firestore_RunAggregationQuery_sync",
       "title": "Snippet for the run_aggregation_query call in the Firestore service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#run_aggregation_query. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#run_aggregation_query.",
       "file": "firestore/run_aggregation_query.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,7 +406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 49,
           "type": "FULL"
         }
       ]
@@ -414,7 +414,7 @@
     {
       "region_tag": "firestore_v1_generated_Firestore_PartitionQuery_sync",
       "title": "Snippet for the partition_query call in the Firestore service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#partition_query. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#partition_query.",
       "file": "firestore/partition_query.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,7 +446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -454,7 +454,7 @@
     {
       "region_tag": "firestore_v1_generated_Firestore_Write_sync",
       "title": "Snippet for the write call in the Firestore service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#write. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#write.",
       "file": "firestore/write.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,7 +486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 50,
+          "end": 55,
           "type": "FULL"
         }
       ]
@@ -494,7 +494,7 @@
     {
       "region_tag": "firestore_v1_generated_Firestore_Listen_sync",
       "title": "Snippet for the listen call in the Firestore service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#listen. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#listen.",
       "file": "firestore/listen.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,7 +526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 50,
+          "end": 55,
           "type": "FULL"
         }
       ]
@@ -534,7 +534,7 @@
     {
       "region_tag": "firestore_v1_generated_Firestore_ListCollectionIds_sync",
       "title": "Snippet for the list_collection_ids call in the Firestore service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#list_collection_ids. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#list_collection_ids.",
       "file": "firestore/list_collection_ids.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,7 +566,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -574,7 +574,7 @@
     {
       "region_tag": "firestore_v1_generated_Firestore_BatchWrite_sync",
       "title": "Snippet for the batch_write call in the Firestore service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#batch_write. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#batch_write.",
       "file": "firestore/batch_write.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,7 +606,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -614,7 +614,7 @@
     {
       "region_tag": "firestore_v1_generated_Firestore_CreateDocument_sync",
       "title": "Snippet for the create_document call in the Firestore service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#create_document. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#create_document.",
       "file": "firestore/create_document.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,7 +646,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]

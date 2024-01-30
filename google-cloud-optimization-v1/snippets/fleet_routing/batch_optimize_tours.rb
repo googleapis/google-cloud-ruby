@@ -22,9 +22,14 @@ require "google/cloud/optimization/v1"
 ##
 # Snippet for the batch_optimize_tours call in the FleetRouting service
 #
+# This snippet has been automatically generated and should be regarded as a code
+# template only. It will require modifications to work:
+# - It may require correct/in-range values for request initialization.
+# - It may require specifying regional endpoints when creating the service
+# client as shown in https://cloud.google.com/ruby/docs/reference.
+#
 # This is an auto-generated example demonstrating basic usage of
-# Google::Cloud::Optimization::V1::FleetRouting::Client#batch_optimize_tours. It
-# may require modification in order to execute successfully.
+# Google::Cloud::Optimization::V1::FleetRouting::Client#batch_optimize_tours.
 #
 def batch_optimize_tours
   # Create a client object. The client can be reused for multiple calls.

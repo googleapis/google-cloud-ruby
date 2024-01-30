@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/spanner/admin/database/v1/database_admin"
 
 class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_backup_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -37,7 +47,7 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientPathsT
 
   def test_crypto_key_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -49,7 +59,7 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientPathsT
 
   def test_crypto_key_version_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -61,7 +71,7 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientPathsT
 
   def test_database_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -73,7 +83,7 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientPathsT
 
   def test_instance_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end

@@ -22,9 +22,14 @@ require "google/cloud/iot/v1"
 ##
 # Snippet for the delete_device_registry call in the DeviceManager service
 #
+# This snippet has been automatically generated and should be regarded as a code
+# template only. It will require modifications to work:
+# - It may require correct/in-range values for request initialization.
+# - It may require specifying regional endpoints when creating the service
+# client as shown in https://cloud.google.com/ruby/docs/reference.
+#
 # This is an auto-generated example demonstrating basic usage of
-# Google::Cloud::Iot::V1::DeviceManager::Client#delete_device_registry. It may
-# require modification in order to execute successfully.
+# Google::Cloud::Iot::V1::DeviceManager::Client#delete_device_registry.
 #
 def delete_device_registry
   # Create a client object. The client can be reused for multiple calls.

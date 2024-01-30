@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Dataform
       module V1beta1
-        VERSION = "0.4.0"
+        VERSION = "0.6.1"
       end
     end
   end

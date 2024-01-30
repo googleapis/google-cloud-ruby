@@ -23,21 +23,46 @@ require "gapic/grpc/service_stub"
 require "google/cloud/billing/v1/cloud_billing"
 
 class ::Google::Cloud::Billing::V1::CloudBilling::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_billing_account_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Billing::V1::CloudBilling::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       path = client.billing_account_path billing_account: "value0"
       assert_equal "billingAccounts/value0", path
+
+      path = client.billing_account_path organization: "value0", billing_account: "value1"
+      assert_equal "organizations/value0/billingAccounts/value1", path
+    end
+  end
+
+  def test_organization_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Billing::V1::CloudBilling::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.organization_path organization: "value0"
+      assert_equal "organizations/value0", path
     end
   end
 
   def test_project_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Billing::V1::CloudBilling::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -49,7 +74,7 @@ class ::Google::Cloud::Billing::V1::CloudBilling::ClientPathsTest < Minitest::Te
 
   def test_project_billing_info_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Billing::V1::CloudBilling::Client.new do |config|
         config.credentials = grpc_channel
       end

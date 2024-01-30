@@ -22,7 +22,7 @@ module Google
     module PolicyTroubleshooter
       module Iam
         module V3
-          VERSION = "0.2.0"
+          VERSION = "0.3.1"
         end
       end
     end

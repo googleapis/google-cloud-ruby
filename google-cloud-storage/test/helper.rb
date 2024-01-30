@@ -66,9 +66,10 @@ class MockStorage < Minitest::Spec
                          lifecycle: nil,
                          location_type: "multi-region",
                          rpo: "DEFAULT",
-                         autoclass_enabled: nil
+                         autoclass_enabled: nil,
+                         autoclass_terminal_storage_class: nil,
+                         enable_object_retention: nil
     versioning_config = { "enabled" => versioning } if versioning
-    autoclass_config = { enabled: autoclass_enabled } unless autoclass_enabled.nil?
     { "kind" => "storage#bucket",
       "id" => name,
       "selfLink" => "#{url_root}/b/#{name}",
@@ -88,7 +89,15 @@ class MockStorage < Minitest::Spec
       "website" => website_hash(website_main, website_404),
       "billing" => billing_hash(requester_pays),
       "etag" => "CAE=",
-      "autoclass" => autoclass_config }.delete_if { |_, v| v.nil? }
+      "autoclass" => autoclass_config_hash(autoclass_enabled, autoclass_terminal_storage_class),
+      "enableObjectRetention" => enable_object_retention
+    }.delete_if { |_, v| v.nil? }
+  end
+
+  def autoclass_config_hash(enabled, terminal_storage_class)
+    { "enabled"               => enabled,
+      "terminalStorageClass"  => terminal_storage_class
+    }.delete_if { |_, v| v.nil? } if !enabled.nil? || terminal_storage_class
   end
 
   def logging_hash(bucket, prefix)
@@ -107,7 +116,13 @@ class MockStorage < Minitest::Spec
     { "requesterPays" => requester_pays} unless requester_pays.nil?
   end
 
-  def random_file_hash bucket=random_bucket_name, name=random_file_path, generation="1234567890", kms_key_name="path/to/encryption_key_name", custom_time: nil
+  def file_retention_hash(retention_params)
+    { "mode"               => retention_params[:mode],
+      "retainUntilTime"  => retention_params[:retain_until_time]
+    }.delete_if { |_, v| v.nil? } if !retention_params.nil? && !retention_params.empty?
+  end
+
+  def random_file_hash bucket=random_bucket_name, name=random_file_path, generation="1234567890", kms_key_name="path/to/encryption_key_name", custom_time: nil, retention_params: nil, override_unlocked_retention: nil
     { "kind" => "storage#object",
       "id" => "#{bucket}/#{name}/1234567890",
       "selfLink" => "https://www.googleapis.com/storage/v1/b/#{bucket}/o/#{name}",
@@ -134,7 +149,9 @@ class MockStorage < Minitest::Spec
       "kmsKeyName" => kms_key_name,
       "temporaryHold" => true,
       "eventBasedHold" => true,
-      "retentionExpirationTime" => Time.now }
+      "retentionExpirationTime" => Time.now,
+      "retention" => file_retention_hash(retention_params),
+      "overrideUnlockedRetention" => override_unlocked_retention }
   end
 
   def random_bucket_name
@@ -249,7 +266,7 @@ class MockStorage < Minitest::Spec
   def update_bucket_args if_metageneration_match: nil,
                          if_metageneration_not_match: nil,
                          predefined_acl: nil,
-                         predefined_default_object_acl: nil, 
+                         predefined_default_object_acl: nil,
                          user_project: nil,
                          options: {}
     {
@@ -343,6 +360,7 @@ class MockStorage < Minitest::Spec
                         if_metageneration_not_match: nil,
                         predefined_acl: nil,
                         user_project: nil,
+                        override_unlocked_retention: nil,
                         options: {}
     opts = {
       generation: generation,
@@ -352,6 +370,7 @@ class MockStorage < Minitest::Spec
       if_metageneration_not_match: if_metageneration_not_match,
       predefined_acl: predefined_acl,
       user_project: user_project,
+      override_unlocked_retention: override_unlocked_retention,
       options: options
     }
   end

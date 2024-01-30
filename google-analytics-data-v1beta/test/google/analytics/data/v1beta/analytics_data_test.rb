@@ -45,6 +45,14 @@ class ::Google::Analytics::Data::V1beta::AnalyticsData::ClientTest < Minitest::T
 
       @response
     end
+
+    def endpoint
+      "endpoint.example.com"
+    end
+
+    def universe_domain
+      "example.com"
+    end
   end
 
   def test_run_report
@@ -531,11 +539,264 @@ class ::Google::Analytics::Data::V1beta::AnalyticsData::ClientTest < Minitest::T
     end
   end
 
+  def test_create_audience_export
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    audience_export = {}
+
+    create_audience_export_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_audience_export, name
+      assert_kind_of ::Google::Analytics::Data::V1beta::CreateAudienceExportRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Data::V1beta::AudienceExport), request["audience_export"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_audience_export_client_stub do
+      # Create client
+      client = ::Google::Analytics::Data::V1beta::AnalyticsData::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_audience_export({ parent: parent, audience_export: audience_export }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_audience_export parent: parent, audience_export: audience_export do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_audience_export ::Google::Analytics::Data::V1beta::CreateAudienceExportRequest.new(parent: parent, audience_export: audience_export) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_audience_export({ parent: parent, audience_export: audience_export }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_audience_export(::Google::Analytics::Data::V1beta::CreateAudienceExportRequest.new(parent: parent, audience_export: audience_export), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_audience_export_client_stub.call_rpc_count
+    end
+  end
+
+  def test_query_audience_export
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Data::V1beta::QueryAudienceExportResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    offset = 42
+    limit = 42
+
+    query_audience_export_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :query_audience_export, name
+      assert_kind_of ::Google::Analytics::Data::V1beta::QueryAudienceExportRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal 42, request["offset"]
+      assert_equal 42, request["limit"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, query_audience_export_client_stub do
+      # Create client
+      client = ::Google::Analytics::Data::V1beta::AnalyticsData::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.query_audience_export({ name: name, offset: offset, limit: limit }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.query_audience_export name: name, offset: offset, limit: limit do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.query_audience_export ::Google::Analytics::Data::V1beta::QueryAudienceExportRequest.new(name: name, offset: offset, limit: limit) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.query_audience_export({ name: name, offset: offset, limit: limit }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.query_audience_export(::Google::Analytics::Data::V1beta::QueryAudienceExportRequest.new(name: name, offset: offset, limit: limit), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, query_audience_export_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_audience_export
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Data::V1beta::AudienceExport.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_audience_export_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_audience_export, name
+      assert_kind_of ::Google::Analytics::Data::V1beta::GetAudienceExportRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_audience_export_client_stub do
+      # Create client
+      client = ::Google::Analytics::Data::V1beta::AnalyticsData::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_audience_export({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_audience_export name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_audience_export ::Google::Analytics::Data::V1beta::GetAudienceExportRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_audience_export({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_audience_export(::Google::Analytics::Data::V1beta::GetAudienceExportRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_audience_export_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_audience_exports
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Data::V1beta::ListAudienceExportsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_audience_exports_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_audience_exports, name
+      assert_kind_of ::Google::Analytics::Data::V1beta::ListAudienceExportsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_audience_exports_client_stub do
+      # Create client
+      client = ::Google::Analytics::Data::V1beta::AnalyticsData::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_audience_exports({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_audience_exports parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_audience_exports ::Google::Analytics::Data::V1beta::ListAudienceExportsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_audience_exports({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_audience_exports(::Google::Analytics::Data::V1beta::ListAudienceExportsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_audience_exports_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
     client = block_config = config = nil
-    Gapic::ServiceStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil, nil
+    Gapic::ServiceStub.stub :new, dummy_stub do
       client = ::Google::Analytics::Data::V1beta::AnalyticsData::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -547,5 +808,19 @@ class ::Google::Analytics::Data::V1beta::AnalyticsData::ClientTest < Minitest::T
 
     assert_same block_config, config
     assert_kind_of ::Google::Analytics::Data::V1beta::AnalyticsData::Client::Configuration, config
+  end
+
+  def test_operations_client
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+
+    client = nil
+    dummy_stub = ClientStub.new nil, nil
+    Gapic::ServiceStub.stub :new, dummy_stub do
+      client = ::Google::Analytics::Data::V1beta::AnalyticsData::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+    end
+
+    assert_kind_of ::Google::Analytics::Data::V1beta::AnalyticsData::Operations, client.operations_client
   end
 end

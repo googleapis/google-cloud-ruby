@@ -60,62 +60,13 @@ class ::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Rest::ClientTest < Minit
 
       @response
     end
-  end
 
-  def test_list_entity_types
-    # Create test objects.
-    client_result = ::Google::Cloud::Dialogflow::CX::V3::ListEntityTypesResponse.new
-    http_response = OpenStruct.new body: client_result.to_json
-
-    call_options = {}
-
-    # Create request parameters for a unary method.
-    parent = "hello world"
-    language_code = "hello world"
-    page_size = 42
-    page_token = "hello world"
-
-    list_entity_types_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
-      assert options.metadata.key? :"x-goog-api-client"
-      assert options.metadata[:"x-goog-api-client"].include? "rest"
-      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    def endpoint
+      "endpoint.example.com"
     end
 
-    ::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Rest::ServiceStub.stub :transcode_list_entity_types_request, ["", "", {}] do
-      Gapic::Rest::ClientStub.stub :new, list_entity_types_client_stub do
-        # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Rest::Client.new do |config|
-          config.credentials = :dummy_value
-        end
-
-        # Use hash object
-        client.list_entity_types({ parent: parent, language_code: language_code, page_size: page_size, page_token: page_token }) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use named arguments
-        client.list_entity_types parent: parent, language_code: language_code, page_size: page_size, page_token: page_token do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object
-        client.list_entity_types ::Google::Cloud::Dialogflow::CX::V3::ListEntityTypesRequest.new(parent: parent, language_code: language_code, page_size: page_size, page_token: page_token) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use hash object with options
-        client.list_entity_types({ parent: parent, language_code: language_code, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object with options
-        client.list_entity_types(::Google::Cloud::Dialogflow::CX::V3::ListEntityTypesRequest.new(parent: parent, language_code: language_code, page_size: page_size, page_token: page_token), call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Verify method calls
-        assert_equal 5, list_entity_types_client_stub.call_count
-      end
+    def universe_domain
+      "example.com"
     end
   end
 
@@ -341,11 +292,69 @@ class ::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Rest::ClientTest < Minit
     end
   end
 
+  def test_list_entity_types
+    # Create test objects.
+    client_result = ::Google::Cloud::Dialogflow::CX::V3::ListEntityTypesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    language_code = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_entity_types_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Rest::ServiceStub.stub :transcode_list_entity_types_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_entity_types_client_stub do
+        # Create client
+        client = ::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_entity_types({ parent: parent, language_code: language_code, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_entity_types parent: parent, language_code: language_code, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_entity_types ::Google::Cloud::Dialogflow::CX::V3::ListEntityTypesRequest.new(parent: parent, language_code: language_code, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_entity_types({ parent: parent, language_code: language_code, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_entity_types(::Google::Cloud::Dialogflow::CX::V3::ListEntityTypesRequest.new(parent: parent, language_code: language_code, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_entity_types_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 
     client = block_config = config = nil
-    Gapic::Rest::ClientStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil
+    Gapic::Rest::ClientStub.stub :new, dummy_stub do
       client = ::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Rest::Client.new do |config|
         config.credentials = credentials_token
       end

@@ -22,9 +22,14 @@ require "google/cloud/dialogflow/v2"
 ##
 # Snippet for the get_validation_result call in the Agents service
 #
+# This snippet has been automatically generated and should be regarded as a code
+# template only. It will require modifications to work:
+# - It may require correct/in-range values for request initialization.
+# - It may require specifying regional endpoints when creating the service
+# client as shown in https://cloud.google.com/ruby/docs/reference.
+#
 # This is an auto-generated example demonstrating basic usage of
-# Google::Cloud::Dialogflow::V2::Agents::Client#get_validation_result. It may
-# require modification in order to execute successfully.
+# Google::Cloud::Dialogflow::V2::Agents::Client#get_validation_result.
 #
 def get_validation_result
   # Create a client object. The client can be reused for multiple calls.

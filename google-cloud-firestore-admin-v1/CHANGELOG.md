@@ -1,5 +1,40 @@
 # Release History
 
+### 0.14.2 (2024-01-15)
+
+#### Documentation
+
+* Minor formatting fix ([#24411](https://github.com/googleapis/google-cloud-ruby/issues/24411)) 
+
+### 0.14.1 (2024-01-12)
+
+#### Bug Fixes
+
+* Ensure endpoints are correct for mixin clients ([#24032](https://github.com/googleapis/google-cloud-ruby/issues/24032)) 
+
+### 0.14.0 (2024-01-11)
+
+#### Features
+
+* Support for universe_domain ([#23779](https://github.com/googleapis/google-cloud-ruby/issues/23779)) 
+
+### 0.13.0 (2024-01-03)
+
+#### Features
+
+* add DeleteDatabase API and delete protection ([#23683](https://github.com/googleapis/google-cloud-ruby/issues/23683)) 
+#### Documentation
+
+* update Database API description 
+
+### 0.12.0 (2023-12-08)
+
+#### Features
+
+* Support database version retention and point-in-time-recovery 
+* Support namespace_ids and snapshot_time parameters to export_documents RPC 
+* Support namespace_ids parameter to import_documents RPC 
+
 ### 0.11.0 (2023-09-12)
 
 #### Features

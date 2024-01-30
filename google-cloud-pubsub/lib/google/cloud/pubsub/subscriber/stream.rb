@@ -231,7 +231,8 @@ module Google
             end
 
             # Call the StreamingPull API to get the response enumerator
-            enum = @subscriber.service.streaming_pull @request_queue.each
+            options = { :"metadata" => { :"x-goog-request-params" =>  @subscriber.subscription_name } }
+            enum = @subscriber.service.streaming_pull @request_queue.each, options
 
             loop do
               synchronize do
@@ -253,7 +254,7 @@ module Google
                 # Use synchronize so changes happen atomically
                 synchronize do
                   update_min_duration_per_lease_extension new_exactly_once_delivery_enabled
-                  @exactly_once_delivery_enabled = new_exactly_once_delivery_enabled unless new_exactly_once_delivery_enabled.nil? 
+                  @exactly_once_delivery_enabled = new_exactly_once_delivery_enabled unless new_exactly_once_delivery_enabled.nil?
                   @subscriber.exactly_once_delivery_enabled = @exactly_once_delivery_enabled
 
                   # Create receipt of received messages reception
@@ -271,7 +272,7 @@ module Google
                   # No need to synchronize the callback future
                   register_callback rec_msg
                 end if !@exactly_once_delivery_enabled # Exactly once delivery scenario is handled by callback
-                
+
                 synchronize { pause_streaming! }
               rescue StopIteration
                 break

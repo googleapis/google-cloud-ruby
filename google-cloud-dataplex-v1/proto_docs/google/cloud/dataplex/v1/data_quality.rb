@@ -74,9 +74,23 @@ module Google
         # @!attribute [rw] passed
         #   @return [::Boolean]
         #     Overall data quality result -- `true` if all rules passed.
+        # @!attribute [r] score
+        #   @return [::Float]
+        #     Output only. The overall data quality score.
+        #
+        #     The score ranges between [0, 100] (up to two decimal points).
         # @!attribute [rw] dimensions
         #   @return [::Array<::Google::Cloud::Dataplex::V1::DataQualityDimensionResult>]
         #     A list of results at the dimension level.
+        #
+        #     A dimension will have a corresponding `DataQualityDimensionResult` if and
+        #     only if there is at least one rule with the 'dimension' field set to it.
+        # @!attribute [r] columns
+        #   @return [::Array<::Google::Cloud::Dataplex::V1::DataQualityColumnResult>]
+        #     Output only. A list of results at the column level.
+        #
+        #     A column will have a corresponding `DataQualityColumnResult` if and only if
+        #     there is at least one rule with the 'column' field set to it.
         # @!attribute [rw] rules
         #   @return [::Array<::Google::Cloud::Dataplex::V1::DataQualityRuleResult>]
         #     A list of all the rules in a job, and their results.
@@ -181,6 +195,13 @@ module Google
         # @!attribute [rw] passed
         #   @return [::Boolean]
         #     Whether the dimension passed or failed.
+        # @!attribute [r] score
+        #   @return [::Float]
+        #     Output only. The dimension-level data quality score for this data scan job
+        #     if and only if the 'dimension' field is set.
+        #
+        #     The score ranges between [0, 100] (up to two decimal
+        #     points).
         class DataQualityDimensionResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -238,7 +259,12 @@ module Google
         #     `ignore_null` is `true`. In that case, such `null` rows are trivially
         #     considered passing.
         #
-        #     This field is only valid for row-level type rules.
+        #     This field is only valid for the following type of rules:
+        #
+        #     * RangeExpectation
+        #     * RegexExpectation
+        #     * SetExpectation
+        #     * UniquenessExpectation
         # @!attribute [rw] dimension
         #   @return [::String]
         #     Required. The dimension a rule belongs to. Results are also aggregated at
@@ -404,6 +430,23 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # DataQualityColumnResult provides a more detailed, per-column view of
+        # the results.
+        # @!attribute [r] column
+        #   @return [::String]
+        #     Output only. The column specified in the DataQualityRule.
+        # @!attribute [r] score
+        #   @return [::Float]
+        #     Output only. The column-level data quality score for this data scan job if
+        #     and only if the 'column' field is set.
+        #
+        #     The score ranges between between [0, 100] (up to two decimal
+        #     points).
+        class DataQualityColumnResult
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

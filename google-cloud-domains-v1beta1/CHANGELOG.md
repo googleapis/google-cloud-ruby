@@ -1,5 +1,17 @@
 # Release History
 
+### 0.8.1 (2024-01-12)
+
+#### Bug Fixes
+
+* Ensure endpoints are correct for mixin clients ([#24032](https://github.com/googleapis/google-cloud-ruby/issues/24032)) 
+
+### 0.8.0 (2024-01-11)
+
+#### Features
+
+* Support for universe_domain ([#23778](https://github.com/googleapis/google-cloud-ruby/issues/23778)) 
+
 ### 0.7.0 (2023-09-12)
 
 #### Features

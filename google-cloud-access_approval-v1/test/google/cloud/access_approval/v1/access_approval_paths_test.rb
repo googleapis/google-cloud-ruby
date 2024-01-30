@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/access_approval/v1/access_approval"
 
 class ::Google::Cloud::AccessApproval::V1::AccessApproval::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_access_approval_settings_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::AccessApproval::V1::AccessApproval::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -43,7 +53,7 @@ class ::Google::Cloud::AccessApproval::V1::AccessApproval::ClientPathsTest < Min
 
   def test_approval_request_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::AccessApproval::V1::AccessApproval::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -61,7 +71,7 @@ class ::Google::Cloud::AccessApproval::V1::AccessApproval::ClientPathsTest < Min
 
   def test_folder_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::AccessApproval::V1::AccessApproval::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -73,7 +83,7 @@ class ::Google::Cloud::AccessApproval::V1::AccessApproval::ClientPathsTest < Min
 
   def test_organization_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::AccessApproval::V1::AccessApproval::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -85,7 +95,7 @@ class ::Google::Cloud::AccessApproval::V1::AccessApproval::ClientPathsTest < Min
 
   def test_project_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::AccessApproval::V1::AccessApproval::Client.new do |config|
         config.credentials = grpc_channel
       end

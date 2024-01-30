@@ -378,6 +378,7 @@ module Google
         #   @return [::Float]
         #     Overall score of the result. Range [0, 1].
         # @!attribute [rw] confidence
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Float]
         #     **Deprecated. Use `score` instead.**
         #     The accuracy of the entity detection in an image.

@@ -99,6 +99,19 @@ module Google
         #     Toggles whether to return the current state of this Analytics Property's
         #     quota. Quota is returned in [AccessQuota](#AccessQuota). For account-level
         #     requests, this field must be false.
+        # @!attribute [rw] include_all_users
+        #   @return [::Boolean]
+        #     Optional. Determines whether to include users who have never made an API
+        #     call in the response. If true, all users with access to the specified
+        #     property or account are included in the response, regardless of whether
+        #     they have made an API call or not. If false, only the users who have made
+        #     an API call will be included.
+        # @!attribute [rw] expand_groups
+        #   @return [::Boolean]
+        #     Optional. Decides whether to return the users within user groups. This
+        #     field works only when include_all_users is set to true. If true, it will
+        #     return all users with access to the specified property or account.
+        #     If false, only the users with direct access will be returned.
         class RunAccessReportRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -336,222 +349,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for GetUserLink RPC.
-        # @!attribute [rw] name
-        #   @return [::String]
-        #     Required. Example format: accounts/1234/userLinks/5678
-        class GetUserLinkRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for BatchGetUserLinks RPC.
-        # @!attribute [rw] parent
-        #   @return [::String]
-        #     Required. The account or property that all user links in the request are
-        #     for. The parent of all provided values for the 'names' field must match
-        #     this field.
-        #     Example format: accounts/1234
-        # @!attribute [rw] names
-        #   @return [::Array<::String>]
-        #     Required. The names of the user links to retrieve.
-        #     A maximum of 1000 user links can be retrieved in a batch.
-        #     Format: accounts/\\{accountId}/userLinks/\\{userLinkId}
-        class BatchGetUserLinksRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Response message for BatchGetUserLinks RPC.
-        # @!attribute [rw] user_links
-        #   @return [::Array<::Google::Analytics::Admin::V1alpha::UserLink>]
-        #     The requested user links.
-        class BatchGetUserLinksResponse
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for ListUserLinks RPC.
-        # @!attribute [rw] parent
-        #   @return [::String]
-        #     Required. Example format: accounts/1234
-        # @!attribute [rw] page_size
-        #   @return [::Integer]
-        #     The maximum number of user links to return.
-        #     The service may return fewer than this value.
-        #     If unspecified, at most 200 user links will be returned.
-        #     The maximum value is 500; values above 500 will be coerced to 500.
-        # @!attribute [rw] page_token
-        #   @return [::String]
-        #     A page token, received from a previous `ListUserLinks` call.
-        #     Provide this to retrieve the subsequent page.
-        #     When paginating, all other parameters provided to `ListUserLinks` must
-        #     match the call that provided the page token.
-        class ListUserLinksRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Response message for ListUserLinks RPC.
-        # @!attribute [rw] user_links
-        #   @return [::Array<::Google::Analytics::Admin::V1alpha::UserLink>]
-        #     List of UserLinks. These will be ordered stably, but in an arbitrary order.
-        # @!attribute [rw] next_page_token
-        #   @return [::String]
-        #     A token, which can be sent as `page_token` to retrieve the next page.
-        #     If this field is omitted, there are no subsequent pages.
-        class ListUserLinksResponse
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for AuditUserLinks RPC.
-        # @!attribute [rw] parent
-        #   @return [::String]
-        #     Required. Example format: accounts/1234
-        # @!attribute [rw] page_size
-        #   @return [::Integer]
-        #     The maximum number of user links to return.
-        #     The service may return fewer than this value.
-        #     If unspecified, at most 1000 user links will be returned.
-        #     The maximum value is 5000; values above 5000 will be coerced to 5000.
-        # @!attribute [rw] page_token
-        #   @return [::String]
-        #     A page token, received from a previous `AuditUserLinks` call.
-        #     Provide this to retrieve the subsequent page.
-        #     When paginating, all other parameters provided to `AuditUserLinks` must
-        #     match the call that provided the page token.
-        class AuditUserLinksRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Response message for AuditUserLinks RPC.
-        # @!attribute [rw] user_links
-        #   @return [::Array<::Google::Analytics::Admin::V1alpha::AuditUserLink>]
-        #     List of AuditUserLinks. These will be ordered stably, but in an arbitrary
-        #     order.
-        # @!attribute [rw] next_page_token
-        #   @return [::String]
-        #     A token, which can be sent as `page_token` to retrieve the next page.
-        #     If this field is omitted, there are no subsequent pages.
-        class AuditUserLinksResponse
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for CreateUserLink RPC.
-        #
-        # Users can have multiple email addresses associated with their Google
-        # account, and one of these email addresses is the "primary" email address.
-        # Any of the email addresses associated with a Google account may be used
-        # for a new UserLink, but the returned UserLink will always contain the
-        # "primary" email address. As a result, the input and output email address
-        # for this request may differ.
-        # @!attribute [rw] parent
-        #   @return [::String]
-        #     Required. Example format: accounts/1234
-        # @!attribute [rw] notify_new_user
-        #   @return [::Boolean]
-        #     Optional. If set, then email the new user notifying them that they've been
-        #     granted permissions to the resource.
-        # @!attribute [rw] user_link
-        #   @return [::Google::Analytics::Admin::V1alpha::UserLink]
-        #     Required. The user link to create.
-        class CreateUserLinkRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for BatchCreateUserLinks RPC.
-        # @!attribute [rw] parent
-        #   @return [::String]
-        #     Required. The account or property that all user links in the request are
-        #     for. This field is required. The parent field in the CreateUserLinkRequest
-        #     messages must either be empty or match this field.
-        #     Example format: accounts/1234
-        # @!attribute [rw] notify_new_users
-        #   @return [::Boolean]
-        #     Optional. If set, then email the new users notifying them that they've been
-        #     granted permissions to the resource. Regardless of whether this is set or
-        #     not, notify_new_user field inside each individual request is ignored.
-        # @!attribute [rw] requests
-        #   @return [::Array<::Google::Analytics::Admin::V1alpha::CreateUserLinkRequest>]
-        #     Required. The requests specifying the user links to create.
-        #     A maximum of 1000 user links can be created in a batch.
-        class BatchCreateUserLinksRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Response message for BatchCreateUserLinks RPC.
-        # @!attribute [rw] user_links
-        #   @return [::Array<::Google::Analytics::Admin::V1alpha::UserLink>]
-        #     The user links created.
-        class BatchCreateUserLinksResponse
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for UpdateUserLink RPC.
-        # @!attribute [rw] user_link
-        #   @return [::Google::Analytics::Admin::V1alpha::UserLink]
-        #     Required. The user link to update.
-        class UpdateUserLinkRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for BatchUpdateUserLinks RPC.
-        # @!attribute [rw] parent
-        #   @return [::String]
-        #     Required. The account or property that all user links in the request are
-        #     for. The parent field in the UpdateUserLinkRequest messages must either be
-        #     empty or match this field.
-        #     Example format: accounts/1234
-        # @!attribute [rw] requests
-        #   @return [::Array<::Google::Analytics::Admin::V1alpha::UpdateUserLinkRequest>]
-        #     Required. The requests specifying the user links to update.
-        #     A maximum of 1000 user links can be updated in a batch.
-        class BatchUpdateUserLinksRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Response message for BatchUpdateUserLinks RPC.
-        # @!attribute [rw] user_links
-        #   @return [::Array<::Google::Analytics::Admin::V1alpha::UserLink>]
-        #     The user links updated.
-        class BatchUpdateUserLinksResponse
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for DeleteUserLink RPC.
-        # @!attribute [rw] name
-        #   @return [::String]
-        #     Required. Example format: accounts/1234/userLinks/5678
-        class DeleteUserLinkRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for BatchDeleteUserLinks RPC.
-        # @!attribute [rw] parent
-        #   @return [::String]
-        #     Required. The account or property that all user links in the request are
-        #     for. The parent of all values for user link names to delete must match this
-        #     field.
-        #     Example format: accounts/1234
-        # @!attribute [rw] requests
-        #   @return [::Array<::Google::Analytics::Admin::V1alpha::DeleteUserLinkRequest>]
-        #     Required. The requests specifying the user links to update.
-        #     A maximum of 1000 user links can be updated in a batch.
-        class BatchDeleteUserLinksRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
         # Request message for CreateFirebaseLink RPC
         # @!attribute [rw] parent
         #   @return [::String]
@@ -765,11 +562,13 @@ module Google
         # @!attribute [rw] account
         #   @return [::String]
         #     Required. The account resource for which to return change history
-        #     resources.
+        #     resources. Format: accounts/\\{account} Example: "accounts/100"
         # @!attribute [rw] property
         #   @return [::String]
         #     Optional. Resource name for a child property. If set, only return changes
         #     made to this property or its child resources.
+        #     Format: properties/\\{propertyId}
+        #     Example: "properties/100"
         # @!attribute [rw] resource_type
         #   @return [::Array<::Google::Analytics::Admin::V1alpha::ChangeHistoryResourceType>]
         #     Optional. If set, only return changes if they are for a resource that
@@ -953,9 +752,10 @@ module Google
         # Request message for ListSKAdNetworkConversionValueSchemas RPC
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. Format:
-        #     properties/\\{property_id}/dataStreams/\\{dataStream}/sKAdNetworkConversionValueSchema
-        #     Example: properties/1234/dataStreams/5678/sKAdNetworkConversionValueSchema
+        #     Required. The DataStream resource to list schemas for.
+        #     Format:
+        #     properties/\\{property_id}/dataStreams/\\{dataStream}
+        #     Example: properties/1234/dataStreams/5678
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of resources to return. The service may return
@@ -1518,6 +1318,99 @@ module Google
         #     Required. The name of the CustomMetric to get.
         #     Example format: properties/1234/customMetrics/5678
         class GetCustomMetricRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for CreateCalculatedMetric RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Format: properties/\\{property_id}
+        #     Example: properties/1234
+        # @!attribute [rw] calculated_metric_id
+        #   @return [::String]
+        #     Required. The ID to use for the calculated metric which will become the
+        #     final component of the calculated metric's resource name.
+        #
+        #     This value should be 1-80 characters and valid characters are
+        #     /[a-zA-Z0-9_]/, no spaces allowed. calculated_metric_id must be unique
+        #     between all calculated metrics under a property. The calculated_metric_id
+        #     is used when referencing this calculated metric from external APIs, for
+        #     example, "calcMetric:\\{calculated_metric_id}".
+        # @!attribute [rw] calculated_metric
+        #   @return [::Google::Analytics::Admin::V1alpha::CalculatedMetric]
+        #     Required. The CalculatedMetric to create.
+        class CreateCalculatedMetricRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for UpdateCalculatedMetric RPC.
+        # @!attribute [rw] calculated_metric
+        #   @return [::Google::Analytics::Admin::V1alpha::CalculatedMetric]
+        #     Required. The CalculatedMetric to update
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The list of fields to be updated. Omitted fields will not be
+        #     updated. To replace the entire entity, use one path with the string "*" to
+        #     match all fields.
+        class UpdateCalculatedMetricRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for DeleteCalculatedMetric RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the CalculatedMetric to delete.
+        #     Format: properties/\\{property_id}/calculatedMetrics/\\{calculated_metric_id}
+        #     Example: properties/1234/calculatedMetrics/Metric01
+        class DeleteCalculatedMetricRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ListCalculatedMetrics RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Example format: properties/1234
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of resources to return.
+        #     If unspecified, at most 50 resources will be returned.
+        #     The maximum value is 200 (higher values will be coerced to the maximum).
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A page token, received from a previous `ListCalculatedMetrics`
+        #     call. Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to `ListCalculatedMetrics`
+        #     must match the call that provided the page token.
+        class ListCalculatedMetricsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ListCalculatedMetrics RPC.
+        # @!attribute [rw] calculated_metrics
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::CalculatedMetric>]
+        #     List of CalculatedMetrics.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListCalculatedMetricsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for GetCalculatedMetric RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the CalculatedMetric to get.
+        #     Format: properties/\\{property_id}/calculatedMetrics/\\{calculated_metric_id}
+        #     Example: properties/1234/calculatedMetrics/Metric01
+        class GetCalculatedMetricRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -2207,6 +2100,34 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for GetDataRedactionSettings RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the settings to lookup.
+        #     Format:
+        #     properties/\\{property}/dataStreams/\\{data_stream}/dataRedactionSettings
+        #     Example: "properties/1000/dataStreams/2000/dataRedactionSettings"
+        class GetDataRedactionSettingsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for UpdateDataRedactionSettings RPC.
+        # @!attribute [rw] data_redaction_settings
+        #   @return [::Google::Analytics::Admin::V1alpha::DataRedactionSettings]
+        #     Required. The settings to update.
+        #     The `name` field is used to identify the settings to be updated.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The list of fields to be updated. Field names must be in snake
+        #     case (e.g., "field_to_update"). Omitted fields will not be updated. To
+        #     replace the entire entity, use one path with the string "*" to match all
+        #     fields.
+        class UpdateDataRedactionSettingsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for CreateConnectedSiteTag RPC.
         # @!attribute [rw] property
         #   @return [::String]
@@ -2443,6 +2364,221 @@ module Google
         #     A token, which can be sent as `page_token` to retrieve the next page.
         #     If this field is omitted, there are no subsequent pages.
         class ListEventCreateRulesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for CreateRollupProperty RPC.
+        # @!attribute [rw] rollup_property
+        #   @return [::Google::Analytics::Admin::V1alpha::Property]
+        #     Required. The roll-up property to create.
+        # @!attribute [rw] source_properties
+        #   @return [::Array<::String>]
+        #     Optional. The resource names of properties that will be sources to the
+        #     created roll-up property.
+        class CreateRollupPropertyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for CreateRollupProperty RPC.
+        # @!attribute [rw] rollup_property
+        #   @return [::Google::Analytics::Admin::V1alpha::Property]
+        #     The created roll-up property.
+        # @!attribute [rw] rollup_property_source_links
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::RollupPropertySourceLink>]
+        #     The created roll-up property source links.
+        class CreateRollupPropertyResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for GetRollupPropertySourceLink RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the roll-up property source link to lookup.
+        #     Format:
+        #     properties/\\{property_id}/rollupPropertySourceLinks/\\{rollup_property_source_link_id}
+        #     Example: properties/123/rollupPropertySourceLinks/456
+        class GetRollupPropertySourceLinkRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ListRollupPropertySourceLinks RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The name of the roll-up property to list roll-up property source
+        #     links under. Format: properties/\\{property_id} Example: properties/1234
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of resources to return. The service may return
+        #     fewer than this value, even if there are additional pages.
+        #     If unspecified, at most 50 resources will be returned.
+        #     The maximum value is 200; (higher values will be coerced to the maximum)
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A page token, received from a previous
+        #     `ListRollupPropertySourceLinks` call. Provide this to retrieve the
+        #     subsequent page. When paginating, all other parameters provided to
+        #     `ListRollupPropertySourceLinks` must match the call that provided the page
+        #     token.
+        class ListRollupPropertySourceLinksRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ListRollupPropertySourceLinks RPC.
+        # @!attribute [rw] rollup_property_source_links
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::RollupPropertySourceLink>]
+        #     List of RollupPropertySourceLinks.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListRollupPropertySourceLinksResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for CreateRollupPropertySourceLink RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Format: properties/\\{property_id}
+        #     Example: properties/1234
+        # @!attribute [rw] rollup_property_source_link
+        #   @return [::Google::Analytics::Admin::V1alpha::RollupPropertySourceLink]
+        #     Required. The roll-up property source link to create.
+        class CreateRollupPropertySourceLinkRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for DeleteRollupPropertySourceLink RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Format:
+        #     properties/\\{property_id}/rollupPropertySourceLinks/\\{rollup_property_source_link_id}
+        #     Example: properties/1234/rollupPropertySourceLinks/5678
+        class DeleteRollupPropertySourceLinkRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for CreateSubproperty RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The ordinary property for which to create a subproperty.
+        #     Format: properties/property_id
+        #     Example: properties/123
+        # @!attribute [rw] subproperty
+        #   @return [::Google::Analytics::Admin::V1alpha::Property]
+        #     Required. The subproperty to create.
+        # @!attribute [rw] subproperty_event_filter
+        #   @return [::Google::Analytics::Admin::V1alpha::SubpropertyEventFilter]
+        #     Optional. The subproperty event filter to create on an ordinary property.
+        class CreateSubpropertyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for CreateSubproperty RPC.
+        # @!attribute [rw] subproperty
+        #   @return [::Google::Analytics::Admin::V1alpha::Property]
+        #     The created subproperty.
+        # @!attribute [rw] subproperty_event_filter
+        #   @return [::Google::Analytics::Admin::V1alpha::SubpropertyEventFilter]
+        #     The created subproperty event filter.
+        class CreateSubpropertyResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for CreateSubpropertyEventFilter RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The ordinary property for which to create a subproperty event
+        #     filter. Format: properties/property_id Example: properties/123
+        # @!attribute [rw] subproperty_event_filter
+        #   @return [::Google::Analytics::Admin::V1alpha::SubpropertyEventFilter]
+        #     Required. The subproperty event filter to create.
+        class CreateSubpropertyEventFilterRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for GetSubpropertyEventFilter RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Resource name of the subproperty event filter to lookup.
+        #     Format:
+        #     properties/property_id/subpropertyEventFilters/subproperty_event_filter
+        #     Example: properties/123/subpropertyEventFilters/456
+        class GetSubpropertyEventFilterRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ListSubpropertyEventFilters RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Resource name of the ordinary property.
+        #     Format: properties/property_id
+        #     Example: properties/123
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of resources to return. The service may return
+        #     fewer than this value, even if there are additional pages. If unspecified,
+        #     at most 50 resources will be returned. The maximum value is 200; (higher
+        #     values will be coerced to the maximum)
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A page token, received from a previous
+        #     `ListSubpropertyEventFilters` call. Provide this to retrieve the subsequent
+        #     page. When paginating, all other parameters provided to
+        #     `ListSubpropertyEventFilters` must match the call that provided the page
+        #     token.
+        class ListSubpropertyEventFiltersRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ListSubpropertyEventFilter RPC.
+        # @!attribute [rw] subproperty_event_filters
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::SubpropertyEventFilter>]
+        #     List of subproperty event filters.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page. If
+        #     this field is omitted, there are no subsequent pages.
+        class ListSubpropertyEventFiltersResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for UpdateSubpropertyEventFilter RPC.
+        # @!attribute [rw] subproperty_event_filter
+        #   @return [::Google::Analytics::Admin::V1alpha::SubpropertyEventFilter]
+        #     Required. The subproperty event filter to update.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The list of fields to update. Field names must be in snake case
+        #     (for example, "field_to_update"). Omitted fields will not be updated. To
+        #     replace the entire entity, use one path with the string "*" to match all
+        #     fields.
+        class UpdateSubpropertyEventFilterRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for DeleteSubpropertyEventFilter RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Resource name of the subproperty event filter to delete.
+        #     Format:
+        #     properties/property_id/subpropertyEventFilters/subproperty_event_filter
+        #     Example: properties/123/subpropertyEventFilters/456
+        class DeleteSubpropertyEventFilterRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

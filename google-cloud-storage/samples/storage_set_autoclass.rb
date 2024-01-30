@@ -19,13 +19,10 @@ require "google/cloud/storage"
 # This is a snippet for showcasing how to set the autoclass
 # configuration of a bucket.
 #
-# Note: Only patch requests that disable autoclass are currently supported.
-# To enable autoclass, you must set it at bucket creation time.
-#
 # @param bucket_name [String] The ID of your GCS bucket (e.g. "your-unique-bucket-name")
 # @param toggle [Boolean] if true, enables Autoclass; if false, disables Autoclass
 #
-def set_autoclass bucket_name:, toggle:
+def set_autoclass bucket_name:, toggle:, terminal_storage_class: nil
   # Initialize client
   storage = Google::Cloud::Storage.new
 
@@ -33,11 +30,14 @@ def set_autoclass bucket_name:, toggle:
   bucket = storage.bucket bucket_name
 
   # Update the autoclass configuration
-  bucket.autoclass_enabled = toggle
+  bucket.update_autoclass({ enabled: toggle, terminal_storage_class: terminal_storage_class })
+  terminal_class_update_time = bucket.autoclass_terminal_storage_class_update_time
 
   # Get autoclass config of the bucket
   puts "Bucket #{bucket.name} has autoclass config set to #{bucket.autoclass_enabled}."
   puts "Bucket #{bucket.name} has autoclass toggle time set to #{bucket.autoclass_toggle_time}."
+  puts "Bucket #{bucket.name} has autoclass terminal storage class set to #{bucket.autoclass_terminal_storage_class}."
+  puts "Bucket #{bucket.name} has autoclass terminal storage class update time set to #{terminal_class_update_time}."
 end
 
 # [END storage_set_autoclass]

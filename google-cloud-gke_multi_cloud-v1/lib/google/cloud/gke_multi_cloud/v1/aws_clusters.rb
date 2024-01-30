@@ -26,6 +26,7 @@ require "google/cloud/gke_multi_cloud/v1/aws_clusters/credentials"
 require "google/cloud/gke_multi_cloud/v1/aws_clusters/paths"
 require "google/cloud/gke_multi_cloud/v1/aws_clusters/operations"
 require "google/cloud/gke_multi_cloud/v1/aws_clusters/client"
+require "google/cloud/gke_multi_cloud/v1/aws_clusters/rest"
 
 module Google
   module Cloud
@@ -39,6 +40,11 @@ module Google
         #
         #     require "google/cloud/gke_multi_cloud/v1/aws_clusters"
         #     client = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/gke_multi_cloud/v1/aws_clusters/rest"
+        #     client = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::Client.new
         #
         module AwsClusters
         end

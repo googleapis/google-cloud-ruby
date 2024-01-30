@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Batch
       module V1
-        VERSION = "0.12.0"
+        VERSION = "0.16.0"
       end
     end
   end

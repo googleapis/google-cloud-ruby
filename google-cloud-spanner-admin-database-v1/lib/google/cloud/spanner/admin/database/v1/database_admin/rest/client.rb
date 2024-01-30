@@ -40,6 +40,9 @@ module Google
                 #   * restore a database from an existing backup
                 #
                 class Client
+                  # @private
+                  DEFAULT_ENDPOINT_TEMPLATE = "spanner.$UNIVERSE_DOMAIN$"
+
                   include Paths
 
                   # @private
@@ -183,6 +186,15 @@ module Google
                   end
 
                   ##
+                  # The effective universe domain
+                  #
+                  # @return [String]
+                  #
+                  def universe_domain
+                    @database_admin_stub.universe_domain
+                  end
+
+                  ##
                   # Create a new DatabaseAdmin REST client object.
                   #
                   # @example
@@ -209,8 +221,9 @@ module Google
                     credentials = @config.credentials
                     # Use self-signed JWT if the endpoint is unchanged from default,
                     # but only if the default endpoint does not have a region prefix.
-                    enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
-                                             !@config.endpoint.split(".").first.include?("-")
+                    enable_self_signed_jwt = @config.endpoint.nil? ||
+                                             (@config.endpoint == Configuration::DEFAULT_ENDPOINT &&
+                                             !@config.endpoint.split(".").first.include?("-"))
                     credentials ||= Credentials.default scope: @config.scope,
                                                         enable_self_signed_jwt: enable_self_signed_jwt
                     if credentials.is_a?(::String) || credentials.is_a?(::Hash)
@@ -224,9 +237,15 @@ module Google
                       config.credentials = credentials
                       config.quota_project = @quota_project_id
                       config.endpoint = @config.endpoint
+                      config.universe_domain = @config.universe_domain
                     end
 
-                    @database_admin_stub = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::ServiceStub.new endpoint: @config.endpoint, credentials: credentials
+                    @database_admin_stub = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::ServiceStub.new(
+                      endpoint: @config.endpoint,
+                      endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
+                      universe_domain: @config.universe_domain,
+                      credentials: credentials
+                    )
                   end
 
                   ##
@@ -349,7 +368,7 @@ module Google
                   #   @param options [::Gapic::CallOptions, ::Hash]
                   #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
                   #
-                  # @overload create_database(parent: nil, create_statement: nil, extra_statements: nil, encryption_config: nil, database_dialect: nil)
+                  # @overload create_database(parent: nil, create_statement: nil, extra_statements: nil, encryption_config: nil, database_dialect: nil, proto_descriptors: nil)
                   #   Pass arguments to `create_database` via keyword arguments. Note that at
                   #   least one keyword argument is required. To specify no parameters, or to keep all
                   #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -374,6 +393,22 @@ module Google
                   #     Google default encryption.
                   #   @param database_dialect [::Google::Cloud::Spanner::Admin::Database::V1::DatabaseDialect]
                   #     Optional. The dialect of the Cloud Spanner Database.
+                  #   @param proto_descriptors [::String]
+                  #     Optional. Proto descriptors used by CREATE/ALTER PROTO BUNDLE statements in
+                  #     'extra_statements' above.
+                  #     Contains a protobuf-serialized
+                  #     [google.protobuf.FileDescriptorSet](https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/descriptor.proto).
+                  #     To generate it, [install](https://grpc.io/docs/protoc-installation/) and
+                  #     run `protoc` with --include_imports and --descriptor_set_out. For example,
+                  #     to generate for moon/shot/app.proto, run
+                  #     ```
+                  #     $protoc  --proto_path=/app_path --proto_path=/lib_path \
+                  #              --include_imports \
+                  #              --descriptor_set_out=descriptors.data \
+                  #              moon/shot/app.proto
+                  #     ```
+                  #     For more details, see protobuffer [self
+                  #     description](https://developers.google.com/protocol-buffers/docs/techniques#self-description).
                   # @yield [result, operation] Access the result along with the TransportOperation object
                   # @yieldparam result [::Gapic::Operation]
                   # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -664,7 +699,7 @@ module Google
                   #   @param options [::Gapic::CallOptions, ::Hash]
                   #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
                   #
-                  # @overload update_database_ddl(database: nil, statements: nil, operation_id: nil)
+                  # @overload update_database_ddl(database: nil, statements: nil, operation_id: nil, proto_descriptors: nil)
                   #   Pass arguments to `update_database_ddl` via keyword arguments. Note that at
                   #   least one keyword argument is required. To specify no parameters, or to keep all
                   #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -693,6 +728,21 @@ module Google
                   #     underscore. If the named operation already exists,
                   #     {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client#update_database_ddl UpdateDatabaseDdl} returns
                   #     `ALREADY_EXISTS`.
+                  #   @param proto_descriptors [::String]
+                  #     Optional. Proto descriptors used by CREATE/ALTER PROTO BUNDLE statements.
+                  #     Contains a protobuf-serialized
+                  #     [google.protobuf.FileDescriptorSet](https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/descriptor.proto).
+                  #     To generate it, [install](https://grpc.io/docs/protoc-installation/) and
+                  #     run `protoc` with --include_imports and --descriptor_set_out. For example,
+                  #     to generate for moon/shot/app.proto, run
+                  #     ```
+                  #     $protoc  --proto_path=/app_path --proto_path=/lib_path \
+                  #              --include_imports \
+                  #              --descriptor_set_out=descriptors.data \
+                  #              moon/shot/app.proto
+                  #     ```
+                  #     For more details, see protobuffer [self
+                  #     description](https://developers.google.com/protocol-buffers/docs/techniques#self-description).
                   # @yield [result, operation] Access the result along with the TransportOperation object
                   # @yieldparam result [::Gapic::Operation]
                   # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2366,9 +2416,9 @@ module Google
                   #   end
                   #
                   # @!attribute [rw] endpoint
-                  #   The hostname or hostname:port of the service endpoint.
-                  #   Defaults to `"spanner.googleapis.com"`.
-                  #   @return [::String]
+                  #   A custom service endpoint, as a hostname or hostname:port. The default is
+                  #   nil, indicating to use the default endpoint in the current universe domain.
+                  #   @return [::String,nil]
                   # @!attribute [rw] credentials
                   #   Credentials to send with calls. You may provide any of the following types:
                   #    *  (`String`) The path to a service account key file in JSON format
@@ -2405,13 +2455,20 @@ module Google
                   # @!attribute [rw] quota_project
                   #   A separate project against which to charge quota.
                   #   @return [::String]
+                  # @!attribute [rw] universe_domain
+                  #   The universe domain within which to make requests. This determines the
+                  #   default endpoint URL. The default value of nil uses the environment
+                  #   universe (usually the default "googleapis.com" universe).
+                  #   @return [::String,nil]
                   #
                   class Configuration
                     extend ::Gapic::Config
 
+                    # @private
+                    # The endpoint specific to the default "googleapis.com" universe. Deprecated.
                     DEFAULT_ENDPOINT = "spanner.googleapis.com"
 
-                    config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
+                    config_attr :endpoint,      nil, ::String, nil
                     config_attr :credentials,   nil do |value|
                       allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                       allowed.any? { |klass| klass === value }
@@ -2423,6 +2480,7 @@ module Google
                     config_attr :metadata,      nil, ::Hash, nil
                     config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
                     config_attr :quota_project, nil, ::String, nil
+                    config_attr :universe_domain, nil, ::String, nil
 
                     # @private
                     def initialize parent_config = nil

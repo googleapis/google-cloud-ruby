@@ -148,6 +148,7 @@ module Google
         #   @return [::Boolean]
         #     Includes symbol level OCR information if set to true.
         # @!attribute [rw] compute_style_info
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
         #     Turn on font identification model and return font style information.
         #     Deprecated, use
@@ -156,7 +157,7 @@ module Google
         # @!attribute [rw] disable_character_boxes_detection
         #   @return [::Boolean]
         #     Turn off character box detector in OCR engine. Character box detection is
-        #     enabled by default in OCR 2.0+ processors.
+        #     enabled by default in OCR 2.0 (and later) processors.
         # @!attribute [rw] premium_features
         #   @return [::Google::Cloud::DocumentAI::V1::OcrConfig::PremiumFeatures]
         #     Configurations for premium OCR features.
@@ -181,8 +182,8 @@ module Google
           # Configurations for premium OCR features.
           # @!attribute [rw] enable_selection_mark_detection
           #   @return [::Boolean]
-          #     Turn on selection mark detector in OCR engine. Only available in OCR 2.0+
-          #     processors.
+          #     Turn on selection mark detector in OCR engine. Only available in OCR 2.0
+          #     (and later) processors.
           # @!attribute [rw] compute_style_info
           #   @return [::Boolean]
           #     Turn on font identification model and return font style information.

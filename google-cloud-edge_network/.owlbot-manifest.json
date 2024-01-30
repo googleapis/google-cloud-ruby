@@ -1,0 +1,25 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".toys.rb",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-edge_network.gemspec",
+    "lib/google-cloud-edge_network.rb",
+    "lib/google/cloud/edge_network.rb",
+    "lib/google/cloud/edge_network/version.rb",
+    "test/google/cloud/edge_network/client_test.rb",
+    "test/google/cloud/edge_network/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml"
+  ]
+}

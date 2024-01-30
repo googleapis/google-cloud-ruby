@@ -1,5 +1,44 @@
 # Changelog
 
+### 0.16.0 (2024-01-25)
+
+#### Features
+
+* Container runnables support using image streaming 
+* Support running a task group as non-root 
+* Support tags in the allocation policy 
+* Support the use_generic_task_monitored_resource cloud logging option 
+
+### 0.15.1 (2024-01-12)
+
+#### Bug Fixes
+
+* Ensure endpoints are correct for mixin clients ([#24032](https://github.com/googleapis/google-cloud-ruby/issues/24032)) 
+
+### 0.15.0 (2024-01-11)
+
+#### Features
+
+* Support for universe_domain ([#23773](https://github.com/googleapis/google-cloud-ruby/issues/23773)) 
+
+### 0.14.0 (2023-12-04)
+
+#### Features
+
+* Added cloud_logging_option field to LogsPolicy ([#23565](https://github.com/googleapis/google-cloud-ruby/issues/23565)) 
+
+### 0.13.1 (2023-11-02)
+
+#### Documentation
+
+* Update docs for default max parallel tasks per job ([#23490](https://github.com/googleapis/google-cloud-ruby/issues/23490)) 
+
+### 0.13.0 (2023-10-23)
+
+#### Features
+
+* expose display_name to batch v1 API ([#23443](https://github.com/googleapis/google-cloud-ruby/issues/23443)) 
+
 ### 0.12.0 (2023-10-06)
 
 #### Features

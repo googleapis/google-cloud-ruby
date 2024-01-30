@@ -640,11 +640,15 @@ module Google
 
         # Request message for
         # {::Google::Cloud::AIPlatform::V1::FeaturestoreService::Client#create_feature FeaturestoreService.CreateFeature}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client#create_feature FeatureRegistryService.CreateFeature}.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The resource name of the EntityType to create a Feature.
-        #     Format:
+        #     Required. The resource name of the EntityType or FeatureGroup to create a
+        #     Feature. Format for entity_type as parent:
         #     `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}`
+        #     Format for feature_group as parent:
+        #     `projects/{project}/locations/{location}/featureGroups/{feature_group}`
         # @!attribute [rw] feature
         #   @return [::Google::Cloud::AIPlatform::V1::Feature]
         #     Required. The Feature to create.
@@ -656,7 +660,7 @@ module Google
         #     This value may be up to 128 characters, and valid characters are
         #     `[a-z0-9_]`. The first character cannot be a number.
         #
-        #     The value must be unique within an EntityType.
+        #     The value must be unique within an EntityType/FeatureGroup.
         class CreateFeatureRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -693,11 +697,15 @@ module Google
 
         # Request message for
         # {::Google::Cloud::AIPlatform::V1::FeaturestoreService::Client#get_feature FeaturestoreService.GetFeature}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client#get_feature FeatureRegistryService.GetFeature}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the Feature resource.
-        #     Format:
+        #     Format for entity_type as parent:
         #     `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}`
+        #     Format for feature_group as parent:
+        #     `projects/{project}/locations/{location}/featureGroups/{feature_group}`
         class GetFeatureRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -705,11 +713,15 @@ module Google
 
         # Request message for
         # {::Google::Cloud::AIPlatform::V1::FeaturestoreService::Client#list_features FeaturestoreService.ListFeatures}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client#list_features FeatureRegistryService.ListFeatures}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the Location to list Features.
-        #     Format:
+        #     Format for entity_type as parent:
         #     `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}`
+        #     Format for feature_group as parent:
+        #     `projects/{project}/locations/{location}/featureGroups/{feature_group}`
         # @!attribute [rw] filter
         #   @return [::String]
         #     Lists the Features that match the filter expression. The following
@@ -742,10 +754,14 @@ module Google
         #   @return [::String]
         #     A page token, received from a previous
         #     {::Google::Cloud::AIPlatform::V1::FeaturestoreService::Client#list_features FeaturestoreService.ListFeatures}
+        #     call or
+        #     {::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client#list_features FeatureRegistryService.ListFeatures}
         #     call. Provide this to retrieve the subsequent page.
         #
         #     When paginating, all other parameters provided to
         #     {::Google::Cloud::AIPlatform::V1::FeaturestoreService::Client#list_features FeaturestoreService.ListFeatures}
+        #     or or
+        #     {::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client#list_features FeatureRegistryService.ListFeatures}
         #     must match the call that provided the page token.
         # @!attribute [rw] order_by
         #   @return [::String]
@@ -754,7 +770,7 @@ module Google
         #     Supported fields:
         #
         #       * `feature_id`
-        #       * `value_type`
+        #       * `value_type` (Not supported for FeatureRegistry Feature)
         #       * `create_time`
         #       * `update_time`
         # @!attribute [rw] read_mask
@@ -762,6 +778,7 @@ module Google
         #     Mask specifying which fields to read.
         # @!attribute [rw] latest_stats_count
         #   @return [::Integer]
+        #     Only applicable for Vertex AI Feature Store (Legacy).
         #     If set, return the most recent
         #     {::Google::Cloud::AIPlatform::V1::ListFeaturesRequest#latest_stats_count ListFeaturesRequest.latest_stats_count}
         #     of stats for each Feature in response. Valid value is [0, 10]. If number of
@@ -775,6 +792,8 @@ module Google
 
         # Response message for
         # {::Google::Cloud::AIPlatform::V1::FeaturestoreService::Client#list_features FeaturestoreService.ListFeatures}.
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client#list_features FeatureRegistryService.ListFeatures}.
         # @!attribute [rw] features
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::Feature>]
         #     The Features matching the request.
@@ -904,12 +923,15 @@ module Google
 
         # Request message for
         # {::Google::Cloud::AIPlatform::V1::FeaturestoreService::Client#update_feature FeaturestoreService.UpdateFeature}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client#update_feature FeatureRegistryService.UpdateFeature}.
         # @!attribute [rw] feature
         #   @return [::Google::Cloud::AIPlatform::V1::Feature]
         #     Required. The Feature's `name` field is used to identify the Feature to be
         #     updated.
         #     Format:
         #     `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}/features/{feature}`
+        #     `projects/{project}/locations/{location}/featureGroups/{feature_group}/features/{feature}`
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Field mask is used to specify the fields to be overwritten in the
@@ -924,7 +946,7 @@ module Google
         #
         #       * `description`
         #       * `labels`
-        #       * `disable_monitoring`
+        #       * `disable_monitoring` (Not supported for FeatureRegistry Feature)
         class UpdateFeatureRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -932,11 +954,14 @@ module Google
 
         # Request message for
         # {::Google::Cloud::AIPlatform::V1::FeaturestoreService::Client#delete_feature FeaturestoreService.DeleteFeature}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client#delete_feature FeatureRegistryService.DeleteFeature}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the Features to be deleted.
         #     Format:
         #     `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}/features/{feature}`
+        #     `projects/{project}/locations/{location}/featureGroups/{feature_group}/features/{feature}`
         class DeleteFeatureRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -77,6 +77,15 @@ module Google
         alias project project_id
 
         ##
+        # The universe domain the client is connected to
+        #
+        # @return [String]
+        #
+        def universe_domain
+          service.universe_domain
+        end
+
+        ##
         # Retrieves topic by name.
         #
         # @param [String] topic_name Name of a topic. The value can be a simple

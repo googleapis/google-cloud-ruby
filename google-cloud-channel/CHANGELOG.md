@@ -1,5 +1,17 @@
 # Release History
 
+### 1.4.0 (2024-01-15)
+
+#### Features
+
+* Support for universe_domain ([#24257](https://github.com/googleapis/google-cloud-ruby/issues/24257)) 
+
+### 1.3.1 (2024-01-03)
+
+#### Documentation
+
+* Deprecation notice for `CloudChannelReportsService` ([#23697](https://github.com/googleapis/google-cloud-ruby/issues/23697)) 
+
 ### 1.3.0 (2023-03-09)
 
 #### Features

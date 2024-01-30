@@ -44,6 +44,20 @@ module Google
             rpc :UpdateRepository, ::Google::Cloud::Dataform::V1beta1::UpdateRepositoryRequest, ::Google::Cloud::Dataform::V1beta1::Repository
             # Deletes a single Repository.
             rpc :DeleteRepository, ::Google::Cloud::Dataform::V1beta1::DeleteRepositoryRequest, ::Google::Protobuf::Empty
+            # Applies a Git commit to a Repository. The Repository must not have a value
+            # for `git_remote_settings.url`.
+            rpc :CommitRepositoryChanges, ::Google::Cloud::Dataform::V1beta1::CommitRepositoryChangesRequest, ::Google::Protobuf::Empty
+            # Returns the contents of a file (inside a Repository). The Repository
+            # must not have a value for `git_remote_settings.url`.
+            rpc :ReadRepositoryFile, ::Google::Cloud::Dataform::V1beta1::ReadRepositoryFileRequest, ::Google::Cloud::Dataform::V1beta1::ReadRepositoryFileResponse
+            # Returns the contents of a given Repository directory. The Repository must
+            # not have a value for `git_remote_settings.url`.
+            rpc :QueryRepositoryDirectoryContents, ::Google::Cloud::Dataform::V1beta1::QueryRepositoryDirectoryContentsRequest, ::Google::Cloud::Dataform::V1beta1::QueryRepositoryDirectoryContentsResponse
+            # Fetches a Repository's history of commits.  The Repository must not have a
+            # value for `git_remote_settings.url`.
+            rpc :FetchRepositoryHistory, ::Google::Cloud::Dataform::V1beta1::FetchRepositoryHistoryRequest, ::Google::Cloud::Dataform::V1beta1::FetchRepositoryHistoryResponse
+            # Computes a Repository's Git access token status.
+            rpc :ComputeRepositoryAccessTokenStatus, ::Google::Cloud::Dataform::V1beta1::ComputeRepositoryAccessTokenStatusRequest, ::Google::Cloud::Dataform::V1beta1::ComputeRepositoryAccessTokenStatusResponse
             # Fetches a Repository's remote branches.
             rpc :FetchRemoteBranches, ::Google::Cloud::Dataform::V1beta1::FetchRemoteBranchesRequest, ::Google::Cloud::Dataform::V1beta1::FetchRemoteBranchesResponse
             # Lists Workspaces in a given Repository.
@@ -87,6 +101,16 @@ module Google
             rpc :MoveFile, ::Google::Cloud::Dataform::V1beta1::MoveFileRequest, ::Google::Cloud::Dataform::V1beta1::MoveFileResponse
             # Writes to a file (inside a Workspace).
             rpc :WriteFile, ::Google::Cloud::Dataform::V1beta1::WriteFileRequest, ::Google::Cloud::Dataform::V1beta1::WriteFileResponse
+            # Lists ReleaseConfigs in a given Repository.
+            rpc :ListReleaseConfigs, ::Google::Cloud::Dataform::V1beta1::ListReleaseConfigsRequest, ::Google::Cloud::Dataform::V1beta1::ListReleaseConfigsResponse
+            # Fetches a single ReleaseConfig.
+            rpc :GetReleaseConfig, ::Google::Cloud::Dataform::V1beta1::GetReleaseConfigRequest, ::Google::Cloud::Dataform::V1beta1::ReleaseConfig
+            # Creates a new ReleaseConfig in a given Repository.
+            rpc :CreateReleaseConfig, ::Google::Cloud::Dataform::V1beta1::CreateReleaseConfigRequest, ::Google::Cloud::Dataform::V1beta1::ReleaseConfig
+            # Updates a single ReleaseConfig.
+            rpc :UpdateReleaseConfig, ::Google::Cloud::Dataform::V1beta1::UpdateReleaseConfigRequest, ::Google::Cloud::Dataform::V1beta1::ReleaseConfig
+            # Deletes a single ReleaseConfig.
+            rpc :DeleteReleaseConfig, ::Google::Cloud::Dataform::V1beta1::DeleteReleaseConfigRequest, ::Google::Protobuf::Empty
             # Lists CompilationResults in a given Repository.
             rpc :ListCompilationResults, ::Google::Cloud::Dataform::V1beta1::ListCompilationResultsRequest, ::Google::Cloud::Dataform::V1beta1::ListCompilationResultsResponse
             # Fetches a single CompilationResult.
@@ -95,6 +119,16 @@ module Google
             rpc :CreateCompilationResult, ::Google::Cloud::Dataform::V1beta1::CreateCompilationResultRequest, ::Google::Cloud::Dataform::V1beta1::CompilationResult
             # Returns CompilationResultActions in a given CompilationResult.
             rpc :QueryCompilationResultActions, ::Google::Cloud::Dataform::V1beta1::QueryCompilationResultActionsRequest, ::Google::Cloud::Dataform::V1beta1::QueryCompilationResultActionsResponse
+            # Lists WorkflowConfigs in a given Repository.
+            rpc :ListWorkflowConfigs, ::Google::Cloud::Dataform::V1beta1::ListWorkflowConfigsRequest, ::Google::Cloud::Dataform::V1beta1::ListWorkflowConfigsResponse
+            # Fetches a single WorkflowConfig.
+            rpc :GetWorkflowConfig, ::Google::Cloud::Dataform::V1beta1::GetWorkflowConfigRequest, ::Google::Cloud::Dataform::V1beta1::WorkflowConfig
+            # Creates a new WorkflowConfig in a given Repository.
+            rpc :CreateWorkflowConfig, ::Google::Cloud::Dataform::V1beta1::CreateWorkflowConfigRequest, ::Google::Cloud::Dataform::V1beta1::WorkflowConfig
+            # Updates a single WorkflowConfig.
+            rpc :UpdateWorkflowConfig, ::Google::Cloud::Dataform::V1beta1::UpdateWorkflowConfigRequest, ::Google::Cloud::Dataform::V1beta1::WorkflowConfig
+            # Deletes a single WorkflowConfig.
+            rpc :DeleteWorkflowConfig, ::Google::Cloud::Dataform::V1beta1::DeleteWorkflowConfigRequest, ::Google::Protobuf::Empty
             # Lists WorkflowInvocations in a given Repository.
             rpc :ListWorkflowInvocations, ::Google::Cloud::Dataform::V1beta1::ListWorkflowInvocationsRequest, ::Google::Cloud::Dataform::V1beta1::ListWorkflowInvocationsResponse
             # Fetches a single WorkflowInvocation.

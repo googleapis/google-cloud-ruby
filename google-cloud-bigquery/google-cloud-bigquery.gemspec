@@ -19,8 +19,9 @@ Gem::Specification.new do |gem|
   gem.required_ruby_version = ">= 2.6"
 
   gem.add_dependency "concurrent-ruby", "~> 1.0"
-  gem.add_dependency "google-apis-bigquery_v2", "~> 0.1"
-  gem.add_dependency "googleauth", ">= 0.16.2", "< 2.a"
+  gem.add_dependency "google-apis-bigquery_v2", "~> 0.62"
+  gem.add_dependency "google-apis-core", "~> 0.13"
+  gem.add_dependency "googleauth", "~> 1.9"
   gem.add_dependency "google-cloud-core", "~> 1.6"
   gem.add_dependency "mini_mime", "~> 1.0"
 

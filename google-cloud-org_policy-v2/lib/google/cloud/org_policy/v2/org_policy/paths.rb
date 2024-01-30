@@ -25,6 +25,23 @@ module Google
           # Path helper methods for the OrgPolicy API.
           module Paths
             ##
+            # Create a fully-qualified CustomConstraint resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `organizations/{organization}/customConstraints/{custom_constraint}`
+            #
+            # @param organization [String]
+            # @param custom_constraint [String]
+            #
+            # @return [::String]
+            def custom_constraint_path organization:, custom_constraint:
+              raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+
+              "organizations/#{organization}/customConstraints/#{custom_constraint}"
+            end
+
+            ##
             # Create a fully-qualified Folder resource string.
             #
             # The resource will be in the following format:

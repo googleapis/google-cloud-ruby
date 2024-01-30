@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-network_connectivity-v1alpha1",
-    "version": "0.7.0",
+    "version": "0.8.1",
     "language": "RUBY",
     "apis": [
       {
@@ -14,7 +14,7 @@
     {
       "region_tag": "networkconnectivity_v1alpha1_generated_HubService_ListHubs_sync",
       "title": "Snippet for the list_hubs call in the HubService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1alpha1::HubService::Client#list_hubs. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1alpha1::HubService::Client#list_hubs.",
       "file": "hub_service/list_hubs.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "networkconnectivity_v1alpha1_generated_HubService_GetHub_sync",
       "title": "Snippet for the get_hub call in the HubService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1alpha1::HubService::Client#get_hub. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1alpha1::HubService::Client#get_hub.",
       "file": "hub_service/get_hub.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "networkconnectivity_v1alpha1_generated_HubService_CreateHub_sync",
       "title": "Snippet for the create_hub call in the HubService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1alpha1::HubService::Client#create_hub. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1alpha1::HubService::Client#create_hub.",
       "file": "hub_service/create_hub.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -134,7 +134,7 @@
     {
       "region_tag": "networkconnectivity_v1alpha1_generated_HubService_UpdateHub_sync",
       "title": "Snippet for the update_hub call in the HubService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1alpha1::HubService::Client#update_hub. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1alpha1::HubService::Client#update_hub.",
       "file": "hub_service/update_hub.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -174,7 +174,7 @@
     {
       "region_tag": "networkconnectivity_v1alpha1_generated_HubService_DeleteHub_sync",
       "title": "Snippet for the delete_hub call in the HubService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1alpha1::HubService::Client#delete_hub. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1alpha1::HubService::Client#delete_hub.",
       "file": "hub_service/delete_hub.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,7 +206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -214,7 +214,7 @@
     {
       "region_tag": "networkconnectivity_v1alpha1_generated_HubService_ListSpokes_sync",
       "title": "Snippet for the list_spokes call in the HubService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1alpha1::HubService::Client#list_spokes. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1alpha1::HubService::Client#list_spokes.",
       "file": "hub_service/list_spokes.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,7 +246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -254,7 +254,7 @@
     {
       "region_tag": "networkconnectivity_v1alpha1_generated_HubService_GetSpoke_sync",
       "title": "Snippet for the get_spoke call in the HubService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1alpha1::HubService::Client#get_spoke. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1alpha1::HubService::Client#get_spoke.",
       "file": "hub_service/get_spoke.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,7 +286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -294,7 +294,7 @@
     {
       "region_tag": "networkconnectivity_v1alpha1_generated_HubService_CreateSpoke_sync",
       "title": "Snippet for the create_spoke call in the HubService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1alpha1::HubService::Client#create_spoke. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1alpha1::HubService::Client#create_spoke.",
       "file": "hub_service/create_spoke.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,7 +326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -334,7 +334,7 @@
     {
       "region_tag": "networkconnectivity_v1alpha1_generated_HubService_UpdateSpoke_sync",
       "title": "Snippet for the update_spoke call in the HubService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1alpha1::HubService::Client#update_spoke. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1alpha1::HubService::Client#update_spoke.",
       "file": "hub_service/update_spoke.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,7 +366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -374,7 +374,7 @@
     {
       "region_tag": "networkconnectivity_v1alpha1_generated_HubService_DeleteSpoke_sync",
       "title": "Snippet for the delete_spoke call in the HubService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1alpha1::HubService::Client#delete_spoke. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1alpha1::HubService::Client#delete_spoke.",
       "file": "hub_service/delete_spoke.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,7 +406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]

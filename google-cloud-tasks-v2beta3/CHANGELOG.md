@@ -1,5 +1,23 @@
 # Release History
 
+### 0.12.2 (2024-01-18)
+
+#### Bug Fixes
+
+* Removed buffer_task RPC which is not supported and wasn't working ([#24435](https://github.com/googleapis/google-cloud-ruby/issues/24435)) 
+
+### 0.12.1 (2024-01-12)
+
+#### Bug Fixes
+
+* Ensure endpoints are correct for mixin clients ([#24032](https://github.com/googleapis/google-cloud-ruby/issues/24032)) 
+
+### 0.12.0 (2024-01-11)
+
+#### Features
+
+* Support for universe_domain ([#23787](https://github.com/googleapis/google-cloud-ruby/issues/23787)) 
+
 ### 0.11.0 (2023-09-12)
 
 #### Features

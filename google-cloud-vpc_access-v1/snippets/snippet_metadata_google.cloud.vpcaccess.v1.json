@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-vpc_access-v1",
-    "version": "0.6.0",
+    "version": "0.7.1",
     "language": "RUBY",
     "apis": [
       {
@@ -14,7 +14,7 @@
     {
       "region_tag": "vpcaccess_v1_generated_VpcAccessService_CreateConnector_sync",
       "title": "Snippet for the create_connector call in the VpcAccessService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VpcAccess::V1::VpcAccessService::Client#create_connector. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VpcAccess::V1::VpcAccessService::Client#create_connector.",
       "file": "vpc_access_service/create_connector.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "vpcaccess_v1_generated_VpcAccessService_GetConnector_sync",
       "title": "Snippet for the get_connector call in the VpcAccessService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VpcAccess::V1::VpcAccessService::Client#get_connector. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VpcAccess::V1::VpcAccessService::Client#get_connector.",
       "file": "vpc_access_service/get_connector.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "vpcaccess_v1_generated_VpcAccessService_ListConnectors_sync",
       "title": "Snippet for the list_connectors call in the VpcAccessService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VpcAccess::V1::VpcAccessService::Client#list_connectors. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VpcAccess::V1::VpcAccessService::Client#list_connectors.",
       "file": "vpc_access_service/list_connectors.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -134,7 +134,7 @@
     {
       "region_tag": "vpcaccess_v1_generated_VpcAccessService_DeleteConnector_sync",
       "title": "Snippet for the delete_connector call in the VpcAccessService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VpcAccess::V1::VpcAccessService::Client#delete_connector. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VpcAccess::V1::VpcAccessService::Client#delete_connector.",
       "file": "vpc_access_service/delete_connector.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]

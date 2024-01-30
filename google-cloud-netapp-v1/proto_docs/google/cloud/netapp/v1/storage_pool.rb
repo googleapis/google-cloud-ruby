@@ -112,9 +112,9 @@ module Google
         # StoragePool is a container for volumes with a service level and capacity.
         # Volumes can be created in a pool of sufficient available capacity.
         # StoragePool capacity is what you are billed for.
-        # @!attribute [r] name
+        # @!attribute [rw] name
         #   @return [::String]
-        #     Output only. Name of the storage pool
+        #     Identifier. Name of the storage pool
         # @!attribute [rw] service_level
         #   @return [::Google::Cloud::NetApp::V1::ServiceLevel]
         #     Required. Service level of the storage pool
@@ -163,8 +163,10 @@ module Google
         #   @return [::Google::Cloud::NetApp::V1::EncryptionType]
         #     Output only. Specifies the current pool encryption key source.
         # @!attribute [rw] global_access_allowed
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
-        #     Optional. Allows SO pool to access AD or DNS server from other regions.
+        #     Deprecated. Used to allow SO pool to access AD or DNS server from other
+        #     regions.
         class StoragePool
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

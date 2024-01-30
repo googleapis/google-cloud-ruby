@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/bigquery/data_exchange/v1beta1/analytics_hub_service"
 
 class ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_data_exchange_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -37,7 +47,7 @@ class ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Cli
 
   def test_dataset_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -49,7 +59,7 @@ class ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Cli
 
   def test_listing_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -61,7 +71,7 @@ class ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Cli
 
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client.new do |config|
         config.credentials = grpc_channel
       end

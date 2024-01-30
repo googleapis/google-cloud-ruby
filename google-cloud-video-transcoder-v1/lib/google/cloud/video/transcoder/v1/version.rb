@@ -22,7 +22,7 @@ module Google
     module Video
       module Transcoder
         module V1
-          VERSION = "0.11.0"
+          VERSION = "0.12.1"
         end
       end
     end

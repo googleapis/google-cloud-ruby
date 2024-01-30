@@ -22,9 +22,14 @@ require "google/cloud/network_security/v1beta1"
 ##
 # Snippet for the list_authorization_policies call in the NetworkSecurity service
 #
+# This snippet has been automatically generated and should be regarded as a code
+# template only. It will require modifications to work:
+# - It may require correct/in-range values for request initialization.
+# - It may require specifying regional endpoints when creating the service
+# client as shown in https://cloud.google.com/ruby/docs/reference.
+#
 # This is an auto-generated example demonstrating basic usage of
 # Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Client#list_authorization_policies.
-# It may require modification in order to execute successfully.
 #
 def list_authorization_policies
   # Create a client object. The client can be reused for multiple calls.

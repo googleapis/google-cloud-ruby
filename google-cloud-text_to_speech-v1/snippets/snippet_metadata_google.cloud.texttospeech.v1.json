@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-text_to_speech-v1",
-    "version": "0.11.0",
+    "version": "0.12.1",
     "language": "RUBY",
     "apis": [
       {
@@ -14,7 +14,7 @@
     {
       "region_tag": "texttospeech_v1_generated_TextToSpeech_ListVoices_sync",
       "title": "Snippet for the list_voices call in the TextToSpeech service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::TextToSpeech::V1::TextToSpeech::Client#list_voices. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::TextToSpeech::V1::TextToSpeech::Client#list_voices.",
       "file": "text_to_speech/list_voices.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "texttospeech_v1_generated_TextToSpeech_SynthesizeSpeech_sync",
       "title": "Snippet for the synthesize_speech call in the TextToSpeech service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::TextToSpeech::V1::TextToSpeech::Client#synthesize_speech. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::TextToSpeech::V1::TextToSpeech::Client#synthesize_speech.",
       "file": "text_to_speech/synthesize_speech.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "texttospeech_v1_generated_TextToSpeechLongAudioSynthesize_SynthesizeLongAudio_sync",
       "title": "Snippet for the synthesize_long_audio call in the TextToSpeechLongAudioSynthesize service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::TextToSpeech::V1::TextToSpeechLongAudioSynthesize::Client#synthesize_long_audio. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::TextToSpeech::V1::TextToSpeechLongAudioSynthesize::Client#synthesize_long_audio.",
       "file": "text_to_speech_long_audio_synthesize/synthesize_long_audio.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]

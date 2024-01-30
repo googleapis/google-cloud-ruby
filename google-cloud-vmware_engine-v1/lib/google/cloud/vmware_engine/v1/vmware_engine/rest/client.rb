@@ -34,6 +34,9 @@ module Google
             # VMwareEngine manages VMware's private clusters in the Cloud.
             #
             class Client
+              # @private
+              DEFAULT_ENDPOINT_TEMPLATE = "vmwareengine.$UNIVERSE_DOMAIN$"
+
               include Paths
 
               # @private
@@ -90,6 +93,26 @@ module Google
                     initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                   }
 
+                  default_config.rpcs.list_nodes.timeout = 120.0
+                  default_config.rpcs.list_nodes.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.get_node.timeout = 120.0
+                  default_config.rpcs.get_node.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.list_external_addresses.timeout = 120.0
+                  default_config.rpcs.list_external_addresses.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.get_external_address.timeout = 120.0
+                  default_config.rpcs.get_external_address.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
                   default_config.rpcs.list_subnets.timeout = 120.0
                   default_config.rpcs.list_subnets.retry_policy = {
                     initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
@@ -101,6 +124,26 @@ module Google
                   }
 
                   default_config.rpcs.update_subnet.timeout = 60.0
+
+                  default_config.rpcs.list_external_access_rules.timeout = 120.0
+                  default_config.rpcs.list_external_access_rules.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.get_external_access_rule.timeout = 120.0
+                  default_config.rpcs.get_external_access_rule.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.list_logging_servers.timeout = 120.0
+                  default_config.rpcs.list_logging_servers.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.get_logging_server.timeout = 120.0
+                  default_config.rpcs.get_logging_server.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
 
                   default_config.rpcs.list_node_types.timeout = 120.0
                   default_config.rpcs.list_node_types.retry_policy = {
@@ -122,6 +165,26 @@ module Google
                     initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                   }
 
+                  default_config.rpcs.get_dns_forwarding.timeout = 120.0
+                  default_config.rpcs.get_dns_forwarding.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.get_network_peering.timeout = 120.0
+                  default_config.rpcs.get_network_peering.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.list_network_peerings.timeout = 120.0
+                  default_config.rpcs.list_network_peerings.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.list_peering_routes.timeout = 120.0
+                  default_config.rpcs.list_peering_routes.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
                   default_config.rpcs.list_hcx_activation_keys.timeout = 120.0
                   default_config.rpcs.list_hcx_activation_keys.retry_policy = {
                     initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
@@ -139,6 +202,16 @@ module Google
 
                   default_config.rpcs.list_network_policies.timeout = 120.0
                   default_config.rpcs.list_network_policies.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.list_management_dns_zone_bindings.timeout = 120.0
+                  default_config.rpcs.list_management_dns_zone_bindings.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.get_management_dns_zone_binding.timeout = 120.0
+                  default_config.rpcs.get_management_dns_zone_binding.retry_policy = {
                     initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                   }
 
@@ -164,6 +237,11 @@ module Google
 
                   default_config.rpcs.list_private_connection_peering_routes.timeout = 120.0
                   default_config.rpcs.list_private_connection_peering_routes.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.get_dns_bind_permission.timeout = 120.0
+                  default_config.rpcs.get_dns_bind_permission.retry_policy = {
                     initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                   }
 
@@ -194,6 +272,15 @@ module Google
               end
 
               ##
+              # The effective universe domain
+              #
+              # @return [String]
+              #
+              def universe_domain
+                @vmware_engine_stub.universe_domain
+              end
+
+              ##
               # Create a new VmwareEngine REST client object.
               #
               # @example
@@ -220,8 +307,9 @@ module Google
                 credentials = @config.credentials
                 # Use self-signed JWT if the endpoint is unchanged from default,
                 # but only if the default endpoint does not have a region prefix.
-                enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
-                                         !@config.endpoint.split(".").first.include?("-")
+                enable_self_signed_jwt = @config.endpoint.nil? ||
+                                         (@config.endpoint == Configuration::DEFAULT_ENDPOINT &&
+                                         !@config.endpoint.split(".").first.include?("-"))
                 credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
                 if credentials.is_a?(::String) || credentials.is_a?(::Hash)
@@ -235,23 +323,31 @@ module Google
                   config.credentials = credentials
                   config.quota_project = @quota_project_id
                   config.endpoint = @config.endpoint
+                  config.universe_domain = @config.universe_domain
                 end
+
+                @vmware_engine_stub = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ServiceStub.new(
+                  endpoint: @config.endpoint,
+                  endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
+                  universe_domain: @config.universe_domain,
+                  credentials: credentials
+                )
 
                 @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
                   config.credentials = credentials
                   config.quota_project = @quota_project_id
-                  config.endpoint = @config.endpoint
+                  config.endpoint = @vmware_engine_stub.endpoint
+                  config.universe_domain = @vmware_engine_stub.universe_domain
                   config.bindings_override = @config.bindings_override
                 end
 
                 @iam_policy_client = Google::Iam::V1::IAMPolicy::Rest::Client.new do |config|
                   config.credentials = credentials
                   config.quota_project = @quota_project_id
-                  config.endpoint = @config.endpoint
+                  config.endpoint = @vmware_engine_stub.endpoint
+                  config.universe_domain = @vmware_engine_stub.universe_domain
                   config.bindings_override = @config.bindings_override
                 end
-
-                @vmware_engine_stub = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ServiceStub.new endpoint: @config.endpoint, credentials: credentials
               end
 
               ##
@@ -491,9 +587,9 @@ module Google
 
               ##
               # Creates a new `PrivateCloud` resource in a given project and location.
-              # Private clouds can only be created in zones, regional private clouds are
-              # not supported.
-              #
+              # Private clouds of type `STANDARD` and
+              # `TIME_LIMITED` are zonal resources, `STRETCHED` private clouds are
+              # regional.
               # Creating a private cloud also creates a [management
               # cluster](https://cloud.google.com/vmware-engine/docs/concepts-vmware-components)
               # for that private cloud.
@@ -1238,8 +1334,7 @@ module Google
               end
 
               ##
-              # Modifies a `Cluster` resource. Only the following fields can be updated:
-              # `node_type_configs.*.node_count`. Only fields specified in `updateMask` are
+              # Modifies a `Cluster` resource. Only fields specified in `updateMask` are
               # applied.
               #
               # During operation processing, the resource is temporarily in the `ACTIVE`
@@ -1430,6 +1525,841 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @vmware_engine_stub.delete_cluster request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists nodes in a given cluster.
+              #
+              # @overload list_nodes(request, options = nil)
+              #   Pass arguments to `list_nodes` via a request object, either of type
+              #   {::Google::Cloud::VmwareEngine::V1::ListNodesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::VmwareEngine::V1::ListNodesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_nodes(parent: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_nodes` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The resource name of the cluster to be queried for nodes.
+              #     Resource names are schemeless URIs that follow the conventions in
+              #     https://cloud.google.com/apis/design/resource_names.
+              #     For example:
+              #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud/clusters/my-cluster`
+              #   @param page_size [::Integer]
+              #     The maximum number of nodes to return in one page.
+              #     The service may return fewer than this value.
+              #     The maximum value is coerced to 1000.
+              #     The default value of this field is 500.
+              #   @param page_token [::String]
+              #     A page token, received from a previous `ListNodes` call.
+              #     Provide this to retrieve the subsequent page.
+              #
+              #     When paginating, all other parameters provided to
+              #     `ListNodes` must match the call that provided the page
+              #     token.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VmwareEngine::V1::Node>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VmwareEngine::V1::Node>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::ListNodesRequest.new
+              #
+              #   # Call the list_nodes method.
+              #   result = client.list_nodes request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::VmwareEngine::V1::Node.
+              #     p item
+              #   end
+              #
+              def list_nodes request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VmwareEngine::V1::ListNodesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_nodes.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::VmwareEngine::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_nodes.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_nodes.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @vmware_engine_stub.list_nodes request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @vmware_engine_stub, :list_nodes, "nodes", request, result, options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets details of a single node.
+              #
+              # @overload get_node(request, options = nil)
+              #   Pass arguments to `get_node` via a request object, either of type
+              #   {::Google::Cloud::VmwareEngine::V1::GetNodeRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::VmwareEngine::V1::GetNodeRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_node(name: nil)
+              #   Pass arguments to `get_node` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource name of the node to retrieve.
+              #     For example:
+              #     `projects/{project}/locations/{location}/privateClouds/{private_cloud}/clusters/{cluster}/nodes/{node}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::VmwareEngine::V1::Node]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::VmwareEngine::V1::Node]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::GetNodeRequest.new
+              #
+              #   # Call the get_node method.
+              #   result = client.get_node request
+              #
+              #   # The returned object is of type Google::Cloud::VmwareEngine::V1::Node.
+              #   p result
+              #
+              def get_node request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VmwareEngine::V1::GetNodeRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_node.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::VmwareEngine::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_node.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_node.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @vmware_engine_stub.get_node request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists external IP addresses assigned to VMware workload VMs in a given
+              # private cloud.
+              #
+              # @overload list_external_addresses(request, options = nil)
+              #   Pass arguments to `list_external_addresses` via a request object, either of type
+              #   {::Google::Cloud::VmwareEngine::V1::ListExternalAddressesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::VmwareEngine::V1::ListExternalAddressesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_external_addresses(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+              #   Pass arguments to `list_external_addresses` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The resource name of the private cloud to be queried for
+              #     external IP addresses.
+              #     Resource names are schemeless URIs that follow the conventions in
+              #     https://cloud.google.com/apis/design/resource_names.
+              #     For example:
+              #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
+              #   @param page_size [::Integer]
+              #     The maximum number of external IP addresses to return in one page.
+              #     The service may return fewer than this value.
+              #     The maximum value is coerced to 1000.
+              #     The default value of this field is 500.
+              #   @param page_token [::String]
+              #     A page token, received from a previous `ListExternalAddresses` call.
+              #     Provide this to retrieve the subsequent page.
+              #
+              #     When paginating, all other parameters provided to
+              #     `ListExternalAddresses` must match the call that provided the page token.
+              #   @param filter [::String]
+              #     A filter expression that matches resources returned in the response.
+              #     The expression must specify the field name, a comparison
+              #     operator, and the value that you want to use for filtering. The value
+              #     must be a string, a number, or a boolean. The comparison operator
+              #     must be `=`, `!=`, `>`, or `<`.
+              #
+              #     For example, if you are filtering a list of IP addresses, you can
+              #     exclude the ones named `example-ip` by specifying
+              #     `name != "example-ip"`.
+              #
+              #     To filter on multiple expressions, provide each separate expression within
+              #     parentheses. For example:
+              #     ```
+              #     (name = "example-ip")
+              #     (createTime > "2021-04-12T08:15:10.40Z")
+              #     ```
+              #
+              #     By default, each expression is an `AND` expression. However, you
+              #     can include `AND` and `OR` expressions explicitly.
+              #     For example:
+              #     ```
+              #     (name = "example-ip-1") AND
+              #     (createTime > "2021-04-12T08:15:10.40Z") OR
+              #     (name = "example-ip-2")
+              #     ```
+              #   @param order_by [::String]
+              #     Sorts list results by a certain order. By default, returned results
+              #     are ordered by `name` in ascending order.
+              #     You can also sort results in descending order based on the `name` value
+              #     using `orderBy="name desc"`.
+              #     Currently, only ordering by `name` is supported.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::VmwareEngine::V1::ListExternalAddressesResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::VmwareEngine::V1::ListExternalAddressesResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::ListExternalAddressesRequest.new
+              #
+              #   # Call the list_external_addresses method.
+              #   result = client.list_external_addresses request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::VmwareEngine::V1::ExternalAddress.
+              #     p item
+              #   end
+              #
+              def list_external_addresses request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VmwareEngine::V1::ListExternalAddressesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_external_addresses.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::VmwareEngine::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_external_addresses.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_external_addresses.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @vmware_engine_stub.list_external_addresses request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists external IP addresses assigned to VMware workload VMs within the
+              # scope of the given network policy.
+              #
+              # @overload fetch_network_policy_external_addresses(request, options = nil)
+              #   Pass arguments to `fetch_network_policy_external_addresses` via a request object, either of type
+              #   {::Google::Cloud::VmwareEngine::V1::FetchNetworkPolicyExternalAddressesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::VmwareEngine::V1::FetchNetworkPolicyExternalAddressesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload fetch_network_policy_external_addresses(network_policy: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `fetch_network_policy_external_addresses` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param network_policy [::String]
+              #     Required. The resource name of the network policy to query for assigned
+              #     external IP addresses. Resource names are schemeless URIs that follow the
+              #     conventions in https://cloud.google.com/apis/design/resource_names. For
+              #     example:
+              #     `projects/my-project/locations/us-central1/networkPolicies/my-policy`
+              #   @param page_size [::Integer]
+              #     The maximum number of external IP addresses to return in one page.
+              #     The service may return fewer than this value.
+              #     The maximum value is coerced to 1000.
+              #     The default value of this field is 500.
+              #   @param page_token [::String]
+              #     A page token, received from a previous
+              #     `FetchNetworkPolicyExternalAddresses` call. Provide this to retrieve the
+              #     subsequent page.
+              #
+              #     When paginating, all parameters provided to
+              #     `FetchNetworkPolicyExternalAddresses`, except for `page_size` and
+              #     `page_token`, must match the call that provided the page token.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VmwareEngine::V1::ExternalAddress>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VmwareEngine::V1::ExternalAddress>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::FetchNetworkPolicyExternalAddressesRequest.new
+              #
+              #   # Call the fetch_network_policy_external_addresses method.
+              #   result = client.fetch_network_policy_external_addresses request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::VmwareEngine::V1::ExternalAddress.
+              #     p item
+              #   end
+              #
+              def fetch_network_policy_external_addresses request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VmwareEngine::V1::FetchNetworkPolicyExternalAddressesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.fetch_network_policy_external_addresses.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::VmwareEngine::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.fetch_network_policy_external_addresses.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.fetch_network_policy_external_addresses.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @vmware_engine_stub.fetch_network_policy_external_addresses request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @vmware_engine_stub, :fetch_network_policy_external_addresses, "external_addresses", request, result, options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets details of a single external IP address.
+              #
+              # @overload get_external_address(request, options = nil)
+              #   Pass arguments to `get_external_address` via a request object, either of type
+              #   {::Google::Cloud::VmwareEngine::V1::GetExternalAddressRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::VmwareEngine::V1::GetExternalAddressRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_external_address(name: nil)
+              #   Pass arguments to `get_external_address` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource name of the external IP address to retrieve.
+              #     Resource names are schemeless URIs that follow the conventions in
+              #     https://cloud.google.com/apis/design/resource_names.
+              #     For example:
+              #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud/externalAddresses/my-ip`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::VmwareEngine::V1::ExternalAddress]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::VmwareEngine::V1::ExternalAddress]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::GetExternalAddressRequest.new
+              #
+              #   # Call the get_external_address method.
+              #   result = client.get_external_address request
+              #
+              #   # The returned object is of type Google::Cloud::VmwareEngine::V1::ExternalAddress.
+              #   p result
+              #
+              def get_external_address request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VmwareEngine::V1::GetExternalAddressRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_external_address.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::VmwareEngine::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_external_address.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_external_address.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @vmware_engine_stub.get_external_address request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a new `ExternalAddress` resource in a given private cloud. The
+              # network policy that corresponds to the private cloud must have the external
+              # IP address network service enabled (`NetworkPolicy.external_ip`).
+              #
+              # @overload create_external_address(request, options = nil)
+              #   Pass arguments to `create_external_address` via a request object, either of type
+              #   {::Google::Cloud::VmwareEngine::V1::CreateExternalAddressRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::VmwareEngine::V1::CreateExternalAddressRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_external_address(parent: nil, external_address: nil, external_address_id: nil, request_id: nil)
+              #   Pass arguments to `create_external_address` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The resource name of the private cloud
+              #     to create a new external IP address in.
+              #     Resource names are schemeless URIs that follow the conventions in
+              #     https://cloud.google.com/apis/design/resource_names.
+              #     For example:
+              #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
+              #   @param external_address [::Google::Cloud::VmwareEngine::V1::ExternalAddress, ::Hash]
+              #     Required. The initial description of a new external IP address.
+              #   @param external_address_id [::String]
+              #     Required. The user-provided identifier of the `ExternalAddress` to be
+              #     created. This identifier must be unique among `ExternalAddress` resources
+              #     within the parent and becomes the final token in the name URI. The
+              #     identifier must meet the following requirements:
+              #
+              #     * Only contains 1-63 alphanumeric characters and hyphens
+              #     * Begins with an alphabetical character
+              #     * Ends with a non-hyphen character
+              #     * Not formatted as a UUID
+              #     * Complies with [RFC 1034](https://datatracker.ietf.org/doc/html/rfc1034)
+              #     (section 3.5)
+              #   @param request_id [::String]
+              #     Optional. A request ID to identify requests. Specify a unique request ID
+              #     so that if you must retry your request, the server will know to ignore
+              #     the request if it has already been completed. The server guarantees that a
+              #     request doesn't result in creation of duplicate commitments for at least 60
+              #     minutes.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request ID,
+              #     the server can check if the original operation with the same request ID was
+              #     received, and if so, will ignore the second request. This prevents clients
+              #     from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::CreateExternalAddressRequest.new
+              #
+              #   # Call the create_external_address method.
+              #   result = client.create_external_address request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def create_external_address request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VmwareEngine::V1::CreateExternalAddressRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_external_address.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::VmwareEngine::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_external_address.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_external_address.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @vmware_engine_stub.create_external_address request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates the parameters of a single external IP address.
+              # Only fields specified in `update_mask` are applied.
+              #
+              # During operation processing, the resource is temporarily in the `ACTIVE`
+              # state before the operation fully completes. For that period of time, you
+              # can't update the resource. Use the operation status to determine when the
+              # processing fully completes.
+              #
+              # @overload update_external_address(request, options = nil)
+              #   Pass arguments to `update_external_address` via a request object, either of type
+              #   {::Google::Cloud::VmwareEngine::V1::UpdateExternalAddressRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::VmwareEngine::V1::UpdateExternalAddressRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_external_address(update_mask: nil, external_address: nil, request_id: nil)
+              #   Pass arguments to `update_external_address` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Required. Field mask is used to specify the fields to be overwritten in the
+              #     `ExternalAddress` resource by the update.
+              #     The fields specified in the `update_mask` are relative to the resource, not
+              #     the full request. A field will be overwritten if it is in the mask. If the
+              #     user does not provide a mask then all fields will be overwritten.
+              #   @param external_address [::Google::Cloud::VmwareEngine::V1::ExternalAddress, ::Hash]
+              #     Required. External IP address description.
+              #   @param request_id [::String]
+              #     Optional. A request ID to identify requests. Specify a unique request ID
+              #     so that if you must retry your request, the server will know to ignore
+              #     the request if it has already been completed. The server guarantees that a
+              #     request doesn't result in creation of duplicate commitments for at least 60
+              #     minutes.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request ID,
+              #     the server can check if the original operation with the same request ID was
+              #     received, and if so, will ignore the second request. This prevents clients
+              #     from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::UpdateExternalAddressRequest.new
+              #
+              #   # Call the update_external_address method.
+              #   result = client.update_external_address request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def update_external_address request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VmwareEngine::V1::UpdateExternalAddressRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_external_address.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::VmwareEngine::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_external_address.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_external_address.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @vmware_engine_stub.update_external_address request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a single external IP address. When you delete an external IP
+              # address, connectivity between the external IP address and the corresponding
+              # internal IP address is lost.
+              #
+              # @overload delete_external_address(request, options = nil)
+              #   Pass arguments to `delete_external_address` via a request object, either of type
+              #   {::Google::Cloud::VmwareEngine::V1::DeleteExternalAddressRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::VmwareEngine::V1::DeleteExternalAddressRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_external_address(name: nil, request_id: nil)
+              #   Pass arguments to `delete_external_address` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource name of the external IP address to delete.
+              #     Resource names are schemeless URIs that follow the conventions in
+              #     https://cloud.google.com/apis/design/resource_names.
+              #     For example:
+              #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud/externalAddresses/my-ip`
+              #   @param request_id [::String]
+              #     Optional. A request ID to identify requests. Specify a unique request ID
+              #     so that if you must retry your request, the server will know to ignore
+              #     the request if it has already been completed. The server guarantees that a
+              #     request doesn't result in creation of duplicate commitments for at least 60
+              #     minutes.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request
+              #     ID, the server can check if the original operation with the same request ID
+              #     was received, and if so, will ignore the second request. This prevents
+              #     clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::DeleteExternalAddressRequest.new
+              #
+              #   # Call the delete_external_address method.
+              #   result = client.delete_external_address request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_external_address request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VmwareEngine::V1::DeleteExternalAddressRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_external_address.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::VmwareEngine::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_external_address.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_external_address.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @vmware_engine_stub.delete_external_address request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
                   return result
@@ -1707,6 +2637,1098 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @vmware_engine_stub.update_subnet request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists `ExternalAccessRule` resources in the specified network policy.
+              #
+              # @overload list_external_access_rules(request, options = nil)
+              #   Pass arguments to `list_external_access_rules` via a request object, either of type
+              #   {::Google::Cloud::VmwareEngine::V1::ListExternalAccessRulesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::VmwareEngine::V1::ListExternalAccessRulesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_external_access_rules(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+              #   Pass arguments to `list_external_access_rules` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The resource name of the network policy to query for external
+              #     access firewall rules. Resource names are schemeless URIs that follow the
+              #     conventions in https://cloud.google.com/apis/design/resource_names. For
+              #     example:
+              #     `projects/my-project/locations/us-central1/networkPolicies/my-policy`
+              #   @param page_size [::Integer]
+              #     The maximum number of external access rules to return in one page.
+              #     The service may return fewer than this value.
+              #     The maximum value is coerced to 1000.
+              #     The default value of this field is 500.
+              #   @param page_token [::String]
+              #     A page token, received from a previous `ListExternalAccessRulesRequest`
+              #     call. Provide this to retrieve the subsequent page.
+              #
+              #     When paginating, all other parameters provided to
+              #     `ListExternalAccessRulesRequest` must match the call that provided the page
+              #     token.
+              #   @param filter [::String]
+              #     A filter expression that matches resources returned in the response.
+              #     The expression must specify the field name, a comparison
+              #     operator, and the value that you want to use for filtering. The value
+              #     must be a string, a number, or a boolean. The comparison operator
+              #     must be `=`, `!=`, `>`, or `<`.
+              #
+              #     For example, if you are filtering a list of external access rules, you can
+              #     exclude the ones named `example-rule` by specifying
+              #     `name != "example-rule"`.
+              #
+              #     To filter on multiple expressions, provide each separate expression within
+              #     parentheses. For example:
+              #     ```
+              #     (name = "example-rule")
+              #     (createTime > "2021-04-12T08:15:10.40Z")
+              #     ```
+              #
+              #     By default, each expression is an `AND` expression. However, you
+              #     can include `AND` and `OR` expressions explicitly.
+              #     For example:
+              #     ```
+              #     (name = "example-rule-1") AND
+              #     (createTime > "2021-04-12T08:15:10.40Z") OR
+              #     (name = "example-rule-2")
+              #     ```
+              #   @param order_by [::String]
+              #     Sorts list results by a certain order. By default, returned results
+              #     are ordered by `name` in ascending order.
+              #     You can also sort results in descending order based on the `name` value
+              #     using `orderBy="name desc"`.
+              #     Currently, only ordering by `name` is supported.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::VmwareEngine::V1::ListExternalAccessRulesResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::VmwareEngine::V1::ListExternalAccessRulesResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::ListExternalAccessRulesRequest.new
+              #
+              #   # Call the list_external_access_rules method.
+              #   result = client.list_external_access_rules request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::VmwareEngine::V1::ExternalAccessRule.
+              #     p item
+              #   end
+              #
+              def list_external_access_rules request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VmwareEngine::V1::ListExternalAccessRulesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_external_access_rules.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::VmwareEngine::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_external_access_rules.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_external_access_rules.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @vmware_engine_stub.list_external_access_rules request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets details of a single external access rule.
+              #
+              # @overload get_external_access_rule(request, options = nil)
+              #   Pass arguments to `get_external_access_rule` via a request object, either of type
+              #   {::Google::Cloud::VmwareEngine::V1::GetExternalAccessRuleRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::VmwareEngine::V1::GetExternalAccessRuleRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_external_access_rule(name: nil)
+              #   Pass arguments to `get_external_access_rule` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource name of the external access firewall rule to
+              #     retrieve. Resource names are schemeless URIs that follow the conventions in
+              #     https://cloud.google.com/apis/design/resource_names.
+              #     For example:
+              #     `projects/my-project/locations/us-central1/networkPolicies/my-policy/externalAccessRules/my-rule`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::VmwareEngine::V1::ExternalAccessRule]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::VmwareEngine::V1::ExternalAccessRule]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::GetExternalAccessRuleRequest.new
+              #
+              #   # Call the get_external_access_rule method.
+              #   result = client.get_external_access_rule request
+              #
+              #   # The returned object is of type Google::Cloud::VmwareEngine::V1::ExternalAccessRule.
+              #   p result
+              #
+              def get_external_access_rule request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VmwareEngine::V1::GetExternalAccessRuleRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_external_access_rule.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::VmwareEngine::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_external_access_rule.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_external_access_rule.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @vmware_engine_stub.get_external_access_rule request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a new external access rule in a given network policy.
+              #
+              # @overload create_external_access_rule(request, options = nil)
+              #   Pass arguments to `create_external_access_rule` via a request object, either of type
+              #   {::Google::Cloud::VmwareEngine::V1::CreateExternalAccessRuleRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::VmwareEngine::V1::CreateExternalAccessRuleRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_external_access_rule(parent: nil, external_access_rule: nil, external_access_rule_id: nil, request_id: nil)
+              #   Pass arguments to `create_external_access_rule` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The resource name of the network policy
+              #     to create a new external access firewall rule in.
+              #     Resource names are schemeless URIs that follow the conventions in
+              #     https://cloud.google.com/apis/design/resource_names.
+              #     For example:
+              #     `projects/my-project/locations/us-central1/networkPolicies/my-policy`
+              #   @param external_access_rule [::Google::Cloud::VmwareEngine::V1::ExternalAccessRule, ::Hash]
+              #     Required. The initial description of a new external access rule.
+              #   @param external_access_rule_id [::String]
+              #     Required. The user-provided identifier of the `ExternalAccessRule` to be
+              #     created. This identifier must be unique among `ExternalAccessRule`
+              #     resources within the parent and becomes the final token in the name URI.
+              #     The identifier must meet the following requirements:
+              #
+              #     * Only contains 1-63 alphanumeric characters and hyphens
+              #     * Begins with an alphabetical character
+              #     * Ends with a non-hyphen character
+              #     * Not formatted as a UUID
+              #     * Complies with [RFC 1034](https://datatracker.ietf.org/doc/html/rfc1034)
+              #     (section 3.5)
+              #   @param request_id [::String]
+              #     A request ID to identify requests. Specify a unique request ID
+              #     so that if you must retry your request, the server will know to ignore
+              #     the request if it has already been completed. The server guarantees that a
+              #     request doesn't result in creation of duplicate commitments for at least 60
+              #     minutes.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request ID,
+              #     the server can check if the original operation with the same request ID was
+              #     received, and if so, will ignore the second request. This prevents clients
+              #     from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::CreateExternalAccessRuleRequest.new
+              #
+              #   # Call the create_external_access_rule method.
+              #   result = client.create_external_access_rule request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def create_external_access_rule request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VmwareEngine::V1::CreateExternalAccessRuleRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_external_access_rule.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::VmwareEngine::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_external_access_rule.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_external_access_rule.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @vmware_engine_stub.create_external_access_rule request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates the parameters of a single external access rule.
+              # Only fields specified in `update_mask` are applied.
+              #
+              # @overload update_external_access_rule(request, options = nil)
+              #   Pass arguments to `update_external_access_rule` via a request object, either of type
+              #   {::Google::Cloud::VmwareEngine::V1::UpdateExternalAccessRuleRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::VmwareEngine::V1::UpdateExternalAccessRuleRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_external_access_rule(update_mask: nil, external_access_rule: nil, request_id: nil)
+              #   Pass arguments to `update_external_access_rule` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Required. Field mask is used to specify the fields to be overwritten in the
+              #     `ExternalAccessRule` resource by the update.
+              #     The fields specified in the `update_mask` are relative to the resource, not
+              #     the full request. A field will be overwritten if it is in the mask. If the
+              #     user does not provide a mask then all fields will be overwritten.
+              #   @param external_access_rule [::Google::Cloud::VmwareEngine::V1::ExternalAccessRule, ::Hash]
+              #     Required. Description of the external access rule.
+              #   @param request_id [::String]
+              #     Optional. A request ID to identify requests. Specify a unique request ID
+              #     so that if you must retry your request, the server will know to ignore
+              #     the request if it has already been completed. The server guarantees that a
+              #     request doesn't result in creation of duplicate commitments for at least 60
+              #     minutes.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request ID,
+              #     the server can check if the original operation with the same request ID was
+              #     received, and if so, will ignore the second request. This prevents clients
+              #     from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::UpdateExternalAccessRuleRequest.new
+              #
+              #   # Call the update_external_access_rule method.
+              #   result = client.update_external_access_rule request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def update_external_access_rule request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VmwareEngine::V1::UpdateExternalAccessRuleRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_external_access_rule.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::VmwareEngine::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_external_access_rule.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_external_access_rule.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @vmware_engine_stub.update_external_access_rule request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a single external access rule.
+              #
+              # @overload delete_external_access_rule(request, options = nil)
+              #   Pass arguments to `delete_external_access_rule` via a request object, either of type
+              #   {::Google::Cloud::VmwareEngine::V1::DeleteExternalAccessRuleRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::VmwareEngine::V1::DeleteExternalAccessRuleRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_external_access_rule(name: nil, request_id: nil)
+              #   Pass arguments to `delete_external_access_rule` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource name of the external access firewall rule to delete.
+              #     Resource names are schemeless URIs that follow the conventions in
+              #     https://cloud.google.com/apis/design/resource_names.
+              #     For example:
+              #     `projects/my-project/locations/us-central1/networkPolicies/my-policy/externalAccessRules/my-rule`
+              #   @param request_id [::String]
+              #     Optional. A request ID to identify requests. Specify a unique request ID
+              #     so that if you must retry your request, the server will know to ignore
+              #     the request if it has already been completed. The server guarantees that a
+              #     request doesn't result in creation of duplicate commitments for at least 60
+              #     minutes.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request
+              #     ID, the server can check if the original operation with the same request ID
+              #     was received, and if so, will ignore the second request. This prevents
+              #     clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::DeleteExternalAccessRuleRequest.new
+              #
+              #   # Call the delete_external_access_rule method.
+              #   result = client.delete_external_access_rule request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_external_access_rule request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VmwareEngine::V1::DeleteExternalAccessRuleRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_external_access_rule.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::VmwareEngine::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_external_access_rule.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_external_access_rule.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @vmware_engine_stub.delete_external_access_rule request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists logging servers configured for a given private
+              # cloud.
+              #
+              # @overload list_logging_servers(request, options = nil)
+              #   Pass arguments to `list_logging_servers` via a request object, either of type
+              #   {::Google::Cloud::VmwareEngine::V1::ListLoggingServersRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::VmwareEngine::V1::ListLoggingServersRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_logging_servers(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+              #   Pass arguments to `list_logging_servers` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The resource name of the private cloud to be queried for
+              #     logging servers.
+              #     Resource names are schemeless URIs that follow the conventions in
+              #     https://cloud.google.com/apis/design/resource_names.
+              #     For example:
+              #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
+              #   @param page_size [::Integer]
+              #     The maximum number of logging servers to return in one page.
+              #     The service may return fewer than this value.
+              #     The maximum value is coerced to 1000.
+              #     The default value of this field is 500.
+              #   @param page_token [::String]
+              #     A page token, received from a previous `ListLoggingServersRequest` call.
+              #     Provide this to retrieve the subsequent page.
+              #
+              #     When paginating, all other parameters provided to
+              #     `ListLoggingServersRequest` must match the call that provided the page
+              #     token.
+              #   @param filter [::String]
+              #     A filter expression that matches resources returned in the response.
+              #     The expression must specify the field name, a comparison
+              #     operator, and the value that you want to use for filtering. The value
+              #     must be a string, a number, or a boolean. The comparison operator
+              #     must be `=`, `!=`, `>`, or `<`.
+              #
+              #     For example, if you are filtering a list of logging servers, you can
+              #     exclude the ones named `example-server` by specifying
+              #     `name != "example-server"`.
+              #
+              #     To filter on multiple expressions, provide each separate expression within
+              #     parentheses. For example:
+              #     ```
+              #     (name = "example-server")
+              #     (createTime > "2021-04-12T08:15:10.40Z")
+              #     ```
+              #
+              #     By default, each expression is an `AND` expression. However, you
+              #     can include `AND` and `OR` expressions explicitly.
+              #     For example:
+              #     ```
+              #     (name = "example-server-1") AND
+              #     (createTime > "2021-04-12T08:15:10.40Z") OR
+              #     (name = "example-server-2")
+              #     ```
+              #   @param order_by [::String]
+              #     Sorts list results by a certain order. By default, returned results
+              #     are ordered by `name` in ascending order.
+              #     You can also sort results in descending order based on the `name` value
+              #     using `orderBy="name desc"`.
+              #     Currently, only ordering by `name` is supported.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::VmwareEngine::V1::ListLoggingServersResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::VmwareEngine::V1::ListLoggingServersResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::ListLoggingServersRequest.new
+              #
+              #   # Call the list_logging_servers method.
+              #   result = client.list_logging_servers request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::VmwareEngine::V1::LoggingServer.
+              #     p item
+              #   end
+              #
+              def list_logging_servers request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VmwareEngine::V1::ListLoggingServersRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_logging_servers.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::VmwareEngine::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_logging_servers.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_logging_servers.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @vmware_engine_stub.list_logging_servers request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets details of a logging server.
+              #
+              # @overload get_logging_server(request, options = nil)
+              #   Pass arguments to `get_logging_server` via a request object, either of type
+              #   {::Google::Cloud::VmwareEngine::V1::GetLoggingServerRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::VmwareEngine::V1::GetLoggingServerRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_logging_server(name: nil)
+              #   Pass arguments to `get_logging_server` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource name of the Logging Server to retrieve.
+              #     Resource names are schemeless URIs that follow the conventions in
+              #     https://cloud.google.com/apis/design/resource_names.
+              #     For example:
+              #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud/loggingServers/my-logging-server`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::VmwareEngine::V1::LoggingServer]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::VmwareEngine::V1::LoggingServer]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::GetLoggingServerRequest.new
+              #
+              #   # Call the get_logging_server method.
+              #   result = client.get_logging_server request
+              #
+              #   # The returned object is of type Google::Cloud::VmwareEngine::V1::LoggingServer.
+              #   p result
+              #
+              def get_logging_server request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VmwareEngine::V1::GetLoggingServerRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_logging_server.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::VmwareEngine::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_logging_server.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_logging_server.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @vmware_engine_stub.get_logging_server request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Create a new logging server for a given private cloud.
+              #
+              # @overload create_logging_server(request, options = nil)
+              #   Pass arguments to `create_logging_server` via a request object, either of type
+              #   {::Google::Cloud::VmwareEngine::V1::CreateLoggingServerRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::VmwareEngine::V1::CreateLoggingServerRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_logging_server(parent: nil, logging_server: nil, logging_server_id: nil, request_id: nil)
+              #   Pass arguments to `create_logging_server` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The resource name of the private cloud
+              #     to create a new Logging Server in.
+              #     Resource names are schemeless URIs that follow the conventions in
+              #     https://cloud.google.com/apis/design/resource_names.
+              #     For example:
+              #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
+              #   @param logging_server [::Google::Cloud::VmwareEngine::V1::LoggingServer, ::Hash]
+              #     Required. The initial description of a new logging server.
+              #   @param logging_server_id [::String]
+              #     Required. The user-provided identifier of the `LoggingServer` to be
+              #     created. This identifier must be unique among `LoggingServer` resources
+              #     within the parent and becomes the final token in the name URI.
+              #     The identifier must meet the following requirements:
+              #
+              #     * Only contains 1-63 alphanumeric characters and hyphens
+              #     * Begins with an alphabetical character
+              #     * Ends with a non-hyphen character
+              #     * Not formatted as a UUID
+              #     * Complies with [RFC 1034](https://datatracker.ietf.org/doc/html/rfc1034)
+              #     (section 3.5)
+              #   @param request_id [::String]
+              #     Optional. A request ID to identify requests. Specify a unique request ID
+              #     so that if you must retry your request, the server will know to ignore
+              #     the request if it has already been completed. The server guarantees that a
+              #     request doesn't result in creation of duplicate commitments for at least 60
+              #     minutes.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request ID,
+              #     the server can check if original operation with the same request ID was
+              #     received, and if so, will ignore the second request. This prevents clients
+              #     from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::CreateLoggingServerRequest.new
+              #
+              #   # Call the create_logging_server method.
+              #   result = client.create_logging_server request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def create_logging_server request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VmwareEngine::V1::CreateLoggingServerRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_logging_server.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::VmwareEngine::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_logging_server.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_logging_server.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @vmware_engine_stub.create_logging_server request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates the parameters of a single logging server.
+              # Only fields specified in `update_mask` are applied.
+              #
+              # @overload update_logging_server(request, options = nil)
+              #   Pass arguments to `update_logging_server` via a request object, either of type
+              #   {::Google::Cloud::VmwareEngine::V1::UpdateLoggingServerRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::VmwareEngine::V1::UpdateLoggingServerRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_logging_server(update_mask: nil, logging_server: nil, request_id: nil)
+              #   Pass arguments to `update_logging_server` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Required. Field mask is used to specify the fields to be overwritten in the
+              #     `LoggingServer` resource by the update.
+              #     The fields specified in the `update_mask` are relative to the resource, not
+              #     the full request. A field will be overwritten if it is in the mask. If the
+              #     user does not provide a mask then all fields will be overwritten.
+              #   @param logging_server [::Google::Cloud::VmwareEngine::V1::LoggingServer, ::Hash]
+              #     Required. Logging server description.
+              #   @param request_id [::String]
+              #     Optional. A request ID to identify requests. Specify a unique request ID
+              #     so that if you must retry your request, the server will know to ignore
+              #     the request if it has already been completed. The server guarantees that a
+              #     request doesn't result in creation of duplicate commitments for at least 60
+              #     minutes.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request ID,
+              #     the server can check if original operation with the same request ID was
+              #     received, and if so, will ignore the second request. This prevents clients
+              #     from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::UpdateLoggingServerRequest.new
+              #
+              #   # Call the update_logging_server method.
+              #   result = client.update_logging_server request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def update_logging_server request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VmwareEngine::V1::UpdateLoggingServerRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_logging_server.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::VmwareEngine::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_logging_server.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_logging_server.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @vmware_engine_stub.update_logging_server request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a single logging server.
+              #
+              # @overload delete_logging_server(request, options = nil)
+              #   Pass arguments to `delete_logging_server` via a request object, either of type
+              #   {::Google::Cloud::VmwareEngine::V1::DeleteLoggingServerRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::VmwareEngine::V1::DeleteLoggingServerRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_logging_server(name: nil, request_id: nil)
+              #   Pass arguments to `delete_logging_server` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource name of the logging server to delete.
+              #     Resource names are schemeless URIs that follow the conventions in
+              #     https://cloud.google.com/apis/design/resource_names.
+              #     For example:
+              #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud/loggingServers/my-logging-server`
+              #   @param request_id [::String]
+              #     Optional. A request ID to identify requests. Specify a unique request ID
+              #     so that if you must retry your request, the server will know to ignore
+              #     the request if it has already been completed. The server guarantees that a
+              #     request doesn't result in creation of duplicate commitments for at least 60
+              #     minutes.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request
+              #     ID, the server can check if original operation with the same request ID
+              #     was received, and if so, will ignore the second request. This prevents
+              #     clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::DeleteLoggingServerRequest.new
+              #
+              #   # Call the delete_logging_server method.
+              #   result = client.delete_logging_server request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_logging_server request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VmwareEngine::V1::DeleteLoggingServerRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_logging_server.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::VmwareEngine::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_logging_server.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_logging_server.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @vmware_engine_stub.delete_logging_server request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
                   return result
@@ -2016,7 +4038,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload show_vcenter_credentials(private_cloud: nil)
+              # @overload show_vcenter_credentials(private_cloud: nil, username: nil)
               #   Pass arguments to `show_vcenter_credentials` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -2028,6 +4050,17 @@ module Google
               #     https://cloud.google.com/apis/design/resource_names.
               #     For example:
               #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
+              #   @param username [::String]
+              #     Optional. The username of the user to be queried for credentials.
+              #     The default value of this field is CloudOwner@gve.local.
+              #     The provided value must be one of the following:
+              #     CloudOwner@gve.local,
+              #     solution-user-01@gve.local,
+              #     solution-user-02@gve.local,
+              #     solution-user-03@gve.local,
+              #     solution-user-04@gve.local,
+              #     solution-user-05@gve.local,
+              #     zertoadmin@gve.local.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::VmwareEngine::V1::Credentials]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2205,7 +4238,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload reset_vcenter_credentials(private_cloud: nil, request_id: nil)
+              # @overload reset_vcenter_credentials(private_cloud: nil, request_id: nil, username: nil)
               #   Pass arguments to `reset_vcenter_credentials` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -2232,6 +4265,16 @@ module Google
               #
               #     The request ID must be a valid UUID with the exception that zero UUID is
               #     not supported (00000000-0000-0000-0000-000000000000).
+              #   @param username [::String]
+              #     Optional. The username of the user to be to reset the credentials.
+              #     The default value of this field is CloudOwner@gve.local.
+              #     The provided value should be one of the following:
+              #     solution-user-01@gve.local,
+              #     solution-user-02@gve.local,
+              #     solution-user-03@gve.local,
+              #     solution-user-04@gve.local,
+              #     solution-user-05@gve.local,
+              #     zertoadmin@gve.local.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2291,6 +4334,851 @@ module Google
 
                 @vmware_engine_stub.reset_vcenter_credentials request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets details of the `DnsForwarding` config.
+              #
+              # @overload get_dns_forwarding(request, options = nil)
+              #   Pass arguments to `get_dns_forwarding` via a request object, either of type
+              #   {::Google::Cloud::VmwareEngine::V1::GetDnsForwardingRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::VmwareEngine::V1::GetDnsForwardingRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_dns_forwarding(name: nil)
+              #   Pass arguments to `get_dns_forwarding` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource name of a `DnsForwarding` to retrieve.
+              #     Resource names are schemeless URIs that follow the conventions in
+              #     https://cloud.google.com/apis/design/resource_names.
+              #     For example:
+              #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud/dnsForwarding`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::VmwareEngine::V1::DnsForwarding]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::VmwareEngine::V1::DnsForwarding]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::GetDnsForwardingRequest.new
+              #
+              #   # Call the get_dns_forwarding method.
+              #   result = client.get_dns_forwarding request
+              #
+              #   # The returned object is of type Google::Cloud::VmwareEngine::V1::DnsForwarding.
+              #   p result
+              #
+              def get_dns_forwarding request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VmwareEngine::V1::GetDnsForwardingRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_dns_forwarding.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::VmwareEngine::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_dns_forwarding.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_dns_forwarding.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @vmware_engine_stub.get_dns_forwarding request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates the parameters of the `DnsForwarding` config, like associated
+              # domains. Only fields specified in `update_mask` are applied.
+              #
+              # @overload update_dns_forwarding(request, options = nil)
+              #   Pass arguments to `update_dns_forwarding` via a request object, either of type
+              #   {::Google::Cloud::VmwareEngine::V1::UpdateDnsForwardingRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::VmwareEngine::V1::UpdateDnsForwardingRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_dns_forwarding(dns_forwarding: nil, update_mask: nil, request_id: nil)
+              #   Pass arguments to `update_dns_forwarding` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param dns_forwarding [::Google::Cloud::VmwareEngine::V1::DnsForwarding, ::Hash]
+              #     Required. DnsForwarding config details.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Required. Field mask is used to specify the fields to be overwritten in the
+              #     `DnsForwarding` resource by the update.
+              #     The fields specified in the `update_mask` are relative to the resource, not
+              #     the full request. A field will be overwritten if it is in the mask. If the
+              #     user does not provide a mask then all fields will be overwritten.
+              #   @param request_id [::String]
+              #     Optional. A request ID to identify requests. Specify a unique request ID
+              #     so that if you must retry your request, the server will know to ignore
+              #     the request if it has already been completed. The server guarantees that a
+              #     request doesn't result in creation of duplicate commitments for at least 60
+              #     minutes.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request ID,
+              #     the server can check if original operation with the same request ID was
+              #     received, and if so, will ignore the second request. This prevents clients
+              #     from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::UpdateDnsForwardingRequest.new
+              #
+              #   # Call the update_dns_forwarding method.
+              #   result = client.update_dns_forwarding request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def update_dns_forwarding request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VmwareEngine::V1::UpdateDnsForwardingRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_dns_forwarding.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::VmwareEngine::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_dns_forwarding.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_dns_forwarding.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @vmware_engine_stub.update_dns_forwarding request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Retrieves a `NetworkPeering` resource by its resource name. The resource
+              # contains details of the network peering, such as peered
+              # networks, import and export custom route configurations, and peering state.
+              # NetworkPeering is a global resource and location can only be global.
+              #
+              # @overload get_network_peering(request, options = nil)
+              #   Pass arguments to `get_network_peering` via a request object, either of type
+              #   {::Google::Cloud::VmwareEngine::V1::GetNetworkPeeringRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::VmwareEngine::V1::GetNetworkPeeringRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_network_peering(name: nil)
+              #   Pass arguments to `get_network_peering` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource name of the network peering to retrieve.
+              #     Resource names are schemeless URIs that follow the conventions in
+              #     https://cloud.google.com/apis/design/resource_names.
+              #     For example:
+              #     `projects/my-project/locations/global/networkPeerings/my-peering`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::VmwareEngine::V1::NetworkPeering]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::VmwareEngine::V1::NetworkPeering]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::GetNetworkPeeringRequest.new
+              #
+              #   # Call the get_network_peering method.
+              #   result = client.get_network_peering request
+              #
+              #   # The returned object is of type Google::Cloud::VmwareEngine::V1::NetworkPeering.
+              #   p result
+              #
+              def get_network_peering request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VmwareEngine::V1::GetNetworkPeeringRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_network_peering.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::VmwareEngine::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_network_peering.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_network_peering.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @vmware_engine_stub.get_network_peering request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists `NetworkPeering` resources in a given project. NetworkPeering is a
+              # global resource and location can only be global.
+              #
+              # @overload list_network_peerings(request, options = nil)
+              #   Pass arguments to `list_network_peerings` via a request object, either of type
+              #   {::Google::Cloud::VmwareEngine::V1::ListNetworkPeeringsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::VmwareEngine::V1::ListNetworkPeeringsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_network_peerings(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+              #   Pass arguments to `list_network_peerings` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The resource name of the location (global) to query for
+              #     network peerings. Resource names are schemeless URIs that follow the
+              #     conventions in https://cloud.google.com/apis/design/resource_names. For
+              #     example: `projects/my-project/locations/global`
+              #   @param page_size [::Integer]
+              #     The maximum number of network peerings to return in one page.
+              #     The maximum value is coerced to 1000.
+              #     The default value of this field is 500.
+              #   @param page_token [::String]
+              #     A page token, received from a previous `ListNetworkPeerings` call.
+              #     Provide this to retrieve the subsequent page.
+              #
+              #     When paginating, all other parameters provided to
+              #     `ListNetworkPeerings` must match the call that provided the page
+              #     token.
+              #   @param filter [::String]
+              #     A filter expression that matches resources returned in the response.
+              #     The expression must specify the field name, a comparison
+              #     operator, and the value that you want to use for filtering. The value
+              #     must be a string, a number, or a boolean. The comparison operator
+              #     must be `=`, `!=`, `>`, or `<`.
+              #
+              #     For example, if you are filtering a list of network peerings, you can
+              #     exclude the ones named `example-peering` by specifying
+              #     `name != "example-peering"`.
+              #
+              #     To filter on multiple expressions, provide each separate expression within
+              #     parentheses. For example:
+              #     ```
+              #     (name = "example-peering")
+              #     (createTime > "2021-04-12T08:15:10.40Z")
+              #     ```
+              #
+              #     By default, each expression is an `AND` expression. However, you
+              #     can include `AND` and `OR` expressions explicitly.
+              #     For example:
+              #     ```
+              #     (name = "example-peering-1") AND
+              #     (createTime > "2021-04-12T08:15:10.40Z") OR
+              #     (name = "example-peering-2")
+              #     ```
+              #   @param order_by [::String]
+              #     Sorts list results by a certain order. By default, returned results
+              #     are ordered by `name` in ascending order.
+              #     You can also sort results in descending order based on the `name` value
+              #     using `orderBy="name desc"`.
+              #     Currently, only ordering by `name` is supported.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::VmwareEngine::V1::ListNetworkPeeringsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::VmwareEngine::V1::ListNetworkPeeringsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::ListNetworkPeeringsRequest.new
+              #
+              #   # Call the list_network_peerings method.
+              #   result = client.list_network_peerings request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::VmwareEngine::V1::NetworkPeering.
+              #     p item
+              #   end
+              #
+              def list_network_peerings request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VmwareEngine::V1::ListNetworkPeeringsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_network_peerings.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::VmwareEngine::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_network_peerings.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_network_peerings.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @vmware_engine_stub.list_network_peerings request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a new network peering between the peer network and VMware Engine
+              # network provided in a `NetworkPeering` resource. NetworkPeering is a
+              # global resource and location can only be global.
+              #
+              # @overload create_network_peering(request, options = nil)
+              #   Pass arguments to `create_network_peering` via a request object, either of type
+              #   {::Google::Cloud::VmwareEngine::V1::CreateNetworkPeeringRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::VmwareEngine::V1::CreateNetworkPeeringRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_network_peering(parent: nil, network_peering_id: nil, network_peering: nil, request_id: nil)
+              #   Pass arguments to `create_network_peering` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The resource name of the location to create the new network
+              #     peering in. This value is always `global`, because `NetworkPeering` is a
+              #     global resource. Resource names are schemeless URIs that follow the
+              #     conventions in https://cloud.google.com/apis/design/resource_names. For
+              #     example: `projects/my-project/locations/global`
+              #   @param network_peering_id [::String]
+              #     Required. The user-provided identifier of the new `NetworkPeering`.
+              #     This identifier must be unique among `NetworkPeering` resources within the
+              #     parent and becomes the final token in the name URI.
+              #     The identifier must meet the following requirements:
+              #
+              #     * Only contains 1-63 alphanumeric characters and hyphens
+              #     * Begins with an alphabetical character
+              #     * Ends with a non-hyphen character
+              #     * Not formatted as a UUID
+              #     * Complies with [RFC 1034](https://datatracker.ietf.org/doc/html/rfc1034)
+              #     (section 3.5)
+              #   @param network_peering [::Google::Cloud::VmwareEngine::V1::NetworkPeering, ::Hash]
+              #     Required. The initial description of the new network peering.
+              #   @param request_id [::String]
+              #     Optional. A request ID to identify requests. Specify a unique request ID
+              #     so that if you must retry your request, the server will know to ignore
+              #     the request if it has already been completed. The server guarantees that a
+              #     request doesn't result in creation of duplicate commitments for at least 60
+              #     minutes.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request
+              #     ID, the server can check if original operation with the same request ID
+              #     was received, and if so, will ignore the second request. This prevents
+              #     clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::CreateNetworkPeeringRequest.new
+              #
+              #   # Call the create_network_peering method.
+              #   result = client.create_network_peering request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def create_network_peering request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VmwareEngine::V1::CreateNetworkPeeringRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_network_peering.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::VmwareEngine::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_network_peering.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_network_peering.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @vmware_engine_stub.create_network_peering request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a `NetworkPeering` resource. When a network peering is deleted for
+              # a VMware Engine network, the peer network becomes inaccessible to that
+              # VMware Engine network. NetworkPeering is a global resource and location can
+              # only be global.
+              #
+              # @overload delete_network_peering(request, options = nil)
+              #   Pass arguments to `delete_network_peering` via a request object, either of type
+              #   {::Google::Cloud::VmwareEngine::V1::DeleteNetworkPeeringRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::VmwareEngine::V1::DeleteNetworkPeeringRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_network_peering(name: nil, request_id: nil)
+              #   Pass arguments to `delete_network_peering` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource name of the network peering to be deleted.
+              #     Resource names are schemeless URIs that follow the conventions in
+              #     https://cloud.google.com/apis/design/resource_names.
+              #     For example:
+              #     `projects/my-project/locations/global/networkPeerings/my-peering`
+              #   @param request_id [::String]
+              #     Optional. A request ID to identify requests. Specify a unique request ID
+              #     so that if you must retry your request, the server will know to ignore
+              #     the request if it has already been completed. The server guarantees that a
+              #     request doesn't result in creation of duplicate commitments for at least 60
+              #     minutes.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request
+              #     ID, the server can check if original operation with the same request ID
+              #     was received, and if so, will ignore the second request. This prevents
+              #     clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::DeleteNetworkPeeringRequest.new
+              #
+              #   # Call the delete_network_peering method.
+              #   result = client.delete_network_peering request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_network_peering request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VmwareEngine::V1::DeleteNetworkPeeringRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_network_peering.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::VmwareEngine::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_network_peering.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_network_peering.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @vmware_engine_stub.delete_network_peering request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Modifies a `NetworkPeering` resource. Only the `description` field can be
+              # updated. Only fields specified in `updateMask` are applied. NetworkPeering
+              # is a global resource and location can only be global.
+              #
+              # @overload update_network_peering(request, options = nil)
+              #   Pass arguments to `update_network_peering` via a request object, either of type
+              #   {::Google::Cloud::VmwareEngine::V1::UpdateNetworkPeeringRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::VmwareEngine::V1::UpdateNetworkPeeringRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_network_peering(network_peering: nil, update_mask: nil, request_id: nil)
+              #   Pass arguments to `update_network_peering` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param network_peering [::Google::Cloud::VmwareEngine::V1::NetworkPeering, ::Hash]
+              #     Required. Network peering description.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Required. Field mask is used to specify the fields to be overwritten in the
+              #     `NetworkPeering` resource by the update.
+              #     The fields specified in the `update_mask` are relative to the resource, not
+              #     the full request. A field will be overwritten if it is in the mask. If the
+              #     user does not provide a mask then all fields will be overwritten.
+              #   @param request_id [::String]
+              #     Optional. A request ID to identify requests. Specify a unique request ID
+              #     so that if you must retry your request, the server will know to ignore
+              #     the request if it has already been completed. The server guarantees that a
+              #     request doesn't result in creation of duplicate commitments for at least 60
+              #     minutes.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request
+              #     ID, the server can check if original operation with the same request ID
+              #     was received, and if so, will ignore the second request. This prevents
+              #     clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::UpdateNetworkPeeringRequest.new
+              #
+              #   # Call the update_network_peering method.
+              #   result = client.update_network_peering request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def update_network_peering request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VmwareEngine::V1::UpdateNetworkPeeringRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_network_peering.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::VmwareEngine::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_network_peering.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_network_peering.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @vmware_engine_stub.update_network_peering request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists the network peering routes exchanged over a peering connection.
+              # NetworkPeering is a global resource and location can only be global.
+              #
+              # @overload list_peering_routes(request, options = nil)
+              #   Pass arguments to `list_peering_routes` via a request object, either of type
+              #   {::Google::Cloud::VmwareEngine::V1::ListPeeringRoutesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::VmwareEngine::V1::ListPeeringRoutesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_peering_routes(parent: nil, page_size: nil, page_token: nil, filter: nil)
+              #   Pass arguments to `list_peering_routes` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The resource name of the network peering to retrieve peering
+              #     routes from. Resource names are schemeless URIs that follow the conventions
+              #     in https://cloud.google.com/apis/design/resource_names. For example:
+              #     `projects/my-project/locations/global/networkPeerings/my-peering`
+              #   @param page_size [::Integer]
+              #     The maximum number of peering routes to return in one page.
+              #     The service may return fewer than this value.
+              #     The maximum value is coerced to 1000.
+              #     The default value of this field is 500.
+              #   @param page_token [::String]
+              #     A page token, received from a previous `ListPeeringRoutes` call.
+              #     Provide this to retrieve the subsequent page.
+              #     When paginating, all other parameters provided to `ListPeeringRoutes` must
+              #     match the call that provided the page token.
+              #   @param filter [::String]
+              #     A filter expression that matches resources returned in the response.
+              #     Currently, only filtering on the `direction` field is supported. To return
+              #     routes imported from the peer network, provide "direction=INCOMING". To
+              #     return routes exported from the VMware Engine network, provide
+              #     "direction=OUTGOING". Other filter expressions return an error.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VmwareEngine::V1::PeeringRoute>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VmwareEngine::V1::PeeringRoute>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::ListPeeringRoutesRequest.new
+              #
+              #   # Call the list_peering_routes method.
+              #   result = client.list_peering_routes request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::VmwareEngine::V1::PeeringRoute.
+              #     p item
+              #   end
+              #
+              def list_peering_routes request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VmwareEngine::V1::ListPeeringRoutesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_peering_routes.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::VmwareEngine::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_peering_routes.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_peering_routes.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @vmware_engine_stub.list_peering_routes request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @vmware_engine_stub, :list_peering_routes, "peering_routes", request, result, options
                   yield result, operation if block_given?
                   return result
                 end
@@ -3150,6 +6038,667 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @vmware_engine_stub.delete_network_policy request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists Consumer VPCs bound to Management DNS Zone of a given private cloud.
+              #
+              # @overload list_management_dns_zone_bindings(request, options = nil)
+              #   Pass arguments to `list_management_dns_zone_bindings` via a request object, either of type
+              #   {::Google::Cloud::VmwareEngine::V1::ListManagementDnsZoneBindingsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::VmwareEngine::V1::ListManagementDnsZoneBindingsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_management_dns_zone_bindings(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+              #   Pass arguments to `list_management_dns_zone_bindings` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The resource name of the private cloud to be queried for
+              #     management DNS zone bindings.
+              #     Resource names are schemeless URIs that follow the conventions in
+              #     https://cloud.google.com/apis/design/resource_names.
+              #     For example:
+              #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
+              #   @param page_size [::Integer]
+              #     The maximum number of management DNS zone bindings to return in one page.
+              #     The service may return fewer than this value.
+              #     The maximum value is coerced to 1000.
+              #     The default value of this field is 500.
+              #   @param page_token [::String]
+              #     A page token, received from a previous `ListManagementDnsZoneBindings`
+              #     call. Provide this to retrieve the subsequent page.
+              #
+              #     When paginating, all other parameters provided to
+              #     `ListManagementDnsZoneBindings` must match the call that provided the page
+              #     token.
+              #   @param filter [::String]
+              #     A filter expression that matches resources returned in the response.
+              #     The expression must specify the field name, a comparison
+              #     operator, and the value that you want to use for filtering. The value
+              #     must be a string, a number, or a boolean. The comparison operator
+              #     must be `=`, `!=`, `>`, or `<`.
+              #
+              #     For example, if you are filtering a list of Management DNS Zone Bindings,
+              #     you can exclude the ones named `example-management-dns-zone-binding` by
+              #     specifying `name != "example-management-dns-zone-binding"`.
+              #
+              #     To filter on multiple expressions, provide each separate expression within
+              #     parentheses. For example:
+              #     ```
+              #     (name = "example-management-dns-zone-binding")
+              #     (createTime > "2021-04-12T08:15:10.40Z")
+              #     ```
+              #
+              #     By default, each expression is an `AND` expression. However, you
+              #     can include `AND` and `OR` expressions explicitly.
+              #     For example:
+              #     ```
+              #     (name = "example-management-dns-zone-binding-1") AND
+              #     (createTime > "2021-04-12T08:15:10.40Z") OR
+              #     (name = "example-management-dns-zone-binding-2")
+              #     ```
+              #   @param order_by [::String]
+              #     Sorts list results by a certain order. By default, returned results
+              #     are ordered by `name` in ascending order.
+              #     You can also sort results in descending order based on the `name` value
+              #     using `orderBy="name desc"`.
+              #     Currently, only ordering by `name` is supported.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::VmwareEngine::V1::ListManagementDnsZoneBindingsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::VmwareEngine::V1::ListManagementDnsZoneBindingsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::ListManagementDnsZoneBindingsRequest.new
+              #
+              #   # Call the list_management_dns_zone_bindings method.
+              #   result = client.list_management_dns_zone_bindings request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::VmwareEngine::V1::ManagementDnsZoneBinding.
+              #     p item
+              #   end
+              #
+              def list_management_dns_zone_bindings request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VmwareEngine::V1::ListManagementDnsZoneBindingsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_management_dns_zone_bindings.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::VmwareEngine::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_management_dns_zone_bindings.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_management_dns_zone_bindings.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @vmware_engine_stub.list_management_dns_zone_bindings request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Retrieves a 'ManagementDnsZoneBinding' resource by its resource name.
+              #
+              # @overload get_management_dns_zone_binding(request, options = nil)
+              #   Pass arguments to `get_management_dns_zone_binding` via a request object, either of type
+              #   {::Google::Cloud::VmwareEngine::V1::GetManagementDnsZoneBindingRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::VmwareEngine::V1::GetManagementDnsZoneBindingRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_management_dns_zone_binding(name: nil)
+              #   Pass arguments to `get_management_dns_zone_binding` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource name of the management DNS zone binding to
+              #     retrieve. Resource names are schemeless URIs that follow the conventions in
+              #     https://cloud.google.com/apis/design/resource_names.
+              #     For example:
+              #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud/managementDnsZoneBindings/my-management-dns-zone-binding`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::VmwareEngine::V1::ManagementDnsZoneBinding]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::VmwareEngine::V1::ManagementDnsZoneBinding]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::GetManagementDnsZoneBindingRequest.new
+              #
+              #   # Call the get_management_dns_zone_binding method.
+              #   result = client.get_management_dns_zone_binding request
+              #
+              #   # The returned object is of type Google::Cloud::VmwareEngine::V1::ManagementDnsZoneBinding.
+              #   p result
+              #
+              def get_management_dns_zone_binding request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VmwareEngine::V1::GetManagementDnsZoneBindingRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_management_dns_zone_binding.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::VmwareEngine::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_management_dns_zone_binding.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_management_dns_zone_binding.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @vmware_engine_stub.get_management_dns_zone_binding request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a new `ManagementDnsZoneBinding` resource in a private cloud.
+              # This RPC creates the DNS binding and the resource that represents the
+              # DNS binding of the consumer VPC network to the management DNS zone. A
+              # management DNS zone is the Cloud DNS cross-project binding zone that
+              # VMware Engine creates for each private cloud. It contains FQDNs and
+              # corresponding IP addresses for the private cloud's ESXi hosts and
+              # management VM appliances like vCenter and NSX Manager.
+              #
+              # @overload create_management_dns_zone_binding(request, options = nil)
+              #   Pass arguments to `create_management_dns_zone_binding` via a request object, either of type
+              #   {::Google::Cloud::VmwareEngine::V1::CreateManagementDnsZoneBindingRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::VmwareEngine::V1::CreateManagementDnsZoneBindingRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_management_dns_zone_binding(parent: nil, management_dns_zone_binding: nil, management_dns_zone_binding_id: nil, request_id: nil)
+              #   Pass arguments to `create_management_dns_zone_binding` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The resource name of the private cloud
+              #     to create a new management DNS zone binding for.
+              #     Resource names are schemeless URIs that follow the conventions in
+              #     https://cloud.google.com/apis/design/resource_names.
+              #     For example:
+              #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
+              #   @param management_dns_zone_binding [::Google::Cloud::VmwareEngine::V1::ManagementDnsZoneBinding, ::Hash]
+              #     Required. The initial values for a new management DNS zone binding.
+              #   @param management_dns_zone_binding_id [::String]
+              #     Required. The user-provided identifier of the `ManagementDnsZoneBinding`
+              #     resource to be created. This identifier must be unique among
+              #     `ManagementDnsZoneBinding` resources within the parent and becomes the
+              #     final token in the name URI. The identifier must meet the following
+              #     requirements:
+              #
+              #     * Only contains 1-63 alphanumeric characters and hyphens
+              #     * Begins with an alphabetical character
+              #     * Ends with a non-hyphen character
+              #     * Not formatted as a UUID
+              #     * Complies with [RFC 1034](https://datatracker.ietf.org/doc/html/rfc1034)
+              #     (section 3.5)
+              #   @param request_id [::String]
+              #     Optional. A request ID to identify requests. Specify a unique request ID
+              #     so that if you must retry your request, the server will know to ignore
+              #     the request if it has already been completed. The server guarantees that a
+              #     request doesn't result in creation of duplicate commitments for at least 60
+              #     minutes.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request ID,
+              #     the server can check if the original operation with the same request ID was
+              #     received, and if so, will ignore the second request. This prevents clients
+              #     from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::CreateManagementDnsZoneBindingRequest.new
+              #
+              #   # Call the create_management_dns_zone_binding method.
+              #   result = client.create_management_dns_zone_binding request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def create_management_dns_zone_binding request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VmwareEngine::V1::CreateManagementDnsZoneBindingRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_management_dns_zone_binding.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::VmwareEngine::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_management_dns_zone_binding.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_management_dns_zone_binding.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @vmware_engine_stub.create_management_dns_zone_binding request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates a `ManagementDnsZoneBinding` resource.
+              # Only fields specified in `update_mask` are applied.
+              #
+              # @overload update_management_dns_zone_binding(request, options = nil)
+              #   Pass arguments to `update_management_dns_zone_binding` via a request object, either of type
+              #   {::Google::Cloud::VmwareEngine::V1::UpdateManagementDnsZoneBindingRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::VmwareEngine::V1::UpdateManagementDnsZoneBindingRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_management_dns_zone_binding(update_mask: nil, management_dns_zone_binding: nil, request_id: nil)
+              #   Pass arguments to `update_management_dns_zone_binding` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Required. Field mask is used to specify the fields to be overwritten in the
+              #     `ManagementDnsZoneBinding` resource by the update.
+              #     The fields specified in the `update_mask` are relative to the resource, not
+              #     the full request. A field will be overwritten if it is in the mask. If the
+              #     user does not provide a mask then all fields will be overwritten.
+              #   @param management_dns_zone_binding [::Google::Cloud::VmwareEngine::V1::ManagementDnsZoneBinding, ::Hash]
+              #     Required. New values to update the management DNS zone binding with.
+              #   @param request_id [::String]
+              #     Optional. A request ID to identify requests. Specify a unique request ID
+              #     so that if you must retry your request, the server will know to ignore
+              #     the request if it has already been completed. The server guarantees that a
+              #     request doesn't result in creation of duplicate commitments for at least 60
+              #     minutes.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request ID,
+              #     the server can check if the original operation with the same request ID was
+              #     received, and if so, will ignore the second request. This prevents clients
+              #     from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::UpdateManagementDnsZoneBindingRequest.new
+              #
+              #   # Call the update_management_dns_zone_binding method.
+              #   result = client.update_management_dns_zone_binding request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def update_management_dns_zone_binding request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VmwareEngine::V1::UpdateManagementDnsZoneBindingRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_management_dns_zone_binding.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::VmwareEngine::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_management_dns_zone_binding.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_management_dns_zone_binding.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @vmware_engine_stub.update_management_dns_zone_binding request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a `ManagementDnsZoneBinding` resource. When a management DNS zone
+              # binding is deleted, the corresponding consumer VPC network is no longer
+              # bound to the management DNS zone.
+              #
+              # @overload delete_management_dns_zone_binding(request, options = nil)
+              #   Pass arguments to `delete_management_dns_zone_binding` via a request object, either of type
+              #   {::Google::Cloud::VmwareEngine::V1::DeleteManagementDnsZoneBindingRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::VmwareEngine::V1::DeleteManagementDnsZoneBindingRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_management_dns_zone_binding(name: nil, request_id: nil)
+              #   Pass arguments to `delete_management_dns_zone_binding` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource name of the management DNS zone binding to delete.
+              #     Resource names are schemeless URIs that follow the conventions in
+              #     https://cloud.google.com/apis/design/resource_names.
+              #     For example:
+              #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud/managementDnsZoneBindings/my-management-dns-zone-binding`
+              #   @param request_id [::String]
+              #     Optional. A request ID to identify requests. Specify a unique request ID
+              #     so that if you must retry your request, the server will know to ignore
+              #     the request if it has already been completed. The server guarantees that a
+              #     request doesn't result in creation of duplicate commitments for at least 60
+              #     minutes.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request
+              #     ID, the server can check if the original operation with the same request ID
+              #     was received, and if so, will ignore the second request. This prevents
+              #     clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::DeleteManagementDnsZoneBindingRequest.new
+              #
+              #   # Call the delete_management_dns_zone_binding method.
+              #   result = client.delete_management_dns_zone_binding request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_management_dns_zone_binding request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VmwareEngine::V1::DeleteManagementDnsZoneBindingRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_management_dns_zone_binding.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::VmwareEngine::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_management_dns_zone_binding.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_management_dns_zone_binding.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @vmware_engine_stub.delete_management_dns_zone_binding request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Retries to create a `ManagementDnsZoneBinding` resource that is
+              # in failed state.
+              #
+              # @overload repair_management_dns_zone_binding(request, options = nil)
+              #   Pass arguments to `repair_management_dns_zone_binding` via a request object, either of type
+              #   {::Google::Cloud::VmwareEngine::V1::RepairManagementDnsZoneBindingRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::VmwareEngine::V1::RepairManagementDnsZoneBindingRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload repair_management_dns_zone_binding(name: nil, request_id: nil)
+              #   Pass arguments to `repair_management_dns_zone_binding` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource name of the management DNS zone binding to repair.
+              #     Resource names are schemeless URIs that follow the conventions in
+              #     https://cloud.google.com/apis/design/resource_names.
+              #     For example:
+              #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud/managementDnsZoneBindings/my-management-dns-zone-binding`
+              #   @param request_id [::String]
+              #     Optional. A request ID to identify requests. Specify a unique request ID
+              #     so that if you must retry your request, the server will know to ignore
+              #     the request if it has already been completed. The server guarantees that a
+              #     request doesn't result in creation of duplicate commitments for at least 60
+              #     minutes.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request ID,
+              #     the server can check if the original operation with the same request ID was
+              #     received, and if so, will ignore the second request. This prevents clients
+              #     from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::RepairManagementDnsZoneBindingRequest.new
+              #
+              #   # Call the repair_management_dns_zone_binding method.
+              #   result = client.repair_management_dns_zone_binding request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def repair_management_dns_zone_binding request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VmwareEngine::V1::RepairManagementDnsZoneBindingRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.repair_management_dns_zone_binding.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::VmwareEngine::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.repair_management_dns_zone_binding.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.repair_management_dns_zone_binding.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @vmware_engine_stub.repair_management_dns_zone_binding request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
                   return result
@@ -4363,6 +7912,316 @@ module Google
               end
 
               ##
+              # Grants the bind permission to the customer provided principal(user /
+              # service account) to bind their DNS zone with the intranet VPC associated
+              # with the project. DnsBindPermission is a global resource and location can
+              # only be global.
+              #
+              # @overload grant_dns_bind_permission(request, options = nil)
+              #   Pass arguments to `grant_dns_bind_permission` via a request object, either of type
+              #   {::Google::Cloud::VmwareEngine::V1::GrantDnsBindPermissionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::VmwareEngine::V1::GrantDnsBindPermissionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload grant_dns_bind_permission(name: nil, principal: nil, request_id: nil)
+              #   Pass arguments to `grant_dns_bind_permission` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the resource which stores the users/service accounts
+              #     having the permission to bind to the corresponding intranet VPC of the
+              #     consumer project. DnsBindPermission is a global resource. Resource names
+              #     are schemeless URIs that follow the conventions in
+              #     https://cloud.google.com/apis/design/resource_names. For example:
+              #     `projects/my-project/locations/global/dnsBindPermission`
+              #   @param principal [::Google::Cloud::VmwareEngine::V1::Principal, ::Hash]
+              #     Required. The consumer provided user/service account which needs to be
+              #     granted permission to bind with the intranet VPC corresponding to the
+              #     consumer project.
+              #   @param request_id [::String]
+              #     Optional. A request ID to identify requests. Specify a unique request ID
+              #     so that if you must retry your request, the server will know to ignore
+              #     the request if it has already been completed. The server guarantees that a
+              #     request doesn't result in creation of duplicate commitments for at least 60
+              #     minutes.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request
+              #     ID, the server can check if original operation with the same request ID
+              #     was received, and if so, will ignore the second request. This prevents
+              #     clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::GrantDnsBindPermissionRequest.new
+              #
+              #   # Call the grant_dns_bind_permission method.
+              #   result = client.grant_dns_bind_permission request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def grant_dns_bind_permission request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VmwareEngine::V1::GrantDnsBindPermissionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.grant_dns_bind_permission.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::VmwareEngine::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.grant_dns_bind_permission.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.grant_dns_bind_permission.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @vmware_engine_stub.grant_dns_bind_permission request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets all the principals having bind permission on the intranet VPC
+              # associated with the consumer project granted by the Grant API.
+              # DnsBindPermission is a global resource and location can only be global.
+              #
+              # @overload get_dns_bind_permission(request, options = nil)
+              #   Pass arguments to `get_dns_bind_permission` via a request object, either of type
+              #   {::Google::Cloud::VmwareEngine::V1::GetDnsBindPermissionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::VmwareEngine::V1::GetDnsBindPermissionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_dns_bind_permission(name: nil)
+              #   Pass arguments to `get_dns_bind_permission` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the resource which stores the users/service accounts
+              #     having the permission to bind to the corresponding intranet VPC of the
+              #     consumer project. DnsBindPermission is a global resource. Resource names
+              #     are schemeless URIs that follow the conventions in
+              #     https://cloud.google.com/apis/design/resource_names. For example:
+              #     `projects/my-project/locations/global/dnsBindPermission`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::VmwareEngine::V1::DnsBindPermission]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::VmwareEngine::V1::DnsBindPermission]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::GetDnsBindPermissionRequest.new
+              #
+              #   # Call the get_dns_bind_permission method.
+              #   result = client.get_dns_bind_permission request
+              #
+              #   # The returned object is of type Google::Cloud::VmwareEngine::V1::DnsBindPermission.
+              #   p result
+              #
+              def get_dns_bind_permission request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VmwareEngine::V1::GetDnsBindPermissionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_dns_bind_permission.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::VmwareEngine::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_dns_bind_permission.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_dns_bind_permission.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @vmware_engine_stub.get_dns_bind_permission request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Revokes the bind permission from the customer provided principal(user /
+              # service account) on the intranet VPC associated with the consumer project.
+              # DnsBindPermission is a global resource and location can only be global.
+              #
+              # @overload revoke_dns_bind_permission(request, options = nil)
+              #   Pass arguments to `revoke_dns_bind_permission` via a request object, either of type
+              #   {::Google::Cloud::VmwareEngine::V1::RevokeDnsBindPermissionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::VmwareEngine::V1::RevokeDnsBindPermissionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload revoke_dns_bind_permission(name: nil, principal: nil, request_id: nil)
+              #   Pass arguments to `revoke_dns_bind_permission` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the resource which stores the users/service accounts
+              #     having the permission to bind to the corresponding intranet VPC of the
+              #     consumer project. DnsBindPermission is a global resource. Resource names
+              #     are schemeless URIs that follow the conventions in
+              #     https://cloud.google.com/apis/design/resource_names. For example:
+              #     `projects/my-project/locations/global/dnsBindPermission`
+              #   @param principal [::Google::Cloud::VmwareEngine::V1::Principal, ::Hash]
+              #     Required. The consumer provided user/service account which needs to be
+              #     granted permission to bind with the intranet VPC corresponding to the
+              #     consumer project.
+              #   @param request_id [::String]
+              #     Optional. A request ID to identify requests. Specify a unique request ID
+              #     so that if you must retry your request, the server will know to ignore
+              #     the request if it has already been completed. The server guarantees that a
+              #     request doesn't result in creation of duplicate commitments for at least 60
+              #     minutes.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request
+              #     ID, the server can check if original operation with the same request ID
+              #     was received, and if so, will ignore the second request. This prevents
+              #     clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/vmware_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::VmwareEngine::V1::RevokeDnsBindPermissionRequest.new
+              #
+              #   # Call the revoke_dns_bind_permission method.
+              #   result = client.revoke_dns_bind_permission request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def revoke_dns_bind_permission request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VmwareEngine::V1::RevokeDnsBindPermissionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.revoke_dns_bind_permission.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::VmwareEngine::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.revoke_dns_bind_permission.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.revoke_dns_bind_permission.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @vmware_engine_stub.revoke_dns_bind_permission request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the VmwareEngine REST API.
               #
               # This class represents the configuration for VmwareEngine REST,
@@ -4392,9 +8251,9 @@ module Google
               #   end
               #
               # @!attribute [rw] endpoint
-              #   The hostname or hostname:port of the service endpoint.
-              #   Defaults to `"vmwareengine.googleapis.com"`.
-              #   @return [::String]
+              #   A custom service endpoint, as a hostname or hostname:port. The default is
+              #   nil, indicating to use the default endpoint in the current universe domain.
+              #   @return [::String,nil]
               # @!attribute [rw] credentials
               #   Credentials to send with calls. You may provide any of the following types:
               #    *  (`String`) The path to a service account key file in JSON format
@@ -4431,13 +8290,20 @@ module Google
               # @!attribute [rw] quota_project
               #   A separate project against which to charge quota.
               #   @return [::String]
+              # @!attribute [rw] universe_domain
+              #   The universe domain within which to make requests. This determines the
+              #   default endpoint URL. The default value of nil uses the environment
+              #   universe (usually the default "googleapis.com" universe).
+              #   @return [::String,nil]
               #
               class Configuration
                 extend ::Gapic::Config
 
+                # @private
+                # The endpoint specific to the default "googleapis.com" universe. Deprecated.
                 DEFAULT_ENDPOINT = "vmwareengine.googleapis.com"
 
-                config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
+                config_attr :endpoint,      nil, ::String, nil
                 config_attr :credentials,   nil do |value|
                   allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                   allowed.any? { |klass| klass === value }
@@ -4449,6 +8315,7 @@ module Google
                 config_attr :metadata,      nil, ::Hash, nil
                 config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
                 config_attr :quota_project, nil, ::String, nil
+                config_attr :universe_domain, nil, ::String, nil
 
                 # @private
                 # Overrides for http bindings for the RPCs of this service
@@ -4550,6 +8417,46 @@ module Google
                   #
                   attr_reader :delete_cluster
                   ##
+                  # RPC-specific configuration for `list_nodes`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_nodes
+                  ##
+                  # RPC-specific configuration for `get_node`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_node
+                  ##
+                  # RPC-specific configuration for `list_external_addresses`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_external_addresses
+                  ##
+                  # RPC-specific configuration for `fetch_network_policy_external_addresses`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :fetch_network_policy_external_addresses
+                  ##
+                  # RPC-specific configuration for `get_external_address`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_external_address
+                  ##
+                  # RPC-specific configuration for `create_external_address`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_external_address
+                  ##
+                  # RPC-specific configuration for `update_external_address`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_external_address
+                  ##
+                  # RPC-specific configuration for `delete_external_address`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_external_address
+                  ##
                   # RPC-specific configuration for `list_subnets`
                   # @return [::Gapic::Config::Method]
                   #
@@ -4564,6 +8471,56 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :update_subnet
+                  ##
+                  # RPC-specific configuration for `list_external_access_rules`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_external_access_rules
+                  ##
+                  # RPC-specific configuration for `get_external_access_rule`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_external_access_rule
+                  ##
+                  # RPC-specific configuration for `create_external_access_rule`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_external_access_rule
+                  ##
+                  # RPC-specific configuration for `update_external_access_rule`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_external_access_rule
+                  ##
+                  # RPC-specific configuration for `delete_external_access_rule`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_external_access_rule
+                  ##
+                  # RPC-specific configuration for `list_logging_servers`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_logging_servers
+                  ##
+                  # RPC-specific configuration for `get_logging_server`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_logging_server
+                  ##
+                  # RPC-specific configuration for `create_logging_server`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_logging_server
+                  ##
+                  # RPC-specific configuration for `update_logging_server`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_logging_server
+                  ##
+                  # RPC-specific configuration for `delete_logging_server`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_logging_server
                   ##
                   # RPC-specific configuration for `list_node_types`
                   # @return [::Gapic::Config::Method]
@@ -4594,6 +8551,46 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :reset_vcenter_credentials
+                  ##
+                  # RPC-specific configuration for `get_dns_forwarding`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_dns_forwarding
+                  ##
+                  # RPC-specific configuration for `update_dns_forwarding`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_dns_forwarding
+                  ##
+                  # RPC-specific configuration for `get_network_peering`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_network_peering
+                  ##
+                  # RPC-specific configuration for `list_network_peerings`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_network_peerings
+                  ##
+                  # RPC-specific configuration for `create_network_peering`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_network_peering
+                  ##
+                  # RPC-specific configuration for `delete_network_peering`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_network_peering
+                  ##
+                  # RPC-specific configuration for `update_network_peering`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_network_peering
+                  ##
+                  # RPC-specific configuration for `list_peering_routes`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_peering_routes
                   ##
                   # RPC-specific configuration for `create_hcx_activation_key`
                   # @return [::Gapic::Config::Method]
@@ -4634,6 +8631,36 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :delete_network_policy
+                  ##
+                  # RPC-specific configuration for `list_management_dns_zone_bindings`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_management_dns_zone_bindings
+                  ##
+                  # RPC-specific configuration for `get_management_dns_zone_binding`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_management_dns_zone_binding
+                  ##
+                  # RPC-specific configuration for `create_management_dns_zone_binding`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_management_dns_zone_binding
+                  ##
+                  # RPC-specific configuration for `update_management_dns_zone_binding`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_management_dns_zone_binding
+                  ##
+                  # RPC-specific configuration for `delete_management_dns_zone_binding`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_management_dns_zone_binding
+                  ##
+                  # RPC-specific configuration for `repair_management_dns_zone_binding`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :repair_management_dns_zone_binding
                   ##
                   # RPC-specific configuration for `create_vmware_engine_network`
                   # @return [::Gapic::Config::Method]
@@ -4689,6 +8716,21 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :list_private_connection_peering_routes
+                  ##
+                  # RPC-specific configuration for `grant_dns_bind_permission`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :grant_dns_bind_permission
+                  ##
+                  # RPC-specific configuration for `get_dns_bind_permission`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_dns_bind_permission
+                  ##
+                  # RPC-specific configuration for `revoke_dns_bind_permission`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :revoke_dns_bind_permission
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -4714,12 +8756,48 @@ module Google
                     @update_cluster = ::Gapic::Config::Method.new update_cluster_config
                     delete_cluster_config = parent_rpcs.delete_cluster if parent_rpcs.respond_to? :delete_cluster
                     @delete_cluster = ::Gapic::Config::Method.new delete_cluster_config
+                    list_nodes_config = parent_rpcs.list_nodes if parent_rpcs.respond_to? :list_nodes
+                    @list_nodes = ::Gapic::Config::Method.new list_nodes_config
+                    get_node_config = parent_rpcs.get_node if parent_rpcs.respond_to? :get_node
+                    @get_node = ::Gapic::Config::Method.new get_node_config
+                    list_external_addresses_config = parent_rpcs.list_external_addresses if parent_rpcs.respond_to? :list_external_addresses
+                    @list_external_addresses = ::Gapic::Config::Method.new list_external_addresses_config
+                    fetch_network_policy_external_addresses_config = parent_rpcs.fetch_network_policy_external_addresses if parent_rpcs.respond_to? :fetch_network_policy_external_addresses
+                    @fetch_network_policy_external_addresses = ::Gapic::Config::Method.new fetch_network_policy_external_addresses_config
+                    get_external_address_config = parent_rpcs.get_external_address if parent_rpcs.respond_to? :get_external_address
+                    @get_external_address = ::Gapic::Config::Method.new get_external_address_config
+                    create_external_address_config = parent_rpcs.create_external_address if parent_rpcs.respond_to? :create_external_address
+                    @create_external_address = ::Gapic::Config::Method.new create_external_address_config
+                    update_external_address_config = parent_rpcs.update_external_address if parent_rpcs.respond_to? :update_external_address
+                    @update_external_address = ::Gapic::Config::Method.new update_external_address_config
+                    delete_external_address_config = parent_rpcs.delete_external_address if parent_rpcs.respond_to? :delete_external_address
+                    @delete_external_address = ::Gapic::Config::Method.new delete_external_address_config
                     list_subnets_config = parent_rpcs.list_subnets if parent_rpcs.respond_to? :list_subnets
                     @list_subnets = ::Gapic::Config::Method.new list_subnets_config
                     get_subnet_config = parent_rpcs.get_subnet if parent_rpcs.respond_to? :get_subnet
                     @get_subnet = ::Gapic::Config::Method.new get_subnet_config
                     update_subnet_config = parent_rpcs.update_subnet if parent_rpcs.respond_to? :update_subnet
                     @update_subnet = ::Gapic::Config::Method.new update_subnet_config
+                    list_external_access_rules_config = parent_rpcs.list_external_access_rules if parent_rpcs.respond_to? :list_external_access_rules
+                    @list_external_access_rules = ::Gapic::Config::Method.new list_external_access_rules_config
+                    get_external_access_rule_config = parent_rpcs.get_external_access_rule if parent_rpcs.respond_to? :get_external_access_rule
+                    @get_external_access_rule = ::Gapic::Config::Method.new get_external_access_rule_config
+                    create_external_access_rule_config = parent_rpcs.create_external_access_rule if parent_rpcs.respond_to? :create_external_access_rule
+                    @create_external_access_rule = ::Gapic::Config::Method.new create_external_access_rule_config
+                    update_external_access_rule_config = parent_rpcs.update_external_access_rule if parent_rpcs.respond_to? :update_external_access_rule
+                    @update_external_access_rule = ::Gapic::Config::Method.new update_external_access_rule_config
+                    delete_external_access_rule_config = parent_rpcs.delete_external_access_rule if parent_rpcs.respond_to? :delete_external_access_rule
+                    @delete_external_access_rule = ::Gapic::Config::Method.new delete_external_access_rule_config
+                    list_logging_servers_config = parent_rpcs.list_logging_servers if parent_rpcs.respond_to? :list_logging_servers
+                    @list_logging_servers = ::Gapic::Config::Method.new list_logging_servers_config
+                    get_logging_server_config = parent_rpcs.get_logging_server if parent_rpcs.respond_to? :get_logging_server
+                    @get_logging_server = ::Gapic::Config::Method.new get_logging_server_config
+                    create_logging_server_config = parent_rpcs.create_logging_server if parent_rpcs.respond_to? :create_logging_server
+                    @create_logging_server = ::Gapic::Config::Method.new create_logging_server_config
+                    update_logging_server_config = parent_rpcs.update_logging_server if parent_rpcs.respond_to? :update_logging_server
+                    @update_logging_server = ::Gapic::Config::Method.new update_logging_server_config
+                    delete_logging_server_config = parent_rpcs.delete_logging_server if parent_rpcs.respond_to? :delete_logging_server
+                    @delete_logging_server = ::Gapic::Config::Method.new delete_logging_server_config
                     list_node_types_config = parent_rpcs.list_node_types if parent_rpcs.respond_to? :list_node_types
                     @list_node_types = ::Gapic::Config::Method.new list_node_types_config
                     get_node_type_config = parent_rpcs.get_node_type if parent_rpcs.respond_to? :get_node_type
@@ -4732,6 +8810,22 @@ module Google
                     @reset_nsx_credentials = ::Gapic::Config::Method.new reset_nsx_credentials_config
                     reset_vcenter_credentials_config = parent_rpcs.reset_vcenter_credentials if parent_rpcs.respond_to? :reset_vcenter_credentials
                     @reset_vcenter_credentials = ::Gapic::Config::Method.new reset_vcenter_credentials_config
+                    get_dns_forwarding_config = parent_rpcs.get_dns_forwarding if parent_rpcs.respond_to? :get_dns_forwarding
+                    @get_dns_forwarding = ::Gapic::Config::Method.new get_dns_forwarding_config
+                    update_dns_forwarding_config = parent_rpcs.update_dns_forwarding if parent_rpcs.respond_to? :update_dns_forwarding
+                    @update_dns_forwarding = ::Gapic::Config::Method.new update_dns_forwarding_config
+                    get_network_peering_config = parent_rpcs.get_network_peering if parent_rpcs.respond_to? :get_network_peering
+                    @get_network_peering = ::Gapic::Config::Method.new get_network_peering_config
+                    list_network_peerings_config = parent_rpcs.list_network_peerings if parent_rpcs.respond_to? :list_network_peerings
+                    @list_network_peerings = ::Gapic::Config::Method.new list_network_peerings_config
+                    create_network_peering_config = parent_rpcs.create_network_peering if parent_rpcs.respond_to? :create_network_peering
+                    @create_network_peering = ::Gapic::Config::Method.new create_network_peering_config
+                    delete_network_peering_config = parent_rpcs.delete_network_peering if parent_rpcs.respond_to? :delete_network_peering
+                    @delete_network_peering = ::Gapic::Config::Method.new delete_network_peering_config
+                    update_network_peering_config = parent_rpcs.update_network_peering if parent_rpcs.respond_to? :update_network_peering
+                    @update_network_peering = ::Gapic::Config::Method.new update_network_peering_config
+                    list_peering_routes_config = parent_rpcs.list_peering_routes if parent_rpcs.respond_to? :list_peering_routes
+                    @list_peering_routes = ::Gapic::Config::Method.new list_peering_routes_config
                     create_hcx_activation_key_config = parent_rpcs.create_hcx_activation_key if parent_rpcs.respond_to? :create_hcx_activation_key
                     @create_hcx_activation_key = ::Gapic::Config::Method.new create_hcx_activation_key_config
                     list_hcx_activation_keys_config = parent_rpcs.list_hcx_activation_keys if parent_rpcs.respond_to? :list_hcx_activation_keys
@@ -4748,6 +8842,18 @@ module Google
                     @update_network_policy = ::Gapic::Config::Method.new update_network_policy_config
                     delete_network_policy_config = parent_rpcs.delete_network_policy if parent_rpcs.respond_to? :delete_network_policy
                     @delete_network_policy = ::Gapic::Config::Method.new delete_network_policy_config
+                    list_management_dns_zone_bindings_config = parent_rpcs.list_management_dns_zone_bindings if parent_rpcs.respond_to? :list_management_dns_zone_bindings
+                    @list_management_dns_zone_bindings = ::Gapic::Config::Method.new list_management_dns_zone_bindings_config
+                    get_management_dns_zone_binding_config = parent_rpcs.get_management_dns_zone_binding if parent_rpcs.respond_to? :get_management_dns_zone_binding
+                    @get_management_dns_zone_binding = ::Gapic::Config::Method.new get_management_dns_zone_binding_config
+                    create_management_dns_zone_binding_config = parent_rpcs.create_management_dns_zone_binding if parent_rpcs.respond_to? :create_management_dns_zone_binding
+                    @create_management_dns_zone_binding = ::Gapic::Config::Method.new create_management_dns_zone_binding_config
+                    update_management_dns_zone_binding_config = parent_rpcs.update_management_dns_zone_binding if parent_rpcs.respond_to? :update_management_dns_zone_binding
+                    @update_management_dns_zone_binding = ::Gapic::Config::Method.new update_management_dns_zone_binding_config
+                    delete_management_dns_zone_binding_config = parent_rpcs.delete_management_dns_zone_binding if parent_rpcs.respond_to? :delete_management_dns_zone_binding
+                    @delete_management_dns_zone_binding = ::Gapic::Config::Method.new delete_management_dns_zone_binding_config
+                    repair_management_dns_zone_binding_config = parent_rpcs.repair_management_dns_zone_binding if parent_rpcs.respond_to? :repair_management_dns_zone_binding
+                    @repair_management_dns_zone_binding = ::Gapic::Config::Method.new repair_management_dns_zone_binding_config
                     create_vmware_engine_network_config = parent_rpcs.create_vmware_engine_network if parent_rpcs.respond_to? :create_vmware_engine_network
                     @create_vmware_engine_network = ::Gapic::Config::Method.new create_vmware_engine_network_config
                     update_vmware_engine_network_config = parent_rpcs.update_vmware_engine_network if parent_rpcs.respond_to? :update_vmware_engine_network
@@ -4770,6 +8876,12 @@ module Google
                     @delete_private_connection = ::Gapic::Config::Method.new delete_private_connection_config
                     list_private_connection_peering_routes_config = parent_rpcs.list_private_connection_peering_routes if parent_rpcs.respond_to? :list_private_connection_peering_routes
                     @list_private_connection_peering_routes = ::Gapic::Config::Method.new list_private_connection_peering_routes_config
+                    grant_dns_bind_permission_config = parent_rpcs.grant_dns_bind_permission if parent_rpcs.respond_to? :grant_dns_bind_permission
+                    @grant_dns_bind_permission = ::Gapic::Config::Method.new grant_dns_bind_permission_config
+                    get_dns_bind_permission_config = parent_rpcs.get_dns_bind_permission if parent_rpcs.respond_to? :get_dns_bind_permission
+                    @get_dns_bind_permission = ::Gapic::Config::Method.new get_dns_bind_permission_config
+                    revoke_dns_bind_permission_config = parent_rpcs.revoke_dns_bind_permission if parent_rpcs.respond_to? :revoke_dns_bind_permission
+                    @revoke_dns_bind_permission = ::Gapic::Config::Method.new revoke_dns_bind_permission_config
 
                     yield self if block_given?
                   end

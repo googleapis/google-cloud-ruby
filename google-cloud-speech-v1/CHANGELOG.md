@@ -1,5 +1,23 @@
 # Release History
 
+### 0.16.1 (2024-01-12)
+
+#### Bug Fixes
+
+* Ensure endpoints are correct for mixin clients ([#24032](https://github.com/googleapis/google-cloud-ruby/issues/24032)) 
+
+### 0.16.0 (2024-01-11)
+
+#### Features
+
+* Support for universe_domain ([#23786](https://github.com/googleapis/google-cloud-ruby/issues/23786)) 
+
+### 0.15.0 (2023-11-06)
+
+#### Features
+
+* Support MP3, TranscriptNormalization and SpeakerLabels ([#23506](https://github.com/googleapis/google-cloud-ruby/issues/23506)) 
+
 ### 0.14.0 (2023-09-12)
 
 #### Features

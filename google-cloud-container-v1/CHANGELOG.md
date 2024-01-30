@@ -1,5 +1,45 @@
 # Release History
 
+### 0.34.0 (2024-01-25)
+
+#### Features
+
+* add fields desired_in_transit_encryption_config and in_transit_encryption_config ([#24458](https://github.com/googleapis/google-cloud-ruby/issues/24458)) 
+#### Documentation
+
+* Remove Not GA comments for GetOpenIDConfig and GetJSONWebKeys 
+
+### 0.33.1 (2024-01-12)
+
+#### Bug Fixes
+
+* Ensure endpoints are correct for mixin clients ([#24032](https://github.com/googleapis/google-cloud-ruby/issues/24032)) 
+
+### 0.33.0 (2024-01-11)
+
+#### Features
+
+* Support for universe_domain ([#23776](https://github.com/googleapis/google-cloud-ruby/issues/23776)) 
+
+### 0.32.0 (2023-12-04)
+
+#### Features
+
+* Added enable_relay field to AdvancedDatapathObservabilityConfig ([#23566](https://github.com/googleapis/google-cloud-ruby/issues/23566)) 
+* support queued_provisioning for NodePool 
+
+### 0.31.0 (2023-11-06)
+
+#### Features
+
+* Support cluster enterprise config ([#23503](https://github.com/googleapis/google-cloud-ruby/issues/23503)) 
+
+### 0.30.0 (2023-11-02)
+
+#### Features
+
+* Support ResourceManagerTags API ([#23488](https://github.com/googleapis/google-cloud-ruby/issues/23488)) 
+
 ### 0.29.0 (2023-09-12)
 
 #### Features

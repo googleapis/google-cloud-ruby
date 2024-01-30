@@ -32,6 +32,11 @@ module Google
       #     require "google/cloud/gke_multi_cloud/v1"
       #     client = ::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/gke_multi_cloud/v1"
+      #     client = ::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Rest::Client.new
+      #
       module V1
       end
     end

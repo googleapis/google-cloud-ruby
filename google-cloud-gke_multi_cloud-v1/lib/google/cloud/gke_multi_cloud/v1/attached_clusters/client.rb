@@ -32,6 +32,9 @@ module Google
           # infrastructure.
           #
           class Client
+            # @private
+            DEFAULT_ENDPOINT_TEMPLATE = "gkemulticloud.$UNIVERSE_DOMAIN$"
+
             include Paths
 
             # @private
@@ -94,6 +97,11 @@ module Google
                   initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
+                default_config.rpcs.generate_attached_cluster_agent_token.timeout = 60.0
+                default_config.rpcs.generate_attached_cluster_agent_token.retry_policy = {
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                }
+
                 default_config
               end
               yield @configure if block_given?
@@ -118,6 +126,15 @@ module Google
             def configure
               yield @config if block_given?
               @config
+            end
+
+            ##
+            # The effective universe domain
+            #
+            # @return [String]
+            #
+            def universe_domain
+              @attached_clusters_stub.universe_domain
             end
 
             ##
@@ -153,8 +170,9 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
-                                       !@config.endpoint.split(".").first.include?("-")
+              enable_self_signed_jwt = @config.endpoint.nil? ||
+                                       (@config.endpoint == Configuration::DEFAULT_ENDPOINT &&
+                                       !@config.endpoint.split(".").first.include?("-"))
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(::String) || credentials.is_a?(::Hash)
@@ -167,12 +185,15 @@ module Google
                 config.credentials = credentials
                 config.quota_project = @quota_project_id
                 config.endpoint = @config.endpoint
+                config.universe_domain = @config.universe_domain
               end
 
               @attached_clusters_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Stub,
-                credentials:  credentials,
-                endpoint:     @config.endpoint,
+                credentials: credentials,
+                endpoint: @config.endpoint,
+                endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
+                universe_domain: @config.universe_domain,
                 channel_args: @config.channel_args,
                 interceptors: @config.interceptors,
                 channel_pool_config: @config.channel_pool
@@ -340,12 +361,16 @@ module Google
             #     fields from
             #     {::Google::Cloud::GkeMultiCloud::V1::AttachedCluster AttachedCluster}:
             #
-            #      *   `description`.
             #      *   `annotations`.
-            #      *   `platform_version`.
+            #      *   `authorization.admin_groups`.
             #      *   `authorization.admin_users`.
+            #      *   `binary_authorization.evaluation_mode`.
+            #      *   `description`.
             #      *   `logging_config.component_config.enable_components`.
             #      *   `monitoring_config.managed_prometheus_config.enabled`.
+            #      *   `platform_version`.
+            #      *   `proxy_config.kubernetes_secret.name`.
+            #      *   `proxy_config.kubernetes_secret.namespace`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -441,7 +466,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload import_attached_cluster(parent: nil, validate_only: nil, fleet_membership: nil, platform_version: nil, distribution: nil)
+            # @overload import_attached_cluster(parent: nil, validate_only: nil, fleet_membership: nil, platform_version: nil, distribution: nil, proxy_config: nil)
             #   Pass arguments to `import_attached_cluster` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -469,6 +494,8 @@ module Google
             #     Required. The Kubernetes distribution of the underlying attached cluster.
             #
             #     Supported values: ["eks", "aks"].
+            #   @param proxy_config [::Google::Cloud::GkeMultiCloud::V1::AttachedProxyConfig, ::Hash]
+            #     Optional. Proxy configuration for outbound HTTP(S) traffic.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -980,7 +1007,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload generate_attached_cluster_install_manifest(parent: nil, attached_cluster_id: nil, platform_version: nil)
+            # @overload generate_attached_cluster_install_manifest(parent: nil, attached_cluster_id: nil, platform_version: nil, proxy_config: nil)
             #   Pass arguments to `generate_attached_cluster_install_manifest` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1016,6 +1043,8 @@ module Google
             #     You can list all supported versions on a given Google Cloud region by
             #     calling
             #     {::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client#get_attached_server_config GetAttachedServerConfig}.
+            #   @param proxy_config [::Google::Cloud::GkeMultiCloud::V1::AttachedProxyConfig, ::Hash]
+            #     Optional. Proxy configuration for outbound HTTP(S) traffic.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::GkeMultiCloud::V1::GenerateAttachedClusterInstallManifestResponse]
@@ -1082,6 +1111,107 @@ module Google
             end
 
             ##
+            # Generates an access token for a cluster agent.
+            #
+            # @overload generate_attached_cluster_agent_token(request, options = nil)
+            #   Pass arguments to `generate_attached_cluster_agent_token` via a request object, either of type
+            #   {::Google::Cloud::GkeMultiCloud::V1::GenerateAttachedClusterAgentTokenRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::GkeMultiCloud::V1::GenerateAttachedClusterAgentTokenRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload generate_attached_cluster_agent_token(attached_cluster: nil, subject_token: nil, subject_token_type: nil, version: nil, grant_type: nil, audience: nil, scope: nil, requested_token_type: nil, options: nil)
+            #   Pass arguments to `generate_attached_cluster_agent_token` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param attached_cluster [::String]
+            #     Required.
+            #   @param subject_token [::String]
+            #     Required.
+            #   @param subject_token_type [::String]
+            #     Required.
+            #   @param version [::String]
+            #     Required.
+            #   @param grant_type [::String]
+            #     Optional.
+            #   @param audience [::String]
+            #     Optional.
+            #   @param scope [::String]
+            #     Optional.
+            #   @param requested_token_type [::String]
+            #     Optional.
+            #   @param options [::String]
+            #     Optional.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::GkeMultiCloud::V1::GenerateAttachedClusterAgentTokenResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::GkeMultiCloud::V1::GenerateAttachedClusterAgentTokenResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/gke_multi_cloud/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::GkeMultiCloud::V1::GenerateAttachedClusterAgentTokenRequest.new
+            #
+            #   # Call the generate_attached_cluster_agent_token method.
+            #   result = client.generate_attached_cluster_agent_token request
+            #
+            #   # The returned object is of type Google::Cloud::GkeMultiCloud::V1::GenerateAttachedClusterAgentTokenResponse.
+            #   p result
+            #
+            def generate_attached_cluster_agent_token request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeMultiCloud::V1::GenerateAttachedClusterAgentTokenRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.generate_attached_cluster_agent_token.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::GkeMultiCloud::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.attached_cluster
+                header_params["attached_cluster"] = request.attached_cluster
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.generate_attached_cluster_agent_token.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.generate_attached_cluster_agent_token.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @attached_clusters_stub.call_rpc :generate_attached_cluster_agent_token, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the AttachedClusters API.
             #
             # This class represents the configuration for AttachedClusters,
@@ -1111,9 +1241,9 @@ module Google
             #   end
             #
             # @!attribute [rw] endpoint
-            #   The hostname or hostname:port of the service endpoint.
-            #   Defaults to `"gkemulticloud.googleapis.com"`.
-            #   @return [::String]
+            #   A custom service endpoint, as a hostname or hostname:port. The default is
+            #   nil, indicating to use the default endpoint in the current universe domain.
+            #   @return [::String,nil]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
             #    *  (`String`) The path to a service account key file in JSON format
@@ -1159,13 +1289,20 @@ module Google
             # @!attribute [rw] quota_project
             #   A separate project against which to charge quota.
             #   @return [::String]
+            # @!attribute [rw] universe_domain
+            #   The universe domain within which to make requests. This determines the
+            #   default endpoint URL. The default value of nil uses the environment
+            #   universe (usually the default "googleapis.com" universe).
+            #   @return [::String,nil]
             #
             class Configuration
               extend ::Gapic::Config
 
+              # @private
+              # The endpoint specific to the default "googleapis.com" universe. Deprecated.
               DEFAULT_ENDPOINT = "gkemulticloud.googleapis.com"
 
-              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
+              config_attr :endpoint,      nil, ::String, nil
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
@@ -1180,6 +1317,7 @@ module Google
               config_attr :metadata,      nil, ::Hash, nil
               config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
               config_attr :quota_project, nil, ::String, nil
+              config_attr :universe_domain, nil, ::String, nil
 
               # @private
               def initialize parent_config = nil
@@ -1266,6 +1404,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :generate_attached_cluster_install_manifest
+                ##
+                # RPC-specific configuration for `generate_attached_cluster_agent_token`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :generate_attached_cluster_agent_token
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -1285,6 +1428,8 @@ module Google
                   @get_attached_server_config = ::Gapic::Config::Method.new get_attached_server_config_config
                   generate_attached_cluster_install_manifest_config = parent_rpcs.generate_attached_cluster_install_manifest if parent_rpcs.respond_to? :generate_attached_cluster_install_manifest
                   @generate_attached_cluster_install_manifest = ::Gapic::Config::Method.new generate_attached_cluster_install_manifest_config
+                  generate_attached_cluster_agent_token_config = parent_rpcs.generate_attached_cluster_agent_token if parent_rpcs.respond_to? :generate_attached_cluster_agent_token
+                  @generate_attached_cluster_agent_token = ::Gapic::Config::Method.new generate_attached_cluster_agent_token_config
 
                   yield self if block_given?
                 end

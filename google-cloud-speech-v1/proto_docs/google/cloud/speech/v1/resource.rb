@@ -149,6 +149,36 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
+
+        # Transcription normalization configuration. Use transcription normalization
+        # to automatically replace parts of the transcript with phrases of your
+        # choosing. For StreamingRecognize, this normalization only applies to stable
+        # partial transcripts (stability > 0.8) and final transcripts.
+        # @!attribute [rw] entries
+        #   @return [::Array<::Google::Cloud::Speech::V1::TranscriptNormalization::Entry>]
+        #     A list of replacement entries. We will perform replacement with one entry
+        #     at a time. For example, the second entry in ["cat" => "dog", "mountain cat"
+        #     => "mountain dog"] will never be applied because we will always process the
+        #     first entry before it. At most 100 entries.
+        class TranscriptNormalization
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # A single replacement configuration.
+          # @!attribute [rw] search
+          #   @return [::String]
+          #     What to replace. Max length is 100 characters.
+          # @!attribute [rw] replace
+          #   @return [::String]
+          #     What to replace with. Max length is 100 characters.
+          # @!attribute [rw] case_sensitive
+          #   @return [::Boolean]
+          #     Whether the search is case sensitive.
+          class Entry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
       end
     end
   end

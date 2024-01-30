@@ -46,7 +46,11 @@ module Google
           #     Required. The ID to use for the database, which will become the final
           #     component of the database's resource name.
           #
-          #     The value must be set to "(default)".
+          #     This value should be 4-63 characters. Valid characters are /[a-z][0-9]-/
+          #     with first character a letter and the last a letter or a number. Must not
+          #     be UUID-like /[0-9a-f]\\{8}(-[0-9a-f]\\{4})\\{3}-[0-9a-f]\\{12}/.
+          #
+          #     "(default)" database id is also valid.
           class CreateDatabaseRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -62,6 +66,17 @@ module Google
           # @!attribute [rw] databases
           #   @return [::Array<::Google::Cloud::Firestore::Admin::V1::Database>]
           #     The databases in the project.
+          # @!attribute [rw] unreachable
+          #   @return [::Array<::String>]
+          #     In the event that data about individual databases cannot be listed they
+          #     will be recorded here.
+          #
+          #     An example entry might be: projects/some_project/locations/some_location
+          #     This can happen if the Cloud Region that the Database resides in is
+          #     currently unavailable.  In this case we can't fetch all the details about
+          #     the database. You may be able to get a more detailed error message
+          #     (or possibly fetch the resource) by sending a 'Get' request for the
+          #     resource or a 'List' request for the specific location.
           class ListDatabasesResponse
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -93,6 +108,28 @@ module Google
 
           # Metadata related to the update database operation.
           class UpdateDatabaseMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The request for
+          # {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#delete_database FirestoreAdmin.DeleteDatabase}.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. A name of the form
+          #     `projects/{project_id}/databases/{database_id}`
+          # @!attribute [rw] etag
+          #   @return [::String]
+          #     The current etag of the Database.
+          #     If an etag is provided and does not match the current etag of the database,
+          #     deletion will be blocked and a FAILED_PRECONDITION error will be returned.
+          class DeleteDatabaseRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Metadata related to the delete database operation.
+          class DeleteDatabaseMetadata
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -254,6 +291,23 @@ module Google
           #     guidelines: https://cloud.google.com/storage/docs/naming.
           #     If the URI is a bucket (without a namespace path), a prefix will be
           #     generated based on the start time.
+          # @!attribute [rw] namespace_ids
+          #   @return [::Array<::String>]
+          #     An empty list represents all namespaces. This is the preferred
+          #     usage for databases that don't use namespaces.
+          #
+          #     An empty string element represents the default namespace. This should be
+          #     used if the database has data in non-default namespaces, but doesn't want
+          #     to include them. Each namespace in this list must be unique.
+          # @!attribute [rw] snapshot_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The timestamp that corresponds to the version of the database to be
+          #     exported. The timestamp must be in the past, rounded to the minute and not
+          #     older than
+          #     {::Google::Cloud::Firestore::Admin::V1::Database#earliest_version_time earliestVersionTime}.
+          #     If specified, then the exported documents will represent a consistent view
+          #     of the database at the provided time. Otherwise, there are no guarantees
+          #     about the consistency of the exported documents.
           class ExportDocumentsRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -276,6 +330,14 @@ module Google
           #     an export that has completed successfully.
           #     See:
           #     {::Google::Cloud::Firestore::Admin::V1::ExportDocumentsResponse#output_uri_prefix google.firestore.admin.v1.ExportDocumentsResponse.output_uri_prefix}.
+          # @!attribute [rw] namespace_ids
+          #   @return [::Array<::String>]
+          #     An empty list represents all namespaces. This is the preferred
+          #     usage for databases that don't use namespaces.
+          #
+          #     An empty string element represents the default namespace. This should be
+          #     used if the database has data in non-default namespaces, but doesn't want
+          #     to include them. Each namespace in this list must be unique.
           class ImportDocumentsRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

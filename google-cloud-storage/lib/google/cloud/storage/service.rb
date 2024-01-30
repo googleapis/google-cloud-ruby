@@ -36,6 +36,11 @@ module Google
         # @private
         attr_accessor :credentials
 
+        # @private
+        def universe_domain
+          service.universe_domain
+        end
+
         ##
         # Creates a new Service instance.
         # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
@@ -43,7 +48,7 @@ module Google
                        timeout: nil, open_timeout: nil, read_timeout: nil,
                        send_timeout: nil, host: nil, quota_project: nil,
                        max_elapsed_time: nil, base_interval: nil, max_interval: nil,
-                       multiplier: nil, upload_chunk_size: nil
+                       multiplier: nil, upload_chunk_size: nil, universe_domain: nil
           @project = project
           @credentials = credentials
           @service = API::StorageService.new
@@ -68,6 +73,13 @@ module Google
           @service.request_options.upload_chunk_size = upload_chunk_size if upload_chunk_size
           @service.authorization = @credentials.client if @credentials
           @service.root_url = host if host
+          @service.universe_domain = universe_domain
+          begin
+            @service.verify_universe_domain!
+          rescue Google::Apis::UniverseDomainError => e
+            # TODO: Create a Google::Cloud::Error subclass for this.
+            raise Google::Cloud::Error, e.message
+          end
         end
         # rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
@@ -112,14 +124,16 @@ module Google
         # Creates a new bucket.
         # Returns Google::Apis::StorageV1::Bucket.
         def insert_bucket bucket_gapi, acl: nil, default_acl: nil,
-                          user_project: nil, options: {}
+                          user_project: nil, enable_object_retention: nil,
+                          options: {}
           execute do
             service.insert_bucket \
               @project, bucket_gapi,
               predefined_acl: acl,
               predefined_default_object_acl: default_acl,
               user_project: user_project(user_project),
-              options: options
+              options: options,
+              enable_object_retention: enable_object_retention
           end
         end
 
@@ -349,6 +363,7 @@ module Google
         # Retrieves a list of files matching the criteria.
         def list_files bucket_name, delimiter: nil, max: nil, token: nil,
                        prefix: nil, versions: nil, user_project: nil,
+                       match_glob: nil,
                        options: {}
           execute do
             service.list_objects \
@@ -356,6 +371,7 @@ module Google
                            page_token: token, prefix: prefix,
                            versions: versions,
                            user_project: user_project(user_project),
+                           match_glob: match_glob,
                            options: options
           end
         end
@@ -580,6 +596,7 @@ module Google
                        if_metageneration_not_match: nil,
                        predefined_acl: nil,
                        user_project: nil,
+                       override_unlocked_retention: nil,
                        options: {}
           file_gapi ||= Google::Apis::StorageV1::Object.new
 
@@ -599,6 +616,7 @@ module Google
                                  if_metageneration_not_match: if_metageneration_not_match,
                                  predefined_acl: predefined_acl,
                                  user_project: user_project(user_project),
+                                 override_unlocked_retention: override_unlocked_retention,
                                  options: options
           end
         end

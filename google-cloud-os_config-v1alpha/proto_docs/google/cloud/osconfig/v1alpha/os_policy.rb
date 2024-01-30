@@ -570,6 +570,7 @@ module Google
           # group within the OS policy is selected based on the `OSFilter` specified
           # within the resource group.
           # @!attribute [rw] os_filter
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::Google::Cloud::OsConfig::V1alpha::OSPolicy::OSFilter]
           #     Deprecated. Use the `inventory_filters` field instead.
           #     Used to specify the OS filter for a resource group

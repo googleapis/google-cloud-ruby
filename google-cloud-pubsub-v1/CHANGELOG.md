@@ -1,5 +1,46 @@
 # Release History
 
+### 0.21.0 (2024-01-25)
+
+#### Features
+
+* add ingestion_data_source_settings field to Topic 
+* add state field to Topic 
+* Added enforce_in_transit flag in the message storage policy ([#24470](https://github.com/googleapis/google-cloud-ruby/issues/24470)) 
+
+### 0.20.2 (2024-01-19)
+
+#### Bug Fixes
+
+* Fix universe_domain and endpoint compatibility in deprecated embedded IAM client ([#24446](https://github.com/googleapis/google-cloud-ruby/issues/24446)) 
+
+### 0.20.1 (2024-01-12)
+
+#### Bug Fixes
+
+* Ensure endpoints are correct for mixin clients ([#24032](https://github.com/googleapis/google-cloud-ruby/issues/24032)) 
+
+### 0.20.0 (2024-01-11)
+
+#### Features
+
+* Support for universe_domain ([#23783](https://github.com/googleapis/google-cloud-ruby/issues/23783)) 
+#### Bug Fixes
+
+* Subscriber and publisher configs honor the base default configs from the high-level pubsub client ([#23796](https://github.com/googleapis/google-cloud-ruby/issues/23796)) 
+
+### 0.19.0 (2023-12-08)
+
+#### Features
+
+* Added use_table_schema field to BigQueryConfig ([#23582](https://github.com/googleapis/google-cloud-ruby/issues/23582)) 
+
+### 0.18.1 (2023-10-23)
+
+#### Documentation
+
+* Update some reference docs ([#23444](https://github.com/googleapis/google-cloud-ruby/issues/23444)) 
+
 ### 0.18.0 (2023-09-12)
 
 #### Features

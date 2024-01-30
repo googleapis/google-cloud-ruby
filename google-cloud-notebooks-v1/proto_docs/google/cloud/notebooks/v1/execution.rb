@@ -23,6 +23,7 @@ module Google
       module V1
         # The description a notebook execution workload.
         # @!attribute [rw] scale_tier
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::Notebooks::V1::ExecutionTemplate::ScaleTier]
         #     Required. Scale tier of the hardware used for notebook execution.
         #     DEPRECATED Will be discontinued. As right now only CUSTOM is supported.

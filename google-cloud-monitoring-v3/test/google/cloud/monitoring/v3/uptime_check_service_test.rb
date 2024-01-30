@@ -45,6 +45,14 @@ class ::Google::Cloud::Monitoring::V3::UptimeCheckService::ClientTest < Minitest
 
       @response
     end
+
+    def endpoint
+      "endpoint.example.com"
+    end
+
+    def universe_domain
+      "example.com"
+    end
   end
 
   def test_list_uptime_check_configs
@@ -421,7 +429,8 @@ class ::Google::Cloud::Monitoring::V3::UptimeCheckService::ClientTest < Minitest
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
     client = block_config = config = nil
-    Gapic::ServiceStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil, nil
+    Gapic::ServiceStub.stub :new, dummy_stub do
       client = ::Google::Cloud::Monitoring::V3::UptimeCheckService::Client.new do |config|
         config.credentials = grpc_channel
       end

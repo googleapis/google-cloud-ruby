@@ -1,5 +1,23 @@
 # Release History
 
+### 0.12.1 (2024-01-12)
+
+#### Bug Fixes
+
+* Ensure endpoints are correct for mixin clients ([#24032](https://github.com/googleapis/google-cloud-ruby/issues/24032)) 
+
+### 0.12.0 (2024-01-11)
+
+#### Features
+
+* Support for universe_domain ([#23787](https://github.com/googleapis/google-cloud-ruby/issues/23787)) 
+
+### 0.11.1 (2024-01-09)
+
+#### Bug Fixes
+
+* Fixed HTTP binding for long audio synthesis when calling via REST ([#23723](https://github.com/googleapis/google-cloud-ruby/issues/23723)) 
+
 ### 0.11.0 (2023-09-12)
 
 #### Features

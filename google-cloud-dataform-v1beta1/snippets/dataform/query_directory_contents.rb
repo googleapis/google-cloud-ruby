@@ -22,9 +22,14 @@ require "google/cloud/dataform/v1beta1"
 ##
 # Snippet for the query_directory_contents call in the Dataform service
 #
+# This snippet has been automatically generated and should be regarded as a code
+# template only. It will require modifications to work:
+# - It may require correct/in-range values for request initialization.
+# - It may require specifying regional endpoints when creating the service
+# client as shown in https://cloud.google.com/ruby/docs/reference.
+#
 # This is an auto-generated example demonstrating basic usage of
 # Google::Cloud::Dataform::V1beta1::Dataform::Client#query_directory_contents.
-# It may require modification in order to execute successfully.
 #
 def query_directory_contents
   # Create a client object. The client can be reused for multiple calls.
@@ -39,7 +44,7 @@ def query_directory_contents
   # The returned object is of type Gapic::PagedEnumerable. You can iterate
   # over elements, and API calls will be issued to fetch pages as needed.
   result.each do |item|
-    # Each element is of type ::Google::Cloud::Dataform::V1beta1::QueryDirectoryContentsResponse::DirectoryEntry.
+    # Each element is of type ::Google::Cloud::Dataform::V1beta1::DirectoryEntry.
     p item
   end
 end

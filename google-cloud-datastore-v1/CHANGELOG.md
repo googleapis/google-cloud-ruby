@@ -1,5 +1,31 @@
 # Release History
 
+### 0.16.2 (2024-01-25)
+
+#### Bug Fixes
+
+* BREAKING CHANGE: Removed unsupported query mode argument 
+* BREAKING CHANGE: Removed unsupported query stats field from query responses 
+
+### 0.16.1 (2024-01-12)
+
+#### Bug Fixes
+
+* Ensure endpoints are correct for mixin clients ([#24032](https://github.com/googleapis/google-cloud-ruby/issues/24032)) 
+
+### 0.16.0 (2024-01-11)
+
+#### Features
+
+* Support for universe_domain ([#23778](https://github.com/googleapis/google-cloud-ruby/issues/23778)) 
+
+### 0.15.0 (2024-01-09)
+
+#### Features
+
+* Support query modes for run_query and run_aggregation_query RPCs 
+* Support stats returned from run_query and run_aggregation_query RPCs 
+
 ### 0.14.0 (2023-09-12)
 
 #### Features

@@ -374,6 +374,7 @@ module Google
         # @!attribute [rw] network_config
         #   @return [::Google::Cloud::AlloyDB::V1alpha::Cluster::NetworkConfig]
         # @!attribute [rw] network
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Required. The resource link for the VPC network in which cluster resources
         #     are created and from which they are accessible via Private IP. The network
@@ -409,6 +410,7 @@ module Google
         #     For more information on the defaults, consult the
         #     documentation for the message type.
         # @!attribute [rw] ssl_config
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::AlloyDB::V1alpha::SslConfig]
         #     SSL configuration for this AlloyDB cluster.
         # @!attribute [rw] encryption_config
@@ -433,9 +435,16 @@ module Google
         # @!attribute [r] primary_config
         #   @return [::Google::Cloud::AlloyDB::V1alpha::Cluster::PrimaryConfig]
         #     Output only. Cross Region replication config specific to PRIMARY cluster.
-        # @!attribute [rw] satisfies_pzs
+        # @!attribute [r] satisfies_pzi
         #   @return [::Boolean]
-        #     Reserved for future use.
+        #     Output only. Reserved for future use.
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
+        # @!attribute [rw] psc_config
+        #   @return [::Google::Cloud::AlloyDB::V1alpha::Cluster::PscConfig]
+        #     Optional. The configuration for Private Service Connect (PSC) for the
+        #     cluster.
         class Cluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -443,7 +452,7 @@ module Google
           # Metadata related to network configuration.
           # @!attribute [rw] network
           #   @return [::String]
-          #     Required. The resource link for the VPC network in which cluster
+          #     Optional. The resource link for the VPC network in which cluster
           #     resources are created and from which they are accessible via Private IP.
           #     The network must belong to the same project as the cluster. It is
           #     specified in the form:
@@ -456,8 +465,8 @@ module Google
           #     instance IPs for this cluster will be created in the allocated range. The
           #     range name must comply with RFC 1035. Specifically, the name must be 1-63
           #     characters long and match the regular expression
-          #     [a-z]([-a-z0-9]*[a-z0-9])?.
-          #     Field name is intended to be consistent with CloudSQL.
+          #     `[a-z]([-a-z0-9]*[a-z0-9])?`.
+          #     Field name is intended to be consistent with Cloud SQL.
           class NetworkConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -482,6 +491,16 @@ module Google
           #     Output only. Names of the clusters that are replicating from this
           #     cluster.
           class PrimaryConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # PscConfig contains PSC related configuration at a cluster level.
+          # @!attribute [rw] psc_enabled
+          #   @return [::Boolean]
+          #     Optional. Create an instance that allows connections from Private Service
+          #     Connect endpoints to the instance.
+          class PscConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -646,7 +665,8 @@ module Google
         #     Configuration for query insights.
         # @!attribute [rw] read_pool_config
         #   @return [::Google::Cloud::AlloyDB::V1alpha::Instance::ReadPoolConfig]
-        #     Read pool specific config.
+        #     Read pool instance configuration.
+        #     This is required if the value of instanceType is READ_POOL.
         # @!attribute [r] ip_address
         #   @return [::String]
         #     Output only. The IP address for the Instance.
@@ -675,9 +695,19 @@ module Google
         # @!attribute [rw] client_connection_config
         #   @return [::Google::Cloud::AlloyDB::V1alpha::Instance::ClientConnectionConfig]
         #     Optional. Client connection specific configurations
-        # @!attribute [rw] satisfies_pzs
+        # @!attribute [r] satisfies_pzi
         #   @return [::Boolean]
-        #     Reserved for future use.
+        #     Output only. Reserved for future use.
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
+        # @!attribute [rw] psc_instance_config
+        #   @return [::Google::Cloud::AlloyDB::V1alpha::Instance::PscInstanceConfig]
+        #     Optional. The configuration for Private Service Connect (PSC) for the
+        #     instance.
+        # @!attribute [rw] network_config
+        #   @return [::Google::Cloud::AlloyDB::V1alpha::Instance::InstanceNetworkConfig]
+        #     Optional. Instance level network configuration.
         class Instance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -779,6 +809,85 @@ module Google
           class ClientConnectionConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Configuration for setting up a PSC interface. This information needs to be
+          # provided by the customer.
+          # PSC interfaces will be created and added to VMs via SLM (adding a network
+          # interface will require recreating the VM). For HA instances this will be
+          # done via LDTM.
+          # @!attribute [rw] consumer_endpoint_ips
+          #   @return [::Array<::String>]
+          #     A list of endpoints in the consumer VPC the interface might initiate
+          #     outbound connections to. This list has to be provided when the PSC
+          #     interface is created.
+          # @!attribute [rw] network_attachment
+          #   @return [::String]
+          #     The NetworkAttachment resource created in the consumer VPC to which the
+          #     PSC interface will be linked, in the form of:
+          #     "projects/$\\{CONSUMER_PROJECT}/regions/$\\{REGION}/networkAttachments/$\\{NETWORK_ATTACHMENT_NAME}".
+          #     NetworkAttachment has to be provided when the PSC interface is created.
+          class PscInterfaceConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # PscInstanceConfig contains PSC related configuration at an
+          # instance level.
+          # @!attribute [r] service_attachment_link
+          #   @return [::String]
+          #     Output only. The service attachment created when Private
+          #     Service Connect (PSC) is enabled for the instance.
+          #     The name of the resource will be in the format of
+          #     projects/<alloydb-tenant-project-number>/regions/<region-name>/serviceAttachments/<service-attachment-name>
+          # @!attribute [rw] allowed_consumer_projects
+          #   @return [::Array<::String>]
+          #     Optional. List of consumer projects that are allowed to create
+          #     PSC endpoints to service-attachments to this instance.
+          # @!attribute [rw] allowed_consumer_networks
+          #   @return [::Array<::String>]
+          #     Optional. List of consumer networks that are allowed to create
+          #     PSC endpoints to service-attachments to this instance.
+          # @!attribute [rw] psc_interface_configs
+          #   @return [::Array<::Google::Cloud::AlloyDB::V1alpha::Instance::PscInterfaceConfig>]
+          #     Optional. Configurations for setting up PSC interfaces attached to the
+          #     instance which are used for outbound connectivity. Only primary instances
+          #     can have PSC interface attached. All the VMs created for the primary
+          #     instance will share the same configurations. Currently we only support 0
+          #     or 1 PSC interface.
+          # @!attribute [rw] outgoing_service_attachment_links
+          #   @return [::Array<::String>]
+          #     Optional. List of service attachments that this instance has created
+          #     endpoints to connect with. Currently, only a single outgoing service
+          #     attachment is supported per instance.
+          # @!attribute [rw] psc_enabled
+          #   @return [::Boolean]
+          #     Optional. Whether PSC connectivity is enabled for this instance.
+          #     This is populated by referencing the value from the parent cluster.
+          class PscInstanceConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Metadata related to instance level network configuration.
+          # @!attribute [rw] authorized_external_networks
+          #   @return [::Array<::Google::Cloud::AlloyDB::V1alpha::Instance::InstanceNetworkConfig::AuthorizedNetwork>]
+          #     Optional. A list of external network authorized to access this instance.
+          # @!attribute [rw] enable_public_ip
+          #   @return [::Boolean]
+          #     Optional. Enabling public ip for the instance.
+          class InstanceNetworkConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # AuthorizedNetwork contains metadata for an authorized network.
+            # @!attribute [rw] cidr_range
+            #   @return [::String]
+            #     CIDR range for one authorzied network of the instance.
+            class AuthorizedNetwork
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
 
           # @!attribute [rw] key
@@ -894,7 +1003,13 @@ module Google
         #     Output only. The private network IP address for the Instance. This is the
         #     default IP for the instance and is always created (even if enable_public_ip
         #     is set). This is the connection endpoint for an end-user application.
+        # @!attribute [r] public_ip_address
+        #   @return [::String]
+        #     Output only. The public IP addresses for the Instance. This is available
+        #     ONLY when enable_public_ip is set. This is the connection endpoint for an
+        #     end-user application.
         # @!attribute [r] pem_certificate_chain
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Array<::String>]
         #     Output only. The pem-encoded chain that may be used to verify the X.509
         #     certificate. Expected to be in issuer-to-root order according to RFC 5246.
@@ -990,9 +1105,12 @@ module Google
         #     Output only. The QuantityBasedExpiry of the backup, specified by the
         #     backup's retention policy. Once the expiry quantity is over retention, the
         #     backup is eligible to be garbage collected.
-        # @!attribute [rw] satisfies_pzs
+        # @!attribute [r] satisfies_pzi
         #   @return [::Boolean]
-        #     Reserved for future use.
+        #     Output only. Reserved for future use.
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
         # @!attribute [r] database_version
         #   @return [::Google::Cloud::AlloyDB::V1alpha::DatabaseVersion]
         #     Output only. The database engine major version of the cluster this backup
@@ -1196,6 +1314,26 @@ module Google
             # Database user that can authenticate via IAM-Based authentication.
             ALLOYDB_IAM_USER = 2
           end
+        end
+
+        # Message describing Database object.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. Name of the resource in the form of
+        #     projects/\\{project}/locations/\\{location}/clusters/\\{cluster}/databases/\\{database}.
+        # @!attribute [rw] charset
+        #   @return [::String]
+        #     Optional. Charset for the database.
+        #     This field can contain any PostgreSQL supported charset name.
+        #     Example values include "UTF8", "SQL_ASCII", etc.
+        # @!attribute [rw] collation
+        #   @return [::String]
+        #     Optional. Collation for the database.
+        #     Name of the custom or native collation for postgres.
+        #     Example values include "C", "POSIX", etc
+        class Database
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # View on Instance. Pass this enum to rpcs that returns an Instance message to

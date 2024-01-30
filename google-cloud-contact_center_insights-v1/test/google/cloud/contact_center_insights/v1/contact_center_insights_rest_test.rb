@@ -60,6 +60,14 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
 
       @response
     end
+
+    def endpoint
+      "endpoint.example.com"
+    end
+
+    def universe_domain
+      "example.com"
+    end
   end
 
   def test_create_conversation
@@ -676,6 +684,63 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     end
   end
 
+  def test_bulk_delete_conversations
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    filter = "hello world"
+    max_delete_count = 42
+    force = true
+
+    bulk_delete_conversations_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::ServiceStub.stub :transcode_bulk_delete_conversations_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, bulk_delete_conversations_client_stub do
+        # Create client
+        client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.bulk_delete_conversations({ parent: parent, filter: filter, max_delete_count: max_delete_count, force: force }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.bulk_delete_conversations parent: parent, filter: filter, max_delete_count: max_delete_count, force: force do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.bulk_delete_conversations ::Google::Cloud::ContactCenterInsights::V1::BulkDeleteConversationsRequest.new(parent: parent, filter: filter, max_delete_count: max_delete_count, force: force) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.bulk_delete_conversations({ parent: parent, filter: filter, max_delete_count: max_delete_count, force: force }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.bulk_delete_conversations(::Google::Cloud::ContactCenterInsights::V1::BulkDeleteConversationsRequest.new(parent: parent, filter: filter, max_delete_count: max_delete_count, force: force), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, bulk_delete_conversations_client_stub.call_count
+      end
+    end
+  end
+
   def test_ingest_conversations
     # Create test objects.
     client_result = ::Google::Longrunning::Operation.new
@@ -688,6 +753,8 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     transcript_object_config = {}
     parent = "hello world"
     conversation_config = {}
+    redaction_config = {}
+    speech_config = {}
 
     ingest_conversations_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -703,27 +770,27 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
         end
 
         # Use hash object
-        client.ingest_conversations({ gcs_source: gcs_source, transcript_object_config: transcript_object_config, parent: parent, conversation_config: conversation_config }) do |_result, response|
+        client.ingest_conversations({ gcs_source: gcs_source, transcript_object_config: transcript_object_config, parent: parent, conversation_config: conversation_config, redaction_config: redaction_config, speech_config: speech_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.ingest_conversations gcs_source: gcs_source, transcript_object_config: transcript_object_config, parent: parent, conversation_config: conversation_config do |_result, response|
+        client.ingest_conversations gcs_source: gcs_source, transcript_object_config: transcript_object_config, parent: parent, conversation_config: conversation_config, redaction_config: redaction_config, speech_config: speech_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.ingest_conversations ::Google::Cloud::ContactCenterInsights::V1::IngestConversationsRequest.new(gcs_source: gcs_source, transcript_object_config: transcript_object_config, parent: parent, conversation_config: conversation_config) do |_result, response|
+        client.ingest_conversations ::Google::Cloud::ContactCenterInsights::V1::IngestConversationsRequest.new(gcs_source: gcs_source, transcript_object_config: transcript_object_config, parent: parent, conversation_config: conversation_config, redaction_config: redaction_config, speech_config: speech_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.ingest_conversations({ gcs_source: gcs_source, transcript_object_config: transcript_object_config, parent: parent, conversation_config: conversation_config }, call_options) do |_result, response|
+        client.ingest_conversations({ gcs_source: gcs_source, transcript_object_config: transcript_object_config, parent: parent, conversation_config: conversation_config, redaction_config: redaction_config, speech_config: speech_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.ingest_conversations(::Google::Cloud::ContactCenterInsights::V1::IngestConversationsRequest.new(gcs_source: gcs_source, transcript_object_config: transcript_object_config, parent: parent, conversation_config: conversation_config), call_options) do |_result, response|
+        client.ingest_conversations(::Google::Cloud::ContactCenterInsights::V1::IngestConversationsRequest.new(gcs_source: gcs_source, transcript_object_config: transcript_object_config, parent: parent, conversation_config: conversation_config, redaction_config: redaction_config, speech_config: speech_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2159,7 +2226,8 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     credentials_token = :dummy_value
 
     client = block_config = config = nil
-    Gapic::Rest::ClientStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil
+    Gapic::Rest::ClientStub.stub :new, dummy_stub do
       client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::Client.new do |config|
         config.credentials = credentials_token
       end

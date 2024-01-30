@@ -65,6 +65,9 @@ module Google
               # [MatchIntentResponse][google.cloud.dialogflow.cx.v3.MatchIntentResponse].
               # Otherwise, the behavior is undefined.
               rpc :FulfillIntent, ::Google::Cloud::Dialogflow::CX::V3::FulfillIntentRequest, ::Google::Cloud::Dialogflow::CX::V3::FulfillIntentResponse
+              # Updates the feedback received from the user for a single turn of the bot
+              # response.
+              rpc :SubmitAnswerFeedback, ::Google::Cloud::Dialogflow::CX::V3::SubmitAnswerFeedbackRequest, ::Google::Cloud::Dialogflow::CX::V3::AnswerFeedback
             end
 
             Stub = Service.rpc_stub_class

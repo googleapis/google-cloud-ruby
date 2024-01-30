@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-alloy_db-v1",
-    "version": "0.6.0",
+    "version": "0.8.1",
     "language": "RUBY",
     "apis": [
       {
@@ -14,7 +14,7 @@
     {
       "region_tag": "alloydb_v1_generated_AlloyDBAdmin_ListClusters_sync",
       "title": "Snippet for the list_clusters call in the AlloyDBAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#list_clusters. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#list_clusters.",
       "file": "alloy_db_admin/list_clusters.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "alloydb_v1_generated_AlloyDBAdmin_GetCluster_sync",
       "title": "Snippet for the get_cluster call in the AlloyDBAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#get_cluster. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#get_cluster.",
       "file": "alloy_db_admin/get_cluster.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "alloydb_v1_generated_AlloyDBAdmin_CreateCluster_sync",
       "title": "Snippet for the create_cluster call in the AlloyDBAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#create_cluster. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#create_cluster.",
       "file": "alloy_db_admin/create_cluster.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -134,7 +134,7 @@
     {
       "region_tag": "alloydb_v1_generated_AlloyDBAdmin_UpdateCluster_sync",
       "title": "Snippet for the update_cluster call in the AlloyDBAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#update_cluster. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#update_cluster.",
       "file": "alloy_db_admin/update_cluster.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -174,7 +174,7 @@
     {
       "region_tag": "alloydb_v1_generated_AlloyDBAdmin_DeleteCluster_sync",
       "title": "Snippet for the delete_cluster call in the AlloyDBAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#delete_cluster. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#delete_cluster.",
       "file": "alloy_db_admin/delete_cluster.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,7 +206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -214,7 +214,7 @@
     {
       "region_tag": "alloydb_v1_generated_AlloyDBAdmin_PromoteCluster_sync",
       "title": "Snippet for the promote_cluster call in the AlloyDBAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#promote_cluster. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#promote_cluster.",
       "file": "alloy_db_admin/promote_cluster.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,7 +246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -254,7 +254,7 @@
     {
       "region_tag": "alloydb_v1_generated_AlloyDBAdmin_RestoreCluster_sync",
       "title": "Snippet for the restore_cluster call in the AlloyDBAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#restore_cluster. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#restore_cluster.",
       "file": "alloy_db_admin/restore_cluster.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,7 +286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -294,7 +294,7 @@
     {
       "region_tag": "alloydb_v1_generated_AlloyDBAdmin_CreateSecondaryCluster_sync",
       "title": "Snippet for the create_secondary_cluster call in the AlloyDBAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#create_secondary_cluster. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#create_secondary_cluster.",
       "file": "alloy_db_admin/create_secondary_cluster.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,7 +326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -334,7 +334,7 @@
     {
       "region_tag": "alloydb_v1_generated_AlloyDBAdmin_ListInstances_sync",
       "title": "Snippet for the list_instances call in the AlloyDBAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#list_instances. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#list_instances.",
       "file": "alloy_db_admin/list_instances.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,7 +366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -374,7 +374,7 @@
     {
       "region_tag": "alloydb_v1_generated_AlloyDBAdmin_GetInstance_sync",
       "title": "Snippet for the get_instance call in the AlloyDBAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#get_instance. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#get_instance.",
       "file": "alloy_db_admin/get_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,7 +406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -414,7 +414,7 @@
     {
       "region_tag": "alloydb_v1_generated_AlloyDBAdmin_CreateInstance_sync",
       "title": "Snippet for the create_instance call in the AlloyDBAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#create_instance. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#create_instance.",
       "file": "alloy_db_admin/create_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,7 +446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -454,7 +454,7 @@
     {
       "region_tag": "alloydb_v1_generated_AlloyDBAdmin_CreateSecondaryInstance_sync",
       "title": "Snippet for the create_secondary_instance call in the AlloyDBAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#create_secondary_instance. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#create_secondary_instance.",
       "file": "alloy_db_admin/create_secondary_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,7 +486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -494,7 +494,7 @@
     {
       "region_tag": "alloydb_v1_generated_AlloyDBAdmin_BatchCreateInstances_sync",
       "title": "Snippet for the batch_create_instances call in the AlloyDBAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#batch_create_instances. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#batch_create_instances.",
       "file": "alloy_db_admin/batch_create_instances.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,7 +526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -534,7 +534,7 @@
     {
       "region_tag": "alloydb_v1_generated_AlloyDBAdmin_UpdateInstance_sync",
       "title": "Snippet for the update_instance call in the AlloyDBAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#update_instance. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#update_instance.",
       "file": "alloy_db_admin/update_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,7 +566,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -574,7 +574,7 @@
     {
       "region_tag": "alloydb_v1_generated_AlloyDBAdmin_DeleteInstance_sync",
       "title": "Snippet for the delete_instance call in the AlloyDBAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#delete_instance. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#delete_instance.",
       "file": "alloy_db_admin/delete_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,7 +606,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -614,7 +614,7 @@
     {
       "region_tag": "alloydb_v1_generated_AlloyDBAdmin_FailoverInstance_sync",
       "title": "Snippet for the failover_instance call in the AlloyDBAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#failover_instance. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#failover_instance.",
       "file": "alloy_db_admin/failover_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,7 +646,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -654,7 +654,7 @@
     {
       "region_tag": "alloydb_v1_generated_AlloyDBAdmin_InjectFault_sync",
       "title": "Snippet for the inject_fault call in the AlloyDBAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#inject_fault. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#inject_fault.",
       "file": "alloy_db_admin/inject_fault.rb",
       "language": "RUBY",
       "client_method": {
@@ -686,7 +686,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -694,7 +694,7 @@
     {
       "region_tag": "alloydb_v1_generated_AlloyDBAdmin_RestartInstance_sync",
       "title": "Snippet for the restart_instance call in the AlloyDBAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#restart_instance. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#restart_instance.",
       "file": "alloy_db_admin/restart_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -726,7 +726,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -734,7 +734,7 @@
     {
       "region_tag": "alloydb_v1_generated_AlloyDBAdmin_ListBackups_sync",
       "title": "Snippet for the list_backups call in the AlloyDBAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#list_backups. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#list_backups.",
       "file": "alloy_db_admin/list_backups.rb",
       "language": "RUBY",
       "client_method": {
@@ -766,7 +766,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -774,7 +774,7 @@
     {
       "region_tag": "alloydb_v1_generated_AlloyDBAdmin_GetBackup_sync",
       "title": "Snippet for the get_backup call in the AlloyDBAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#get_backup. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#get_backup.",
       "file": "alloy_db_admin/get_backup.rb",
       "language": "RUBY",
       "client_method": {
@@ -806,7 +806,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -814,7 +814,7 @@
     {
       "region_tag": "alloydb_v1_generated_AlloyDBAdmin_CreateBackup_sync",
       "title": "Snippet for the create_backup call in the AlloyDBAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#create_backup. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#create_backup.",
       "file": "alloy_db_admin/create_backup.rb",
       "language": "RUBY",
       "client_method": {
@@ -846,7 +846,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -854,7 +854,7 @@
     {
       "region_tag": "alloydb_v1_generated_AlloyDBAdmin_UpdateBackup_sync",
       "title": "Snippet for the update_backup call in the AlloyDBAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#update_backup. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#update_backup.",
       "file": "alloy_db_admin/update_backup.rb",
       "language": "RUBY",
       "client_method": {
@@ -886,7 +886,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -894,7 +894,7 @@
     {
       "region_tag": "alloydb_v1_generated_AlloyDBAdmin_DeleteBackup_sync",
       "title": "Snippet for the delete_backup call in the AlloyDBAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#delete_backup. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#delete_backup.",
       "file": "alloy_db_admin/delete_backup.rb",
       "language": "RUBY",
       "client_method": {
@@ -926,7 +926,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -934,7 +934,7 @@
     {
       "region_tag": "alloydb_v1_generated_AlloyDBAdmin_ListSupportedDatabaseFlags_sync",
       "title": "Snippet for the list_supported_database_flags call in the AlloyDBAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#list_supported_database_flags. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#list_supported_database_flags.",
       "file": "alloy_db_admin/list_supported_database_flags.rb",
       "language": "RUBY",
       "client_method": {
@@ -966,7 +966,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -974,7 +974,7 @@
     {
       "region_tag": "alloydb_v1_generated_AlloyDBAdmin_GenerateClientCertificate_sync",
       "title": "Snippet for the generate_client_certificate call in the AlloyDBAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#generate_client_certificate. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#generate_client_certificate.",
       "file": "alloy_db_admin/generate_client_certificate.rb",
       "language": "RUBY",
       "client_method": {
@@ -1006,7 +1006,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1014,7 +1014,7 @@
     {
       "region_tag": "alloydb_v1_generated_AlloyDBAdmin_GetConnectionInfo_sync",
       "title": "Snippet for the get_connection_info call in the AlloyDBAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#get_connection_info. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#get_connection_info.",
       "file": "alloy_db_admin/get_connection_info.rb",
       "language": "RUBY",
       "client_method": {
@@ -1046,7 +1046,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1054,7 +1054,7 @@
     {
       "region_tag": "alloydb_v1_generated_AlloyDBAdmin_ListUsers_sync",
       "title": "Snippet for the list_users call in the AlloyDBAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#list_users. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#list_users.",
       "file": "alloy_db_admin/list_users.rb",
       "language": "RUBY",
       "client_method": {
@@ -1086,7 +1086,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1094,7 +1094,7 @@
     {
       "region_tag": "alloydb_v1_generated_AlloyDBAdmin_GetUser_sync",
       "title": "Snippet for the get_user call in the AlloyDBAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#get_user. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#get_user.",
       "file": "alloy_db_admin/get_user.rb",
       "language": "RUBY",
       "client_method": {
@@ -1126,7 +1126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1134,7 +1134,7 @@
     {
       "region_tag": "alloydb_v1_generated_AlloyDBAdmin_CreateUser_sync",
       "title": "Snippet for the create_user call in the AlloyDBAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#create_user. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#create_user.",
       "file": "alloy_db_admin/create_user.rb",
       "language": "RUBY",
       "client_method": {
@@ -1166,7 +1166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1174,7 +1174,7 @@
     {
       "region_tag": "alloydb_v1_generated_AlloyDBAdmin_UpdateUser_sync",
       "title": "Snippet for the update_user call in the AlloyDBAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#update_user. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#update_user.",
       "file": "alloy_db_admin/update_user.rb",
       "language": "RUBY",
       "client_method": {
@@ -1206,7 +1206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1214,7 +1214,7 @@
     {
       "region_tag": "alloydb_v1_generated_AlloyDBAdmin_DeleteUser_sync",
       "title": "Snippet for the delete_user call in the AlloyDBAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#delete_user. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#delete_user.",
       "file": "alloy_db_admin/delete_user.rb",
       "language": "RUBY",
       "client_method": {
@@ -1246,7 +1246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]

@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/dialogflow/v2/agents"
 
 class ::Google::Cloud::Dialogflow::V2::Agents::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_agent_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Dialogflow::V2::Agents::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -40,7 +50,7 @@ class ::Google::Cloud::Dialogflow::V2::Agents::ClientPathsTest < Minitest::Test
 
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Dialogflow::V2::Agents::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -52,7 +62,7 @@ class ::Google::Cloud::Dialogflow::V2::Agents::ClientPathsTest < Minitest::Test
 
   def test_project_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Dialogflow::V2::Agents::Client.new do |config|
         config.credentials = grpc_channel
       end

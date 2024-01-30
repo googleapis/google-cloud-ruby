@@ -45,6 +45,14 @@ class ::Google::Cloud::Billing::V1::CloudBilling::ClientTest < Minitest::Test
 
       @response
     end
+
+    def endpoint
+      "endpoint.example.com"
+    end
+
+    def universe_domain
+      "example.com"
+    end
   end
 
   def test_get_billing_account
@@ -116,6 +124,7 @@ class ::Google::Cloud::Billing::V1::CloudBilling::ClientTest < Minitest::Test
     page_size = 42
     page_token = "hello world"
     filter = "hello world"
+    parent = "hello world"
 
     list_billing_accounts_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_billing_accounts, name
@@ -123,6 +132,7 @@ class ::Google::Cloud::Billing::V1::CloudBilling::ClientTest < Minitest::Test
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
       assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["parent"]
       refute_nil options
     end
 
@@ -133,35 +143,35 @@ class ::Google::Cloud::Billing::V1::CloudBilling::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.list_billing_accounts({ page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      client.list_billing_accounts({ page_size: page_size, page_token: page_token, filter: filter, parent: parent }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_billing_accounts page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      client.list_billing_accounts page_size: page_size, page_token: page_token, filter: filter, parent: parent do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_billing_accounts ::Google::Cloud::Billing::V1::ListBillingAccountsRequest.new(page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      client.list_billing_accounts ::Google::Cloud::Billing::V1::ListBillingAccountsRequest.new(page_size: page_size, page_token: page_token, filter: filter, parent: parent) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_billing_accounts({ page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      client.list_billing_accounts({ page_size: page_size, page_token: page_token, filter: filter, parent: parent }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_billing_accounts(::Google::Cloud::Billing::V1::ListBillingAccountsRequest.new(page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      client.list_billing_accounts(::Google::Cloud::Billing::V1::ListBillingAccountsRequest.new(page_size: page_size, page_token: page_token, filter: filter, parent: parent), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -243,11 +253,13 @@ class ::Google::Cloud::Billing::V1::CloudBilling::ClientTest < Minitest::Test
 
     # Create request parameters for a unary method.
     billing_account = {}
+    parent = "hello world"
 
     create_billing_account_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_billing_account, name
       assert_kind_of ::Google::Cloud::Billing::V1::CreateBillingAccountRequest, request
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Billing::V1::BillingAccount), request["billing_account"]
+      assert_equal "hello world", request["parent"]
       refute_nil options
     end
 
@@ -258,31 +270,31 @@ class ::Google::Cloud::Billing::V1::CloudBilling::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.create_billing_account({ billing_account: billing_account }) do |response, operation|
+      client.create_billing_account({ billing_account: billing_account, parent: parent }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_billing_account billing_account: billing_account do |response, operation|
+      client.create_billing_account billing_account: billing_account, parent: parent do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_billing_account ::Google::Cloud::Billing::V1::CreateBillingAccountRequest.new(billing_account: billing_account) do |response, operation|
+      client.create_billing_account ::Google::Cloud::Billing::V1::CreateBillingAccountRequest.new(billing_account: billing_account, parent: parent) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_billing_account({ billing_account: billing_account }, grpc_options) do |response, operation|
+      client.create_billing_account({ billing_account: billing_account, parent: parent }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_billing_account(::Google::Cloud::Billing::V1::CreateBillingAccountRequest.new(billing_account: billing_account), grpc_options) do |response, operation|
+      client.create_billing_account(::Google::Cloud::Billing::V1::CreateBillingAccountRequest.new(billing_account: billing_account, parent: parent), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -659,11 +671,72 @@ class ::Google::Cloud::Billing::V1::CloudBilling::ClientTest < Minitest::Test
     end
   end
 
+  def test_move_billing_account
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Billing::V1::BillingAccount.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    destination_parent = "hello world"
+
+    move_billing_account_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :move_billing_account, name
+      assert_kind_of ::Google::Cloud::Billing::V1::MoveBillingAccountRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["destination_parent"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, move_billing_account_client_stub do
+      # Create client
+      client = ::Google::Cloud::Billing::V1::CloudBilling::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.move_billing_account({ name: name, destination_parent: destination_parent }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.move_billing_account name: name, destination_parent: destination_parent do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.move_billing_account ::Google::Cloud::Billing::V1::MoveBillingAccountRequest.new(name: name, destination_parent: destination_parent) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.move_billing_account({ name: name, destination_parent: destination_parent }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.move_billing_account(::Google::Cloud::Billing::V1::MoveBillingAccountRequest.new(name: name, destination_parent: destination_parent), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, move_billing_account_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
     client = block_config = config = nil
-    Gapic::ServiceStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil, nil
+    Gapic::ServiceStub.stub :new, dummy_stub do
       client = ::Google::Cloud::Billing::V1::CloudBilling::Client.new do |config|
         config.credentials = grpc_channel
       end

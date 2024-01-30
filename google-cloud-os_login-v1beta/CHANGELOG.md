@@ -1,5 +1,29 @@
 # Release History
 
+### 0.14.1 (2024-01-12)
+
+#### Bug Fixes
+
+* Ensure endpoints are correct for mixin clients ([#24032](https://github.com/googleapis/google-cloud-ruby/issues/24032)) 
+
+### 0.14.0 (2024-01-11)
+
+#### Features
+
+* Support for universe_domain ([#23783](https://github.com/googleapis/google-cloud-ruby/issues/23783)) 
+
+### 0.13.0 (2024-01-09)
+
+#### Features
+
+* added field `ImportSshPublicKeyRequest.regions` ([#23767](https://github.com/googleapis/google-cloud-ruby/issues/23767)) 
+
+### 0.12.0 (2023-10-23)
+
+#### Features
+
+* location-based HTTP binding for SignSshPublicKey ([#23442](https://github.com/googleapis/google-cloud-ruby/issues/23442)) 
+
 ### 0.11.0 (2023-10-03)
 
 #### Features

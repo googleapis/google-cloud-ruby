@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-beyond_corp-app_gateways-v1",
-    "version": "0.3.0",
+    "version": "0.4.1",
     "language": "RUBY",
     "apis": [
       {
@@ -14,7 +14,7 @@
     {
       "region_tag": "beyondcorp_v1_generated_AppGatewaysService_ListAppGateways_sync",
       "title": "Snippet for the list_app_gateways call in the AppGatewaysService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BeyondCorp::AppGateways::V1::AppGatewaysService::Client#list_app_gateways. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BeyondCorp::AppGateways::V1::AppGatewaysService::Client#list_app_gateways.",
       "file": "app_gateways_service/list_app_gateways.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "beyondcorp_v1_generated_AppGatewaysService_GetAppGateway_sync",
       "title": "Snippet for the get_app_gateway call in the AppGatewaysService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BeyondCorp::AppGateways::V1::AppGatewaysService::Client#get_app_gateway. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BeyondCorp::AppGateways::V1::AppGatewaysService::Client#get_app_gateway.",
       "file": "app_gateways_service/get_app_gateway.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "beyondcorp_v1_generated_AppGatewaysService_CreateAppGateway_sync",
       "title": "Snippet for the create_app_gateway call in the AppGatewaysService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BeyondCorp::AppGateways::V1::AppGatewaysService::Client#create_app_gateway. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BeyondCorp::AppGateways::V1::AppGatewaysService::Client#create_app_gateway.",
       "file": "app_gateways_service/create_app_gateway.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -134,7 +134,7 @@
     {
       "region_tag": "beyondcorp_v1_generated_AppGatewaysService_DeleteAppGateway_sync",
       "title": "Snippet for the delete_app_gateway call in the AppGatewaysService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BeyondCorp::AppGateways::V1::AppGatewaysService::Client#delete_app_gateway. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BeyondCorp::AppGateways::V1::AppGatewaysService::Client#delete_app_gateway.",
       "file": "app_gateways_service/delete_app_gateway.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]

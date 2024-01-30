@@ -30,6 +30,9 @@ module Google
           # V1 APIs for Security Center service.
           #
           class Client
+            # @private
+            DEFAULT_ENDPOINT_TEMPLATE = "securitycenter.$UNIVERSE_DOMAIN$"
+
             include Paths
 
             # @private
@@ -201,6 +204,15 @@ module Google
             end
 
             ##
+            # The effective universe domain
+            #
+            # @return [String]
+            #
+            def universe_domain
+              @security_center_stub.universe_domain
+            end
+
+            ##
             # Create a new SecurityCenter client object.
             #
             # @example
@@ -233,8 +245,9 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
-                                       !@config.endpoint.split(".").first.include?("-")
+              enable_self_signed_jwt = @config.endpoint.nil? ||
+                                       (@config.endpoint == Configuration::DEFAULT_ENDPOINT &&
+                                       !@config.endpoint.split(".").first.include?("-"))
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(::String) || credentials.is_a?(::Hash)
@@ -247,12 +260,15 @@ module Google
                 config.credentials = credentials
                 config.quota_project = @quota_project_id
                 config.endpoint = @config.endpoint
+                config.universe_domain = @config.universe_domain
               end
 
               @security_center_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Stub,
-                credentials:  credentials,
-                endpoint:     @config.endpoint,
+                credentials: credentials,
+                endpoint: @config.endpoint,
+                endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
+                universe_domain: @config.universe_domain,
                 channel_args: @config.channel_args,
                 interceptors: @config.interceptors,
                 channel_pool_config: @config.channel_pool
@@ -3791,6 +3807,99 @@ module Google
             end
 
             ##
+            # Simulates a given SecurityHealthAnalyticsCustomModule and Resource.
+            #
+            # @overload simulate_security_health_analytics_custom_module(request, options = nil)
+            #   Pass arguments to `simulate_security_health_analytics_custom_module` via a request object, either of type
+            #   {::Google::Cloud::SecurityCenter::V1::SimulateSecurityHealthAnalyticsCustomModuleRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::SecurityCenter::V1::SimulateSecurityHealthAnalyticsCustomModuleRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload simulate_security_health_analytics_custom_module(parent: nil, custom_config: nil, resource: nil)
+            #   Pass arguments to `simulate_security_health_analytics_custom_module` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The relative resource name of the organization, project, or
+            #     folder. For more information about relative resource names, see [Relative
+            #     Resource
+            #     Name](https://cloud.google.com/apis/design/resource_names#relative_resource_name)
+            #     Example: `organizations/{organization_id}`
+            #   @param custom_config [::Google::Cloud::SecurityCenter::V1::CustomConfig, ::Hash]
+            #     Required. The custom configuration that you need to test.
+            #   @param resource [::Google::Cloud::SecurityCenter::V1::SimulateSecurityHealthAnalyticsCustomModuleRequest::SimulatedResource, ::Hash]
+            #     Required. Resource data to simulate custom module against.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::SecurityCenter::V1::SimulateSecurityHealthAnalyticsCustomModuleResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::SecurityCenter::V1::SimulateSecurityHealthAnalyticsCustomModuleResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/security_center/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecurityCenter::V1::SimulateSecurityHealthAnalyticsCustomModuleRequest.new
+            #
+            #   # Call the simulate_security_health_analytics_custom_module method.
+            #   result = client.simulate_security_health_analytics_custom_module request
+            #
+            #   # The returned object is of type Google::Cloud::SecurityCenter::V1::SimulateSecurityHealthAnalyticsCustomModuleResponse.
+            #   p result
+            #
+            def simulate_security_health_analytics_custom_module request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecurityCenter::V1::SimulateSecurityHealthAnalyticsCustomModuleRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.simulate_security_health_analytics_custom_module.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::SecurityCenter::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.simulate_security_health_analytics_custom_module.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.simulate_security_health_analytics_custom_module.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @security_center_stub.call_rpc :simulate_security_health_analytics_custom_module, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Updates external system. This is for a given finding.
             #
             # @overload update_external_system(request, options = nil)
@@ -4927,9 +5036,9 @@ module Google
             #   end
             #
             # @!attribute [rw] endpoint
-            #   The hostname or hostname:port of the service endpoint.
-            #   Defaults to `"securitycenter.googleapis.com"`.
-            #   @return [::String]
+            #   A custom service endpoint, as a hostname or hostname:port. The default is
+            #   nil, indicating to use the default endpoint in the current universe domain.
+            #   @return [::String,nil]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
             #    *  (`String`) The path to a service account key file in JSON format
@@ -4975,13 +5084,20 @@ module Google
             # @!attribute [rw] quota_project
             #   A separate project against which to charge quota.
             #   @return [::String]
+            # @!attribute [rw] universe_domain
+            #   The universe domain within which to make requests. This determines the
+            #   default endpoint URL. The default value of nil uses the environment
+            #   universe (usually the default "googleapis.com" universe).
+            #   @return [::String,nil]
             #
             class Configuration
               extend ::Gapic::Config
 
+              # @private
+              # The endpoint specific to the default "googleapis.com" universe. Deprecated.
               DEFAULT_ENDPOINT = "securitycenter.googleapis.com"
 
-              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
+              config_attr :endpoint,      nil, ::String, nil
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
@@ -4996,6 +5112,7 @@ module Google
               config_attr :metadata,      nil, ::Hash, nil
               config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
               config_attr :quota_project, nil, ::String, nil
+              config_attr :universe_domain, nil, ::String, nil
 
               # @private
               def initialize parent_config = nil
@@ -5203,6 +5320,11 @@ module Google
                 #
                 attr_reader :test_iam_permissions
                 ##
+                # RPC-specific configuration for `simulate_security_health_analytics_custom_module`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :simulate_security_health_analytics_custom_module
+                ##
                 # RPC-specific configuration for `update_external_system`
                 # @return [::Gapic::Config::Method]
                 #
@@ -5329,6 +5451,8 @@ module Google
                   @set_iam_policy = ::Gapic::Config::Method.new set_iam_policy_config
                   test_iam_permissions_config = parent_rpcs.test_iam_permissions if parent_rpcs.respond_to? :test_iam_permissions
                   @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
+                  simulate_security_health_analytics_custom_module_config = parent_rpcs.simulate_security_health_analytics_custom_module if parent_rpcs.respond_to? :simulate_security_health_analytics_custom_module
+                  @simulate_security_health_analytics_custom_module = ::Gapic::Config::Method.new simulate_security_health_analytics_custom_module_config
                   update_external_system_config = parent_rpcs.update_external_system if parent_rpcs.respond_to? :update_external_system
                   @update_external_system = ::Gapic::Config::Method.new update_external_system_config
                   update_finding_config = parent_rpcs.update_finding if parent_rpcs.respond_to? :update_finding

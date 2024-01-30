@@ -60,6 +60,14 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ClientTest < 
 
       @response
     end
+
+    def endpoint
+      "endpoint.example.com"
+    end
+
+    def universe_domain
+      "example.com"
+    end
   end
 
   def test_create_index
@@ -459,6 +467,8 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ClientTest < 
     name = "hello world"
     collection_ids = ["hello world"]
     output_uri_prefix = "hello world"
+    namespace_ids = ["hello world"]
+    snapshot_time = {}
 
     export_documents_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -474,27 +484,27 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ClientTest < 
         end
 
         # Use hash object
-        client.export_documents({ name: name, collection_ids: collection_ids, output_uri_prefix: output_uri_prefix }) do |_result, response|
+        client.export_documents({ name: name, collection_ids: collection_ids, output_uri_prefix: output_uri_prefix, namespace_ids: namespace_ids, snapshot_time: snapshot_time }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.export_documents name: name, collection_ids: collection_ids, output_uri_prefix: output_uri_prefix do |_result, response|
+        client.export_documents name: name, collection_ids: collection_ids, output_uri_prefix: output_uri_prefix, namespace_ids: namespace_ids, snapshot_time: snapshot_time do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.export_documents ::Google::Cloud::Firestore::Admin::V1::ExportDocumentsRequest.new(name: name, collection_ids: collection_ids, output_uri_prefix: output_uri_prefix) do |_result, response|
+        client.export_documents ::Google::Cloud::Firestore::Admin::V1::ExportDocumentsRequest.new(name: name, collection_ids: collection_ids, output_uri_prefix: output_uri_prefix, namespace_ids: namespace_ids, snapshot_time: snapshot_time) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.export_documents({ name: name, collection_ids: collection_ids, output_uri_prefix: output_uri_prefix }, call_options) do |_result, response|
+        client.export_documents({ name: name, collection_ids: collection_ids, output_uri_prefix: output_uri_prefix, namespace_ids: namespace_ids, snapshot_time: snapshot_time }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.export_documents(::Google::Cloud::Firestore::Admin::V1::ExportDocumentsRequest.new(name: name, collection_ids: collection_ids, output_uri_prefix: output_uri_prefix), call_options) do |_result, response|
+        client.export_documents(::Google::Cloud::Firestore::Admin::V1::ExportDocumentsRequest.new(name: name, collection_ids: collection_ids, output_uri_prefix: output_uri_prefix, namespace_ids: namespace_ids, snapshot_time: snapshot_time), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -515,6 +525,7 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ClientTest < 
     name = "hello world"
     collection_ids = ["hello world"]
     input_uri_prefix = "hello world"
+    namespace_ids = ["hello world"]
 
     import_documents_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -530,27 +541,27 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ClientTest < 
         end
 
         # Use hash object
-        client.import_documents({ name: name, collection_ids: collection_ids, input_uri_prefix: input_uri_prefix }) do |_result, response|
+        client.import_documents({ name: name, collection_ids: collection_ids, input_uri_prefix: input_uri_prefix, namespace_ids: namespace_ids }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.import_documents name: name, collection_ids: collection_ids, input_uri_prefix: input_uri_prefix do |_result, response|
+        client.import_documents name: name, collection_ids: collection_ids, input_uri_prefix: input_uri_prefix, namespace_ids: namespace_ids do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.import_documents ::Google::Cloud::Firestore::Admin::V1::ImportDocumentsRequest.new(name: name, collection_ids: collection_ids, input_uri_prefix: input_uri_prefix) do |_result, response|
+        client.import_documents ::Google::Cloud::Firestore::Admin::V1::ImportDocumentsRequest.new(name: name, collection_ids: collection_ids, input_uri_prefix: input_uri_prefix, namespace_ids: namespace_ids) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.import_documents({ name: name, collection_ids: collection_ids, input_uri_prefix: input_uri_prefix }, call_options) do |_result, response|
+        client.import_documents({ name: name, collection_ids: collection_ids, input_uri_prefix: input_uri_prefix, namespace_ids: namespace_ids }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.import_documents(::Google::Cloud::Firestore::Admin::V1::ImportDocumentsRequest.new(name: name, collection_ids: collection_ids, input_uri_prefix: input_uri_prefix), call_options) do |_result, response|
+        client.import_documents(::Google::Cloud::Firestore::Admin::V1::ImportDocumentsRequest.new(name: name, collection_ids: collection_ids, input_uri_prefix: input_uri_prefix, namespace_ids: namespace_ids), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -779,11 +790,67 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ClientTest < 
     end
   end
 
+  def test_delete_database
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    etag = "hello world"
+
+    delete_database_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ServiceStub.stub :transcode_delete_database_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_database_client_stub do
+        # Create client
+        client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_database({ name: name, etag: etag }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_database name: name, etag: etag do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_database ::Google::Cloud::Firestore::Admin::V1::DeleteDatabaseRequest.new(name: name, etag: etag) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_database({ name: name, etag: etag }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_database(::Google::Cloud::Firestore::Admin::V1::DeleteDatabaseRequest.new(name: name, etag: etag), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_database_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 
     client = block_config = config = nil
-    Gapic::Rest::ClientStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil
+    Gapic::Rest::ClientStub.stub :new, dummy_stub do
       client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
         config.credentials = credentials_token
       end

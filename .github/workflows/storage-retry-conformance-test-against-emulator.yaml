@@ -23,10 +23,10 @@ jobs:
           - 9000:9000
 
     steps:
-      - uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # v4
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '2.6'
+          ruby-version: '3.2'
       - run: ruby --version
       - run: bundle install
       - run: bundle exec rake conformance

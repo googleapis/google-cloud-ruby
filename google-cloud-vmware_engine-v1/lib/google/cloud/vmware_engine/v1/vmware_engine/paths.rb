@@ -46,6 +46,84 @@ module Google
             end
 
             ##
+            # Create a fully-qualified DnsBindPermission resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/dnsBindPermission`
+            #
+            # @param project [String]
+            # @param location [String]
+            #
+            # @return [::String]
+            def dns_bind_permission_path project:, location:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/dnsBindPermission"
+            end
+
+            ##
+            # Create a fully-qualified DnsForwarding resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/privateClouds/{private_cloud}/dnsForwarding`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param private_cloud [String]
+            #
+            # @return [::String]
+            def dns_forwarding_path project:, location:, private_cloud:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/privateClouds/#{private_cloud}/dnsForwarding"
+            end
+
+            ##
+            # Create a fully-qualified ExternalAccessRule resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/networkPolicies/{network_policy}/externalAccessRules/{external_access_rule}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param network_policy [String]
+            # @param external_access_rule [String]
+            #
+            # @return [::String]
+            def external_access_rule_path project:, location:, network_policy:, external_access_rule:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "network_policy cannot contain /" if network_policy.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/networkPolicies/#{network_policy}/externalAccessRules/#{external_access_rule}"
+            end
+
+            ##
+            # Create a fully-qualified ExternalAddress resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/privateClouds/{private_cloud}/externalAddresses/{external_address}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param private_cloud [String]
+            # @param external_address [String]
+            #
+            # @return [::String]
+            def external_address_path project:, location:, private_cloud:, external_address:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "private_cloud cannot contain /" if private_cloud.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/privateClouds/#{private_cloud}/externalAddresses/#{external_address}"
+            end
+
+            ##
             # Create a fully-qualified HcxActivationKey resource string.
             #
             # The resource will be in the following format:
@@ -84,6 +162,48 @@ module Google
             end
 
             ##
+            # Create a fully-qualified LoggingServer resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/privateClouds/{private_cloud}/loggingServers/{logging_server}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param private_cloud [String]
+            # @param logging_server [String]
+            #
+            # @return [::String]
+            def logging_server_path project:, location:, private_cloud:, logging_server:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "private_cloud cannot contain /" if private_cloud.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/privateClouds/#{private_cloud}/loggingServers/#{logging_server}"
+            end
+
+            ##
+            # Create a fully-qualified ManagementDnsZoneBinding resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/privateClouds/{private_cloud}/managementDnsZoneBindings/{management_dns_zone_binding}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param private_cloud [String]
+            # @param management_dns_zone_binding [String]
+            #
+            # @return [::String]
+            def management_dns_zone_binding_path project:, location:, private_cloud:, management_dns_zone_binding:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "private_cloud cannot contain /" if private_cloud.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/privateClouds/#{private_cloud}/managementDnsZoneBindings/#{management_dns_zone_binding}"
+            end
+
+            ##
             # Create a fully-qualified Network resource string.
             #
             # The resource will be in the following format:
@@ -98,6 +218,25 @@ module Google
               raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
               "projects/#{project}/global/networks/#{network}"
+            end
+
+            ##
+            # Create a fully-qualified NetworkPeering resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/networkPeerings/{network_peering}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param network_peering [String]
+            #
+            # @return [::String]
+            def network_peering_path project:, location:, network_peering:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/networkPeerings/#{network_peering}"
             end
 
             ##
@@ -117,6 +256,29 @@ module Google
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/networkPolicies/#{network_policy}"
+            end
+
+            ##
+            # Create a fully-qualified Node resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/privateClouds/{private_cloud}/clusters/{cluster}/nodes/{node}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param private_cloud [String]
+            # @param cluster [String]
+            # @param node [String]
+            #
+            # @return [::String]
+            def node_path project:, location:, private_cloud:, cluster:, node:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "private_cloud cannot contain /" if private_cloud.to_s.include? "/"
+              raise ::ArgumentError, "cluster cannot contain /" if cluster.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/privateClouds/#{private_cloud}/clusters/#{cluster}/nodes/#{node}"
             end
 
             ##

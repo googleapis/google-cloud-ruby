@@ -1,5 +1,29 @@
 # Release History
 
+### 0.17.2 (2024-01-18)
+
+#### Documentation
+
+* Minor clarifications ([#24433](https://github.com/googleapis/google-cloud-ruby/issues/24433)) 
+
+### 0.17.1 (2024-01-12)
+
+#### Bug Fixes
+
+* Ensure endpoints are correct for mixin clients ([#24032](https://github.com/googleapis/google-cloud-ruby/issues/24032)) 
+
+### 0.17.0 (2024-01-11)
+
+#### Features
+
+* Support for universe_domain ([#23775](https://github.com/googleapis/google-cloud-ruby/issues/23775)) 
+
+### 0.16.0 (2023-12-13)
+
+#### Features
+
+* Billing accounts now have a parent organization, and can be moved between parents ([#23633](https://github.com/googleapis/google-cloud-ruby/issues/23633)) 
+
 ### 0.15.1 (2023-09-26)
 
 #### Documentation

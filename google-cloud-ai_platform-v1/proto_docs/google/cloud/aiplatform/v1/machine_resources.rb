@@ -45,6 +45,10 @@ module Google
         # @!attribute [rw] accelerator_count
         #   @return [::Integer]
         #     The number of accelerators to attach to the machine.
+        # @!attribute [rw] tpu_topology
+        #   @return [::String]
+        #     Immutable. The topology of the TPUs. Corresponds to the TPU topologies
+        #     available from GKE. (Example: tpu_topology: "2x2x1").
         class MachineSpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

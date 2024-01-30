@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-data_catalog-v1",
-    "version": "0.20.0",
+    "version": "0.21.1",
     "language": "RUBY",
     "apis": [
       {
@@ -14,7 +14,7 @@
     {
       "region_tag": "datacatalog_v1_generated_DataCatalog_SearchCatalog_sync",
       "title": "Snippet for the search_catalog call in the DataCatalog service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#search_catalog. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#search_catalog.",
       "file": "data_catalog/search_catalog.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "datacatalog_v1_generated_DataCatalog_CreateEntryGroup_sync",
       "title": "Snippet for the create_entry_group call in the DataCatalog service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#create_entry_group. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#create_entry_group.",
       "file": "data_catalog/create_entry_group.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "datacatalog_v1_generated_DataCatalog_GetEntryGroup_sync",
       "title": "Snippet for the get_entry_group call in the DataCatalog service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#get_entry_group. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#get_entry_group.",
       "file": "data_catalog/get_entry_group.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -134,7 +134,7 @@
     {
       "region_tag": "datacatalog_v1_generated_DataCatalog_UpdateEntryGroup_sync",
       "title": "Snippet for the update_entry_group call in the DataCatalog service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#update_entry_group. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#update_entry_group.",
       "file": "data_catalog/update_entry_group.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -174,7 +174,7 @@
     {
       "region_tag": "datacatalog_v1_generated_DataCatalog_DeleteEntryGroup_sync",
       "title": "Snippet for the delete_entry_group call in the DataCatalog service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#delete_entry_group. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#delete_entry_group.",
       "file": "data_catalog/delete_entry_group.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,7 +206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -214,7 +214,7 @@
     {
       "region_tag": "datacatalog_v1_generated_DataCatalog_ListEntryGroups_sync",
       "title": "Snippet for the list_entry_groups call in the DataCatalog service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#list_entry_groups. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#list_entry_groups.",
       "file": "data_catalog/list_entry_groups.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,7 +246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -254,7 +254,7 @@
     {
       "region_tag": "datacatalog_v1_generated_DataCatalog_CreateEntry_sync",
       "title": "Snippet for the create_entry call in the DataCatalog service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#create_entry. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#create_entry.",
       "file": "data_catalog/create_entry.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,7 +286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -294,7 +294,7 @@
     {
       "region_tag": "datacatalog_v1_generated_DataCatalog_UpdateEntry_sync",
       "title": "Snippet for the update_entry call in the DataCatalog service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#update_entry. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#update_entry.",
       "file": "data_catalog/update_entry.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,7 +326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -334,7 +334,7 @@
     {
       "region_tag": "datacatalog_v1_generated_DataCatalog_DeleteEntry_sync",
       "title": "Snippet for the delete_entry call in the DataCatalog service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#delete_entry. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#delete_entry.",
       "file": "data_catalog/delete_entry.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,7 +366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -374,7 +374,7 @@
     {
       "region_tag": "datacatalog_v1_generated_DataCatalog_GetEntry_sync",
       "title": "Snippet for the get_entry call in the DataCatalog service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#get_entry. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#get_entry.",
       "file": "data_catalog/get_entry.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,7 +406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -414,7 +414,7 @@
     {
       "region_tag": "datacatalog_v1_generated_DataCatalog_LookupEntry_sync",
       "title": "Snippet for the lookup_entry call in the DataCatalog service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#lookup_entry. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#lookup_entry.",
       "file": "data_catalog/lookup_entry.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,7 +446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -454,7 +454,7 @@
     {
       "region_tag": "datacatalog_v1_generated_DataCatalog_ListEntries_sync",
       "title": "Snippet for the list_entries call in the DataCatalog service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#list_entries. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#list_entries.",
       "file": "data_catalog/list_entries.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,7 +486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -494,7 +494,7 @@
     {
       "region_tag": "datacatalog_v1_generated_DataCatalog_ModifyEntryOverview_sync",
       "title": "Snippet for the modify_entry_overview call in the DataCatalog service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#modify_entry_overview. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#modify_entry_overview.",
       "file": "data_catalog/modify_entry_overview.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,7 +526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -534,7 +534,7 @@
     {
       "region_tag": "datacatalog_v1_generated_DataCatalog_ModifyEntryContacts_sync",
       "title": "Snippet for the modify_entry_contacts call in the DataCatalog service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#modify_entry_contacts. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#modify_entry_contacts.",
       "file": "data_catalog/modify_entry_contacts.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,7 +566,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -574,7 +574,7 @@
     {
       "region_tag": "datacatalog_v1_generated_DataCatalog_CreateTagTemplate_sync",
       "title": "Snippet for the create_tag_template call in the DataCatalog service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#create_tag_template. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#create_tag_template.",
       "file": "data_catalog/create_tag_template.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,7 +606,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -614,7 +614,7 @@
     {
       "region_tag": "datacatalog_v1_generated_DataCatalog_GetTagTemplate_sync",
       "title": "Snippet for the get_tag_template call in the DataCatalog service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#get_tag_template. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#get_tag_template.",
       "file": "data_catalog/get_tag_template.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,7 +646,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -654,7 +654,7 @@
     {
       "region_tag": "datacatalog_v1_generated_DataCatalog_UpdateTagTemplate_sync",
       "title": "Snippet for the update_tag_template call in the DataCatalog service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#update_tag_template. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#update_tag_template.",
       "file": "data_catalog/update_tag_template.rb",
       "language": "RUBY",
       "client_method": {
@@ -686,7 +686,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -694,7 +694,7 @@
     {
       "region_tag": "datacatalog_v1_generated_DataCatalog_DeleteTagTemplate_sync",
       "title": "Snippet for the delete_tag_template call in the DataCatalog service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#delete_tag_template. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#delete_tag_template.",
       "file": "data_catalog/delete_tag_template.rb",
       "language": "RUBY",
       "client_method": {
@@ -726,7 +726,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -734,7 +734,7 @@
     {
       "region_tag": "datacatalog_v1_generated_DataCatalog_CreateTagTemplateField_sync",
       "title": "Snippet for the create_tag_template_field call in the DataCatalog service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#create_tag_template_field. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#create_tag_template_field.",
       "file": "data_catalog/create_tag_template_field.rb",
       "language": "RUBY",
       "client_method": {
@@ -766,7 +766,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -774,7 +774,7 @@
     {
       "region_tag": "datacatalog_v1_generated_DataCatalog_UpdateTagTemplateField_sync",
       "title": "Snippet for the update_tag_template_field call in the DataCatalog service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#update_tag_template_field. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#update_tag_template_field.",
       "file": "data_catalog/update_tag_template_field.rb",
       "language": "RUBY",
       "client_method": {
@@ -806,7 +806,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -814,7 +814,7 @@
     {
       "region_tag": "datacatalog_v1_generated_DataCatalog_RenameTagTemplateField_sync",
       "title": "Snippet for the rename_tag_template_field call in the DataCatalog service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#rename_tag_template_field. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#rename_tag_template_field.",
       "file": "data_catalog/rename_tag_template_field.rb",
       "language": "RUBY",
       "client_method": {
@@ -846,7 +846,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -854,7 +854,7 @@
     {
       "region_tag": "datacatalog_v1_generated_DataCatalog_RenameTagTemplateFieldEnumValue_sync",
       "title": "Snippet for the rename_tag_template_field_enum_value call in the DataCatalog service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#rename_tag_template_field_enum_value. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#rename_tag_template_field_enum_value.",
       "file": "data_catalog/rename_tag_template_field_enum_value.rb",
       "language": "RUBY",
       "client_method": {
@@ -886,7 +886,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -894,7 +894,7 @@
     {
       "region_tag": "datacatalog_v1_generated_DataCatalog_DeleteTagTemplateField_sync",
       "title": "Snippet for the delete_tag_template_field call in the DataCatalog service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#delete_tag_template_field. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#delete_tag_template_field.",
       "file": "data_catalog/delete_tag_template_field.rb",
       "language": "RUBY",
       "client_method": {
@@ -926,7 +926,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -934,7 +934,7 @@
     {
       "region_tag": "datacatalog_v1_generated_DataCatalog_CreateTag_sync",
       "title": "Snippet for the create_tag call in the DataCatalog service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#create_tag. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#create_tag.",
       "file": "data_catalog/create_tag.rb",
       "language": "RUBY",
       "client_method": {
@@ -966,7 +966,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -974,7 +974,7 @@
     {
       "region_tag": "datacatalog_v1_generated_DataCatalog_UpdateTag_sync",
       "title": "Snippet for the update_tag call in the DataCatalog service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#update_tag. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#update_tag.",
       "file": "data_catalog/update_tag.rb",
       "language": "RUBY",
       "client_method": {
@@ -1006,7 +1006,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1014,7 +1014,7 @@
     {
       "region_tag": "datacatalog_v1_generated_DataCatalog_DeleteTag_sync",
       "title": "Snippet for the delete_tag call in the DataCatalog service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#delete_tag. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#delete_tag.",
       "file": "data_catalog/delete_tag.rb",
       "language": "RUBY",
       "client_method": {
@@ -1046,7 +1046,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1054,7 +1054,7 @@
     {
       "region_tag": "datacatalog_v1_generated_DataCatalog_ListTags_sync",
       "title": "Snippet for the list_tags call in the DataCatalog service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#list_tags. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#list_tags.",
       "file": "data_catalog/list_tags.rb",
       "language": "RUBY",
       "client_method": {
@@ -1086,7 +1086,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1094,7 +1094,7 @@
     {
       "region_tag": "datacatalog_v1_generated_DataCatalog_ReconcileTags_sync",
       "title": "Snippet for the reconcile_tags call in the DataCatalog service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#reconcile_tags. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#reconcile_tags.",
       "file": "data_catalog/reconcile_tags.rb",
       "language": "RUBY",
       "client_method": {
@@ -1126,7 +1126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1134,7 +1134,7 @@
     {
       "region_tag": "datacatalog_v1_generated_DataCatalog_StarEntry_sync",
       "title": "Snippet for the star_entry call in the DataCatalog service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#star_entry. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#star_entry.",
       "file": "data_catalog/star_entry.rb",
       "language": "RUBY",
       "client_method": {
@@ -1166,7 +1166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1174,7 +1174,7 @@
     {
       "region_tag": "datacatalog_v1_generated_DataCatalog_UnstarEntry_sync",
       "title": "Snippet for the unstar_entry call in the DataCatalog service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#unstar_entry. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#unstar_entry.",
       "file": "data_catalog/unstar_entry.rb",
       "language": "RUBY",
       "client_method": {
@@ -1206,7 +1206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1214,7 +1214,7 @@
     {
       "region_tag": "datacatalog_v1_generated_DataCatalog_SetIamPolicy_sync",
       "title": "Snippet for the set_iam_policy call in the DataCatalog service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#set_iam_policy. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#set_iam_policy.",
       "file": "data_catalog/set_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -1246,7 +1246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1254,7 +1254,7 @@
     {
       "region_tag": "datacatalog_v1_generated_DataCatalog_GetIamPolicy_sync",
       "title": "Snippet for the get_iam_policy call in the DataCatalog service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#get_iam_policy. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#get_iam_policy.",
       "file": "data_catalog/get_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -1286,7 +1286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1294,7 +1294,7 @@
     {
       "region_tag": "datacatalog_v1_generated_DataCatalog_TestIamPermissions_sync",
       "title": "Snippet for the test_iam_permissions call in the DataCatalog service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#test_iam_permissions. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#test_iam_permissions.",
       "file": "data_catalog/test_iam_permissions.rb",
       "language": "RUBY",
       "client_method": {
@@ -1326,7 +1326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1334,7 +1334,7 @@
     {
       "region_tag": "datacatalog_v1_generated_DataCatalog_ImportEntries_sync",
       "title": "Snippet for the import_entries call in the DataCatalog service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#import_entries. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#import_entries.",
       "file": "data_catalog/import_entries.rb",
       "language": "RUBY",
       "client_method": {
@@ -1366,7 +1366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1374,7 +1374,7 @@
     {
       "region_tag": "datacatalog_v1_generated_PolicyTagManager_CreateTaxonomy_sync",
       "title": "Snippet for the create_taxonomy call in the PolicyTagManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#create_taxonomy. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#create_taxonomy.",
       "file": "policy_tag_manager/create_taxonomy.rb",
       "language": "RUBY",
       "client_method": {
@@ -1406,7 +1406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1414,7 +1414,7 @@
     {
       "region_tag": "datacatalog_v1_generated_PolicyTagManager_DeleteTaxonomy_sync",
       "title": "Snippet for the delete_taxonomy call in the PolicyTagManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#delete_taxonomy. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#delete_taxonomy.",
       "file": "policy_tag_manager/delete_taxonomy.rb",
       "language": "RUBY",
       "client_method": {
@@ -1446,7 +1446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1454,7 +1454,7 @@
     {
       "region_tag": "datacatalog_v1_generated_PolicyTagManager_UpdateTaxonomy_sync",
       "title": "Snippet for the update_taxonomy call in the PolicyTagManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#update_taxonomy. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#update_taxonomy.",
       "file": "policy_tag_manager/update_taxonomy.rb",
       "language": "RUBY",
       "client_method": {
@@ -1486,7 +1486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1494,7 +1494,7 @@
     {
       "region_tag": "datacatalog_v1_generated_PolicyTagManager_ListTaxonomies_sync",
       "title": "Snippet for the list_taxonomies call in the PolicyTagManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#list_taxonomies. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#list_taxonomies.",
       "file": "policy_tag_manager/list_taxonomies.rb",
       "language": "RUBY",
       "client_method": {
@@ -1526,7 +1526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1534,7 +1534,7 @@
     {
       "region_tag": "datacatalog_v1_generated_PolicyTagManager_GetTaxonomy_sync",
       "title": "Snippet for the get_taxonomy call in the PolicyTagManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#get_taxonomy. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#get_taxonomy.",
       "file": "policy_tag_manager/get_taxonomy.rb",
       "language": "RUBY",
       "client_method": {
@@ -1566,7 +1566,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1574,7 +1574,7 @@
     {
       "region_tag": "datacatalog_v1_generated_PolicyTagManager_CreatePolicyTag_sync",
       "title": "Snippet for the create_policy_tag call in the PolicyTagManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#create_policy_tag. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#create_policy_tag.",
       "file": "policy_tag_manager/create_policy_tag.rb",
       "language": "RUBY",
       "client_method": {
@@ -1606,7 +1606,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1614,7 +1614,7 @@
     {
       "region_tag": "datacatalog_v1_generated_PolicyTagManager_DeletePolicyTag_sync",
       "title": "Snippet for the delete_policy_tag call in the PolicyTagManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#delete_policy_tag. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#delete_policy_tag.",
       "file": "policy_tag_manager/delete_policy_tag.rb",
       "language": "RUBY",
       "client_method": {
@@ -1646,7 +1646,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1654,7 +1654,7 @@
     {
       "region_tag": "datacatalog_v1_generated_PolicyTagManager_UpdatePolicyTag_sync",
       "title": "Snippet for the update_policy_tag call in the PolicyTagManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#update_policy_tag. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#update_policy_tag.",
       "file": "policy_tag_manager/update_policy_tag.rb",
       "language": "RUBY",
       "client_method": {
@@ -1686,7 +1686,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1694,7 +1694,7 @@
     {
       "region_tag": "datacatalog_v1_generated_PolicyTagManager_ListPolicyTags_sync",
       "title": "Snippet for the list_policy_tags call in the PolicyTagManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#list_policy_tags. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#list_policy_tags.",
       "file": "policy_tag_manager/list_policy_tags.rb",
       "language": "RUBY",
       "client_method": {
@@ -1726,7 +1726,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1734,7 +1734,7 @@
     {
       "region_tag": "datacatalog_v1_generated_PolicyTagManager_GetPolicyTag_sync",
       "title": "Snippet for the get_policy_tag call in the PolicyTagManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#get_policy_tag. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#get_policy_tag.",
       "file": "policy_tag_manager/get_policy_tag.rb",
       "language": "RUBY",
       "client_method": {
@@ -1766,7 +1766,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1774,7 +1774,7 @@
     {
       "region_tag": "datacatalog_v1_generated_PolicyTagManager_GetIamPolicy_sync",
       "title": "Snippet for the get_iam_policy call in the PolicyTagManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#get_iam_policy. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#get_iam_policy.",
       "file": "policy_tag_manager/get_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -1806,7 +1806,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1814,7 +1814,7 @@
     {
       "region_tag": "datacatalog_v1_generated_PolicyTagManager_SetIamPolicy_sync",
       "title": "Snippet for the set_iam_policy call in the PolicyTagManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#set_iam_policy. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#set_iam_policy.",
       "file": "policy_tag_manager/set_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -1846,7 +1846,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1854,7 +1854,7 @@
     {
       "region_tag": "datacatalog_v1_generated_PolicyTagManager_TestIamPermissions_sync",
       "title": "Snippet for the test_iam_permissions call in the PolicyTagManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#test_iam_permissions. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#test_iam_permissions.",
       "file": "policy_tag_manager/test_iam_permissions.rb",
       "language": "RUBY",
       "client_method": {
@@ -1886,7 +1886,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1894,7 +1894,7 @@
     {
       "region_tag": "datacatalog_v1_generated_PolicyTagManagerSerialization_ReplaceTaxonomy_sync",
       "title": "Snippet for the replace_taxonomy call in the PolicyTagManagerSerialization service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::Client#replace_taxonomy. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::Client#replace_taxonomy.",
       "file": "policy_tag_manager_serialization/replace_taxonomy.rb",
       "language": "RUBY",
       "client_method": {
@@ -1926,7 +1926,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1934,7 +1934,7 @@
     {
       "region_tag": "datacatalog_v1_generated_PolicyTagManagerSerialization_ImportTaxonomies_sync",
       "title": "Snippet for the import_taxonomies call in the PolicyTagManagerSerialization service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::Client#import_taxonomies. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::Client#import_taxonomies.",
       "file": "policy_tag_manager_serialization/import_taxonomies.rb",
       "language": "RUBY",
       "client_method": {
@@ -1966,7 +1966,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1974,7 +1974,7 @@
     {
       "region_tag": "datacatalog_v1_generated_PolicyTagManagerSerialization_ExportTaxonomies_sync",
       "title": "Snippet for the export_taxonomies call in the PolicyTagManagerSerialization service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::Client#export_taxonomies. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::Client#export_taxonomies.",
       "file": "policy_tag_manager_serialization/export_taxonomies.rb",
       "language": "RUBY",
       "client_method": {
@@ -2006,7 +2006,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]

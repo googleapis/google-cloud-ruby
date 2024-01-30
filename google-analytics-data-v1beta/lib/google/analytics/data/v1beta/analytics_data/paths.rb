@@ -25,6 +25,23 @@ module Google
           # Path helper methods for the AnalyticsData API.
           module Paths
             ##
+            # Create a fully-qualified AudienceExport resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `properties/{property}/audienceExports/{audience_export}`
+            #
+            # @param property [String]
+            # @param audience_export [String]
+            #
+            # @return [::String]
+            def audience_export_path property:, audience_export:
+              raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
+
+              "properties/#{property}/audienceExports/#{audience_export}"
+            end
+
+            ##
             # Create a fully-qualified Metadata resource string.
             #
             # The resource will be in the following format:
@@ -36,6 +53,20 @@ module Google
             # @return [::String]
             def metadata_path property:
               "properties/#{property}/metadata"
+            end
+
+            ##
+            # Create a fully-qualified Property resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `properties/{property}`
+            #
+            # @param property [String]
+            #
+            # @return [::String]
+            def property_path property:
+              "properties/#{property}"
             end
 
             extend self

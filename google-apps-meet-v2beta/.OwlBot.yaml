@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/apps/meet/v2beta/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-apps-meet-v2beta/$1

@@ -30,6 +30,7 @@ module Google
         #     "folders/\\{folder}/muteConfigs/\\{mute_config}"
         #     "projects/\\{project}/muteConfigs/\\{mute_config}"
         # @!attribute [rw] display_name
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     The human readable name to be displayed for the mute config.
         # @!attribute [rw] description

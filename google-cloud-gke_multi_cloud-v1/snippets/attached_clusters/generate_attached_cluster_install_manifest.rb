@@ -22,9 +22,14 @@ require "google/cloud/gke_multi_cloud/v1"
 ##
 # Snippet for the generate_attached_cluster_install_manifest call in the AttachedClusters service
 #
+# This snippet has been automatically generated and should be regarded as a code
+# template only. It will require modifications to work:
+# - It may require correct/in-range values for request initialization.
+# - It may require specifying regional endpoints when creating the service
+# client as shown in https://cloud.google.com/ruby/docs/reference.
+#
 # This is an auto-generated example demonstrating basic usage of
 # Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client#generate_attached_cluster_install_manifest.
-# It may require modification in order to execute successfully.
 #
 def generate_attached_cluster_install_manifest
   # Create a client object. The client can be reused for multiple calls.

@@ -135,6 +135,7 @@ module Google
           #     Target all VMs in the project. If true, no other criteria is
           #     permitted.
           # @!attribute [rw] os_short_names
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::Array<::String>]
           #     Deprecated. Use the `inventories` field instead.
           #     A VM is selected if it's OS short name matches with any of the

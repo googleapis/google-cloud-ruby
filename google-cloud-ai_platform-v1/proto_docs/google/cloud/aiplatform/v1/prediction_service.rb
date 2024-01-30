@@ -115,7 +115,72 @@ module Google
         end
 
         # Request message for
-        # [PredictionService.StreamingPredict][google.cloud.aiplatform.v1.PredictionService.StreamingPredict].
+        # {::Google::Cloud::AIPlatform::V1::PredictionService::Client#direct_predict PredictionService.DirectPredict}.
+        # @!attribute [rw] endpoint
+        #   @return [::String]
+        #     Required. The name of the Endpoint requested to serve the prediction.
+        #     Format:
+        #     `projects/{project}/locations/{location}/endpoints/{endpoint}`
+        # @!attribute [rw] inputs
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::Tensor>]
+        #     The prediction input.
+        # @!attribute [rw] parameters
+        #   @return [::Google::Cloud::AIPlatform::V1::Tensor]
+        #     The parameters that govern the prediction.
+        class DirectPredictRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::PredictionService::Client#direct_predict PredictionService.DirectPredict}.
+        # @!attribute [rw] outputs
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::Tensor>]
+        #     The prediction output.
+        # @!attribute [rw] parameters
+        #   @return [::Google::Cloud::AIPlatform::V1::Tensor]
+        #     The parameters that govern the prediction.
+        class DirectPredictResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::PredictionService::Client#direct_raw_predict PredictionService.DirectRawPredict}.
+        # @!attribute [rw] endpoint
+        #   @return [::String]
+        #     Required. The name of the Endpoint requested to serve the prediction.
+        #     Format:
+        #     `projects/{project}/locations/{location}/endpoints/{endpoint}`
+        # @!attribute [rw] method_name
+        #   @return [::String]
+        #     Fully qualified name of the API method being invoked to perform
+        #     predictions.
+        #
+        #     Format:
+        #     `/namespace.Service/Method/`
+        #     Example:
+        #     `/tensorflow.serving.PredictionService/Predict`
+        # @!attribute [rw] input
+        #   @return [::String]
+        #     The prediction input.
+        class DirectRawPredictRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::PredictionService::Client#direct_raw_predict PredictionService.DirectRawPredict}.
+        # @!attribute [rw] output
+        #   @return [::String]
+        #     The prediction output.
+        class DirectRawPredictResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::PredictionService::Client#streaming_predict PredictionService.StreamingPredict}.
         #
         # The first message must contain
         # {::Google::Cloud::AIPlatform::V1::StreamingPredictRequest#endpoint endpoint} field
@@ -137,7 +202,7 @@ module Google
         end
 
         # Response message for
-        # [PredictionService.StreamingPredict][google.cloud.aiplatform.v1.PredictionService.StreamingPredict].
+        # {::Google::Cloud::AIPlatform::V1::PredictionService::Client#streaming_predict PredictionService.StreamingPredict}.
         # @!attribute [rw] outputs
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::Tensor>]
         #     The prediction output.
@@ -145,6 +210,51 @@ module Google
         #   @return [::Google::Cloud::AIPlatform::V1::Tensor]
         #     The parameters that govern the prediction.
         class StreamingPredictResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::PredictionService::Client#streaming_raw_predict PredictionService.StreamingRawPredict}.
+        #
+        # The first message must contain
+        # {::Google::Cloud::AIPlatform::V1::StreamingRawPredictRequest#endpoint endpoint}
+        # and
+        # {::Google::Cloud::AIPlatform::V1::StreamingRawPredictRequest#method_name method_name}
+        # fields and optionally
+        # {::Google::Cloud::AIPlatform::V1::StreamingRawPredictRequest#input input}. The
+        # subsequent messages must contain
+        # {::Google::Cloud::AIPlatform::V1::StreamingRawPredictRequest#input input}.
+        # {::Google::Cloud::AIPlatform::V1::StreamingRawPredictRequest#method_name method_name}
+        # in the subsequent messages have no effect.
+        # @!attribute [rw] endpoint
+        #   @return [::String]
+        #     Required. The name of the Endpoint requested to serve the prediction.
+        #     Format:
+        #     `projects/{project}/locations/{location}/endpoints/{endpoint}`
+        # @!attribute [rw] method_name
+        #   @return [::String]
+        #     Fully qualified name of the API method being invoked to perform
+        #     predictions.
+        #
+        #     Format:
+        #     `/namespace.Service/Method/`
+        #     Example:
+        #     `/tensorflow.serving.PredictionService/Predict`
+        # @!attribute [rw] input
+        #   @return [::String]
+        #     The prediction input.
+        class StreamingRawPredictRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::PredictionService::Client#streaming_raw_predict PredictionService.StreamingRawPredict}.
+        # @!attribute [rw] output
+        #   @return [::String]
+        #     The prediction output.
+        class StreamingRawPredictResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -213,6 +323,34 @@ module Google
         #     Same as
         #     {::Google::Cloud::AIPlatform::V1::PredictResponse#predictions PredictResponse.predictions}.
         class ExplainResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for [PredictionService.CountTokens][].
+        # @!attribute [rw] endpoint
+        #   @return [::String]
+        #     Required. The name of the Endpoint requested to perform token counting.
+        #     Format:
+        #     `projects/{project}/locations/{location}/endpoints/{endpoint}`
+        # @!attribute [rw] instances
+        #   @return [::Array<::Google::Protobuf::Value>]
+        #     Required. The instances that are the input to token counting call.
+        #     Schema is identical to the prediction schema of the underlying model.
+        class CountTokensRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for [PredictionService.CountTokens][].
+        # @!attribute [rw] total_tokens
+        #   @return [::Integer]
+        #     The total number of tokens counted across all instances from the request.
+        # @!attribute [rw] total_billable_characters
+        #   @return [::Integer]
+        #     The total number of billable characters counted across all instances from
+        #     the request.
+        class CountTokensResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

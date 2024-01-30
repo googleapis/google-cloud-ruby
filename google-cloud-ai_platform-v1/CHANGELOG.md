@@ -1,5 +1,23 @@
 # Changelog
 
+### 0.35.0 (2023-12-04)
+
+#### Features
+
+* add direct_predict, direct_raw_predict, streaming_predict, streaming_raw_predict to prediction_service 
+* add llm_utility_service  
+
+### 0.34.0 (2023-11-20)
+
+#### Features
+
+* add CountTokensRequest to Prediction 
+* add FeatureGroup, FeatureOnlineStore, FeatureOnlineStoreAdminService, FeatureOnlineStoreService, FeatureRegistryService, FeatureView, FeatureViewSync 
+* add numeric_restriction to Index 
+* add protected_artifact_location_id to CustomJob ([#23538](https://github.com/googleapis/google-cloud-ruby/issues/23538)) 
+* add tpu_topology to MachineSpec 
+* add value_type, version_column_name to Feature 
+
 ### 0.33.0 (2023-10-06)
 
 #### Features

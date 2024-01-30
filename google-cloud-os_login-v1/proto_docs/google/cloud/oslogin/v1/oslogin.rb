@@ -116,6 +116,11 @@ module Google
         # @!attribute [rw] project_id
         #   @return [::String]
         #     The project ID of the Google Cloud Platform project.
+        # @!attribute [rw] regions
+        #   @return [::Array<::String>]
+        #     Optional. The regions to which to assert that the key was written.
+        #     If unspecified, defaults to all regions.
+        #     Regions are listed at https://cloud.google.com/about/locations#region.
         class ImportSshPublicKeyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

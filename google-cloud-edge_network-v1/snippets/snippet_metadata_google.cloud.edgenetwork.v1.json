@@ -1,0 +1,1055 @@
+{
+  "client_library": {
+    "name": "google-cloud-edge_network-v1",
+    "version": "0.3.0",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.edgenetwork.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "edgenetwork_v1_generated_EdgeNetwork_InitializeZone_sync",
+      "title": "Snippet for the initialize_zone call in the EdgeNetwork service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#initialize_zone.",
+      "file": "edge_network/initialize_zone.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "initialize_zone",
+        "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#initialize_zone",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::EdgeNetwork::V1::InitializeZoneRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::EdgeNetwork::V1::InitializeZoneResponse",
+        "client": {
+          "short_name": "EdgeNetwork::Client",
+          "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client"
+        },
+        "method": {
+          "short_name": "InitializeZone",
+          "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork.InitializeZone",
+          "service": {
+            "short_name": "EdgeNetwork",
+            "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "edgenetwork_v1_generated_EdgeNetwork_ListZones_sync",
+      "title": "Snippet for the list_zones call in the EdgeNetwork service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#list_zones.",
+      "file": "edge_network/list_zones.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_zones",
+        "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#list_zones",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::EdgeNetwork::V1::ListZonesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::EdgeNetwork::V1::ListZonesResponse",
+        "client": {
+          "short_name": "EdgeNetwork::Client",
+          "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client"
+        },
+        "method": {
+          "short_name": "ListZones",
+          "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork.ListZones",
+          "service": {
+            "short_name": "EdgeNetwork",
+            "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "edgenetwork_v1_generated_EdgeNetwork_GetZone_sync",
+      "title": "Snippet for the get_zone call in the EdgeNetwork service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#get_zone.",
+      "file": "edge_network/get_zone.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_zone",
+        "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#get_zone",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::EdgeNetwork::V1::GetZoneRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::EdgeNetwork::V1::Zone",
+        "client": {
+          "short_name": "EdgeNetwork::Client",
+          "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client"
+        },
+        "method": {
+          "short_name": "GetZone",
+          "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork.GetZone",
+          "service": {
+            "short_name": "EdgeNetwork",
+            "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "edgenetwork_v1_generated_EdgeNetwork_ListNetworks_sync",
+      "title": "Snippet for the list_networks call in the EdgeNetwork service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#list_networks.",
+      "file": "edge_network/list_networks.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_networks",
+        "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#list_networks",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::EdgeNetwork::V1::ListNetworksRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::EdgeNetwork::V1::ListNetworksResponse",
+        "client": {
+          "short_name": "EdgeNetwork::Client",
+          "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client"
+        },
+        "method": {
+          "short_name": "ListNetworks",
+          "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork.ListNetworks",
+          "service": {
+            "short_name": "EdgeNetwork",
+            "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "edgenetwork_v1_generated_EdgeNetwork_GetNetwork_sync",
+      "title": "Snippet for the get_network call in the EdgeNetwork service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#get_network.",
+      "file": "edge_network/get_network.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_network",
+        "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#get_network",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::EdgeNetwork::V1::GetNetworkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::EdgeNetwork::V1::Network",
+        "client": {
+          "short_name": "EdgeNetwork::Client",
+          "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client"
+        },
+        "method": {
+          "short_name": "GetNetwork",
+          "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork.GetNetwork",
+          "service": {
+            "short_name": "EdgeNetwork",
+            "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "edgenetwork_v1_generated_EdgeNetwork_DiagnoseNetwork_sync",
+      "title": "Snippet for the diagnose_network call in the EdgeNetwork service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#diagnose_network.",
+      "file": "edge_network/diagnose_network.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "diagnose_network",
+        "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#diagnose_network",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::EdgeNetwork::V1::DiagnoseNetworkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::EdgeNetwork::V1::DiagnoseNetworkResponse",
+        "client": {
+          "short_name": "EdgeNetwork::Client",
+          "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client"
+        },
+        "method": {
+          "short_name": "DiagnoseNetwork",
+          "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork.DiagnoseNetwork",
+          "service": {
+            "short_name": "EdgeNetwork",
+            "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "edgenetwork_v1_generated_EdgeNetwork_CreateNetwork_sync",
+      "title": "Snippet for the create_network call in the EdgeNetwork service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#create_network.",
+      "file": "edge_network/create_network.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_network",
+        "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#create_network",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::EdgeNetwork::V1::CreateNetworkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "EdgeNetwork::Client",
+          "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client"
+        },
+        "method": {
+          "short_name": "CreateNetwork",
+          "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork.CreateNetwork",
+          "service": {
+            "short_name": "EdgeNetwork",
+            "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "edgenetwork_v1_generated_EdgeNetwork_DeleteNetwork_sync",
+      "title": "Snippet for the delete_network call in the EdgeNetwork service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#delete_network.",
+      "file": "edge_network/delete_network.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_network",
+        "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#delete_network",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::EdgeNetwork::V1::DeleteNetworkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "EdgeNetwork::Client",
+          "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client"
+        },
+        "method": {
+          "short_name": "DeleteNetwork",
+          "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork.DeleteNetwork",
+          "service": {
+            "short_name": "EdgeNetwork",
+            "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "edgenetwork_v1_generated_EdgeNetwork_ListSubnets_sync",
+      "title": "Snippet for the list_subnets call in the EdgeNetwork service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#list_subnets.",
+      "file": "edge_network/list_subnets.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_subnets",
+        "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#list_subnets",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::EdgeNetwork::V1::ListSubnetsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::EdgeNetwork::V1::ListSubnetsResponse",
+        "client": {
+          "short_name": "EdgeNetwork::Client",
+          "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client"
+        },
+        "method": {
+          "short_name": "ListSubnets",
+          "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork.ListSubnets",
+          "service": {
+            "short_name": "EdgeNetwork",
+            "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "edgenetwork_v1_generated_EdgeNetwork_GetSubnet_sync",
+      "title": "Snippet for the get_subnet call in the EdgeNetwork service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#get_subnet.",
+      "file": "edge_network/get_subnet.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_subnet",
+        "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#get_subnet",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::EdgeNetwork::V1::GetSubnetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::EdgeNetwork::V1::Subnet",
+        "client": {
+          "short_name": "EdgeNetwork::Client",
+          "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client"
+        },
+        "method": {
+          "short_name": "GetSubnet",
+          "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork.GetSubnet",
+          "service": {
+            "short_name": "EdgeNetwork",
+            "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "edgenetwork_v1_generated_EdgeNetwork_CreateSubnet_sync",
+      "title": "Snippet for the create_subnet call in the EdgeNetwork service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#create_subnet.",
+      "file": "edge_network/create_subnet.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_subnet",
+        "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#create_subnet",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::EdgeNetwork::V1::CreateSubnetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "EdgeNetwork::Client",
+          "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client"
+        },
+        "method": {
+          "short_name": "CreateSubnet",
+          "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork.CreateSubnet",
+          "service": {
+            "short_name": "EdgeNetwork",
+            "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "edgenetwork_v1_generated_EdgeNetwork_UpdateSubnet_sync",
+      "title": "Snippet for the update_subnet call in the EdgeNetwork service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#update_subnet.",
+      "file": "edge_network/update_subnet.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_subnet",
+        "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#update_subnet",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::EdgeNetwork::V1::UpdateSubnetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "EdgeNetwork::Client",
+          "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client"
+        },
+        "method": {
+          "short_name": "UpdateSubnet",
+          "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork.UpdateSubnet",
+          "service": {
+            "short_name": "EdgeNetwork",
+            "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "edgenetwork_v1_generated_EdgeNetwork_DeleteSubnet_sync",
+      "title": "Snippet for the delete_subnet call in the EdgeNetwork service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#delete_subnet.",
+      "file": "edge_network/delete_subnet.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_subnet",
+        "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#delete_subnet",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::EdgeNetwork::V1::DeleteSubnetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "EdgeNetwork::Client",
+          "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client"
+        },
+        "method": {
+          "short_name": "DeleteSubnet",
+          "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork.DeleteSubnet",
+          "service": {
+            "short_name": "EdgeNetwork",
+            "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "edgenetwork_v1_generated_EdgeNetwork_ListInterconnects_sync",
+      "title": "Snippet for the list_interconnects call in the EdgeNetwork service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#list_interconnects.",
+      "file": "edge_network/list_interconnects.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_interconnects",
+        "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#list_interconnects",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::EdgeNetwork::V1::ListInterconnectsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::EdgeNetwork::V1::ListInterconnectsResponse",
+        "client": {
+          "short_name": "EdgeNetwork::Client",
+          "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client"
+        },
+        "method": {
+          "short_name": "ListInterconnects",
+          "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork.ListInterconnects",
+          "service": {
+            "short_name": "EdgeNetwork",
+            "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "edgenetwork_v1_generated_EdgeNetwork_GetInterconnect_sync",
+      "title": "Snippet for the get_interconnect call in the EdgeNetwork service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#get_interconnect.",
+      "file": "edge_network/get_interconnect.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_interconnect",
+        "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#get_interconnect",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::EdgeNetwork::V1::GetInterconnectRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::EdgeNetwork::V1::Interconnect",
+        "client": {
+          "short_name": "EdgeNetwork::Client",
+          "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client"
+        },
+        "method": {
+          "short_name": "GetInterconnect",
+          "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork.GetInterconnect",
+          "service": {
+            "short_name": "EdgeNetwork",
+            "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "edgenetwork_v1_generated_EdgeNetwork_DiagnoseInterconnect_sync",
+      "title": "Snippet for the diagnose_interconnect call in the EdgeNetwork service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#diagnose_interconnect.",
+      "file": "edge_network/diagnose_interconnect.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "diagnose_interconnect",
+        "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#diagnose_interconnect",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::EdgeNetwork::V1::DiagnoseInterconnectRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::EdgeNetwork::V1::DiagnoseInterconnectResponse",
+        "client": {
+          "short_name": "EdgeNetwork::Client",
+          "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client"
+        },
+        "method": {
+          "short_name": "DiagnoseInterconnect",
+          "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork.DiagnoseInterconnect",
+          "service": {
+            "short_name": "EdgeNetwork",
+            "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "edgenetwork_v1_generated_EdgeNetwork_ListInterconnectAttachments_sync",
+      "title": "Snippet for the list_interconnect_attachments call in the EdgeNetwork service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#list_interconnect_attachments.",
+      "file": "edge_network/list_interconnect_attachments.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_interconnect_attachments",
+        "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#list_interconnect_attachments",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::EdgeNetwork::V1::ListInterconnectAttachmentsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::EdgeNetwork::V1::ListInterconnectAttachmentsResponse",
+        "client": {
+          "short_name": "EdgeNetwork::Client",
+          "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client"
+        },
+        "method": {
+          "short_name": "ListInterconnectAttachments",
+          "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork.ListInterconnectAttachments",
+          "service": {
+            "short_name": "EdgeNetwork",
+            "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "edgenetwork_v1_generated_EdgeNetwork_GetInterconnectAttachment_sync",
+      "title": "Snippet for the get_interconnect_attachment call in the EdgeNetwork service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#get_interconnect_attachment.",
+      "file": "edge_network/get_interconnect_attachment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_interconnect_attachment",
+        "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#get_interconnect_attachment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::EdgeNetwork::V1::GetInterconnectAttachmentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::EdgeNetwork::V1::InterconnectAttachment",
+        "client": {
+          "short_name": "EdgeNetwork::Client",
+          "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client"
+        },
+        "method": {
+          "short_name": "GetInterconnectAttachment",
+          "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork.GetInterconnectAttachment",
+          "service": {
+            "short_name": "EdgeNetwork",
+            "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "edgenetwork_v1_generated_EdgeNetwork_CreateInterconnectAttachment_sync",
+      "title": "Snippet for the create_interconnect_attachment call in the EdgeNetwork service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#create_interconnect_attachment.",
+      "file": "edge_network/create_interconnect_attachment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_interconnect_attachment",
+        "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#create_interconnect_attachment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::EdgeNetwork::V1::CreateInterconnectAttachmentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "EdgeNetwork::Client",
+          "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client"
+        },
+        "method": {
+          "short_name": "CreateInterconnectAttachment",
+          "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork.CreateInterconnectAttachment",
+          "service": {
+            "short_name": "EdgeNetwork",
+            "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "edgenetwork_v1_generated_EdgeNetwork_DeleteInterconnectAttachment_sync",
+      "title": "Snippet for the delete_interconnect_attachment call in the EdgeNetwork service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#delete_interconnect_attachment.",
+      "file": "edge_network/delete_interconnect_attachment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_interconnect_attachment",
+        "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#delete_interconnect_attachment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::EdgeNetwork::V1::DeleteInterconnectAttachmentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "EdgeNetwork::Client",
+          "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client"
+        },
+        "method": {
+          "short_name": "DeleteInterconnectAttachment",
+          "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork.DeleteInterconnectAttachment",
+          "service": {
+            "short_name": "EdgeNetwork",
+            "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "edgenetwork_v1_generated_EdgeNetwork_ListRouters_sync",
+      "title": "Snippet for the list_routers call in the EdgeNetwork service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#list_routers.",
+      "file": "edge_network/list_routers.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_routers",
+        "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#list_routers",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::EdgeNetwork::V1::ListRoutersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::EdgeNetwork::V1::ListRoutersResponse",
+        "client": {
+          "short_name": "EdgeNetwork::Client",
+          "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client"
+        },
+        "method": {
+          "short_name": "ListRouters",
+          "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork.ListRouters",
+          "service": {
+            "short_name": "EdgeNetwork",
+            "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "edgenetwork_v1_generated_EdgeNetwork_GetRouter_sync",
+      "title": "Snippet for the get_router call in the EdgeNetwork service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#get_router.",
+      "file": "edge_network/get_router.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_router",
+        "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#get_router",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::EdgeNetwork::V1::GetRouterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::EdgeNetwork::V1::Router",
+        "client": {
+          "short_name": "EdgeNetwork::Client",
+          "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client"
+        },
+        "method": {
+          "short_name": "GetRouter",
+          "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork.GetRouter",
+          "service": {
+            "short_name": "EdgeNetwork",
+            "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "edgenetwork_v1_generated_EdgeNetwork_DiagnoseRouter_sync",
+      "title": "Snippet for the diagnose_router call in the EdgeNetwork service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#diagnose_router.",
+      "file": "edge_network/diagnose_router.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "diagnose_router",
+        "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#diagnose_router",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::EdgeNetwork::V1::DiagnoseRouterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::EdgeNetwork::V1::DiagnoseRouterResponse",
+        "client": {
+          "short_name": "EdgeNetwork::Client",
+          "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client"
+        },
+        "method": {
+          "short_name": "DiagnoseRouter",
+          "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork.DiagnoseRouter",
+          "service": {
+            "short_name": "EdgeNetwork",
+            "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "edgenetwork_v1_generated_EdgeNetwork_CreateRouter_sync",
+      "title": "Snippet for the create_router call in the EdgeNetwork service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#create_router.",
+      "file": "edge_network/create_router.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_router",
+        "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#create_router",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::EdgeNetwork::V1::CreateRouterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "EdgeNetwork::Client",
+          "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client"
+        },
+        "method": {
+          "short_name": "CreateRouter",
+          "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork.CreateRouter",
+          "service": {
+            "short_name": "EdgeNetwork",
+            "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "edgenetwork_v1_generated_EdgeNetwork_UpdateRouter_sync",
+      "title": "Snippet for the update_router call in the EdgeNetwork service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#update_router.",
+      "file": "edge_network/update_router.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_router",
+        "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#update_router",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::EdgeNetwork::V1::UpdateRouterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "EdgeNetwork::Client",
+          "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client"
+        },
+        "method": {
+          "short_name": "UpdateRouter",
+          "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork.UpdateRouter",
+          "service": {
+            "short_name": "EdgeNetwork",
+            "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "edgenetwork_v1_generated_EdgeNetwork_DeleteRouter_sync",
+      "title": "Snippet for the delete_router call in the EdgeNetwork service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#delete_router.",
+      "file": "edge_network/delete_router.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_router",
+        "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client#delete_router",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::EdgeNetwork::V1::DeleteRouterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "EdgeNetwork::Client",
+          "full_name": "::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Client"
+        },
+        "method": {
+          "short_name": "DeleteRouter",
+          "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork.DeleteRouter",
+          "service": {
+            "short_name": "EdgeNetwork",
+            "full_name": "google.cloud.edgenetwork.v1.EdgeNetwork"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}

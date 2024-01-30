@@ -60,6 +60,70 @@ class ::Google::Cloud::Compute::V1::PublicAdvertisedPrefixes::Rest::ClientTest <
 
       @response
     end
+
+    def endpoint
+      "endpoint.example.com"
+    end
+
+    def universe_domain
+      "example.com"
+    end
+  end
+
+  def test_announce
+    # Create test objects.
+    client_result = ::Google::Cloud::Compute::V1::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    project = "hello world"
+    public_advertised_prefix = "hello world"
+    request_id = "hello world"
+
+    announce_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Compute::V1::PublicAdvertisedPrefixes::Rest::ServiceStub.stub :transcode_announce_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, announce_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::PublicAdvertisedPrefixes::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.announce({ project: project, public_advertised_prefix: public_advertised_prefix, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.announce project: project, public_advertised_prefix: public_advertised_prefix, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.announce ::Google::Cloud::Compute::V1::AnnouncePublicAdvertisedPrefixeRequest.new(project: project, public_advertised_prefix: public_advertised_prefix, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.announce({ project: project, public_advertised_prefix: public_advertised_prefix, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.announce(::Google::Cloud::Compute::V1::AnnouncePublicAdvertisedPrefixeRequest.new(project: project, public_advertised_prefix: public_advertised_prefix, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, announce_client_stub.call_count
+      end
+    end
   end
 
   def test_delete
@@ -345,11 +409,68 @@ class ::Google::Cloud::Compute::V1::PublicAdvertisedPrefixes::Rest::ClientTest <
     end
   end
 
+  def test_withdraw
+    # Create test objects.
+    client_result = ::Google::Cloud::Compute::V1::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    project = "hello world"
+    public_advertised_prefix = "hello world"
+    request_id = "hello world"
+
+    withdraw_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Compute::V1::PublicAdvertisedPrefixes::Rest::ServiceStub.stub :transcode_withdraw_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, withdraw_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::PublicAdvertisedPrefixes::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.withdraw({ project: project, public_advertised_prefix: public_advertised_prefix, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.withdraw project: project, public_advertised_prefix: public_advertised_prefix, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.withdraw ::Google::Cloud::Compute::V1::WithdrawPublicAdvertisedPrefixeRequest.new(project: project, public_advertised_prefix: public_advertised_prefix, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.withdraw({ project: project, public_advertised_prefix: public_advertised_prefix, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.withdraw(::Google::Cloud::Compute::V1::WithdrawPublicAdvertisedPrefixeRequest.new(project: project, public_advertised_prefix: public_advertised_prefix, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, withdraw_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 
     client = block_config = config = nil
-    Gapic::Rest::ClientStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil
+    Gapic::Rest::ClientStub.stub :new, dummy_stub do
       client = ::Google::Cloud::Compute::V1::PublicAdvertisedPrefixes::Rest::Client.new do |config|
         config.credentials = credentials_token
       end

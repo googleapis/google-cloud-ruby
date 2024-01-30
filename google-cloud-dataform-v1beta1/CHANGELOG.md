@@ -1,5 +1,24 @@
 # Changelog
 
+### 0.6.1 (2024-01-12)
+
+#### Bug Fixes
+
+* Ensure endpoints are correct for mixin clients ([#24032](https://github.com/googleapis/google-cloud-ruby/issues/24032)) 
+
+### 0.6.0 (2024-01-11)
+
+#### Features
+
+* Support for universe_domain ([#23777](https://github.com/googleapis/google-cloud-ruby/issues/23777)) 
+
+### 0.5.0 (2023-11-02)
+
+#### Features
+
+* Support ReleaseConfigs ([#23477](https://github.com/googleapis/google-cloud-ruby/issues/23477)) 
+* Support Repository APIs ([#23477](https://github.com/googleapis/google-cloud-ruby/issues/23477)) 
+
 ### 0.4.0 (2023-09-12)
 
 #### Features

@@ -517,6 +517,7 @@ module Google
         #   @return [::String]
         #     Path inside the Cloud Storage bucket to write data to.
         # @!attribute [rw] gcs_file_format
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::Datastream::V1alpha1::GcsFileFormat]
         #     File format that data should be written in.
         #     Deprecated field - use file_format instead.
@@ -763,6 +764,7 @@ module Google
         end
 
         # File format in Cloud Storage.
+        # @deprecated This enum is deprecated and may be removed in the next major version update.
         module GcsFileFormat
           # Unspecified Cloud Storage file format.
           GCS_FILE_FORMAT_UNSPECIFIED = 0

@@ -45,6 +45,14 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::ClientTest < Min
 
       @response
     end
+
+    def endpoint
+      "endpoint.example.com"
+    end
+
+    def universe_domain
+      "example.com"
+    end
   end
 
   def test_create_table
@@ -503,12 +511,14 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::ClientTest < Min
     # Create request parameters for a unary method.
     name = "hello world"
     modifications = [{}]
+    ignore_warnings = true
 
     modify_column_families_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :modify_column_families, name
       assert_kind_of ::Google::Cloud::Bigtable::Admin::V2::ModifyColumnFamiliesRequest, request
       assert_equal "hello world", request["name"]
       assert_kind_of ::Google::Cloud::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification, request["modifications"].first
+      assert_equal true, request["ignore_warnings"]
       refute_nil options
     end
 
@@ -519,31 +529,31 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::ClientTest < Min
       end
 
       # Use hash object
-      client.modify_column_families({ name: name, modifications: modifications }) do |response, operation|
+      client.modify_column_families({ name: name, modifications: modifications, ignore_warnings: ignore_warnings }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.modify_column_families name: name, modifications: modifications do |response, operation|
+      client.modify_column_families name: name, modifications: modifications, ignore_warnings: ignore_warnings do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.modify_column_families ::Google::Cloud::Bigtable::Admin::V2::ModifyColumnFamiliesRequest.new(name: name, modifications: modifications) do |response, operation|
+      client.modify_column_families ::Google::Cloud::Bigtable::Admin::V2::ModifyColumnFamiliesRequest.new(name: name, modifications: modifications, ignore_warnings: ignore_warnings) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.modify_column_families({ name: name, modifications: modifications }, grpc_options) do |response, operation|
+      client.modify_column_families({ name: name, modifications: modifications, ignore_warnings: ignore_warnings }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.modify_column_families(::Google::Cloud::Bigtable::Admin::V2::ModifyColumnFamiliesRequest.new(name: name, modifications: modifications), grpc_options) do |response, operation|
+      client.modify_column_families(::Google::Cloud::Bigtable::Admin::V2::ModifyColumnFamiliesRequest.new(name: name, modifications: modifications, ignore_warnings: ignore_warnings), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1623,7 +1633,8 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::ClientTest < Min
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
     client = block_config = config = nil
-    Gapic::ServiceStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil, nil
+    Gapic::ServiceStub.stub :new, dummy_stub do
       client = ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -1641,7 +1652,8 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::ClientTest < Min
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
     client = nil
-    Gapic::ServiceStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil, nil
+    Gapic::ServiceStub.stub :new, dummy_stub do
       client = ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end

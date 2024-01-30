@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/logging/v2/config_service"
 
 class ::Google::Cloud::Logging::V2::ConfigService::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_billing_account_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Logging::V2::ConfigService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -37,7 +47,7 @@ class ::Google::Cloud::Logging::V2::ConfigService::ClientPathsTest < Minitest::T
 
   def test_billing_account_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Logging::V2::ConfigService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -49,7 +59,7 @@ class ::Google::Cloud::Logging::V2::ConfigService::ClientPathsTest < Minitest::T
 
   def test_cmek_settings_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Logging::V2::ConfigService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -70,7 +80,7 @@ class ::Google::Cloud::Logging::V2::ConfigService::ClientPathsTest < Minitest::T
 
   def test_folder_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Logging::V2::ConfigService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -82,7 +92,7 @@ class ::Google::Cloud::Logging::V2::ConfigService::ClientPathsTest < Minitest::T
 
   def test_folder_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Logging::V2::ConfigService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -94,7 +104,7 @@ class ::Google::Cloud::Logging::V2::ConfigService::ClientPathsTest < Minitest::T
 
   def test_link_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Logging::V2::ConfigService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -115,7 +125,7 @@ class ::Google::Cloud::Logging::V2::ConfigService::ClientPathsTest < Minitest::T
 
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Logging::V2::ConfigService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -127,7 +137,7 @@ class ::Google::Cloud::Logging::V2::ConfigService::ClientPathsTest < Minitest::T
 
   def test_log_bucket_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Logging::V2::ConfigService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -148,7 +158,7 @@ class ::Google::Cloud::Logging::V2::ConfigService::ClientPathsTest < Minitest::T
 
   def test_log_exclusion_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Logging::V2::ConfigService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -169,7 +179,7 @@ class ::Google::Cloud::Logging::V2::ConfigService::ClientPathsTest < Minitest::T
 
   def test_log_sink_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Logging::V2::ConfigService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -190,7 +200,7 @@ class ::Google::Cloud::Logging::V2::ConfigService::ClientPathsTest < Minitest::T
 
   def test_log_view_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Logging::V2::ConfigService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -211,7 +221,7 @@ class ::Google::Cloud::Logging::V2::ConfigService::ClientPathsTest < Minitest::T
 
   def test_organization_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Logging::V2::ConfigService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -223,7 +233,7 @@ class ::Google::Cloud::Logging::V2::ConfigService::ClientPathsTest < Minitest::T
 
   def test_organization_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Logging::V2::ConfigService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -235,7 +245,7 @@ class ::Google::Cloud::Logging::V2::ConfigService::ClientPathsTest < Minitest::T
 
   def test_project_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Logging::V2::ConfigService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -247,7 +257,7 @@ class ::Google::Cloud::Logging::V2::ConfigService::ClientPathsTest < Minitest::T
 
   def test_settings_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Logging::V2::ConfigService::Client.new do |config|
         config.credentials = grpc_channel
       end

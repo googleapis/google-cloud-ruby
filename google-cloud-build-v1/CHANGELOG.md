@@ -1,5 +1,23 @@
 # Release History
 
+### 0.26.1 (2024-01-12)
+
+#### Bug Fixes
+
+* Ensure endpoints are correct for mixin clients ([#24032](https://github.com/googleapis/google-cloud-ruby/issues/24032)) 
+
+### 0.26.0 (2024-01-11)
+
+#### Features
+
+* Support for universe_domain ([#23775](https://github.com/googleapis/google-cloud-ruby/issues/23775)) 
+
+### 0.25.0 (2023-11-06)
+
+#### Features
+
+* Add optional field "SourceFetcher" to choose source fetcher tool ([#23504](https://github.com/googleapis/google-cloud-ruby/issues/23504)) 
+
 ### 0.24.0 (2023-09-12)
 
 #### Features

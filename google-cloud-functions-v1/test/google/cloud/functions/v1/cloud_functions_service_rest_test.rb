@@ -60,6 +60,14 @@ class ::Google::Cloud::Functions::V1::CloudFunctionsService::Rest::ClientTest < 
 
       @response
     end
+
+    def endpoint
+      "endpoint.example.com"
+    end
+
+    def universe_domain
+      "example.com"
+    end
   end
 
   def test_list_functions
@@ -127,6 +135,7 @@ class ::Google::Cloud::Functions::V1::CloudFunctionsService::Rest::ClientTest < 
 
     # Create request parameters for a unary method.
     name = "hello world"
+    version_id = 42
 
     get_function_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -142,27 +151,27 @@ class ::Google::Cloud::Functions::V1::CloudFunctionsService::Rest::ClientTest < 
         end
 
         # Use hash object
-        client.get_function({ name: name }) do |_result, response|
+        client.get_function({ name: name, version_id: version_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_function name: name do |_result, response|
+        client.get_function name: name, version_id: version_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_function ::Google::Cloud::Functions::V1::GetFunctionRequest.new(name: name) do |_result, response|
+        client.get_function ::Google::Cloud::Functions::V1::GetFunctionRequest.new(name: name, version_id: version_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_function({ name: name }, call_options) do |_result, response|
+        client.get_function({ name: name, version_id: version_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_function(::Google::Cloud::Functions::V1::GetFunctionRequest.new(name: name), call_options) do |_result, response|
+        client.get_function(::Google::Cloud::Functions::V1::GetFunctionRequest.new(name: name, version_id: version_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -671,7 +680,8 @@ class ::Google::Cloud::Functions::V1::CloudFunctionsService::Rest::ClientTest < 
     credentials_token = :dummy_value
 
     client = block_config = config = nil
-    Gapic::Rest::ClientStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil
+    Gapic::Rest::ClientStub.stub :new, dummy_stub do
       client = ::Google::Cloud::Functions::V1::CloudFunctionsService::Rest::Client.new do |config|
         config.credentials = credentials_token
       end

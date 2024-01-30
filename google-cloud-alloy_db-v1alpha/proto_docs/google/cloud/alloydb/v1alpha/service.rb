@@ -956,8 +956,10 @@ module Google
         #     The request ID must be a valid UUID with the exception that zero UUID is
         #     not supported (00000000-0000-0000-0000-000000000000).
         # @!attribute [rw] pem_csr
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
-        #     Optional. A pem-encoded X.509 certificate signing request (CSR).
+        #     Optional. A pem-encoded X.509 certificate signing request (CSR). It is
+        #     recommended to use public_key instead.
         # @!attribute [rw] cert_duration
         #   @return [::Google::Protobuf::Duration]
         #     Optional. An optional hint to the endpoint to generate the client
@@ -980,6 +982,7 @@ module Google
 
         # Message returned by a GenerateClientCertificate operation.
         # @!attribute [r] pem_certificate
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Output only. The pem-encoded, signed X.509 certificate.
         # @!attribute [r] pem_certificate_chain
@@ -1197,6 +1200,43 @@ module Google
         #     Optional. If set, the backend validates the request, but doesn't actually
         #     execute it.
         class DeleteUserRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message for requesting list of Databases.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Parent value for ListDatabasesRequest.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of databases to return. The service may return
+        #     fewer than this value. If unspecified, an appropriate number of databases
+        #     will be returned. The max value will be 2000, values above max will be
+        #     coerced to max.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A page token, received from a previous `ListDatabases` call.
+        #     This should be provided to retrieve the subsequent page.
+        #     This field is currently not supported, its value will be ignored if passed.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Filtering results.
+        #     This field is currently not supported, its value will be ignored if passed.
+        class ListDatabasesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message for response to listing Databases.
+        # @!attribute [rw] databases
+        #   @return [::Array<::Google::Cloud::AlloyDB::V1alpha::Database>]
+        #     The list of databases
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token identifying the next page of results the server should return.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListDatabasesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

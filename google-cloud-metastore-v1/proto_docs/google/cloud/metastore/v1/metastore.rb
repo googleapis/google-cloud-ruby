@@ -445,6 +445,7 @@ module Google
           # A specification of the location of and metadata about a database dump from
           # a relational database management system.
           # @!attribute [rw] database_type
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::Google::Cloud::Metastore::V1::MetadataImport::DatabaseDump::DatabaseType]
           #     The type of the database.
           # @!attribute [rw] gcs_uri
@@ -452,6 +453,7 @@ module Google
           #     A Cloud Storage object or folder URI that specifies the source from which
           #     to import metadata. It must begin with `gs://`.
           # @!attribute [rw] source_database
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::String]
           #     The name of the source database.
           # @!attribute [rw] type

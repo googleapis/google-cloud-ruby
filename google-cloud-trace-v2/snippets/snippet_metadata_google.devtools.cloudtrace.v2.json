@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-trace-v2",
-    "version": "0.7.0",
+    "version": "0.8.1",
     "language": "RUBY",
     "apis": [
       {
@@ -14,7 +14,7 @@
     {
       "region_tag": "cloudtrace_v2_generated_TraceService_BatchWriteSpans_sync",
       "title": "Snippet for the batch_write_spans call in the TraceService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Trace::V2::TraceService::Client#batch_write_spans. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Trace::V2::TraceService::Client#batch_write_spans.",
       "file": "trace_service/batch_write_spans.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "cloudtrace_v2_generated_TraceService_CreateSpan_sync",
       "title": "Snippet for the create_span call in the TraceService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Trace::V2::TraceService::Client#create_span. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Trace::V2::TraceService::Client#create_span.",
       "file": "trace_service/create_span.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]

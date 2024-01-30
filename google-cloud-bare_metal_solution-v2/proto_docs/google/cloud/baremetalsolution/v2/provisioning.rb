@@ -43,6 +43,7 @@ module Google
         #     A service account to enable customers to access instance credentials upon
         #     handover.
         # @!attribute [rw] email
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Email provided to send a confirmation with provisioning config to.
         #     Deprecated in favour of email field in request messages.
@@ -230,9 +231,11 @@ module Google
         #     [Available
         #     images](https://cloud.google.com/bare-metal/docs/bms-planning#server_configurations)
         # @!attribute [rw] client_network
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::BareMetalSolution::V2::InstanceConfig::NetworkAddress]
         #     Client network address. Filled if InstanceConfig.multivlan_config is false.
         # @!attribute [rw] private_network
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::BareMetalSolution::V2::InstanceConfig::NetworkAddress]
         #     Private network address, if any. Filled if InstanceConfig.multivlan_config
         #     is false.
@@ -524,6 +527,7 @@ module Google
         #   @return [::String]
         #     Output only. The name of the instance quota.
         # @!attribute [rw] instance_type
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Instance type.
         #     Deprecated: use gcp_service.

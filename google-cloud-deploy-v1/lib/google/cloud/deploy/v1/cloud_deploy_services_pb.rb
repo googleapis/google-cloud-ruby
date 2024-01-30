@@ -46,6 +46,8 @@ module Google
             rpc :DeleteDeliveryPipeline, ::Google::Cloud::Deploy::V1::DeleteDeliveryPipelineRequest, ::Google::Longrunning::Operation
             # Lists Targets in a given project and location.
             rpc :ListTargets, ::Google::Cloud::Deploy::V1::ListTargetsRequest, ::Google::Cloud::Deploy::V1::ListTargetsResponse
+            # Creates a `Rollout` to roll back the specified target.
+            rpc :RollbackTarget, ::Google::Cloud::Deploy::V1::RollbackTargetRequest, ::Google::Cloud::Deploy::V1::RollbackTargetResponse
             # Gets details of a single Target.
             rpc :GetTarget, ::Google::Cloud::Deploy::V1::GetTargetRequest, ::Google::Cloud::Deploy::V1::Target
             # Creates a new Target in a given project and location.
@@ -54,6 +56,16 @@ module Google
             rpc :UpdateTarget, ::Google::Cloud::Deploy::V1::UpdateTargetRequest, ::Google::Longrunning::Operation
             # Deletes a single Target.
             rpc :DeleteTarget, ::Google::Cloud::Deploy::V1::DeleteTargetRequest, ::Google::Longrunning::Operation
+            # Lists CustomTargetTypes in a given project and location.
+            rpc :ListCustomTargetTypes, ::Google::Cloud::Deploy::V1::ListCustomTargetTypesRequest, ::Google::Cloud::Deploy::V1::ListCustomTargetTypesResponse
+            # Gets details of a single CustomTargetType.
+            rpc :GetCustomTargetType, ::Google::Cloud::Deploy::V1::GetCustomTargetTypeRequest, ::Google::Cloud::Deploy::V1::CustomTargetType
+            # Creates a new CustomTargetType in a given project and location.
+            rpc :CreateCustomTargetType, ::Google::Cloud::Deploy::V1::CreateCustomTargetTypeRequest, ::Google::Longrunning::Operation
+            # Updates a single CustomTargetType.
+            rpc :UpdateCustomTargetType, ::Google::Cloud::Deploy::V1::UpdateCustomTargetTypeRequest, ::Google::Longrunning::Operation
+            # Deletes a single CustomTargetType.
+            rpc :DeleteCustomTargetType, ::Google::Cloud::Deploy::V1::DeleteCustomTargetTypeRequest, ::Google::Longrunning::Operation
             # Lists Releases in a given project and location.
             rpc :ListReleases, ::Google::Cloud::Deploy::V1::ListReleasesRequest, ::Google::Cloud::Deploy::V1::ListReleasesResponse
             # Gets details of a single Release.
@@ -86,6 +98,25 @@ module Google
             rpc :TerminateJobRun, ::Google::Cloud::Deploy::V1::TerminateJobRunRequest, ::Google::Cloud::Deploy::V1::TerminateJobRunResponse
             # Gets the configuration for a location.
             rpc :GetConfig, ::Google::Cloud::Deploy::V1::GetConfigRequest, ::Google::Cloud::Deploy::V1::Config
+            # Creates a new Automation in a given project and location.
+            rpc :CreateAutomation, ::Google::Cloud::Deploy::V1::CreateAutomationRequest, ::Google::Longrunning::Operation
+            # Updates the parameters of a single Automation resource.
+            rpc :UpdateAutomation, ::Google::Cloud::Deploy::V1::UpdateAutomationRequest, ::Google::Longrunning::Operation
+            # Deletes a single Automation resource.
+            rpc :DeleteAutomation, ::Google::Cloud::Deploy::V1::DeleteAutomationRequest, ::Google::Longrunning::Operation
+            # Gets details of a single Automation.
+            rpc :GetAutomation, ::Google::Cloud::Deploy::V1::GetAutomationRequest, ::Google::Cloud::Deploy::V1::Automation
+            # Lists Automations in a given project and location.
+            rpc :ListAutomations, ::Google::Cloud::Deploy::V1::ListAutomationsRequest, ::Google::Cloud::Deploy::V1::ListAutomationsResponse
+            # Gets details of a single AutomationRun.
+            rpc :GetAutomationRun, ::Google::Cloud::Deploy::V1::GetAutomationRunRequest, ::Google::Cloud::Deploy::V1::AutomationRun
+            # Lists AutomationRuns in a given project and location.
+            rpc :ListAutomationRuns, ::Google::Cloud::Deploy::V1::ListAutomationRunsRequest, ::Google::Cloud::Deploy::V1::ListAutomationRunsResponse
+            # Cancels an AutomationRun. The `state` of the `AutomationRun` after
+            # cancelling is `CANCELLED`. `CancelAutomationRun` can be called on
+            # AutomationRun in the state `IN_PROGRESS` and `PENDING`; AutomationRun
+            # in a different state returns an `FAILED_PRECONDITION` error.
+            rpc :CancelAutomationRun, ::Google::Cloud::Deploy::V1::CancelAutomationRunRequest, ::Google::Cloud::Deploy::V1::CancelAutomationRunResponse
           end
 
           Stub = Service.rpc_stub_class

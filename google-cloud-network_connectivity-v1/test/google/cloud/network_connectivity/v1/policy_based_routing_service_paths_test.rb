@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/network_connectivity/v1/policy_based_routing_service"
 
 class ::Google::Cloud::NetworkConnectivity::V1::PolicyBasedRoutingService::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::NetworkConnectivity::V1::PolicyBasedRoutingService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -37,7 +47,7 @@ class ::Google::Cloud::NetworkConnectivity::V1::PolicyBasedRoutingService::Clien
 
   def test_network_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::NetworkConnectivity::V1::PolicyBasedRoutingService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -49,7 +59,7 @@ class ::Google::Cloud::NetworkConnectivity::V1::PolicyBasedRoutingService::Clien
 
   def test_policy_based_route_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::NetworkConnectivity::V1::PolicyBasedRoutingService::Client.new do |config|
         config.credentials = grpc_channel
       end

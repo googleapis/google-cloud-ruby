@@ -1,5 +1,24 @@
 # Changelog
 
+### 0.12.1 (2024-01-12)
+
+#### Bug Fixes
+
+* Ensure endpoints are correct for mixin clients ([#24032](https://github.com/googleapis/google-cloud-ruby/issues/24032)) 
+
+### 0.12.0 (2024-01-11)
+
+#### Features
+
+* Support for universe_domain ([#23773](https://github.com/googleapis/google-cloud-ruby/issues/23773)) 
+
+### 0.11.0 (2023-10-27)
+
+#### Features
+
+* add docker_config, virtual_repository_config, remote_repository_config, mode, cleanup_policies, size_bytes, satisfies_pzs, cleanup_policy_dry_run to Repository 
+* support batch_delete_versions service 
+
 ### 0.10.0 (2023-09-12)
 
 #### Features

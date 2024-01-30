@@ -1,5 +1,23 @@
 # Release History
 
+### 0.17.1 (2024-01-12)
+
+#### Bug Fixes
+
+* Ensure endpoints are correct for mixin clients ([#24032](https://github.com/googleapis/google-cloud-ruby/issues/24032)) 
+
+### 0.17.0 (2024-01-11)
+
+#### Features
+
+* Support for universe_domain ([#23784](https://github.com/googleapis/google-cloud-ruby/issues/23784)) 
+
+### 0.16.0 (2023-12-13)
+
+#### Features
+
+* Support cost_in_local_currency field in the cost projection ([#23648](https://github.com/googleapis/google-cloud-ruby/issues/23648)) 
+
 ### 0.15.0 (2023-09-12)
 
 #### Features

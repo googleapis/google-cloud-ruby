@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-orchestration-airflow-service-v1",
-    "version": "0.8.0",
+    "version": "0.9.1",
     "language": "RUBY",
     "apis": [
       {
@@ -14,7 +14,7 @@
     {
       "region_tag": "composer_v1_generated_Environments_CreateEnvironment_sync",
       "title": "Snippet for the create_environment call in the Environments service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#create_environment. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#create_environment.",
       "file": "environments/create_environment.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "composer_v1_generated_Environments_GetEnvironment_sync",
       "title": "Snippet for the get_environment call in the Environments service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#get_environment. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#get_environment.",
       "file": "environments/get_environment.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "composer_v1_generated_Environments_ListEnvironments_sync",
       "title": "Snippet for the list_environments call in the Environments service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#list_environments. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#list_environments.",
       "file": "environments/list_environments.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -134,7 +134,7 @@
     {
       "region_tag": "composer_v1_generated_Environments_UpdateEnvironment_sync",
       "title": "Snippet for the update_environment call in the Environments service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#update_environment. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#update_environment.",
       "file": "environments/update_environment.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -174,7 +174,7 @@
     {
       "region_tag": "composer_v1_generated_Environments_DeleteEnvironment_sync",
       "title": "Snippet for the delete_environment call in the Environments service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#delete_environment. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#delete_environment.",
       "file": "environments/delete_environment.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,7 +206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -214,7 +214,7 @@
     {
       "region_tag": "composer_v1_generated_Environments_ExecuteAirflowCommand_sync",
       "title": "Snippet for the execute_airflow_command call in the Environments service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#execute_airflow_command. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#execute_airflow_command.",
       "file": "environments/execute_airflow_command.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,7 +246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -254,7 +254,7 @@
     {
       "region_tag": "composer_v1_generated_Environments_StopAirflowCommand_sync",
       "title": "Snippet for the stop_airflow_command call in the Environments service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#stop_airflow_command. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#stop_airflow_command.",
       "file": "environments/stop_airflow_command.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,7 +286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -294,7 +294,7 @@
     {
       "region_tag": "composer_v1_generated_Environments_PollAirflowCommand_sync",
       "title": "Snippet for the poll_airflow_command call in the Environments service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#poll_airflow_command. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#poll_airflow_command.",
       "file": "environments/poll_airflow_command.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,7 +326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -334,7 +334,7 @@
     {
       "region_tag": "composer_v1_generated_Environments_SaveSnapshot_sync",
       "title": "Snippet for the save_snapshot call in the Environments service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#save_snapshot. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#save_snapshot.",
       "file": "environments/save_snapshot.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,7 +366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -374,7 +374,7 @@
     {
       "region_tag": "composer_v1_generated_Environments_LoadSnapshot_sync",
       "title": "Snippet for the load_snapshot call in the Environments service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#load_snapshot. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#load_snapshot.",
       "file": "environments/load_snapshot.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,7 +406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -414,7 +414,7 @@
     {
       "region_tag": "composer_v1_generated_Environments_DatabaseFailover_sync",
       "title": "Snippet for the database_failover call in the Environments service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#database_failover. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#database_failover.",
       "file": "environments/database_failover.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,7 +446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -454,7 +454,7 @@
     {
       "region_tag": "composer_v1_generated_Environments_FetchDatabaseProperties_sync",
       "title": "Snippet for the fetch_database_properties call in the Environments service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#fetch_database_properties. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#fetch_database_properties.",
       "file": "environments/fetch_database_properties.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,7 +486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -494,7 +494,7 @@
     {
       "region_tag": "composer_v1_generated_ImageVersions_ListImageVersions_sync",
       "title": "Snippet for the list_image_versions call in the ImageVersions service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Orchestration::Airflow::Service::V1::ImageVersions::Client#list_image_versions. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Orchestration::Airflow::Service::V1::ImageVersions::Client#list_image_versions.",
       "file": "image_versions/list_image_versions.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,7 +526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]

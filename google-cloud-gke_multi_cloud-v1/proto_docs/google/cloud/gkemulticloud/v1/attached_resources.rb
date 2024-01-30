@@ -49,7 +49,7 @@ module Google
         #   @return [::String]
         #     Required. The Kubernetes distribution of the underlying attached cluster.
         #
-        #     Supported values: ["eks", "aks"].
+        #     Supported values: ["eks", "aks", "generic"].
         # @!attribute [r] cluster_region
         #   @return [::String]
         #     Output only. The region where this cluster runs.
@@ -110,6 +110,12 @@ module Google
         # @!attribute [rw] monitoring_config
         #   @return [::Google::Cloud::GkeMultiCloud::V1::MonitoringConfig]
         #     Optional. Monitoring configuration for this cluster.
+        # @!attribute [rw] proxy_config
+        #   @return [::Google::Cloud::GkeMultiCloud::V1::AttachedProxyConfig]
+        #     Optional. Proxy configuration for outbound HTTP(S) traffic.
+        # @!attribute [rw] binary_authorization
+        #   @return [::Google::Cloud::GkeMultiCloud::V1::BinaryAuthorization]
+        #     Optional. Binary Authorization configuration for this cluster.
         class AttachedCluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -155,9 +161,17 @@ module Google
         # Configuration related to the cluster RBAC settings.
         # @!attribute [rw] admin_users
         #   @return [::Array<::Google::Cloud::GkeMultiCloud::V1::AttachedClusterUser>]
-        #     Required. Users that can perform operations as a cluster admin. A managed
+        #     Optional. Users that can perform operations as a cluster admin. A managed
         #     ClusterRoleBinding will be created to grant the `cluster-admin` ClusterRole
         #     to the users. Up to ten admin users can be provided.
+        #
+        #     For more info on RBAC, see
+        #     https://kubernetes.io/docs/reference/access-authn-authz/rbac/#user-facing-roles
+        # @!attribute [rw] admin_groups
+        #   @return [::Array<::Google::Cloud::GkeMultiCloud::V1::AttachedClusterGroup>]
+        #     Optional. Groups of users that can perform operations as a cluster admin. A
+        #     managed ClusterRoleBinding will be created to grant the `cluster-admin`
+        #     ClusterRole to the groups. Up to ten admin groups can be provided.
         #
         #     For more info on RBAC, see
         #     https://kubernetes.io/docs/reference/access-authn-authz/rbac/#user-facing-roles
@@ -171,6 +185,15 @@ module Google
         #   @return [::String]
         #     Required. The name of the user, e.g. `my-gcp-id@gmail.com`.
         class AttachedClusterUser
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Identities of a group-type subject for Attached clusters.
+        # @!attribute [rw] group
+        #   @return [::String]
+        #     Required. The name of the group, e.g. `my-group@domain.com`.
+        class AttachedClusterGroup
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -230,6 +253,29 @@ module Google
         #   @return [::String]
         #     Human-friendly description of the error.
         class AttachedClusterError
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Details of a proxy config.
+        # @!attribute [rw] kubernetes_secret
+        #   @return [::Google::Cloud::GkeMultiCloud::V1::KubernetesSecret]
+        #     The Kubernetes Secret resource that contains the HTTP(S) proxy
+        #     configuration. The secret must be a JSON encoded proxy configuration
+        #     as described in
+        class AttachedProxyConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Information about a Kubernetes Secret
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Name of the kubernetes secret.
+        # @!attribute [rw] namespace
+        #   @return [::String]
+        #     Namespace in which the kubernetes secret is stored.
+        class KubernetesSecret
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

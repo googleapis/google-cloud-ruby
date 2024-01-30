@@ -45,6 +45,14 @@ class ::Google::Cloud::Deploy::V1::CloudDeploy::ClientTest < Minitest::Test
 
       @response
     end
+
+    def endpoint
+      "endpoint.example.com"
+    end
+
+    def universe_domain
+      "example.com"
+    end
   end
 
   def test_list_delivery_pipelines
@@ -462,6 +470,76 @@ class ::Google::Cloud::Deploy::V1::CloudDeploy::ClientTest < Minitest::Test
     end
   end
 
+  def test_rollback_target
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Deploy::V1::RollbackTargetResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    target_id = "hello world"
+    rollout_id = "hello world"
+    release_id = "hello world"
+    rollout_to_roll_back = "hello world"
+    rollback_config = {}
+    validate_only = true
+
+    rollback_target_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :rollback_target, name
+      assert_kind_of ::Google::Cloud::Deploy::V1::RollbackTargetRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["target_id"]
+      assert_equal "hello world", request["rollout_id"]
+      assert_equal "hello world", request["release_id"]
+      assert_equal "hello world", request["rollout_to_roll_back"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Deploy::V1::RollbackTargetConfig), request["rollback_config"]
+      assert_equal true, request["validate_only"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, rollback_target_client_stub do
+      # Create client
+      client = ::Google::Cloud::Deploy::V1::CloudDeploy::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.rollback_target({ name: name, target_id: target_id, rollout_id: rollout_id, release_id: release_id, rollout_to_roll_back: rollout_to_roll_back, rollback_config: rollback_config, validate_only: validate_only }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.rollback_target name: name, target_id: target_id, rollout_id: rollout_id, release_id: release_id, rollout_to_roll_back: rollout_to_roll_back, rollback_config: rollback_config, validate_only: validate_only do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.rollback_target ::Google::Cloud::Deploy::V1::RollbackTargetRequest.new(name: name, target_id: target_id, rollout_id: rollout_id, release_id: release_id, rollout_to_roll_back: rollout_to_roll_back, rollback_config: rollback_config, validate_only: validate_only) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.rollback_target({ name: name, target_id: target_id, rollout_id: rollout_id, release_id: release_id, rollout_to_roll_back: rollout_to_roll_back, rollback_config: rollback_config, validate_only: validate_only }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.rollback_target(::Google::Cloud::Deploy::V1::RollbackTargetRequest.new(name: name, target_id: target_id, rollout_id: rollout_id, release_id: release_id, rollout_to_roll_back: rollout_to_roll_back, rollback_config: rollback_config, validate_only: validate_only), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, rollback_target_client_stub.call_rpc_count
+    end
+  end
+
   def test_get_target
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::Deploy::V1::Target.new
@@ -730,6 +808,348 @@ class ::Google::Cloud::Deploy::V1::CloudDeploy::ClientTest < Minitest::Test
 
       # Verify method calls
       assert_equal 5, delete_target_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_custom_target_types
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Deploy::V1::ListCustomTargetTypesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_custom_target_types_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_custom_target_types, name
+      assert_kind_of ::Google::Cloud::Deploy::V1::ListCustomTargetTypesRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_custom_target_types_client_stub do
+      # Create client
+      client = ::Google::Cloud::Deploy::V1::CloudDeploy::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_custom_target_types({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_custom_target_types parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_custom_target_types ::Google::Cloud::Deploy::V1::ListCustomTargetTypesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_custom_target_types({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_custom_target_types(::Google::Cloud::Deploy::V1::ListCustomTargetTypesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_custom_target_types_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_custom_target_type
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Deploy::V1::CustomTargetType.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_custom_target_type_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_custom_target_type, name
+      assert_kind_of ::Google::Cloud::Deploy::V1::GetCustomTargetTypeRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_custom_target_type_client_stub do
+      # Create client
+      client = ::Google::Cloud::Deploy::V1::CloudDeploy::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_custom_target_type({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_custom_target_type name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_custom_target_type ::Google::Cloud::Deploy::V1::GetCustomTargetTypeRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_custom_target_type({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_custom_target_type(::Google::Cloud::Deploy::V1::GetCustomTargetTypeRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_custom_target_type_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_custom_target_type
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    custom_target_type_id = "hello world"
+    custom_target_type = {}
+    request_id = "hello world"
+    validate_only = true
+
+    create_custom_target_type_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_custom_target_type, name
+      assert_kind_of ::Google::Cloud::Deploy::V1::CreateCustomTargetTypeRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["custom_target_type_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Deploy::V1::CustomTargetType), request["custom_target_type"]
+      assert_equal "hello world", request["request_id"]
+      assert_equal true, request["validate_only"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_custom_target_type_client_stub do
+      # Create client
+      client = ::Google::Cloud::Deploy::V1::CloudDeploy::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_custom_target_type({ parent: parent, custom_target_type_id: custom_target_type_id, custom_target_type: custom_target_type, request_id: request_id, validate_only: validate_only }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_custom_target_type parent: parent, custom_target_type_id: custom_target_type_id, custom_target_type: custom_target_type, request_id: request_id, validate_only: validate_only do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_custom_target_type ::Google::Cloud::Deploy::V1::CreateCustomTargetTypeRequest.new(parent: parent, custom_target_type_id: custom_target_type_id, custom_target_type: custom_target_type, request_id: request_id, validate_only: validate_only) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_custom_target_type({ parent: parent, custom_target_type_id: custom_target_type_id, custom_target_type: custom_target_type, request_id: request_id, validate_only: validate_only }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_custom_target_type(::Google::Cloud::Deploy::V1::CreateCustomTargetTypeRequest.new(parent: parent, custom_target_type_id: custom_target_type_id, custom_target_type: custom_target_type, request_id: request_id, validate_only: validate_only), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_custom_target_type_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_custom_target_type
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    custom_target_type = {}
+    request_id = "hello world"
+    allow_missing = true
+    validate_only = true
+
+    update_custom_target_type_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_custom_target_type, name
+      assert_kind_of ::Google::Cloud::Deploy::V1::UpdateCustomTargetTypeRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Deploy::V1::CustomTargetType), request["custom_target_type"]
+      assert_equal "hello world", request["request_id"]
+      assert_equal true, request["allow_missing"]
+      assert_equal true, request["validate_only"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_custom_target_type_client_stub do
+      # Create client
+      client = ::Google::Cloud::Deploy::V1::CloudDeploy::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_custom_target_type({ update_mask: update_mask, custom_target_type: custom_target_type, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_custom_target_type update_mask: update_mask, custom_target_type: custom_target_type, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_custom_target_type ::Google::Cloud::Deploy::V1::UpdateCustomTargetTypeRequest.new(update_mask: update_mask, custom_target_type: custom_target_type, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_custom_target_type({ update_mask: update_mask, custom_target_type: custom_target_type, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_custom_target_type(::Google::Cloud::Deploy::V1::UpdateCustomTargetTypeRequest.new(update_mask: update_mask, custom_target_type: custom_target_type, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_custom_target_type_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_custom_target_type
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+    allow_missing = true
+    validate_only = true
+    etag = "hello world"
+
+    delete_custom_target_type_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_custom_target_type, name
+      assert_kind_of ::Google::Cloud::Deploy::V1::DeleteCustomTargetTypeRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["request_id"]
+      assert_equal true, request["allow_missing"]
+      assert_equal true, request["validate_only"]
+      assert_equal "hello world", request["etag"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_custom_target_type_client_stub do
+      # Create client
+      client = ::Google::Cloud::Deploy::V1::CloudDeploy::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_custom_target_type({ name: name, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only, etag: etag }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_custom_target_type name: name, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only, etag: etag do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_custom_target_type ::Google::Cloud::Deploy::V1::DeleteCustomTargetTypeRequest.new(name: name, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only, etag: etag) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_custom_target_type({ name: name, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only, etag: etag }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_custom_target_type(::Google::Cloud::Deploy::V1::DeleteCustomTargetTypeRequest.new(name: name, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only, etag: etag), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_custom_target_type_client_stub.call_rpc_count
     end
   end
 
@@ -1740,11 +2160,541 @@ class ::Google::Cloud::Deploy::V1::CloudDeploy::ClientTest < Minitest::Test
     end
   end
 
+  def test_create_automation
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    automation_id = "hello world"
+    automation = {}
+    request_id = "hello world"
+    validate_only = true
+
+    create_automation_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_automation, name
+      assert_kind_of ::Google::Cloud::Deploy::V1::CreateAutomationRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["automation_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Deploy::V1::Automation), request["automation"]
+      assert_equal "hello world", request["request_id"]
+      assert_equal true, request["validate_only"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_automation_client_stub do
+      # Create client
+      client = ::Google::Cloud::Deploy::V1::CloudDeploy::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_automation({ parent: parent, automation_id: automation_id, automation: automation, request_id: request_id, validate_only: validate_only }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_automation parent: parent, automation_id: automation_id, automation: automation, request_id: request_id, validate_only: validate_only do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_automation ::Google::Cloud::Deploy::V1::CreateAutomationRequest.new(parent: parent, automation_id: automation_id, automation: automation, request_id: request_id, validate_only: validate_only) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_automation({ parent: parent, automation_id: automation_id, automation: automation, request_id: request_id, validate_only: validate_only }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_automation(::Google::Cloud::Deploy::V1::CreateAutomationRequest.new(parent: parent, automation_id: automation_id, automation: automation, request_id: request_id, validate_only: validate_only), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_automation_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_automation
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    automation = {}
+    request_id = "hello world"
+    allow_missing = true
+    validate_only = true
+
+    update_automation_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_automation, name
+      assert_kind_of ::Google::Cloud::Deploy::V1::UpdateAutomationRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Deploy::V1::Automation), request["automation"]
+      assert_equal "hello world", request["request_id"]
+      assert_equal true, request["allow_missing"]
+      assert_equal true, request["validate_only"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_automation_client_stub do
+      # Create client
+      client = ::Google::Cloud::Deploy::V1::CloudDeploy::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_automation({ update_mask: update_mask, automation: automation, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_automation update_mask: update_mask, automation: automation, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_automation ::Google::Cloud::Deploy::V1::UpdateAutomationRequest.new(update_mask: update_mask, automation: automation, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_automation({ update_mask: update_mask, automation: automation, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_automation(::Google::Cloud::Deploy::V1::UpdateAutomationRequest.new(update_mask: update_mask, automation: automation, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_automation_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_automation
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+    allow_missing = true
+    validate_only = true
+    etag = "hello world"
+
+    delete_automation_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_automation, name
+      assert_kind_of ::Google::Cloud::Deploy::V1::DeleteAutomationRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["request_id"]
+      assert_equal true, request["allow_missing"]
+      assert_equal true, request["validate_only"]
+      assert_equal "hello world", request["etag"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_automation_client_stub do
+      # Create client
+      client = ::Google::Cloud::Deploy::V1::CloudDeploy::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_automation({ name: name, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only, etag: etag }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_automation name: name, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only, etag: etag do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_automation ::Google::Cloud::Deploy::V1::DeleteAutomationRequest.new(name: name, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only, etag: etag) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_automation({ name: name, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only, etag: etag }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_automation(::Google::Cloud::Deploy::V1::DeleteAutomationRequest.new(name: name, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only, etag: etag), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_automation_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_automation
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Deploy::V1::Automation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_automation_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_automation, name
+      assert_kind_of ::Google::Cloud::Deploy::V1::GetAutomationRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_automation_client_stub do
+      # Create client
+      client = ::Google::Cloud::Deploy::V1::CloudDeploy::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_automation({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_automation name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_automation ::Google::Cloud::Deploy::V1::GetAutomationRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_automation({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_automation(::Google::Cloud::Deploy::V1::GetAutomationRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_automation_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_automations
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Deploy::V1::ListAutomationsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_automations_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_automations, name
+      assert_kind_of ::Google::Cloud::Deploy::V1::ListAutomationsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_automations_client_stub do
+      # Create client
+      client = ::Google::Cloud::Deploy::V1::CloudDeploy::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_automations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_automations parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_automations ::Google::Cloud::Deploy::V1::ListAutomationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_automations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_automations(::Google::Cloud::Deploy::V1::ListAutomationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_automations_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_automation_run
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Deploy::V1::AutomationRun.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_automation_run_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_automation_run, name
+      assert_kind_of ::Google::Cloud::Deploy::V1::GetAutomationRunRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_automation_run_client_stub do
+      # Create client
+      client = ::Google::Cloud::Deploy::V1::CloudDeploy::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_automation_run({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_automation_run name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_automation_run ::Google::Cloud::Deploy::V1::GetAutomationRunRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_automation_run({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_automation_run(::Google::Cloud::Deploy::V1::GetAutomationRunRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_automation_run_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_automation_runs
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Deploy::V1::ListAutomationRunsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_automation_runs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_automation_runs, name
+      assert_kind_of ::Google::Cloud::Deploy::V1::ListAutomationRunsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_automation_runs_client_stub do
+      # Create client
+      client = ::Google::Cloud::Deploy::V1::CloudDeploy::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_automation_runs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_automation_runs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_automation_runs ::Google::Cloud::Deploy::V1::ListAutomationRunsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_automation_runs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_automation_runs(::Google::Cloud::Deploy::V1::ListAutomationRunsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_automation_runs_client_stub.call_rpc_count
+    end
+  end
+
+  def test_cancel_automation_run
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Deploy::V1::CancelAutomationRunResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    cancel_automation_run_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :cancel_automation_run, name
+      assert_kind_of ::Google::Cloud::Deploy::V1::CancelAutomationRunRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, cancel_automation_run_client_stub do
+      # Create client
+      client = ::Google::Cloud::Deploy::V1::CloudDeploy::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.cancel_automation_run({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.cancel_automation_run name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.cancel_automation_run ::Google::Cloud::Deploy::V1::CancelAutomationRunRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.cancel_automation_run({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.cancel_automation_run(::Google::Cloud::Deploy::V1::CancelAutomationRunRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, cancel_automation_run_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
     client = block_config = config = nil
-    Gapic::ServiceStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil, nil
+    Gapic::ServiceStub.stub :new, dummy_stub do
       client = ::Google::Cloud::Deploy::V1::CloudDeploy::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -1762,7 +2712,8 @@ class ::Google::Cloud::Deploy::V1::CloudDeploy::ClientTest < Minitest::Test
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
     client = nil
-    Gapic::ServiceStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil, nil
+    Gapic::ServiceStub.stub :new, dummy_stub do
       client = ::Google::Cloud::Deploy::V1::CloudDeploy::Client.new do |config|
         config.credentials = grpc_channel
       end

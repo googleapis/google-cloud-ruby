@@ -26,9 +26,9 @@ module Google
         # denoting PII such as age, zipcode, and SSN. A data *origin* taxonomy could
         # contain policy tags to distinguish user data, employee data, partner data,
         # public data.
-        # @!attribute [r] name
+        # @!attribute [rw] name
         #   @return [::String]
-        #     Output only. Resource name of this taxonomy, whose format is:
+        #     Identifier. Resource name of this taxonomy, whose format is:
         #     "projects/\\{project_number}/locations/\\{location_id}/taxonomies/\\{id}".
         # @!attribute [rw] display_name
         #   @return [::String]
@@ -90,9 +90,9 @@ module Google
         # in a hierarchy. For example, consider the following hierarchy:
         # Geolocation -&gt; (LatLong, City, ZipCode). PolicyTag "Geolocation"
         # contains three child policy tags: "LatLong", "City", and "ZipCode".
-        # @!attribute [r] name
+        # @!attribute [rw] name
         #   @return [::String]
-        #     Output only. Resource name of this policy tag, whose format is:
+        #     Identifier. Resource name of this policy tag, whose format is:
         #     "projects/\\{project_number}/locations/\\{location_id}/taxonomies/\\{taxonomy_id}/policyTags/\\{id}".
         # @!attribute [rw] display_name
         #   @return [::String]

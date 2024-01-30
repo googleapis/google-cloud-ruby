@@ -119,6 +119,9 @@ module Google
         #     Optional. Optional parameter to place one or more nonces in the eat_nonce
         #     claim in the output token. The minimum size for JSON-encoded EATs is 10
         #     bytes and the maximum size is 74 bytes.
+        # @!attribute [rw] token_type
+        #   @return [::Google::Cloud::ConfidentialComputing::V1::TokenType]
+        #     Optional. Optional token type to select what type of token to return.
         class TokenOptions
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -242,6 +245,16 @@ module Google
 
           # ECDSA on the P-256 Curve with a SHA256 digest.
           ECDSA_P256_SHA256 = 3
+        end
+
+        # Token type enum contains the different types of token responses Confidential
+        # Space supports
+        module TokenType
+          # Unspecified token type
+          TOKEN_TYPE_UNSPECIFIED = 0
+
+          # OpenID Connect (OIDC) token type
+          TOKEN_TYPE_OIDC = 1
         end
       end
     end

@@ -7,7 +7,7 @@ require 'google/protobuf'
 require 'google/cloud/deploy/v1/log_enums_pb'
 
 
-descriptor_data = "\nBgoogle/cloud/deploy/v1/deliverypipeline_notification_payload.proto\x12\x16google.cloud.deploy.v1\x1a&google/cloud/deploy/v1/log_enums.proto\"{\n!DeliveryPipelineNotificationEvent\x12\x0f\n\x07message\x18\x01 \x01(\t\x12\x19\n\x11\x64\x65livery_pipeline\x18\x02 \x01(\t\x12*\n\x04type\x18\x03 \x01(\x0e\x32\x1c.google.cloud.deploy.v1.TypeB|\n\x1a\x63om.google.cloud.deploy.v1B(DeliveryPipelineNotificationPayloadProtoP\x01Z2cloud.google.com/go/deploy/apiv1/deploypb;deploypbb\x06proto3"
+descriptor_data = "\nBgoogle/cloud/deploy/v1/deliverypipeline_notification_payload.proto\x12\x16google.cloud.deploy.v1\x1a&google/cloud/deploy/v1/log_enums.proto\"\x91\x01\n!DeliveryPipelineNotificationEvent\x12\x0f\n\x07message\x18\x01 \x01(\t\x12\x14\n\x0cpipeline_uid\x18\x04 \x01(\t\x12\x19\n\x11\x64\x65livery_pipeline\x18\x02 \x01(\t\x12*\n\x04type\x18\x03 \x01(\x0e\x32\x1c.google.cloud.deploy.v1.TypeB|\n\x1a\x63om.google.cloud.deploy.v1B(DeliveryPipelineNotificationPayloadProtoP\x01Z2cloud.google.com/go/deploy/apiv1/deploypb;deploypbb\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 

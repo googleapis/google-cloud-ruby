@@ -45,6 +45,14 @@ class ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::ClientTest < Minitest::
 
       @response
     end
+
+    def endpoint
+      "endpoint.example.com"
+    end
+
+    def universe_domain
+      "example.com"
+    end
   end
 
   def test_create_azure_client
@@ -638,6 +646,82 @@ class ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::ClientTest < Minitest::
     end
   end
 
+  def test_generate_azure_cluster_agent_token
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::GkeMultiCloud::V1::GenerateAzureClusterAgentTokenResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    azure_cluster = "hello world"
+    subject_token = "hello world"
+    subject_token_type = "hello world"
+    version = "hello world"
+    node_pool_id = "hello world"
+    grant_type = "hello world"
+    audience = "hello world"
+    scope = "hello world"
+    requested_token_type = "hello world"
+    options = "hello world"
+
+    generate_azure_cluster_agent_token_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :generate_azure_cluster_agent_token, name
+      assert_kind_of ::Google::Cloud::GkeMultiCloud::V1::GenerateAzureClusterAgentTokenRequest, request
+      assert_equal "hello world", request["azure_cluster"]
+      assert_equal "hello world", request["subject_token"]
+      assert_equal "hello world", request["subject_token_type"]
+      assert_equal "hello world", request["version"]
+      assert_equal "hello world", request["node_pool_id"]
+      assert_equal "hello world", request["grant_type"]
+      assert_equal "hello world", request["audience"]
+      assert_equal "hello world", request["scope"]
+      assert_equal "hello world", request["requested_token_type"]
+      assert_equal "hello world", request["options"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, generate_azure_cluster_agent_token_client_stub do
+      # Create client
+      client = ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.generate_azure_cluster_agent_token({ azure_cluster: azure_cluster, subject_token: subject_token, subject_token_type: subject_token_type, version: version, node_pool_id: node_pool_id, grant_type: grant_type, audience: audience, scope: scope, requested_token_type: requested_token_type, options: options }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.generate_azure_cluster_agent_token azure_cluster: azure_cluster, subject_token: subject_token, subject_token_type: subject_token_type, version: version, node_pool_id: node_pool_id, grant_type: grant_type, audience: audience, scope: scope, requested_token_type: requested_token_type, options: options do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.generate_azure_cluster_agent_token ::Google::Cloud::GkeMultiCloud::V1::GenerateAzureClusterAgentTokenRequest.new(azure_cluster: azure_cluster, subject_token: subject_token, subject_token_type: subject_token_type, version: version, node_pool_id: node_pool_id, grant_type: grant_type, audience: audience, scope: scope, requested_token_type: requested_token_type, options: options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.generate_azure_cluster_agent_token({ azure_cluster: azure_cluster, subject_token: subject_token, subject_token_type: subject_token_type, version: version, node_pool_id: node_pool_id, grant_type: grant_type, audience: audience, scope: scope, requested_token_type: requested_token_type, options: options }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.generate_azure_cluster_agent_token(::Google::Cloud::GkeMultiCloud::V1::GenerateAzureClusterAgentTokenRequest.new(azure_cluster: azure_cluster, subject_token: subject_token, subject_token_type: subject_token_type, version: version, node_pool_id: node_pool_id, grant_type: grant_type, audience: audience, scope: scope, requested_token_type: requested_token_type, options: options), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, generate_azure_cluster_agent_token_client_stub.call_rpc_count
+    end
+  end
+
   def test_generate_azure_access_token
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::GkeMultiCloud::V1::GenerateAzureAccessTokenResponse.new
@@ -1026,6 +1110,122 @@ class ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::ClientTest < Minitest::
     end
   end
 
+  def test_get_azure_open_id_config
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::GkeMultiCloud::V1::AzureOpenIdConfig.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    azure_cluster = "hello world"
+
+    get_azure_open_id_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_azure_open_id_config, name
+      assert_kind_of ::Google::Cloud::GkeMultiCloud::V1::GetAzureOpenIdConfigRequest, request
+      assert_equal "hello world", request["azure_cluster"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_azure_open_id_config_client_stub do
+      # Create client
+      client = ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_azure_open_id_config({ azure_cluster: azure_cluster }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_azure_open_id_config azure_cluster: azure_cluster do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_azure_open_id_config ::Google::Cloud::GkeMultiCloud::V1::GetAzureOpenIdConfigRequest.new(azure_cluster: azure_cluster) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_azure_open_id_config({ azure_cluster: azure_cluster }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_azure_open_id_config(::Google::Cloud::GkeMultiCloud::V1::GetAzureOpenIdConfigRequest.new(azure_cluster: azure_cluster), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_azure_open_id_config_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_azure_json_web_keys
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::GkeMultiCloud::V1::AzureJsonWebKeys.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    azure_cluster = "hello world"
+
+    get_azure_json_web_keys_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_azure_json_web_keys, name
+      assert_kind_of ::Google::Cloud::GkeMultiCloud::V1::GetAzureJsonWebKeysRequest, request
+      assert_equal "hello world", request["azure_cluster"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_azure_json_web_keys_client_stub do
+      # Create client
+      client = ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_azure_json_web_keys({ azure_cluster: azure_cluster }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_azure_json_web_keys azure_cluster: azure_cluster do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_azure_json_web_keys ::Google::Cloud::GkeMultiCloud::V1::GetAzureJsonWebKeysRequest.new(azure_cluster: azure_cluster) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_azure_json_web_keys({ azure_cluster: azure_cluster }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_azure_json_web_keys(::Google::Cloud::GkeMultiCloud::V1::GetAzureJsonWebKeysRequest.new(azure_cluster: azure_cluster), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_azure_json_web_keys_client_stub.call_rpc_count
+    end
+  end
+
   def test_get_azure_server_config
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::GkeMultiCloud::V1::AzureServerConfig.new
@@ -1088,7 +1288,8 @@ class ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::ClientTest < Minitest::
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
     client = block_config = config = nil
-    Gapic::ServiceStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil, nil
+    Gapic::ServiceStub.stub :new, dummy_stub do
       client = ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -1106,7 +1307,8 @@ class ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::ClientTest < Minitest::
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
     client = nil
-    Gapic::ServiceStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil, nil
+    Gapic::ServiceStub.stub :new, dummy_stub do
       client = ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new do |config|
         config.credentials = grpc_channel
       end

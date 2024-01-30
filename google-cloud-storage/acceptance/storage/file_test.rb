@@ -857,4 +857,187 @@ describe Google::Cloud::Storage::File, :storage do
       expect { private_bucket.create_file original, file_name }.must_raise Google::Cloud::UnauthenticatedError
     end
   end
+
+  describe "object retention" do
+    # Note: While it would be best if we could clean up these buckets after
+    # each test, some of them have retention and cannot be deleted without
+    # incurring additional delays. So instead we delete things (including
+    # objects lingering from previous runs) at the end of the entire test run
+    # (see the bottom of storage_helper.rb).
+    let(:object_lock_bucket) { storage.create_bucket("object-lock-bucket-#{Time.now.to_i}", enable_object_retention: true) }
+    let(:data) { StringIO.new "Hello World!" }
+
+    it "should update file with future retain until time" do
+      uploaded_file = object_lock_bucket.create_file data, "object-lock-data.txt"
+
+      future_retain_until_time = (Time.now + 5).to_datetime
+      retention = { mode: "Unlocked", retain_until_time: future_retain_until_time }
+      uploaded_file.retention = retention
+
+      _(uploaded_file.retention_mode).must_equal "Unlocked"
+      _(uploaded_file.retention_retain_until_time).must_be_within_delta future_retain_until_time
+    end
+
+    it "should reduce retain until time of Unlocked with override" do
+      uploaded_file = object_lock_bucket.create_file data, "object-lock-data.txt"
+
+      retain_until_time = (Time.now + 5).to_datetime
+      future_retain_until_time = (Time.now + 10).to_datetime
+
+      retention = { mode: "Unlocked", retain_until_time: future_retain_until_time }
+      uploaded_file.retention = retention
+      retention = { mode: "Unlocked", retain_until_time: retain_until_time, override_unlocked_retention: true }
+      uploaded_file.retention = retention
+
+      _(uploaded_file.retention_retain_until_time).must_be_within_delta retain_until_time
+    end
+
+    it "should remove retention of unlocked object with override" do
+      uploaded_file = object_lock_bucket.create_file data, "object-lock-data.txt"
+
+      retain_until_time = (Time.now + 5).to_datetime
+      retention = { mode: "Unlocked", retain_until_time: retain_until_time }
+
+      uploaded_file.retention = retention
+
+      uploaded_file.retention = { mode: nil, retain_until_time: nil, override_unlocked_retention: true }
+
+      _(uploaded_file.retention).must_be :nil?
+    end
+
+    it "should extend retain until time of unlocked object" do
+      uploaded_file = object_lock_bucket.create_file data, "object-lock-data.txt"
+
+      retain_until_time = (Time.now + 5).to_datetime
+      retention = { mode: "Unlocked", retain_until_time: retain_until_time }
+      uploaded_file.retention = retention
+
+      future_retain_until_time = (Time.now + 25).to_datetime
+      retention = { mode: "Unlocked", retain_until_time: future_retain_until_time }
+      uploaded_file.retention = retention
+
+      _(uploaded_file.retention_retain_until_time).must_be_within_delta future_retain_until_time
+    end
+
+    it "should extend retain until time of locked object" do
+      uploaded_file = object_lock_bucket.create_file data, "object-lock-data.txt"
+
+      retain_until_time = (Time.now + 5).to_datetime
+      retention = { mode: "Locked", retain_until_time: retain_until_time }
+      uploaded_file.retention = retention
+
+      future_retain_until_time = (Time.now + 25).to_datetime
+      retention = { mode: "Locked", retain_until_time: future_retain_until_time }
+      uploaded_file.retention = retention
+
+      _(uploaded_file.retention_retain_until_time).must_be_within_delta future_retain_until_time
+    end
+
+    it "should update retention mode from unlocked to locked" do
+      uploaded_file = object_lock_bucket.create_file data, "object-lock-data.txt"
+
+      retain_until_time = (Time.now + 500).to_datetime
+      retention = { mode: "Unlocked", retain_until_time: retain_until_time }
+      uploaded_file.retention = retention
+      _(uploaded_file.retention_mode).must_equal "Unlocked"
+
+      retention = { mode: "Locked", retain_until_time: retain_until_time, override_unlocked_retention: true }
+      uploaded_file.retention = retention
+
+      _(uploaded_file.retention_mode).must_equal "Locked"
+    end
+
+    it "should throw error when deleting object under retention" do
+      uploaded_file = object_lock_bucket.create_file data, "object-lock-data.txt"
+
+      retain_until_time = (Time.now + 500).to_datetime
+      retention = { mode: "Unlocked", retain_until_time: retain_until_time }
+      uploaded_file.retention = retention
+      _(uploaded_file.retention_mode).must_equal "Unlocked"
+
+      expect { uploaded_file.delete }.must_raise Google::Cloud::PermissionDeniedError
+    end
+
+    it "should throw error when updating file with retain until time in the past" do
+      uploaded_file = object_lock_bucket.create_file data, "object-lock-data.txt"
+
+      retain_until_time = (Time.now + 1).to_datetime
+      retention = { mode: "Unlocked", retain_until_time: retain_until_time }
+      uploaded_file.retention = retention
+      _(uploaded_file.retention_mode).must_equal "Unlocked"
+      _(uploaded_file.retention_retain_until_time).must_be_within_delta retain_until_time
+      sleep(1)
+      expect { uploaded_file.retention = retention }.must_raise Google::Cloud::InvalidArgumentError
+    end
+
+    it "should throw error when updating retention with only one argument" do
+      uploaded_file = object_lock_bucket.create_file data, "object-lock-data.txt"
+
+      retain_until_time = (Time.now + 1).to_datetime
+      retention = { mode: "Unlocked" }
+
+      expect { uploaded_file.retention = retention }.must_raise Google::Cloud::InvalidArgumentError
+    end
+
+    it "should throw error when reducing retain until time without override" do
+      uploaded_file = object_lock_bucket.create_file data, "object-lock-data.txt"
+
+      retain_until_time = (Time.now + 100).to_datetime
+      retention = { mode: "Unlocked", retain_until_time: retain_until_time }
+      uploaded_file.retention = retention
+
+      reduced_retain_until_time = (Time.now + 2).to_datetime
+      retention = { mode: "Unlocked", retain_until_time: reduced_retain_until_time }
+
+      expect { uploaded_file.retention = retention }.must_raise Google::Cloud::PermissionDeniedError
+    end
+
+    it "should throw error when removing retention without override" do
+      uploaded_file = object_lock_bucket.create_file data, "object-lock-data.txt"
+
+      retain_until_time = (Time.now + 5).to_datetime
+      retention = { mode: "Unlocked", retain_until_time: retain_until_time }
+      uploaded_file.retention = retention
+
+      retention = { mode: nil, retain_until_time: nil }
+
+      expect { uploaded_file.retention = retention }.must_raise Google::Cloud::PermissionDeniedError
+    end
+
+    it "should throw error when reducing retain until time of a locked object" do
+      uploaded_file = object_lock_bucket.create_file data, "object-lock-data.txt"
+
+      retain_until_time = (Time.now + 100).to_datetime
+      retention = { mode: "Locked", retain_until_time: retain_until_time }
+      uploaded_file.retention = retention
+
+      reduced_retain_until_time = (Time.now + 50).to_datetime
+      retention = { mode: "Locked", retain_until_time: reduced_retain_until_time }
+
+      expect { uploaded_file.retention = retention }.must_raise Google::Cloud::PermissionDeniedError
+    end
+
+    it "should throw error when removing retention of locked object" do
+      uploaded_file = object_lock_bucket.create_file data, "object-lock-data.txt"
+
+      retain_until_time = (Time.now + 5).to_datetime
+      retention = { mode: "Locked", retain_until_time: retain_until_time }
+      uploaded_file.retention = retention
+
+      retention = { mode: nil, retain_until_time: nil, override_unlocked_retention: true }
+
+      expect { uploaded_file.retention = retention }.must_raise Google::Cloud::PermissionDeniedError
+    end
+
+    it "should throw error when updating mode from Locked to Unlocked" do
+      uploaded_file = object_lock_bucket.create_file data, "object-lock-data.txt"
+
+      retain_until_time = (Time.now + 500).to_datetime
+      retention = { mode: "Locked", retain_until_time: retain_until_time }
+      uploaded_file.retention = retention
+
+      retention = { mode: "Unlocked", retain_until_time: retain_until_time, override_unlocked_retention: true }
+      expect { uploaded_file.retention = retention }.must_raise Google::Cloud::PermissionDeniedError
+    end
+  end
 end

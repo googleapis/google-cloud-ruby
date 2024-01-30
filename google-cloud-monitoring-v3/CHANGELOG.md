@@ -1,5 +1,23 @@
 # Release History
 
+### 0.15.1 (2024-01-12)
+
+#### Bug Fixes
+
+* Ensure endpoints are correct for mixin clients ([#24032](https://github.com/googleapis/google-cloud-ruby/issues/24032)) 
+
+### 0.15.0 (2024-01-11)
+
+#### Features
+
+* Support for universe_domain ([#23782](https://github.com/googleapis/google-cloud-ruby/issues/23782)) 
+
+### 0.14.0 (2023-12-13)
+
+#### Features
+
+* Added support for severity in AlertPolicy ([#23647](https://github.com/googleapis/google-cloud-ruby/issues/23647)) 
+
 ### 0.13.0 (2023-09-12)
 
 #### Features

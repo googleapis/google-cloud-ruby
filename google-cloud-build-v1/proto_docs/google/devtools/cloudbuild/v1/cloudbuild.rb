@@ -73,9 +73,24 @@ module Google
         #   @return [::Integer]
         #     Cloud Storage generation for the object. If the generation is
         #     omitted, the latest generation will be used.
+        # @!attribute [rw] source_fetcher
+        #   @return [::Google::Cloud::Build::V1::StorageSource::SourceFetcher]
+        #     Option to specify the tool to fetch the source file for the build.
         class StorageSource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Specifies the tool to fetch the source file for the build.
+          module SourceFetcher
+            # Unspecified. Defaults to GSUTIL.
+            SOURCE_FETCHER_UNSPECIFIED = 0
+
+            # Use the "gsutil" tool to download the source file.
+            GSUTIL = 1
+
+            # Use the Cloud Storage Fetcher tool to download the source file.
+            GCS_FETCHER = 2
+          end
         end
 
         # Location of the source in any accessible Git repository.
@@ -1518,6 +1533,7 @@ module Google
         # GitHubEventsConfig describes the configuration of a trigger that creates a
         # build whenever a GitHub event is received.
         # @!attribute [rw] installation_id
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Integer]
         #     The installationID that emits the GitHub event.
         # @!attribute [rw] owner
@@ -1804,6 +1820,7 @@ module Google
         #     Option to define build log streaming behavior to Cloud
         #     Storage.
         # @!attribute [rw] worker_pool
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     This field deprecated; please use `pool.name` instead.
         # @!attribute [rw] pool

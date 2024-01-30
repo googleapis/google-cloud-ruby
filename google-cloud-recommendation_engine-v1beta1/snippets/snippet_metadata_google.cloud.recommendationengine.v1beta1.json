@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-recommendation_engine-v1beta1",
-    "version": "0.7.0",
+    "version": "0.8.1",
     "language": "RUBY",
     "apis": [
       {
@@ -14,7 +14,7 @@
     {
       "region_tag": "recommendationengine_v1beta1_generated_CatalogService_CreateCatalogItem_sync",
       "title": "Snippet for the create_catalog_item call in the CatalogService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Client#create_catalog_item. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Client#create_catalog_item.",
       "file": "catalog_service/create_catalog_item.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "recommendationengine_v1beta1_generated_CatalogService_GetCatalogItem_sync",
       "title": "Snippet for the get_catalog_item call in the CatalogService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Client#get_catalog_item. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Client#get_catalog_item.",
       "file": "catalog_service/get_catalog_item.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "recommendationengine_v1beta1_generated_CatalogService_ListCatalogItems_sync",
       "title": "Snippet for the list_catalog_items call in the CatalogService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Client#list_catalog_items. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Client#list_catalog_items.",
       "file": "catalog_service/list_catalog_items.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -134,7 +134,7 @@
     {
       "region_tag": "recommendationengine_v1beta1_generated_CatalogService_UpdateCatalogItem_sync",
       "title": "Snippet for the update_catalog_item call in the CatalogService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Client#update_catalog_item. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Client#update_catalog_item.",
       "file": "catalog_service/update_catalog_item.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -174,7 +174,7 @@
     {
       "region_tag": "recommendationengine_v1beta1_generated_CatalogService_DeleteCatalogItem_sync",
       "title": "Snippet for the delete_catalog_item call in the CatalogService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Client#delete_catalog_item. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Client#delete_catalog_item.",
       "file": "catalog_service/delete_catalog_item.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,7 +206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -214,7 +214,7 @@
     {
       "region_tag": "recommendationengine_v1beta1_generated_CatalogService_ImportCatalogItems_sync",
       "title": "Snippet for the import_catalog_items call in the CatalogService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Client#import_catalog_items. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Client#import_catalog_items.",
       "file": "catalog_service/import_catalog_items.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,7 +246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -254,7 +254,7 @@
     {
       "region_tag": "recommendationengine_v1beta1_generated_PredictionApiKeyRegistry_CreatePredictionApiKeyRegistration_sync",
       "title": "Snippet for the create_prediction_api_key_registration call in the PredictionApiKeyRegistry service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Client#create_prediction_api_key_registration. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Client#create_prediction_api_key_registration.",
       "file": "prediction_api_key_registry/create_prediction_api_key_registration.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,7 +286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -294,7 +294,7 @@
     {
       "region_tag": "recommendationengine_v1beta1_generated_PredictionApiKeyRegistry_ListPredictionApiKeyRegistrations_sync",
       "title": "Snippet for the list_prediction_api_key_registrations call in the PredictionApiKeyRegistry service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Client#list_prediction_api_key_registrations. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Client#list_prediction_api_key_registrations.",
       "file": "prediction_api_key_registry/list_prediction_api_key_registrations.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,7 +326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -334,7 +334,7 @@
     {
       "region_tag": "recommendationengine_v1beta1_generated_PredictionApiKeyRegistry_DeletePredictionApiKeyRegistration_sync",
       "title": "Snippet for the delete_prediction_api_key_registration call in the PredictionApiKeyRegistry service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Client#delete_prediction_api_key_registration. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Client#delete_prediction_api_key_registration.",
       "file": "prediction_api_key_registry/delete_prediction_api_key_registration.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,7 +366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -374,7 +374,7 @@
     {
       "region_tag": "recommendationengine_v1beta1_generated_PredictionService_Predict_sync",
       "title": "Snippet for the predict call in the PredictionService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecommendationEngine::V1beta1::PredictionService::Client#predict. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecommendationEngine::V1beta1::PredictionService::Client#predict.",
       "file": "prediction_service/predict.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,7 +406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -414,7 +414,7 @@
     {
       "region_tag": "recommendationengine_v1beta1_generated_UserEventService_WriteUserEvent_sync",
       "title": "Snippet for the write_user_event call in the UserEventService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Client#write_user_event. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Client#write_user_event.",
       "file": "user_event_service/write_user_event.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,7 +446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -454,7 +454,7 @@
     {
       "region_tag": "recommendationengine_v1beta1_generated_UserEventService_CollectUserEvent_sync",
       "title": "Snippet for the collect_user_event call in the UserEventService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Client#collect_user_event. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Client#collect_user_event.",
       "file": "user_event_service/collect_user_event.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,7 +486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -494,7 +494,7 @@
     {
       "region_tag": "recommendationengine_v1beta1_generated_UserEventService_ListUserEvents_sync",
       "title": "Snippet for the list_user_events call in the UserEventService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Client#list_user_events. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Client#list_user_events.",
       "file": "user_event_service/list_user_events.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,7 +526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -534,7 +534,7 @@
     {
       "region_tag": "recommendationengine_v1beta1_generated_UserEventService_PurgeUserEvents_sync",
       "title": "Snippet for the purge_user_events call in the UserEventService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Client#purge_user_events. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Client#purge_user_events.",
       "file": "user_event_service/purge_user_events.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,7 +566,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -574,7 +574,7 @@
     {
       "region_tag": "recommendationengine_v1beta1_generated_UserEventService_ImportUserEvents_sync",
       "title": "Snippet for the import_user_events call in the UserEventService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Client#import_user_events. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Client#import_user_events.",
       "file": "user_event_service/import_user_events.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,7 +606,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]

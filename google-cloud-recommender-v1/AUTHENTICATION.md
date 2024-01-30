@@ -1,151 +1,122 @@
 # Authentication
 
-In general, the google-cloud-recommender-v1 library uses
-[Service Account](https://cloud.google.com/iam/docs/creating-managing-service-accounts)
-credentials to connect to Google Cloud services. When running within
-[Google Cloud Platform environments](#google-cloud-platform-environments) the
-credentials will be discovered automatically. When running on other
-environments, the Service Account credentials can be specified by providing the
-path to the
-[JSON keyfile](https://cloud.google.com/iam/docs/managing-service-account-keys)
-for the account (or the JSON itself) in
-[environment variables](#environment-variables). Additionally, Cloud SDK
-credentials can also be discovered automatically, but this is only recommended
-during development.
+The recommended way to authenticate to the google-cloud-recommender-v1 library is to use
+[Application Default Credentials (ADC)](https://cloud.google.com/docs/authentication/application-default-credentials).
+To review all of your authentication options, see [Credentials lookup](#credential-lookup).
 
 ## Quickstart
 
-1. [Create a service account and credentials](#creating-a-service-account).
-2. Set the [environment variable](#environment-variables).
+The following example shows how to set up authentication for a local development
+environment with your user credentials. 
+
+**NOTE:** This method is _not_ recommended for running in production. User credentials
+should be used only during development.
+
+1. [Download and install the Google Cloud CLI](https://cloud.google.com/sdk).
+2. Set up a local ADC file with your user credentials:
 
 ```sh
-export RECOMMENDER_CREDENTIALS=path/to/keyfile.json
+gcloud auth application-default login
 ```
 
-3. Initialize the client.
+3. Write code as if already authenticated.
 
-```ruby
-require "google/cloud/recommender/v1"
-
-client = ::Google::Cloud::Recommender::V1::Recommender::Client.new
-```
+For more information about setting up authentication for a local development environment, see
+[Set up Application Default Credentials](https://cloud.google.com/docs/authentication/provide-credentials-adc#local-dev).
 
 ## Credential Lookup
 
-The google-cloud-recommender-v1 library aims to make authentication
-as simple as possible, and provides several mechanisms to configure your system
-without requiring **Service Account Credentials** directly in code.
+The google-cloud-recommender-v1 library provides several mechanisms to configure your system.
+Generally, using Application Default Credentials to facilitate automatic 
+credentials discovery is the easist method. But if you need to explicitly specify
+credentials, there are several methods available to you.
 
-**Credentials** are discovered in the following order:
+Credentials are accepted in the following ways, in the following order or precedence:
 
-1. Specify credentials in method arguments
-2. Specify credentials in configuration
-3. Discover credentials path in environment variables
-4. Discover credentials JSON in environment variables
-5. Discover credentials file in the Cloud SDK's path
-6. Discover GCP credentials
-
-### Google Cloud Platform environments
-
-When running on Google Cloud Platform (GCP), including Google Compute Engine
-(GCE), Google Kubernetes Engine (GKE), Google App Engine (GAE), Google Cloud
-Functions (GCF) and Cloud Run, **Credentials** are discovered automatically.
-Code should be written as if already authenticated.
-
-### Environment Variables
-
-The **Credentials JSON** can be placed in environment variables instead of
-declaring them directly in code. Each service has its own environment variable,
-allowing for different service accounts to be used for different services. (See
-the READMEs for the individual service gems for details.) The path to the
-**Credentials JSON** file can be stored in the environment variable, or the
-**Credentials JSON** itself can be stored for environments such as Docker
-containers where writing files is difficult or not encouraged.
-
-The environment variables that google-cloud-recommender-v1
-checks for credentials are configured on the service Credentials class (such as
-{::Google::Cloud::Recommender::V1::Recommender::Credentials}):
-
-* `RECOMMENDER_CREDENTIALS` - Path to JSON file, or JSON contents
-* `RECOMMENDER_KEYFILE` - Path to JSON file, or JSON contents
-* `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
-* `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
-* `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
-
-```ruby
-require "google/cloud/recommender/v1"
-
-ENV["RECOMMENDER_CREDENTIALS"] = "path/to/keyfile.json"
-
-client = ::Google::Cloud::Recommender::V1::Recommender::Client.new
-```
+1. Credentials specified in method arguments
+2. Credentials specified in configuration
+3. Credentials pointed to or included in environment variables
+4. Credentials found in local ADC file
+5. Credentials returned by the metadata server for the attached service account (GCP)
 
 ### Configuration
 
-The path to the **Credentials JSON** file can be configured instead of storing
-it in an environment variable. Either on an individual client initialization:
+You can configure a path to a JSON credentials file, either for an individual client object or
+globally, for all client objects. The JSON file can contain credentials created for
+[workload identity federation](https://cloud.google.com/iam/docs/workload-identity-federation),
+[workforce identity federation](https://cloud.google.com/iam/docs/workforce-identity-federation), or a
+[service account key](https://cloud.google.com/docs/authentication/provide-credentials-adc#local-key).
+
+Note: Service account keys are a security risk if not managed correctly. You should
+[choose a more secure alternative to service account keys](https://cloud.google.com/docs/authentication#auth-decision-tree)
+whenever possible.
+
+To configure a credentials file for an individual client initialization:
 
 ```ruby
 require "google/cloud/recommender/v1"
 
 client = ::Google::Cloud::Recommender::V1::Recommender::Client.new do |config|
-  config.credentials = "path/to/keyfile.json"
+  config.credentials = "path/to/credentialfile.json"
 end
 ```
 
-Or globally for all clients:
+To configure a credentials file globally for all clients:
 
 ```ruby
 require "google/cloud/recommender/v1"
 
 ::Google::Cloud::Recommender::V1::Recommender::Client.configure do |config|
-  config.credentials = "path/to/keyfile.json"
+  config.credentials = "path/to/credentialfile.json"
 end
 
 client = ::Google::Cloud::Recommender::V1::Recommender::Client.new
 ```
 
-### Cloud SDK
+### Environment Variables
 
-This option allows for an easy way to authenticate during development. If
-credentials are not provided in code or in environment variables, then Cloud SDK
-credentials are discovered.
+You can also use an environment variable to provide a JSON credentials file.
+The environment variable can contain a path to the credentials file or, for
+environments such as Docker containers where writing files is not encouraged,
+you can include the credentials file itself.
 
-To configure your system for this, simply:
+The JSON file can contain credentials created for
+[workload identity federation](https://cloud.google.com/iam/docs/workload-identity-federation),
+[workforce identity federation](https://cloud.google.com/iam/docs/workforce-identity-federation), or a
+[service account key](https://cloud.google.com/docs/authentication/provide-credentials-adc#local-key).
 
-1. [Download and install the Cloud SDK](https://cloud.google.com/sdk)
-2. Authenticate using OAuth 2.0 `$ gcloud auth application-default login`
-3. Write code as if already authenticated.
+Note: Service account keys are a security risk if not managed correctly. You should
+[choose a more secure alternative to service account keys](https://cloud.google.com/docs/authentication#auth-decision-tree)
+whenever possible.
 
-**NOTE:** This is _not_ recommended for running in production. The Cloud SDK
-*should* only be used during development.
+The environment variables that google-cloud-recommender-v1
+checks for credentials are:
 
-## Creating a Service Account
+* `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
+* `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
-Google Cloud requires **Service Account Credentials** to
-connect to the APIs. You will use the **JSON key file** to
-connect to most services with google-cloud-recommender-v1.
+```ruby
+require "google/cloud/recommender/v1"
 
-If you are not running this client within
-[Google Cloud Platform environments](#google-cloud-platform-environments), you
-need a Google Developers service account.
+ENV["GOOGLE_APPLICATION_CREDENTIALS"] = "path/to/credentialfile.json"
 
-1. Visit the [Google Cloud Console](https://console.cloud.google.com/project).
-2. Create a new project or click on an existing project.
-3. Activate the menu in the upper left and select **APIs & Services**. From
-   here, you will enable the APIs that your application requires.
+client = ::Google::Cloud::Recommender::V1::Recommender::Client.new
+```
 
-   *Note: You may need to enable billing in order to use these services.*
+### Local ADC file
 
-4. Select **Credentials** from the side navigation.
+You can set up a local ADC file with your user credentials for authentication during
+development. If credentials are not provided in code or in environment variables,
+then the local ADC credentials are discovered.
 
-   Find the "Create credentials" drop down near the top of the page, and select
-   "Service account" to be guided through downloading a new JSON key file.
+Follow the steps in [Quickstart](#quickstart) to set up a local ADC file.
 
-   If you want to re-use an existing service account, you can easily generate a
-   new key file. Just select the account you wish to re-use, click the pencil
-   tool on the right side to edit the service account, select the **Keys** tab,
-   and then select **Add Key**.
+### Google Cloud Platform environments
 
-   The key file you download will be used by this library to authenticate API
-   requests and should be stored in a secure location.
+When running on Google Cloud Platform (GCP), including Google Compute Engine
+(GCE), Google Kubernetes Engine (GKE), Google App Engine (GAE), Google Cloud
+Functions (GCF) and Cloud Run, credentials are retrieved from the attached
+service account automatically. Code should be written as if already authenticated.
+
+For more information, see
+[Set up ADC for Google Cloud services](https://cloud.google.com/docs/authentication/provide-credentials-adc#attached-sa).

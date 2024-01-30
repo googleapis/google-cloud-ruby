@@ -27,6 +27,10 @@ class ::Google::Cloud::ContainerAnalysis::V1::ContainerAnalysis::GrafeasTest < M
         raise "Unexpected grpc request."
       end
     end
+
+    def universe_domain
+      "googleapis.com"
+    end
   end
 
   def test_get_default_grafeas_client

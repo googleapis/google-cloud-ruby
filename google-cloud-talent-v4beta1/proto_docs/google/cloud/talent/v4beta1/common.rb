@@ -895,6 +895,7 @@ module Google
         # Deprecated. All resources are only visible to the owner.
         #
         # An enum that represents who has view access to the resource.
+        # @deprecated This enum is deprecated and may be removed in the next major version update.
         module Visibility
           # Default value.
           VISIBILITY_UNSPECIFIED = 0

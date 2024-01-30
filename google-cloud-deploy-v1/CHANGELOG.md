@@ -1,5 +1,49 @@
 # Changelog
 
+### 0.17.1 (2024-01-12)
+
+#### Bug Fixes
+
+* Ensure endpoints are correct for mixin clients ([#24032](https://github.com/googleapis/google-cloud-ruby/issues/24032)) 
+
+### 0.17.0 (2024-01-11)
+
+#### Features
+
+* Support for universe_domain ([#23778](https://github.com/googleapis/google-cloud-ruby/issues/23778)) 
+
+### 0.16.0 (2024-01-09)
+
+#### Features
+
+* Added more information to certain notification events ([#23745](https://github.com/googleapis/google-cloud-ruby/issues/23745)) 
+* Delivery pipeline notification events report the pipeline UID 
+* Job run notification events report the release and rollout names 
+* Release notification events report the pipeline and release UIDs 
+* Release render events report the event type and pipeline UID 
+* Rollout notification events report the release name and rollout UID 
+* Rollout update events report the release name 
+
+### 0.15.0 (2023-12-08)
+
+#### Features
+
+* Support for canary revision tags in CloudRunConfig 
+* Support for custom target information in the Target resource type 
+* Support for RPCs managing custom target types ([#23625](https://github.com/googleapis/google-cloud-ruby/issues/23625)) 
+
+### 0.14.0 (2023-11-06)
+
+#### Features
+
+* add Automation API and Rollback API ([#23509](https://github.com/googleapis/google-cloud-ruby/issues/23509)) 
+
+### 0.13.0 (2023-10-25)
+
+#### Features
+
+* add platform log RolloutUpdateEvent 
+
 ### 0.12.0 (2023-09-12)
 
 #### Features

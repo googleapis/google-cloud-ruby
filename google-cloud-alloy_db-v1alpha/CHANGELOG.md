@@ -1,5 +1,27 @@
 # Changelog
 
+### 0.5.1 (2024-01-12)
+
+#### Bug Fixes
+
+* Ensure endpoints are correct for mixin clients ([#24032](https://github.com/googleapis/google-cloud-ruby/issues/24032)) 
+
+### 0.5.0 (2024-01-11)
+
+#### Features
+
+* Support for universe_domain ([#23772](https://github.com/googleapis/google-cloud-ruby/issues/23772)) 
+
+### 0.4.0 (2024-01-03)
+
+#### Features
+
+* add instance network config 
+* add ListDatabases API and Database object 
+* add PSC config, PSC interface config, PSC instance config ([#23674](https://github.com/googleapis/google-cloud-ruby/issues/23674)) 
+* add support for fields satisfies_pzi and satisfies_pzs 
+* change field network in NetworkConfig from required to optional 
+
 ### 0.3.0 (2023-09-26)
 
 #### Features

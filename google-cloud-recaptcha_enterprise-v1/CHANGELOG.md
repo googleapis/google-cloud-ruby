@@ -1,5 +1,38 @@
 # Release History
 
+### 0.17.2 (2024-01-18)
+
+#### Documentation
+
+* Minor clarification to AccountVerificationInfo#username description ([#24432](https://github.com/googleapis/google-cloud-ruby/issues/24432)) 
+
+### 0.17.1 (2024-01-12)
+
+#### Bug Fixes
+
+* Ensure endpoints are correct for mixin clients ([#24032](https://github.com/googleapis/google-cloud-ruby/issues/24032)) 
+
+### 0.17.0 (2024-01-11)
+
+#### Features
+
+* Support for universe_domain ([#23784](https://github.com/googleapis/google-cloud-ruby/issues/23784)) 
+
+### 0.16.0 (2024-01-09)
+
+#### Features
+
+* Added account_id parameter to annotate_assessment 
+* Added Apple developer ID and non-Google app store flag to mobile key settings 
+* Added behavioral trust verdict to FraudPreventionAssessment 
+* Added extended verdict reasons to RiskAnalysis 
+* added stable account identifier to related group membership resources, and deprecated hashed identifier field ([#23640](https://github.com/googleapis/google-cloud-ruby/issues/23640)) 
+* Added user_info field to Event 
+* Additional information about events being assessed, including request UI, headers, and flags for express requests, WAF token assessments, and policy evaluations 
+* Support firewall policy assessments 
+* Support FirewallPolicy management calls ([#23424](https://github.com/googleapis/google-cloud-ruby/issues/23424)) 
+* Support fraud signals in assessments 
+
 ### 0.15.0 (2023-09-12)
 
 #### Features

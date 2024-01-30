@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-storage_transfer-v1",
-    "version": "0.8.0",
+    "version": "0.9.1",
     "language": "RUBY",
     "apis": [
       {
@@ -14,7 +14,7 @@
     {
       "region_tag": "storagetransfer_v1_generated_StorageTransferService_GetGoogleServiceAccount_sync",
       "title": "Snippet for the get_google_service_account call in the StorageTransferService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageTransfer::V1::StorageTransferService::Client#get_google_service_account. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageTransfer::V1::StorageTransferService::Client#get_google_service_account.",
       "file": "storage_transfer_service/get_google_service_account.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "storagetransfer_v1_generated_StorageTransferService_CreateTransferJob_sync",
       "title": "Snippet for the create_transfer_job call in the StorageTransferService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageTransfer::V1::StorageTransferService::Client#create_transfer_job. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageTransfer::V1::StorageTransferService::Client#create_transfer_job.",
       "file": "storage_transfer_service/create_transfer_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "storagetransfer_v1_generated_StorageTransferService_UpdateTransferJob_sync",
       "title": "Snippet for the update_transfer_job call in the StorageTransferService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageTransfer::V1::StorageTransferService::Client#update_transfer_job. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageTransfer::V1::StorageTransferService::Client#update_transfer_job.",
       "file": "storage_transfer_service/update_transfer_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -134,7 +134,7 @@
     {
       "region_tag": "storagetransfer_v1_generated_StorageTransferService_GetTransferJob_sync",
       "title": "Snippet for the get_transfer_job call in the StorageTransferService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageTransfer::V1::StorageTransferService::Client#get_transfer_job. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageTransfer::V1::StorageTransferService::Client#get_transfer_job.",
       "file": "storage_transfer_service/get_transfer_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -174,7 +174,7 @@
     {
       "region_tag": "storagetransfer_v1_generated_StorageTransferService_ListTransferJobs_sync",
       "title": "Snippet for the list_transfer_jobs call in the StorageTransferService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageTransfer::V1::StorageTransferService::Client#list_transfer_jobs. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageTransfer::V1::StorageTransferService::Client#list_transfer_jobs.",
       "file": "storage_transfer_service/list_transfer_jobs.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,7 +206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -214,7 +214,7 @@
     {
       "region_tag": "storagetransfer_v1_generated_StorageTransferService_PauseTransferOperation_sync",
       "title": "Snippet for the pause_transfer_operation call in the StorageTransferService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageTransfer::V1::StorageTransferService::Client#pause_transfer_operation. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageTransfer::V1::StorageTransferService::Client#pause_transfer_operation.",
       "file": "storage_transfer_service/pause_transfer_operation.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,7 +246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -254,7 +254,7 @@
     {
       "region_tag": "storagetransfer_v1_generated_StorageTransferService_ResumeTransferOperation_sync",
       "title": "Snippet for the resume_transfer_operation call in the StorageTransferService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageTransfer::V1::StorageTransferService::Client#resume_transfer_operation. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageTransfer::V1::StorageTransferService::Client#resume_transfer_operation.",
       "file": "storage_transfer_service/resume_transfer_operation.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,7 +286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -294,7 +294,7 @@
     {
       "region_tag": "storagetransfer_v1_generated_StorageTransferService_RunTransferJob_sync",
       "title": "Snippet for the run_transfer_job call in the StorageTransferService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageTransfer::V1::StorageTransferService::Client#run_transfer_job. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageTransfer::V1::StorageTransferService::Client#run_transfer_job.",
       "file": "storage_transfer_service/run_transfer_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,7 +326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -334,7 +334,7 @@
     {
       "region_tag": "storagetransfer_v1_generated_StorageTransferService_DeleteTransferJob_sync",
       "title": "Snippet for the delete_transfer_job call in the StorageTransferService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageTransfer::V1::StorageTransferService::Client#delete_transfer_job. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageTransfer::V1::StorageTransferService::Client#delete_transfer_job.",
       "file": "storage_transfer_service/delete_transfer_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,7 +366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -374,7 +374,7 @@
     {
       "region_tag": "storagetransfer_v1_generated_StorageTransferService_CreateAgentPool_sync",
       "title": "Snippet for the create_agent_pool call in the StorageTransferService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageTransfer::V1::StorageTransferService::Client#create_agent_pool. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageTransfer::V1::StorageTransferService::Client#create_agent_pool.",
       "file": "storage_transfer_service/create_agent_pool.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,7 +406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -414,7 +414,7 @@
     {
       "region_tag": "storagetransfer_v1_generated_StorageTransferService_UpdateAgentPool_sync",
       "title": "Snippet for the update_agent_pool call in the StorageTransferService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageTransfer::V1::StorageTransferService::Client#update_agent_pool. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageTransfer::V1::StorageTransferService::Client#update_agent_pool.",
       "file": "storage_transfer_service/update_agent_pool.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,7 +446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -454,7 +454,7 @@
     {
       "region_tag": "storagetransfer_v1_generated_StorageTransferService_GetAgentPool_sync",
       "title": "Snippet for the get_agent_pool call in the StorageTransferService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageTransfer::V1::StorageTransferService::Client#get_agent_pool. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageTransfer::V1::StorageTransferService::Client#get_agent_pool.",
       "file": "storage_transfer_service/get_agent_pool.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,7 +486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -494,7 +494,7 @@
     {
       "region_tag": "storagetransfer_v1_generated_StorageTransferService_ListAgentPools_sync",
       "title": "Snippet for the list_agent_pools call in the StorageTransferService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageTransfer::V1::StorageTransferService::Client#list_agent_pools. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageTransfer::V1::StorageTransferService::Client#list_agent_pools.",
       "file": "storage_transfer_service/list_agent_pools.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,7 +526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -534,7 +534,7 @@
     {
       "region_tag": "storagetransfer_v1_generated_StorageTransferService_DeleteAgentPool_sync",
       "title": "Snippet for the delete_agent_pool call in the StorageTransferService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageTransfer::V1::StorageTransferService::Client#delete_agent_pool. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageTransfer::V1::StorageTransferService::Client#delete_agent_pool.",
       "file": "storage_transfer_service/delete_agent_pool.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,7 +566,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]

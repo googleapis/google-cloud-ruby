@@ -28,8 +28,8 @@ long_desc \
 remaining_args :gem_names do
   desc "The gems for which to run owlbot."
 end
-flag :all do
-  desc "Run owlbot on all gems in this repo."
+flag :all, "--all[=WHICH]" do
+  desc "Run owlbot on all gems in this repo. Optional value can be 'gapics' or 'wrappers'"
 end
 flag :except, "--except=GEM", handler: :push, default: [] do
   desc "Omit this gem from --all. Can be used multiple times."
@@ -125,7 +125,7 @@ end
 
 def choose_gems
   gems = gem_names
-  gems = all ? all_gems : gems_from_subdirectory if gems.empty?
+  gems = all_gems || gems_from_subdirectory if gems.empty?
   error "You must specify at least one gem name" if gems.empty?
   logger.info "Gems: #{gems}"
   gems
@@ -139,10 +139,16 @@ def gems_from_subdirectory
 end
 
 def all_gems
+  return nil unless all
   cd context_directory do
     gems = Dir.glob("*/#{OWLBOT_CONFIG_FILE_NAME}").map { |path| File.dirname path }
     gems.delete_if do |name|
       !File.file? File.join(context_directory, name, "#{name}.gemspec")
+    end
+    if all.to_s.start_with? "gapic"
+      gems.delete_if { |name| name !~ /-v\d+\w*$/ }
+    elsif all.to_s.start_with? "wrapper"
+      gems.delete_if { |name| name =~ /-v\d+\w*$/ }
     end
     gems - except
   end

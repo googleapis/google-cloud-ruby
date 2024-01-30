@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-security-private_ca-v1beta1",
-    "version": "0.7.0",
+    "version": "0.8.1",
     "language": "RUBY",
     "apis": [
       {
@@ -14,7 +14,7 @@
     {
       "region_tag": "privateca_v1beta1_generated_CertificateAuthorityService_CreateCertificate_sync",
       "title": "Snippet for the create_certificate call in the CertificateAuthorityService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client#create_certificate. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client#create_certificate.",
       "file": "certificate_authority_service/create_certificate.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "privateca_v1beta1_generated_CertificateAuthorityService_GetCertificate_sync",
       "title": "Snippet for the get_certificate call in the CertificateAuthorityService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client#get_certificate. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client#get_certificate.",
       "file": "certificate_authority_service/get_certificate.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "privateca_v1beta1_generated_CertificateAuthorityService_ListCertificates_sync",
       "title": "Snippet for the list_certificates call in the CertificateAuthorityService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client#list_certificates. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client#list_certificates.",
       "file": "certificate_authority_service/list_certificates.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -134,7 +134,7 @@
     {
       "region_tag": "privateca_v1beta1_generated_CertificateAuthorityService_RevokeCertificate_sync",
       "title": "Snippet for the revoke_certificate call in the CertificateAuthorityService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client#revoke_certificate. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client#revoke_certificate.",
       "file": "certificate_authority_service/revoke_certificate.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -174,7 +174,7 @@
     {
       "region_tag": "privateca_v1beta1_generated_CertificateAuthorityService_UpdateCertificate_sync",
       "title": "Snippet for the update_certificate call in the CertificateAuthorityService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client#update_certificate. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client#update_certificate.",
       "file": "certificate_authority_service/update_certificate.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,7 +206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -214,7 +214,7 @@
     {
       "region_tag": "privateca_v1beta1_generated_CertificateAuthorityService_ActivateCertificateAuthority_sync",
       "title": "Snippet for the activate_certificate_authority call in the CertificateAuthorityService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client#activate_certificate_authority. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client#activate_certificate_authority.",
       "file": "certificate_authority_service/activate_certificate_authority.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,7 +246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -254,7 +254,7 @@
     {
       "region_tag": "privateca_v1beta1_generated_CertificateAuthorityService_CreateCertificateAuthority_sync",
       "title": "Snippet for the create_certificate_authority call in the CertificateAuthorityService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client#create_certificate_authority. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client#create_certificate_authority.",
       "file": "certificate_authority_service/create_certificate_authority.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,7 +286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -294,7 +294,7 @@
     {
       "region_tag": "privateca_v1beta1_generated_CertificateAuthorityService_DisableCertificateAuthority_sync",
       "title": "Snippet for the disable_certificate_authority call in the CertificateAuthorityService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client#disable_certificate_authority. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client#disable_certificate_authority.",
       "file": "certificate_authority_service/disable_certificate_authority.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,7 +326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -334,7 +334,7 @@
     {
       "region_tag": "privateca_v1beta1_generated_CertificateAuthorityService_EnableCertificateAuthority_sync",
       "title": "Snippet for the enable_certificate_authority call in the CertificateAuthorityService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client#enable_certificate_authority. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client#enable_certificate_authority.",
       "file": "certificate_authority_service/enable_certificate_authority.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,7 +366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -374,7 +374,7 @@
     {
       "region_tag": "privateca_v1beta1_generated_CertificateAuthorityService_FetchCertificateAuthorityCsr_sync",
       "title": "Snippet for the fetch_certificate_authority_csr call in the CertificateAuthorityService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client#fetch_certificate_authority_csr. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client#fetch_certificate_authority_csr.",
       "file": "certificate_authority_service/fetch_certificate_authority_csr.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,7 +406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -414,7 +414,7 @@
     {
       "region_tag": "privateca_v1beta1_generated_CertificateAuthorityService_GetCertificateAuthority_sync",
       "title": "Snippet for the get_certificate_authority call in the CertificateAuthorityService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client#get_certificate_authority. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client#get_certificate_authority.",
       "file": "certificate_authority_service/get_certificate_authority.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,7 +446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -454,7 +454,7 @@
     {
       "region_tag": "privateca_v1beta1_generated_CertificateAuthorityService_ListCertificateAuthorities_sync",
       "title": "Snippet for the list_certificate_authorities call in the CertificateAuthorityService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client#list_certificate_authorities. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client#list_certificate_authorities.",
       "file": "certificate_authority_service/list_certificate_authorities.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,7 +486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -494,7 +494,7 @@
     {
       "region_tag": "privateca_v1beta1_generated_CertificateAuthorityService_RestoreCertificateAuthority_sync",
       "title": "Snippet for the restore_certificate_authority call in the CertificateAuthorityService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client#restore_certificate_authority. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client#restore_certificate_authority.",
       "file": "certificate_authority_service/restore_certificate_authority.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,7 +526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -534,7 +534,7 @@
     {
       "region_tag": "privateca_v1beta1_generated_CertificateAuthorityService_ScheduleDeleteCertificateAuthority_sync",
       "title": "Snippet for the schedule_delete_certificate_authority call in the CertificateAuthorityService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client#schedule_delete_certificate_authority. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client#schedule_delete_certificate_authority.",
       "file": "certificate_authority_service/schedule_delete_certificate_authority.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,7 +566,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -574,7 +574,7 @@
     {
       "region_tag": "privateca_v1beta1_generated_CertificateAuthorityService_UpdateCertificateAuthority_sync",
       "title": "Snippet for the update_certificate_authority call in the CertificateAuthorityService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client#update_certificate_authority. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client#update_certificate_authority.",
       "file": "certificate_authority_service/update_certificate_authority.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,7 +606,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -614,7 +614,7 @@
     {
       "region_tag": "privateca_v1beta1_generated_CertificateAuthorityService_GetCertificateRevocationList_sync",
       "title": "Snippet for the get_certificate_revocation_list call in the CertificateAuthorityService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client#get_certificate_revocation_list. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client#get_certificate_revocation_list.",
       "file": "certificate_authority_service/get_certificate_revocation_list.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,7 +646,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -654,7 +654,7 @@
     {
       "region_tag": "privateca_v1beta1_generated_CertificateAuthorityService_ListCertificateRevocationLists_sync",
       "title": "Snippet for the list_certificate_revocation_lists call in the CertificateAuthorityService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client#list_certificate_revocation_lists. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client#list_certificate_revocation_lists.",
       "file": "certificate_authority_service/list_certificate_revocation_lists.rb",
       "language": "RUBY",
       "client_method": {
@@ -686,7 +686,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -694,7 +694,7 @@
     {
       "region_tag": "privateca_v1beta1_generated_CertificateAuthorityService_UpdateCertificateRevocationList_sync",
       "title": "Snippet for the update_certificate_revocation_list call in the CertificateAuthorityService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client#update_certificate_revocation_list. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client#update_certificate_revocation_list.",
       "file": "certificate_authority_service/update_certificate_revocation_list.rb",
       "language": "RUBY",
       "client_method": {
@@ -726,7 +726,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -734,7 +734,7 @@
     {
       "region_tag": "privateca_v1beta1_generated_CertificateAuthorityService_GetReusableConfig_sync",
       "title": "Snippet for the get_reusable_config call in the CertificateAuthorityService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client#get_reusable_config. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client#get_reusable_config.",
       "file": "certificate_authority_service/get_reusable_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -766,7 +766,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -774,7 +774,7 @@
     {
       "region_tag": "privateca_v1beta1_generated_CertificateAuthorityService_ListReusableConfigs_sync",
       "title": "Snippet for the list_reusable_configs call in the CertificateAuthorityService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client#list_reusable_configs. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client#list_reusable_configs.",
       "file": "certificate_authority_service/list_reusable_configs.rb",
       "language": "RUBY",
       "client_method": {
@@ -806,7 +806,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]

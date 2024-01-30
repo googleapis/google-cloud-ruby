@@ -222,6 +222,7 @@ module Google
         #     Interface name. This is of syntax <bond><bond_mode> or <nic> and
         #     forms part of the network template name.
         # @!attribute [rw] interface_index
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Integer]
         #     The index of the logical interface mapping to the index of the hardware
         #     bond or nic on the chosen network template. This field is deprecated.

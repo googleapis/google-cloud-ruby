@@ -21,18 +21,352 @@ module Google
   module Cloud
     module ArtifactRegistry
       module V1
+        # Artifact policy configuration for the repository contents.
+        # @!attribute [rw] id
+        #   @return [::String]
+        #     The user-provided ID of the upstream policy.
+        # @!attribute [rw] repository
+        #   @return [::String]
+        #     A reference to the repository resource, for example:
+        #     `projects/p1/locations/us-central1/repositories/repo1`.
+        # @!attribute [rw] priority
+        #   @return [::Integer]
+        #     Entries with a greater priority value take precedence in the pull order.
+        class UpstreamPolicy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # CleanupPolicyCondition is a set of conditions attached to a CleanupPolicy.
+        # If multiple entries are set, all must be satisfied for the condition to be
+        # satisfied.
+        # @!attribute [rw] tag_state
+        #   @return [::Google::Cloud::ArtifactRegistry::V1::CleanupPolicyCondition::TagState]
+        #     Match versions by tag status.
+        # @!attribute [rw] tag_prefixes
+        #   @return [::Array<::String>]
+        #     Match versions by tag prefix. Applied on any prefix match.
+        # @!attribute [rw] version_name_prefixes
+        #   @return [::Array<::String>]
+        #     Match versions by version name prefix. Applied on any prefix match.
+        # @!attribute [rw] package_name_prefixes
+        #   @return [::Array<::String>]
+        #     Match versions by package prefix. Applied on any prefix match.
+        # @!attribute [rw] older_than
+        #   @return [::Google::Protobuf::Duration]
+        #     Match versions older than a duration.
+        # @!attribute [rw] newer_than
+        #   @return [::Google::Protobuf::Duration]
+        #     Match versions newer than a duration.
+        class CleanupPolicyCondition
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Statuses applying to versions.
+          module TagState
+            # Tag status not specified.
+            TAG_STATE_UNSPECIFIED = 0
+
+            # Applies to tagged versions only.
+            TAGGED = 1
+
+            # Applies to untagged versions only.
+            UNTAGGED = 2
+
+            # Applies to all versions.
+            ANY = 3
+          end
+        end
+
+        # CleanupPolicyMostRecentVersions is an alternate condition of a CleanupPolicy
+        # for retaining a minimum number of versions.
+        # @!attribute [rw] package_name_prefixes
+        #   @return [::Array<::String>]
+        #     List of package name prefixes that will apply this rule.
+        # @!attribute [rw] keep_count
+        #   @return [::Integer]
+        #     Minimum number of versions to keep.
+        class CleanupPolicyMostRecentVersions
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Artifact policy configuration for repository cleanup policies.
+        # @!attribute [rw] condition
+        #   @return [::Google::Cloud::ArtifactRegistry::V1::CleanupPolicyCondition]
+        #     Policy condition for matching versions.
+        # @!attribute [rw] most_recent_versions
+        #   @return [::Google::Cloud::ArtifactRegistry::V1::CleanupPolicyMostRecentVersions]
+        #     Policy condition for retaining a minimum number of versions. May only be
+        #     specified with a Keep action.
+        # @!attribute [rw] id
+        #   @return [::String]
+        #     The user-provided ID of the cleanup policy.
+        # @!attribute [rw] action
+        #   @return [::Google::Cloud::ArtifactRegistry::V1::CleanupPolicy::Action]
+        #     Policy action.
+        class CleanupPolicy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Action type for a cleanup policy.
+          module Action
+            # Action not specified.
+            ACTION_UNSPECIFIED = 0
+
+            # Delete action.
+            DELETE = 1
+
+            # Keep action.
+            KEEP = 2
+          end
+        end
+
+        # Virtual repository configuration.
+        # @!attribute [rw] upstream_policies
+        #   @return [::Array<::Google::Cloud::ArtifactRegistry::V1::UpstreamPolicy>]
+        #     Policies that configure the upstream artifacts distributed by the Virtual
+        #     Repository. Upstream policies cannot be set on a standard repository.
+        class VirtualRepositoryConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Remote repository configuration.
+        # @!attribute [rw] docker_repository
+        #   @return [::Google::Cloud::ArtifactRegistry::V1::RemoteRepositoryConfig::DockerRepository]
+        #     Specific settings for a Docker remote repository.
+        # @!attribute [rw] maven_repository
+        #   @return [::Google::Cloud::ArtifactRegistry::V1::RemoteRepositoryConfig::MavenRepository]
+        #     Specific settings for a Maven remote repository.
+        # @!attribute [rw] npm_repository
+        #   @return [::Google::Cloud::ArtifactRegistry::V1::RemoteRepositoryConfig::NpmRepository]
+        #     Specific settings for an Npm remote repository.
+        # @!attribute [rw] python_repository
+        #   @return [::Google::Cloud::ArtifactRegistry::V1::RemoteRepositoryConfig::PythonRepository]
+        #     Specific settings for a Python remote repository.
+        # @!attribute [rw] apt_repository
+        #   @return [::Google::Cloud::ArtifactRegistry::V1::RemoteRepositoryConfig::AptRepository]
+        #     Specific settings for an Apt remote repository.
+        # @!attribute [rw] yum_repository
+        #   @return [::Google::Cloud::ArtifactRegistry::V1::RemoteRepositoryConfig::YumRepository]
+        #     Specific settings for a Yum remote repository.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     The description of the remote source.
+        # @!attribute [rw] upstream_credentials
+        #   @return [::Google::Cloud::ArtifactRegistry::V1::RemoteRepositoryConfig::UpstreamCredentials]
+        #     Optional. The credentials used to access the remote repository.
+        class RemoteRepositoryConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The credentials to access the remote repository.
+          # @!attribute [rw] username_password_credentials
+          #   @return [::Google::Cloud::ArtifactRegistry::V1::RemoteRepositoryConfig::UpstreamCredentials::UsernamePasswordCredentials]
+          #     Use username and password to access the remote repository.
+          class UpstreamCredentials
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Username and password credentials.
+            # @!attribute [rw] username
+            #   @return [::String]
+            #     The username to access the remote repository.
+            # @!attribute [rw] password_secret_version
+            #   @return [::String]
+            #     The Secret Manager key version that holds the password to access the
+            #     remote repository. Must be in the format of
+            #     `projects/{project}/secrets/{secret}/versions/{version}`.
+            class UsernamePasswordCredentials
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+
+          # Configuration for a Docker remote repository.
+          # @!attribute [rw] public_repository
+          #   @return [::Google::Cloud::ArtifactRegistry::V1::RemoteRepositoryConfig::DockerRepository::PublicRepository]
+          #     One of the publicly available Docker repositories supported by Artifact
+          #     Registry.
+          class DockerRepository
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Predefined list of publicly available Docker repositories like Docker
+            # Hub.
+            module PublicRepository
+              # Unspecified repository.
+              PUBLIC_REPOSITORY_UNSPECIFIED = 0
+
+              # Docker Hub.
+              DOCKER_HUB = 1
+            end
+          end
+
+          # Configuration for a Maven remote repository.
+          # @!attribute [rw] public_repository
+          #   @return [::Google::Cloud::ArtifactRegistry::V1::RemoteRepositoryConfig::MavenRepository::PublicRepository]
+          #     One of the publicly available Maven repositories supported by Artifact
+          #     Registry.
+          class MavenRepository
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Predefined list of publicly available Maven repositories like Maven
+            # Central.
+            module PublicRepository
+              # Unspecified repository.
+              PUBLIC_REPOSITORY_UNSPECIFIED = 0
+
+              # Maven Central.
+              MAVEN_CENTRAL = 1
+            end
+          end
+
+          # Configuration for a Npm remote repository.
+          # @!attribute [rw] public_repository
+          #   @return [::Google::Cloud::ArtifactRegistry::V1::RemoteRepositoryConfig::NpmRepository::PublicRepository]
+          #     One of the publicly available Npm repositories supported by Artifact
+          #     Registry.
+          class NpmRepository
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Predefined list of publicly available NPM repositories like npmjs.
+            module PublicRepository
+              # Unspecified repository.
+              PUBLIC_REPOSITORY_UNSPECIFIED = 0
+
+              # npmjs.
+              NPMJS = 1
+            end
+          end
+
+          # Configuration for a Python remote repository.
+          # @!attribute [rw] public_repository
+          #   @return [::Google::Cloud::ArtifactRegistry::V1::RemoteRepositoryConfig::PythonRepository::PublicRepository]
+          #     One of the publicly available Python repositories supported by Artifact
+          #     Registry.
+          class PythonRepository
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Predefined list of publicly available Python repositories like PyPI.org.
+            module PublicRepository
+              # Unspecified repository.
+              PUBLIC_REPOSITORY_UNSPECIFIED = 0
+
+              # PyPI.
+              PYPI = 1
+            end
+          end
+
+          # Configuration for an Apt remote repository.
+          # @!attribute [rw] public_repository
+          #   @return [::Google::Cloud::ArtifactRegistry::V1::RemoteRepositoryConfig::AptRepository::PublicRepository]
+          #     One of the publicly available Apt repositories supported by Artifact
+          #     Registry.
+          class AptRepository
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Publicly available Apt repositories constructed from a common repository
+            # base and a custom repository path.
+            # @!attribute [rw] repository_base
+            #   @return [::Google::Cloud::ArtifactRegistry::V1::RemoteRepositoryConfig::AptRepository::PublicRepository::RepositoryBase]
+            #     A common public repository base for Apt.
+            # @!attribute [rw] repository_path
+            #   @return [::String]
+            #     A custom field to define a path to a specific repository from the base.
+            class PublicRepository
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Predefined list of publicly available repository bases for Apt.
+              module RepositoryBase
+                # Unspecified repository base.
+                REPOSITORY_BASE_UNSPECIFIED = 0
+
+                # Debian.
+                DEBIAN = 1
+
+                # Ubuntu LTS/Pro.
+                UBUNTU = 2
+              end
+            end
+          end
+
+          # Configuration for a Yum remote repository.
+          # @!attribute [rw] public_repository
+          #   @return [::Google::Cloud::ArtifactRegistry::V1::RemoteRepositoryConfig::YumRepository::PublicRepository]
+          #     One of the publicly available Yum repositories supported by Artifact
+          #     Registry.
+          class YumRepository
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Publicly available Yum repositories constructed from a common repository
+            # base and a custom repository path.
+            # @!attribute [rw] repository_base
+            #   @return [::Google::Cloud::ArtifactRegistry::V1::RemoteRepositoryConfig::YumRepository::PublicRepository::RepositoryBase]
+            #     A common public repository base for Yum.
+            # @!attribute [rw] repository_path
+            #   @return [::String]
+            #     A custom field to define a path to a specific repository from the base.
+            class PublicRepository
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Predefined list of publicly available repository bases for Yum.
+              module RepositoryBase
+                # Unspecified repository base.
+                REPOSITORY_BASE_UNSPECIFIED = 0
+
+                # CentOS.
+                CENTOS = 1
+
+                # CentOS Debug.
+                CENTOS_DEBUG = 2
+
+                # CentOS Vault.
+                CENTOS_VAULT = 3
+
+                # CentOS Stream.
+                CENTOS_STREAM = 4
+
+                # Rocky.
+                ROCKY = 5
+
+                # Fedora Extra Packages for Enterprise Linux (EPEL).
+                EPEL = 6
+              end
+            end
+          end
+        end
+
         # A Repository for storing artifacts with a specific format.
         # @!attribute [rw] maven_config
         #   @return [::Google::Cloud::ArtifactRegistry::V1::Repository::MavenRepositoryConfig]
         #     Maven repository config contains repository level configuration
         #     for the repositories of maven type.
+        # @!attribute [rw] docker_config
+        #   @return [::Google::Cloud::ArtifactRegistry::V1::Repository::DockerRepositoryConfig]
+        #     Docker repository config contains repository level configuration
+        #     for the repositories of docker type.
+        # @!attribute [rw] virtual_repository_config
+        #   @return [::Google::Cloud::ArtifactRegistry::V1::VirtualRepositoryConfig]
+        #     Configuration specific for a Virtual Repository.
+        # @!attribute [rw] remote_repository_config
+        #   @return [::Google::Cloud::ArtifactRegistry::V1::RemoteRepositoryConfig]
+        #     Configuration specific for a Remote Repository.
         # @!attribute [rw] name
         #   @return [::String]
         #     The name of the repository, for example:
-        #     "projects/p1/locations/us-central1/repositories/repo1".
+        #     `projects/p1/locations/us-central1/repositories/repo1`.
         # @!attribute [rw] format
         #   @return [::Google::Cloud::ArtifactRegistry::V1::Repository::Format]
-        #     The format of packages that are stored in the repository.
+        #     Optional. The format of packages that are stored in the repository.
         # @!attribute [rw] description
         #   @return [::String]
         #     The user-provided description of the repository.
@@ -43,18 +377,39 @@ module Google
         #     longer than 63 characters. Label keys must begin with a lowercase letter
         #     and may only contain lowercase letters, numeric characters, underscores,
         #     and dashes.
-        # @!attribute [rw] create_time
+        # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     The time when the repository was created.
-        # @!attribute [rw] update_time
+        #     Output only. The time when the repository was created.
+        # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     The time when the repository was last updated.
+        #     Output only. The time when the repository was last updated.
         # @!attribute [rw] kms_key_name
         #   @return [::String]
         #     The Cloud KMS resource name of the customer managed encryption key that's
         #     used to encrypt the contents of the Repository. Has the form:
         #     `projects/my-project/locations/my-region/keyRings/my-kr/cryptoKeys/my-key`.
         #     This value may not be changed after the Repository has been created.
+        # @!attribute [rw] mode
+        #   @return [::Google::Cloud::ArtifactRegistry::V1::Repository::Mode]
+        #     Optional. The mode of the repository.
+        # @!attribute [rw] cleanup_policies
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::ArtifactRegistry::V1::CleanupPolicy}]
+        #     Optional. Cleanup policies for this repository. Cleanup policies indicate
+        #     when certain package versions can be automatically deleted. Map keys are
+        #     policy IDs supplied by users during policy creation. They must unique
+        #     within a repository and be under 128 characters in length.
+        # @!attribute [r] size_bytes
+        #   @return [::Integer]
+        #     Output only. The size, in bytes, of all artifact storage in this
+        #     repository. Repositories that are generally available or in public preview
+        #      use this to calculate storage costs.
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Boolean]
+        #     Output only. If set, the repository satisfies physical zone separation.
+        # @!attribute [rw] cleanup_policy_dry_run
+        #   @return [::Boolean]
+        #     Optional. If true, the cleanup pipeline is prevented from deleting versions
+        #     in this repository.
         class Repository
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -88,11 +443,33 @@ module Google
             end
           end
 
+          # DockerRepositoryConfig is docker related repository details.
+          # Provides additional configuration details for repositories of the docker
+          # format type.
+          # @!attribute [rw] immutable_tags
+          #   @return [::Boolean]
+          #     The repository which enabled this flag prevents all tags from being
+          #     modified, moved or deleted. This does not prevent tags from being
+          #     created.
+          class DockerRepositoryConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # @!attribute [rw] key
           #   @return [::String]
           # @!attribute [rw] value
           #   @return [::String]
           class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::ArtifactRegistry::V1::CleanupPolicy]
+          class CleanupPoliciesEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -119,6 +496,28 @@ module Google
 
             # Python package format.
             PYTHON = 8
+
+            # Kubeflow Pipelines package format.
+            KFP = 9
+
+            # Go package format.
+            GO = 10
+          end
+
+          # The mode configures the repository to serve artifacts from different
+          # sources.
+          module Mode
+            # Unspecified mode.
+            MODE_UNSPECIFIED = 0
+
+            # A standard repository storing artifacts.
+            STANDARD_REPOSITORY = 1
+
+            # A virtual repository to serve artifacts from one or more sources.
+            VIRTUAL_REPOSITORY = 2
+
+            # A remote repository to serve artifacts from a remote source.
+            REMOTE_REPOSITORY = 3
           end
         end
 
@@ -167,10 +566,10 @@ module Google
         #     created.
         # @!attribute [rw] repository_id
         #   @return [::String]
-        #     The repository id to use for this repository.
+        #     Required. The repository id to use for this repository.
         # @!attribute [rw] repository
         #   @return [::Google::Cloud::ArtifactRegistry::V1::Repository]
-        #     The repository to be created.
+        #     Required. The repository to be created.
         class CreateRepositoryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

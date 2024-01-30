@@ -60,6 +60,14 @@ class ::Google::Cloud::Compute::V1::NetworkAttachments::Rest::ClientTest < Minit
 
       @response
     end
+
+    def endpoint
+      "endpoint.example.com"
+    end
+
+    def universe_domain
+      "example.com"
+    end
   end
 
   def test_aggregated_list
@@ -77,6 +85,7 @@ class ::Google::Cloud::Compute::V1::NetworkAttachments::Rest::ClientTest < Minit
     page_token = "hello world"
     project = "hello world"
     return_partial_success = true
+    service_project_number = 42
 
     aggregated_list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -92,27 +101,27 @@ class ::Google::Cloud::Compute::V1::NetworkAttachments::Rest::ClientTest < Minit
         end
 
         # Use hash object
-        client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
+        client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
+        client.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListNetworkAttachmentsRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
+        client.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListNetworkAttachmentsRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
+        client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListNetworkAttachmentsRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
+        client.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListNetworkAttachmentsRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -409,6 +418,64 @@ class ::Google::Cloud::Compute::V1::NetworkAttachments::Rest::ClientTest < Minit
     end
   end
 
+  def test_patch
+    # Create test objects.
+    client_result = ::Google::Cloud::Compute::V1::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    network_attachment = "hello world"
+    network_attachment_resource = {}
+    project = "hello world"
+    region = "hello world"
+    request_id = "hello world"
+
+    patch_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Compute::V1::NetworkAttachments::Rest::ServiceStub.stub :transcode_patch_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, patch_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::NetworkAttachments::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.patch({ network_attachment: network_attachment, network_attachment_resource: network_attachment_resource, project: project, region: region, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.patch network_attachment: network_attachment, network_attachment_resource: network_attachment_resource, project: project, region: region, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.patch ::Google::Cloud::Compute::V1::PatchNetworkAttachmentRequest.new(network_attachment: network_attachment, network_attachment_resource: network_attachment_resource, project: project, region: region, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.patch({ network_attachment: network_attachment, network_attachment_resource: network_attachment_resource, project: project, region: region, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.patch(::Google::Cloud::Compute::V1::PatchNetworkAttachmentRequest.new(network_attachment: network_attachment, network_attachment_resource: network_attachment_resource, project: project, region: region, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, patch_client_stub.call_count
+      end
+    end
+  end
+
   def test_set_iam_policy
     # Create test objects.
     client_result = ::Google::Cloud::Compute::V1::Policy.new
@@ -527,7 +594,8 @@ class ::Google::Cloud::Compute::V1::NetworkAttachments::Rest::ClientTest < Minit
     credentials_token = :dummy_value
 
     client = block_config = config = nil
-    Gapic::Rest::ClientStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil
+    Gapic::Rest::ClientStub.stub :new, dummy_stub do
       client = ::Google::Cloud::Compute::V1::NetworkAttachments::Rest::Client.new do |config|
         config.credentials = credentials_token
       end

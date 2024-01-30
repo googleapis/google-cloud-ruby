@@ -27,8 +27,8 @@ module Google
         #     Which pages to process (1-indexed).
         # @!attribute [rw] from_start
         #   @return [::Integer]
-        #     Only process certain pages from the start, process all if the document
-        #     has less pages.
+        #     Only process certain pages from the start. Process all if the document
+        #     has fewer pages.
         # @!attribute [rw] from_end
         #   @return [::Integer]
         #     Only process certain pages from the end, same as above.

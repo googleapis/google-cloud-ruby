@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-recaptcha_enterprise-v1",
-    "version": "0.15.0",
+    "version": "0.17.2",
     "language": "RUBY",
     "apis": [
       {
@@ -14,7 +14,7 @@
     {
       "region_tag": "recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_CreateAssessment_sync",
       "title": "Snippet for the create_assessment call in the RecaptchaEnterpriseService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#create_assessment. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#create_assessment.",
       "file": "recaptcha_enterprise_service/create_assessment.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_AnnotateAssessment_sync",
       "title": "Snippet for the annotate_assessment call in the RecaptchaEnterpriseService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#annotate_assessment. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#annotate_assessment.",
       "file": "recaptcha_enterprise_service/annotate_assessment.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_CreateKey_sync",
       "title": "Snippet for the create_key call in the RecaptchaEnterpriseService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#create_key. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#create_key.",
       "file": "recaptcha_enterprise_service/create_key.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -134,7 +134,7 @@
     {
       "region_tag": "recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_ListKeys_sync",
       "title": "Snippet for the list_keys call in the RecaptchaEnterpriseService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#list_keys. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#list_keys.",
       "file": "recaptcha_enterprise_service/list_keys.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -174,7 +174,7 @@
     {
       "region_tag": "recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_RetrieveLegacySecretKey_sync",
       "title": "Snippet for the retrieve_legacy_secret_key call in the RecaptchaEnterpriseService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#retrieve_legacy_secret_key. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#retrieve_legacy_secret_key.",
       "file": "recaptcha_enterprise_service/retrieve_legacy_secret_key.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,7 +206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -214,7 +214,7 @@
     {
       "region_tag": "recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_GetKey_sync",
       "title": "Snippet for the get_key call in the RecaptchaEnterpriseService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#get_key. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#get_key.",
       "file": "recaptcha_enterprise_service/get_key.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,7 +246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -254,7 +254,7 @@
     {
       "region_tag": "recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_UpdateKey_sync",
       "title": "Snippet for the update_key call in the RecaptchaEnterpriseService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#update_key. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#update_key.",
       "file": "recaptcha_enterprise_service/update_key.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,7 +286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -294,7 +294,7 @@
     {
       "region_tag": "recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_DeleteKey_sync",
       "title": "Snippet for the delete_key call in the RecaptchaEnterpriseService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#delete_key. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#delete_key.",
       "file": "recaptcha_enterprise_service/delete_key.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,7 +326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -334,7 +334,7 @@
     {
       "region_tag": "recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_MigrateKey_sync",
       "title": "Snippet for the migrate_key call in the RecaptchaEnterpriseService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#migrate_key. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#migrate_key.",
       "file": "recaptcha_enterprise_service/migrate_key.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,7 +366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -374,7 +374,7 @@
     {
       "region_tag": "recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_GetMetrics_sync",
       "title": "Snippet for the get_metrics call in the RecaptchaEnterpriseService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#get_metrics. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#get_metrics.",
       "file": "recaptcha_enterprise_service/get_metrics.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,7 +406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -414,7 +414,7 @@
     {
       "region_tag": "recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_CreateFirewallPolicy_sync",
       "title": "Snippet for the create_firewall_policy call in the RecaptchaEnterpriseService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#create_firewall_policy. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#create_firewall_policy.",
       "file": "recaptcha_enterprise_service/create_firewall_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,7 +446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -454,7 +454,7 @@
     {
       "region_tag": "recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_ListFirewallPolicies_sync",
       "title": "Snippet for the list_firewall_policies call in the RecaptchaEnterpriseService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#list_firewall_policies. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#list_firewall_policies.",
       "file": "recaptcha_enterprise_service/list_firewall_policies.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,7 +486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -494,7 +494,7 @@
     {
       "region_tag": "recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_GetFirewallPolicy_sync",
       "title": "Snippet for the get_firewall_policy call in the RecaptchaEnterpriseService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#get_firewall_policy. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#get_firewall_policy.",
       "file": "recaptcha_enterprise_service/get_firewall_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,7 +526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -534,7 +534,7 @@
     {
       "region_tag": "recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_UpdateFirewallPolicy_sync",
       "title": "Snippet for the update_firewall_policy call in the RecaptchaEnterpriseService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#update_firewall_policy. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#update_firewall_policy.",
       "file": "recaptcha_enterprise_service/update_firewall_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,7 +566,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -574,7 +574,7 @@
     {
       "region_tag": "recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_DeleteFirewallPolicy_sync",
       "title": "Snippet for the delete_firewall_policy call in the RecaptchaEnterpriseService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#delete_firewall_policy. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#delete_firewall_policy.",
       "file": "recaptcha_enterprise_service/delete_firewall_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,7 +606,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -614,7 +614,7 @@
     {
       "region_tag": "recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_ListRelatedAccountGroups_sync",
       "title": "Snippet for the list_related_account_groups call in the RecaptchaEnterpriseService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#list_related_account_groups. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#list_related_account_groups.",
       "file": "recaptcha_enterprise_service/list_related_account_groups.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,7 +646,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -654,7 +654,7 @@
     {
       "region_tag": "recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_ListRelatedAccountGroupMemberships_sync",
       "title": "Snippet for the list_related_account_group_memberships call in the RecaptchaEnterpriseService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#list_related_account_group_memberships. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#list_related_account_group_memberships.",
       "file": "recaptcha_enterprise_service/list_related_account_group_memberships.rb",
       "language": "RUBY",
       "client_method": {
@@ -686,7 +686,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -694,7 +694,7 @@
     {
       "region_tag": "recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_SearchRelatedAccountGroupMemberships_sync",
       "title": "Snippet for the search_related_account_group_memberships call in the RecaptchaEnterpriseService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#search_related_account_group_memberships. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#search_related_account_group_memberships.",
       "file": "recaptcha_enterprise_service/search_related_account_group_memberships.rb",
       "language": "RUBY",
       "client_method": {
@@ -726,7 +726,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]

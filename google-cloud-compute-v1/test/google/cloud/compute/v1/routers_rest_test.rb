@@ -60,6 +60,14 @@ class ::Google::Cloud::Compute::V1::Routers::Rest::ClientTest < Minitest::Test
 
       @response
     end
+
+    def endpoint
+      "endpoint.example.com"
+    end
+
+    def universe_domain
+      "example.com"
+    end
   end
 
   def test_aggregated_list
@@ -77,6 +85,7 @@ class ::Google::Cloud::Compute::V1::Routers::Rest::ClientTest < Minitest::Test
     page_token = "hello world"
     project = "hello world"
     return_partial_success = true
+    service_project_number = 42
 
     aggregated_list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -92,27 +101,27 @@ class ::Google::Cloud::Compute::V1::Routers::Rest::ClientTest < Minitest::Test
         end
 
         # Use hash object
-        client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
+        client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
+        client.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListRoutersRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
+        client.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListRoutersRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
+        client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListRoutersRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
+        client.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListRoutersRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -231,6 +240,63 @@ class ::Google::Cloud::Compute::V1::Routers::Rest::ClientTest < Minitest::Test
 
         # Verify method calls
         assert_equal 5, get_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_nat_ip_info
+    # Create test objects.
+    client_result = ::Google::Cloud::Compute::V1::NatIpInfoResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    nat_name = "hello world"
+    project = "hello world"
+    region = "hello world"
+    router = "hello world"
+
+    get_nat_ip_info_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Compute::V1::Routers::Rest::ServiceStub.stub :transcode_get_nat_ip_info_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_nat_ip_info_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::Routers::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_nat_ip_info({ nat_name: nat_name, project: project, region: region, router: router }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_nat_ip_info nat_name: nat_name, project: project, region: region, router: router do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_nat_ip_info ::Google::Cloud::Compute::V1::GetNatIpInfoRouterRequest.new(nat_name: nat_name, project: project, region: region, router: router) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_nat_ip_info({ nat_name: nat_name, project: project, region: region, router: router }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_nat_ip_info(::Google::Cloud::Compute::V1::GetNatIpInfoRouterRequest.new(nat_name: nat_name, project: project, region: region, router: router), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_nat_ip_info_client_stub.call_count
       end
     end
   end
@@ -647,7 +713,8 @@ class ::Google::Cloud::Compute::V1::Routers::Rest::ClientTest < Minitest::Test
     credentials_token = :dummy_value
 
     client = block_config = config = nil
-    Gapic::Rest::ClientStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil
+    Gapic::Rest::ClientStub.stub :new, dummy_stub do
       client = ::Google::Cloud::Compute::V1::Routers::Rest::Client.new do |config|
         config.credentials = credentials_token
       end

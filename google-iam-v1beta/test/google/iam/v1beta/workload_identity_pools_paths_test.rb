@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/iam/v1beta/workload_identity_pools"
 
 class ::Google::Iam::V1beta::WorkloadIdentityPools::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_project_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Iam::V1beta::WorkloadIdentityPools::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -37,7 +47,7 @@ class ::Google::Iam::V1beta::WorkloadIdentityPools::ClientPathsTest < Minitest::
 
   def test_workload_identity_pool_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Iam::V1beta::WorkloadIdentityPools::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -49,7 +59,7 @@ class ::Google::Iam::V1beta::WorkloadIdentityPools::ClientPathsTest < Minitest::
 
   def test_workload_identity_pool_provider_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Iam::V1beta::WorkloadIdentityPools::Client.new do |config|
         config.credentials = grpc_channel
       end

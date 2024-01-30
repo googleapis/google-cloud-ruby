@@ -60,6 +60,70 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ClientTest < Min
 
       @response
     end
+
+    def endpoint
+      "endpoint.example.com"
+    end
+
+    def universe_domain
+      "example.com"
+    end
+  end
+
+  def test_process_open_lineage_run_event
+    # Create test objects.
+    client_result = ::Google::Cloud::DataCatalog::Lineage::V1::ProcessOpenLineageRunEventResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    open_lineage = {}
+    request_id = "hello world"
+
+    process_open_lineage_run_event_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ServiceStub.stub :transcode_process_open_lineage_run_event_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, process_open_lineage_run_event_client_stub do
+        # Create client
+        client = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.process_open_lineage_run_event({ parent: parent, open_lineage: open_lineage, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.process_open_lineage_run_event parent: parent, open_lineage: open_lineage, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.process_open_lineage_run_event ::Google::Cloud::DataCatalog::Lineage::V1::ProcessOpenLineageRunEventRequest.new(parent: parent, open_lineage: open_lineage, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.process_open_lineage_run_event({ parent: parent, open_lineage: open_lineage, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.process_open_lineage_run_event(::Google::Cloud::DataCatalog::Lineage::V1::ProcessOpenLineageRunEventRequest.new(parent: parent, open_lineage: open_lineage, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, process_open_lineage_run_event_client_stub.call_count
+      end
+    end
   end
 
   def test_create_process
@@ -405,6 +469,7 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ClientTest < Min
     # Create request parameters for a unary method.
     run = {}
     update_mask = {}
+    allow_missing = true
 
     update_run_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -420,27 +485,27 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ClientTest < Min
         end
 
         # Use hash object
-        client.update_run({ run: run, update_mask: update_mask }) do |_result, response|
+        client.update_run({ run: run, update_mask: update_mask, allow_missing: allow_missing }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_run run: run, update_mask: update_mask do |_result, response|
+        client.update_run run: run, update_mask: update_mask, allow_missing: allow_missing do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_run ::Google::Cloud::DataCatalog::Lineage::V1::UpdateRunRequest.new(run: run, update_mask: update_mask) do |_result, response|
+        client.update_run ::Google::Cloud::DataCatalog::Lineage::V1::UpdateRunRequest.new(run: run, update_mask: update_mask, allow_missing: allow_missing) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_run({ run: run, update_mask: update_mask }, call_options) do |_result, response|
+        client.update_run({ run: run, update_mask: update_mask, allow_missing: allow_missing }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_run(::Google::Cloud::DataCatalog::Lineage::V1::UpdateRunRequest.new(run: run, update_mask: update_mask), call_options) do |_result, response|
+        client.update_run(::Google::Cloud::DataCatalog::Lineage::V1::UpdateRunRequest.new(run: run, update_mask: update_mask, allow_missing: allow_missing), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -954,7 +1019,8 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ClientTest < Min
     credentials_token = :dummy_value
 
     client = block_config = config = nil
-    Gapic::Rest::ClientStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil
+    Gapic::Rest::ClientStub.stub :new, dummy_stub do
       client = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new do |config|
         config.credentials = credentials_token
       end

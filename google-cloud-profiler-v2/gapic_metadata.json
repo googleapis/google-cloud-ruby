@@ -28,6 +28,20 @@
           }
         }
       }
+    },
+    "ExportService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Profiler::V2::ExportService::Client",
+          "rpcs": {
+            "ListProfiles": {
+              "methods": [
+                "list_profiles"
+              ]
+            }
+          }
+        }
+      }
     }
   }
 }

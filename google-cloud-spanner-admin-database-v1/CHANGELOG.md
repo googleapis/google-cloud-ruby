@@ -1,5 +1,23 @@
 # Release History
 
+### 0.17.0 (2024-01-25)
+
+#### Features
+
+* Support proto descriptors when creating a database or getting or updating a database DDL ([#24468](https://github.com/googleapis/google-cloud-ruby/issues/24468)) 
+
+### 0.16.1 (2024-01-12)
+
+#### Bug Fixes
+
+* Ensure endpoints are correct for mixin clients ([#24032](https://github.com/googleapis/google-cloud-ruby/issues/24032)) 
+
+### 0.16.0 (2024-01-11)
+
+#### Features
+
+* Support for universe_domain ([#23786](https://github.com/googleapis/google-cloud-ruby/issues/23786)) 
+
 ### 0.15.0 (2023-09-12)
 
 #### Features

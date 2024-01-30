@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-build-v2",
-    "version": "0.4.0",
+    "version": "0.5.1",
     "language": "RUBY",
     "apis": [
       {
@@ -14,7 +14,7 @@
     {
       "region_tag": "cloudbuild_v2_generated_RepositoryManager_CreateConnection_sync",
       "title": "Snippet for the create_connection call in the RepositoryManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V2::RepositoryManager::Client#create_connection. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V2::RepositoryManager::Client#create_connection.",
       "file": "repository_manager/create_connection.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "cloudbuild_v2_generated_RepositoryManager_GetConnection_sync",
       "title": "Snippet for the get_connection call in the RepositoryManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V2::RepositoryManager::Client#get_connection. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V2::RepositoryManager::Client#get_connection.",
       "file": "repository_manager/get_connection.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "cloudbuild_v2_generated_RepositoryManager_ListConnections_sync",
       "title": "Snippet for the list_connections call in the RepositoryManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V2::RepositoryManager::Client#list_connections. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V2::RepositoryManager::Client#list_connections.",
       "file": "repository_manager/list_connections.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -134,7 +134,7 @@
     {
       "region_tag": "cloudbuild_v2_generated_RepositoryManager_UpdateConnection_sync",
       "title": "Snippet for the update_connection call in the RepositoryManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V2::RepositoryManager::Client#update_connection. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V2::RepositoryManager::Client#update_connection.",
       "file": "repository_manager/update_connection.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -174,7 +174,7 @@
     {
       "region_tag": "cloudbuild_v2_generated_RepositoryManager_DeleteConnection_sync",
       "title": "Snippet for the delete_connection call in the RepositoryManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V2::RepositoryManager::Client#delete_connection. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V2::RepositoryManager::Client#delete_connection.",
       "file": "repository_manager/delete_connection.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,7 +206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -214,7 +214,7 @@
     {
       "region_tag": "cloudbuild_v2_generated_RepositoryManager_CreateRepository_sync",
       "title": "Snippet for the create_repository call in the RepositoryManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V2::RepositoryManager::Client#create_repository. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V2::RepositoryManager::Client#create_repository.",
       "file": "repository_manager/create_repository.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,7 +246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -254,7 +254,7 @@
     {
       "region_tag": "cloudbuild_v2_generated_RepositoryManager_BatchCreateRepositories_sync",
       "title": "Snippet for the batch_create_repositories call in the RepositoryManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V2::RepositoryManager::Client#batch_create_repositories. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V2::RepositoryManager::Client#batch_create_repositories.",
       "file": "repository_manager/batch_create_repositories.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,7 +286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -294,7 +294,7 @@
     {
       "region_tag": "cloudbuild_v2_generated_RepositoryManager_GetRepository_sync",
       "title": "Snippet for the get_repository call in the RepositoryManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V2::RepositoryManager::Client#get_repository. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V2::RepositoryManager::Client#get_repository.",
       "file": "repository_manager/get_repository.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,7 +326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -334,7 +334,7 @@
     {
       "region_tag": "cloudbuild_v2_generated_RepositoryManager_ListRepositories_sync",
       "title": "Snippet for the list_repositories call in the RepositoryManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V2::RepositoryManager::Client#list_repositories. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V2::RepositoryManager::Client#list_repositories.",
       "file": "repository_manager/list_repositories.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,7 +366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -374,7 +374,7 @@
     {
       "region_tag": "cloudbuild_v2_generated_RepositoryManager_DeleteRepository_sync",
       "title": "Snippet for the delete_repository call in the RepositoryManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V2::RepositoryManager::Client#delete_repository. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V2::RepositoryManager::Client#delete_repository.",
       "file": "repository_manager/delete_repository.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,7 +406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -414,7 +414,7 @@
     {
       "region_tag": "cloudbuild_v2_generated_RepositoryManager_FetchReadWriteToken_sync",
       "title": "Snippet for the fetch_read_write_token call in the RepositoryManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V2::RepositoryManager::Client#fetch_read_write_token. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V2::RepositoryManager::Client#fetch_read_write_token.",
       "file": "repository_manager/fetch_read_write_token.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,7 +446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -454,7 +454,7 @@
     {
       "region_tag": "cloudbuild_v2_generated_RepositoryManager_FetchReadToken_sync",
       "title": "Snippet for the fetch_read_token call in the RepositoryManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V2::RepositoryManager::Client#fetch_read_token. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V2::RepositoryManager::Client#fetch_read_token.",
       "file": "repository_manager/fetch_read_token.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,7 +486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -494,7 +494,7 @@
     {
       "region_tag": "cloudbuild_v2_generated_RepositoryManager_FetchLinkableRepositories_sync",
       "title": "Snippet for the fetch_linkable_repositories call in the RepositoryManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V2::RepositoryManager::Client#fetch_linkable_repositories. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V2::RepositoryManager::Client#fetch_linkable_repositories.",
       "file": "repository_manager/fetch_linkable_repositories.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,7 +526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -534,7 +534,7 @@
     {
       "region_tag": "cloudbuild_v2_generated_RepositoryManager_FetchGitRefs_sync",
       "title": "Snippet for the fetch_git_refs call in the RepositoryManager service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V2::RepositoryManager::Client#fetch_git_refs. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V2::RepositoryManager::Client#fetch_git_refs.",
       "file": "repository_manager/fetch_git_refs.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,7 +566,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]

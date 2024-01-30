@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/recommendation_engine/v1beta1/catalog_service"
 
 class ::Google::Cloud::RecommendationEngine::V1beta1::CatalogService::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_catalog_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -37,7 +47,7 @@ class ::Google::Cloud::RecommendationEngine::V1beta1::CatalogService::ClientPath
 
   def test_catalog_item_path_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Client.new do |config|
         config.credentials = grpc_channel
       end

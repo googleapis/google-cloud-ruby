@@ -24,6 +24,7 @@ module Google
         module V1
           # Table display options that can be reused.
           # @!attribute [rw] shown_columns
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::Array<::String>]
           #     Optional. This field is unused and has been replaced by
           #     TimeSeriesTable.column_settings

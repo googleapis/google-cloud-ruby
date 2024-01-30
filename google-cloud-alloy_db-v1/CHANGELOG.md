@@ -1,5 +1,23 @@
 # Changelog
 
+### 0.8.1 (2024-01-12)
+
+#### Bug Fixes
+
+* Ensure endpoints are correct for mixin clients ([#24032](https://github.com/googleapis/google-cloud-ruby/issues/24032)) 
+
+### 0.8.0 (2024-01-11)
+
+#### Features
+
+* Support for universe_domain ([#23772](https://github.com/googleapis/google-cloud-ruby/issues/23772)) 
+
+### 0.7.0 (2023-11-06)
+
+#### Features
+
+* Add "use_metadata_exchange" field in GenerateClientCertificate API ([#23505](https://github.com/googleapis/google-cloud-ruby/issues/23505)) 
+
 ### 0.6.0 (2023-09-29)
 
 #### Features

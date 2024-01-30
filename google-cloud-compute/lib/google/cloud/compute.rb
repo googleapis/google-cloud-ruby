@@ -29,7 +29,7 @@ require "google/cloud/config"
 
 # Set the default configuration
 ::Google::Cloud.configure.add_config! :compute do |config|
-  config.add_field! :endpoint,      "compute.googleapis.com", match: ::String
+  config.add_field! :endpoint,      nil, match: ::String
   config.add_field! :credentials,   nil, match: [::String, ::Hash, ::Google::Auth::Credentials]
   config.add_field! :scope,         nil, match: [::Array, ::String]
   config.add_field! :lib_name,      nil, match: ::String
@@ -38,6 +38,7 @@ require "google/cloud/config"
   config.add_field! :metadata,      nil, match: ::Hash
   config.add_field! :retry_policy,  nil, match: [::Hash, ::Proc]
   config.add_field! :quota_project, nil, match: ::String
+  config.add_field! :universe_domain, nil, match: ::String
 end
 
 module Google
@@ -2232,6 +2233,36 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::Compute.const_get(package_name).const_get(:ServiceAttachments)
+        service_module.const_get(:Rest).const_get(:Client).new(&block)
+      end
+
+      ##
+      # Create a new client object for SnapshotSettingsService.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Compute::V1::SnapshotSettingsService::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-SnapshotSettingsService-Rest-Client)
+      # for a REST client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the SnapshotSettingsService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # ## About SnapshotSettingsService
+      #
+      # The SnapshotSettings API.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.snapshot_settings_service version: :v1, &block
+        require "google/cloud/compute/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Compute
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::Compute.const_get(package_name).const_get(:SnapshotSettingsService)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
 

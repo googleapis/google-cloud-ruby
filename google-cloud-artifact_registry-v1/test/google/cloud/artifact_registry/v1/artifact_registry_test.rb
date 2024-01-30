@@ -45,6 +45,14 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::ClientTest < Mini
 
       @response
     end
+
+    def endpoint
+      "endpoint.example.com"
+    end
+
+    def universe_domain
+      "example.com"
+    end
   end
 
   def test_list_docker_images
@@ -1380,6 +1388,73 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::ClientTest < Mini
     end
   end
 
+  def test_batch_delete_versions
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+    validate_only = true
+
+    batch_delete_versions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :batch_delete_versions, name
+      assert_kind_of ::Google::Cloud::ArtifactRegistry::V1::BatchDeleteVersionsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal ["hello world"], request["names"]
+      assert_equal true, request["validate_only"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, batch_delete_versions_client_stub do
+      # Create client
+      client = ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.batch_delete_versions({ parent: parent, names: names, validate_only: validate_only }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.batch_delete_versions parent: parent, names: names, validate_only: validate_only do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.batch_delete_versions ::Google::Cloud::ArtifactRegistry::V1::BatchDeleteVersionsRequest.new(parent: parent, names: names, validate_only: validate_only) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.batch_delete_versions({ parent: parent, names: names, validate_only: validate_only }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.batch_delete_versions(::Google::Cloud::ArtifactRegistry::V1::BatchDeleteVersionsRequest.new(parent: parent, names: names, validate_only: validate_only), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, batch_delete_versions_client_stub.call_rpc_count
+    end
+  end
+
   def test_list_files
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::ArtifactRegistry::V1::ListFilesResponse.new
@@ -2238,7 +2313,8 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::ClientTest < Mini
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
     client = block_config = config = nil
-    Gapic::ServiceStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil, nil
+    Gapic::ServiceStub.stub :new, dummy_stub do
       client = ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -2256,7 +2332,8 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::ClientTest < Mini
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
     client = nil
-    Gapic::ServiceStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil, nil
+    Gapic::ServiceStub.stub :new, dummy_stub do
       client = ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new do |config|
         config.credentials = grpc_channel
       end

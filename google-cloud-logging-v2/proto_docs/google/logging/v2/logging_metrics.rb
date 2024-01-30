@@ -148,6 +148,7 @@ module Google
         #
         #     This field may not be present for older metrics.
         # @!attribute [rw] version
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::Logging::V2::LogMetric::ApiVersion]
         #     Deprecated. The API version that created or updated this metric.
         #     The v2 format is used by default and cannot be changed.

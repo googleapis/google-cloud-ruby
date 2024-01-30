@@ -30,14 +30,35 @@ module Google
             # including transcoding, making the REST call, and deserialing the response.
             #
             class ServiceStub
-              def initialize endpoint:, credentials:
+              def initialize endpoint:, endpoint_template:, universe_domain:, credentials:
                 # These require statements are intentionally placed here to initialize
                 # the REST modules only when it's required.
                 require "gapic/rest"
 
-                @client_stub = ::Gapic::Rest::ClientStub.new endpoint: endpoint, credentials: credentials,
+                @client_stub = ::Gapic::Rest::ClientStub.new endpoint: endpoint,
+                                                             endpoint_template: endpoint_template,
+                                                             universe_domain: universe_domain,
+                                                             credentials: credentials,
                                                              numeric_enums: true,
                                                              raise_faraday_errors: false
+              end
+
+              ##
+              # The effective universe domain
+              #
+              # @return [String]
+              #
+              def universe_domain
+                @client_stub.universe_domain
+              end
+
+              ##
+              # The effective endpoint
+              #
+              # @return [String]
+              #
+              def endpoint
+                @client_stub.endpoint
               end
 
               ##
@@ -453,386 +474,6 @@ module Google
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Analytics::Admin::V1alpha::Property.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
-              end
-
-              ##
-              # Baseline implementation for the get_user_link REST call
-              #
-              # @param request_pb [::Google::Analytics::Admin::V1alpha::GetUserLinkRequest]
-              #   A request object representing the call parameters. Required.
-              # @param options [::Gapic::CallOptions]
-              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Analytics::Admin::V1alpha::UserLink]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Google::Analytics::Admin::V1alpha::UserLink]
-              #   A result object deserialized from the server's reply
-              def get_user_link request_pb, options = nil
-                raise ::ArgumentError, "request must be provided" if request_pb.nil?
-
-                verb, uri, query_string_params, body = ServiceStub.transcode_get_user_link_request request_pb
-                query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split "=", 2 }
-                                      else
-                                        {}
-                                      end
-
-                response = @client_stub.make_http_request(
-                  verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
-                  options: options
-                )
-                operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Analytics::Admin::V1alpha::UserLink.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
-              end
-
-              ##
-              # Baseline implementation for the batch_get_user_links REST call
-              #
-              # @param request_pb [::Google::Analytics::Admin::V1alpha::BatchGetUserLinksRequest]
-              #   A request object representing the call parameters. Required.
-              # @param options [::Gapic::CallOptions]
-              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Analytics::Admin::V1alpha::BatchGetUserLinksResponse]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Google::Analytics::Admin::V1alpha::BatchGetUserLinksResponse]
-              #   A result object deserialized from the server's reply
-              def batch_get_user_links request_pb, options = nil
-                raise ::ArgumentError, "request must be provided" if request_pb.nil?
-
-                verb, uri, query_string_params, body = ServiceStub.transcode_batch_get_user_links_request request_pb
-                query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split "=", 2 }
-                                      else
-                                        {}
-                                      end
-
-                response = @client_stub.make_http_request(
-                  verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
-                  options: options
-                )
-                operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Analytics::Admin::V1alpha::BatchGetUserLinksResponse.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
-              end
-
-              ##
-              # Baseline implementation for the list_user_links REST call
-              #
-              # @param request_pb [::Google::Analytics::Admin::V1alpha::ListUserLinksRequest]
-              #   A request object representing the call parameters. Required.
-              # @param options [::Gapic::CallOptions]
-              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Analytics::Admin::V1alpha::ListUserLinksResponse]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Google::Analytics::Admin::V1alpha::ListUserLinksResponse]
-              #   A result object deserialized from the server's reply
-              def list_user_links request_pb, options = nil
-                raise ::ArgumentError, "request must be provided" if request_pb.nil?
-
-                verb, uri, query_string_params, body = ServiceStub.transcode_list_user_links_request request_pb
-                query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split "=", 2 }
-                                      else
-                                        {}
-                                      end
-
-                response = @client_stub.make_http_request(
-                  verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
-                  options: options
-                )
-                operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Analytics::Admin::V1alpha::ListUserLinksResponse.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
-              end
-
-              ##
-              # Baseline implementation for the audit_user_links REST call
-              #
-              # @param request_pb [::Google::Analytics::Admin::V1alpha::AuditUserLinksRequest]
-              #   A request object representing the call parameters. Required.
-              # @param options [::Gapic::CallOptions]
-              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Analytics::Admin::V1alpha::AuditUserLinksResponse]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Google::Analytics::Admin::V1alpha::AuditUserLinksResponse]
-              #   A result object deserialized from the server's reply
-              def audit_user_links request_pb, options = nil
-                raise ::ArgumentError, "request must be provided" if request_pb.nil?
-
-                verb, uri, query_string_params, body = ServiceStub.transcode_audit_user_links_request request_pb
-                query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split "=", 2 }
-                                      else
-                                        {}
-                                      end
-
-                response = @client_stub.make_http_request(
-                  verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
-                  options: options
-                )
-                operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Analytics::Admin::V1alpha::AuditUserLinksResponse.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
-              end
-
-              ##
-              # Baseline implementation for the create_user_link REST call
-              #
-              # @param request_pb [::Google::Analytics::Admin::V1alpha::CreateUserLinkRequest]
-              #   A request object representing the call parameters. Required.
-              # @param options [::Gapic::CallOptions]
-              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Analytics::Admin::V1alpha::UserLink]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Google::Analytics::Admin::V1alpha::UserLink]
-              #   A result object deserialized from the server's reply
-              def create_user_link request_pb, options = nil
-                raise ::ArgumentError, "request must be provided" if request_pb.nil?
-
-                verb, uri, query_string_params, body = ServiceStub.transcode_create_user_link_request request_pb
-                query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split "=", 2 }
-                                      else
-                                        {}
-                                      end
-
-                response = @client_stub.make_http_request(
-                  verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
-                  options: options
-                )
-                operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Analytics::Admin::V1alpha::UserLink.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
-              end
-
-              ##
-              # Baseline implementation for the batch_create_user_links REST call
-              #
-              # @param request_pb [::Google::Analytics::Admin::V1alpha::BatchCreateUserLinksRequest]
-              #   A request object representing the call parameters. Required.
-              # @param options [::Gapic::CallOptions]
-              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Analytics::Admin::V1alpha::BatchCreateUserLinksResponse]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Google::Analytics::Admin::V1alpha::BatchCreateUserLinksResponse]
-              #   A result object deserialized from the server's reply
-              def batch_create_user_links request_pb, options = nil
-                raise ::ArgumentError, "request must be provided" if request_pb.nil?
-
-                verb, uri, query_string_params, body = ServiceStub.transcode_batch_create_user_links_request request_pb
-                query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split "=", 2 }
-                                      else
-                                        {}
-                                      end
-
-                response = @client_stub.make_http_request(
-                  verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
-                  options: options
-                )
-                operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Analytics::Admin::V1alpha::BatchCreateUserLinksResponse.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
-              end
-
-              ##
-              # Baseline implementation for the update_user_link REST call
-              #
-              # @param request_pb [::Google::Analytics::Admin::V1alpha::UpdateUserLinkRequest]
-              #   A request object representing the call parameters. Required.
-              # @param options [::Gapic::CallOptions]
-              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Analytics::Admin::V1alpha::UserLink]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Google::Analytics::Admin::V1alpha::UserLink]
-              #   A result object deserialized from the server's reply
-              def update_user_link request_pb, options = nil
-                raise ::ArgumentError, "request must be provided" if request_pb.nil?
-
-                verb, uri, query_string_params, body = ServiceStub.transcode_update_user_link_request request_pb
-                query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split "=", 2 }
-                                      else
-                                        {}
-                                      end
-
-                response = @client_stub.make_http_request(
-                  verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
-                  options: options
-                )
-                operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Analytics::Admin::V1alpha::UserLink.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
-              end
-
-              ##
-              # Baseline implementation for the batch_update_user_links REST call
-              #
-              # @param request_pb [::Google::Analytics::Admin::V1alpha::BatchUpdateUserLinksRequest]
-              #   A request object representing the call parameters. Required.
-              # @param options [::Gapic::CallOptions]
-              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Analytics::Admin::V1alpha::BatchUpdateUserLinksResponse]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Google::Analytics::Admin::V1alpha::BatchUpdateUserLinksResponse]
-              #   A result object deserialized from the server's reply
-              def batch_update_user_links request_pb, options = nil
-                raise ::ArgumentError, "request must be provided" if request_pb.nil?
-
-                verb, uri, query_string_params, body = ServiceStub.transcode_batch_update_user_links_request request_pb
-                query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split "=", 2 }
-                                      else
-                                        {}
-                                      end
-
-                response = @client_stub.make_http_request(
-                  verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
-                  options: options
-                )
-                operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Analytics::Admin::V1alpha::BatchUpdateUserLinksResponse.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
-              end
-
-              ##
-              # Baseline implementation for the delete_user_link REST call
-              #
-              # @param request_pb [::Google::Analytics::Admin::V1alpha::DeleteUserLinkRequest]
-              #   A request object representing the call parameters. Required.
-              # @param options [::Gapic::CallOptions]
-              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Protobuf::Empty]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Google::Protobuf::Empty]
-              #   A result object deserialized from the server's reply
-              def delete_user_link request_pb, options = nil
-                raise ::ArgumentError, "request must be provided" if request_pb.nil?
-
-                verb, uri, query_string_params, body = ServiceStub.transcode_delete_user_link_request request_pb
-                query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split "=", 2 }
-                                      else
-                                        {}
-                                      end
-
-                response = @client_stub.make_http_request(
-                  verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
-                  options: options
-                )
-                operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Protobuf::Empty.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
-              end
-
-              ##
-              # Baseline implementation for the batch_delete_user_links REST call
-              #
-              # @param request_pb [::Google::Analytics::Admin::V1alpha::BatchDeleteUserLinksRequest]
-              #   A request object representing the call parameters. Required.
-              # @param options [::Gapic::CallOptions]
-              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Protobuf::Empty]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Google::Protobuf::Empty]
-              #   A result object deserialized from the server's reply
-              def batch_delete_user_links request_pb, options = nil
-                raise ::ArgumentError, "request must be provided" if request_pb.nil?
-
-                verb, uri, query_string_params, body = ServiceStub.transcode_batch_delete_user_links_request request_pb
-                query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split "=", 2 }
-                                      else
-                                        {}
-                                      end
-
-                response = @client_stub.make_http_request(
-                  verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
-                  options: options
-                )
-                operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Protobuf::Empty.decode_json response.body, ignore_unknown_fields: true
 
                 yield result, operation if block_given?
                 result
@@ -4905,6 +4546,690 @@ module Google
               end
 
               ##
+              # Baseline implementation for the update_data_redaction_settings REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::UpdateDataRedactionSettingsRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::DataRedactionSettings]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::DataRedactionSettings]
+              #   A result object deserialized from the server's reply
+              def update_data_redaction_settings request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_update_data_redaction_settings_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Analytics::Admin::V1alpha::DataRedactionSettings.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the get_data_redaction_settings REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::GetDataRedactionSettingsRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::DataRedactionSettings]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::DataRedactionSettings]
+              #   A result object deserialized from the server's reply
+              def get_data_redaction_settings request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_get_data_redaction_settings_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Analytics::Admin::V1alpha::DataRedactionSettings.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the get_calculated_metric REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::GetCalculatedMetricRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::CalculatedMetric]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::CalculatedMetric]
+              #   A result object deserialized from the server's reply
+              def get_calculated_metric request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_get_calculated_metric_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Analytics::Admin::V1alpha::CalculatedMetric.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the create_calculated_metric REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::CreateCalculatedMetricRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::CalculatedMetric]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::CalculatedMetric]
+              #   A result object deserialized from the server's reply
+              def create_calculated_metric request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_create_calculated_metric_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Analytics::Admin::V1alpha::CalculatedMetric.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the list_calculated_metrics REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::ListCalculatedMetricsRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::ListCalculatedMetricsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::ListCalculatedMetricsResponse]
+              #   A result object deserialized from the server's reply
+              def list_calculated_metrics request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_list_calculated_metrics_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Analytics::Admin::V1alpha::ListCalculatedMetricsResponse.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the update_calculated_metric REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::UpdateCalculatedMetricRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::CalculatedMetric]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::CalculatedMetric]
+              #   A result object deserialized from the server's reply
+              def update_calculated_metric request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_update_calculated_metric_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Analytics::Admin::V1alpha::CalculatedMetric.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the delete_calculated_metric REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::DeleteCalculatedMetricRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #   A result object deserialized from the server's reply
+              def delete_calculated_metric request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_delete_calculated_metric_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Protobuf::Empty.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the create_rollup_property REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::CreateRollupPropertyRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::CreateRollupPropertyResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::CreateRollupPropertyResponse]
+              #   A result object deserialized from the server's reply
+              def create_rollup_property request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_create_rollup_property_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Analytics::Admin::V1alpha::CreateRollupPropertyResponse.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the get_rollup_property_source_link REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::GetRollupPropertySourceLinkRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::RollupPropertySourceLink]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::RollupPropertySourceLink]
+              #   A result object deserialized from the server's reply
+              def get_rollup_property_source_link request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_get_rollup_property_source_link_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Analytics::Admin::V1alpha::RollupPropertySourceLink.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the list_rollup_property_source_links REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::ListRollupPropertySourceLinksRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::ListRollupPropertySourceLinksResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::ListRollupPropertySourceLinksResponse]
+              #   A result object deserialized from the server's reply
+              def list_rollup_property_source_links request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_list_rollup_property_source_links_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Analytics::Admin::V1alpha::ListRollupPropertySourceLinksResponse.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the create_rollup_property_source_link REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::CreateRollupPropertySourceLinkRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::RollupPropertySourceLink]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::RollupPropertySourceLink]
+              #   A result object deserialized from the server's reply
+              def create_rollup_property_source_link request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_create_rollup_property_source_link_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Analytics::Admin::V1alpha::RollupPropertySourceLink.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the delete_rollup_property_source_link REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::DeleteRollupPropertySourceLinkRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #   A result object deserialized from the server's reply
+              def delete_rollup_property_source_link request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_delete_rollup_property_source_link_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Protobuf::Empty.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the create_subproperty REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::CreateSubpropertyRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::CreateSubpropertyResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::CreateSubpropertyResponse]
+              #   A result object deserialized from the server's reply
+              def create_subproperty request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_create_subproperty_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Analytics::Admin::V1alpha::CreateSubpropertyResponse.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the create_subproperty_event_filter REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::CreateSubpropertyEventFilterRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::SubpropertyEventFilter]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::SubpropertyEventFilter]
+              #   A result object deserialized from the server's reply
+              def create_subproperty_event_filter request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_create_subproperty_event_filter_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Analytics::Admin::V1alpha::SubpropertyEventFilter.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the get_subproperty_event_filter REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::GetSubpropertyEventFilterRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::SubpropertyEventFilter]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::SubpropertyEventFilter]
+              #   A result object deserialized from the server's reply
+              def get_subproperty_event_filter request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_get_subproperty_event_filter_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Analytics::Admin::V1alpha::SubpropertyEventFilter.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the list_subproperty_event_filters REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::ListSubpropertyEventFiltersRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::ListSubpropertyEventFiltersResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::ListSubpropertyEventFiltersResponse]
+              #   A result object deserialized from the server's reply
+              def list_subproperty_event_filters request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_list_subproperty_event_filters_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Analytics::Admin::V1alpha::ListSubpropertyEventFiltersResponse.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the update_subproperty_event_filter REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::UpdateSubpropertyEventFilterRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::SubpropertyEventFilter]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::SubpropertyEventFilter]
+              #   A result object deserialized from the server's reply
+              def update_subproperty_event_filter request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_update_subproperty_event_filter_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Analytics::Admin::V1alpha::SubpropertyEventFilter.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the delete_subproperty_event_filter REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::DeleteSubpropertyEventFilterRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #   A result object deserialized from the server's reply
+              def delete_subproperty_event_filter request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_delete_subproperty_event_filter_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Protobuf::Empty.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
               # @private
               #
               # GRPC transcoding helper method for the get_account REST call
@@ -5124,298 +5449,6 @@ module Google
                                                           body: "property",
                                                           matches: [
                                                             ["property.name", %r{^properties/[^/]+/?$}, false]
-                                                          ]
-                                                        )
-                transcoder.transcode request_pb
-              end
-
-              ##
-              # @private
-              #
-              # GRPC transcoding helper method for the get_user_link REST call
-              #
-              # @param request_pb [::Google::Analytics::Admin::V1alpha::GetUserLinkRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def self.transcode_get_user_link_request request_pb
-                transcoder = Gapic::Rest::GrpcTranscoder.new
-                                                        .with_bindings(
-                                                          uri_method: :get,
-                                                          uri_template: "/v1alpha/{name}",
-                                                          matches: [
-                                                            ["name", %r{^accounts/[^/]+/userLinks/[^/]+/?$}, false]
-                                                          ]
-                                                        )
-                                                        .with_bindings(
-                                                          uri_method: :get,
-                                                          uri_template: "/v1alpha/{name}",
-                                                          matches: [
-                                                            ["name", %r{^properties/[^/]+/userLinks/[^/]+/?$}, false]
-                                                          ]
-                                                        )
-                transcoder.transcode request_pb
-              end
-
-              ##
-              # @private
-              #
-              # GRPC transcoding helper method for the batch_get_user_links REST call
-              #
-              # @param request_pb [::Google::Analytics::Admin::V1alpha::BatchGetUserLinksRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def self.transcode_batch_get_user_links_request request_pb
-                transcoder = Gapic::Rest::GrpcTranscoder.new
-                                                        .with_bindings(
-                                                          uri_method: :get,
-                                                          uri_template: "/v1alpha/{parent}/userLinks:batchGet",
-                                                          matches: [
-                                                            ["parent", %r{^accounts/[^/]+/?$}, false]
-                                                          ]
-                                                        )
-                                                        .with_bindings(
-                                                          uri_method: :get,
-                                                          uri_template: "/v1alpha/{parent}/userLinks:batchGet",
-                                                          matches: [
-                                                            ["parent", %r{^properties/[^/]+/?$}, false]
-                                                          ]
-                                                        )
-                transcoder.transcode request_pb
-              end
-
-              ##
-              # @private
-              #
-              # GRPC transcoding helper method for the list_user_links REST call
-              #
-              # @param request_pb [::Google::Analytics::Admin::V1alpha::ListUserLinksRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def self.transcode_list_user_links_request request_pb
-                transcoder = Gapic::Rest::GrpcTranscoder.new
-                                                        .with_bindings(
-                                                          uri_method: :get,
-                                                          uri_template: "/v1alpha/{parent}/userLinks",
-                                                          matches: [
-                                                            ["parent", %r{^accounts/[^/]+/?$}, false]
-                                                          ]
-                                                        )
-                                                        .with_bindings(
-                                                          uri_method: :get,
-                                                          uri_template: "/v1alpha/{parent}/userLinks",
-                                                          matches: [
-                                                            ["parent", %r{^properties/[^/]+/?$}, false]
-                                                          ]
-                                                        )
-                transcoder.transcode request_pb
-              end
-
-              ##
-              # @private
-              #
-              # GRPC transcoding helper method for the audit_user_links REST call
-              #
-              # @param request_pb [::Google::Analytics::Admin::V1alpha::AuditUserLinksRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def self.transcode_audit_user_links_request request_pb
-                transcoder = Gapic::Rest::GrpcTranscoder.new
-                                                        .with_bindings(
-                                                          uri_method: :post,
-                                                          uri_template: "/v1alpha/{parent}/userLinks:audit",
-                                                          body: "*",
-                                                          matches: [
-                                                            ["parent", %r{^accounts/[^/]+/?$}, false]
-                                                          ]
-                                                        )
-                                                        .with_bindings(
-                                                          uri_method: :post,
-                                                          uri_template: "/v1alpha/{parent}/userLinks:audit",
-                                                          body: "*",
-                                                          matches: [
-                                                            ["parent", %r{^properties/[^/]+/?$}, false]
-                                                          ]
-                                                        )
-                transcoder.transcode request_pb
-              end
-
-              ##
-              # @private
-              #
-              # GRPC transcoding helper method for the create_user_link REST call
-              #
-              # @param request_pb [::Google::Analytics::Admin::V1alpha::CreateUserLinkRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def self.transcode_create_user_link_request request_pb
-                transcoder = Gapic::Rest::GrpcTranscoder.new
-                                                        .with_bindings(
-                                                          uri_method: :post,
-                                                          uri_template: "/v1alpha/{parent}/userLinks",
-                                                          body: "user_link",
-                                                          matches: [
-                                                            ["parent", %r{^accounts/[^/]+/?$}, false]
-                                                          ]
-                                                        )
-                                                        .with_bindings(
-                                                          uri_method: :post,
-                                                          uri_template: "/v1alpha/{parent}/userLinks",
-                                                          body: "user_link",
-                                                          matches: [
-                                                            ["parent", %r{^properties/[^/]+/?$}, false]
-                                                          ]
-                                                        )
-                transcoder.transcode request_pb
-              end
-
-              ##
-              # @private
-              #
-              # GRPC transcoding helper method for the batch_create_user_links REST call
-              #
-              # @param request_pb [::Google::Analytics::Admin::V1alpha::BatchCreateUserLinksRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def self.transcode_batch_create_user_links_request request_pb
-                transcoder = Gapic::Rest::GrpcTranscoder.new
-                                                        .with_bindings(
-                                                          uri_method: :post,
-                                                          uri_template: "/v1alpha/{parent}/userLinks:batchCreate",
-                                                          body: "*",
-                                                          matches: [
-                                                            ["parent", %r{^accounts/[^/]+/?$}, false]
-                                                          ]
-                                                        )
-                                                        .with_bindings(
-                                                          uri_method: :post,
-                                                          uri_template: "/v1alpha/{parent}/userLinks:batchCreate",
-                                                          body: "*",
-                                                          matches: [
-                                                            ["parent", %r{^properties/[^/]+/?$}, false]
-                                                          ]
-                                                        )
-                transcoder.transcode request_pb
-              end
-
-              ##
-              # @private
-              #
-              # GRPC transcoding helper method for the update_user_link REST call
-              #
-              # @param request_pb [::Google::Analytics::Admin::V1alpha::UpdateUserLinkRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def self.transcode_update_user_link_request request_pb
-                transcoder = Gapic::Rest::GrpcTranscoder.new
-                                                        .with_bindings(
-                                                          uri_method: :patch,
-                                                          uri_template: "/v1alpha/{user_link.name}",
-                                                          body: "user_link",
-                                                          matches: [
-                                                            ["user_link.name", %r{^accounts/[^/]+/userLinks/[^/]+/?$}, false]
-                                                          ]
-                                                        )
-                                                        .with_bindings(
-                                                          uri_method: :patch,
-                                                          uri_template: "/v1alpha/{user_link.name}",
-                                                          body: "user_link",
-                                                          matches: [
-                                                            ["user_link.name", %r{^properties/[^/]+/userLinks/[^/]+/?$}, false]
-                                                          ]
-                                                        )
-                transcoder.transcode request_pb
-              end
-
-              ##
-              # @private
-              #
-              # GRPC transcoding helper method for the batch_update_user_links REST call
-              #
-              # @param request_pb [::Google::Analytics::Admin::V1alpha::BatchUpdateUserLinksRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def self.transcode_batch_update_user_links_request request_pb
-                transcoder = Gapic::Rest::GrpcTranscoder.new
-                                                        .with_bindings(
-                                                          uri_method: :post,
-                                                          uri_template: "/v1alpha/{parent}/userLinks:batchUpdate",
-                                                          body: "*",
-                                                          matches: [
-                                                            ["parent", %r{^accounts/[^/]+/?$}, false]
-                                                          ]
-                                                        )
-                                                        .with_bindings(
-                                                          uri_method: :post,
-                                                          uri_template: "/v1alpha/{parent}/userLinks:batchUpdate",
-                                                          body: "*",
-                                                          matches: [
-                                                            ["parent", %r{^properties/[^/]+/?$}, false]
-                                                          ]
-                                                        )
-                transcoder.transcode request_pb
-              end
-
-              ##
-              # @private
-              #
-              # GRPC transcoding helper method for the delete_user_link REST call
-              #
-              # @param request_pb [::Google::Analytics::Admin::V1alpha::DeleteUserLinkRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def self.transcode_delete_user_link_request request_pb
-                transcoder = Gapic::Rest::GrpcTranscoder.new
-                                                        .with_bindings(
-                                                          uri_method: :delete,
-                                                          uri_template: "/v1alpha/{name}",
-                                                          matches: [
-                                                            ["name", %r{^accounts/[^/]+/userLinks/[^/]+/?$}, false]
-                                                          ]
-                                                        )
-                                                        .with_bindings(
-                                                          uri_method: :delete,
-                                                          uri_template: "/v1alpha/{name}",
-                                                          matches: [
-                                                            ["name", %r{^properties/[^/]+/userLinks/[^/]+/?$}, false]
-                                                          ]
-                                                        )
-                transcoder.transcode request_pb
-              end
-
-              ##
-              # @private
-              #
-              # GRPC transcoding helper method for the batch_delete_user_links REST call
-              #
-              # @param request_pb [::Google::Analytics::Admin::V1alpha::BatchDeleteUserLinksRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def self.transcode_batch_delete_user_links_request request_pb
-                transcoder = Gapic::Rest::GrpcTranscoder.new
-                                                        .with_bindings(
-                                                          uri_method: :post,
-                                                          uri_template: "/v1alpha/{parent}/userLinks:batchDelete",
-                                                          body: "*",
-                                                          matches: [
-                                                            ["parent", %r{^accounts/[^/]+/?$}, false]
-                                                          ]
-                                                        )
-                                                        .with_bindings(
-                                                          uri_method: :post,
-                                                          uri_template: "/v1alpha/{parent}/userLinks:batchDelete",
-                                                          body: "*",
-                                                          matches: [
-                                                            ["parent", %r{^properties/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -7778,6 +7811,388 @@ module Google
                                                           uri_template: "/v1alpha/{name}",
                                                           matches: [
                                                             ["name", %r{^properties/[^/]+/dataStreams/[^/]+/eventCreateRules/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the update_data_redaction_settings REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::UpdateDataRedactionSettingsRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_update_data_redaction_settings_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v1alpha/{data_redaction_settings.name}",
+                                                          body: "data_redaction_settings",
+                                                          matches: [
+                                                            ["data_redaction_settings.name", %r{^properties/[^/]+/dataStreams/[^/]+/dataRedactionSettings/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the get_data_redaction_settings REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::GetDataRedactionSettingsRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_get_data_redaction_settings_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1alpha/{name}",
+                                                          matches: [
+                                                            ["name", %r{^properties/[^/]+/dataStreams/[^/]+/dataRedactionSettings/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the get_calculated_metric REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::GetCalculatedMetricRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_get_calculated_metric_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1alpha/{name}",
+                                                          matches: [
+                                                            ["name", %r{^properties/[^/]+/calculatedMetrics/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the create_calculated_metric REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::CreateCalculatedMetricRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_create_calculated_metric_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1alpha/{parent}/calculatedMetrics",
+                                                          body: "calculated_metric",
+                                                          matches: [
+                                                            ["parent", %r{^properties/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the list_calculated_metrics REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::ListCalculatedMetricsRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_list_calculated_metrics_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1alpha/{parent}/calculatedMetrics",
+                                                          matches: [
+                                                            ["parent", %r{^properties/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the update_calculated_metric REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::UpdateCalculatedMetricRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_update_calculated_metric_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v1alpha/{calculated_metric.name}",
+                                                          body: "calculated_metric",
+                                                          matches: [
+                                                            ["calculated_metric.name", %r{^properties/[^/]+/calculatedMetrics/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the delete_calculated_metric REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::DeleteCalculatedMetricRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_delete_calculated_metric_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/v1alpha/{name}",
+                                                          matches: [
+                                                            ["name", %r{^properties/[^/]+/calculatedMetrics/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the create_rollup_property REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::CreateRollupPropertyRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_create_rollup_property_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1alpha/properties:createRollupProperty",
+                                                          body: "*",
+                                                          matches: []
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the get_rollup_property_source_link REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::GetRollupPropertySourceLinkRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_get_rollup_property_source_link_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1alpha/{name}",
+                                                          matches: [
+                                                            ["name", %r{^properties/[^/]+/rollupPropertySourceLinks/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the list_rollup_property_source_links REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::ListRollupPropertySourceLinksRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_list_rollup_property_source_links_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1alpha/{parent}/rollupPropertySourceLinks",
+                                                          matches: [
+                                                            ["parent", %r{^properties/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the create_rollup_property_source_link REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::CreateRollupPropertySourceLinkRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_create_rollup_property_source_link_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1alpha/{parent}/rollupPropertySourceLinks",
+                                                          body: "rollup_property_source_link",
+                                                          matches: [
+                                                            ["parent", %r{^properties/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the delete_rollup_property_source_link REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::DeleteRollupPropertySourceLinkRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_delete_rollup_property_source_link_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/v1alpha/{name}",
+                                                          matches: [
+                                                            ["name", %r{^properties/[^/]+/rollupPropertySourceLinks/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the create_subproperty REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::CreateSubpropertyRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_create_subproperty_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1alpha/properties:createSubproperty",
+                                                          body: "*",
+                                                          matches: []
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the create_subproperty_event_filter REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::CreateSubpropertyEventFilterRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_create_subproperty_event_filter_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1alpha/{parent}/subpropertyEventFilters",
+                                                          body: "subproperty_event_filter",
+                                                          matches: [
+                                                            ["parent", %r{^properties/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the get_subproperty_event_filter REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::GetSubpropertyEventFilterRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_get_subproperty_event_filter_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1alpha/{name}",
+                                                          matches: [
+                                                            ["name", %r{^properties/[^/]+/subpropertyEventFilters/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the list_subproperty_event_filters REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::ListSubpropertyEventFiltersRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_list_subproperty_event_filters_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1alpha/{parent}/subpropertyEventFilters",
+                                                          matches: [
+                                                            ["parent", %r{^properties/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the update_subproperty_event_filter REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::UpdateSubpropertyEventFilterRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_update_subproperty_event_filter_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v1alpha/{subproperty_event_filter.name}",
+                                                          body: "subproperty_event_filter",
+                                                          matches: [
+                                                            ["subproperty_event_filter.name", %r{^properties/[^/]+/subpropertyEventFilters/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the delete_subproperty_event_filter REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::DeleteSubpropertyEventFilterRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_delete_subproperty_event_filter_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/v1alpha/{name}",
+                                                          matches: [
+                                                            ["name", %r{^properties/[^/]+/subpropertyEventFilters/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

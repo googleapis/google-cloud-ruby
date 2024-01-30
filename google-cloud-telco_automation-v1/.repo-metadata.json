@@ -1,0 +1,17 @@
+{
+    "api_id": "telcoautomation.googleapis.com",
+    "api_shortname": "telcoautomation",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-telco_automation-v1/latest",
+    "distribution_name": "google-cloud-telco_automation-v1",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "telcoautomation",
+    "name_pretty": "Telco Automation V1 API",
+    "product_documentation": "https://cloud.google.com/telecom-network-automation",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "APIs to automate 5G deployment and management of cloud infrastructure and network functions. Note that google-cloud-telco_automation-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-telco_automation instead. See the readme for more details.",
+    "ruby-cloud-product-url": "https://cloud.google.com/telecom-network-automation",
+    "library_type": "GAPIC_AUTO"
+}

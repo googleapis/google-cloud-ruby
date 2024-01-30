@@ -1,5 +1,24 @@
 # Changelog
 
+### 0.11.1 (2024-01-12)
+
+#### Bug Fixes
+
+* Ensure endpoints are correct for mixin clients ([#24032](https://github.com/googleapis/google-cloud-ruby/issues/24032)) 
+
+### 0.11.0 (2024-01-11)
+
+#### Features
+
+* Support for universe_domain ([#23772](https://github.com/googleapis/google-cloud-ruby/issues/23772)) 
+
+### 0.10.0 (2023-12-13)
+
+#### Features
+
+* Added calls for managing audience exports 
+* Response metadata now includes sampling metadata 
+
 ### 0.9.0 (2023-09-12)
 
 #### Features

@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-dlp-v2",
-    "version": "0.18.0",
+    "version": "0.20.1",
     "language": "RUBY",
     "apis": [
       {
@@ -14,7 +14,7 @@
     {
       "region_tag": "dlp_v2_generated_DlpService_InspectContent_sync",
       "title": "Snippet for the inspect_content call in the DlpService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#inspect_content. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#inspect_content.",
       "file": "dlp_service/inspect_content.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "dlp_v2_generated_DlpService_RedactImage_sync",
       "title": "Snippet for the redact_image call in the DlpService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#redact_image. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#redact_image.",
       "file": "dlp_service/redact_image.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "dlp_v2_generated_DlpService_DeidentifyContent_sync",
       "title": "Snippet for the deidentify_content call in the DlpService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#deidentify_content. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#deidentify_content.",
       "file": "dlp_service/deidentify_content.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -134,7 +134,7 @@
     {
       "region_tag": "dlp_v2_generated_DlpService_ReidentifyContent_sync",
       "title": "Snippet for the reidentify_content call in the DlpService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#reidentify_content. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#reidentify_content.",
       "file": "dlp_service/reidentify_content.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -174,7 +174,7 @@
     {
       "region_tag": "dlp_v2_generated_DlpService_ListInfoTypes_sync",
       "title": "Snippet for the list_info_types call in the DlpService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#list_info_types. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#list_info_types.",
       "file": "dlp_service/list_info_types.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,7 +206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -214,7 +214,7 @@
     {
       "region_tag": "dlp_v2_generated_DlpService_CreateInspectTemplate_sync",
       "title": "Snippet for the create_inspect_template call in the DlpService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#create_inspect_template. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#create_inspect_template.",
       "file": "dlp_service/create_inspect_template.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,7 +246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -254,7 +254,7 @@
     {
       "region_tag": "dlp_v2_generated_DlpService_UpdateInspectTemplate_sync",
       "title": "Snippet for the update_inspect_template call in the DlpService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#update_inspect_template. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#update_inspect_template.",
       "file": "dlp_service/update_inspect_template.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,7 +286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -294,7 +294,7 @@
     {
       "region_tag": "dlp_v2_generated_DlpService_GetInspectTemplate_sync",
       "title": "Snippet for the get_inspect_template call in the DlpService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#get_inspect_template. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#get_inspect_template.",
       "file": "dlp_service/get_inspect_template.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,7 +326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -334,7 +334,7 @@
     {
       "region_tag": "dlp_v2_generated_DlpService_ListInspectTemplates_sync",
       "title": "Snippet for the list_inspect_templates call in the DlpService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#list_inspect_templates. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#list_inspect_templates.",
       "file": "dlp_service/list_inspect_templates.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,7 +366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -374,7 +374,7 @@
     {
       "region_tag": "dlp_v2_generated_DlpService_DeleteInspectTemplate_sync",
       "title": "Snippet for the delete_inspect_template call in the DlpService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#delete_inspect_template. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#delete_inspect_template.",
       "file": "dlp_service/delete_inspect_template.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,7 +406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -414,7 +414,7 @@
     {
       "region_tag": "dlp_v2_generated_DlpService_CreateDeidentifyTemplate_sync",
       "title": "Snippet for the create_deidentify_template call in the DlpService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#create_deidentify_template. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#create_deidentify_template.",
       "file": "dlp_service/create_deidentify_template.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,7 +446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -454,7 +454,7 @@
     {
       "region_tag": "dlp_v2_generated_DlpService_UpdateDeidentifyTemplate_sync",
       "title": "Snippet for the update_deidentify_template call in the DlpService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#update_deidentify_template. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#update_deidentify_template.",
       "file": "dlp_service/update_deidentify_template.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,7 +486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -494,7 +494,7 @@
     {
       "region_tag": "dlp_v2_generated_DlpService_GetDeidentifyTemplate_sync",
       "title": "Snippet for the get_deidentify_template call in the DlpService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#get_deidentify_template. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#get_deidentify_template.",
       "file": "dlp_service/get_deidentify_template.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,7 +526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -534,7 +534,7 @@
     {
       "region_tag": "dlp_v2_generated_DlpService_ListDeidentifyTemplates_sync",
       "title": "Snippet for the list_deidentify_templates call in the DlpService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#list_deidentify_templates. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#list_deidentify_templates.",
       "file": "dlp_service/list_deidentify_templates.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,7 +566,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -574,7 +574,7 @@
     {
       "region_tag": "dlp_v2_generated_DlpService_DeleteDeidentifyTemplate_sync",
       "title": "Snippet for the delete_deidentify_template call in the DlpService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#delete_deidentify_template. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#delete_deidentify_template.",
       "file": "dlp_service/delete_deidentify_template.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,7 +606,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -614,7 +614,7 @@
     {
       "region_tag": "dlp_v2_generated_DlpService_CreateJobTrigger_sync",
       "title": "Snippet for the create_job_trigger call in the DlpService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#create_job_trigger. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#create_job_trigger.",
       "file": "dlp_service/create_job_trigger.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,7 +646,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -654,7 +654,7 @@
     {
       "region_tag": "dlp_v2_generated_DlpService_UpdateJobTrigger_sync",
       "title": "Snippet for the update_job_trigger call in the DlpService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#update_job_trigger. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#update_job_trigger.",
       "file": "dlp_service/update_job_trigger.rb",
       "language": "RUBY",
       "client_method": {
@@ -686,7 +686,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -694,7 +694,7 @@
     {
       "region_tag": "dlp_v2_generated_DlpService_HybridInspectJobTrigger_sync",
       "title": "Snippet for the hybrid_inspect_job_trigger call in the DlpService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#hybrid_inspect_job_trigger. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#hybrid_inspect_job_trigger.",
       "file": "dlp_service/hybrid_inspect_job_trigger.rb",
       "language": "RUBY",
       "client_method": {
@@ -726,7 +726,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -734,7 +734,7 @@
     {
       "region_tag": "dlp_v2_generated_DlpService_GetJobTrigger_sync",
       "title": "Snippet for the get_job_trigger call in the DlpService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#get_job_trigger. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#get_job_trigger.",
       "file": "dlp_service/get_job_trigger.rb",
       "language": "RUBY",
       "client_method": {
@@ -766,7 +766,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -774,7 +774,7 @@
     {
       "region_tag": "dlp_v2_generated_DlpService_ListJobTriggers_sync",
       "title": "Snippet for the list_job_triggers call in the DlpService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#list_job_triggers. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#list_job_triggers.",
       "file": "dlp_service/list_job_triggers.rb",
       "language": "RUBY",
       "client_method": {
@@ -806,7 +806,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -814,7 +814,7 @@
     {
       "region_tag": "dlp_v2_generated_DlpService_DeleteJobTrigger_sync",
       "title": "Snippet for the delete_job_trigger call in the DlpService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#delete_job_trigger. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#delete_job_trigger.",
       "file": "dlp_service/delete_job_trigger.rb",
       "language": "RUBY",
       "client_method": {
@@ -846,7 +846,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -854,7 +854,7 @@
     {
       "region_tag": "dlp_v2_generated_DlpService_ActivateJobTrigger_sync",
       "title": "Snippet for the activate_job_trigger call in the DlpService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#activate_job_trigger. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#activate_job_trigger.",
       "file": "dlp_service/activate_job_trigger.rb",
       "language": "RUBY",
       "client_method": {
@@ -886,7 +886,207 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dlp_v2_generated_DlpService_CreateDiscoveryConfig_sync",
+      "title": "Snippet for the create_discovery_config call in the DlpService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#create_discovery_config.",
+      "file": "dlp_service/create_discovery_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_discovery_config",
+        "full_name": "::Google::Cloud::Dlp::V2::DlpService::Client#create_discovery_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dlp::V2::CreateDiscoveryConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dlp::V2::DiscoveryConfig",
+        "client": {
+          "short_name": "DlpService::Client",
+          "full_name": "::Google::Cloud::Dlp::V2::DlpService::Client"
+        },
+        "method": {
+          "short_name": "CreateDiscoveryConfig",
+          "full_name": "google.privacy.dlp.v2.DlpService.CreateDiscoveryConfig",
+          "service": {
+            "short_name": "DlpService",
+            "full_name": "google.privacy.dlp.v2.DlpService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dlp_v2_generated_DlpService_UpdateDiscoveryConfig_sync",
+      "title": "Snippet for the update_discovery_config call in the DlpService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#update_discovery_config.",
+      "file": "dlp_service/update_discovery_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_discovery_config",
+        "full_name": "::Google::Cloud::Dlp::V2::DlpService::Client#update_discovery_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dlp::V2::UpdateDiscoveryConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dlp::V2::DiscoveryConfig",
+        "client": {
+          "short_name": "DlpService::Client",
+          "full_name": "::Google::Cloud::Dlp::V2::DlpService::Client"
+        },
+        "method": {
+          "short_name": "UpdateDiscoveryConfig",
+          "full_name": "google.privacy.dlp.v2.DlpService.UpdateDiscoveryConfig",
+          "service": {
+            "short_name": "DlpService",
+            "full_name": "google.privacy.dlp.v2.DlpService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dlp_v2_generated_DlpService_GetDiscoveryConfig_sync",
+      "title": "Snippet for the get_discovery_config call in the DlpService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#get_discovery_config.",
+      "file": "dlp_service/get_discovery_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_discovery_config",
+        "full_name": "::Google::Cloud::Dlp::V2::DlpService::Client#get_discovery_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dlp::V2::GetDiscoveryConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dlp::V2::DiscoveryConfig",
+        "client": {
+          "short_name": "DlpService::Client",
+          "full_name": "::Google::Cloud::Dlp::V2::DlpService::Client"
+        },
+        "method": {
+          "short_name": "GetDiscoveryConfig",
+          "full_name": "google.privacy.dlp.v2.DlpService.GetDiscoveryConfig",
+          "service": {
+            "short_name": "DlpService",
+            "full_name": "google.privacy.dlp.v2.DlpService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dlp_v2_generated_DlpService_ListDiscoveryConfigs_sync",
+      "title": "Snippet for the list_discovery_configs call in the DlpService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#list_discovery_configs.",
+      "file": "dlp_service/list_discovery_configs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_discovery_configs",
+        "full_name": "::Google::Cloud::Dlp::V2::DlpService::Client#list_discovery_configs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dlp::V2::ListDiscoveryConfigsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dlp::V2::ListDiscoveryConfigsResponse",
+        "client": {
+          "short_name": "DlpService::Client",
+          "full_name": "::Google::Cloud::Dlp::V2::DlpService::Client"
+        },
+        "method": {
+          "short_name": "ListDiscoveryConfigs",
+          "full_name": "google.privacy.dlp.v2.DlpService.ListDiscoveryConfigs",
+          "service": {
+            "short_name": "DlpService",
+            "full_name": "google.privacy.dlp.v2.DlpService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dlp_v2_generated_DlpService_DeleteDiscoveryConfig_sync",
+      "title": "Snippet for the delete_discovery_config call in the DlpService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#delete_discovery_config.",
+      "file": "dlp_service/delete_discovery_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_discovery_config",
+        "full_name": "::Google::Cloud::Dlp::V2::DlpService::Client#delete_discovery_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dlp::V2::DeleteDiscoveryConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "DlpService::Client",
+          "full_name": "::Google::Cloud::Dlp::V2::DlpService::Client"
+        },
+        "method": {
+          "short_name": "DeleteDiscoveryConfig",
+          "full_name": "google.privacy.dlp.v2.DlpService.DeleteDiscoveryConfig",
+          "service": {
+            "short_name": "DlpService",
+            "full_name": "google.privacy.dlp.v2.DlpService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -894,7 +1094,7 @@
     {
       "region_tag": "dlp_v2_generated_DlpService_CreateDlpJob_sync",
       "title": "Snippet for the create_dlp_job call in the DlpService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#create_dlp_job. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#create_dlp_job.",
       "file": "dlp_service/create_dlp_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -926,7 +1126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -934,7 +1134,7 @@
     {
       "region_tag": "dlp_v2_generated_DlpService_ListDlpJobs_sync",
       "title": "Snippet for the list_dlp_jobs call in the DlpService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#list_dlp_jobs. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#list_dlp_jobs.",
       "file": "dlp_service/list_dlp_jobs.rb",
       "language": "RUBY",
       "client_method": {
@@ -966,7 +1166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -974,7 +1174,7 @@
     {
       "region_tag": "dlp_v2_generated_DlpService_GetDlpJob_sync",
       "title": "Snippet for the get_dlp_job call in the DlpService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#get_dlp_job. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#get_dlp_job.",
       "file": "dlp_service/get_dlp_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -1006,7 +1206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1014,7 +1214,7 @@
     {
       "region_tag": "dlp_v2_generated_DlpService_DeleteDlpJob_sync",
       "title": "Snippet for the delete_dlp_job call in the DlpService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#delete_dlp_job. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#delete_dlp_job.",
       "file": "dlp_service/delete_dlp_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -1046,7 +1246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1054,7 +1254,7 @@
     {
       "region_tag": "dlp_v2_generated_DlpService_CancelDlpJob_sync",
       "title": "Snippet for the cancel_dlp_job call in the DlpService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#cancel_dlp_job. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#cancel_dlp_job.",
       "file": "dlp_service/cancel_dlp_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -1086,7 +1286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1094,7 +1294,7 @@
     {
       "region_tag": "dlp_v2_generated_DlpService_CreateStoredInfoType_sync",
       "title": "Snippet for the create_stored_info_type call in the DlpService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#create_stored_info_type. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#create_stored_info_type.",
       "file": "dlp_service/create_stored_info_type.rb",
       "language": "RUBY",
       "client_method": {
@@ -1126,7 +1326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1134,7 +1334,7 @@
     {
       "region_tag": "dlp_v2_generated_DlpService_UpdateStoredInfoType_sync",
       "title": "Snippet for the update_stored_info_type call in the DlpService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#update_stored_info_type. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#update_stored_info_type.",
       "file": "dlp_service/update_stored_info_type.rb",
       "language": "RUBY",
       "client_method": {
@@ -1166,7 +1366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1174,7 +1374,7 @@
     {
       "region_tag": "dlp_v2_generated_DlpService_GetStoredInfoType_sync",
       "title": "Snippet for the get_stored_info_type call in the DlpService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#get_stored_info_type. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#get_stored_info_type.",
       "file": "dlp_service/get_stored_info_type.rb",
       "language": "RUBY",
       "client_method": {
@@ -1206,7 +1406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1214,7 +1414,7 @@
     {
       "region_tag": "dlp_v2_generated_DlpService_ListStoredInfoTypes_sync",
       "title": "Snippet for the list_stored_info_types call in the DlpService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#list_stored_info_types. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#list_stored_info_types.",
       "file": "dlp_service/list_stored_info_types.rb",
       "language": "RUBY",
       "client_method": {
@@ -1246,7 +1446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1254,7 +1454,7 @@
     {
       "region_tag": "dlp_v2_generated_DlpService_DeleteStoredInfoType_sync",
       "title": "Snippet for the delete_stored_info_type call in the DlpService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#delete_stored_info_type. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#delete_stored_info_type.",
       "file": "dlp_service/delete_stored_info_type.rb",
       "language": "RUBY",
       "client_method": {
@@ -1286,7 +1486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1294,7 +1494,7 @@
     {
       "region_tag": "dlp_v2_generated_DlpService_HybridInspectDlpJob_sync",
       "title": "Snippet for the hybrid_inspect_dlp_job call in the DlpService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#hybrid_inspect_dlp_job. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#hybrid_inspect_dlp_job.",
       "file": "dlp_service/hybrid_inspect_dlp_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -1326,7 +1526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1334,7 +1534,7 @@
     {
       "region_tag": "dlp_v2_generated_DlpService_FinishDlpJob_sync",
       "title": "Snippet for the finish_dlp_job call in the DlpService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#finish_dlp_job. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dlp::V2::DlpService::Client#finish_dlp_job.",
       "file": "dlp_service/finish_dlp_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -1366,7 +1566,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]

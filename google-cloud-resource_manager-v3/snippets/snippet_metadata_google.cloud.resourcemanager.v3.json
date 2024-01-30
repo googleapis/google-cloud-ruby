@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-resource_manager-v3",
-    "version": "0.7.0",
+    "version": "0.8.1",
     "language": "RUBY",
     "apis": [
       {
@@ -14,7 +14,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_Folders_GetFolder_sync",
       "title": "Snippet for the get_folder call in the Folders service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Folders::Client#get_folder. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Folders::Client#get_folder.",
       "file": "folders/get_folder.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_Folders_ListFolders_sync",
       "title": "Snippet for the list_folders call in the Folders service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Folders::Client#list_folders. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Folders::Client#list_folders.",
       "file": "folders/list_folders.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_Folders_SearchFolders_sync",
       "title": "Snippet for the search_folders call in the Folders service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Folders::Client#search_folders. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Folders::Client#search_folders.",
       "file": "folders/search_folders.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -134,7 +134,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_Folders_CreateFolder_sync",
       "title": "Snippet for the create_folder call in the Folders service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Folders::Client#create_folder. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Folders::Client#create_folder.",
       "file": "folders/create_folder.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -174,7 +174,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_Folders_UpdateFolder_sync",
       "title": "Snippet for the update_folder call in the Folders service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Folders::Client#update_folder. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Folders::Client#update_folder.",
       "file": "folders/update_folder.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,7 +206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -214,7 +214,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_Folders_MoveFolder_sync",
       "title": "Snippet for the move_folder call in the Folders service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Folders::Client#move_folder. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Folders::Client#move_folder.",
       "file": "folders/move_folder.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,7 +246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -254,7 +254,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_Folders_DeleteFolder_sync",
       "title": "Snippet for the delete_folder call in the Folders service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Folders::Client#delete_folder. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Folders::Client#delete_folder.",
       "file": "folders/delete_folder.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,7 +286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -294,7 +294,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_Folders_UndeleteFolder_sync",
       "title": "Snippet for the undelete_folder call in the Folders service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Folders::Client#undelete_folder. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Folders::Client#undelete_folder.",
       "file": "folders/undelete_folder.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,7 +326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -334,7 +334,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_Folders_GetIamPolicy_sync",
       "title": "Snippet for the get_iam_policy call in the Folders service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Folders::Client#get_iam_policy. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Folders::Client#get_iam_policy.",
       "file": "folders/get_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,7 +366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -374,7 +374,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_Folders_SetIamPolicy_sync",
       "title": "Snippet for the set_iam_policy call in the Folders service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Folders::Client#set_iam_policy. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Folders::Client#set_iam_policy.",
       "file": "folders/set_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,7 +406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -414,7 +414,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_Folders_TestIamPermissions_sync",
       "title": "Snippet for the test_iam_permissions call in the Folders service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Folders::Client#test_iam_permissions. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Folders::Client#test_iam_permissions.",
       "file": "folders/test_iam_permissions.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,7 +446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -454,7 +454,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_Organizations_GetOrganization_sync",
       "title": "Snippet for the get_organization call in the Organizations service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Organizations::Client#get_organization. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Organizations::Client#get_organization.",
       "file": "organizations/get_organization.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,7 +486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -494,7 +494,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_Organizations_SearchOrganizations_sync",
       "title": "Snippet for the search_organizations call in the Organizations service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Organizations::Client#search_organizations. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Organizations::Client#search_organizations.",
       "file": "organizations/search_organizations.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,7 +526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -534,7 +534,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_Organizations_GetIamPolicy_sync",
       "title": "Snippet for the get_iam_policy call in the Organizations service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Organizations::Client#get_iam_policy. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Organizations::Client#get_iam_policy.",
       "file": "organizations/get_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,7 +566,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -574,7 +574,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_Organizations_SetIamPolicy_sync",
       "title": "Snippet for the set_iam_policy call in the Organizations service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Organizations::Client#set_iam_policy. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Organizations::Client#set_iam_policy.",
       "file": "organizations/set_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,7 +606,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -614,7 +614,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_Organizations_TestIamPermissions_sync",
       "title": "Snippet for the test_iam_permissions call in the Organizations service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Organizations::Client#test_iam_permissions. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Organizations::Client#test_iam_permissions.",
       "file": "organizations/test_iam_permissions.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,7 +646,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -654,7 +654,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_Projects_GetProject_sync",
       "title": "Snippet for the get_project call in the Projects service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Projects::Client#get_project. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Projects::Client#get_project.",
       "file": "projects/get_project.rb",
       "language": "RUBY",
       "client_method": {
@@ -686,7 +686,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -694,7 +694,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_Projects_ListProjects_sync",
       "title": "Snippet for the list_projects call in the Projects service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Projects::Client#list_projects. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Projects::Client#list_projects.",
       "file": "projects/list_projects.rb",
       "language": "RUBY",
       "client_method": {
@@ -726,7 +726,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -734,7 +734,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_Projects_SearchProjects_sync",
       "title": "Snippet for the search_projects call in the Projects service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Projects::Client#search_projects. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Projects::Client#search_projects.",
       "file": "projects/search_projects.rb",
       "language": "RUBY",
       "client_method": {
@@ -766,7 +766,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -774,7 +774,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_Projects_CreateProject_sync",
       "title": "Snippet for the create_project call in the Projects service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Projects::Client#create_project. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Projects::Client#create_project.",
       "file": "projects/create_project.rb",
       "language": "RUBY",
       "client_method": {
@@ -806,7 +806,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -814,7 +814,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_Projects_UpdateProject_sync",
       "title": "Snippet for the update_project call in the Projects service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Projects::Client#update_project. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Projects::Client#update_project.",
       "file": "projects/update_project.rb",
       "language": "RUBY",
       "client_method": {
@@ -846,7 +846,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -854,7 +854,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_Projects_MoveProject_sync",
       "title": "Snippet for the move_project call in the Projects service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Projects::Client#move_project. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Projects::Client#move_project.",
       "file": "projects/move_project.rb",
       "language": "RUBY",
       "client_method": {
@@ -886,7 +886,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -894,7 +894,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_Projects_DeleteProject_sync",
       "title": "Snippet for the delete_project call in the Projects service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Projects::Client#delete_project. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Projects::Client#delete_project.",
       "file": "projects/delete_project.rb",
       "language": "RUBY",
       "client_method": {
@@ -926,7 +926,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -934,7 +934,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_Projects_UndeleteProject_sync",
       "title": "Snippet for the undelete_project call in the Projects service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Projects::Client#undelete_project. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Projects::Client#undelete_project.",
       "file": "projects/undelete_project.rb",
       "language": "RUBY",
       "client_method": {
@@ -966,7 +966,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -974,7 +974,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_Projects_GetIamPolicy_sync",
       "title": "Snippet for the get_iam_policy call in the Projects service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Projects::Client#get_iam_policy. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Projects::Client#get_iam_policy.",
       "file": "projects/get_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -1006,7 +1006,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1014,7 +1014,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_Projects_SetIamPolicy_sync",
       "title": "Snippet for the set_iam_policy call in the Projects service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Projects::Client#set_iam_policy. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Projects::Client#set_iam_policy.",
       "file": "projects/set_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -1046,7 +1046,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1054,7 +1054,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_Projects_TestIamPermissions_sync",
       "title": "Snippet for the test_iam_permissions call in the Projects service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Projects::Client#test_iam_permissions. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::Projects::Client#test_iam_permissions.",
       "file": "projects/test_iam_permissions.rb",
       "language": "RUBY",
       "client_method": {
@@ -1086,7 +1086,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1094,7 +1094,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_TagBindings_ListTagBindings_sync",
       "title": "Snippet for the list_tag_bindings call in the TagBindings service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagBindings::Client#list_tag_bindings. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagBindings::Client#list_tag_bindings.",
       "file": "tag_bindings/list_tag_bindings.rb",
       "language": "RUBY",
       "client_method": {
@@ -1126,7 +1126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1134,7 +1134,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_TagBindings_CreateTagBinding_sync",
       "title": "Snippet for the create_tag_binding call in the TagBindings service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagBindings::Client#create_tag_binding. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagBindings::Client#create_tag_binding.",
       "file": "tag_bindings/create_tag_binding.rb",
       "language": "RUBY",
       "client_method": {
@@ -1166,7 +1166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1174,7 +1174,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_TagBindings_DeleteTagBinding_sync",
       "title": "Snippet for the delete_tag_binding call in the TagBindings service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagBindings::Client#delete_tag_binding. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagBindings::Client#delete_tag_binding.",
       "file": "tag_bindings/delete_tag_binding.rb",
       "language": "RUBY",
       "client_method": {
@@ -1206,7 +1206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1214,7 +1214,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_TagBindings_ListEffectiveTags_sync",
       "title": "Snippet for the list_effective_tags call in the TagBindings service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagBindings::Client#list_effective_tags. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagBindings::Client#list_effective_tags.",
       "file": "tag_bindings/list_effective_tags.rb",
       "language": "RUBY",
       "client_method": {
@@ -1246,7 +1246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1254,7 +1254,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_TagHolds_CreateTagHold_sync",
       "title": "Snippet for the create_tag_hold call in the TagHolds service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagHolds::Client#create_tag_hold. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagHolds::Client#create_tag_hold.",
       "file": "tag_holds/create_tag_hold.rb",
       "language": "RUBY",
       "client_method": {
@@ -1286,7 +1286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1294,7 +1294,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_TagHolds_DeleteTagHold_sync",
       "title": "Snippet for the delete_tag_hold call in the TagHolds service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagHolds::Client#delete_tag_hold. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagHolds::Client#delete_tag_hold.",
       "file": "tag_holds/delete_tag_hold.rb",
       "language": "RUBY",
       "client_method": {
@@ -1326,7 +1326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1334,7 +1334,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_TagHolds_ListTagHolds_sync",
       "title": "Snippet for the list_tag_holds call in the TagHolds service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagHolds::Client#list_tag_holds. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagHolds::Client#list_tag_holds.",
       "file": "tag_holds/list_tag_holds.rb",
       "language": "RUBY",
       "client_method": {
@@ -1366,7 +1366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1374,7 +1374,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_TagKeys_ListTagKeys_sync",
       "title": "Snippet for the list_tag_keys call in the TagKeys service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagKeys::Client#list_tag_keys. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagKeys::Client#list_tag_keys.",
       "file": "tag_keys/list_tag_keys.rb",
       "language": "RUBY",
       "client_method": {
@@ -1406,7 +1406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1414,7 +1414,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_TagKeys_GetTagKey_sync",
       "title": "Snippet for the get_tag_key call in the TagKeys service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagKeys::Client#get_tag_key. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagKeys::Client#get_tag_key.",
       "file": "tag_keys/get_tag_key.rb",
       "language": "RUBY",
       "client_method": {
@@ -1446,7 +1446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1454,7 +1454,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_TagKeys_GetNamespacedTagKey_sync",
       "title": "Snippet for the get_namespaced_tag_key call in the TagKeys service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagKeys::Client#get_namespaced_tag_key. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagKeys::Client#get_namespaced_tag_key.",
       "file": "tag_keys/get_namespaced_tag_key.rb",
       "language": "RUBY",
       "client_method": {
@@ -1486,7 +1486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1494,7 +1494,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_TagKeys_CreateTagKey_sync",
       "title": "Snippet for the create_tag_key call in the TagKeys service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagKeys::Client#create_tag_key. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagKeys::Client#create_tag_key.",
       "file": "tag_keys/create_tag_key.rb",
       "language": "RUBY",
       "client_method": {
@@ -1526,7 +1526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1534,7 +1534,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_TagKeys_UpdateTagKey_sync",
       "title": "Snippet for the update_tag_key call in the TagKeys service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagKeys::Client#update_tag_key. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagKeys::Client#update_tag_key.",
       "file": "tag_keys/update_tag_key.rb",
       "language": "RUBY",
       "client_method": {
@@ -1566,7 +1566,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1574,7 +1574,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_TagKeys_DeleteTagKey_sync",
       "title": "Snippet for the delete_tag_key call in the TagKeys service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagKeys::Client#delete_tag_key. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagKeys::Client#delete_tag_key.",
       "file": "tag_keys/delete_tag_key.rb",
       "language": "RUBY",
       "client_method": {
@@ -1606,7 +1606,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1614,7 +1614,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_TagKeys_GetIamPolicy_sync",
       "title": "Snippet for the get_iam_policy call in the TagKeys service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagKeys::Client#get_iam_policy. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagKeys::Client#get_iam_policy.",
       "file": "tag_keys/get_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -1646,7 +1646,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1654,7 +1654,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_TagKeys_SetIamPolicy_sync",
       "title": "Snippet for the set_iam_policy call in the TagKeys service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagKeys::Client#set_iam_policy. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagKeys::Client#set_iam_policy.",
       "file": "tag_keys/set_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -1686,7 +1686,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1694,7 +1694,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_TagKeys_TestIamPermissions_sync",
       "title": "Snippet for the test_iam_permissions call in the TagKeys service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagKeys::Client#test_iam_permissions. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagKeys::Client#test_iam_permissions.",
       "file": "tag_keys/test_iam_permissions.rb",
       "language": "RUBY",
       "client_method": {
@@ -1726,7 +1726,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1734,7 +1734,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_TagValues_ListTagValues_sync",
       "title": "Snippet for the list_tag_values call in the TagValues service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagValues::Client#list_tag_values. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagValues::Client#list_tag_values.",
       "file": "tag_values/list_tag_values.rb",
       "language": "RUBY",
       "client_method": {
@@ -1766,7 +1766,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1774,7 +1774,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_TagValues_GetTagValue_sync",
       "title": "Snippet for the get_tag_value call in the TagValues service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagValues::Client#get_tag_value. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagValues::Client#get_tag_value.",
       "file": "tag_values/get_tag_value.rb",
       "language": "RUBY",
       "client_method": {
@@ -1806,7 +1806,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1814,7 +1814,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_TagValues_GetNamespacedTagValue_sync",
       "title": "Snippet for the get_namespaced_tag_value call in the TagValues service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagValues::Client#get_namespaced_tag_value. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagValues::Client#get_namespaced_tag_value.",
       "file": "tag_values/get_namespaced_tag_value.rb",
       "language": "RUBY",
       "client_method": {
@@ -1846,7 +1846,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1854,7 +1854,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_TagValues_CreateTagValue_sync",
       "title": "Snippet for the create_tag_value call in the TagValues service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagValues::Client#create_tag_value. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagValues::Client#create_tag_value.",
       "file": "tag_values/create_tag_value.rb",
       "language": "RUBY",
       "client_method": {
@@ -1886,7 +1886,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1894,7 +1894,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_TagValues_UpdateTagValue_sync",
       "title": "Snippet for the update_tag_value call in the TagValues service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagValues::Client#update_tag_value. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagValues::Client#update_tag_value.",
       "file": "tag_values/update_tag_value.rb",
       "language": "RUBY",
       "client_method": {
@@ -1926,7 +1926,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1934,7 +1934,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_TagValues_DeleteTagValue_sync",
       "title": "Snippet for the delete_tag_value call in the TagValues service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagValues::Client#delete_tag_value. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagValues::Client#delete_tag_value.",
       "file": "tag_values/delete_tag_value.rb",
       "language": "RUBY",
       "client_method": {
@@ -1966,7 +1966,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1974,7 +1974,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_TagValues_GetIamPolicy_sync",
       "title": "Snippet for the get_iam_policy call in the TagValues service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagValues::Client#get_iam_policy. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagValues::Client#get_iam_policy.",
       "file": "tag_values/get_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -2006,7 +2006,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -2014,7 +2014,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_TagValues_SetIamPolicy_sync",
       "title": "Snippet for the set_iam_policy call in the TagValues service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagValues::Client#set_iam_policy. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagValues::Client#set_iam_policy.",
       "file": "tag_values/set_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -2046,7 +2046,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -2054,7 +2054,7 @@
     {
       "region_tag": "cloudresourcemanager_v3_generated_TagValues_TestIamPermissions_sync",
       "title": "Snippet for the test_iam_permissions call in the TagValues service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagValues::Client#test_iam_permissions. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagValues::Client#test_iam_permissions.",
       "file": "tag_values/test_iam_permissions.rb",
       "language": "RUBY",
       "client_method": {
@@ -2086,7 +2086,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]

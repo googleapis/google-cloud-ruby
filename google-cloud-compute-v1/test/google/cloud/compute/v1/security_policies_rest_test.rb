@@ -60,6 +60,14 @@ class ::Google::Cloud::Compute::V1::SecurityPolicies::Rest::ClientTest < Minites
 
       @response
     end
+
+    def endpoint
+      "endpoint.example.com"
+    end
+
+    def universe_domain
+      "example.com"
+    end
   end
 
   def test_add_rule
@@ -134,6 +142,7 @@ class ::Google::Cloud::Compute::V1::SecurityPolicies::Rest::ClientTest < Minites
     page_token = "hello world"
     project = "hello world"
     return_partial_success = true
+    service_project_number = 42
 
     aggregated_list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -149,27 +158,27 @@ class ::Google::Cloud::Compute::V1::SecurityPolicies::Rest::ClientTest < Minites
         end
 
         # Use hash object
-        client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
+        client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
+        client.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListSecurityPoliciesRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
+        client.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListSecurityPoliciesRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
+        client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListSecurityPoliciesRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
+        client.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListSecurityPoliciesRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -533,6 +542,7 @@ class ::Google::Cloud::Compute::V1::SecurityPolicies::Rest::ClientTest < Minites
     request_id = "hello world"
     security_policy = "hello world"
     security_policy_resource = {}
+    update_mask = "hello world"
 
     patch_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -548,27 +558,27 @@ class ::Google::Cloud::Compute::V1::SecurityPolicies::Rest::ClientTest < Minites
         end
 
         # Use hash object
-        client.patch({ project: project, request_id: request_id, security_policy: security_policy, security_policy_resource: security_policy_resource }) do |_result, response|
+        client.patch({ project: project, request_id: request_id, security_policy: security_policy, security_policy_resource: security_policy_resource, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.patch project: project, request_id: request_id, security_policy: security_policy, security_policy_resource: security_policy_resource do |_result, response|
+        client.patch project: project, request_id: request_id, security_policy: security_policy, security_policy_resource: security_policy_resource, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.patch ::Google::Cloud::Compute::V1::PatchSecurityPolicyRequest.new(project: project, request_id: request_id, security_policy: security_policy, security_policy_resource: security_policy_resource) do |_result, response|
+        client.patch ::Google::Cloud::Compute::V1::PatchSecurityPolicyRequest.new(project: project, request_id: request_id, security_policy: security_policy, security_policy_resource: security_policy_resource, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.patch({ project: project, request_id: request_id, security_policy: security_policy, security_policy_resource: security_policy_resource }, call_options) do |_result, response|
+        client.patch({ project: project, request_id: request_id, security_policy: security_policy, security_policy_resource: security_policy_resource, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.patch(::Google::Cloud::Compute::V1::PatchSecurityPolicyRequest.new(project: project, request_id: request_id, security_policy: security_policy, security_policy_resource: security_policy_resource), call_options) do |_result, response|
+        client.patch(::Google::Cloud::Compute::V1::PatchSecurityPolicyRequest.new(project: project, request_id: request_id, security_policy: security_policy, security_policy_resource: security_policy_resource, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -590,6 +600,7 @@ class ::Google::Cloud::Compute::V1::SecurityPolicies::Rest::ClientTest < Minites
     project = "hello world"
     security_policy = "hello world"
     security_policy_rule_resource = {}
+    update_mask = "hello world"
     validate_only = true
 
     patch_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
@@ -606,27 +617,27 @@ class ::Google::Cloud::Compute::V1::SecurityPolicies::Rest::ClientTest < Minites
         end
 
         # Use hash object
-        client.patch_rule({ priority: priority, project: project, security_policy: security_policy, security_policy_rule_resource: security_policy_rule_resource, validate_only: validate_only }) do |_result, response|
+        client.patch_rule({ priority: priority, project: project, security_policy: security_policy, security_policy_rule_resource: security_policy_rule_resource, update_mask: update_mask, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.patch_rule priority: priority, project: project, security_policy: security_policy, security_policy_rule_resource: security_policy_rule_resource, validate_only: validate_only do |_result, response|
+        client.patch_rule priority: priority, project: project, security_policy: security_policy, security_policy_rule_resource: security_policy_rule_resource, update_mask: update_mask, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.patch_rule ::Google::Cloud::Compute::V1::PatchRuleSecurityPolicyRequest.new(priority: priority, project: project, security_policy: security_policy, security_policy_rule_resource: security_policy_rule_resource, validate_only: validate_only) do |_result, response|
+        client.patch_rule ::Google::Cloud::Compute::V1::PatchRuleSecurityPolicyRequest.new(priority: priority, project: project, security_policy: security_policy, security_policy_rule_resource: security_policy_rule_resource, update_mask: update_mask, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.patch_rule({ priority: priority, project: project, security_policy: security_policy, security_policy_rule_resource: security_policy_rule_resource, validate_only: validate_only }, call_options) do |_result, response|
+        client.patch_rule({ priority: priority, project: project, security_policy: security_policy, security_policy_rule_resource: security_policy_rule_resource, update_mask: update_mask, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.patch_rule(::Google::Cloud::Compute::V1::PatchRuleSecurityPolicyRequest.new(priority: priority, project: project, security_policy: security_policy, security_policy_rule_resource: security_policy_rule_resource, validate_only: validate_only), call_options) do |_result, response|
+        client.patch_rule(::Google::Cloud::Compute::V1::PatchRuleSecurityPolicyRequest.new(priority: priority, project: project, security_policy: security_policy, security_policy_rule_resource: security_policy_rule_resource, update_mask: update_mask, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -752,7 +763,8 @@ class ::Google::Cloud::Compute::V1::SecurityPolicies::Rest::ClientTest < Minites
     credentials_token = :dummy_value
 
     client = block_config = config = nil
-    Gapic::Rest::ClientStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil
+    Gapic::Rest::ClientStub.stub :new, dummy_stub do
       client = ::Google::Cloud::Compute::V1::SecurityPolicies::Rest::Client.new do |config|
         config.credentials = credentials_token
       end

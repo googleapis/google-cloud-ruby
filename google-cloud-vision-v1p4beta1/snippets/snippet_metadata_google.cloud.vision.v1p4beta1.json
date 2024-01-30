@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-vision-v1p4beta1",
-    "version": "0.6.0",
+    "version": "0.7.1",
     "language": "RUBY",
     "apis": [
       {
@@ -14,7 +14,7 @@
     {
       "region_tag": "vision_v1p4beta1_generated_ProductSearch_CreateProductSet_sync",
       "title": "Snippet for the create_product_set call in the ProductSearch service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1p4beta1::ProductSearch::Client#create_product_set. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1p4beta1::ProductSearch::Client#create_product_set.",
       "file": "product_search/create_product_set.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "vision_v1p4beta1_generated_ProductSearch_ListProductSets_sync",
       "title": "Snippet for the list_product_sets call in the ProductSearch service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1p4beta1::ProductSearch::Client#list_product_sets. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1p4beta1::ProductSearch::Client#list_product_sets.",
       "file": "product_search/list_product_sets.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "vision_v1p4beta1_generated_ProductSearch_GetProductSet_sync",
       "title": "Snippet for the get_product_set call in the ProductSearch service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1p4beta1::ProductSearch::Client#get_product_set. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1p4beta1::ProductSearch::Client#get_product_set.",
       "file": "product_search/get_product_set.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -134,7 +134,7 @@
     {
       "region_tag": "vision_v1p4beta1_generated_ProductSearch_UpdateProductSet_sync",
       "title": "Snippet for the update_product_set call in the ProductSearch service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1p4beta1::ProductSearch::Client#update_product_set. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1p4beta1::ProductSearch::Client#update_product_set.",
       "file": "product_search/update_product_set.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -174,7 +174,7 @@
     {
       "region_tag": "vision_v1p4beta1_generated_ProductSearch_DeleteProductSet_sync",
       "title": "Snippet for the delete_product_set call in the ProductSearch service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1p4beta1::ProductSearch::Client#delete_product_set. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1p4beta1::ProductSearch::Client#delete_product_set.",
       "file": "product_search/delete_product_set.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,7 +206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -214,7 +214,7 @@
     {
       "region_tag": "vision_v1p4beta1_generated_ProductSearch_CreateProduct_sync",
       "title": "Snippet for the create_product call in the ProductSearch service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1p4beta1::ProductSearch::Client#create_product. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1p4beta1::ProductSearch::Client#create_product.",
       "file": "product_search/create_product.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,7 +246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -254,7 +254,7 @@
     {
       "region_tag": "vision_v1p4beta1_generated_ProductSearch_ListProducts_sync",
       "title": "Snippet for the list_products call in the ProductSearch service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1p4beta1::ProductSearch::Client#list_products. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1p4beta1::ProductSearch::Client#list_products.",
       "file": "product_search/list_products.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,7 +286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -294,7 +294,7 @@
     {
       "region_tag": "vision_v1p4beta1_generated_ProductSearch_GetProduct_sync",
       "title": "Snippet for the get_product call in the ProductSearch service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1p4beta1::ProductSearch::Client#get_product. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1p4beta1::ProductSearch::Client#get_product.",
       "file": "product_search/get_product.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,7 +326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -334,7 +334,7 @@
     {
       "region_tag": "vision_v1p4beta1_generated_ProductSearch_UpdateProduct_sync",
       "title": "Snippet for the update_product call in the ProductSearch service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1p4beta1::ProductSearch::Client#update_product. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1p4beta1::ProductSearch::Client#update_product.",
       "file": "product_search/update_product.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,7 +366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -374,7 +374,7 @@
     {
       "region_tag": "vision_v1p4beta1_generated_ProductSearch_DeleteProduct_sync",
       "title": "Snippet for the delete_product call in the ProductSearch service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1p4beta1::ProductSearch::Client#delete_product. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1p4beta1::ProductSearch::Client#delete_product.",
       "file": "product_search/delete_product.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,7 +406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -414,7 +414,7 @@
     {
       "region_tag": "vision_v1p4beta1_generated_ProductSearch_CreateReferenceImage_sync",
       "title": "Snippet for the create_reference_image call in the ProductSearch service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1p4beta1::ProductSearch::Client#create_reference_image. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1p4beta1::ProductSearch::Client#create_reference_image.",
       "file": "product_search/create_reference_image.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,7 +446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -454,7 +454,7 @@
     {
       "region_tag": "vision_v1p4beta1_generated_ProductSearch_DeleteReferenceImage_sync",
       "title": "Snippet for the delete_reference_image call in the ProductSearch service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1p4beta1::ProductSearch::Client#delete_reference_image. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1p4beta1::ProductSearch::Client#delete_reference_image.",
       "file": "product_search/delete_reference_image.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,7 +486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -494,7 +494,7 @@
     {
       "region_tag": "vision_v1p4beta1_generated_ProductSearch_ListReferenceImages_sync",
       "title": "Snippet for the list_reference_images call in the ProductSearch service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1p4beta1::ProductSearch::Client#list_reference_images. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1p4beta1::ProductSearch::Client#list_reference_images.",
       "file": "product_search/list_reference_images.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,7 +526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -534,7 +534,7 @@
     {
       "region_tag": "vision_v1p4beta1_generated_ProductSearch_GetReferenceImage_sync",
       "title": "Snippet for the get_reference_image call in the ProductSearch service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1p4beta1::ProductSearch::Client#get_reference_image. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1p4beta1::ProductSearch::Client#get_reference_image.",
       "file": "product_search/get_reference_image.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,7 +566,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -574,7 +574,7 @@
     {
       "region_tag": "vision_v1p4beta1_generated_ProductSearch_AddProductToProductSet_sync",
       "title": "Snippet for the add_product_to_product_set call in the ProductSearch service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1p4beta1::ProductSearch::Client#add_product_to_product_set. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1p4beta1::ProductSearch::Client#add_product_to_product_set.",
       "file": "product_search/add_product_to_product_set.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,7 +606,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -614,7 +614,7 @@
     {
       "region_tag": "vision_v1p4beta1_generated_ProductSearch_RemoveProductFromProductSet_sync",
       "title": "Snippet for the remove_product_from_product_set call in the ProductSearch service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1p4beta1::ProductSearch::Client#remove_product_from_product_set. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1p4beta1::ProductSearch::Client#remove_product_from_product_set.",
       "file": "product_search/remove_product_from_product_set.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,7 +646,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -654,7 +654,7 @@
     {
       "region_tag": "vision_v1p4beta1_generated_ProductSearch_ListProductsInProductSet_sync",
       "title": "Snippet for the list_products_in_product_set call in the ProductSearch service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1p4beta1::ProductSearch::Client#list_products_in_product_set. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1p4beta1::ProductSearch::Client#list_products_in_product_set.",
       "file": "product_search/list_products_in_product_set.rb",
       "language": "RUBY",
       "client_method": {
@@ -686,7 +686,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -694,7 +694,7 @@
     {
       "region_tag": "vision_v1p4beta1_generated_ProductSearch_ImportProductSets_sync",
       "title": "Snippet for the import_product_sets call in the ProductSearch service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1p4beta1::ProductSearch::Client#import_product_sets. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1p4beta1::ProductSearch::Client#import_product_sets.",
       "file": "product_search/import_product_sets.rb",
       "language": "RUBY",
       "client_method": {
@@ -726,7 +726,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -734,7 +734,7 @@
     {
       "region_tag": "vision_v1p4beta1_generated_ProductSearch_PurgeProducts_sync",
       "title": "Snippet for the purge_products call in the ProductSearch service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1p4beta1::ProductSearch::Client#purge_products. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1p4beta1::ProductSearch::Client#purge_products.",
       "file": "product_search/purge_products.rb",
       "language": "RUBY",
       "client_method": {
@@ -766,7 +766,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -774,7 +774,7 @@
     {
       "region_tag": "vision_v1p4beta1_generated_ImageAnnotator_BatchAnnotateImages_sync",
       "title": "Snippet for the batch_annotate_images call in the ImageAnnotator service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1p4beta1::ImageAnnotator::Client#batch_annotate_images. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1p4beta1::ImageAnnotator::Client#batch_annotate_images.",
       "file": "image_annotator/batch_annotate_images.rb",
       "language": "RUBY",
       "client_method": {
@@ -806,7 +806,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -814,7 +814,7 @@
     {
       "region_tag": "vision_v1p4beta1_generated_ImageAnnotator_BatchAnnotateFiles_sync",
       "title": "Snippet for the batch_annotate_files call in the ImageAnnotator service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1p4beta1::ImageAnnotator::Client#batch_annotate_files. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1p4beta1::ImageAnnotator::Client#batch_annotate_files.",
       "file": "image_annotator/batch_annotate_files.rb",
       "language": "RUBY",
       "client_method": {
@@ -846,7 +846,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -854,7 +854,7 @@
     {
       "region_tag": "vision_v1p4beta1_generated_ImageAnnotator_AsyncBatchAnnotateImages_sync",
       "title": "Snippet for the async_batch_annotate_images call in the ImageAnnotator service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1p4beta1::ImageAnnotator::Client#async_batch_annotate_images. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1p4beta1::ImageAnnotator::Client#async_batch_annotate_images.",
       "file": "image_annotator/async_batch_annotate_images.rb",
       "language": "RUBY",
       "client_method": {
@@ -886,7 +886,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -894,7 +894,7 @@
     {
       "region_tag": "vision_v1p4beta1_generated_ImageAnnotator_AsyncBatchAnnotateFiles_sync",
       "title": "Snippet for the async_batch_annotate_files call in the ImageAnnotator service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1p4beta1::ImageAnnotator::Client#async_batch_annotate_files. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Vision::V1p4beta1::ImageAnnotator::Client#async_batch_annotate_files.",
       "file": "image_annotator/async_batch_annotate_files.rb",
       "language": "RUBY",
       "client_method": {
@@ -926,7 +926,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]

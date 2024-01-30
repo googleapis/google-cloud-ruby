@@ -89,7 +89,8 @@ module Google
             # account, even if the charge occurred before the new billing account was
             # assigned to the project.
             #
-            # The current authenticated user must have ownership privileges for both the
+            # The current authenticated user must have ownership privileges for both
+            # the
             # [project](https://cloud.google.com/docs/permissions-overview#h.bgs0oxofvnoo
             # ) and the [billing
             # account](https://cloud.google.com/billing/docs/how-to/billing-access).
@@ -123,6 +124,8 @@ module Google
             # the resource and a set of permissions as input and returns the subset of
             # the input permissions that the caller is allowed for that resource.
             rpc :TestIamPermissions, ::Google::Iam::V1::TestIamPermissionsRequest, ::Google::Iam::V1::TestIamPermissionsResponse
+            # Changes which parent organization a billing account belongs to.
+            rpc :MoveBillingAccount, ::Google::Cloud::Billing::V1::MoveBillingAccountRequest, ::Google::Cloud::Billing::V1::BillingAccount
           end
 
           Stub = Service.rpc_stub_class

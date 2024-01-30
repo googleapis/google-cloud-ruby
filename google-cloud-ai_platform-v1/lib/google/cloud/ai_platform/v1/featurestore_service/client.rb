@@ -1274,9 +1274,11 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The resource name of the EntityType to create a Feature.
-            #     Format:
+            #     Required. The resource name of the EntityType or FeatureGroup to create a
+            #     Feature. Format for entity_type as parent:
             #     `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}`
+            #     Format for feature_group as parent:
+            #     `projects/{project}/locations/{location}/featureGroups/{feature_group}`
             #   @param feature [::Google::Cloud::AIPlatform::V1::Feature, ::Hash]
             #     Required. The Feature to create.
             #   @param feature_id [::String]
@@ -1286,7 +1288,7 @@ module Google
             #     This value may be up to 128 characters, and valid characters are
             #     `[a-z0-9_]`. The first character cannot be a number.
             #
-            #     The value must be unique within an EntityType.
+            #     The value must be unique within an EntityType/FeatureGroup.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -1481,8 +1483,10 @@ module Google
             #
             #   @param name [::String]
             #     Required. The name of the Feature resource.
-            #     Format:
+            #     Format for entity_type as parent:
             #     `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}`
+            #     Format for feature_group as parent:
+            #     `projects/{project}/locations/{location}/featureGroups/{feature_group}`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::AIPlatform::V1::Feature]
@@ -1568,8 +1572,10 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The resource name of the Location to list Features.
-            #     Format:
+            #     Format for entity_type as parent:
             #     `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}`
+            #     Format for feature_group as parent:
+            #     `projects/{project}/locations/{location}/featureGroups/{feature_group}`
             #   @param filter [::String]
             #     Lists the Features that match the filter expression. The following
             #     filters are supported:
@@ -1599,10 +1605,14 @@ module Google
             #   @param page_token [::String]
             #     A page token, received from a previous
             #     {::Google::Cloud::AIPlatform::V1::FeaturestoreService::Client#list_features FeaturestoreService.ListFeatures}
+            #     call or
+            #     {::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client#list_features FeatureRegistryService.ListFeatures}
             #     call. Provide this to retrieve the subsequent page.
             #
             #     When paginating, all other parameters provided to
             #     {::Google::Cloud::AIPlatform::V1::FeaturestoreService::Client#list_features FeaturestoreService.ListFeatures}
+            #     or or
+            #     {::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client#list_features FeatureRegistryService.ListFeatures}
             #     must match the call that provided the page token.
             #   @param order_by [::String]
             #     A comma-separated list of fields to order by, sorted in ascending order.
@@ -1610,12 +1620,13 @@ module Google
             #     Supported fields:
             #
             #       * `feature_id`
-            #       * `value_type`
+            #       * `value_type` (Not supported for FeatureRegistry Feature)
             #       * `create_time`
             #       * `update_time`
             #   @param read_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Mask specifying which fields to read.
             #   @param latest_stats_count [::Integer]
+            #     Only applicable for Vertex AI Feature Store (Legacy).
             #     If set, return the most recent
             #     {::Google::Cloud::AIPlatform::V1::ListFeaturesRequest#latest_stats_count ListFeaturesRequest.latest_stats_count}
             #     of stats for each Feature in response. Valid value is [0, 10]. If number of
@@ -1715,6 +1726,7 @@ module Google
             #     updated.
             #     Format:
             #     `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}/features/{feature}`
+            #     `projects/{project}/locations/{location}/featureGroups/{feature_group}/features/{feature}`
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Field mask is used to specify the fields to be overwritten in the
             #     Features resource by the update.
@@ -1728,7 +1740,7 @@ module Google
             #
             #       * `description`
             #       * `labels`
-            #       * `disable_monitoring`
+            #       * `disable_monitoring` (Not supported for FeatureRegistry Feature)
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::AIPlatform::V1::Feature]
@@ -1816,6 +1828,7 @@ module Google
             #     Required. The name of the Features to be deleted.
             #     Format:
             #     `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}/features/{feature}`
+            #     `projects/{project}/locations/{location}/featureGroups/{feature_group}/features/{feature}`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]

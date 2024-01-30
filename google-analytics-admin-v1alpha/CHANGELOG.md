@@ -1,5 +1,30 @@
 # Release History
 
+### 0.28.0 (2024-01-25)
+
+#### Features
+
+* Support for calculated metrics in change history 
+* Support for CRUD operations on calculated metrics ([#24471](https://github.com/googleapis/google-cloud-ruby/issues/24471)) 
+
+### 0.27.1 (2024-01-12)
+
+#### Bug Fixes
+
+* Ensure endpoints are correct for mixin clients ([#24032](https://github.com/googleapis/google-cloud-ruby/issues/24032)) 
+
+### 0.27.0 (2024-01-11)
+
+#### Features
+
+* Support for universe_domain ([#23772](https://github.com/googleapis/google-cloud-ruby/issues/23772)) 
+
+### 0.26.0 (2024-01-03)
+
+#### Features
+
+* add `GetSubpropertyEventFilter`, `ListSubpropertyEventFilters` and `UpdateSubpropertyEventFilters` methods ([#23664](https://github.com/googleapis/google-cloud-ruby/issues/23664)) 
+
 ### 0.25.0 (2023-09-12)
 
 #### Features

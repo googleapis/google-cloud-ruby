@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/bigquery/data_policies/v1beta1/data_policy_service"
 
 class ::Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_data_policy_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -37,7 +47,7 @@ class ::Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Clien
 
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Client.new do |config|
         config.credentials = grpc_channel
       end

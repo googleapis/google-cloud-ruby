@@ -464,6 +464,7 @@ module Google
         # [service tiers
         # documentation](https://cloud.google.com/monitoring/workspaces/tiers) for more
         # details.
+        # @deprecated This enum is deprecated and may be removed in the next major version update.
         module ServiceTier
           # An invalid sentinel value, used to indicate that a tier has not
           # been provided explicitly.

@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Retail
       module V2
-        VERSION = "0.17.0"
+        VERSION = "0.18.1"
       end
     end
   end

@@ -34,8 +34,8 @@ module Google
         #   @return [::Boolean]
         #     Output only. True if the billing account is open, and will therefore be
         #     charged for any usage on associated projects. False if the billing account
-        #     is closed, and therefore projects associated with it will be unable to use
-        #     paid services.
+        #     is closed, and therefore projects associated with it are unable to use paid
+        #     services.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     The display name given to the billing account, such as `My Billing
@@ -47,6 +47,16 @@ module Google
         #     will be the resource name of the parent billing account that it is being
         #     resold through.
         #     Otherwise this will be empty.
+        # @!attribute [r] parent
+        #   @return [::String]
+        #     Output only. The billing account's parent resource identifier.
+        #     Use the `MoveBillingAccount` method to update the account's parent resource
+        #     if it is a organization.
+        #     Format:
+        #       - `organizations/{organization_id}`, for example,
+        #         `organizations/12345678`
+        #       - `billingAccounts/{billing_account_id}`, for example,
+        #         `billingAccounts/012345-567890-ABCDEF`
         class BillingAccount
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -107,8 +117,17 @@ module Google
         #     This only supports filtering for
         #     [subaccounts](https://cloud.google.com/billing/docs/concepts) under a
         #     single provided parent billing account.
-        #     (e.g. "master_billing_account=billingAccounts/012345-678901-ABCDEF").
+        #     (for example,
+        #     `master_billing_account=billingAccounts/012345-678901-ABCDEF`).
         #     Boolean algebra and other fields are not currently supported.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Optional. The parent resource to list billing accounts from.
+        #     Format:
+        #       - `organizations/{organization_id}`, for example,
+        #         `organizations/12345678`
+        #       - `billingAccounts/{billing_account_id}`, for example,
+        #         `billingAccounts/012345-567890-ABCDEF`
         class ListBillingAccountsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -135,6 +154,14 @@ module Google
         #     Currently CreateBillingAccount only supports subaccount creation, so
         #     any created billing accounts must be under a provided parent billing
         #     account.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Optional. The parent to create a billing account from.
+        #     Format:
+        #       - `organizations/{organization_id}`, for example,
+        #         `organizations/12345678`
+        #       - `billingAccounts/{billing_account_id}`, for example,
+        #          `billingAccounts/012345-567890-ABCDEF`
         class CreateBillingAccountRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -214,6 +241,23 @@ module Google
         #     ignored; thus, you can leave empty all fields except
         #     `billing_account_name`.
         class UpdateProjectBillingInfoRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `MoveBillingAccount` RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the billing account to move.
+        #     Must be of the form `billingAccounts/{billing_account_id}`.
+        #     The specified billing account cannot be a subaccount, since a subaccount
+        #     always belongs to the same organization as its parent account.
+        # @!attribute [rw] destination_parent
+        #   @return [::String]
+        #     Required. The resource name of the Organization to move
+        #     the billing account under.
+        #     Must be of the form `organizations/{organization_id}`.
+        class MoveBillingAccountRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

@@ -289,7 +289,15 @@ describe Google::Cloud::Storage::Bucket, :storage do
     _(storage.bucket(one_off_bucket_name)).wont_be :nil?
     _(one_off_bucket.user_project).must_equal true
     _(one_off_bucket.autoclass_enabled).must_equal true
+    _(one_off_bucket.autoclass_terminal_storage_class).must_equal 'NEARLINE'
+    _(one_off_bucket.autoclass_terminal_storage_class_update_time).wont_be :nil?
     prev_toggle_time = one_off_bucket.autoclass_toggle_time
+
+    one_off_bucket.update do |b|
+      b.update_autoclass({ enabled: true, terminal_storage_class: "ARCHIVE"})
+    end
+    _(one_off_bucket.autoclass_enabled).must_equal true
+    _(one_off_bucket.autoclass_terminal_storage_class).must_equal "ARCHIVE"
 
     one_off_bucket.update do |b|
       b.autoclass_enabled= false

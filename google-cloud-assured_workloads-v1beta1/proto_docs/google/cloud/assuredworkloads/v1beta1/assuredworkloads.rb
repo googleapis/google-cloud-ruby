@@ -235,15 +235,19 @@ module Google
         #     `billingAccounts/{billing_account_id}`. For example,
         #     `billingAccounts/012345-567890-ABCDEF`.
         # @!attribute [rw] il4_settings
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::AssuredWorkloads::V1beta1::Workload::IL4Settings]
         #     Input only. Immutable. Settings specific to resources needed for IL4.
         # @!attribute [rw] cjis_settings
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::AssuredWorkloads::V1beta1::Workload::CJISSettings]
         #     Input only. Immutable. Settings specific to resources needed for CJIS.
         # @!attribute [rw] fedramp_high_settings
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::AssuredWorkloads::V1beta1::Workload::FedrampHighSettings]
         #     Input only. Immutable. Settings specific to resources needed for FedRAMP High.
         # @!attribute [rw] fedramp_moderate_settings
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::AssuredWorkloads::V1beta1::Workload::FedrampModerateSettings]
         #     Input only. Immutable. Settings specific to resources needed for FedRAMP Moderate.
         # @!attribute [rw] etag
@@ -262,6 +266,7 @@ module Google
         #     Format:
         #     folders/\\{folder_id}
         # @!attribute [rw] kms_settings
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::AssuredWorkloads::V1beta1::Workload::KMSSettings]
         #     Input only. Settings used to create a CMEK crypto key. When set, a project with a KMS
         #     CMEK key is provisioned.
@@ -328,6 +333,7 @@ module Google
           end
 
           # Settings specific to the Key Management Service.
+          # @deprecated This message is deprecated and may be removed in the next major version update.
           # @!attribute [rw] next_rotation_time
           #   @return [::Google::Protobuf::Timestamp]
           #     Required. Input only. Immutable. The time at which the Key Management Service will automatically create a
@@ -343,6 +349,7 @@ module Google
           end
 
           # Settings specific to resources needed for IL4.
+          # @deprecated This message is deprecated and may be removed in the next major version update.
           # @!attribute [rw] kms_settings
           #   @return [::Google::Cloud::AssuredWorkloads::V1beta1::Workload::KMSSettings]
           #     Input only. Immutable. Settings used to create a CMEK crypto key.
@@ -352,6 +359,7 @@ module Google
           end
 
           # Settings specific to resources needed for CJIS.
+          # @deprecated This message is deprecated and may be removed in the next major version update.
           # @!attribute [rw] kms_settings
           #   @return [::Google::Cloud::AssuredWorkloads::V1beta1::Workload::KMSSettings]
           #     Input only. Immutable. Settings used to create a CMEK crypto key.
@@ -361,6 +369,7 @@ module Google
           end
 
           # Settings specific to resources needed for FedRAMP High.
+          # @deprecated This message is deprecated and may be removed in the next major version update.
           # @!attribute [rw] kms_settings
           #   @return [::Google::Cloud::AssuredWorkloads::V1beta1::Workload::KMSSettings]
           #     Input only. Immutable. Settings used to create a CMEK crypto key.
@@ -370,6 +379,7 @@ module Google
           end
 
           # Settings specific to resources needed for FedRAMP Moderate.
+          # @deprecated This message is deprecated and may be removed in the next major version update.
           # @!attribute [rw] kms_settings
           #   @return [::Google::Cloud::AssuredWorkloads::V1beta1::Workload::KMSSettings]
           #     Input only. Immutable. Settings used to create a CMEK crypto key.

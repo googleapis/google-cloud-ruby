@@ -16,6 +16,7 @@ require "google/cloud/bigquery"
 require "google/cloud/errors"
 require "google/cloud/storage"
 require "minitest/autorun"
+require "minitest/focus"
 require "securerandom"
 
 RESOURCE_EXHAUSTION_FAILURE_MESSAGE = "Maybe take a break from creating and deleting buckets for a bit".freeze
@@ -54,20 +55,22 @@ def delete_dataset_helper dataset_id
   retry_action Google::Cloud::ResourceExhaustedError, RESOURCE_EXHAUSTION_FAILURE_MESSAGE do
     dataset = bigquery_client.dataset dataset_id
     return unless dataset
-    dataset.delete
+    dataset.delete force: true
   end
 end
 
 def retry_action error, message = nil
-  5.times do
+  success = false
+  5.times do |count|
     yield
-    return
+    success = true
+    break
   rescue error => e
     puts "\n#{e} Gonna try again"
-    sleep rand(1..3)
+    sleep (2 + (rand(1..3) / 2))**count
   rescue StandardError => e
     puts "\n#{e}"
-    return
+    break
   end
-  raise error, message
+  raise error, message unless success
 end

@@ -30,6 +30,9 @@ module Google
           # Provides natural language translation operations.
           #
           class Client
+            # @private
+            DEFAULT_ENDPOINT_TEMPLATE = "translate.$UNIVERSE_DOMAIN$"
+
             include Paths
 
             # @private
@@ -123,6 +126,15 @@ module Google
             end
 
             ##
+            # The effective universe domain
+            #
+            # @return [String]
+            #
+            def universe_domain
+              @translation_service_stub.universe_domain
+            end
+
+            ##
             # Create a new TranslationService client object.
             #
             # @example
@@ -155,8 +167,9 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
-                                       !@config.endpoint.split(".").first.include?("-")
+              enable_self_signed_jwt = @config.endpoint.nil? ||
+                                       (@config.endpoint == Configuration::DEFAULT_ENDPOINT &&
+                                       !@config.endpoint.split(".").first.include?("-"))
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(::String) || credentials.is_a?(::Hash)
@@ -169,12 +182,15 @@ module Google
                 config.credentials = credentials
                 config.quota_project = @quota_project_id
                 config.endpoint = @config.endpoint
+                config.universe_domain = @config.universe_domain
               end
 
               @translation_service_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::Translate::V3::TranslationService::Stub,
-                credentials:  credentials,
-                endpoint:     @config.endpoint,
+                credentials: credentials,
+                endpoint: @config.endpoint,
+                endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
+                universe_domain: @config.universe_domain,
                 channel_args: @config.channel_args,
                 interceptors: @config.interceptors,
                 channel_pool_config: @config.channel_pool
@@ -946,9 +962,9 @@ module Google
             #   @param glossaries [::Hash{::String => ::Google::Cloud::Translate::V3::TranslateTextGlossaryConfig, ::Hash}]
             #     Optional. Glossaries to be applied. It's keyed by target language code.
             #   @param format_conversions [::Hash{::String => ::String}]
-            #     Optional. File format conversion map to be applied to all input files.
-            #     Map's key is the original mime_type. Map's value is the target mime_type of
-            #     translated documents.
+            #     Optional. The file format conversion map that is applied to all input
+            #     files. The map key is the original mime_type. The map value is the target
+            #     mime_type of translated documents.
             #
             #     Supported file format conversion includes:
             #     - `application/pdf` to
@@ -1435,6 +1451,927 @@ module Google
             end
 
             ##
+            # Creates an Adaptive MT dataset.
+            #
+            # @overload create_adaptive_mt_dataset(request, options = nil)
+            #   Pass arguments to `create_adaptive_mt_dataset` via a request object, either of type
+            #   {::Google::Cloud::Translate::V3::CreateAdaptiveMtDatasetRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Translate::V3::CreateAdaptiveMtDatasetRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_adaptive_mt_dataset(parent: nil, adaptive_mt_dataset: nil)
+            #   Pass arguments to `create_adaptive_mt_dataset` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Name of the parent project. In form of
+            #     `projects/{project-number-or-id}/locations/{location-id}`
+            #   @param adaptive_mt_dataset [::Google::Cloud::Translate::V3::AdaptiveMtDataset, ::Hash]
+            #     Required. The AdaptiveMtDataset to be created.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Translate::V3::AdaptiveMtDataset]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Translate::V3::AdaptiveMtDataset]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/translate/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Translate::V3::TranslationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Translate::V3::CreateAdaptiveMtDatasetRequest.new
+            #
+            #   # Call the create_adaptive_mt_dataset method.
+            #   result = client.create_adaptive_mt_dataset request
+            #
+            #   # The returned object is of type Google::Cloud::Translate::V3::AdaptiveMtDataset.
+            #   p result
+            #
+            def create_adaptive_mt_dataset request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Translate::V3::CreateAdaptiveMtDatasetRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_adaptive_mt_dataset.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Translate::V3::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_adaptive_mt_dataset.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_adaptive_mt_dataset.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @translation_service_stub.call_rpc :create_adaptive_mt_dataset, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes an Adaptive MT dataset, including all its entries and associated
+            # metadata.
+            #
+            # @overload delete_adaptive_mt_dataset(request, options = nil)
+            #   Pass arguments to `delete_adaptive_mt_dataset` via a request object, either of type
+            #   {::Google::Cloud::Translate::V3::DeleteAdaptiveMtDatasetRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Translate::V3::DeleteAdaptiveMtDatasetRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_adaptive_mt_dataset(name: nil)
+            #   Pass arguments to `delete_adaptive_mt_dataset` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Name of the dataset. In the form of
+            #     `projects/{project-number-or-id}/locations/{location-id}/adaptiveMtDatasets/{adaptive-mt-dataset-id}`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Protobuf::Empty]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/translate/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Translate::V3::TranslationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Translate::V3::DeleteAdaptiveMtDatasetRequest.new
+            #
+            #   # Call the delete_adaptive_mt_dataset method.
+            #   result = client.delete_adaptive_mt_dataset request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
+            def delete_adaptive_mt_dataset request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Translate::V3::DeleteAdaptiveMtDatasetRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_adaptive_mt_dataset.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Translate::V3::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_adaptive_mt_dataset.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_adaptive_mt_dataset.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @translation_service_stub.call_rpc :delete_adaptive_mt_dataset, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets the Adaptive MT dataset.
+            #
+            # @overload get_adaptive_mt_dataset(request, options = nil)
+            #   Pass arguments to `get_adaptive_mt_dataset` via a request object, either of type
+            #   {::Google::Cloud::Translate::V3::GetAdaptiveMtDatasetRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Translate::V3::GetAdaptiveMtDatasetRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_adaptive_mt_dataset(name: nil)
+            #   Pass arguments to `get_adaptive_mt_dataset` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Name of the dataset. In the form of
+            #     `projects/{project-number-or-id}/locations/{location-id}/adaptiveMtDatasets/{adaptive-mt-dataset-id}`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Translate::V3::AdaptiveMtDataset]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Translate::V3::AdaptiveMtDataset]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/translate/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Translate::V3::TranslationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Translate::V3::GetAdaptiveMtDatasetRequest.new
+            #
+            #   # Call the get_adaptive_mt_dataset method.
+            #   result = client.get_adaptive_mt_dataset request
+            #
+            #   # The returned object is of type Google::Cloud::Translate::V3::AdaptiveMtDataset.
+            #   p result
+            #
+            def get_adaptive_mt_dataset request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Translate::V3::GetAdaptiveMtDatasetRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_adaptive_mt_dataset.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Translate::V3::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_adaptive_mt_dataset.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_adaptive_mt_dataset.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @translation_service_stub.call_rpc :get_adaptive_mt_dataset, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists all Adaptive MT datasets for which the caller has read permission.
+            #
+            # @overload list_adaptive_mt_datasets(request, options = nil)
+            #   Pass arguments to `list_adaptive_mt_datasets` via a request object, either of type
+            #   {::Google::Cloud::Translate::V3::ListAdaptiveMtDatasetsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Translate::V3::ListAdaptiveMtDatasetsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_adaptive_mt_datasets(parent: nil, page_size: nil, page_token: nil, filter: nil)
+            #   Pass arguments to `list_adaptive_mt_datasets` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The resource name of the project from which to list the Adaptive
+            #     MT datasets. `projects/{project-number-or-id}/locations/{location-id}`
+            #   @param page_size [::Integer]
+            #     Optional. Requested page size. The server may return fewer results than
+            #     requested. If unspecified, the server picks an appropriate default.
+            #   @param page_token [::String]
+            #     Optional. A token identifying a page of results the server should return.
+            #     Typically, this is the value of
+            #     ListAdaptiveMtDatasetsResponse.next_page_token returned from the
+            #     previous call to `ListAdaptiveMtDatasets` method. The first page is
+            #     returned if `page_token`is empty or missing.
+            #   @param filter [::String]
+            #     Optional. An expression for filtering the results of the request.
+            #     Filter is not supported yet.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Translate::V3::AdaptiveMtDataset>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Translate::V3::AdaptiveMtDataset>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/translate/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Translate::V3::TranslationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Translate::V3::ListAdaptiveMtDatasetsRequest.new
+            #
+            #   # Call the list_adaptive_mt_datasets method.
+            #   result = client.list_adaptive_mt_datasets request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::Translate::V3::AdaptiveMtDataset.
+            #     p item
+            #   end
+            #
+            def list_adaptive_mt_datasets request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Translate::V3::ListAdaptiveMtDatasetsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_adaptive_mt_datasets.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Translate::V3::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_adaptive_mt_datasets.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_adaptive_mt_datasets.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @translation_service_stub.call_rpc :list_adaptive_mt_datasets, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @translation_service_stub, :list_adaptive_mt_datasets, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Translate text using Adaptive MT.
+            #
+            # @overload adaptive_mt_translate(request, options = nil)
+            #   Pass arguments to `adaptive_mt_translate` via a request object, either of type
+            #   {::Google::Cloud::Translate::V3::AdaptiveMtTranslateRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Translate::V3::AdaptiveMtTranslateRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload adaptive_mt_translate(parent: nil, dataset: nil, content: nil)
+            #   Pass arguments to `adaptive_mt_translate` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Location to make a regional call.
+            #
+            #     Format: `projects/{project-number-or-id}/locations/{location-id}`.
+            #   @param dataset [::String]
+            #     Required. The resource name for the dataset to use for adaptive MT.
+            #     `projects/{project}/locations/{location-id}/adaptiveMtDatasets/{dataset}`
+            #   @param content [::Array<::String>]
+            #     Required. The content of the input in string format.
+            #     For now only one sentence per request is supported.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Translate::V3::AdaptiveMtTranslateResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Translate::V3::AdaptiveMtTranslateResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/translate/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Translate::V3::TranslationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Translate::V3::AdaptiveMtTranslateRequest.new
+            #
+            #   # Call the adaptive_mt_translate method.
+            #   result = client.adaptive_mt_translate request
+            #
+            #   # The returned object is of type Google::Cloud::Translate::V3::AdaptiveMtTranslateResponse.
+            #   p result
+            #
+            def adaptive_mt_translate request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Translate::V3::AdaptiveMtTranslateRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.adaptive_mt_translate.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Translate::V3::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.adaptive_mt_translate.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.adaptive_mt_translate.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @translation_service_stub.call_rpc :adaptive_mt_translate, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets and AdaptiveMtFile
+            #
+            # @overload get_adaptive_mt_file(request, options = nil)
+            #   Pass arguments to `get_adaptive_mt_file` via a request object, either of type
+            #   {::Google::Cloud::Translate::V3::GetAdaptiveMtFileRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Translate::V3::GetAdaptiveMtFileRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_adaptive_mt_file(name: nil)
+            #   Pass arguments to `get_adaptive_mt_file` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The resource name of the file, in form of
+            #     `projects/{project-number-or-id}/locations/{location_id}/adaptiveMtDatasets/{dataset}/adaptiveMtFiles/{file}`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Translate::V3::AdaptiveMtFile]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Translate::V3::AdaptiveMtFile]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/translate/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Translate::V3::TranslationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Translate::V3::GetAdaptiveMtFileRequest.new
+            #
+            #   # Call the get_adaptive_mt_file method.
+            #   result = client.get_adaptive_mt_file request
+            #
+            #   # The returned object is of type Google::Cloud::Translate::V3::AdaptiveMtFile.
+            #   p result
+            #
+            def get_adaptive_mt_file request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Translate::V3::GetAdaptiveMtFileRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_adaptive_mt_file.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Translate::V3::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_adaptive_mt_file.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_adaptive_mt_file.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @translation_service_stub.call_rpc :get_adaptive_mt_file, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes an AdaptiveMtFile along with its sentences.
+            #
+            # @overload delete_adaptive_mt_file(request, options = nil)
+            #   Pass arguments to `delete_adaptive_mt_file` via a request object, either of type
+            #   {::Google::Cloud::Translate::V3::DeleteAdaptiveMtFileRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Translate::V3::DeleteAdaptiveMtFileRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_adaptive_mt_file(name: nil)
+            #   Pass arguments to `delete_adaptive_mt_file` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The resource name of the file to delete, in form of
+            #     `projects/{project-number-or-id}/locations/{location_id}/adaptiveMtDatasets/{dataset}/adaptiveMtFiles/{file}`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Protobuf::Empty]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/translate/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Translate::V3::TranslationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Translate::V3::DeleteAdaptiveMtFileRequest.new
+            #
+            #   # Call the delete_adaptive_mt_file method.
+            #   result = client.delete_adaptive_mt_file request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
+            def delete_adaptive_mt_file request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Translate::V3::DeleteAdaptiveMtFileRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_adaptive_mt_file.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Translate::V3::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_adaptive_mt_file.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_adaptive_mt_file.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @translation_service_stub.call_rpc :delete_adaptive_mt_file, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Imports an AdaptiveMtFile and adds all of its sentences into the
+            # AdaptiveMtDataset.
+            #
+            # @overload import_adaptive_mt_file(request, options = nil)
+            #   Pass arguments to `import_adaptive_mt_file` via a request object, either of type
+            #   {::Google::Cloud::Translate::V3::ImportAdaptiveMtFileRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Translate::V3::ImportAdaptiveMtFileRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload import_adaptive_mt_file(parent: nil, file_input_source: nil, gcs_input_source: nil)
+            #   Pass arguments to `import_adaptive_mt_file` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The resource name of the file, in form of
+            #     `projects/{project-number-or-id}/locations/{location_id}/adaptiveMtDatasets/{dataset}`
+            #   @param file_input_source [::Google::Cloud::Translate::V3::FileInputSource, ::Hash]
+            #     Inline file source.
+            #   @param gcs_input_source [::Google::Cloud::Translate::V3::GcsInputSource, ::Hash]
+            #     Google Cloud Storage file source.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Translate::V3::ImportAdaptiveMtFileResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Translate::V3::ImportAdaptiveMtFileResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/translate/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Translate::V3::TranslationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Translate::V3::ImportAdaptiveMtFileRequest.new
+            #
+            #   # Call the import_adaptive_mt_file method.
+            #   result = client.import_adaptive_mt_file request
+            #
+            #   # The returned object is of type Google::Cloud::Translate::V3::ImportAdaptiveMtFileResponse.
+            #   p result
+            #
+            def import_adaptive_mt_file request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Translate::V3::ImportAdaptiveMtFileRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.import_adaptive_mt_file.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Translate::V3::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.import_adaptive_mt_file.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.import_adaptive_mt_file.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @translation_service_stub.call_rpc :import_adaptive_mt_file, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists all AdaptiveMtFiles associated to an AdaptiveMtDataset.
+            #
+            # @overload list_adaptive_mt_files(request, options = nil)
+            #   Pass arguments to `list_adaptive_mt_files` via a request object, either of type
+            #   {::Google::Cloud::Translate::V3::ListAdaptiveMtFilesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Translate::V3::ListAdaptiveMtFilesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_adaptive_mt_files(parent: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `list_adaptive_mt_files` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The resource name of the project from which to list the Adaptive
+            #     MT files.
+            #     `projects/{project}/locations/{location}/adaptiveMtDatasets/{dataset}`
+            #   @param page_size [::Integer]
+            #     Optional.
+            #   @param page_token [::String]
+            #     Optional. A token identifying a page of results the server should return.
+            #     Typically, this is the value of
+            #     ListAdaptiveMtFilesResponse.next_page_token returned from the
+            #     previous call to `ListAdaptiveMtFiles` method. The first page is
+            #     returned if `page_token`is empty or missing.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Translate::V3::AdaptiveMtFile>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Translate::V3::AdaptiveMtFile>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/translate/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Translate::V3::TranslationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Translate::V3::ListAdaptiveMtFilesRequest.new
+            #
+            #   # Call the list_adaptive_mt_files method.
+            #   result = client.list_adaptive_mt_files request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::Translate::V3::AdaptiveMtFile.
+            #     p item
+            #   end
+            #
+            def list_adaptive_mt_files request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Translate::V3::ListAdaptiveMtFilesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_adaptive_mt_files.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Translate::V3::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_adaptive_mt_files.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_adaptive_mt_files.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @translation_service_stub.call_rpc :list_adaptive_mt_files, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @translation_service_stub, :list_adaptive_mt_files, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists all AdaptiveMtSentences under a given file/dataset.
+            #
+            # @overload list_adaptive_mt_sentences(request, options = nil)
+            #   Pass arguments to `list_adaptive_mt_sentences` via a request object, either of type
+            #   {::Google::Cloud::Translate::V3::ListAdaptiveMtSentencesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Translate::V3::ListAdaptiveMtSentencesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_adaptive_mt_sentences(parent: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `list_adaptive_mt_sentences` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The resource name of the project from which to list the Adaptive
+            #     MT files. The following format lists all sentences under a file.
+            #     `projects/{project}/locations/{location}/adaptiveMtDatasets/{dataset}/adaptiveMtFiles/{file}`
+            #     The following format lists all sentences within a dataset.
+            #     `projects/{project}/locations/{location}/adaptiveMtDatasets/{dataset}`
+            #   @param page_size [::Integer]
+            #   @param page_token [::String]
+            #     A token identifying a page of results the server should return.
+            #     Typically, this is the value of
+            #     ListAdaptiveMtSentencesRequest.next_page_token returned from the
+            #     previous call to `ListTranslationMemories` method. The first page is
+            #     returned if `page_token` is empty or missing.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Translate::V3::AdaptiveMtSentence>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Translate::V3::AdaptiveMtSentence>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/translate/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Translate::V3::TranslationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Translate::V3::ListAdaptiveMtSentencesRequest.new
+            #
+            #   # Call the list_adaptive_mt_sentences method.
+            #   result = client.list_adaptive_mt_sentences request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::Translate::V3::AdaptiveMtSentence.
+            #     p item
+            #   end
+            #
+            def list_adaptive_mt_sentences request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Translate::V3::ListAdaptiveMtSentencesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_adaptive_mt_sentences.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Translate::V3::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_adaptive_mt_sentences.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_adaptive_mt_sentences.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @translation_service_stub.call_rpc :list_adaptive_mt_sentences, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @translation_service_stub, :list_adaptive_mt_sentences, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the TranslationService API.
             #
             # This class represents the configuration for TranslationService,
@@ -1464,9 +2401,9 @@ module Google
             #   end
             #
             # @!attribute [rw] endpoint
-            #   The hostname or hostname:port of the service endpoint.
-            #   Defaults to `"translate.googleapis.com"`.
-            #   @return [::String]
+            #   A custom service endpoint, as a hostname or hostname:port. The default is
+            #   nil, indicating to use the default endpoint in the current universe domain.
+            #   @return [::String,nil]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
             #    *  (`String`) The path to a service account key file in JSON format
@@ -1512,13 +2449,20 @@ module Google
             # @!attribute [rw] quota_project
             #   A separate project against which to charge quota.
             #   @return [::String]
+            # @!attribute [rw] universe_domain
+            #   The universe domain within which to make requests. This determines the
+            #   default endpoint URL. The default value of nil uses the environment
+            #   universe (usually the default "googleapis.com" universe).
+            #   @return [::String,nil]
             #
             class Configuration
               extend ::Gapic::Config
 
+              # @private
+              # The endpoint specific to the default "googleapis.com" universe. Deprecated.
               DEFAULT_ENDPOINT = "translate.googleapis.com"
 
-              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
+              config_attr :endpoint,      nil, ::String, nil
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
@@ -1533,6 +2477,7 @@ module Google
               config_attr :metadata,      nil, ::Hash, nil
               config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
               config_attr :quota_project, nil, ::String, nil
+              config_attr :universe_domain, nil, ::String, nil
 
               # @private
               def initialize parent_config = nil
@@ -1629,6 +2574,56 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_glossary
+                ##
+                # RPC-specific configuration for `create_adaptive_mt_dataset`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_adaptive_mt_dataset
+                ##
+                # RPC-specific configuration for `delete_adaptive_mt_dataset`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_adaptive_mt_dataset
+                ##
+                # RPC-specific configuration for `get_adaptive_mt_dataset`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_adaptive_mt_dataset
+                ##
+                # RPC-specific configuration for `list_adaptive_mt_datasets`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_adaptive_mt_datasets
+                ##
+                # RPC-specific configuration for `adaptive_mt_translate`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :adaptive_mt_translate
+                ##
+                # RPC-specific configuration for `get_adaptive_mt_file`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_adaptive_mt_file
+                ##
+                # RPC-specific configuration for `delete_adaptive_mt_file`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_adaptive_mt_file
+                ##
+                # RPC-specific configuration for `import_adaptive_mt_file`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :import_adaptive_mt_file
+                ##
+                # RPC-specific configuration for `list_adaptive_mt_files`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_adaptive_mt_files
+                ##
+                # RPC-specific configuration for `list_adaptive_mt_sentences`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_adaptive_mt_sentences
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -1652,6 +2647,26 @@ module Google
                   @get_glossary = ::Gapic::Config::Method.new get_glossary_config
                   delete_glossary_config = parent_rpcs.delete_glossary if parent_rpcs.respond_to? :delete_glossary
                   @delete_glossary = ::Gapic::Config::Method.new delete_glossary_config
+                  create_adaptive_mt_dataset_config = parent_rpcs.create_adaptive_mt_dataset if parent_rpcs.respond_to? :create_adaptive_mt_dataset
+                  @create_adaptive_mt_dataset = ::Gapic::Config::Method.new create_adaptive_mt_dataset_config
+                  delete_adaptive_mt_dataset_config = parent_rpcs.delete_adaptive_mt_dataset if parent_rpcs.respond_to? :delete_adaptive_mt_dataset
+                  @delete_adaptive_mt_dataset = ::Gapic::Config::Method.new delete_adaptive_mt_dataset_config
+                  get_adaptive_mt_dataset_config = parent_rpcs.get_adaptive_mt_dataset if parent_rpcs.respond_to? :get_adaptive_mt_dataset
+                  @get_adaptive_mt_dataset = ::Gapic::Config::Method.new get_adaptive_mt_dataset_config
+                  list_adaptive_mt_datasets_config = parent_rpcs.list_adaptive_mt_datasets if parent_rpcs.respond_to? :list_adaptive_mt_datasets
+                  @list_adaptive_mt_datasets = ::Gapic::Config::Method.new list_adaptive_mt_datasets_config
+                  adaptive_mt_translate_config = parent_rpcs.adaptive_mt_translate if parent_rpcs.respond_to? :adaptive_mt_translate
+                  @adaptive_mt_translate = ::Gapic::Config::Method.new adaptive_mt_translate_config
+                  get_adaptive_mt_file_config = parent_rpcs.get_adaptive_mt_file if parent_rpcs.respond_to? :get_adaptive_mt_file
+                  @get_adaptive_mt_file = ::Gapic::Config::Method.new get_adaptive_mt_file_config
+                  delete_adaptive_mt_file_config = parent_rpcs.delete_adaptive_mt_file if parent_rpcs.respond_to? :delete_adaptive_mt_file
+                  @delete_adaptive_mt_file = ::Gapic::Config::Method.new delete_adaptive_mt_file_config
+                  import_adaptive_mt_file_config = parent_rpcs.import_adaptive_mt_file if parent_rpcs.respond_to? :import_adaptive_mt_file
+                  @import_adaptive_mt_file = ::Gapic::Config::Method.new import_adaptive_mt_file_config
+                  list_adaptive_mt_files_config = parent_rpcs.list_adaptive_mt_files if parent_rpcs.respond_to? :list_adaptive_mt_files
+                  @list_adaptive_mt_files = ::Gapic::Config::Method.new list_adaptive_mt_files_config
+                  list_adaptive_mt_sentences_config = parent_rpcs.list_adaptive_mt_sentences if parent_rpcs.respond_to? :list_adaptive_mt_sentences
+                  @list_adaptive_mt_sentences = ::Gapic::Config::Method.new list_adaptive_mt_sentences_config
 
                   yield self if block_given?
                 end

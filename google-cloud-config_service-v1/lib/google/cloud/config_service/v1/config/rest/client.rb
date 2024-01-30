@@ -35,6 +35,9 @@ module Google
             # management of Google Cloud infrastructure resources.
             #
             class Client
+              # @private
+              DEFAULT_ENDPOINT_TEMPLATE = "config.$UNIVERSE_DOMAIN$"
+
               include Paths
 
               # @private
@@ -96,6 +99,15 @@ module Google
               end
 
               ##
+              # The effective universe domain
+              #
+              # @return [String]
+              #
+              def universe_domain
+                @config_stub.universe_domain
+              end
+
+              ##
               # Create a new Config REST client object.
               #
               # @example
@@ -122,8 +134,9 @@ module Google
                 credentials = @config.credentials
                 # Use self-signed JWT if the endpoint is unchanged from default,
                 # but only if the default endpoint does not have a region prefix.
-                enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
-                                         !@config.endpoint.split(".").first.include?("-")
+                enable_self_signed_jwt = @config.endpoint.nil? ||
+                                         (@config.endpoint == Configuration::DEFAULT_ENDPOINT &&
+                                         !@config.endpoint.split(".").first.include?("-"))
                 credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
                 if credentials.is_a?(::String) || credentials.is_a?(::Hash)
@@ -137,23 +150,31 @@ module Google
                   config.credentials = credentials
                   config.quota_project = @quota_project_id
                   config.endpoint = @config.endpoint
+                  config.universe_domain = @config.universe_domain
                 end
+
+                @config_stub = ::Google::Cloud::ConfigService::V1::Config::Rest::ServiceStub.new(
+                  endpoint: @config.endpoint,
+                  endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
+                  universe_domain: @config.universe_domain,
+                  credentials: credentials
+                )
 
                 @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
                   config.credentials = credentials
                   config.quota_project = @quota_project_id
-                  config.endpoint = @config.endpoint
+                  config.endpoint = @config_stub.endpoint
+                  config.universe_domain = @config_stub.universe_domain
                   config.bindings_override = @config.bindings_override
                 end
 
                 @iam_policy_client = Google::Iam::V1::IAMPolicy::Rest::Client.new do |config|
                   config.credentials = credentials
                   config.quota_project = @quota_project_id
-                  config.endpoint = @config.endpoint
+                  config.endpoint = @config_stub.endpoint
+                  config.universe_domain = @config_stub.universe_domain
                   config.bindings_override = @config.bindings_override
                 end
-
-                @config_stub = ::Google::Cloud::ConfigService::V1::Config::Rest::ServiceStub.new endpoint: @config.endpoint, credentials: credentials
               end
 
               ##
@@ -1669,6 +1690,487 @@ module Google
               end
 
               ##
+              # Creates a {::Google::Cloud::ConfigService::V1::Preview Preview}.
+              #
+              # @overload create_preview(request, options = nil)
+              #   Pass arguments to `create_preview` via a request object, either of type
+              #   {::Google::Cloud::ConfigService::V1::CreatePreviewRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ConfigService::V1::CreatePreviewRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_preview(parent: nil, preview_id: nil, preview: nil, request_id: nil)
+              #   Pass arguments to `create_preview` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent in whose context the Preview is created. The parent
+              #     value is in the format: 'projects/\\{project_id}/locations/\\{location}'.
+              #   @param preview_id [::String]
+              #     Optional. The preview ID.
+              #   @param preview [::Google::Cloud::ConfigService::V1::Preview, ::Hash]
+              #     Required. {::Google::Cloud::ConfigService::V1::Preview Preview} resource to be created.
+              #   @param request_id [::String]
+              #     Optional. An optional request ID to identify requests. Specify a unique
+              #     request ID so that if you must retry your request, the server will know to
+              #     ignore the request if it has already been completed. The server will
+              #     guarantee that for at least 60 minutes since the first request.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request ID,
+              #     the server can check if original operation with the same request ID was
+              #     received, and if so, will ignore the second request. This prevents clients
+              #     from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/config_service/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ConfigService::V1::Config::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ConfigService::V1::CreatePreviewRequest.new
+              #
+              #   # Call the create_preview method.
+              #   result = client.create_preview request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def create_preview request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ConfigService::V1::CreatePreviewRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_preview.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ConfigService::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_preview.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_preview.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @config_stub.create_preview request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets details about a {::Google::Cloud::ConfigService::V1::Preview Preview}.
+              #
+              # @overload get_preview(request, options = nil)
+              #   Pass arguments to `get_preview` via a request object, either of type
+              #   {::Google::Cloud::ConfigService::V1::GetPreviewRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ConfigService::V1::GetPreviewRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_preview(name: nil)
+              #   Pass arguments to `get_preview` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the preview. Format:
+              #     'projects/\\{project_id}/locations/\\{location}/previews/\\{preview}'.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::ConfigService::V1::Preview]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::ConfigService::V1::Preview]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/config_service/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ConfigService::V1::Config::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ConfigService::V1::GetPreviewRequest.new
+              #
+              #   # Call the get_preview method.
+              #   result = client.get_preview request
+              #
+              #   # The returned object is of type Google::Cloud::ConfigService::V1::Preview.
+              #   p result
+              #
+              def get_preview request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ConfigService::V1::GetPreviewRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_preview.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ConfigService::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_preview.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_preview.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @config_stub.get_preview request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists {::Google::Cloud::ConfigService::V1::Preview Preview}s in a given project and
+              # location.
+              #
+              # @overload list_previews(request, options = nil)
+              #   Pass arguments to `list_previews` via a request object, either of type
+              #   {::Google::Cloud::ConfigService::V1::ListPreviewsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ConfigService::V1::ListPreviewsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_previews(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+              #   Pass arguments to `list_previews` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent in whose context the Previews are listed. The parent
+              #     value is in the format: 'projects/\\{project_id}/locations/\\{location}'.
+              #   @param page_size [::Integer]
+              #     Optional. When requesting a page of resources, 'page_size' specifies number
+              #     of resources to return. If unspecified or set to 0, all resources will be
+              #     returned.
+              #   @param page_token [::String]
+              #     Optional. Token returned by previous call to 'ListDeployments' which
+              #     specifies the position in the list from where to continue listing the
+              #     resources.
+              #   @param filter [::String]
+              #     Optional. Lists the Deployments that match the filter expression. A filter
+              #     expression filters the resources listed in the response. The expression
+              #     must be of the form '\\{field} \\{operator} \\{value}' where operators: '<', '>',
+              #     '<=', '>=', '!=', '=', ':' are supported (colon ':' represents a HAS
+              #     operator which is roughly synonymous with equality). \\{field} can refer to a
+              #     proto or JSON field, or a synthetic field. Field names can be camelCase or
+              #     snake_case.
+              #
+              #     Examples:
+              #     - Filter by name:
+              #       name = "projects/foo/locations/us-central1/deployments/bar
+              #
+              #     - Filter by labels:
+              #       - Resources that have a key called 'foo'
+              #         labels.foo:*
+              #       - Resources that have a key called 'foo' whose value is 'bar'
+              #         labels.foo = bar
+              #
+              #     - Filter by state:
+              #       - Deployments in CREATING state.
+              #         state=CREATING
+              #   @param order_by [::String]
+              #     Optional. Field to use to sort the list.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::ConfigService::V1::ListPreviewsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::ConfigService::V1::ListPreviewsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/config_service/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ConfigService::V1::Config::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ConfigService::V1::ListPreviewsRequest.new
+              #
+              #   # Call the list_previews method.
+              #   result = client.list_previews request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::ConfigService::V1::Preview.
+              #     p item
+              #   end
+              #
+              def list_previews request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ConfigService::V1::ListPreviewsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_previews.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ConfigService::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_previews.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_previews.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @config_stub.list_previews request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a {::Google::Cloud::ConfigService::V1::Preview Preview}.
+              #
+              # @overload delete_preview(request, options = nil)
+              #   Pass arguments to `delete_preview` via a request object, either of type
+              #   {::Google::Cloud::ConfigService::V1::DeletePreviewRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ConfigService::V1::DeletePreviewRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_preview(name: nil, request_id: nil)
+              #   Pass arguments to `delete_preview` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the Preview in the format:
+              #     'projects/\\{project_id}/locations/\\{location}/previews/\\{preview}'.
+              #   @param request_id [::String]
+              #     Optional. An optional request ID to identify requests. Specify a unique
+              #     request ID so that if you must retry your request, the server will know to
+              #     ignore the request if it has already been completed. The server will
+              #     guarantee that for at least 60 minutes after the first request.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request ID,
+              #     the server can check if original operation with the same request ID was
+              #     received, and if so, will ignore the second request. This prevents clients
+              #     from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/config_service/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ConfigService::V1::Config::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ConfigService::V1::DeletePreviewRequest.new
+              #
+              #   # Call the delete_preview method.
+              #   result = client.delete_preview request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_preview request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ConfigService::V1::DeletePreviewRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_preview.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ConfigService::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_preview.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_preview.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @config_stub.delete_preview request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Export {::Google::Cloud::ConfigService::V1::Preview Preview} results.
+              #
+              # @overload export_preview_result(request, options = nil)
+              #   Pass arguments to `export_preview_result` via a request object, either of type
+              #   {::Google::Cloud::ConfigService::V1::ExportPreviewResultRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ConfigService::V1::ExportPreviewResultRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload export_preview_result(parent: nil)
+              #   Pass arguments to `export_preview_result` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The preview whose results should be exported. The preview value
+              #     is in the format:
+              #     'projects/\\{project_id}/locations/\\{location}/previews/\\{preview}'.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::ConfigService::V1::ExportPreviewResultResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::ConfigService::V1::ExportPreviewResultResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/config_service/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ConfigService::V1::Config::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ConfigService::V1::ExportPreviewResultRequest.new
+              #
+              #   # Call the export_preview_result method.
+              #   result = client.export_preview_result request
+              #
+              #   # The returned object is of type Google::Cloud::ConfigService::V1::ExportPreviewResultResponse.
+              #   p result
+              #
+              def export_preview_result request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ConfigService::V1::ExportPreviewResultRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.export_preview_result.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ConfigService::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.export_preview_result.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.export_preview_result.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @config_stub.export_preview_result request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the Config REST API.
               #
               # This class represents the configuration for Config REST,
@@ -1698,9 +2200,9 @@ module Google
               #   end
               #
               # @!attribute [rw] endpoint
-              #   The hostname or hostname:port of the service endpoint.
-              #   Defaults to `"config.googleapis.com"`.
-              #   @return [::String]
+              #   A custom service endpoint, as a hostname or hostname:port. The default is
+              #   nil, indicating to use the default endpoint in the current universe domain.
+              #   @return [::String,nil]
               # @!attribute [rw] credentials
               #   Credentials to send with calls. You may provide any of the following types:
               #    *  (`String`) The path to a service account key file in JSON format
@@ -1737,13 +2239,20 @@ module Google
               # @!attribute [rw] quota_project
               #   A separate project against which to charge quota.
               #   @return [::String]
+              # @!attribute [rw] universe_domain
+              #   The universe domain within which to make requests. This determines the
+              #   default endpoint URL. The default value of nil uses the environment
+              #   universe (usually the default "googleapis.com" universe).
+              #   @return [::String,nil]
               #
               class Configuration
                 extend ::Gapic::Config
 
+                # @private
+                # The endpoint specific to the default "googleapis.com" universe. Deprecated.
                 DEFAULT_ENDPOINT = "config.googleapis.com"
 
-                config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
+                config_attr :endpoint,      nil, ::String, nil
                 config_attr :credentials,   nil do |value|
                   allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                   allowed.any? { |klass| klass === value }
@@ -1755,6 +2264,7 @@ module Google
                 config_attr :metadata,      nil, ::Hash, nil
                 config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
                 config_attr :quota_project, nil, ::String, nil
+                config_attr :universe_domain, nil, ::String, nil
 
                 # @private
                 # Overrides for http bindings for the RPCs of this service
@@ -1880,6 +2390,31 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :export_lock_info
+                  ##
+                  # RPC-specific configuration for `create_preview`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_preview
+                  ##
+                  # RPC-specific configuration for `get_preview`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_preview
+                  ##
+                  # RPC-specific configuration for `list_previews`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_previews
+                  ##
+                  # RPC-specific configuration for `delete_preview`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_preview
+                  ##
+                  # RPC-specific configuration for `export_preview_result`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :export_preview_result
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -1915,6 +2450,16 @@ module Google
                     @unlock_deployment = ::Gapic::Config::Method.new unlock_deployment_config
                     export_lock_info_config = parent_rpcs.export_lock_info if parent_rpcs.respond_to? :export_lock_info
                     @export_lock_info = ::Gapic::Config::Method.new export_lock_info_config
+                    create_preview_config = parent_rpcs.create_preview if parent_rpcs.respond_to? :create_preview
+                    @create_preview = ::Gapic::Config::Method.new create_preview_config
+                    get_preview_config = parent_rpcs.get_preview if parent_rpcs.respond_to? :get_preview
+                    @get_preview = ::Gapic::Config::Method.new get_preview_config
+                    list_previews_config = parent_rpcs.list_previews if parent_rpcs.respond_to? :list_previews
+                    @list_previews = ::Gapic::Config::Method.new list_previews_config
+                    delete_preview_config = parent_rpcs.delete_preview if parent_rpcs.respond_to? :delete_preview
+                    @delete_preview = ::Gapic::Config::Method.new delete_preview_config
+                    export_preview_result_config = parent_rpcs.export_preview_result if parent_rpcs.respond_to? :export_preview_result
+                    @export_preview_result = ::Gapic::Config::Method.new export_preview_result_config
 
                     yield self if block_given?
                   end

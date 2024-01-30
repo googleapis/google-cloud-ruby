@@ -1,5 +1,17 @@
 # Changelog
 
+### 0.7.1 (2024-01-12)
+
+#### Bug Fixes
+
+* Ensure endpoints are correct for mixin clients ([#24032](https://github.com/googleapis/google-cloud-ruby/issues/24032)) 
+
+### 0.7.0 (2024-01-08)
+
+#### Features
+
+* Support for universe domain in mixin clients ([#23746](https://github.com/googleapis/google-cloud-ruby/issues/23746)) 
+
 ### 0.6.0 (2023-09-12)
 
 #### Features

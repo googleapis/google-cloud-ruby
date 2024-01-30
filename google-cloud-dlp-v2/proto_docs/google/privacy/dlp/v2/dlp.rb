@@ -39,7 +39,8 @@ module Google
 
         # The rule to exclude findings based on a hotword. For record inspection of
         # tables, column names are considered hotwords. An example of this is to
-        # exclude a finding if a BigQuery column matches a specific pattern.
+        # exclude a finding if it belongs to a BigQuery column that matches a specific
+        # pattern.
         # @!attribute [rw] hotword_regex
         #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::Regex]
         #     Regular expression pattern defining what qualifies as a hotword.
@@ -113,17 +114,26 @@ module Google
         #     https://cloud.google.com/dlp/docs/infotypes-reference.
         #
         #     When no InfoTypes or CustomInfoTypes are specified in a request, the
-        #     system may automatically choose what detectors to run. By default this may
-        #     be all types, but may change over time as detectors are updated.
+        #     system may automatically choose a default list of detectors to run, which
+        #     may change over time.
         #
         #     If you need precise control and predictability as to what detectors are
         #     run you should specify specific InfoTypes listed in the reference,
         #     otherwise a default list will be used, which may change over time.
         # @!attribute [rw] min_likelihood
         #   @return [::Google::Cloud::Dlp::V2::Likelihood]
-        #     Only returns findings equal or above this threshold. The default is
+        #     Only returns findings equal to or above this threshold. The default is
         #     POSSIBLE.
-        #     See https://cloud.google.com/dlp/docs/likelihood to learn more.
+        #
+        #     In general, the highest likelihood setting yields the fewest findings in
+        #     results and the lowest chance of a false positive. For more information,
+        #     see [Match likelihood](https://cloud.google.com/dlp/docs/likelihood).
+        # @!attribute [rw] min_likelihood_per_info_type
+        #   @return [::Array<::Google::Cloud::Dlp::V2::InspectConfig::InfoTypeLikelihood>]
+        #     Minimum likelihood per infotype. For each infotype, a user can specify a
+        #     minimum likelihood. The system only returns a finding if its likelihood is
+        #     above this threshold. If this field is not set, the system uses the
+        #     InspectConfig min_likelihood.
         # @!attribute [rw] limits
         #   @return [::Google::Cloud::Dlp::V2::InspectConfig::FindingLimits]
         #     Configuration to control the number of findings returned.
@@ -134,11 +144,19 @@ module Google
         #     redacted. Don't include finding limits in
         #     {::Google::Cloud::Dlp::V2::DlpService::Client#redact_image RedactImage}
         #     requests. Otherwise, Cloud DLP returns an error.
+        #
+        #     When set within an
+        #     {::Google::Cloud::Dlp::V2::InspectJobConfig InspectJobConfig}, the specified
+        #     maximum values aren't hard limits. If an inspection job reaches these
+        #     limits, the job ends gradually, not abruptly. Therefore, the actual number
+        #     of findings that Cloud DLP returns can be multiple times higher than these
+        #     maximum values.
         # @!attribute [rw] include_quote
         #   @return [::Boolean]
         #     When true, a contextual quote from the data that triggered a finding is
-        #     included in the response; see {::Google::Cloud::Dlp::V2::Finding#quote Finding.quote}.
-        #     This is not used for data profiling.
+        #     included in the response; see
+        #     {::Google::Cloud::Dlp::V2::Finding#quote Finding.quote}. This is not used for
+        #     data profiling.
         # @!attribute [rw] exclude_info_types
         #   @return [::Boolean]
         #     When true, excludes type information of the findings.
@@ -159,6 +177,25 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
+          # Configuration for setting a minimum likelihood per infotype. Used to
+          # customize the minimum likelihood level for specific infotypes in the
+          # request. For example, use this if you want to lower the precision for
+          # PERSON_NAME without lowering the precision for the other infotypes in the
+          # request.
+          # @!attribute [rw] info_type
+          #   @return [::Google::Cloud::Dlp::V2::InfoType]
+          #     Type of information the likelihood threshold applies to. Only one
+          #     likelihood per info_type should be provided. If InfoTypeLikelihood does
+          #     not have an info_type, the configuration fails.
+          # @!attribute [rw] min_likelihood
+          #   @return [::Google::Cloud::Dlp::V2::Likelihood]
+          #     Only returns findings equal to or above this threshold. This field is
+          #     required or else the configuration fails.
+          class InfoTypeLikelihood
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Configuration to control the number of findings returned for inspection.
           # This is not used for de-identification or data profiling.
           #
@@ -169,15 +206,29 @@ module Google
           # requests. Otherwise, Cloud DLP returns an error.
           # @!attribute [rw] max_findings_per_item
           #   @return [::Integer]
-          #     Max number of findings that will be returned for each item scanned.
-          #     When set within `InspectJobConfig`,
-          #     the maximum returned is 2000 regardless if this is set higher.
-          #     When set within `InspectContentRequest`, this field is ignored.
+          #     Max number of findings that are returned for each item scanned.
+          #
+          #     When set within an
+          #     {::Google::Cloud::Dlp::V2::InspectContentRequest InspectContentRequest},
+          #     this field is ignored.
+          #
+          #     This value isn't a hard limit. If the number of findings for an item
+          #     reaches this limit, the inspection of that item ends gradually, not
+          #     abruptly. Therefore, the actual number of findings that Cloud DLP returns
+          #     for the item can be multiple times higher than this value.
           # @!attribute [rw] max_findings_per_request
           #   @return [::Integer]
-          #     Max number of findings that will be returned per request/job.
-          #     When set within `InspectContentRequest`, the maximum returned is 2000
-          #     regardless if this is set higher.
+          #     Max number of findings that are returned per request or job.
+          #
+          #     If you set this field in an
+          #     {::Google::Cloud::Dlp::V2::InspectContentRequest InspectContentRequest}, the
+          #     resulting maximum value is the value that you set or 3,000, whichever is
+          #     lower.
+          #
+          #     This value isn't a hard limit. If an inspection reaches this limit, the
+          #     inspection ends gradually, not abruptly. Therefore, the actual number of
+          #     findings that Cloud DLP returns can be multiple times higher than this
+          #     value.
           # @!attribute [rw] max_findings_per_info_type
           #   @return [::Array<::Google::Cloud::Dlp::V2::InspectConfig::FindingLimits::InfoTypeLimit>]
           #     Configuration of findings limit given for specified infoTypes.
@@ -1007,6 +1058,19 @@ module Google
           end
         end
 
+        # The schema of data to be saved to the BigQuery table when the
+        # `DataProfileAction` is enabled.
+        # @!attribute [rw] table_profile
+        #   @return [::Google::Cloud::Dlp::V2::TableDataProfile]
+        #     Table data profile column
+        # @!attribute [rw] column_profile
+        #   @return [::Google::Cloud::Dlp::V2::ColumnDataProfile]
+        #     Column data profile column
+        class DataProfileBigQueryRowSchema
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Statistics related to processing hybrid inspect requests.
         # @!attribute [rw] processed_count
         #   @return [::Integer]
@@ -1025,6 +1089,62 @@ module Google
         class HybridInspectStatistics
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The results of an {::Google::Cloud::Dlp::V2::Action Action}.
+        # @!attribute [rw] deidentify_details
+        #   @return [::Google::Cloud::Dlp::V2::DeidentifyDataSourceDetails]
+        #     Outcome of a de-identification action.
+        class ActionDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Summary of what was modified during a transformation.
+        # @!attribute [rw] transformed_bytes
+        #   @return [::Integer]
+        #     Total size in bytes that were transformed in some way.
+        # @!attribute [rw] transformation_count
+        #   @return [::Integer]
+        #     Number of successfully applied transformations.
+        # @!attribute [rw] transformation_error_count
+        #   @return [::Integer]
+        #     Number of errors encountered while trying to apply transformations.
+        class DeidentifyDataSourceStats
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The results of a {::Google::Cloud::Dlp::V2::Action::Deidentify Deidentify} action
+        # from an inspect job.
+        # @!attribute [rw] requested_options
+        #   @return [::Google::Cloud::Dlp::V2::DeidentifyDataSourceDetails::RequestedDeidentifyOptions]
+        #     De-identification config used for the request.
+        # @!attribute [rw] deidentify_stats
+        #   @return [::Google::Cloud::Dlp::V2::DeidentifyDataSourceStats]
+        #     Stats about the de-identification operation.
+        class DeidentifyDataSourceDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # De-identification options.
+          # @!attribute [rw] snapshot_deidentify_template
+          #   @return [::Google::Cloud::Dlp::V2::DeidentifyTemplate]
+          #     Snapshot of the state of the `DeidentifyTemplate` from the
+          #     {::Google::Cloud::Dlp::V2::Action::Deidentify Deidentify} action at the time
+          #     this job was run.
+          # @!attribute [rw] snapshot_structured_deidentify_template
+          #   @return [::Google::Cloud::Dlp::V2::DeidentifyTemplate]
+          #     Snapshot of the state of the structured `DeidentifyTemplate` from the
+          #     `Deidentify` action at the time this job was run.
+          # @!attribute [rw] snapshot_image_redact_template
+          #   @return [::Google::Cloud::Dlp::V2::DeidentifyTemplate]
+          #     Snapshot of the state of the image transformation `DeidentifyTemplate`
+          #     from the `Deidentify` action at the time this job was run.
+          class RequestedDeidentifyOptions
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # InfoType description.
@@ -1047,6 +1167,9 @@ module Google
         # @!attribute [rw] categories
         #   @return [::Array<::Google::Cloud::Dlp::V2::InfoTypeCategory>]
         #     The category of the infoType.
+        # @!attribute [rw] sensitivity_score
+        #   @return [::Google::Cloud::Dlp::V2::SensitivityScore]
+        #     The default sensitivity of the infoType.
         class InfoTypeDescription
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1102,6 +1225,9 @@ module Google
             # The infoType is typically used in Colombia.
             COLOMBIA = 9
 
+            # The infoType is typically used in Croatia.
+            CROATIA = 42
+
             # The infoType is typically used in Denmark.
             DENMARK = 10
 
@@ -1144,6 +1270,9 @@ module Google
             # The infoType is typically used in the Netherlands.
             THE_NETHERLANDS = 23
 
+            # The infoType is typically used in New Zealand.
+            NEW_ZEALAND = 41
+
             # The infoType is typically used in Norway.
             NORWAY = 24
 
@@ -1171,6 +1300,9 @@ module Google
             # The infoType is typically used in Sweden.
             SWEDEN = 32
 
+            # The infoType is typically used in Switzerland.
+            SWITZERLAND = 43
+
             # The infoType is typically used in Taiwan.
             TAIWAN = 33
 
@@ -1194,9 +1326,6 @@ module Google
 
             # The infoType is typically used in Google internally.
             INTERNAL = 40
-
-            # The infoType is typically used in New Zealand.
-            NEW_ZEALAND = 41
           end
 
           # Enum of the current industries in the category.
@@ -1351,8 +1480,8 @@ module Google
         #     Required. Quasi-identifier columns.
         # @!attribute [rw] relative_frequency
         #   @return [::Google::Cloud::Dlp::V2::FieldId]
-        #     Required. The relative frequency column must contain a floating-point number
-        #     between 0 and 1 (inclusive). Null values are assumed to be zero.
+        #     Required. The relative frequency column must contain a floating-point
+        #     number between 0 and 1 (inclusive). Null values are assumed to be zero.
         class StatisticalTable
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1467,8 +1596,8 @@ module Google
           # extrapolating from the distribution of values in the input dataset.
           # @!attribute [rw] quasi_ids
           #   @return [::Array<::Google::Cloud::Dlp::V2::PrivacyMetric::KMapEstimationConfig::TaggedField>]
-          #     Required. Fields considered to be quasi-identifiers. No two columns can have the
-          #     same tag.
+          #     Required. Fields considered to be quasi-identifiers. No two columns can
+          #     have the same tag.
           # @!attribute [rw] region_code
           #   @return [::String]
           #     ISO 3166-1 alpha-2 region code to use in the statistical modeling.
@@ -1523,8 +1652,8 @@ module Google
             #     Required. Quasi-identifier columns.
             # @!attribute [rw] relative_frequency
             #   @return [::Google::Cloud::Dlp::V2::FieldId]
-            #     Required. The relative frequency column must contain a floating-point number
-            #     between 0 and 1 (inclusive). Null values are assumed to be zero.
+            #     Required. The relative frequency column must contain a floating-point
+            #     number between 0 and 1 (inclusive). Null values are assumed to be zero.
             class AuxiliaryTable
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1550,8 +1679,8 @@ module Google
           # knowing the attack dataset, so we use a statistical model instead.
           # @!attribute [rw] quasi_ids
           #   @return [::Array<::Google::Cloud::Dlp::V2::QuasiId>]
-          #     Required. Fields considered to be quasi-identifiers. No two fields can have the
-          #     same tag.
+          #     Required. Fields considered to be quasi-identifiers. No two fields can
+          #     have the same tag.
           # @!attribute [rw] region_code
           #   @return [::String]
           #     ISO 3166-1 alpha-2 region code to use in the statistical modeling.
@@ -2018,8 +2147,8 @@ module Google
             # Apply transformation to the selected info_types.
             # @!attribute [rw] info_types
             #   @return [::Array<::Google::Cloud::Dlp::V2::InfoType>]
-            #     Required. InfoTypes to apply the transformation to. Required. Provided InfoType
-            #     must be unique within the ImageTransformations message.
+            #     Required. InfoTypes to apply the transformation to. Required. Provided
+            #     InfoType must be unique within the ImageTransformations message.
             class SelectedInfoTypes
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2367,18 +2496,18 @@ module Google
         # See https://cloud.google.com/dlp/docs/concepts-bucketing to learn more.
         # @!attribute [rw] lower_bound
         #   @return [::Google::Cloud::Dlp::V2::Value]
-        #     Required. Lower bound value of buckets. All values less than `lower_bound` are
-        #     grouped together into a single bucket; for example if `lower_bound` = 10,
-        #     then all values less than 10 are replaced with the value "-10".
+        #     Required. Lower bound value of buckets. All values less than `lower_bound`
+        #     are grouped together into a single bucket; for example if `lower_bound` =
+        #     10, then all values less than 10 are replaced with the value "-10".
         # @!attribute [rw] upper_bound
         #   @return [::Google::Cloud::Dlp::V2::Value]
-        #     Required. Upper bound value of buckets. All values greater than upper_bound are
-        #     grouped together into a single bucket; for example if `upper_bound` = 89,
-        #     then all values greater than 89 are replaced with the value "89+".
+        #     Required. Upper bound value of buckets. All values greater than upper_bound
+        #     are grouped together into a single bucket; for example if `upper_bound` =
+        #     89, then all values greater than 89 are replaced with the value "89+".
         # @!attribute [rw] bucket_size
         #   @return [::Float]
-        #     Required. Size of each bucket (except for minimum and maximum buckets). So if
-        #     `lower_bound` = 10, `upper_bound` = 89, and `bucket_size` = 10, then the
+        #     Required. Size of each bucket (except for minimum and maximum buckets). So
+        #     if `lower_bound` = 10, `upper_bound` = 89, and `bucket_size` = 10, then the
         #     following buckets would be used: -10, 10-20, 20-30, 30-40, 40-50, 50-60,
         #     60-70, 70-80, 80-89, 89+. Precision up to 2 decimals works.
         class FixedSizeBucketingConfig
@@ -2599,14 +2728,15 @@ module Google
         # to learn more.
         # @!attribute [rw] upper_bound_days
         #   @return [::Integer]
-        #     Required. Range of shift in days. Actual shift will be selected at random within this
-        #     range (inclusive ends). Negative means shift to earlier in time. Must not
-        #     be more than 365250 days (1000 years) each direction.
+        #     Required. Range of shift in days. Actual shift will be selected at random
+        #     within this range (inclusive ends). Negative means shift to earlier in
+        #     time. Must not be more than 365250 days (1000 years) each direction.
         #
         #     For example, 3 means shift date to at most 3 days into the future.
         # @!attribute [rw] lower_bound_days
         #   @return [::Integer]
-        #     Required. For example, -5 means shift date to at most 5 days back in the past.
+        #     Required. For example, -5 means shift date to at most 5 days back in the
+        #     past.
         # @!attribute [rw] context
         #   @return [::Google::Cloud::Dlp::V2::FieldId]
         #     Points to the field that contains the context, for example, an entity id.
@@ -3068,7 +3198,8 @@ module Google
         #     Detailed error codes and messages.
         # @!attribute [rw] timestamps
         #   @return [::Array<::Google::Protobuf::Timestamp>]
-        #     The times the error occurred.
+        #     The times the error occurred. List includes the oldest timestamp and the
+        #     last 9 timestamps.
         class Error
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3097,8 +3228,8 @@ module Google
         #     a single Schedule trigger and must have at least one object.
         # @!attribute [r] errors
         #   @return [::Array<::Google::Cloud::Dlp::V2::Error>]
-        #     Output only. A stream of errors encountered when the trigger was activated. Repeated
-        #     errors may result in the JobTrigger automatically being paused.
+        #     Output only. A stream of errors encountered when the trigger was activated.
+        #     Repeated errors may result in the JobTrigger automatically being paused.
         #     Will return the last 100 errors. Whenever the JobTrigger is modified
         #     this list will be cleared.
         # @!attribute [r] create_time
@@ -3205,16 +3336,14 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Publish the result summary of a DlpJob to the Cloud Security
-          # Command Center (CSCC Alpha).
-          # This action is only available for projects which are parts of
-          # an organization and whitelisted for the alpha Cloud Security Command
-          # Center.
-          # The action will publish the count of finding instances and their info
-          # types. The summary of findings will be persisted in CSCC and are governed
-          # by CSCC service-specific policy, see
-          # https://cloud.google.com/terms/service-terms Only a single instance of this
-          # action can be specified. Compatible with: Inspect
+          # Publish the result summary of a DlpJob to [Security Command
+          # Center](https://cloud.google.com/security-command-center). This action is
+          # available for only projects that belong to an organization. This action
+          # publishes the count of finding instances and their infoTypes. The summary
+          # of findings are persisted in Security Command Center and are governed by
+          # [service-specific policies for Security Command
+          # Center](https://cloud.google.com/terms/service-terms). Only a single
+          # instance of this action can be specified. Compatible with: Inspect
           class PublishSummaryToCscc
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3272,10 +3401,11 @@ module Google
           #     message for more information about what is noted).
           # @!attribute [rw] cloud_storage_output
           #   @return [::String]
-          #     Required. User settable Cloud Storage bucket and folders to store de-identified
-          #     files. This field must be set for cloud storage deidentification. The
-          #     output Cloud Storage bucket must be different from the input bucket.
-          #     De-identified files will overwrite files in the output path.
+          #     Required. User settable Cloud Storage bucket and folders to store
+          #     de-identified files. This field must be set for cloud storage
+          #     deidentification. The output Cloud Storage bucket must be different
+          #     from the input bucket. De-identified files will overwrite files in the
+          #     output path.
           #
           #     Form of: gs://bucket/folder/ or gs://bucket
           # @!attribute [rw] file_types_to_transform
@@ -3384,8 +3514,8 @@ module Google
         # Request message for UpdateInspectTemplate.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. Resource name of organization and inspectTemplate to be updated, for
-        #     example `organizations/433245324/inspectTemplates/432452342` or
+        #     Required. Resource name of organization and inspectTemplate to be updated,
+        #     for example `organizations/433245324/inspectTemplates/432452342` or
         #     projects/project-id/inspectTemplates/432452342.
         # @!attribute [rw] inspect_template
         #   @return [::Google::Cloud::Dlp::V2::InspectTemplate]
@@ -3401,8 +3531,8 @@ module Google
         # Request message for GetInspectTemplate.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. Resource name of the organization and inspectTemplate to be read, for
-        #     example `organizations/433245324/inspectTemplates/432452342` or
+        #     Required. Resource name of the organization and inspectTemplate to be read,
+        #     for example `organizations/433245324/inspectTemplates/432452342` or
         #     projects/project-id/inspectTemplates/432452342.
         class GetInspectTemplateRequest
           include ::Google::Protobuf::MessageExts
@@ -3434,17 +3564,17 @@ module Google
         #         parent=projects/example-project/locations/europe-west3
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Page token to continue retrieval. Comes from previous call
+        #     Page token to continue retrieval. Comes from the previous call
         #     to `ListInspectTemplates`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Size of the page, can be limited by the server. If zero server returns
-        #     a page of max size 100.
+        #     Size of the page. This value can be limited by the server. If zero server
+        #     returns a page of max size 100.
         # @!attribute [rw] order_by
         #   @return [::String]
         #     Comma separated list of fields to order by,
-        #     followed by `asc` or `desc` postfix. This list is case-insensitive,
-        #     default sorting order is ascending, redundant space characters are
+        #     followed by `asc` or `desc` postfix. This list is case insensitive. The
+        #     default sorting order is ascending. Redundant space characters are
         #     insignificant.
         #
         #     Example: `name asc,update_time, create_time desc`
@@ -3469,8 +3599,8 @@ module Google
         #     List of inspectTemplates, up to page_size in ListInspectTemplatesRequest.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     If the next page is available then the next page token to be used
-        #     in following ListInspectTemplates request.
+        #     If the next page is available then the next page token to be used in the
+        #     following ListInspectTemplates request.
         class ListInspectTemplatesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3479,9 +3609,9 @@ module Google
         # Request message for DeleteInspectTemplate.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. Resource name of the organization and inspectTemplate to be deleted, for
-        #     example `organizations/433245324/inspectTemplates/432452342` or
-        #     projects/project-id/inspectTemplates/432452342.
+        #     Required. Resource name of the organization and inspectTemplate to be
+        #     deleted, for example `organizations/433245324/inspectTemplates/432452342`
+        #     or projects/project-id/inspectTemplates/432452342.
         class DeleteInspectTemplateRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3559,6 +3689,122 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for CreateDiscoveryConfig.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Parent resource name.
+        #
+        #     The format of this value is as follows:
+        #     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+        #
+        #     The following example `parent` string specifies a parent project with the
+        #     identifier `example-project`, and specifies the `europe-west3` location
+        #     for processing data:
+        #
+        #         parent=projects/example-project/locations/europe-west3
+        # @!attribute [rw] discovery_config
+        #   @return [::Google::Cloud::Dlp::V2::DiscoveryConfig]
+        #     Required. The DiscoveryConfig to create.
+        # @!attribute [rw] config_id
+        #   @return [::String]
+        #     The config ID can contain uppercase and lowercase letters,
+        #     numbers, and hyphens; that is, it must match the regular
+        #     expression: `[a-zA-Z\d-_]+`. The maximum length is 100
+        #     characters. Can be empty to allow the system to generate one.
+        class CreateDiscoveryConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for UpdateDiscoveryConfig.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Resource name of the project and the configuration, for example
+        #     `projects/dlp-test-project/discoveryConfigs/53234423`.
+        # @!attribute [rw] discovery_config
+        #   @return [::Google::Cloud::Dlp::V2::DiscoveryConfig]
+        #     Required. New DiscoveryConfig value.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Mask to control which fields get updated.
+        class UpdateDiscoveryConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for GetDiscoveryConfig.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Resource name of the project and the configuration, for example
+        #     `projects/dlp-test-project/discoveryConfigs/53234423`.
+        class GetDiscoveryConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ListDiscoveryConfigs.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Parent resource name.
+        #
+        #     The format of this value is as follows:
+        #     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+        #
+        #     The following example `parent` string specifies a parent project with the
+        #     identifier `example-project`, and specifies the `europe-west3` location
+        #     for processing data:
+        #
+        #         parent=projects/example-project/locations/europe-west3
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Page token to continue retrieval. Comes from the previous call
+        #     to ListDiscoveryConfigs. `order_by` field must not
+        #     change for subsequent calls.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Size of the page. This value can be limited by a server.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Comma separated list of config fields to order by,
+        #     followed by `asc` or `desc` postfix. This list is case insensitive. The
+        #     default sorting order is ascending. Redundant space characters are
+        #     insignificant.
+        #
+        #     Example: `name asc,update_time, create_time desc`
+        #
+        #     Supported fields are:
+        #
+        #     - `last_run_time`: corresponds to the last time the DiscoveryConfig ran.
+        #     - `name`: corresponds to the DiscoveryConfig's name.
+        #     - `status`: corresponds to DiscoveryConfig's status.
+        class ListDiscoveryConfigsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ListDiscoveryConfigs.
+        # @!attribute [rw] discovery_configs
+        #   @return [::Array<::Google::Cloud::Dlp::V2::DiscoveryConfig>]
+        #     List of configs, up to page_size in ListDiscoveryConfigsRequest.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     If the next page is available then this value is the next page token to be
+        #     used in the following ListDiscoveryConfigs request.
+        class ListDiscoveryConfigsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for DeleteDiscoveryConfig.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Resource name of the project and the config, for example
+        #     `projects/dlp-test-project/discoveryConfigs/53234423`.
+        class DeleteDiscoveryConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for CreateDlpJobRequest. Used to initiate long running
         # jobs such as calculating risk metrics or inspecting Google Cloud
         # Storage.
@@ -3622,17 +3868,17 @@ module Google
         #         parent=projects/example-project/locations/europe-west3
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Page token to continue retrieval. Comes from previous call
+        #     Page token to continue retrieval. Comes from the previous call
         #     to ListJobTriggers. `order_by` field must not
         #     change for subsequent calls.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Size of the page, can be limited by a server.
+        #     Size of the page. This value can be limited by a server.
         # @!attribute [rw] order_by
         #   @return [::String]
         #     Comma separated list of triggeredJob fields to order by,
-        #     followed by `asc` or `desc` postfix. This list is case-insensitive,
-        #     default sorting order is ascending, redundant space characters are
+        #     followed by `asc` or `desc` postfix. This list is case insensitive. The
+        #     default sorting order is ascending. Redundant space characters are
         #     insignificant.
         #
         #     Example: `name asc,update_time, create_time desc`
@@ -3688,8 +3934,8 @@ module Google
         #     List of triggeredJobs, up to page_size in ListJobTriggersRequest.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     If the next page is available then the next page token to be used
-        #     in following ListJobTriggers request.
+        #     If the next page is available then this value is the next page token to be
+        #     used in the following ListJobTriggers request.
         class ListJobTriggersResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3842,11 +4088,57 @@ module Google
         #     scanned.
         #
         #     For more information, see
-        #     https://cloud.google.com/dlp/docs/data-profiles#data_residency.
+        #     https://cloud.google.com/dlp/docs/data-profiles#data-residency.
         # @!attribute [rw] data_profile_actions
         #   @return [::Array<::Google::Cloud::Dlp::V2::DataProfileAction>]
         #     Actions to execute at the completion of the job.
         class DataProfileJobConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A pattern to match against one or more tables, datasets, or projects that
+        # contain BigQuery tables. At least one pattern must be specified.
+        # Regular expressions use RE2
+        # [syntax](https://github.com/google/re2/wiki/Syntax); a guide can be found
+        # under the google/re2 repository on GitHub.
+        # @!attribute [rw] project_id_regex
+        #   @return [::String]
+        #     For organizations, if unset, will match all projects. Has no effect
+        #     for data profile configurations created within a project.
+        # @!attribute [rw] dataset_id_regex
+        #   @return [::String]
+        #     If unset, this property matches all datasets.
+        # @!attribute [rw] table_id_regex
+        #   @return [::String]
+        #     If unset, this property matches all tables.
+        class BigQueryRegex
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A collection of regular expressions to determine what tables to match
+        # against.
+        # @!attribute [rw] patterns
+        #   @return [::Array<::Google::Cloud::Dlp::V2::BigQueryRegex>]
+        #     A single BigQuery regular expression pattern to match against one or more
+        #     tables, datasets, or projects that contain BigQuery tables.
+        class BigQueryRegexes
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The types of BigQuery tables supported by Cloud DLP.
+        # @!attribute [rw] types
+        #   @return [::Array<::Google::Cloud::Dlp::V2::BigQueryTableType>]
+        #     A set of BigQuery table types.
+        class BigQueryTableTypes
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Do not profile the tables.
+        class Disabled
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -3859,6 +4151,263 @@ module Google
         #   @return [::Integer]
         #     The ID of the Folder within an organization to scan.
         class DataProfileLocation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration for discovery to scan resources for profile generation.
+        # Only one discovery configuration may exist per organization, folder,
+        # or project.
+        #
+        # The generated data profiles are retained according to the
+        # [data retention policy]
+        # (https://cloud.google.com/dlp/docs/data-profiles#retention).
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Unique resource name for the DiscoveryConfig, assigned by the service when
+        #     the DiscoveryConfig is created, for example
+        #     `projects/dlp-test-project/locations/global/discoveryConfigs/53234423`.
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     Display name (max 100 chars)
+        # @!attribute [rw] org_config
+        #   @return [::Google::Cloud::Dlp::V2::DiscoveryConfig::OrgConfig]
+        #     Only set when the parent is an org.
+        # @!attribute [rw] inspect_templates
+        #   @return [::Array<::String>]
+        #     Detection logic for profile generation.
+        #
+        #     Not all template features are used by Discovery. FindingLimits,
+        #     include_quote and exclude_info_types have no impact on
+        #     Discovery.
+        #
+        #     Multiple templates may be provided if there is data in multiple regions.
+        #     At most one template must be specified per-region (including "global").
+        #     Each region is scanned using the applicable template. If no region-specific
+        #     template is specified, but a "global" template is specified, it will be
+        #     copied to that region and used instead. If no global or region-specific
+        #     template is provided for a region with data, that region's data will not be
+        #     scanned.
+        #
+        #     For more information, see
+        #     https://cloud.google.com/dlp/docs/data-profiles#data-residency.
+        # @!attribute [rw] actions
+        #   @return [::Array<::Google::Cloud::Dlp::V2::DataProfileAction>]
+        #     Actions to execute at the completion of scanning.
+        # @!attribute [rw] targets
+        #   @return [::Array<::Google::Cloud::Dlp::V2::DiscoveryTarget>]
+        #     Target to match against for determining what to scan and how frequently.
+        # @!attribute [r] errors
+        #   @return [::Array<::Google::Cloud::Dlp::V2::Error>]
+        #     Output only. A stream of errors encountered when the config was activated.
+        #     Repeated errors may result in the config automatically being paused. Output
+        #     only field. Will return the last 100 errors. Whenever the config is
+        #     modified this list will be cleared.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The creation timestamp of a DiscoveryConfig.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The last update timestamp of a DiscoveryConfig.
+        # @!attribute [r] last_run_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The timestamp of the last time this config was executed.
+        # @!attribute [rw] status
+        #   @return [::Google::Cloud::Dlp::V2::DiscoveryConfig::Status]
+        #     Required. A status for this configuration.
+        class DiscoveryConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Project and scan location information. Only set when the parent is an org.
+          # @!attribute [rw] location
+          #   @return [::Google::Cloud::Dlp::V2::DiscoveryStartingLocation]
+          #     The data to scan: folder, org, or project
+          # @!attribute [rw] project_id
+          #   @return [::String]
+          #     The project that will run the scan. The DLP service
+          #     account that exists within this project must have access to all resources
+          #     that are profiled, and the Cloud DLP API must be enabled.
+          class OrgConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Whether the discovery config is currently active. New options may be added
+          # at a later time.
+          module Status
+            # Unused
+            STATUS_UNSPECIFIED = 0
+
+            # The discovery config is currently active.
+            RUNNING = 1
+
+            # The discovery config is paused temporarily.
+            PAUSED = 2
+          end
+        end
+
+        # Target used to match against for Discovery.
+        # @!attribute [rw] big_query_target
+        #   @return [::Google::Cloud::Dlp::V2::BigQueryDiscoveryTarget]
+        #     BigQuery target for Discovery. The first target to match a table will be
+        #     the one applied.
+        class DiscoveryTarget
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Target used to match against for discovery with BigQuery tables
+        # @!attribute [rw] filter
+        #   @return [::Google::Cloud::Dlp::V2::DiscoveryBigQueryFilter]
+        #     Required. The tables the discovery cadence applies to. The first target
+        #     with a matching filter will be the one to apply to a table.
+        # @!attribute [rw] conditions
+        #   @return [::Google::Cloud::Dlp::V2::DiscoveryBigQueryConditions]
+        #     In addition to matching the filter, these conditions must be true
+        #     before a profile is generated.
+        # @!attribute [rw] cadence
+        #   @return [::Google::Cloud::Dlp::V2::DiscoveryGenerationCadence]
+        #     How often and when to update profiles. New tables that match both the
+        #     filter and conditions are scanned as quickly as possible depending on
+        #     system capacity.
+        # @!attribute [rw] disabled
+        #   @return [::Google::Cloud::Dlp::V2::Disabled]
+        #     Tables that match this filter will not have profiles created.
+        class BigQueryDiscoveryTarget
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Determines what tables will have profiles generated within an organization
+        # or project. Includes the ability to filter by regular expression patterns
+        # on project ID, dataset ID, and table ID.
+        # @!attribute [rw] tables
+        #   @return [::Google::Cloud::Dlp::V2::BigQueryTableCollection]
+        #     A specific set of tables for this filter to apply to. A table collection
+        #     must be specified in only one filter per config.
+        #     If a table id or dataset is empty, Cloud DLP assumes all tables in that
+        #     collection must be profiled. Must specify a project ID.
+        # @!attribute [rw] other_tables
+        #   @return [::Google::Cloud::Dlp::V2::DiscoveryBigQueryFilter::AllOtherBigQueryTables]
+        #     Catch-all. This should always be the last filter in the list because
+        #     anything above it will apply first. Should only appear once in a
+        #     configuration. If none is specified, a default one will be added
+        #     automatically.
+        class DiscoveryBigQueryFilter
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Catch-all for all other tables not specified by other filters. Should
+          # always be last, except for single-table configurations, which will only
+          # have a TableReference target.
+          class AllOtherBigQueryTables
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Specifies a collection of BigQuery tables. Used for Discovery.
+        # @!attribute [rw] include_regexes
+        #   @return [::Google::Cloud::Dlp::V2::BigQueryRegexes]
+        #     A collection of regular expressions to match a BigQuery table against.
+        class BigQueryTableCollection
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Requirements that must be true before a table is scanned in discovery for the
+        # first time. There is an AND relationship between the top-level attributes.
+        # Additionally, minimum conditions with an OR relationship that must be met
+        # before Cloud DLP scans a table can be set (like a minimum row count or a
+        # minimum table age).
+        # @!attribute [rw] created_after
+        #   @return [::Google::Protobuf::Timestamp]
+        #     BigQuery table must have been created after this date. Used to avoid
+        #     backfilling.
+        # @!attribute [rw] types
+        #   @return [::Google::Cloud::Dlp::V2::BigQueryTableTypes]
+        #     Restrict discovery to specific table types.
+        # @!attribute [rw] type_collection
+        #   @return [::Google::Cloud::Dlp::V2::BigQueryTableTypeCollection]
+        #     Restrict discovery to categories of table types.
+        # @!attribute [rw] or_conditions
+        #   @return [::Google::Cloud::Dlp::V2::DiscoveryBigQueryConditions::OrConditions]
+        #     At least one of the conditions must be true for a table to be scanned.
+        class DiscoveryBigQueryConditions
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # There is an OR relationship between these attributes. They are used to
+          # determine if a table should be scanned or not in Discovery.
+          # @!attribute [rw] min_row_count
+          #   @return [::Integer]
+          #     Minimum number of rows that should be present before Cloud DLP
+          #     profiles a table
+          # @!attribute [rw] min_age
+          #   @return [::Google::Protobuf::Duration]
+          #     Minimum age a table must have before Cloud DLP can profile it. Value must
+          #     be 1 hour or greater.
+          class OrConditions
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # What must take place for a profile to be updated and how
+        # frequently it should occur.
+        # New tables are scanned as quickly as possible depending on system
+        # capacity.
+        # @!attribute [rw] schema_modified_cadence
+        #   @return [::Google::Cloud::Dlp::V2::DiscoverySchemaModifiedCadence]
+        #     Governs when to update data profiles when a schema is modified.
+        # @!attribute [rw] table_modified_cadence
+        #   @return [::Google::Cloud::Dlp::V2::DiscoveryTableModifiedCadence]
+        #     Governs when to update data profiles when a table is modified.
+        class DiscoveryGenerationCadence
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The cadence at which to update data profiles when a table is modified.
+        # @!attribute [rw] types
+        #   @return [::Array<::Google::Cloud::Dlp::V2::BigQueryTableModification>]
+        #     The type of events to consider when deciding if the table has been
+        #     modified and should have the profile updated. Defaults to
+        #     MODIFIED_TIMESTAMP.
+        # @!attribute [rw] frequency
+        #   @return [::Google::Cloud::Dlp::V2::DataProfileUpdateFrequency]
+        #     How frequently data profiles can be updated when tables are modified.
+        #     Defaults to never.
+        class DiscoveryTableModifiedCadence
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The cadence at which to update data profiles when a schema is modified.
+        # @!attribute [rw] types
+        #   @return [::Array<::Google::Cloud::Dlp::V2::BigQuerySchemaModification>]
+        #     The type of events to consider when deciding if the table's schema
+        #     has been modified and should have the profile updated. Defaults to
+        #     NEW_COLUMNS.
+        # @!attribute [rw] frequency
+        #   @return [::Google::Cloud::Dlp::V2::DataProfileUpdateFrequency]
+        #     How frequently profiles may be updated when schemas are
+        #     modified. Defaults to monthly.
+        class DiscoverySchemaModifiedCadence
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The location to begin a discovery scan. Denotes an organization ID or folder
+        # ID within an organization.
+        # @!attribute [rw] organization_id
+        #   @return [::Integer]
+        #     The ID of an organization to scan.
+        # @!attribute [rw] folder_id
+        #   @return [::Integer]
+        #     The ID of the Folder within an organization to scan.
+        class DiscoveryStartingLocation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -3888,6 +4437,9 @@ module Google
         # @!attribute [rw] end_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Time when the job finished.
+        # @!attribute [rw] last_modified
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Time when the job was last modified by the system.
         # @!attribute [rw] job_trigger_name
         #   @return [::String]
         #     If created by a job trigger, the resource name of the trigger that
@@ -3895,6 +4447,9 @@ module Google
         # @!attribute [rw] errors
         #   @return [::Array<::Google::Cloud::Dlp::V2::Error>]
         #     A stream of errors encountered running the job.
+        # @!attribute [rw] action_details
+        #   @return [::Array<::Google::Cloud::Dlp::V2::ActionDetails>]
+        #     Events that should occur after the job has completed.
         class DlpJob
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3998,8 +4553,8 @@ module Google
         # @!attribute [rw] order_by
         #   @return [::String]
         #     Comma separated list of fields to order by,
-        #     followed by `asc` or `desc` postfix. This list is case-insensitive,
-        #     default sorting order is ascending, redundant space characters are
+        #     followed by `asc` or `desc` postfix. This list is case insensitive. The
+        #     default sorting order is ascending. Redundant space characters are
         #     insignificant.
         #
         #     Example: `name asc, end_time asc, create_time desc`
@@ -4100,8 +4655,9 @@ module Google
         # Request message for UpdateDeidentifyTemplate.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. Resource name of organization and deidentify template to be updated, for
-        #     example `organizations/433245324/deidentifyTemplates/432452342` or
+        #     Required. Resource name of organization and deidentify template to be
+        #     updated, for example
+        #     `organizations/433245324/deidentifyTemplates/432452342` or
         #     projects/project-id/deidentifyTemplates/432452342.
         # @!attribute [rw] deidentify_template
         #   @return [::Google::Cloud::Dlp::V2::DeidentifyTemplate]
@@ -4117,9 +4673,9 @@ module Google
         # Request message for GetDeidentifyTemplate.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. Resource name of the organization and deidentify template to be read, for
-        #     example `organizations/433245324/deidentifyTemplates/432452342` or
-        #     projects/project-id/deidentifyTemplates/432452342.
+        #     Required. Resource name of the organization and deidentify template to be
+        #     read, for example `organizations/433245324/deidentifyTemplates/432452342`
+        #     or projects/project-id/deidentifyTemplates/432452342.
         class GetDeidentifyTemplateRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -4150,17 +4706,17 @@ module Google
         #         parent=projects/example-project/locations/europe-west3
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Page token to continue retrieval. Comes from previous call
+        #     Page token to continue retrieval. Comes from the previous call
         #     to `ListDeidentifyTemplates`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Size of the page, can be limited by the server. If zero server returns
-        #     a page of max size 100.
+        #     Size of the page. This value can be limited by the server. If zero server
+        #     returns a page of max size 100.
         # @!attribute [rw] order_by
         #   @return [::String]
         #     Comma separated list of fields to order by,
-        #     followed by `asc` or `desc` postfix. This list is case-insensitive,
-        #     default sorting order is ascending, redundant space characters are
+        #     followed by `asc` or `desc` postfix. This list is case insensitive. The
+        #     default sorting order is ascending. Redundant space characters are
         #     insignificant.
         #
         #     Example: `name asc,update_time, create_time desc`
@@ -4186,8 +4742,8 @@ module Google
         #     ListDeidentifyTemplatesRequest.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     If the next page is available then the next page token to be used
-        #     in following ListDeidentifyTemplates request.
+        #     If the next page is available then the next page token to be used in the
+        #     following ListDeidentifyTemplates request.
         class ListDeidentifyTemplatesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -4196,8 +4752,9 @@ module Google
         # Request message for DeleteDeidentifyTemplate.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. Resource name of the organization and deidentify template to be deleted,
-        #     for example `organizations/433245324/deidentifyTemplates/432452342` or
+        #     Required. Resource name of the organization and deidentify template to be
+        #     deleted, for example
+        #     `organizations/433245324/deidentifyTemplates/432452342` or
         #     projects/project-id/deidentifyTemplates/432452342.
         class DeleteDeidentifyTemplateRequest
           include ::Google::Protobuf::MessageExts
@@ -4364,8 +4921,8 @@ module Google
         # Request message for UpdateStoredInfoType.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. Resource name of organization and storedInfoType to be updated, for
-        #     example `organizations/433245324/storedInfoTypes/432452342` or
+        #     Required. Resource name of organization and storedInfoType to be updated,
+        #     for example `organizations/433245324/storedInfoTypes/432452342` or
         #     projects/project-id/storedInfoTypes/432452342.
         # @!attribute [rw] config
         #   @return [::Google::Cloud::Dlp::V2::StoredInfoTypeConfig]
@@ -4383,8 +4940,8 @@ module Google
         # Request message for GetStoredInfoType.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. Resource name of the organization and storedInfoType to be read, for
-        #     example `organizations/433245324/storedInfoTypes/432452342` or
+        #     Required. Resource name of the organization and storedInfoType to be read,
+        #     for example `organizations/433245324/storedInfoTypes/432452342` or
         #     projects/project-id/storedInfoTypes/432452342.
         class GetStoredInfoTypeRequest
           include ::Google::Protobuf::MessageExts
@@ -4412,17 +4969,17 @@ module Google
         #         parent=projects/example-project/locations/europe-west3
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Page token to continue retrieval. Comes from previous call
+        #     Page token to continue retrieval. Comes from the previous call
         #     to `ListStoredInfoTypes`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Size of the page, can be limited by the server. If zero server returns
-        #     a page of max size 100.
+        #     Size of the page. This value can be limited by the server. If zero server
+        #     returns a page of max size 100.
         # @!attribute [rw] order_by
         #   @return [::String]
         #     Comma separated list of fields to order by,
-        #     followed by `asc` or `desc` postfix. This list is case-insensitive,
-        #     default sorting order is ascending, redundant space characters are
+        #     followed by `asc` or `desc` postfix. This list is case insensitive. The
+        #     default sorting order is ascending. Redundant space characters are
         #     insignificant.
         #
         #     Example: `name asc, display_name, create_time desc`
@@ -4449,7 +5006,7 @@ module Google
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     If the next page is available then the next page token to be used
-        #     in following ListStoredInfoTypes request.
+        #     in the following ListStoredInfoTypes request.
         class ListStoredInfoTypesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -4458,8 +5015,8 @@ module Google
         # Request message for DeleteStoredInfoType.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. Resource name of the organization and storedInfoType to be deleted, for
-        #     example `organizations/433245324/storedInfoTypes/432452342` or
+        #     Required. Resource name of the organization and storedInfoType to be
+        #     deleted, for example `organizations/433245324/storedInfoTypes/432452342` or
         #     projects/project-id/storedInfoTypes/432452342.
         class DeleteStoredInfoTypeRequest
           include ::Google::Protobuf::MessageExts
@@ -4469,8 +5026,8 @@ module Google
         # Request to search for potentially sensitive info in a custom location.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. Resource name of the trigger to execute a hybrid inspect on, for example
-        #     `projects/dlp-test-project/jobTriggers/53234423`.
+        #     Required. Resource name of the trigger to execute a hybrid inspect on, for
+        #     example `projects/dlp-test-project/jobTriggers/53234423`.
         # @!attribute [rw] hybrid_item
         #   @return [::Google::Cloud::Dlp::V2::HybridContentItem]
         #     The item to inspect.
@@ -4482,8 +5039,8 @@ module Google
         # Request to search for potentially sensitive info in a custom location.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. Resource name of the job to execute a hybrid inspect on, for example
-        #     `projects/dlp-test-project/dlpJob/53234423`.
+        #     Required. Resource name of the job to execute a hybrid inspect on, for
+        #     example `projects/dlp-test-project/dlpJob/53234423`.
         # @!attribute [rw] hybrid_item
         #   @return [::Google::Cloud::Dlp::V2::HybridContentItem]
         #     The item to inspect.
@@ -4618,7 +5175,7 @@ module Google
         #     The resource name to the project data profile for this table.
         # @!attribute [rw] dataset_project_id
         #   @return [::String]
-        #     The GCP project ID that owns the BigQuery dataset.
+        #     The Google Cloud project ID that owns the BigQuery dataset.
         # @!attribute [rw] dataset_location
         #   @return [::String]
         #     The BigQuery location where the dataset's data is stored.
@@ -4721,7 +5278,8 @@ module Google
 
         # @!attribute [rw] status
         #   @return [::Google::Rpc::Status]
-        #     Profiling status code and optional message
+        #     Profiling status code and optional message. The `status.code` value is 0
+        #     (default value) for OK.
         # @!attribute [rw] timestamp
         #   @return [::Google::Protobuf::Timestamp]
         #     Time when the profile generation status was updated
@@ -4735,6 +5293,7 @@ module Google
         #   @return [::Google::Cloud::Dlp::V2::InfoType]
         #     The infoType.
         # @!attribute [rw] estimated_prevalence
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Integer]
         #     Not populated for predicted infotypes.
         class InfoTypeSummary
@@ -4750,9 +5309,160 @@ module Google
         #   @return [::Integer]
         #     Approximate percentage of non-null rows that contained data detected by
         #     this infotype.
+        # @!attribute [rw] excluded_from_analysis
+        #   @return [::Boolean]
+        #     Whether this infoType was excluded from sensitivity and risk analysis due
+        #     to factors such as low prevalence (subject to change).
         class OtherInfoTypeSummary
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The profile for a scanned column within a table.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     The name of the profile.
+        # @!attribute [rw] profile_status
+        #   @return [::Google::Cloud::Dlp::V2::ProfileStatus]
+        #     Success or error status from the most recent profile generation attempt.
+        #     May be empty if the profile is still being generated.
+        # @!attribute [rw] state
+        #   @return [::Google::Cloud::Dlp::V2::ColumnDataProfile::State]
+        #     State of a profile.
+        # @!attribute [rw] profile_last_generated
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The last time the profile was generated.
+        # @!attribute [rw] table_data_profile
+        #   @return [::String]
+        #     The resource name of the table data profile.
+        # @!attribute [rw] table_full_resource
+        #   @return [::String]
+        #     The resource name of the table this column is within.
+        # @!attribute [rw] dataset_project_id
+        #   @return [::String]
+        #     The Google Cloud project ID that owns the BigQuery dataset.
+        # @!attribute [rw] dataset_location
+        #   @return [::String]
+        #     The BigQuery location where the dataset's data is stored.
+        #     See https://cloud.google.com/bigquery/docs/locations for supported
+        #     locations.
+        # @!attribute [rw] dataset_id
+        #   @return [::String]
+        #     The BigQuery dataset ID.
+        # @!attribute [rw] table_id
+        #   @return [::String]
+        #     The BigQuery table ID.
+        # @!attribute [rw] column
+        #   @return [::String]
+        #     The name of the column.
+        # @!attribute [rw] sensitivity_score
+        #   @return [::Google::Cloud::Dlp::V2::SensitivityScore]
+        #     The sensitivity of this column.
+        # @!attribute [rw] data_risk_level
+        #   @return [::Google::Cloud::Dlp::V2::DataRiskLevel]
+        #     The data risk level for this column.
+        # @!attribute [rw] column_info_type
+        #   @return [::Google::Cloud::Dlp::V2::InfoTypeSummary]
+        #     If it's been determined this column can be identified as a single type,
+        #     this will be set. Otherwise the column either has unidentifiable content
+        #     or mixed types.
+        # @!attribute [rw] other_matches
+        #   @return [::Array<::Google::Cloud::Dlp::V2::OtherInfoTypeSummary>]
+        #     Other types found within this column. List will be unordered.
+        # @!attribute [rw] estimated_null_percentage
+        #   @return [::Google::Cloud::Dlp::V2::NullPercentageLevel]
+        #     Approximate percentage of entries being null in the column.
+        # @!attribute [rw] estimated_uniqueness_score
+        #   @return [::Google::Cloud::Dlp::V2::UniquenessScoreLevel]
+        #     Approximate uniqueness of the column.
+        # @!attribute [rw] free_text_score
+        #   @return [::Float]
+        #     The likelihood that this column contains free-form text.
+        #     A value close to 1 may indicate the column is likely to contain
+        #     free-form or natural language text.
+        #     Range in 0-1.
+        # @!attribute [rw] column_type
+        #   @return [::Google::Cloud::Dlp::V2::ColumnDataProfile::ColumnDataType]
+        #     The data type of a given column.
+        # @!attribute [rw] policy_state
+        #   @return [::Google::Cloud::Dlp::V2::ColumnDataProfile::ColumnPolicyState]
+        #     Indicates if a policy tag has been applied to the column.
+        class ColumnDataProfile
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Possible states of a profile. New items may be added.
+          module State
+            # Unused.
+            STATE_UNSPECIFIED = 0
+
+            # The profile is currently running. Once a profile has finished it will
+            # transition to DONE.
+            RUNNING = 1
+
+            # The profile is no longer generating.
+            # If profile_status.status.code is 0, the profile succeeded, otherwise, it
+            # failed.
+            DONE = 2
+          end
+
+          # Data types of the data in a column. Types may be added over time.
+          module ColumnDataType
+            # Invalid type.
+            COLUMN_DATA_TYPE_UNSPECIFIED = 0
+
+            # Encoded as a string in decimal format.
+            TYPE_INT64 = 1
+
+            # Encoded as a boolean "false" or "true".
+            TYPE_BOOL = 2
+
+            # Encoded as a number, or string "NaN", "Infinity" or "-Infinity".
+            TYPE_FLOAT64 = 3
+
+            # Encoded as a string value.
+            TYPE_STRING = 4
+
+            # Encoded as a base64 string per RFC 4648, section 4.
+            TYPE_BYTES = 5
+
+            # Encoded as an RFC 3339 timestamp with mandatory "Z" time zone string:
+            # 1985-04-12T23:20:50.52Z
+            TYPE_TIMESTAMP = 6
+
+            # Encoded as RFC 3339 full-date format string: 1985-04-12
+            TYPE_DATE = 7
+
+            # Encoded as RFC 3339 partial-time format string: 23:20:50.52
+            TYPE_TIME = 8
+
+            # Encoded as RFC 3339 full-date "T" partial-time: 1985-04-12T23:20:50.52
+            TYPE_DATETIME = 9
+
+            # Encoded as WKT
+            TYPE_GEOGRAPHY = 10
+
+            # Encoded as a decimal string.
+            TYPE_NUMERIC = 11
+
+            # Container of ordered fields, each with a type and field name.
+            TYPE_RECORD = 12
+
+            # Decimal type.
+            TYPE_BIGNUMERIC = 13
+
+            # Json type.
+            TYPE_JSON = 14
+          end
+
+          # The possible policy states for a column.
+          module ColumnPolicyState
+            # No policy tags.
+            COLUMN_POLICY_STATE_UNSPECIFIED = 0
+
+            # Column has policy tag applied.
+            COLUMN_POLICY_TAGGED = 1
+          end
         end
 
         # A condition for determining whether a Pub/Sub should be triggered.
@@ -4913,6 +5623,79 @@ module Google
           REDACT_IMAGE = 14
         end
 
+        # Over time new types may be added. Currently VIEW, MATERIALIZED_VIEW,
+        # and SNAPSHOT are not supported.
+        module BigQueryTableTypeCollection
+          # Unused.
+          BIG_QUERY_COLLECTION_UNSPECIFIED = 0
+
+          # Automatically generate profiles for all tables, even if the table type is
+          # not yet fully supported for analysis. Profiles for unsupported tables will
+          # be generated with errors to indicate their partial support. When full
+          # support is added, the tables will automatically be profiled during the next
+          # scheduled run.
+          BIG_QUERY_COLLECTION_ALL_TYPES = 1
+
+          # Only those types fully supported will be profiled. Will expand
+          # automatically as Cloud DLP adds support for new table types. Unsupported
+          # table types will not have partial profiles generated.
+          BIG_QUERY_COLLECTION_ONLY_SUPPORTED_TYPES = 2
+        end
+
+        # Over time new types may be added. Currently VIEW, MATERIALIZED_VIEW,
+        # SNAPSHOT, and non-BigLake external tables are not supported.
+        module BigQueryTableType
+          # Unused.
+          BIG_QUERY_TABLE_TYPE_UNSPECIFIED = 0
+
+          # A normal BigQuery table.
+          BIG_QUERY_TABLE_TYPE_TABLE = 1
+
+          # A table that references data stored in Cloud Storage.
+          BIG_QUERY_TABLE_TYPE_EXTERNAL_BIG_LAKE = 2
+        end
+
+        # How frequently data profiles can be updated. New options can be added at a
+        # later time.
+        module DataProfileUpdateFrequency
+          # Unspecified.
+          UPDATE_FREQUENCY_UNSPECIFIED = 0
+
+          # After the data profile is created, it will never be updated.
+          UPDATE_FREQUENCY_NEVER = 1
+
+          # The data profile can be updated up to once every 24 hours.
+          UPDATE_FREQUENCY_DAILY = 2
+
+          # The data profile can be updated up to once every 30 days. Default.
+          UPDATE_FREQUENCY_MONTHLY = 4
+        end
+
+        # Attributes evaluated to determine if a table has been modified. New values
+        # may be added at a later time.
+        module BigQueryTableModification
+          # Unused.
+          TABLE_MODIFICATION_UNSPECIFIED = 0
+
+          # A table will be considered modified when the last_modified_time from
+          # BigQuery has been updated.
+          TABLE_MODIFIED_TIMESTAMP = 1
+        end
+
+        # Attributes evaluated to determine if a schema has been modified. New values
+        # may be added at a later time.
+        module BigQuerySchemaModification
+          # Unused
+          SCHEMA_MODIFICATION_UNSPECIFIED = 0
+
+          # Profiles should be regenerated when new columns are added to the table.
+          # Default.
+          SCHEMA_NEW_COLUMNS = 1
+
+          # Profiles should be regenerated when columns are removed from the table.
+          SCHEMA_REMOVED_COLUMNS = 2
+        end
+
         # Operators available for comparing the value of fields.
         module RelationalOperator
           # Unused
@@ -5058,6 +5841,43 @@ module Google
 
           # Customer provides the key.
           ENCRYPTION_CUSTOMER_MANAGED = 2
+        end
+
+        # Bucketized nullness percentage levels. A higher level means a higher
+        # percentage of the column is null.
+        module NullPercentageLevel
+          # Unused.
+          NULL_PERCENTAGE_LEVEL_UNSPECIFIED = 0
+
+          # Very few null entries.
+          NULL_PERCENTAGE_VERY_LOW = 1
+
+          # Some null entries.
+          NULL_PERCENTAGE_LOW = 2
+
+          NULL_PERCENTAGE_MEDIUM = 3
+
+          # A lot of null entries.
+          NULL_PERCENTAGE_HIGH = 4
+        end
+
+        # Bucketized uniqueness score levels. A higher uniqueness score is a strong
+        # signal that the column may contain a unique identifier like user id. A low
+        # value indicates that the column contains few unique values like booleans or
+        # other classifiers.
+        module UniquenessScoreLevel
+          # Some columns do not have estimated uniqueness. Possible reasons include
+          # having too few values.
+          UNIQUENESS_SCORE_LEVEL_UNSPECIFIED = 0
+
+          # Low uniqueness, possibly a boolean, enum or similiarly typed column.
+          UNIQUENESS_SCORE_LOW = 1
+
+          # Medium uniqueness.
+          UNIQUENESS_SCORE_MEDIUM = 2
+
+          # High uniqueness, possibly a column of free text or unique identifiers.
+          UNIQUENESS_SCORE_HIGH = 3
         end
       end
     end

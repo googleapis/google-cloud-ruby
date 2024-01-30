@@ -1,0 +1,25 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".toys.rb",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-telco_automation.gemspec",
+    "lib/google-cloud-telco_automation.rb",
+    "lib/google/cloud/telco_automation.rb",
+    "lib/google/cloud/telco_automation/version.rb",
+    "test/google/cloud/telco_automation/client_test.rb",
+    "test/google/cloud/telco_automation/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml"
+  ]
+}

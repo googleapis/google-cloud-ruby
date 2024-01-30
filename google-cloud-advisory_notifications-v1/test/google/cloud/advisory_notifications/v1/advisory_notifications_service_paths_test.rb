@@ -23,33 +23,49 @@ require "gapic/grpc/service_stub"
 require "google/cloud/advisory_notifications/v1/advisory_notifications_service"
 
 class ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       path = client.location_path organization: "value0", location: "value1"
       assert_equal "organizations/value0/locations/value1", path
+
+      path = client.location_path project: "value0", location: "value1"
+      assert_equal "projects/value0/locations/value1", path
     end
   end
 
   def test_notification_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       path = client.notification_path organization: "value0", location: "value1", notification: "value2"
       assert_equal "organizations/value0/locations/value1/notifications/value2", path
+
+      path = client.notification_path project: "value0", location: "value1", notification: "value2"
+      assert_equal "projects/value0/locations/value1/notifications/value2", path
     end
   end
 
   def test_settings_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::Client.new do |config|
         config.credentials = grpc_channel
       end

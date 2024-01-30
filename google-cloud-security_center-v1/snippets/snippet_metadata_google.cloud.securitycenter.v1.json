@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-security_center-v1",
-    "version": "0.32.0",
+    "version": "0.34.1",
     "language": "RUBY",
     "apis": [
       {
@@ -14,7 +14,7 @@
     {
       "region_tag": "securitycenter_v1_generated_SecurityCenter_BulkMuteFindings_sync",
       "title": "Snippet for the bulk_mute_findings call in the SecurityCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#bulk_mute_findings. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#bulk_mute_findings.",
       "file": "security_center/bulk_mute_findings.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "securitycenter_v1_generated_SecurityCenter_CreateSecurityHealthAnalyticsCustomModule_sync",
       "title": "Snippet for the create_security_health_analytics_custom_module call in the SecurityCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#create_security_health_analytics_custom_module. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#create_security_health_analytics_custom_module.",
       "file": "security_center/create_security_health_analytics_custom_module.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "securitycenter_v1_generated_SecurityCenter_CreateSource_sync",
       "title": "Snippet for the create_source call in the SecurityCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#create_source. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#create_source.",
       "file": "security_center/create_source.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -134,7 +134,7 @@
     {
       "region_tag": "securitycenter_v1_generated_SecurityCenter_CreateFinding_sync",
       "title": "Snippet for the create_finding call in the SecurityCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#create_finding. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#create_finding.",
       "file": "security_center/create_finding.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -174,7 +174,7 @@
     {
       "region_tag": "securitycenter_v1_generated_SecurityCenter_CreateMuteConfig_sync",
       "title": "Snippet for the create_mute_config call in the SecurityCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#create_mute_config. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#create_mute_config.",
       "file": "security_center/create_mute_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,7 +206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -214,7 +214,7 @@
     {
       "region_tag": "securitycenter_v1_generated_SecurityCenter_CreateNotificationConfig_sync",
       "title": "Snippet for the create_notification_config call in the SecurityCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#create_notification_config. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#create_notification_config.",
       "file": "security_center/create_notification_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,7 +246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -254,7 +254,7 @@
     {
       "region_tag": "securitycenter_v1_generated_SecurityCenter_DeleteMuteConfig_sync",
       "title": "Snippet for the delete_mute_config call in the SecurityCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#delete_mute_config. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#delete_mute_config.",
       "file": "security_center/delete_mute_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,7 +286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -294,7 +294,7 @@
     {
       "region_tag": "securitycenter_v1_generated_SecurityCenter_DeleteNotificationConfig_sync",
       "title": "Snippet for the delete_notification_config call in the SecurityCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#delete_notification_config. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#delete_notification_config.",
       "file": "security_center/delete_notification_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,7 +326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -334,7 +334,7 @@
     {
       "region_tag": "securitycenter_v1_generated_SecurityCenter_DeleteSecurityHealthAnalyticsCustomModule_sync",
       "title": "Snippet for the delete_security_health_analytics_custom_module call in the SecurityCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#delete_security_health_analytics_custom_module. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#delete_security_health_analytics_custom_module.",
       "file": "security_center/delete_security_health_analytics_custom_module.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,7 +366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -374,7 +374,7 @@
     {
       "region_tag": "securitycenter_v1_generated_SecurityCenter_GetBigQueryExport_sync",
       "title": "Snippet for the get_big_query_export call in the SecurityCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#get_big_query_export. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#get_big_query_export.",
       "file": "security_center/get_big_query_export.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,7 +406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -414,7 +414,7 @@
     {
       "region_tag": "securitycenter_v1_generated_SecurityCenter_GetIamPolicy_sync",
       "title": "Snippet for the get_iam_policy call in the SecurityCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#get_iam_policy. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#get_iam_policy.",
       "file": "security_center/get_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,7 +446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -454,7 +454,7 @@
     {
       "region_tag": "securitycenter_v1_generated_SecurityCenter_GetMuteConfig_sync",
       "title": "Snippet for the get_mute_config call in the SecurityCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#get_mute_config. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#get_mute_config.",
       "file": "security_center/get_mute_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,7 +486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -494,7 +494,7 @@
     {
       "region_tag": "securitycenter_v1_generated_SecurityCenter_GetNotificationConfig_sync",
       "title": "Snippet for the get_notification_config call in the SecurityCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#get_notification_config. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#get_notification_config.",
       "file": "security_center/get_notification_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,7 +526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -534,7 +534,7 @@
     {
       "region_tag": "securitycenter_v1_generated_SecurityCenter_GetOrganizationSettings_sync",
       "title": "Snippet for the get_organization_settings call in the SecurityCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#get_organization_settings. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#get_organization_settings.",
       "file": "security_center/get_organization_settings.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,7 +566,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -574,7 +574,7 @@
     {
       "region_tag": "securitycenter_v1_generated_SecurityCenter_GetEffectiveSecurityHealthAnalyticsCustomModule_sync",
       "title": "Snippet for the get_effective_security_health_analytics_custom_module call in the SecurityCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#get_effective_security_health_analytics_custom_module. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#get_effective_security_health_analytics_custom_module.",
       "file": "security_center/get_effective_security_health_analytics_custom_module.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,7 +606,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -614,7 +614,7 @@
     {
       "region_tag": "securitycenter_v1_generated_SecurityCenter_GetSecurityHealthAnalyticsCustomModule_sync",
       "title": "Snippet for the get_security_health_analytics_custom_module call in the SecurityCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#get_security_health_analytics_custom_module. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#get_security_health_analytics_custom_module.",
       "file": "security_center/get_security_health_analytics_custom_module.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,7 +646,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -654,7 +654,7 @@
     {
       "region_tag": "securitycenter_v1_generated_SecurityCenter_GetSource_sync",
       "title": "Snippet for the get_source call in the SecurityCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#get_source. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#get_source.",
       "file": "security_center/get_source.rb",
       "language": "RUBY",
       "client_method": {
@@ -686,7 +686,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -694,7 +694,7 @@
     {
       "region_tag": "securitycenter_v1_generated_SecurityCenter_GroupAssets_sync",
       "title": "Snippet for the group_assets call in the SecurityCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#group_assets. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#group_assets.",
       "file": "security_center/group_assets.rb",
       "language": "RUBY",
       "client_method": {
@@ -726,7 +726,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -734,7 +734,7 @@
     {
       "region_tag": "securitycenter_v1_generated_SecurityCenter_GroupFindings_sync",
       "title": "Snippet for the group_findings call in the SecurityCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#group_findings. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#group_findings.",
       "file": "security_center/group_findings.rb",
       "language": "RUBY",
       "client_method": {
@@ -766,7 +766,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -774,7 +774,7 @@
     {
       "region_tag": "securitycenter_v1_generated_SecurityCenter_ListAssets_sync",
       "title": "Snippet for the list_assets call in the SecurityCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#list_assets. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#list_assets.",
       "file": "security_center/list_assets.rb",
       "language": "RUBY",
       "client_method": {
@@ -806,7 +806,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -814,7 +814,7 @@
     {
       "region_tag": "securitycenter_v1_generated_SecurityCenter_ListDescendantSecurityHealthAnalyticsCustomModules_sync",
       "title": "Snippet for the list_descendant_security_health_analytics_custom_modules call in the SecurityCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#list_descendant_security_health_analytics_custom_modules. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#list_descendant_security_health_analytics_custom_modules.",
       "file": "security_center/list_descendant_security_health_analytics_custom_modules.rb",
       "language": "RUBY",
       "client_method": {
@@ -846,7 +846,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -854,7 +854,7 @@
     {
       "region_tag": "securitycenter_v1_generated_SecurityCenter_ListFindings_sync",
       "title": "Snippet for the list_findings call in the SecurityCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#list_findings. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#list_findings.",
       "file": "security_center/list_findings.rb",
       "language": "RUBY",
       "client_method": {
@@ -886,7 +886,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -894,7 +894,7 @@
     {
       "region_tag": "securitycenter_v1_generated_SecurityCenter_ListMuteConfigs_sync",
       "title": "Snippet for the list_mute_configs call in the SecurityCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#list_mute_configs. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#list_mute_configs.",
       "file": "security_center/list_mute_configs.rb",
       "language": "RUBY",
       "client_method": {
@@ -926,7 +926,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -934,7 +934,7 @@
     {
       "region_tag": "securitycenter_v1_generated_SecurityCenter_ListNotificationConfigs_sync",
       "title": "Snippet for the list_notification_configs call in the SecurityCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#list_notification_configs. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#list_notification_configs.",
       "file": "security_center/list_notification_configs.rb",
       "language": "RUBY",
       "client_method": {
@@ -966,7 +966,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -974,7 +974,7 @@
     {
       "region_tag": "securitycenter_v1_generated_SecurityCenter_ListEffectiveSecurityHealthAnalyticsCustomModules_sync",
       "title": "Snippet for the list_effective_security_health_analytics_custom_modules call in the SecurityCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#list_effective_security_health_analytics_custom_modules. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#list_effective_security_health_analytics_custom_modules.",
       "file": "security_center/list_effective_security_health_analytics_custom_modules.rb",
       "language": "RUBY",
       "client_method": {
@@ -1006,7 +1006,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1014,7 +1014,7 @@
     {
       "region_tag": "securitycenter_v1_generated_SecurityCenter_ListSecurityHealthAnalyticsCustomModules_sync",
       "title": "Snippet for the list_security_health_analytics_custom_modules call in the SecurityCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#list_security_health_analytics_custom_modules. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#list_security_health_analytics_custom_modules.",
       "file": "security_center/list_security_health_analytics_custom_modules.rb",
       "language": "RUBY",
       "client_method": {
@@ -1046,7 +1046,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1054,7 +1054,7 @@
     {
       "region_tag": "securitycenter_v1_generated_SecurityCenter_ListSources_sync",
       "title": "Snippet for the list_sources call in the SecurityCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#list_sources. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#list_sources.",
       "file": "security_center/list_sources.rb",
       "language": "RUBY",
       "client_method": {
@@ -1086,7 +1086,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1094,7 +1094,7 @@
     {
       "region_tag": "securitycenter_v1_generated_SecurityCenter_RunAssetDiscovery_sync",
       "title": "Snippet for the run_asset_discovery call in the SecurityCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#run_asset_discovery. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#run_asset_discovery.",
       "file": "security_center/run_asset_discovery.rb",
       "language": "RUBY",
       "client_method": {
@@ -1126,7 +1126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1134,7 +1134,7 @@
     {
       "region_tag": "securitycenter_v1_generated_SecurityCenter_SetFindingState_sync",
       "title": "Snippet for the set_finding_state call in the SecurityCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#set_finding_state. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#set_finding_state.",
       "file": "security_center/set_finding_state.rb",
       "language": "RUBY",
       "client_method": {
@@ -1166,7 +1166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1174,7 +1174,7 @@
     {
       "region_tag": "securitycenter_v1_generated_SecurityCenter_SetMute_sync",
       "title": "Snippet for the set_mute call in the SecurityCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#set_mute. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#set_mute.",
       "file": "security_center/set_mute.rb",
       "language": "RUBY",
       "client_method": {
@@ -1206,7 +1206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1214,7 +1214,7 @@
     {
       "region_tag": "securitycenter_v1_generated_SecurityCenter_SetIamPolicy_sync",
       "title": "Snippet for the set_iam_policy call in the SecurityCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#set_iam_policy. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#set_iam_policy.",
       "file": "security_center/set_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -1246,7 +1246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1254,7 +1254,7 @@
     {
       "region_tag": "securitycenter_v1_generated_SecurityCenter_TestIamPermissions_sync",
       "title": "Snippet for the test_iam_permissions call in the SecurityCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#test_iam_permissions. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#test_iam_permissions.",
       "file": "security_center/test_iam_permissions.rb",
       "language": "RUBY",
       "client_method": {
@@ -1286,7 +1286,47 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycenter_v1_generated_SecurityCenter_SimulateSecurityHealthAnalyticsCustomModule_sync",
+      "title": "Snippet for the simulate_security_health_analytics_custom_module call in the SecurityCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#simulate_security_health_analytics_custom_module.",
+      "file": "security_center/simulate_security_health_analytics_custom_module.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "simulate_security_health_analytics_custom_module",
+        "full_name": "::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#simulate_security_health_analytics_custom_module",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenter::V1::SimulateSecurityHealthAnalyticsCustomModuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenter::V1::SimulateSecurityHealthAnalyticsCustomModuleResponse",
+        "client": {
+          "short_name": "SecurityCenter::Client",
+          "full_name": "::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client"
+        },
+        "method": {
+          "short_name": "SimulateSecurityHealthAnalyticsCustomModule",
+          "full_name": "google.cloud.securitycenter.v1.SecurityCenter.SimulateSecurityHealthAnalyticsCustomModule",
+          "service": {
+            "short_name": "SecurityCenter",
+            "full_name": "google.cloud.securitycenter.v1.SecurityCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1294,7 +1334,7 @@
     {
       "region_tag": "securitycenter_v1_generated_SecurityCenter_UpdateExternalSystem_sync",
       "title": "Snippet for the update_external_system call in the SecurityCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#update_external_system. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#update_external_system.",
       "file": "security_center/update_external_system.rb",
       "language": "RUBY",
       "client_method": {
@@ -1326,7 +1366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1334,7 +1374,7 @@
     {
       "region_tag": "securitycenter_v1_generated_SecurityCenter_UpdateFinding_sync",
       "title": "Snippet for the update_finding call in the SecurityCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#update_finding. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#update_finding.",
       "file": "security_center/update_finding.rb",
       "language": "RUBY",
       "client_method": {
@@ -1366,7 +1406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1374,7 +1414,7 @@
     {
       "region_tag": "securitycenter_v1_generated_SecurityCenter_UpdateMuteConfig_sync",
       "title": "Snippet for the update_mute_config call in the SecurityCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#update_mute_config. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#update_mute_config.",
       "file": "security_center/update_mute_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -1406,7 +1446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1414,7 +1454,7 @@
     {
       "region_tag": "securitycenter_v1_generated_SecurityCenter_UpdateNotificationConfig_sync",
       "title": "Snippet for the update_notification_config call in the SecurityCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#update_notification_config. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#update_notification_config.",
       "file": "security_center/update_notification_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -1446,7 +1486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1454,7 +1494,7 @@
     {
       "region_tag": "securitycenter_v1_generated_SecurityCenter_UpdateOrganizationSettings_sync",
       "title": "Snippet for the update_organization_settings call in the SecurityCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#update_organization_settings. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#update_organization_settings.",
       "file": "security_center/update_organization_settings.rb",
       "language": "RUBY",
       "client_method": {
@@ -1486,7 +1526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1494,7 +1534,7 @@
     {
       "region_tag": "securitycenter_v1_generated_SecurityCenter_UpdateSecurityHealthAnalyticsCustomModule_sync",
       "title": "Snippet for the update_security_health_analytics_custom_module call in the SecurityCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#update_security_health_analytics_custom_module. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#update_security_health_analytics_custom_module.",
       "file": "security_center/update_security_health_analytics_custom_module.rb",
       "language": "RUBY",
       "client_method": {
@@ -1526,7 +1566,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1534,7 +1574,7 @@
     {
       "region_tag": "securitycenter_v1_generated_SecurityCenter_UpdateSource_sync",
       "title": "Snippet for the update_source call in the SecurityCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#update_source. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#update_source.",
       "file": "security_center/update_source.rb",
       "language": "RUBY",
       "client_method": {
@@ -1566,7 +1606,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1574,7 +1614,7 @@
     {
       "region_tag": "securitycenter_v1_generated_SecurityCenter_UpdateSecurityMarks_sync",
       "title": "Snippet for the update_security_marks call in the SecurityCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#update_security_marks. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#update_security_marks.",
       "file": "security_center/update_security_marks.rb",
       "language": "RUBY",
       "client_method": {
@@ -1606,7 +1646,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1614,7 +1654,7 @@
     {
       "region_tag": "securitycenter_v1_generated_SecurityCenter_CreateBigQueryExport_sync",
       "title": "Snippet for the create_big_query_export call in the SecurityCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#create_big_query_export. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#create_big_query_export.",
       "file": "security_center/create_big_query_export.rb",
       "language": "RUBY",
       "client_method": {
@@ -1646,7 +1686,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1654,7 +1694,7 @@
     {
       "region_tag": "securitycenter_v1_generated_SecurityCenter_DeleteBigQueryExport_sync",
       "title": "Snippet for the delete_big_query_export call in the SecurityCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#delete_big_query_export. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#delete_big_query_export.",
       "file": "security_center/delete_big_query_export.rb",
       "language": "RUBY",
       "client_method": {
@@ -1686,7 +1726,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1694,7 +1734,7 @@
     {
       "region_tag": "securitycenter_v1_generated_SecurityCenter_UpdateBigQueryExport_sync",
       "title": "Snippet for the update_big_query_export call in the SecurityCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#update_big_query_export. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#update_big_query_export.",
       "file": "security_center/update_big_query_export.rb",
       "language": "RUBY",
       "client_method": {
@@ -1726,7 +1766,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1734,7 +1774,7 @@
     {
       "region_tag": "securitycenter_v1_generated_SecurityCenter_ListBigQueryExports_sync",
       "title": "Snippet for the list_big_query_exports call in the SecurityCenter service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#list_big_query_exports. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#list_big_query_exports.",
       "file": "security_center/list_big_query_exports.rb",
       "language": "RUBY",
       "client_method": {
@@ -1766,7 +1806,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]

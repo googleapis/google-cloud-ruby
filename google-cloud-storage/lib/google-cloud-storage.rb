@@ -192,7 +192,7 @@ Google::Cloud.configure.add_config! :storage do |config|
   config.add_field! :read_timeout, nil, match: Integer
   config.add_field! :send_timeout, nil, match: Integer
   config.add_field! :upload_chunk_size, nil, match: Integer
-  # TODO: Remove once discovery document is updated.
-  config.add_field! :endpoint, "https://storage.googleapis.com/", match: String
+  config.add_field! :endpoint, nil, match: String, allow_nil: true
+  config.add_field! :universe_domain, nil, match: String, allow_nil: true
 end
 # rubocop:enable Metrics/BlockLength

@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-phishing_protection-v1beta1",
-    "version": "0.7.0",
+    "version": "0.8.1",
     "language": "RUBY",
     "apis": [
       {
@@ -14,7 +14,7 @@
     {
       "region_tag": "phishingprotection_v1beta1_generated_PhishingProtectionService_ReportPhishing_sync",
       "title": "Snippet for the report_phishing call in the PhishingProtectionService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::Client#report_phishing. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::Client#report_phishing.",
       "file": "phishing_protection_service/report_phishing.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]

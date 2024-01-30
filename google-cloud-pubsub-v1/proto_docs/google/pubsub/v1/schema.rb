@@ -74,8 +74,8 @@ module Google
         #     The ID to use for the schema, which will become the final component of
         #     the schema's resource name.
         #
-        #     See https://cloud.google.com/pubsub/docs/admin#resource_names for resource
-        #     name constraints.
+        #     See https://cloud.google.com/pubsub/docs/pubsub-basics#resource_names for
+        #     resource name constraints.
         class CreateSchemaRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -201,6 +201,7 @@ module Google
         #
         #     Example: `projects/123/schemas/my-schema@c7cfa2a8`
         # @!attribute [rw] revision_id
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Optional. This field is deprecated and should not be used for specifying
         #     the revision ID. The revision ID should be specified via the `name`

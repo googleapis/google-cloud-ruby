@@ -45,6 +45,76 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::ClientTest < Minitest:
 
       @response
     end
+
+    def endpoint
+      "endpoint.example.com"
+    end
+
+    def universe_domain
+      "example.com"
+    end
+  end
+
+  def test_process_open_lineage_run_event
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::DataCatalog::Lineage::V1::ProcessOpenLineageRunEventResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    open_lineage = {}
+    request_id = "hello world"
+
+    process_open_lineage_run_event_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :process_open_lineage_run_event, name
+      assert_kind_of ::Google::Cloud::DataCatalog::Lineage::V1::ProcessOpenLineageRunEventRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Struct), request["open_lineage"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, process_open_lineage_run_event_client_stub do
+      # Create client
+      client = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.process_open_lineage_run_event({ parent: parent, open_lineage: open_lineage, request_id: request_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.process_open_lineage_run_event parent: parent, open_lineage: open_lineage, request_id: request_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.process_open_lineage_run_event ::Google::Cloud::DataCatalog::Lineage::V1::ProcessOpenLineageRunEventRequest.new(parent: parent, open_lineage: open_lineage, request_id: request_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.process_open_lineage_run_event({ parent: parent, open_lineage: open_lineage, request_id: request_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.process_open_lineage_run_event(::Google::Cloud::DataCatalog::Lineage::V1::ProcessOpenLineageRunEventRequest.new(parent: parent, open_lineage: open_lineage, request_id: request_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, process_open_lineage_run_event_client_stub.call_rpc_count
+    end
   end
 
   def test_create_process
@@ -433,12 +503,14 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::ClientTest < Minitest:
     # Create request parameters for a unary method.
     run = {}
     update_mask = {}
+    allow_missing = true
 
     update_run_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_run, name
       assert_kind_of ::Google::Cloud::DataCatalog::Lineage::V1::UpdateRunRequest, request
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataCatalog::Lineage::V1::Run), request["run"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal true, request["allow_missing"]
       refute_nil options
     end
 
@@ -449,31 +521,31 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::ClientTest < Minitest:
       end
 
       # Use hash object
-      client.update_run({ run: run, update_mask: update_mask }) do |response, operation|
+      client.update_run({ run: run, update_mask: update_mask, allow_missing: allow_missing }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_run run: run, update_mask: update_mask do |response, operation|
+      client.update_run run: run, update_mask: update_mask, allow_missing: allow_missing do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_run ::Google::Cloud::DataCatalog::Lineage::V1::UpdateRunRequest.new(run: run, update_mask: update_mask) do |response, operation|
+      client.update_run ::Google::Cloud::DataCatalog::Lineage::V1::UpdateRunRequest.new(run: run, update_mask: update_mask, allow_missing: allow_missing) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_run({ run: run, update_mask: update_mask }, grpc_options) do |response, operation|
+      client.update_run({ run: run, update_mask: update_mask, allow_missing: allow_missing }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_run(::Google::Cloud::DataCatalog::Lineage::V1::UpdateRunRequest.new(run: run, update_mask: update_mask), grpc_options) do |response, operation|
+      client.update_run(::Google::Cloud::DataCatalog::Lineage::V1::UpdateRunRequest.new(run: run, update_mask: update_mask, allow_missing: allow_missing), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1063,7 +1135,8 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::ClientTest < Minitest:
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
     client = block_config = config = nil
-    Gapic::ServiceStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil, nil
+    Gapic::ServiceStub.stub :new, dummy_stub do
       client = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -1081,7 +1154,8 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::ClientTest < Minitest:
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
     client = nil
-    Gapic::ServiceStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil, nil
+    Gapic::ServiceStub.stub :new, dummy_stub do
       client = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client.new do |config|
         config.credentials = grpc_channel
       end

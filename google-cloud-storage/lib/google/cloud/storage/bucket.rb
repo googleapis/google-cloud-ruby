@@ -119,6 +119,15 @@ module Google
         end
 
         ##
+        # The object retention configuration of the bucket
+        #
+        # @return [Google::Apis::StorageV1::Bucket::ObjectRetention]
+        #
+        def object_retention
+          @gapi.object_retention
+        end
+
+        ##
         # The name of the bucket.
         #
         # @return [String]
@@ -435,6 +444,24 @@ module Google
         end
 
         ##
+        # Terminal Storage class of the autoclass
+        #
+        # @return [String]
+        #
+        def autoclass_terminal_storage_class
+          @gapi.autoclass&.terminal_storage_class
+        end
+
+        ##
+        # Update time at which the autoclass terminal storage class was last modified
+        #
+        # @return [DateTime]
+        #
+        def autoclass_terminal_storage_class_update_time
+          @gapi.autoclass&.terminal_storage_class_update_time
+        end
+
+        ##
         # Updates bucket's autoclass configuration. This defines the default class for objects in the
         # bucket and down/up-grades the storage class of objects based on the access patterns.
         # Accepted values are `:false`, and `:true`.
@@ -442,14 +469,30 @@ module Google
         # For more information, see [Storage
         # Classes](https://cloud.google.com/storage/docs/using-autoclass).
         #
-        # Note: Only patch requests that disable autoclass are currently supported.
-        # To enable autoclass, you must set it at bucket creation time.
-        #
         # @param [Boolean] toggle for autoclass configuration of the bucket.
         #
         def autoclass_enabled= toggle
           @gapi.autoclass ||= API::Bucket::Autoclass.new
           @gapi.autoclass.enabled = toggle
+          patch_gapi! :autoclass
+        end
+
+        ##
+        # Update method to update all attributes of autoclass of a bucket
+        # It accepts params as a Hash of attributes in the following format:
+        #
+        #     { enabled: true, terminal_storage_class: "ARCHIVE" }
+        #
+        # terminal_storage_class field is optional. It defaults to `NEARLINE`.
+        # Valid terminal_storage_class values are `NEARLINE` and `ARCHIVE`.
+        #
+        # @param [Hash(String => String)] autoclass_attributes
+        #
+        def update_autoclass autoclass_attributes
+          @gapi.autoclass ||= API::Bucket::Autoclass.new
+          autoclass_attributes.each do |k, v|
+            @gapi.autoclass.send "#{k}=", v
+          end
           patch_gapi! :autoclass
         end
 
@@ -1265,6 +1308,9 @@ module Google
         #   `prefixes` are omitted.
         # @param [String] token A previously-returned page token representing
         #   part of the larger set of results to view.
+        # @param [String] match_glob A glob pattern used to filter results returned in items (e.g. `foo*bar`).
+        #    The string value must be UTF-8 encoded. See:
+        #    https://cloud.google.com/storage/docs/json_api/v1/objects/list#list-object-glob
         # @param [Integer] max Maximum number of items plus prefixes to return.
         #   As duplicate prefixes are omitted, fewer total results may be
         #   returned than requested. The default value of this parameter is
@@ -1300,14 +1346,17 @@ module Google
         #   end
         #
         def files prefix: nil, delimiter: nil, token: nil, max: nil,
-                  versions: nil
+                  versions: nil, match_glob: nil
           ensure_service!
           gapi = service.list_files name, prefix: prefix, delimiter: delimiter,
                                           token: token, max: max,
                                           versions: versions,
-                                          user_project: user_project
+                                          user_project: user_project,
+                                          match_glob: match_glob
           File::List.from_gapi gapi, service, name, prefix, delimiter, max,
-                               versions, user_project: user_project
+                               versions,
+                               user_project: user_project,
+                               match_glob: match_glob
         end
         alias find_files files
 

@@ -45,6 +45,14 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::ClientTest < Minitest::Test
 
       @response
     end
+
+    def endpoint
+      "endpoint.example.com"
+    end
+
+    def universe_domain
+      "example.com"
+    end
   end
 
   def test_list_constraints
@@ -426,11 +434,13 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::ClientTest < Minitest::Test
 
     # Create request parameters for a unary method.
     name = "hello world"
+    etag = "hello world"
 
     delete_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_policy, name
       assert_kind_of ::Google::Cloud::OrgPolicy::V2::DeletePolicyRequest, request
       assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["etag"]
       refute_nil options
     end
 
@@ -441,31 +451,31 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.delete_policy({ name: name }) do |response, operation|
+      client.delete_policy({ name: name, etag: etag }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_policy name: name do |response, operation|
+      client.delete_policy name: name, etag: etag do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_policy ::Google::Cloud::OrgPolicy::V2::DeletePolicyRequest.new(name: name) do |response, operation|
+      client.delete_policy ::Google::Cloud::OrgPolicy::V2::DeletePolicyRequest.new(name: name, etag: etag) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_policy({ name: name }, grpc_options) do |response, operation|
+      client.delete_policy({ name: name, etag: etag }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_policy(::Google::Cloud::OrgPolicy::V2::DeletePolicyRequest.new(name: name), grpc_options) do |response, operation|
+      client.delete_policy(::Google::Cloud::OrgPolicy::V2::DeletePolicyRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -475,11 +485,313 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::ClientTest < Minitest::Test
     end
   end
 
+  def test_create_custom_constraint
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::OrgPolicy::V2::CustomConstraint.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    custom_constraint = {}
+
+    create_custom_constraint_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_custom_constraint, name
+      assert_kind_of ::Google::Cloud::OrgPolicy::V2::CreateCustomConstraintRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::OrgPolicy::V2::CustomConstraint), request["custom_constraint"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_custom_constraint_client_stub do
+      # Create client
+      client = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_custom_constraint({ parent: parent, custom_constraint: custom_constraint }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_custom_constraint parent: parent, custom_constraint: custom_constraint do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_custom_constraint ::Google::Cloud::OrgPolicy::V2::CreateCustomConstraintRequest.new(parent: parent, custom_constraint: custom_constraint) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_custom_constraint({ parent: parent, custom_constraint: custom_constraint }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_custom_constraint(::Google::Cloud::OrgPolicy::V2::CreateCustomConstraintRequest.new(parent: parent, custom_constraint: custom_constraint), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_custom_constraint_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_custom_constraint
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::OrgPolicy::V2::CustomConstraint.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    custom_constraint = {}
+
+    update_custom_constraint_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_custom_constraint, name
+      assert_kind_of ::Google::Cloud::OrgPolicy::V2::UpdateCustomConstraintRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::OrgPolicy::V2::CustomConstraint), request["custom_constraint"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_custom_constraint_client_stub do
+      # Create client
+      client = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_custom_constraint({ custom_constraint: custom_constraint }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_custom_constraint custom_constraint: custom_constraint do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_custom_constraint ::Google::Cloud::OrgPolicy::V2::UpdateCustomConstraintRequest.new(custom_constraint: custom_constraint) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_custom_constraint({ custom_constraint: custom_constraint }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_custom_constraint(::Google::Cloud::OrgPolicy::V2::UpdateCustomConstraintRequest.new(custom_constraint: custom_constraint), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_custom_constraint_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_custom_constraint
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::OrgPolicy::V2::CustomConstraint.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_custom_constraint_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_custom_constraint, name
+      assert_kind_of ::Google::Cloud::OrgPolicy::V2::GetCustomConstraintRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_custom_constraint_client_stub do
+      # Create client
+      client = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_custom_constraint({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_custom_constraint name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_custom_constraint ::Google::Cloud::OrgPolicy::V2::GetCustomConstraintRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_custom_constraint({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_custom_constraint(::Google::Cloud::OrgPolicy::V2::GetCustomConstraintRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_custom_constraint_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_custom_constraints
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::OrgPolicy::V2::ListCustomConstraintsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_custom_constraints_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_custom_constraints, name
+      assert_kind_of ::Google::Cloud::OrgPolicy::V2::ListCustomConstraintsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_custom_constraints_client_stub do
+      # Create client
+      client = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_custom_constraints({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_custom_constraints parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_custom_constraints ::Google::Cloud::OrgPolicy::V2::ListCustomConstraintsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_custom_constraints({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_custom_constraints(::Google::Cloud::OrgPolicy::V2::ListCustomConstraintsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_custom_constraints_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_custom_constraint
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_custom_constraint_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_custom_constraint, name
+      assert_kind_of ::Google::Cloud::OrgPolicy::V2::DeleteCustomConstraintRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_custom_constraint_client_stub do
+      # Create client
+      client = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_custom_constraint({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_custom_constraint name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_custom_constraint ::Google::Cloud::OrgPolicy::V2::DeleteCustomConstraintRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_custom_constraint({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_custom_constraint(::Google::Cloud::OrgPolicy::V2::DeleteCustomConstraintRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_custom_constraint_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
     client = block_config = config = nil
-    Gapic::ServiceStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil, nil
+    Gapic::ServiceStub.stub :new, dummy_stub do
       client = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client.new do |config|
         config.credentials = grpc_channel
       end

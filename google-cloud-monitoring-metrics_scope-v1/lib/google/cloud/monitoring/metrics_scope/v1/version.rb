@@ -22,7 +22,7 @@ module Google
     module Monitoring
       module MetricsScope
         module V1
-          VERSION = "0.4.0"
+          VERSION = "0.5.1"
         end
       end
     end

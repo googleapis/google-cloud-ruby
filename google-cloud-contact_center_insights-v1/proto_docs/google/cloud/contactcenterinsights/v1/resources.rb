@@ -61,6 +61,9 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     A map for the user to specify any custom fields. A maximum of 20 labels per
         #     conversation is allowed, with a maximum of 256 characters per entry.
+        # @!attribute [rw] quality_metadata
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::Conversation::QualityMetadata]
+        #     Conversation metadata related to quality management.
         # @!attribute [r] transcript
         #   @return [::Google::Cloud::ContactCenterInsights::V1::Conversation::Transcript]
         #     Output only. The conversation transcript.
@@ -106,6 +109,43 @@ module Google
           class CallMetadata
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Conversation metadata related to quality management.
+          # @!attribute [rw] customer_satisfaction_rating
+          #   @return [::Integer]
+          #     An arbitrary integer value indicating the customer's satisfaction rating.
+          # @!attribute [rw] wait_duration
+          #   @return [::Google::Protobuf::Duration]
+          #     The amount of time the customer waited to connect with an agent.
+          # @!attribute [rw] menu_path
+          #   @return [::String]
+          #     An arbitrary string value specifying the menu path the customer took.
+          # @!attribute [rw] agent_info
+          #   @return [::Array<::Google::Cloud::ContactCenterInsights::V1::Conversation::QualityMetadata::AgentInfo>]
+          #     Information about agents involved in the call.
+          class QualityMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Information about an agent involved in the conversation.
+            # @!attribute [rw] agent_id
+            #   @return [::String]
+            #     A user-specified string representing the agent.
+            # @!attribute [rw] display_name
+            #   @return [::String]
+            #     The agent's name.
+            # @!attribute [rw] team
+            #   @return [::String]
+            #     A user-specified string representing the agent's team.
+            # @!attribute [rw] disposition_code
+            #   @return [::String]
+            #     A user-provided string indicating the outcome of the agent's segment of
+            #     the call.
+            class AgentInfo
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
 
           # A message representing the transcript of a conversation.
@@ -722,6 +762,7 @@ module Google
 
           # Configs for the input data used to create the issue model.
           # @!attribute [rw] medium
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::Google::Cloud::ContactCenterInsights::V1::Conversation::Medium]
           #     Medium of conversations used in training data. This field is being
           #     deprecated. To specify the medium to be used in training a new issue
@@ -1360,6 +1401,7 @@ module Google
         #   @return [::String]
         #     A user-specified ID representing the participant.
         # @!attribute [rw] dialogflow_participant
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Deprecated. Use `dialogflow_participant_name` instead.
         #     The name of the Dialogflow participant. Format:
@@ -1481,7 +1523,7 @@ module Google
               # Unspecified summarization model.
               SUMMARIZATION_MODEL_UNSPECIFIED = 0
 
-              # The Insights baseline model.
+              # The CCAI baseline model.
               BASELINE_MODEL = 1
             end
           end

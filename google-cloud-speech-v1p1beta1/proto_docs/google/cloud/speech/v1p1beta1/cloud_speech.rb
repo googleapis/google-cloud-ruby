@@ -274,12 +274,14 @@ module Google
         #     spoken emojis with the corresponding Unicode symbols in the final
         #     transcript. If 'false', spoken emojis are not replaced.
         # @!attribute [rw] enable_speaker_diarization
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
         #     If 'true', enables speaker detection for each recognized word in
         #     the top alternative of the recognition result using a speaker_tag provided
         #     in the WordInfo.
         #     Note: Use diarization_config instead.
         # @!attribute [rw] diarization_speaker_count
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Integer]
         #     If set, specifies the estimated number of speakers in the conversation.
         #     Defaults to '2'. Ignored unless enable_speaker_diarization is set to true.
@@ -462,6 +464,7 @@ module Google
         #     flexibility by allowing the system to automatically determine the correct
         #     number of speakers. If not set, the default value is 6.
         # @!attribute [r] speaker_tag
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Integer]
         #     Output only. Unused.
         class SpeakerDiarizationConfig
@@ -470,6 +473,7 @@ module Google
         end
 
         # Description of audio data to be recognized.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] interaction_type
         #   @return [::Google::Cloud::Speech::V1p1beta1::RecognitionMetadata::InteractionType]
         #     The use case most closely describing the audio content to be recognized.
@@ -500,6 +504,7 @@ module Google
         #     A list of possible audio mime types is maintained at
         #     http://www.iana.org/assignments/media-types/media-types.xhtml#audio
         # @!attribute [rw] obfuscated_id
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Integer]
         #     Obfuscated (privacy-protected) ID of the user, to identify number of
         #     unique users using the service.

@@ -60,6 +60,14 @@ class ::Google::Cloud::OsLogin::V1::OsLoginService::Rest::ClientTest < Minitest:
 
       @response
     end
+
+    def endpoint
+      "endpoint.example.com"
+    end
+
+    def universe_domain
+      "example.com"
+    end
   end
 
   def test_create_ssh_public_key
@@ -346,6 +354,7 @@ class ::Google::Cloud::OsLogin::V1::OsLoginService::Rest::ClientTest < Minitest:
     parent = "hello world"
     ssh_public_key = {}
     project_id = "hello world"
+    regions = ["hello world"]
 
     import_ssh_public_key_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -361,27 +370,27 @@ class ::Google::Cloud::OsLogin::V1::OsLoginService::Rest::ClientTest < Minitest:
         end
 
         # Use hash object
-        client.import_ssh_public_key({ parent: parent, ssh_public_key: ssh_public_key, project_id: project_id }) do |_result, response|
+        client.import_ssh_public_key({ parent: parent, ssh_public_key: ssh_public_key, project_id: project_id, regions: regions }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.import_ssh_public_key parent: parent, ssh_public_key: ssh_public_key, project_id: project_id do |_result, response|
+        client.import_ssh_public_key parent: parent, ssh_public_key: ssh_public_key, project_id: project_id, regions: regions do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.import_ssh_public_key ::Google::Cloud::OsLogin::V1::ImportSshPublicKeyRequest.new(parent: parent, ssh_public_key: ssh_public_key, project_id: project_id) do |_result, response|
+        client.import_ssh_public_key ::Google::Cloud::OsLogin::V1::ImportSshPublicKeyRequest.new(parent: parent, ssh_public_key: ssh_public_key, project_id: project_id, regions: regions) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.import_ssh_public_key({ parent: parent, ssh_public_key: ssh_public_key, project_id: project_id }, call_options) do |_result, response|
+        client.import_ssh_public_key({ parent: parent, ssh_public_key: ssh_public_key, project_id: project_id, regions: regions }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.import_ssh_public_key(::Google::Cloud::OsLogin::V1::ImportSshPublicKeyRequest.new(parent: parent, ssh_public_key: ssh_public_key, project_id: project_id), call_options) do |_result, response|
+        client.import_ssh_public_key(::Google::Cloud::OsLogin::V1::ImportSshPublicKeyRequest.new(parent: parent, ssh_public_key: ssh_public_key, project_id: project_id, regions: regions), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -451,7 +460,8 @@ class ::Google::Cloud::OsLogin::V1::OsLoginService::Rest::ClientTest < Minitest:
     credentials_token = :dummy_value
 
     client = block_config = config = nil
-    Gapic::Rest::ClientStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil
+    Gapic::Rest::ClientStub.stub :new, dummy_stub do
       client = ::Google::Cloud::OsLogin::V1::OsLoginService::Rest::Client.new do |config|
         config.credentials = credentials_token
       end

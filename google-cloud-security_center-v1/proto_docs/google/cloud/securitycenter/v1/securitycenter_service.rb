@@ -55,6 +55,7 @@ module Google
         #     * integer literals without quotes.
         #     * boolean literals `true` and `false` without quotes.
         # @!attribute [rw] mute_annotation
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     This can be a mute configuration name or any identifier for mute/unmute
         #     of findings based on the filter.
@@ -1316,6 +1317,71 @@ module Google
         class RunAssetDiscoveryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message to simulate a CustomConfig against a given test resource.
+        # Maximum size of the request is 4 MB by default.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The relative resource name of the organization, project, or
+        #     folder. For more information about relative resource names, see [Relative
+        #     Resource
+        #     Name](https://cloud.google.com/apis/design/resource_names#relative_resource_name)
+        #     Example: `organizations/{organization_id}`
+        # @!attribute [rw] custom_config
+        #   @return [::Google::Cloud::SecurityCenter::V1::CustomConfig]
+        #     Required. The custom configuration that you need to test.
+        # @!attribute [rw] resource
+        #   @return [::Google::Cloud::SecurityCenter::V1::SimulateSecurityHealthAnalyticsCustomModuleRequest::SimulatedResource]
+        #     Required. Resource data to simulate custom module against.
+        class SimulateSecurityHealthAnalyticsCustomModuleRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Manually constructed resource name. If the custom module evaluates against
+          # only the resource data, you can omit the `iam_policy_data` field. If it
+          # evaluates only the `iam_policy_data` field, you can omit the resource data.
+          # @!attribute [rw] resource_type
+          #   @return [::String]
+          #     Required. The type of the resource, for example,
+          #     `compute.googleapis.com/Disk`.
+          # @!attribute [rw] resource_data
+          #   @return [::Google::Protobuf::Struct]
+          #     Optional. A representation of the Google Cloud resource. Should match the
+          #     Google Cloud resource JSON format.
+          # @!attribute [rw] iam_policy_data
+          #   @return [::Google::Iam::V1::Policy]
+          #     Optional. A representation of the IAM policy.
+          class SimulatedResource
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Response message for simulating a `SecurityHealthAnalyticsCustomModule`
+        # against a given resource.
+        # @!attribute [rw] result
+        #   @return [::Google::Cloud::SecurityCenter::V1::SimulateSecurityHealthAnalyticsCustomModuleResponse::SimulatedResult]
+        #     Result for test case in the corresponding request.
+        class SimulateSecurityHealthAnalyticsCustomModuleResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Possible test result.
+          # @!attribute [rw] finding
+          #   @return [::Google::Cloud::SecurityCenter::V1::Finding]
+          #     Finding that would be published for the test case,
+          #     if a violation is detected.
+          # @!attribute [rw] no_violation
+          #   @return [::Google::Protobuf::Empty]
+          #     Indicates that the test case does not trigger any violation.
+          # @!attribute [rw] error
+          #   @return [::Google::Rpc::Status]
+          #     Error encountered during the test.
+          class SimulatedResult
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Request message for updating a ExternalSystem resource.

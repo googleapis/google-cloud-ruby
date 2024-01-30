@@ -69,6 +69,60 @@ module Google
           end
         end
 
+        # Metadata describing the Session operation.
+        # @!attribute [rw] session
+        #   @return [::String]
+        #     Name of the session for the operation.
+        # @!attribute [rw] session_uuid
+        #   @return [::String]
+        #     Session UUID for the operation.
+        # @!attribute [rw] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time when the operation was created.
+        # @!attribute [rw] done_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time when the operation was finished.
+        # @!attribute [rw] operation_type
+        #   @return [::Google::Cloud::Dataproc::V1::SessionOperationMetadata::SessionOperationType]
+        #     The operation type.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     Short description of the operation.
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Labels associated with the operation.
+        # @!attribute [rw] warnings
+        #   @return [::Array<::String>]
+        #     Warnings encountered during operation execution.
+        class SessionOperationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Operation type for Session resources
+          module SessionOperationType
+            # Session operation type is unknown.
+            SESSION_OPERATION_TYPE_UNSPECIFIED = 0
+
+            # Create Session operation type.
+            CREATE = 1
+
+            # Terminate Session operation type.
+            TERMINATE = 2
+
+            # Delete Session operation type.
+            DELETE = 3
+          end
+        end
+
         # The status of the operation.
         # @!attribute [r] state
         #   @return [::Google::Cloud::Dataproc::V1::ClusterOperationStatus::State]

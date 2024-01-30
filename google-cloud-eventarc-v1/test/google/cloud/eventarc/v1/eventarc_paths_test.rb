@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/eventarc/v1/eventarc"
 
 class ::Google::Cloud::Eventarc::V1::Eventarc::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_channel_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -37,7 +47,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::ClientPathsTest < Minitest::Test
 
   def test_channel_connection_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -49,7 +59,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::ClientPathsTest < Minitest::Test
 
   def test_cloud_function_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -61,7 +71,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::ClientPathsTest < Minitest::Test
 
   def test_crypto_key_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -73,7 +83,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::ClientPathsTest < Minitest::Test
 
   def test_google_channel_config_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -85,7 +95,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::ClientPathsTest < Minitest::Test
 
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -97,7 +107,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::ClientPathsTest < Minitest::Test
 
   def test_provider_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -109,7 +119,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::ClientPathsTest < Minitest::Test
 
   def test_service_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -118,7 +128,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::ClientPathsTest < Minitest::Test
 
   def test_service_account_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -130,7 +140,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::ClientPathsTest < Minitest::Test
 
   def test_trigger_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -142,7 +152,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::ClientPathsTest < Minitest::Test
 
   def test_workflow_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new do |config|
         config.credentials = grpc_channel
       end

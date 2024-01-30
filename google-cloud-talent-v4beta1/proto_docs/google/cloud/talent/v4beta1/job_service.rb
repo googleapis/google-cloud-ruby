@@ -222,6 +222,7 @@ module Google
         #
         #     Defaults to false.
         # @!attribute [rw] require_precise_result_size
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
         #     This field is deprecated.
         # @!attribute [rw] histogram_queries

@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/build/v1/cloud_build"
 
 class ::Google::Cloud::Build::V1::CloudBuild::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_build_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Build::V1::CloudBuild::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -40,7 +50,7 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientPathsTest < Minitest::Test
 
   def test_build_trigger_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Build::V1::CloudBuild::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -55,7 +65,7 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientPathsTest < Minitest::Test
 
   def test_crypto_key_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Build::V1::CloudBuild::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -67,7 +77,7 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientPathsTest < Minitest::Test
 
   def test_github_enterprise_config_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Build::V1::CloudBuild::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -82,7 +92,7 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientPathsTest < Minitest::Test
 
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Build::V1::CloudBuild::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -94,7 +104,7 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientPathsTest < Minitest::Test
 
   def test_network_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Build::V1::CloudBuild::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -106,7 +116,7 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientPathsTest < Minitest::Test
 
   def test_project_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Build::V1::CloudBuild::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -118,7 +128,7 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientPathsTest < Minitest::Test
 
   def test_repository_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Build::V1::CloudBuild::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -130,7 +140,7 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientPathsTest < Minitest::Test
 
   def test_secret_version_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Build::V1::CloudBuild::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -142,7 +152,7 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientPathsTest < Minitest::Test
 
   def test_service_account_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Build::V1::CloudBuild::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -154,7 +164,7 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientPathsTest < Minitest::Test
 
   def test_subscription_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Build::V1::CloudBuild::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -166,7 +176,7 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientPathsTest < Minitest::Test
 
   def test_topic_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Build::V1::CloudBuild::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -178,7 +188,7 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientPathsTest < Minitest::Test
 
   def test_worker_pool_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::Build::V1::CloudBuild::Client.new do |config|
         config.credentials = grpc_channel
       end

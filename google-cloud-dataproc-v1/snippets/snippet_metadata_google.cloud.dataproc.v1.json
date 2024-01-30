@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-dataproc-v1",
-    "version": "0.21.0",
+    "version": "0.23.1",
     "language": "RUBY",
     "apis": [
       {
@@ -14,7 +14,7 @@
     {
       "region_tag": "dataproc_v1_generated_AutoscalingPolicyService_CreateAutoscalingPolicy_sync",
       "title": "Snippet for the create_autoscaling_policy call in the AutoscalingPolicyService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client#create_autoscaling_policy. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client#create_autoscaling_policy.",
       "file": "autoscaling_policy_service/create_autoscaling_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "dataproc_v1_generated_AutoscalingPolicyService_UpdateAutoscalingPolicy_sync",
       "title": "Snippet for the update_autoscaling_policy call in the AutoscalingPolicyService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client#update_autoscaling_policy. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client#update_autoscaling_policy.",
       "file": "autoscaling_policy_service/update_autoscaling_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "dataproc_v1_generated_AutoscalingPolicyService_GetAutoscalingPolicy_sync",
       "title": "Snippet for the get_autoscaling_policy call in the AutoscalingPolicyService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client#get_autoscaling_policy. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client#get_autoscaling_policy.",
       "file": "autoscaling_policy_service/get_autoscaling_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -134,7 +134,7 @@
     {
       "region_tag": "dataproc_v1_generated_AutoscalingPolicyService_ListAutoscalingPolicies_sync",
       "title": "Snippet for the list_autoscaling_policies call in the AutoscalingPolicyService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client#list_autoscaling_policies. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client#list_autoscaling_policies.",
       "file": "autoscaling_policy_service/list_autoscaling_policies.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -174,7 +174,7 @@
     {
       "region_tag": "dataproc_v1_generated_AutoscalingPolicyService_DeleteAutoscalingPolicy_sync",
       "title": "Snippet for the delete_autoscaling_policy call in the AutoscalingPolicyService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client#delete_autoscaling_policy. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client#delete_autoscaling_policy.",
       "file": "autoscaling_policy_service/delete_autoscaling_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,7 +206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -214,7 +214,7 @@
     {
       "region_tag": "dataproc_v1_generated_BatchController_CreateBatch_sync",
       "title": "Snippet for the create_batch call in the BatchController service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::BatchController::Client#create_batch. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::BatchController::Client#create_batch.",
       "file": "batch_controller/create_batch.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,7 +246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -254,7 +254,7 @@
     {
       "region_tag": "dataproc_v1_generated_BatchController_GetBatch_sync",
       "title": "Snippet for the get_batch call in the BatchController service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::BatchController::Client#get_batch. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::BatchController::Client#get_batch.",
       "file": "batch_controller/get_batch.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,7 +286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -294,7 +294,7 @@
     {
       "region_tag": "dataproc_v1_generated_BatchController_ListBatches_sync",
       "title": "Snippet for the list_batches call in the BatchController service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::BatchController::Client#list_batches. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::BatchController::Client#list_batches.",
       "file": "batch_controller/list_batches.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,7 +326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -334,7 +334,7 @@
     {
       "region_tag": "dataproc_v1_generated_BatchController_DeleteBatch_sync",
       "title": "Snippet for the delete_batch call in the BatchController service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::BatchController::Client#delete_batch. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::BatchController::Client#delete_batch.",
       "file": "batch_controller/delete_batch.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,7 +366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -374,7 +374,7 @@
     {
       "region_tag": "dataproc_v1_generated_ClusterController_CreateCluster_sync",
       "title": "Snippet for the create_cluster call in the ClusterController service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::ClusterController::Client#create_cluster. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::ClusterController::Client#create_cluster.",
       "file": "cluster_controller/create_cluster.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,7 +406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -414,7 +414,7 @@
     {
       "region_tag": "dataproc_v1_generated_ClusterController_UpdateCluster_sync",
       "title": "Snippet for the update_cluster call in the ClusterController service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::ClusterController::Client#update_cluster. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::ClusterController::Client#update_cluster.",
       "file": "cluster_controller/update_cluster.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,7 +446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -454,7 +454,7 @@
     {
       "region_tag": "dataproc_v1_generated_ClusterController_StopCluster_sync",
       "title": "Snippet for the stop_cluster call in the ClusterController service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::ClusterController::Client#stop_cluster. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::ClusterController::Client#stop_cluster.",
       "file": "cluster_controller/stop_cluster.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,7 +486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -494,7 +494,7 @@
     {
       "region_tag": "dataproc_v1_generated_ClusterController_StartCluster_sync",
       "title": "Snippet for the start_cluster call in the ClusterController service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::ClusterController::Client#start_cluster. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::ClusterController::Client#start_cluster.",
       "file": "cluster_controller/start_cluster.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,7 +526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -534,7 +534,7 @@
     {
       "region_tag": "dataproc_v1_generated_ClusterController_DeleteCluster_sync",
       "title": "Snippet for the delete_cluster call in the ClusterController service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::ClusterController::Client#delete_cluster. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::ClusterController::Client#delete_cluster.",
       "file": "cluster_controller/delete_cluster.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,7 +566,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -574,7 +574,7 @@
     {
       "region_tag": "dataproc_v1_generated_ClusterController_GetCluster_sync",
       "title": "Snippet for the get_cluster call in the ClusterController service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::ClusterController::Client#get_cluster. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::ClusterController::Client#get_cluster.",
       "file": "cluster_controller/get_cluster.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,7 +606,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -614,7 +614,7 @@
     {
       "region_tag": "dataproc_v1_generated_ClusterController_ListClusters_sync",
       "title": "Snippet for the list_clusters call in the ClusterController service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::ClusterController::Client#list_clusters. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::ClusterController::Client#list_clusters.",
       "file": "cluster_controller/list_clusters.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,7 +646,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -654,7 +654,7 @@
     {
       "region_tag": "dataproc_v1_generated_ClusterController_DiagnoseCluster_sync",
       "title": "Snippet for the diagnose_cluster call in the ClusterController service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::ClusterController::Client#diagnose_cluster. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::ClusterController::Client#diagnose_cluster.",
       "file": "cluster_controller/diagnose_cluster.rb",
       "language": "RUBY",
       "client_method": {
@@ -686,7 +686,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -694,7 +694,7 @@
     {
       "region_tag": "dataproc_v1_generated_JobController_SubmitJob_sync",
       "title": "Snippet for the submit_job call in the JobController service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::JobController::Client#submit_job. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::JobController::Client#submit_job.",
       "file": "job_controller/submit_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -726,7 +726,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -734,7 +734,7 @@
     {
       "region_tag": "dataproc_v1_generated_JobController_SubmitJobAsOperation_sync",
       "title": "Snippet for the submit_job_as_operation call in the JobController service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::JobController::Client#submit_job_as_operation. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::JobController::Client#submit_job_as_operation.",
       "file": "job_controller/submit_job_as_operation.rb",
       "language": "RUBY",
       "client_method": {
@@ -766,7 +766,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -774,7 +774,7 @@
     {
       "region_tag": "dataproc_v1_generated_JobController_GetJob_sync",
       "title": "Snippet for the get_job call in the JobController service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::JobController::Client#get_job. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::JobController::Client#get_job.",
       "file": "job_controller/get_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -806,7 +806,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -814,7 +814,7 @@
     {
       "region_tag": "dataproc_v1_generated_JobController_ListJobs_sync",
       "title": "Snippet for the list_jobs call in the JobController service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::JobController::Client#list_jobs. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::JobController::Client#list_jobs.",
       "file": "job_controller/list_jobs.rb",
       "language": "RUBY",
       "client_method": {
@@ -846,7 +846,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -854,7 +854,7 @@
     {
       "region_tag": "dataproc_v1_generated_JobController_UpdateJob_sync",
       "title": "Snippet for the update_job call in the JobController service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::JobController::Client#update_job. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::JobController::Client#update_job.",
       "file": "job_controller/update_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -886,7 +886,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -894,7 +894,7 @@
     {
       "region_tag": "dataproc_v1_generated_JobController_CancelJob_sync",
       "title": "Snippet for the cancel_job call in the JobController service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::JobController::Client#cancel_job. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::JobController::Client#cancel_job.",
       "file": "job_controller/cancel_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -926,7 +926,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -934,7 +934,7 @@
     {
       "region_tag": "dataproc_v1_generated_JobController_DeleteJob_sync",
       "title": "Snippet for the delete_job call in the JobController service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::JobController::Client#delete_job. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::JobController::Client#delete_job.",
       "file": "job_controller/delete_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -966,7 +966,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -974,7 +974,7 @@
     {
       "region_tag": "dataproc_v1_generated_NodeGroupController_CreateNodeGroup_sync",
       "title": "Snippet for the create_node_group call in the NodeGroupController service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::NodeGroupController::Client#create_node_group. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::NodeGroupController::Client#create_node_group.",
       "file": "node_group_controller/create_node_group.rb",
       "language": "RUBY",
       "client_method": {
@@ -1006,7 +1006,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1014,7 +1014,7 @@
     {
       "region_tag": "dataproc_v1_generated_NodeGroupController_ResizeNodeGroup_sync",
       "title": "Snippet for the resize_node_group call in the NodeGroupController service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::NodeGroupController::Client#resize_node_group. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::NodeGroupController::Client#resize_node_group.",
       "file": "node_group_controller/resize_node_group.rb",
       "language": "RUBY",
       "client_method": {
@@ -1046,7 +1046,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1054,7 +1054,7 @@
     {
       "region_tag": "dataproc_v1_generated_NodeGroupController_GetNodeGroup_sync",
       "title": "Snippet for the get_node_group call in the NodeGroupController service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::NodeGroupController::Client#get_node_group. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::NodeGroupController::Client#get_node_group.",
       "file": "node_group_controller/get_node_group.rb",
       "language": "RUBY",
       "client_method": {
@@ -1086,7 +1086,407 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_SessionController_CreateSession_sync",
+      "title": "Snippet for the create_session call in the SessionController service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::SessionController::Client#create_session.",
+      "file": "session_controller/create_session.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_session",
+        "full_name": "::Google::Cloud::Dataproc::V1::SessionController::Client#create_session",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::CreateSessionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SessionController::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::SessionController::Client"
+        },
+        "method": {
+          "short_name": "CreateSession",
+          "full_name": "google.cloud.dataproc.v1.SessionController.CreateSession",
+          "service": {
+            "short_name": "SessionController",
+            "full_name": "google.cloud.dataproc.v1.SessionController"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_SessionController_GetSession_sync",
+      "title": "Snippet for the get_session call in the SessionController service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::SessionController::Client#get_session.",
+      "file": "session_controller/get_session.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_session",
+        "full_name": "::Google::Cloud::Dataproc::V1::SessionController::Client#get_session",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::GetSessionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataproc::V1::Session",
+        "client": {
+          "short_name": "SessionController::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::SessionController::Client"
+        },
+        "method": {
+          "short_name": "GetSession",
+          "full_name": "google.cloud.dataproc.v1.SessionController.GetSession",
+          "service": {
+            "short_name": "SessionController",
+            "full_name": "google.cloud.dataproc.v1.SessionController"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_SessionController_ListSessions_sync",
+      "title": "Snippet for the list_sessions call in the SessionController service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::SessionController::Client#list_sessions.",
+      "file": "session_controller/list_sessions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_sessions",
+        "full_name": "::Google::Cloud::Dataproc::V1::SessionController::Client#list_sessions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::ListSessionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataproc::V1::ListSessionsResponse",
+        "client": {
+          "short_name": "SessionController::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::SessionController::Client"
+        },
+        "method": {
+          "short_name": "ListSessions",
+          "full_name": "google.cloud.dataproc.v1.SessionController.ListSessions",
+          "service": {
+            "short_name": "SessionController",
+            "full_name": "google.cloud.dataproc.v1.SessionController"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_SessionController_TerminateSession_sync",
+      "title": "Snippet for the terminate_session call in the SessionController service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::SessionController::Client#terminate_session.",
+      "file": "session_controller/terminate_session.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "terminate_session",
+        "full_name": "::Google::Cloud::Dataproc::V1::SessionController::Client#terminate_session",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::TerminateSessionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SessionController::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::SessionController::Client"
+        },
+        "method": {
+          "short_name": "TerminateSession",
+          "full_name": "google.cloud.dataproc.v1.SessionController.TerminateSession",
+          "service": {
+            "short_name": "SessionController",
+            "full_name": "google.cloud.dataproc.v1.SessionController"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_SessionController_DeleteSession_sync",
+      "title": "Snippet for the delete_session call in the SessionController service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::SessionController::Client#delete_session.",
+      "file": "session_controller/delete_session.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_session",
+        "full_name": "::Google::Cloud::Dataproc::V1::SessionController::Client#delete_session",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::DeleteSessionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SessionController::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::SessionController::Client"
+        },
+        "method": {
+          "short_name": "DeleteSession",
+          "full_name": "google.cloud.dataproc.v1.SessionController.DeleteSession",
+          "service": {
+            "short_name": "SessionController",
+            "full_name": "google.cloud.dataproc.v1.SessionController"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_SessionTemplateController_CreateSessionTemplate_sync",
+      "title": "Snippet for the create_session_template call in the SessionTemplateController service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::SessionTemplateController::Client#create_session_template.",
+      "file": "session_template_controller/create_session_template.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_session_template",
+        "full_name": "::Google::Cloud::Dataproc::V1::SessionTemplateController::Client#create_session_template",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::CreateSessionTemplateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataproc::V1::SessionTemplate",
+        "client": {
+          "short_name": "SessionTemplateController::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::SessionTemplateController::Client"
+        },
+        "method": {
+          "short_name": "CreateSessionTemplate",
+          "full_name": "google.cloud.dataproc.v1.SessionTemplateController.CreateSessionTemplate",
+          "service": {
+            "short_name": "SessionTemplateController",
+            "full_name": "google.cloud.dataproc.v1.SessionTemplateController"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_SessionTemplateController_UpdateSessionTemplate_sync",
+      "title": "Snippet for the update_session_template call in the SessionTemplateController service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::SessionTemplateController::Client#update_session_template.",
+      "file": "session_template_controller/update_session_template.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_session_template",
+        "full_name": "::Google::Cloud::Dataproc::V1::SessionTemplateController::Client#update_session_template",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::UpdateSessionTemplateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataproc::V1::SessionTemplate",
+        "client": {
+          "short_name": "SessionTemplateController::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::SessionTemplateController::Client"
+        },
+        "method": {
+          "short_name": "UpdateSessionTemplate",
+          "full_name": "google.cloud.dataproc.v1.SessionTemplateController.UpdateSessionTemplate",
+          "service": {
+            "short_name": "SessionTemplateController",
+            "full_name": "google.cloud.dataproc.v1.SessionTemplateController"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_SessionTemplateController_GetSessionTemplate_sync",
+      "title": "Snippet for the get_session_template call in the SessionTemplateController service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::SessionTemplateController::Client#get_session_template.",
+      "file": "session_template_controller/get_session_template.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_session_template",
+        "full_name": "::Google::Cloud::Dataproc::V1::SessionTemplateController::Client#get_session_template",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::GetSessionTemplateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataproc::V1::SessionTemplate",
+        "client": {
+          "short_name": "SessionTemplateController::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::SessionTemplateController::Client"
+        },
+        "method": {
+          "short_name": "GetSessionTemplate",
+          "full_name": "google.cloud.dataproc.v1.SessionTemplateController.GetSessionTemplate",
+          "service": {
+            "short_name": "SessionTemplateController",
+            "full_name": "google.cloud.dataproc.v1.SessionTemplateController"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_SessionTemplateController_ListSessionTemplates_sync",
+      "title": "Snippet for the list_session_templates call in the SessionTemplateController service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::SessionTemplateController::Client#list_session_templates.",
+      "file": "session_template_controller/list_session_templates.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_session_templates",
+        "full_name": "::Google::Cloud::Dataproc::V1::SessionTemplateController::Client#list_session_templates",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::ListSessionTemplatesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataproc::V1::ListSessionTemplatesResponse",
+        "client": {
+          "short_name": "SessionTemplateController::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::SessionTemplateController::Client"
+        },
+        "method": {
+          "short_name": "ListSessionTemplates",
+          "full_name": "google.cloud.dataproc.v1.SessionTemplateController.ListSessionTemplates",
+          "service": {
+            "short_name": "SessionTemplateController",
+            "full_name": "google.cloud.dataproc.v1.SessionTemplateController"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataproc_v1_generated_SessionTemplateController_DeleteSessionTemplate_sync",
+      "title": "Snippet for the delete_session_template call in the SessionTemplateController service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::SessionTemplateController::Client#delete_session_template.",
+      "file": "session_template_controller/delete_session_template.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_session_template",
+        "full_name": "::Google::Cloud::Dataproc::V1::SessionTemplateController::Client#delete_session_template",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataproc::V1::DeleteSessionTemplateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "SessionTemplateController::Client",
+          "full_name": "::Google::Cloud::Dataproc::V1::SessionTemplateController::Client"
+        },
+        "method": {
+          "short_name": "DeleteSessionTemplate",
+          "full_name": "google.cloud.dataproc.v1.SessionTemplateController.DeleteSessionTemplate",
+          "service": {
+            "short_name": "SessionTemplateController",
+            "full_name": "google.cloud.dataproc.v1.SessionTemplateController"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1094,7 +1494,7 @@
     {
       "region_tag": "dataproc_v1_generated_WorkflowTemplateService_CreateWorkflowTemplate_sync",
       "title": "Snippet for the create_workflow_template call in the WorkflowTemplateService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#create_workflow_template. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#create_workflow_template.",
       "file": "workflow_template_service/create_workflow_template.rb",
       "language": "RUBY",
       "client_method": {
@@ -1126,7 +1526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1134,7 +1534,7 @@
     {
       "region_tag": "dataproc_v1_generated_WorkflowTemplateService_GetWorkflowTemplate_sync",
       "title": "Snippet for the get_workflow_template call in the WorkflowTemplateService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#get_workflow_template. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#get_workflow_template.",
       "file": "workflow_template_service/get_workflow_template.rb",
       "language": "RUBY",
       "client_method": {
@@ -1166,7 +1566,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1174,7 +1574,7 @@
     {
       "region_tag": "dataproc_v1_generated_WorkflowTemplateService_InstantiateWorkflowTemplate_sync",
       "title": "Snippet for the instantiate_workflow_template call in the WorkflowTemplateService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#instantiate_workflow_template. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#instantiate_workflow_template.",
       "file": "workflow_template_service/instantiate_workflow_template.rb",
       "language": "RUBY",
       "client_method": {
@@ -1206,7 +1606,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1214,7 +1614,7 @@
     {
       "region_tag": "dataproc_v1_generated_WorkflowTemplateService_InstantiateInlineWorkflowTemplate_sync",
       "title": "Snippet for the instantiate_inline_workflow_template call in the WorkflowTemplateService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#instantiate_inline_workflow_template. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#instantiate_inline_workflow_template.",
       "file": "workflow_template_service/instantiate_inline_workflow_template.rb",
       "language": "RUBY",
       "client_method": {
@@ -1246,7 +1646,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1254,7 +1654,7 @@
     {
       "region_tag": "dataproc_v1_generated_WorkflowTemplateService_UpdateWorkflowTemplate_sync",
       "title": "Snippet for the update_workflow_template call in the WorkflowTemplateService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#update_workflow_template. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#update_workflow_template.",
       "file": "workflow_template_service/update_workflow_template.rb",
       "language": "RUBY",
       "client_method": {
@@ -1286,7 +1686,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1294,7 +1694,7 @@
     {
       "region_tag": "dataproc_v1_generated_WorkflowTemplateService_ListWorkflowTemplates_sync",
       "title": "Snippet for the list_workflow_templates call in the WorkflowTemplateService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#list_workflow_templates. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#list_workflow_templates.",
       "file": "workflow_template_service/list_workflow_templates.rb",
       "language": "RUBY",
       "client_method": {
@@ -1326,7 +1726,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1334,7 +1734,7 @@
     {
       "region_tag": "dataproc_v1_generated_WorkflowTemplateService_DeleteWorkflowTemplate_sync",
       "title": "Snippet for the delete_workflow_template call in the WorkflowTemplateService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#delete_workflow_template. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#delete_workflow_template.",
       "file": "workflow_template_service/delete_workflow_template.rb",
       "language": "RUBY",
       "client_method": {
@@ -1366,7 +1766,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]

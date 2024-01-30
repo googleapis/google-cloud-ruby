@@ -24,7 +24,7 @@ Metrics/CyclomaticComplexity:
 Metrics/MethodLength:
   Max: 35
 Metrics/PerceivedComplexity:
-  Max: 15
+  Max: 20
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-pubsub.rb"

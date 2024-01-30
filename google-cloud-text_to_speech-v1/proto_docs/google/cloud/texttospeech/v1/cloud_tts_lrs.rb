@@ -58,8 +58,9 @@ module Google
         #   @return [::Google::Protobuf::Timestamp]
         #     Time when the request was received.
         # @!attribute [rw] last_update_time
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Protobuf::Timestamp]
-        #     Time of the most recent processing update.
+        #     Deprecated. Do not use.
         # @!attribute [rw] progress_percentage
         #   @return [::Float]
         #     The progress of the most recent processing update in percentage, ie. 70.0%.

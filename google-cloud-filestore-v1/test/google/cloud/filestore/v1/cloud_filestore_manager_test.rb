@@ -45,6 +45,14 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::ClientTest < Minite
 
       @response
     end
+
+    def endpoint
+      "endpoint.example.com"
+    end
+
+    def universe_domain
+      "example.com"
+    end
   end
 
   def test_list_instances
@@ -373,6 +381,71 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::ClientTest < Minite
 
       # Verify method calls
       assert_equal 5, restore_instance_client_stub.call_rpc_count
+    end
+  end
+
+  def test_revert_instance
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    target_snapshot_id = "hello world"
+
+    revert_instance_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :revert_instance, name
+      assert_kind_of ::Google::Cloud::Filestore::V1::RevertInstanceRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["target_snapshot_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, revert_instance_client_stub do
+      # Create client
+      client = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.revert_instance({ name: name, target_snapshot_id: target_snapshot_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.revert_instance name: name, target_snapshot_id: target_snapshot_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.revert_instance ::Google::Cloud::Filestore::V1::RevertInstanceRequest.new(name: name, target_snapshot_id: target_snapshot_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.revert_instance({ name: name, target_snapshot_id: target_snapshot_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.revert_instance(::Google::Cloud::Filestore::V1::RevertInstanceRequest.new(name: name, target_snapshot_id: target_snapshot_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, revert_instance_client_stub.call_rpc_count
     end
   end
 
@@ -1093,7 +1166,8 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::ClientTest < Minite
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
     client = block_config = config = nil
-    Gapic::ServiceStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil, nil
+    Gapic::ServiceStub.stub :new, dummy_stub do
       client = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -1111,7 +1185,8 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::ClientTest < Minite
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
     client = nil
-    Gapic::ServiceStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil, nil
+    Gapic::ServiceStub.stub :new, dummy_stub do
       client = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new do |config|
         config.credentials = grpc_channel
       end

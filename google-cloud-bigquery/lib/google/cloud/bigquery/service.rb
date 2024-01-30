@@ -41,15 +41,26 @@ module Google
         # @private
         attr_reader :retries, :timeout, :host
 
+        # @private
+        def universe_domain
+          service.universe_domain
+        end
+
         ##
         # Creates a new Service instance.
-        def initialize project, credentials, retries: nil, timeout: nil, host: nil, quota_project: nil
+        def initialize project, credentials,
+                       retries: nil,
+                       timeout: nil,
+                       host: nil,
+                       quota_project: nil,
+                       universe_domain: nil
           @project = project
           @credentials = credentials
           @retries = retries
           @timeout = timeout
           @host = host
           @quota_project = quota_project
+          @universe_domain = universe_domain
         end
 
         def service
@@ -69,7 +80,14 @@ module Google
             service.request_options.query["prettyPrint"] = false
             service.request_options.quota_project = @quota_project if @quota_project
             service.authorization = @credentials.client
+            service.universe_domain = @universe_domain
             service.root_url = host if host
+            begin
+              service.verify_universe_domain!
+            rescue Google::Apis::UniverseDomainError => e
+              # TODO: Create a Google::Cloud::Error subclass for this.
+              raise Google::Cloud::Error, e.message
+            end
             service
           end
         end

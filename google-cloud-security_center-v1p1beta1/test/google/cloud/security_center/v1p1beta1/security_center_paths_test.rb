@@ -23,9 +23,19 @@ require "gapic/grpc/service_stub"
 require "google/cloud/security_center/v1p1beta1/security_center"
 
 class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
   def test_finding_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -43,7 +53,7 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientPathsTes
 
   def test_folder_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -55,7 +65,7 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientPathsTes
 
   def test_notification_config_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -67,7 +77,7 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientPathsTes
 
   def test_organization_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -79,7 +89,7 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientPathsTes
 
   def test_organization_settings_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -91,7 +101,7 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientPathsTes
 
   def test_project_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -103,7 +113,7 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientPathsTes
 
   def test_security_marks_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -130,7 +140,7 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientPathsTes
 
   def test_source_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -148,7 +158,7 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientPathsTes
 
   def test_topic_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end

@@ -60,6 +60,14 @@ class ::Google::Cloud::Compute::V1::Instances::Rest::ClientTest < Minitest::Test
 
       @response
     end
+
+    def endpoint
+      "endpoint.example.com"
+    end
+
+    def universe_domain
+      "example.com"
+    end
   end
 
   def test_add_access_config
@@ -194,6 +202,7 @@ class ::Google::Cloud::Compute::V1::Instances::Rest::ClientTest < Minitest::Test
     page_token = "hello world"
     project = "hello world"
     return_partial_success = true
+    service_project_number = 42
 
     aggregated_list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -209,27 +218,27 @@ class ::Google::Cloud::Compute::V1::Instances::Rest::ClientTest < Minitest::Test
         end
 
         # Use hash object
-        client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
+        client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
+        client.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListInstancesRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
+        client.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListInstancesRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
+        client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListInstancesRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
+        client.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListInstancesRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1915,6 +1924,64 @@ class ::Google::Cloud::Compute::V1::Instances::Rest::ClientTest < Minitest::Test
     end
   end
 
+  def test_set_security_policy
+    # Create test objects.
+    client_result = ::Google::Cloud::Compute::V1::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    instance = "hello world"
+    instances_set_security_policy_request_resource = {}
+    project = "hello world"
+    request_id = "hello world"
+    zone = "hello world"
+
+    set_security_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Compute::V1::Instances::Rest::ServiceStub.stub :transcode_set_security_policy_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, set_security_policy_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::Instances::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.set_security_policy({ instance: instance, instances_set_security_policy_request_resource: instances_set_security_policy_request_resource, project: project, request_id: request_id, zone: zone }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.set_security_policy instance: instance, instances_set_security_policy_request_resource: instances_set_security_policy_request_resource, project: project, request_id: request_id, zone: zone do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.set_security_policy ::Google::Cloud::Compute::V1::SetSecurityPolicyInstanceRequest.new(instance: instance, instances_set_security_policy_request_resource: instances_set_security_policy_request_resource, project: project, request_id: request_id, zone: zone) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.set_security_policy({ instance: instance, instances_set_security_policy_request_resource: instances_set_security_policy_request_resource, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.set_security_policy(::Google::Cloud::Compute::V1::SetSecurityPolicyInstanceRequest.new(instance: instance, instances_set_security_policy_request_resource: instances_set_security_policy_request_resource, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, set_security_policy_client_stub.call_count
+      end
+    end
+  end
+
   def test_set_service_account
     # Create test objects.
     client_result = ::Google::Cloud::Compute::V1::Operation.new
@@ -2732,7 +2799,8 @@ class ::Google::Cloud::Compute::V1::Instances::Rest::ClientTest < Minitest::Test
     credentials_token = :dummy_value
 
     client = block_config = config = nil
-    Gapic::Rest::ClientStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil
+    Gapic::Rest::ClientStub.stub :new, dummy_stub do
       client = ::Google::Cloud::Compute::V1::Instances::Rest::Client.new do |config|
         config.credentials = credentials_token
       end

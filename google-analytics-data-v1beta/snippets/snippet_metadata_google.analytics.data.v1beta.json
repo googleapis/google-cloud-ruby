@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-analytics-data-v1beta",
-    "version": "0.9.0",
+    "version": "0.11.1",
     "language": "RUBY",
     "apis": [
       {
@@ -14,7 +14,7 @@
     {
       "region_tag": "analyticsdata_v1beta_generated_AnalyticsData_RunReport_sync",
       "title": "Snippet for the run_report call in the AnalyticsData service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Data::V1beta::AnalyticsData::Client#run_report. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Data::V1beta::AnalyticsData::Client#run_report.",
       "file": "analytics_data/run_report.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "analyticsdata_v1beta_generated_AnalyticsData_RunPivotReport_sync",
       "title": "Snippet for the run_pivot_report call in the AnalyticsData service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Data::V1beta::AnalyticsData::Client#run_pivot_report. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Data::V1beta::AnalyticsData::Client#run_pivot_report.",
       "file": "analytics_data/run_pivot_report.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "analyticsdata_v1beta_generated_AnalyticsData_BatchRunReports_sync",
       "title": "Snippet for the batch_run_reports call in the AnalyticsData service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Data::V1beta::AnalyticsData::Client#batch_run_reports. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Data::V1beta::AnalyticsData::Client#batch_run_reports.",
       "file": "analytics_data/batch_run_reports.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -134,7 +134,7 @@
     {
       "region_tag": "analyticsdata_v1beta_generated_AnalyticsData_BatchRunPivotReports_sync",
       "title": "Snippet for the batch_run_pivot_reports call in the AnalyticsData service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Data::V1beta::AnalyticsData::Client#batch_run_pivot_reports. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Data::V1beta::AnalyticsData::Client#batch_run_pivot_reports.",
       "file": "analytics_data/batch_run_pivot_reports.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -174,7 +174,7 @@
     {
       "region_tag": "analyticsdata_v1beta_generated_AnalyticsData_GetMetadata_sync",
       "title": "Snippet for the get_metadata call in the AnalyticsData service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Data::V1beta::AnalyticsData::Client#get_metadata. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Data::V1beta::AnalyticsData::Client#get_metadata.",
       "file": "analytics_data/get_metadata.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,7 +206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -214,7 +214,7 @@
     {
       "region_tag": "analyticsdata_v1beta_generated_AnalyticsData_RunRealtimeReport_sync",
       "title": "Snippet for the run_realtime_report call in the AnalyticsData service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Data::V1beta::AnalyticsData::Client#run_realtime_report. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Data::V1beta::AnalyticsData::Client#run_realtime_report.",
       "file": "analytics_data/run_realtime_report.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,7 +246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -254,7 +254,7 @@
     {
       "region_tag": "analyticsdata_v1beta_generated_AnalyticsData_CheckCompatibility_sync",
       "title": "Snippet for the check_compatibility call in the AnalyticsData service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Data::V1beta::AnalyticsData::Client#check_compatibility. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Data::V1beta::AnalyticsData::Client#check_compatibility.",
       "file": "analytics_data/check_compatibility.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,7 +286,167 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsdata_v1beta_generated_AnalyticsData_CreateAudienceExport_sync",
+      "title": "Snippet for the create_audience_export call in the AnalyticsData service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Data::V1beta::AnalyticsData::Client#create_audience_export.",
+      "file": "analytics_data/create_audience_export.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_audience_export",
+        "full_name": "::Google::Analytics::Data::V1beta::AnalyticsData::Client#create_audience_export",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Data::V1beta::CreateAudienceExportRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AnalyticsData::Client",
+          "full_name": "::Google::Analytics::Data::V1beta::AnalyticsData::Client"
+        },
+        "method": {
+          "short_name": "CreateAudienceExport",
+          "full_name": "google.analytics.data.v1beta.BetaAnalyticsData.CreateAudienceExport",
+          "service": {
+            "short_name": "AnalyticsData",
+            "full_name": "google.analytics.data.v1beta.BetaAnalyticsData"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsdata_v1beta_generated_AnalyticsData_QueryAudienceExport_sync",
+      "title": "Snippet for the query_audience_export call in the AnalyticsData service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Data::V1beta::AnalyticsData::Client#query_audience_export.",
+      "file": "analytics_data/query_audience_export.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "query_audience_export",
+        "full_name": "::Google::Analytics::Data::V1beta::AnalyticsData::Client#query_audience_export",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Data::V1beta::QueryAudienceExportRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Data::V1beta::QueryAudienceExportResponse",
+        "client": {
+          "short_name": "AnalyticsData::Client",
+          "full_name": "::Google::Analytics::Data::V1beta::AnalyticsData::Client"
+        },
+        "method": {
+          "short_name": "QueryAudienceExport",
+          "full_name": "google.analytics.data.v1beta.BetaAnalyticsData.QueryAudienceExport",
+          "service": {
+            "short_name": "AnalyticsData",
+            "full_name": "google.analytics.data.v1beta.BetaAnalyticsData"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsdata_v1beta_generated_AnalyticsData_GetAudienceExport_sync",
+      "title": "Snippet for the get_audience_export call in the AnalyticsData service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Data::V1beta::AnalyticsData::Client#get_audience_export.",
+      "file": "analytics_data/get_audience_export.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_audience_export",
+        "full_name": "::Google::Analytics::Data::V1beta::AnalyticsData::Client#get_audience_export",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Data::V1beta::GetAudienceExportRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Data::V1beta::AudienceExport",
+        "client": {
+          "short_name": "AnalyticsData::Client",
+          "full_name": "::Google::Analytics::Data::V1beta::AnalyticsData::Client"
+        },
+        "method": {
+          "short_name": "GetAudienceExport",
+          "full_name": "google.analytics.data.v1beta.BetaAnalyticsData.GetAudienceExport",
+          "service": {
+            "short_name": "AnalyticsData",
+            "full_name": "google.analytics.data.v1beta.BetaAnalyticsData"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsdata_v1beta_generated_AnalyticsData_ListAudienceExports_sync",
+      "title": "Snippet for the list_audience_exports call in the AnalyticsData service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Data::V1beta::AnalyticsData::Client#list_audience_exports.",
+      "file": "analytics_data/list_audience_exports.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_audience_exports",
+        "full_name": "::Google::Analytics::Data::V1beta::AnalyticsData::Client#list_audience_exports",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Data::V1beta::ListAudienceExportsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Data::V1beta::ListAudienceExportsResponse",
+        "client": {
+          "short_name": "AnalyticsData::Client",
+          "full_name": "::Google::Analytics::Data::V1beta::AnalyticsData::Client"
+        },
+        "method": {
+          "short_name": "ListAudienceExports",
+          "full_name": "google.analytics.data.v1beta.BetaAnalyticsData.ListAudienceExports",
+          "service": {
+            "short_name": "AnalyticsData",
+            "full_name": "google.analytics.data.v1beta.BetaAnalyticsData"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
           "type": "FULL"
         }
       ]

@@ -32,6 +32,9 @@ module Google
             # An API that lets users analyze and explore their business conversation data.
             #
             class Client
+              # @private
+              DEFAULT_ENDPOINT_TEMPLATE = "contactcenterinsights.$UNIVERSE_DOMAIN$"
+
               include Paths
 
               # @private
@@ -98,6 +101,15 @@ module Google
               end
 
               ##
+              # The effective universe domain
+              #
+              # @return [String]
+              #
+              def universe_domain
+                @contact_center_insights_stub.universe_domain
+              end
+
+              ##
               # Create a new ContactCenterInsights REST client object.
               #
               # @example
@@ -124,8 +136,9 @@ module Google
                 credentials = @config.credentials
                 # Use self-signed JWT if the endpoint is unchanged from default,
                 # but only if the default endpoint does not have a region prefix.
-                enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
-                                         !@config.endpoint.split(".").first.include?("-")
+                enable_self_signed_jwt = @config.endpoint.nil? ||
+                                         (@config.endpoint == Configuration::DEFAULT_ENDPOINT &&
+                                         !@config.endpoint.split(".").first.include?("-"))
                 credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
                 if credentials.is_a?(::String) || credentials.is_a?(::Hash)
@@ -139,9 +152,15 @@ module Google
                   config.credentials = credentials
                   config.quota_project = @quota_project_id
                   config.endpoint = @config.endpoint
+                  config.universe_domain = @config.universe_domain
                 end
 
-                @contact_center_insights_stub = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::ServiceStub.new endpoint: @config.endpoint, credentials: credentials
+                @contact_center_insights_stub = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::ServiceStub.new(
+                  endpoint: @config.endpoint,
+                  endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
+                  universe_domain: @config.universe_domain,
+                  credentials: credentials
+                )
               end
 
               ##
@@ -272,11 +291,11 @@ module Google
               #     This value should be 4-64 characters and must match the regular
               #     expression `^[a-z0-9-]{4,64}$`. Valid characters are `[a-z][0-9]-`
               #   @param redaction_config [::Google::Cloud::ContactCenterInsights::V1::RedactionConfig, ::Hash]
-              #     Optional. DLP settings for transcript redaction. Optional, will default to
-              #     the config specified in Settings.
+              #     Optional. DLP settings for transcript redaction. Will default to the config
+              #     specified in Settings.
               #   @param speech_config [::Google::Cloud::ContactCenterInsights::V1::SpeechConfig, ::Hash]
-              #     Optional. Default Speech-to-Text configuration. Optional, will default to
-              #     the config specified in Settings.
+              #     Optional. Speech-to-Text configuration. Will default to the config
+              #     specified in Settings.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1117,6 +1136,102 @@ module Google
               end
 
               ##
+              # Deletes multiple conversations in a single request.
+              #
+              # @overload bulk_delete_conversations(request, options = nil)
+              #   Pass arguments to `bulk_delete_conversations` via a request object, either of type
+              #   {::Google::Cloud::ContactCenterInsights::V1::BulkDeleteConversationsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ContactCenterInsights::V1::BulkDeleteConversationsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload bulk_delete_conversations(parent: nil, filter: nil, max_delete_count: nil, force: nil)
+              #   Pass arguments to `bulk_delete_conversations` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource to delete conversations from.
+              #     Format:
+              #     projects/\\{project}/locations/\\{location}
+              #   @param filter [::String]
+              #     Filter used to select the subset of conversations to delete.
+              #   @param max_delete_count [::Integer]
+              #     Maximum number of conversations to delete.
+              #   @param force [::Boolean]
+              #     If set to true, all of this conversation's analyses will also be deleted.
+              #     Otherwise, the request will only succeed if the conversation has no
+              #     analyses.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/contact_center_insights/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ContactCenterInsights::V1::BulkDeleteConversationsRequest.new
+              #
+              #   # Call the bulk_delete_conversations method.
+              #   result = client.bulk_delete_conversations request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def bulk_delete_conversations request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::BulkDeleteConversationsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.bulk_delete_conversations.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.bulk_delete_conversations.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.bulk_delete_conversations.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @contact_center_insights_stub.bulk_delete_conversations request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Imports conversations and processes them according to the user's
               # configuration.
               #
@@ -1130,7 +1245,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload ingest_conversations(gcs_source: nil, transcript_object_config: nil, parent: nil, conversation_config: nil)
+              # @overload ingest_conversations(gcs_source: nil, transcript_object_config: nil, parent: nil, conversation_config: nil, redaction_config: nil, speech_config: nil)
               #   Pass arguments to `ingest_conversations` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1144,6 +1259,12 @@ module Google
               #     Required. The parent resource for new conversations.
               #   @param conversation_config [::Google::Cloud::ContactCenterInsights::V1::IngestConversationsRequest::ConversationConfig, ::Hash]
               #     Configuration that applies to all conversations.
+              #   @param redaction_config [::Google::Cloud::ContactCenterInsights::V1::RedactionConfig, ::Hash]
+              #     Optional. DLP settings for transcript redaction. Optional, will default to
+              #     the config specified in Settings.
+              #   @param speech_config [::Google::Cloud::ContactCenterInsights::V1::SpeechConfig, ::Hash]
+              #     Optional. Default Speech-to-Text configuration. Optional, will default to
+              #     the config specified in Settings.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -3377,9 +3498,9 @@ module Google
               #   end
               #
               # @!attribute [rw] endpoint
-              #   The hostname or hostname:port of the service endpoint.
-              #   Defaults to `"contactcenterinsights.googleapis.com"`.
-              #   @return [::String]
+              #   A custom service endpoint, as a hostname or hostname:port. The default is
+              #   nil, indicating to use the default endpoint in the current universe domain.
+              #   @return [::String,nil]
               # @!attribute [rw] credentials
               #   Credentials to send with calls. You may provide any of the following types:
               #    *  (`String`) The path to a service account key file in JSON format
@@ -3416,13 +3537,20 @@ module Google
               # @!attribute [rw] quota_project
               #   A separate project against which to charge quota.
               #   @return [::String]
+              # @!attribute [rw] universe_domain
+              #   The universe domain within which to make requests. This determines the
+              #   default endpoint URL. The default value of nil uses the environment
+              #   universe (usually the default "googleapis.com" universe).
+              #   @return [::String,nil]
               #
               class Configuration
                 extend ::Gapic::Config
 
+                # @private
+                # The endpoint specific to the default "googleapis.com" universe. Deprecated.
                 DEFAULT_ENDPOINT = "contactcenterinsights.googleapis.com"
 
-                config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
+                config_attr :endpoint,      nil, ::String, nil
                 config_attr :credentials,   nil do |value|
                   allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                   allowed.any? { |klass| klass === value }
@@ -3434,6 +3562,7 @@ module Google
                 config_attr :metadata,      nil, ::Hash, nil
                 config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
                 config_attr :quota_project, nil, ::String, nil
+                config_attr :universe_domain, nil, ::String, nil
 
                 # @private
                 def initialize parent_config = nil
@@ -3527,6 +3656,11 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :bulk_analyze_conversations
+                  ##
+                  # RPC-specific configuration for `bulk_delete_conversations`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :bulk_delete_conversations
                   ##
                   # RPC-specific configuration for `ingest_conversations`
                   # @return [::Gapic::Config::Method]
@@ -3687,6 +3821,8 @@ module Google
                     @delete_analysis = ::Gapic::Config::Method.new delete_analysis_config
                     bulk_analyze_conversations_config = parent_rpcs.bulk_analyze_conversations if parent_rpcs.respond_to? :bulk_analyze_conversations
                     @bulk_analyze_conversations = ::Gapic::Config::Method.new bulk_analyze_conversations_config
+                    bulk_delete_conversations_config = parent_rpcs.bulk_delete_conversations if parent_rpcs.respond_to? :bulk_delete_conversations
+                    @bulk_delete_conversations = ::Gapic::Config::Method.new bulk_delete_conversations_config
                     ingest_conversations_config = parent_rpcs.ingest_conversations if parent_rpcs.respond_to? :ingest_conversations
                     @ingest_conversations = ::Gapic::Config::Method.new ingest_conversations_config
                     export_insights_data_config = parent_rpcs.export_insights_data if parent_rpcs.respond_to? :export_insights_data

@@ -19,6 +19,7 @@
 require "google/cloud/errors"
 require "google/cloud/filestore/v1/cloud_filestore_service_pb"
 require "google/cloud/filestore/v1/cloud_filestore_manager/rest/service_stub"
+require "google/cloud/location/rest"
 
 module Google
   module Cloud
@@ -50,6 +51,9 @@ module Google
             # * `projects/12345/locations/us-central1/backups/my-backup`
             #
             class Client
+              # @private
+              DEFAULT_ENDPOINT_TEMPLATE = "file.$UNIVERSE_DOMAIN$"
+
               include Paths
 
               # @private
@@ -145,6 +149,15 @@ module Google
               end
 
               ##
+              # The effective universe domain
+              #
+              # @return [String]
+              #
+              def universe_domain
+                @cloud_filestore_manager_stub.universe_domain
+              end
+
+              ##
               # Create a new CloudFilestoreManager REST client object.
               #
               # @example
@@ -171,8 +184,9 @@ module Google
                 credentials = @config.credentials
                 # Use self-signed JWT if the endpoint is unchanged from default,
                 # but only if the default endpoint does not have a region prefix.
-                enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
-                                         !@config.endpoint.split(".").first.include?("-")
+                enable_self_signed_jwt = @config.endpoint.nil? ||
+                                         (@config.endpoint == Configuration::DEFAULT_ENDPOINT &&
+                                         !@config.endpoint.split(".").first.include?("-"))
                 credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
                 if credentials.is_a?(::String) || credentials.is_a?(::Hash)
@@ -186,9 +200,23 @@ module Google
                   config.credentials = credentials
                   config.quota_project = @quota_project_id
                   config.endpoint = @config.endpoint
+                  config.universe_domain = @config.universe_domain
                 end
 
-                @cloud_filestore_manager_stub = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ServiceStub.new endpoint: @config.endpoint, credentials: credentials
+                @cloud_filestore_manager_stub = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ServiceStub.new(
+                  endpoint: @config.endpoint,
+                  endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
+                  universe_domain: @config.universe_domain,
+                  credentials: credentials
+                )
+
+                @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @cloud_filestore_manager_stub.endpoint
+                  config.universe_domain = @cloud_filestore_manager_stub.universe_domain
+                  config.bindings_override = @config.bindings_override
+                end
               end
 
               ##
@@ -197,6 +225,13 @@ module Google
               # @return [::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::Operations]
               #
               attr_reader :operations_client
+
+              ##
+              # Get the associated client for mix-in of the Locations.
+              #
+              # @return [Google::Cloud::Location::Locations::Rest::Client]
+              #
+              attr_reader :location_client
 
               # Service calls
 
@@ -655,6 +690,98 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @cloud_filestore_manager_stub.restore_instance request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Revert an existing instance's file system to a specified snapshot.
+              #
+              # @overload revert_instance(request, options = nil)
+              #   Pass arguments to `revert_instance` via a request object, either of type
+              #   {::Google::Cloud::Filestore::V1::RevertInstanceRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Filestore::V1::RevertInstanceRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload revert_instance(name: nil, target_snapshot_id: nil)
+              #   Pass arguments to `revert_instance` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required.
+              #     `projects/{project_id}/locations/{location_id}/instances/{instance_id}`.
+              #     The resource name of the instance, in the format
+              #   @param target_snapshot_id [::String]
+              #     Required. The snapshot resource ID, in the format 'my-snapshot', where the
+              #     specified ID is the \\{snapshot_id} of the fully qualified name like
+              #     `projects/{project_id}/locations/{location_id}/instances/{instance_id}/snapshots/{snapshot_id}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/filestore/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Filestore::V1::RevertInstanceRequest.new
+              #
+              #   # Call the revert_instance method.
+              #   result = client.revert_instance request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def revert_instance request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Filestore::V1::RevertInstanceRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.revert_instance.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Filestore::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.revert_instance.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.revert_instance.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @cloud_filestore_manager_stub.revert_instance request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
                   return result
@@ -1678,9 +1805,9 @@ module Google
               #   end
               #
               # @!attribute [rw] endpoint
-              #   The hostname or hostname:port of the service endpoint.
-              #   Defaults to `"file.googleapis.com"`.
-              #   @return [::String]
+              #   A custom service endpoint, as a hostname or hostname:port. The default is
+              #   nil, indicating to use the default endpoint in the current universe domain.
+              #   @return [::String,nil]
               # @!attribute [rw] credentials
               #   Credentials to send with calls. You may provide any of the following types:
               #    *  (`String`) The path to a service account key file in JSON format
@@ -1717,13 +1844,20 @@ module Google
               # @!attribute [rw] quota_project
               #   A separate project against which to charge quota.
               #   @return [::String]
+              # @!attribute [rw] universe_domain
+              #   The universe domain within which to make requests. This determines the
+              #   default endpoint URL. The default value of nil uses the environment
+              #   universe (usually the default "googleapis.com" universe).
+              #   @return [::String,nil]
               #
               class Configuration
                 extend ::Gapic::Config
 
+                # @private
+                # The endpoint specific to the default "googleapis.com" universe. Deprecated.
                 DEFAULT_ENDPOINT = "file.googleapis.com"
 
-                config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
+                config_attr :endpoint,      nil, ::String, nil
                 config_attr :credentials,   nil do |value|
                   allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                   allowed.any? { |klass| klass === value }
@@ -1735,6 +1869,14 @@ module Google
                 config_attr :metadata,      nil, ::Hash, nil
                 config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
                 config_attr :quota_project, nil, ::String, nil
+                config_attr :universe_domain, nil, ::String, nil
+
+                # @private
+                # Overrides for http bindings for the RPCs of this service
+                # are only used when this service is used as mixin, and only
+                # by the host service.
+                # @return [::Hash{::Symbol=>::Array<::Gapic::Rest::GrpcTranscoder::HttpBinding>}]
+                config_attr :bindings_override, {}, ::Hash, nil
 
                 # @private
                 def initialize parent_config = nil
@@ -1798,6 +1940,11 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :restore_instance
+                  ##
+                  # RPC-specific configuration for `revert_instance`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :revert_instance
                   ##
                   # RPC-specific configuration for `delete_instance`
                   # @return [::Gapic::Config::Method]
@@ -1866,6 +2013,8 @@ module Google
                     @update_instance = ::Gapic::Config::Method.new update_instance_config
                     restore_instance_config = parent_rpcs.restore_instance if parent_rpcs.respond_to? :restore_instance
                     @restore_instance = ::Gapic::Config::Method.new restore_instance_config
+                    revert_instance_config = parent_rpcs.revert_instance if parent_rpcs.respond_to? :revert_instance
+                    @revert_instance = ::Gapic::Config::Method.new revert_instance_config
                     delete_instance_config = parent_rpcs.delete_instance if parent_rpcs.respond_to? :delete_instance
                     @delete_instance = ::Gapic::Config::Method.new delete_instance_config
                     list_snapshots_config = parent_rpcs.list_snapshots if parent_rpcs.respond_to? :list_snapshots

@@ -1,0 +1,25 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".toys.rb",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-cloud_quotas.gemspec",
+    "lib/google-cloud-cloud_quotas.rb",
+    "lib/google/cloud/cloud_quotas.rb",
+    "lib/google/cloud/cloud_quotas/version.rb",
+    "test/google/cloud/cloud_quotas/client_test.rb",
+    "test/google/cloud/cloud_quotas/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml"
+  ]
+}

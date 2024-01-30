@@ -5,7 +5,7 @@
 require 'google/protobuf'
 
 
-descriptor_data = "\n&google/cloud/deploy/v1/log_enums.proto\x12\x16google.cloud.deploy.v1*\xda\x01\n\x04Type\x12\x14\n\x10TYPE_UNSPECIFIED\x10\x00\x12$\n TYPE_PUBSUB_NOTIFICATION_FAILURE\x10\x01\x12\x1e\n\x1aTYPE_RESOURCE_STATE_CHANGE\x10\x03\x12\x18\n\x14TYPE_PROCESS_ABORTED\x10\x04\x12\x1d\n\x19TYPE_RESTRICTION_VIOLATED\x10\x05\x12\x19\n\x15TYPE_RESOURCE_DELETED\x10\x06\x12\"\n\x1aTYPE_RENDER_STATUES_CHANGE\x10\x02\x1a\x02\x08\x01\x42\x61\n\x1a\x63om.google.cloud.deploy.v1B\rLogEnumsProtoP\x01Z2cloud.google.com/go/deploy/apiv1/deploypb;deploypbb\x06proto3"
+descriptor_data = "\n&google/cloud/deploy/v1/log_enums.proto\x12\x16google.cloud.deploy.v1*\xf3\x01\n\x04Type\x12\x14\n\x10TYPE_UNSPECIFIED\x10\x00\x12$\n TYPE_PUBSUB_NOTIFICATION_FAILURE\x10\x01\x12\x1e\n\x1aTYPE_RESOURCE_STATE_CHANGE\x10\x03\x12\x18\n\x14TYPE_PROCESS_ABORTED\x10\x04\x12\x1d\n\x19TYPE_RESTRICTION_VIOLATED\x10\x05\x12\x19\n\x15TYPE_RESOURCE_DELETED\x10\x06\x12\x17\n\x13TYPE_ROLLOUT_UPDATE\x10\x07\x12\"\n\x1aTYPE_RENDER_STATUES_CHANGE\x10\x02\x1a\x02\x08\x01\x42\x61\n\x1a\x63om.google.cloud.deploy.v1B\rLogEnumsProtoP\x01Z2cloud.google.com/go/deploy/apiv1/deploypb;deploypbb\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 

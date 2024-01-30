@@ -30,6 +30,21 @@ describe Google::Cloud::Bigquery::Service do
   let(:project_default_ref) { Google::Apis::BigqueryV2::ProjectReference.new project_id: project_id_default }
   let(:dataset_default_ref) { Google::Apis::BigqueryV2::DatasetReference.new project_id: project_id_default, dataset_id: dataset_id_default }
   let(:table_default_ref) { Google::Apis::BigqueryV2::TableReference.new project_id: project_id_default, dataset_id: dataset_id_default, table_id: table_id_default }
+  let(:default_credentials) do
+    creds = OpenStruct.new empty: true
+    def creds.is_a? target
+      target == Google::Auth::Credentials
+    end
+    creds
+  end
+  let(:default_universe_credentials) do
+    client = OpenStruct.new universe_domain: "googleapis.com"
+    creds = OpenStruct.new empty: true, client: client
+    def creds.is_a? target
+      target == Google::Auth::Credentials
+    end
+    creds
+  end
 
   it "creates a Google::Apis::BigqueryV2::BigqueryService" do
     mock_credentials = Minitest::Mock.new
@@ -57,6 +72,42 @@ describe Google::Cloud::Bigquery::Service do
     _(v2_service.request_options.quota_project).must_equal quota_project
     _(v2_service.authorization).must_equal client
     _(v2_service.root_url).must_equal host
+    _(v2_service.universe_domain).must_equal "googleapis.com"
+  end
+
+  it "supports setting a universe domain argument" do
+    service = Google::Cloud::Bigquery::Service.new "my-project", default_credentials, universe_domain: "mydomain1.com"
+    _(service.universe_domain).must_equal "mydomain1.com"
+    _(service.service.root_url).must_equal "https://bigquery.mydomain1.com/"
+  end
+
+  it "supports setting a universe domain via environment variable" do
+    ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"] = "mydomain2.com"
+    service = Google::Cloud::Bigquery::Service.new "my-project", default_credentials
+    _(service.universe_domain).must_equal "mydomain2.com"
+    _(service.service.root_url).must_equal "https://bigquery.mydomain2.com/"
+  ensure
+    ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"] = nil
+  end
+
+  it "overrides universe domain with endpoint" do
+    service = Google::Cloud::Bigquery::Service.new "my-project", default_credentials,
+                                                   host: "https://bigquery.example.com/",
+                                                   universe_domain: "mydomain3.com"
+    _(service.universe_domain).must_equal "mydomain3.com"
+    _(service.service.root_url).must_equal "https://bigquery.example.com/"
+  end
+
+  it "allows credentials with matching universe domain" do
+    service = Google::Cloud::Bigquery::Service.new "my-project", default_universe_credentials
+    service.service
+  end
+
+  it "errors on credentials with non-matching universe domain" do
+    service = Google::Cloud::Bigquery::Service.new "my-project", default_universe_credentials, universe_domain: "wronguniverse.com"
+    expect do
+      service.service
+    end.must_raise Google::Cloud::Error
   end
 
   it "returns table ref from standard sql format with project, dataset, table and no default ref" do

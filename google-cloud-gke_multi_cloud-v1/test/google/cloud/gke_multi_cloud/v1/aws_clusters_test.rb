@@ -45,6 +45,14 @@ class ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::ClientTest < Minitest::Te
 
       @response
     end
+
+    def endpoint
+      "endpoint.example.com"
+    end
+
+    def universe_domain
+      "example.com"
+    end
   end
 
   def test_create_aws_cluster
@@ -319,6 +327,7 @@ class ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::ClientTest < Minitest::Te
     name = "hello world"
     validate_only = true
     allow_missing = true
+    ignore_errors = true
     etag = "hello world"
 
     delete_aws_cluster_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
@@ -327,6 +336,7 @@ class ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::ClientTest < Minitest::Te
       assert_equal "hello world", request["name"]
       assert_equal true, request["validate_only"]
       assert_equal true, request["allow_missing"]
+      assert_equal true, request["ignore_errors"]
       assert_equal "hello world", request["etag"]
       refute_nil options
     end
@@ -338,35 +348,35 @@ class ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::ClientTest < Minitest::Te
       end
 
       # Use hash object
-      client.delete_aws_cluster({ name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag }) do |response, operation|
+      client.delete_aws_cluster({ name: name, validate_only: validate_only, allow_missing: allow_missing, ignore_errors: ignore_errors, etag: etag }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_aws_cluster name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag do |response, operation|
+      client.delete_aws_cluster name: name, validate_only: validate_only, allow_missing: allow_missing, ignore_errors: ignore_errors, etag: etag do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_aws_cluster ::Google::Cloud::GkeMultiCloud::V1::DeleteAwsClusterRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag) do |response, operation|
+      client.delete_aws_cluster ::Google::Cloud::GkeMultiCloud::V1::DeleteAwsClusterRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, ignore_errors: ignore_errors, etag: etag) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_aws_cluster({ name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag }, grpc_options) do |response, operation|
+      client.delete_aws_cluster({ name: name, validate_only: validate_only, allow_missing: allow_missing, ignore_errors: ignore_errors, etag: etag }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_aws_cluster(::Google::Cloud::GkeMultiCloud::V1::DeleteAwsClusterRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag), grpc_options) do |response, operation|
+      client.delete_aws_cluster(::Google::Cloud::GkeMultiCloud::V1::DeleteAwsClusterRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, ignore_errors: ignore_errors, etag: etag), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -374,6 +384,82 @@ class ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::ClientTest < Minitest::Te
 
       # Verify method calls
       assert_equal 5, delete_aws_cluster_client_stub.call_rpc_count
+    end
+  end
+
+  def test_generate_aws_cluster_agent_token
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::GkeMultiCloud::V1::GenerateAwsClusterAgentTokenResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    aws_cluster = "hello world"
+    subject_token = "hello world"
+    subject_token_type = "hello world"
+    version = "hello world"
+    node_pool_id = "hello world"
+    grant_type = "hello world"
+    audience = "hello world"
+    scope = "hello world"
+    requested_token_type = "hello world"
+    options = "hello world"
+
+    generate_aws_cluster_agent_token_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :generate_aws_cluster_agent_token, name
+      assert_kind_of ::Google::Cloud::GkeMultiCloud::V1::GenerateAwsClusterAgentTokenRequest, request
+      assert_equal "hello world", request["aws_cluster"]
+      assert_equal "hello world", request["subject_token"]
+      assert_equal "hello world", request["subject_token_type"]
+      assert_equal "hello world", request["version"]
+      assert_equal "hello world", request["node_pool_id"]
+      assert_equal "hello world", request["grant_type"]
+      assert_equal "hello world", request["audience"]
+      assert_equal "hello world", request["scope"]
+      assert_equal "hello world", request["requested_token_type"]
+      assert_equal "hello world", request["options"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, generate_aws_cluster_agent_token_client_stub do
+      # Create client
+      client = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.generate_aws_cluster_agent_token({ aws_cluster: aws_cluster, subject_token: subject_token, subject_token_type: subject_token_type, version: version, node_pool_id: node_pool_id, grant_type: grant_type, audience: audience, scope: scope, requested_token_type: requested_token_type, options: options }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.generate_aws_cluster_agent_token aws_cluster: aws_cluster, subject_token: subject_token, subject_token_type: subject_token_type, version: version, node_pool_id: node_pool_id, grant_type: grant_type, audience: audience, scope: scope, requested_token_type: requested_token_type, options: options do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.generate_aws_cluster_agent_token ::Google::Cloud::GkeMultiCloud::V1::GenerateAwsClusterAgentTokenRequest.new(aws_cluster: aws_cluster, subject_token: subject_token, subject_token_type: subject_token_type, version: version, node_pool_id: node_pool_id, grant_type: grant_type, audience: audience, scope: scope, requested_token_type: requested_token_type, options: options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.generate_aws_cluster_agent_token({ aws_cluster: aws_cluster, subject_token: subject_token, subject_token_type: subject_token_type, version: version, node_pool_id: node_pool_id, grant_type: grant_type, audience: audience, scope: scope, requested_token_type: requested_token_type, options: options }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.generate_aws_cluster_agent_token(::Google::Cloud::GkeMultiCloud::V1::GenerateAwsClusterAgentTokenRequest.new(aws_cluster: aws_cluster, subject_token: subject_token, subject_token_type: subject_token_type, version: version, node_pool_id: node_pool_id, grant_type: grant_type, audience: audience, scope: scope, requested_token_type: requested_token_type, options: options), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, generate_aws_cluster_agent_token_client_stub.call_rpc_count
     end
   end
 
@@ -571,6 +657,71 @@ class ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::ClientTest < Minitest::Te
     end
   end
 
+  def test_rollback_aws_node_pool_update
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    respect_pdb = true
+
+    rollback_aws_node_pool_update_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :rollback_aws_node_pool_update, name
+      assert_kind_of ::Google::Cloud::GkeMultiCloud::V1::RollbackAwsNodePoolUpdateRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal true, request["respect_pdb"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, rollback_aws_node_pool_update_client_stub do
+      # Create client
+      client = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.rollback_aws_node_pool_update({ name: name, respect_pdb: respect_pdb }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.rollback_aws_node_pool_update name: name, respect_pdb: respect_pdb do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.rollback_aws_node_pool_update ::Google::Cloud::GkeMultiCloud::V1::RollbackAwsNodePoolUpdateRequest.new(name: name, respect_pdb: respect_pdb) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.rollback_aws_node_pool_update({ name: name, respect_pdb: respect_pdb }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.rollback_aws_node_pool_update(::Google::Cloud::GkeMultiCloud::V1::RollbackAwsNodePoolUpdateRequest.new(name: name, respect_pdb: respect_pdb), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, rollback_aws_node_pool_update_client_stub.call_rpc_count
+    end
+  end
+
   def test_get_aws_node_pool
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::GkeMultiCloud::V1::AwsNodePool.new
@@ -707,6 +858,7 @@ class ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::ClientTest < Minitest::Te
     name = "hello world"
     validate_only = true
     allow_missing = true
+    ignore_errors = true
     etag = "hello world"
 
     delete_aws_node_pool_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
@@ -715,6 +867,7 @@ class ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::ClientTest < Minitest::Te
       assert_equal "hello world", request["name"]
       assert_equal true, request["validate_only"]
       assert_equal true, request["allow_missing"]
+      assert_equal true, request["ignore_errors"]
       assert_equal "hello world", request["etag"]
       refute_nil options
     end
@@ -726,35 +879,35 @@ class ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::ClientTest < Minitest::Te
       end
 
       # Use hash object
-      client.delete_aws_node_pool({ name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag }) do |response, operation|
+      client.delete_aws_node_pool({ name: name, validate_only: validate_only, allow_missing: allow_missing, ignore_errors: ignore_errors, etag: etag }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_aws_node_pool name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag do |response, operation|
+      client.delete_aws_node_pool name: name, validate_only: validate_only, allow_missing: allow_missing, ignore_errors: ignore_errors, etag: etag do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_aws_node_pool ::Google::Cloud::GkeMultiCloud::V1::DeleteAwsNodePoolRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag) do |response, operation|
+      client.delete_aws_node_pool ::Google::Cloud::GkeMultiCloud::V1::DeleteAwsNodePoolRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, ignore_errors: ignore_errors, etag: etag) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_aws_node_pool({ name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag }, grpc_options) do |response, operation|
+      client.delete_aws_node_pool({ name: name, validate_only: validate_only, allow_missing: allow_missing, ignore_errors: ignore_errors, etag: etag }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_aws_node_pool(::Google::Cloud::GkeMultiCloud::V1::DeleteAwsNodePoolRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag), grpc_options) do |response, operation|
+      client.delete_aws_node_pool(::Google::Cloud::GkeMultiCloud::V1::DeleteAwsNodePoolRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, ignore_errors: ignore_errors, etag: etag), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -762,6 +915,122 @@ class ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::ClientTest < Minitest::Te
 
       # Verify method calls
       assert_equal 5, delete_aws_node_pool_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_aws_open_id_config
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::GkeMultiCloud::V1::AwsOpenIdConfig.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    aws_cluster = "hello world"
+
+    get_aws_open_id_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_aws_open_id_config, name
+      assert_kind_of ::Google::Cloud::GkeMultiCloud::V1::GetAwsOpenIdConfigRequest, request
+      assert_equal "hello world", request["aws_cluster"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_aws_open_id_config_client_stub do
+      # Create client
+      client = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_aws_open_id_config({ aws_cluster: aws_cluster }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_aws_open_id_config aws_cluster: aws_cluster do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_aws_open_id_config ::Google::Cloud::GkeMultiCloud::V1::GetAwsOpenIdConfigRequest.new(aws_cluster: aws_cluster) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_aws_open_id_config({ aws_cluster: aws_cluster }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_aws_open_id_config(::Google::Cloud::GkeMultiCloud::V1::GetAwsOpenIdConfigRequest.new(aws_cluster: aws_cluster), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_aws_open_id_config_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_aws_json_web_keys
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::GkeMultiCloud::V1::AwsJsonWebKeys.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    aws_cluster = "hello world"
+
+    get_aws_json_web_keys_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_aws_json_web_keys, name
+      assert_kind_of ::Google::Cloud::GkeMultiCloud::V1::GetAwsJsonWebKeysRequest, request
+      assert_equal "hello world", request["aws_cluster"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_aws_json_web_keys_client_stub do
+      # Create client
+      client = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_aws_json_web_keys({ aws_cluster: aws_cluster }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_aws_json_web_keys aws_cluster: aws_cluster do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_aws_json_web_keys ::Google::Cloud::GkeMultiCloud::V1::GetAwsJsonWebKeysRequest.new(aws_cluster: aws_cluster) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_aws_json_web_keys({ aws_cluster: aws_cluster }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_aws_json_web_keys(::Google::Cloud::GkeMultiCloud::V1::GetAwsJsonWebKeysRequest.new(aws_cluster: aws_cluster), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_aws_json_web_keys_client_stub.call_rpc_count
     end
   end
 
@@ -827,7 +1096,8 @@ class ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::ClientTest < Minitest::Te
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
     client = block_config = config = nil
-    Gapic::ServiceStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil, nil
+    Gapic::ServiceStub.stub :new, dummy_stub do
       client = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -845,7 +1115,8 @@ class ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::ClientTest < Minitest::Te
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
     client = nil
-    Gapic::ServiceStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil, nil
+    Gapic::ServiceStub.stub :new, dummy_stub do
       client = ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client.new do |config|
         config.credentials = grpc_channel
       end

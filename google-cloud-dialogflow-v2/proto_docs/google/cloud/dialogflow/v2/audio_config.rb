@@ -108,6 +108,7 @@ module Google
         #     offsets. If false or unspecified, Speech doesn't return any word-level
         #     information.
         # @!attribute [rw] phrase_hints
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Array<::String>]
         #     A list of strings containing words and phrases that the speech
         #     recognizer should recognize with higher likelihood.
@@ -128,23 +129,9 @@ module Google
         #     for more details.
         # @!attribute [rw] model
         #   @return [::String]
-        #     Which Speech model to select for the given request. Select the
-        #     model best suited to your domain to get best results. If a model is not
-        #     explicitly specified, then we auto-select a model based on the parameters
-        #     in the InputAudioConfig.
-        #     If enhanced speech model is enabled for the agent and an enhanced
-        #     version of the specified model for the language does not exist, then the
-        #     speech is recognized using the standard version of the specified model.
-        #     Refer to
-        #     [Cloud Speech API
-        #     documentation](https://cloud.google.com/speech-to-text/docs/basics#select-model)
-        #     for more details.
-        #     If you specify a model, the following models typically have the best
-        #     performance:
-        #
-        #     - phone_call (best for Agent Assist and telephony)
-        #     - latest_short (best for Dialogflow non-telephony)
-        #     - command_and_search (best for very short utterances and commands)
+        #     Optional. Which Speech model to select for the given request.
+        #     For more information, see
+        #     [Speech models](https://cloud.google.com/dialogflow/es/docs/speech-models).
         # @!attribute [rw] model_variant
         #   @return [::Google::Cloud::Dialogflow::V2::SpeechModelVariant]
         #     Which variant of the [Speech
@@ -276,13 +263,28 @@ module Google
         #     error.
         # @!attribute [rw] model
         #   @return [::String]
-        #     Which Speech model to select. Select the model best suited to your domain
-        #     to get best results. If a model is not explicitly specified, then a default
-        #     model is used.
+        #     Which Speech model to select. Select the
+        #     model best suited to your domain to get best results. If a model is not
+        #     explicitly specified, then Dialogflow auto-selects a model based on other
+        #     parameters in the SpeechToTextConfig and Agent settings.
+        #     If enhanced speech model is enabled for the agent and an enhanced
+        #     version of the specified model for the language does not exist, then the
+        #     speech is recognized using the standard version of the specified model.
         #     Refer to
         #     [Cloud Speech API
         #     documentation](https://cloud.google.com/speech-to-text/docs/basics#select-model)
         #     for more details.
+        #     If you specify a model, the following models typically have the best
+        #     performance:
+        #
+        #     - phone_call (best for Agent Assist and telephony)
+        #     - latest_short (best for Dialogflow non-telephony)
+        #     - command_and_search
+        #
+        #     Leave this field unspecified to use
+        #     [Agent Speech
+        #     settings](https://cloud.google.com/dialogflow/cx/docs/concept/agent#settings-speech)
+        #     for model selection.
         # @!attribute [rw] use_timeout_based_endpointing
         #   @return [::Boolean]
         #     Use timeout based endpointing, interpreting endpointer sensitivy as

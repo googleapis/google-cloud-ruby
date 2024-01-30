@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-dataplex-v1",
-    "version": "0.13.0",
+    "version": "0.18.1",
     "language": "RUBY",
     "apis": [
       {
@@ -14,7 +14,7 @@
     {
       "region_tag": "dataplex_v1_generated_ContentService_CreateContent_sync",
       "title": "Snippet for the create_content call in the ContentService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::ContentService::Client#create_content. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::ContentService::Client#create_content.",
       "file": "content_service/create_content.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -54,7 +54,7 @@
     {
       "region_tag": "dataplex_v1_generated_ContentService_UpdateContent_sync",
       "title": "Snippet for the update_content call in the ContentService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::ContentService::Client#update_content. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::ContentService::Client#update_content.",
       "file": "content_service/update_content.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -94,7 +94,7 @@
     {
       "region_tag": "dataplex_v1_generated_ContentService_DeleteContent_sync",
       "title": "Snippet for the delete_content call in the ContentService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::ContentService::Client#delete_content. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::ContentService::Client#delete_content.",
       "file": "content_service/delete_content.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -134,7 +134,7 @@
     {
       "region_tag": "dataplex_v1_generated_ContentService_GetContent_sync",
       "title": "Snippet for the get_content call in the ContentService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::ContentService::Client#get_content. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::ContentService::Client#get_content.",
       "file": "content_service/get_content.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -174,7 +174,7 @@
     {
       "region_tag": "dataplex_v1_generated_ContentService_GetIamPolicy_sync",
       "title": "Snippet for the get_iam_policy call in the ContentService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::ContentService::Client#get_iam_policy. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::ContentService::Client#get_iam_policy.",
       "file": "content_service/get_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,7 +206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -214,7 +214,7 @@
     {
       "region_tag": "dataplex_v1_generated_ContentService_SetIamPolicy_sync",
       "title": "Snippet for the set_iam_policy call in the ContentService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::ContentService::Client#set_iam_policy. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::ContentService::Client#set_iam_policy.",
       "file": "content_service/set_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,7 +246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -254,7 +254,7 @@
     {
       "region_tag": "dataplex_v1_generated_ContentService_TestIamPermissions_sync",
       "title": "Snippet for the test_iam_permissions call in the ContentService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::ContentService::Client#test_iam_permissions. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::ContentService::Client#test_iam_permissions.",
       "file": "content_service/test_iam_permissions.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,7 +286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -294,7 +294,7 @@
     {
       "region_tag": "dataplex_v1_generated_ContentService_ListContent_sync",
       "title": "Snippet for the list_content call in the ContentService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::ContentService::Client#list_content. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::ContentService::Client#list_content.",
       "file": "content_service/list_content.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,7 +326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -334,7 +334,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataplexService_CreateLake_sync",
       "title": "Snippet for the create_lake call in the DataplexService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#create_lake. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#create_lake.",
       "file": "dataplex_service/create_lake.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,7 +366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -374,7 +374,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataplexService_UpdateLake_sync",
       "title": "Snippet for the update_lake call in the DataplexService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#update_lake. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#update_lake.",
       "file": "dataplex_service/update_lake.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,7 +406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -414,7 +414,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataplexService_DeleteLake_sync",
       "title": "Snippet for the delete_lake call in the DataplexService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#delete_lake. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#delete_lake.",
       "file": "dataplex_service/delete_lake.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,7 +446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -454,7 +454,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataplexService_ListLakes_sync",
       "title": "Snippet for the list_lakes call in the DataplexService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#list_lakes. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#list_lakes.",
       "file": "dataplex_service/list_lakes.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,7 +486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -494,7 +494,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataplexService_GetLake_sync",
       "title": "Snippet for the get_lake call in the DataplexService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#get_lake. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#get_lake.",
       "file": "dataplex_service/get_lake.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,7 +526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -534,7 +534,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataplexService_ListLakeActions_sync",
       "title": "Snippet for the list_lake_actions call in the DataplexService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#list_lake_actions. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#list_lake_actions.",
       "file": "dataplex_service/list_lake_actions.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,7 +566,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -574,7 +574,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataplexService_CreateZone_sync",
       "title": "Snippet for the create_zone call in the DataplexService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#create_zone. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#create_zone.",
       "file": "dataplex_service/create_zone.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,7 +606,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -614,7 +614,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataplexService_UpdateZone_sync",
       "title": "Snippet for the update_zone call in the DataplexService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#update_zone. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#update_zone.",
       "file": "dataplex_service/update_zone.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,7 +646,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -654,7 +654,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataplexService_DeleteZone_sync",
       "title": "Snippet for the delete_zone call in the DataplexService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#delete_zone. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#delete_zone.",
       "file": "dataplex_service/delete_zone.rb",
       "language": "RUBY",
       "client_method": {
@@ -686,7 +686,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -694,7 +694,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataplexService_ListZones_sync",
       "title": "Snippet for the list_zones call in the DataplexService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#list_zones. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#list_zones.",
       "file": "dataplex_service/list_zones.rb",
       "language": "RUBY",
       "client_method": {
@@ -726,7 +726,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -734,7 +734,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataplexService_GetZone_sync",
       "title": "Snippet for the get_zone call in the DataplexService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#get_zone. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#get_zone.",
       "file": "dataplex_service/get_zone.rb",
       "language": "RUBY",
       "client_method": {
@@ -766,7 +766,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -774,7 +774,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataplexService_ListZoneActions_sync",
       "title": "Snippet for the list_zone_actions call in the DataplexService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#list_zone_actions. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#list_zone_actions.",
       "file": "dataplex_service/list_zone_actions.rb",
       "language": "RUBY",
       "client_method": {
@@ -806,7 +806,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -814,7 +814,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataplexService_CreateAsset_sync",
       "title": "Snippet for the create_asset call in the DataplexService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#create_asset. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#create_asset.",
       "file": "dataplex_service/create_asset.rb",
       "language": "RUBY",
       "client_method": {
@@ -846,7 +846,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -854,7 +854,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataplexService_UpdateAsset_sync",
       "title": "Snippet for the update_asset call in the DataplexService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#update_asset. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#update_asset.",
       "file": "dataplex_service/update_asset.rb",
       "language": "RUBY",
       "client_method": {
@@ -886,7 +886,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -894,7 +894,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataplexService_DeleteAsset_sync",
       "title": "Snippet for the delete_asset call in the DataplexService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#delete_asset. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#delete_asset.",
       "file": "dataplex_service/delete_asset.rb",
       "language": "RUBY",
       "client_method": {
@@ -926,7 +926,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -934,7 +934,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataplexService_ListAssets_sync",
       "title": "Snippet for the list_assets call in the DataplexService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#list_assets. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#list_assets.",
       "file": "dataplex_service/list_assets.rb",
       "language": "RUBY",
       "client_method": {
@@ -966,7 +966,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -974,7 +974,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataplexService_GetAsset_sync",
       "title": "Snippet for the get_asset call in the DataplexService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#get_asset. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#get_asset.",
       "file": "dataplex_service/get_asset.rb",
       "language": "RUBY",
       "client_method": {
@@ -1006,7 +1006,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1014,7 +1014,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataplexService_ListAssetActions_sync",
       "title": "Snippet for the list_asset_actions call in the DataplexService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#list_asset_actions. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#list_asset_actions.",
       "file": "dataplex_service/list_asset_actions.rb",
       "language": "RUBY",
       "client_method": {
@@ -1046,7 +1046,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1054,7 +1054,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataplexService_CreateTask_sync",
       "title": "Snippet for the create_task call in the DataplexService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#create_task. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#create_task.",
       "file": "dataplex_service/create_task.rb",
       "language": "RUBY",
       "client_method": {
@@ -1086,7 +1086,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1094,7 +1094,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataplexService_UpdateTask_sync",
       "title": "Snippet for the update_task call in the DataplexService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#update_task. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#update_task.",
       "file": "dataplex_service/update_task.rb",
       "language": "RUBY",
       "client_method": {
@@ -1126,7 +1126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1134,7 +1134,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataplexService_DeleteTask_sync",
       "title": "Snippet for the delete_task call in the DataplexService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#delete_task. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#delete_task.",
       "file": "dataplex_service/delete_task.rb",
       "language": "RUBY",
       "client_method": {
@@ -1166,7 +1166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1174,7 +1174,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataplexService_ListTasks_sync",
       "title": "Snippet for the list_tasks call in the DataplexService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#list_tasks. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#list_tasks.",
       "file": "dataplex_service/list_tasks.rb",
       "language": "RUBY",
       "client_method": {
@@ -1206,7 +1206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1214,7 +1214,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataplexService_GetTask_sync",
       "title": "Snippet for the get_task call in the DataplexService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#get_task. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#get_task.",
       "file": "dataplex_service/get_task.rb",
       "language": "RUBY",
       "client_method": {
@@ -1246,7 +1246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1254,7 +1254,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataplexService_ListJobs_sync",
       "title": "Snippet for the list_jobs call in the DataplexService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#list_jobs. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#list_jobs.",
       "file": "dataplex_service/list_jobs.rb",
       "language": "RUBY",
       "client_method": {
@@ -1286,7 +1286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1294,7 +1294,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataplexService_RunTask_sync",
       "title": "Snippet for the run_task call in the DataplexService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#run_task. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#run_task.",
       "file": "dataplex_service/run_task.rb",
       "language": "RUBY",
       "client_method": {
@@ -1326,7 +1326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1334,7 +1334,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataplexService_GetJob_sync",
       "title": "Snippet for the get_job call in the DataplexService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#get_job. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#get_job.",
       "file": "dataplex_service/get_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -1366,7 +1366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1374,7 +1374,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataplexService_CancelJob_sync",
       "title": "Snippet for the cancel_job call in the DataplexService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#cancel_job. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#cancel_job.",
       "file": "dataplex_service/cancel_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -1406,7 +1406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1414,7 +1414,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataplexService_CreateEnvironment_sync",
       "title": "Snippet for the create_environment call in the DataplexService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#create_environment. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#create_environment.",
       "file": "dataplex_service/create_environment.rb",
       "language": "RUBY",
       "client_method": {
@@ -1446,7 +1446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1454,7 +1454,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataplexService_UpdateEnvironment_sync",
       "title": "Snippet for the update_environment call in the DataplexService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#update_environment. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#update_environment.",
       "file": "dataplex_service/update_environment.rb",
       "language": "RUBY",
       "client_method": {
@@ -1486,7 +1486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1494,7 +1494,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataplexService_DeleteEnvironment_sync",
       "title": "Snippet for the delete_environment call in the DataplexService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#delete_environment. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#delete_environment.",
       "file": "dataplex_service/delete_environment.rb",
       "language": "RUBY",
       "client_method": {
@@ -1526,7 +1526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1534,7 +1534,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataplexService_ListEnvironments_sync",
       "title": "Snippet for the list_environments call in the DataplexService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#list_environments. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#list_environments.",
       "file": "dataplex_service/list_environments.rb",
       "language": "RUBY",
       "client_method": {
@@ -1566,7 +1566,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1574,7 +1574,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataplexService_GetEnvironment_sync",
       "title": "Snippet for the get_environment call in the DataplexService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#get_environment. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#get_environment.",
       "file": "dataplex_service/get_environment.rb",
       "language": "RUBY",
       "client_method": {
@@ -1606,7 +1606,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1614,7 +1614,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataplexService_ListSessions_sync",
       "title": "Snippet for the list_sessions call in the DataplexService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#list_sessions. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#list_sessions.",
       "file": "dataplex_service/list_sessions.rb",
       "language": "RUBY",
       "client_method": {
@@ -1646,7 +1646,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1654,7 +1654,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataTaxonomyService_CreateDataTaxonomy_sync",
       "title": "Snippet for the create_data_taxonomy call in the DataTaxonomyService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataTaxonomyService::Client#create_data_taxonomy. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataTaxonomyService::Client#create_data_taxonomy.",
       "file": "data_taxonomy_service/create_data_taxonomy.rb",
       "language": "RUBY",
       "client_method": {
@@ -1686,7 +1686,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1694,7 +1694,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataTaxonomyService_UpdateDataTaxonomy_sync",
       "title": "Snippet for the update_data_taxonomy call in the DataTaxonomyService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataTaxonomyService::Client#update_data_taxonomy. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataTaxonomyService::Client#update_data_taxonomy.",
       "file": "data_taxonomy_service/update_data_taxonomy.rb",
       "language": "RUBY",
       "client_method": {
@@ -1726,7 +1726,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1734,7 +1734,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataTaxonomyService_DeleteDataTaxonomy_sync",
       "title": "Snippet for the delete_data_taxonomy call in the DataTaxonomyService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataTaxonomyService::Client#delete_data_taxonomy. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataTaxonomyService::Client#delete_data_taxonomy.",
       "file": "data_taxonomy_service/delete_data_taxonomy.rb",
       "language": "RUBY",
       "client_method": {
@@ -1766,7 +1766,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1774,7 +1774,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataTaxonomyService_ListDataTaxonomies_sync",
       "title": "Snippet for the list_data_taxonomies call in the DataTaxonomyService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataTaxonomyService::Client#list_data_taxonomies. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataTaxonomyService::Client#list_data_taxonomies.",
       "file": "data_taxonomy_service/list_data_taxonomies.rb",
       "language": "RUBY",
       "client_method": {
@@ -1806,7 +1806,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -1814,7 +1814,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataTaxonomyService_GetDataTaxonomy_sync",
       "title": "Snippet for the get_data_taxonomy call in the DataTaxonomyService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataTaxonomyService::Client#get_data_taxonomy. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataTaxonomyService::Client#get_data_taxonomy.",
       "file": "data_taxonomy_service/get_data_taxonomy.rb",
       "language": "RUBY",
       "client_method": {
@@ -1846,7 +1846,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1854,7 +1854,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataTaxonomyService_CreateDataAttributeBinding_sync",
       "title": "Snippet for the create_data_attribute_binding call in the DataTaxonomyService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataTaxonomyService::Client#create_data_attribute_binding. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataTaxonomyService::Client#create_data_attribute_binding.",
       "file": "data_taxonomy_service/create_data_attribute_binding.rb",
       "language": "RUBY",
       "client_method": {
@@ -1886,7 +1886,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1894,7 +1894,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataTaxonomyService_UpdateDataAttributeBinding_sync",
       "title": "Snippet for the update_data_attribute_binding call in the DataTaxonomyService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataTaxonomyService::Client#update_data_attribute_binding. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataTaxonomyService::Client#update_data_attribute_binding.",
       "file": "data_taxonomy_service/update_data_attribute_binding.rb",
       "language": "RUBY",
       "client_method": {
@@ -1926,7 +1926,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1934,7 +1934,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataTaxonomyService_DeleteDataAttributeBinding_sync",
       "title": "Snippet for the delete_data_attribute_binding call in the DataTaxonomyService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataTaxonomyService::Client#delete_data_attribute_binding. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataTaxonomyService::Client#delete_data_attribute_binding.",
       "file": "data_taxonomy_service/delete_data_attribute_binding.rb",
       "language": "RUBY",
       "client_method": {
@@ -1966,7 +1966,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -1974,7 +1974,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataTaxonomyService_ListDataAttributeBindings_sync",
       "title": "Snippet for the list_data_attribute_bindings call in the DataTaxonomyService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataTaxonomyService::Client#list_data_attribute_bindings. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataTaxonomyService::Client#list_data_attribute_bindings.",
       "file": "data_taxonomy_service/list_data_attribute_bindings.rb",
       "language": "RUBY",
       "client_method": {
@@ -2006,7 +2006,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -2014,7 +2014,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataTaxonomyService_GetDataAttributeBinding_sync",
       "title": "Snippet for the get_data_attribute_binding call in the DataTaxonomyService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataTaxonomyService::Client#get_data_attribute_binding. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataTaxonomyService::Client#get_data_attribute_binding.",
       "file": "data_taxonomy_service/get_data_attribute_binding.rb",
       "language": "RUBY",
       "client_method": {
@@ -2046,7 +2046,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -2054,7 +2054,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataTaxonomyService_CreateDataAttribute_sync",
       "title": "Snippet for the create_data_attribute call in the DataTaxonomyService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataTaxonomyService::Client#create_data_attribute. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataTaxonomyService::Client#create_data_attribute.",
       "file": "data_taxonomy_service/create_data_attribute.rb",
       "language": "RUBY",
       "client_method": {
@@ -2086,7 +2086,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -2094,7 +2094,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataTaxonomyService_UpdateDataAttribute_sync",
       "title": "Snippet for the update_data_attribute call in the DataTaxonomyService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataTaxonomyService::Client#update_data_attribute. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataTaxonomyService::Client#update_data_attribute.",
       "file": "data_taxonomy_service/update_data_attribute.rb",
       "language": "RUBY",
       "client_method": {
@@ -2126,7 +2126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -2134,7 +2134,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataTaxonomyService_DeleteDataAttribute_sync",
       "title": "Snippet for the delete_data_attribute call in the DataTaxonomyService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataTaxonomyService::Client#delete_data_attribute. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataTaxonomyService::Client#delete_data_attribute.",
       "file": "data_taxonomy_service/delete_data_attribute.rb",
       "language": "RUBY",
       "client_method": {
@@ -2166,7 +2166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -2174,7 +2174,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataTaxonomyService_ListDataAttributes_sync",
       "title": "Snippet for the list_data_attributes call in the DataTaxonomyService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataTaxonomyService::Client#list_data_attributes. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataTaxonomyService::Client#list_data_attributes.",
       "file": "data_taxonomy_service/list_data_attributes.rb",
       "language": "RUBY",
       "client_method": {
@@ -2206,7 +2206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -2214,7 +2214,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataTaxonomyService_GetDataAttribute_sync",
       "title": "Snippet for the get_data_attribute call in the DataTaxonomyService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataTaxonomyService::Client#get_data_attribute. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataTaxonomyService::Client#get_data_attribute.",
       "file": "data_taxonomy_service/get_data_attribute.rb",
       "language": "RUBY",
       "client_method": {
@@ -2246,7 +2246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -2254,7 +2254,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataScanService_CreateDataScan_sync",
       "title": "Snippet for the create_data_scan call in the DataScanService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataScanService::Client#create_data_scan. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataScanService::Client#create_data_scan.",
       "file": "data_scan_service/create_data_scan.rb",
       "language": "RUBY",
       "client_method": {
@@ -2286,7 +2286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -2294,7 +2294,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataScanService_UpdateDataScan_sync",
       "title": "Snippet for the update_data_scan call in the DataScanService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataScanService::Client#update_data_scan. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataScanService::Client#update_data_scan.",
       "file": "data_scan_service/update_data_scan.rb",
       "language": "RUBY",
       "client_method": {
@@ -2326,7 +2326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -2334,7 +2334,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataScanService_DeleteDataScan_sync",
       "title": "Snippet for the delete_data_scan call in the DataScanService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataScanService::Client#delete_data_scan. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataScanService::Client#delete_data_scan.",
       "file": "data_scan_service/delete_data_scan.rb",
       "language": "RUBY",
       "client_method": {
@@ -2366,7 +2366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 48,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -2374,7 +2374,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataScanService_GetDataScan_sync",
       "title": "Snippet for the get_data_scan call in the DataScanService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataScanService::Client#get_data_scan. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataScanService::Client#get_data_scan.",
       "file": "data_scan_service/get_data_scan.rb",
       "language": "RUBY",
       "client_method": {
@@ -2406,7 +2406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -2414,7 +2414,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataScanService_ListDataScans_sync",
       "title": "Snippet for the list_data_scans call in the DataScanService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataScanService::Client#list_data_scans. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataScanService::Client#list_data_scans.",
       "file": "data_scan_service/list_data_scans.rb",
       "language": "RUBY",
       "client_method": {
@@ -2446,7 +2446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -2454,7 +2454,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataScanService_RunDataScan_sync",
       "title": "Snippet for the run_data_scan call in the DataScanService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataScanService::Client#run_data_scan. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataScanService::Client#run_data_scan.",
       "file": "data_scan_service/run_data_scan.rb",
       "language": "RUBY",
       "client_method": {
@@ -2486,7 +2486,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -2494,7 +2494,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataScanService_GetDataScanJob_sync",
       "title": "Snippet for the get_data_scan_job call in the DataScanService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataScanService::Client#get_data_scan_job. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataScanService::Client#get_data_scan_job.",
       "file": "data_scan_service/get_data_scan_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -2526,7 +2526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -2534,7 +2534,7 @@
     {
       "region_tag": "dataplex_v1_generated_DataScanService_ListDataScanJobs_sync",
       "title": "Snippet for the list_data_scan_jobs call in the DataScanService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataScanService::Client#list_data_scan_jobs. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataScanService::Client#list_data_scan_jobs.",
       "file": "data_scan_service/list_data_scan_jobs.rb",
       "language": "RUBY",
       "client_method": {
@@ -2566,7 +2566,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -2574,7 +2574,7 @@
     {
       "region_tag": "dataplex_v1_generated_MetadataService_CreateEntity_sync",
       "title": "Snippet for the create_entity call in the MetadataService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::MetadataService::Client#create_entity. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::MetadataService::Client#create_entity.",
       "file": "metadata_service/create_entity.rb",
       "language": "RUBY",
       "client_method": {
@@ -2606,7 +2606,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -2614,7 +2614,7 @@
     {
       "region_tag": "dataplex_v1_generated_MetadataService_UpdateEntity_sync",
       "title": "Snippet for the update_entity call in the MetadataService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::MetadataService::Client#update_entity. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::MetadataService::Client#update_entity.",
       "file": "metadata_service/update_entity.rb",
       "language": "RUBY",
       "client_method": {
@@ -2646,7 +2646,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -2654,7 +2654,7 @@
     {
       "region_tag": "dataplex_v1_generated_MetadataService_DeleteEntity_sync",
       "title": "Snippet for the delete_entity call in the MetadataService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::MetadataService::Client#delete_entity. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::MetadataService::Client#delete_entity.",
       "file": "metadata_service/delete_entity.rb",
       "language": "RUBY",
       "client_method": {
@@ -2686,7 +2686,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -2694,7 +2694,7 @@
     {
       "region_tag": "dataplex_v1_generated_MetadataService_GetEntity_sync",
       "title": "Snippet for the get_entity call in the MetadataService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::MetadataService::Client#get_entity. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::MetadataService::Client#get_entity.",
       "file": "metadata_service/get_entity.rb",
       "language": "RUBY",
       "client_method": {
@@ -2726,7 +2726,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -2734,7 +2734,7 @@
     {
       "region_tag": "dataplex_v1_generated_MetadataService_ListEntities_sync",
       "title": "Snippet for the list_entities call in the MetadataService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::MetadataService::Client#list_entities. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::MetadataService::Client#list_entities.",
       "file": "metadata_service/list_entities.rb",
       "language": "RUBY",
       "client_method": {
@@ -2766,7 +2766,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -2774,7 +2774,7 @@
     {
       "region_tag": "dataplex_v1_generated_MetadataService_CreatePartition_sync",
       "title": "Snippet for the create_partition call in the MetadataService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::MetadataService::Client#create_partition. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::MetadataService::Client#create_partition.",
       "file": "metadata_service/create_partition.rb",
       "language": "RUBY",
       "client_method": {
@@ -2806,7 +2806,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -2814,7 +2814,7 @@
     {
       "region_tag": "dataplex_v1_generated_MetadataService_DeletePartition_sync",
       "title": "Snippet for the delete_partition call in the MetadataService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::MetadataService::Client#delete_partition. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::MetadataService::Client#delete_partition.",
       "file": "metadata_service/delete_partition.rb",
       "language": "RUBY",
       "client_method": {
@@ -2846,7 +2846,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -2854,7 +2854,7 @@
     {
       "region_tag": "dataplex_v1_generated_MetadataService_GetPartition_sync",
       "title": "Snippet for the get_partition call in the MetadataService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::MetadataService::Client#get_partition. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::MetadataService::Client#get_partition.",
       "file": "metadata_service/get_partition.rb",
       "language": "RUBY",
       "client_method": {
@@ -2886,7 +2886,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -2894,7 +2894,7 @@
     {
       "region_tag": "dataplex_v1_generated_MetadataService_ListPartitions_sync",
       "title": "Snippet for the list_partitions call in the MetadataService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::MetadataService::Client#list_partitions. It may require modification in order to execute successfully.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::MetadataService::Client#list_partitions.",
       "file": "metadata_service/list_partitions.rb",
       "language": "RUBY",
       "client_method": {
@@ -2926,7 +2926,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 50,
           "type": "FULL"
         }
       ]

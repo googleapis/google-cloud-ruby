@@ -60,6 +60,14 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::ClientTest < Minitest::Te
 
       @response
     end
+
+    def endpoint
+      "endpoint.example.com"
+    end
+
+    def universe_domain
+      "example.com"
+    end
   end
 
   def test_list_constraints
@@ -401,6 +409,7 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::ClientTest < Minitest::Te
 
     # Create request parameters for a unary method.
     name = "hello world"
+    etag = "hello world"
 
     delete_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -416,27 +425,27 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::ClientTest < Minitest::Te
         end
 
         # Use hash object
-        client.delete_policy({ name: name }) do |_result, response|
+        client.delete_policy({ name: name, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_policy name: name do |_result, response|
+        client.delete_policy name: name, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_policy ::Google::Cloud::OrgPolicy::V2::DeletePolicyRequest.new(name: name) do |_result, response|
+        client.delete_policy ::Google::Cloud::OrgPolicy::V2::DeletePolicyRequest.new(name: name, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_policy({ name: name }, call_options) do |_result, response|
+        client.delete_policy({ name: name, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_policy(::Google::Cloud::OrgPolicy::V2::DeletePolicyRequest.new(name: name), call_options) do |_result, response|
+        client.delete_policy(::Google::Cloud::OrgPolicy::V2::DeletePolicyRequest.new(name: name, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -446,11 +455,285 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::ClientTest < Minitest::Te
     end
   end
 
+  def test_create_custom_constraint
+    # Create test objects.
+    client_result = ::Google::Cloud::OrgPolicy::V2::CustomConstraint.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    custom_constraint = {}
+
+    create_custom_constraint_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::ServiceStub.stub :transcode_create_custom_constraint_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_custom_constraint_client_stub do
+        # Create client
+        client = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_custom_constraint({ parent: parent, custom_constraint: custom_constraint }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_custom_constraint parent: parent, custom_constraint: custom_constraint do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_custom_constraint ::Google::Cloud::OrgPolicy::V2::CreateCustomConstraintRequest.new(parent: parent, custom_constraint: custom_constraint) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_custom_constraint({ parent: parent, custom_constraint: custom_constraint }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_custom_constraint(::Google::Cloud::OrgPolicy::V2::CreateCustomConstraintRequest.new(parent: parent, custom_constraint: custom_constraint), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_custom_constraint_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_custom_constraint
+    # Create test objects.
+    client_result = ::Google::Cloud::OrgPolicy::V2::CustomConstraint.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    custom_constraint = {}
+
+    update_custom_constraint_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::ServiceStub.stub :transcode_update_custom_constraint_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_custom_constraint_client_stub do
+        # Create client
+        client = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_custom_constraint({ custom_constraint: custom_constraint }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_custom_constraint custom_constraint: custom_constraint do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_custom_constraint ::Google::Cloud::OrgPolicy::V2::UpdateCustomConstraintRequest.new(custom_constraint: custom_constraint) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_custom_constraint({ custom_constraint: custom_constraint }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_custom_constraint(::Google::Cloud::OrgPolicy::V2::UpdateCustomConstraintRequest.new(custom_constraint: custom_constraint), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_custom_constraint_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_custom_constraint
+    # Create test objects.
+    client_result = ::Google::Cloud::OrgPolicy::V2::CustomConstraint.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_custom_constraint_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::ServiceStub.stub :transcode_get_custom_constraint_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_custom_constraint_client_stub do
+        # Create client
+        client = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_custom_constraint({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_custom_constraint name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_custom_constraint ::Google::Cloud::OrgPolicy::V2::GetCustomConstraintRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_custom_constraint({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_custom_constraint(::Google::Cloud::OrgPolicy::V2::GetCustomConstraintRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_custom_constraint_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_custom_constraints
+    # Create test objects.
+    client_result = ::Google::Cloud::OrgPolicy::V2::ListCustomConstraintsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_custom_constraints_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::ServiceStub.stub :transcode_list_custom_constraints_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_custom_constraints_client_stub do
+        # Create client
+        client = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_custom_constraints({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_custom_constraints parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_custom_constraints ::Google::Cloud::OrgPolicy::V2::ListCustomConstraintsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_custom_constraints({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_custom_constraints(::Google::Cloud::OrgPolicy::V2::ListCustomConstraintsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_custom_constraints_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_custom_constraint
+    # Create test objects.
+    client_result = ::Google::Protobuf::Empty.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_custom_constraint_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::ServiceStub.stub :transcode_delete_custom_constraint_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_custom_constraint_client_stub do
+        # Create client
+        client = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_custom_constraint({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_custom_constraint name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_custom_constraint ::Google::Cloud::OrgPolicy::V2::DeleteCustomConstraintRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_custom_constraint({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_custom_constraint(::Google::Cloud::OrgPolicy::V2::DeleteCustomConstraintRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_custom_constraint_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 
     client = block_config = config = nil
-    Gapic::Rest::ClientStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil
+    Gapic::Rest::ClientStub.stub :new, dummy_stub do
       client = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::Client.new do |config|
         config.credentials = credentials_token
       end

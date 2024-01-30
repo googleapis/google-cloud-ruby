@@ -41,6 +41,9 @@ module Google
             # https://cloud.google.com/dlp/docs/.
             #
             class Client
+              # @private
+              DEFAULT_ENDPOINT_TEMPLATE = "dlp.$UNIVERSE_DOMAIN$"
+
               include Paths
 
               # @private
@@ -161,6 +164,25 @@ module Google
 
                   default_config.rpcs.activate_job_trigger.timeout = 300.0
 
+                  default_config.rpcs.create_discovery_config.timeout = 300.0
+
+                  default_config.rpcs.update_discovery_config.timeout = 300.0
+
+                  default_config.rpcs.get_discovery_config.timeout = 300.0
+                  default_config.rpcs.get_discovery_config.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                  }
+
+                  default_config.rpcs.list_discovery_configs.timeout = 300.0
+                  default_config.rpcs.list_discovery_configs.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                  }
+
+                  default_config.rpcs.delete_discovery_config.timeout = 300.0
+                  default_config.rpcs.delete_discovery_config.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                  }
+
                   default_config.rpcs.create_dlp_job.timeout = 300.0
 
                   default_config.rpcs.list_dlp_jobs.timeout = 300.0
@@ -230,6 +252,15 @@ module Google
               end
 
               ##
+              # The effective universe domain
+              #
+              # @return [String]
+              #
+              def universe_domain
+                @dlp_service_stub.universe_domain
+              end
+
+              ##
               # Create a new DlpService REST client object.
               #
               # @example
@@ -256,8 +287,9 @@ module Google
                 credentials = @config.credentials
                 # Use self-signed JWT if the endpoint is unchanged from default,
                 # but only if the default endpoint does not have a region prefix.
-                enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
-                                         !@config.endpoint.split(".").first.include?("-")
+                enable_self_signed_jwt = @config.endpoint.nil? ||
+                                         (@config.endpoint == Configuration::DEFAULT_ENDPOINT &&
+                                         !@config.endpoint.split(".").first.include?("-"))
                 credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
                 if credentials.is_a?(::String) || credentials.is_a?(::Hash)
@@ -267,13 +299,19 @@ module Google
                 @quota_project_id = @config.quota_project
                 @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
+                @dlp_service_stub = ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.new(
+                  endpoint: @config.endpoint,
+                  endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
+                  universe_domain: @config.universe_domain,
+                  credentials: credentials
+                )
+
                 @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
                   config.credentials = credentials
                   config.quota_project = @quota_project_id
-                  config.endpoint = @config.endpoint
+                  config.endpoint = @dlp_service_stub.endpoint
+                  config.universe_domain = @dlp_service_stub.universe_domain
                 end
-
-                @dlp_service_stub = ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.new endpoint: @config.endpoint, credentials: credentials
               end
 
               ##
@@ -989,8 +1027,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. Resource name of organization and inspectTemplate to be updated, for
-              #     example `organizations/433245324/inspectTemplates/432452342` or
+              #     Required. Resource name of organization and inspectTemplate to be updated,
+              #     for example `organizations/433245324/inspectTemplates/432452342` or
               #     projects/project-id/inspectTemplates/432452342.
               #   @param inspect_template [::Google::Cloud::Dlp::V2::InspectTemplate, ::Hash]
               #     New InspectTemplate value.
@@ -1074,8 +1112,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. Resource name of the organization and inspectTemplate to be read, for
-              #     example `organizations/433245324/inspectTemplates/432452342` or
+              #     Required. Resource name of the organization and inspectTemplate to be read,
+              #     for example `organizations/433245324/inspectTemplates/432452342` or
               #     projects/project-id/inspectTemplates/432452342.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Dlp::V2::InspectTemplate]
@@ -1176,15 +1214,15 @@ module Google
               #
               #         parent=projects/example-project/locations/europe-west3
               #   @param page_token [::String]
-              #     Page token to continue retrieval. Comes from previous call
+              #     Page token to continue retrieval. Comes from the previous call
               #     to `ListInspectTemplates`.
               #   @param page_size [::Integer]
-              #     Size of the page, can be limited by the server. If zero server returns
-              #     a page of max size 100.
+              #     Size of the page. This value can be limited by the server. If zero server
+              #     returns a page of max size 100.
               #   @param order_by [::String]
               #     Comma separated list of fields to order by,
-              #     followed by `asc` or `desc` postfix. This list is case-insensitive,
-              #     default sorting order is ascending, redundant space characters are
+              #     followed by `asc` or `desc` postfix. This list is case insensitive. The
+              #     default sorting order is ascending. Redundant space characters are
               #     insignificant.
               #
               #     Example: `name asc,update_time, create_time desc`
@@ -1280,9 +1318,9 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. Resource name of the organization and inspectTemplate to be deleted, for
-              #     example `organizations/433245324/inspectTemplates/432452342` or
-              #     projects/project-id/inspectTemplates/432452342.
+              #     Required. Resource name of the organization and inspectTemplate to be
+              #     deleted, for example `organizations/433245324/inspectTemplates/432452342`
+              #     or projects/project-id/inspectTemplates/432452342.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Protobuf::Empty]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1471,8 +1509,9 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. Resource name of organization and deidentify template to be updated, for
-              #     example `organizations/433245324/deidentifyTemplates/432452342` or
+              #     Required. Resource name of organization and deidentify template to be
+              #     updated, for example
+              #     `organizations/433245324/deidentifyTemplates/432452342` or
               #     projects/project-id/deidentifyTemplates/432452342.
               #   @param deidentify_template [::Google::Cloud::Dlp::V2::DeidentifyTemplate, ::Hash]
               #     New DeidentifyTemplate value.
@@ -1557,9 +1596,9 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. Resource name of the organization and deidentify template to be read, for
-              #     example `organizations/433245324/deidentifyTemplates/432452342` or
-              #     projects/project-id/deidentifyTemplates/432452342.
+              #     Required. Resource name of the organization and deidentify template to be
+              #     read, for example `organizations/433245324/deidentifyTemplates/432452342`
+              #     or projects/project-id/deidentifyTemplates/432452342.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Dlp::V2::DeidentifyTemplate]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1660,15 +1699,15 @@ module Google
               #
               #         parent=projects/example-project/locations/europe-west3
               #   @param page_token [::String]
-              #     Page token to continue retrieval. Comes from previous call
+              #     Page token to continue retrieval. Comes from the previous call
               #     to `ListDeidentifyTemplates`.
               #   @param page_size [::Integer]
-              #     Size of the page, can be limited by the server. If zero server returns
-              #     a page of max size 100.
+              #     Size of the page. This value can be limited by the server. If zero server
+              #     returns a page of max size 100.
               #   @param order_by [::String]
               #     Comma separated list of fields to order by,
-              #     followed by `asc` or `desc` postfix. This list is case-insensitive,
-              #     default sorting order is ascending, redundant space characters are
+              #     followed by `asc` or `desc` postfix. This list is case insensitive. The
+              #     default sorting order is ascending. Redundant space characters are
               #     insignificant.
               #
               #     Example: `name asc,update_time, create_time desc`
@@ -1765,8 +1804,9 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. Resource name of the organization and deidentify template to be deleted,
-              #     for example `organizations/433245324/deidentifyTemplates/432452342` or
+              #     Required. Resource name of the organization and deidentify template to be
+              #     deleted, for example
+              #     `organizations/433245324/deidentifyTemplates/432452342` or
               #     projects/project-id/deidentifyTemplates/432452342.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Protobuf::Empty]
@@ -2035,8 +2075,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. Resource name of the trigger to execute a hybrid inspect on, for example
-              #     `projects/dlp-test-project/jobTriggers/53234423`.
+              #     Required. Resource name of the trigger to execute a hybrid inspect on, for
+              #     example `projects/dlp-test-project/jobTriggers/53234423`.
               #   @param hybrid_item [::Google::Cloud::Dlp::V2::HybridContentItem, ::Hash]
               #     The item to inspect.
               # @yield [result, operation] Access the result along with the TransportOperation object
@@ -2214,15 +2254,15 @@ module Google
               #
               #         parent=projects/example-project/locations/europe-west3
               #   @param page_token [::String]
-              #     Page token to continue retrieval. Comes from previous call
+              #     Page token to continue retrieval. Comes from the previous call
               #     to ListJobTriggers. `order_by` field must not
               #     change for subsequent calls.
               #   @param page_size [::Integer]
-              #     Size of the page, can be limited by a server.
+              #     Size of the page. This value can be limited by a server.
               #   @param order_by [::String]
               #     Comma separated list of triggeredJob fields to order by,
-              #     followed by `asc` or `desc` postfix. This list is case-insensitive,
-              #     default sorting order is ascending, redundant space characters are
+              #     followed by `asc` or `desc` postfix. This list is case insensitive. The
+              #     default sorting order is ascending. Redundant space characters are
               #     insignificant.
               #
               #     Example: `name asc,update_time, create_time desc`
@@ -2488,6 +2528,452 @@ module Google
               end
 
               ##
+              # Creates a config for discovery to scan and profile storage.
+              #
+              # @overload create_discovery_config(request, options = nil)
+              #   Pass arguments to `create_discovery_config` via a request object, either of type
+              #   {::Google::Cloud::Dlp::V2::CreateDiscoveryConfigRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Dlp::V2::CreateDiscoveryConfigRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_discovery_config(parent: nil, discovery_config: nil, config_id: nil)
+              #   Pass arguments to `create_discovery_config` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Parent resource name.
+              #
+              #     The format of this value is as follows:
+              #     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+              #
+              #     The following example `parent` string specifies a parent project with the
+              #     identifier `example-project`, and specifies the `europe-west3` location
+              #     for processing data:
+              #
+              #         parent=projects/example-project/locations/europe-west3
+              #   @param discovery_config [::Google::Cloud::Dlp::V2::DiscoveryConfig, ::Hash]
+              #     Required. The DiscoveryConfig to create.
+              #   @param config_id [::String]
+              #     The config ID can contain uppercase and lowercase letters,
+              #     numbers, and hyphens; that is, it must match the regular
+              #     expression: `[a-zA-Z\d-_]+`. The maximum length is 100
+              #     characters. Can be empty to allow the system to generate one.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Dlp::V2::DiscoveryConfig]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Dlp::V2::DiscoveryConfig]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dlp/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dlp::V2::DlpService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dlp::V2::CreateDiscoveryConfigRequest.new
+              #
+              #   # Call the create_discovery_config method.
+              #   result = client.create_discovery_config request
+              #
+              #   # The returned object is of type Google::Cloud::Dlp::V2::DiscoveryConfig.
+              #   p result
+              #
+              def create_discovery_config request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::CreateDiscoveryConfigRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_discovery_config.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Dlp::V2::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_discovery_config.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_discovery_config.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @dlp_service_stub.create_discovery_config request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates a discovery configuration.
+              #
+              # @overload update_discovery_config(request, options = nil)
+              #   Pass arguments to `update_discovery_config` via a request object, either of type
+              #   {::Google::Cloud::Dlp::V2::UpdateDiscoveryConfigRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Dlp::V2::UpdateDiscoveryConfigRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_discovery_config(name: nil, discovery_config: nil, update_mask: nil)
+              #   Pass arguments to `update_discovery_config` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Resource name of the project and the configuration, for example
+              #     `projects/dlp-test-project/discoveryConfigs/53234423`.
+              #   @param discovery_config [::Google::Cloud::Dlp::V2::DiscoveryConfig, ::Hash]
+              #     Required. New DiscoveryConfig value.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Mask to control which fields get updated.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Dlp::V2::DiscoveryConfig]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Dlp::V2::DiscoveryConfig]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dlp/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dlp::V2::DlpService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dlp::V2::UpdateDiscoveryConfigRequest.new
+              #
+              #   # Call the update_discovery_config method.
+              #   result = client.update_discovery_config request
+              #
+              #   # The returned object is of type Google::Cloud::Dlp::V2::DiscoveryConfig.
+              #   p result
+              #
+              def update_discovery_config request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::UpdateDiscoveryConfigRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_discovery_config.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Dlp::V2::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_discovery_config.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_discovery_config.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @dlp_service_stub.update_discovery_config request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets a discovery configuration.
+              #
+              # @overload get_discovery_config(request, options = nil)
+              #   Pass arguments to `get_discovery_config` via a request object, either of type
+              #   {::Google::Cloud::Dlp::V2::GetDiscoveryConfigRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Dlp::V2::GetDiscoveryConfigRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_discovery_config(name: nil)
+              #   Pass arguments to `get_discovery_config` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Resource name of the project and the configuration, for example
+              #     `projects/dlp-test-project/discoveryConfigs/53234423`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Dlp::V2::DiscoveryConfig]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Dlp::V2::DiscoveryConfig]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dlp/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dlp::V2::DlpService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dlp::V2::GetDiscoveryConfigRequest.new
+              #
+              #   # Call the get_discovery_config method.
+              #   result = client.get_discovery_config request
+              #
+              #   # The returned object is of type Google::Cloud::Dlp::V2::DiscoveryConfig.
+              #   p result
+              #
+              def get_discovery_config request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::GetDiscoveryConfigRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_discovery_config.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Dlp::V2::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_discovery_config.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_discovery_config.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @dlp_service_stub.get_discovery_config request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists discovery configurations.
+              #
+              # @overload list_discovery_configs(request, options = nil)
+              #   Pass arguments to `list_discovery_configs` via a request object, either of type
+              #   {::Google::Cloud::Dlp::V2::ListDiscoveryConfigsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Dlp::V2::ListDiscoveryConfigsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_discovery_configs(parent: nil, page_token: nil, page_size: nil, order_by: nil)
+              #   Pass arguments to `list_discovery_configs` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Parent resource name.
+              #
+              #     The format of this value is as follows:
+              #     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+              #
+              #     The following example `parent` string specifies a parent project with the
+              #     identifier `example-project`, and specifies the `europe-west3` location
+              #     for processing data:
+              #
+              #         parent=projects/example-project/locations/europe-west3
+              #   @param page_token [::String]
+              #     Page token to continue retrieval. Comes from the previous call
+              #     to ListDiscoveryConfigs. `order_by` field must not
+              #     change for subsequent calls.
+              #   @param page_size [::Integer]
+              #     Size of the page. This value can be limited by a server.
+              #   @param order_by [::String]
+              #     Comma separated list of config fields to order by,
+              #     followed by `asc` or `desc` postfix. This list is case insensitive. The
+              #     default sorting order is ascending. Redundant space characters are
+              #     insignificant.
+              #
+              #     Example: `name asc,update_time, create_time desc`
+              #
+              #     Supported fields are:
+              #
+              #     - `last_run_time`: corresponds to the last time the DiscoveryConfig ran.
+              #     - `name`: corresponds to the DiscoveryConfig's name.
+              #     - `status`: corresponds to DiscoveryConfig's status.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dlp::V2::DiscoveryConfig>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dlp::V2::DiscoveryConfig>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dlp/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dlp::V2::DlpService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dlp::V2::ListDiscoveryConfigsRequest.new
+              #
+              #   # Call the list_discovery_configs method.
+              #   result = client.list_discovery_configs request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Dlp::V2::DiscoveryConfig.
+              #     p item
+              #   end
+              #
+              def list_discovery_configs request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::ListDiscoveryConfigsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_discovery_configs.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Dlp::V2::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_discovery_configs.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_discovery_configs.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @dlp_service_stub.list_discovery_configs request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @dlp_service_stub, :list_discovery_configs, "discovery_configs", request, result, options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a discovery configuration.
+              #
+              # @overload delete_discovery_config(request, options = nil)
+              #   Pass arguments to `delete_discovery_config` via a request object, either of type
+              #   {::Google::Cloud::Dlp::V2::DeleteDiscoveryConfigRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Dlp::V2::DeleteDiscoveryConfigRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_discovery_config(name: nil)
+              #   Pass arguments to `delete_discovery_config` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Resource name of the project and the config, for example
+              #     `projects/dlp-test-project/discoveryConfigs/53234423`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dlp/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dlp::V2::DlpService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dlp::V2::DeleteDiscoveryConfigRequest.new
+              #
+              #   # Call the delete_discovery_config method.
+              #   result = client.delete_discovery_config request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
+              def delete_discovery_config request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::DeleteDiscoveryConfigRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_discovery_config.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Dlp::V2::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_discovery_config.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_discovery_config.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @dlp_service_stub.delete_discovery_config request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Creates a new job to inspect storage or calculate risk metrics.
               # See https://cloud.google.com/dlp/docs/inspecting-storage and
               # https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.
@@ -2672,8 +3158,8 @@ module Google
               #     The type of job. Defaults to `DlpJobType.INSPECT`
               #   @param order_by [::String]
               #     Comma separated list of fields to order by,
-              #     followed by `asc` or `desc` postfix. This list is case-insensitive,
-              #     default sorting order is ascending, redundant space characters are
+              #     followed by `asc` or `desc` postfix. This list is case insensitive. The
+              #     default sorting order is ascending. Redundant space characters are
               #     insignificant.
               #
               #     Example: `name asc, end_time asc, create_time desc`
@@ -3123,8 +3609,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. Resource name of organization and storedInfoType to be updated, for
-              #     example `organizations/433245324/storedInfoTypes/432452342` or
+              #     Required. Resource name of organization and storedInfoType to be updated,
+              #     for example `organizations/433245324/storedInfoTypes/432452342` or
               #     projects/project-id/storedInfoTypes/432452342.
               #   @param config [::Google::Cloud::Dlp::V2::StoredInfoTypeConfig, ::Hash]
               #     Updated configuration for the storedInfoType. If not provided, a new
@@ -3211,8 +3697,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. Resource name of the organization and storedInfoType to be read, for
-              #     example `organizations/433245324/storedInfoTypes/432452342` or
+              #     Required. Resource name of the organization and storedInfoType to be read,
+              #     for example `organizations/433245324/storedInfoTypes/432452342` or
               #     projects/project-id/storedInfoTypes/432452342.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Dlp::V2::StoredInfoType]
@@ -3310,15 +3796,15 @@ module Google
               #
               #         parent=projects/example-project/locations/europe-west3
               #   @param page_token [::String]
-              #     Page token to continue retrieval. Comes from previous call
+              #     Page token to continue retrieval. Comes from the previous call
               #     to `ListStoredInfoTypes`.
               #   @param page_size [::Integer]
-              #     Size of the page, can be limited by the server. If zero server returns
-              #     a page of max size 100.
+              #     Size of the page. This value can be limited by the server. If zero server
+              #     returns a page of max size 100.
               #   @param order_by [::String]
               #     Comma separated list of fields to order by,
-              #     followed by `asc` or `desc` postfix. This list is case-insensitive,
-              #     default sorting order is ascending, redundant space characters are
+              #     followed by `asc` or `desc` postfix. This list is case insensitive. The
+              #     default sorting order is ascending. Redundant space characters are
               #     insignificant.
               #
               #     Example: `name asc, display_name, create_time desc`
@@ -3416,8 +3902,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. Resource name of the organization and storedInfoType to be deleted, for
-              #     example `organizations/433245324/storedInfoTypes/432452342` or
+              #     Required. Resource name of the organization and storedInfoType to be
+              #     deleted, for example `organizations/433245324/storedInfoTypes/432452342` or
               #     projects/project-id/storedInfoTypes/432452342.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Protobuf::Empty]
@@ -3498,8 +3984,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. Resource name of the job to execute a hybrid inspect on, for example
-              #     `projects/dlp-test-project/dlpJob/53234423`.
+              #     Required. Resource name of the job to execute a hybrid inspect on, for
+              #     example `projects/dlp-test-project/dlpJob/53234423`.
               #   @param hybrid_item [::Google::Cloud::Dlp::V2::HybridContentItem, ::Hash]
               #     The item to inspect.
               # @yield [result, operation] Access the result along with the TransportOperation object
@@ -3669,9 +4155,9 @@ module Google
               #   end
               #
               # @!attribute [rw] endpoint
-              #   The hostname or hostname:port of the service endpoint.
-              #   Defaults to `"dlp.googleapis.com"`.
-              #   @return [::String]
+              #   A custom service endpoint, as a hostname or hostname:port. The default is
+              #   nil, indicating to use the default endpoint in the current universe domain.
+              #   @return [::String,nil]
               # @!attribute [rw] credentials
               #   Credentials to send with calls. You may provide any of the following types:
               #    *  (`String`) The path to a service account key file in JSON format
@@ -3708,13 +4194,20 @@ module Google
               # @!attribute [rw] quota_project
               #   A separate project against which to charge quota.
               #   @return [::String]
+              # @!attribute [rw] universe_domain
+              #   The universe domain within which to make requests. This determines the
+              #   default endpoint URL. The default value of nil uses the environment
+              #   universe (usually the default "googleapis.com" universe).
+              #   @return [::String,nil]
               #
               class Configuration
                 extend ::Gapic::Config
 
+                # @private
+                # The endpoint specific to the default "googleapis.com" universe. Deprecated.
                 DEFAULT_ENDPOINT = "dlp.googleapis.com"
 
-                config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
+                config_attr :endpoint,      nil, ::String, nil
                 config_attr :credentials,   nil do |value|
                   allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                   allowed.any? { |klass| klass === value }
@@ -3726,6 +4219,7 @@ module Google
                 config_attr :metadata,      nil, ::Hash, nil
                 config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
                 config_attr :quota_project, nil, ::String, nil
+                config_attr :universe_domain, nil, ::String, nil
 
                 # @private
                 def initialize parent_config = nil
@@ -3875,6 +4369,31 @@ module Google
                   #
                   attr_reader :activate_job_trigger
                   ##
+                  # RPC-specific configuration for `create_discovery_config`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_discovery_config
+                  ##
+                  # RPC-specific configuration for `update_discovery_config`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_discovery_config
+                  ##
+                  # RPC-specific configuration for `get_discovery_config`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_discovery_config
+                  ##
+                  # RPC-specific configuration for `list_discovery_configs`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_discovery_configs
+                  ##
+                  # RPC-specific configuration for `delete_discovery_config`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_discovery_config
+                  ##
                   # RPC-specific configuration for `create_dlp_job`
                   # @return [::Gapic::Config::Method]
                   #
@@ -3981,6 +4500,16 @@ module Google
                     @delete_job_trigger = ::Gapic::Config::Method.new delete_job_trigger_config
                     activate_job_trigger_config = parent_rpcs.activate_job_trigger if parent_rpcs.respond_to? :activate_job_trigger
                     @activate_job_trigger = ::Gapic::Config::Method.new activate_job_trigger_config
+                    create_discovery_config_config = parent_rpcs.create_discovery_config if parent_rpcs.respond_to? :create_discovery_config
+                    @create_discovery_config = ::Gapic::Config::Method.new create_discovery_config_config
+                    update_discovery_config_config = parent_rpcs.update_discovery_config if parent_rpcs.respond_to? :update_discovery_config
+                    @update_discovery_config = ::Gapic::Config::Method.new update_discovery_config_config
+                    get_discovery_config_config = parent_rpcs.get_discovery_config if parent_rpcs.respond_to? :get_discovery_config
+                    @get_discovery_config = ::Gapic::Config::Method.new get_discovery_config_config
+                    list_discovery_configs_config = parent_rpcs.list_discovery_configs if parent_rpcs.respond_to? :list_discovery_configs
+                    @list_discovery_configs = ::Gapic::Config::Method.new list_discovery_configs_config
+                    delete_discovery_config_config = parent_rpcs.delete_discovery_config if parent_rpcs.respond_to? :delete_discovery_config
+                    @delete_discovery_config = ::Gapic::Config::Method.new delete_discovery_config_config
                     create_dlp_job_config = parent_rpcs.create_dlp_job if parent_rpcs.respond_to? :create_dlp_job
                     @create_dlp_job = ::Gapic::Config::Method.new create_dlp_job_config
                     list_dlp_jobs_config = parent_rpcs.list_dlp_jobs if parent_rpcs.respond_to? :list_dlp_jobs

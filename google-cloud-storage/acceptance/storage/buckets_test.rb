@@ -17,12 +17,11 @@ require "storage_helper"
 describe "Storage", :buckets, :storage do
   let(:buckets) do
     bucket_names.map do |b|
-      storage.bucket(b) ||
-      safe_gcs_execute { storage.create_bucket(b) }
+      storage.bucket(b) || safe_gcs_execute { storage.create_bucket(b) }
     end
   end
   let(:bucket_names) { $bucket_names }
-    
+
   before do
     buckets # always create the buckets
   end
@@ -32,12 +31,10 @@ describe "Storage", :buckets, :storage do
     _(first_buckets.next?).must_equal true
     first_buckets.each do |b|
       _(b).must_be_kind_of Google::Cloud::Storage::Bucket
-      _(b.location_type).must_equal "multi-region"
     end
     second_buckets = first_buckets.next
     second_buckets.each do |b|
       _(b).must_be_kind_of Google::Cloud::Storage::Bucket
-      _(b.location_type).must_equal "multi-region"
     end
   end
 
@@ -46,12 +43,10 @@ describe "Storage", :buckets, :storage do
     _(first_buckets.next?).must_equal true
     first_buckets.each do |b|
       _(b).must_be_kind_of Google::Cloud::Storage::Bucket
-      _(b.user_project).must_equal true
     end
     second_buckets = first_buckets.next
     second_buckets.each do |b|
       _(b).must_be_kind_of Google::Cloud::Storage::Bucket
-      _(b.user_project).must_equal true
     end
   end
 

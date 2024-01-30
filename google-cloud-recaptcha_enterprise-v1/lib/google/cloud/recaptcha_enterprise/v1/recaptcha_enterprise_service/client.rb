@@ -30,6 +30,9 @@ module Google
           # Service to determine the likelihood an event is legitimate.
           #
           class Client
+            # @private
+            DEFAULT_ENDPOINT_TEMPLATE = "recaptchaenterprise.$UNIVERSE_DOMAIN$"
+
             include Paths
 
             # @private
@@ -105,6 +108,15 @@ module Google
             end
 
             ##
+            # The effective universe domain
+            #
+            # @return [String]
+            #
+            def universe_domain
+              @recaptcha_enterprise_service_stub.universe_domain
+            end
+
+            ##
             # Create a new RecaptchaEnterpriseService client object.
             #
             # @example
@@ -137,8 +149,9 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
-                                       !@config.endpoint.split(".").first.include?("-")
+              enable_self_signed_jwt = @config.endpoint.nil? ||
+                                       (@config.endpoint == Configuration::DEFAULT_ENDPOINT &&
+                                       !@config.endpoint.split(".").first.include?("-"))
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(::String) || credentials.is_a?(::Hash)
@@ -149,8 +162,10 @@ module Google
 
               @recaptcha_enterprise_service_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Stub,
-                credentials:  credentials,
-                endpoint:     @config.endpoint,
+                credentials: credentials,
+                endpoint: @config.endpoint,
+                endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
+                universe_domain: @config.universe_domain,
                 channel_args: @config.channel_args,
                 interceptors: @config.interceptors,
                 channel_pool_config: @config.channel_pool
@@ -261,7 +276,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload annotate_assessment(name: nil, annotation: nil, reasons: nil, hashed_account_id: nil, transaction_event: nil)
+            # @overload annotate_assessment(name: nil, annotation: nil, reasons: nil, account_id: nil, hashed_account_id: nil, transaction_event: nil)
             #   Pass arguments to `annotate_assessment` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -274,14 +289,16 @@ module Google
             #     be left empty to provide reasons that apply to an event without concluding
             #     whether the event is legitimate or fraudulent.
             #   @param reasons [::Array<::Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentRequest::Reason>]
-            #     Optional. Optional reasons for the annotation that will be assigned to the
-            #     Event.
+            #     Optional. Reasons for the annotation that are assigned to the event.
+            #   @param account_id [::String]
+            #     Optional. A stable account identifier to apply to the assessment. This is
+            #     an alternative to setting `account_id` in `CreateAssessment`, for example
+            #     when a stable account identifier is not yet known in the initial request.
             #   @param hashed_account_id [::String]
-            #     Optional. Unique stable hashed user identifier to apply to the assessment.
-            #     This is an alternative to setting the hashed_account_id in
-            #     CreateAssessment, for example when the account identifier is not yet known
-            #     in the initial request. It is recommended that the identifier is hashed
-            #     using hmac-sha256 with stable secret.
+            #     Optional. A stable hashed account identifier to apply to the assessment.
+            #     This is an alternative to setting `hashed_account_id` in
+            #     `CreateAssessment`, for example when a stable account identifier is not yet
+            #     known in the initial request.
             #   @param transaction_event [::Google::Cloud::RecaptchaEnterprise::V1::TransactionEvent, ::Hash]
             #     Optional. If the assessment is part of a payment transaction, provide
             #     details on payment lifecycle events that occur in the transaction.
@@ -1734,7 +1751,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload search_related_account_group_memberships(project: nil, hashed_account_id: nil, page_size: nil, page_token: nil)
+            # @overload search_related_account_group_memberships(project: nil, account_id: nil, hashed_account_id: nil, page_size: nil, page_token: nil)
             #   Pass arguments to `search_related_account_group_memberships` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1743,10 +1760,17 @@ module Google
             #     Required. The name of the project to search related account group
             #     memberships from. Specify the project name in the following format:
             #     `projects/{project}`.
+            #   @param account_id [::String]
+            #     Optional. The unique stable account identifier used to search connections.
+            #     The identifier should correspond to an `account_id` provided in a previous
+            #     `CreateAssessment` or `AnnotateAssessment` call. Either hashed_account_id
+            #     or account_id must be set, but not both.
             #   @param hashed_account_id [::String]
-            #     Optional. The unique stable hashed user identifier used to search
-            #     connections. The identifier should correspond to a `hashed_account_id`
-            #     provided in a previous `CreateAssessment` or `AnnotateAssessment` call.
+            #     Optional. Deprecated: use `account_id` instead.
+            #     The unique stable hashed account identifier used to search connections. The
+            #     identifier should correspond to a `hashed_account_id` provided in a
+            #     previous `CreateAssessment` or `AnnotateAssessment` call. Either
+            #     hashed_account_id or account_id must be set, but not both.
             #   @param page_size [::Integer]
             #     Optional. The maximum number of groups to return. The service might return
             #     fewer than this value. If unspecified, at most 50 groups are returned. The
@@ -1859,9 +1883,9 @@ module Google
             #   end
             #
             # @!attribute [rw] endpoint
-            #   The hostname or hostname:port of the service endpoint.
-            #   Defaults to `"recaptchaenterprise.googleapis.com"`.
-            #   @return [::String]
+            #   A custom service endpoint, as a hostname or hostname:port. The default is
+            #   nil, indicating to use the default endpoint in the current universe domain.
+            #   @return [::String,nil]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
             #    *  (`String`) The path to a service account key file in JSON format
@@ -1907,13 +1931,20 @@ module Google
             # @!attribute [rw] quota_project
             #   A separate project against which to charge quota.
             #   @return [::String]
+            # @!attribute [rw] universe_domain
+            #   The universe domain within which to make requests. This determines the
+            #   default endpoint URL. The default value of nil uses the environment
+            #   universe (usually the default "googleapis.com" universe).
+            #   @return [::String,nil]
             #
             class Configuration
               extend ::Gapic::Config
 
+              # @private
+              # The endpoint specific to the default "googleapis.com" universe. Deprecated.
               DEFAULT_ENDPOINT = "recaptchaenterprise.googleapis.com"
 
-              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
+              config_attr :endpoint,      nil, ::String, nil
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
@@ -1928,6 +1959,7 @@ module Google
               config_attr :metadata,      nil, ::Hash, nil
               config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
               config_attr :quota_project, nil, ::String, nil
+              config_attr :universe_domain, nil, ::String, nil
 
               # @private
               def initialize parent_config = nil
