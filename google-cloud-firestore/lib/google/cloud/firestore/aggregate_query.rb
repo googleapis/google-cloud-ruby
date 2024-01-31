@@ -67,13 +67,22 @@ module Google
         attr_reader :parent_path
 
         ##
-        # @private The Google::Cloud::Firestore::V1::StructuredQuery object.
+        # @private The Google::Cloud::Firestore::Query object.
         attr_reader :query
 
         ##
         # @private Object of type
         # Google::Cloud::Firestore::V1::StructuredAggregationQuery
         attr_reader :grpc
+
+        # @private
+        DEFAULT_COUNT_ALIAS = "count".freeze
+
+        # @private
+        DEFAULT_SUM_ALIAS = "sum".freeze
+
+        # @private
+        DEFAULT_AVG_ALIAS = "avg".freeze
 
         ##
         # @private Creates a new AggregateQuery
@@ -82,7 +91,7 @@ module Google
           @parent_path = parent_path
           @client = client
           @grpc = Google::Cloud::Firestore::V1::StructuredAggregationQuery.new(
-            structured_query: @query,
+            structured_query: @query.query,
             aggregations: []
           )
         end
@@ -90,7 +99,7 @@ module Google
         ##
         # Adds a count aggregate.
         #
-        # @param [aggregate_alias] Alias to refer to the aggregate. Optional
+        # @param aggregate_alias [String] Alias to refer to the aggregate. Optional
         #
         # @return [AggregateQuery] A new aggregate query with the added count aggregate.
         #
@@ -110,9 +119,85 @@ module Google
         #   end
         #
         def add_count aggregate_alias: nil
-          aggregate_alias ||= ALIASES[:count]
+          aggregate_alias ||= DEFAULT_COUNT_ALIAS
           new_aggregate = Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation.new(
             count: Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation::Count.new,
+            alias: aggregate_alias
+          )
+
+          start new_aggregate
+        end
+
+        ##
+        # Adds a sum aggregate.
+        #
+        # @param field [String] The field to sum by
+        # @param aggregate_alias [String] Alias to refer to the aggregate
+        #
+        # @return [AggregateQuery] A new aggregate query with the added sum aggregate.
+        #
+        # @example
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   query = firestore.col "cities"
+        #
+        #   # Create an aggregate query
+        #   aggregate_query = query.aggregate_query
+        #                          .add_sum("population")
+        #
+        #   aggregate_query.get do |aggregate_snapshot|
+        #     puts aggregate_snapshot.get
+        #   end
+        #
+        def add_sum field, aggregate_alias: nil
+          aggregate_alias ||= DEFAULT_SUM_ALIAS
+          field = FieldPath.parse field unless field.is_a? FieldPath
+          new_aggregate = Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation.new(
+            sum: Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation::Sum.new(
+              field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(
+                field_path: field.formatted_string
+              )
+            ),
+            alias: aggregate_alias
+          )
+
+          start new_aggregate
+        end
+
+        ##
+        # Adds an average aggregate.
+        #
+        # @param field [String] The field to apply average on
+        # @param aggregate_alias [String] Alias to refer to the aggregate
+        #
+        # @return [AggregateQuery] A new aggregate query with the added average aggregate.
+        #
+        # @example
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   query = firestore.col "cities"
+        #
+        #   # Create an aggregate query
+        #   aggregate_query = query.aggregate_query
+        #                          .add_avg("population")
+        #
+        #   aggregate_query.get do |aggregate_snapshot|
+        #     puts aggregate_snapshot.get
+        #   end
+        #
+        def add_avg field, aggregate_alias: nil
+          aggregate_alias ||= DEFAULT_AVG_ALIAS
+          field = FieldPath.parse field unless field.is_a? FieldPath
+          new_aggregate = Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation.new(
+            avg: Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation::Avg.new(
+              field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(
+                field_path: field.formatted_string
+              )
+            ),
             alias: aggregate_alias
           )
 
@@ -124,7 +209,7 @@ module Google
         def start new_aggregate
           combined_aggregates = [].concat(grpc.aggregations).concat([new_aggregate])
           new_grpc = Google::Cloud::Firestore::V1::StructuredAggregationQuery.new(
-            structured_query: @query,
+            structured_query: @query.query,
             aggregations: combined_aggregates
           )
           self.class.new(@query, @parent_path, @client).tap do |aq|
@@ -174,12 +259,6 @@ module Google
         end
 
         protected
-
-        ##
-        # @private
-        ALIASES = {
-          count: "count"
-        }.freeze
 
         ##
         # @private Raise an error unless a database is available.

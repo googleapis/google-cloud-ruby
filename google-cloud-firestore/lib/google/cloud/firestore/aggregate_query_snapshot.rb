@@ -54,13 +54,28 @@ module Google
       #   end
       class AggregateQuerySnapshot
         ##
+        # @private Object of type [Hash{String => Object}]
+        #
+        # String can have the following values:
+        #   - an aggregate literal "sum", "avg", or "count"
+        #   - a custom aggregate alias
+        # Object can have the following types:
+        #   - Integer
+        #   - Float
+        #   - nil
+        #   - NaN
+        attr_reader :aggregate_fields
+
+        ##
         # Retrieves the aggregate data.
         #
         # @param aggregate_alias [String] The alias used to access
         #   the aggregate value. For an AggregateQuery with a
         #   single aggregate field, this parameter can be omitted.
         #
-        # @return [Integer] The aggregate value.
+        # @return [Integer, Float, nil, NaN] The aggregate value.
+        #   Returns `nil` if the aggregate_alias does not exist.
+        #   Returns `NaN` if the aggregate field contains one or more NaN values.
         #
         # @example
         #   require "google/cloud/firestore"
@@ -104,11 +119,21 @@ module Google
         # @private New AggregateQuerySnapshot from a
         # Google::Cloud::Firestore::V1::RunAggregationQueryResponse object.
         def self.from_run_aggregate_query_response response
+          # rubocop:disable Style/MapToHash
           aggregate_fields = response
                              .result
                              .aggregate_fields
-                             .to_h # convert from protobuf to ruby map
-                             .transform_values { |v| v[:integer_value] }
+                             .map do |aggregate_alias, value| # convert from protobuf to ruby map
+                               if value.has_integer_value?
+                                 [aggregate_alias, value.integer_value]
+                               elsif value.has_double_value?
+                                 [aggregate_alias, value.double_value]
+                               elsif value.has_null_value?
+                                 [aggregate_alias, nil]
+                               end
+                             end
+                             .to_h
+          # rubocop:enable Style/MapToHash
 
           new.tap do |s|
             s.instance_variable_set :@aggregate_fields, aggregate_fields
