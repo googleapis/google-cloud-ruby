@@ -1,5 +1,11 @@
 # Release History
 
+### 0.24.0 (2024-01-31)
+
+#### Features
+
+* add session and session_template controllers ([#24493](https://github.com/googleapis/google-cloud-ruby/issues/24493)) 
+
 ### 0.23.1 (2024-01-12)
 
 #### Bug Fixes
