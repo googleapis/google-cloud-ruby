@@ -429,7 +429,7 @@ module Google
             # Rule processing errors.
             GOVERNANCE_RULE_ERRORS = 17
 
-            # Governance rule prcoessing Event.
+            # Governance rule processing Event.
             GOVERNANCE_RULE_PROCESSING = 18
           end
         end
