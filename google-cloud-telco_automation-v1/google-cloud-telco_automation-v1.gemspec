@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "APIs to automate 5G deployment and management of cloud infrastructure and network functions. Note that google-cloud-telco_automation-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-telco_automation instead. See the readme for more details."
-  gem.summary       = "APIs to automate 5G deployment and management of cloud infrastructure and network functions."
+  gem.description   = "APIs to automate management of cloud infrastructure for network functions. Note that google-cloud-telco_automation-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-telco_automation instead. See the readme for more details."
+  gem.summary       = "APIs to automate management of cloud infrastructure for network functions."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

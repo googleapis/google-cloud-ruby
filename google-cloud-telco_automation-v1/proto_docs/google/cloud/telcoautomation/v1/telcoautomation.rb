@@ -331,6 +331,9 @@ module Google
         # @!attribute [rw] workload_cluster
         #   @return [::String]
         #     Optional. Immutable. The WorkloadCluster on which to create the Deployment.
+        #     This field should only be passed when the deployment_level of the source
+        #     blueprint specifies deployments on workload clusters e.g.
+        #     WORKLOAD_CLUSTER_DEPLOYMENT.
         # @!attribute [r] deployment_level
         #   @return [::Google::Cloud::TelcoAutomation::V1::DeploymentLevel]
         #     Output only. Attributes to where the deployment can inflict changes. The
@@ -1501,6 +1504,10 @@ module Google
 
           # NFDeploy specific status. Peering in progress.
           STATUS_PEERING = 10
+
+          # K8s objects such as NetworkAttachmentDefinition don't have a defined
+          # status.
+          STATUS_NOT_APPLICABLE = 11
         end
 
         # DeploymentLevel of a blueprint signifies where the blueprint will be
@@ -1527,6 +1534,12 @@ module Google
           # b) Used to create a deployment on orchestration cluster which will create
           # further hydrated deployments.
           MULTI_DEPLOYMENT = 3
+
+          # Blueprints at WORKLOAD_CLUSTER_DEPLOYMENT level can be
+          # a) Modified in private catalog.
+          # b) Used to create a deployment on workload cluster by the user, once
+          # approved.
+          WORKLOAD_CLUSTER_DEPLOYMENT = 4
         end
       end
     end

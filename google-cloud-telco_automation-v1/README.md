@@ -1,8 +1,8 @@
 # Ruby Client for the Telco Automation V1 API
 
-APIs to automate 5G deployment and management of cloud infrastructure and network functions.
+APIs to automate management of cloud infrastructure for network functions.
 
-APIs to automate 5G deployment and management of cloud infrastructure and network functions.
+APIs to automate management of cloud infrastructure for network functions.
 
 https://github.com/googleapis/google-cloud-ruby
 
