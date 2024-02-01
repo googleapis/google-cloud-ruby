@@ -1,5 +1,11 @@
 # Release History
 
+### 0.15.2 (2024-02-01)
+
+#### Bug Fixes
+
+* Eliminated a harmless but annoying warning in the protobuf class files 
+
 ### 0.15.1 (2024-01-12)
 
 #### Bug Fixes
