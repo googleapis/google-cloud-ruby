@@ -8,13 +8,13 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 
 
-descriptor_data = "\n+google/cloud/video/stitcher/v1/slates.proto\x12\x1egoogle.cloud.video.stitcher.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\x8d\x02\n\x05Slate\x12\x11\n\x04name\x18\x01 \x01(\tB\x03\xe0\x41\x03\x12\x0b\n\x03uri\x18\x02 \x01(\t\x12\x41\n\tgam_slate\x18\x03 \x01(\x0b\x32..google.cloud.video.stitcher.v1.Slate.GamSlate\x1a@\n\x08GamSlate\x12\x19\n\x0cnetwork_code\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x19\n\x0cgam_slate_id\x18\x02 \x01(\x03\x42\x03\xe0\x41\x03:_\xea\x41\\\n\"videostitcher.googleapis.com/Slate\x12\x36projects/{project}/locations/{location}/slates/{slate}Bs\n\"com.google.cloud.video.stitcher.v1B\x0bSlatesProtoP\x01Z>cloud.google.com/go/video/stitcher/apiv1/stitcherpb;stitcherpbb\x06proto3"
+descriptor_data = "\n+google/cloud/video/stitcher/v1/slates.proto\x12\x1egoogle.cloud.video.stitcher.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\x90\x02\n\x05Slate\x12\x12\n\x04name\x18\x01 \x01(\tB\x04\xe2\x41\x01\x03\x12\x0b\n\x03uri\x18\x02 \x01(\t\x12\x41\n\tgam_slate\x18\x03 \x01(\x0b\x32..google.cloud.video.stitcher.v1.Slate.GamSlate\x1a\x42\n\x08GamSlate\x12\x1a\n\x0cnetwork_code\x18\x01 \x01(\tB\x04\xe2\x41\x01\x02\x12\x1a\n\x0cgam_slate_id\x18\x02 \x01(\x03\x42\x04\xe2\x41\x01\x03:_\xea\x41\\\n\"videostitcher.googleapis.com/Slate\x12\x36projects/{project}/locations/{location}/slates/{slate}Bs\n\"com.google.cloud.video.stitcher.v1B\x0bSlatesProtoP\x01Z>cloud.google.com/go/video/stitcher/apiv1/stitcherpb;stitcherpbb\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
 begin
   pool.add_serialized_file(descriptor_data)
-rescue TypeError => e
+rescue TypeError
   # Compatibility code: will be removed in the next major version.
   require 'google/protobuf/descriptor_pb'
   parsed = Google::Protobuf::FileDescriptorProto.decode(descriptor_data)
