@@ -8,13 +8,13 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 
 
-descriptor_data = "\n3google/cloud/aiplatform/v1/deployed_index_ref.proto\x12\x1agoogle.cloud.aiplatform.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\x96\x01\n\x10\x44\x65ployedIndexRef\x12G\n\x0eindex_endpoint\x18\x01 \x01(\tB/\xe0\x41\x05\xfa\x41)\n\'aiplatform.googleapis.com/IndexEndpoint\x12\x1e\n\x11\x64\x65ployed_index_id\x18\x02 \x01(\tB\x03\xe0\x41\x05\x12\x19\n\x0c\x64isplay_name\x18\x03 \x01(\tB\x03\xe0\x41\x03\x42\xd3\x01\n\x1e\x63om.google.cloud.aiplatform.v1B\x15\x44\x65ployedIndexRefProtoP\x01Z>cloud.google.com/go/aiplatform/apiv1/aiplatformpb;aiplatformpb\xaa\x02\x1aGoogle.Cloud.AIPlatform.V1\xca\x02\x1aGoogle\\Cloud\\AIPlatform\\V1\xea\x02\x1dGoogle::Cloud::AIPlatform::V1b\x06proto3"
+descriptor_data = "\n3google/cloud/aiplatform/v1/deployed_index_ref.proto\x12\x1agoogle.cloud.aiplatform.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\x99\x01\n\x10\x44\x65ployedIndexRef\x12H\n\x0eindex_endpoint\x18\x01 \x01(\tB0\xe2\x41\x01\x05\xfa\x41)\n\'aiplatform.googleapis.com/IndexEndpoint\x12\x1f\n\x11\x64\x65ployed_index_id\x18\x02 \x01(\tB\x04\xe2\x41\x01\x05\x12\x1a\n\x0c\x64isplay_name\x18\x03 \x01(\tB\x04\xe2\x41\x01\x03\x42\xd3\x01\n\x1e\x63om.google.cloud.aiplatform.v1B\x15\x44\x65ployedIndexRefProtoP\x01Z>cloud.google.com/go/aiplatform/apiv1/aiplatformpb;aiplatformpb\xaa\x02\x1aGoogle.Cloud.AIPlatform.V1\xca\x02\x1aGoogle\\Cloud\\AIPlatform\\V1\xea\x02\x1dGoogle::Cloud::AIPlatform::V1b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
 begin
   pool.add_serialized_file(descriptor_data)
-rescue TypeError => e
+rescue TypeError
   # Compatibility code: will be removed in the next major version.
   require 'google/protobuf/descriptor_pb'
   parsed = Google::Protobuf::FileDescriptorProto.decode(descriptor_data)

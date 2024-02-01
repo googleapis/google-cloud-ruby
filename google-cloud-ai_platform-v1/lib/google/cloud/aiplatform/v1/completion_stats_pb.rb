@@ -7,13 +7,13 @@ require 'google/protobuf'
 require 'google/api/field_behavior_pb'
 
 
-descriptor_data = "\n1google/cloud/aiplatform/v1/completion_stats.proto\x12\x1agoogle.cloud.aiplatform.v1\x1a\x1fgoogle/api/field_behavior.proto\"\x98\x01\n\x0f\x43ompletionStats\x12\x1d\n\x10successful_count\x18\x01 \x01(\x03\x42\x03\xe0\x41\x03\x12\x19\n\x0c\x66\x61iled_count\x18\x02 \x01(\x03\x42\x03\xe0\x41\x03\x12\x1d\n\x10incomplete_count\x18\x03 \x01(\x03\x42\x03\xe0\x41\x03\x12,\n\x1fsuccessful_forecast_point_count\x18\x05 \x01(\x03\x42\x03\xe0\x41\x03\x42\xd2\x01\n\x1e\x63om.google.cloud.aiplatform.v1B\x14\x43ompletionStatsProtoP\x01Z>cloud.google.com/go/aiplatform/apiv1/aiplatformpb;aiplatformpb\xaa\x02\x1aGoogle.Cloud.AIPlatform.V1\xca\x02\x1aGoogle\\Cloud\\AIPlatform\\V1\xea\x02\x1dGoogle::Cloud::AIPlatform::V1b\x06proto3"
+descriptor_data = "\n1google/cloud/aiplatform/v1/completion_stats.proto\x12\x1agoogle.cloud.aiplatform.v1\x1a\x1fgoogle/api/field_behavior.proto\"\x9c\x01\n\x0f\x43ompletionStats\x12\x1e\n\x10successful_count\x18\x01 \x01(\x03\x42\x04\xe2\x41\x01\x03\x12\x1a\n\x0c\x66\x61iled_count\x18\x02 \x01(\x03\x42\x04\xe2\x41\x01\x03\x12\x1e\n\x10incomplete_count\x18\x03 \x01(\x03\x42\x04\xe2\x41\x01\x03\x12-\n\x1fsuccessful_forecast_point_count\x18\x05 \x01(\x03\x42\x04\xe2\x41\x01\x03\x42\xd2\x01\n\x1e\x63om.google.cloud.aiplatform.v1B\x14\x43ompletionStatsProtoP\x01Z>cloud.google.com/go/aiplatform/apiv1/aiplatformpb;aiplatformpb\xaa\x02\x1aGoogle.Cloud.AIPlatform.V1\xca\x02\x1aGoogle\\Cloud\\AIPlatform\\V1\xea\x02\x1dGoogle::Cloud::AIPlatform::V1b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
 begin
   pool.add_serialized_file(descriptor_data)
-rescue TypeError => e
+rescue TypeError
   # Compatibility code: will be removed in the next major version.
   require 'google/protobuf/descriptor_pb'
   parsed = Google::Protobuf::FileDescriptorProto.decode(descriptor_data)

@@ -10,13 +10,13 @@ require 'google/protobuf/struct_pb'
 require 'google/protobuf/timestamp_pb'
 
 
-descriptor_data = "\n*google/cloud/aiplatform/v1/data_item.proto\x12\x1agoogle.cloud.aiplatform.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xbb\x03\n\x08\x44\x61taItem\x12\x11\n\x04name\x18\x01 \x01(\tB\x03\xe0\x41\x03\x12\x34\n\x0b\x63reate_time\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x03\xe0\x41\x03\x12\x34\n\x0bupdate_time\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x03\xe0\x41\x03\x12\x45\n\x06labels\x18\x03 \x03(\x0b\x32\x30.google.cloud.aiplatform.v1.DataItem.LabelsEntryB\x03\xe0\x41\x01\x12,\n\x07payload\x18\x04 \x01(\x0b\x32\x16.google.protobuf.ValueB\x03\xe0\x41\x02\x12\x11\n\x04\x65tag\x18\x07 \x01(\tB\x03\xe0\x41\x01\x1a-\n\x0bLabelsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01:y\xea\x41v\n\"aiplatform.googleapis.com/DataItem\x12Pprojects/{project}/locations/{location}/datasets/{dataset}/dataItems/{data_item}B\xcb\x01\n\x1e\x63om.google.cloud.aiplatform.v1B\rDataItemProtoP\x01Z>cloud.google.com/go/aiplatform/apiv1/aiplatformpb;aiplatformpb\xaa\x02\x1aGoogle.Cloud.AIPlatform.V1\xca\x02\x1aGoogle\\Cloud\\AIPlatform\\V1\xea\x02\x1dGoogle::Cloud::AIPlatform::V1b\x06proto3"
+descriptor_data = "\n*google/cloud/aiplatform/v1/data_item.proto\x12\x1agoogle.cloud.aiplatform.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xc1\x03\n\x08\x44\x61taItem\x12\x12\n\x04name\x18\x01 \x01(\tB\x04\xe2\x41\x01\x03\x12\x35\n\x0b\x63reate_time\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x04\xe2\x41\x01\x03\x12\x35\n\x0bupdate_time\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x04\xe2\x41\x01\x03\x12\x46\n\x06labels\x18\x03 \x03(\x0b\x32\x30.google.cloud.aiplatform.v1.DataItem.LabelsEntryB\x04\xe2\x41\x01\x01\x12-\n\x07payload\x18\x04 \x01(\x0b\x32\x16.google.protobuf.ValueB\x04\xe2\x41\x01\x02\x12\x12\n\x04\x65tag\x18\x07 \x01(\tB\x04\xe2\x41\x01\x01\x1a-\n\x0bLabelsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01:y\xea\x41v\n\"aiplatform.googleapis.com/DataItem\x12Pprojects/{project}/locations/{location}/datasets/{dataset}/dataItems/{data_item}B\xcb\x01\n\x1e\x63om.google.cloud.aiplatform.v1B\rDataItemProtoP\x01Z>cloud.google.com/go/aiplatform/apiv1/aiplatformpb;aiplatformpb\xaa\x02\x1aGoogle.Cloud.AIPlatform.V1\xca\x02\x1aGoogle\\Cloud\\AIPlatform\\V1\xea\x02\x1dGoogle::Cloud::AIPlatform::V1b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
 begin
   pool.add_serialized_file(descriptor_data)
-rescue TypeError => e
+rescue TypeError
   # Compatibility code: will be removed in the next major version.
   require 'google/protobuf/descriptor_pb'
   parsed = Google::Protobuf::FileDescriptorProto.decode(descriptor_data)

@@ -7,13 +7,13 @@ require 'google/protobuf'
 require 'google/api/field_behavior_pb'
 
 
-descriptor_data = "\n#google/cloud/aiplatform/v1/io.proto\x12\x1agoogle.cloud.aiplatform.v1\x1a\x1fgoogle/api/field_behavior.proto\"L\n\nAvroSource\x12>\n\ngcs_source\x18\x01 \x01(\x0b\x32%.google.cloud.aiplatform.v1.GcsSourceB\x03\xe0\x41\x02\"K\n\tCsvSource\x12>\n\ngcs_source\x18\x01 \x01(\x0b\x32%.google.cloud.aiplatform.v1.GcsSourceB\x03\xe0\x41\x02\"\x1e\n\tGcsSource\x12\x11\n\x04uris\x18\x01 \x03(\tB\x03\xe0\x41\x02\"0\n\x0eGcsDestination\x12\x1e\n\x11output_uri_prefix\x18\x01 \x01(\tB\x03\xe0\x41\x02\"(\n\x0e\x42igQuerySource\x12\x16\n\tinput_uri\x18\x01 \x01(\tB\x03\xe0\x41\x02\".\n\x13\x42igQueryDestination\x12\x17\n\noutput_uri\x18\x01 \x01(\tB\x03\xe0\x41\x02\"Z\n\x0e\x43svDestination\x12H\n\x0fgcs_destination\x18\x01 \x01(\x0b\x32*.google.cloud.aiplatform.v1.GcsDestinationB\x03\xe0\x41\x02\"_\n\x13TFRecordDestination\x12H\n\x0fgcs_destination\x18\x01 \x01(\x0b\x32*.google.cloud.aiplatform.v1.GcsDestinationB\x03\xe0\x41\x02\"7\n\x1c\x43ontainerRegistryDestination\x12\x17\n\noutput_uri\x18\x01 \x01(\tB\x03\xe0\x41\x02\x42\xc5\x01\n\x1e\x63om.google.cloud.aiplatform.v1B\x07IoProtoP\x01Z>cloud.google.com/go/aiplatform/apiv1/aiplatformpb;aiplatformpb\xaa\x02\x1aGoogle.Cloud.AIPlatform.V1\xca\x02\x1aGoogle\\Cloud\\AIPlatform\\V1\xea\x02\x1dGoogle::Cloud::AIPlatform::V1b\x06proto3"
+descriptor_data = "\n#google/cloud/aiplatform/v1/io.proto\x12\x1agoogle.cloud.aiplatform.v1\x1a\x1fgoogle/api/field_behavior.proto\"M\n\nAvroSource\x12?\n\ngcs_source\x18\x01 \x01(\x0b\x32%.google.cloud.aiplatform.v1.GcsSourceB\x04\xe2\x41\x01\x02\"L\n\tCsvSource\x12?\n\ngcs_source\x18\x01 \x01(\x0b\x32%.google.cloud.aiplatform.v1.GcsSourceB\x04\xe2\x41\x01\x02\"\x1f\n\tGcsSource\x12\x12\n\x04uris\x18\x01 \x03(\tB\x04\xe2\x41\x01\x02\"1\n\x0eGcsDestination\x12\x1f\n\x11output_uri_prefix\x18\x01 \x01(\tB\x04\xe2\x41\x01\x02\")\n\x0e\x42igQuerySource\x12\x17\n\tinput_uri\x18\x01 \x01(\tB\x04\xe2\x41\x01\x02\"/\n\x13\x42igQueryDestination\x12\x18\n\noutput_uri\x18\x01 \x01(\tB\x04\xe2\x41\x01\x02\"[\n\x0e\x43svDestination\x12I\n\x0fgcs_destination\x18\x01 \x01(\x0b\x32*.google.cloud.aiplatform.v1.GcsDestinationB\x04\xe2\x41\x01\x02\"`\n\x13TFRecordDestination\x12I\n\x0fgcs_destination\x18\x01 \x01(\x0b\x32*.google.cloud.aiplatform.v1.GcsDestinationB\x04\xe2\x41\x01\x02\"8\n\x1c\x43ontainerRegistryDestination\x12\x18\n\noutput_uri\x18\x01 \x01(\tB\x04\xe2\x41\x01\x02\x42\xc5\x01\n\x1e\x63om.google.cloud.aiplatform.v1B\x07IoProtoP\x01Z>cloud.google.com/go/aiplatform/apiv1/aiplatformpb;aiplatformpb\xaa\x02\x1aGoogle.Cloud.AIPlatform.V1\xca\x02\x1aGoogle\\Cloud\\AIPlatform\\V1\xea\x02\x1dGoogle::Cloud::AIPlatform::V1b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
 begin
   pool.add_serialized_file(descriptor_data)
-rescue TypeError => e
+rescue TypeError
   # Compatibility code: will be removed in the next major version.
   require 'google/protobuf/descriptor_pb'
   parsed = Google::Protobuf::FileDescriptorProto.decode(descriptor_data)
