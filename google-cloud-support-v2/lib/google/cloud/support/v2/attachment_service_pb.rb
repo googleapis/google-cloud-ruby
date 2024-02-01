@@ -11,13 +11,13 @@ require 'google/api/resource_pb'
 require 'google/cloud/support/v2/attachment_pb'
 
 
-descriptor_data = "\n0google/cloud/support/v2/attachment_service.proto\x12\x17google.cloud.support.v2\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a(google/cloud/support/v2/attachment.proto\"y\n\x16ListAttachmentsRequest\x12\x38\n\x06parent\x18\x01 \x01(\tB(\xe0\x41\x02\xfa\x41\"\n cloudsupport.googleapis.com/Case\x12\x11\n\tpage_size\x18\x02 \x01(\x05\x12\x12\n\npage_token\x18\x03 \x01(\t\"l\n\x17ListAttachmentsResponse\x12\x38\n\x0b\x61ttachments\x18\x01 \x03(\x0b\x32#.google.cloud.support.v2.Attachment\x12\x17\n\x0fnext_page_token\x18\x02 \x01(\t2\xd1\x02\n\x15\x43\x61seAttachmentService\x12\xe6\x01\n\x0fListAttachments\x12/.google.cloud.support.v2.ListAttachmentsRequest\x1a\x30.google.cloud.support.v2.ListAttachmentsResponse\"p\x82\xd3\xe4\x93\x02\x61\x12+/v2/{parent=projects/*/cases/*}/attachmentsZ2\x12\x30/v2/{parent=organizations/*/cases/*}/attachments\xda\x41\x06parent\x1aO\xca\x41\x1b\x63loudsupport.googleapis.com\xd2\x41.https://www.googleapis.com/auth/cloud-platformB\xbf\x01\n\x1b\x63om.google.cloud.support.v2B\x16\x41ttachmentServiceProtoP\x01Z5cloud.google.com/go/support/apiv2/supportpb;supportpb\xaa\x02\x17Google.Cloud.Support.V2\xca\x02\x17Google\\Cloud\\Support\\V2\xea\x02\x1aGoogle::Cloud::Support::V2b\x06proto3"
+descriptor_data = "\n0google/cloud/support/v2/attachment_service.proto\x12\x17google.cloud.support.v2\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a(google/cloud/support/v2/attachment.proto\"z\n\x16ListAttachmentsRequest\x12\x39\n\x06parent\x18\x01 \x01(\tB)\xe2\x41\x01\x02\xfa\x41\"\n cloudsupport.googleapis.com/Case\x12\x11\n\tpage_size\x18\x02 \x01(\x05\x12\x12\n\npage_token\x18\x03 \x01(\t\"l\n\x17ListAttachmentsResponse\x12\x38\n\x0b\x61ttachments\x18\x01 \x03(\x0b\x32#.google.cloud.support.v2.Attachment\x12\x17\n\x0fnext_page_token\x18\x02 \x01(\t2\xd1\x02\n\x15\x43\x61seAttachmentService\x12\xe6\x01\n\x0fListAttachments\x12/.google.cloud.support.v2.ListAttachmentsRequest\x1a\x30.google.cloud.support.v2.ListAttachmentsResponse\"p\xda\x41\x06parent\x82\xd3\xe4\x93\x02\x61\x12+/v2/{parent=projects/*/cases/*}/attachmentsZ2\x12\x30/v2/{parent=organizations/*/cases/*}/attachments\x1aO\xca\x41\x1b\x63loudsupport.googleapis.com\xd2\x41.https://www.googleapis.com/auth/cloud-platformB\xbf\x01\n\x1b\x63om.google.cloud.support.v2B\x16\x41ttachmentServiceProtoP\x01Z5cloud.google.com/go/support/apiv2/supportpb;supportpb\xaa\x02\x17Google.Cloud.Support.V2\xca\x02\x17Google\\Cloud\\Support\\V2\xea\x02\x1aGoogle::Cloud::Support::V2b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
 begin
   pool.add_serialized_file(descriptor_data)
-rescue TypeError => e
+rescue TypeError
   # Compatibility code: will be removed in the next major version.
   require 'google/protobuf/descriptor_pb'
   parsed = Google::Protobuf::FileDescriptorProto.decode(descriptor_data)

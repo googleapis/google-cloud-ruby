@@ -11,13 +11,13 @@ require 'google/api/resource_pb'
 require 'google/cloud/talent/v4/event_pb'
 
 
-descriptor_data = "\n*google/cloud/talent/v4/event_service.proto\x12\x16google.cloud.talent.v4\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\"google/cloud/talent/v4/event.proto\"\x8e\x01\n\x18\x43reateClientEventRequest\x12\x32\n\x06parent\x18\x01 \x01(\tB\"\xe0\x41\x02\xfa\x41\x1c\n\x1ajobs.googleapis.com/Tenant\x12>\n\x0c\x63lient_event\x18\x02 \x01(\x0b\x32#.google.cloud.talent.v4.ClientEventB\x03\xe0\x41\x02\x32\xc5\x02\n\x0c\x45ventService\x12\xc6\x01\n\x11\x43reateClientEvent\x12\x30.google.cloud.talent.v4.CreateClientEventRequest\x1a#.google.cloud.talent.v4.ClientEvent\"Z\x82\xd3\xe4\x93\x02>\"./v4/{parent=projects/*/tenants/*}/clientEvents:\x0c\x63lient_event\xda\x41\x13parent,client_event\x1al\xca\x41\x13jobs.googleapis.com\xd2\x41Shttps://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/jobsBk\n\x1a\x63om.google.cloud.talent.v4B\x11\x45ventServiceProtoP\x01Z2cloud.google.com/go/talent/apiv4/talentpb;talentpb\xa2\x02\x03\x43TSb\x06proto3"
+descriptor_data = "\n*google/cloud/talent/v4/event_service.proto\x12\x16google.cloud.talent.v4\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\"google/cloud/talent/v4/event.proto\"\x90\x01\n\x18\x43reateClientEventRequest\x12\x33\n\x06parent\x18\x01 \x01(\tB#\xe2\x41\x01\x02\xfa\x41\x1c\n\x1ajobs.googleapis.com/Tenant\x12?\n\x0c\x63lient_event\x18\x02 \x01(\x0b\x32#.google.cloud.talent.v4.ClientEventB\x04\xe2\x41\x01\x02\x32\xc5\x02\n\x0c\x45ventService\x12\xc6\x01\n\x11\x43reateClientEvent\x12\x30.google.cloud.talent.v4.CreateClientEventRequest\x1a#.google.cloud.talent.v4.ClientEvent\"Z\xda\x41\x13parent,client_event\x82\xd3\xe4\x93\x02>\"./v4/{parent=projects/*/tenants/*}/clientEvents:\x0c\x63lient_event\x1al\xca\x41\x13jobs.googleapis.com\xd2\x41Shttps://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/jobsBk\n\x1a\x63om.google.cloud.talent.v4B\x11\x45ventServiceProtoP\x01Z2cloud.google.com/go/talent/apiv4/talentpb;talentpb\xa2\x02\x03\x43TSb\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
 begin
   pool.add_serialized_file(descriptor_data)
-rescue TypeError => e
+rescue TypeError
   # Compatibility code: will be removed in the next major version.
   require 'google/protobuf/descriptor_pb'
   parsed = Google::Protobuf::FileDescriptorProto.decode(descriptor_data)

@@ -8,13 +8,13 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 
 
-descriptor_data = "\n6google/cloud/security/publicca/v1beta1/resources.proto\x12&google.cloud.security.publicca.v1beta1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\xdd\x01\n\x12\x45xternalAccountKey\x12\x11\n\x04name\x18\x01 \x01(\tB\x03\xe0\x41\x03\x12\x13\n\x06key_id\x18\x02 \x01(\tB\x03\xe0\x41\x03\x12\x18\n\x0b\x62\x36\x34_mac_key\x18\x03 \x01(\x0c\x42\x03\xe0\x41\x03:\x84\x01\xea\x41\x80\x01\n*publicca.googleapis.com/ExternalAccountKey\x12Rprojects/{project}/locations/{location}/externalAccountKeys/{external_account_key}B\x88\x02\n*com.google.cloud.security.publicca.v1beta1B\x0eResourcesProtoP\x01ZFcloud.google.com/go/security/publicca/apiv1beta1/publiccapb;publiccapb\xf8\x01\x01\xaa\x02&Google.Cloud.Security.PublicCA.V1Beta1\xca\x02&Google\\Cloud\\Security\\PublicCA\\V1beta1\xea\x02*Google::Cloud::Security::PublicCA::V1beta1b\x06proto3"
+descriptor_data = "\n6google/cloud/security/publicca/v1beta1/resources.proto\x12&google.cloud.security.publicca.v1beta1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\xe0\x01\n\x12\x45xternalAccountKey\x12\x12\n\x04name\x18\x01 \x01(\tB\x04\xe2\x41\x01\x03\x12\x14\n\x06key_id\x18\x02 \x01(\tB\x04\xe2\x41\x01\x03\x12\x19\n\x0b\x62\x36\x34_mac_key\x18\x03 \x01(\x0c\x42\x04\xe2\x41\x01\x03:\x84\x01\xea\x41\x80\x01\n*publicca.googleapis.com/ExternalAccountKey\x12Rprojects/{project}/locations/{location}/externalAccountKeys/{external_account_key}B\x88\x02\n*com.google.cloud.security.publicca.v1beta1B\x0eResourcesProtoP\x01ZFcloud.google.com/go/security/publicca/apiv1beta1/publiccapb;publiccapb\xf8\x01\x01\xaa\x02&Google.Cloud.Security.PublicCA.V1Beta1\xca\x02&Google\\Cloud\\Security\\PublicCA\\V1beta1\xea\x02*Google::Cloud::Security::PublicCA::V1beta1b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
 begin
   pool.add_serialized_file(descriptor_data)
-rescue TypeError => e
+rescue TypeError
   # Compatibility code: will be removed in the next major version.
   require 'google/protobuf/descriptor_pb'
   parsed = Google::Protobuf::FileDescriptorProto.decode(descriptor_data)

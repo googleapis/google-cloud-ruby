@@ -9,13 +9,13 @@ require 'google/api/resource_pb'
 require 'google/protobuf/timestamp_pb'
 
 
-descriptor_data = "\n0google/cloud/securitycenter/v1/mute_config.proto\x12\x1egoogle.cloud.securitycenter.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xae\x03\n\nMuteConfig\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x18\n\x0c\x64isplay_name\x18\x02 \x01(\tB\x02\x18\x01\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\x12\x13\n\x06\x66ilter\x18\x04 \x01(\tB\x03\xe0\x41\x02\x12\x34\n\x0b\x63reate_time\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x03\xe0\x41\x03\x12\x34\n\x0bupdate_time\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x03\xe0\x41\x03\x12\x1f\n\x12most_recent_editor\x18\x07 \x01(\tB\x03\xe0\x41\x03:\xc0\x01\xea\x41\xbc\x01\n(securitycenter.googleapis.com/MuteConfig\x12\x36organizations/{organization}/muteConfigs/{mute_config}\x12*folders/{folder}/muteConfigs/{mute_config}\x12,projects/{project}/muteConfigs/{mute_config}B\xe9\x01\n\"com.google.cloud.securitycenter.v1B\x0fMuteConfigProtoP\x01ZJcloud.google.com/go/securitycenter/apiv1/securitycenterpb;securitycenterpb\xaa\x02\x1eGoogle.Cloud.SecurityCenter.V1\xca\x02\x1eGoogle\\Cloud\\SecurityCenter\\V1\xea\x02!Google::Cloud::SecurityCenter::V1b\x06proto3"
+descriptor_data = "\n0google/cloud/securitycenter/v1/mute_config.proto\x12\x1egoogle.cloud.securitycenter.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xb2\x03\n\nMuteConfig\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x18\n\x0c\x64isplay_name\x18\x02 \x01(\tB\x02\x18\x01\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\x12\x14\n\x06\x66ilter\x18\x04 \x01(\tB\x04\xe2\x41\x01\x02\x12\x35\n\x0b\x63reate_time\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x04\xe2\x41\x01\x03\x12\x35\n\x0bupdate_time\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x04\xe2\x41\x01\x03\x12 \n\x12most_recent_editor\x18\x07 \x01(\tB\x04\xe2\x41\x01\x03:\xc0\x01\xea\x41\xbc\x01\n(securitycenter.googleapis.com/MuteConfig\x12\x36organizations/{organization}/muteConfigs/{mute_config}\x12*folders/{folder}/muteConfigs/{mute_config}\x12,projects/{project}/muteConfigs/{mute_config}B\xe9\x01\n\"com.google.cloud.securitycenter.v1B\x0fMuteConfigProtoP\x01ZJcloud.google.com/go/securitycenter/apiv1/securitycenterpb;securitycenterpb\xaa\x02\x1eGoogle.Cloud.SecurityCenter.V1\xca\x02\x1eGoogle\\Cloud\\SecurityCenter\\V1\xea\x02!Google::Cloud::SecurityCenter::V1b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
 begin
   pool.add_serialized_file(descriptor_data)
-rescue TypeError => e
+rescue TypeError
   # Compatibility code: will be removed in the next major version.
   require 'google/protobuf/descriptor_pb'
   parsed = Google::Protobuf::FileDescriptorProto.decode(descriptor_data)
