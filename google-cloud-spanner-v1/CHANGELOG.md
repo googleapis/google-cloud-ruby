@@ -1,5 +1,11 @@
 # Release History
 
+### 0.22.1 (2024-02-01)
+
+#### Documentation
+
+* update the comment regarding eligible SQL shapes for PartitionQuery ([#24497](https://github.com/googleapis/google-cloud-ruby/issues/24497)) 
+
 ### 0.22.0 (2024-01-25)
 
 #### Features
