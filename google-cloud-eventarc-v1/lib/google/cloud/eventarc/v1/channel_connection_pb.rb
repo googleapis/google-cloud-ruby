@@ -9,13 +9,13 @@ require 'google/api/resource_pb'
 require 'google/protobuf/timestamp_pb'
 
 
-descriptor_data = "\n1google/cloud/eventarc/v1/channel_connection.proto\x12\x18google.cloud.eventarc.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xa7\x03\n\x11\x43hannelConnection\x12\x11\n\x04name\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x10\n\x03uid\x18\x02 \x01(\tB\x03\xe0\x41\x03\x12\x38\n\x07\x63hannel\x18\x05 \x01(\tB\'\xe0\x41\x02\xfa\x41!\n\x1f\x65ventarc.googleapis.com/Channel\x12\x34\n\x0b\x63reate_time\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x03\xe0\x41\x03\x12\x34\n\x0bupdate_time\x18\x07 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x03\xe0\x41\x03\x12\x1d\n\x10\x61\x63tivation_token\x18\x08 \x01(\tB\x03\xe0\x41\x04:\xa7\x01\xea\x41\xa3\x01\n)eventarc.googleapis.com/ChannelConnection\x12Oprojects/{project}/locations/{location}/channelConnections/{channel_connection}*\x12\x63hannelConnections2\x11\x63hannelConnectionB\xc6\x01\n\x1c\x63om.google.cloud.eventarc.v1B\x16\x43hannelConnectionProtoP\x01Z8cloud.google.com/go/eventarc/apiv1/eventarcpb;eventarcpb\xaa\x02\x18Google.Cloud.Eventarc.V1\xca\x02\x18Google\\Cloud\\Eventarc\\V1\xea\x02\x1bGoogle::Cloud::Eventarc::V1b\x06proto3"
+descriptor_data = "\n1google/cloud/eventarc/v1/channel_connection.proto\x12\x18google.cloud.eventarc.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xad\x03\n\x11\x43hannelConnection\x12\x12\n\x04name\x18\x01 \x01(\tB\x04\xe2\x41\x01\x02\x12\x11\n\x03uid\x18\x02 \x01(\tB\x04\xe2\x41\x01\x03\x12\x39\n\x07\x63hannel\x18\x05 \x01(\tB(\xe2\x41\x01\x02\xfa\x41!\n\x1f\x65ventarc.googleapis.com/Channel\x12\x35\n\x0b\x63reate_time\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x04\xe2\x41\x01\x03\x12\x35\n\x0bupdate_time\x18\x07 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x04\xe2\x41\x01\x03\x12\x1e\n\x10\x61\x63tivation_token\x18\x08 \x01(\tB\x04\xe2\x41\x01\x04:\xa7\x01\xea\x41\xa3\x01\n)eventarc.googleapis.com/ChannelConnection\x12Oprojects/{project}/locations/{location}/channelConnections/{channel_connection}*\x12\x63hannelConnections2\x11\x63hannelConnectionB\xc6\x01\n\x1c\x63om.google.cloud.eventarc.v1B\x16\x43hannelConnectionProtoP\x01Z8cloud.google.com/go/eventarc/apiv1/eventarcpb;eventarcpb\xaa\x02\x18Google.Cloud.Eventarc.V1\xca\x02\x18Google\\Cloud\\Eventarc\\V1\xea\x02\x1bGoogle::Cloud::Eventarc::V1b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
 begin
   pool.add_serialized_file(descriptor_data)
-rescue TypeError => e
+rescue TypeError
   # Compatibility code: will be removed in the next major version.
   require 'google/protobuf/descriptor_pb'
   parsed = Google::Protobuf::FileDescriptorProto.decode(descriptor_data)
