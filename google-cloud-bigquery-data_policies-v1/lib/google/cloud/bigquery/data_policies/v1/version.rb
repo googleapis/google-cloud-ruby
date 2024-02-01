@@ -22,7 +22,7 @@ module Google
     module Bigquery
       module DataPolicies
         module V1
-          VERSION = "0.7.1"
+          VERSION = "0.7.2"
         end
       end
     end
