@@ -7,13 +7,13 @@ require 'google/protobuf'
 require 'google/api/field_behavior_pb'
 
 
-descriptor_data = "\n3google/cloud/dialogflow/cx/v3/safety_settings.proto\x12\x1dgoogle.cloud.dialogflow.cx.v3\x1a\x1fgoogle/api/field_behavior.proto\"\x97\x01\n\x0eSafetySettings\x12L\n\x0e\x62\x61nned_phrases\x18\x01 \x03(\x0b\x32\x34.google.cloud.dialogflow.cx.v3.SafetySettings.Phrase\x1a\x37\n\x06Phrase\x12\x11\n\x04text\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x1a\n\rlanguage_code\x18\x02 \x01(\tB\x03\xe0\x41\x02\x42\xb9\x01\n!com.google.cloud.dialogflow.cx.v3B\x13SafetySettingsProtoP\x01Z1cloud.google.com/go/dialogflow/cx/apiv3/cxpb;cxpb\xf8\x01\x01\xa2\x02\x02\x44\x46\xaa\x02\x1dGoogle.Cloud.Dialogflow.Cx.V3\xea\x02!Google::Cloud::Dialogflow::CX::V3b\x06proto3"
+descriptor_data = "\n3google/cloud/dialogflow/cx/v3/safety_settings.proto\x12\x1dgoogle.cloud.dialogflow.cx.v3\x1a\x1fgoogle/api/field_behavior.proto\"\x99\x01\n\x0eSafetySettings\x12L\n\x0e\x62\x61nned_phrases\x18\x01 \x03(\x0b\x32\x34.google.cloud.dialogflow.cx.v3.SafetySettings.Phrase\x1a\x39\n\x06Phrase\x12\x12\n\x04text\x18\x01 \x01(\tB\x04\xe2\x41\x01\x02\x12\x1b\n\rlanguage_code\x18\x02 \x01(\tB\x04\xe2\x41\x01\x02\x42\xb9\x01\n!com.google.cloud.dialogflow.cx.v3B\x13SafetySettingsProtoP\x01Z1cloud.google.com/go/dialogflow/cx/apiv3/cxpb;cxpb\xf8\x01\x01\xa2\x02\x02\x44\x46\xaa\x02\x1dGoogle.Cloud.Dialogflow.Cx.V3\xea\x02!Google::Cloud::Dialogflow::CX::V3b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
 begin
   pool.add_serialized_file(descriptor_data)
-rescue TypeError => e
+rescue TypeError
   # Compatibility code: will be removed in the next major version.
   require 'google/protobuf/descriptor_pb'
   parsed = Google::Protobuf::FileDescriptorProto.decode(descriptor_data)

@@ -8,13 +8,13 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 
 
-descriptor_data = "\n)google/cloud/dataplex/v1/processing.proto\x12\x18google.cloud.dataplex.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\xbd\x01\n\x07Trigger\x12?\n\ton_demand\x18\x64 \x01(\x0b\x32*.google.cloud.dataplex.v1.Trigger.OnDemandH\x00\x12>\n\x08schedule\x18\x65 \x01(\x0b\x32*.google.cloud.dataplex.v1.Trigger.ScheduleH\x00\x1a\n\n\x08OnDemand\x1a\x1d\n\x08Schedule\x12\x11\n\x04\x63ron\x18\x01 \x01(\tB\x03\xe0\x41\x02\x42\x06\n\x04mode\"i\n\nDataSource\x12\x38\n\x06\x65ntity\x18\x64 \x01(\tB&\xe0\x41\x05\xfa\x41 \n\x1e\x64\x61taplex.googleapis.com/EntityH\x00\x12\x17\n\x08resource\x18\x65 \x01(\tB\x03\xe0\x41\x05H\x00\x42\x08\n\x06source\"\xaf\x01\n\x0bScannedData\x12S\n\x11incremental_field\x18\x01 \x01(\x0b\x32\x36.google.cloud.dataplex.v1.ScannedData.IncrementalFieldH\x00\x1a=\n\x10IncrementalField\x12\r\n\x05\x66ield\x18\x01 \x01(\t\x12\r\n\x05start\x18\x02 \x01(\t\x12\x0b\n\x03\x65nd\x18\x03 \x01(\tB\x0c\n\ndata_rangeBk\n\x1c\x63om.google.cloud.dataplex.v1B\x0fProcessingProtoP\x01Z8cloud.google.com/go/dataplex/apiv1/dataplexpb;dataplexpbb\x06proto3"
+descriptor_data = "\n)google/cloud/dataplex/v1/processing.proto\x12\x18google.cloud.dataplex.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\xbe\x01\n\x07Trigger\x12?\n\ton_demand\x18\x64 \x01(\x0b\x32*.google.cloud.dataplex.v1.Trigger.OnDemandH\x00\x12>\n\x08schedule\x18\x65 \x01(\x0b\x32*.google.cloud.dataplex.v1.Trigger.ScheduleH\x00\x1a\n\n\x08OnDemand\x1a\x1e\n\x08Schedule\x12\x12\n\x04\x63ron\x18\x01 \x01(\tB\x04\xe2\x41\x01\x02\x42\x06\n\x04mode\"k\n\nDataSource\x12\x39\n\x06\x65ntity\x18\x64 \x01(\tB\'\xe2\x41\x01\x05\xfa\x41 \n\x1e\x64\x61taplex.googleapis.com/EntityH\x00\x12\x18\n\x08resource\x18\x65 \x01(\tB\x04\xe2\x41\x01\x05H\x00\x42\x08\n\x06source\"\xaf\x01\n\x0bScannedData\x12S\n\x11incremental_field\x18\x01 \x01(\x0b\x32\x36.google.cloud.dataplex.v1.ScannedData.IncrementalFieldH\x00\x1a=\n\x10IncrementalField\x12\r\n\x05\x66ield\x18\x01 \x01(\t\x12\r\n\x05start\x18\x02 \x01(\t\x12\x0b\n\x03\x65nd\x18\x03 \x01(\tB\x0c\n\ndata_rangeBk\n\x1c\x63om.google.cloud.dataplex.v1B\x0fProcessingProtoP\x01Z8cloud.google.com/go/dataplex/apiv1/dataplexpb;dataplexpbb\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
 begin
   pool.add_serialized_file(descriptor_data)
-rescue TypeError => e
+rescue TypeError
   # Compatibility code: will be removed in the next major version.
   require 'google/protobuf/descriptor_pb'
   parsed = Google::Protobuf::FileDescriptorProto.decode(descriptor_data)
