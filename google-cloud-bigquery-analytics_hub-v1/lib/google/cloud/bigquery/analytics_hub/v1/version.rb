@@ -22,7 +22,7 @@ module Google
     module Bigquery
       module AnalyticsHub
         module V1
-          VERSION = "0.5.1"
+          VERSION = "0.5.2"
         end
       end
     end
