@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-data_catalog-v1",
-    "version": "0.21.1",
+    "version": "0.21.2",
     "language": "RUBY",
     "apis": [
       {
