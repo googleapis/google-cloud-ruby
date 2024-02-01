@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-network_connectivity-v1",
-    "version": "0.9.1",
+    "version": "0.9.2",
     "language": "RUBY",
     "apis": [
       {
