@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.3.0 (2024-02-01)
+
+#### Features
+
+* support for STATUS_NOT_APPLICABLE in Status and WORKLOAD_CLUSTER_DEPLOYMENT in DeploymentLevel 
+
 ### 0.2.1 (2024-01-12)
 
 #### Bug Fixes
