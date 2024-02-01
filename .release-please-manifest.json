@@ -159,7 +159,7 @@
   "google-cloud-build+FILLER": "0.0.0",
   "google-cloud-build-v1": "0.26.1",
   "google-cloud-build-v1+FILLER": "0.0.0",
-  "google-cloud-build-v2": "0.5.1",
+  "google-cloud-build-v2": "0.5.2",
   "google-cloud-build-v2+FILLER": "0.0.0",
   "google-cloud-certificate_manager": "1.1.0",
   "google-cloud-certificate_manager+FILLER": "0.0.0",
