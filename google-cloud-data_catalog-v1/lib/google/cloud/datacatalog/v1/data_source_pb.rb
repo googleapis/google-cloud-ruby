@@ -7,13 +7,13 @@ require 'google/protobuf'
 require 'google/api/field_behavior_pb'
 
 
-descriptor_data = "\n-google/cloud/datacatalog/v1/data_source.proto\x12\x1bgoogle.cloud.datacatalog.v1\x1a\x1fgoogle/api/field_behavior.proto\"\x9c\x02\n\nDataSource\x12@\n\x07service\x18\x01 \x01(\x0e\x32/.google.cloud.datacatalog.v1.DataSource.Service\x12\x10\n\x08resource\x18\x02 \x01(\t\x12\x19\n\x0csource_entry\x18\x03 \x01(\tB\x03\xe0\x41\x03\x12L\n\x12storage_properties\x18\x04 \x01(\x0b\x32..google.cloud.datacatalog.v1.StoragePropertiesH\x00\"C\n\x07Service\x12\x17\n\x13SERVICE_UNSPECIFIED\x10\x00\x12\x11\n\rCLOUD_STORAGE\x10\x01\x12\x0c\n\x08\x42IGQUERY\x10\x02\x42\x0c\n\nproperties\"<\n\x11StorageProperties\x12\x14\n\x0c\x66ile_pattern\x18\x01 \x03(\t\x12\x11\n\tfile_type\x18\x02 \x01(\tB\xd7\x01\n\x1f\x63om.google.cloud.datacatalog.v1B\x0f\x44\x61taSourceProtoP\x01ZAcloud.google.com/go/datacatalog/apiv1/datacatalogpb;datacatalogpb\xf8\x01\x01\xaa\x02\x1bGoogle.Cloud.DataCatalog.V1\xca\x02\x1bGoogle\\Cloud\\DataCatalog\\V1\xea\x02\x1eGoogle::Cloud::DataCatalog::V1b\x06proto3"
+descriptor_data = "\n-google/cloud/datacatalog/v1/data_source.proto\x12\x1bgoogle.cloud.datacatalog.v1\x1a\x1fgoogle/api/field_behavior.proto\"\x9d\x02\n\nDataSource\x12@\n\x07service\x18\x01 \x01(\x0e\x32/.google.cloud.datacatalog.v1.DataSource.Service\x12\x10\n\x08resource\x18\x02 \x01(\t\x12\x1a\n\x0csource_entry\x18\x03 \x01(\tB\x04\xe2\x41\x01\x03\x12L\n\x12storage_properties\x18\x04 \x01(\x0b\x32..google.cloud.datacatalog.v1.StoragePropertiesH\x00\"C\n\x07Service\x12\x17\n\x13SERVICE_UNSPECIFIED\x10\x00\x12\x11\n\rCLOUD_STORAGE\x10\x01\x12\x0c\n\x08\x42IGQUERY\x10\x02\x42\x0c\n\nproperties\"<\n\x11StorageProperties\x12\x14\n\x0c\x66ile_pattern\x18\x01 \x03(\t\x12\x11\n\tfile_type\x18\x02 \x01(\tB\xd7\x01\n\x1f\x63om.google.cloud.datacatalog.v1B\x0f\x44\x61taSourceProtoP\x01ZAcloud.google.com/go/datacatalog/apiv1/datacatalogpb;datacatalogpb\xf8\x01\x01\xaa\x02\x1bGoogle.Cloud.DataCatalog.V1\xca\x02\x1bGoogle\\Cloud\\DataCatalog\\V1\xea\x02\x1eGoogle::Cloud::DataCatalog::V1b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
 begin
   pool.add_serialized_file(descriptor_data)
-rescue TypeError => e
+rescue TypeError
   # Compatibility code: will be removed in the next major version.
   require 'google/protobuf/descriptor_pb'
   parsed = Google::Protobuf::FileDescriptorProto.decode(descriptor_data)
