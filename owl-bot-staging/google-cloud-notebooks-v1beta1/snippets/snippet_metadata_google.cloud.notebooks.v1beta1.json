@@ -1,0 +1,775 @@
+{
+  "client_library": {
+    "name": "google-cloud-notebooks-v1beta1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.notebooks.v1beta1",
+        "version": "v1beta1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "notebooks_v1beta1_generated_NotebookService_ListInstances_sync",
+      "title": "Snippet for the list_instances call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1beta1::NotebookService::Client#list_instances.",
+      "file": "notebook_service/list_instances.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_instances",
+        "full_name": "::Google::Cloud::Notebooks::V1beta1::NotebookService::Client#list_instances",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Notebooks::V1beta1::ListInstancesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Notebooks::V1beta1::ListInstancesResponse",
+        "client": {
+          "short_name": "NotebookService::Client",
+          "full_name": "::Google::Cloud::Notebooks::V1beta1::NotebookService::Client"
+        },
+        "method": {
+          "short_name": "ListInstances",
+          "full_name": "google.cloud.notebooks.v1beta1.NotebookService.ListInstances",
+          "service": {
+            "short_name": "NotebookService",
+            "full_name": "google.cloud.notebooks.v1beta1.NotebookService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "notebooks_v1beta1_generated_NotebookService_GetInstance_sync",
+      "title": "Snippet for the get_instance call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1beta1::NotebookService::Client#get_instance.",
+      "file": "notebook_service/get_instance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_instance",
+        "full_name": "::Google::Cloud::Notebooks::V1beta1::NotebookService::Client#get_instance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Notebooks::V1beta1::GetInstanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Notebooks::V1beta1::Instance",
+        "client": {
+          "short_name": "NotebookService::Client",
+          "full_name": "::Google::Cloud::Notebooks::V1beta1::NotebookService::Client"
+        },
+        "method": {
+          "short_name": "GetInstance",
+          "full_name": "google.cloud.notebooks.v1beta1.NotebookService.GetInstance",
+          "service": {
+            "short_name": "NotebookService",
+            "full_name": "google.cloud.notebooks.v1beta1.NotebookService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "notebooks_v1beta1_generated_NotebookService_CreateInstance_sync",
+      "title": "Snippet for the create_instance call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1beta1::NotebookService::Client#create_instance.",
+      "file": "notebook_service/create_instance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_instance",
+        "full_name": "::Google::Cloud::Notebooks::V1beta1::NotebookService::Client#create_instance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Notebooks::V1beta1::CreateInstanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NotebookService::Client",
+          "full_name": "::Google::Cloud::Notebooks::V1beta1::NotebookService::Client"
+        },
+        "method": {
+          "short_name": "CreateInstance",
+          "full_name": "google.cloud.notebooks.v1beta1.NotebookService.CreateInstance",
+          "service": {
+            "short_name": "NotebookService",
+            "full_name": "google.cloud.notebooks.v1beta1.NotebookService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "notebooks_v1beta1_generated_NotebookService_RegisterInstance_sync",
+      "title": "Snippet for the register_instance call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1beta1::NotebookService::Client#register_instance.",
+      "file": "notebook_service/register_instance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "register_instance",
+        "full_name": "::Google::Cloud::Notebooks::V1beta1::NotebookService::Client#register_instance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Notebooks::V1beta1::RegisterInstanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NotebookService::Client",
+          "full_name": "::Google::Cloud::Notebooks::V1beta1::NotebookService::Client"
+        },
+        "method": {
+          "short_name": "RegisterInstance",
+          "full_name": "google.cloud.notebooks.v1beta1.NotebookService.RegisterInstance",
+          "service": {
+            "short_name": "NotebookService",
+            "full_name": "google.cloud.notebooks.v1beta1.NotebookService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "notebooks_v1beta1_generated_NotebookService_SetInstanceAccelerator_sync",
+      "title": "Snippet for the set_instance_accelerator call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1beta1::NotebookService::Client#set_instance_accelerator.",
+      "file": "notebook_service/set_instance_accelerator.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "set_instance_accelerator",
+        "full_name": "::Google::Cloud::Notebooks::V1beta1::NotebookService::Client#set_instance_accelerator",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Notebooks::V1beta1::SetInstanceAcceleratorRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NotebookService::Client",
+          "full_name": "::Google::Cloud::Notebooks::V1beta1::NotebookService::Client"
+        },
+        "method": {
+          "short_name": "SetInstanceAccelerator",
+          "full_name": "google.cloud.notebooks.v1beta1.NotebookService.SetInstanceAccelerator",
+          "service": {
+            "short_name": "NotebookService",
+            "full_name": "google.cloud.notebooks.v1beta1.NotebookService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "notebooks_v1beta1_generated_NotebookService_SetInstanceMachineType_sync",
+      "title": "Snippet for the set_instance_machine_type call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1beta1::NotebookService::Client#set_instance_machine_type.",
+      "file": "notebook_service/set_instance_machine_type.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "set_instance_machine_type",
+        "full_name": "::Google::Cloud::Notebooks::V1beta1::NotebookService::Client#set_instance_machine_type",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Notebooks::V1beta1::SetInstanceMachineTypeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NotebookService::Client",
+          "full_name": "::Google::Cloud::Notebooks::V1beta1::NotebookService::Client"
+        },
+        "method": {
+          "short_name": "SetInstanceMachineType",
+          "full_name": "google.cloud.notebooks.v1beta1.NotebookService.SetInstanceMachineType",
+          "service": {
+            "short_name": "NotebookService",
+            "full_name": "google.cloud.notebooks.v1beta1.NotebookService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "notebooks_v1beta1_generated_NotebookService_SetInstanceLabels_sync",
+      "title": "Snippet for the set_instance_labels call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1beta1::NotebookService::Client#set_instance_labels.",
+      "file": "notebook_service/set_instance_labels.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "set_instance_labels",
+        "full_name": "::Google::Cloud::Notebooks::V1beta1::NotebookService::Client#set_instance_labels",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Notebooks::V1beta1::SetInstanceLabelsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NotebookService::Client",
+          "full_name": "::Google::Cloud::Notebooks::V1beta1::NotebookService::Client"
+        },
+        "method": {
+          "short_name": "SetInstanceLabels",
+          "full_name": "google.cloud.notebooks.v1beta1.NotebookService.SetInstanceLabels",
+          "service": {
+            "short_name": "NotebookService",
+            "full_name": "google.cloud.notebooks.v1beta1.NotebookService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "notebooks_v1beta1_generated_NotebookService_DeleteInstance_sync",
+      "title": "Snippet for the delete_instance call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1beta1::NotebookService::Client#delete_instance.",
+      "file": "notebook_service/delete_instance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_instance",
+        "full_name": "::Google::Cloud::Notebooks::V1beta1::NotebookService::Client#delete_instance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Notebooks::V1beta1::DeleteInstanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NotebookService::Client",
+          "full_name": "::Google::Cloud::Notebooks::V1beta1::NotebookService::Client"
+        },
+        "method": {
+          "short_name": "DeleteInstance",
+          "full_name": "google.cloud.notebooks.v1beta1.NotebookService.DeleteInstance",
+          "service": {
+            "short_name": "NotebookService",
+            "full_name": "google.cloud.notebooks.v1beta1.NotebookService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "notebooks_v1beta1_generated_NotebookService_StartInstance_sync",
+      "title": "Snippet for the start_instance call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1beta1::NotebookService::Client#start_instance.",
+      "file": "notebook_service/start_instance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "start_instance",
+        "full_name": "::Google::Cloud::Notebooks::V1beta1::NotebookService::Client#start_instance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Notebooks::V1beta1::StartInstanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NotebookService::Client",
+          "full_name": "::Google::Cloud::Notebooks::V1beta1::NotebookService::Client"
+        },
+        "method": {
+          "short_name": "StartInstance",
+          "full_name": "google.cloud.notebooks.v1beta1.NotebookService.StartInstance",
+          "service": {
+            "short_name": "NotebookService",
+            "full_name": "google.cloud.notebooks.v1beta1.NotebookService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "notebooks_v1beta1_generated_NotebookService_StopInstance_sync",
+      "title": "Snippet for the stop_instance call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1beta1::NotebookService::Client#stop_instance.",
+      "file": "notebook_service/stop_instance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "stop_instance",
+        "full_name": "::Google::Cloud::Notebooks::V1beta1::NotebookService::Client#stop_instance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Notebooks::V1beta1::StopInstanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NotebookService::Client",
+          "full_name": "::Google::Cloud::Notebooks::V1beta1::NotebookService::Client"
+        },
+        "method": {
+          "short_name": "StopInstance",
+          "full_name": "google.cloud.notebooks.v1beta1.NotebookService.StopInstance",
+          "service": {
+            "short_name": "NotebookService",
+            "full_name": "google.cloud.notebooks.v1beta1.NotebookService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "notebooks_v1beta1_generated_NotebookService_ResetInstance_sync",
+      "title": "Snippet for the reset_instance call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1beta1::NotebookService::Client#reset_instance.",
+      "file": "notebook_service/reset_instance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "reset_instance",
+        "full_name": "::Google::Cloud::Notebooks::V1beta1::NotebookService::Client#reset_instance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Notebooks::V1beta1::ResetInstanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NotebookService::Client",
+          "full_name": "::Google::Cloud::Notebooks::V1beta1::NotebookService::Client"
+        },
+        "method": {
+          "short_name": "ResetInstance",
+          "full_name": "google.cloud.notebooks.v1beta1.NotebookService.ResetInstance",
+          "service": {
+            "short_name": "NotebookService",
+            "full_name": "google.cloud.notebooks.v1beta1.NotebookService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "notebooks_v1beta1_generated_NotebookService_ReportInstanceInfo_sync",
+      "title": "Snippet for the report_instance_info call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1beta1::NotebookService::Client#report_instance_info.",
+      "file": "notebook_service/report_instance_info.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "report_instance_info",
+        "full_name": "::Google::Cloud::Notebooks::V1beta1::NotebookService::Client#report_instance_info",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Notebooks::V1beta1::ReportInstanceInfoRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NotebookService::Client",
+          "full_name": "::Google::Cloud::Notebooks::V1beta1::NotebookService::Client"
+        },
+        "method": {
+          "short_name": "ReportInstanceInfo",
+          "full_name": "google.cloud.notebooks.v1beta1.NotebookService.ReportInstanceInfo",
+          "service": {
+            "short_name": "NotebookService",
+            "full_name": "google.cloud.notebooks.v1beta1.NotebookService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "notebooks_v1beta1_generated_NotebookService_IsInstanceUpgradeable_sync",
+      "title": "Snippet for the is_instance_upgradeable call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1beta1::NotebookService::Client#is_instance_upgradeable.",
+      "file": "notebook_service/is_instance_upgradeable.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "is_instance_upgradeable",
+        "full_name": "::Google::Cloud::Notebooks::V1beta1::NotebookService::Client#is_instance_upgradeable",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Notebooks::V1beta1::IsInstanceUpgradeableRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Notebooks::V1beta1::IsInstanceUpgradeableResponse",
+        "client": {
+          "short_name": "NotebookService::Client",
+          "full_name": "::Google::Cloud::Notebooks::V1beta1::NotebookService::Client"
+        },
+        "method": {
+          "short_name": "IsInstanceUpgradeable",
+          "full_name": "google.cloud.notebooks.v1beta1.NotebookService.IsInstanceUpgradeable",
+          "service": {
+            "short_name": "NotebookService",
+            "full_name": "google.cloud.notebooks.v1beta1.NotebookService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "notebooks_v1beta1_generated_NotebookService_UpgradeInstance_sync",
+      "title": "Snippet for the upgrade_instance call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1beta1::NotebookService::Client#upgrade_instance.",
+      "file": "notebook_service/upgrade_instance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "upgrade_instance",
+        "full_name": "::Google::Cloud::Notebooks::V1beta1::NotebookService::Client#upgrade_instance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Notebooks::V1beta1::UpgradeInstanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NotebookService::Client",
+          "full_name": "::Google::Cloud::Notebooks::V1beta1::NotebookService::Client"
+        },
+        "method": {
+          "short_name": "UpgradeInstance",
+          "full_name": "google.cloud.notebooks.v1beta1.NotebookService.UpgradeInstance",
+          "service": {
+            "short_name": "NotebookService",
+            "full_name": "google.cloud.notebooks.v1beta1.NotebookService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "notebooks_v1beta1_generated_NotebookService_UpgradeInstanceInternal_sync",
+      "title": "Snippet for the upgrade_instance_internal call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1beta1::NotebookService::Client#upgrade_instance_internal.",
+      "file": "notebook_service/upgrade_instance_internal.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "upgrade_instance_internal",
+        "full_name": "::Google::Cloud::Notebooks::V1beta1::NotebookService::Client#upgrade_instance_internal",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Notebooks::V1beta1::UpgradeInstanceInternalRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NotebookService::Client",
+          "full_name": "::Google::Cloud::Notebooks::V1beta1::NotebookService::Client"
+        },
+        "method": {
+          "short_name": "UpgradeInstanceInternal",
+          "full_name": "google.cloud.notebooks.v1beta1.NotebookService.UpgradeInstanceInternal",
+          "service": {
+            "short_name": "NotebookService",
+            "full_name": "google.cloud.notebooks.v1beta1.NotebookService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "notebooks_v1beta1_generated_NotebookService_ListEnvironments_sync",
+      "title": "Snippet for the list_environments call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1beta1::NotebookService::Client#list_environments.",
+      "file": "notebook_service/list_environments.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_environments",
+        "full_name": "::Google::Cloud::Notebooks::V1beta1::NotebookService::Client#list_environments",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Notebooks::V1beta1::ListEnvironmentsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Notebooks::V1beta1::ListEnvironmentsResponse",
+        "client": {
+          "short_name": "NotebookService::Client",
+          "full_name": "::Google::Cloud::Notebooks::V1beta1::NotebookService::Client"
+        },
+        "method": {
+          "short_name": "ListEnvironments",
+          "full_name": "google.cloud.notebooks.v1beta1.NotebookService.ListEnvironments",
+          "service": {
+            "short_name": "NotebookService",
+            "full_name": "google.cloud.notebooks.v1beta1.NotebookService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "notebooks_v1beta1_generated_NotebookService_GetEnvironment_sync",
+      "title": "Snippet for the get_environment call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1beta1::NotebookService::Client#get_environment.",
+      "file": "notebook_service/get_environment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_environment",
+        "full_name": "::Google::Cloud::Notebooks::V1beta1::NotebookService::Client#get_environment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Notebooks::V1beta1::GetEnvironmentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Notebooks::V1beta1::Environment",
+        "client": {
+          "short_name": "NotebookService::Client",
+          "full_name": "::Google::Cloud::Notebooks::V1beta1::NotebookService::Client"
+        },
+        "method": {
+          "short_name": "GetEnvironment",
+          "full_name": "google.cloud.notebooks.v1beta1.NotebookService.GetEnvironment",
+          "service": {
+            "short_name": "NotebookService",
+            "full_name": "google.cloud.notebooks.v1beta1.NotebookService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "notebooks_v1beta1_generated_NotebookService_CreateEnvironment_sync",
+      "title": "Snippet for the create_environment call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1beta1::NotebookService::Client#create_environment.",
+      "file": "notebook_service/create_environment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_environment",
+        "full_name": "::Google::Cloud::Notebooks::V1beta1::NotebookService::Client#create_environment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Notebooks::V1beta1::CreateEnvironmentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NotebookService::Client",
+          "full_name": "::Google::Cloud::Notebooks::V1beta1::NotebookService::Client"
+        },
+        "method": {
+          "short_name": "CreateEnvironment",
+          "full_name": "google.cloud.notebooks.v1beta1.NotebookService.CreateEnvironment",
+          "service": {
+            "short_name": "NotebookService",
+            "full_name": "google.cloud.notebooks.v1beta1.NotebookService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "notebooks_v1beta1_generated_NotebookService_DeleteEnvironment_sync",
+      "title": "Snippet for the delete_environment call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Notebooks::V1beta1::NotebookService::Client#delete_environment.",
+      "file": "notebook_service/delete_environment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_environment",
+        "full_name": "::Google::Cloud::Notebooks::V1beta1::NotebookService::Client#delete_environment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Notebooks::V1beta1::DeleteEnvironmentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NotebookService::Client",
+          "full_name": "::Google::Cloud::Notebooks::V1beta1::NotebookService::Client"
+        },
+        "method": {
+          "short_name": "DeleteEnvironment",
+          "full_name": "google.cloud.notebooks.v1beta1.NotebookService.DeleteEnvironment",
+          "service": {
+            "short_name": "NotebookService",
+            "full_name": "google.cloud.notebooks.v1beta1.NotebookService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
