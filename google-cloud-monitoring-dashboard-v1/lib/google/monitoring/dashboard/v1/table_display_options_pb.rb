@@ -7,13 +7,13 @@ require 'google/protobuf'
 require 'google/api/field_behavior_pb'
 
 
-descriptor_data = "\n:google/monitoring/dashboard/v1/table_display_options.proto\x12\x1egoogle.monitoring.dashboard.v1\x1a\x1fgoogle/api/field_behavior.proto\"3\n\x13TableDisplayOptions\x12\x1c\n\rshown_columns\x18\x01 \x03(\tB\x05\x18\x01\xe0\x41\x01\x42\x81\x02\n\"com.google.monitoring.dashboard.v1B\x18TableDisplayOptionsProtoP\x01ZFcloud.google.com/go/monitoring/dashboard/apiv1/dashboardpb;dashboardpb\xaa\x02$Google.Cloud.Monitoring.Dashboard.V1\xca\x02$Google\\Cloud\\Monitoring\\Dashboard\\V1\xea\x02(Google::Cloud::Monitoring::Dashboard::V1b\x06proto3"
+descriptor_data = "\n:google/monitoring/dashboard/v1/table_display_options.proto\x12\x1egoogle.monitoring.dashboard.v1\x1a\x1fgoogle/api/field_behavior.proto\"4\n\x13TableDisplayOptions\x12\x1d\n\rshown_columns\x18\x01 \x03(\tB\x06\x18\x01\xe2\x41\x01\x01\x42\x81\x02\n\"com.google.monitoring.dashboard.v1B\x18TableDisplayOptionsProtoP\x01ZFcloud.google.com/go/monitoring/dashboard/apiv1/dashboardpb;dashboardpb\xaa\x02$Google.Cloud.Monitoring.Dashboard.V1\xca\x02$Google\\Cloud\\Monitoring\\Dashboard\\V1\xea\x02(Google::Cloud::Monitoring::Dashboard::V1b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
 begin
   pool.add_serialized_file(descriptor_data)
-rescue TypeError => e
+rescue TypeError
   # Compatibility code: will be removed in the next major version.
   require 'google/protobuf/descriptor_pb'
   parsed = Google::Protobuf::FileDescriptorProto.decode(descriptor_data)
