@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-datastore-v1",
-    "version": "0.16.2",
+    "version": "0.16.3",
     "language": "RUBY",
     "apis": [
       {
