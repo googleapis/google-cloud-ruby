@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-video_intelligence-v1p1beta1",
-    "version": "0.9.1",
+    "version": "0.9.2",
     "language": "RUBY",
     "apis": [
       {
