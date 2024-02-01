@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-bigquery-data_policies-v1beta1",
-    "version": "0.4.1",
+    "version": "0.4.2",
     "language": "RUBY",
     "apis": [
       {
