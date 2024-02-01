@@ -22,7 +22,7 @@ module Google
     module Bigquery
       module Reservation
         module V1
-          VERSION = "0.11.1"
+          VERSION = "0.11.2"
         end
       end
     end
