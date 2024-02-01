@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-alloy_db-v1beta",
-    "version": "0.6.1",
+    "version": "0.6.2",
     "language": "RUBY",
     "apis": [
       {
