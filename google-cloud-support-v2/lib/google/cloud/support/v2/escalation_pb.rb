@@ -7,13 +7,13 @@ require 'google/protobuf'
 require 'google/api/field_behavior_pb'
 
 
-descriptor_data = "\n(google/cloud/support/v2/escalation.proto\x12\x17google.cloud.support.v2\x1a\x1fgoogle/api/field_behavior.proto\"\xce\x01\n\nEscalation\x12?\n\x06reason\x18\x04 \x01(\x0e\x32*.google.cloud.support.v2.Escalation.ReasonB\x03\xe0\x41\x02\x12\x1a\n\rjustification\x18\x05 \x01(\tB\x03\xe0\x41\x02\"c\n\x06Reason\x12\x16\n\x12REASON_UNSPECIFIED\x10\x00\x12\x13\n\x0fRESOLUTION_TIME\x10\x01\x12\x17\n\x13TECHNICAL_EXPERTISE\x10\x02\x12\x13\n\x0f\x42USINESS_IMPACT\x10\x03\x42\xb8\x01\n\x1b\x63om.google.cloud.support.v2B\x0f\x45scalationProtoP\x01Z5cloud.google.com/go/support/apiv2/supportpb;supportpb\xaa\x02\x17Google.Cloud.Support.V2\xca\x02\x17Google\\Cloud\\Support\\V2\xea\x02\x1aGoogle::Cloud::Support::V2b\x06proto3"
+descriptor_data = "\n(google/cloud/support/v2/escalation.proto\x12\x17google.cloud.support.v2\x1a\x1fgoogle/api/field_behavior.proto\"\xd0\x01\n\nEscalation\x12@\n\x06reason\x18\x04 \x01(\x0e\x32*.google.cloud.support.v2.Escalation.ReasonB\x04\xe2\x41\x01\x02\x12\x1b\n\rjustification\x18\x05 \x01(\tB\x04\xe2\x41\x01\x02\"c\n\x06Reason\x12\x16\n\x12REASON_UNSPECIFIED\x10\x00\x12\x13\n\x0fRESOLUTION_TIME\x10\x01\x12\x17\n\x13TECHNICAL_EXPERTISE\x10\x02\x12\x13\n\x0f\x42USINESS_IMPACT\x10\x03\x42\xb8\x01\n\x1b\x63om.google.cloud.support.v2B\x0f\x45scalationProtoP\x01Z5cloud.google.com/go/support/apiv2/supportpb;supportpb\xaa\x02\x17Google.Cloud.Support.V2\xca\x02\x17Google\\Cloud\\Support\\V2\xea\x02\x1aGoogle::Cloud::Support::V2b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
 begin
   pool.add_serialized_file(descriptor_data)
-rescue TypeError => e
+rescue TypeError
   # Compatibility code: will be removed in the next major version.
   require 'google/protobuf/descriptor_pb'
   parsed = Google::Protobuf::FileDescriptorProto.decode(descriptor_data)

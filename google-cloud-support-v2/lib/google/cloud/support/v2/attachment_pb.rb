@@ -10,13 +10,13 @@ require 'google/cloud/support/v2/actor_pb'
 require 'google/protobuf/timestamp_pb'
 
 
-descriptor_data = "\n(google/cloud/support/v2/attachment.proto\x12\x17google.cloud.support.v2\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a#google/cloud/support/v2/actor.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x81\x03\n\nAttachment\x12\x11\n\x04name\x18\x01 \x01(\tB\x03\xe0\x41\x03\x12\x34\n\x0b\x63reate_time\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x03\xe0\x41\x03\x12\x34\n\x07\x63reator\x18\x03 \x01(\x0b\x32\x1e.google.cloud.support.v2.ActorB\x03\xe0\x41\x03\x12\x10\n\x08\x66ilename\x18\x04 \x01(\t\x12\x16\n\tmime_type\x18\x05 \x01(\tB\x03\xe0\x41\x03\x12\x17\n\nsize_bytes\x18\x06 \x01(\x03\x42\x03\xe0\x41\x03:\xb0\x01\xea\x41\xac\x01\n&cloudsupport.googleapis.com/Attachment\x12\x45organizations/{organization}/cases/{case}/attachments/{attachment_id}\x12;projects/{project}/cases/{case}/attachments/{attachment_id}B\xb8\x01\n\x1b\x63om.google.cloud.support.v2B\x0f\x41ttachmentProtoP\x01Z5cloud.google.com/go/support/apiv2/supportpb;supportpb\xaa\x02\x17Google.Cloud.Support.V2\xca\x02\x17Google\\Cloud\\Support\\V2\xea\x02\x1aGoogle::Cloud::Support::V2b\x06proto3"
+descriptor_data = "\n(google/cloud/support/v2/attachment.proto\x12\x17google.cloud.support.v2\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a#google/cloud/support/v2/actor.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x86\x03\n\nAttachment\x12\x12\n\x04name\x18\x01 \x01(\tB\x04\xe2\x41\x01\x03\x12\x35\n\x0b\x63reate_time\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x04\xe2\x41\x01\x03\x12\x35\n\x07\x63reator\x18\x03 \x01(\x0b\x32\x1e.google.cloud.support.v2.ActorB\x04\xe2\x41\x01\x03\x12\x10\n\x08\x66ilename\x18\x04 \x01(\t\x12\x17\n\tmime_type\x18\x05 \x01(\tB\x04\xe2\x41\x01\x03\x12\x18\n\nsize_bytes\x18\x06 \x01(\x03\x42\x04\xe2\x41\x01\x03:\xb0\x01\xea\x41\xac\x01\n&cloudsupport.googleapis.com/Attachment\x12\x45organizations/{organization}/cases/{case}/attachments/{attachment_id}\x12;projects/{project}/cases/{case}/attachments/{attachment_id}B\xb8\x01\n\x1b\x63om.google.cloud.support.v2B\x0f\x41ttachmentProtoP\x01Z5cloud.google.com/go/support/apiv2/supportpb;supportpb\xaa\x02\x17Google.Cloud.Support.V2\xca\x02\x17Google\\Cloud\\Support\\V2\xea\x02\x1aGoogle::Cloud::Support::V2b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
 begin
   pool.add_serialized_file(descriptor_data)
-rescue TypeError => e
+rescue TypeError
   # Compatibility code: will be removed in the next major version.
   require 'google/protobuf/descriptor_pb'
   parsed = Google::Protobuf::FileDescriptorProto.decode(descriptor_data)
