@@ -21,7 +21,7 @@ module Google
   module Cloud
     module NetworkConnectivity
       module V1alpha1
-        VERSION = "0.8.1"
+        VERSION = "0.8.2"
       end
     end
   end
