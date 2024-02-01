@@ -7,13 +7,13 @@ require 'google/protobuf'
 require 'google/api/field_behavior_pb'
 
 
-descriptor_data = "\n\"google/appengine/v1/location.proto\x12\x13google.appengine.v1\x1a\x1fgoogle/api/field_behavior.proto\"\x85\x01\n\x10LocationMetadata\x12&\n\x1estandard_environment_available\x18\x02 \x01(\x08\x12&\n\x1e\x66lexible_environment_available\x18\x04 \x01(\x08\x12!\n\x14search_api_available\x18\x06 \x01(\x08\x42\x03\xe0\x41\x03\x42\xbe\x01\n\x17\x63om.google.appengine.v1B\rLocationProtoP\x01Z;cloud.google.com/go/appengine/apiv1/appenginepb;appenginepb\xaa\x02\x19Google.Cloud.AppEngine.V1\xca\x02\x19Google\\Cloud\\AppEngine\\V1\xea\x02\x1cGoogle::Cloud::AppEngine::V1b\x06proto3"
+descriptor_data = "\n\"google/appengine/v1/location.proto\x12\x13google.appengine.v1\x1a\x1fgoogle/api/field_behavior.proto\"\x86\x01\n\x10LocationMetadata\x12&\n\x1estandard_environment_available\x18\x02 \x01(\x08\x12&\n\x1e\x66lexible_environment_available\x18\x04 \x01(\x08\x12\"\n\x14search_api_available\x18\x06 \x01(\x08\x42\x04\xe2\x41\x01\x03\x42\xbe\x01\n\x17\x63om.google.appengine.v1B\rLocationProtoP\x01Z;cloud.google.com/go/appengine/apiv1/appenginepb;appenginepb\xaa\x02\x19Google.Cloud.AppEngine.V1\xca\x02\x19Google\\Cloud\\AppEngine\\V1\xea\x02\x1cGoogle::Cloud::AppEngine::V1b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
 begin
   pool.add_serialized_file(descriptor_data)
-rescue TypeError => e
+rescue TypeError
   # Compatibility code: will be removed in the next major version.
   require 'google/protobuf/descriptor_pb'
   parsed = Google::Protobuf::FileDescriptorProto.decode(descriptor_data)
