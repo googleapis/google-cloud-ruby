@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-storage_insights-v1",
-    "version": "0.4.1",
+    "version": "0.4.2",
     "language": "RUBY",
     "apis": [
       {
