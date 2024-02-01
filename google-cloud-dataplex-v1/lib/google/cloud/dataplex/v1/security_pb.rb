@@ -7,13 +7,13 @@ require 'google/protobuf'
 require 'google/api/field_behavior_pb'
 
 
-descriptor_data = "\n\'google/cloud/dataplex/v1/security.proto\x12\x18google.cloud.dataplex.v1\x1a\x1fgoogle/api/field_behavior.proto\"U\n\x12ResourceAccessSpec\x12\x14\n\x07readers\x18\x01 \x03(\tB\x03\xe0\x41\x01\x12\x14\n\x07writers\x18\x02 \x03(\tB\x03\xe0\x41\x01\x12\x13\n\x06owners\x18\x03 \x03(\tB\x03\xe0\x41\x01\"&\n\x0e\x44\x61taAccessSpec\x12\x14\n\x07readers\x18\x01 \x03(\tB\x03\xe0\x41\x01\x42i\n\x1c\x63om.google.cloud.dataplex.v1B\rSecurityProtoP\x01Z8cloud.google.com/go/dataplex/apiv1/dataplexpb;dataplexpbb\x06proto3"
+descriptor_data = "\n\'google/cloud/dataplex/v1/security.proto\x12\x18google.cloud.dataplex.v1\x1a\x1fgoogle/api/field_behavior.proto\"X\n\x12ResourceAccessSpec\x12\x15\n\x07readers\x18\x01 \x03(\tB\x04\xe2\x41\x01\x01\x12\x15\n\x07writers\x18\x02 \x03(\tB\x04\xe2\x41\x01\x01\x12\x14\n\x06owners\x18\x03 \x03(\tB\x04\xe2\x41\x01\x01\"\'\n\x0e\x44\x61taAccessSpec\x12\x15\n\x07readers\x18\x01 \x03(\tB\x04\xe2\x41\x01\x01\x42i\n\x1c\x63om.google.cloud.dataplex.v1B\rSecurityProtoP\x01Z8cloud.google.com/go/dataplex/apiv1/dataplexpb;dataplexpbb\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
 begin
   pool.add_serialized_file(descriptor_data)
-rescue TypeError => e
+rescue TypeError
   # Compatibility code: will be removed in the next major version.
   require 'google/protobuf/descriptor_pb'
   parsed = Google::Protobuf::FileDescriptorProto.decode(descriptor_data)
