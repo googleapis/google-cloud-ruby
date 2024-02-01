@@ -1,0 +1,57 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.dataqna.v1alpha",
+  "libraryPackage": "::Google::Cloud::DataQnA::V1alpha",
+  "services": {
+    "AutoSuggestionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DataQnA::V1alpha::AutoSuggestionService::Client",
+          "rpcs": {
+            "SuggestQueries": {
+              "methods": [
+                "suggest_queries"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "QuestionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DataQnA::V1alpha::QuestionService::Client",
+          "rpcs": {
+            "GetQuestion": {
+              "methods": [
+                "get_question"
+              ]
+            },
+            "CreateQuestion": {
+              "methods": [
+                "create_question"
+              ]
+            },
+            "ExecuteQuestion": {
+              "methods": [
+                "execute_question"
+              ]
+            },
+            "GetUserFeedback": {
+              "methods": [
+                "get_user_feedback"
+              ]
+            },
+            "UpdateUserFeedback": {
+              "methods": [
+                "update_user_feedback"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
