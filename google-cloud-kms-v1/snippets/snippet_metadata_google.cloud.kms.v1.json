@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-kms-v1",
-    "version": "0.24.1",
+    "version": "0.24.2",
     "language": "RUBY",
     "apis": [
       {
