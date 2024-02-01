@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-dataplex-v1",
-    "version": "0.18.1",
+    "version": "0.18.2",
     "language": "RUBY",
     "apis": [
       {
