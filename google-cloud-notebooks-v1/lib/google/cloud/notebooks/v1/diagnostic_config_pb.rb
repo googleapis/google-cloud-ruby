@@ -7,13 +7,13 @@ require 'google/protobuf'
 require 'google/api/field_behavior_pb'
 
 
-descriptor_data = "\n1google/cloud/notebooks/v1/diagnostic_config.proto\x12\x19google.cloud.notebooks.v1\x1a\x1fgoogle/api/field_behavior.proto\"\xbe\x01\n\x10\x44iagnosticConfig\x12\x17\n\ngcs_bucket\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x1a\n\rrelative_path\x18\x02 \x01(\tB\x03\xe0\x41\x01\x12 \n\x13repair_flag_enabled\x18\x03 \x01(\x08\x42\x03\xe0\x41\x01\x12(\n\x1bpacket_capture_flag_enabled\x18\x04 \x01(\x08\x42\x03\xe0\x41\x01\x12)\n\x1c\x63opy_home_files_flag_enabled\x18\x05 \x01(\x08\x42\x03\xe0\x41\x01\x42u\n\x1d\x63om.google.cloud.notebooks.v1B\x15\x44iagnosticConfigProtoP\x01Z;cloud.google.com/go/notebooks/apiv1/notebookspb;notebookspbb\x06proto3"
+descriptor_data = "\n1google/cloud/notebooks/v1/diagnostic_config.proto\x12\x19google.cloud.notebooks.v1\x1a\x1fgoogle/api/field_behavior.proto\"\xc3\x01\n\x10\x44iagnosticConfig\x12\x18\n\ngcs_bucket\x18\x01 \x01(\tB\x04\xe2\x41\x01\x02\x12\x1b\n\rrelative_path\x18\x02 \x01(\tB\x04\xe2\x41\x01\x01\x12!\n\x13repair_flag_enabled\x18\x03 \x01(\x08\x42\x04\xe2\x41\x01\x01\x12)\n\x1bpacket_capture_flag_enabled\x18\x04 \x01(\x08\x42\x04\xe2\x41\x01\x01\x12*\n\x1c\x63opy_home_files_flag_enabled\x18\x05 \x01(\x08\x42\x04\xe2\x41\x01\x01\x42u\n\x1d\x63om.google.cloud.notebooks.v1B\x15\x44iagnosticConfigProtoP\x01Z;cloud.google.com/go/notebooks/apiv1/notebookspb;notebookspbb\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
 begin
   pool.add_serialized_file(descriptor_data)
-rescue TypeError => e
+rescue TypeError
   # Compatibility code: will be removed in the next major version.
   require 'google/protobuf/descriptor_pb'
   parsed = Google::Protobuf::FileDescriptorProto.decode(descriptor_data)
