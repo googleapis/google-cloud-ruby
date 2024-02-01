@@ -1016,6 +1016,9 @@ module Google
         # @!attribute [rw] gcs_fuse_csi_driver_config
         #   @return [::Google::Cloud::Container::V1beta1::GcsFuseCsiDriverConfig]
         #     Configuration for the Cloud Storage Fuse CSI driver.
+        # @!attribute [rw] stateful_ha_config
+        #   @return [::Google::Cloud::Container::V1beta1::StatefulHAConfig]
+        #     Optional. Configuration for the StatefulHA add-on.
         class AddonsConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1090,6 +1093,15 @@ module Google
         #   @return [::Boolean]
         #     Whether the Backup for GKE agent is enabled for this cluster.
         class GkeBackupAgentConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration for the Stateful HA add-on.
+        # @!attribute [rw] enabled
+        #   @return [::Boolean]
+        #     Whether the Stateful HA add-on is enabled for this cluster.
+        class StatefulHAConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -5662,9 +5674,9 @@ module Google
         # @!attribute [rw] workload_policy_config
         #   @return [::Google::Cloud::Container::V1beta1::WorkloadPolicyConfig]
         #     Workload policy configuration for Autopilot.
-        # @!attribute [rw] conversion_status
+        # @!attribute [r] conversion_status
         #   @return [::Google::Cloud::Container::V1beta1::AutopilotConversionStatus]
-        #     ConversionStatus shows conversion status.
+        #     Output only. ConversionStatus shows conversion status.
         class Autopilot
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
