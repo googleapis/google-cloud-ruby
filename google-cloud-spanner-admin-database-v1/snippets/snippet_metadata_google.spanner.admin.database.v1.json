@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-spanner-admin-database-v1",
-    "version": "0.17.0",
+    "version": "0.17.1",
     "language": "RUBY",
     "apis": [
       {
