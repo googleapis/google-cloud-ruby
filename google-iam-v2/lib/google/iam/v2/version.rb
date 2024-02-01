@@ -20,7 +20,7 @@
 module Google
   module Iam
     module V2
-      VERSION = "0.5.1"
+      VERSION = "0.5.2"
     end
   end
 end
