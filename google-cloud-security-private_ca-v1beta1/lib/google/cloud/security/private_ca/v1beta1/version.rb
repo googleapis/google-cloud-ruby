@@ -22,7 +22,7 @@ module Google
     module Security
       module PrivateCA
         module V1beta1
-          VERSION = "0.8.1"
+          VERSION = "0.8.2"
         end
       end
     end
