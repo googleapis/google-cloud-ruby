@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-language-v2",
-    "version": "0.3.1",
+    "version": "0.3.2",
     "language": "RUBY",
     "apis": [
       {
