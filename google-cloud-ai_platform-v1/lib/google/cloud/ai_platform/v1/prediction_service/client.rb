@@ -407,8 +407,100 @@ module Google
             end
 
             ##
-            # Perform an unary online prediction request for Vertex first-party products
-            # and frameworks.
+            # Perform a streaming online prediction with an arbitrary HTTP payload.
+            #
+            # @overload stream_raw_predict(request, options = nil)
+            #   Pass arguments to `stream_raw_predict` via a request object, either of type
+            #   {::Google::Cloud::AIPlatform::V1::StreamRawPredictRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AIPlatform::V1::StreamRawPredictRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload stream_raw_predict(endpoint: nil, http_body: nil)
+            #   Pass arguments to `stream_raw_predict` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param endpoint [::String]
+            #     Required. The name of the Endpoint requested to serve the prediction.
+            #     Format:
+            #     `projects/{project}/locations/{location}/endpoints/{endpoint}`
+            #   @param http_body [::Google::Api::HttpBody, ::Hash]
+            #     The prediction input. Supports HTTP headers and arbitrary data payload.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Enumerable<::Google::Api::HttpBody>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Enumerable<::Google::Api::HttpBody>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::PredictionService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AIPlatform::V1::StreamRawPredictRequest.new
+            #
+            #   # Call the stream_raw_predict method to start streaming.
+            #   output = client.stream_raw_predict request
+            #
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Api::HttpBody
+            #   output.each do |current_response|
+            #     p current_response
+            #   end
+            #
+            def stream_raw_predict request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::StreamRawPredictRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.stream_raw_predict.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.endpoint
+                header_params["endpoint"] = request.endpoint
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.stream_raw_predict.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.stream_raw_predict.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @prediction_service_stub.call_rpc :stream_raw_predict, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Perform an unary online prediction request to a gRPC model server for
+            # Vertex first-party products and frameworks.
             #
             # @overload direct_predict(request, options = nil)
             #   Pass arguments to `direct_predict` via a request object, either of type
@@ -499,7 +591,8 @@ module Google
             end
 
             ##
-            # Perform an online prediction request through gRPC.
+            # Perform an unary online prediction request to a gRPC model server for
+            # custom containers.
             #
             # @overload direct_raw_predict(request, options = nil)
             #   Pass arguments to `direct_raw_predict` via a request object, either of type
@@ -588,6 +681,164 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @prediction_service_stub.call_rpc :direct_raw_predict, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Perform a streaming online prediction request to a gRPC model server for
+            # Vertex first-party products and frameworks.
+            #
+            # @param request [::Gapic::StreamInput, ::Enumerable<::Google::Cloud::AIPlatform::V1::StreamDirectPredictRequest, ::Hash>]
+            #   An enumerable of {::Google::Cloud::AIPlatform::V1::StreamDirectPredictRequest} instances.
+            # @param options [::Gapic::CallOptions, ::Hash]
+            #   Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Enumerable<::Google::Cloud::AIPlatform::V1::StreamDirectPredictResponse>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Enumerable<::Google::Cloud::AIPlatform::V1::StreamDirectPredictResponse>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::PredictionService::Client.new
+            #
+            #   # Create an input stream.
+            #   input = Gapic::StreamInput.new
+            #
+            #   # Call the stream_direct_predict method to start streaming.
+            #   output = client.stream_direct_predict input
+            #
+            #   # Send requests on the stream. For each request object, set fields by
+            #   # passing keyword arguments. Be sure to close the stream when done.
+            #   input << Google::Cloud::AIPlatform::V1::StreamDirectPredictRequest.new
+            #   input << Google::Cloud::AIPlatform::V1::StreamDirectPredictRequest.new
+            #   input.close
+            #
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::AIPlatform::V1::StreamDirectPredictResponse
+            #   output.each do |current_response|
+            #     p current_response
+            #   end
+            #
+            def stream_direct_predict request, options = nil
+              unless request.is_a? ::Enumerable
+                raise ::ArgumentError, "request must be an Enumerable" unless request.respond_to? :to_enum
+                request = request.to_enum
+              end
+
+              request = request.lazy.map do |req|
+                ::Gapic::Protobuf.coerce req, to: ::Google::Cloud::AIPlatform::V1::StreamDirectPredictRequest
+              end
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.stream_direct_predict.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              options.apply_defaults timeout:      @config.rpcs.stream_direct_predict.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.stream_direct_predict.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @prediction_service_stub.call_rpc :stream_direct_predict, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Perform a streaming online prediction request to a gRPC model server for
+            # custom containers.
+            #
+            # @param request [::Gapic::StreamInput, ::Enumerable<::Google::Cloud::AIPlatform::V1::StreamDirectRawPredictRequest, ::Hash>]
+            #   An enumerable of {::Google::Cloud::AIPlatform::V1::StreamDirectRawPredictRequest} instances.
+            # @param options [::Gapic::CallOptions, ::Hash]
+            #   Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Enumerable<::Google::Cloud::AIPlatform::V1::StreamDirectRawPredictResponse>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Enumerable<::Google::Cloud::AIPlatform::V1::StreamDirectRawPredictResponse>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::PredictionService::Client.new
+            #
+            #   # Create an input stream.
+            #   input = Gapic::StreamInput.new
+            #
+            #   # Call the stream_direct_raw_predict method to start streaming.
+            #   output = client.stream_direct_raw_predict input
+            #
+            #   # Send requests on the stream. For each request object, set fields by
+            #   # passing keyword arguments. Be sure to close the stream when done.
+            #   input << Google::Cloud::AIPlatform::V1::StreamDirectRawPredictRequest.new
+            #   input << Google::Cloud::AIPlatform::V1::StreamDirectRawPredictRequest.new
+            #   input.close
+            #
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::AIPlatform::V1::StreamDirectRawPredictResponse
+            #   output.each do |current_response|
+            #     p current_response
+            #   end
+            #
+            def stream_direct_raw_predict request, options = nil
+              unless request.is_a? ::Enumerable
+                raise ::ArgumentError, "request must be an Enumerable" unless request.respond_to? :to_enum
+                request = request.to_enum
+              end
+
+              request = request.lazy.map do |req|
+                ::Gapic::Protobuf.coerce req, to: ::Google::Cloud::AIPlatform::V1::StreamDirectRawPredictRequest
+              end
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.stream_direct_raw_predict.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              options.apply_defaults timeout:      @config.rpcs.stream_direct_raw_predict.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.stream_direct_raw_predict.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @prediction_service_stub.call_rpc :stream_direct_raw_predict, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -974,6 +1225,112 @@ module Google
             end
 
             ##
+            # Generate content with multimodal inputs.
+            #
+            # @overload generate_content(request, options = nil)
+            #   Pass arguments to `generate_content` via a request object, either of type
+            #   {::Google::Cloud::AIPlatform::V1::GenerateContentRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AIPlatform::V1::GenerateContentRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload generate_content(model: nil, contents: nil, tools: nil, safety_settings: nil, generation_config: nil)
+            #   Pass arguments to `generate_content` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param model [::String]
+            #     Required. The name of the publisher model requested to serve the
+            #     prediction. Format:
+            #     `projects/{project}/locations/{location}/publishers/*/models/*`
+            #   @param contents [::Array<::Google::Cloud::AIPlatform::V1::Content, ::Hash>]
+            #     Required. The content of the current conversation with the model.
+            #
+            #     For single-turn queries, this is a single instance. For multi-turn queries,
+            #     this is a repeated field that contains conversation history + latest
+            #     request.
+            #   @param tools [::Array<::Google::Cloud::AIPlatform::V1::Tool, ::Hash>]
+            #     Optional. A list of `Tools` the model may use to generate the next
+            #     response.
+            #
+            #     A `Tool` is a piece of code that enables the system to interact with
+            #     external systems to perform an action, or set of actions, outside of
+            #     knowledge and scope of the model. The only supported tool is currently
+            #     `Function`
+            #   @param safety_settings [::Array<::Google::Cloud::AIPlatform::V1::SafetySetting, ::Hash>]
+            #     Optional. Per request settings for blocking unsafe content.
+            #     Enforced on GenerateContentResponse.candidates.
+            #   @param generation_config [::Google::Cloud::AIPlatform::V1::GenerationConfig, ::Hash]
+            #     Optional. Generation config.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::AIPlatform::V1::GenerateContentResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::AIPlatform::V1::GenerateContentResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::PredictionService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AIPlatform::V1::GenerateContentRequest.new
+            #
+            #   # Call the generate_content method.
+            #   result = client.generate_content request
+            #
+            #   # The returned object is of type Google::Cloud::AIPlatform::V1::GenerateContentResponse.
+            #   p result
+            #
+            def generate_content request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::GenerateContentRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.generate_content.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.model
+                header_params["model"] = request.model
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.generate_content.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.generate_content.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @prediction_service_stub.call_rpc :generate_content, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Generate content with multimodal inputs with streaming support.
             #
             # @overload stream_generate_content(request, options = nil)
@@ -1246,6 +1603,11 @@ module Google
                 #
                 attr_reader :raw_predict
                 ##
+                # RPC-specific configuration for `stream_raw_predict`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :stream_raw_predict
+                ##
                 # RPC-specific configuration for `direct_predict`
                 # @return [::Gapic::Config::Method]
                 #
@@ -1255,6 +1617,16 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :direct_raw_predict
+                ##
+                # RPC-specific configuration for `stream_direct_predict`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :stream_direct_predict
+                ##
+                # RPC-specific configuration for `stream_direct_raw_predict`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :stream_direct_raw_predict
                 ##
                 # RPC-specific configuration for `streaming_predict`
                 # @return [::Gapic::Config::Method]
@@ -1276,6 +1648,11 @@ module Google
                 #
                 attr_reader :explain
                 ##
+                # RPC-specific configuration for `generate_content`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :generate_content
+                ##
                 # RPC-specific configuration for `stream_generate_content`
                 # @return [::Gapic::Config::Method]
                 #
@@ -1287,10 +1664,16 @@ module Google
                   @predict = ::Gapic::Config::Method.new predict_config
                   raw_predict_config = parent_rpcs.raw_predict if parent_rpcs.respond_to? :raw_predict
                   @raw_predict = ::Gapic::Config::Method.new raw_predict_config
+                  stream_raw_predict_config = parent_rpcs.stream_raw_predict if parent_rpcs.respond_to? :stream_raw_predict
+                  @stream_raw_predict = ::Gapic::Config::Method.new stream_raw_predict_config
                   direct_predict_config = parent_rpcs.direct_predict if parent_rpcs.respond_to? :direct_predict
                   @direct_predict = ::Gapic::Config::Method.new direct_predict_config
                   direct_raw_predict_config = parent_rpcs.direct_raw_predict if parent_rpcs.respond_to? :direct_raw_predict
                   @direct_raw_predict = ::Gapic::Config::Method.new direct_raw_predict_config
+                  stream_direct_predict_config = parent_rpcs.stream_direct_predict if parent_rpcs.respond_to? :stream_direct_predict
+                  @stream_direct_predict = ::Gapic::Config::Method.new stream_direct_predict_config
+                  stream_direct_raw_predict_config = parent_rpcs.stream_direct_raw_predict if parent_rpcs.respond_to? :stream_direct_raw_predict
+                  @stream_direct_raw_predict = ::Gapic::Config::Method.new stream_direct_raw_predict_config
                   streaming_predict_config = parent_rpcs.streaming_predict if parent_rpcs.respond_to? :streaming_predict
                   @streaming_predict = ::Gapic::Config::Method.new streaming_predict_config
                   server_streaming_predict_config = parent_rpcs.server_streaming_predict if parent_rpcs.respond_to? :server_streaming_predict
@@ -1299,6 +1682,8 @@ module Google
                   @streaming_raw_predict = ::Gapic::Config::Method.new streaming_raw_predict_config
                   explain_config = parent_rpcs.explain if parent_rpcs.respond_to? :explain
                   @explain = ::Gapic::Config::Method.new explain_config
+                  generate_content_config = parent_rpcs.generate_content if parent_rpcs.respond_to? :generate_content
+                  @generate_content = ::Gapic::Config::Method.new generate_content_config
                   stream_generate_content_config = parent_rpcs.stream_generate_content if parent_rpcs.respond_to? :stream_generate_content
                   @stream_generate_content = ::Gapic::Config::Method.new stream_generate_content_config
 

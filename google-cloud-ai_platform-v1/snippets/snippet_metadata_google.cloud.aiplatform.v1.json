@@ -5252,6 +5252,46 @@
       ]
     },
     {
+      "region_tag": "aiplatform_v1_generated_PredictionService_StreamRawPredict_sync",
+      "title": "Snippet for the stream_raw_predict call in the PredictionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::PredictionService::Client#stream_raw_predict.",
+      "file": "prediction_service/stream_raw_predict.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "stream_raw_predict",
+        "full_name": "::Google::Cloud::AIPlatform::V1::PredictionService::Client#stream_raw_predict",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::StreamRawPredictRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Api::HttpBody",
+        "client": {
+          "short_name": "PredictionService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::PredictionService::Client"
+        },
+        "method": {
+          "short_name": "StreamRawPredict",
+          "full_name": "google.cloud.aiplatform.v1.PredictionService.StreamRawPredict",
+          "service": {
+            "short_name": "PredictionService",
+            "full_name": "google.cloud.aiplatform.v1.PredictionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 49,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "aiplatform_v1_generated_PredictionService_DirectPredict_sync",
       "title": "Snippet for the direct_predict call in the PredictionService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::PredictionService::Client#direct_predict.",
@@ -5327,6 +5367,86 @@
         {
           "start": 20,
           "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_PredictionService_StreamDirectPredict_sync",
+      "title": "Snippet for the stream_direct_predict call in the PredictionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::PredictionService::Client#stream_direct_predict.",
+      "file": "prediction_service/stream_direct_predict.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "stream_direct_predict",
+        "full_name": "::Google::Cloud::AIPlatform::V1::PredictionService::Client#stream_direct_predict",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::StreamDirectPredictRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::StreamDirectPredictResponse",
+        "client": {
+          "short_name": "PredictionService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::PredictionService::Client"
+        },
+        "method": {
+          "short_name": "StreamDirectPredict",
+          "full_name": "google.cloud.aiplatform.v1.PredictionService.StreamDirectPredict",
+          "service": {
+            "short_name": "PredictionService",
+            "full_name": "google.cloud.aiplatform.v1.PredictionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 55,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_PredictionService_StreamDirectRawPredict_sync",
+      "title": "Snippet for the stream_direct_raw_predict call in the PredictionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::PredictionService::Client#stream_direct_raw_predict.",
+      "file": "prediction_service/stream_direct_raw_predict.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "stream_direct_raw_predict",
+        "full_name": "::Google::Cloud::AIPlatform::V1::PredictionService::Client#stream_direct_raw_predict",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::StreamDirectRawPredictRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::StreamDirectRawPredictResponse",
+        "client": {
+          "short_name": "PredictionService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::PredictionService::Client"
+        },
+        "method": {
+          "short_name": "StreamDirectRawPredict",
+          "full_name": "google.cloud.aiplatform.v1.PredictionService.StreamDirectRawPredict",
+          "service": {
+            "short_name": "PredictionService",
+            "full_name": "google.cloud.aiplatform.v1.PredictionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 55,
           "type": "FULL"
         }
       ]
@@ -5475,6 +5595,46 @@
         "method": {
           "short_name": "Explain",
           "full_name": "google.cloud.aiplatform.v1.PredictionService.Explain",
+          "service": {
+            "short_name": "PredictionService",
+            "full_name": "google.cloud.aiplatform.v1.PredictionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_PredictionService_GenerateContent_sync",
+      "title": "Snippet for the generate_content call in the PredictionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::PredictionService::Client#generate_content.",
+      "file": "prediction_service/generate_content.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "generate_content",
+        "full_name": "::Google::Cloud::AIPlatform::V1::PredictionService::Client#generate_content",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::GenerateContentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::GenerateContentResponse",
+        "client": {
+          "short_name": "PredictionService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::PredictionService::Client"
+        },
+        "method": {
+          "short_name": "GenerateContent",
+          "full_name": "google.cloud.aiplatform.v1.PredictionService.GenerateContent",
           "service": {
             "short_name": "PredictionService",
             "full_name": "google.cloud.aiplatform.v1.PredictionService"

@@ -764,6 +764,11 @@
                 "raw_predict"
               ]
             },
+            "StreamRawPredict": {
+              "methods": [
+                "stream_raw_predict"
+              ]
+            },
             "DirectPredict": {
               "methods": [
                 "direct_predict"
@@ -772,6 +777,16 @@
             "DirectRawPredict": {
               "methods": [
                 "direct_raw_predict"
+              ]
+            },
+            "StreamDirectPredict": {
+              "methods": [
+                "stream_direct_predict"
+              ]
+            },
+            "StreamDirectRawPredict": {
+              "methods": [
+                "stream_direct_raw_predict"
               ]
             },
             "StreamingPredict": {
@@ -792,6 +807,11 @@
             "Explain": {
               "methods": [
                 "explain"
+              ]
+            },
+            "GenerateContent": {
+              "methods": [
+                "generate_content"
               ]
             },
             "StreamGenerateContent": {
