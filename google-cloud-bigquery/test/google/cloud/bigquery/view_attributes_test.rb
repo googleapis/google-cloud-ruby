@@ -79,9 +79,13 @@ describe Google::Cloud::Bigquery::Table, :view, :attributes, :mock_bigquery do
     _(view.schema).must_be :frozen?
     _(view.schema.fields).wont_be :empty?
     _(view.fields).wont_be :empty?
-    _(view.headers).must_equal [:name, :age, :score, :pi, :my_bignumeric, :active, :avatar, :started_at, :duration, :target_end, :birthday, :home]
-    _(view.param_types).must_equal({ name: :STRING, age: :INTEGER, score: :FLOAT, pi: :NUMERIC, my_bignumeric: :BIGNUMERIC, active: :BOOLEAN, avatar: :BYTES, started_at: :TIMESTAMP, duration: :TIME, target_end: :DATETIME, birthday: :DATE, home: :GEOGRAPHY })
-
+    _(view.headers).must_equal [:name, :age, :score, :pi, :my_bignumeric, :active, 
+                                :avatar, :started_at, :duration, :target_end, 
+                                :birthday, :home, :address]
+    _(view.param_types).must_equal({ name: :STRING, age: :INTEGER, score: :FLOAT, pi: :NUMERIC, 
+                                     my_bignumeric: :BIGNUMERIC, active: :BOOLEAN, avatar: :BYTES, 
+                                     started_at: :TIMESTAMP, duration: :TIME, target_end: :DATETIME, 
+                                     birthday: :DATE, home: :GEOGRAPHY, address: :JSON })
     mock.verify
 
     # A second call to attribute does not make a second HTTP API call

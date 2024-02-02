@@ -202,7 +202,8 @@ describe Google::Cloud::Bigquery::External::CsvSource do
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "duration",      type: "TIME", description: nil, fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "target_end",    type: "DATETIME", description: nil, fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "birthday",      type: "DATE", description: nil, fields: []),
-        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "home",          type: "GEOGRAPHY", description: nil, fields: [])
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "home",          type: "GEOGRAPHY", description: nil, fields: []),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "address",       type: "JSON", description: nil, fields: [])
       ]),
       csv_options: Google::Apis::BigqueryV2::CsvOptions.new
     )
@@ -223,14 +224,20 @@ describe Google::Cloud::Bigquery::External::CsvSource do
       s.datetime "target_end"
       s.date "birthday"
       s.geography "home"
+      s.json "address"
     end
 
     _(table.schema).wont_be :empty?
     _(table.fields).must_equal table.schema.fields
     _(table.headers).must_equal table.schema.headers
-    _(table.headers).must_equal [:name, :age, :score, :pi, :my_bignumeric, :active, :avatar, :started_at, :duration, :target_end, :birthday, :home]
+    _(table.headers).must_equal [:name, :age, :score, :pi, :my_bignumeric, :active, 
+                                 :avatar, :started_at, :duration, :target_end, 
+                                 :birthday, :home, :address]
     _(table.param_types).must_equal table.schema.param_types
-    _(table.param_types).must_equal({ name: :STRING, age: :INTEGER, score: :FLOAT, pi: :NUMERIC, my_bignumeric: :BIGNUMERIC, active: :BOOLEAN, avatar: :BYTES, started_at: :TIMESTAMP, duration: :TIME, target_end: :DATETIME, birthday: :DATE, home: :GEOGRAPHY })
+    _(table.param_types).must_equal({ name: :STRING, age: :INTEGER, score: :FLOAT, pi: :NUMERIC, 
+                                      my_bignumeric: :BIGNUMERIC, active: :BOOLEAN, avatar: :BYTES, 
+                                      started_at: :TIMESTAMP, duration: :TIME, target_end: :DATETIME, 
+                                      birthday: :DATE, home: :GEOGRAPHY, address: :JSON })
 
     _(table.to_gapi.to_h).must_equal table_gapi.to_h
   end
@@ -255,7 +262,8 @@ describe Google::Cloud::Bigquery::External::CsvSource do
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "duration",      type: "TIME", description: nil, fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "target_end",    type: "DATETIME", description: nil, fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "birthday",      type: "DATE", description: nil, fields: []),
-        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "home",          type: "GEOGRAPHY", description: nil, fields: [])
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "home",          type: "GEOGRAPHY", description: nil, fields: []),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "address",       type: "JSON", description: nil, fields: [])
       ]),
       csv_options: Google::Apis::BigqueryV2::CsvOptions.new
     )
@@ -277,15 +285,20 @@ describe Google::Cloud::Bigquery::External::CsvSource do
     schema.datetime "target_end"
     schema.date "birthday"
     schema.geography "home"
+    schema.json "address"
 
     table.schema = schema
 
     _(table.schema).wont_be :empty?
     _(table.fields).must_equal table.schema.fields
     _(table.headers).must_equal table.schema.headers
-    _(table.headers).must_equal [:name, :age, :score, :pi, :my_bignumeric, :active, :avatar, :started_at, :duration, :target_end, :birthday, :home]
+    _(table.headers).must_equal [:name, :age, :score, :pi, :my_bignumeric, :active, 
+                                 :avatar, :started_at, :duration, :target_end, 
+                                 :birthday, :home, :address]
     _(table.param_types).must_equal table.schema.param_types
-    _(table.param_types).must_equal({ name: :STRING, age: :INTEGER, score: :FLOAT, pi: :NUMERIC, my_bignumeric: :BIGNUMERIC, active: :BOOLEAN, avatar: :BYTES, started_at: :TIMESTAMP, duration: :TIME, target_end: :DATETIME, birthday: :DATE, home: :GEOGRAPHY })
+    _(table.param_types).must_equal({ name: :STRING, age: :INTEGER, score: :FLOAT, pi: :NUMERIC, my_bignumeric: :BIGNUMERIC, 
+                                      active: :BOOLEAN, avatar: :BYTES, started_at: :TIMESTAMP, duration: :TIME, 
+                                      target_end: :DATETIME, birthday: :DATE, home: :GEOGRAPHY, address: :JSON })
 
     _(table.to_gapi.to_h).must_equal table_gapi.to_h
   end

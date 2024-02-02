@@ -232,6 +232,31 @@ describe Google::Cloud::Bigquery, :named_params, :bigquery do
     _(rows.first[:value]).must_be_nil
   end
 
+  it "queries the data with a json parameter and json type" do
+    value = { "name" => "Alice", "age" => 30}
+    rows = bigquery.query "SELECT @value AS value", 
+                          params: { value: value.to_json},
+                          types: { value: :JSON }
+
+    _(rows.class).must_equal Google::Cloud::Bigquery::Data
+    _(rows.fields.count).must_equal 1
+    _(rows.fields.first.name).must_equal "value"
+    _(rows.fields.first).must_be :json?
+    _(rows.count).must_equal 1
+    _(JSON.parse(rows.first[:value])).must_equal value
+  end
+
+  it "queries the data with a nil parameter and json type" do
+    rows = bigquery.query "SELECT @value AS value", params: { value: nil }, types: { value: :JSON }
+
+    _(rows.class).must_equal Google::Cloud::Bigquery::Data
+    _(rows.fields.count).must_equal 1
+    _(rows.fields.first.name).must_equal "value"
+    _(rows.fields.first).must_be :json?
+    _(rows.count).must_equal 1
+    _(rows.first[:value]).must_be_nil
+  end
+
   it "queries the data with a timestamp parameter" do
     now = Time.now
     rows = bigquery.query "SELECT @value AS value", params: { value: now }

@@ -52,6 +52,7 @@ module Google
             "GEOGRAPHY",
             "INTEGER",
             "INT64",
+            "JSON",
             "NUMERIC",
             "RECORD",
             "STRING",
@@ -98,6 +99,7 @@ module Google
           #   * `FLOAT`
           #   * `FLOAT64` (same as `FLOAT`)
           #   * `GEOGRAPHY`
+          #   * `JSON`
           #   * `INTEGER`
           #   * `INT64` (same as `INTEGER`)
           #   * `NUMERIC`
@@ -125,6 +127,7 @@ module Google
           #   * `FLOAT`
           #   * `FLOAT64` (same as `FLOAT`)
           #   * `GEOGRAPHY`
+          #   * `JSON`
           #   * `INTEGER`
           #   * `INT64` (same as `INTEGER`)
           #   * `NUMERIC`
@@ -454,6 +457,15 @@ module Google
           #
           def geography?
             type == "GEOGRAPHY"
+          end
+
+          ##
+          # Checks if the type of the field is `JSON`.
+          #
+          # @return [Boolean] `true` when `JSON`, `false` otherwise.
+          #
+          def json?
+            type == "JSON"
           end
 
           ##
@@ -891,6 +903,30 @@ module Google
             record_check!
 
             add_field name, :geography, description: description, mode: mode, policy_tags: policy_tags
+          end
+
+          ##
+          # Adds a json field to the nested schema of a record field.
+          #
+          # https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types#json_type
+          #
+          # @param [String] name The field name. The name must contain only
+          #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+          #   start with a letter or underscore. The maximum length is 128
+          #   characters.
+          # @param [String] description A description of the field.
+          # @param [Symbol] mode The field's mode. The possible values are
+          #   `:nullable`, `:required`, and `:repeated`. The default value is
+          #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
+          #
+          def json name, description: nil, mode: :nullable, policy_tags: nil
+            record_check!
+
+            add_field name, :json, description: description, mode: mode, policy_tags: policy_tags
           end
 
           ##

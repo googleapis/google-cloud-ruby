@@ -111,6 +111,7 @@ module Google
           # | `DATETIME`   | `DateTime`                           | `DATETIME` does not support time zone.             |
           # | `DATE`       | `Date`                               |                                                    |
           # | `GEOGRAPHY`  | `String`                             |                                                    |
+          # | `JSON`       | `String` (Stringified JSON)          | String, as JSON does not have a schema to verify.  |
           # | `TIMESTAMP`  | `Time`                               |                                                    |
           # | `TIME`       | `Google::Cloud::BigQuery::Time`      |                                                    |
           # | `BYTES`      | `File`, `IO`, `StringIO`, or similar |                                                    |

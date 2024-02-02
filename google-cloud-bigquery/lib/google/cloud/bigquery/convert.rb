@@ -39,6 +39,7 @@ module Google
       #   | `DATETIME`   | `DateTime`                           | `DATETIME` does not support time zone.             |
       #   | `DATE`       | `Date`                               |                                                    |
       #   | `GEOGRAPHY`  | `String`                             |                                                    |
+      #   | `JSON`       | `String`                             | String, as JSON does not have a schema to verify.  |
       #   | `TIMESTAMP`  | `Time`                               |                                                    |
       #   | `TIME`       | `Google::Cloud::BigQuery::Time`      |                                                    |
       #   | `BYTES`      | `File`, `IO`, `StringIO`, or similar |                                                    |
@@ -72,7 +73,7 @@ module Google
             value[:v].map { |v| format_value v, field }
           elsif Hash === value[:v]
             format_row value[:v], field.fields
-          elsif field.type == "STRING"
+          elsif field.type == "STRING" || field.type == "JSON" || field.type == "GEOGRAPHY"
             String value[:v]
           elsif field.type == "INTEGER"
             Integer value[:v]
@@ -102,8 +103,6 @@ module Google
             ::Time.parse("#{value[:v]} UTC").to_datetime
           elsif field.type == "DATE"
             Date.parse value[:v]
-          elsif field.type == "GEOGRAPHY"
-            String value[:v]
           else
             value[:v]
           end

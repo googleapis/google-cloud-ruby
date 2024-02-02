@@ -2648,6 +2648,7 @@ module Google
         # | `DATETIME`   | `DateTime`                           | `DATETIME` does not support time zone.             |
         # | `DATE`       | `Date`                               |                                                    |
         # | `GEOGRAPHY`  | `String`                             | Well-known text (WKT) or GeoJSON.                  |
+        # | `JSON`       | `String` (Stringified JSON)          | String, as JSON does not have a schema to verify.  |
         # | `TIMESTAMP`  | `Time`                               |                                                    |
         # | `TIME`       | `Google::Cloud::BigQuery::Time`      |                                                    |
         # | `BYTES`      | `File`, `IO`, `StringIO`, or similar |                                                    |
@@ -4282,6 +4283,66 @@ module Google
                         default_value_expression: nil
             schema.geography name, description: description, mode: mode, policy_tags: policy_tags,
                              default_value_expression: default_value_expression
+          end
+
+          ##
+          # Adds an json field to the schema.
+          #
+          # See {Schema#json}.
+          # https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types#json_type
+          #
+          # @param [String] name The field name. The name must contain only
+          #   letters (`[A-Za-z]`), numbers (`[0-9]`), or underscores (`_`), and must
+          #   start with a letter or underscore. The maximum length is 128
+          #   characters.
+          # @param [String] description A description of the field.
+          # @param [Symbol] mode The field's mode. The possible values are
+          #   `:nullable`, `:required`, and `:repeated`. The default value is
+          #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
+          # @param default_value_expression [String] The default value of a field
+          #   using a SQL expression. It can only be set for top level fields (columns).
+          #   Use a struct or array expression to specify default value for the entire struct or
+          #   array. The valid SQL expressions are:
+          #     - Literals for all data types, including STRUCT and ARRAY.
+          #     - The following functions:
+          #         `CURRENT_TIMESTAMP`
+          #         `CURRENT_TIME`
+          #         `CURRENT_DATE`
+          #         `CURRENT_DATETIME`
+          #         `GENERATE_UUID`
+          #         `RAND`
+          #         `SESSION_USER`
+          #         `ST_GEOPOINT`
+          #     - Struct or array composed with the above allowed functions, for example:
+          #         "[CURRENT_DATE(), DATE '2020-01-01'"]
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   table = dataset.create_table "my_table" do |schema|
+          #     schema.json "person", mode: :required
+          #   end
+          #
+          # @example Add field with default value.
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   table = dataset.create_table "my_table" do |schema|
+          #     schema.json "person", default_value_expression: "JSON '{"name": "Alice", "age": 30}'"
+          #   end
+          #
+          # @!group Schema
+          def json name, description: nil, mode: :nullable, policy_tags: nil,
+                   default_value_expression: nil
+            schema.json name, description: description, mode: mode, policy_tags: policy_tags,
+                        default_value_expression: default_value_expression
           end
 
           ##
