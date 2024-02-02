@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.3.0 (2024-02-02)
+
+#### Features
+
+* update gem description 
+
 ### 0.2.0 (2024-01-15)
 
 #### Features
