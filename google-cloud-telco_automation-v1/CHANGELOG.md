@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.3.0 (2024-02-02)
+
+#### Features
+
+* support for STATUS_NOT_APPLICABLE in Status and WORKLOAD_CLUSTER_DEPLOYMENT in DeploymentLevel 
+#### Bug Fixes
+
+* Eliminated a harmless but annoying warning in the protobuf class files 
+
 ### 0.3.0 (2024-02-01)
 
 #### Features
