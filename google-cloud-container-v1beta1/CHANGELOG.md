@@ -1,5 +1,11 @@
 # Release History
 
+### 0.35.0 (2024-02-05)
+
+#### Features
+
+* support field stateful_ha_config for AddonsConfig 
+
 ### 0.34.3 (2024-02-01)
 
 #### Bug Fixes
