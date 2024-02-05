@@ -57,6 +57,9 @@ module Google
         # @!attribute [rw] deprecation_info
         #   @return [::Google::Cloud::DocumentAI::V1::ProcessorVersion::DeprecationInfo]
         #     If set, information about the eventual deprecation of this version.
+        # @!attribute [r] model_type
+        #   @return [::Google::Cloud::DocumentAI::V1::ProcessorVersion::ModelType]
+        #     Output only. The model type of this processor version.
         class ProcessorVersion
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -101,6 +104,18 @@ module Google
 
             # The processor version is being imported.
             IMPORTING = 8
+          end
+
+          # The possible model types of the processor version.
+          module ModelType
+            # The processor version has unspecified model type.
+            MODEL_TYPE_UNSPECIFIED = 0
+
+            # The processor version has generative model type.
+            MODEL_TYPE_GENERATIVE = 1
+
+            # The processor version has custom model type.
+            MODEL_TYPE_CUSTOM = 2
           end
         end
 
