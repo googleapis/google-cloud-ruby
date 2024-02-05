@@ -412,6 +412,18 @@ module Google
           patch_gapi! :default_encryption_configuration
         end
 
+        def storage_billing_model
+          return nil if reference?
+          ensure_full_data!
+          @gapi.storage_billing_model
+        end
+
+        def storage_billing_model= value
+          ensure_full_data!
+          @gapi.storage_billing_model = value
+          patch_gapi! :storage_billing_model
+        end
+
         ##
         # Retrieves the access rules for a Dataset. The rules can be updated
         # when passing a block, see {Dataset::Access} for all the methods
