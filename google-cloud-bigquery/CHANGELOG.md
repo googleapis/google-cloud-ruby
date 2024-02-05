@@ -1,5 +1,11 @@
 # Release History
 
+### 1.47.0 (2024-02-05)
+
+#### Features
+
+* add json type support ([#24491](https://github.com/googleapis/google-cloud-ruby/issues/24491)) 
+
 ### 1.46.1 (2024-01-26)
 
 #### Bug Fixes
