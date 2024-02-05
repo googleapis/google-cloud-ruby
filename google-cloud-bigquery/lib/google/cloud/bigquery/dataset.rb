@@ -412,12 +412,50 @@ module Google
           patch_gapi! :default_encryption_configuration
         end
 
+        ##
+        # Gets the Storage Billing Model for the dataset.
+        #
+        # @see https://cloud.google.com/blog/products/data-analytics/new-bigquery-billing-model-helps-reduce-physical-storage-costs
+        #
+        # @return [String, nil] A string containing the storage billing model,
+        #   or `nil` if the object is a reference (see {#reference?}).
+        #   Possible values of the string are `LOGICAL`, `PHYSICAL`
+        #   and `STORAGE_BILLING_MODEL_UNSPECIFIED`.
+        #
+        # @example
+        #
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   storage_billing_model = dataset.storage_billing_model
+        #
+        # @!group Attributes
+        #
         def storage_billing_model
           return nil if reference?
           ensure_full_data!
           @gapi.storage_billing_model
         end
 
+        ##
+        # Sets the Storage Billing Model for the dataset.
+        #
+        # @see https://cloud.google.com/blog/products/data-analytics/new-bigquery-billing-model-helps-reduce-physical-storage-costs
+        #
+        # @param value [String] The new storage billing model. Accepted values
+        #   are `LOGICAL` and `PHYSICAL`.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   storage_billing_model = dataset.storage_billing_model "LOGICAL"
+        #
+        # @!group Attributes
+        #
         def storage_billing_model= value
           ensure_full_data!
           @gapi.storage_billing_model = value
