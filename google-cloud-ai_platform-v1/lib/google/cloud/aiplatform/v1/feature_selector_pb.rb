@@ -7,7 +7,7 @@ require 'google/protobuf'
 require 'google/api/field_behavior_pb'
 
 
-descriptor_data = "\n1google/cloud/aiplatform/v1/feature_selector.proto\x12\x1agoogle.cloud.aiplatform.v1\x1a\x1fgoogle/api/field_behavior.proto\"\x1e\n\tIdMatcher\x12\x11\n\x03ids\x18\x01 \x03(\tB\x04\xe2\x41\x01\x02\"R\n\x0f\x46\x65\x61tureSelector\x12?\n\nid_matcher\x18\x01 \x01(\x0b\x32%.google.cloud.aiplatform.v1.IdMatcherB\x04\xe2\x41\x01\x02\x42\xd2\x01\n\x1e\x63om.google.cloud.aiplatform.v1B\x14\x46\x65\x61tureSelectorProtoP\x01Z>cloud.google.com/go/aiplatform/apiv1/aiplatformpb;aiplatformpb\xaa\x02\x1aGoogle.Cloud.AIPlatform.V1\xca\x02\x1aGoogle\\Cloud\\AIPlatform\\V1\xea\x02\x1dGoogle::Cloud::AIPlatform::V1b\x06proto3"
+descriptor_data = "\n1google/cloud/aiplatform/v1/feature_selector.proto\x12\x1agoogle.cloud.aiplatform.v1\x1a\x1fgoogle/api/field_behavior.proto\"\x1d\n\tIdMatcher\x12\x10\n\x03ids\x18\x01 \x03(\tB\x03\xe0\x41\x02\"Q\n\x0f\x46\x65\x61tureSelector\x12>\n\nid_matcher\x18\x01 \x01(\x0b\x32%.google.cloud.aiplatform.v1.IdMatcherB\x03\xe0\x41\x02\x42\xd2\x01\n\x1e\x63om.google.cloud.aiplatform.v1B\x14\x46\x65\x61tureSelectorProtoP\x01Z>cloud.google.com/go/aiplatform/apiv1/aiplatformpb;aiplatformpb\xaa\x02\x1aGoogle.Cloud.AIPlatform.V1\xca\x02\x1aGoogle\\Cloud\\AIPlatform\\V1\xea\x02\x1dGoogle::Cloud::AIPlatform::V1b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
