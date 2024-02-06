@@ -123,4 +123,23 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :update, :mock_bigquery d
     _(dataset.default_encryption).must_be :frozen?
     mock.verify
   end
+
+  it "updates its storage_billing_model" do
+    storage_billing_model = "LOGICAL"
+
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :get_dataset, dataset_gapi, [project, dataset_id]
+    updated_gapi = dataset_gapi.dup
+    updated_gapi.storage_billing_model = storage_billing_model
+    patch_gapi = Google::Apis::BigqueryV2::Dataset.new storage_billing_model: storage_billing_model, etag: dataset_gapi.etag
+    mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi], options: {header: {"If-Match" => dataset_gapi.etag}}
+
+    _(dataset.storage_billing_model).must_be_nil
+
+    dataset.storage_billing_model = storage_billing_model
+
+    _(dataset.storage_billing_model).must_equal storage_billing_model
+    mock.verify
+  end
 end
