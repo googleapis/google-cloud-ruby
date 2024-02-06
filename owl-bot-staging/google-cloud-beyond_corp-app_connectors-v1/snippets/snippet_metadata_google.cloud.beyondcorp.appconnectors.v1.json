@@ -1,0 +1,255 @@
+{
+  "client_library": {
+    "name": "google-cloud-beyond_corp-app_connectors-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.beyondcorp.appconnectors.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "beyondcorp_v1_generated_AppConnectorsService_ListAppConnectors_sync",
+      "title": "Snippet for the list_app_connectors call in the AppConnectorsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client#list_app_connectors.",
+      "file": "app_connectors_service/list_app_connectors.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_app_connectors",
+        "full_name": "::Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client#list_app_connectors",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BeyondCorp::AppConnectors::V1::ListAppConnectorsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BeyondCorp::AppConnectors::V1::ListAppConnectorsResponse",
+        "client": {
+          "short_name": "AppConnectorsService::Client",
+          "full_name": "::Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client"
+        },
+        "method": {
+          "short_name": "ListAppConnectors",
+          "full_name": "google.cloud.beyondcorp.appconnectors.v1.AppConnectorsService.ListAppConnectors",
+          "service": {
+            "short_name": "AppConnectorsService",
+            "full_name": "google.cloud.beyondcorp.appconnectors.v1.AppConnectorsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "beyondcorp_v1_generated_AppConnectorsService_GetAppConnector_sync",
+      "title": "Snippet for the get_app_connector call in the AppConnectorsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client#get_app_connector.",
+      "file": "app_connectors_service/get_app_connector.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_app_connector",
+        "full_name": "::Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client#get_app_connector",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BeyondCorp::AppConnectors::V1::GetAppConnectorRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnector",
+        "client": {
+          "short_name": "AppConnectorsService::Client",
+          "full_name": "::Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client"
+        },
+        "method": {
+          "short_name": "GetAppConnector",
+          "full_name": "google.cloud.beyondcorp.appconnectors.v1.AppConnectorsService.GetAppConnector",
+          "service": {
+            "short_name": "AppConnectorsService",
+            "full_name": "google.cloud.beyondcorp.appconnectors.v1.AppConnectorsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "beyondcorp_v1_generated_AppConnectorsService_CreateAppConnector_sync",
+      "title": "Snippet for the create_app_connector call in the AppConnectorsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client#create_app_connector.",
+      "file": "app_connectors_service/create_app_connector.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_app_connector",
+        "full_name": "::Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client#create_app_connector",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BeyondCorp::AppConnectors::V1::CreateAppConnectorRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AppConnectorsService::Client",
+          "full_name": "::Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client"
+        },
+        "method": {
+          "short_name": "CreateAppConnector",
+          "full_name": "google.cloud.beyondcorp.appconnectors.v1.AppConnectorsService.CreateAppConnector",
+          "service": {
+            "short_name": "AppConnectorsService",
+            "full_name": "google.cloud.beyondcorp.appconnectors.v1.AppConnectorsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "beyondcorp_v1_generated_AppConnectorsService_UpdateAppConnector_sync",
+      "title": "Snippet for the update_app_connector call in the AppConnectorsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client#update_app_connector.",
+      "file": "app_connectors_service/update_app_connector.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_app_connector",
+        "full_name": "::Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client#update_app_connector",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BeyondCorp::AppConnectors::V1::UpdateAppConnectorRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AppConnectorsService::Client",
+          "full_name": "::Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client"
+        },
+        "method": {
+          "short_name": "UpdateAppConnector",
+          "full_name": "google.cloud.beyondcorp.appconnectors.v1.AppConnectorsService.UpdateAppConnector",
+          "service": {
+            "short_name": "AppConnectorsService",
+            "full_name": "google.cloud.beyondcorp.appconnectors.v1.AppConnectorsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "beyondcorp_v1_generated_AppConnectorsService_DeleteAppConnector_sync",
+      "title": "Snippet for the delete_app_connector call in the AppConnectorsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client#delete_app_connector.",
+      "file": "app_connectors_service/delete_app_connector.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_app_connector",
+        "full_name": "::Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client#delete_app_connector",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BeyondCorp::AppConnectors::V1::DeleteAppConnectorRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AppConnectorsService::Client",
+          "full_name": "::Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client"
+        },
+        "method": {
+          "short_name": "DeleteAppConnector",
+          "full_name": "google.cloud.beyondcorp.appconnectors.v1.AppConnectorsService.DeleteAppConnector",
+          "service": {
+            "short_name": "AppConnectorsService",
+            "full_name": "google.cloud.beyondcorp.appconnectors.v1.AppConnectorsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "beyondcorp_v1_generated_AppConnectorsService_ReportStatus_sync",
+      "title": "Snippet for the report_status call in the AppConnectorsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client#report_status.",
+      "file": "app_connectors_service/report_status.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "report_status",
+        "full_name": "::Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client#report_status",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BeyondCorp::AppConnectors::V1::ReportStatusRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AppConnectorsService::Client",
+          "full_name": "::Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client"
+        },
+        "method": {
+          "short_name": "ReportStatus",
+          "full_name": "google.cloud.beyondcorp.appconnectors.v1.AppConnectorsService.ReportStatus",
+          "service": {
+            "short_name": "AppConnectorsService",
+            "full_name": "google.cloud.beyondcorp.appconnectors.v1.AppConnectorsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
