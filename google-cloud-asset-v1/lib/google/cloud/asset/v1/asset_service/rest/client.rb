@@ -1201,8 +1201,8 @@ module Google
               #       location.
               #   @param asset_types [::Array<::String>]
               #     Optional. A list of asset types that this request searches for. If empty,
-              #     it will search all the [searchable asset
-              #     types](https://cloud.google.com/asset-inventory/docs/supported-asset-types).
+              #     it will search all the asset types [supported by search
+              #     APIs](https://cloud.google.com/asset-inventory/docs/supported-asset-types).
               #
               #     Regular expressions are also supported. For example:
               #
@@ -1428,9 +1428,9 @@ module Google
               #     be identical to those in the previous call.
               #   @param asset_types [::Array<::String>]
               #     Optional. A list of asset types that the IAM policies are attached to. If
-              #     empty, it will search the IAM policies that are attached to all the
-              #     [searchable asset
-              #     types](https://cloud.google.com/asset-inventory/docs/supported-asset-types).
+              #     empty, it will search the IAM policies that are attached to all the asset
+              #     types [supported by search
+              #     APIs](https://cloud.google.com/asset-inventory/docs/supported-asset-types)
               #
               #     Regular expressions are also supported. For example:
               #
@@ -2462,8 +2462,8 @@ module Google
               #   @param names [::Array<::String>]
               #     Required. The names refer to the [full_resource_names]
               #     (https://cloud.google.com/asset-inventory/docs/resource-name-format)
-              #     of [searchable asset
-              #     types](https://cloud.google.com/asset-inventory/docs/supported-asset-types).
+              #     of the asset types [supported by search
+              #     APIs](https://cloud.google.com/asset-inventory/docs/supported-asset-types).
               #     A maximum of 20 resources' effective policies can be retrieved in a batch.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesResponse]
@@ -2758,9 +2758,8 @@ module Google
               # * compute.requireOsLogin
               # * compute.disableNestedVirtualization
               #
-              # This RPC only returns either resources of types supported by [searchable
-              # asset
-              # types](https://cloud.google.com/asset-inventory/docs/supported-asset-types),
+              # This RPC only returns either resources of types [supported by search
+              # APIs](https://cloud.google.com/asset-inventory/docs/supported-asset-types)
               # or IAM policies.
               #
               # @overload analyze_org_policy_governed_assets(request, options = nil)
