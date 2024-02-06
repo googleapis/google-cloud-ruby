@@ -1,0 +1,575 @@
+{
+  "client_library": {
+    "name": "google-cloud-firestore-admin-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.firestore.admin.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "firestore_v1_generated_FirestoreAdmin_CreateIndex_sync",
+      "title": "Snippet for the create_index call in the FirestoreAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#create_index.",
+      "file": "firestore_admin/create_index.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_index",
+        "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#create_index",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::Admin::V1::CreateIndexRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "FirestoreAdmin::Client",
+          "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client"
+        },
+        "method": {
+          "short_name": "CreateIndex",
+          "full_name": "google.firestore.admin.v1.FirestoreAdmin.CreateIndex",
+          "service": {
+            "short_name": "FirestoreAdmin",
+            "full_name": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "firestore_v1_generated_FirestoreAdmin_ListIndexes_sync",
+      "title": "Snippet for the list_indexes call in the FirestoreAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_indexes.",
+      "file": "firestore_admin/list_indexes.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_indexes",
+        "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_indexes",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::Admin::V1::ListIndexesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Firestore::Admin::V1::ListIndexesResponse",
+        "client": {
+          "short_name": "FirestoreAdmin::Client",
+          "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client"
+        },
+        "method": {
+          "short_name": "ListIndexes",
+          "full_name": "google.firestore.admin.v1.FirestoreAdmin.ListIndexes",
+          "service": {
+            "short_name": "FirestoreAdmin",
+            "full_name": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "firestore_v1_generated_FirestoreAdmin_GetIndex_sync",
+      "title": "Snippet for the get_index call in the FirestoreAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#get_index.",
+      "file": "firestore_admin/get_index.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_index",
+        "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#get_index",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::Admin::V1::GetIndexRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Firestore::Admin::V1::Index",
+        "client": {
+          "short_name": "FirestoreAdmin::Client",
+          "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client"
+        },
+        "method": {
+          "short_name": "GetIndex",
+          "full_name": "google.firestore.admin.v1.FirestoreAdmin.GetIndex",
+          "service": {
+            "short_name": "FirestoreAdmin",
+            "full_name": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "firestore_v1_generated_FirestoreAdmin_DeleteIndex_sync",
+      "title": "Snippet for the delete_index call in the FirestoreAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#delete_index.",
+      "file": "firestore_admin/delete_index.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_index",
+        "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#delete_index",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::Admin::V1::DeleteIndexRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "FirestoreAdmin::Client",
+          "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client"
+        },
+        "method": {
+          "short_name": "DeleteIndex",
+          "full_name": "google.firestore.admin.v1.FirestoreAdmin.DeleteIndex",
+          "service": {
+            "short_name": "FirestoreAdmin",
+            "full_name": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "firestore_v1_generated_FirestoreAdmin_GetField_sync",
+      "title": "Snippet for the get_field call in the FirestoreAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#get_field.",
+      "file": "firestore_admin/get_field.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_field",
+        "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#get_field",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::Admin::V1::GetFieldRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Firestore::Admin::V1::Field",
+        "client": {
+          "short_name": "FirestoreAdmin::Client",
+          "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client"
+        },
+        "method": {
+          "short_name": "GetField",
+          "full_name": "google.firestore.admin.v1.FirestoreAdmin.GetField",
+          "service": {
+            "short_name": "FirestoreAdmin",
+            "full_name": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "firestore_v1_generated_FirestoreAdmin_UpdateField_sync",
+      "title": "Snippet for the update_field call in the FirestoreAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#update_field.",
+      "file": "firestore_admin/update_field.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_field",
+        "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#update_field",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::Admin::V1::UpdateFieldRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "FirestoreAdmin::Client",
+          "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client"
+        },
+        "method": {
+          "short_name": "UpdateField",
+          "full_name": "google.firestore.admin.v1.FirestoreAdmin.UpdateField",
+          "service": {
+            "short_name": "FirestoreAdmin",
+            "full_name": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "firestore_v1_generated_FirestoreAdmin_ListFields_sync",
+      "title": "Snippet for the list_fields call in the FirestoreAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_fields.",
+      "file": "firestore_admin/list_fields.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_fields",
+        "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_fields",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::Admin::V1::ListFieldsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Firestore::Admin::V1::ListFieldsResponse",
+        "client": {
+          "short_name": "FirestoreAdmin::Client",
+          "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client"
+        },
+        "method": {
+          "short_name": "ListFields",
+          "full_name": "google.firestore.admin.v1.FirestoreAdmin.ListFields",
+          "service": {
+            "short_name": "FirestoreAdmin",
+            "full_name": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "firestore_v1_generated_FirestoreAdmin_ExportDocuments_sync",
+      "title": "Snippet for the export_documents call in the FirestoreAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#export_documents.",
+      "file": "firestore_admin/export_documents.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "export_documents",
+        "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#export_documents",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::Admin::V1::ExportDocumentsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "FirestoreAdmin::Client",
+          "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client"
+        },
+        "method": {
+          "short_name": "ExportDocuments",
+          "full_name": "google.firestore.admin.v1.FirestoreAdmin.ExportDocuments",
+          "service": {
+            "short_name": "FirestoreAdmin",
+            "full_name": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "firestore_v1_generated_FirestoreAdmin_ImportDocuments_sync",
+      "title": "Snippet for the import_documents call in the FirestoreAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#import_documents.",
+      "file": "firestore_admin/import_documents.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "import_documents",
+        "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#import_documents",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::Admin::V1::ImportDocumentsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "FirestoreAdmin::Client",
+          "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client"
+        },
+        "method": {
+          "short_name": "ImportDocuments",
+          "full_name": "google.firestore.admin.v1.FirestoreAdmin.ImportDocuments",
+          "service": {
+            "short_name": "FirestoreAdmin",
+            "full_name": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "firestore_v1_generated_FirestoreAdmin_CreateDatabase_sync",
+      "title": "Snippet for the create_database call in the FirestoreAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#create_database.",
+      "file": "firestore_admin/create_database.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_database",
+        "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#create_database",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::Admin::V1::CreateDatabaseRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "FirestoreAdmin::Client",
+          "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client"
+        },
+        "method": {
+          "short_name": "CreateDatabase",
+          "full_name": "google.firestore.admin.v1.FirestoreAdmin.CreateDatabase",
+          "service": {
+            "short_name": "FirestoreAdmin",
+            "full_name": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "firestore_v1_generated_FirestoreAdmin_GetDatabase_sync",
+      "title": "Snippet for the get_database call in the FirestoreAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#get_database.",
+      "file": "firestore_admin/get_database.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_database",
+        "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#get_database",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::Admin::V1::GetDatabaseRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Firestore::Admin::V1::Database",
+        "client": {
+          "short_name": "FirestoreAdmin::Client",
+          "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client"
+        },
+        "method": {
+          "short_name": "GetDatabase",
+          "full_name": "google.firestore.admin.v1.FirestoreAdmin.GetDatabase",
+          "service": {
+            "short_name": "FirestoreAdmin",
+            "full_name": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "firestore_v1_generated_FirestoreAdmin_ListDatabases_sync",
+      "title": "Snippet for the list_databases call in the FirestoreAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_databases.",
+      "file": "firestore_admin/list_databases.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_databases",
+        "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_databases",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::Admin::V1::ListDatabasesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Firestore::Admin::V1::ListDatabasesResponse",
+        "client": {
+          "short_name": "FirestoreAdmin::Client",
+          "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client"
+        },
+        "method": {
+          "short_name": "ListDatabases",
+          "full_name": "google.firestore.admin.v1.FirestoreAdmin.ListDatabases",
+          "service": {
+            "short_name": "FirestoreAdmin",
+            "full_name": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "firestore_v1_generated_FirestoreAdmin_UpdateDatabase_sync",
+      "title": "Snippet for the update_database call in the FirestoreAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#update_database.",
+      "file": "firestore_admin/update_database.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_database",
+        "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#update_database",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::Admin::V1::UpdateDatabaseRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "FirestoreAdmin::Client",
+          "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client"
+        },
+        "method": {
+          "short_name": "UpdateDatabase",
+          "full_name": "google.firestore.admin.v1.FirestoreAdmin.UpdateDatabase",
+          "service": {
+            "short_name": "FirestoreAdmin",
+            "full_name": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "firestore_v1_generated_FirestoreAdmin_DeleteDatabase_sync",
+      "title": "Snippet for the delete_database call in the FirestoreAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#delete_database.",
+      "file": "firestore_admin/delete_database.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_database",
+        "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#delete_database",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::Admin::V1::DeleteDatabaseRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "FirestoreAdmin::Client",
+          "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client"
+        },
+        "method": {
+          "short_name": "DeleteDatabase",
+          "full_name": "google.firestore.admin.v1.FirestoreAdmin.DeleteDatabase",
+          "service": {
+            "short_name": "FirestoreAdmin",
+            "full_name": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
