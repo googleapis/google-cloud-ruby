@@ -7,7 +7,7 @@ require 'google/protobuf'
 require 'google/api/field_behavior_pb'
 
 
-descriptor_data = "\n&google/cloud/translate/v3/common.proto\x12\x1bgoogle.cloud.translation.v3\x1a\x1fgoogle/api/field_behavior.proto\")\n\x0eGcsInputSource\x12\x17\n\tinput_uri\x18\x01 \x01(\tB\x04\xe2\x41\x01\x02\"]\n\x0f\x46ileInputSource\x12\x17\n\tmime_type\x18\x01 \x01(\tB\x04\xe2\x41\x01\x02\x12\x15\n\x07\x63ontent\x18\x02 \x01(\x0c\x42\x04\xe2\x41\x01\x02\x12\x1a\n\x0c\x64isplay_name\x18\x03 \x01(\tB\x04\xe2\x41\x01\x02\"7\n\x14GcsOutputDestination\x12\x1f\n\x11output_uri_prefix\x18\x01 \x01(\tB\x04\xe2\x41\x01\x02\x42\xc5\x01\n\x1d\x63om.google.cloud.translate.v3B\x0b\x43ommonProtoP\x01Z;cloud.google.com/go/translate/apiv3/translatepb;translatepb\xf8\x01\x01\xaa\x02\x19Google.Cloud.Translate.V3\xca\x02\x19Google\\Cloud\\Translate\\V3\xea\x02\x1cGoogle::Cloud::Translate::V3b\x06proto3"
+descriptor_data = "\n&google/cloud/translate/v3/common.proto\x12\x1bgoogle.cloud.translation.v3\x1a\x1fgoogle/api/field_behavior.proto\"(\n\x0eGcsInputSource\x12\x16\n\tinput_uri\x18\x01 \x01(\tB\x03\xe0\x41\x02\"Z\n\x0f\x46ileInputSource\x12\x16\n\tmime_type\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x14\n\x07\x63ontent\x18\x02 \x01(\x0c\x42\x03\xe0\x41\x02\x12\x19\n\x0c\x64isplay_name\x18\x03 \x01(\tB\x03\xe0\x41\x02\"6\n\x14GcsOutputDestination\x12\x1e\n\x11output_uri_prefix\x18\x01 \x01(\tB\x03\xe0\x41\x02\x42\xc5\x01\n\x1d\x63om.google.cloud.translate.v3B\x0b\x43ommonProtoP\x01Z;cloud.google.com/go/translate/apiv3/translatepb;translatepb\xf8\x01\x01\xaa\x02\x19Google.Cloud.Translate.V3\xca\x02\x19Google\\Cloud\\Translate\\V3\xea\x02\x1cGoogle::Cloud::Translate::V3b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
