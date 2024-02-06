@@ -1,5 +1,11 @@
 # Release History
 
+### 2.5.0 (2024-02-06)
+
+#### Features
+
+* support session controller and session template controller 
+
 ### 2.4.0 (2024-01-15)
 
 #### Features
