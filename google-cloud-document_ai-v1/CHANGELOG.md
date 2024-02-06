@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.18.0 (2024-02-06)
+
+#### Features
+
+* Expose model_type field in processor version APIs ([#24748](https://github.com/googleapis/google-cloud-ruby/issues/24748)) 
+
 ### 0.17.2 (2024-02-01)
 
 #### Bug Fixes
