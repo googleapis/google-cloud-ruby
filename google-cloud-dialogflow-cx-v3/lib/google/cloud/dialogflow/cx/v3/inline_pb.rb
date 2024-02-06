@@ -7,7 +7,7 @@ require 'google/protobuf'
 require 'google/api/field_behavior_pb'
 
 
-descriptor_data = "\n*google/cloud/dialogflow/cx/v3/inline.proto\x12\x1dgoogle.cloud.dialogflow.cx.v3\x1a\x1fgoogle/api/field_behavior.proto\"*\n\x11InlineDestination\x12\x15\n\x07\x63ontent\x18\x01 \x01(\x0c\x42\x04\xe2\x41\x01\x03\"\x1f\n\x0cInlineSource\x12\x0f\n\x07\x63ontent\x18\x01 \x01(\x0c\x42\xb1\x01\n!com.google.cloud.dialogflow.cx.v3B\x0bInlineProtoP\x01Z1cloud.google.com/go/dialogflow/cx/apiv3/cxpb;cxpb\xf8\x01\x01\xa2\x02\x02\x44\x46\xaa\x02\x1dGoogle.Cloud.Dialogflow.Cx.V3\xea\x02!Google::Cloud::Dialogflow::CX::V3b\x06proto3"
+descriptor_data = "\n*google/cloud/dialogflow/cx/v3/inline.proto\x12\x1dgoogle.cloud.dialogflow.cx.v3\x1a\x1fgoogle/api/field_behavior.proto\")\n\x11InlineDestination\x12\x14\n\x07\x63ontent\x18\x01 \x01(\x0c\x42\x03\xe0\x41\x03\"\x1f\n\x0cInlineSource\x12\x0f\n\x07\x63ontent\x18\x01 \x01(\x0c\x42\xb1\x01\n!com.google.cloud.dialogflow.cx.v3B\x0bInlineProtoP\x01Z1cloud.google.com/go/dialogflow/cx/apiv3/cxpb;cxpb\xf8\x01\x01\xa2\x02\x02\x44\x46\xaa\x02\x1dGoogle.Cloud.Dialogflow.Cx.V3\xea\x02!Google::Cloud::Dialogflow::CX::V3b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
