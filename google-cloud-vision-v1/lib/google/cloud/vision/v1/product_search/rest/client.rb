@@ -32,16 +32,18 @@ module Google
             # Manages Products and ProductSets of reference images for use in product
             # search. It uses the following resource model:
             #
-            # - The API has a collection of {::Google::Cloud::Vision::V1::ProductSet ProductSet} resources, named
-            # `projects/*/locations/*/productSets/*`, which acts as a way to put different
-            # products into groups to limit identification.
+            # - The API has a collection of {::Google::Cloud::Vision::V1::ProductSet ProductSet}
+            # resources, named `projects/*/locations/*/productSets/*`, which acts as a way
+            # to put different products into groups to limit identification.
             #
             # In parallel,
             #
-            # - The API has a collection of {::Google::Cloud::Vision::V1::Product Product} resources, named
+            # - The API has a collection of {::Google::Cloud::Vision::V1::Product Product}
+            # resources, named
             #   `projects/*/locations/*/products/*`
             #
-            # - Each {::Google::Cloud::Vision::V1::Product Product} has a collection of {::Google::Cloud::Vision::V1::ReferenceImage ReferenceImage} resources, named
+            # - Each {::Google::Cloud::Vision::V1::Product Product} has a collection of
+            # {::Google::Cloud::Vision::V1::ReferenceImage ReferenceImage} resources, named
             #   `projects/*/locations/*/products/*/referenceImages/*`
             #
             class Client
@@ -1215,7 +1217,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. Resource name of the product in which to create the reference image.
+              #     Required. Resource name of the product in which to create the reference
+              #     image.
               #
               #     Format is
               #     `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`.
@@ -1673,7 +1676,8 @@ module Google
               #     Format is:
               #     `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`
               #   @param product [::String]
-              #     Required. The resource name for the Product to be removed from this ProductSet.
+              #     Required. The resource name for the Product to be removed from this
+              #     ProductSet.
               #
               #     Format is:
               #     `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`
@@ -1835,8 +1839,8 @@ module Google
               # Asynchronous API that imports a list of reference images to specified
               # product sets based on a list of image information.
               #
-              # The {::Google::Longrunning::Operation google.longrunning.Operation} API can be used to keep track of the
-              # progress and results of the request.
+              # The {::Google::Longrunning::Operation google.longrunning.Operation} API can be
+              # used to keep track of the progress and results of the request.
               # `Operation.metadata` contains `BatchOperationMetadata`. (progress)
               # `Operation.response` contains `ImportProductSetsResponse`. (results)
               #
@@ -1953,8 +1957,8 @@ module Google
               # ProductSet, you must wait until the PurgeProducts operation has finished
               # for that ProductSet.
               #
-              # The {::Google::Longrunning::Operation google.longrunning.Operation} API can be used to keep track of the
-              # progress and results of the request.
+              # The {::Google::Longrunning::Operation google.longrunning.Operation} API can be
+              # used to keep track of the progress and results of the request.
               # `Operation.metadata` contains `BatchOperationMetadata`. (progress)
               #
               # @overload purge_products(request, options = nil)

@@ -28,7 +28,8 @@ module Google
         #     If it is not specified, system discretion will be applied.
         # @!attribute [rw] product_set
         #   @return [::String]
-        #     The resource name of a {::Google::Cloud::Vision::V1::ProductSet ProductSet} to be searched for similar images.
+        #     The resource name of a {::Google::Cloud::Vision::V1::ProductSet ProductSet} to
+        #     be searched for similar images.
         #
         #     Format is:
         #     `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`.
