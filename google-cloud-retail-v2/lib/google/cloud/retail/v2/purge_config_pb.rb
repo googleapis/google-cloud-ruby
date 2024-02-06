@@ -8,7 +8,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 
 
-descriptor_data = "\n)google/cloud/retail/v2/purge_config.proto\x12\x16google.cloud.retail.v2\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\x0f\n\rPurgeMetadata\"u\n\x16PurgeUserEventsRequest\x12\x36\n\x06parent\x18\x01 \x01(\tB&\xe2\x41\x01\x02\xfa\x41\x1f\n\x1dretail.googleapis.com/Catalog\x12\x14\n\x06\x66ilter\x18\x02 \x01(\tB\x04\xe2\x41\x01\x02\x12\r\n\x05\x66orce\x18\x03 \x01(\x08\"6\n\x17PurgeUserEventsResponse\x12\x1b\n\x13purged_events_count\x18\x01 \x01(\x03\x42\xbb\x01\n\x1a\x63om.google.cloud.retail.v2B\x10PurgeConfigProtoP\x01Z2cloud.google.com/go/retail/apiv2/retailpb;retailpb\xa2\x02\x06RETAIL\xaa\x02\x16Google.Cloud.Retail.V2\xca\x02\x16Google\\Cloud\\Retail\\V2\xea\x02\x19Google::Cloud::Retail::V2b\x06proto3"
+descriptor_data = "\n)google/cloud/retail/v2/purge_config.proto\x12\x16google.cloud.retail.v2\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\x0f\n\rPurgeMetadata\"s\n\x16PurgeUserEventsRequest\x12\x35\n\x06parent\x18\x01 \x01(\tB%\xe0\x41\x02\xfa\x41\x1f\n\x1dretail.googleapis.com/Catalog\x12\x13\n\x06\x66ilter\x18\x02 \x01(\tB\x03\xe0\x41\x02\x12\r\n\x05\x66orce\x18\x03 \x01(\x08\"6\n\x17PurgeUserEventsResponse\x12\x1b\n\x13purged_events_count\x18\x01 \x01(\x03\x42\xbb\x01\n\x1a\x63om.google.cloud.retail.v2B\x10PurgeConfigProtoP\x01Z2cloud.google.com/go/retail/apiv2/retailpb;retailpb\xa2\x02\x06RETAIL\xaa\x02\x16Google.Cloud.Retail.V2\xca\x02\x16Google\\Cloud\\Retail\\V2\xea\x02\x19Google::Cloud::Retail::V2b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
