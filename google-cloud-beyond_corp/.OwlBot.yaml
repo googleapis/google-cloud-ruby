@@ -5,7 +5,5 @@ deep-copy-regex:
     dest: /owl-bot-staging/google-cloud-beyond_corp/google-cloud-beyond_corp-app_connectors/$1
   - source: /google/cloud/beyondcorp/appgateways/[^/]+-ruby/(.*)
     dest: /owl-bot-staging/google-cloud-beyond_corp/google-cloud-beyond_corp-app_gateways/$1
-  - source: /google/cloud/beyondcorp/clientconnectorservices/[^/]+-ruby/(.*)
-    dest: /owl-bot-staging/google-cloud-beyond_corp/google-cloud-beyond_corp-client_connector_services/$1
   - source: /google/cloud/beyondcorp/clientgateways/[^/]+-ruby/(.*)
     dest: /owl-bot-staging/google-cloud-beyond_corp/google-cloud-beyond_corp-client_gateways/$1
