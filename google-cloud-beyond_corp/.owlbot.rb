@@ -17,7 +17,6 @@ OwlBot.prepare_multi_wrapper(
     "google-cloud-beyond_corp-app_connections",
     "google-cloud-beyond_corp-app_connectors",
     "google-cloud-beyond_corp-app_gateways",
-    "google-cloud-beyond_corp-client_connector_services",
     "google-cloud-beyond_corp-client_gateways"
   ],
   pretty_name: "BeyondCorp API"
