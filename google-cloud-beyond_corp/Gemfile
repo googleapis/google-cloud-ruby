@@ -5,5 +5,4 @@ gemspec
 gem "google-cloud-beyond_corp-app_connections-v1", path: "../google-cloud-beyond_corp-app_connections-v1"
 gem "google-cloud-beyond_corp-app_connectors-v1", path: "../google-cloud-beyond_corp-app_connectors-v1"
 gem "google-cloud-beyond_corp-app_gateways-v1", path: "../google-cloud-beyond_corp-app_gateways-v1"
-gem "google-cloud-beyond_corp-client_connector_services-v1", path: "../google-cloud-beyond_corp-client_connector_services-v1"
 gem "google-cloud-beyond_corp-client_gateways-v1", path: "../google-cloud-beyond_corp-client_gateways-v1"

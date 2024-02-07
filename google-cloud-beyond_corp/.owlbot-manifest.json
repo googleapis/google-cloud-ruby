@@ -20,8 +20,6 @@
     "lib/google/cloud/beyond_corp/app_connectors/version.rb",
     "lib/google/cloud/beyond_corp/app_gateways.rb",
     "lib/google/cloud/beyond_corp/app_gateways/version.rb",
-    "lib/google/cloud/beyond_corp/client_connector_services.rb",
-    "lib/google/cloud/beyond_corp/client_connector_services/version.rb",
     "lib/google/cloud/beyond_corp/client_gateways.rb",
     "lib/google/cloud/beyond_corp/client_gateways/version.rb",
     "lib/google/cloud/beyond_corp/version.rb",
@@ -31,8 +29,6 @@
     "test/google/cloud/beyond_corp/app_connectors/version_test.rb",
     "test/google/cloud/beyond_corp/app_gateways/client_test.rb",
     "test/google/cloud/beyond_corp/app_gateways/version_test.rb",
-    "test/google/cloud/beyond_corp/client_connector_services/client_test.rb",
-    "test/google/cloud/beyond_corp/client_connector_services/version_test.rb",
     "test/google/cloud/beyond_corp/client_gateways/client_test.rb",
     "test/google/cloud/beyond_corp/client_gateways/version_test.rb",
     "test/helper.rb"
