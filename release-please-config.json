@@ -747,10 +747,6 @@
       "component": "google-cloud-ids-v1",
       "version_file": "lib/google/cloud/ids/v1/version.rb"
     },
-    "google-cloud-iot": {
-      "component": "google-cloud-iot",
-      "version_file": "lib/google/cloud/iot/version.rb"
-    },
     "google-cloud-iot-v1": {
       "component": "google-cloud-iot-v1",
       "version_file": "lib/google/cloud/iot/v1/version.rb"
