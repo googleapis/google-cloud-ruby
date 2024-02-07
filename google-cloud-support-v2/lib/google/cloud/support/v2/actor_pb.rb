@@ -7,7 +7,7 @@ require 'google/protobuf'
 require 'google/api/field_behavior_pb'
 
 
-descriptor_data = "\n#google/cloud/support/v2/actor.proto\x12\x17google.cloud.support.v2\x1a\x1fgoogle/api/field_behavior.proto\"J\n\x05\x41\x63tor\x12\x14\n\x0c\x64isplay_name\x18\x01 \x01(\t\x12\r\n\x05\x65mail\x18\x02 \x01(\t\x12\x1c\n\x0egoogle_support\x18\x04 \x01(\x08\x42\x04\xe2\x41\x01\x03\x42\xb3\x01\n\x1b\x63om.google.cloud.support.v2B\nActorProtoP\x01Z5cloud.google.com/go/support/apiv2/supportpb;supportpb\xaa\x02\x17Google.Cloud.Support.V2\xca\x02\x17Google\\Cloud\\Support\\V2\xea\x02\x1aGoogle::Cloud::Support::V2b\x06proto3"
+descriptor_data = "\n#google/cloud/support/v2/actor.proto\x12\x17google.cloud.support.v2\x1a\x1fgoogle/api/field_behavior.proto\"I\n\x05\x41\x63tor\x12\x14\n\x0c\x64isplay_name\x18\x01 \x01(\t\x12\r\n\x05\x65mail\x18\x02 \x01(\t\x12\x1b\n\x0egoogle_support\x18\x04 \x01(\x08\x42\x03\xe0\x41\x03\x42\xb3\x01\n\x1b\x63om.google.cloud.support.v2B\nActorProtoP\x01Z5cloud.google.com/go/support/apiv2/supportpb;supportpb\xaa\x02\x17Google.Cloud.Support.V2\xca\x02\x17Google\\Cloud\\Support\\V2\xea\x02\x1aGoogle::Cloud::Support::V2b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 

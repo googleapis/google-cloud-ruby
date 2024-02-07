@@ -8,7 +8,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 
 
-descriptor_data = "\n#google/cloud/talent/v4/tenant.proto\x12\x16google.cloud.talent.v4\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"w\n\x06Tenant\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x19\n\x0b\x65xternal_id\x18\x02 \x01(\tB\x04\xe2\x41\x01\x02:D\xea\x41\x41\n\x1ajobs.googleapis.com/Tenant\x12#projects/{project}/tenants/{tenant}Be\n\x1a\x63om.google.cloud.talent.v4B\x0bTenantProtoP\x01Z2cloud.google.com/go/talent/apiv4/talentpb;talentpb\xa2\x02\x03\x43TSb\x06proto3"
+descriptor_data = "\n#google/cloud/talent/v4/tenant.proto\x12\x16google.cloud.talent.v4\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"v\n\x06Tenant\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x18\n\x0b\x65xternal_id\x18\x02 \x01(\tB\x03\xe0\x41\x02:D\xea\x41\x41\n\x1ajobs.googleapis.com/Tenant\x12#projects/{project}/tenants/{tenant}Be\n\x1a\x63om.google.cloud.talent.v4B\x0bTenantProtoP\x01Z2cloud.google.com/go/talent/apiv4/talentpb;talentpb\xa2\x02\x03\x43TSb\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
