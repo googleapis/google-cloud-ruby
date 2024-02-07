@@ -40,10 +40,11 @@ module Google
         #     characters long.
         # @!attribute [rw] product_category
         #   @return [::String]
-        #     Immutable. The category for the product identified by the reference image. This should
-        #     be one of "homegoods-v2", "apparel-v2", "toys-v2", "packagedgoods-v1" or
-        #     "general-v1". The legacy categories "homegoods", "apparel", and "toys" are
-        #     still supported, but these should not be used for new products.
+        #     Immutable. The category for the product identified by the reference image.
+        #     This should be one of "homegoods-v2", "apparel-v2", "toys-v2",
+        #     "packagedgoods-v1" or "general-v1". The legacy categories "homegoods",
+        #     "apparel", and "toys" are still supported, but these should not be used for
+        #     new products.
         # @!attribute [rw] product_labels
         #   @return [::Array<::Google::Cloud::Vision::V1::Product::KeyValue>]
         #     Key-value pairs that can be attached to a product. At query time,
@@ -129,8 +130,8 @@ module Google
         #     The URI must start with `gs://`.
         # @!attribute [rw] bounding_polys
         #   @return [::Array<::Google::Cloud::Vision::V1::BoundingPoly>]
-        #     Optional. Bounding polygons around the areas of interest in the reference image.
-        #     If this field is empty, the system will try to detect regions of
+        #     Optional. Bounding polygons around the areas of interest in the reference
+        #     image. If this field is empty, the system will try to detect regions of
         #     interest. At most 10 bounding polygons will be used.
         #
         #     The provided shape is converted into a non-rotated rectangle. Once
@@ -327,7 +328,8 @@ module Google
         # Request message for the `CreateReferenceImage` method.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. Resource name of the product in which to create the reference image.
+        #     Required. Resource name of the product in which to create the reference
+        #     image.
         #
         #     Format is
         #     `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`.
@@ -433,7 +435,8 @@ module Google
         #     `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`
         # @!attribute [rw] product
         #   @return [::String]
-        #     Required. The resource name for the Product to be removed from this ProductSet.
+        #     Required. The resource name for the Product to be removed from this
+        #     ProductSet.
         #
         #     Format is:
         #     `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`
@@ -502,15 +505,17 @@ module Google
         #     `product-display-name` column refers to
         #     {::Google::Cloud::Vision::V1::Product#display_name display_name}, the
         #     `product-category` column refers to
-        #     {::Google::Cloud::Vision::V1::Product#product_category product_category}, and the
-        #     `labels` column refers to {::Google::Cloud::Vision::V1::Product#product_labels product_labels}.
+        #     {::Google::Cloud::Vision::V1::Product#product_category product_category}, and
+        #     the `labels` column refers to
+        #     {::Google::Cloud::Vision::V1::Product#product_labels product_labels}.
         #
         #     The `image-id` column is optional but must be unique if provided. If it is
         #     empty, the system will automatically assign a unique id to the image.
         #
         #     The `product-display-name` column is optional. If it is empty, the system
-        #     sets the {::Google::Cloud::Vision::V1::Product#display_name display_name} field for the product to a
-        #     space (" "). You can update the `display_name` later by using the API.
+        #     sets the {::Google::Cloud::Vision::V1::Product#display_name display_name} field
+        #     for the product to a space (" "). You can update the `display_name` later
+        #     by using the API.
         #
         #     If a `Product` with the specified `product-id` already exists, then the
         #     system ignores the `product-display-name`, `product-category`, and `labels`
@@ -570,8 +575,10 @@ module Google
         # Response message for the `ImportProductSets` method.
         #
         # This message is returned by the
-        # google.longrunning.Operations.GetOperation method in the returned
-        # {::Google::Longrunning::Operation#response google.longrunning.Operation.response} field.
+        # google.longrunning.Operations.GetOperation
+        # method in the returned
+        # {::Google::Longrunning::Operation#response google.longrunning.Operation.response}
+        # field.
         # @!attribute [rw] reference_images
         #   @return [::Array<::Google::Cloud::Vision::V1::ReferenceImage>]
         #     The list of reference_images that are imported successfully.
@@ -601,7 +608,8 @@ module Google
         # @!attribute [rw] end_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The time when the batch request is finished and
-        #     {::Google::Longrunning::Operation#done google.longrunning.Operation.done} is set to true.
+        #     {::Google::Longrunning::Operation#done google.longrunning.Operation.done} is
+        #     set to true.
         class BatchOperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

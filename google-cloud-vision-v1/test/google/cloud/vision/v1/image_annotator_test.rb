@@ -65,12 +65,14 @@ class ::Google::Cloud::Vision::V1::ImageAnnotator::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     requests = [{}]
     parent = "hello world"
+    labels = {}
 
     batch_annotate_images_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :batch_annotate_images, name
       assert_kind_of ::Google::Cloud::Vision::V1::BatchAnnotateImagesRequest, request
       assert_kind_of ::Google::Cloud::Vision::V1::AnnotateImageRequest, request["requests"].first
       assert_equal "hello world", request["parent"]
+      assert_equal({}, request["labels"].to_h)
       refute_nil options
     end
 
@@ -81,31 +83,31 @@ class ::Google::Cloud::Vision::V1::ImageAnnotator::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.batch_annotate_images({ requests: requests, parent: parent }) do |response, operation|
+      client.batch_annotate_images({ requests: requests, parent: parent, labels: labels }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_annotate_images requests: requests, parent: parent do |response, operation|
+      client.batch_annotate_images requests: requests, parent: parent, labels: labels do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_annotate_images ::Google::Cloud::Vision::V1::BatchAnnotateImagesRequest.new(requests: requests, parent: parent) do |response, operation|
+      client.batch_annotate_images ::Google::Cloud::Vision::V1::BatchAnnotateImagesRequest.new(requests: requests, parent: parent, labels: labels) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_annotate_images({ requests: requests, parent: parent }, grpc_options) do |response, operation|
+      client.batch_annotate_images({ requests: requests, parent: parent, labels: labels }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_annotate_images(::Google::Cloud::Vision::V1::BatchAnnotateImagesRequest.new(requests: requests, parent: parent), grpc_options) do |response, operation|
+      client.batch_annotate_images(::Google::Cloud::Vision::V1::BatchAnnotateImagesRequest.new(requests: requests, parent: parent, labels: labels), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -125,12 +127,14 @@ class ::Google::Cloud::Vision::V1::ImageAnnotator::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     requests = [{}]
     parent = "hello world"
+    labels = {}
 
     batch_annotate_files_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :batch_annotate_files, name
       assert_kind_of ::Google::Cloud::Vision::V1::BatchAnnotateFilesRequest, request
       assert_kind_of ::Google::Cloud::Vision::V1::AnnotateFileRequest, request["requests"].first
       assert_equal "hello world", request["parent"]
+      assert_equal({}, request["labels"].to_h)
       refute_nil options
     end
 
@@ -141,31 +145,31 @@ class ::Google::Cloud::Vision::V1::ImageAnnotator::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.batch_annotate_files({ requests: requests, parent: parent }) do |response, operation|
+      client.batch_annotate_files({ requests: requests, parent: parent, labels: labels }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_annotate_files requests: requests, parent: parent do |response, operation|
+      client.batch_annotate_files requests: requests, parent: parent, labels: labels do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_annotate_files ::Google::Cloud::Vision::V1::BatchAnnotateFilesRequest.new(requests: requests, parent: parent) do |response, operation|
+      client.batch_annotate_files ::Google::Cloud::Vision::V1::BatchAnnotateFilesRequest.new(requests: requests, parent: parent, labels: labels) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_annotate_files({ requests: requests, parent: parent }, grpc_options) do |response, operation|
+      client.batch_annotate_files({ requests: requests, parent: parent, labels: labels }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_annotate_files(::Google::Cloud::Vision::V1::BatchAnnotateFilesRequest.new(requests: requests, parent: parent), grpc_options) do |response, operation|
+      client.batch_annotate_files(::Google::Cloud::Vision::V1::BatchAnnotateFilesRequest.new(requests: requests, parent: parent, labels: labels), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -186,6 +190,7 @@ class ::Google::Cloud::Vision::V1::ImageAnnotator::ClientTest < Minitest::Test
     requests = [{}]
     output_config = {}
     parent = "hello world"
+    labels = {}
 
     async_batch_annotate_images_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :async_batch_annotate_images, name
@@ -193,6 +198,7 @@ class ::Google::Cloud::Vision::V1::ImageAnnotator::ClientTest < Minitest::Test
       assert_kind_of ::Google::Cloud::Vision::V1::AnnotateImageRequest, request["requests"].first
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Vision::V1::OutputConfig), request["output_config"]
       assert_equal "hello world", request["parent"]
+      assert_equal({}, request["labels"].to_h)
       refute_nil options
     end
 
@@ -203,35 +209,35 @@ class ::Google::Cloud::Vision::V1::ImageAnnotator::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.async_batch_annotate_images({ requests: requests, output_config: output_config, parent: parent }) do |response, operation|
+      client.async_batch_annotate_images({ requests: requests, output_config: output_config, parent: parent, labels: labels }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.async_batch_annotate_images requests: requests, output_config: output_config, parent: parent do |response, operation|
+      client.async_batch_annotate_images requests: requests, output_config: output_config, parent: parent, labels: labels do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.async_batch_annotate_images ::Google::Cloud::Vision::V1::AsyncBatchAnnotateImagesRequest.new(requests: requests, output_config: output_config, parent: parent) do |response, operation|
+      client.async_batch_annotate_images ::Google::Cloud::Vision::V1::AsyncBatchAnnotateImagesRequest.new(requests: requests, output_config: output_config, parent: parent, labels: labels) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.async_batch_annotate_images({ requests: requests, output_config: output_config, parent: parent }, grpc_options) do |response, operation|
+      client.async_batch_annotate_images({ requests: requests, output_config: output_config, parent: parent, labels: labels }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.async_batch_annotate_images(::Google::Cloud::Vision::V1::AsyncBatchAnnotateImagesRequest.new(requests: requests, output_config: output_config, parent: parent), grpc_options) do |response, operation|
+      client.async_batch_annotate_images(::Google::Cloud::Vision::V1::AsyncBatchAnnotateImagesRequest.new(requests: requests, output_config: output_config, parent: parent, labels: labels), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -252,12 +258,14 @@ class ::Google::Cloud::Vision::V1::ImageAnnotator::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     requests = [{}]
     parent = "hello world"
+    labels = {}
 
     async_batch_annotate_files_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :async_batch_annotate_files, name
       assert_kind_of ::Google::Cloud::Vision::V1::AsyncBatchAnnotateFilesRequest, request
       assert_kind_of ::Google::Cloud::Vision::V1::AsyncAnnotateFileRequest, request["requests"].first
       assert_equal "hello world", request["parent"]
+      assert_equal({}, request["labels"].to_h)
       refute_nil options
     end
 
@@ -268,35 +276,35 @@ class ::Google::Cloud::Vision::V1::ImageAnnotator::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.async_batch_annotate_files({ requests: requests, parent: parent }) do |response, operation|
+      client.async_batch_annotate_files({ requests: requests, parent: parent, labels: labels }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.async_batch_annotate_files requests: requests, parent: parent do |response, operation|
+      client.async_batch_annotate_files requests: requests, parent: parent, labels: labels do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.async_batch_annotate_files ::Google::Cloud::Vision::V1::AsyncBatchAnnotateFilesRequest.new(requests: requests, parent: parent) do |response, operation|
+      client.async_batch_annotate_files ::Google::Cloud::Vision::V1::AsyncBatchAnnotateFilesRequest.new(requests: requests, parent: parent, labels: labels) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.async_batch_annotate_files({ requests: requests, parent: parent }, grpc_options) do |response, operation|
+      client.async_batch_annotate_files({ requests: requests, parent: parent, labels: labels }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.async_batch_annotate_files(::Google::Cloud::Vision::V1::AsyncBatchAnnotateFilesRequest.new(requests: requests, parent: parent), grpc_options) do |response, operation|
+      client.async_batch_annotate_files(::Google::Cloud::Vision::V1::AsyncBatchAnnotateFilesRequest.new(requests: requests, parent: parent, labels: labels), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
