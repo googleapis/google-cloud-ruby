@@ -1,3 +1,0 @@
-deep-copy-regex:
-  - source: /google/cloud/iot/[^/]+-ruby/(.*)
-    dest: /owl-bot-staging/google-cloud-iot/$1
