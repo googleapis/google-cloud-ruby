@@ -7,7 +7,7 @@ require 'google/protobuf'
 require 'google/api/field_behavior_pb'
 
 
-descriptor_data = "\n1google/cloud/notebooks/v2/diagnostic_config.proto\x12\x19google.cloud.notebooks.v2\x1a\x1fgoogle/api/field_behavior.proto\"\xc0\x01\n\x10\x44iagnosticConfig\x12\x18\n\ngcs_bucket\x18\x01 \x01(\tB\x04\xe2\x41\x01\x02\x12\x1b\n\rrelative_path\x18\x02 \x01(\tB\x04\xe2\x41\x01\x01\x12 \n\x12\x65nable_repair_flag\x18\x03 \x01(\x08\x42\x04\xe2\x41\x01\x01\x12(\n\x1a\x65nable_packet_capture_flag\x18\x04 \x01(\x08\x42\x04\xe2\x41\x01\x01\x12)\n\x1b\x65nable_copy_home_files_flag\x18\x05 \x01(\x08\x42\x04\xe2\x41\x01\x01\x42\xcc\x01\n\x1d\x63om.google.cloud.notebooks.v2B\x15\x44iagnosticConfigProtoP\x01Z;cloud.google.com/go/notebooks/apiv2/notebookspb;notebookspb\xaa\x02\x19Google.Cloud.Notebooks.V2\xca\x02\x19Google\\Cloud\\Notebooks\\V2\xea\x02\x1cGoogle::Cloud::Notebooks::V2b\x06proto3"
+descriptor_data = "\n1google/cloud/notebooks/v2/diagnostic_config.proto\x12\x19google.cloud.notebooks.v2\x1a\x1fgoogle/api/field_behavior.proto\"\xbb\x01\n\x10\x44iagnosticConfig\x12\x17\n\ngcs_bucket\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x1a\n\rrelative_path\x18\x02 \x01(\tB\x03\xe0\x41\x01\x12\x1f\n\x12\x65nable_repair_flag\x18\x03 \x01(\x08\x42\x03\xe0\x41\x01\x12\'\n\x1a\x65nable_packet_capture_flag\x18\x04 \x01(\x08\x42\x03\xe0\x41\x01\x12(\n\x1b\x65nable_copy_home_files_flag\x18\x05 \x01(\x08\x42\x03\xe0\x41\x01\x42\xcc\x01\n\x1d\x63om.google.cloud.notebooks.v2B\x15\x44iagnosticConfigProtoP\x01Z;cloud.google.com/go/notebooks/apiv2/notebookspb;notebookspb\xaa\x02\x19Google.Cloud.Notebooks.V2\xca\x02\x19Google\\Cloud\\Notebooks\\V2\xea\x02\x1cGoogle::Cloud::Notebooks::V2b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
