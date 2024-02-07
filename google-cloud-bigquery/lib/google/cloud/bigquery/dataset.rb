@@ -417,10 +417,10 @@ module Google
         #
         # @see https://cloud.google.com/blog/products/data-analytics/new-bigquery-billing-model-helps-reduce-physical-storage-costs
         #
-        # @return [String, nil] A string containing the storage billing model,
-        #   or `nil` if the object is a reference (see {#reference?}).
-        #   Possible values of the string are `LOGICAL`, `PHYSICAL`
-        #   and `STORAGE_BILLING_MODEL_UNSPECIFIED`.
+        # @return [String, nil] A string containing the storage billing model, or `nil`.
+        #   Possible values of the string are `LOGICAL`, `PHYSICAL`.
+        #   It returns `nil` if either the object is a reference (see {#reference?}),
+        #   or if the storage billing model is unspecified.
         #
         # @example
         #
