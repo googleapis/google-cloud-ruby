@@ -35,6 +35,10 @@ module Google
 
             # Fetch feature values under a FeatureView.
             rpc :FetchFeatureValues, ::Google::Cloud::AIPlatform::V1::FetchFeatureValuesRequest, ::Google::Cloud::AIPlatform::V1::FetchFeatureValuesResponse
+            # Search the nearest entities under a FeatureView.
+            # Search only works for indexable feature view; if a feature view isn't
+            # indexable, returns Invalid argument response.
+            rpc :SearchNearestEntities, ::Google::Cloud::AIPlatform::V1::SearchNearestEntitiesRequest, ::Google::Cloud::AIPlatform::V1::SearchNearestEntitiesResponse
           end
 
           Stub = Service.rpc_stub_class

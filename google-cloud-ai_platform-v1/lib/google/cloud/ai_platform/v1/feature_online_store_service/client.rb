@@ -283,6 +283,101 @@ module Google
             end
 
             ##
+            # Search the nearest entities under a FeatureView.
+            # Search only works for indexable feature view; if a feature view isn't
+            # indexable, returns Invalid argument response.
+            #
+            # @overload search_nearest_entities(request, options = nil)
+            #   Pass arguments to `search_nearest_entities` via a request object, either of type
+            #   {::Google::Cloud::AIPlatform::V1::SearchNearestEntitiesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AIPlatform::V1::SearchNearestEntitiesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload search_nearest_entities(feature_view: nil, query: nil, return_full_entity: nil)
+            #   Pass arguments to `search_nearest_entities` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param feature_view [::String]
+            #     Required. FeatureView resource format
+            #     `projects/{project}/locations/{location}/featureOnlineStores/{featureOnlineStore}/featureViews/{featureView}`
+            #   @param query [::Google::Cloud::AIPlatform::V1::NearestNeighborQuery, ::Hash]
+            #     Required. The query.
+            #   @param return_full_entity [::Boolean]
+            #     Optional. If set to true, the full entities (including all vector values
+            #     and metadata) of the nearest neighbors are returned; otherwise only entity
+            #     id of the nearest neighbors will be returned. Note that returning full
+            #     entities will significantly increase the latency and cost of the query.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::AIPlatform::V1::SearchNearestEntitiesResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::AIPlatform::V1::SearchNearestEntitiesResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::FeatureOnlineStoreService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AIPlatform::V1::SearchNearestEntitiesRequest.new
+            #
+            #   # Call the search_nearest_entities method.
+            #   result = client.search_nearest_entities request
+            #
+            #   # The returned object is of type Google::Cloud::AIPlatform::V1::SearchNearestEntitiesResponse.
+            #   p result
+            #
+            def search_nearest_entities request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::SearchNearestEntitiesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.search_nearest_entities.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.feature_view
+                header_params["feature_view"] = request.feature_view
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.search_nearest_entities.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.search_nearest_entities.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @feature_online_store_service_stub.call_rpc :search_nearest_entities, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the FeatureOnlineStoreService API.
             #
             # This class represents the configuration for FeatureOnlineStoreService,
@@ -440,11 +535,18 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :fetch_feature_values
+                ##
+                # RPC-specific configuration for `search_nearest_entities`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :search_nearest_entities
 
                 # @private
                 def initialize parent_rpcs = nil
                   fetch_feature_values_config = parent_rpcs.fetch_feature_values if parent_rpcs.respond_to? :fetch_feature_values
                   @fetch_feature_values = ::Gapic::Config::Method.new fetch_feature_values_config
+                  search_nearest_entities_config = parent_rpcs.search_nearest_entities if parent_rpcs.respond_to? :search_nearest_entities
+                  @search_nearest_entities = ::Gapic::Config::Method.new search_nearest_entities_config
 
                   yield self if block_given?
                 end

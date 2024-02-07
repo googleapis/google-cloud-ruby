@@ -441,6 +441,7 @@
     "snippets/feature_online_store_admin_service/update_feature_online_store.rb",
     "snippets/feature_online_store_admin_service/update_feature_view.rb",
     "snippets/feature_online_store_service/fetch_feature_values.rb",
+    "snippets/feature_online_store_service/search_nearest_entities.rb",
     "snippets/feature_registry_service/create_feature.rb",
     "snippets/feature_registry_service/create_feature_group.rb",
     "snippets/feature_registry_service/delete_feature.rb",

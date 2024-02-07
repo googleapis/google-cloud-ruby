@@ -294,6 +294,11 @@
               "methods": [
                 "fetch_feature_values"
               ]
+            },
+            "SearchNearestEntities": {
+              "methods": [
+                "search_nearest_entities"
+              ]
             }
           }
         }

@@ -117,6 +117,68 @@ class ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreService::ClientTest < M
     end
   end
 
+  def test_search_nearest_entities
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::AIPlatform::V1::SearchNearestEntitiesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    feature_view = "hello world"
+    query = {}
+    return_full_entity = true
+
+    search_nearest_entities_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :search_nearest_entities, name
+      assert_kind_of ::Google::Cloud::AIPlatform::V1::SearchNearestEntitiesRequest, request
+      assert_equal "hello world", request["feature_view"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AIPlatform::V1::NearestNeighborQuery), request["query"]
+      assert_equal true, request["return_full_entity"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, search_nearest_entities_client_stub do
+      # Create client
+      client = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.search_nearest_entities({ feature_view: feature_view, query: query, return_full_entity: return_full_entity }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.search_nearest_entities feature_view: feature_view, query: query, return_full_entity: return_full_entity do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.search_nearest_entities ::Google::Cloud::AIPlatform::V1::SearchNearestEntitiesRequest.new(feature_view: feature_view, query: query, return_full_entity: return_full_entity) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.search_nearest_entities({ feature_view: feature_view, query: query, return_full_entity: return_full_entity }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.search_nearest_entities(::Google::Cloud::AIPlatform::V1::SearchNearestEntitiesRequest.new(feature_view: feature_view, query: query, return_full_entity: return_full_entity), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, search_nearest_entities_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
