@@ -925,7 +925,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param backend_bucket [::String]
-              #     Name of the BackendService resource to which the security policy should be set. The name should conform to RFC1035.
+              #     Name of the BackendBucket resource to which the security policy should be set. The name should conform to RFC1035.
               #   @param project [::String]
               #     Project ID for this request.
               #   @param request_id [::String]
