@@ -1,5 +1,11 @@
 # Release History
 
+### 1.48.0 (2024-02-08)
+
+#### Features
+
+* Support accessing storage_ billing_model field in a dataset ([#24755](https://github.com/googleapis/google-cloud-ruby/issues/24755)) 
+
 ### 1.47.0 (2024-02-05)
 
 #### Features
