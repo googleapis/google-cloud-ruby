@@ -1,5 +1,11 @@
 # Release History
 
+### 0.14.0 (2024-02-08)
+
+#### Features
+
+* Labels can be set in batch annotation calls ([#24758](https://github.com/googleapis/google-cloud-ruby/issues/24758)) 
+
 ### 0.13.2 (2024-02-01)
 
 #### Bug Fixes
