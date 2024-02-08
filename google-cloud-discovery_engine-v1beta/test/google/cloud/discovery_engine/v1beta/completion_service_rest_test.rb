@@ -128,6 +128,115 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::CompletionService::Rest::ClientT
     end
   end
 
+  def test_import_suggestion_deny_list_entries
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    inline_source = {}
+    parent = "hello world"
+
+    import_suggestion_deny_list_entries_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DiscoveryEngine::V1beta::CompletionService::Rest::ServiceStub.stub :transcode_import_suggestion_deny_list_entries_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, import_suggestion_deny_list_entries_client_stub do
+        # Create client
+        client = ::Google::Cloud::DiscoveryEngine::V1beta::CompletionService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.import_suggestion_deny_list_entries({ inline_source: inline_source, parent: parent }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.import_suggestion_deny_list_entries inline_source: inline_source, parent: parent do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.import_suggestion_deny_list_entries ::Google::Cloud::DiscoveryEngine::V1beta::ImportSuggestionDenyListEntriesRequest.new(inline_source: inline_source, parent: parent) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.import_suggestion_deny_list_entries({ inline_source: inline_source, parent: parent }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.import_suggestion_deny_list_entries(::Google::Cloud::DiscoveryEngine::V1beta::ImportSuggestionDenyListEntriesRequest.new(inline_source: inline_source, parent: parent), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, import_suggestion_deny_list_entries_client_stub.call_count
+      end
+    end
+  end
+
+  def test_purge_suggestion_deny_list_entries
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+
+    purge_suggestion_deny_list_entries_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DiscoveryEngine::V1beta::CompletionService::Rest::ServiceStub.stub :transcode_purge_suggestion_deny_list_entries_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, purge_suggestion_deny_list_entries_client_stub do
+        # Create client
+        client = ::Google::Cloud::DiscoveryEngine::V1beta::CompletionService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.purge_suggestion_deny_list_entries({ parent: parent }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.purge_suggestion_deny_list_entries parent: parent do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.purge_suggestion_deny_list_entries ::Google::Cloud::DiscoveryEngine::V1beta::PurgeSuggestionDenyListEntriesRequest.new(parent: parent) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.purge_suggestion_deny_list_entries({ parent: parent }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.purge_suggestion_deny_list_entries(::Google::Cloud::DiscoveryEngine::V1beta::PurgeSuggestionDenyListEntriesRequest.new(parent: parent), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, purge_suggestion_deny_list_entries_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

@@ -45,6 +45,9 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Cli
 
       path = client.conversation_path project: "value0", location: "value1", collection: "value2", data_store: "value3", conversation: "value4"
       assert_equal "projects/value0/locations/value1/collections/value2/dataStores/value3/conversations/value4", path
+
+      path = client.conversation_path project: "value0", location: "value1", collection: "value2", engine: "value3", conversation: "value4"
+      assert_equal "projects/value0/locations/value1/collections/value2/engines/value3/conversations/value4", path
     end
   end
 
@@ -63,6 +66,21 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Cli
     end
   end
 
+  def test_document_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.document_path project: "value0", location: "value1", data_store: "value2", branch: "value3", document: "value4"
+      assert_equal "projects/value0/locations/value1/dataStores/value2/branches/value3/documents/value4", path
+
+      path = client.document_path project: "value0", location: "value1", collection: "value2", data_store: "value3", branch: "value4", document: "value5"
+      assert_equal "projects/value0/locations/value1/collections/value2/dataStores/value3/branches/value4/documents/value5", path
+    end
+  end
+
   def test_serving_config_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -75,6 +93,9 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Cli
 
       path = client.serving_config_path project: "value0", location: "value1", collection: "value2", data_store: "value3", serving_config: "value4"
       assert_equal "projects/value0/locations/value1/collections/value2/dataStores/value3/servingConfigs/value4", path
+
+      path = client.serving_config_path project: "value0", location: "value1", collection: "value2", engine: "value3", serving_config: "value4"
+      assert_equal "projects/value0/locations/value1/collections/value2/engines/value3/servingConfigs/value4", path
     end
   end
 end

@@ -126,6 +126,14 @@ module Google
                                                             ["serving_config", %r{^projects/[^/]+/locations/[^/]+/collections/[^/]+/dataStores/[^/]+/servingConfigs/[^/]+/?$}, false]
                                                           ]
                                                         )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1beta/{serving_config}:search",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["serving_config", %r{^projects/[^/]+/locations/[^/]+/collections/[^/]+/engines/[^/]+/servingConfigs/[^/]+/?$}, false]
+                                                          ]
+                                                        )
                 transcoder.transcode request_pb
               end
             end

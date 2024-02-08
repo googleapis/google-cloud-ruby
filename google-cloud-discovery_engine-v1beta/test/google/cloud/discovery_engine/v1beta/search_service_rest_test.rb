@@ -86,6 +86,7 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::SearchService::Rest::ClientTest 
     page_token = "hello world"
     offset = 42
     filter = "hello world"
+    canonical_filter = "hello world"
     order_by = "hello world"
     user_info = {}
     facet_specs = [{}]
@@ -114,27 +115,27 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::SearchService::Rest::ClientTest 
         end
 
         # Use hash object
-        client.search({ serving_config: serving_config, branch: branch, query: query, image_query: image_query, page_size: page_size, page_token: page_token, offset: offset, filter: filter, order_by: order_by, user_info: user_info, facet_specs: facet_specs, boost_spec: boost_spec, params: params, query_expansion_spec: query_expansion_spec, spell_correction_spec: spell_correction_spec, user_pseudo_id: user_pseudo_id, content_search_spec: content_search_spec, embedding_spec: embedding_spec, ranking_expression: ranking_expression, safe_search: safe_search, user_labels: user_labels }) do |_result, response|
+        client.search({ serving_config: serving_config, branch: branch, query: query, image_query: image_query, page_size: page_size, page_token: page_token, offset: offset, filter: filter, canonical_filter: canonical_filter, order_by: order_by, user_info: user_info, facet_specs: facet_specs, boost_spec: boost_spec, params: params, query_expansion_spec: query_expansion_spec, spell_correction_spec: spell_correction_spec, user_pseudo_id: user_pseudo_id, content_search_spec: content_search_spec, embedding_spec: embedding_spec, ranking_expression: ranking_expression, safe_search: safe_search, user_labels: user_labels }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.search serving_config: serving_config, branch: branch, query: query, image_query: image_query, page_size: page_size, page_token: page_token, offset: offset, filter: filter, order_by: order_by, user_info: user_info, facet_specs: facet_specs, boost_spec: boost_spec, params: params, query_expansion_spec: query_expansion_spec, spell_correction_spec: spell_correction_spec, user_pseudo_id: user_pseudo_id, content_search_spec: content_search_spec, embedding_spec: embedding_spec, ranking_expression: ranking_expression, safe_search: safe_search, user_labels: user_labels do |_result, response|
+        client.search serving_config: serving_config, branch: branch, query: query, image_query: image_query, page_size: page_size, page_token: page_token, offset: offset, filter: filter, canonical_filter: canonical_filter, order_by: order_by, user_info: user_info, facet_specs: facet_specs, boost_spec: boost_spec, params: params, query_expansion_spec: query_expansion_spec, spell_correction_spec: spell_correction_spec, user_pseudo_id: user_pseudo_id, content_search_spec: content_search_spec, embedding_spec: embedding_spec, ranking_expression: ranking_expression, safe_search: safe_search, user_labels: user_labels do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.search ::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest.new(serving_config: serving_config, branch: branch, query: query, image_query: image_query, page_size: page_size, page_token: page_token, offset: offset, filter: filter, order_by: order_by, user_info: user_info, facet_specs: facet_specs, boost_spec: boost_spec, params: params, query_expansion_spec: query_expansion_spec, spell_correction_spec: spell_correction_spec, user_pseudo_id: user_pseudo_id, content_search_spec: content_search_spec, embedding_spec: embedding_spec, ranking_expression: ranking_expression, safe_search: safe_search, user_labels: user_labels) do |_result, response|
+        client.search ::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest.new(serving_config: serving_config, branch: branch, query: query, image_query: image_query, page_size: page_size, page_token: page_token, offset: offset, filter: filter, canonical_filter: canonical_filter, order_by: order_by, user_info: user_info, facet_specs: facet_specs, boost_spec: boost_spec, params: params, query_expansion_spec: query_expansion_spec, spell_correction_spec: spell_correction_spec, user_pseudo_id: user_pseudo_id, content_search_spec: content_search_spec, embedding_spec: embedding_spec, ranking_expression: ranking_expression, safe_search: safe_search, user_labels: user_labels) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.search({ serving_config: serving_config, branch: branch, query: query, image_query: image_query, page_size: page_size, page_token: page_token, offset: offset, filter: filter, order_by: order_by, user_info: user_info, facet_specs: facet_specs, boost_spec: boost_spec, params: params, query_expansion_spec: query_expansion_spec, spell_correction_spec: spell_correction_spec, user_pseudo_id: user_pseudo_id, content_search_spec: content_search_spec, embedding_spec: embedding_spec, ranking_expression: ranking_expression, safe_search: safe_search, user_labels: user_labels }, call_options) do |_result, response|
+        client.search({ serving_config: serving_config, branch: branch, query: query, image_query: image_query, page_size: page_size, page_token: page_token, offset: offset, filter: filter, canonical_filter: canonical_filter, order_by: order_by, user_info: user_info, facet_specs: facet_specs, boost_spec: boost_spec, params: params, query_expansion_spec: query_expansion_spec, spell_correction_spec: spell_correction_spec, user_pseudo_id: user_pseudo_id, content_search_spec: content_search_spec, embedding_spec: embedding_spec, ranking_expression: ranking_expression, safe_search: safe_search, user_labels: user_labels }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.search(::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest.new(serving_config: serving_config, branch: branch, query: query, image_query: image_query, page_size: page_size, page_token: page_token, offset: offset, filter: filter, order_by: order_by, user_info: user_info, facet_specs: facet_specs, boost_spec: boost_spec, params: params, query_expansion_spec: query_expansion_spec, spell_correction_spec: spell_correction_spec, user_pseudo_id: user_pseudo_id, content_search_spec: content_search_spec, embedding_spec: embedding_spec, ranking_expression: ranking_expression, safe_search: safe_search, user_labels: user_labels), call_options) do |_result, response|
+        client.search(::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest.new(serving_config: serving_config, branch: branch, query: query, image_query: image_query, page_size: page_size, page_token: page_token, offset: offset, filter: filter, canonical_filter: canonical_filter, order_by: order_by, user_info: user_info, facet_specs: facet_specs, boost_spec: boost_spec, params: params, query_expansion_spec: query_expansion_spec, spell_correction_spec: spell_correction_spec, user_pseudo_id: user_pseudo_id, content_search_spec: content_search_spec, embedding_spec: embedding_spec, ranking_expression: ranking_expression, safe_search: safe_search, user_labels: user_labels), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

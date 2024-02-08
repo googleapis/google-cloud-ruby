@@ -85,6 +85,7 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Res
     safe_search = true
     user_labels = {}
     summary_spec = {}
+    filter = "hello world"
 
     converse_conversation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -100,27 +101,27 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Res
         end
 
         # Use hash object
-        client.converse_conversation({ name: name, query: query, serving_config: serving_config, conversation: conversation, safe_search: safe_search, user_labels: user_labels, summary_spec: summary_spec }) do |_result, response|
+        client.converse_conversation({ name: name, query: query, serving_config: serving_config, conversation: conversation, safe_search: safe_search, user_labels: user_labels, summary_spec: summary_spec, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.converse_conversation name: name, query: query, serving_config: serving_config, conversation: conversation, safe_search: safe_search, user_labels: user_labels, summary_spec: summary_spec do |_result, response|
+        client.converse_conversation name: name, query: query, serving_config: serving_config, conversation: conversation, safe_search: safe_search, user_labels: user_labels, summary_spec: summary_spec, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.converse_conversation ::Google::Cloud::DiscoveryEngine::V1beta::ConverseConversationRequest.new(name: name, query: query, serving_config: serving_config, conversation: conversation, safe_search: safe_search, user_labels: user_labels, summary_spec: summary_spec) do |_result, response|
+        client.converse_conversation ::Google::Cloud::DiscoveryEngine::V1beta::ConverseConversationRequest.new(name: name, query: query, serving_config: serving_config, conversation: conversation, safe_search: safe_search, user_labels: user_labels, summary_spec: summary_spec, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.converse_conversation({ name: name, query: query, serving_config: serving_config, conversation: conversation, safe_search: safe_search, user_labels: user_labels, summary_spec: summary_spec }, call_options) do |_result, response|
+        client.converse_conversation({ name: name, query: query, serving_config: serving_config, conversation: conversation, safe_search: safe_search, user_labels: user_labels, summary_spec: summary_spec, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.converse_conversation(::Google::Cloud::DiscoveryEngine::V1beta::ConverseConversationRequest.new(name: name, query: query, serving_config: serving_config, conversation: conversation, safe_search: safe_search, user_labels: user_labels, summary_spec: summary_spec), call_options) do |_result, response|
+        client.converse_conversation(::Google::Cloud::DiscoveryEngine::V1beta::ConverseConversationRequest.new(name: name, query: query, serving_config: serving_config, conversation: conversation, safe_search: safe_search, user_labels: user_labels, summary_spec: summary_spec, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

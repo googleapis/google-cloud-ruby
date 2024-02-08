@@ -19,9 +19,13 @@
 require "google/cloud/discovery_engine/v1beta/completion_service"
 require "google/cloud/discovery_engine/v1beta/search_service"
 require "google/cloud/discovery_engine/v1beta/conversational_search_service"
+require "google/cloud/discovery_engine/v1beta/data_store_service"
 require "google/cloud/discovery_engine/v1beta/document_service"
+require "google/cloud/discovery_engine/v1beta/engine_service"
 require "google/cloud/discovery_engine/v1beta/recommendation_service"
 require "google/cloud/discovery_engine/v1beta/schema_service"
+require "google/cloud/discovery_engine/v1beta/serving_config_service"
+require "google/cloud/discovery_engine/v1beta/site_search_engine_service"
 require "google/cloud/discovery_engine/v1beta/user_event_service"
 require "google/cloud/discovery_engine/v1beta/version"
 

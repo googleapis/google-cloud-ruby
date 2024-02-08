@@ -316,6 +316,14 @@ module Google
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/collections/[^/]+/dataStores/[^/]+/conversations/[^/]+/?$}, false]
                                                           ]
                                                         )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1beta/{name}:converse",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/collections/[^/]+/engines/[^/]+/conversations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
                 transcoder.transcode request_pb
               end
 
@@ -346,6 +354,14 @@ module Google
                                                             ["parent", %r{^projects/[^/]+/locations/[^/]+/collections/[^/]+/dataStores/[^/]+/?$}, false]
                                                           ]
                                                         )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1beta/{parent}/conversations",
+                                                          body: "conversation",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/collections/[^/]+/engines/[^/]+/?$}, false]
+                                                          ]
+                                                        )
                 transcoder.transcode request_pb
               end
 
@@ -372,6 +388,13 @@ module Google
                                                           uri_template: "/v1beta/{name}",
                                                           matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/collections/[^/]+/dataStores/[^/]+/conversations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/v1beta/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/collections/[^/]+/engines/[^/]+/conversations/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -404,6 +427,14 @@ module Google
                                                             ["conversation.name", %r{^projects/[^/]+/locations/[^/]+/collections/[^/]+/dataStores/[^/]+/conversations/[^/]+/?$}, false]
                                                           ]
                                                         )
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v1beta/{conversation.name}",
+                                                          body: "conversation",
+                                                          matches: [
+                                                            ["conversation.name", %r{^projects/[^/]+/locations/[^/]+/collections/[^/]+/engines/[^/]+/conversations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
                 transcoder.transcode request_pb
               end
 
@@ -432,6 +463,13 @@ module Google
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/collections/[^/]+/dataStores/[^/]+/conversations/[^/]+/?$}, false]
                                                           ]
                                                         )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1beta/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/collections/[^/]+/engines/[^/]+/conversations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
                 transcoder.transcode request_pb
               end
 
@@ -458,6 +496,13 @@ module Google
                                                           uri_template: "/v1beta/{parent}/conversations",
                                                           matches: [
                                                             ["parent", %r{^projects/[^/]+/locations/[^/]+/collections/[^/]+/dataStores/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1beta/{parent}/conversations",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/collections/[^/]+/engines/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
