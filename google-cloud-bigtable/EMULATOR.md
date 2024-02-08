@@ -15,7 +15,7 @@ below.
 ```ruby
 require "google/cloud/bigtable"
 
-# Make Pub/Sub use the emulator
+# Make Bigtable use the emulator
 ENV["BIGTABLE_EMULATOR_HOST"] = "localhost:8086"
 
 bigtable = Google::Cloud::Bigtable.new "emulator-project-id"
