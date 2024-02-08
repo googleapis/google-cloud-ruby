@@ -1,5 +1,11 @@
 # Release History
 
+### 0.29.3 (2024-02-08)
+
+#### Documentation
+
+* Improve YARD documentation ([#24771](https://github.com/googleapis/google-cloud-ruby/issues/24771)) 
+
 ### 0.29.2 (2024-02-01)
 
 #### Bug Fixes
