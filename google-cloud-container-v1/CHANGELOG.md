@@ -1,5 +1,11 @@
 # Release History
 
+### 0.35.0 (2024-02-08)
+
+#### Features
+
+* Add `stateful_ha_config` field to AddonsConfig ([#24773](https://github.com/googleapis/google-cloud-ruby/issues/24773)) 
+
 ### 0.34.1 (2024-02-01)
 
 #### Bug Fixes
