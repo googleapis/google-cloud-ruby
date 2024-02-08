@@ -1,5 +1,13 @@
 # Release History
 
+### 2.8.0 (2024-02-08)
+
+#### Features
+
+* Add PerformMaintenance API ([#24781](https://github.com/googleapis/google-cloud-ruby/issues/24781)) 
+* Support config for SecurityPolicyRuleMatcherExprOptions ([#24781](https://github.com/googleapis/google-cloud-ruby/issues/24781)) 
+* Support Region Zones API ([#24781](https://github.com/googleapis/google-cloud-ruby/issues/24781)) 
+
 ### 2.7.2 (2024-02-01)
 
 #### Bug Fixes
