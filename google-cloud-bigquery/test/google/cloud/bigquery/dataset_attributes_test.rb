@@ -64,6 +64,18 @@ describe Google::Cloud::Bigquery::Dataset, :attributes, :mock_bigquery do
     mock.verify
   end
 
+  it "gets full data for storage_billing_model" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :get_dataset, dataset_full_gapi, [project, dataset_id]
+
+    _(dataset.storage_billing_model).must_be_nil
+
+    # A second call to attribute does not make a second HTTP API call
+    _(dataset.storage_billing_model).must_be_nil
+    mock.verify
+  end
+
   it "gets full data for tags" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
