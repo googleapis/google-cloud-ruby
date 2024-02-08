@@ -368,6 +368,148 @@ class ::Google::Cloud::Dialogflow::CX::V3::EntityTypes::ClientTest < Minitest::T
     end
   end
 
+  def test_export_entity_types
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    entity_types = ["hello world"]
+    entity_types_uri = "hello world"
+    data_format = :DATA_FORMAT_UNSPECIFIED
+    language_code = "hello world"
+
+    export_entity_types_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :export_entity_types, name
+      assert_kind_of ::Google::Cloud::Dialogflow::CX::V3::ExportEntityTypesRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal ["hello world"], request["entity_types"]
+      assert_equal "hello world", request["entity_types_uri"]
+      assert_equal :entity_types_uri, request.destination
+      assert_equal :DATA_FORMAT_UNSPECIFIED, request["data_format"]
+      assert_equal "hello world", request["language_code"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, export_entity_types_client_stub do
+      # Create client
+      client = ::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.export_entity_types({ parent: parent, entity_types: entity_types, entity_types_uri: entity_types_uri, data_format: data_format, language_code: language_code }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.export_entity_types parent: parent, entity_types: entity_types, entity_types_uri: entity_types_uri, data_format: data_format, language_code: language_code do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.export_entity_types ::Google::Cloud::Dialogflow::CX::V3::ExportEntityTypesRequest.new(parent: parent, entity_types: entity_types, entity_types_uri: entity_types_uri, data_format: data_format, language_code: language_code) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.export_entity_types({ parent: parent, entity_types: entity_types, entity_types_uri: entity_types_uri, data_format: data_format, language_code: language_code }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.export_entity_types(::Google::Cloud::Dialogflow::CX::V3::ExportEntityTypesRequest.new(parent: parent, entity_types: entity_types, entity_types_uri: entity_types_uri, data_format: data_format, language_code: language_code), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, export_entity_types_client_stub.call_rpc_count
+    end
+  end
+
+  def test_import_entity_types
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    entity_types_uri = "hello world"
+    merge_option = :MERGE_OPTION_UNSPECIFIED
+    target_entity_type = "hello world"
+
+    import_entity_types_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :import_entity_types, name
+      assert_kind_of ::Google::Cloud::Dialogflow::CX::V3::ImportEntityTypesRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["entity_types_uri"]
+      assert_equal :entity_types_uri, request.entity_types
+      assert_equal :MERGE_OPTION_UNSPECIFIED, request["merge_option"]
+      assert_equal "hello world", request["target_entity_type"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, import_entity_types_client_stub do
+      # Create client
+      client = ::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.import_entity_types({ parent: parent, entity_types_uri: entity_types_uri, merge_option: merge_option, target_entity_type: target_entity_type }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.import_entity_types parent: parent, entity_types_uri: entity_types_uri, merge_option: merge_option, target_entity_type: target_entity_type do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.import_entity_types ::Google::Cloud::Dialogflow::CX::V3::ImportEntityTypesRequest.new(parent: parent, entity_types_uri: entity_types_uri, merge_option: merge_option, target_entity_type: target_entity_type) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.import_entity_types({ parent: parent, entity_types_uri: entity_types_uri, merge_option: merge_option, target_entity_type: target_entity_type }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.import_entity_types(::Google::Cloud::Dialogflow::CX::V3::ImportEntityTypesRequest.new(parent: parent, entity_types_uri: entity_types_uri, merge_option: merge_option, target_entity_type: target_entity_type), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, import_entity_types_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
@@ -385,5 +527,19 @@ class ::Google::Cloud::Dialogflow::CX::V3::EntityTypes::ClientTest < Minitest::T
 
     assert_same block_config, config
     assert_kind_of ::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Client::Configuration, config
+  end
+
+  def test_operations_client
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+
+    client = nil
+    dummy_stub = ClientStub.new nil, nil
+    Gapic::ServiceStub.stub :new, dummy_stub do
+      client = ::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+    end
+
+    assert_kind_of ::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Operations, client.operations_client
   end
 end

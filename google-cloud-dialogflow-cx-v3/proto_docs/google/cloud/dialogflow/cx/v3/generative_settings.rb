@@ -97,6 +97,10 @@ module Google
             #   @return [::String]
             #     Agent scope, e.g. "Example company website", "internal Example
             #     company website for employees", "manual of car owner".
+            # @!attribute [rw] disable_data_store_fallback
+            #   @return [::Boolean]
+            #     Whether to disable fallback to Data Store search results (in case the LLM
+            #     couldn't pick a proper answer). Per default the feature is enabled.
             class KnowledgeConnectorSettings
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -25,6 +25,7 @@ require "google/cloud/dialogflow/cx/v3/bindings_override"
 
 require "google/cloud/dialogflow/cx/v3/entity_types/credentials"
 require "google/cloud/dialogflow/cx/v3/entity_types/paths"
+require "google/cloud/dialogflow/cx/v3/entity_types/rest/operations"
 require "google/cloud/dialogflow/cx/v3/entity_types/rest/client"
 
 module Google

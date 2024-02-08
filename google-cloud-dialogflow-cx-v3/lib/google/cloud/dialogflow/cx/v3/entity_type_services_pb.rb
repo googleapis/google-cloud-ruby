@@ -56,6 +56,10 @@ module Google
               rpc :DeleteEntityType, ::Google::Cloud::Dialogflow::CX::V3::DeleteEntityTypeRequest, ::Google::Protobuf::Empty
               # Returns the list of all entity types in the specified agent.
               rpc :ListEntityTypes, ::Google::Cloud::Dialogflow::CX::V3::ListEntityTypesRequest, ::Google::Cloud::Dialogflow::CX::V3::ListEntityTypesResponse
+              # Exports the selected entity types.
+              rpc :ExportEntityTypes, ::Google::Cloud::Dialogflow::CX::V3::ExportEntityTypesRequest, ::Google::Longrunning::Operation
+              # Imports the specified entitytypes into the agent.
+              rpc :ImportEntityTypes, ::Google::Cloud::Dialogflow::CX::V3::ImportEntityTypesRequest, ::Google::Longrunning::Operation
             end
 
             Stub = Service.rpc_stub_class

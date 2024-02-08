@@ -114,6 +114,9 @@ module Google
           # @!attribute [rw] create_time
           #   @return [::Google::Protobuf::Timestamp]
           #     The timestamp of the change.
+          # @!attribute [rw] language_code
+          #   @return [::String]
+          #     The affected language code of the change.
           class Changelog
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

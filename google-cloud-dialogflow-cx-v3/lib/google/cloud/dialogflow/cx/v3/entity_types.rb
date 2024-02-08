@@ -24,6 +24,7 @@ require "google/cloud/dialogflow/cx/v3/version"
 
 require "google/cloud/dialogflow/cx/v3/entity_types/credentials"
 require "google/cloud/dialogflow/cx/v3/entity_types/paths"
+require "google/cloud/dialogflow/cx/v3/entity_types/operations"
 require "google/cloud/dialogflow/cx/v3/entity_types/client"
 require "google/cloud/dialogflow/cx/v3/entity_types/rest"
 

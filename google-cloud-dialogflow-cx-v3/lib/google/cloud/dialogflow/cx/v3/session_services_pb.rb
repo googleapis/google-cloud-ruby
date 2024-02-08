@@ -46,6 +46,12 @@ module Google
               # See [Versions and
               # environments](https://cloud.google.com/dialogflow/cx/docs/concept/version).
               rpc :DetectIntent, ::Google::Cloud::Dialogflow::CX::V3::DetectIntentRequest, ::Google::Cloud::Dialogflow::CX::V3::DetectIntentResponse
+              # Processes a natural language query and returns structured, actionable data
+              # as a result through server-side streaming. Server-side streaming allows
+              # Dialogflow to send [partial
+              # responses](https://cloud.google.com/dialogflow/cx/docs/concept/fulfillment#partial-response)
+              # earlier in a single request.
+              rpc :ServerStreamingDetectIntent, ::Google::Cloud::Dialogflow::CX::V3::DetectIntentRequest, stream(::Google::Cloud::Dialogflow::CX::V3::DetectIntentResponse)
               # Processes a natural language query in audio format in a streaming fashion
               # and returns structured, actionable data as a result. This method is only
               # available via the gRPC API (not REST).

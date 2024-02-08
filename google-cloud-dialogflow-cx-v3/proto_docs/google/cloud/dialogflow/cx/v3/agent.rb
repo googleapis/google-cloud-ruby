@@ -92,7 +92,8 @@ module Google
           #     Immutable. Name of the start flow in this agent. A start flow will be
           #     automatically created when the agent is created, and can only be deleted by
           #     deleting the agent. Format: `projects/<Project ID>/locations/<Location
-          #     ID>/agents/<Agent ID>/flows/<Flow ID>`.
+          #     ID>/agents/<Agent ID>/flows/<Flow ID>`. Currently only the default start
+          #     flow with id "00000000-0000-0000-0000-000000000000" is allowed.
           # @!attribute [rw] security_settings
           #   @return [::String]
           #     Name of the

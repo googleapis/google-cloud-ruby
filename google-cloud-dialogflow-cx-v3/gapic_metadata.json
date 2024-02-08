@@ -229,6 +229,16 @@
               "methods": [
                 "list_entity_types"
               ]
+            },
+            "ExportEntityTypes": {
+              "methods": [
+                "export_entity_types"
+              ]
+            },
+            "ImportEntityTypes": {
+              "methods": [
+                "import_entity_types"
+              ]
             }
           }
         }
@@ -320,6 +330,11 @@
             "DetectIntent": {
               "methods": [
                 "detect_intent"
+              ]
+            },
+            "ServerStreamingDetectIntent": {
+              "methods": [
+                "server_streaming_detect_intent"
               ]
             },
             "StreamingDetectIntent": {

@@ -1412,6 +1412,86 @@
       ]
     },
     {
+      "region_tag": "dialogflow_v3_generated_EntityTypes_ExportEntityTypes_sync",
+      "title": "Snippet for the export_entity_types call in the EntityTypes service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::EntityTypes::Client#export_entity_types.",
+      "file": "entity_types/export_entity_types.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "export_entity_types",
+        "full_name": "::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Client#export_entity_types",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::CX::V3::ExportEntityTypesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "EntityTypes::Client",
+          "full_name": "::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Client"
+        },
+        "method": {
+          "short_name": "ExportEntityTypes",
+          "full_name": "google.cloud.dialogflow.cx.v3.EntityTypes.ExportEntityTypes",
+          "service": {
+            "short_name": "EntityTypes",
+            "full_name": "google.cloud.dialogflow.cx.v3.EntityTypes"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v3_generated_EntityTypes_ImportEntityTypes_sync",
+      "title": "Snippet for the import_entity_types call in the EntityTypes service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::EntityTypes::Client#import_entity_types.",
+      "file": "entity_types/import_entity_types.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "import_entity_types",
+        "full_name": "::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Client#import_entity_types",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::CX::V3::ImportEntityTypesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "EntityTypes::Client",
+          "full_name": "::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Client"
+        },
+        "method": {
+          "short_name": "ImportEntityTypes",
+          "full_name": "google.cloud.dialogflow.cx.v3.EntityTypes.ImportEntityTypes",
+          "service": {
+            "short_name": "EntityTypes",
+            "full_name": "google.cloud.dialogflow.cx.v3.EntityTypes"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "dialogflow_v3_generated_Intents_ListIntents_sync",
       "title": "Snippet for the list_intents call in the Intents service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Intents::Client#list_intents.",
@@ -1927,6 +2007,46 @@
         {
           "start": 20,
           "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v3_generated_Sessions_ServerStreamingDetectIntent_sync",
+      "title": "Snippet for the server_streaming_detect_intent call in the Sessions service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Sessions::Client#server_streaming_detect_intent.",
+      "file": "sessions/server_streaming_detect_intent.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "server_streaming_detect_intent",
+        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Sessions::Client#server_streaming_detect_intent",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::CX::V3::DetectIntentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::CX::V3::DetectIntentResponse",
+        "client": {
+          "short_name": "Sessions::Client",
+          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Sessions::Client"
+        },
+        "method": {
+          "short_name": "ServerStreamingDetectIntent",
+          "full_name": "google.cloud.dialogflow.cx.v3.Sessions.ServerStreamingDetectIntent",
+          "service": {
+            "short_name": "Sessions",
+            "full_name": "google.cloud.dialogflow.cx.v3.Sessions"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 49,
           "type": "FULL"
         }
       ]
