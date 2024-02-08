@@ -84,7 +84,7 @@ module Google
                     initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [14, 4]
                   }
 
-                  default_config.rpcs.delete_table.timeout = 60.0
+                  default_config.rpcs.delete_table.timeout = 300.0
 
                   default_config.rpcs.modify_column_families.timeout = 300.0
 
@@ -110,7 +110,7 @@ module Google
                     initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [14, 4]
                   }
 
-                  default_config.rpcs.delete_snapshot.timeout = 60.0
+                  default_config.rpcs.delete_snapshot.timeout = 300.0
 
                   default_config.rpcs.create_backup.timeout = 60.0
 
@@ -121,7 +121,7 @@ module Google
 
                   default_config.rpcs.update_backup.timeout = 60.0
 
-                  default_config.rpcs.delete_backup.timeout = 60.0
+                  default_config.rpcs.delete_backup.timeout = 300.0
 
                   default_config.rpcs.list_backups.timeout = 60.0
                   default_config.rpcs.list_backups.retry_policy = {
