@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.5.0 (2024-02-08)
+
+#### Features
+
+* Support RegionZones API ([#24780](https://github.com/googleapis/google-cloud-ruby/issues/24780)) 
+
 ### 1.4.0 (2024-01-15)
 
 #### Features
