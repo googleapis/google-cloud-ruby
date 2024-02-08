@@ -227,6 +227,7 @@ module Google
               #   @param return_partial_success [::Boolean]
               #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
               #   @param service_project_number [::Integer]
+              #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::String, ::Google::Cloud::Compute::V1::NodeTemplatesScopedList>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

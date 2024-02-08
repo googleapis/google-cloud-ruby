@@ -134,6 +134,8 @@ module Google
                     initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
+                  default_config.rpcs.perform_maintenance.timeout = 600.0
+
                   default_config.rpcs.remove_resource_policies.timeout = 600.0
 
                   default_config.rpcs.reset.timeout = 600.0
@@ -515,6 +517,7 @@ module Google
               #   @param return_partial_success [::Boolean]
               #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
               #   @param service_project_number [::Integer]
+              #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::String, ::Google::Cloud::Compute::V1::InstancesScopedList>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1910,6 +1913,99 @@ module Google
                 @instances_stub.list_referrers request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @instances_stub, :list_referrers, "items", request, result, options
                   yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Perform a manual maintenance on the instance.
+              #
+              # @overload perform_maintenance(request, options = nil)
+              #   Pass arguments to `perform_maintenance` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::PerformMaintenanceInstanceRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::PerformMaintenanceInstanceRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload perform_maintenance(instance: nil, project: nil, request_id: nil, zone: nil)
+              #   Pass arguments to `perform_maintenance` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param instance [::String]
+              #     Name of the instance scoping this request.
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param request_id [::String]
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #   @param zone [::String]
+              #     The name of the zone for this request.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::GenericLRO::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::Instances::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::PerformMaintenanceInstanceRequest.new
+              #
+              #   # Call the perform_maintenance method.
+              #   result = client.perform_maintenance request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
+              def perform_maintenance request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::PerformMaintenanceInstanceRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.perform_maintenance.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.perform_maintenance.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.perform_maintenance.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @instances_stub.perform_maintenance request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: zone_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "zone" => request.zone
+                    },
+                    options: options
+                  )
+                  yield result, response if block_given?
                   return result
                 end
               rescue ::Gapic::Rest::Error => e
@@ -3613,7 +3709,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload simulate_maintenance_event(instance: nil, project: nil, request_id: nil, zone: nil)
+              # @overload simulate_maintenance_event(instance: nil, project: nil, request_id: nil, with_extended_notifications: nil, zone: nil)
               #   Pass arguments to `simulate_maintenance_event` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -3624,6 +3720,8 @@ module Google
               #     Project ID for this request.
               #   @param request_id [::String]
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #   @param with_extended_notifications [::Boolean]
+              #     Determines whether the customers receive notifications before migration. Only applicable to SF vms.
               #   @param zone [::String]
               #     The name of the zone for this request.
               # @yield [result, operation] Access the result along with the TransportOperation object
@@ -3900,7 +3998,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param discard_local_ssd [::Boolean]
-              #     If true, discard the contents of any attached localSSD partitions. Default value is false.
+              #     This property is required if the instance has any attached Local SSD disks. If false, Local SSD data will be preserved when the instance is suspended. If true, the contents of any attached Local SSD disks will be discarded.
               #   @param instance [::String]
               #     Name of the instance resource to stop.
               #   @param project [::String]
@@ -3995,7 +4093,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param discard_local_ssd [::Boolean]
-              #     If true, discard the contents of any attached localSSD partitions. Default value is false.
+              #     This property is required if the instance has any attached Local SSD disks. If false, Local SSD data will be preserved when the instance is suspended. If true, the contents of any attached Local SSD disks will be discarded.
               #   @param instance [::String]
               #     Name of the instance resource to suspend.
               #   @param project [::String]
@@ -4864,6 +4962,11 @@ module Google
                   #
                   attr_reader :list_referrers
                   ##
+                  # RPC-specific configuration for `perform_maintenance`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :perform_maintenance
+                  ##
                   # RPC-specific configuration for `remove_resource_policies`
                   # @return [::Gapic::Config::Method]
                   #
@@ -5047,6 +5150,8 @@ module Google
                     @list = ::Gapic::Config::Method.new list_config
                     list_referrers_config = parent_rpcs.list_referrers if parent_rpcs.respond_to? :list_referrers
                     @list_referrers = ::Gapic::Config::Method.new list_referrers_config
+                    perform_maintenance_config = parent_rpcs.perform_maintenance if parent_rpcs.respond_to? :perform_maintenance
+                    @perform_maintenance = ::Gapic::Config::Method.new perform_maintenance_config
                     remove_resource_policies_config = parent_rpcs.remove_resource_policies if parent_rpcs.respond_to? :remove_resource_policies
                     @remove_resource_policies = ::Gapic::Config::Method.new remove_resource_policies_config
                     reset_config = parent_rpcs.reset if parent_rpcs.respond_to? :reset

@@ -1116,6 +1116,63 @@ class ::Google::Cloud::Compute::V1::Instances::Rest::ClientTest < Minitest::Test
     end
   end
 
+  def test_perform_maintenance
+    # Create test objects.
+    client_result = ::Google::Cloud::Compute::V1::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    instance = "hello world"
+    project = "hello world"
+    request_id = "hello world"
+    zone = "hello world"
+
+    perform_maintenance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Compute::V1::Instances::Rest::ServiceStub.stub :transcode_perform_maintenance_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, perform_maintenance_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::Instances::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.perform_maintenance({ instance: instance, project: project, request_id: request_id, zone: zone }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.perform_maintenance instance: instance, project: project, request_id: request_id, zone: zone do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.perform_maintenance ::Google::Cloud::Compute::V1::PerformMaintenanceInstanceRequest.new(instance: instance, project: project, request_id: request_id, zone: zone) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.perform_maintenance({ instance: instance, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.perform_maintenance(::Google::Cloud::Compute::V1::PerformMaintenanceInstanceRequest.new(instance: instance, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, perform_maintenance_client_stub.call_count
+      end
+    end
+  end
+
   def test_remove_resource_policies
     # Create test objects.
     client_result = ::Google::Cloud::Compute::V1::Operation.new
@@ -2167,6 +2224,7 @@ class ::Google::Cloud::Compute::V1::Instances::Rest::ClientTest < Minitest::Test
     instance = "hello world"
     project = "hello world"
     request_id = "hello world"
+    with_extended_notifications = true
     zone = "hello world"
 
     simulate_maintenance_event_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
@@ -2183,27 +2241,27 @@ class ::Google::Cloud::Compute::V1::Instances::Rest::ClientTest < Minitest::Test
         end
 
         # Use hash object
-        client.simulate_maintenance_event({ instance: instance, project: project, request_id: request_id, zone: zone }) do |_result, response|
+        client.simulate_maintenance_event({ instance: instance, project: project, request_id: request_id, with_extended_notifications: with_extended_notifications, zone: zone }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.simulate_maintenance_event instance: instance, project: project, request_id: request_id, zone: zone do |_result, response|
+        client.simulate_maintenance_event instance: instance, project: project, request_id: request_id, with_extended_notifications: with_extended_notifications, zone: zone do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.simulate_maintenance_event ::Google::Cloud::Compute::V1::SimulateMaintenanceEventInstanceRequest.new(instance: instance, project: project, request_id: request_id, zone: zone) do |_result, response|
+        client.simulate_maintenance_event ::Google::Cloud::Compute::V1::SimulateMaintenanceEventInstanceRequest.new(instance: instance, project: project, request_id: request_id, with_extended_notifications: with_extended_notifications, zone: zone) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.simulate_maintenance_event({ instance: instance, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
+        client.simulate_maintenance_event({ instance: instance, project: project, request_id: request_id, with_extended_notifications: with_extended_notifications, zone: zone }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.simulate_maintenance_event(::Google::Cloud::Compute::V1::SimulateMaintenanceEventInstanceRequest.new(instance: instance, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
+        client.simulate_maintenance_event(::Google::Cloud::Compute::V1::SimulateMaintenanceEventInstanceRequest.new(instance: instance, project: project, request_id: request_id, with_extended_notifications: with_extended_notifications, zone: zone), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
