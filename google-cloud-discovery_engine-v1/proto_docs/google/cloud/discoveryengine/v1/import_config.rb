@@ -334,6 +334,72 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
+        # Request message for
+        # {::Google::Cloud::DiscoveryEngine::V1::CompletionService::Client#import_suggestion_deny_list_entries CompletionService.ImportSuggestionDenyListEntries}
+        # method.
+        # @!attribute [rw] inline_source
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::ImportSuggestionDenyListEntriesRequest::InlineSource]
+        #     The Inline source for the input content for suggestion deny list entries.
+        # @!attribute [rw] gcs_source
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::GcsSource]
+        #     Cloud Storage location for the input content.
+        #
+        #     Only 1 file can be specified that contains all entries to import.
+        #     Supported values `gcs_source.schema` for autocomplete suggestion deny
+        #     list entry imports:
+        #
+        #     * `suggestion_deny_list` (default): One JSON [SuggestionDenyListEntry]
+        #     per line.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent data store resource name for which to import denylist
+        #     entries. Follows pattern projects/*/locations/*/collections/*/dataStores/*.
+        class ImportSuggestionDenyListEntriesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The inline source for SuggestionDenyListEntry.
+          # @!attribute [rw] entries
+          #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::SuggestionDenyListEntry>]
+          #     Required. A list of all denylist entries to import. Max of 1000 items.
+          class InlineSource
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Response message for
+        # {::Google::Cloud::DiscoveryEngine::V1::CompletionService::Client#import_suggestion_deny_list_entries CompletionService.ImportSuggestionDenyListEntries}
+        # method.
+        # @!attribute [rw] error_samples
+        #   @return [::Array<::Google::Rpc::Status>]
+        #     A sample of errors encountered while processing the request.
+        # @!attribute [rw] imported_entries_count
+        #   @return [::Integer]
+        #     Count of deny list entries successfully imported.
+        # @!attribute [rw] failed_entries_count
+        #   @return [::Integer]
+        #     Count of deny list entries that failed to be imported.
+        class ImportSuggestionDenyListEntriesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Metadata related to the progress of the ImportSuggestionDenyListEntries
+        # operation. This is returned by the google.longrunning.Operation.metadata
+        # field.
+        # @!attribute [rw] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Operation create time.
+        # @!attribute [rw] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Operation last update time. If the operation is done, this is also the
+        #     finish time.
+        class ImportSuggestionDenyListEntriesMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
       end
     end
   end

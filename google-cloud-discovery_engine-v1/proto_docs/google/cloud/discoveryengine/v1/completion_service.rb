@@ -35,8 +35,9 @@ module Google
         #     128 characters.
         # @!attribute [rw] query_model
         #   @return [::String]
-        #     Selects data model of query suggestions for serving. Currently supported
-        #     values:
+        #     Specifies the autocomplete data model. This overrides any model specified
+        #     in the Configuration > Autocomplete section of the Cloud console. Currently
+        #     supported values:
         #
         #     * `document` - Using suggestions generated from user-imported documents.
         #     * `search-history` - Using suggestions generated from the past history of
@@ -50,8 +51,7 @@ module Google
         #     Default values:
         #
         #     * `document` is the default model for regular dataStores.
-        #     * `search-history` is the default model for
-        #     [IndustryVertical.SITE_SEARCH][] dataStores.
+        #     * `search-history` is the default model for site search dataStores.
         # @!attribute [rw] user_pseudo_id
         #   @return [::String]
         #     A unique identifier for tracking visitors. For example, this could be
@@ -100,6 +100,12 @@ module Google
           # @!attribute [rw] suggestion
           #   @return [::String]
           #     The suggestion for the query.
+          # @!attribute [rw] completable_field_paths
+          #   @return [::Array<::String>]
+          #     The unique document field paths that serve as the source of this
+          #     suggestion if it was generated from completable fields.
+          #
+          #     This field is only populated for the document-completable model.
           class QuerySuggestion
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

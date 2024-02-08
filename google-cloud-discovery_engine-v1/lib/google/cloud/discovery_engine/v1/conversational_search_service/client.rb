@@ -193,7 +193,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload converse_conversation(name: nil, query: nil, serving_config: nil, conversation: nil, safe_search: nil, user_labels: nil, summary_spec: nil)
+            # @overload converse_conversation(name: nil, query: nil, serving_config: nil, conversation: nil, safe_search: nil, user_labels: nil, summary_spec: nil, filter: nil)
             #   Pass arguments to `converse_conversation` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -237,6 +237,23 @@ module Google
             #     for more details.
             #   @param summary_spec [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::ContentSearchSpec::SummarySpec, ::Hash]
             #     A specification for configuring the summary returned in the response.
+            #   @param filter [::String]
+            #     The filter syntax consists of an expression language for constructing a
+            #     predicate from one or more fields of the documents being filtered. Filter
+            #     expression is case-sensitive. This will be used to filter search results
+            #     which may affect the summary response.
+            #
+            #     If this field is unrecognizable, an  `INVALID_ARGUMENT`  is returned.
+            #
+            #     Filtering in Vertex AI Search is done by mapping the LHS filter key to a
+            #     key property defined in the Vertex AI Search backend -- this mapping is
+            #     defined by the customer in their schema. For example a media customer might
+            #     have a field 'name' in their schema. In this case the filter would look
+            #     like this: filter --> name:'ANY("king kong")'
+            #
+            #     For more information about filtering including syntax and filter
+            #     operators, see
+            #     [Filter](https://cloud.google.com/generative-ai-app-builder/docs/filter-search-metadata)
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DiscoveryEngine::V1::ConverseConversationResponse]
@@ -512,7 +529,7 @@ module Google
             #     {::Google::Cloud::DiscoveryEngine::V1::Conversation Conversation} to update. The
             #     following are NOT supported:
             #
-            #     * [conversation.name][]
+            #     * {::Google::Cloud::DiscoveryEngine::V1::Conversation#name Conversation.name}
             #
             #     If not set or empty, all supported fields are updated.
             #
@@ -668,7 +685,7 @@ module Google
 
             ##
             # Lists all Conversations by their parent
-            # [DataStore][google.cloud.discoveryengine.v1.DataStore].
+            # {::Google::Cloud::DiscoveryEngine::V1::DataStore DataStore}.
             #
             # @overload list_conversations(request, options = nil)
             #   Pass arguments to `list_conversations` via a request object, either of type

@@ -27,6 +27,8 @@ module Google
         # @!attribute [rw] serving_config
         #   @return [::String]
         #     Required. The resource name of the Search serving config, such as
+        #     `projects/*/locations/global/collections/default_collection/engines/*/servingConfigs/default_serving_config`,
+        #     or
         #     `projects/*/locations/global/collections/default_collection/dataStores/default_data_store/servingConfigs/default_serving_config`.
         #     This field is used to identify the serving configuration name, set
         #     of models used to make the search.
@@ -77,12 +79,37 @@ module Google
         #     expression is case-sensitive.
         #
         #     If this field is unrecognizable, an  `INVALID_ARGUMENT`  is returned.
+        #
+        #     Filtering in Vertex AI Search is done by mapping the LHS filter key to a
+        #     key property defined in the Vertex AI Search backend -- this mapping is
+        #     defined by the customer in their schema. For example a media customer might
+        #     have a field 'name' in their schema. In this case the filter would look
+        #     like this: filter --> name:'ANY("king kong")'
+        #
+        #     For more information about filtering including syntax and filter
+        #     operators, see
+        #     [Filter](https://cloud.google.com/generative-ai-app-builder/docs/filter-search-metadata)
+        # @!attribute [rw] canonical_filter
+        #   @return [::String]
+        #     The default filter that is applied when a user performs a search without
+        #     checking any filters on the search page.
+        #
+        #     The filter applied to every search request when quality improvement such as
+        #     query expansion is needed. In the case a query does not have a sufficient
+        #     amount of results this filter will be used to determine whether or not to
+        #     enable the query expansion flow. The original filter will still be used for
+        #     the query expanded search.
+        #     This field is strongly recommended to achieve high search quality.
+        #
+        #     For more information about filter syntax, see
+        #     {::Google::Cloud::DiscoveryEngine::V1::SearchRequest#filter SearchRequest.filter}.
         # @!attribute [rw] order_by
         #   @return [::String]
         #     The order in which documents are returned. Documents can be ordered by
         #     a field in an {::Google::Cloud::DiscoveryEngine::V1::Document Document} object.
         #     Leave it unset if ordered by relevance. `order_by` expression is
-        #     case-sensitive.
+        #     case-sensitive. For more information on ordering, see
+        #     [Ordering](https://cloud.google.com/retail/docs/filter-and-order#order)
         #
         #     If this field is unrecognizable, an `INVALID_ARGUMENT` is returned.
         # @!attribute [rw] user_info
@@ -100,6 +127,8 @@ module Google
         # @!attribute [rw] boost_spec
         #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::BoostSpec]
         #     Boost specification to boost certain documents.
+        #     For more information on boosting, see
+        #     [Boosting](https://cloud.google.com/retail/docs/boosting#boost)
         # @!attribute [rw] params
         #   @return [::Google::Protobuf::Map{::String => ::Google::Protobuf::Value}]
         #     Additional search parameters.
@@ -108,9 +137,17 @@ module Google
         #
         #     * `user_country_code`: string. Default empty. If set to non-empty, results
         #        are restricted or boosted based on the location provided.
+        #        Example:
+        #        user_country_code: "au"
+        #
+        #        For available codes see [Country
+        #        Codes](https://developers.google.com/custom-search/docs/json_api_reference#countryCodes)
+        #
         #     * `search_type`: double. Default empty. Enables non-webpage searching
-        #       depending on the value. The only valid non-default value is 1,
-        #       which enables image searching.
+        #        depending on the value. The only valid non-default value is 1,
+        #        which enables image searching.
+        #        Example:
+        #        search_type: 1
         # @!attribute [rw] query_expansion_spec
         #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::QueryExpansionSpec]
         #     The query expansion specification that specifies the conditions under which
@@ -511,13 +548,50 @@ module Google
             #     navigational queries. If this field is set to `true`, we skip
             #     generating summaries for non-summary seeking queries and return
             #     fallback messages instead.
+            # @!attribute [rw] model_prompt_spec
+            #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::ContentSearchSpec::SummarySpec::ModelPromptSpec]
+            #     If specified, the spec will be used to modify the prompt provided to
+            #     the LLM.
             # @!attribute [rw] language_code
             #   @return [::String]
             #     Language code for Summary. Use language tags defined by
-            #     [BCP47][https://www.rfc-editor.org/rfc/bcp/bcp47.txt].
+            #     [BCP47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt).
+            #     Note: This is an experimental feature.
+            # @!attribute [rw] model_spec
+            #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::ContentSearchSpec::SummarySpec::ModelSpec]
+            #     If specified, the spec will be used to modify the model specification
+            #     provided to the LLM.
             class SummarySpec
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Specification of the prompt to use with the model.
+              # @!attribute [rw] preamble
+              #   @return [::String]
+              #     Text at the beginning of the prompt that instructs the assistant.
+              #     Examples are available in the user guide.
+              class ModelPromptSpec
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
+              # Specification of the model.
+              # @!attribute [rw] version
+              #   @return [::String]
+              #     The model version used to generate the summary.
+              #
+              #     Supported values are:
+              #
+              #     * `stable`: string. Default value when no value is specified. Uses a
+              #       generally available, fine-tuned version of the text-bison@001
+              #       model.
+              #     * `preview`: string. (Public preview) Uses a fine-tuned version of
+              #       the text-bison@002 model. This model works only for summaries in
+              #       English.
+              class ModelSpec
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
             end
           end
 
@@ -653,6 +727,9 @@ module Google
           #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchResponse::Summary::SafetyAttributes]
           #     A collection of Safety Attribute categories and their associated
           #     confidence scores.
+          # @!attribute [rw] summary_with_metadata
+          #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchResponse::Summary::SummaryWithMetadata]
+          #     Summary with metadata information.
           class Summary
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -667,6 +744,74 @@ module Google
             #     The confidence scores of the each category, higher
             #     value means higher confidence. Order matches the Categories.
             class SafetyAttributes
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Citation metadata.
+            # @!attribute [rw] citations
+            #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::SearchResponse::Summary::Citation>]
+            #     Citations for segments.
+            class CitationMetadata
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Citation info for a segment.
+            # @!attribute [rw] start_index
+            #   @return [::Integer]
+            #     Index indicates the start of the segment, measured in bytes/unicode.
+            # @!attribute [rw] end_index
+            #   @return [::Integer]
+            #     End of the attributed segment, exclusive.
+            # @!attribute [rw] sources
+            #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::SearchResponse::Summary::CitationSource>]
+            #     Citation sources for the attributed segment.
+            class Citation
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Citation source.
+            # @!attribute [rw] reference_index
+            #   @return [::Integer]
+            #     Document reference index from SummaryWithMetadata.references.
+            #     It is 0-indexed and the value will be zero if the reference_index is
+            #     not set explicitly.
+            class CitationSource
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Document reference.
+            # @!attribute [rw] title
+            #   @return [::String]
+            #     Title of the document.
+            # @!attribute [rw] document
+            #   @return [::String]
+            #     Required.
+            #     {::Google::Cloud::DiscoveryEngine::V1::Document#name Document.name} of the
+            #     document. Full resource name of the referenced document, in the format
+            #     `projects/*/locations/*/collections/*/dataStores/*/branches/*/documents/*`.
+            # @!attribute [rw] uri
+            #   @return [::String]
+            #     Cloud Storage or HTTP uri for the document.
+            class Reference
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Summary with metadata information.
+            # @!attribute [rw] summary
+            #   @return [::String]
+            #     Summary text with no citation information.
+            # @!attribute [rw] citation_metadata
+            #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchResponse::Summary::CitationMetadata]
+            #     Citation metadata for given summary.
+            # @!attribute [rw] references
+            #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::SearchResponse::Summary::Reference>]
+            #     Document References.
+            class SummaryWithMetadata
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end

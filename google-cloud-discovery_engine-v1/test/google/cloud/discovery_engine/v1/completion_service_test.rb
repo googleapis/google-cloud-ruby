@@ -121,6 +121,135 @@ class ::Google::Cloud::DiscoveryEngine::V1::CompletionService::ClientTest < Mini
     end
   end
 
+  def test_import_suggestion_deny_list_entries
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    inline_source = {}
+    parent = "hello world"
+
+    import_suggestion_deny_list_entries_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :import_suggestion_deny_list_entries, name
+      assert_kind_of ::Google::Cloud::DiscoveryEngine::V1::ImportSuggestionDenyListEntriesRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DiscoveryEngine::V1::ImportSuggestionDenyListEntriesRequest::InlineSource), request["inline_source"]
+      assert_equal :inline_source, request.source
+      assert_equal "hello world", request["parent"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, import_suggestion_deny_list_entries_client_stub do
+      # Create client
+      client = ::Google::Cloud::DiscoveryEngine::V1::CompletionService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.import_suggestion_deny_list_entries({ inline_source: inline_source, parent: parent }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.import_suggestion_deny_list_entries inline_source: inline_source, parent: parent do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.import_suggestion_deny_list_entries ::Google::Cloud::DiscoveryEngine::V1::ImportSuggestionDenyListEntriesRequest.new(inline_source: inline_source, parent: parent) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.import_suggestion_deny_list_entries({ inline_source: inline_source, parent: parent }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.import_suggestion_deny_list_entries(::Google::Cloud::DiscoveryEngine::V1::ImportSuggestionDenyListEntriesRequest.new(inline_source: inline_source, parent: parent), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, import_suggestion_deny_list_entries_client_stub.call_rpc_count
+    end
+  end
+
+  def test_purge_suggestion_deny_list_entries
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+
+    purge_suggestion_deny_list_entries_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :purge_suggestion_deny_list_entries, name
+      assert_kind_of ::Google::Cloud::DiscoveryEngine::V1::PurgeSuggestionDenyListEntriesRequest, request
+      assert_equal "hello world", request["parent"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, purge_suggestion_deny_list_entries_client_stub do
+      # Create client
+      client = ::Google::Cloud::DiscoveryEngine::V1::CompletionService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.purge_suggestion_deny_list_entries({ parent: parent }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.purge_suggestion_deny_list_entries parent: parent do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.purge_suggestion_deny_list_entries ::Google::Cloud::DiscoveryEngine::V1::PurgeSuggestionDenyListEntriesRequest.new(parent: parent) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.purge_suggestion_deny_list_entries({ parent: parent }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.purge_suggestion_deny_list_entries(::Google::Cloud::DiscoveryEngine::V1::PurgeSuggestionDenyListEntriesRequest.new(parent: parent), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, purge_suggestion_deny_list_entries_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
@@ -138,5 +267,19 @@ class ::Google::Cloud::DiscoveryEngine::V1::CompletionService::ClientTest < Mini
 
     assert_same block_config, config
     assert_kind_of ::Google::Cloud::DiscoveryEngine::V1::CompletionService::Client::Configuration, config
+  end
+
+  def test_operations_client
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+
+    client = nil
+    dummy_stub = ClientStub.new nil, nil
+    Gapic::ServiceStub.stub :new, dummy_stub do
+      client = ::Google::Cloud::DiscoveryEngine::V1::CompletionService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+    end
+
+    assert_kind_of ::Google::Cloud::DiscoveryEngine::V1::CompletionService::Operations, client.operations_client
   end
 end

@@ -35,6 +35,14 @@ module Google
 
             # Completes the specified user input with keyword suggestions.
             rpc :CompleteQuery, ::Google::Cloud::DiscoveryEngine::V1::CompleteQueryRequest, ::Google::Cloud::DiscoveryEngine::V1::CompleteQueryResponse
+            # Imports all
+            # [SuggestionDenyListEntry][google.cloud.discoveryengine.v1.SuggestionDenyListEntry]
+            # for a DataStore.
+            rpc :ImportSuggestionDenyListEntries, ::Google::Cloud::DiscoveryEngine::V1::ImportSuggestionDenyListEntriesRequest, ::Google::Longrunning::Operation
+            # Permanently deletes all
+            # [SuggestionDenyListEntry][google.cloud.discoveryengine.v1.SuggestionDenyListEntry]
+            # for a DataStore.
+            rpc :PurgeSuggestionDenyListEntries, ::Google::Cloud::DiscoveryEngine::V1::PurgeSuggestionDenyListEntriesRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class
