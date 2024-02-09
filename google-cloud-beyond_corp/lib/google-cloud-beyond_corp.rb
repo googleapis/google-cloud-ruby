@@ -20,4 +20,3 @@ require "google/cloud/beyond_corp" unless defined? Google::Cloud::BeyondCorp::VE
 require "google/cloud/beyond_corp/app_connectors" unless defined? Google::Cloud::BeyondCorp::AppConnectors::VERSION
 require "google/cloud/beyond_corp/app_gateways" unless defined? Google::Cloud::BeyondCorp::AppGateways::VERSION
 require "google/cloud/beyond_corp/client_gateways" unless defined? Google::Cloud::BeyondCorp::ClientGateways::VERSION
-
