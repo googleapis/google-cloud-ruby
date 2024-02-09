@@ -7,15 +7,20 @@ require 'google/protobuf'
 require 'google/api/field_behavior_pb'
 require 'google/monitoring/dashboard/v1/alertchart_pb'
 require 'google/monitoring/dashboard/v1/collapsible_group_pb'
+require 'google/monitoring/dashboard/v1/error_reporting_panel_pb'
+require 'google/monitoring/dashboard/v1/incident_list_pb'
 require 'google/monitoring/dashboard/v1/logs_panel_pb'
+require 'google/monitoring/dashboard/v1/piechart_pb'
 require 'google/monitoring/dashboard/v1/scorecard_pb'
+require 'google/monitoring/dashboard/v1/section_header_pb'
+require 'google/monitoring/dashboard/v1/single_view_group_pb'
 require 'google/monitoring/dashboard/v1/table_pb'
 require 'google/monitoring/dashboard/v1/text_pb'
 require 'google/monitoring/dashboard/v1/xychart_pb'
 require 'google/protobuf/empty_pb'
 
 
-descriptor_data = "\n+google/monitoring/dashboard/v1/widget.proto\x12\x1egoogle.monitoring.dashboard.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a/google/monitoring/dashboard/v1/alertchart.proto\x1a\x36google/monitoring/dashboard/v1/collapsible_group.proto\x1a/google/monitoring/dashboard/v1/logs_panel.proto\x1a.google/monitoring/dashboard/v1/scorecard.proto\x1a*google/monitoring/dashboard/v1/table.proto\x1a)google/monitoring/dashboard/v1/text.proto\x1a,google/monitoring/dashboard/v1/xychart.proto\x1a\x1bgoogle/protobuf/empty.proto\"\xa4\x04\n\x06Widget\x12\x12\n\x05title\x18\x01 \x01(\tB\x03\xe0\x41\x01\x12;\n\x08xy_chart\x18\x02 \x01(\x0b\x32\'.google.monitoring.dashboard.v1.XyChartH\x00\x12>\n\tscorecard\x18\x03 \x01(\x0b\x32).google.monitoring.dashboard.v1.ScorecardH\x00\x12\x34\n\x04text\x18\x04 \x01(\x0b\x32$.google.monitoring.dashboard.v1.TextH\x00\x12\'\n\x05\x62lank\x18\x05 \x01(\x0b\x32\x16.google.protobuf.EmptyH\x00\x12\x41\n\x0b\x61lert_chart\x18\x07 \x01(\x0b\x32*.google.monitoring.dashboard.v1.AlertChartH\x00\x12L\n\x11time_series_table\x18\x08 \x01(\x0b\x32/.google.monitoring.dashboard.v1.TimeSeriesTableH\x00\x12M\n\x11\x63ollapsible_group\x18\t \x01(\x0b\x32\x30.google.monitoring.dashboard.v1.CollapsibleGroupH\x00\x12?\n\nlogs_panel\x18\n \x01(\x0b\x32).google.monitoring.dashboard.v1.LogsPanelH\x00\x42\t\n\x07\x63ontentB\xf4\x01\n\"com.google.monitoring.dashboard.v1B\x0bWidgetProtoP\x01ZFcloud.google.com/go/monitoring/dashboard/apiv1/dashboardpb;dashboardpb\xaa\x02$Google.Cloud.Monitoring.Dashboard.V1\xca\x02$Google\\Cloud\\Monitoring\\Dashboard\\V1\xea\x02(Google::Cloud::Monitoring::Dashboard::V1b\x06proto3"
+descriptor_data = "\n+google/monitoring/dashboard/v1/widget.proto\x12\x1egoogle.monitoring.dashboard.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a/google/monitoring/dashboard/v1/alertchart.proto\x1a\x36google/monitoring/dashboard/v1/collapsible_group.proto\x1a:google/monitoring/dashboard/v1/error_reporting_panel.proto\x1a\x32google/monitoring/dashboard/v1/incident_list.proto\x1a/google/monitoring/dashboard/v1/logs_panel.proto\x1a-google/monitoring/dashboard/v1/piechart.proto\x1a.google/monitoring/dashboard/v1/scorecard.proto\x1a\x33google/monitoring/dashboard/v1/section_header.proto\x1a\x36google/monitoring/dashboard/v1/single_view_group.proto\x1a*google/monitoring/dashboard/v1/table.proto\x1a)google/monitoring/dashboard/v1/text.proto\x1a,google/monitoring/dashboard/v1/xychart.proto\x1a\x1bgoogle/protobuf/empty.proto\"\xa8\x07\n\x06Widget\x12\x12\n\x05title\x18\x01 \x01(\tB\x03\xe0\x41\x01\x12;\n\x08xy_chart\x18\x02 \x01(\x0b\x32\'.google.monitoring.dashboard.v1.XyChartH\x00\x12>\n\tscorecard\x18\x03 \x01(\x0b\x32).google.monitoring.dashboard.v1.ScorecardH\x00\x12\x34\n\x04text\x18\x04 \x01(\x0b\x32$.google.monitoring.dashboard.v1.TextH\x00\x12\'\n\x05\x62lank\x18\x05 \x01(\x0b\x32\x16.google.protobuf.EmptyH\x00\x12\x41\n\x0b\x61lert_chart\x18\x07 \x01(\x0b\x32*.google.monitoring.dashboard.v1.AlertChartH\x00\x12L\n\x11time_series_table\x18\x08 \x01(\x0b\x32/.google.monitoring.dashboard.v1.TimeSeriesTableH\x00\x12M\n\x11\x63ollapsible_group\x18\t \x01(\x0b\x32\x30.google.monitoring.dashboard.v1.CollapsibleGroupH\x00\x12?\n\nlogs_panel\x18\n \x01(\x0b\x32).google.monitoring.dashboard.v1.LogsPanelH\x00\x12\x45\n\rincident_list\x18\x0c \x01(\x0b\x32,.google.monitoring.dashboard.v1.IncidentListH\x00\x12=\n\tpie_chart\x18\x0e \x01(\x0b\x32(.google.monitoring.dashboard.v1.PieChartH\x00\x12T\n\x15\x65rror_reporting_panel\x18\x13 \x01(\x0b\x32\x33.google.monitoring.dashboard.v1.ErrorReportingPanelH\x00\x12G\n\x0esection_header\x18\x15 \x01(\x0b\x32-.google.monitoring.dashboard.v1.SectionHeaderH\x00\x12L\n\x11single_view_group\x18\x16 \x01(\x0b\x32/.google.monitoring.dashboard.v1.SingleViewGroupH\x00\x12\x0f\n\x02id\x18\x11 \x01(\tB\x03\xe0\x41\x01\x42\t\n\x07\x63ontentB\xf4\x01\n\"com.google.monitoring.dashboard.v1B\x0bWidgetProtoP\x01ZFcloud.google.com/go/monitoring/dashboard/apiv1/dashboardpb;dashboardpb\xaa\x02$Google.Cloud.Monitoring.Dashboard.V1\xca\x02$Google\\Cloud\\Monitoring\\Dashboard\\V1\xea\x02(Google::Cloud::Monitoring::Dashboard::V1b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
@@ -38,6 +43,11 @@ rescue TypeError
     ["google.monitoring.dashboard.v1.TimeSeriesTable", "google/monitoring/dashboard/v1/table.proto"],
     ["google.monitoring.dashboard.v1.CollapsibleGroup", "google/monitoring/dashboard/v1/collapsible_group.proto"],
     ["google.monitoring.dashboard.v1.LogsPanel", "google/monitoring/dashboard/v1/logs_panel.proto"],
+    ["google.monitoring.dashboard.v1.IncidentList", "google/monitoring/dashboard/v1/incident_list.proto"],
+    ["google.monitoring.dashboard.v1.PieChart", "google/monitoring/dashboard/v1/piechart.proto"],
+    ["google.monitoring.dashboard.v1.ErrorReportingPanel", "google/monitoring/dashboard/v1/error_reporting_panel.proto"],
+    ["google.monitoring.dashboard.v1.SectionHeader", "google/monitoring/dashboard/v1/section_header.proto"],
+    ["google.monitoring.dashboard.v1.SingleViewGroup", "google/monitoring/dashboard/v1/single_view_group.proto"],
   ]
   imports.each do |type_name, expected_filename|
     import_file = pool.lookup(type_name).file_descriptor

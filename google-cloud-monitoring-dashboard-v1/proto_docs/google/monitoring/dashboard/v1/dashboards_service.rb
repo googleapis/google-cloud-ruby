@@ -54,9 +54,10 @@ module Google
           #     If unspecified, a default of 1000 is used.
           # @!attribute [rw] page_token
           #   @return [::String]
-          #     If this field is not empty then it must contain the `nextPageToken` value
-          #     returned by a previous call to this method.  Using this field causes the
-          #     method to return additional results from the previous method call.
+          #     Optional. If this field is not empty then it must contain the
+          #     `nextPageToken` value returned by a previous call to this method.  Using
+          #     this field causes the method to return additional results from the previous
+          #     method call.
           class ListDashboardsRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

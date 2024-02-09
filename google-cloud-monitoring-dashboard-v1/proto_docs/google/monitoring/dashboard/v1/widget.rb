@@ -52,6 +52,26 @@ module Google
           # @!attribute [rw] logs_panel
           #   @return [::Google::Cloud::Monitoring::Dashboard::V1::LogsPanel]
           #     A widget that shows a stream of logs.
+          # @!attribute [rw] incident_list
+          #   @return [::Google::Cloud::Monitoring::Dashboard::V1::IncidentList]
+          #     A widget that shows list of incidents.
+          # @!attribute [rw] pie_chart
+          #   @return [::Google::Cloud::Monitoring::Dashboard::V1::PieChart]
+          #     A widget that displays timeseries data as a pie chart.
+          # @!attribute [rw] error_reporting_panel
+          #   @return [::Google::Monitoring::Dashboard::V1::ErrorReportingPanel]
+          #     A widget that displays a list of error groups.
+          # @!attribute [rw] section_header
+          #   @return [::Google::Cloud::Monitoring::Dashboard::V1::SectionHeader]
+          #     A widget that defines a section header for easier navigation of the
+          #     dashboard.
+          # @!attribute [rw] single_view_group
+          #   @return [::Google::Cloud::Monitoring::Dashboard::V1::SingleViewGroup]
+          #     A widget that groups the other widgets by using a dropdown menu.
+          # @!attribute [rw] id
+          #   @return [::String]
+          #     Optional. The widget id. Ids may be made up of alphanumerics, dashes and
+          #     underscores. Widget ids are optional.
           class Widget
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

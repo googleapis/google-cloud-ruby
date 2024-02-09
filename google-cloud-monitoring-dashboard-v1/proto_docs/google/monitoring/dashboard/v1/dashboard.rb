@@ -26,7 +26,7 @@ module Google
           # of pages in the Stackdriver web application.
           # @!attribute [rw] name
           #   @return [::String]
-          #     Immutable. The resource name of the dashboard.
+          #     Identifier. The resource name of the dashboard.
           # @!attribute [rw] display_name
           #   @return [::String]
           #     Required. The mutable, human-readable name.

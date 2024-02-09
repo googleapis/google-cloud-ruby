@@ -34,6 +34,10 @@ module Google
           # @!attribute [rw] spark_chart_view
           #   @return [::Google::Cloud::Monitoring::Dashboard::V1::Scorecard::SparkChartView]
           #     Will cause the scorecard to show a spark chart.
+          # @!attribute [rw] blank_view
+          #   @return [::Google::Protobuf::Empty]
+          #     Will cause the `Scorecard` to show only the value, with no indicator to
+          #     its value relative to its thresholds.
           # @!attribute [rw] thresholds
           #   @return [::Array<::Google::Cloud::Monitoring::Dashboard::V1::Threshold>]
           #     The thresholds used to determine the state of the scorecard given the

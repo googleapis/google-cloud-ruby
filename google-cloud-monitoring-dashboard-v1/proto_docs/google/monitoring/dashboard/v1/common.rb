@@ -389,6 +389,9 @@ module Google
           # @!attribute [rw] direction
           #   @return [::Google::Cloud::Monitoring::Dashboard::V1::PickTimeSeriesFilter::Direction]
           #     How to use the ranking to select time series that pass through the filter.
+          # @!attribute [rw] interval
+          #   @return [::Google::Type::Interval]
+          #     Select the top N streams/time series within this time interval
           class PickTimeSeriesFilter
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

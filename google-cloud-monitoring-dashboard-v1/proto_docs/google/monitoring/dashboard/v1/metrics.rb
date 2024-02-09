@@ -43,6 +43,15 @@ module Google
           #     the same as the
           #     [`unit`](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.metricDescriptors)
           #     field in `MetricDescriptor`.
+          # @!attribute [rw] output_full_duration
+          #   @return [::Boolean]
+          #     Optional. If set, Cloud Monitoring will treat the full query duration as
+          #     the alignment period so that there will be only 1 output value.
+          #
+          #     *Note: This could override the configured alignment period except for
+          #     the cases where a series of data points are expected, like
+          #       - XyChart
+          #       - Scorecard's spark chart
           class TimeSeriesQuery
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
