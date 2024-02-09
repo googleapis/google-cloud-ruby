@@ -101,6 +101,15 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Defines embedding config, used for bring your own embeddings feature.
+        # @!attribute [rw] field_path
+        #   @return [::String]
+        #     Full field path in the schema mapped as embedding field.
+        class EmbeddingConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Double list.
         # @!attribute [rw] values
         #   @return [::Array<::Float>]
@@ -108,6 +117,57 @@ module Google
         class DoubleList
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The industry vertical associated with the
+        # {::Google::Cloud::DiscoveryEngine::V1beta::DataStore DataStore}.
+        module IndustryVertical
+          # Value used when unset.
+          INDUSTRY_VERTICAL_UNSPECIFIED = 0
+
+          # The generic vertical for documents that are not specific to any industry
+          # vertical.
+          GENERIC = 1
+
+          # The media industry vertical.
+          MEDIA = 2
+        end
+
+        # The type of solution.
+        module SolutionType
+          # Default value.
+          SOLUTION_TYPE_UNSPECIFIED = 0
+
+          # Used for Recommendations AI.
+          SOLUTION_TYPE_RECOMMENDATION = 1
+
+          # Used for Discovery Search.
+          SOLUTION_TYPE_SEARCH = 2
+
+          # Used for use cases related to the Generative AI agent.
+          SOLUTION_TYPE_CHAT = 3
+        end
+
+        # Tiers of search features. Different tiers might have different
+        # pricing. To learn more, please check the pricing documentation.
+        module SearchTier
+          # Default value when the enum is unspecified. This is invalid to use.
+          SEARCH_TIER_UNSPECIFIED = 0
+
+          # Standard tier.
+          SEARCH_TIER_STANDARD = 1
+
+          # Enterprise tier.
+          SEARCH_TIER_ENTERPRISE = 2
+        end
+
+        # Add-on that provides additional functionality for search.
+        module SearchAddOn
+          # Default value when the enum is unspecified. This is invalid to use.
+          SEARCH_ADD_ON_UNSPECIFIED = 0
+
+          # Large language model add-on.
+          SEARCH_ADD_ON_LLM = 1
         end
       end
     end

@@ -186,13 +186,15 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload search(serving_config: nil, branch: nil, query: nil, image_query: nil, page_size: nil, page_token: nil, offset: nil, filter: nil, order_by: nil, user_info: nil, facet_specs: nil, boost_spec: nil, params: nil, query_expansion_spec: nil, spell_correction_spec: nil, user_pseudo_id: nil, content_search_spec: nil, embedding_spec: nil, ranking_expression: nil, safe_search: nil, user_labels: nil)
+              # @overload search(serving_config: nil, branch: nil, query: nil, image_query: nil, page_size: nil, page_token: nil, offset: nil, filter: nil, canonical_filter: nil, order_by: nil, user_info: nil, facet_specs: nil, boost_spec: nil, params: nil, query_expansion_spec: nil, spell_correction_spec: nil, user_pseudo_id: nil, content_search_spec: nil, embedding_spec: nil, ranking_expression: nil, safe_search: nil, user_labels: nil)
               #   Pass arguments to `search` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param serving_config [::String]
               #     Required. The resource name of the Search serving config, such as
+              #     `projects/*/locations/global/collections/default_collection/engines/*/servingConfigs/default_serving_config`,
+              #     or
               #     `projects/*/locations/global/collections/default_collection/dataStores/default_data_store/servingConfigs/default_serving_config`.
               #     This field is used to identify the serving configuration name, set
               #     of models used to make the search.
@@ -236,11 +238,35 @@ module Google
               #     expression is case-sensitive.
               #
               #     If this field is unrecognizable, an  `INVALID_ARGUMENT`  is returned.
+              #
+              #     Filtering in Vertex AI Search is done by mapping the LHS filter key to a
+              #     key property defined in the Vertex AI Search backend -- this mapping is
+              #     defined by the customer in their schema. For example a media customer might
+              #     have a field 'name' in their schema. In this case the filter would look
+              #     like this: filter --> name:'ANY("king kong")'
+              #
+              #     For more information about filtering including syntax and filter
+              #     operators, see
+              #     [Filter](https://cloud.google.com/generative-ai-app-builder/docs/filter-search-metadata)
+              #   @param canonical_filter [::String]
+              #     The default filter that is applied when a user performs a search without
+              #     checking any filters on the search page.
+              #
+              #     The filter applied to every search request when quality improvement such as
+              #     query expansion is needed. In the case a query does not have a sufficient
+              #     amount of results this filter will be used to determine whether or not to
+              #     enable the query expansion flow. The original filter will still be used for
+              #     the query expanded search.
+              #     This field is strongly recommended to achieve high search quality.
+              #
+              #     For more information about filter syntax, see
+              #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest#filter SearchRequest.filter}.
               #   @param order_by [::String]
               #     The order in which documents are returned. Documents can be ordered by
               #     a field in an {::Google::Cloud::DiscoveryEngine::V1beta::Document Document}
               #     object. Leave it unset if ordered by relevance. `order_by` expression is
-              #     case-sensitive.
+              #     case-sensitive. For more information on ordering, see
+              #     [Ordering](https://cloud.google.com/retail/docs/filter-and-order#order)
               #
               #     If this field is unrecognizable, an `INVALID_ARGUMENT` is returned.
               #   @param user_info [::Google::Cloud::DiscoveryEngine::V1beta::UserInfo, ::Hash]
@@ -255,6 +281,8 @@ module Google
               #     error is returned.
               #   @param boost_spec [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::BoostSpec, ::Hash]
               #     Boost specification to boost certain documents.
+              #     For more information on boosting, see
+              #     [Boosting](https://cloud.google.com/retail/docs/boosting#boost)
               #   @param params [::Hash{::String => ::Google::Protobuf::Value, ::Hash}]
               #     Additional search parameters.
               #
@@ -262,9 +290,17 @@ module Google
               #
               #     * `user_country_code`: string. Default empty. If set to non-empty, results
               #        are restricted or boosted based on the location provided.
+              #        Example:
+              #        user_country_code: "au"
+              #
+              #        For available codes see [Country
+              #        Codes](https://developers.google.com/custom-search/docs/json_api_reference#countryCodes)
+              #
               #     * `search_type`: double. Default empty. Enables non-webpage searching
-              #       depending on the value. The only valid non-default value is 1,
-              #       which enables image searching.
+              #        depending on the value. The only valid non-default value is 1,
+              #        which enables image searching.
+              #        Example:
+              #        search_type: 1
               #   @param query_expansion_spec [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::QueryExpansionSpec, ::Hash]
               #     The query expansion specification that specifies the conditions under which
               #     query expansion occurs.
@@ -291,15 +327,17 @@ module Google
               #   @param embedding_spec [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::EmbeddingSpec, ::Hash]
               #     Uses the provided embedding to do additional semantic document retrieval.
               #     The retrieval is based on the dot product of
-              #     [SearchRequest.embedding_spec.embedding_vectors.vector][] and the document
-              #     embedding that is provided in
-              #     [SearchRequest.embedding_spec.embedding_vectors.field_path][].
+              #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::EmbeddingSpec::EmbeddingVector#vector SearchRequest.EmbeddingSpec.EmbeddingVector.vector}
+              #     and the document embedding that is provided in
+              #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::EmbeddingSpec::EmbeddingVector#field_path SearchRequest.EmbeddingSpec.EmbeddingVector.field_path}.
               #
-              #     If [SearchRequest.embedding_spec.embedding_vectors.field_path][] is not
-              #     provided, it will use [ServingConfig.embedding_config.field_paths][].
+              #     If
+              #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::EmbeddingSpec::EmbeddingVector#field_path SearchRequest.EmbeddingSpec.EmbeddingVector.field_path}
+              #     is not provided, it will use [ServingConfig.EmbeddingConfig.field_path][].
               #   @param ranking_expression [::String]
               #     The ranking expression controls the customized ranking on retrieval
-              #     documents. This overrides [ServingConfig.ranking_expression][].
+              #     documents. This overrides
+              #     {::Google::Cloud::DiscoveryEngine::V1beta::ServingConfig#ranking_expression ServingConfig.ranking_expression}.
               #     The ranking expression is a single function or multiple functions that are
               #     joint by "+".
               #       * ranking_expression = function, { " + ", function };

@@ -817,6 +817,13 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/v1beta/{name}/operations",
                                                           matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/collections/[^/]+/dataConnector/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1beta/{name}/operations",
+                                                          matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/collections/[^/]+/dataStores/[^/]+/branches/[^/]+/?$}, false]
                                                           ]
                                                         )
@@ -918,6 +925,13 @@ module Google
               #   Uri, Body, Query string parameters
               def self.transcode_get_operation_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1beta/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/collections/[^/]+/dataConnector/operations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
                                                         .with_bindings(
                                                           uri_method: :get,
                                                           uri_template: "/v1beta/{name}",

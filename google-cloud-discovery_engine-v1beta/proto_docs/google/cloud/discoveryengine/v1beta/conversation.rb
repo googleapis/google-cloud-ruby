@@ -26,6 +26,8 @@ module Google
         #   @return [::String]
         #     Immutable. Fully qualified name
         #     `project/*/locations/global/collections/{collection}/dataStore/*/conversations/*`
+        #     or
+        #     `project/*/locations/global/collections/{collection}/engines/*/conversations/*`.
         # @!attribute [rw] state
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Conversation::State]
         #     The state of the Conversation.

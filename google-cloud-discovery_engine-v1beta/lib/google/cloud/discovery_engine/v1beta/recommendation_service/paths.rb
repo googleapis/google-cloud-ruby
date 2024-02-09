@@ -101,6 +101,17 @@ module Google
             #   @param data_store [String]
             #   @param serving_config [String]
             #
+            # @overload serving_config_path(project:, location:, collection:, engine:, serving_config:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/servingConfigs/{serving_config}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param collection [String]
+            #   @param engine [String]
+            #   @param serving_config [String]
+            #
             # @return [::String]
             def serving_config_path **args
               resources = {
@@ -118,6 +129,14 @@ module Google
                   raise ::ArgumentError, "data_store cannot contain /" if data_store.to_s.include? "/"
 
                   "projects/#{project}/locations/#{location}/collections/#{collection}/dataStores/#{data_store}/servingConfigs/#{serving_config}"
+                end),
+                "collection:engine:location:project:serving_config" => (proc do |project:, location:, collection:, engine:, serving_config:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "collection cannot contain /" if collection.to_s.include? "/"
+                  raise ::ArgumentError, "engine cannot contain /" if engine.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/collections/#{collection}/engines/#{engine}/servingConfigs/#{serving_config}"
                 end)
               }
 
