@@ -50,6 +50,9 @@ module Google
           # @!attribute [rw] display_name
           #   @return [::String]
           #     Required. The human-readable name of the page, unique within the flow.
+          # @!attribute [rw] description
+          #   @return [::String]
+          #     The description of the page. The maximum length is 500 characters.
           # @!attribute [rw] entry_fulfillment
           #   @return [::Google::Cloud::Dialogflow::CX::V3::Fulfillment]
           #     The fulfillment to call when the session is entering the page.

@@ -101,6 +101,39 @@ module Google
                 end
 
                 ##
+                # Baseline implementation for the server_streaming_detect_intent REST call
+                #
+                # @param request_pb [::Google::Cloud::Dialogflow::CX::V3::DetectIntentRequest]
+                #   A request object representing the call parameters. Required.
+                # @param options [::Gapic::CallOptions]
+                #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @yieldparam chunk [::String] The chunk of data received during server streaming.
+                #
+                # @return [::Gapic::Rest::TransportOperation]
+                def server_streaming_detect_intent request_pb, options = nil, &block
+                  raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                  verb, uri, query_string_params, body = ServiceStub.transcode_server_streaming_detect_intent_request request_pb
+                  query_string_params = if query_string_params.any?
+                                          query_string_params.to_h { |p| p.split "=", 2 }
+                                        else
+                                          {}
+                                        end
+
+                  response = @client_stub.make_http_request(
+                    verb,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    options: options,
+                    is_server_streaming: true,
+                    &block
+                  )
+                  ::Gapic::Rest::TransportOperation.new response
+                end
+
+                ##
                 # Baseline implementation for the match_intent REST call
                 #
                 # @param request_pb [::Google::Cloud::Dialogflow::CX::V3::MatchIntentRequest]
@@ -236,6 +269,36 @@ module Google
                                                           .with_bindings(
                                                             uri_method: :post,
                                                             uri_template: "/v3/{session}:detectIntent",
+                                                            body: "*",
+                                                            matches: [
+                                                              ["session", %r{^projects/[^/]+/locations/[^/]+/agents/[^/]+/environments/[^/]+/sessions/[^/]+/?$}, false]
+                                                            ]
+                                                          )
+                  transcoder.transcode request_pb
+                end
+
+                ##
+                # @private
+                #
+                # GRPC transcoding helper method for the server_streaming_detect_intent REST call
+                #
+                # @param request_pb [::Google::Cloud::Dialogflow::CX::V3::DetectIntentRequest]
+                #   A request object representing the call parameters. Required.
+                # @return [Array(String, [String, nil], Hash{String => String})]
+                #   Uri, Body, Query string parameters
+                def self.transcode_server_streaming_detect_intent_request request_pb
+                  transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                          .with_bindings(
+                                                            uri_method: :post,
+                                                            uri_template: "/v3/{session}:serverStreamingDetectIntent",
+                                                            body: "*",
+                                                            matches: [
+                                                              ["session", %r{^projects/[^/]+/locations/[^/]+/agents/[^/]+/sessions/[^/]+/?$}, false]
+                                                            ]
+                                                          )
+                                                          .with_bindings(
+                                                            uri_method: :post,
+                                                            uri_template: "/v3/{session}:serverStreamingDetectIntent",
                                                             body: "*",
                                                             matches: [
                                                               ["session", %r{^projects/[^/]+/locations/[^/]+/agents/[^/]+/environments/[^/]+/sessions/[^/]+/?$}, false]

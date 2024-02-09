@@ -454,9 +454,9 @@ module Google
               # Message contains a (possibly partial) transcript.
               TRANSCRIPT = 1
 
-              # Event indicates that the server has detected the end of the user's speech
-              # utterance and expects no additional speech. Therefore, the server will
-              # not process additional audio (although it may subsequently return
+              # This event indicates that the server has detected the end of the user's
+              # speech utterance and expects no additional speech. Therefore, the server
+              # will not process additional audio (although it may subsequently return
               # additional results). The client should stop sending additional audio
               # data, half-close the gRPC connection, and wait for any additional results
               # until the server closes the gRPC connection. This message is only sent if
@@ -577,7 +577,7 @@ module Google
           #     unspecified channel will be returned.
           # @!attribute [rw] session_ttl
           #   @return [::Google::Protobuf::Duration]
-          #     Optional. Sets Dialogflow session life time.
+          #     Optional. Configure lifetime of the Dialogflow session.
           #     By default, a Dialogflow session remains active and its data is stored for
           #     30 minutes after the last request is sent for the session.
           #     This value should be no longer than 1 day.
@@ -722,6 +722,8 @@ module Google
           # 4. An event to be triggered.
           #
           # 5. DTMF digits to invoke an intent and fill in parameter value.
+          #
+          # 6. The results of a tool executed by the client.
           # @!attribute [rw] text
           #   @return [::Google::Cloud::Dialogflow::CX::V3::TextInput]
           #     The natural language text to be processed.
@@ -801,6 +803,18 @@ module Google
           #     The list of rich messages returned to the client. Responses vary from
           #     simple text messages to more sophisticated, structured payloads used
           #     to drive complex logic.
+          # @!attribute [rw] webhook_ids
+          #   @return [::Array<::String>]
+          #     The list of webhook ids in the order of call sequence.
+          # @!attribute [rw] webhook_display_names
+          #   @return [::Array<::String>]
+          #     The list of webhook display names in the order of call sequence.
+          # @!attribute [rw] webhook_latencies
+          #   @return [::Array<::Google::Protobuf::Duration>]
+          #     The list of webhook latencies in the order of call sequence.
+          # @!attribute [rw] webhook_tags
+          #   @return [::Array<::String>]
+          #     The list of webhook tags in the order of call sequence.
           # @!attribute [rw] webhook_statuses
           #   @return [::Array<::Google::Rpc::Status>]
           #     The list of webhook call status in the order of call sequence.
@@ -813,6 +827,11 @@ module Google
           # @!attribute [rw] current_page
           #   @return [::Google::Cloud::Dialogflow::CX::V3::Page]
           #     The current {::Google::Cloud::Dialogflow::CX::V3::Page Page}. Some, not all
+          #     fields are filled in this message, including but not limited to `name` and
+          #     `display_name`.
+          # @!attribute [rw] current_flow
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::Flow]
+          #     The current {::Google::Cloud::Dialogflow::CX::V3::Flow Flow}. Some, not all
           #     fields are filled in this message, including but not limited to `name` and
           #     `display_name`.
           # @!attribute [rw] intent
@@ -883,8 +902,7 @@ module Google
           # Represents the natural language text to be processed.
           # @!attribute [rw] text
           #   @return [::String]
-          #     Required. The UTF-8 encoded natural language text to be processed. Text
-          #     length must not exceed 256 characters.
+          #     Required. The UTF-8 encoded natural language text to be processed.
           class TextInput
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

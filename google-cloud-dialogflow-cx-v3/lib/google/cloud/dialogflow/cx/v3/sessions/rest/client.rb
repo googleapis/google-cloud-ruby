@@ -84,6 +84,8 @@ module Google
                       initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                     }
 
+                    default_config.rpcs.server_streaming_detect_intent.timeout = 220.0
+
                     default_config
                   end
                   yield @configure if block_given?
@@ -285,6 +287,113 @@ module Google
                     yield result, operation if block_given?
                     return result
                   end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Processes a natural language query and returns structured, actionable data
+                # as a result through server-side streaming. Server-side streaming allows
+                # Dialogflow to send [partial
+                # responses](https://cloud.google.com/dialogflow/cx/docs/concept/fulfillment#partial-response)
+                # earlier in a single request.
+                #
+                # @overload server_streaming_detect_intent(request, options = nil)
+                #   Pass arguments to `server_streaming_detect_intent` via a request object, either of type
+                #   {::Google::Cloud::Dialogflow::CX::V3::DetectIntentRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Dialogflow::CX::V3::DetectIntentRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload server_streaming_detect_intent(session: nil, query_params: nil, query_input: nil, output_audio_config: nil)
+                #   Pass arguments to `server_streaming_detect_intent` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param session [::String]
+                #     Required. The name of the session this query is sent to.
+                #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+                #     ID>/sessions/<Session ID>` or `projects/<Project ID>/locations/<Location
+                #     ID>/agents/<Agent ID>/environments/<Environment ID>/sessions/<Session ID>`.
+                #     If `Environment ID` is not specified, we assume default 'draft'
+                #     environment.
+                #     It's up to the API caller to choose an appropriate `Session ID`. It can be
+                #     a random number or some type of session identifiers (preferably hashed).
+                #     The length of the `Session ID` must not exceed 36 characters.
+                #
+                #     For more information, see the [sessions
+                #     guide](https://cloud.google.com/dialogflow/cx/docs/concept/session).
+                #
+                #     Note: Always use agent versions for production traffic.
+                #     See [Versions and
+                #     environments](https://cloud.google.com/dialogflow/cx/docs/concept/version).
+                #   @param query_params [::Google::Cloud::Dialogflow::CX::V3::QueryParameters, ::Hash]
+                #     The parameters of this query.
+                #   @param query_input [::Google::Cloud::Dialogflow::CX::V3::QueryInput, ::Hash]
+                #     Required. The input specification.
+                #   @param output_audio_config [::Google::Cloud::Dialogflow::CX::V3::OutputAudioConfig, ::Hash]
+                #     Instructs the speech synthesizer how to generate the output audio.
+                # @return [::Enumerable<::Google::Cloud::Dialogflow::CX::V3::DetectIntentResponse>]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::Sessions::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::DetectIntentRequest.new
+                #
+                #   # Call the server_streaming_detect_intent method to start streaming.
+                #   output = client.server_streaming_detect_intent request
+                #
+                #   # The returned object is a streamed enumerable yielding elements of type
+                #   # ::Google::Cloud::Dialogflow::CX::V3::DetectIntentResponse
+                #   output.each do |current_response|
+                #     p current_response
+                #   end
+                #
+                def server_streaming_detect_intent request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dialogflow::CX::V3::DetectIntentRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.server_streaming_detect_intent.metadata.to_h
+
+                  # Set x-goog-api-client and x-goog-user-project headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Dialogflow::CX::V3::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.server_streaming_detect_intent.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.server_streaming_detect_intent.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  ::Gapic::Rest::ServerStream.new(
+                    ::Google::Cloud::Dialogflow::CX::V3::DetectIntentResponse,
+                    ::Gapic::Rest::ThreadedEnumerator.new do |in_q, out_q|
+                      @sessions_stub.server_streaming_detect_intent request, options do |chunk|
+                        in_q.deq
+                        out_q.enq chunk
+                      end
+                    end
+                  )
                 rescue ::Gapic::Rest::Error => e
                   raise ::Google::Cloud::Error.from_error(e)
                 end
@@ -707,6 +816,11 @@ module Google
                     #
                     attr_reader :detect_intent
                     ##
+                    # RPC-specific configuration for `server_streaming_detect_intent`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :server_streaming_detect_intent
+                    ##
                     # RPC-specific configuration for `match_intent`
                     # @return [::Gapic::Config::Method]
                     #
@@ -726,6 +840,8 @@ module Google
                     def initialize parent_rpcs = nil
                       detect_intent_config = parent_rpcs.detect_intent if parent_rpcs.respond_to? :detect_intent
                       @detect_intent = ::Gapic::Config::Method.new detect_intent_config
+                      server_streaming_detect_intent_config = parent_rpcs.server_streaming_detect_intent if parent_rpcs.respond_to? :server_streaming_detect_intent
+                      @server_streaming_detect_intent = ::Gapic::Config::Method.new server_streaming_detect_intent_config
                       match_intent_config = parent_rpcs.match_intent if parent_rpcs.respond_to? :match_intent
                       @match_intent = ::Gapic::Config::Method.new match_intent_config
                       fulfill_intent_config = parent_rpcs.fulfill_intent if parent_rpcs.respond_to? :fulfill_intent

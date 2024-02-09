@@ -150,6 +150,13 @@ module Google
                   @quota_project_id = @config.quota_project
                   @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
+                  @operations_client = ::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Rest::Operations.new do |config|
+                    config.credentials = credentials
+                    config.quota_project = @quota_project_id
+                    config.endpoint = @config.endpoint
+                    config.universe_domain = @config.universe_domain
+                  end
+
                   @entity_types_stub = ::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Rest::ServiceStub.new(
                     endpoint: @config.endpoint,
                     endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
@@ -165,6 +172,13 @@ module Google
                     config.bindings_override = @config.bindings_override
                   end
                 end
+
+                ##
+                # Get the associated client for long-running operations.
+                #
+                # @return [::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Rest::Operations]
+                #
+                attr_reader :operations_client
 
                 ##
                 # Get the associated client for mix-in of the Locations.
@@ -661,6 +675,237 @@ module Google
                 end
 
                 ##
+                # Exports the selected entity types.
+                #
+                # @overload export_entity_types(request, options = nil)
+                #   Pass arguments to `export_entity_types` via a request object, either of type
+                #   {::Google::Cloud::Dialogflow::CX::V3::ExportEntityTypesRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Dialogflow::CX::V3::ExportEntityTypesRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload export_entity_types(parent: nil, entity_types: nil, entity_types_uri: nil, entity_types_content_inline: nil, data_format: nil, language_code: nil)
+                #   Pass arguments to `export_entity_types` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param parent [::String]
+                #     Required. The name of the parent agent to export entity types.
+                #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+                #     ID>`.
+                #   @param entity_types [::Array<::String>]
+                #     Required. The name of the entity types to export.
+                #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+                #     ID>/entityTypes/<EntityType ID>`.
+                #   @param entity_types_uri [::String]
+                #     Optional. The [Google Cloud
+                #     Storage](https://cloud.google.com/storage/docs/) URI to export the entity
+                #     types to. The format of this URI must be
+                #     `gs://<bucket-name>/<object-name>`.
+                #
+                #     Dialogflow performs a write operation for the Cloud Storage object
+                #     on the caller's behalf, so your request authentication must
+                #     have write permissions for the object. For more information, see
+                #     [Dialogflow access
+                #     control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
+                #   @param entity_types_content_inline [::Boolean]
+                #     Optional. The option to return the serialized entity types inline.
+                #   @param data_format [::Google::Cloud::Dialogflow::CX::V3::ExportEntityTypesRequest::DataFormat]
+                #     Optional. The data format of the exported entity types. If not specified,
+                #     `BLOB` is assumed.
+                #   @param language_code [::String]
+                #     Optional. The language to retrieve the entity type for. The following
+                #     fields are language dependent:
+                #
+                #     *   `EntityType.entities.value`
+                #     *   `EntityType.entities.synonyms`
+                #     *   `EntityType.excluded_phrases.value`
+                #
+                #     If not specified, all language dependent fields will be retrieved.
+                #     [Many
+                #     languages](https://cloud.google.com/dialogflow/docs/reference/language)
+                #     are supported.
+                #     Note: languages must be enabled in the agent before they can be used.
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Gapic::Operation]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Gapic::Operation]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::EntityTypes::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::ExportEntityTypesRequest.new
+                #
+                #   # Call the export_entity_types method.
+                #   result = client.export_entity_types request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
+                def export_entity_types request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dialogflow::CX::V3::ExportEntityTypesRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.export_entity_types.metadata.to_h
+
+                  # Set x-goog-api-client and x-goog-user-project headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Dialogflow::CX::V3::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.export_entity_types.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.export_entity_types.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @entity_types_stub.export_entity_types request, options do |result, operation|
+                    result = ::Gapic::Operation.new result, @operations_client, options: options
+                    yield result, operation if block_given?
+                    return result
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Imports the specified entitytypes into the agent.
+                #
+                # @overload import_entity_types(request, options = nil)
+                #   Pass arguments to `import_entity_types` via a request object, either of type
+                #   {::Google::Cloud::Dialogflow::CX::V3::ImportEntityTypesRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Dialogflow::CX::V3::ImportEntityTypesRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload import_entity_types(parent: nil, entity_types_uri: nil, entity_types_content: nil, merge_option: nil, target_entity_type: nil)
+                #   Pass arguments to `import_entity_types` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param parent [::String]
+                #     Required. The agent to import the entity types into.
+                #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+                #   @param entity_types_uri [::String]
+                #     The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI
+                #     to import entity types from. The format of this URI must be
+                #     `gs://<bucket-name>/<object-name>`.
+                #
+                #     Dialogflow performs a read operation for the Cloud Storage object
+                #     on the caller's behalf, so your request authentication must
+                #     have read permissions for the object. For more information, see
+                #     [Dialogflow access
+                #     control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
+                #   @param entity_types_content [::Google::Cloud::Dialogflow::CX::V3::InlineSource, ::Hash]
+                #     Uncompressed byte content of entity types.
+                #   @param merge_option [::Google::Cloud::Dialogflow::CX::V3::ImportEntityTypesRequest::MergeOption]
+                #     Required. Merge option for importing entity types.
+                #   @param target_entity_type [::String]
+                #     Optional. The target entity type to import into.
+                #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+                #     ID>/entity_types/<EntityType ID>`.
+                #     If set, there should be only one entity type included in
+                #     [entity_types][google.cloud.dialogflow.cx.v3.ImportEntityTypesRequest.entity_types],
+                #     of which the type should match the type of the target entity type. All
+                #     {::Google::Cloud::Dialogflow::CX::V3::EntityType#entities entities} in the
+                #     imported entity type will be added to the target entity type.
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Gapic::Operation]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Gapic::Operation]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/dialogflow/cx/v3"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Dialogflow::CX::V3::EntityTypes::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Dialogflow::CX::V3::ImportEntityTypesRequest.new
+                #
+                #   # Call the import_entity_types method.
+                #   result = client.import_entity_types request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
+                def import_entity_types request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dialogflow::CX::V3::ImportEntityTypesRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.import_entity_types.metadata.to_h
+
+                  # Set x-goog-api-client and x-goog-user-project headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Dialogflow::CX::V3::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.import_entity_types.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.import_entity_types.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @entity_types_stub.import_entity_types request, options do |result, operation|
+                    result = ::Gapic::Operation.new result, @operations_client, options: options
+                    yield result, operation if block_given?
+                    return result
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
                 # Configuration class for the EntityTypes REST API.
                 #
                 # This class represents the configuration for EntityTypes REST,
@@ -825,6 +1070,16 @@ module Google
                     # @return [::Gapic::Config::Method]
                     #
                     attr_reader :list_entity_types
+                    ##
+                    # RPC-specific configuration for `export_entity_types`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :export_entity_types
+                    ##
+                    # RPC-specific configuration for `import_entity_types`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :import_entity_types
 
                     # @private
                     def initialize parent_rpcs = nil
@@ -838,6 +1093,10 @@ module Google
                       @delete_entity_type = ::Gapic::Config::Method.new delete_entity_type_config
                       list_entity_types_config = parent_rpcs.list_entity_types if parent_rpcs.respond_to? :list_entity_types
                       @list_entity_types = ::Gapic::Config::Method.new list_entity_types_config
+                      export_entity_types_config = parent_rpcs.export_entity_types if parent_rpcs.respond_to? :export_entity_types
+                      @export_entity_types = ::Gapic::Config::Method.new export_entity_types_config
+                      import_entity_types_config = parent_rpcs.import_entity_types if parent_rpcs.respond_to? :import_entity_types
+                      @import_entity_types = ::Gapic::Config::Method.new import_entity_types_config
 
                       yield self if block_given?
                     end
