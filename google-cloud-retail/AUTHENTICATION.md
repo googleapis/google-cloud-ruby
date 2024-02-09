@@ -56,7 +56,7 @@ To configure a credentials file for an individual client initialization:
 ```ruby
 require "google/cloud/retail"
 
-client = Google::Cloud::Retail.catalog_service do |config|
+client = Google::Cloud::Retail.analytics_service do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 ```
@@ -70,7 +70,7 @@ Google::Cloud::Retail.configure do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 
-client = Google::Cloud::Retail.catalog_service
+client = Google::Cloud::Retail.analytics_service
 ```
 
 ### Environment Variables
@@ -100,7 +100,7 @@ require "google/cloud/retail"
 
 ENV["GOOGLE_APPLICATION_CREDENTIALS"] = "path/to/credentialfile.json"
 
-client = Google::Cloud::Retail.catalog_service
+client = Google::Cloud::Retail.analytics_service
 ```
 
 ### Local ADC file
