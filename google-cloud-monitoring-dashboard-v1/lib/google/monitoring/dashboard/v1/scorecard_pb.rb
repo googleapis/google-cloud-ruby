@@ -7,9 +7,10 @@ require 'google/protobuf'
 require 'google/api/field_behavior_pb'
 require 'google/monitoring/dashboard/v1/metrics_pb'
 require 'google/protobuf/duration_pb'
+require 'google/protobuf/empty_pb'
 
 
-descriptor_data = "\n.google/monitoring/dashboard/v1/scorecard.proto\x12\x1egoogle.monitoring.dashboard.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a,google/monitoring/dashboard/v1/metrics.proto\x1a\x1egoogle/protobuf/duration.proto\"\x9b\x04\n\tScorecard\x12O\n\x11time_series_query\x18\x01 \x01(\x0b\x32/.google.monitoring.dashboard.v1.TimeSeriesQueryB\x03\xe0\x41\x02\x12I\n\ngauge_view\x18\x04 \x01(\x0b\x32\x33.google.monitoring.dashboard.v1.Scorecard.GaugeViewH\x00\x12T\n\x10spark_chart_view\x18\x05 \x01(\x0b\x32\x38.google.monitoring.dashboard.v1.Scorecard.SparkChartViewH\x00\x12=\n\nthresholds\x18\x06 \x03(\x0b\x32).google.monitoring.dashboard.v1.Threshold\x1a\x35\n\tGaugeView\x12\x13\n\x0blower_bound\x18\x01 \x01(\x01\x12\x13\n\x0bupper_bound\x18\x02 \x01(\x01\x1a\x98\x01\n\x0eSparkChartView\x12M\n\x10spark_chart_type\x18\x01 \x01(\x0e\x32..google.monitoring.dashboard.v1.SparkChartTypeB\x03\xe0\x41\x02\x12\x37\n\x14min_alignment_period\x18\x02 \x01(\x0b\x32\x19.google.protobuf.DurationB\x0b\n\tdata_viewB\xf7\x01\n\"com.google.monitoring.dashboard.v1B\x0eScorecardProtoP\x01ZFcloud.google.com/go/monitoring/dashboard/apiv1/dashboardpb;dashboardpb\xaa\x02$Google.Cloud.Monitoring.Dashboard.V1\xca\x02$Google\\Cloud\\Monitoring\\Dashboard\\V1\xea\x02(Google::Cloud::Monitoring::Dashboard::V1b\x06proto3"
+descriptor_data = "\n.google/monitoring/dashboard/v1/scorecard.proto\x12\x1egoogle.monitoring.dashboard.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a,google/monitoring/dashboard/v1/metrics.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1bgoogle/protobuf/empty.proto\"\xc9\x04\n\tScorecard\x12O\n\x11time_series_query\x18\x01 \x01(\x0b\x32/.google.monitoring.dashboard.v1.TimeSeriesQueryB\x03\xe0\x41\x02\x12I\n\ngauge_view\x18\x04 \x01(\x0b\x32\x33.google.monitoring.dashboard.v1.Scorecard.GaugeViewH\x00\x12T\n\x10spark_chart_view\x18\x05 \x01(\x0b\x32\x38.google.monitoring.dashboard.v1.Scorecard.SparkChartViewH\x00\x12,\n\nblank_view\x18\x07 \x01(\x0b\x32\x16.google.protobuf.EmptyH\x00\x12=\n\nthresholds\x18\x06 \x03(\x0b\x32).google.monitoring.dashboard.v1.Threshold\x1a\x35\n\tGaugeView\x12\x13\n\x0blower_bound\x18\x01 \x01(\x01\x12\x13\n\x0bupper_bound\x18\x02 \x01(\x01\x1a\x98\x01\n\x0eSparkChartView\x12M\n\x10spark_chart_type\x18\x01 \x01(\x0e\x32..google.monitoring.dashboard.v1.SparkChartTypeB\x03\xe0\x41\x02\x12\x37\n\x14min_alignment_period\x18\x02 \x01(\x0b\x32\x19.google.protobuf.DurationB\x0b\n\tdata_viewB\xf7\x01\n\"com.google.monitoring.dashboard.v1B\x0eScorecardProtoP\x01ZFcloud.google.com/go/monitoring/dashboard/apiv1/dashboardpb;dashboardpb\xaa\x02$Google.Cloud.Monitoring.Dashboard.V1\xca\x02$Google\\Cloud\\Monitoring\\Dashboard\\V1\xea\x02(Google::Cloud::Monitoring::Dashboard::V1b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
@@ -25,6 +26,7 @@ rescue TypeError
   warn "Warning: Protobuf detected an import path issue while loading generated file #{__FILE__}"
   imports = [
     ["google.monitoring.dashboard.v1.TimeSeriesQuery", "google/monitoring/dashboard/v1/metrics.proto"],
+    ["google.protobuf.Empty", "google/protobuf/empty.proto"],
     ["google.protobuf.Duration", "google/protobuf/duration.proto"],
   ]
   imports.each do |type_name, expected_filename|

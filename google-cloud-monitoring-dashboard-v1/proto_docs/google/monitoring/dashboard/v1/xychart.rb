@@ -38,13 +38,13 @@ module Google
           #     Threshold lines drawn horizontally across the chart.
           # @!attribute [rw] x_axis
           #   @return [::Google::Cloud::Monitoring::Dashboard::V1::XyChart::Axis]
-          #     The properties applied to the X axis.
+          #     The properties applied to the x-axis.
           # @!attribute [rw] y_axis
           #   @return [::Google::Cloud::Monitoring::Dashboard::V1::XyChart::Axis]
-          #     The properties applied to the Y axis.
+          #     The properties applied to the y-axis.
           # @!attribute [rw] y2_axis
           #   @return [::Google::Cloud::Monitoring::Dashboard::V1::XyChart::Axis]
-          #     The properties applied to the Y2 axis.
+          #     The properties applied to the y2-axis.
           # @!attribute [rw] chart_options
           #   @return [::Google::Cloud::Monitoring::Dashboard::V1::ChartOptions]
           #     Display options for the chart.
@@ -89,13 +89,13 @@ module Google
 
                 # The data is plotted as a set of filled areas (one area per series),
                 # with the areas stacked vertically (the base of each area is the top of
-                # its predecessor, and the base of the first area is the X axis). Since
+                # its predecessor, and the base of the first area is the x-axis). Since
                 # the areas do not overlap, each is filled with a different opaque color.
                 STACKED_AREA = 2
 
                 # The data is plotted as a set of rectangular boxes (one box per series),
                 # with the boxes stacked vertically (the base of each box is the top of
-                # its predecessor, and the base of the first box is the X axis). Since
+                # its predecessor, and the base of the first box is the x-axis). Since
                 # the boxes do not overlap, each is filled with a different opaque color.
                 STACKED_BAR = 3
 

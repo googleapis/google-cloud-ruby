@@ -302,9 +302,10 @@ module Google
               #     A positive number that is the maximum number of results to return.
               #     If unspecified, a default of 1000 is used.
               #   @param page_token [::String]
-              #     If this field is not empty then it must contain the `nextPageToken` value
-              #     returned by a previous call to this method.  Using this field causes the
-              #     method to return additional results from the previous method call.
+              #     Optional. If this field is not empty then it must contain the
+              #     `nextPageToken` value returned by a previous call to this method.  Using
+              #     this field causes the method to return additional results from the previous
+              #     method call.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Monitoring::Dashboard::V1::Dashboard>]
