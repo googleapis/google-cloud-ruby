@@ -56,7 +56,7 @@ To configure a credentials file for an individual client initialization:
 ```ruby
 require "google/cloud/retail/v2"
 
-client = ::Google::Cloud::Retail::V2::CatalogService::Client.new do |config|
+client = ::Google::Cloud::Retail::V2::AnalyticsService::Client.new do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 ```
@@ -66,11 +66,11 @@ To configure a credentials file globally for all clients:
 ```ruby
 require "google/cloud/retail/v2"
 
-::Google::Cloud::Retail::V2::CatalogService::Client.configure do |config|
+::Google::Cloud::Retail::V2::AnalyticsService::Client.configure do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 
-client = ::Google::Cloud::Retail::V2::CatalogService::Client.new
+client = ::Google::Cloud::Retail::V2::AnalyticsService::Client.new
 ```
 
 ### Environment Variables
@@ -100,7 +100,7 @@ require "google/cloud/retail/v2"
 
 ENV["GOOGLE_APPLICATION_CREDENTIALS"] = "path/to/credentialfile.json"
 
-client = ::Google::Cloud::Retail::V2::CatalogService::Client.new
+client = ::Google::Cloud::Retail::V2::AnalyticsService::Client.new
 ```
 
 ### Local ADC file

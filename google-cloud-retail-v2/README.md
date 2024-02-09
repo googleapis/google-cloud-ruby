@@ -32,9 +32,9 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/retail/v2"
 
-client = ::Google::Cloud::Retail::V2::CatalogService::Client.new
-request = ::Google::Cloud::Retail::V2::ListCatalogsRequest.new # (request fields as keyword arguments...)
-response = client.list_catalogs request
+client = ::Google::Cloud::Retail::V2::AnalyticsService::Client.new
+request = ::Google::Cloud::Retail::V2::ExportAnalyticsMetricsRequest.new # (request fields as keyword arguments...)
+response = client.export_analytics_metrics request
 ```
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-retail-v2/latest)
