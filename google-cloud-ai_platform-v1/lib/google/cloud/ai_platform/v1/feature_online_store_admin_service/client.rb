@@ -559,6 +559,7 @@ module Google
             #     Updatable fields:
             #
             #       * `big_query_source`
+            #       * `bigtable`
             #       * `labels`
             #       * `sync_config`
             #
@@ -1098,6 +1099,7 @@ module Google
             #     Updatable fields:
             #
             #       * `labels`
+            #       * `serviceAgentType`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]

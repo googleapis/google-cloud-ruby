@@ -68,9 +68,11 @@ module Google
           #   @return [::String]
           #     The resource name of the Google Cloud resource.
           # @!attribute [rw] use_case
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::String]
           #     Use case (CUJ) of the resource.
           # @!attribute [rw] description
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::String]
           #     Description of the resource.
           class ResourceReference
@@ -98,12 +100,18 @@ module Google
           # @!attribute [rw] open_notebook
           #   @return [::Google::Cloud::AIPlatform::V1::PublisherModel::CallToAction::RegionalResourceReferences]
           #     Optional. Open notebook of the PublisherModel.
+          # @!attribute [rw] open_notebooks
+          #   @return [::Google::Cloud::AIPlatform::V1::PublisherModel::CallToAction::OpenNotebooks]
+          #     Optional. Open notebooks of the PublisherModel.
           # @!attribute [rw] create_application
           #   @return [::Google::Cloud::AIPlatform::V1::PublisherModel::CallToAction::RegionalResourceReferences]
           #     Optional. Create application using the PublisherModel.
           # @!attribute [rw] open_fine_tuning_pipeline
           #   @return [::Google::Cloud::AIPlatform::V1::PublisherModel::CallToAction::RegionalResourceReferences]
           #     Optional. Open fine-tuning pipeline of the PublisherModel.
+          # @!attribute [rw] open_fine_tuning_pipelines
+          #   @return [::Google::Cloud::AIPlatform::V1::PublisherModel::CallToAction::OpenFineTuningPipelines]
+          #     Optional. Open fine-tuning pipelines of the PublisherModel.
           # @!attribute [rw] open_prompt_tuning_pipeline
           #   @return [::Google::Cloud::AIPlatform::V1::PublisherModel::CallToAction::RegionalResourceReferences]
           #     Optional. Open prompt-tuning pipeline of the PublisherModel.
@@ -113,6 +121,9 @@ module Google
           # @!attribute [rw] deploy
           #   @return [::Google::Cloud::AIPlatform::V1::PublisherModel::CallToAction::Deploy]
           #     Optional. Deploy the PublisherModel to Vertex Endpoint.
+          # @!attribute [rw] deploy_gke
+          #   @return [::Google::Cloud::AIPlatform::V1::PublisherModel::CallToAction::DeployGke]
+          #     Optional. Deploy PublisherModel to Google Kubernetes Engine.
           # @!attribute [rw] open_generation_ai_studio
           #   @return [::Google::Cloud::AIPlatform::V1::PublisherModel::CallToAction::RegionalResourceReferences]
           #     Optional. Open in Generation AI Studio.
@@ -133,7 +144,16 @@ module Google
             #     Required.
             # @!attribute [rw] title
             #   @return [::String]
-            #     Required. The title of the regional resource reference.
+            #     Required.
+            # @!attribute [rw] resource_title
+            #   @return [::String]
+            #     Optional. Title of the resource.
+            # @!attribute [rw] resource_use_case
+            #   @return [::String]
+            #     Optional. Use case (CUJ) of the resource.
+            # @!attribute [rw] resource_description
+            #   @return [::String]
+            #     Optional. Description of the resource.
             class RegionalResourceReferences
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -156,6 +176,24 @@ module Google
             #   @return [::String]
             #     Required. The title of the view rest API.
             class ViewRestApi
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Open notebooks.
+            # @!attribute [rw] notebooks
+            #   @return [::Array<::Google::Cloud::AIPlatform::V1::PublisherModel::CallToAction::RegionalResourceReferences>]
+            #     Required. Regional resource references to notebooks.
+            class OpenNotebooks
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Open fine tuning pipelines.
+            # @!attribute [rw] fine_tuning_pipelines
+            #   @return [::Array<::Google::Cloud::AIPlatform::V1::PublisherModel::CallToAction::RegionalResourceReferences>]
+            #     Required. Regional resource references to fine tuning pipelines.
+            class OpenFineTuningPipelines
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
@@ -198,6 +236,15 @@ module Google
             #     Optional. The signed URI for ephemeral Cloud Storage access to model
             #     artifact.
             class Deploy
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Configurations for PublisherModel GKE deployment
+            # @!attribute [rw] gke_yaml_configs
+            #   @return [::Array<::String>]
+            #     Optional. GKE deployment configuration in yaml format.
+            class DeployGke
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end

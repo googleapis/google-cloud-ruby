@@ -1258,8 +1258,7 @@ module Google
             #
             #     A `Tool` is a piece of code that enables the system to interact with
             #     external systems to perform an action, or set of actions, outside of
-            #     knowledge and scope of the model. The only supported tool is currently
-            #     `Function`
+            #     knowledge and scope of the model.
             #   @param safety_settings [::Array<::Google::Cloud::AIPlatform::V1::SafetySetting, ::Hash>]
             #     Optional. Per request settings for blocking unsafe content.
             #     Enforced on GenerateContentResponse.candidates.
@@ -1364,8 +1363,7 @@ module Google
             #
             #     A `Tool` is a piece of code that enables the system to interact with
             #     external systems to perform an action, or set of actions, outside of
-            #     knowledge and scope of the model. The only supported tool is currently
-            #     `Function`
+            #     knowledge and scope of the model.
             #   @param safety_settings [::Array<::Google::Cloud::AIPlatform::V1::SafetySetting, ::Hash>]
             #     Optional. Per request settings for blocking unsafe content.
             #     Enforced on GenerateContentResponse.candidates.

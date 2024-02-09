@@ -8,7 +8,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 
 
-descriptor_data = "\n3google/cloud/aiplatform/v1/service_networking.proto\x12\x1agoogle.cloud.aiplatform.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"e\n\x1bPrivateServiceConnectConfig\x12+\n\x1e\x65nable_private_service_connect\x18\x01 \x01(\x08\x42\x03\xe0\x41\x02\x12\x19\n\x11project_allowlist\x18\x02 \x03(\tB\xd4\x01\n\x1e\x63om.google.cloud.aiplatform.v1B\x16ServiceNetworkingProtoP\x01Z>cloud.google.com/go/aiplatform/apiv1/aiplatformpb;aiplatformpb\xaa\x02\x1aGoogle.Cloud.AIPlatform.V1\xca\x02\x1aGoogle\\Cloud\\AIPlatform\\V1\xea\x02\x1dGoogle::Cloud::AIPlatform::V1b\x06proto3"
+descriptor_data = "\n3google/cloud/aiplatform/v1/service_networking.proto\x12\x1agoogle.cloud.aiplatform.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"e\n\x1bPrivateServiceConnectConfig\x12+\n\x1e\x65nable_private_service_connect\x18\x01 \x01(\x08\x42\x03\xe0\x41\x02\x12\x19\n\x11project_allowlist\x18\x02 \x03(\t\"S\n\x15PscAutomatedEndpoints\x12\x12\n\nproject_id\x18\x01 \x01(\t\x12\x0f\n\x07network\x18\x02 \x01(\t\x12\x15\n\rmatch_address\x18\x03 \x01(\tB\xd4\x01\n\x1e\x63om.google.cloud.aiplatform.v1B\x16ServiceNetworkingProtoP\x01Z>cloud.google.com/go/aiplatform/apiv1/aiplatformpb;aiplatformpb\xaa\x02\x1aGoogle.Cloud.AIPlatform.V1\xca\x02\x1aGoogle\\Cloud\\AIPlatform\\V1\xea\x02\x1dGoogle::Cloud::AIPlatform::V1b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
@@ -39,6 +39,7 @@ module Google
     module AIPlatform
       module V1
         PrivateServiceConnectConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.PrivateServiceConnectConfig").msgclass
+        PscAutomatedEndpoints = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.PscAutomatedEndpoints").msgclass
       end
     end
   end

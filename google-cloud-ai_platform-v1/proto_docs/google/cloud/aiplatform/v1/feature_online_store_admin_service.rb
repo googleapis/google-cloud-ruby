@@ -145,6 +145,7 @@ module Google
         #     Updatable fields:
         #
         #       * `big_query_source`
+        #       * `bigtable`
         #       * `labels`
         #       * `sync_config`
         class UpdateFeatureOnlineStoreRequest
@@ -304,6 +305,7 @@ module Google
         #     Updatable fields:
         #
         #       * `labels`
+        #       * `serviceAgentType`
         class UpdateFeatureViewRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

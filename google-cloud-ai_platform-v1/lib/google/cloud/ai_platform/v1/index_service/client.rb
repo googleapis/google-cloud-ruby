@@ -699,7 +699,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload upsert_datapoints(index: nil, datapoints: nil)
+            # @overload upsert_datapoints(index: nil, datapoints: nil, update_mask: nil)
             #   Pass arguments to `upsert_datapoints` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -710,6 +710,14 @@ module Google
             #     `projects/{project}/locations/{location}/indexes/{index}`
             #   @param datapoints [::Array<::Google::Cloud::AIPlatform::V1::IndexDatapoint, ::Hash>]
             #     A list of datapoints to be created/updated.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Optional. Update mask is used to specify the fields to be overwritten in
+            #     the datapoints by the update. The fields specified in the update_mask are
+            #     relative to each IndexDatapoint inside datapoints, not the full request.
+            #
+            #     Updatable fields:
+            #
+            #       * Use `all_restricts` to update both restricts and numeric_restricts.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::AIPlatform::V1::UpsertDatapointsResponse]

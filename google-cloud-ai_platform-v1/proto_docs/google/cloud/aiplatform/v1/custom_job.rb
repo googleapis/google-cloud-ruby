@@ -327,10 +327,6 @@ module Google
         #     Optional. Indicates if the job should retry for internal errors after the
         #     job starts running. If true, overrides
         #     `Scheduling.restart_job_on_worker_restart` to false.
-        # @!attribute [rw] max_wait_duration
-        #   @return [::Google::Protobuf::Duration]
-        #     Optional. This is the maximum time a user will wait in the QRM queue for
-        #     resources. Default is 1 day
         class Scheduling
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

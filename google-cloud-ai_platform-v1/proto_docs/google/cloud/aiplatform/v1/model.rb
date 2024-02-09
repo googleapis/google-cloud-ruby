@@ -102,11 +102,11 @@ module Google
         #     deploying this Model. The specification is ingested upon
         #     {::Google::Cloud::AIPlatform::V1::ModelService::Client#upload_model ModelService.UploadModel},
         #     and all binaries it contains are copied and stored internally by Vertex AI.
-        #     Not present for AutoML Models or Large Models.
+        #     Not required for AutoML Models.
         # @!attribute [rw] artifact_uri
         #   @return [::String]
         #     Immutable. The path to the directory containing the Model artifact and any
-        #     of its supporting files. Not present for AutoML Models or Large Models.
+        #     of its supporting files. Not required for AutoML Models.
         # @!attribute [r] supported_deployment_resources_types
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::Model::DeploymentResourcesType>]
         #     Output only. When this Model is deployed, its prediction resources are
@@ -283,7 +283,8 @@ module Google
         # @!attribute [r] model_source_info
         #   @return [::Google::Cloud::AIPlatform::V1::ModelSourceInfo]
         #     Output only. Source of a model. It can either be automl training pipeline,
-        #     custom training pipeline, BigQuery ML, or existing Vertex AI Model.
+        #     custom training pipeline, BigQuery ML, or saved and tuned from Genie or
+        #     Model Garden.
         # @!attribute [r] original_model_info
         #   @return [::Google::Cloud::AIPlatform::V1::Model::OriginalModelInfo]
         #     Output only. If this Model is a copy of another Model, this contains info
@@ -757,6 +758,10 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Source of the model.
+          # Different from `objective` field, this `ModelSourceType` enum
+          # indicates the source from which the model was accessed or obtained,
+          # whereas the `objective` indicates the overall aim or function of this
+          # model.
           module ModelSourceType
             # Should not be used.
             MODEL_SOURCE_TYPE_UNSPECIFIED = 0
@@ -778,6 +783,9 @@ module Google
 
             # The Model is uploaded by text embedding finetuning pipeline.
             CUSTOM_TEXT_EMBEDDING = 6
+
+            # The Model is saved or tuned from Marketplace.
+            MARKETPLACE = 7
           end
         end
 

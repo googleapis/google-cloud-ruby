@@ -33,6 +33,22 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
+        # PscAutomatedEndpoints defines the output of the forwarding rule
+        # automatically created by each PscAutomationConfig.
+        # @!attribute [rw] project_id
+        #   @return [::String]
+        #     Corresponding project_id in pscAutomationConfigs
+        # @!attribute [rw] network
+        #   @return [::String]
+        #     Corresponding network in pscAutomationConfigs.
+        # @!attribute [rw] match_address
+        #   @return [::String]
+        #     Ip Address created by the automated forwarding rule.
+        class PscAutomatedEndpoints
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
       end
     end
   end

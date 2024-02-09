@@ -154,6 +154,15 @@ module Google
         # @!attribute [rw] datapoints
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::IndexDatapoint>]
         #     A list of datapoints to be created/updated.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. Update mask is used to specify the fields to be overwritten in
+        #     the datapoints by the update. The fields specified in the update_mask are
+        #     relative to each IndexDatapoint inside datapoints, not the full request.
+        #
+        #     Updatable fields:
+        #
+        #       * Use `all_restricts` to update both restricts and numeric_restricts.
         class UpsertDatapointsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -250,6 +259,25 @@ module Google
 
               # The `namespace` field is missing.
               NAMESPACE_MISSING = 7
+
+              # Generic catch-all error. Only used for validation failure where the
+              # root cause cannot be easily retrieved programmatically.
+              PARSING_ERROR = 8
+
+              # There are multiple restricts with the same `namespace` value.
+              DUPLICATE_NAMESPACE = 9
+
+              # Numeric restrict has operator specified in datapoint.
+              OP_IN_DATAPOINT = 10
+
+              # Numeric restrict has multiple values specified.
+              MULTIPLE_VALUES = 11
+
+              # Numeric restrict has invalid numeric value specified.
+              INVALID_NUMERIC_VALUE = 12
+
+              # File is not in UTF_8 format.
+              INVALID_ENCODING = 13
             end
           end
 

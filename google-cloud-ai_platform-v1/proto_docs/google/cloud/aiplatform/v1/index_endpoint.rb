@@ -280,6 +280,10 @@ module Google
         #   @return [::String]
         #     Output only. The name of the service attachment resource. Populated if
         #     private service connect is enabled.
+        # @!attribute [r] psc_automated_endpoints
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::PscAutomatedEndpoints>]
+        #     Output only. PscAutomatedEndpoints is populated if private service connect
+        #     is enabled if PscAutomatedConfig is set.
         class IndexPrivateEndpoints
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
