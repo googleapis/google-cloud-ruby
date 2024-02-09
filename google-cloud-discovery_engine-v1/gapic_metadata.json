@@ -14,6 +14,16 @@
               "methods": [
                 "complete_query"
               ]
+            },
+            "ImportSuggestionDenyListEntries": {
+              "methods": [
+                "import_suggestion_deny_list_entries"
+              ]
+            },
+            "PurgeSuggestionDenyListEntries": {
+              "methods": [
+                "purge_suggestion_deny_list_entries"
+              ]
             }
           }
         }
@@ -72,6 +82,40 @@
         }
       }
     },
+    "DataStoreService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DiscoveryEngine::V1::DataStoreService::Client",
+          "rpcs": {
+            "CreateDataStore": {
+              "methods": [
+                "create_data_store"
+              ]
+            },
+            "GetDataStore": {
+              "methods": [
+                "get_data_store"
+              ]
+            },
+            "ListDataStores": {
+              "methods": [
+                "list_data_stores"
+              ]
+            },
+            "DeleteDataStore": {
+              "methods": [
+                "delete_data_store"
+              ]
+            },
+            "UpdateDataStore": {
+              "methods": [
+                "update_data_store"
+              ]
+            }
+          }
+        }
+      }
+    },
     "DocumentService": {
       "clients": {
         "grpc": {
@@ -116,6 +160,40 @@
         }
       }
     },
+    "EngineService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DiscoveryEngine::V1::EngineService::Client",
+          "rpcs": {
+            "CreateEngine": {
+              "methods": [
+                "create_engine"
+              ]
+            },
+            "DeleteEngine": {
+              "methods": [
+                "delete_engine"
+              ]
+            },
+            "UpdateEngine": {
+              "methods": [
+                "update_engine"
+              ]
+            },
+            "GetEngine": {
+              "methods": [
+                "get_engine"
+              ]
+            },
+            "ListEngines": {
+              "methods": [
+                "list_engines"
+              ]
+            }
+          }
+        }
+      }
+    },
     "SchemaService": {
       "clients": {
         "grpc": {
@@ -144,6 +222,75 @@
             "DeleteSchema": {
               "methods": [
                 "delete_schema"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SiteSearchEngineService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Client",
+          "rpcs": {
+            "GetSiteSearchEngine": {
+              "methods": [
+                "get_site_search_engine"
+              ]
+            },
+            "CreateTargetSite": {
+              "methods": [
+                "create_target_site"
+              ]
+            },
+            "BatchCreateTargetSites": {
+              "methods": [
+                "batch_create_target_sites"
+              ]
+            },
+            "GetTargetSite": {
+              "methods": [
+                "get_target_site"
+              ]
+            },
+            "UpdateTargetSite": {
+              "methods": [
+                "update_target_site"
+              ]
+            },
+            "DeleteTargetSite": {
+              "methods": [
+                "delete_target_site"
+              ]
+            },
+            "ListTargetSites": {
+              "methods": [
+                "list_target_sites"
+              ]
+            },
+            "EnableAdvancedSiteSearch": {
+              "methods": [
+                "enable_advanced_site_search"
+              ]
+            },
+            "DisableAdvancedSiteSearch": {
+              "methods": [
+                "disable_advanced_site_search"
+              ]
+            },
+            "RecrawlUris": {
+              "methods": [
+                "recrawl_uris"
+              ]
+            },
+            "BatchVerifyTargetSites": {
+              "methods": [
+                "batch_verify_target_sites"
+              ]
+            },
+            "FetchDomainVerificationStatus": {
+              "methods": [
+                "fetch_domain_verification_status"
               ]
             }
           }

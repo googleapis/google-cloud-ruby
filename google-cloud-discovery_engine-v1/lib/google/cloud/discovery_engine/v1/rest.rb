@@ -19,8 +19,11 @@
 require "google/cloud/discovery_engine/v1/completion_service/rest"
 require "google/cloud/discovery_engine/v1/search_service/rest"
 require "google/cloud/discovery_engine/v1/conversational_search_service/rest"
+require "google/cloud/discovery_engine/v1/data_store_service/rest"
 require "google/cloud/discovery_engine/v1/document_service/rest"
+require "google/cloud/discovery_engine/v1/engine_service/rest"
 require "google/cloud/discovery_engine/v1/schema_service/rest"
+require "google/cloud/discovery_engine/v1/site_search_engine_service/rest"
 require "google/cloud/discovery_engine/v1/user_event_service/rest"
 require "google/cloud/discovery_engine/v1/version"
 

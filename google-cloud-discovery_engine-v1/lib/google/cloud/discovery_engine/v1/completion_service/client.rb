@@ -152,6 +152,13 @@ module Google
               @quota_project_id = @config.quota_project
               @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
+              @operations_client = Operations.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+                config.universe_domain = @config.universe_domain
+              end
+
               @completion_service_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::DiscoveryEngine::V1::CompletionService::Stub,
                 credentials: credentials,
@@ -170,6 +177,13 @@ module Google
                 config.universe_domain = @completion_service_stub.universe_domain
               end
             end
+
+            ##
+            # Get the associated client for long-running operations.
+            #
+            # @return [::Google::Cloud::DiscoveryEngine::V1::CompletionService::Operations]
+            #
+            attr_reader :operations_client
 
             ##
             # Get the associated client for mix-in of the Locations.
@@ -206,8 +220,9 @@ module Google
             #     Required. The typeahead input used to fetch suggestions. Maximum length is
             #     128 characters.
             #   @param query_model [::String]
-            #     Selects data model of query suggestions for serving. Currently supported
-            #     values:
+            #     Specifies the autocomplete data model. This overrides any model specified
+            #     in the Configuration > Autocomplete section of the Cloud console. Currently
+            #     supported values:
             #
             #     * `document` - Using suggestions generated from user-imported documents.
             #     * `search-history` - Using suggestions generated from the past history of
@@ -221,8 +236,7 @@ module Google
             #     Default values:
             #
             #     * `document` is the default model for regular dataStores.
-            #     * `search-history` is the default model for
-            #     [IndustryVertical.SITE_SEARCH][] dataStores.
+            #     * `search-history` is the default model for site search dataStores.
             #   @param user_pseudo_id [::String]
             #     A unique identifier for tracking visitors. For example, this could be
             #     implemented with an HTTP cookie, which should be able to uniquely identify
@@ -301,6 +315,209 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @completion_service_stub.call_rpc :complete_query, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Imports all
+            # {::Google::Cloud::DiscoveryEngine::V1::SuggestionDenyListEntry SuggestionDenyListEntry}
+            # for a DataStore.
+            #
+            # @overload import_suggestion_deny_list_entries(request, options = nil)
+            #   Pass arguments to `import_suggestion_deny_list_entries` via a request object, either of type
+            #   {::Google::Cloud::DiscoveryEngine::V1::ImportSuggestionDenyListEntriesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::DiscoveryEngine::V1::ImportSuggestionDenyListEntriesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload import_suggestion_deny_list_entries(inline_source: nil, gcs_source: nil, parent: nil)
+            #   Pass arguments to `import_suggestion_deny_list_entries` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param inline_source [::Google::Cloud::DiscoveryEngine::V1::ImportSuggestionDenyListEntriesRequest::InlineSource, ::Hash]
+            #     The Inline source for the input content for suggestion deny list entries.
+            #   @param gcs_source [::Google::Cloud::DiscoveryEngine::V1::GcsSource, ::Hash]
+            #     Cloud Storage location for the input content.
+            #
+            #     Only 1 file can be specified that contains all entries to import.
+            #     Supported values `gcs_source.schema` for autocomplete suggestion deny
+            #     list entry imports:
+            #
+            #     * `suggestion_deny_list` (default): One JSON [SuggestionDenyListEntry]
+            #     per line.
+            #   @param parent [::String]
+            #     Required. The parent data store resource name for which to import denylist
+            #     entries. Follows pattern projects/*/locations/*/collections/*/dataStores/*.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/discovery_engine/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DiscoveryEngine::V1::CompletionService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DiscoveryEngine::V1::ImportSuggestionDenyListEntriesRequest.new
+            #
+            #   # Call the import_suggestion_deny_list_entries method.
+            #   result = client.import_suggestion_deny_list_entries request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def import_suggestion_deny_list_entries request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DiscoveryEngine::V1::ImportSuggestionDenyListEntriesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.import_suggestion_deny_list_entries.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::DiscoveryEngine::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.import_suggestion_deny_list_entries.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.import_suggestion_deny_list_entries.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @completion_service_stub.call_rpc :import_suggestion_deny_list_entries, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Permanently deletes all
+            # {::Google::Cloud::DiscoveryEngine::V1::SuggestionDenyListEntry SuggestionDenyListEntry}
+            # for a DataStore.
+            #
+            # @overload purge_suggestion_deny_list_entries(request, options = nil)
+            #   Pass arguments to `purge_suggestion_deny_list_entries` via a request object, either of type
+            #   {::Google::Cloud::DiscoveryEngine::V1::PurgeSuggestionDenyListEntriesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::DiscoveryEngine::V1::PurgeSuggestionDenyListEntriesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload purge_suggestion_deny_list_entries(parent: nil)
+            #   Pass arguments to `purge_suggestion_deny_list_entries` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent data store resource name for which to import denylist
+            #     entries. Follows pattern projects/*/locations/*/collections/*/dataStores/*.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/discovery_engine/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DiscoveryEngine::V1::CompletionService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DiscoveryEngine::V1::PurgeSuggestionDenyListEntriesRequest.new
+            #
+            #   # Call the purge_suggestion_deny_list_entries method.
+            #   result = client.purge_suggestion_deny_list_entries request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def purge_suggestion_deny_list_entries request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DiscoveryEngine::V1::PurgeSuggestionDenyListEntriesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.purge_suggestion_deny_list_entries.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::DiscoveryEngine::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.purge_suggestion_deny_list_entries.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.purge_suggestion_deny_list_entries.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @completion_service_stub.call_rpc :purge_suggestion_deny_list_entries, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
@@ -466,11 +683,25 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :complete_query
+                ##
+                # RPC-specific configuration for `import_suggestion_deny_list_entries`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :import_suggestion_deny_list_entries
+                ##
+                # RPC-specific configuration for `purge_suggestion_deny_list_entries`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :purge_suggestion_deny_list_entries
 
                 # @private
                 def initialize parent_rpcs = nil
                   complete_query_config = parent_rpcs.complete_query if parent_rpcs.respond_to? :complete_query
                   @complete_query = ::Gapic::Config::Method.new complete_query_config
+                  import_suggestion_deny_list_entries_config = parent_rpcs.import_suggestion_deny_list_entries if parent_rpcs.respond_to? :import_suggestion_deny_list_entries
+                  @import_suggestion_deny_list_entries = ::Gapic::Config::Method.new import_suggestion_deny_list_entries_config
+                  purge_suggestion_deny_list_entries_config = parent_rpcs.purge_suggestion_deny_list_entries if parent_rpcs.respond_to? :purge_suggestion_deny_list_entries
+                  @purge_suggestion_deny_list_entries = ::Gapic::Config::Method.new purge_suggestion_deny_list_entries_config
 
                   yield self if block_given?
                 end

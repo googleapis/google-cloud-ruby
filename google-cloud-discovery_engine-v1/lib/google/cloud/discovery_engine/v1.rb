@@ -19,8 +19,11 @@
 require "google/cloud/discovery_engine/v1/completion_service"
 require "google/cloud/discovery_engine/v1/search_service"
 require "google/cloud/discovery_engine/v1/conversational_search_service"
+require "google/cloud/discovery_engine/v1/data_store_service"
 require "google/cloud/discovery_engine/v1/document_service"
+require "google/cloud/discovery_engine/v1/engine_service"
 require "google/cloud/discovery_engine/v1/schema_service"
+require "google/cloud/discovery_engine/v1/site_search_engine_service"
 require "google/cloud/discovery_engine/v1/user_event_service"
 require "google/cloud/discovery_engine/v1/version"
 

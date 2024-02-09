@@ -78,6 +78,47 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
+        # Request message for
+        # {::Google::Cloud::DiscoveryEngine::V1::CompletionService::Client#purge_suggestion_deny_list_entries CompletionService.PurgeSuggestionDenyListEntries}
+        # method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent data store resource name for which to import denylist
+        #     entries. Follows pattern projects/*/locations/*/collections/*/dataStores/*.
+        class PurgeSuggestionDenyListEntriesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::DiscoveryEngine::V1::CompletionService::Client#purge_suggestion_deny_list_entries CompletionService.PurgeSuggestionDenyListEntries}
+        # method.
+        # @!attribute [rw] purge_count
+        #   @return [::Integer]
+        #     Number of suggestion deny list entries purged.
+        # @!attribute [rw] error_samples
+        #   @return [::Array<::Google::Rpc::Status>]
+        #     A sample of errors encountered while processing the request.
+        class PurgeSuggestionDenyListEntriesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Metadata related to the progress of the PurgeSuggestionDenyListEntries
+        # operation. This is returned by the google.longrunning.Operation.metadata
+        # field.
+        # @!attribute [rw] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Operation create time.
+        # @!attribute [rw] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Operation last update time. If the operation is done, this is also the
+        #     finish time.
+        class PurgeSuggestionDenyListEntriesMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
       end
     end
   end

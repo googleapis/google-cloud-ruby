@@ -24,6 +24,7 @@ require "google/cloud/discovery_engine/v1/version"
 
 require "google/cloud/discovery_engine/v1/completion_service/credentials"
 require "google/cloud/discovery_engine/v1/completion_service/paths"
+require "google/cloud/discovery_engine/v1/completion_service/rest/operations"
 require "google/cloud/discovery_engine/v1/completion_service/rest/client"
 
 module Google
