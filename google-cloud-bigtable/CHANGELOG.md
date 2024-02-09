@@ -1,5 +1,11 @@
 # Release History
 
+### 2.9.1 (2024-02-09)
+
+#### Documentation
+
+* update EMULATOR.md ([#24787](https://github.com/googleapis/google-cloud-ruby/issues/24787)) 
+
 ### 2.9.0 (2023-09-14)
 
 #### Features
