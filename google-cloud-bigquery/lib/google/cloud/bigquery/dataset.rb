@@ -452,7 +452,7 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
-        #   storage_billing_model = dataset.storage_billing_model "LOGICAL"
+        #   dataset.storage_billing_model = "LOGICAL"
         #
         # @!group Attributes
         #
