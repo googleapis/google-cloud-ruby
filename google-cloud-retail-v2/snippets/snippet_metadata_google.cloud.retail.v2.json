@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-retail-v2",
-    "version": "0.18.2",
+    "version": "0.19.0",
     "language": "RUBY",
     "apis": [
       {
