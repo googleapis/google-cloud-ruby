@@ -1,5 +1,11 @@
 # Release History
 
+### 0.19.0 (2024-02-10)
+
+#### Features
+
+* Support analytics service and its APIs ([#24789](https://github.com/googleapis/google-cloud-ruby/issues/24789)) 
+
 ### 0.18.2 (2024-02-01)
 
 #### Bug Fixes
