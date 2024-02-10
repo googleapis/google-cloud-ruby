@@ -1,5 +1,11 @@
 # Release History
 
+### 1.48.1 (2024-02-10)
+
+#### Documentation
+
+* Correct an example snippet related to storage_billing_model ([#24796](https://github.com/googleapis/google-cloud-ruby/issues/24796)) 
+
 ### 1.48.0 (2024-02-08)
 
 #### Features
