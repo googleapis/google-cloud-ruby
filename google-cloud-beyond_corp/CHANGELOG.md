@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.2.0 (2024-02-10)
+
+#### Features
+
+* Remove support for obsolete client_connector_services client ([#24806](https://github.com/googleapis/google-cloud-ruby/issues/24806)) 
+
 ### 1.1.0 (2024-01-15)
 
 #### Features
