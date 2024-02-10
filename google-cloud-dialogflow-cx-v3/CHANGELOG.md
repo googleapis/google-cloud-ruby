@@ -1,5 +1,20 @@
 # Changelog
 
+### 0.25.0 (2024-02-10)
+
+#### Features
+
+* Support `ExportEntityTypes` and `ImportEntityTypes` APIs for `EntityTypes` ([#24792](https://github.com/googleapis/google-cloud-ruby/issues/24792)) 
+* Support `ServerStreamingDetectIntent` API for `Sessions` ([#24792](https://github.com/googleapis/google-cloud-ruby/issues/24792)) 
+* Support new field `current_flow` for `QueryResult`  ([#24792](https://github.com/googleapis/google-cloud-ruby/issues/24792)) 
+* Support new field `description` for `Page`  ([#24792](https://github.com/googleapis/google-cloud-ruby/issues/24792)) 
+* Support new field `disable_data_store_fallback` for `KnowledgeConnectorSettings`  ([#24792](https://github.com/googleapis/google-cloud-ruby/issues/24792)) 
+* Support new field `language_code` for `Changelog`  ([#24792](https://github.com/googleapis/google-cloud-ruby/issues/24792)) 
+* Support several new webhook related fields for `QueryResult`  ([#24792](https://github.com/googleapis/google-cloud-ruby/issues/24792)) 
+#### Documentation
+
+* Update documentation for several APIs ([#24792](https://github.com/googleapis/google-cloud-ruby/issues/24792)) 
+
 ### 0.24.2 (2024-02-01)
 
 #### Bug Fixes
