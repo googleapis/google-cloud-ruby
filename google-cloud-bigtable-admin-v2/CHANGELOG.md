@@ -1,5 +1,11 @@
 # Release History
 
+### 0.21.3 (2024-02-10)
+
+#### Bug Fixes
+
+* extend timeouts for deleting snapshots, backups and tables [#24791](https://github.com/googleapis/google-cloud-ruby/issues/24791) 
+
 ### 0.21.2 (2024-02-01)
 
 #### Bug Fixes
