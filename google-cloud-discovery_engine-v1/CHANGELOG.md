@@ -1,5 +1,16 @@
 # Changelog
 
+### 0.5.0 (2024-02-12)
+
+#### Features
+
+* add engine support for multi-turn search and search APIs ([#24790](https://github.com/googleapis/google-cloud-ruby/issues/24790)) 
+* add suggestion deny list import/purge APIs ([#24790](https://github.com/googleapis/google-cloud-ruby/issues/24790)) 
+* support search summarization with citations and references ([#24790](https://github.com/googleapis/google-cloud-ruby/issues/24790)) 
+#### Documentation
+
+* keep the API doc up-to-date with recent changes ([#24790](https://github.com/googleapis/google-cloud-ruby/issues/24790)) 
+
 ### 0.4.2 (2024-02-01)
 
 #### Bug Fixes
