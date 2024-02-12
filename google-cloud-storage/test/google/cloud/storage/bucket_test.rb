@@ -716,13 +716,34 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     end
   end
 
+  it "lists files with folders as prefix set" do
+    mock = Minitest::Mock.new
+    mock.expect :list_objects, list_files_gapi(3, nil, ["/prefix/path1/", "/prefix/path2/"], include_folders_as_prefixes: true),
+      [bucket.name], delimiter: "/", max_results: nil, page_token: nil, prefix: nil, versions: nil, user_project: nil, match_glob: nil, include_folders_as_prefixes: nil, options: {}
+
+    bucket.service.mocked_service = mock
+
+    files = bucket.files delimiter: "/"
+
+    mock.verify
+
+    _(files.count).must_equal 3
+    _(files.prefixes).wont_be :empty?
+    _(files.prefixes).must_include "/prefix/path1/"
+    _(files.prefixes).must_include "/prefix/path2/"
+    files.each do |file|
+      _(file).must_be_kind_of Google::Cloud::Storage::File
+      _(file.user_project).must_be :nil?
+    end
+  end
+
   it "lists files with match_glob set" do
     mock = Minitest::Mock.new
     mock.expect :list_objects, list_files_gapi(2),
       [bucket.name], delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: nil, user_project: nil, match_glob: "/foo/**/bar/", options: {}
-    
+
     bucket.service.mocked_service = mock
-    
+
     files = bucket.files match_glob: "/foo/**/bar/"
 
     mock.verify
@@ -1383,8 +1404,8 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     Google::Apis::StorageV1::Object.from_json random_file_hash(bucket, name).to_json
   end
 
-  def list_files_gapi count = 2, token = nil, prefixes = nil
+  def list_files_gapi count = 2, token = nil, prefixes = nil, include_folders_as_prefixes: nil
     files = count.times.map { Google::Apis::StorageV1::Object.from_json random_file_hash.to_json }
-    Google::Apis::StorageV1::Objects.new kind: "storage#objects", items: files, next_page_token: token, prefixes: prefixes
+    Google::Apis::StorageV1::Objects.new kind: "storage#objects", items: files, next_page_token: token, prefixes: prefixes, include_folders_as_prefixes: include_folders_as_prefixes
   end
 end

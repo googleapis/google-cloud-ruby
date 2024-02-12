@@ -1346,17 +1346,19 @@ module Google
         #   end
         #
         def files prefix: nil, delimiter: nil, token: nil, max: nil,
-                  versions: nil, match_glob: nil
+                  versions: nil, match_glob: nil, include_folders_as_prefixes: nil
           ensure_service!
           gapi = service.list_files name, prefix: prefix, delimiter: delimiter,
                                           token: token, max: max,
                                           versions: versions,
                                           user_project: user_project,
-                                          match_glob: match_glob
+                                          match_glob: match_glob,
+                                          include_folders_as_prefixes: include_folders_as_prefixes
           File::List.from_gapi gapi, service, name, prefix, delimiter, max,
                                versions,
                                user_project: user_project,
-                               match_glob: match_glob
+                               match_glob: match_glob,
+                               include_folders_as_prefixes: include_folders_as_prefixes
         end
         alias find_files files
 
