@@ -1,3 +1,0 @@
-deep-copy-regex:
-  - source: /google/cloud/beyondcorp/clientconnectorservices/v1/[^/]+-ruby/(.*)
-    dest: /owl-bot-staging/google-cloud-beyond_corp-client_connector_services-v1/$1

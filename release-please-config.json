@@ -199,10 +199,6 @@
       "component": "google-cloud-beyond_corp-app_gateways-v1",
       "version_file": "lib/google/cloud/beyond_corp/app_gateways/v1/version.rb"
     },
-    "google-cloud-beyond_corp-client_connector_services-v1": {
-      "component": "google-cloud-beyond_corp-client_connector_services-v1",
-      "version_file": "lib/google/cloud/beyond_corp/client_connector_services/v1/version.rb"
-    },
     "google-cloud-beyond_corp-client_gateways-v1": {
       "component": "google-cloud-beyond_corp-client_gateways-v1",
       "version_file": "lib/google/cloud/beyond_corp/client_gateways/v1/version.rb"
