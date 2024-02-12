@@ -58,6 +58,7 @@
     "snippets/data_transfer_service/list_transfer_runs.rb",
     "snippets/data_transfer_service/schedule_transfer_runs.rb",
     "snippets/data_transfer_service/start_manual_transfer_runs.rb",
+    "snippets/data_transfer_service/unenroll_data_sources.rb",
     "snippets/data_transfer_service/update_transfer_config.rb",
     "snippets/snippet_metadata_google.cloud.bigquery.datatransfer.v1.json",
     "test/google/cloud/bigquery/data_transfer/v1/data_transfer_service_paths_test.rb",

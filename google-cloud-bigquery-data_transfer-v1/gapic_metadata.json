@@ -84,6 +84,11 @@
               "methods": [
                 "enroll_data_sources"
               ]
+            },
+            "UnenrollDataSources": {
+              "methods": [
+                "unenroll_data_sources"
+              ]
             }
           }
         }

@@ -610,6 +610,46 @@
           "type": "FULL"
         }
       ]
+    },
+    {
+      "region_tag": "bigquerydatatransfer_v1_generated_DataTransferService_UnenrollDataSources_sync",
+      "title": "Snippet for the unenroll_data_sources call in the DataTransferService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client#unenroll_data_sources.",
+      "file": "data_transfer_service/unenroll_data_sources.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "unenroll_data_sources",
+        "full_name": "::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client#unenroll_data_sources",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigquery::DataTransfer::V1::UnenrollDataSourcesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "DataTransferService::Client",
+          "full_name": "::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client"
+        },
+        "method": {
+          "short_name": "UnenrollDataSources",
+          "full_name": "google.cloud.bigquery.datatransfer.v1.DataTransferService.UnenrollDataSources",
+          "service": {
+            "short_name": "DataTransferService",
+            "full_name": "google.cloud.bigquery.datatransfer.v1.DataTransferService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
     }
   ]
 }

@@ -82,6 +82,11 @@ module Google
               # [Data Transfer
               # Service](https://cloud.google.com/bigquery/docs/working-with-transfers).
               rpc :EnrollDataSources, ::Google::Cloud::Bigquery::DataTransfer::V1::EnrollDataSourcesRequest, ::Google::Protobuf::Empty
+              # Unenroll data sources in a user project. This allows users to remove
+              # transfer configurations for these data sources. They will no longer appear
+              # in the ListDataSources RPC and will also no longer appear in the [BigQuery
+              # UI](https://console.cloud.google.com/bigquery).
+              rpc :UnenrollDataSources, ::Google::Cloud::Bigquery::DataTransfer::V1::UnenrollDataSourcesRequest, ::Google::Protobuf::Empty
             end
 
             Stub = Service.rpc_stub_class
