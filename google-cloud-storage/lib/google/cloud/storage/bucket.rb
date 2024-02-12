@@ -1319,7 +1319,7 @@ module Google
         #   as distinct results. The default is `false`. For more information,
         #   see [Object Versioning
         #   ](https://cloud.google.com/storage/docs/object-versioning).
-        # @param [Boolean] include_folders_as_prefixes, If `true`, will also include
+        # @param [Boolean] include_folders_as_prefixes If `true`, will also include
         #   folders and managed folders, besides objects, in the returned prefixes.
         #   Only applicable if delimiter is set to '/'.
         #
