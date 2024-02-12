@@ -1489,7 +1489,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
     mock.expect :get_object, Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket.name, file_name, generations[0]).to_json),
       [bucket.name, file_name], **get_object_args
     mock.expect :list_objects, Google::Apis::StorageV1::Objects.new(kind: "storage#objects", items: file_gapis),
-      [bucket.name], delimiter: nil, max_results: nil, page_token: nil, prefix: file_name, versions: true, user_project: nil, match_glob: nil, options: {}
+      [bucket.name], delimiter: nil, max_results: nil, page_token: nil, prefix: file_name, versions: true, user_project: nil, match_glob: nil, include_folders_as_prefixes:nil, options: {}
 
     bucket.service.mocked_service = mock
     file.service.mocked_service = mock
@@ -1515,7 +1515,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
     mock.expect :get_object, Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket_user_project.name, file_name, generations[0]).to_json),
       [bucket_user_project.name, file_name], **get_object_args(user_project: "test")
     mock.expect :list_objects, Google::Apis::StorageV1::Objects.new(kind: "storage#objects", items: file_gapis),
-      [bucket.name], delimiter: nil, max_results: nil, page_token: nil, prefix: file_name, versions: true, user_project: "test", match_glob: nil, options: {}
+      [bucket.name], delimiter: nil, max_results: nil, page_token: nil, prefix: file_name, versions: true, user_project: "test", match_glob: nil, include_folders_as_prefixes:nil, options: {}
 
     bucket_user_project.service.mocked_service = mock
     file.service.mocked_service = mock
