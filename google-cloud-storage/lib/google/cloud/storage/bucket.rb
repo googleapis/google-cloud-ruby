@@ -1319,6 +1319,9 @@ module Google
         #   as distinct results. The default is `false`. For more information,
         #   see [Object Versioning
         #   ](https://cloud.google.com/storage/docs/object-versioning).
+        # @param [Boolean] include_folders_as_prefixes If `true`, will also include
+        #   folders and managed folders, besides objects, in the returned prefixes.
+        #   Only applicable if delimiter is set to '/'.
         #
         # @return [Array<Google::Cloud::Storage::File>] (See
         #   {Google::Cloud::Storage::File::List})
@@ -1346,17 +1349,19 @@ module Google
         #   end
         #
         def files prefix: nil, delimiter: nil, token: nil, max: nil,
-                  versions: nil, match_glob: nil
+                  versions: nil, match_glob: nil, include_folders_as_prefixes: nil
           ensure_service!
           gapi = service.list_files name, prefix: prefix, delimiter: delimiter,
                                           token: token, max: max,
                                           versions: versions,
                                           user_project: user_project,
-                                          match_glob: match_glob
+                                          match_glob: match_glob,
+                                          include_folders_as_prefixes: include_folders_as_prefixes
           File::List.from_gapi gapi, service, name, prefix, delimiter, max,
                                versions,
                                user_project: user_project,
-                               match_glob: match_glob
+                               match_glob: match_glob,
+                               include_folders_as_prefixes: include_folders_as_prefixes
         end
         alias find_files files
 

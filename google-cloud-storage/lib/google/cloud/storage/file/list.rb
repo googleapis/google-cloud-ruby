@@ -165,8 +165,8 @@ module Google
           # Google::Apis::StorageV1::Objects object.
           def self.from_gapi gapi_list, service, bucket = nil, prefix = nil,
                              delimiter = nil, max = nil, versions = nil,
-                             user_project: nil,
-                             match_glob: nil
+                             user_project: nil, match_glob: nil,
+                             include_folders_as_prefixes: nil
             files = new(Array(gapi_list.items).map do |gapi_object|
               File.from_gapi gapi_object, service, user_project: user_project
             end)
@@ -180,6 +180,7 @@ module Google
             files.instance_variable_set :@versions, versions
             files.instance_variable_set :@user_project, user_project
             files.instance_variable_set :@match_glob, match_glob
+            files.instance_variable_set :@include_folders_as_prefixes, include_folders_as_prefixes
             files
           end
 

@@ -363,7 +363,7 @@ module Google
         # Retrieves a list of files matching the criteria.
         def list_files bucket_name, delimiter: nil, max: nil, token: nil,
                        prefix: nil, versions: nil, user_project: nil,
-                       match_glob: nil,
+                       match_glob: nil, include_folders_as_prefixes: nil,
                        options: {}
           execute do
             service.list_objects \
@@ -372,6 +372,7 @@ module Google
                            versions: versions,
                            user_project: user_project(user_project),
                            match_glob: match_glob,
+                           include_folders_as_prefixes: include_folders_as_prefixes,
                            options: options
           end
         end
