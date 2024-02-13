@@ -212,6 +212,9 @@ module Google
         # @!attribute [rw] kernel_rootkit
         #   @return [::Google::Cloud::SecurityCenter::V1::KernelRootkit]
         #     Signature of the kernel rootkit.
+        # @!attribute [rw] application
+        #   @return [::Google::Cloud::SecurityCenter::V1::Application]
+        #     Represents an application associated with the finding.
         class Finding
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
