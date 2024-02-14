@@ -368,6 +368,424 @@ module Google
                   end
 
                   ##
+                  # Baseline implementation for the list_workloads REST call
+                  #
+                  # @param request_pb [::Google::Cloud::Orchestration::Airflow::Service::V1::ListWorkloadsRequest]
+                  #   A request object representing the call parameters. Required.
+                  # @param options [::Gapic::CallOptions]
+                  #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                  #
+                  # @yield [result, operation] Access the result along with the TransportOperation object
+                  # @yieldparam result [::Google::Cloud::Orchestration::Airflow::Service::V1::ListWorkloadsResponse]
+                  # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                  #
+                  # @return [::Google::Cloud::Orchestration::Airflow::Service::V1::ListWorkloadsResponse]
+                  #   A result object deserialized from the server's reply
+                  def list_workloads request_pb, options = nil
+                    raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                    verb, uri, query_string_params, body = ServiceStub.transcode_list_workloads_request request_pb
+                    query_string_params = if query_string_params.any?
+                                            query_string_params.to_h { |p| p.split "=", 2 }
+                                          else
+                                            {}
+                                          end
+
+                    response = @client_stub.make_http_request(
+                      verb,
+                      uri:     uri,
+                      body:    body || "",
+                      params:  query_string_params,
+                      options: options
+                    )
+                    operation = ::Gapic::Rest::TransportOperation.new response
+                    result = ::Google::Cloud::Orchestration::Airflow::Service::V1::ListWorkloadsResponse.decode_json response.body, ignore_unknown_fields: true
+
+                    yield result, operation if block_given?
+                    result
+                  end
+
+                  ##
+                  # Baseline implementation for the create_user_workloads_secret REST call
+                  #
+                  # @param request_pb [::Google::Cloud::Orchestration::Airflow::Service::V1::CreateUserWorkloadsSecretRequest]
+                  #   A request object representing the call parameters. Required.
+                  # @param options [::Gapic::CallOptions]
+                  #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                  #
+                  # @yield [result, operation] Access the result along with the TransportOperation object
+                  # @yieldparam result [::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsSecret]
+                  # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                  #
+                  # @return [::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsSecret]
+                  #   A result object deserialized from the server's reply
+                  def create_user_workloads_secret request_pb, options = nil
+                    raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                    verb, uri, query_string_params, body = ServiceStub.transcode_create_user_workloads_secret_request request_pb
+                    query_string_params = if query_string_params.any?
+                                            query_string_params.to_h { |p| p.split "=", 2 }
+                                          else
+                                            {}
+                                          end
+
+                    response = @client_stub.make_http_request(
+                      verb,
+                      uri:     uri,
+                      body:    body || "",
+                      params:  query_string_params,
+                      options: options
+                    )
+                    operation = ::Gapic::Rest::TransportOperation.new response
+                    result = ::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsSecret.decode_json response.body, ignore_unknown_fields: true
+
+                    yield result, operation if block_given?
+                    result
+                  end
+
+                  ##
+                  # Baseline implementation for the get_user_workloads_secret REST call
+                  #
+                  # @param request_pb [::Google::Cloud::Orchestration::Airflow::Service::V1::GetUserWorkloadsSecretRequest]
+                  #   A request object representing the call parameters. Required.
+                  # @param options [::Gapic::CallOptions]
+                  #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                  #
+                  # @yield [result, operation] Access the result along with the TransportOperation object
+                  # @yieldparam result [::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsSecret]
+                  # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                  #
+                  # @return [::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsSecret]
+                  #   A result object deserialized from the server's reply
+                  def get_user_workloads_secret request_pb, options = nil
+                    raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                    verb, uri, query_string_params, body = ServiceStub.transcode_get_user_workloads_secret_request request_pb
+                    query_string_params = if query_string_params.any?
+                                            query_string_params.to_h { |p| p.split "=", 2 }
+                                          else
+                                            {}
+                                          end
+
+                    response = @client_stub.make_http_request(
+                      verb,
+                      uri:     uri,
+                      body:    body || "",
+                      params:  query_string_params,
+                      options: options
+                    )
+                    operation = ::Gapic::Rest::TransportOperation.new response
+                    result = ::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsSecret.decode_json response.body, ignore_unknown_fields: true
+
+                    yield result, operation if block_given?
+                    result
+                  end
+
+                  ##
+                  # Baseline implementation for the list_user_workloads_secrets REST call
+                  #
+                  # @param request_pb [::Google::Cloud::Orchestration::Airflow::Service::V1::ListUserWorkloadsSecretsRequest]
+                  #   A request object representing the call parameters. Required.
+                  # @param options [::Gapic::CallOptions]
+                  #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                  #
+                  # @yield [result, operation] Access the result along with the TransportOperation object
+                  # @yieldparam result [::Google::Cloud::Orchestration::Airflow::Service::V1::ListUserWorkloadsSecretsResponse]
+                  # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                  #
+                  # @return [::Google::Cloud::Orchestration::Airflow::Service::V1::ListUserWorkloadsSecretsResponse]
+                  #   A result object deserialized from the server's reply
+                  def list_user_workloads_secrets request_pb, options = nil
+                    raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                    verb, uri, query_string_params, body = ServiceStub.transcode_list_user_workloads_secrets_request request_pb
+                    query_string_params = if query_string_params.any?
+                                            query_string_params.to_h { |p| p.split "=", 2 }
+                                          else
+                                            {}
+                                          end
+
+                    response = @client_stub.make_http_request(
+                      verb,
+                      uri:     uri,
+                      body:    body || "",
+                      params:  query_string_params,
+                      options: options
+                    )
+                    operation = ::Gapic::Rest::TransportOperation.new response
+                    result = ::Google::Cloud::Orchestration::Airflow::Service::V1::ListUserWorkloadsSecretsResponse.decode_json response.body, ignore_unknown_fields: true
+
+                    yield result, operation if block_given?
+                    result
+                  end
+
+                  ##
+                  # Baseline implementation for the update_user_workloads_secret REST call
+                  #
+                  # @param request_pb [::Google::Cloud::Orchestration::Airflow::Service::V1::UpdateUserWorkloadsSecretRequest]
+                  #   A request object representing the call parameters. Required.
+                  # @param options [::Gapic::CallOptions]
+                  #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                  #
+                  # @yield [result, operation] Access the result along with the TransportOperation object
+                  # @yieldparam result [::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsSecret]
+                  # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                  #
+                  # @return [::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsSecret]
+                  #   A result object deserialized from the server's reply
+                  def update_user_workloads_secret request_pb, options = nil
+                    raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                    verb, uri, query_string_params, body = ServiceStub.transcode_update_user_workloads_secret_request request_pb
+                    query_string_params = if query_string_params.any?
+                                            query_string_params.to_h { |p| p.split "=", 2 }
+                                          else
+                                            {}
+                                          end
+
+                    response = @client_stub.make_http_request(
+                      verb,
+                      uri:     uri,
+                      body:    body || "",
+                      params:  query_string_params,
+                      options: options
+                    )
+                    operation = ::Gapic::Rest::TransportOperation.new response
+                    result = ::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsSecret.decode_json response.body, ignore_unknown_fields: true
+
+                    yield result, operation if block_given?
+                    result
+                  end
+
+                  ##
+                  # Baseline implementation for the delete_user_workloads_secret REST call
+                  #
+                  # @param request_pb [::Google::Cloud::Orchestration::Airflow::Service::V1::DeleteUserWorkloadsSecretRequest]
+                  #   A request object representing the call parameters. Required.
+                  # @param options [::Gapic::CallOptions]
+                  #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                  #
+                  # @yield [result, operation] Access the result along with the TransportOperation object
+                  # @yieldparam result [::Google::Protobuf::Empty]
+                  # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                  #
+                  # @return [::Google::Protobuf::Empty]
+                  #   A result object deserialized from the server's reply
+                  def delete_user_workloads_secret request_pb, options = nil
+                    raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                    verb, uri, query_string_params, body = ServiceStub.transcode_delete_user_workloads_secret_request request_pb
+                    query_string_params = if query_string_params.any?
+                                            query_string_params.to_h { |p| p.split "=", 2 }
+                                          else
+                                            {}
+                                          end
+
+                    response = @client_stub.make_http_request(
+                      verb,
+                      uri:     uri,
+                      body:    body || "",
+                      params:  query_string_params,
+                      options: options
+                    )
+                    operation = ::Gapic::Rest::TransportOperation.new response
+                    result = ::Google::Protobuf::Empty.decode_json response.body, ignore_unknown_fields: true
+
+                    yield result, operation if block_given?
+                    result
+                  end
+
+                  ##
+                  # Baseline implementation for the create_user_workloads_config_map REST call
+                  #
+                  # @param request_pb [::Google::Cloud::Orchestration::Airflow::Service::V1::CreateUserWorkloadsConfigMapRequest]
+                  #   A request object representing the call parameters. Required.
+                  # @param options [::Gapic::CallOptions]
+                  #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                  #
+                  # @yield [result, operation] Access the result along with the TransportOperation object
+                  # @yieldparam result [::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsConfigMap]
+                  # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                  #
+                  # @return [::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsConfigMap]
+                  #   A result object deserialized from the server's reply
+                  def create_user_workloads_config_map request_pb, options = nil
+                    raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                    verb, uri, query_string_params, body = ServiceStub.transcode_create_user_workloads_config_map_request request_pb
+                    query_string_params = if query_string_params.any?
+                                            query_string_params.to_h { |p| p.split "=", 2 }
+                                          else
+                                            {}
+                                          end
+
+                    response = @client_stub.make_http_request(
+                      verb,
+                      uri:     uri,
+                      body:    body || "",
+                      params:  query_string_params,
+                      options: options
+                    )
+                    operation = ::Gapic::Rest::TransportOperation.new response
+                    result = ::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsConfigMap.decode_json response.body, ignore_unknown_fields: true
+
+                    yield result, operation if block_given?
+                    result
+                  end
+
+                  ##
+                  # Baseline implementation for the get_user_workloads_config_map REST call
+                  #
+                  # @param request_pb [::Google::Cloud::Orchestration::Airflow::Service::V1::GetUserWorkloadsConfigMapRequest]
+                  #   A request object representing the call parameters. Required.
+                  # @param options [::Gapic::CallOptions]
+                  #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                  #
+                  # @yield [result, operation] Access the result along with the TransportOperation object
+                  # @yieldparam result [::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsConfigMap]
+                  # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                  #
+                  # @return [::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsConfigMap]
+                  #   A result object deserialized from the server's reply
+                  def get_user_workloads_config_map request_pb, options = nil
+                    raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                    verb, uri, query_string_params, body = ServiceStub.transcode_get_user_workloads_config_map_request request_pb
+                    query_string_params = if query_string_params.any?
+                                            query_string_params.to_h { |p| p.split "=", 2 }
+                                          else
+                                            {}
+                                          end
+
+                    response = @client_stub.make_http_request(
+                      verb,
+                      uri:     uri,
+                      body:    body || "",
+                      params:  query_string_params,
+                      options: options
+                    )
+                    operation = ::Gapic::Rest::TransportOperation.new response
+                    result = ::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsConfigMap.decode_json response.body, ignore_unknown_fields: true
+
+                    yield result, operation if block_given?
+                    result
+                  end
+
+                  ##
+                  # Baseline implementation for the list_user_workloads_config_maps REST call
+                  #
+                  # @param request_pb [::Google::Cloud::Orchestration::Airflow::Service::V1::ListUserWorkloadsConfigMapsRequest]
+                  #   A request object representing the call parameters. Required.
+                  # @param options [::Gapic::CallOptions]
+                  #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                  #
+                  # @yield [result, operation] Access the result along with the TransportOperation object
+                  # @yieldparam result [::Google::Cloud::Orchestration::Airflow::Service::V1::ListUserWorkloadsConfigMapsResponse]
+                  # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                  #
+                  # @return [::Google::Cloud::Orchestration::Airflow::Service::V1::ListUserWorkloadsConfigMapsResponse]
+                  #   A result object deserialized from the server's reply
+                  def list_user_workloads_config_maps request_pb, options = nil
+                    raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                    verb, uri, query_string_params, body = ServiceStub.transcode_list_user_workloads_config_maps_request request_pb
+                    query_string_params = if query_string_params.any?
+                                            query_string_params.to_h { |p| p.split "=", 2 }
+                                          else
+                                            {}
+                                          end
+
+                    response = @client_stub.make_http_request(
+                      verb,
+                      uri:     uri,
+                      body:    body || "",
+                      params:  query_string_params,
+                      options: options
+                    )
+                    operation = ::Gapic::Rest::TransportOperation.new response
+                    result = ::Google::Cloud::Orchestration::Airflow::Service::V1::ListUserWorkloadsConfigMapsResponse.decode_json response.body, ignore_unknown_fields: true
+
+                    yield result, operation if block_given?
+                    result
+                  end
+
+                  ##
+                  # Baseline implementation for the update_user_workloads_config_map REST call
+                  #
+                  # @param request_pb [::Google::Cloud::Orchestration::Airflow::Service::V1::UpdateUserWorkloadsConfigMapRequest]
+                  #   A request object representing the call parameters. Required.
+                  # @param options [::Gapic::CallOptions]
+                  #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                  #
+                  # @yield [result, operation] Access the result along with the TransportOperation object
+                  # @yieldparam result [::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsConfigMap]
+                  # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                  #
+                  # @return [::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsConfigMap]
+                  #   A result object deserialized from the server's reply
+                  def update_user_workloads_config_map request_pb, options = nil
+                    raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                    verb, uri, query_string_params, body = ServiceStub.transcode_update_user_workloads_config_map_request request_pb
+                    query_string_params = if query_string_params.any?
+                                            query_string_params.to_h { |p| p.split "=", 2 }
+                                          else
+                                            {}
+                                          end
+
+                    response = @client_stub.make_http_request(
+                      verb,
+                      uri:     uri,
+                      body:    body || "",
+                      params:  query_string_params,
+                      options: options
+                    )
+                    operation = ::Gapic::Rest::TransportOperation.new response
+                    result = ::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsConfigMap.decode_json response.body, ignore_unknown_fields: true
+
+                    yield result, operation if block_given?
+                    result
+                  end
+
+                  ##
+                  # Baseline implementation for the delete_user_workloads_config_map REST call
+                  #
+                  # @param request_pb [::Google::Cloud::Orchestration::Airflow::Service::V1::DeleteUserWorkloadsConfigMapRequest]
+                  #   A request object representing the call parameters. Required.
+                  # @param options [::Gapic::CallOptions]
+                  #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                  #
+                  # @yield [result, operation] Access the result along with the TransportOperation object
+                  # @yieldparam result [::Google::Protobuf::Empty]
+                  # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                  #
+                  # @return [::Google::Protobuf::Empty]
+                  #   A result object deserialized from the server's reply
+                  def delete_user_workloads_config_map request_pb, options = nil
+                    raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                    verb, uri, query_string_params, body = ServiceStub.transcode_delete_user_workloads_config_map_request request_pb
+                    query_string_params = if query_string_params.any?
+                                            query_string_params.to_h { |p| p.split "=", 2 }
+                                          else
+                                            {}
+                                          end
+
+                    response = @client_stub.make_http_request(
+                      verb,
+                      uri:     uri,
+                      body:    body || "",
+                      params:  query_string_params,
+                      options: options
+                    )
+                    operation = ::Gapic::Rest::TransportOperation.new response
+                    result = ::Google::Protobuf::Empty.decode_json response.body, ignore_unknown_fields: true
+
+                    yield result, operation if block_given?
+                    result
+                  end
+
+                  ##
                   # Baseline implementation for the save_snapshot REST call
                   #
                   # @param request_pb [::Google::Cloud::Orchestration::Airflow::Service::V1::SaveSnapshotRequest]
@@ -687,6 +1105,241 @@ module Google
                                                               body: "*",
                                                               matches: [
                                                                 ["environment", %r{^projects/[^/]+/locations/[^/]+/environments/[^/]+/?$}, false]
+                                                              ]
+                                                            )
+                    transcoder.transcode request_pb
+                  end
+
+                  ##
+                  # @private
+                  #
+                  # GRPC transcoding helper method for the list_workloads REST call
+                  #
+                  # @param request_pb [::Google::Cloud::Orchestration::Airflow::Service::V1::ListWorkloadsRequest]
+                  #   A request object representing the call parameters. Required.
+                  # @return [Array(String, [String, nil], Hash{String => String})]
+                  #   Uri, Body, Query string parameters
+                  def self.transcode_list_workloads_request request_pb
+                    transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                            .with_bindings(
+                                                              uri_method: :get,
+                                                              uri_template: "/v1/{parent}/workloads",
+                                                              matches: [
+                                                                ["parent", %r{^projects/[^/]+/locations/[^/]+/environments/[^/]+/?$}, false]
+                                                              ]
+                                                            )
+                    transcoder.transcode request_pb
+                  end
+
+                  ##
+                  # @private
+                  #
+                  # GRPC transcoding helper method for the create_user_workloads_secret REST call
+                  #
+                  # @param request_pb [::Google::Cloud::Orchestration::Airflow::Service::V1::CreateUserWorkloadsSecretRequest]
+                  #   A request object representing the call parameters. Required.
+                  # @return [Array(String, [String, nil], Hash{String => String})]
+                  #   Uri, Body, Query string parameters
+                  def self.transcode_create_user_workloads_secret_request request_pb
+                    transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                            .with_bindings(
+                                                              uri_method: :post,
+                                                              uri_template: "/v1/{parent}/userWorkloadsSecrets",
+                                                              body: "user_workloads_secret",
+                                                              matches: [
+                                                                ["parent", %r{^projects/[^/]+/locations/[^/]+/environments/[^/]+/?$}, false]
+                                                              ]
+                                                            )
+                    transcoder.transcode request_pb
+                  end
+
+                  ##
+                  # @private
+                  #
+                  # GRPC transcoding helper method for the get_user_workloads_secret REST call
+                  #
+                  # @param request_pb [::Google::Cloud::Orchestration::Airflow::Service::V1::GetUserWorkloadsSecretRequest]
+                  #   A request object representing the call parameters. Required.
+                  # @return [Array(String, [String, nil], Hash{String => String})]
+                  #   Uri, Body, Query string parameters
+                  def self.transcode_get_user_workloads_secret_request request_pb
+                    transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                            .with_bindings(
+                                                              uri_method: :get,
+                                                              uri_template: "/v1/{name}",
+                                                              matches: [
+                                                                ["name", %r{^projects/[^/]+/locations/[^/]+/environments/[^/]+/userWorkloadsSecrets/[^/]+/?$}, false]
+                                                              ]
+                                                            )
+                    transcoder.transcode request_pb
+                  end
+
+                  ##
+                  # @private
+                  #
+                  # GRPC transcoding helper method for the list_user_workloads_secrets REST call
+                  #
+                  # @param request_pb [::Google::Cloud::Orchestration::Airflow::Service::V1::ListUserWorkloadsSecretsRequest]
+                  #   A request object representing the call parameters. Required.
+                  # @return [Array(String, [String, nil], Hash{String => String})]
+                  #   Uri, Body, Query string parameters
+                  def self.transcode_list_user_workloads_secrets_request request_pb
+                    transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                            .with_bindings(
+                                                              uri_method: :get,
+                                                              uri_template: "/v1/{parent}/userWorkloadsSecrets",
+                                                              matches: [
+                                                                ["parent", %r{^projects/[^/]+/locations/[^/]+/environments/[^/]+/?$}, false]
+                                                              ]
+                                                            )
+                    transcoder.transcode request_pb
+                  end
+
+                  ##
+                  # @private
+                  #
+                  # GRPC transcoding helper method for the update_user_workloads_secret REST call
+                  #
+                  # @param request_pb [::Google::Cloud::Orchestration::Airflow::Service::V1::UpdateUserWorkloadsSecretRequest]
+                  #   A request object representing the call parameters. Required.
+                  # @return [Array(String, [String, nil], Hash{String => String})]
+                  #   Uri, Body, Query string parameters
+                  def self.transcode_update_user_workloads_secret_request request_pb
+                    transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                            .with_bindings(
+                                                              uri_method: :put,
+                                                              uri_template: "/v1/{user_workloads_secret.name}",
+                                                              body: "user_workloads_secret",
+                                                              matches: [
+                                                                ["user_workloads_secret.name", %r{^projects/[^/]+/locations/[^/]+/environments/[^/]+/userWorkloadsSecrets/[^/]+/?$}, false]
+                                                              ]
+                                                            )
+                    transcoder.transcode request_pb
+                  end
+
+                  ##
+                  # @private
+                  #
+                  # GRPC transcoding helper method for the delete_user_workloads_secret REST call
+                  #
+                  # @param request_pb [::Google::Cloud::Orchestration::Airflow::Service::V1::DeleteUserWorkloadsSecretRequest]
+                  #   A request object representing the call parameters. Required.
+                  # @return [Array(String, [String, nil], Hash{String => String})]
+                  #   Uri, Body, Query string parameters
+                  def self.transcode_delete_user_workloads_secret_request request_pb
+                    transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                            .with_bindings(
+                                                              uri_method: :delete,
+                                                              uri_template: "/v1/{name}",
+                                                              matches: [
+                                                                ["name", %r{^projects/[^/]+/locations/[^/]+/environments/[^/]+/userWorkloadsSecrets/[^/]+/?$}, false]
+                                                              ]
+                                                            )
+                    transcoder.transcode request_pb
+                  end
+
+                  ##
+                  # @private
+                  #
+                  # GRPC transcoding helper method for the create_user_workloads_config_map REST call
+                  #
+                  # @param request_pb [::Google::Cloud::Orchestration::Airflow::Service::V1::CreateUserWorkloadsConfigMapRequest]
+                  #   A request object representing the call parameters. Required.
+                  # @return [Array(String, [String, nil], Hash{String => String})]
+                  #   Uri, Body, Query string parameters
+                  def self.transcode_create_user_workloads_config_map_request request_pb
+                    transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                            .with_bindings(
+                                                              uri_method: :post,
+                                                              uri_template: "/v1/{parent}/userWorkloadsConfigMaps",
+                                                              body: "user_workloads_config_map",
+                                                              matches: [
+                                                                ["parent", %r{^projects/[^/]+/locations/[^/]+/environments/[^/]+/?$}, false]
+                                                              ]
+                                                            )
+                    transcoder.transcode request_pb
+                  end
+
+                  ##
+                  # @private
+                  #
+                  # GRPC transcoding helper method for the get_user_workloads_config_map REST call
+                  #
+                  # @param request_pb [::Google::Cloud::Orchestration::Airflow::Service::V1::GetUserWorkloadsConfigMapRequest]
+                  #   A request object representing the call parameters. Required.
+                  # @return [Array(String, [String, nil], Hash{String => String})]
+                  #   Uri, Body, Query string parameters
+                  def self.transcode_get_user_workloads_config_map_request request_pb
+                    transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                            .with_bindings(
+                                                              uri_method: :get,
+                                                              uri_template: "/v1/{name}",
+                                                              matches: [
+                                                                ["name", %r{^projects/[^/]+/locations/[^/]+/environments/[^/]+/userWorkloadsConfigMaps/[^/]+/?$}, false]
+                                                              ]
+                                                            )
+                    transcoder.transcode request_pb
+                  end
+
+                  ##
+                  # @private
+                  #
+                  # GRPC transcoding helper method for the list_user_workloads_config_maps REST call
+                  #
+                  # @param request_pb [::Google::Cloud::Orchestration::Airflow::Service::V1::ListUserWorkloadsConfigMapsRequest]
+                  #   A request object representing the call parameters. Required.
+                  # @return [Array(String, [String, nil], Hash{String => String})]
+                  #   Uri, Body, Query string parameters
+                  def self.transcode_list_user_workloads_config_maps_request request_pb
+                    transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                            .with_bindings(
+                                                              uri_method: :get,
+                                                              uri_template: "/v1/{parent}/userWorkloadsConfigMaps",
+                                                              matches: [
+                                                                ["parent", %r{^projects/[^/]+/locations/[^/]+/environments/[^/]+/?$}, false]
+                                                              ]
+                                                            )
+                    transcoder.transcode request_pb
+                  end
+
+                  ##
+                  # @private
+                  #
+                  # GRPC transcoding helper method for the update_user_workloads_config_map REST call
+                  #
+                  # @param request_pb [::Google::Cloud::Orchestration::Airflow::Service::V1::UpdateUserWorkloadsConfigMapRequest]
+                  #   A request object representing the call parameters. Required.
+                  # @return [Array(String, [String, nil], Hash{String => String})]
+                  #   Uri, Body, Query string parameters
+                  def self.transcode_update_user_workloads_config_map_request request_pb
+                    transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                            .with_bindings(
+                                                              uri_method: :put,
+                                                              uri_template: "/v1/{user_workloads_config_map.name}",
+                                                              body: "user_workloads_config_map",
+                                                              matches: [
+                                                                ["user_workloads_config_map.name", %r{^projects/[^/]+/locations/[^/]+/environments/[^/]+/userWorkloadsConfigMaps/[^/]+/?$}, false]
+                                                              ]
+                                                            )
+                    transcoder.transcode request_pb
+                  end
+
+                  ##
+                  # @private
+                  #
+                  # GRPC transcoding helper method for the delete_user_workloads_config_map REST call
+                  #
+                  # @param request_pb [::Google::Cloud::Orchestration::Airflow::Service::V1::DeleteUserWorkloadsConfigMapRequest]
+                  #   A request object representing the call parameters. Required.
+                  # @return [Array(String, [String, nil], Hash{String => String})]
+                  #   Uri, Body, Query string parameters
+                  def self.transcode_delete_user_workloads_config_map_request request_pb
+                    transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                            .with_bindings(
+                                                              uri_method: :delete,
+                                                              uri_template: "/v1/{name}",
+                                                              matches: [
+                                                                ["name", %r{^projects/[^/]+/locations/[^/]+/environments/[^/]+/userWorkloadsConfigMaps/[^/]+/?$}, false]
                                                               ]
                                                             )
                     transcoder.transcode request_pb

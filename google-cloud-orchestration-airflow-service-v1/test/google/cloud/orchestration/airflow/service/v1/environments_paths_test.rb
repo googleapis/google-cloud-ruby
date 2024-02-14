@@ -44,4 +44,28 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client
       assert_equal "projects/value0/locations/value1/environments/value2", path
     end
   end
+
+  def test_user_workloads_config_map_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.user_workloads_config_map_path project: "value0", location: "value1", environment: "value2", user_workloads_config_map: "value3"
+      assert_equal "projects/value0/locations/value1/environments/value2/userWorkloadsConfigMaps/value3", path
+    end
+  end
+
+  def test_user_workloads_secret_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.user_workloads_secret_path project: "value0", location: "value1", environment: "value2", user_workloads_secret: "value3"
+      assert_equal "projects/value0/locations/value1/environments/value2/userWorkloadsSecrets/value3", path
+    end
+  end
 end

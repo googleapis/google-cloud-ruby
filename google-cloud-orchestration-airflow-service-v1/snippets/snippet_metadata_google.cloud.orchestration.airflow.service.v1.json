@@ -332,6 +332,446 @@
       ]
     },
     {
+      "region_tag": "composer_v1_generated_Environments_ListWorkloads_sync",
+      "title": "Snippet for the list_workloads call in the Environments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#list_workloads.",
+      "file": "environments/list_workloads.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_workloads",
+        "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#list_workloads",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Orchestration::Airflow::Service::V1::ListWorkloadsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Orchestration::Airflow::Service::V1::ListWorkloadsResponse",
+        "client": {
+          "short_name": "Environments::Client",
+          "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client"
+        },
+        "method": {
+          "short_name": "ListWorkloads",
+          "full_name": "google.cloud.orchestration.airflow.service.v1.Environments.ListWorkloads",
+          "service": {
+            "short_name": "Environments",
+            "full_name": "google.cloud.orchestration.airflow.service.v1.Environments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "composer_v1_generated_Environments_CreateUserWorkloadsSecret_sync",
+      "title": "Snippet for the create_user_workloads_secret call in the Environments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#create_user_workloads_secret.",
+      "file": "environments/create_user_workloads_secret.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_user_workloads_secret",
+        "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#create_user_workloads_secret",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Orchestration::Airflow::Service::V1::CreateUserWorkloadsSecretRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsSecret",
+        "client": {
+          "short_name": "Environments::Client",
+          "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client"
+        },
+        "method": {
+          "short_name": "CreateUserWorkloadsSecret",
+          "full_name": "google.cloud.orchestration.airflow.service.v1.Environments.CreateUserWorkloadsSecret",
+          "service": {
+            "short_name": "Environments",
+            "full_name": "google.cloud.orchestration.airflow.service.v1.Environments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "composer_v1_generated_Environments_GetUserWorkloadsSecret_sync",
+      "title": "Snippet for the get_user_workloads_secret call in the Environments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#get_user_workloads_secret.",
+      "file": "environments/get_user_workloads_secret.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_user_workloads_secret",
+        "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#get_user_workloads_secret",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Orchestration::Airflow::Service::V1::GetUserWorkloadsSecretRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsSecret",
+        "client": {
+          "short_name": "Environments::Client",
+          "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client"
+        },
+        "method": {
+          "short_name": "GetUserWorkloadsSecret",
+          "full_name": "google.cloud.orchestration.airflow.service.v1.Environments.GetUserWorkloadsSecret",
+          "service": {
+            "short_name": "Environments",
+            "full_name": "google.cloud.orchestration.airflow.service.v1.Environments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "composer_v1_generated_Environments_ListUserWorkloadsSecrets_sync",
+      "title": "Snippet for the list_user_workloads_secrets call in the Environments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#list_user_workloads_secrets.",
+      "file": "environments/list_user_workloads_secrets.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_user_workloads_secrets",
+        "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#list_user_workloads_secrets",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Orchestration::Airflow::Service::V1::ListUserWorkloadsSecretsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Orchestration::Airflow::Service::V1::ListUserWorkloadsSecretsResponse",
+        "client": {
+          "short_name": "Environments::Client",
+          "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client"
+        },
+        "method": {
+          "short_name": "ListUserWorkloadsSecrets",
+          "full_name": "google.cloud.orchestration.airflow.service.v1.Environments.ListUserWorkloadsSecrets",
+          "service": {
+            "short_name": "Environments",
+            "full_name": "google.cloud.orchestration.airflow.service.v1.Environments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "composer_v1_generated_Environments_UpdateUserWorkloadsSecret_sync",
+      "title": "Snippet for the update_user_workloads_secret call in the Environments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#update_user_workloads_secret.",
+      "file": "environments/update_user_workloads_secret.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_user_workloads_secret",
+        "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#update_user_workloads_secret",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Orchestration::Airflow::Service::V1::UpdateUserWorkloadsSecretRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsSecret",
+        "client": {
+          "short_name": "Environments::Client",
+          "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client"
+        },
+        "method": {
+          "short_name": "UpdateUserWorkloadsSecret",
+          "full_name": "google.cloud.orchestration.airflow.service.v1.Environments.UpdateUserWorkloadsSecret",
+          "service": {
+            "short_name": "Environments",
+            "full_name": "google.cloud.orchestration.airflow.service.v1.Environments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "composer_v1_generated_Environments_DeleteUserWorkloadsSecret_sync",
+      "title": "Snippet for the delete_user_workloads_secret call in the Environments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#delete_user_workloads_secret.",
+      "file": "environments/delete_user_workloads_secret.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_user_workloads_secret",
+        "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#delete_user_workloads_secret",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Orchestration::Airflow::Service::V1::DeleteUserWorkloadsSecretRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "Environments::Client",
+          "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client"
+        },
+        "method": {
+          "short_name": "DeleteUserWorkloadsSecret",
+          "full_name": "google.cloud.orchestration.airflow.service.v1.Environments.DeleteUserWorkloadsSecret",
+          "service": {
+            "short_name": "Environments",
+            "full_name": "google.cloud.orchestration.airflow.service.v1.Environments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "composer_v1_generated_Environments_CreateUserWorkloadsConfigMap_sync",
+      "title": "Snippet for the create_user_workloads_config_map call in the Environments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#create_user_workloads_config_map.",
+      "file": "environments/create_user_workloads_config_map.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_user_workloads_config_map",
+        "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#create_user_workloads_config_map",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Orchestration::Airflow::Service::V1::CreateUserWorkloadsConfigMapRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsConfigMap",
+        "client": {
+          "short_name": "Environments::Client",
+          "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client"
+        },
+        "method": {
+          "short_name": "CreateUserWorkloadsConfigMap",
+          "full_name": "google.cloud.orchestration.airflow.service.v1.Environments.CreateUserWorkloadsConfigMap",
+          "service": {
+            "short_name": "Environments",
+            "full_name": "google.cloud.orchestration.airflow.service.v1.Environments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "composer_v1_generated_Environments_GetUserWorkloadsConfigMap_sync",
+      "title": "Snippet for the get_user_workloads_config_map call in the Environments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#get_user_workloads_config_map.",
+      "file": "environments/get_user_workloads_config_map.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_user_workloads_config_map",
+        "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#get_user_workloads_config_map",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Orchestration::Airflow::Service::V1::GetUserWorkloadsConfigMapRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsConfigMap",
+        "client": {
+          "short_name": "Environments::Client",
+          "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client"
+        },
+        "method": {
+          "short_name": "GetUserWorkloadsConfigMap",
+          "full_name": "google.cloud.orchestration.airflow.service.v1.Environments.GetUserWorkloadsConfigMap",
+          "service": {
+            "short_name": "Environments",
+            "full_name": "google.cloud.orchestration.airflow.service.v1.Environments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "composer_v1_generated_Environments_ListUserWorkloadsConfigMaps_sync",
+      "title": "Snippet for the list_user_workloads_config_maps call in the Environments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#list_user_workloads_config_maps.",
+      "file": "environments/list_user_workloads_config_maps.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_user_workloads_config_maps",
+        "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#list_user_workloads_config_maps",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Orchestration::Airflow::Service::V1::ListUserWorkloadsConfigMapsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Orchestration::Airflow::Service::V1::ListUserWorkloadsConfigMapsResponse",
+        "client": {
+          "short_name": "Environments::Client",
+          "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client"
+        },
+        "method": {
+          "short_name": "ListUserWorkloadsConfigMaps",
+          "full_name": "google.cloud.orchestration.airflow.service.v1.Environments.ListUserWorkloadsConfigMaps",
+          "service": {
+            "short_name": "Environments",
+            "full_name": "google.cloud.orchestration.airflow.service.v1.Environments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "composer_v1_generated_Environments_UpdateUserWorkloadsConfigMap_sync",
+      "title": "Snippet for the update_user_workloads_config_map call in the Environments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#update_user_workloads_config_map.",
+      "file": "environments/update_user_workloads_config_map.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_user_workloads_config_map",
+        "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#update_user_workloads_config_map",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Orchestration::Airflow::Service::V1::UpdateUserWorkloadsConfigMapRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsConfigMap",
+        "client": {
+          "short_name": "Environments::Client",
+          "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client"
+        },
+        "method": {
+          "short_name": "UpdateUserWorkloadsConfigMap",
+          "full_name": "google.cloud.orchestration.airflow.service.v1.Environments.UpdateUserWorkloadsConfigMap",
+          "service": {
+            "short_name": "Environments",
+            "full_name": "google.cloud.orchestration.airflow.service.v1.Environments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "composer_v1_generated_Environments_DeleteUserWorkloadsConfigMap_sync",
+      "title": "Snippet for the delete_user_workloads_config_map call in the Environments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#delete_user_workloads_config_map.",
+      "file": "environments/delete_user_workloads_config_map.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_user_workloads_config_map",
+        "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#delete_user_workloads_config_map",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Orchestration::Airflow::Service::V1::DeleteUserWorkloadsConfigMapRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "Environments::Client",
+          "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client"
+        },
+        "method": {
+          "short_name": "DeleteUserWorkloadsConfigMap",
+          "full_name": "google.cloud.orchestration.airflow.service.v1.Environments.DeleteUserWorkloadsConfigMap",
+          "service": {
+            "short_name": "Environments",
+            "full_name": "google.cloud.orchestration.airflow.service.v1.Environments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "composer_v1_generated_Environments_SaveSnapshot_sync",
       "title": "Snippet for the save_snapshot call in the Environments service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#save_snapshot.",

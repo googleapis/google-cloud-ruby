@@ -51,6 +51,63 @@ module Google
                 rpc :StopAirflowCommand, ::Google::Cloud::Orchestration::Airflow::Service::V1::StopAirflowCommandRequest, ::Google::Cloud::Orchestration::Airflow::Service::V1::StopAirflowCommandResponse
                 # Polls Airflow CLI command execution and fetches logs.
                 rpc :PollAirflowCommand, ::Google::Cloud::Orchestration::Airflow::Service::V1::PollAirflowCommandRequest, ::Google::Cloud::Orchestration::Airflow::Service::V1::PollAirflowCommandResponse
+                # Lists workloads in a Cloud Composer environment. Workload is a unit that
+                # runs a single Composer component.
+                #
+                # This method is supported for Cloud Composer environments in versions
+                # composer-3.*.*-airflow-*.*.* and newer.
+                rpc :ListWorkloads, ::Google::Cloud::Orchestration::Airflow::Service::V1::ListWorkloadsRequest, ::Google::Cloud::Orchestration::Airflow::Service::V1::ListWorkloadsResponse
+                # Creates a user workloads Secret.
+                #
+                # This method is supported for Cloud Composer environments in versions
+                # composer-3.*.*-airflow-*.*.* and newer.
+                rpc :CreateUserWorkloadsSecret, ::Google::Cloud::Orchestration::Airflow::Service::V1::CreateUserWorkloadsSecretRequest, ::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsSecret
+                # Gets an existing user workloads Secret.
+                # Values of the "data" field in the response are cleared.
+                #
+                # This method is supported for Cloud Composer environments in versions
+                # composer-3.*.*-airflow-*.*.* and newer.
+                rpc :GetUserWorkloadsSecret, ::Google::Cloud::Orchestration::Airflow::Service::V1::GetUserWorkloadsSecretRequest, ::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsSecret
+                # Lists user workloads Secrets.
+                #
+                # This method is supported for Cloud Composer environments in versions
+                # composer-3.*.*-airflow-*.*.* and newer.
+                rpc :ListUserWorkloadsSecrets, ::Google::Cloud::Orchestration::Airflow::Service::V1::ListUserWorkloadsSecretsRequest, ::Google::Cloud::Orchestration::Airflow::Service::V1::ListUserWorkloadsSecretsResponse
+                # Updates a user workloads Secret.
+                #
+                # This method is supported for Cloud Composer environments in versions
+                # composer-3.*.*-airflow-*.*.* and newer.
+                rpc :UpdateUserWorkloadsSecret, ::Google::Cloud::Orchestration::Airflow::Service::V1::UpdateUserWorkloadsSecretRequest, ::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsSecret
+                # Deletes a user workloads Secret.
+                #
+                # This method is supported for Cloud Composer environments in versions
+                # composer-3.*.*-airflow-*.*.* and newer.
+                rpc :DeleteUserWorkloadsSecret, ::Google::Cloud::Orchestration::Airflow::Service::V1::DeleteUserWorkloadsSecretRequest, ::Google::Protobuf::Empty
+                # Creates a user workloads ConfigMap.
+                #
+                # This method is supported for Cloud Composer environments in versions
+                # composer-3.*.*-airflow-*.*.* and newer.
+                rpc :CreateUserWorkloadsConfigMap, ::Google::Cloud::Orchestration::Airflow::Service::V1::CreateUserWorkloadsConfigMapRequest, ::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsConfigMap
+                # Gets an existing user workloads ConfigMap.
+                #
+                # This method is supported for Cloud Composer environments in versions
+                # composer-3.*.*-airflow-*.*.* and newer.
+                rpc :GetUserWorkloadsConfigMap, ::Google::Cloud::Orchestration::Airflow::Service::V1::GetUserWorkloadsConfigMapRequest, ::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsConfigMap
+                # Lists user workloads ConfigMaps.
+                #
+                # This method is supported for Cloud Composer environments in versions
+                # composer-3.*.*-airflow-*.*.* and newer.
+                rpc :ListUserWorkloadsConfigMaps, ::Google::Cloud::Orchestration::Airflow::Service::V1::ListUserWorkloadsConfigMapsRequest, ::Google::Cloud::Orchestration::Airflow::Service::V1::ListUserWorkloadsConfigMapsResponse
+                # Updates a user workloads ConfigMap.
+                #
+                # This method is supported for Cloud Composer environments in versions
+                # composer-3.*.*-airflow-*.*.* and newer.
+                rpc :UpdateUserWorkloadsConfigMap, ::Google::Cloud::Orchestration::Airflow::Service::V1::UpdateUserWorkloadsConfigMapRequest, ::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsConfigMap
+                # Deletes a user workloads ConfigMap.
+                #
+                # This method is supported for Cloud Composer environments in versions
+                # composer-3.*.*-airflow-*.*.* and newer.
+                rpc :DeleteUserWorkloadsConfigMap, ::Google::Cloud::Orchestration::Airflow::Service::V1::DeleteUserWorkloadsConfigMapRequest, ::Google::Protobuf::Empty
                 # Creates a snapshots of a Cloud Composer environment.
                 #
                 # As a result of this operation, snapshot of environment's state is stored

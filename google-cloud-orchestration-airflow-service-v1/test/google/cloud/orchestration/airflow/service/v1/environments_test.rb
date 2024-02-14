@@ -571,6 +571,677 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client
     end
   end
 
+  def test_list_workloads
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Orchestration::Airflow::Service::V1::ListWorkloadsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+
+    list_workloads_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_workloads, name
+      assert_kind_of ::Google::Cloud::Orchestration::Airflow::Service::V1::ListWorkloadsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_workloads_client_stub do
+      # Create client
+      client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_workloads({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_workloads parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_workloads ::Google::Cloud::Orchestration::Airflow::Service::V1::ListWorkloadsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_workloads({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_workloads(::Google::Cloud::Orchestration::Airflow::Service::V1::ListWorkloadsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_workloads_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_user_workloads_secret
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsSecret.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    user_workloads_secret = {}
+
+    create_user_workloads_secret_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_user_workloads_secret, name
+      assert_kind_of ::Google::Cloud::Orchestration::Airflow::Service::V1::CreateUserWorkloadsSecretRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsSecret), request["user_workloads_secret"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_user_workloads_secret_client_stub do
+      # Create client
+      client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_user_workloads_secret({ parent: parent, user_workloads_secret: user_workloads_secret }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_user_workloads_secret parent: parent, user_workloads_secret: user_workloads_secret do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_user_workloads_secret ::Google::Cloud::Orchestration::Airflow::Service::V1::CreateUserWorkloadsSecretRequest.new(parent: parent, user_workloads_secret: user_workloads_secret) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_user_workloads_secret({ parent: parent, user_workloads_secret: user_workloads_secret }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_user_workloads_secret(::Google::Cloud::Orchestration::Airflow::Service::V1::CreateUserWorkloadsSecretRequest.new(parent: parent, user_workloads_secret: user_workloads_secret), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_user_workloads_secret_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_user_workloads_secret
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsSecret.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_user_workloads_secret_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_user_workloads_secret, name
+      assert_kind_of ::Google::Cloud::Orchestration::Airflow::Service::V1::GetUserWorkloadsSecretRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_user_workloads_secret_client_stub do
+      # Create client
+      client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_user_workloads_secret({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_user_workloads_secret name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_user_workloads_secret ::Google::Cloud::Orchestration::Airflow::Service::V1::GetUserWorkloadsSecretRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_user_workloads_secret({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_user_workloads_secret(::Google::Cloud::Orchestration::Airflow::Service::V1::GetUserWorkloadsSecretRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_user_workloads_secret_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_user_workloads_secrets
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Orchestration::Airflow::Service::V1::ListUserWorkloadsSecretsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_user_workloads_secrets_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_user_workloads_secrets, name
+      assert_kind_of ::Google::Cloud::Orchestration::Airflow::Service::V1::ListUserWorkloadsSecretsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_user_workloads_secrets_client_stub do
+      # Create client
+      client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_user_workloads_secrets({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_user_workloads_secrets parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_user_workloads_secrets ::Google::Cloud::Orchestration::Airflow::Service::V1::ListUserWorkloadsSecretsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_user_workloads_secrets({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_user_workloads_secrets(::Google::Cloud::Orchestration::Airflow::Service::V1::ListUserWorkloadsSecretsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_user_workloads_secrets_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_user_workloads_secret
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsSecret.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    user_workloads_secret = {}
+
+    update_user_workloads_secret_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_user_workloads_secret, name
+      assert_kind_of ::Google::Cloud::Orchestration::Airflow::Service::V1::UpdateUserWorkloadsSecretRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsSecret), request["user_workloads_secret"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_user_workloads_secret_client_stub do
+      # Create client
+      client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_user_workloads_secret({ user_workloads_secret: user_workloads_secret }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_user_workloads_secret user_workloads_secret: user_workloads_secret do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_user_workloads_secret ::Google::Cloud::Orchestration::Airflow::Service::V1::UpdateUserWorkloadsSecretRequest.new(user_workloads_secret: user_workloads_secret) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_user_workloads_secret({ user_workloads_secret: user_workloads_secret }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_user_workloads_secret(::Google::Cloud::Orchestration::Airflow::Service::V1::UpdateUserWorkloadsSecretRequest.new(user_workloads_secret: user_workloads_secret), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_user_workloads_secret_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_user_workloads_secret
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_user_workloads_secret_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_user_workloads_secret, name
+      assert_kind_of ::Google::Cloud::Orchestration::Airflow::Service::V1::DeleteUserWorkloadsSecretRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_user_workloads_secret_client_stub do
+      # Create client
+      client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_user_workloads_secret({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_user_workloads_secret name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_user_workloads_secret ::Google::Cloud::Orchestration::Airflow::Service::V1::DeleteUserWorkloadsSecretRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_user_workloads_secret({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_user_workloads_secret(::Google::Cloud::Orchestration::Airflow::Service::V1::DeleteUserWorkloadsSecretRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_user_workloads_secret_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_user_workloads_config_map
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsConfigMap.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    user_workloads_config_map = {}
+
+    create_user_workloads_config_map_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_user_workloads_config_map, name
+      assert_kind_of ::Google::Cloud::Orchestration::Airflow::Service::V1::CreateUserWorkloadsConfigMapRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsConfigMap), request["user_workloads_config_map"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_user_workloads_config_map_client_stub do
+      # Create client
+      client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_user_workloads_config_map({ parent: parent, user_workloads_config_map: user_workloads_config_map }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_user_workloads_config_map parent: parent, user_workloads_config_map: user_workloads_config_map do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_user_workloads_config_map ::Google::Cloud::Orchestration::Airflow::Service::V1::CreateUserWorkloadsConfigMapRequest.new(parent: parent, user_workloads_config_map: user_workloads_config_map) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_user_workloads_config_map({ parent: parent, user_workloads_config_map: user_workloads_config_map }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_user_workloads_config_map(::Google::Cloud::Orchestration::Airflow::Service::V1::CreateUserWorkloadsConfigMapRequest.new(parent: parent, user_workloads_config_map: user_workloads_config_map), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_user_workloads_config_map_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_user_workloads_config_map
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsConfigMap.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_user_workloads_config_map_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_user_workloads_config_map, name
+      assert_kind_of ::Google::Cloud::Orchestration::Airflow::Service::V1::GetUserWorkloadsConfigMapRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_user_workloads_config_map_client_stub do
+      # Create client
+      client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_user_workloads_config_map({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_user_workloads_config_map name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_user_workloads_config_map ::Google::Cloud::Orchestration::Airflow::Service::V1::GetUserWorkloadsConfigMapRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_user_workloads_config_map({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_user_workloads_config_map(::Google::Cloud::Orchestration::Airflow::Service::V1::GetUserWorkloadsConfigMapRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_user_workloads_config_map_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_user_workloads_config_maps
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Orchestration::Airflow::Service::V1::ListUserWorkloadsConfigMapsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_user_workloads_config_maps_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_user_workloads_config_maps, name
+      assert_kind_of ::Google::Cloud::Orchestration::Airflow::Service::V1::ListUserWorkloadsConfigMapsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_user_workloads_config_maps_client_stub do
+      # Create client
+      client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_user_workloads_config_maps({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_user_workloads_config_maps parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_user_workloads_config_maps ::Google::Cloud::Orchestration::Airflow::Service::V1::ListUserWorkloadsConfigMapsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_user_workloads_config_maps({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_user_workloads_config_maps(::Google::Cloud::Orchestration::Airflow::Service::V1::ListUserWorkloadsConfigMapsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_user_workloads_config_maps_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_user_workloads_config_map
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsConfigMap.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    user_workloads_config_map = {}
+
+    update_user_workloads_config_map_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_user_workloads_config_map, name
+      assert_kind_of ::Google::Cloud::Orchestration::Airflow::Service::V1::UpdateUserWorkloadsConfigMapRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsConfigMap), request["user_workloads_config_map"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_user_workloads_config_map_client_stub do
+      # Create client
+      client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_user_workloads_config_map({ user_workloads_config_map: user_workloads_config_map }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_user_workloads_config_map user_workloads_config_map: user_workloads_config_map do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_user_workloads_config_map ::Google::Cloud::Orchestration::Airflow::Service::V1::UpdateUserWorkloadsConfigMapRequest.new(user_workloads_config_map: user_workloads_config_map) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_user_workloads_config_map({ user_workloads_config_map: user_workloads_config_map }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_user_workloads_config_map(::Google::Cloud::Orchestration::Airflow::Service::V1::UpdateUserWorkloadsConfigMapRequest.new(user_workloads_config_map: user_workloads_config_map), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_user_workloads_config_map_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_user_workloads_config_map
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_user_workloads_config_map_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_user_workloads_config_map, name
+      assert_kind_of ::Google::Cloud::Orchestration::Airflow::Service::V1::DeleteUserWorkloadsConfigMapRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_user_workloads_config_map_client_stub do
+      # Create client
+      client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_user_workloads_config_map({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_user_workloads_config_map name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_user_workloads_config_map ::Google::Cloud::Orchestration::Airflow::Service::V1::DeleteUserWorkloadsConfigMapRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_user_workloads_config_map({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_user_workloads_config_map(::Google::Cloud::Orchestration::Airflow::Service::V1::DeleteUserWorkloadsConfigMapRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_user_workloads_config_map_client_stub.call_rpc_count
+    end
+  end
+
   def test_save_snapshot
     # Create GRPC objects.
     grpc_response = ::Google::Longrunning::Operation.new
