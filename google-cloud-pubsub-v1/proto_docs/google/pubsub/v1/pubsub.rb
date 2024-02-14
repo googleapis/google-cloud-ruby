@@ -102,7 +102,7 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
-            # Possible states for managed ingestion from Amazon Kinesis Data Streams.
+            # Possible states for ingestion from Amazon Kinesis Data Streams.
             module State
               # Default value. This value is unused.
               STATE_UNSPECIFIED = 0
@@ -182,8 +182,7 @@ module Google
         #     Output only. An output-only field indicating the state of the topic.
         # @!attribute [rw] ingestion_data_source_settings
         #   @return [::Google::Cloud::PubSub::V1::IngestionDataSourceSettings]
-        #     Optional. Settings for managed ingestion from a data source into this
-        #     topic.
+        #     Optional. Settings for ingestion from a data source into this topic.
         class Topic
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

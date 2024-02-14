@@ -275,8 +275,7 @@ module Google
             #     not set, message retention is controlled by settings on individual
             #     subscriptions. Cannot be more than 31 days or less than 10 minutes.
             #   @param ingestion_data_source_settings [::Google::Cloud::PubSub::V1::IngestionDataSourceSettings, ::Hash]
-            #     Optional. Settings for managed ingestion from a data source into this
-            #     topic.
+            #     Optional. Settings for ingestion from a data source into this topic.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::PubSub::V1::Topic]
