@@ -851,7 +851,8 @@ module Google
             # @!attribute [rw] bounding_poly
             #   @return [::Google::Cloud::DocumentAI::V1beta3::BoundingPoly]
             #     Optional. Identifies the bounding polygon of a layout element on the
-            #     page.
+            #     page. If `layout_type` is set, the bounding polygon must be exactly the
+            #     same to the layout element it's referring to.
             # @!attribute [rw] confidence
             #   @return [::Float]
             #     Optional. Confidence of detected page element, if applicable. Range

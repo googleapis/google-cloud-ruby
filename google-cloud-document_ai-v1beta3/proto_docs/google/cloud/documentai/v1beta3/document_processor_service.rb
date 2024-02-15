@@ -34,8 +34,8 @@ module Google
         #     Only process certain pages from the end, same as above.
         # @!attribute [rw] ocr_config
         #   @return [::Google::Cloud::DocumentAI::V1beta3::OcrConfig]
-        #     Only applicable to `OCR_PROCESSOR`. Returns error if set on other
-        #     processor types.
+        #     Only applicable to `OCR_PROCESSOR` and `FORM_PARSER_PROCESSOR`.
+        #     Returns error if set on other processor types.
         # @!attribute [rw] schema_override
         #   @return [::Google::Cloud::DocumentAI::V1beta3::DocumentSchema]
         #     Optional. Override the schema of the
@@ -101,9 +101,26 @@ module Google
         # @!attribute [rw] process_options
         #   @return [::Google::Cloud::DocumentAI::V1beta3::ProcessOptions]
         #     Inference-time options for the process API
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. The labels with user-defined metadata for the request.
+        #
+        #     Label keys and values can be no longer than 63 characters
+        #     (Unicode codepoints) and can only contain lowercase letters, numeric
+        #     characters, underscores, and dashes. International characters are allowed.
+        #     Label values are optional. Label keys must start with a letter.
         class ProcessRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # The status of human review on a processed document.
@@ -205,6 +222,14 @@ module Google
         # @!attribute [rw] process_options
         #   @return [::Google::Cloud::DocumentAI::V1beta3::ProcessOptions]
         #     Inference-time options for the process API
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. The labels with user-defined metadata for the request.
+        #
+        #     Label keys and values can be no longer than 63 characters
+        #     (Unicode codepoints) and can only contain lowercase letters, numeric
+        #     characters, underscores, and dashes. International characters are allowed.
+        #     Label values are optional. Label keys must start with a letter.
         class BatchProcessRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -236,6 +261,15 @@ module Google
           #   @return [::String]
           #     The output Cloud Storage directory to put the processed documents.
           class BatchOutputConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -580,7 +614,8 @@ module Google
         #   @return [::Google::Cloud::DocumentAI::V1beta3::Processor]
         #     Required. The processor to be created, requires
         #     {::Google::Cloud::DocumentAI::V1beta3::Processor#type Processor.type} and
-        #     [Processor.display_name]][] to be set. Also, the
+        #     {::Google::Cloud::DocumentAI::V1beta3::Processor#display_name Processor.display_name}
+        #     to be set. Also, the
         #     {::Google::Cloud::DocumentAI::V1beta3::Processor#kms_key_name Processor.kms_key_name}
         #     field must be set if the processor is under CMEK.
         class CreateProcessorRequest
@@ -714,6 +749,9 @@ module Google
         # @!attribute [rw] custom_document_extraction_options
         #   @return [::Google::Cloud::DocumentAI::V1beta3::TrainProcessorVersionRequest::CustomDocumentExtractionOptions]
         #     Options to control Custom Document Extraction (CDE) Processor.
+        # @!attribute [rw] foundation_model_tuning_options
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::TrainProcessorVersionRequest::FoundationModelTuningOptions]
+        #     Options to control foundation model tuning of a processor.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent (project, location and processor) to create the new
@@ -769,6 +807,21 @@ module Google
 
               TEMPLATE_BASED = 2
             end
+          end
+
+          # Options to control foundation model tuning of the processor.
+          # @!attribute [rw] train_steps
+          #   @return [::Integer]
+          #     Optional. The number of steps to run for model tuning. Valid values are
+          #     between 1 and 400. If not provided, recommended steps will be used.
+          # @!attribute [rw] learning_rate_multiplier
+          #   @return [::Float]
+          #     Optional. The multiplier to apply to the recommended learning rate. Valid
+          #     values are between 0.1 and 10. If not provided, recommended learning rate
+          #     will be used.
+          class FoundationModelTuningOptions
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
