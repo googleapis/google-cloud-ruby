@@ -360,6 +360,320 @@ module Google
               end
             end
 
+            # Create user workloads Secret request.
+            # @!attribute [rw] parent
+            #   @return [::String]
+            #     Required. The environment name to create a Secret for, in the form:
+            #     "projects/\\{projectId}/locations/\\{locationId}/environments/\\{environmentId}"
+            # @!attribute [rw] user_workloads_secret
+            #   @return [::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsSecret]
+            #     Required. User workloads Secret to create.
+            class CreateUserWorkloadsSecretRequest
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Get user workloads Secret request.
+            # @!attribute [rw] name
+            #   @return [::String]
+            #     Required. The resource name of the Secret to get, in the form:
+            #     "projects/\\{projectId}/locations/\\{locationId}/environments/\\{environmentId}/userWorkloadsSecrets/\\{userWorkloadsSecretId}"
+            class GetUserWorkloadsSecretRequest
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # List user workloads Secrets request.
+            # @!attribute [rw] parent
+            #   @return [::String]
+            #     Required. List Secrets in the given environment, in the form:
+            #     "projects/\\{projectId}/locations/\\{locationId}/environments/\\{environmentId}"
+            # @!attribute [rw] page_size
+            #   @return [::Integer]
+            #     Optional. The maximum number of Secrets to return.
+            # @!attribute [rw] page_token
+            #   @return [::String]
+            #     Optional. The next_page_token value returned from a previous List request,
+            #     if any.
+            class ListUserWorkloadsSecretsRequest
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Update user workloads Secret request.
+            # @!attribute [rw] user_workloads_secret
+            #   @return [::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsSecret]
+            #     Optional. User workloads Secret to override.
+            class UpdateUserWorkloadsSecretRequest
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Delete user workloads Secret request.
+            # @!attribute [rw] name
+            #   @return [::String]
+            #     Required. The Secret to delete, in the form:
+            #     "projects/\\{projectId}/locations/\\{locationId}/environments/\\{environmentId}/userWorkloadsSecrets/\\{userWorkloadsSecretId}"
+            class DeleteUserWorkloadsSecretRequest
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Create user workloads ConfigMap request.
+            # @!attribute [rw] parent
+            #   @return [::String]
+            #     Required. The environment name to create a ConfigMap for, in the form:
+            #     "projects/\\{projectId}/locations/\\{locationId}/environments/\\{environmentId}"
+            # @!attribute [rw] user_workloads_config_map
+            #   @return [::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsConfigMap]
+            #     Required. User workloads ConfigMap to create.
+            class CreateUserWorkloadsConfigMapRequest
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Get user workloads ConfigMap request.
+            # @!attribute [rw] name
+            #   @return [::String]
+            #     Required. The resource name of the ConfigMap to get, in the form:
+            #     "projects/\\{projectId}/locations/\\{locationId}/environments/\\{environmentId}/userWorkloadsConfigMaps/\\{userWorkloadsConfigMapId}"
+            class GetUserWorkloadsConfigMapRequest
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # List user workloads ConfigMaps request.
+            # @!attribute [rw] parent
+            #   @return [::String]
+            #     Required. List ConfigMaps in the given environment, in the form:
+            #     "projects/\\{projectId}/locations/\\{locationId}/environments/\\{environmentId}"
+            # @!attribute [rw] page_size
+            #   @return [::Integer]
+            #     Optional. The maximum number of ConfigMaps to return.
+            # @!attribute [rw] page_token
+            #   @return [::String]
+            #     Optional. The next_page_token value returned from a previous List request,
+            #     if any.
+            class ListUserWorkloadsConfigMapsRequest
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Update user workloads ConfigMap request.
+            # @!attribute [rw] user_workloads_config_map
+            #   @return [::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsConfigMap]
+            #     Optional. User workloads ConfigMap to override.
+            class UpdateUserWorkloadsConfigMapRequest
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Delete user workloads ConfigMap request.
+            # @!attribute [rw] name
+            #   @return [::String]
+            #     Required. The ConfigMap to delete, in the form:
+            #     "projects/\\{projectId}/locations/\\{locationId}/environments/\\{environmentId}/userWorkloadsConfigMaps/\\{userWorkloadsConfigMapId}"
+            class DeleteUserWorkloadsConfigMapRequest
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # User workloads Secret used by Airflow tasks that run with Kubernetes executor
+            # or KubernetesPodOperator.
+            # @!attribute [rw] name
+            #   @return [::String]
+            #     Identifier. The resource name of the Secret, in the form:
+            #     "projects/\\{projectId}/locations/\\{locationId}/environments/\\{environmentId}/userWorkloadsSecrets/\\{userWorkloadsSecretId}"
+            # @!attribute [rw] data
+            #   @return [::Google::Protobuf::Map{::String => ::String}]
+            #     Optional. The "data" field of Kubernetes Secret, organized in key-value
+            #     pairs, which can contain sensitive values such as a password, a token, or a
+            #     key. The values for all keys have to be base64-encoded strings. For details
+            #     see: https://kubernetes.io/docs/concepts/configuration/secret/
+            class UserWorkloadsSecret
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # @!attribute [rw] key
+              #   @return [::String]
+              # @!attribute [rw] value
+              #   @return [::String]
+              class DataEntry
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+            end
+
+            # The user workloads Secrets for a given environment.
+            # @!attribute [rw] user_workloads_secrets
+            #   @return [::Array<::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsSecret>]
+            #     The list of Secrets returned by a ListUserWorkloadsSecretsRequest.
+            # @!attribute [rw] next_page_token
+            #   @return [::String]
+            #     The page token used to query for the next page if one exists.
+            class ListUserWorkloadsSecretsResponse
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # User workloads ConfigMap used by Airflow tasks that run with Kubernetes
+            # executor or KubernetesPodOperator.
+            # @!attribute [rw] name
+            #   @return [::String]
+            #     Identifier. The resource name of the ConfigMap, in the form:
+            #     "projects/\\{projectId}/locations/\\{locationId}/environments/\\{environmentId}/userWorkloadsConfigMaps/\\{userWorkloadsConfigMapId}"
+            # @!attribute [rw] data
+            #   @return [::Google::Protobuf::Map{::String => ::String}]
+            #     Optional. The "data" field of Kubernetes ConfigMap, organized in key-value
+            #     pairs. For details see:
+            #     https://kubernetes.io/docs/concepts/configuration/configmap/
+            class UserWorkloadsConfigMap
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # @!attribute [rw] key
+              #   @return [::String]
+              # @!attribute [rw] value
+              #   @return [::String]
+              class DataEntry
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+            end
+
+            # The user workloads ConfigMaps for a given environment.
+            # @!attribute [rw] user_workloads_config_maps
+            #   @return [::Array<::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsConfigMap>]
+            #     The list of ConfigMaps returned by a ListUserWorkloadsConfigMapsRequest.
+            # @!attribute [rw] next_page_token
+            #   @return [::String]
+            #     The page token used to query for the next page if one exists.
+            class ListUserWorkloadsConfigMapsResponse
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Request for listing workloads in a Cloud Composer environment.
+            # @!attribute [rw] parent
+            #   @return [::String]
+            #     Required. The environment name to get workloads for, in the form:
+            #     "projects/\\{projectId}/locations/\\{locationId}/environments/\\{environmentId}"
+            # @!attribute [rw] page_size
+            #   @return [::Integer]
+            #     Optional. The maximum number of environments to return.
+            # @!attribute [rw] page_token
+            #   @return [::String]
+            #     Optional. The next_page_token value returned from a previous List request,
+            #     if any.
+            # @!attribute [rw] filter
+            #   @return [::String]
+            #     Optional. The list filter.
+            #     Currently only supports equality on the type field. The value of a field
+            #     specified in the filter expression must be one ComposerWorkloadType enum
+            #     option. It's possible to get multiple types using "OR" operator, e.g.:
+            #     "type=SCHEDULER OR type=CELERY_WORKER". If not specified, all items are
+            #     returned.
+            class ListWorkloadsRequest
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Response to ListWorkloadsRequest.
+            # @!attribute [rw] workloads
+            #   @return [::Array<::Google::Cloud::Orchestration::Airflow::Service::V1::ListWorkloadsResponse::ComposerWorkload>]
+            #     The list of environment workloads.
+            # @!attribute [rw] next_page_token
+            #   @return [::String]
+            #     The page token used to query for the next page if one exists.
+            class ListWorkloadsResponse
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Information about a single workload.
+              # @!attribute [rw] name
+              #   @return [::String]
+              #     Name of a workload.
+              # @!attribute [rw] type
+              #   @return [::Google::Cloud::Orchestration::Airflow::Service::V1::ListWorkloadsResponse::ComposerWorkloadType]
+              #     Type of a workload.
+              # @!attribute [r] status
+              #   @return [::Google::Cloud::Orchestration::Airflow::Service::V1::ListWorkloadsResponse::ComposerWorkloadStatus]
+              #     Output only. Status of a workload.
+              class ComposerWorkload
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
+              # Workload status.
+              # @!attribute [r] state
+              #   @return [::Google::Cloud::Orchestration::Airflow::Service::V1::ListWorkloadsResponse::ComposerWorkloadState]
+              #     Output only. Workload state.
+              # @!attribute [r] status_message
+              #   @return [::String]
+              #     Output only. Text to provide more descriptive status.
+              # @!attribute [r] detailed_status_message
+              #   @return [::String]
+              #     Output only. Detailed message of the status.
+              class ComposerWorkloadStatus
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
+              # Supported workload types.
+              module ComposerWorkloadType
+                # Not able to determine the type of the workload.
+                COMPOSER_WORKLOAD_TYPE_UNSPECIFIED = 0
+
+                # Celery worker.
+                CELERY_WORKER = 1
+
+                # Kubernetes worker.
+                KUBERNETES_WORKER = 2
+
+                # Workload created by Kubernetes Pod Operator.
+                KUBERNETES_OPERATOR_POD = 3
+
+                # Airflow scheduler.
+                SCHEDULER = 4
+
+                # Airflow Dag processor.
+                DAG_PROCESSOR = 5
+
+                # Airflow triggerer.
+                TRIGGERER = 6
+
+                # Airflow web server UI.
+                WEB_SERVER = 7
+
+                # Redis.
+                REDIS = 8
+              end
+
+              # Workload states.
+              module ComposerWorkloadState
+                # Not able to determine the status of the workload.
+                COMPOSER_WORKLOAD_STATE_UNSPECIFIED = 0
+
+                # Workload is in pending state and has not yet started.
+                PENDING = 1
+
+                # Workload is running fine.
+                OK = 2
+
+                # Workload is running but there are some non-critical problems.
+                WARNING = 3
+
+                # Workload is not running due to an error.
+                ERROR = 4
+
+                # Workload has finished execution with success.
+                SUCCEEDED = 5
+
+                # Workload has finished execution with failure.
+                FAILED = 6
+              end
+            end
+
             # Request to create a snapshot of a Cloud Composer environment.
             # @!attribute [rw] environment
             #   @return [::String]
@@ -463,6 +777,16 @@ module Google
             #     that the failover replica is out of sync. The primary instance can only
             #     fail over to the failover replica when the status is true.
             class FetchDatabasePropertiesResponse
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The configuration for data storage in the environment.
+            # @!attribute [rw] bucket
+            #   @return [::String]
+            #     Optional. The name of the Cloud Storage bucket used by the environment. No
+            #     `gs://` prefix.
+            class StorageConfig
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
@@ -572,6 +896,10 @@ module Google
             #
             #     This field is supported for Cloud Composer environments in versions
             #     composer-2.2.0-airflow-*.*.* and newer.
+            # @!attribute [rw] data_retention_config
+            #   @return [::Google::Cloud::Orchestration::Airflow::Service::V1::DataRetentionConfig]
+            #     Optional. The configuration setting for Airflow database data retention
+            #     mechanism.
             class EnvironmentConfig
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -639,6 +967,13 @@ module Google
             #     or db-n1-standard-16. If not specified, db-n1-standard-2 will be used.
             #     Supported for Cloud Composer environments in versions
             #     composer-1.*.*-airflow-*.*.*.
+            # @!attribute [rw] zone
+            #   @return [::String]
+            #     Optional. The Compute Engine zone where the Airflow database is created. If
+            #     zone is provided, it must be in the region selected for the environment. If
+            #     zone is not provided, a zone is automatically selected. The zone can only
+            #     be set during environment creation. Supported for Cloud Composer
+            #     environments in versions composer-2.*.*-airflow-*.*.*.
             class DatabaseConfig
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -800,6 +1135,16 @@ module Google
             #
             #     This field is supported for Cloud Composer environments in versions
             #     composer-1.*.*-airflow-2.*.*.
+            # @!attribute [rw] cloud_data_lineage_integration
+            #   @return [::Google::Cloud::Orchestration::Airflow::Service::V1::CloudDataLineageIntegration]
+            #     Optional. The configuration for Cloud Data Lineage integration.
+            # @!attribute [rw] web_server_plugins_mode
+            #   @return [::Google::Cloud::Orchestration::Airflow::Service::V1::SoftwareConfig::WebServerPluginsMode]
+            #     Optional. Whether or not the web server uses custom plugins.
+            #     If unspecified, the field defaults to `PLUGINS_ENABLED`.
+            #
+            #     This field is supported for Cloud Composer environments in versions
+            #     composer-3.*.*-airflow-*.*.* and newer.
             class SoftwareConfig
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -829,6 +1174,18 @@ module Google
               class EnvVariablesEntry
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
+              # Web server plugins mode of the Cloud Composer environment.
+              module WebServerPluginsMode
+                # Default mode.
+                WEB_SERVER_PLUGINS_MODE_UNSPECIFIED = 0
+
+                # Web server plugins are not supported.
+                PLUGINS_DISABLED = 1
+
+                # Web server plugins are supported.
+                PLUGINS_ENABLED = 2
               end
             end
 
@@ -1006,6 +1363,29 @@ module Google
             #
             #     See:
             #     https://cloud.google.com/kubernetes-engine/docs/how-to/ip-masquerade-agent
+            # @!attribute [rw] composer_network_attachment
+            #   @return [::String]
+            #     Optional. Network Attachment that Cloud Composer environment is connected
+            #     to, which provides connectivity with a user's VPC network. Takes precedence
+            #     over network and subnetwork settings. If not provided, but network and
+            #     subnetwork are defined during environment, it will be provisioned. If not
+            #     provided and network and subnetwork are also empty, then connectivity to
+            #     user's VPC network is disabled. Network attachment must be provided in
+            #     format
+            #     projects/\\{project}/regions/\\{region}/networkAttachments/\\{networkAttachment}.
+            #
+            #     This field is supported for Cloud Composer environments in versions
+            #     composer-3.*.*-airflow-*.*.* and newer.
+            # @!attribute [rw] composer_internal_ipv4_cidr_block
+            #   @return [::String]
+            #     Optional. The IP range in CIDR notation to use internally by Cloud
+            #     Composer. IP addresses are not reserved - and the same range can be used by
+            #     multiple Cloud Composer environments. In case of overlap, IPs from this
+            #     range will not be accessible in the user's VPC network. Cannot be updated.
+            #     If not specified, the default value of '100.64.128.0/20' is used.
+            #
+            #     This field is supported for Cloud Composer environments in versions
+            #     composer-3.*.*-airflow-*.*.* and newer.
             class NodeConfig
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1070,6 +1450,17 @@ module Google
             #     If this field is set to true, `IPAllocationPolicy.use_ip_aliases` must be
             #     set to true for Cloud Composer environments in versions
             #     composer-1.*.*-airflow-*.*.*.
+            # @!attribute [rw] enable_private_builds_only
+            #   @return [::Boolean]
+            #     Optional. If `true`, builds performed during operations that install Python
+            #     packages have only private connectivity to Google services (including
+            #     Artifact Registry) and VPC network (if either `NodeConfig.network` and
+            #     `NodeConfig.subnetwork` fields or `NodeConfig.composer_network_attachment`
+            #     field are specified). If `false`, the builds also have access to the
+            #     internet.
+            #
+            #     This field is supported for Cloud Composer environments in versions
+            #     composer-3.*.*-airflow-*.*.* and newer.
             # @!attribute [rw] private_cluster_config
             #   @return [::Google::Cloud::Orchestration::Airflow::Service::V1::PrivateClusterConfig]
             #     Optional. Configuration for the private GKE cluster for a Private IP
@@ -1142,6 +1533,15 @@ module Google
             # @!attribute [rw] worker
             #   @return [::Google::Cloud::Orchestration::Airflow::Service::V1::WorkloadsConfig::WorkerResource]
             #     Optional. Resources used by Airflow workers.
+            # @!attribute [rw] triggerer
+            #   @return [::Google::Cloud::Orchestration::Airflow::Service::V1::WorkloadsConfig::TriggererResource]
+            #     Optional. Resources used by Airflow triggerers.
+            # @!attribute [rw] dag_processor
+            #   @return [::Google::Cloud::Orchestration::Airflow::Service::V1::WorkloadsConfig::DagProcessorResource]
+            #     Optional. Resources used by Airflow DAG processors.
+            #
+            #     This field is supported for Cloud Composer environments in versions
+            #     composer-3.*.*-airflow-*.*.* and newer.
             class WorkloadsConfig
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1200,6 +1600,44 @@ module Google
               #   @return [::Integer]
               #     Optional. Maximum number of workers for autoscaling.
               class WorkerResource
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
+              # Configuration for resources used by Airflow triggerers.
+              # @!attribute [rw] count
+              #   @return [::Integer]
+              #     Optional. The number of triggerers.
+              # @!attribute [rw] cpu
+              #   @return [::Float]
+              #     Optional. CPU request and limit for a single Airflow triggerer replica.
+              # @!attribute [rw] memory_gb
+              #   @return [::Float]
+              #     Optional. Memory (GB) request and limit for a single Airflow triggerer
+              #     replica.
+              class TriggererResource
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
+              # Configuration for resources used by Airflow DAG processors.
+              # @!attribute [rw] cpu
+              #   @return [::Float]
+              #     Optional. CPU request and limit for a single Airflow DAG processor
+              #     replica.
+              # @!attribute [rw] memory_gb
+              #   @return [::Float]
+              #     Optional. Memory (GB) request and limit for a single Airflow DAG
+              #     processor replica.
+              # @!attribute [rw] storage_gb
+              #   @return [::Float]
+              #     Optional. Storage (GB) request and limit for a single Airflow DAG
+              #     processor replica.
+              # @!attribute [rw] count
+              #   @return [::Integer]
+              #     Optional. The number of DAG processors. If not provided or set to 0, a
+              #     single DAG processor instance will be created.
+              class DagProcessorResource
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
               end
@@ -1264,6 +1702,15 @@ module Google
               end
             end
 
+            # Configuration for Cloud Data Lineage integration.
+            # @!attribute [rw] enabled
+            #   @return [::Boolean]
+            #     Optional. Whether or not Cloud Data Lineage integration is enabled.
+            class CloudDataLineageIntegration
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
             # An environment for running orchestration tasks.
             # @!attribute [rw] name
             #   @return [::String]
@@ -1298,6 +1745,12 @@ module Google
             #     * Values must conform to regexp:  [\p\\{Ll}\p\\{Lo}\p\\{N}_-]\\{0,63}
             #     * Both keys and values are additionally constrained to be <= 128 bytes in
             #     size.
+            # @!attribute [r] satisfies_pzs
+            #   @return [::Boolean]
+            #     Output only. Reserved for future use.
+            # @!attribute [rw] storage_config
+            #   @return [::Google::Cloud::Orchestration::Airflow::Service::V1::StorageConfig]
+            #     Optional. Storage configuration for this environment.
             class Environment
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1376,6 +1829,38 @@ module Google
 
                 # There were no python packages conflicts.
                 NO_CONFLICT = 2
+              end
+            end
+
+            # The configuration setting for Airflow database data retention mechanism.
+            # @!attribute [rw] task_logs_retention_config
+            #   @return [::Google::Cloud::Orchestration::Airflow::Service::V1::TaskLogsRetentionConfig]
+            #     Optional. The configuration settings for task logs retention
+            class DataRetentionConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The configuration setting for Task Logs.
+            # @!attribute [rw] storage_mode
+            #   @return [::Google::Cloud::Orchestration::Airflow::Service::V1::TaskLogsRetentionConfig::TaskLogsStorageMode]
+            #     Optional. The mode of storage for Airflow workers task logs. For details,
+            #     see go/composer-store-task-logs-in-cloud-logging-only-design-doc
+            class TaskLogsRetentionConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # The definition of task_logs_storage_mode.
+              module TaskLogsStorageMode
+                # This configuration is not specified by the user.
+                TASK_LOGS_STORAGE_MODE_UNSPECIFIED = 0
+
+                # Store task logs in Cloud Logging and in the environment's Cloud Storage
+                # bucket.
+                CLOUD_LOGGING_AND_CLOUD_STORAGE = 1
+
+                # Store task logs in Cloud Logging only.
+                CLOUD_LOGGING_ONLY = 2
               end
             end
           end

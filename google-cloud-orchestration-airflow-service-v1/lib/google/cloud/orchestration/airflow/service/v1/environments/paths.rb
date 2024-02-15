@@ -45,6 +45,48 @@ module Google
                   "projects/#{project}/locations/#{location}/environments/#{environment}"
                 end
 
+                ##
+                # Create a fully-qualified UserWorkloadsConfigMap resource string.
+                #
+                # The resource will be in the following format:
+                #
+                # `projects/{project}/locations/{location}/environments/{environment}/userWorkloadsConfigMaps/{user_workloads_config_map}`
+                #
+                # @param project [String]
+                # @param location [String]
+                # @param environment [String]
+                # @param user_workloads_config_map [String]
+                #
+                # @return [::String]
+                def user_workloads_config_map_path project:, location:, environment:, user_workloads_config_map:
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "environment cannot contain /" if environment.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/environments/#{environment}/userWorkloadsConfigMaps/#{user_workloads_config_map}"
+                end
+
+                ##
+                # Create a fully-qualified UserWorkloadsSecret resource string.
+                #
+                # The resource will be in the following format:
+                #
+                # `projects/{project}/locations/{location}/environments/{environment}/userWorkloadsSecrets/{user_workloads_secret}`
+                #
+                # @param project [String]
+                # @param location [String]
+                # @param environment [String]
+                # @param user_workloads_secret [String]
+                #
+                # @return [::String]
+                def user_workloads_secret_path project:, location:, environment:, user_workloads_secret:
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "environment cannot contain /" if environment.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/environments/#{environment}/userWorkloadsSecrets/#{user_workloads_secret}"
+                end
+
                 extend self
               end
             end

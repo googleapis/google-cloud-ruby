@@ -1053,6 +1053,1026 @@ module Google
                 end
 
                 ##
+                # Lists workloads in a Cloud Composer environment. Workload is a unit that
+                # runs a single Composer component.
+                #
+                # This method is supported for Cloud Composer environments in versions
+                # composer-3.*.*-airflow-*.*.* and newer.
+                #
+                # @overload list_workloads(request, options = nil)
+                #   Pass arguments to `list_workloads` via a request object, either of type
+                #   {::Google::Cloud::Orchestration::Airflow::Service::V1::ListWorkloadsRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Orchestration::Airflow::Service::V1::ListWorkloadsRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+                #
+                # @overload list_workloads(parent: nil, page_size: nil, page_token: nil, filter: nil)
+                #   Pass arguments to `list_workloads` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param parent [::String]
+                #     Required. The environment name to get workloads for, in the form:
+                #     "projects/\\{projectId}/locations/\\{locationId}/environments/\\{environmentId}"
+                #   @param page_size [::Integer]
+                #     Optional. The maximum number of environments to return.
+                #   @param page_token [::String]
+                #     Optional. The next_page_token value returned from a previous List request,
+                #     if any.
+                #   @param filter [::String]
+                #     Optional. The list filter.
+                #     Currently only supports equality on the type field. The value of a field
+                #     specified in the filter expression must be one ComposerWorkloadType enum
+                #     option. It's possible to get multiple types using "OR" operator, e.g.:
+                #     "type=SCHEDULER OR type=CELERY_WORKER". If not specified, all items are
+                #     returned.
+                #
+                # @yield [response, operation] Access the result along with the RPC operation
+                # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Orchestration::Airflow::Service::V1::ListWorkloadsResponse::ComposerWorkload>]
+                # @yieldparam operation [::GRPC::ActiveCall::Operation]
+                #
+                # @return [::Gapic::PagedEnumerable<::Google::Cloud::Orchestration::Airflow::Service::V1::ListWorkloadsResponse::ComposerWorkload>]
+                #
+                # @raise [::Google::Cloud::Error] if the RPC is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/orchestration/airflow/service/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Orchestration::Airflow::Service::V1::ListWorkloadsRequest.new
+                #
+                #   # Call the list_workloads method.
+                #   result = client.list_workloads request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
+                #     # Each element is of type ::Google::Cloud::Orchestration::Airflow::Service::V1::ListWorkloadsResponse::ComposerWorkload.
+                #     p item
+                #   end
+                #
+                def list_workloads request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Orchestration::Airflow::Service::V1::ListWorkloadsRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  metadata = @config.rpcs.list_workloads.metadata.to_h
+
+                  # Set x-goog-api-client and x-goog-user-project headers
+                  metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Orchestration::Airflow::Service::V1::VERSION
+                  metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  header_params = {}
+                  if request.parent
+                    header_params["parent"] = request.parent
+                  end
+
+                  request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                  metadata[:"x-goog-request-params"] ||= request_params_header
+
+                  options.apply_defaults timeout:      @config.rpcs.list_workloads.timeout,
+                                         metadata:     metadata,
+                                         retry_policy: @config.rpcs.list_workloads.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @environments_stub.call_rpc :list_workloads, request, options: options do |response, operation|
+                    response = ::Gapic::PagedEnumerable.new @environments_stub, :list_workloads, request, response, operation, options
+                    yield response, operation if block_given?
+                    return response
+                  end
+                rescue ::GRPC::BadStatus => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Creates a user workloads Secret.
+                #
+                # This method is supported for Cloud Composer environments in versions
+                # composer-3.*.*-airflow-*.*.* and newer.
+                #
+                # @overload create_user_workloads_secret(request, options = nil)
+                #   Pass arguments to `create_user_workloads_secret` via a request object, either of type
+                #   {::Google::Cloud::Orchestration::Airflow::Service::V1::CreateUserWorkloadsSecretRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Orchestration::Airflow::Service::V1::CreateUserWorkloadsSecretRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+                #
+                # @overload create_user_workloads_secret(parent: nil, user_workloads_secret: nil)
+                #   Pass arguments to `create_user_workloads_secret` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param parent [::String]
+                #     Required. The environment name to create a Secret for, in the form:
+                #     "projects/\\{projectId}/locations/\\{locationId}/environments/\\{environmentId}"
+                #   @param user_workloads_secret [::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsSecret, ::Hash]
+                #     Required. User workloads Secret to create.
+                #
+                # @yield [response, operation] Access the result along with the RPC operation
+                # @yieldparam response [::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsSecret]
+                # @yieldparam operation [::GRPC::ActiveCall::Operation]
+                #
+                # @return [::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsSecret]
+                #
+                # @raise [::Google::Cloud::Error] if the RPC is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/orchestration/airflow/service/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Orchestration::Airflow::Service::V1::CreateUserWorkloadsSecretRequest.new
+                #
+                #   # Call the create_user_workloads_secret method.
+                #   result = client.create_user_workloads_secret request
+                #
+                #   # The returned object is of type Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsSecret.
+                #   p result
+                #
+                def create_user_workloads_secret request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Orchestration::Airflow::Service::V1::CreateUserWorkloadsSecretRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  metadata = @config.rpcs.create_user_workloads_secret.metadata.to_h
+
+                  # Set x-goog-api-client and x-goog-user-project headers
+                  metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Orchestration::Airflow::Service::V1::VERSION
+                  metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  header_params = {}
+                  if request.parent
+                    header_params["parent"] = request.parent
+                  end
+
+                  request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                  metadata[:"x-goog-request-params"] ||= request_params_header
+
+                  options.apply_defaults timeout:      @config.rpcs.create_user_workloads_secret.timeout,
+                                         metadata:     metadata,
+                                         retry_policy: @config.rpcs.create_user_workloads_secret.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @environments_stub.call_rpc :create_user_workloads_secret, request, options: options do |response, operation|
+                    yield response, operation if block_given?
+                    return response
+                  end
+                rescue ::GRPC::BadStatus => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Gets an existing user workloads Secret.
+                # Values of the "data" field in the response are cleared.
+                #
+                # This method is supported for Cloud Composer environments in versions
+                # composer-3.*.*-airflow-*.*.* and newer.
+                #
+                # @overload get_user_workloads_secret(request, options = nil)
+                #   Pass arguments to `get_user_workloads_secret` via a request object, either of type
+                #   {::Google::Cloud::Orchestration::Airflow::Service::V1::GetUserWorkloadsSecretRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Orchestration::Airflow::Service::V1::GetUserWorkloadsSecretRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+                #
+                # @overload get_user_workloads_secret(name: nil)
+                #   Pass arguments to `get_user_workloads_secret` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param name [::String]
+                #     Required. The resource name of the Secret to get, in the form:
+                #     "projects/\\{projectId}/locations/\\{locationId}/environments/\\{environmentId}/userWorkloadsSecrets/\\{userWorkloadsSecretId}"
+                #
+                # @yield [response, operation] Access the result along with the RPC operation
+                # @yieldparam response [::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsSecret]
+                # @yieldparam operation [::GRPC::ActiveCall::Operation]
+                #
+                # @return [::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsSecret]
+                #
+                # @raise [::Google::Cloud::Error] if the RPC is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/orchestration/airflow/service/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Orchestration::Airflow::Service::V1::GetUserWorkloadsSecretRequest.new
+                #
+                #   # Call the get_user_workloads_secret method.
+                #   result = client.get_user_workloads_secret request
+                #
+                #   # The returned object is of type Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsSecret.
+                #   p result
+                #
+                def get_user_workloads_secret request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Orchestration::Airflow::Service::V1::GetUserWorkloadsSecretRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  metadata = @config.rpcs.get_user_workloads_secret.metadata.to_h
+
+                  # Set x-goog-api-client and x-goog-user-project headers
+                  metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Orchestration::Airflow::Service::V1::VERSION
+                  metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  header_params = {}
+                  if request.name
+                    header_params["name"] = request.name
+                  end
+
+                  request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                  metadata[:"x-goog-request-params"] ||= request_params_header
+
+                  options.apply_defaults timeout:      @config.rpcs.get_user_workloads_secret.timeout,
+                                         metadata:     metadata,
+                                         retry_policy: @config.rpcs.get_user_workloads_secret.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @environments_stub.call_rpc :get_user_workloads_secret, request, options: options do |response, operation|
+                    yield response, operation if block_given?
+                    return response
+                  end
+                rescue ::GRPC::BadStatus => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Lists user workloads Secrets.
+                #
+                # This method is supported for Cloud Composer environments in versions
+                # composer-3.*.*-airflow-*.*.* and newer.
+                #
+                # @overload list_user_workloads_secrets(request, options = nil)
+                #   Pass arguments to `list_user_workloads_secrets` via a request object, either of type
+                #   {::Google::Cloud::Orchestration::Airflow::Service::V1::ListUserWorkloadsSecretsRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Orchestration::Airflow::Service::V1::ListUserWorkloadsSecretsRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+                #
+                # @overload list_user_workloads_secrets(parent: nil, page_size: nil, page_token: nil)
+                #   Pass arguments to `list_user_workloads_secrets` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param parent [::String]
+                #     Required. List Secrets in the given environment, in the form:
+                #     "projects/\\{projectId}/locations/\\{locationId}/environments/\\{environmentId}"
+                #   @param page_size [::Integer]
+                #     Optional. The maximum number of Secrets to return.
+                #   @param page_token [::String]
+                #     Optional. The next_page_token value returned from a previous List request,
+                #     if any.
+                #
+                # @yield [response, operation] Access the result along with the RPC operation
+                # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsSecret>]
+                # @yieldparam operation [::GRPC::ActiveCall::Operation]
+                #
+                # @return [::Gapic::PagedEnumerable<::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsSecret>]
+                #
+                # @raise [::Google::Cloud::Error] if the RPC is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/orchestration/airflow/service/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Orchestration::Airflow::Service::V1::ListUserWorkloadsSecretsRequest.new
+                #
+                #   # Call the list_user_workloads_secrets method.
+                #   result = client.list_user_workloads_secrets request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
+                #     # Each element is of type ::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsSecret.
+                #     p item
+                #   end
+                #
+                def list_user_workloads_secrets request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Orchestration::Airflow::Service::V1::ListUserWorkloadsSecretsRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  metadata = @config.rpcs.list_user_workloads_secrets.metadata.to_h
+
+                  # Set x-goog-api-client and x-goog-user-project headers
+                  metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Orchestration::Airflow::Service::V1::VERSION
+                  metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  header_params = {}
+                  if request.parent
+                    header_params["parent"] = request.parent
+                  end
+
+                  request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                  metadata[:"x-goog-request-params"] ||= request_params_header
+
+                  options.apply_defaults timeout:      @config.rpcs.list_user_workloads_secrets.timeout,
+                                         metadata:     metadata,
+                                         retry_policy: @config.rpcs.list_user_workloads_secrets.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @environments_stub.call_rpc :list_user_workloads_secrets, request, options: options do |response, operation|
+                    response = ::Gapic::PagedEnumerable.new @environments_stub, :list_user_workloads_secrets, request, response, operation, options
+                    yield response, operation if block_given?
+                    return response
+                  end
+                rescue ::GRPC::BadStatus => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Updates a user workloads Secret.
+                #
+                # This method is supported for Cloud Composer environments in versions
+                # composer-3.*.*-airflow-*.*.* and newer.
+                #
+                # @overload update_user_workloads_secret(request, options = nil)
+                #   Pass arguments to `update_user_workloads_secret` via a request object, either of type
+                #   {::Google::Cloud::Orchestration::Airflow::Service::V1::UpdateUserWorkloadsSecretRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Orchestration::Airflow::Service::V1::UpdateUserWorkloadsSecretRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+                #
+                # @overload update_user_workloads_secret(user_workloads_secret: nil)
+                #   Pass arguments to `update_user_workloads_secret` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param user_workloads_secret [::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsSecret, ::Hash]
+                #     Optional. User workloads Secret to override.
+                #
+                # @yield [response, operation] Access the result along with the RPC operation
+                # @yieldparam response [::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsSecret]
+                # @yieldparam operation [::GRPC::ActiveCall::Operation]
+                #
+                # @return [::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsSecret]
+                #
+                # @raise [::Google::Cloud::Error] if the RPC is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/orchestration/airflow/service/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Orchestration::Airflow::Service::V1::UpdateUserWorkloadsSecretRequest.new
+                #
+                #   # Call the update_user_workloads_secret method.
+                #   result = client.update_user_workloads_secret request
+                #
+                #   # The returned object is of type Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsSecret.
+                #   p result
+                #
+                def update_user_workloads_secret request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Orchestration::Airflow::Service::V1::UpdateUserWorkloadsSecretRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  metadata = @config.rpcs.update_user_workloads_secret.metadata.to_h
+
+                  # Set x-goog-api-client and x-goog-user-project headers
+                  metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Orchestration::Airflow::Service::V1::VERSION
+                  metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  header_params = {}
+                  if request.user_workloads_secret&.name
+                    header_params["user_workloads_secret.name"] = request.user_workloads_secret.name
+                  end
+
+                  request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                  metadata[:"x-goog-request-params"] ||= request_params_header
+
+                  options.apply_defaults timeout:      @config.rpcs.update_user_workloads_secret.timeout,
+                                         metadata:     metadata,
+                                         retry_policy: @config.rpcs.update_user_workloads_secret.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @environments_stub.call_rpc :update_user_workloads_secret, request, options: options do |response, operation|
+                    yield response, operation if block_given?
+                    return response
+                  end
+                rescue ::GRPC::BadStatus => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Deletes a user workloads Secret.
+                #
+                # This method is supported for Cloud Composer environments in versions
+                # composer-3.*.*-airflow-*.*.* and newer.
+                #
+                # @overload delete_user_workloads_secret(request, options = nil)
+                #   Pass arguments to `delete_user_workloads_secret` via a request object, either of type
+                #   {::Google::Cloud::Orchestration::Airflow::Service::V1::DeleteUserWorkloadsSecretRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Orchestration::Airflow::Service::V1::DeleteUserWorkloadsSecretRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+                #
+                # @overload delete_user_workloads_secret(name: nil)
+                #   Pass arguments to `delete_user_workloads_secret` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param name [::String]
+                #     Required. The Secret to delete, in the form:
+                #     "projects/\\{projectId}/locations/\\{locationId}/environments/\\{environmentId}/userWorkloadsSecrets/\\{userWorkloadsSecretId}"
+                #
+                # @yield [response, operation] Access the result along with the RPC operation
+                # @yieldparam response [::Google::Protobuf::Empty]
+                # @yieldparam operation [::GRPC::ActiveCall::Operation]
+                #
+                # @return [::Google::Protobuf::Empty]
+                #
+                # @raise [::Google::Cloud::Error] if the RPC is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/orchestration/airflow/service/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Orchestration::Airflow::Service::V1::DeleteUserWorkloadsSecretRequest.new
+                #
+                #   # Call the delete_user_workloads_secret method.
+                #   result = client.delete_user_workloads_secret request
+                #
+                #   # The returned object is of type Google::Protobuf::Empty.
+                #   p result
+                #
+                def delete_user_workloads_secret request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Orchestration::Airflow::Service::V1::DeleteUserWorkloadsSecretRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  metadata = @config.rpcs.delete_user_workloads_secret.metadata.to_h
+
+                  # Set x-goog-api-client and x-goog-user-project headers
+                  metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Orchestration::Airflow::Service::V1::VERSION
+                  metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  header_params = {}
+                  if request.name
+                    header_params["name"] = request.name
+                  end
+
+                  request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                  metadata[:"x-goog-request-params"] ||= request_params_header
+
+                  options.apply_defaults timeout:      @config.rpcs.delete_user_workloads_secret.timeout,
+                                         metadata:     metadata,
+                                         retry_policy: @config.rpcs.delete_user_workloads_secret.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @environments_stub.call_rpc :delete_user_workloads_secret, request, options: options do |response, operation|
+                    yield response, operation if block_given?
+                    return response
+                  end
+                rescue ::GRPC::BadStatus => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Creates a user workloads ConfigMap.
+                #
+                # This method is supported for Cloud Composer environments in versions
+                # composer-3.*.*-airflow-*.*.* and newer.
+                #
+                # @overload create_user_workloads_config_map(request, options = nil)
+                #   Pass arguments to `create_user_workloads_config_map` via a request object, either of type
+                #   {::Google::Cloud::Orchestration::Airflow::Service::V1::CreateUserWorkloadsConfigMapRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Orchestration::Airflow::Service::V1::CreateUserWorkloadsConfigMapRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+                #
+                # @overload create_user_workloads_config_map(parent: nil, user_workloads_config_map: nil)
+                #   Pass arguments to `create_user_workloads_config_map` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param parent [::String]
+                #     Required. The environment name to create a ConfigMap for, in the form:
+                #     "projects/\\{projectId}/locations/\\{locationId}/environments/\\{environmentId}"
+                #   @param user_workloads_config_map [::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsConfigMap, ::Hash]
+                #     Required. User workloads ConfigMap to create.
+                #
+                # @yield [response, operation] Access the result along with the RPC operation
+                # @yieldparam response [::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsConfigMap]
+                # @yieldparam operation [::GRPC::ActiveCall::Operation]
+                #
+                # @return [::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsConfigMap]
+                #
+                # @raise [::Google::Cloud::Error] if the RPC is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/orchestration/airflow/service/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Orchestration::Airflow::Service::V1::CreateUserWorkloadsConfigMapRequest.new
+                #
+                #   # Call the create_user_workloads_config_map method.
+                #   result = client.create_user_workloads_config_map request
+                #
+                #   # The returned object is of type Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsConfigMap.
+                #   p result
+                #
+                def create_user_workloads_config_map request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Orchestration::Airflow::Service::V1::CreateUserWorkloadsConfigMapRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  metadata = @config.rpcs.create_user_workloads_config_map.metadata.to_h
+
+                  # Set x-goog-api-client and x-goog-user-project headers
+                  metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Orchestration::Airflow::Service::V1::VERSION
+                  metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  header_params = {}
+                  if request.parent
+                    header_params["parent"] = request.parent
+                  end
+
+                  request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                  metadata[:"x-goog-request-params"] ||= request_params_header
+
+                  options.apply_defaults timeout:      @config.rpcs.create_user_workloads_config_map.timeout,
+                                         metadata:     metadata,
+                                         retry_policy: @config.rpcs.create_user_workloads_config_map.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @environments_stub.call_rpc :create_user_workloads_config_map, request, options: options do |response, operation|
+                    yield response, operation if block_given?
+                    return response
+                  end
+                rescue ::GRPC::BadStatus => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Gets an existing user workloads ConfigMap.
+                #
+                # This method is supported for Cloud Composer environments in versions
+                # composer-3.*.*-airflow-*.*.* and newer.
+                #
+                # @overload get_user_workloads_config_map(request, options = nil)
+                #   Pass arguments to `get_user_workloads_config_map` via a request object, either of type
+                #   {::Google::Cloud::Orchestration::Airflow::Service::V1::GetUserWorkloadsConfigMapRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Orchestration::Airflow::Service::V1::GetUserWorkloadsConfigMapRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+                #
+                # @overload get_user_workloads_config_map(name: nil)
+                #   Pass arguments to `get_user_workloads_config_map` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param name [::String]
+                #     Required. The resource name of the ConfigMap to get, in the form:
+                #     "projects/\\{projectId}/locations/\\{locationId}/environments/\\{environmentId}/userWorkloadsConfigMaps/\\{userWorkloadsConfigMapId}"
+                #
+                # @yield [response, operation] Access the result along with the RPC operation
+                # @yieldparam response [::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsConfigMap]
+                # @yieldparam operation [::GRPC::ActiveCall::Operation]
+                #
+                # @return [::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsConfigMap]
+                #
+                # @raise [::Google::Cloud::Error] if the RPC is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/orchestration/airflow/service/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Orchestration::Airflow::Service::V1::GetUserWorkloadsConfigMapRequest.new
+                #
+                #   # Call the get_user_workloads_config_map method.
+                #   result = client.get_user_workloads_config_map request
+                #
+                #   # The returned object is of type Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsConfigMap.
+                #   p result
+                #
+                def get_user_workloads_config_map request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Orchestration::Airflow::Service::V1::GetUserWorkloadsConfigMapRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  metadata = @config.rpcs.get_user_workloads_config_map.metadata.to_h
+
+                  # Set x-goog-api-client and x-goog-user-project headers
+                  metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Orchestration::Airflow::Service::V1::VERSION
+                  metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  header_params = {}
+                  if request.name
+                    header_params["name"] = request.name
+                  end
+
+                  request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                  metadata[:"x-goog-request-params"] ||= request_params_header
+
+                  options.apply_defaults timeout:      @config.rpcs.get_user_workloads_config_map.timeout,
+                                         metadata:     metadata,
+                                         retry_policy: @config.rpcs.get_user_workloads_config_map.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @environments_stub.call_rpc :get_user_workloads_config_map, request, options: options do |response, operation|
+                    yield response, operation if block_given?
+                    return response
+                  end
+                rescue ::GRPC::BadStatus => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Lists user workloads ConfigMaps.
+                #
+                # This method is supported for Cloud Composer environments in versions
+                # composer-3.*.*-airflow-*.*.* and newer.
+                #
+                # @overload list_user_workloads_config_maps(request, options = nil)
+                #   Pass arguments to `list_user_workloads_config_maps` via a request object, either of type
+                #   {::Google::Cloud::Orchestration::Airflow::Service::V1::ListUserWorkloadsConfigMapsRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Orchestration::Airflow::Service::V1::ListUserWorkloadsConfigMapsRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+                #
+                # @overload list_user_workloads_config_maps(parent: nil, page_size: nil, page_token: nil)
+                #   Pass arguments to `list_user_workloads_config_maps` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param parent [::String]
+                #     Required. List ConfigMaps in the given environment, in the form:
+                #     "projects/\\{projectId}/locations/\\{locationId}/environments/\\{environmentId}"
+                #   @param page_size [::Integer]
+                #     Optional. The maximum number of ConfigMaps to return.
+                #   @param page_token [::String]
+                #     Optional. The next_page_token value returned from a previous List request,
+                #     if any.
+                #
+                # @yield [response, operation] Access the result along with the RPC operation
+                # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsConfigMap>]
+                # @yieldparam operation [::GRPC::ActiveCall::Operation]
+                #
+                # @return [::Gapic::PagedEnumerable<::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsConfigMap>]
+                #
+                # @raise [::Google::Cloud::Error] if the RPC is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/orchestration/airflow/service/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Orchestration::Airflow::Service::V1::ListUserWorkloadsConfigMapsRequest.new
+                #
+                #   # Call the list_user_workloads_config_maps method.
+                #   result = client.list_user_workloads_config_maps request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
+                #     # Each element is of type ::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsConfigMap.
+                #     p item
+                #   end
+                #
+                def list_user_workloads_config_maps request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Orchestration::Airflow::Service::V1::ListUserWorkloadsConfigMapsRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  metadata = @config.rpcs.list_user_workloads_config_maps.metadata.to_h
+
+                  # Set x-goog-api-client and x-goog-user-project headers
+                  metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Orchestration::Airflow::Service::V1::VERSION
+                  metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  header_params = {}
+                  if request.parent
+                    header_params["parent"] = request.parent
+                  end
+
+                  request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                  metadata[:"x-goog-request-params"] ||= request_params_header
+
+                  options.apply_defaults timeout:      @config.rpcs.list_user_workloads_config_maps.timeout,
+                                         metadata:     metadata,
+                                         retry_policy: @config.rpcs.list_user_workloads_config_maps.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @environments_stub.call_rpc :list_user_workloads_config_maps, request, options: options do |response, operation|
+                    response = ::Gapic::PagedEnumerable.new @environments_stub, :list_user_workloads_config_maps, request, response, operation, options
+                    yield response, operation if block_given?
+                    return response
+                  end
+                rescue ::GRPC::BadStatus => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Updates a user workloads ConfigMap.
+                #
+                # This method is supported for Cloud Composer environments in versions
+                # composer-3.*.*-airflow-*.*.* and newer.
+                #
+                # @overload update_user_workloads_config_map(request, options = nil)
+                #   Pass arguments to `update_user_workloads_config_map` via a request object, either of type
+                #   {::Google::Cloud::Orchestration::Airflow::Service::V1::UpdateUserWorkloadsConfigMapRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Orchestration::Airflow::Service::V1::UpdateUserWorkloadsConfigMapRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+                #
+                # @overload update_user_workloads_config_map(user_workloads_config_map: nil)
+                #   Pass arguments to `update_user_workloads_config_map` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param user_workloads_config_map [::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsConfigMap, ::Hash]
+                #     Optional. User workloads ConfigMap to override.
+                #
+                # @yield [response, operation] Access the result along with the RPC operation
+                # @yieldparam response [::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsConfigMap]
+                # @yieldparam operation [::GRPC::ActiveCall::Operation]
+                #
+                # @return [::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsConfigMap]
+                #
+                # @raise [::Google::Cloud::Error] if the RPC is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/orchestration/airflow/service/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Orchestration::Airflow::Service::V1::UpdateUserWorkloadsConfigMapRequest.new
+                #
+                #   # Call the update_user_workloads_config_map method.
+                #   result = client.update_user_workloads_config_map request
+                #
+                #   # The returned object is of type Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsConfigMap.
+                #   p result
+                #
+                def update_user_workloads_config_map request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Orchestration::Airflow::Service::V1::UpdateUserWorkloadsConfigMapRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  metadata = @config.rpcs.update_user_workloads_config_map.metadata.to_h
+
+                  # Set x-goog-api-client and x-goog-user-project headers
+                  metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Orchestration::Airflow::Service::V1::VERSION
+                  metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  header_params = {}
+                  if request.user_workloads_config_map&.name
+                    header_params["user_workloads_config_map.name"] = request.user_workloads_config_map.name
+                  end
+
+                  request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                  metadata[:"x-goog-request-params"] ||= request_params_header
+
+                  options.apply_defaults timeout:      @config.rpcs.update_user_workloads_config_map.timeout,
+                                         metadata:     metadata,
+                                         retry_policy: @config.rpcs.update_user_workloads_config_map.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @environments_stub.call_rpc :update_user_workloads_config_map, request, options: options do |response, operation|
+                    yield response, operation if block_given?
+                    return response
+                  end
+                rescue ::GRPC::BadStatus => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Deletes a user workloads ConfigMap.
+                #
+                # This method is supported for Cloud Composer environments in versions
+                # composer-3.*.*-airflow-*.*.* and newer.
+                #
+                # @overload delete_user_workloads_config_map(request, options = nil)
+                #   Pass arguments to `delete_user_workloads_config_map` via a request object, either of type
+                #   {::Google::Cloud::Orchestration::Airflow::Service::V1::DeleteUserWorkloadsConfigMapRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Orchestration::Airflow::Service::V1::DeleteUserWorkloadsConfigMapRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+                #
+                # @overload delete_user_workloads_config_map(name: nil)
+                #   Pass arguments to `delete_user_workloads_config_map` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param name [::String]
+                #     Required. The ConfigMap to delete, in the form:
+                #     "projects/\\{projectId}/locations/\\{locationId}/environments/\\{environmentId}/userWorkloadsConfigMaps/\\{userWorkloadsConfigMapId}"
+                #
+                # @yield [response, operation] Access the result along with the RPC operation
+                # @yieldparam response [::Google::Protobuf::Empty]
+                # @yieldparam operation [::GRPC::ActiveCall::Operation]
+                #
+                # @return [::Google::Protobuf::Empty]
+                #
+                # @raise [::Google::Cloud::Error] if the RPC is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/orchestration/airflow/service/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Orchestration::Airflow::Service::V1::DeleteUserWorkloadsConfigMapRequest.new
+                #
+                #   # Call the delete_user_workloads_config_map method.
+                #   result = client.delete_user_workloads_config_map request
+                #
+                #   # The returned object is of type Google::Protobuf::Empty.
+                #   p result
+                #
+                def delete_user_workloads_config_map request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Orchestration::Airflow::Service::V1::DeleteUserWorkloadsConfigMapRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  metadata = @config.rpcs.delete_user_workloads_config_map.metadata.to_h
+
+                  # Set x-goog-api-client and x-goog-user-project headers
+                  metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Orchestration::Airflow::Service::V1::VERSION
+                  metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  header_params = {}
+                  if request.name
+                    header_params["name"] = request.name
+                  end
+
+                  request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                  metadata[:"x-goog-request-params"] ||= request_params_header
+
+                  options.apply_defaults timeout:      @config.rpcs.delete_user_workloads_config_map.timeout,
+                                         metadata:     metadata,
+                                         retry_policy: @config.rpcs.delete_user_workloads_config_map.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @environments_stub.call_rpc :delete_user_workloads_config_map, request, options: options do |response, operation|
+                    yield response, operation if block_given?
+                    return response
+                  end
+                rescue ::GRPC::BadStatus => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
                 # Creates a snapshots of a Cloud Composer environment.
                 #
                 # As a result of this operation, snapshot of environment's state is stored
@@ -1638,6 +2658,61 @@ module Google
                     #
                     attr_reader :poll_airflow_command
                     ##
+                    # RPC-specific configuration for `list_workloads`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :list_workloads
+                    ##
+                    # RPC-specific configuration for `create_user_workloads_secret`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :create_user_workloads_secret
+                    ##
+                    # RPC-specific configuration for `get_user_workloads_secret`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :get_user_workloads_secret
+                    ##
+                    # RPC-specific configuration for `list_user_workloads_secrets`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :list_user_workloads_secrets
+                    ##
+                    # RPC-specific configuration for `update_user_workloads_secret`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :update_user_workloads_secret
+                    ##
+                    # RPC-specific configuration for `delete_user_workloads_secret`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :delete_user_workloads_secret
+                    ##
+                    # RPC-specific configuration for `create_user_workloads_config_map`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :create_user_workloads_config_map
+                    ##
+                    # RPC-specific configuration for `get_user_workloads_config_map`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :get_user_workloads_config_map
+                    ##
+                    # RPC-specific configuration for `list_user_workloads_config_maps`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :list_user_workloads_config_maps
+                    ##
+                    # RPC-specific configuration for `update_user_workloads_config_map`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :update_user_workloads_config_map
+                    ##
+                    # RPC-specific configuration for `delete_user_workloads_config_map`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :delete_user_workloads_config_map
+                    ##
                     # RPC-specific configuration for `save_snapshot`
                     # @return [::Gapic::Config::Method]
                     #
@@ -1676,6 +2751,28 @@ module Google
                       @stop_airflow_command = ::Gapic::Config::Method.new stop_airflow_command_config
                       poll_airflow_command_config = parent_rpcs.poll_airflow_command if parent_rpcs.respond_to? :poll_airflow_command
                       @poll_airflow_command = ::Gapic::Config::Method.new poll_airflow_command_config
+                      list_workloads_config = parent_rpcs.list_workloads if parent_rpcs.respond_to? :list_workloads
+                      @list_workloads = ::Gapic::Config::Method.new list_workloads_config
+                      create_user_workloads_secret_config = parent_rpcs.create_user_workloads_secret if parent_rpcs.respond_to? :create_user_workloads_secret
+                      @create_user_workloads_secret = ::Gapic::Config::Method.new create_user_workloads_secret_config
+                      get_user_workloads_secret_config = parent_rpcs.get_user_workloads_secret if parent_rpcs.respond_to? :get_user_workloads_secret
+                      @get_user_workloads_secret = ::Gapic::Config::Method.new get_user_workloads_secret_config
+                      list_user_workloads_secrets_config = parent_rpcs.list_user_workloads_secrets if parent_rpcs.respond_to? :list_user_workloads_secrets
+                      @list_user_workloads_secrets = ::Gapic::Config::Method.new list_user_workloads_secrets_config
+                      update_user_workloads_secret_config = parent_rpcs.update_user_workloads_secret if parent_rpcs.respond_to? :update_user_workloads_secret
+                      @update_user_workloads_secret = ::Gapic::Config::Method.new update_user_workloads_secret_config
+                      delete_user_workloads_secret_config = parent_rpcs.delete_user_workloads_secret if parent_rpcs.respond_to? :delete_user_workloads_secret
+                      @delete_user_workloads_secret = ::Gapic::Config::Method.new delete_user_workloads_secret_config
+                      create_user_workloads_config_map_config = parent_rpcs.create_user_workloads_config_map if parent_rpcs.respond_to? :create_user_workloads_config_map
+                      @create_user_workloads_config_map = ::Gapic::Config::Method.new create_user_workloads_config_map_config
+                      get_user_workloads_config_map_config = parent_rpcs.get_user_workloads_config_map if parent_rpcs.respond_to? :get_user_workloads_config_map
+                      @get_user_workloads_config_map = ::Gapic::Config::Method.new get_user_workloads_config_map_config
+                      list_user_workloads_config_maps_config = parent_rpcs.list_user_workloads_config_maps if parent_rpcs.respond_to? :list_user_workloads_config_maps
+                      @list_user_workloads_config_maps = ::Gapic::Config::Method.new list_user_workloads_config_maps_config
+                      update_user_workloads_config_map_config = parent_rpcs.update_user_workloads_config_map if parent_rpcs.respond_to? :update_user_workloads_config_map
+                      @update_user_workloads_config_map = ::Gapic::Config::Method.new update_user_workloads_config_map_config
+                      delete_user_workloads_config_map_config = parent_rpcs.delete_user_workloads_config_map if parent_rpcs.respond_to? :delete_user_workloads_config_map
+                      @delete_user_workloads_config_map = ::Gapic::Config::Method.new delete_user_workloads_config_map_config
                       save_snapshot_config = parent_rpcs.save_snapshot if parent_rpcs.respond_to? :save_snapshot
                       @save_snapshot = ::Gapic::Config::Method.new save_snapshot_config
                       load_snapshot_config = parent_rpcs.load_snapshot if parent_rpcs.respond_to? :load_snapshot
