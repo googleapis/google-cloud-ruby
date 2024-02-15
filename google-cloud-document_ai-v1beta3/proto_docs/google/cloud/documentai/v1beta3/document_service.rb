@@ -202,8 +202,9 @@ module Google
         #     - String match is case sensitive (for filter `DisplayName` & `EntityType`).
         # @!attribute [rw] return_total_size
         #   @return [::Boolean]
-        #     Optional. Controls if the ListDocuments request requires a total size
-        #     of matched documents. See ListDocumentsResponse.total_size.
+        #     Optional. Controls if the request requires a total size of matched
+        #     documents. See
+        #     {::Google::Cloud::DocumentAI::V1beta3::ListDocumentsResponse#total_size ListDocumentsResponse.total_size}.
         #
         #     Enabling this flag may adversely impact performance.
         #
@@ -212,10 +213,13 @@ module Google
         #   @return [::Integer]
         #     Optional. Number of results to skip beginning from the `page_token` if
         #     provided. https://google.aip.dev/158#skipping-results. It must be a
-        #     non-negative integer. Negative values wil be rejected. Note that this is
+        #     non-negative integer. Negative values will be rejected. Note that this is
         #     not the number of pages to skip. If this value causes the cursor to move
-        #     past the end of results, `ListDocumentsResponse.document_metadata` and
-        #     `ListDocumentsResponse.next_page_token` will be empty.
+        #     past the end of results,
+        #     {::Google::Cloud::DocumentAI::V1beta3::ListDocumentsResponse#document_metadata ListDocumentsResponse.document_metadata}
+        #     and
+        #     {::Google::Cloud::DocumentAI::V1beta3::ListDocumentsResponse#next_page_token ListDocumentsResponse.next_page_token}
+        #     will be empty.
         class ListDocumentsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -226,8 +230,10 @@ module Google
         #     Document metadata corresponding to the listed documents.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     A token, which can be sent as `page_token` to retrieve the next page.
-        #     If this field is omitted, there are no subsequent pages.
+        #     A token, which can be sent as
+        #     {::Google::Cloud::DocumentAI::V1beta3::ListDocumentsRequest#page_token ListDocumentsRequest.page_token}
+        #     to retrieve the next page. If this field is omitted, there are no
+        #     subsequent pages.
         # @!attribute [rw] total_size
         #   @return [::Integer]
         #     Total count of documents queried.
@@ -338,7 +344,7 @@ module Google
         #     Type of the dataset split to which the document belongs.
         # @!attribute [rw] labeling_state
         #   @return [::Google::Cloud::DocumentAI::V1beta3::DocumentLabelingState]
-        #     Labelling state of the document.
+        #     Labeling state of the document.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     The display name of the document.
@@ -363,18 +369,18 @@ module Google
           DATASET_SPLIT_UNASSIGNED = 3
         end
 
-        # Describes the labelling status of a document.
+        # Describes the labeling status of a document.
         module DocumentLabelingState
           # Default value if the enum is not set.
           DOCUMENT_LABELING_STATE_UNSPECIFIED = 0
 
-          # Document has been labelled.
+          # Document has been labeled.
           DOCUMENT_LABELED = 1
 
-          # Document has not been labelled.
+          # Document has not been labeled.
           DOCUMENT_UNLABELED = 2
 
-          # Document has been auto-labelled.
+          # Document has been auto-labeled.
           DOCUMENT_AUTO_LABELED = 3
         end
       end

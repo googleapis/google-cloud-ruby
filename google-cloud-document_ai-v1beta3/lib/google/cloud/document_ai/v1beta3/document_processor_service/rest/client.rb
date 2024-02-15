@@ -214,7 +214,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload process_document(inline_document: nil, raw_document: nil, gcs_document: nil, name: nil, document: nil, skip_human_review: nil, field_mask: nil, process_options: nil)
+              # @overload process_document(inline_document: nil, raw_document: nil, gcs_document: nil, name: nil, document: nil, skip_human_review: nil, field_mask: nil, process_options: nil, labels: nil)
               #   Pass arguments to `process_document` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -251,6 +251,13 @@ module Google
               #     the form of `{document_field_name}` or `pages.{page_field_name}`.
               #   @param process_options [::Google::Cloud::DocumentAI::V1beta3::ProcessOptions, ::Hash]
               #     Inference-time options for the process API
+              #   @param labels [::Hash{::String => ::String}]
+              #     Optional. The labels with user-defined metadata for the request.
+              #
+              #     Label keys and values can be no longer than 63 characters
+              #     (Unicode codepoints) and can only contain lowercase letters, numeric
+              #     characters, underscores, and dashes. International characters are allowed.
+              #     Label values are optional. Label keys must start with a letter.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::DocumentAI::V1beta3::ProcessResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -323,7 +330,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload batch_process_documents(name: nil, input_configs: nil, output_config: nil, input_documents: nil, document_output_config: nil, skip_human_review: nil, process_options: nil)
+              # @overload batch_process_documents(name: nil, input_configs: nil, output_config: nil, input_documents: nil, document_output_config: nil, skip_human_review: nil, process_options: nil, labels: nil)
               #   Pass arguments to `batch_process_documents` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -352,6 +359,13 @@ module Google
               #     `false`.
               #   @param process_options [::Google::Cloud::DocumentAI::V1beta3::ProcessOptions, ::Hash]
               #     Inference-time options for the process API
+              #   @param labels [::Hash{::String => ::String}]
+              #     Optional. The labels with user-defined metadata for the request.
+              #
+              #     Label keys and values can be no longer than 63 characters
+              #     (Unicode codepoints) and can only contain lowercase letters, numeric
+              #     characters, underscores, and dashes. International characters are allowed.
+              #     Label values are optional. Label keys must start with a letter.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -851,13 +865,15 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload train_processor_version(custom_document_extraction_options: nil, parent: nil, processor_version: nil, document_schema: nil, input_data: nil, base_processor_version: nil)
+              # @overload train_processor_version(custom_document_extraction_options: nil, foundation_model_tuning_options: nil, parent: nil, processor_version: nil, document_schema: nil, input_data: nil, base_processor_version: nil)
               #   Pass arguments to `train_processor_version` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param custom_document_extraction_options [::Google::Cloud::DocumentAI::V1beta3::TrainProcessorVersionRequest::CustomDocumentExtractionOptions, ::Hash]
               #     Options to control Custom Document Extraction (CDE) Processor.
+              #   @param foundation_model_tuning_options [::Google::Cloud::DocumentAI::V1beta3::TrainProcessorVersionRequest::FoundationModelTuningOptions, ::Hash]
+              #     Options to control foundation model tuning of a processor.
               #   @param parent [::String]
               #     Required. The parent (project, location and processor) to create the new
               #     version for. Format:
@@ -1394,7 +1410,8 @@ module Google
               #   @param processor [::Google::Cloud::DocumentAI::V1beta3::Processor, ::Hash]
               #     Required. The processor to be created, requires
               #     {::Google::Cloud::DocumentAI::V1beta3::Processor#type Processor.type} and
-              #     [Processor.display_name]][] to be set. Also, the
+              #     {::Google::Cloud::DocumentAI::V1beta3::Processor#display_name Processor.display_name}
+              #     to be set. Also, the
               #     {::Google::Cloud::DocumentAI::V1beta3::Processor#kms_key_name Processor.kms_key_name}
               #     field must be set if the processor is under CMEK.
               # @yield [result, operation] Access the result along with the TransportOperation object
