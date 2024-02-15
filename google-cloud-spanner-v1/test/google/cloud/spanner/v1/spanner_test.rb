@@ -1122,6 +1122,7 @@ class ::Google::Cloud::Spanner::V1::Spanner::ClientTest < Minitest::Test
     session = "hello world"
     request_options = {}
     mutation_groups = [{}]
+    exclude_txn_from_change_streams = true
 
     batch_write_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
       assert_equal :batch_write, name
@@ -1129,6 +1130,7 @@ class ::Google::Cloud::Spanner::V1::Spanner::ClientTest < Minitest::Test
       assert_equal "hello world", request["session"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::V1::RequestOptions), request["request_options"]
       assert_kind_of ::Google::Cloud::Spanner::V1::BatchWriteRequest::MutationGroup, request["mutation_groups"].first
+      assert_equal true, request["exclude_txn_from_change_streams"]
       refute_nil options
     end
 
@@ -1139,7 +1141,7 @@ class ::Google::Cloud::Spanner::V1::Spanner::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.batch_write({ session: session, request_options: request_options, mutation_groups: mutation_groups }) do |response, operation|
+      client.batch_write({ session: session, request_options: request_options, mutation_groups: mutation_groups, exclude_txn_from_change_streams: exclude_txn_from_change_streams }) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Spanner::V1::BatchWriteResponse, r
@@ -1148,7 +1150,7 @@ class ::Google::Cloud::Spanner::V1::Spanner::ClientTest < Minitest::Test
       end
 
       # Use named arguments
-      client.batch_write session: session, request_options: request_options, mutation_groups: mutation_groups do |response, operation|
+      client.batch_write session: session, request_options: request_options, mutation_groups: mutation_groups, exclude_txn_from_change_streams: exclude_txn_from_change_streams do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Spanner::V1::BatchWriteResponse, r
@@ -1157,7 +1159,7 @@ class ::Google::Cloud::Spanner::V1::Spanner::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.batch_write ::Google::Cloud::Spanner::V1::BatchWriteRequest.new(session: session, request_options: request_options, mutation_groups: mutation_groups) do |response, operation|
+      client.batch_write ::Google::Cloud::Spanner::V1::BatchWriteRequest.new(session: session, request_options: request_options, mutation_groups: mutation_groups, exclude_txn_from_change_streams: exclude_txn_from_change_streams) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Spanner::V1::BatchWriteResponse, r
@@ -1166,7 +1168,7 @@ class ::Google::Cloud::Spanner::V1::Spanner::ClientTest < Minitest::Test
       end
 
       # Use hash object with options
-      client.batch_write({ session: session, request_options: request_options, mutation_groups: mutation_groups }, grpc_options) do |response, operation|
+      client.batch_write({ session: session, request_options: request_options, mutation_groups: mutation_groups, exclude_txn_from_change_streams: exclude_txn_from_change_streams }, grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Spanner::V1::BatchWriteResponse, r
@@ -1175,7 +1177,7 @@ class ::Google::Cloud::Spanner::V1::Spanner::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.batch_write(::Google::Cloud::Spanner::V1::BatchWriteRequest.new(session: session, request_options: request_options, mutation_groups: mutation_groups), grpc_options) do |response, operation|
+      client.batch_write(::Google::Cloud::Spanner::V1::BatchWriteRequest.new(session: session, request_options: request_options, mutation_groups: mutation_groups, exclude_txn_from_change_streams: exclude_txn_from_change_streams), grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Spanner::V1::BatchWriteResponse, r

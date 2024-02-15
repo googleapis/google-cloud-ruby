@@ -89,6 +89,15 @@ module Google
         # @!attribute [rw] creator_role
         #   @return [::String]
         #     The database role which created this session.
+        # @!attribute [rw] multiplexed
+        #   @return [::Boolean]
+        #     Optional. If true, specifies a multiplexed session. A multiplexed session
+        #     may be used for multiple, concurrent read-only operations but can not be
+        #     used for read-write transactions, partitioned reads, or partitioned
+        #     queries. Multiplexed sessions can be created via
+        #     {::Google::Cloud::Spanner::V1::Spanner::Client#create_session CreateSession} but not via
+        #     {::Google::Cloud::Spanner::V1::Spanner::Client#batch_create_sessions BatchCreateSessions}.
+        #     Multiplexed sessions may not be deleted nor listed.
         class Session
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -244,8 +253,9 @@ module Google
         #     may fail due to `DEADLINE_EXCEEDED` errors.
         # @!attribute [rw] exclude_replicas
         #   @return [::Google::Cloud::Spanner::V1::DirectedReadOptions::ExcludeReplicas]
-        #     Exclude_replicas indicates that should be excluded from serving
-        #     requests. Spanner will not route requests to the replicas in this list.
+        #     Exclude_replicas indicates that specified replicas should be excluded
+        #     from serving requests. Spanner will not route requests to the replicas
+        #     in this list.
         class DirectedReadOptions
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -263,7 +273,7 @@ module Google
           #   * `location:us-east1` --> The "us-east1" replica(s) of any available type
           #                             will be used to process the request.
           #   * `type:READ_ONLY`    --> The "READ_ONLY" type replica(s) in nearest
-          # .                            available location will be used to process the
+          #                             available location will be used to process the
           #                             request.
           #   * `location:us-east1 type:READ_ONLY` --> The "READ_ONLY" type replica(s)
           #                          in location "us-east1" will be used to process
@@ -950,6 +960,20 @@ module Google
         # @!attribute [rw] mutation_groups
         #   @return [::Array<::Google::Cloud::Spanner::V1::BatchWriteRequest::MutationGroup>]
         #     Required. The groups of mutations to be applied.
+        # @!attribute [rw] exclude_txn_from_change_streams
+        #   @return [::Boolean]
+        #     Optional. When `exclude_txn_from_change_streams` is set to `true`:
+        #      * Mutations from all transactions in this batch write operation will not
+        #      be recorded in change streams with DDL option `allow_txn_exclusion=true`
+        #      that are tracking columns modified by these transactions.
+        #      * Mutations from all transactions in this batch write operation will be
+        #      recorded in change streams with DDL option `allow_txn_exclusion=false or
+        #      not set` that are tracking columns modified by these transactions.
+        #
+        #     When `exclude_txn_from_change_streams` is set to `false` or not set,
+        #     mutations from all transactions in this batch write operation will be
+        #     recorded in all change streams that are tracking columns modified by these
+        #     transactions.
         class BatchWriteRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

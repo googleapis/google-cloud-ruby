@@ -2100,7 +2100,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload batch_write(session: nil, request_options: nil, mutation_groups: nil)
+            # @overload batch_write(session: nil, request_options: nil, mutation_groups: nil, exclude_txn_from_change_streams: nil)
             #   Pass arguments to `batch_write` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -2111,6 +2111,19 @@ module Google
             #     Common options for this request.
             #   @param mutation_groups [::Array<::Google::Cloud::Spanner::V1::BatchWriteRequest::MutationGroup, ::Hash>]
             #     Required. The groups of mutations to be applied.
+            #   @param exclude_txn_from_change_streams [::Boolean]
+            #     Optional. When `exclude_txn_from_change_streams` is set to `true`:
+            #      * Mutations from all transactions in this batch write operation will not
+            #      be recorded in change streams with DDL option `allow_txn_exclusion=true`
+            #      that are tracking columns modified by these transactions.
+            #      * Mutations from all transactions in this batch write operation will be
+            #      recorded in change streams with DDL option `allow_txn_exclusion=false or
+            #      not set` that are tracking columns modified by these transactions.
+            #
+            #     When `exclude_txn_from_change_streams` is set to `false` or not set,
+            #     mutations from all transactions in this batch write operation will be
+            #     recorded in all change streams that are tracking columns modified by these
+            #     transactions.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Enumerable<::Google::Cloud::Spanner::V1::BatchWriteResponse>]
