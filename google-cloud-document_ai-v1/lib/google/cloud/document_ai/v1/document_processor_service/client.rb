@@ -220,7 +220,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload process_document(inline_document: nil, raw_document: nil, gcs_document: nil, name: nil, skip_human_review: nil, field_mask: nil, process_options: nil)
+            # @overload process_document(inline_document: nil, raw_document: nil, gcs_document: nil, name: nil, skip_human_review: nil, field_mask: nil, process_options: nil, labels: nil)
             #   Pass arguments to `process_document` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -252,6 +252,13 @@ module Google
             #     the form of `{document_field_name}` or `pages.{page_field_name}`.
             #   @param process_options [::Google::Cloud::DocumentAI::V1::ProcessOptions, ::Hash]
             #     Inference-time options for the process API
+            #   @param labels [::Hash{::String => ::String}]
+            #     Optional. The labels with user-defined metadata for the request.
+            #
+            #     Label keys and values can be no longer than 63 characters
+            #     (Unicode codepoints) and can only contain lowercase letters, numeric
+            #     characters, underscores, and dashes. International characters are allowed.
+            #     Label values are optional. Label keys must start with a letter.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DocumentAI::V1::ProcessResponse]
@@ -331,7 +338,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload batch_process_documents(name: nil, input_documents: nil, document_output_config: nil, skip_human_review: nil, process_options: nil)
+            # @overload batch_process_documents(name: nil, input_documents: nil, document_output_config: nil, skip_human_review: nil, process_options: nil, labels: nil)
             #   Pass arguments to `batch_process_documents` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -356,6 +363,13 @@ module Google
             #     `false`.
             #   @param process_options [::Google::Cloud::DocumentAI::V1::ProcessOptions, ::Hash]
             #     Inference-time options for the process API
+            #   @param labels [::Hash{::String => ::String}]
+            #     Optional. The labels with user-defined metadata for the request.
+            #
+            #     Label keys and values can be no longer than 63 characters
+            #     (Unicode codepoints) and can only contain lowercase letters, numeric
+            #     characters, underscores, and dashes. International characters are allowed.
+            #     Label values are optional. Label keys must start with a letter.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -1482,7 +1496,8 @@ module Google
             #   @param processor [::Google::Cloud::DocumentAI::V1::Processor, ::Hash]
             #     Required. The processor to be created, requires
             #     {::Google::Cloud::DocumentAI::V1::Processor#type Processor.type} and
-            #     [Processor.display_name]][] to be set. Also, the
+            #     {::Google::Cloud::DocumentAI::V1::Processor#display_name Processor.display_name}
+            #     to be set. Also, the
             #     {::Google::Cloud::DocumentAI::V1::Processor#kms_key_name Processor.kms_key_name}
             #     field must be set if the processor is under CMEK.
             #
