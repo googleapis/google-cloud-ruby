@@ -1723,6 +1723,97 @@ module Google
               end
 
               ##
+              # Unenroll data sources in a user project. This allows users to remove
+              # transfer configurations for these data sources. They will no longer appear
+              # in the ListDataSources RPC and will also no longer appear in the [BigQuery
+              # UI](https://console.cloud.google.com/bigquery).
+              #
+              # @overload unenroll_data_sources(request, options = nil)
+              #   Pass arguments to `unenroll_data_sources` via a request object, either of type
+              #   {::Google::Cloud::Bigquery::DataTransfer::V1::UnenrollDataSourcesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigquery::DataTransfer::V1::UnenrollDataSourcesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload unenroll_data_sources(name: nil, data_source_ids: nil)
+              #   Pass arguments to `unenroll_data_sources` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     The name of the project resource in the form: `projects/{project_id}`
+              #   @param data_source_ids [::Array<::String>]
+              #     Data sources that are unenrolled. It is required to provide at least one
+              #     data source id.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Protobuf::Empty]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigquery/data_transfer/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::DataTransfer::V1::UnenrollDataSourcesRequest.new
+              #
+              #   # Call the unenroll_data_sources method.
+              #   result = client.unenroll_data_sources request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
+              def unenroll_data_sources request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigquery::DataTransfer::V1::UnenrollDataSourcesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.unenroll_data_sources.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigquery::DataTransfer::V1::VERSION
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.unenroll_data_sources.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.unenroll_data_sources.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @data_transfer_service_stub.call_rpc :unenroll_data_sources, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                  return response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the DataTransferService API.
               #
               # This class represents the configuration for DataTransferService,
@@ -1950,6 +2041,11 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :enroll_data_sources
+                  ##
+                  # RPC-specific configuration for `unenroll_data_sources`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :unenroll_data_sources
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -1983,6 +2079,8 @@ module Google
                     @check_valid_creds = ::Gapic::Config::Method.new check_valid_creds_config
                     enroll_data_sources_config = parent_rpcs.enroll_data_sources if parent_rpcs.respond_to? :enroll_data_sources
                     @enroll_data_sources = ::Gapic::Config::Method.new enroll_data_sources_config
+                    unenroll_data_sources_config = parent_rpcs.unenroll_data_sources if parent_rpcs.respond_to? :unenroll_data_sources
+                    @unenroll_data_sources = ::Gapic::Config::Method.new unenroll_data_sources_config
 
                     yield self if block_given?
                   end

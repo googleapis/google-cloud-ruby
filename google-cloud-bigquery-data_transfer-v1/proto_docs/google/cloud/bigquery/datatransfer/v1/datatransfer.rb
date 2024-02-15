@@ -677,6 +677,20 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+
+          # A request to unenroll a set of data sources so they are no longer visible in
+          # the BigQuery UI's `Transfer` tab.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     The name of the project resource in the form: `projects/{project_id}`
+          # @!attribute [rw] data_source_ids
+          #   @return [::Array<::String>]
+          #     Data sources that are unenrolled. It is required to provide at least one
+          #     data source id.
+          class UnenrollDataSourcesRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
       end
     end
