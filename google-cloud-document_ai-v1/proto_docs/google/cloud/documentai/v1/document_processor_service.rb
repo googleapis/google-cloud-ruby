@@ -34,8 +34,15 @@ module Google
         #     Only process certain pages from the end, same as above.
         # @!attribute [rw] ocr_config
         #   @return [::Google::Cloud::DocumentAI::V1::OcrConfig]
-        #     Only applicable to `OCR_PROCESSOR`. Returns error if set on other
-        #     processor types.
+        #     Only applicable to `OCR_PROCESSOR` and `FORM_PARSER_PROCESSOR`.
+        #     Returns error if set on other processor types.
+        # @!attribute [rw] schema_override
+        #   @return [::Google::Cloud::DocumentAI::V1::DocumentSchema]
+        #     Optional. Override the schema of the
+        #     {::Google::Cloud::DocumentAI::V1::ProcessorVersion ProcessorVersion}. Will
+        #     return an Invalid Argument error if this field is set when the underlying
+        #     {::Google::Cloud::DocumentAI::V1::ProcessorVersion ProcessorVersion} doesn't
+        #     support schema override.
         class ProcessOptions
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -87,9 +94,26 @@ module Google
         # @!attribute [rw] process_options
         #   @return [::Google::Cloud::DocumentAI::V1::ProcessOptions]
         #     Inference-time options for the process API
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. The labels with user-defined metadata for the request.
+        #
+        #     Label keys and values can be no longer than 63 characters
+        #     (Unicode codepoints) and can only contain lowercase letters, numeric
+        #     characters, underscores, and dashes. International characters are allowed.
+        #     Label values are optional. Label keys must start with a letter.
         class ProcessRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # The status of human review on a processed document.
@@ -176,9 +200,26 @@ module Google
         # @!attribute [rw] process_options
         #   @return [::Google::Cloud::DocumentAI::V1::ProcessOptions]
         #     Inference-time options for the process API
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. The labels with user-defined metadata for the request.
+        #
+        #     Label keys and values can be no longer than 63 characters
+        #     (Unicode codepoints) and can only contain lowercase letters, numeric
+        #     characters, underscores, and dashes. International characters are allowed.
+        #     Label values are optional. Label keys must start with a letter.
         class BatchProcessRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Response message for
@@ -511,7 +552,8 @@ module Google
         #   @return [::Google::Cloud::DocumentAI::V1::Processor]
         #     Required. The processor to be created, requires
         #     {::Google::Cloud::DocumentAI::V1::Processor#type Processor.type} and
-        #     [Processor.display_name]][] to be set. Also, the
+        #     {::Google::Cloud::DocumentAI::V1::Processor#display_name Processor.display_name}
+        #     to be set. Also, the
         #     {::Google::Cloud::DocumentAI::V1::Processor#kms_key_name Processor.kms_key_name}
         #     field must be set if the processor is under CMEK.
         class CreateProcessorRequest
