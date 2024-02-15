@@ -1,0 +1,113 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.recaptchaenterprise.v1",
+  "libraryPackage": "::Google::Cloud::RecaptchaEnterprise::V1",
+  "services": {
+    "RecaptchaEnterpriseService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client",
+          "rpcs": {
+            "CreateAssessment": {
+              "methods": [
+                "create_assessment"
+              ]
+            },
+            "AnnotateAssessment": {
+              "methods": [
+                "annotate_assessment"
+              ]
+            },
+            "CreateKey": {
+              "methods": [
+                "create_key"
+              ]
+            },
+            "ListKeys": {
+              "methods": [
+                "list_keys"
+              ]
+            },
+            "RetrieveLegacySecretKey": {
+              "methods": [
+                "retrieve_legacy_secret_key"
+              ]
+            },
+            "GetKey": {
+              "methods": [
+                "get_key"
+              ]
+            },
+            "UpdateKey": {
+              "methods": [
+                "update_key"
+              ]
+            },
+            "DeleteKey": {
+              "methods": [
+                "delete_key"
+              ]
+            },
+            "MigrateKey": {
+              "methods": [
+                "migrate_key"
+              ]
+            },
+            "GetMetrics": {
+              "methods": [
+                "get_metrics"
+              ]
+            },
+            "CreateFirewallPolicy": {
+              "methods": [
+                "create_firewall_policy"
+              ]
+            },
+            "ListFirewallPolicies": {
+              "methods": [
+                "list_firewall_policies"
+              ]
+            },
+            "GetFirewallPolicy": {
+              "methods": [
+                "get_firewall_policy"
+              ]
+            },
+            "UpdateFirewallPolicy": {
+              "methods": [
+                "update_firewall_policy"
+              ]
+            },
+            "DeleteFirewallPolicy": {
+              "methods": [
+                "delete_firewall_policy"
+              ]
+            },
+            "ReorderFirewallPolicies": {
+              "methods": [
+                "reorder_firewall_policies"
+              ]
+            },
+            "ListRelatedAccountGroups": {
+              "methods": [
+                "list_related_account_groups"
+              ]
+            },
+            "ListRelatedAccountGroupMemberships": {
+              "methods": [
+                "list_related_account_group_memberships"
+              ]
+            },
+            "SearchRelatedAccountGroupMemberships": {
+              "methods": [
+                "search_related_account_group_memberships"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
