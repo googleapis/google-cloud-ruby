@@ -965,6 +965,66 @@ class ::Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Clie
     end
   end
 
+  def test_reorder_firewall_policies
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::RecaptchaEnterprise::V1::ReorderFirewallPoliciesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+
+    reorder_firewall_policies_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :reorder_firewall_policies, name
+      assert_kind_of ::Google::Cloud::RecaptchaEnterprise::V1::ReorderFirewallPoliciesRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal ["hello world"], request["names"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, reorder_firewall_policies_client_stub do
+      # Create client
+      client = ::Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.reorder_firewall_policies({ parent: parent, names: names }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.reorder_firewall_policies parent: parent, names: names do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.reorder_firewall_policies ::Google::Cloud::RecaptchaEnterprise::V1::ReorderFirewallPoliciesRequest.new(parent: parent, names: names) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.reorder_firewall_policies({ parent: parent, names: names }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.reorder_firewall_policies(::Google::Cloud::RecaptchaEnterprise::V1::ReorderFirewallPoliciesRequest.new(parent: parent, names: names), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, reorder_firewall_policies_client_stub.call_rpc_count
+    end
+  end
+
   def test_list_related_account_groups
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::RecaptchaEnterprise::V1::ListRelatedAccountGroupsResponse.new

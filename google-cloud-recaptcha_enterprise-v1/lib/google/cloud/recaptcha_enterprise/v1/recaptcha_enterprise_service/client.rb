@@ -1535,6 +1535,95 @@ module Google
             end
 
             ##
+            # Reorders all firewall policies.
+            #
+            # @overload reorder_firewall_policies(request, options = nil)
+            #   Pass arguments to `reorder_firewall_policies` via a request object, either of type
+            #   {::Google::Cloud::RecaptchaEnterprise::V1::ReorderFirewallPoliciesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::RecaptchaEnterprise::V1::ReorderFirewallPoliciesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload reorder_firewall_policies(parent: nil, names: nil)
+            #   Pass arguments to `reorder_firewall_policies` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The name of the project to list the policies for, in the format
+            #     `projects/{project}`.
+            #   @param names [::Array<::String>]
+            #     Required. A list containing all policy names, in the new order. Each name
+            #     is in the format `projects/{project}/firewallpolicies/{firewallpolicy}`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::RecaptchaEnterprise::V1::ReorderFirewallPoliciesResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::RecaptchaEnterprise::V1::ReorderFirewallPoliciesResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/recaptcha_enterprise/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::RecaptchaEnterprise::V1::ReorderFirewallPoliciesRequest.new
+            #
+            #   # Call the reorder_firewall_policies method.
+            #   result = client.reorder_firewall_policies request
+            #
+            #   # The returned object is of type Google::Cloud::RecaptchaEnterprise::V1::ReorderFirewallPoliciesResponse.
+            #   p result
+            #
+            def reorder_firewall_policies request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::RecaptchaEnterprise::V1::ReorderFirewallPoliciesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.reorder_firewall_policies.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::RecaptchaEnterprise::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.reorder_firewall_policies.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.reorder_firewall_policies.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @recaptcha_enterprise_service_stub.call_rpc :reorder_firewall_policies, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # List groups of related accounts.
             #
             # @overload list_related_account_groups(request, options = nil)
@@ -2082,6 +2171,11 @@ module Google
                 #
                 attr_reader :delete_firewall_policy
                 ##
+                # RPC-specific configuration for `reorder_firewall_policies`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :reorder_firewall_policies
+                ##
                 # RPC-specific configuration for `list_related_account_groups`
                 # @return [::Gapic::Config::Method]
                 #
@@ -2129,6 +2223,8 @@ module Google
                   @update_firewall_policy = ::Gapic::Config::Method.new update_firewall_policy_config
                   delete_firewall_policy_config = parent_rpcs.delete_firewall_policy if parent_rpcs.respond_to? :delete_firewall_policy
                   @delete_firewall_policy = ::Gapic::Config::Method.new delete_firewall_policy_config
+                  reorder_firewall_policies_config = parent_rpcs.reorder_firewall_policies if parent_rpcs.respond_to? :reorder_firewall_policies
+                  @reorder_firewall_policies = ::Gapic::Config::Method.new reorder_firewall_policies_config
                   list_related_account_groups_config = parent_rpcs.list_related_account_groups if parent_rpcs.respond_to? :list_related_account_groups
                   @list_related_account_groups = ::Gapic::Config::Method.new list_related_account_groups_config
                   list_related_account_group_memberships_config = parent_rpcs.list_related_account_group_memberships if parent_rpcs.respond_to? :list_related_account_group_memberships

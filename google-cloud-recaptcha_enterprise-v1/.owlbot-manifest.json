@@ -49,6 +49,7 @@
     "snippets/recaptcha_enterprise_service/list_related_account_group_memberships.rb",
     "snippets/recaptcha_enterprise_service/list_related_account_groups.rb",
     "snippets/recaptcha_enterprise_service/migrate_key.rb",
+    "snippets/recaptcha_enterprise_service/reorder_firewall_policies.rb",
     "snippets/recaptcha_enterprise_service/retrieve_legacy_secret_key.rb",
     "snippets/recaptcha_enterprise_service/search_related_account_group_memberships.rb",
     "snippets/recaptcha_enterprise_service/update_firewall_policy.rb",

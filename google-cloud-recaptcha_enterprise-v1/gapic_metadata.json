@@ -85,6 +85,11 @@
                 "delete_firewall_policy"
               ]
             },
+            "ReorderFirewallPolicies": {
+              "methods": [
+                "reorder_firewall_policies"
+              ]
+            },
             "ListRelatedAccountGroups": {
               "methods": [
                 "list_related_account_groups"

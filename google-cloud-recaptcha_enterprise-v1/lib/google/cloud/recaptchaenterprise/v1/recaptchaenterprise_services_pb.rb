@@ -74,6 +74,8 @@ module Google
             rpc :UpdateFirewallPolicy, ::Google::Cloud::RecaptchaEnterprise::V1::UpdateFirewallPolicyRequest, ::Google::Cloud::RecaptchaEnterprise::V1::FirewallPolicy
             # Deletes the specified firewall policy.
             rpc :DeleteFirewallPolicy, ::Google::Cloud::RecaptchaEnterprise::V1::DeleteFirewallPolicyRequest, ::Google::Protobuf::Empty
+            # Reorders all firewall policies.
+            rpc :ReorderFirewallPolicies, ::Google::Cloud::RecaptchaEnterprise::V1::ReorderFirewallPoliciesRequest, ::Google::Cloud::RecaptchaEnterprise::V1::ReorderFirewallPoliciesResponse
             # List groups of related accounts.
             rpc :ListRelatedAccountGroups, ::Google::Cloud::RecaptchaEnterprise::V1::ListRelatedAccountGroupsRequest, ::Google::Cloud::RecaptchaEnterprise::V1::ListRelatedAccountGroupsResponse
             # Get memberships in a group of related accounts.
