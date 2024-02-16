@@ -140,12 +140,18 @@ module Google
             # name of the parent.
             MERGED = 4
 
-            # The incident was automatically closed because the issues couldn’t be
-            # confirmed or is no longer impacting Google Cloud Products and/or
-            # Locations.
+            # The incident was automatically closed because of the following reasons:
+            #
+            #  * The impact of the incident could not be confirmed.
+            #  * The incident was intermittent or resolved itself.
+            #
+            #  The incident does not have a resolution because no action or
+            #  investigation happened. If it is intermittent, the incident may reopen.
             AUTO_CLOSED = 9
 
-            # The incident was verified as non-impactful. No further action required.
+            # Upon investigation, Google engineers concluded that the incident is not
+            # affecting a Google Cloud product. This state can change if the incident
+            # is reviewed again.
             FALSE_POSITIVE = 10
           end
 
@@ -300,12 +306,18 @@ module Google
             # parent.
             MERGED = 4
 
-            # The incident was automatically closed because the issues couldn’t be
-            # confirmed or is no longer impacting Google Cloud Products and/or
-            # Locations.
+            # The incident was automatically closed because of the following reasons:
+            #
+            #  * The impact of the incident could not be confirmed.
+            #  * The incident was intermittent or resolved itself.
+            #
+            #  The incident does not have a resolution because no action or
+            #  investigation happened. If it is intermittent, the incident may reopen.
             AUTO_CLOSED = 9
 
-            # The incident was verified as non-impactful. No further action required.
+            # Upon investigation, Google engineers concluded that the incident is not
+            # affecting a Google Cloud product. This state can change if the incident
+            # is reviewed again.
             FALSE_POSITIVE = 10
           end
         end
