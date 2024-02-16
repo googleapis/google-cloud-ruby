@@ -4,7 +4,7 @@
 
 #### Features
 
-* introduces schema_override to ProcessOptions ([#24824](https://github.com/googleapis/google-cloud-ruby/issues/24824)) 
+* Add support for schema_override in ProcessOptions ([#24824](https://github.com/googleapis/google-cloud-ruby/issues/24824)) 
 
 ### 0.18.0 (2024-02-06)
 
