@@ -1,5 +1,11 @@
 # Release History
 
+### 0.17.4 (2024-02-16)
+
+#### Documentation
+
+* Clarify that the parent field in the CreateBillingAccountRequest must be a billing account ([#24814](https://github.com/googleapis/google-cloud-ruby/issues/24814)) 
+
 ### 0.17.3 (2024-02-01)
 
 #### Bug Fixes
