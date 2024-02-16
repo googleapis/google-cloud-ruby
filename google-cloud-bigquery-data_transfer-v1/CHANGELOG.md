@@ -1,5 +1,11 @@
 # Release History
 
+### 0.13.0 (2024-02-16)
+
+#### Features
+
+* Add UnenrollDataSources API which gives users a programmatic way to unenroll data sources ([#24810](https://github.com/googleapis/google-cloud-ruby/issues/24810)) 
+
 ### 0.12.2 (2024-02-01)
 
 #### Bug Fixes
