@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.10.0 (2024-02-16)
+
+#### Features
+
+* add data_retention_config to EnvironmentConfig 
+* add ListWorkloads RPC ([#24817](https://github.com/googleapis/google-cloud-ruby/issues/24817)) 
+* add storage_config to Environment 
+* add web_server_plugins_mode to SoftwareConfig 
+
 ### 0.9.2 (2024-02-01)
 
 #### Bug Fixes
