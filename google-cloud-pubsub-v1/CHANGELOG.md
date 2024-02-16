@@ -1,5 +1,11 @@
 # Release History
 
+### 0.21.2 (2024-02-16)
+
+#### Documentation
+
+* small fix in Pub/Sub ingestion comments ([#24818](https://github.com/googleapis/google-cloud-ruby/issues/24818)) 
+
 ### 0.21.1 (2024-02-01)
 
 #### Bug Fixes
