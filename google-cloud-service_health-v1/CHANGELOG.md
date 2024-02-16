@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.1.2 (2024-02-16)
+
+#### Documentation
+
+* update DetailedState module comments ([#24826](https://github.com/googleapis/google-cloud-ruby/issues/24826)) 
+
 ### 0.1.1 (2024-02-01)
 
 #### Bug Fixes
