@@ -4,7 +4,7 @@
 
 #### Features
 
-* Adds exclude_txn_from_change_streams for multiplexed session in spanner.proto ([#24820](https://github.com/googleapis/google-cloud-ruby/issues/24820)) 
+* Support exclude_txn_from_change_streams for multiplexed session in spanner.proto ([#24820](https://github.com/googleapis/google-cloud-ruby/issues/24820)) 
 
 ### 0.22.2 (2024-02-01)
 
