@@ -4,7 +4,7 @@
 
 #### Documentation
 
-* small fix in Pub/Sub ingestion comments ([#24818](https://github.com/googleapis/google-cloud-ruby/issues/24818)) 
+* Fixes in Pub/Sub ingestion comments ([#24818](https://github.com/googleapis/google-cloud-ruby/issues/24818)) 
 
 ### 0.21.1 (2024-02-01)
 
