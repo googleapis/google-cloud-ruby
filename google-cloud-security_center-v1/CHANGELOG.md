@@ -1,5 +1,11 @@
 # Release History
 
+### 0.35.0 (2024-02-16)
+
+#### Features
+
+* Add application field to finding's list of attributes ([#24815](https://github.com/googleapis/google-cloud-ruby/issues/24815)) 
+
 ### 0.34.2 (2024-02-01)
 
 #### Bug Fixes
