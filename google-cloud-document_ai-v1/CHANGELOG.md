@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.19.0 (2024-02-16)
+
+#### Features
+
+* Add support for schema_override in ProcessOptions ([#24824](https://github.com/googleapis/google-cloud-ruby/issues/24824)) 
+
 ### 0.18.0 (2024-02-06)
 
 #### Features
