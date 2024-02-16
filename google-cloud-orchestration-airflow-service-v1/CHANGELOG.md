@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.10.0 (2024-02-16)
+
+#### Features
+
+* Added ListWorkloads RPC and other related workload methods
+
 ### 0.9.2 (2024-02-01)
 
 #### Bug Fixes
