@@ -107,9 +107,26 @@ module Google
           #   @return [::String]
           #     Optional. A SQL expression to specify the [default value]
           #     (https://cloud.google.com/bigquery/docs/default-values) for this field.
+          # @!attribute [rw] range_element_type
+          #   @return [::Google::Cloud::Bigquery::Storage::V1::TableFieldSchema::FieldElementType]
+          #     Optional. The subtype of the RANGE, if the type of this field is RANGE. If
+          #     the type is RANGE, this field is required. Possible values for the field
+          #     element type of a RANGE include:
+          #     * DATE
+          #     * DATETIME
+          #     * TIMESTAMP
           class TableFieldSchema
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Represents the type of a field element.
+            # @!attribute [rw] type
+            #   @return [::Google::Cloud::Bigquery::Storage::V1::TableFieldSchema::Type]
+            #     Required. The type of a field element.
+            class FieldElementType
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
 
             module Type
               # Illegal value
@@ -159,6 +176,9 @@ module Google
 
               # JSON, String
               JSON = 15
+
+              # RANGE
+              RANGE = 16
             end
 
             module Mode
