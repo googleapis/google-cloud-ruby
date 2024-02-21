@@ -229,14 +229,39 @@ module Google
           #     `container.options` field.
           # @!attribute [rw] username
           #   @return [::String]
-          #     Optional username for logging in to a docker registry. If username
-          #     matches `projects/*/secrets/*/versions/*` then Batch will read the
-          #     username from the Secret Manager.
+          #     Required if the container image is from a private Docker registry. The
+          #     username to login to the Docker registry that contains the image.
+          #
+          #     You can either specify the username directly by using plain text or
+          #     specify an encrypted username by using a Secret Manager secret:
+          #     `projects/*/secrets/*/versions/*`. However, using a secret is
+          #     recommended for enhanced security.
+          #
+          #     Caution: If you specify the username using plain text, you risk the
+          #     username being exposed to any users who can view the job or its logs.
+          #     To avoid this risk, specify a secret that contains the username instead.
+          #
+          #     Learn more about [Secret
+          #     Manager](https://cloud.google.com/secret-manager/docs/) and [using
+          #     Secret Manager with
+          #     Batch](https://cloud.google.com/batch/docs/create-run-job-secret-manager).
           # @!attribute [rw] password
           #   @return [::String]
-          #     Optional password for logging in to a docker registry. If password
-          #     matches `projects/*/secrets/*/versions/*` then Batch will read the
-          #     password from the Secret Manager;
+          #     Required if the container image is from a private Docker registry. The
+          #     password to login to the Docker registry that contains the image.
+          #
+          #     For security, it is strongly recommended to specify an
+          #     encrypted password by using a Secret Manager secret:
+          #     `projects/*/secrets/*/versions/*`.
+          #
+          #     Warning: If you specify the password using plain text, you risk the
+          #     password being exposed to any users who can view the job or its logs.
+          #     To avoid this risk, specify a secret that contains the password instead.
+          #
+          #     Learn more about [Secret
+          #     Manager](https://cloud.google.com/secret-manager/docs/) and [using
+          #     Secret Manager with
+          #     Batch](https://cloud.google.com/batch/docs/create-run-job-secret-manager).
           # @!attribute [rw] enable_image_streaming
           #   @return [::Boolean]
           #     Optional. If set to true, this container runnable uses Image streaming.
@@ -271,7 +296,7 @@ module Google
           #     first line of the file.(For example, to execute the script using bash,
           #     `#!/bin/bash` should be the first line of the file. To execute the
           #     script using`Python3`, `#!/usr/bin/env python3` should be the first
-          #     line of the file.) Otherwise, the file will by default be excuted by
+          #     line of the file.) Otherwise, the file will by default be executed by
           #     `/bin/sh`.
           # @!attribute [rw] text
           #   @return [::String]
@@ -281,7 +306,7 @@ module Google
           #     beginning of the text.(For example, to execute the script using bash,
           #     `#!/bin/bash\n` should be added. To execute the script using`Python3`,
           #     `#!/usr/bin/env python3\n` should be added.) Otherwise, the script will
-          #     by default be excuted by `/bin/sh`.
+          #     by default be executed by `/bin/sh`.
           class Script
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
