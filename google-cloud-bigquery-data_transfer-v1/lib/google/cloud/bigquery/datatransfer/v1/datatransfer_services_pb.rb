@@ -85,7 +85,8 @@ module Google
               # Unenroll data sources in a user project. This allows users to remove
               # transfer configurations for these data sources. They will no longer appear
               # in the ListDataSources RPC and will also no longer appear in the [BigQuery
-              # UI](https://console.cloud.google.com/bigquery).
+              # UI](https://console.cloud.google.com/bigquery). Data transfers
+              # configurations of unenrolled data sources will not be scheduled.
               rpc :UnenrollDataSources, ::Google::Cloud::Bigquery::DataTransfer::V1::UnenrollDataSourcesRequest, ::Google::Protobuf::Empty
             end
 

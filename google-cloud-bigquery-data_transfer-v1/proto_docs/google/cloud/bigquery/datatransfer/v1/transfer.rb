@@ -44,13 +44,13 @@ module Google
           #     Specifies time to start scheduling transfer runs. The first run will be
           #     scheduled at or after the start time according to a recurrence pattern
           #     defined in the schedule string. The start time can be changed at any
-          #     moment. The time when a data transfer can be trigerred manually is not
+          #     moment. The time when a data transfer can be triggered manually is not
           #     limited by this option.
           # @!attribute [rw] end_time
           #   @return [::Google::Protobuf::Timestamp]
           #     Defines time to stop scheduling transfer runs. A transfer run cannot be
           #     scheduled at or after the end time. The end time can be changed at any
-          #     moment. The time when a data transfer can be trigerred manually is not
+          #     moment. The time when a data transfer can be triggered manually is not
           #     limited by this option.
           class ScheduleOptions
             include ::Google::Protobuf::MessageExts
@@ -102,8 +102,7 @@ module Google
           #   @return [::String]
           #     Data transfer schedule.
           #     If the data source does not support a custom schedule, this should be
-          #     empty. If it is empty, the default value for the data source will be
-          #     used.
+          #     empty. If it is empty, the default value for the data source will be used.
           #     The specified times are in UTC.
           #     Examples of valid format:
           #     `1st,3rd monday of month 15:30`,
@@ -123,12 +122,12 @@ module Google
           #     For example, if `data_refresh_window_days = 10`, then every day
           #     BigQuery reingests data for [today-10, today-1], rather than ingesting data
           #     for just [today-1].
-          #     Only valid if the data source supports the feature. Set the value to  0
+          #     Only valid if the data source supports the feature. Set the value to 0
           #     to use the default value.
           # @!attribute [rw] disabled
           #   @return [::Boolean]
-          #     Is this config disabled. When set to true, no runs are scheduled
-          #     for a given transfer.
+          #     Is this config disabled. When set to true, no runs will be scheduled for
+          #     this transfer config.
           # @!attribute [r] update_time
           #   @return [::Google::Protobuf::Timestamp]
           #     Output only. Data transfer modification time. Ignored by server on input.
@@ -150,7 +149,7 @@ module Google
           #     associated with this transfer config finish.
           #
           #     The format for specifying a pubsub topic is:
-          #     `projects/{project}/topics/{topic}`
+          #     `projects/{project_id}/topics/{topic_id}`
           # @!attribute [rw] email_preferences
           #   @return [::Google::Cloud::Bigquery::DataTransfer::V1::EmailPreferences]
           #     Email notifications will be sent according to these preferences
@@ -241,7 +240,7 @@ module Google
           #     transfer run finishes.
           #
           #     The format for specifying a pubsub topic is:
-          #     `projects/{project}/topics/{topic}`
+          #     `projects/{project_id}/topics/{topic_id}`
           # @!attribute [r] email_preferences
           #   @return [::Google::Cloud::Bigquery::DataTransfer::V1::EmailPreferences]
           #     Output only. Email notifications will be sent according to these
