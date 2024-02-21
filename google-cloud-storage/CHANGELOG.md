@@ -1,5 +1,11 @@
 # Release History
 
+### 1.49.0 (2024-02-21)
+
+#### Features
+
+* Support of Managed Folders ([#24809](https://github.com/googleapis/google-cloud-ruby/issues/24809)) 
+
 ### 1.48.1 (2024-01-26)
 
 #### Bug Fixes
