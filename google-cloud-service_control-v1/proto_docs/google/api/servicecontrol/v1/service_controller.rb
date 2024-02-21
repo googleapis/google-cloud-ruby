@@ -80,6 +80,11 @@ module Google
           # @!attribute [rw] consumer_info
           #   @return [::Google::Cloud::ServiceControl::V1::CheckResponse::ConsumerInfo]
           #     Consumer info of this check.
+          # @!attribute [rw] api_key_uid
+          #   @return [::String]
+          #     The unique id of the api key in the format of "apikey:<UID>".
+          #     This field will be populated when the consumer passed to Service Control
+          #     is an API key and all the API key related validations are successful.
           class CheckInfo
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
