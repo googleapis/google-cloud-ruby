@@ -1,5 +1,19 @@
 # Release History
 
+### 0.32.0 (2024-02-21)
+
+#### Features
+
+* adds display_name to DocumentSchema 
+* adds foundation_model_tuning_options to TrainProcessorVersionRequest ([#24825](https://github.com/googleapis/google-cloud-ruby/issues/24825)) 
+* adds labels to ProcessRequest and BatchProcessRequest 
+#### Bug Fixes
+
+* deprecates Dataset.document_warehouse_config 
+#### Documentation
+
+* updates to comments 
+
 ### 0.31.0 (2024-02-06)
 
 #### Features
