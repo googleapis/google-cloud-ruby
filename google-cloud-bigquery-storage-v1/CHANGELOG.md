@@ -1,5 +1,11 @@
 # Release History
 
+### 0.26.0 (2024-02-22)
+
+#### Features
+
+* Add the RANGE type to the google.cloud.bigquery.storage.v1.TableFieldSchema ([#24835](https://github.com/googleapis/google-cloud-ruby/issues/24835)) 
+
 ### 0.25.2 (2024-02-01)
 
 #### Bug Fixes
