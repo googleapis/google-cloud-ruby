@@ -215,6 +215,9 @@ module Google
         # @!attribute [rw] application
         #   @return [::Google::Cloud::SecurityCenter::V1::Application]
         #     Represents an application associated with the finding.
+        # @!attribute [rw] backup_disaster_recovery
+        #   @return [::Google::Cloud::SecurityCenter::V1::BackupDisasterRecovery]
+        #     Fields related to Backup and DR findings.
         class Finding
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
