@@ -1,5 +1,11 @@
 # Release History
 
+### 0.36.0 (2024-02-22)
+
+#### Features
+
+* Support queued provisioning on existing node pools ([#24849](https://github.com/googleapis/google-cloud-ruby/issues/24849)) 
+
 ### 0.35.0 (2024-02-08)
 
 #### Features
