@@ -1,5 +1,11 @@
 # Release History
 
+### 0.36.0 (2024-02-22)
+
+#### Features
+
+* Include Finding information related to Google Cloud Backup and DR Service ([#24842](https://github.com/googleapis/google-cloud-ruby/issues/24842)) 
+
 ### 0.35.0 (2024-02-16)
 
 #### Features
