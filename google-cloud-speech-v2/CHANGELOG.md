@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.10.0 (2024-02-22)
+
+#### Features
+
+* Support for VTT and SRT formatted output ([#24841](https://github.com/googleapis/google-cloud-ruby/issues/24841)) 
+
 ### 0.9.2 (2024-02-01)
 
 #### Bug Fixes
