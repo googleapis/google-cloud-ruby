@@ -25,9 +25,23 @@ module Google
         # @!attribute [rw] key
         #   @return [::String]
         #     String key to use for lookup.
+        # @!attribute [rw] composite_key
+        #   @return [::Google::Cloud::AIPlatform::V1::FeatureViewDataKey::CompositeKey]
+        #     The actual Entity ID will be composed from this struct. This should match
+        #     with the way ID is defined in the FeatureView spec.
         class FeatureViewDataKey
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # ID that is comprised from several parts (columns).
+          # @!attribute [rw] parts
+          #   @return [::Array<::String>]
+          #     Parts to construct Entity ID. Should match with the same ID columns as
+          #     defined in FeatureView in the same order.
+          class CompositeKey
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Request message for
