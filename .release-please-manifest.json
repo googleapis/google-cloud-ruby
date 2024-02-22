@@ -607,7 +607,7 @@
   "google-cloud-spanner-admin-database-v1+FILLER": "0.0.0",
   "google-cloud-spanner-admin-instance-v1": "0.13.2",
   "google-cloud-spanner-admin-instance-v1+FILLER": "0.0.0",
-  "google-cloud-spanner-v1": "0.23.0",
+  "google-cloud-spanner-v1": "0.24.0",
   "google-cloud-spanner-v1+FILLER": "0.0.0",
   "google-cloud-speech": "1.6.0",
   "google-cloud-speech+FILLER": "0.0.0",
