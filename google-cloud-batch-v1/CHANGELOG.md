@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.16.2 (2024-02-22)
+
+#### Documentation
+
+* refine proto comment for run_as_non_root ([#24837](https://github.com/googleapis/google-cloud-ruby/issues/24837)) 
+
 ### 0.16.1 (2024-02-01)
 
 #### Bug Fixes
