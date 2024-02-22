@@ -115,6 +115,21 @@ module Google
         end
 
         # Request message for
+        # {::Google::Cloud::AIPlatform::V1::PredictionService::Client#stream_raw_predict PredictionService.StreamRawPredict}.
+        # @!attribute [rw] endpoint
+        #   @return [::String]
+        #     Required. The name of the Endpoint requested to serve the prediction.
+        #     Format:
+        #     `projects/{project}/locations/{location}/endpoints/{endpoint}`
+        # @!attribute [rw] http_body
+        #   @return [::Google::Api::HttpBody]
+        #     The prediction input. Supports HTTP headers and arbitrary data payload.
+        class StreamRawPredictRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
         # {::Google::Cloud::AIPlatform::V1::PredictionService::Client#direct_predict PredictionService.DirectPredict}.
         # @!attribute [rw] endpoint
         #   @return [::String]
@@ -175,6 +190,87 @@ module Google
         #   @return [::String]
         #     The prediction output.
         class DirectRawPredictResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::PredictionService::Client#stream_direct_predict PredictionService.StreamDirectPredict}.
+        #
+        # The first message must contain
+        # {::Google::Cloud::AIPlatform::V1::StreamDirectPredictRequest#endpoint endpoint}
+        # field and optionally [input][]. The subsequent messages must contain
+        # [input][].
+        # @!attribute [rw] endpoint
+        #   @return [::String]
+        #     Required. The name of the Endpoint requested to serve the prediction.
+        #     Format:
+        #     `projects/{project}/locations/{location}/endpoints/{endpoint}`
+        # @!attribute [rw] inputs
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::Tensor>]
+        #     Optional. The prediction input.
+        # @!attribute [rw] parameters
+        #   @return [::Google::Cloud::AIPlatform::V1::Tensor]
+        #     Optional. The parameters that govern the prediction.
+        class StreamDirectPredictRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::PredictionService::Client#stream_direct_predict PredictionService.StreamDirectPredict}.
+        # @!attribute [rw] outputs
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::Tensor>]
+        #     The prediction output.
+        # @!attribute [rw] parameters
+        #   @return [::Google::Cloud::AIPlatform::V1::Tensor]
+        #     The parameters that govern the prediction.
+        class StreamDirectPredictResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::PredictionService::Client#stream_direct_raw_predict PredictionService.StreamDirectRawPredict}.
+        #
+        # The first message must contain
+        # {::Google::Cloud::AIPlatform::V1::StreamDirectRawPredictRequest#endpoint endpoint}
+        # and
+        # {::Google::Cloud::AIPlatform::V1::StreamDirectRawPredictRequest#method_name method_name}
+        # fields and optionally
+        # {::Google::Cloud::AIPlatform::V1::StreamDirectRawPredictRequest#input input}. The
+        # subsequent messages must contain
+        # {::Google::Cloud::AIPlatform::V1::StreamDirectRawPredictRequest#input input}.
+        # {::Google::Cloud::AIPlatform::V1::StreamDirectRawPredictRequest#method_name method_name}
+        # in the subsequent messages have no effect.
+        # @!attribute [rw] endpoint
+        #   @return [::String]
+        #     Required. The name of the Endpoint requested to serve the prediction.
+        #     Format:
+        #     `projects/{project}/locations/{location}/endpoints/{endpoint}`
+        # @!attribute [rw] method_name
+        #   @return [::String]
+        #     Optional. Fully qualified name of the API method being invoked to perform
+        #     predictions.
+        #
+        #     Format:
+        #     `/namespace.Service/Method/`
+        #     Example:
+        #     `/tensorflow.serving.PredictionService/Predict`
+        # @!attribute [rw] input
+        #   @return [::String]
+        #     Optional. The prediction input.
+        class StreamDirectRawPredictRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::PredictionService::Client#stream_direct_raw_predict PredictionService.StreamDirectRawPredict}.
+        # @!attribute [rw] output
+        #   @return [::String]
+        #     The prediction output.
+        class StreamDirectRawPredictResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -333,10 +429,18 @@ module Google
         #     Required. The name of the Endpoint requested to perform token counting.
         #     Format:
         #     `projects/{project}/locations/{location}/endpoints/{endpoint}`
+        # @!attribute [rw] model
+        #   @return [::String]
+        #     Required. The name of the publisher model requested to serve the
+        #     prediction. Format:
+        #     `projects/{project}/locations/{location}/publishers/*/models/*`
         # @!attribute [rw] instances
         #   @return [::Array<::Google::Protobuf::Value>]
         #     Required. The instances that are the input to token counting call.
         #     Schema is identical to the prediction schema of the underlying model.
+        # @!attribute [rw] contents
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::Content>]
+        #     Required. Input content.
         class CountTokensRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -353,6 +457,97 @@ module Google
         class CountTokensResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for [PredictionService.GenerateContent].
+        # @!attribute [rw] model
+        #   @return [::String]
+        #     Required. The name of the publisher model requested to serve the
+        #     prediction. Format:
+        #     `projects/{project}/locations/{location}/publishers/*/models/*`
+        # @!attribute [rw] contents
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::Content>]
+        #     Required. The content of the current conversation with the model.
+        #
+        #     For single-turn queries, this is a single instance. For multi-turn queries,
+        #     this is a repeated field that contains conversation history + latest
+        #     request.
+        # @!attribute [rw] tools
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::Tool>]
+        #     Optional. A list of `Tools` the model may use to generate the next
+        #     response.
+        #
+        #     A `Tool` is a piece of code that enables the system to interact with
+        #     external systems to perform an action, or set of actions, outside of
+        #     knowledge and scope of the model.
+        # @!attribute [rw] safety_settings
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::SafetySetting>]
+        #     Optional. Per request settings for blocking unsafe content.
+        #     Enforced on GenerateContentResponse.candidates.
+        # @!attribute [rw] generation_config
+        #   @return [::Google::Cloud::AIPlatform::V1::GenerationConfig]
+        #     Optional. Generation config.
+        class GenerateContentRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for [PredictionService.GenerateContent].
+        # @!attribute [r] candidates
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::Candidate>]
+        #     Output only. Generated candidates.
+        # @!attribute [r] prompt_feedback
+        #   @return [::Google::Cloud::AIPlatform::V1::GenerateContentResponse::PromptFeedback]
+        #     Output only. Content filter results for a prompt sent in the request.
+        #     Note: Sent only in the first stream chunk.
+        #     Only happens when no candidates were generated due to content violations.
+        # @!attribute [rw] usage_metadata
+        #   @return [::Google::Cloud::AIPlatform::V1::GenerateContentResponse::UsageMetadata]
+        #     Usage metadata about the response(s).
+        class GenerateContentResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Content filter results for a prompt sent in the request.
+          # @!attribute [r] block_reason
+          #   @return [::Google::Cloud::AIPlatform::V1::GenerateContentResponse::PromptFeedback::BlockedReason]
+          #     Output only. Blocked reason.
+          # @!attribute [r] safety_ratings
+          #   @return [::Array<::Google::Cloud::AIPlatform::V1::SafetyRating>]
+          #     Output only. Safety ratings.
+          # @!attribute [r] block_reason_message
+          #   @return [::String]
+          #     Output only. A readable block reason message.
+          class PromptFeedback
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Blocked reason enumeration.
+            module BlockedReason
+              # Unspecified blocked reason.
+              BLOCKED_REASON_UNSPECIFIED = 0
+
+              # Candidates blocked due to safety.
+              SAFETY = 1
+
+              # Candidates blocked due to other reason.
+              OTHER = 2
+            end
+          end
+
+          # Usage metadata about response(s).
+          # @!attribute [rw] prompt_token_count
+          #   @return [::Integer]
+          #     Number of tokens in the request.
+          # @!attribute [rw] candidates_token_count
+          #   @return [::Integer]
+          #     Number of tokens in the response(s).
+          # @!attribute [rw] total_token_count
+          #   @return [::Integer]
+          class UsageMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
       end
     end

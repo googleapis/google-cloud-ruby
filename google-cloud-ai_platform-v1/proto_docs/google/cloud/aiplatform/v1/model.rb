@@ -102,11 +102,11 @@ module Google
         #     deploying this Model. The specification is ingested upon
         #     {::Google::Cloud::AIPlatform::V1::ModelService::Client#upload_model ModelService.UploadModel},
         #     and all binaries it contains are copied and stored internally by Vertex AI.
-        #     Not present for AutoML Models or Large Models.
+        #     Not required for AutoML Models.
         # @!attribute [rw] artifact_uri
         #   @return [::String]
         #     Immutable. The path to the directory containing the Model artifact and any
-        #     of its supporting files. Not present for AutoML Models or Large Models.
+        #     of its supporting files. Not required for AutoML Models.
         # @!attribute [r] supported_deployment_resources_types
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::Model::DeploymentResourcesType>]
         #     Output only. When this Model is deployed, its prediction resources are
@@ -270,6 +270,12 @@ module Google
         #     characters, underscores and dashes. International characters are allowed.
         #
         #     See https://goo.gl/xmQnxf for more information and examples of labels.
+        # @!attribute [rw] data_stats
+        #   @return [::Google::Cloud::AIPlatform::V1::Model::DataStats]
+        #     Stats of data used for training or evaluating the Model.
+        #
+        #     Only populated when the Model is trained by a TrainingPipeline with
+        #     [data_input_config][TrainingPipeline.data_input_config].
         # @!attribute [rw] encryption_spec
         #   @return [::Google::Cloud::AIPlatform::V1::EncryptionSpec]
         #     Customer-managed encryption key spec for a Model. If set, this
@@ -277,7 +283,8 @@ module Google
         # @!attribute [r] model_source_info
         #   @return [::Google::Cloud::AIPlatform::V1::ModelSourceInfo]
         #     Output only. Source of a model. It can either be automl training pipeline,
-        #     custom training pipeline, BigQuery ML, or existing Vertex AI Model.
+        #     custom training pipeline, BigQuery ML, or saved and tuned from Genie or
+        #     Model Garden.
         # @!attribute [r] original_model_info
         #   @return [::Google::Cloud::AIPlatform::V1::Model::OriginalModelInfo]
         #     Output only. If this Model is a copy of another Model, this contains info
@@ -344,6 +351,38 @@ module Google
             end
           end
 
+          # Stats of data used for train or evaluate the Model.
+          # @!attribute [rw] training_data_items_count
+          #   @return [::Integer]
+          #     Number of DataItems that were used for training this Model.
+          # @!attribute [rw] validation_data_items_count
+          #   @return [::Integer]
+          #     Number of DataItems that were used for validating this Model during
+          #     training.
+          # @!attribute [rw] test_data_items_count
+          #   @return [::Integer]
+          #     Number of DataItems that were used for evaluating this Model. If the
+          #     Model is evaluated multiple times, this will be the number of test
+          #     DataItems used by the first evaluation. If the Model is not evaluated,
+          #     the number is 0.
+          # @!attribute [rw] training_annotations_count
+          #   @return [::Integer]
+          #     Number of Annotations that are used for training this Model.
+          # @!attribute [rw] validation_annotations_count
+          #   @return [::Integer]
+          #     Number of Annotations that are used for validating this Model during
+          #     training.
+          # @!attribute [rw] test_annotations_count
+          #   @return [::Integer]
+          #     Number of Annotations that are used for evaluating this Model. If the
+          #     Model is evaluated multiple times, this will be the number of test
+          #     Annotations used by the first evaluation. If the Model is not evaluated,
+          #     the number is 0.
+          class DataStats
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Contains information about the original Model if this Model is a copy.
           # @!attribute [r] model
           #   @return [::String]
@@ -380,7 +419,9 @@ module Google
 
             # Resources that can be shared by multiple
             # {::Google::Cloud::AIPlatform::V1::DeployedModel DeployedModels}. A
-            # pre-configured [DeploymentResourcePool][] is required.
+            # pre-configured
+            # {::Google::Cloud::AIPlatform::V1::DeploymentResourcePool DeploymentResourcePool}
+            # is required.
             SHARED_RESOURCES = 3
           end
         end
@@ -717,6 +758,10 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Source of the model.
+          # Different from `objective` field, this `ModelSourceType` enum
+          # indicates the source from which the model was accessed or obtained,
+          # whereas the `objective` indicates the overall aim or function of this
+          # model.
           module ModelSourceType
             # Should not be used.
             MODEL_SOURCE_TYPE_UNSPECIFIED = 0
@@ -735,6 +780,12 @@ module Google
 
             # The Model is saved or tuned from Genie.
             GENIE = 5
+
+            # The Model is uploaded by text embedding finetuning pipeline.
+            CUSTOM_TEXT_EMBEDDING = 6
+
+            # The Model is saved or tuned from Marketplace.
+            MARKETPLACE = 7
           end
         end
 

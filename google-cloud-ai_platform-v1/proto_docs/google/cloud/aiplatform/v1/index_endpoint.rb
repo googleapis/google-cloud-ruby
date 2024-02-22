@@ -77,6 +77,7 @@ module Google
         #     Where \\{project} is a project number, as in '12345', and \\{network} is
         #     network name.
         # @!attribute [rw] enable_private_service_connect
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
         #     Optional. Deprecated: If true, expose the IndexEndpoint via private service
         #     connect.
@@ -279,6 +280,10 @@ module Google
         #   @return [::String]
         #     Output only. The name of the service attachment resource. Populated if
         #     private service connect is enabled.
+        # @!attribute [r] psc_automated_endpoints
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::PscAutomatedEndpoints>]
+        #     Output only. PscAutomatedEndpoints is populated if private service connect
+        #     is enabled if PscAutomatedConfig is set.
         class IndexPrivateEndpoints
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

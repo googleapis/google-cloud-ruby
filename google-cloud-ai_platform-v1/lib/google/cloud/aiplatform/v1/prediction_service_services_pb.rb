@@ -47,11 +47,20 @@ module Google
             # [DeployedModel][google.cloud.aiplatform.v1.DeployedModel] that served this
             # prediction.
             rpc :RawPredict, ::Google::Cloud::AIPlatform::V1::RawPredictRequest, ::Google::Api::HttpBody
-            # Perform an unary online prediction request for Vertex first-party products
-            # and frameworks.
+            # Perform a streaming online prediction with an arbitrary HTTP payload.
+            rpc :StreamRawPredict, ::Google::Cloud::AIPlatform::V1::StreamRawPredictRequest, stream(::Google::Api::HttpBody)
+            # Perform an unary online prediction request to a gRPC model server for
+            # Vertex first-party products and frameworks.
             rpc :DirectPredict, ::Google::Cloud::AIPlatform::V1::DirectPredictRequest, ::Google::Cloud::AIPlatform::V1::DirectPredictResponse
-            # Perform an online prediction request through gRPC.
+            # Perform an unary online prediction request to a gRPC model server for
+            # custom containers.
             rpc :DirectRawPredict, ::Google::Cloud::AIPlatform::V1::DirectRawPredictRequest, ::Google::Cloud::AIPlatform::V1::DirectRawPredictResponse
+            # Perform a streaming online prediction request to a gRPC model server for
+            # Vertex first-party products and frameworks.
+            rpc :StreamDirectPredict, stream(::Google::Cloud::AIPlatform::V1::StreamDirectPredictRequest), stream(::Google::Cloud::AIPlatform::V1::StreamDirectPredictResponse)
+            # Perform a streaming online prediction request to a gRPC model server for
+            # custom containers.
+            rpc :StreamDirectRawPredict, stream(::Google::Cloud::AIPlatform::V1::StreamDirectRawPredictRequest), stream(::Google::Cloud::AIPlatform::V1::StreamDirectRawPredictResponse)
             # Perform a streaming online prediction request for Vertex first-party
             # products and frameworks.
             rpc :StreamingPredict, stream(::Google::Cloud::AIPlatform::V1::StreamingPredictRequest), stream(::Google::Cloud::AIPlatform::V1::StreamingPredictResponse)
@@ -72,6 +81,10 @@ module Google
             # [explanation_spec][google.cloud.aiplatform.v1.DeployedModel.explanation_spec]
             # populated.
             rpc :Explain, ::Google::Cloud::AIPlatform::V1::ExplainRequest, ::Google::Cloud::AIPlatform::V1::ExplainResponse
+            # Generate content with multimodal inputs.
+            rpc :GenerateContent, ::Google::Cloud::AIPlatform::V1::GenerateContentRequest, ::Google::Cloud::AIPlatform::V1::GenerateContentResponse
+            # Generate content with multimodal inputs with streaming support.
+            rpc :StreamGenerateContent, ::Google::Cloud::AIPlatform::V1::GenerateContentRequest, stream(::Google::Cloud::AIPlatform::V1::GenerateContentResponse)
           end
 
           Stub = Service.rpc_stub_class

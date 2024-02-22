@@ -23,9 +23,9 @@ module Google
       module V1
         # FeatureViewSync is a representation of sync operation which copies data from
         # data source to Feature View in Online Store.
-        # @!attribute [r] name
+        # @!attribute [rw] name
         #   @return [::String]
-        #     Output only. Name of the FeatureViewSync. Format:
+        #     Identifier. Name of the FeatureViewSync. Format:
         #     `projects/{project}/locations/{location}/featureOnlineStores/{feature_online_store}/featureViews/{feature_view}/featureViewSyncs/{feature_view_sync}`
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]

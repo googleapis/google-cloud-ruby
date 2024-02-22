@@ -27,7 +27,7 @@ module Google
         #   @return [::String]
         #     Required. The resource name of the Location to create FeatureOnlineStores.
         #     Format:
-        #     `projects/{project}/locations/{location}'`
+        #     `projects/{project}/locations/{location}`
         # @!attribute [rw] feature_online_store
         #   @return [::Google::Cloud::AIPlatform::V1::FeatureOnlineStore]
         #     Required. The FeatureOnlineStore to create.
@@ -145,6 +145,7 @@ module Google
         #     Updatable fields:
         #
         #       * `big_query_source`
+        #       * `bigtable`
         #       * `labels`
         #       * `sync_config`
         class UpdateFeatureOnlineStoreRequest
@@ -304,6 +305,7 @@ module Google
         #     Updatable fields:
         #
         #       * `labels`
+        #       * `serviceAgentType`
         class UpdateFeatureViewRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -199,7 +199,15 @@ module Google
         # {::Google::Cloud::AIPlatform::V1::DatasetService::Client#export_data DatasetService.ExportData}.
         # @!attribute [rw] exported_files
         #   @return [::Array<::String>]
-        #     All of the files that are exported in this export operation.
+        #     All of the files that are exported in this export operation. For custom
+        #     code training export, only three (training, validation and test)
+        #     Cloud Storage paths in wildcard format are populated
+        #     (for example, gs://.../training-*).
+        # @!attribute [rw] data_stats
+        #   @return [::Google::Cloud::AIPlatform::V1::Model::DataStats]
+        #     Only present for custom code training export use case. Records data stats,
+        #     i.e., train/validation/test item/annotation counts calculated during
+        #     the export operation.
         class ExportDataResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -392,6 +400,7 @@ module Google
         #     Format:
         #     `projects/{project}/locations/{location}/datasets/{dataset}`
         # @!attribute [rw] saved_query
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     The resource name of a SavedQuery(annotation set in UI).
         #     Format:
@@ -419,6 +428,7 @@ module Google
         #     * `data_item=1`
         #     * `has_annotation(5)`
         # @!attribute [rw] annotations_filter
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     An expression for filtering the Annotations that will be returned per
         #     DataItem.
@@ -444,6 +454,7 @@ module Google
         #     Requested page size. Server may return fewer results than requested.
         #     Default and maximum page size is 100.
         # @!attribute [rw] order_by
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     A comma-separated list of fields to order by, sorted in ascending order.
         #     Use "desc" after a field name for descending.

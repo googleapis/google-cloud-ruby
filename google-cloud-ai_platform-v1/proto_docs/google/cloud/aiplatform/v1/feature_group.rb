@@ -28,9 +28,9 @@ module Google
         #     By default treats the source as a sparse time series source, which is
         #     required to have an entity_id and a feature_timestamp column in the
         #     source.
-        # @!attribute [r] name
+        # @!attribute [rw] name
         #   @return [::String]
-        #     Output only. Name of the FeatureGroup. Format:
+        #     Identifier. Name of the FeatureGroup. Format:
         #     `projects/{project}/locations/{location}/featureGroups/{featureGroup}`
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]

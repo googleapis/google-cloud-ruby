@@ -23,9 +23,31 @@ require "gapic/grpc/service_stub"
 require "google/cloud/ai_platform/v1/endpoint_service"
 
 class ::Google::Cloud::AIPlatform::V1::EndpointService::ClientPathsTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+  
+    def universe_domain
+      "example.com"
+    end
+  end
+
+  def test_deployment_resource_pool_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::AIPlatform::V1::EndpointService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.deployment_resource_pool_path project: "value0", location: "value1", deployment_resource_pool: "value2"
+      assert_equal "projects/value0/locations/value1/deploymentResourcePools/value2", path
+    end
+  end
+
   def test_endpoint_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::AIPlatform::V1::EndpointService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -40,7 +62,7 @@ class ::Google::Cloud::AIPlatform::V1::EndpointService::ClientPathsTest < Minite
 
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::AIPlatform::V1::EndpointService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -52,7 +74,7 @@ class ::Google::Cloud::AIPlatform::V1::EndpointService::ClientPathsTest < Minite
 
   def test_model_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::AIPlatform::V1::EndpointService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -64,7 +86,7 @@ class ::Google::Cloud::AIPlatform::V1::EndpointService::ClientPathsTest < Minite
 
   def test_model_deployment_monitoring_job_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::AIPlatform::V1::EndpointService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -76,7 +98,7 @@ class ::Google::Cloud::AIPlatform::V1::EndpointService::ClientPathsTest < Minite
 
   def test_network_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       client = ::Google::Cloud::AIPlatform::V1::EndpointService::Client.new do |config|
         config.credentials = grpc_channel
       end

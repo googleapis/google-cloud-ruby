@@ -323,7 +323,7 @@ module Google
           #     {::Google::Cloud::AIPlatform::V1::BatchPredictionJob::InstanceConfig#excluded_fields excluded_fields}
           #     must be empty.
           #
-          #     The input must be JSONL with objects at each line, CSV, BigQuery
+          #     The input must be JSONL with objects at each line, BigQuery
           #     or TfRecord.
           # @!attribute [rw] excluded_fields
           #   @return [::Array<::String>]
@@ -338,7 +338,7 @@ module Google
           #     {::Google::Cloud::AIPlatform::V1::BatchPredictionJob::InstanceConfig#included_fields included_fields}
           #     must be empty.
           #
-          #     The input must be JSONL with objects at each line, CSV, BigQuery
+          #     The input must be JSONL with objects at each line, BigQuery
           #     or TfRecord.
           class InstanceConfig
             include ::Google::Protobuf::MessageExts

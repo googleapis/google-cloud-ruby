@@ -132,6 +132,7 @@ module Google
 
           # The runtime config of a PipelineJob.
           # @!attribute [rw] parameters
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::AIPlatform::V1::Value}]
           #     Deprecated. Use
           #     {::Google::Cloud::AIPlatform::V1::PipelineJob::RuntimeConfig#parameter_values RuntimeConfig.parameter_values}

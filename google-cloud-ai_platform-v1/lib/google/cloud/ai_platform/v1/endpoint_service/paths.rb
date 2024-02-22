@@ -25,6 +25,25 @@ module Google
           # Path helper methods for the EndpointService API.
           module Paths
             ##
+            # Create a fully-qualified DeploymentResourcePool resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/deploymentResourcePools/{deployment_resource_pool}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param deployment_resource_pool [String]
+            #
+            # @return [::String]
+            def deployment_resource_pool_path project:, location:, deployment_resource_pool:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/deploymentResourcePools/#{deployment_resource_pool}"
+            end
+
+            ##
             # Create a fully-qualified Endpoint resource string.
             #
             # @overload endpoint_path(project:, location:, endpoint:)

@@ -196,6 +196,10 @@ module Google
         #     The created BigQuery table to store logs. Customer could do their own query
         #     & analysis. Format:
         #     `bq://<project_id>.model_deployment_monitoring_<endpoint_id>.<tolower(log_source)>_<tolower(log_type)>`
+        # @!attribute [r] request_response_logging_schema_version
+        #   @return [::String]
+        #     Output only. The schema version of the request/response logging BigQuery
+        #     table. Default to v1 if unset.
         class ModelDeploymentMonitoringBigQueryTable
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

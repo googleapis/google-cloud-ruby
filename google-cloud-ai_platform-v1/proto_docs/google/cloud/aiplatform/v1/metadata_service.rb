@@ -118,6 +118,7 @@ module Google
         #     Format:
         #     `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
         # @!attribute [rw] force
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
         #     Deprecated: Field is no longer supported.
         class DeleteMetadataStoreRequest

@@ -219,6 +219,21 @@ module Google
         #     Optional. The Experiment Run associated with this job.
         #     Format:
         #     `projects/{project}/locations/{location}/metadataStores/{metadataStores}/contexts/{experiment-name}-{experiment-run-name}`
+        # @!attribute [rw] models
+        #   @return [::Array<::String>]
+        #     Optional. The name of the Model resources for which to generate a mapping
+        #     to artifact URIs. Applicable only to some of the Google-provided custom
+        #     jobs. Format: `projects/{project}/locations/{location}/models/{model}`
+        #
+        #     In order to retrieve a specific version of the model, also provide
+        #     the version ID or version alias.
+        #       Example: `projects/{project}/locations/{location}/models/{model}@2`
+        #                  or
+        #                `projects/{project}/locations/{location}/models/{model}@golden`
+        #     If no version ID or alias is specified, the "default" version will be
+        #     returned. The "default" version alias is created for the first version of
+        #     the model, and can be moved to other versions later on. There will be
+        #     exactly one default version.
         class CustomJobSpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

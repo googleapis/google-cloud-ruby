@@ -104,6 +104,40 @@
         }
       }
     },
+    "DeploymentResourcePoolService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Client",
+          "rpcs": {
+            "CreateDeploymentResourcePool": {
+              "methods": [
+                "create_deployment_resource_pool"
+              ]
+            },
+            "GetDeploymentResourcePool": {
+              "methods": [
+                "get_deployment_resource_pool"
+              ]
+            },
+            "ListDeploymentResourcePools": {
+              "methods": [
+                "list_deployment_resource_pools"
+              ]
+            },
+            "DeleteDeploymentResourcePool": {
+              "methods": [
+                "delete_deployment_resource_pool"
+              ]
+            },
+            "QueryDeployedModels": {
+              "methods": [
+                "query_deployed_models"
+              ]
+            }
+          }
+        }
+      }
+    },
     "EndpointService": {
       "clients": {
         "grpc": {
@@ -259,6 +293,11 @@
             "FetchFeatureValues": {
               "methods": [
                 "fetch_feature_values"
+              ]
+            },
+            "SearchNearestEntities": {
+              "methods": [
+                "search_nearest_entities"
               ]
             }
           }
@@ -730,6 +769,11 @@
                 "raw_predict"
               ]
             },
+            "StreamRawPredict": {
+              "methods": [
+                "stream_raw_predict"
+              ]
+            },
             "DirectPredict": {
               "methods": [
                 "direct_predict"
@@ -738,6 +782,16 @@
             "DirectRawPredict": {
               "methods": [
                 "direct_raw_predict"
+              ]
+            },
+            "StreamDirectPredict": {
+              "methods": [
+                "stream_direct_predict"
+              ]
+            },
+            "StreamDirectRawPredict": {
+              "methods": [
+                "stream_direct_raw_predict"
               ]
             },
             "StreamingPredict": {
@@ -758,6 +812,16 @@
             "Explain": {
               "methods": [
                 "explain"
+              ]
+            },
+            "GenerateContent": {
+              "methods": [
+                "generate_content"
+              ]
+            },
+            "StreamGenerateContent": {
+              "methods": [
+                "stream_generate_content"
               ]
             }
           }

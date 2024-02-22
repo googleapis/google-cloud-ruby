@@ -72,6 +72,7 @@ module Google
         #     If this is set, then all resources created by the NasJob
         #     will be encrypted with the provided encryption key.
         # @!attribute [rw] enable_restricted_image_training
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
         #     Optional. Enable a separation of Custom model training
         #     and restricted image training for tenant project.

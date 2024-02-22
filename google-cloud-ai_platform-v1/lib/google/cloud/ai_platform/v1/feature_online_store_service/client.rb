@@ -29,7 +29,12 @@ module Google
           ##
           # Client for the FeatureOnlineStoreService service.
           #
+          # A service for fetching feature values from the online store.
+          #
           class Client
+            # @private
+            DEFAULT_ENDPOINT_TEMPLATE = "aiplatform.$UNIVERSE_DOMAIN$"
+
             include Paths
 
             # @private
@@ -91,6 +96,15 @@ module Google
             end
 
             ##
+            # The effective universe domain
+            #
+            # @return [String]
+            #
+            def universe_domain
+              @feature_online_store_service_stub.universe_domain
+            end
+
+            ##
             # Create a new FeatureOnlineStoreService client object.
             #
             # @example
@@ -123,8 +137,9 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
-                                       !@config.endpoint.split(".").first.include?("-")
+              enable_self_signed_jwt = @config.endpoint.nil? ||
+                                       (@config.endpoint == Configuration::DEFAULT_ENDPOINT &&
+                                       !@config.endpoint.split(".").first.include?("-"))
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(::String) || credentials.is_a?(::Hash)
@@ -133,26 +148,30 @@ module Google
               @quota_project_id = @config.quota_project
               @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
+              @feature_online_store_service_stub = ::Gapic::ServiceStub.new(
+                ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreService::Stub,
+                credentials: credentials,
+                endpoint: @config.endpoint,
+                endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
+                universe_domain: @config.universe_domain,
+                channel_args: @config.channel_args,
+                interceptors: @config.interceptors,
+                channel_pool_config: @config.channel_pool
+              )
+
               @location_client = Google::Cloud::Location::Locations::Client.new do |config|
                 config.credentials = credentials
                 config.quota_project = @quota_project_id
-                config.endpoint = @config.endpoint
+                config.endpoint = @feature_online_store_service_stub.endpoint
+                config.universe_domain = @feature_online_store_service_stub.universe_domain
               end
 
               @iam_policy_client = Google::Iam::V1::IAMPolicy::Client.new do |config|
                 config.credentials = credentials
                 config.quota_project = @quota_project_id
-                config.endpoint = @config.endpoint
+                config.endpoint = @feature_online_store_service_stub.endpoint
+                config.universe_domain = @feature_online_store_service_stub.universe_domain
               end
-
-              @feature_online_store_service_stub = ::Gapic::ServiceStub.new(
-                ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreService::Stub,
-                credentials:  credentials,
-                endpoint:     @config.endpoint,
-                channel_args: @config.channel_args,
-                interceptors: @config.interceptors,
-                channel_pool_config: @config.channel_pool
-              )
             end
 
             ##
@@ -264,6 +283,101 @@ module Google
             end
 
             ##
+            # Search the nearest entities under a FeatureView.
+            # Search only works for indexable feature view; if a feature view isn't
+            # indexable, returns Invalid argument response.
+            #
+            # @overload search_nearest_entities(request, options = nil)
+            #   Pass arguments to `search_nearest_entities` via a request object, either of type
+            #   {::Google::Cloud::AIPlatform::V1::SearchNearestEntitiesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AIPlatform::V1::SearchNearestEntitiesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload search_nearest_entities(feature_view: nil, query: nil, return_full_entity: nil)
+            #   Pass arguments to `search_nearest_entities` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param feature_view [::String]
+            #     Required. FeatureView resource format
+            #     `projects/{project}/locations/{location}/featureOnlineStores/{featureOnlineStore}/featureViews/{featureView}`
+            #   @param query [::Google::Cloud::AIPlatform::V1::NearestNeighborQuery, ::Hash]
+            #     Required. The query.
+            #   @param return_full_entity [::Boolean]
+            #     Optional. If set to true, the full entities (including all vector values
+            #     and metadata) of the nearest neighbors are returned; otherwise only entity
+            #     id of the nearest neighbors will be returned. Note that returning full
+            #     entities will significantly increase the latency and cost of the query.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::AIPlatform::V1::SearchNearestEntitiesResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::AIPlatform::V1::SearchNearestEntitiesResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::FeatureOnlineStoreService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AIPlatform::V1::SearchNearestEntitiesRequest.new
+            #
+            #   # Call the search_nearest_entities method.
+            #   result = client.search_nearest_entities request
+            #
+            #   # The returned object is of type Google::Cloud::AIPlatform::V1::SearchNearestEntitiesResponse.
+            #   p result
+            #
+            def search_nearest_entities request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::SearchNearestEntitiesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.search_nearest_entities.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.feature_view
+                header_params["feature_view"] = request.feature_view
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.search_nearest_entities.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.search_nearest_entities.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @feature_online_store_service_stub.call_rpc :search_nearest_entities, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the FeatureOnlineStoreService API.
             #
             # This class represents the configuration for FeatureOnlineStoreService,
@@ -293,9 +407,9 @@ module Google
             #   end
             #
             # @!attribute [rw] endpoint
-            #   The hostname or hostname:port of the service endpoint.
-            #   Defaults to `"aiplatform.googleapis.com"`.
-            #   @return [::String]
+            #   A custom service endpoint, as a hostname or hostname:port. The default is
+            #   nil, indicating to use the default endpoint in the current universe domain.
+            #   @return [::String,nil]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
             #    *  (`String`) The path to a service account key file in JSON format
@@ -341,13 +455,20 @@ module Google
             # @!attribute [rw] quota_project
             #   A separate project against which to charge quota.
             #   @return [::String]
+            # @!attribute [rw] universe_domain
+            #   The universe domain within which to make requests. This determines the
+            #   default endpoint URL. The default value of nil uses the environment
+            #   universe (usually the default "googleapis.com" universe).
+            #   @return [::String,nil]
             #
             class Configuration
               extend ::Gapic::Config
 
+              # @private
+              # The endpoint specific to the default "googleapis.com" universe. Deprecated.
               DEFAULT_ENDPOINT = "aiplatform.googleapis.com"
 
-              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
+              config_attr :endpoint,      nil, ::String, nil
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
@@ -362,6 +483,7 @@ module Google
               config_attr :metadata,      nil, ::Hash, nil
               config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
               config_attr :quota_project, nil, ::String, nil
+              config_attr :universe_domain, nil, ::String, nil
 
               # @private
               def initialize parent_config = nil
@@ -413,11 +535,18 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :fetch_feature_values
+                ##
+                # RPC-specific configuration for `search_nearest_entities`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :search_nearest_entities
 
                 # @private
                 def initialize parent_rpcs = nil
                   fetch_feature_values_config = parent_rpcs.fetch_feature_values if parent_rpcs.respond_to? :fetch_feature_values
                   @fetch_feature_values = ::Gapic::Config::Method.new fetch_feature_values_config
+                  search_nearest_entities_config = parent_rpcs.search_nearest_entities if parent_rpcs.respond_to? :search_nearest_entities
+                  @search_nearest_entities = ::Gapic::Config::Method.new search_nearest_entities_config
 
                   yield self if block_given?
                 end

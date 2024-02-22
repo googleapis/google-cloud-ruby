@@ -184,15 +184,78 @@ module Google
         # @!attribute [rw] fraction_split
         #   @return [::Google::Cloud::AIPlatform::V1::ExportFractionSplit]
         #     Split based on fractions defining the size of each set.
+        # @!attribute [rw] filter_split
+        #   @return [::Google::Cloud::AIPlatform::V1::ExportFilterSplit]
+        #     Split based on the provided filters for each set.
         # @!attribute [rw] annotations_filter
         #   @return [::String]
         #     An expression for filtering what part of the Dataset is to be exported.
         #     Only Annotations that match this filter will be exported. The filter syntax
         #     is the same as in
         #     {::Google::Cloud::AIPlatform::V1::DatasetService::Client#list_annotations ListAnnotations}.
+        # @!attribute [rw] saved_query_id
+        #   @return [::String]
+        #     The ID of a SavedQuery (annotation set) under the Dataset specified by
+        #     [dataset_id][] used for filtering Annotations for training.
+        #
+        #     Only used for custom training data export use cases.
+        #     Only applicable to Datasets that have SavedQueries.
+        #
+        #     Only Annotations that are associated with this SavedQuery are used in
+        #     respectively training. When used in conjunction with
+        #     {::Google::Cloud::AIPlatform::V1::ExportDataConfig#annotations_filter annotations_filter},
+        #     the Annotations used for training are filtered by both
+        #     {::Google::Cloud::AIPlatform::V1::ExportDataConfig#saved_query_id saved_query_id}
+        #     and
+        #     {::Google::Cloud::AIPlatform::V1::ExportDataConfig#annotations_filter annotations_filter}.
+        #
+        #     Only one of
+        #     {::Google::Cloud::AIPlatform::V1::ExportDataConfig#saved_query_id saved_query_id}
+        #     and
+        #     {::Google::Cloud::AIPlatform::V1::ExportDataConfig#annotation_schema_uri annotation_schema_uri}
+        #     should be specified as both of them represent the same thing: problem type.
+        # @!attribute [rw] annotation_schema_uri
+        #   @return [::String]
+        #     The Cloud Storage URI that points to a YAML file describing the annotation
+        #     schema. The schema is defined as an OpenAPI 3.0.2 [Schema
+        #     Object](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.2.md#schemaObject).
+        #     The schema files that can be used here are found in
+        #     gs://google-cloud-aiplatform/schema/dataset/annotation/, note that the
+        #     chosen schema must be consistent with
+        #     {::Google::Cloud::AIPlatform::V1::Dataset#metadata_schema_uri metadata} of the
+        #     Dataset specified by [dataset_id][].
+        #
+        #     Only used for custom training data export use cases.
+        #     Only applicable to Datasets that have DataItems and Annotations.
+        #
+        #     Only Annotations that both match this schema and belong to DataItems not
+        #     ignored by the split method are used in respectively training, validation
+        #     or test role, depending on the role of the DataItem they are on.
+        #
+        #     When used in conjunction with
+        #     {::Google::Cloud::AIPlatform::V1::ExportDataConfig#annotations_filter annotations_filter},
+        #     the Annotations used for training are filtered by both
+        #     {::Google::Cloud::AIPlatform::V1::ExportDataConfig#annotations_filter annotations_filter}
+        #     and
+        #     {::Google::Cloud::AIPlatform::V1::ExportDataConfig#annotation_schema_uri annotation_schema_uri}.
+        # @!attribute [rw] export_use
+        #   @return [::Google::Cloud::AIPlatform::V1::ExportDataConfig::ExportUse]
+        #     Indicates the usage of the exported files.
         class ExportDataConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # ExportUse indicates the usage of the exported files. It restricts file
+          # destination, format, annotations to be exported, whether to allow
+          # unannotated data to be exported and whether to clone files to temp Cloud
+          # Storage bucket.
+          module ExportUse
+            # Regular user export.
+            EXPORT_USE_UNSPECIFIED = 0
+
+            # Export for custom code training.
+            CUSTOM_CODE_TRAINING = 6
+          end
         end
 
         # Assigns the input data to training, validation, and test sets as per the
@@ -211,6 +274,45 @@ module Google
         #   @return [::Float]
         #     The fraction of the input data that is to be used to evaluate the Model.
         class ExportFractionSplit
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Assigns input data to training, validation, and test sets based on the given
+        # filters, data pieces not matched by any filter are ignored. Currently only
+        # supported for Datasets containing DataItems.
+        # If any of the filters in this message are to match nothing, then they can be
+        # set as '-' (the minus sign).
+        #
+        # Supported only for unstructured Datasets.
+        # @!attribute [rw] training_filter
+        #   @return [::String]
+        #     Required. A filter on DataItems of the Dataset. DataItems that match
+        #     this filter are used to train the Model. A filter with same syntax
+        #     as the one used in
+        #     {::Google::Cloud::AIPlatform::V1::DatasetService::Client#list_data_items DatasetService.ListDataItems}
+        #     may be used. If a single DataItem is matched by more than one of the
+        #     FilterSplit filters, then it is assigned to the first set that applies to
+        #     it in the training, validation, test order.
+        # @!attribute [rw] validation_filter
+        #   @return [::String]
+        #     Required. A filter on DataItems of the Dataset. DataItems that match
+        #     this filter are used to validate the Model. A filter with same syntax
+        #     as the one used in
+        #     {::Google::Cloud::AIPlatform::V1::DatasetService::Client#list_data_items DatasetService.ListDataItems}
+        #     may be used. If a single DataItem is matched by more than one of the
+        #     FilterSplit filters, then it is assigned to the first set that applies to
+        #     it in the training, validation, test order.
+        # @!attribute [rw] test_filter
+        #   @return [::String]
+        #     Required. A filter on DataItems of the Dataset. DataItems that match
+        #     this filter are used to test the Model. A filter with same syntax
+        #     as the one used in
+        #     {::Google::Cloud::AIPlatform::V1::DatasetService::Client#list_data_items DatasetService.ListDataItems}
+        #     may be used. If a single DataItem is matched by more than one of the
+        #     FilterSplit filters, then it is assigned to the first set that applies to
+        #     it in the training, validation, test order.
+        class ExportFilterSplit
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

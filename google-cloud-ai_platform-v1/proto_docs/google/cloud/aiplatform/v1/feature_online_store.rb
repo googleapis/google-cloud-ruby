@@ -29,9 +29,9 @@ module Google
         #     Contains settings for the Cloud Bigtable instance that will be created
         #     to serve featureValues for all FeatureViews under this
         #     FeatureOnlineStore.
-        # @!attribute [r] name
+        # @!attribute [rw] name
         #   @return [::String]
-        #     Output only. Name of the FeatureOnlineStore. Format:
+        #     Identifier. Name of the FeatureOnlineStore. Format:
         #     `projects/{project}/locations/{location}/featureOnlineStores/{featureOnlineStore}`
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]

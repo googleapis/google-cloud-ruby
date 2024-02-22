@@ -95,6 +95,7 @@ module Google
         #     Where `{project}` is a project number, as in `12345`, and `{network}` is
         #     network name.
         # @!attribute [rw] enable_private_service_connect
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
         #     Deprecated: If true, expose the Endpoint via private service connect.
         #
@@ -144,6 +145,11 @@ module Google
         #   @return [::Google::Cloud::AIPlatform::V1::AutomaticResources]
         #     A description of resources that to large degree are decided by Vertex
         #     AI, and require only a modest additional configuration.
+        # @!attribute [rw] shared_resources
+        #   @return [::String]
+        #     The resource name of the shared DeploymentResourcePool to deploy on.
+        #     Format:
+        #     `projects/{project}/locations/{location}/deploymentResourcePools/{deployment_resource_pool}`
         # @!attribute [rw] id
         #   @return [::String]
         #     Immutable. The ID of the DeployedModel. If not provided upon deployment,

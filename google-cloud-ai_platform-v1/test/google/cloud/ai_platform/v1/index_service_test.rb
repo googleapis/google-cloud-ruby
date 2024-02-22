@@ -45,6 +45,14 @@ class ::Google::Cloud::AIPlatform::V1::IndexService::ClientTest < Minitest::Test
 
       @response
     end
+
+    def endpoint
+      "endpoint.example.com"
+    end
+
+    def universe_domain
+      "example.com"
+    end
   end
 
   def test_create_index
@@ -379,12 +387,14 @@ class ::Google::Cloud::AIPlatform::V1::IndexService::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     index = "hello world"
     datapoints = [{}]
+    update_mask = {}
 
     upsert_datapoints_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :upsert_datapoints, name
       assert_kind_of ::Google::Cloud::AIPlatform::V1::UpsertDatapointsRequest, request
       assert_equal "hello world", request["index"]
       assert_kind_of ::Google::Cloud::AIPlatform::V1::IndexDatapoint, request["datapoints"].first
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -395,31 +405,31 @@ class ::Google::Cloud::AIPlatform::V1::IndexService::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.upsert_datapoints({ index: index, datapoints: datapoints }) do |response, operation|
+      client.upsert_datapoints({ index: index, datapoints: datapoints, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.upsert_datapoints index: index, datapoints: datapoints do |response, operation|
+      client.upsert_datapoints index: index, datapoints: datapoints, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.upsert_datapoints ::Google::Cloud::AIPlatform::V1::UpsertDatapointsRequest.new(index: index, datapoints: datapoints) do |response, operation|
+      client.upsert_datapoints ::Google::Cloud::AIPlatform::V1::UpsertDatapointsRequest.new(index: index, datapoints: datapoints, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.upsert_datapoints({ index: index, datapoints: datapoints }, grpc_options) do |response, operation|
+      client.upsert_datapoints({ index: index, datapoints: datapoints, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.upsert_datapoints(::Google::Cloud::AIPlatform::V1::UpsertDatapointsRequest.new(index: index, datapoints: datapoints), grpc_options) do |response, operation|
+      client.upsert_datapoints(::Google::Cloud::AIPlatform::V1::UpsertDatapointsRequest.new(index: index, datapoints: datapoints, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -493,7 +503,8 @@ class ::Google::Cloud::AIPlatform::V1::IndexService::ClientTest < Minitest::Test
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
     client = block_config = config = nil
-    Gapic::ServiceStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil, nil
+    Gapic::ServiceStub.stub :new, dummy_stub do
       client = ::Google::Cloud::AIPlatform::V1::IndexService::Client.new do |config|
         config.credentials = grpc_channel
       end
@@ -511,7 +522,8 @@ class ::Google::Cloud::AIPlatform::V1::IndexService::ClientTest < Minitest::Test
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
     client = nil
-    Gapic::ServiceStub.stub :new, nil do
+    dummy_stub = ClientStub.new nil, nil
+    Gapic::ServiceStub.stub :new, dummy_stub do
       client = ::Google::Cloud::AIPlatform::V1::IndexService::Client.new do |config|
         config.credentials = grpc_channel
       end
