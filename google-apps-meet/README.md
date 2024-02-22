@@ -16,7 +16,7 @@ for this library, google-apps-meet, to see the convenience methods for
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
-[google-apps-meet-v2beta](https://cloud.google.com/ruby/docs/reference/google-apps-meet-v2beta/latest).
+[google-apps-meet-v2](https://cloud.google.com/ruby/docs/reference/google-apps-meet-v2/latest).
 
 See also the [Product Documentation](https://developers.google.com/meet/api/guides/overview)
 for more usage information.
@@ -50,7 +50,7 @@ support schedule.
 Most modern Ruby client libraries for Google APIs come in two flavors: the main
 client library with a name such as `google-apps-meet`,
 and lower-level _versioned_ client libraries with names such as
-`google-apps-meet-v2beta`.
+`google-apps-meet-v2`.
 _In most cases, you should install the main client._
 
 ### What's the difference between the main client and a versioned client?
@@ -88,7 +88,7 @@ You can use a versioned client if you are content with a possibly lower-level
 class interface, you explicitly want to avoid features provided by the main
 client, or you want to access a specific service version not be covered by the
 main client. You can identify versioned client gems because the service version
-is part of the name, e.g. `google-apps-meet-v2beta`.
+is part of the name, e.g. `google-apps-meet-v2`.
 
 ### What about the google-apis-<name> clients?
 

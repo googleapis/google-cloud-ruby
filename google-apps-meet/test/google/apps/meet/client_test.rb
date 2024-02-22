@@ -39,7 +39,7 @@ class Google::Apps::Meet::ClientConstructionMinitest < Minitest::Test
       client = Google::Apps::Meet.spaces_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Apps::Meet::V2beta::SpacesService::Client, client
+      assert_kind_of Google::Apps::Meet::V2::SpacesService::Client, client
     end
   end
 
@@ -48,7 +48,7 @@ class Google::Apps::Meet::ClientConstructionMinitest < Minitest::Test
       client = Google::Apps::Meet.spaces_service transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
-      assert_kind_of Google::Apps::Meet::V2beta::SpacesService::Rest::Client, client
+      assert_kind_of Google::Apps::Meet::V2::SpacesService::Rest::Client, client
     end
   end
 
@@ -58,7 +58,7 @@ class Google::Apps::Meet::ClientConstructionMinitest < Minitest::Test
       client = Google::Apps::Meet.conference_records_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Apps::Meet::V2beta::ConferenceRecordsService::Client, client
+      assert_kind_of Google::Apps::Meet::V2::ConferenceRecordsService::Client, client
     end
   end
 
@@ -67,7 +67,7 @@ class Google::Apps::Meet::ClientConstructionMinitest < Minitest::Test
       client = Google::Apps::Meet.conference_records_service transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
-      assert_kind_of Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::Client, client
+      assert_kind_of Google::Apps::Meet::V2::ConferenceRecordsService::Rest::Client, client
     end
   end
 end
