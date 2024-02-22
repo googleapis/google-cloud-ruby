@@ -31,6 +31,10 @@
       "component": "google-apps-meet",
       "version_file": "lib/google/apps/meet/version.rb"
     },
+    "google-apps-meet-v2": {
+      "component": "google-apps-meet-v2",
+      "version_file": "lib/google/apps/meet/v2/version.rb"
+    },
     "google-apps-meet-v2beta": {
       "component": "google-apps-meet-v2beta",
       "version_file": "lib/google/apps/meet/v2beta/version.rb"
