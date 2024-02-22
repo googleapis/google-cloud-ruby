@@ -1,5 +1,11 @@
 # Release History
 
+### 0.13.1 (2024-02-22)
+
+#### Documentation
+
+* update unenrollDataSources API documentation ([#24840](https://github.com/googleapis/google-cloud-ruby/issues/24840)) 
+
 ### 0.13.0 (2024-02-16)
 
 #### Features
