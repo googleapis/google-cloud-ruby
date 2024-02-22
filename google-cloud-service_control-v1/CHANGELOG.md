@@ -1,5 +1,11 @@
 # Release History
 
+### 0.10.0 (2024-02-22)
+
+#### Features
+
+* include api_key_uid in service control check response ([#24839](https://github.com/googleapis/google-cloud-ruby/issues/24839)) 
+
 ### 0.9.2 (2024-02-01)
 
 #### Bug Fixes
