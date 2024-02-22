@@ -356,6 +356,9 @@ module Google
         # @!attribute [rw] resource_manager_tags
         #   @return [::Google::Cloud::Container::V1::ResourceManagerTags]
         #     A map of resource manager tag keys and values to be attached to the nodes.
+        # @!attribute [rw] enable_confidential_storage
+        #   @return [::Boolean]
+        #     Optional. Reserved for future use.
         class NodeConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2530,6 +2533,9 @@ module Google
         #     Desired resource manager tag keys and values to be attached to the nodes
         #     for managing Compute Engine firewalls using Network Firewall Policies.
         #     Existing tags will be replaced with new values.
+        # @!attribute [rw] queued_provisioning
+        #   @return [::Google::Cloud::Container::V1::NodePool::QueuedProvisioning]
+        #     Specifies the configuration of queued provisioning.
         class UpdateNodePoolRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
