@@ -86,6 +86,10 @@ module Google
         #     Only applicable for Vertex AI Feature Store.
         #     The name of the BigQuery Table/View column hosting data for this version.
         #     If no value is provided, will use feature_id.
+        # @!attribute [rw] point_of_contact
+        #   @return [::String]
+        #     Entity responsible for maintaining this feature. Can be comma separated
+        #     list of email addresses or URIs.
         class Feature
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
