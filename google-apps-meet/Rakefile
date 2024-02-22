@@ -85,8 +85,8 @@ task :acceptance, :project, :keyfile do |t, args|
   if project.nil? || keyfile.nil?
     fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or GOOGLE_CLOUD_TEST_PROJECT=test123 GOOGLE_CLOUD_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
-  require "google/apps/meet/v2beta/spaces_service/credentials"
-  ::Google::Apps::Meet::V2beta::SpacesService::Credentials.env_vars.each do |path|
+  require "google/apps/meet/v2/spaces_service/credentials"
+  ::Google::Apps::Meet::V2::SpacesService::Credentials.env_vars.each do |path|
     ENV[path] = nil
   end
   ENV["GOOGLE_CLOUD_PROJECT"] = project
