@@ -1,5 +1,11 @@
 # Release History
 
+### 0.24.0 (2024-02-22)
+
+#### Features
+
+* Update TransactionOptions to include new option exclude_txn_from_change_streams ([#24834](https://github.com/googleapis/google-cloud-ruby/issues/24834)) 
+
 ### 0.23.0 (2024-02-16)
 
 #### Features
