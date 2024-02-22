@@ -1,5 +1,17 @@
 # Changelog
 
+### 0.36.0 (2024-02-22)
+
+#### Features
+
+* Support CRUD operations on deployment resource pools 
+* Support for universe_domain 
+* Support for various additional fields on existing RPCs 
+* Support the generate_content and stream_generate_content RPCs in the PredictionService 
+* Support the query_deployed_models RPC 
+* Support the search_nearest_entities RPC in the FeatureOnlineStoreService 
+* Support the stream_raw_predict, stream_direct_predict, and stream_direct_raw_predict RPCs in the PredictionService 
+
 ### 0.35.0 (2023-12-04)
 
 #### Features
