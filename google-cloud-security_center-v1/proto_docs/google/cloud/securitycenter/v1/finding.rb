@@ -212,12 +212,21 @@ module Google
         # @!attribute [rw] kernel_rootkit
         #   @return [::Google::Cloud::SecurityCenter::V1::KernelRootkit]
         #     Signature of the kernel rootkit.
+        # @!attribute [rw] org_policies
+        #   @return [::Array<::Google::Cloud::SecurityCenter::V1::OrgPolicy>]
+        #     Contains information about the org policies associated with the finding.
         # @!attribute [rw] application
         #   @return [::Google::Cloud::SecurityCenter::V1::Application]
         #     Represents an application associated with the finding.
         # @!attribute [rw] backup_disaster_recovery
         #   @return [::Google::Cloud::SecurityCenter::V1::BackupDisasterRecovery]
         #     Fields related to Backup and DR findings.
+        # @!attribute [rw] log_entries
+        #   @return [::Array<::Google::Cloud::SecurityCenter::V1::LogEntry>]
+        #     Log entries that are relevant to the finding.
+        # @!attribute [rw] load_balancers
+        #   @return [::Array<::Google::Cloud::SecurityCenter::V1::LoadBalancer>]
+        #     The load balancers associated with the finding.
         class Finding
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

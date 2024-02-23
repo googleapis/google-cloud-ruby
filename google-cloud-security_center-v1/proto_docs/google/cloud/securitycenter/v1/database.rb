@@ -28,13 +28,13 @@ module Google
         # name](https://google.aip.dev/122#full-resource-names) populated because these
         # resource types, such as Cloud SQL databases, are not yet supported by Cloud
         # Asset Inventory. In these cases only the display name is provided.
-        # Some database resources may not have the [full resource
-        # name](https://google.aip.dev/122#full-resource-names) populated because
-        # these resource types are not yet supported by Cloud Asset Inventory (e.g.
-        # Cloud SQL databases). In these cases only the display name will be
-        # provided.
         # @!attribute [rw] name
         #   @return [::String]
+        #     Some database resources may not have the [full resource
+        #     name](https://google.aip.dev/122#full-resource-names) populated because
+        #     these resource types are not yet supported by Cloud Asset Inventory (e.g.
+        #     Cloud SQL databases). In these cases only the display name will be
+        #     provided.
         #     The [full resource name](https://google.aip.dev/122#full-resource-names) of
         #     the database that the user connected to, if it is supported by Cloud Asset
         #     Inventory.
@@ -52,6 +52,11 @@ module Google
         #   @return [::Array<::String>]
         #     The target usernames, roles, or groups of an SQL privilege grant, which is
         #     not an IAM policy change.
+        # @!attribute [rw] version
+        #   @return [::String]
+        #     The version of the database, for example, POSTGRES_14.
+        #     See [the complete
+        #     list](https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1/SqlDatabaseVersion).
         class Database
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -52,6 +52,9 @@ module Google
         #   @return [::Array<::Google::Cloud::SecurityCenter::V1::Kubernetes::AccessReview>]
         #     Provides information on any Kubernetes access reviews (privilege checks)
         #     relevant to the finding.
+        # @!attribute [rw] objects
+        #   @return [::Array<::Google::Cloud::SecurityCenter::V1::Kubernetes::Object>]
+        #     Kubernetes objects related to the finding.
         class Kubernetes
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -202,6 +205,32 @@ module Google
           #   @return [::String]
           #     The API version of the resource. "*" means all.
           class AccessReview
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Kubernetes object related to the finding, uniquely identified by GKNN.
+          # Used if the object Kind is not one of Pod, Node, NodePool, Binding, or
+          # AccessReview.
+          # @!attribute [rw] group
+          #   @return [::String]
+          #     Kubernetes object group, such as "policy.k8s.io/v1".
+          # @!attribute [rw] kind
+          #   @return [::String]
+          #     Kubernetes object kind, such as "Namespace".
+          # @!attribute [rw] ns
+          #   @return [::String]
+          #     Kubernetes object namespace. Must be a valid DNS label. Named
+          #     "ns" to avoid collision with C++ namespace keyword. For details see
+          #     https://kubernetes.io/docs/tasks/administer-cluster/namespaces/.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Kubernetes object name. For details see
+          #     https://kubernetes.io/docs/concepts/overview/working-with-objects/names/.
+          # @!attribute [rw] containers
+          #   @return [::Array<::Google::Cloud::SecurityCenter::V1::Container>]
+          #     Pod containers associated with this finding, if any.
+          class Object
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

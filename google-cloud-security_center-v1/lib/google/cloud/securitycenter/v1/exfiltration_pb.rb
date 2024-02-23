@@ -5,7 +5,7 @@
 require 'google/protobuf'
 
 
-descriptor_data = "\n1google/cloud/securitycenter/v1/exfiltration.proto\x12\x1egoogle.cloud.securitycenter.v1\"\x8e\x01\n\x0c\x45xfiltration\x12>\n\x07sources\x18\x01 \x03(\x0b\x32-.google.cloud.securitycenter.v1.ExfilResource\x12>\n\x07targets\x18\x02 \x03(\x0b\x32-.google.cloud.securitycenter.v1.ExfilResource\"1\n\rExfilResource\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x12\n\ncomponents\x18\x02 \x03(\tB\xeb\x01\n\"com.google.cloud.securitycenter.v1B\x11\x45xfiltrationProtoP\x01ZJcloud.google.com/go/securitycenter/apiv1/securitycenterpb;securitycenterpb\xaa\x02\x1eGoogle.Cloud.SecurityCenter.V1\xca\x02\x1eGoogle\\Cloud\\SecurityCenter\\V1\xea\x02!Google::Cloud::SecurityCenter::V1b\x06proto3"
+descriptor_data = "\n1google/cloud/securitycenter/v1/exfiltration.proto\x12\x1egoogle.cloud.securitycenter.v1\"\xaf\x01\n\x0c\x45xfiltration\x12>\n\x07sources\x18\x01 \x03(\x0b\x32-.google.cloud.securitycenter.v1.ExfilResource\x12>\n\x07targets\x18\x02 \x03(\x0b\x32-.google.cloud.securitycenter.v1.ExfilResource\x12\x1f\n\x17total_exfiltrated_bytes\x18\x03 \x01(\x03\"1\n\rExfilResource\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x12\n\ncomponents\x18\x02 \x03(\tB\xeb\x01\n\"com.google.cloud.securitycenter.v1B\x11\x45xfiltrationProtoP\x01ZJcloud.google.com/go/securitycenter/apiv1/securitycenterpb;securitycenterpb\xaa\x02\x1eGoogle.Cloud.SecurityCenter.V1\xca\x02\x1eGoogle\\Cloud\\SecurityCenter\\V1\xea\x02!Google::Cloud::SecurityCenter::V1b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
