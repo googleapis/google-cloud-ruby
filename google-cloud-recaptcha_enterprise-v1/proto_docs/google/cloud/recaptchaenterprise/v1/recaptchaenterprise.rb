@@ -1110,6 +1110,26 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # The reorder firewall policies request message.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The name of the project to list the policies for, in the format
+        #     `projects/{project}`.
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. A list containing all policy names, in the new order. Each name
+        #     is in the format `projects/{project}/firewallpolicies/{firewallpolicy}`.
+        class ReorderFirewallPoliciesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The reorder firewall policies response message.
+        class ReorderFirewallPoliciesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The migrate key request message.
         # @!attribute [rw] name
         #   @return [::String]
