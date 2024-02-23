@@ -1,0 +1,13 @@
+source "https://rubygems.org"
+
+gemspec
+
+gem "google-analytics-admin-v1alpha", path: "../google-analytics-admin-v1alpha"
+
+gem "google-style", "~> 1.27.1"
+gem "minitest", "~> 5.22"
+gem "minitest-focus", "~> 1.4"
+gem "minitest-rg", "~> 5.3"
+gem "rake", ">= 13.0"
+gem "redcarpet", "~> 3.6"
+gem "yard", "~> 0.9"
