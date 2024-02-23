@@ -42,6 +42,16 @@ class Google::Cloud::AIPlatform::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_deployment_resource_pool_service_grpc
+    Gapic::ServiceStub.stub :new, DummyStub.new do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::AIPlatform.deployment_resource_pool_service do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Client, client
+    end
+  end
+
   def test_endpoint_service_grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
