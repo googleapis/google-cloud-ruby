@@ -1,0 +1,88 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.devtools.cloudbuild.v2",
+  "libraryPackage": "::Google::Cloud::Build::V2",
+  "services": {
+    "RepositoryManager": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Build::V2::RepositoryManager::Client",
+          "rpcs": {
+            "CreateConnection": {
+              "methods": [
+                "create_connection"
+              ]
+            },
+            "GetConnection": {
+              "methods": [
+                "get_connection"
+              ]
+            },
+            "ListConnections": {
+              "methods": [
+                "list_connections"
+              ]
+            },
+            "UpdateConnection": {
+              "methods": [
+                "update_connection"
+              ]
+            },
+            "DeleteConnection": {
+              "methods": [
+                "delete_connection"
+              ]
+            },
+            "CreateRepository": {
+              "methods": [
+                "create_repository"
+              ]
+            },
+            "BatchCreateRepositories": {
+              "methods": [
+                "batch_create_repositories"
+              ]
+            },
+            "GetRepository": {
+              "methods": [
+                "get_repository"
+              ]
+            },
+            "ListRepositories": {
+              "methods": [
+                "list_repositories"
+              ]
+            },
+            "DeleteRepository": {
+              "methods": [
+                "delete_repository"
+              ]
+            },
+            "FetchReadWriteToken": {
+              "methods": [
+                "fetch_read_write_token"
+              ]
+            },
+            "FetchReadToken": {
+              "methods": [
+                "fetch_read_token"
+              ]
+            },
+            "FetchLinkableRepositories": {
+              "methods": [
+                "fetch_linkable_repositories"
+              ]
+            },
+            "FetchGitRefs": {
+              "methods": [
+                "fetch_git_refs"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
