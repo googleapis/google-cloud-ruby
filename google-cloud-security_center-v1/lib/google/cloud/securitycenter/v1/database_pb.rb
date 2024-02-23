@@ -5,7 +5,7 @@
 require 'google/protobuf'
 
 
-descriptor_data = "\n-google/cloud/securitycenter/v1/database.proto\x12\x1egoogle.cloud.securitycenter.v1\"b\n\x08\x44\x61tabase\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x14\n\x0c\x64isplay_name\x18\x02 \x01(\t\x12\x11\n\tuser_name\x18\x03 \x01(\t\x12\r\n\x05query\x18\x04 \x01(\t\x12\x10\n\x08grantees\x18\x05 \x03(\tB\xe7\x01\n\"com.google.cloud.securitycenter.v1B\rDatabaseProtoP\x01ZJcloud.google.com/go/securitycenter/apiv1/securitycenterpb;securitycenterpb\xaa\x02\x1eGoogle.Cloud.SecurityCenter.V1\xca\x02\x1eGoogle\\Cloud\\SecurityCenter\\V1\xea\x02!Google::Cloud::SecurityCenter::V1b\x06proto3"
+descriptor_data = "\n-google/cloud/securitycenter/v1/database.proto\x12\x1egoogle.cloud.securitycenter.v1\"s\n\x08\x44\x61tabase\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x14\n\x0c\x64isplay_name\x18\x02 \x01(\t\x12\x11\n\tuser_name\x18\x03 \x01(\t\x12\r\n\x05query\x18\x04 \x01(\t\x12\x10\n\x08grantees\x18\x05 \x03(\t\x12\x0f\n\x07version\x18\x06 \x01(\tB\xe7\x01\n\"com.google.cloud.securitycenter.v1B\rDatabaseProtoP\x01ZJcloud.google.com/go/securitycenter/apiv1/securitycenterpb;securitycenterpb\xaa\x02\x1eGoogle.Cloud.SecurityCenter.V1\xca\x02\x1eGoogle\\Cloud\\SecurityCenter\\V1\xea\x02!Google::Cloud::SecurityCenter::V1b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 

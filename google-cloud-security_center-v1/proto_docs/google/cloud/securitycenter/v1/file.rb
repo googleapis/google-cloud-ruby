@@ -45,9 +45,26 @@ module Google
         # @!attribute [rw] contents
         #   @return [::String]
         #     Prefix of the file contents as a JSON-encoded string.
+        # @!attribute [rw] disk_path
+        #   @return [::Google::Cloud::SecurityCenter::V1::File::DiskPath]
+        #     Path of the file in terms of underlying disk/partition identifiers.
         class File
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Path of the file in terms of underlying disk/partition identifiers.
+          # @!attribute [rw] partition_uuid
+          #   @return [::String]
+          #     UUID of the partition (format
+          #     https://wiki.archlinux.org/title/persistent_block_device_naming#by-uuid)
+          # @!attribute [rw] relative_path
+          #   @return [::String]
+          #     Relative path of the file in the partition as a JSON encoded string.
+          #     Example: /home/user1/executable_file.sh
+          class DiskPath
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
       end
     end

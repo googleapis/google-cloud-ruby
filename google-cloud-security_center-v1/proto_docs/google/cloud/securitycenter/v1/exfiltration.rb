@@ -34,6 +34,9 @@ module Google
         #   @return [::Array<::Google::Cloud::SecurityCenter::V1::ExfilResource>]
         #     If there are multiple targets, each target would get a complete copy of the
         #     "joined" source data.
+        # @!attribute [rw] total_exfiltrated_bytes
+        #   @return [::Integer]
+        #     Total exfiltrated bytes processed for the entire job.
         class Exfiltration
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

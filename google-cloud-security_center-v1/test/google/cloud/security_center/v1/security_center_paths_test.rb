@@ -192,6 +192,24 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientPathsTest < Min
     end
   end
 
+  def test_policy_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.policy_path organization: "value0", constraint_name: "value1"
+      assert_equal "organizations/value0/policies/value1", path
+
+      path = client.policy_path folder: "value0", constraint_name: "value1"
+      assert_equal "folders/value0/policies/value1", path
+
+      path = client.policy_path project: "value0", constraint_name: "value1"
+      assert_equal "projects/value0/policies/value1", path
+    end
+  end
+
   def test_project_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do

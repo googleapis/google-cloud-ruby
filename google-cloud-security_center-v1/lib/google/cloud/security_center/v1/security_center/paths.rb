@@ -438,6 +438,58 @@ module Google
             end
 
             ##
+            # Create a fully-qualified Policy resource string.
+            #
+            # @overload policy_path(organization:, constraint_name:)
+            #   The resource will be in the following format:
+            #
+            #   `organizations/{organization}/policies/{constraint_name}`
+            #
+            #   @param organization [String]
+            #   @param constraint_name [String]
+            #
+            # @overload policy_path(folder:, constraint_name:)
+            #   The resource will be in the following format:
+            #
+            #   `folders/{folder}/policies/{constraint_name}`
+            #
+            #   @param folder [String]
+            #   @param constraint_name [String]
+            #
+            # @overload policy_path(project:, constraint_name:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/policies/{constraint_name}`
+            #
+            #   @param project [String]
+            #   @param constraint_name [String]
+            #
+            # @return [::String]
+            def policy_path **args
+              resources = {
+                "constraint_name:organization" => (proc do |organization:, constraint_name:|
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+
+                  "organizations/#{organization}/policies/#{constraint_name}"
+                end),
+                "constraint_name:folder" => (proc do |folder:, constraint_name:|
+                  raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
+
+                  "folders/#{folder}/policies/#{constraint_name}"
+                end),
+                "constraint_name:project" => (proc do |project:, constraint_name:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+                  "projects/#{project}/policies/#{constraint_name}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
+            end
+
+            ##
             # Create a fully-qualified Project resource string.
             #
             # The resource will be in the following format:

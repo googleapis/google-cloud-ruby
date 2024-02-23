@@ -50,6 +50,9 @@ module Google
           # @!attribute [rw] yara_rule_signature
           #   @return [::Google::Cloud::SecurityCenter::V1::Indicator::ProcessSignature::YaraRuleSignature]
           #     Signature indicating that a YARA rule was matched.
+          # @!attribute [rw] signature_type
+          #   @return [::Google::Cloud::SecurityCenter::V1::Indicator::ProcessSignature::SignatureType]
+          #     Describes the type of resource associated with the signature.
           class ProcessSignature
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -88,6 +91,18 @@ module Google
             class YaraRuleSignature
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Possible resource types to be associated with a signature.
+            module SignatureType
+              # The default signature type.
+              SIGNATURE_TYPE_UNSPECIFIED = 0
+
+              # Used for signatures concerning processes.
+              SIGNATURE_TYPE_PROCESS = 1
+
+              # Used for signatures concerning disks.
+              SIGNATURE_TYPE_FILE = 2
             end
           end
         end
