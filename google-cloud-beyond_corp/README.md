@@ -65,7 +65,7 @@ end
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 2.6+.
+This library is supported on Ruby 2.7+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or
@@ -131,4 +131,3 @@ The `google-apis-` clients have wide coverage across Google services, so you
 might need to use one if there is no modern client available for the service.
 However, if a modern client is available, we generally recommend it over the
 older `google-apis-` clients.
-
