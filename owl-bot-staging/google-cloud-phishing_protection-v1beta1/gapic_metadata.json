@@ -1,0 +1,23 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.phishingprotection.v1beta1",
+  "libraryPackage": "::Google::Cloud::PhishingProtection::V1beta1",
+  "services": {
+    "PhishingProtectionServiceV1Beta1": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::Client",
+          "rpcs": {
+            "ReportPhishing": {
+              "methods": [
+                "report_phishing"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
