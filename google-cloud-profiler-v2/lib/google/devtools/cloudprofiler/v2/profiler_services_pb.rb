@@ -27,9 +27,8 @@ module Google
           # Manage the collection of continuous profiling data provided by profiling
           # agents running in the cloud or by an offline provider of profiling data.
           #
-          # General guidelines:
-          # * Profiles for a single deployment must be created in ascending time order.
-          # * Profiles can be created in either online or offline mode, see below.
+          # __The APIs listed in this service are intended for use within our profiler
+          # agents only.__
           class Service
 
             include ::GRPC::GenericService
@@ -39,6 +38,11 @@ module Google
             self.service_name = 'google.devtools.cloudprofiler.v2.ProfilerService'
 
             # CreateProfile creates a new profile resource in the online mode.
+            #
+            # _Direct use of this API is discouraged, please use a [supported
+            # profiler
+            # agent](https://cloud.google.com/profiler/docs/about-profiler#profiling_agent)
+            # instead for profile collection._
             #
             # The server ensures that the new profiles are created at a constant rate per
             # deployment, so the creation request may hang for some time until the next
@@ -53,14 +57,24 @@ module Google
             # "google.rpc.retryinfo-bin".
             #
             rpc :CreateProfile, ::Google::Cloud::Profiler::V2::CreateProfileRequest, ::Google::Cloud::Profiler::V2::Profile
-            # CreateOfflineProfile creates a new profile resource in the offline mode.
-            # The client provides the profile to create along with the profile bytes, the
-            # server records it.
+            # CreateOfflineProfile creates a new profile resource in the offline
+            # mode. The client provides the profile to create along with the profile
+            # bytes, the server records it.
+            #
+            # _Direct use of this API is discouraged, please use a [supported
+            # profiler
+            # agent](https://cloud.google.com/profiler/docs/about-profiler#profiling_agent)
+            # instead for profile collection._
             rpc :CreateOfflineProfile, ::Google::Cloud::Profiler::V2::CreateOfflineProfileRequest, ::Google::Cloud::Profiler::V2::Profile
             # UpdateProfile updates the profile bytes and labels on the profile resource
             # created in the online mode. Updating the bytes for profiles created in the
             # offline mode is currently not supported: the profile content must be
             # provided at the time of the profile creation.
+            #
+            # _Direct use of this API is discouraged, please use a [supported
+            # profiler
+            # agent](https://cloud.google.com/profiler/docs/about-profiler#profiling_agent)
+            # instead for profile collection._
             rpc :UpdateProfile, ::Google::Cloud::Profiler::V2::UpdateProfileRequest, ::Google::Cloud::Profiler::V2::Profile
           end
 

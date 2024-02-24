@@ -184,7 +184,7 @@ module Google
               #   @param page_size [::Integer]
               #     The maximum number of items to return.
               #     Default page_size is 1000.
-              #     Max limit is 10000.
+              #     Max limit is 1000.
               #   @param page_token [::String]
               #     The token to continue pagination and get profiles from a particular page.
               #     When paginating, all other parameters provided to `ListProfiles` must match

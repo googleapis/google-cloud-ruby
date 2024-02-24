@@ -41,6 +41,7 @@
     "proto_docs/google/devtools/cloudprofiler/v2/profiler.rb",
     "proto_docs/google/protobuf/duration.rb",
     "proto_docs/google/protobuf/field_mask.rb",
+    "proto_docs/google/protobuf/timestamp.rb",
     "snippets/Gemfile",
     "snippets/export_service/list_profiles.rb",
     "snippets/profiler_service/create_offline_profile.rb",

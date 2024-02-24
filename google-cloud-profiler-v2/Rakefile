@@ -30,38 +30,10 @@ Rake::TestTask.new do |t|
   t.warning = false
 end
 
-namespace :test do
-  desc "Runs tests with coverage."
-  task :coverage do
-    require "simplecov"
-    SimpleCov.start do
-      command_name "google-cloud-profiler-v2"
-      track_files "lib/**/*.rb"
-      add_filter "test/"
-    end
-
-    Rake::Task[:test].invoke
-  end
-end
-
 desc "Runs the smoke tests."
 Rake::TestTask.new :smoke_test do |t|
   t.test_files = FileList["acceptance/**/*smoke_test.rb"]
   t.warning = false
-end
-
-namespace :smoke_test do
-  desc "Runs smoke tests with coverage."
-  task :coverage do
-    require "simplecov"
-    SimpleCov.start do
-      command_name "google-cloud-profiler-v2"
-      track_files "lib/**/*.rb"
-      add_filter "test/"
-    end
-
-    Rake::Task[:smoke_test].invoke
-  end
 end
 
 # Acceptance tests
@@ -103,10 +75,6 @@ namespace :acceptance do
     else
       puts "The google-cloud-profiler-v2 gem has no acceptance tests."
     end
-  end
-
-  desc "Run acceptance tests with coverage."
-  task :coverage do
   end
 
   desc "Run acceptance cleanup."
