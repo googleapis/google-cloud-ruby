@@ -368,9 +368,7 @@ module Google
         #     A map of resource manager tag keys and values to be attached to the nodes.
         # @!attribute [rw] enable_confidential_storage
         #   @return [::Boolean]
-        #     Optional. Enable confidential storage on Hyperdisk.
-        #     boot_disk_kms_key is required when enable_confidential_storage is true.
-        #     This is only available for private preview.
+        #     Optional. Reserved for future use.
         class NodeConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2956,6 +2954,9 @@ module Google
         #     Desired resource manager tag keys and values to be attached to the nodes
         #     for managing Compute Engine firewalls using Network Firewall Policies.
         #     Existing tags will be replaced with new values.
+        # @!attribute [rw] queued_provisioning
+        #   @return [::Google::Cloud::Container::V1beta1::NodePool::QueuedProvisioning]
+        #     Specifies the configuration of queued provisioning.
         class UpdateNodePoolRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
