@@ -35,9 +35,8 @@ module Google
         # Manage the collection of continuous profiling data provided by profiling
         # agents running in the cloud or by an offline provider of profiling data.
         #
-        # General guidelines:
-        # * Profiles for a single deployment must be created in ascending time order.
-        # * Profiles can be created in either online or offline mode, see below.
+        # __The APIs listed in this service are intended for use within our profiler
+        # agents only.__
         #
         # @example Load this service and instantiate a gRPC client
         #

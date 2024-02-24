@@ -96,6 +96,10 @@ module Google
         #     Input only. Labels associated to this specific profile. These labels will
         #     get merged with the deployment labels for the final data set. See
         #     documentation on deployment labels for validation rules and limits.
+        # @!attribute [r] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Start time for the profile.
+        #     This output is only present in response from the ListProfiles method.
         class Profile
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -162,7 +166,7 @@ module Google
         #   @return [::Integer]
         #     The maximum number of items to return.
         #     Default page_size is 1000.
-        #     Max limit is 10000.
+        #     Max limit is 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     The token to continue pagination and get profiles from a particular page.
