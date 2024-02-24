@@ -1,0 +1,77 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.cloudcontrolspartner.v1beta",
+  "libraryPackage": "::Google::Cloud::CloudControlsPartner::V1beta",
+  "services": {
+    "CloudControlsPartnerCore": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client",
+          "rpcs": {
+            "GetWorkload": {
+              "methods": [
+                "get_workload"
+              ]
+            },
+            "ListWorkloads": {
+              "methods": [
+                "list_workloads"
+              ]
+            },
+            "GetCustomer": {
+              "methods": [
+                "get_customer"
+              ]
+            },
+            "ListCustomers": {
+              "methods": [
+                "list_customers"
+              ]
+            },
+            "GetEkmConnections": {
+              "methods": [
+                "get_ekm_connections"
+              ]
+            },
+            "GetPartnerPermissions": {
+              "methods": [
+                "get_partner_permissions"
+              ]
+            },
+            "ListAccessApprovalRequests": {
+              "methods": [
+                "list_access_approval_requests"
+              ]
+            },
+            "GetPartner": {
+              "methods": [
+                "get_partner"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "CloudControlsPartnerMonitoring": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerMonitoring::Client",
+          "rpcs": {
+            "ListViolations": {
+              "methods": [
+                "list_violations"
+              ]
+            },
+            "GetViolation": {
+              "methods": [
+                "get_violation"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

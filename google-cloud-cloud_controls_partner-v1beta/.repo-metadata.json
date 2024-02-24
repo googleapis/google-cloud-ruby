@@ -1,0 +1,17 @@
+{
+    "api_id": "cloudcontrolspartner.googleapis.com",
+    "api_shortname": "cloudcontrolspartner",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-cloud_controls_partner-v1beta/latest",
+    "distribution_name": "google-cloud-cloud_controls_partner-v1beta",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "cloudcontrolspartner",
+    "name_pretty": "Cloud Controls Partner V1BETA API",
+    "product_documentation": "https://cloud.google.com/sovereign-controls-by-partners/docs/sovereign-partners",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Provides insights about your customers and their Assured Workloads based on your Sovereign Controls by Partners offering. Note that google-cloud-cloud_controls_partner-v1beta is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-cloud_controls_partner instead. See the readme for more details.",
+    "ruby-cloud-product-url": "https://cloud.google.com/sovereign-controls-by-partners/docs/sovereign-partners",
+    "library_type": "GAPIC_AUTO"
+}
