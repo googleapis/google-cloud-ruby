@@ -325,7 +325,7 @@
   "google-cloud-filestore-v1+FILLER": "0.0.0",
   "google-cloud-firestore": "2.14.0",
   "google-cloud-firestore+FILLER": "0.0.0",
-  "google-cloud-firestore-admin": "0.3.0",
+  "google-cloud-firestore-admin": "0.4.0",
   "google-cloud-firestore-admin+FILLER": "0.0.0",
   "google-cloud-firestore-admin-v1": "0.14.3",
   "google-cloud-firestore-admin-v1+FILLER": "0.0.0",
