@@ -439,7 +439,7 @@
   "google-cloud-network_management+FILLER": "0.0.0",
   "google-cloud-network_management-v1": "0.10.2",
   "google-cloud-network_management-v1+FILLER": "0.0.0",
-  "google-cloud-network_security": "0.4.0",
+  "google-cloud-network_security": "0.5.0",
   "google-cloud-network_security+FILLER": "0.0.0",
   "google-cloud-network_security-v1beta1": "0.7.2",
   "google-cloud-network_security-v1beta1+FILLER": "0.0.0",
