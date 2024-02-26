@@ -95,7 +95,7 @@
   "google-cloud-beyond_corp-app_connectors-v1+FILLER": "0.0.0",
   "google-cloud-beyond_corp-app_gateways-v1": "0.4.2",
   "google-cloud-beyond_corp-app_gateways-v1+FILLER": "0.0.0",
-  "google-cloud-beyond_corp-client_gateways-v1": "0.4.2",
+  "google-cloud-beyond_corp-client_gateways-v1": "0.5.0",
   "google-cloud-beyond_corp-client_gateways-v1+FILLER": "0.0.0",
   "google-cloud-bigquery": "1.48.1",
   "google-cloud-bigquery+FILLER": "0.0.0",
