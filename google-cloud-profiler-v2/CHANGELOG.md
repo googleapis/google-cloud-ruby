@@ -1,5 +1,15 @@
 # Release History
 
+### 0.10.0 (2024-02-26)
+
+#### Features
+
+* Added the Profile#start_time field 
+* Update minimum supported Ruby version to 2.7 
+#### Documentation
+
+* Clarified that direct API calls are intended for use only by supported profiler agents 
+
 ### 0.9.2 (2024-02-01)
 
 #### Bug Fixes
