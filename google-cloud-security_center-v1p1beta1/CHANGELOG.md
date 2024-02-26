@@ -4,6 +4,12 @@
 
 * Clarify Finding#event_time description
 
+### 0.14.0 (2024-02-26)
+
+#### Features
+
+* Updated minimum Ruby version to 2.7 ([#24876](https://github.com/googleapis/google-cloud-ruby/issues/24876)) 
+
 ### 0.13.2 (2024-02-01)
 
 #### Bug Fixes
