@@ -13,7 +13,6 @@
 # limitations under the License.
 
 
-require "simplecov"
 require "minitest/autorun"
 
 require "google/cloud/dlp"
