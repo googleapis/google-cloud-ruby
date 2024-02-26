@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.9.0 (2024-02-26)
+
+#### Features
+
+* Updated minimum Ruby version to 2.7 ([#24874](https://github.com/googleapis/google-cloud-ruby/issues/24874)) 
+
 ### 0.8.2 (2024-02-01)
 
 #### Bug Fixes
