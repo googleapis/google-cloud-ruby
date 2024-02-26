@@ -315,7 +315,7 @@
   "google-cloud-eventarc+FILLER": "0.0.0",
   "google-cloud-eventarc-publishing": "1.1.0",
   "google-cloud-eventarc-publishing+FILLER": "0.0.0",
-  "google-cloud-eventarc-publishing-v1": "0.8.2",
+  "google-cloud-eventarc-publishing-v1": "0.9.0",
   "google-cloud-eventarc-publishing-v1+FILLER": "0.0.0",
   "google-cloud-eventarc-v1": "0.9.2",
   "google-cloud-eventarc-v1+FILLER": "0.0.0",
