@@ -77,7 +77,7 @@
   "google-cloud-automl+FILLER": "0.0.0",
   "google-cloud-automl-v1": "0.9.2",
   "google-cloud-automl-v1+FILLER": "0.0.0",
-  "google-cloud-automl-v1beta1": "0.10.2",
+  "google-cloud-automl-v1beta1": "0.11.0",
   "google-cloud-automl-v1beta1+FILLER": "0.0.0",
   "google-cloud-bare_metal_solution": "1.1.0",
   "google-cloud-bare_metal_solution+FILLER": "0.0.0",
