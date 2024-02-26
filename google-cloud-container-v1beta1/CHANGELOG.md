@@ -1,5 +1,13 @@
 # Release History
 
+### 0.36.0 (2024-02-26)
+
+#### Features
+
+* Enable queued provisioning on existing nodepools ([#24882](https://github.com/googleapis/google-cloud-ruby/issues/24882)) 
+* Update minimum Ruby version to 2.7 
+* Updated minimum Ruby version to 2.7 ([#24867](https://github.com/googleapis/google-cloud-ruby/issues/24867)) 
+
 ### 0.35.0 (2024-02-05)
 
 #### Features
