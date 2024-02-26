@@ -164,6 +164,11 @@
               "methods": [
                 "delete_user"
               ]
+            },
+            "ListDatabases": {
+              "methods": [
+                "list_databases"
+              ]
             }
           }
         }
