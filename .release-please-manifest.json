@@ -103,7 +103,7 @@
   "google-cloud-bigquery-analytics_hub+FILLER": "0.0.0",
   "google-cloud-bigquery-analytics_hub-v1": "0.5.2",
   "google-cloud-bigquery-analytics_hub-v1+FILLER": "0.0.0",
-  "google-cloud-bigquery-connection": "1.4.0",
+  "google-cloud-bigquery-connection": "1.5.0",
   "google-cloud-bigquery-connection+FILLER": "0.0.0",
   "google-cloud-bigquery-connection-v1": "0.17.2",
   "google-cloud-bigquery-connection-v1+FILLER": "0.0.0",
