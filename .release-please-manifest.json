@@ -155,7 +155,7 @@
   "google-cloud-binary_authorization-v1+FILLER": "0.0.0",
   "google-cloud-binary_authorization-v1beta1": "0.12.2",
   "google-cloud-binary_authorization-v1beta1+FILLER": "0.0.0",
-  "google-cloud-build": "1.4.0",
+  "google-cloud-build": "1.5.0",
   "google-cloud-build+FILLER": "0.0.0",
   "google-cloud-build-v1": "0.26.2",
   "google-cloud-build-v1+FILLER": "0.0.0",
