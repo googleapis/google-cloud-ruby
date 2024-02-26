@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Notebooks
       module V1beta1
-        VERSION = "0.9.2"
+        VERSION = "0.10.0"
       end
     end
   end
