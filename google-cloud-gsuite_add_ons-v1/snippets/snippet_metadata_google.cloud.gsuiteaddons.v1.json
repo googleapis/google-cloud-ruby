@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-gsuite_add_ons-v1",
-    "version": "0.5.2",
+    "version": "0.6.0",
     "language": "RUBY",
     "apis": [
       {
