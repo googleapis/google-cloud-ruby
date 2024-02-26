@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.37.0 (2024-02-26)
+
+#### Features
+
+* Support for FeatureViewDataKey#composite_key ([#24859](https://github.com/googleapis/google-cloud-ruby/issues/24859)) 
+* Updated minimum Ruby version to 2.7 ([#24862](https://github.com/googleapis/google-cloud-ruby/issues/24862)) 
+
 ### 0.36.0 (2024-02-22)
 
 #### Features
