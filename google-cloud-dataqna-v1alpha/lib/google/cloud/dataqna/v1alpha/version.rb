@@ -21,7 +21,7 @@ module Google
   module Cloud
     module DataQnA
       module V1alpha
-        VERSION = "0.6.2"
+        VERSION = "0.7.0"
       end
     end
   end
