@@ -1,5 +1,12 @@
 # Release History
 
+### 0.18.0 (2024-02-26)
+
+#### Features
+
+* Updated minimum Ruby version to 2.7 ([#24875](https://github.com/googleapis/google-cloud-ruby/issues/24875)) 
+* Support for the reorder_firewall_policies RPC ([#24819](https://github.com/googleapis/google-cloud-ruby/issues/24819)) 
+
 ### 0.17.3 (2024-02-01)
 
 #### Bug Fixes
