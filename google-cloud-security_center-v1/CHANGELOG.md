@@ -1,5 +1,16 @@
 # Release History
 
+### 0.37.0 (2024-02-26)
+
+#### Features
+
+* Updated minimum Ruby version to 2.7 ([#24876](https://github.com/googleapis/google-cloud-ruby/issues/24876)) 
+* Exfiltrations report the total number of exfiltrated bytes processed 
+* Files report their path in terms of underlying disk/partition identifiers 
+* Findings include associated org policies, log entries, load balancers, and kubernetes objects 
+* Support for Database version 
+* Support for ProcessSignature type 
+
 ### 0.36.0 (2024-02-22)
 
 #### Features
