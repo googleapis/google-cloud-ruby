@@ -22,7 +22,7 @@ module Google
     module Video
       module LiveStream
         module V1
-          VERSION = "0.8.2"
+          VERSION = "0.9.0"
         end
       end
     end
