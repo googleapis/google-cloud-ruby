@@ -20,7 +20,7 @@
 module Google
   module Cloud
     module Location
-      VERSION = "0.7.1"
+      VERSION = "0.8.0"
     end
   end
 end
