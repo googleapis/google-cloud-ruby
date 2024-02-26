@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-beyond_corp-client_gateways-v1",
-    "version": "0.4.2",
+    "version": "0.5.0",
     "language": "RUBY",
     "apis": [
       {
