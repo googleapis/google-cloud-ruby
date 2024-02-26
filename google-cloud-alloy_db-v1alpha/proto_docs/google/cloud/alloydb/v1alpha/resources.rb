@@ -671,6 +671,11 @@ module Google
         #   @return [::String]
         #     Output only. The IP address for the Instance.
         #     This is the connection endpoint for an end-user application.
+        # @!attribute [r] public_ip_address
+        #   @return [::String]
+        #     Output only. The public IP addresses for the Instance. This is available
+        #     ONLY when enable_public_ip is set. This is the connection endpoint for an
+        #     end-user application.
         # @!attribute [r] reconciling
         #   @return [::Boolean]
         #     Output only. Reconciling (https://google.aip.dev/128#reconciliation).
@@ -1016,6 +1021,9 @@ module Google
         # @!attribute [r] instance_uid
         #   @return [::String]
         #     Output only. The unique ID of the Instance.
+        # @!attribute [r] psc_dns_name
+        #   @return [::String]
+        #     Output only. The DNS name to use with PSC for the Instance.
         class ConnectionInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
