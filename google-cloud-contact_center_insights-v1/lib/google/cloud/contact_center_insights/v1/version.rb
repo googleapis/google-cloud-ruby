@@ -21,7 +21,7 @@ module Google
   module Cloud
     module ContactCenterInsights
       module V1
-        VERSION = "0.21.1"
+        VERSION = "0.22.0"
       end
     end
   end
