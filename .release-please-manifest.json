@@ -137,7 +137,7 @@
   "google-cloud-bigtable+FILLER": "0.0.0",
   "google-cloud-bigtable-admin-v2": "0.21.3",
   "google-cloud-bigtable-admin-v2+FILLER": "0.0.0",
-  "google-cloud-bigtable-v2": "0.17.2",
+  "google-cloud-bigtable-v2": "0.18.0",
   "google-cloud-bigtable-v2+FILLER": "0.0.0",
   "google-cloud-billing": "1.4.0",
   "google-cloud-billing+FILLER": "0.0.0",
