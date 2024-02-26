@@ -339,7 +339,7 @@
   "google-cloud-functions-v2+FILLER": "0.0.0",
   "google-cloud-gke_backup": "1.1.0",
   "google-cloud-gke_backup+FILLER": "0.0.0",
-  "google-cloud-gke_backup-v1": "0.7.2",
+  "google-cloud-gke_backup-v1": "0.8.0",
   "google-cloud-gke_backup-v1+FILLER": "0.0.0",
   "google-cloud-gke_connect-gateway": "0.3.0",
   "google-cloud-gke_connect-gateway+FILLER": "0.0.0",
