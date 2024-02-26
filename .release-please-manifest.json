@@ -581,7 +581,7 @@
   "google-cloud-service_control+FILLER": "0.0.0",
   "google-cloud-service_control-v1": "0.10.0",
   "google-cloud-service_control-v1+FILLER": "0.0.0",
-  "google-cloud-service_directory": "1.4.0",
+  "google-cloud-service_directory": "1.5.0",
   "google-cloud-service_directory+FILLER": "0.0.0",
   "google-cloud-service_directory-v1": "0.10.2",
   "google-cloud-service_directory-v1+FILLER": "0.0.0",
