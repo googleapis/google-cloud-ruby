@@ -28,7 +28,7 @@ module Google
         #     For example: "projects/123456/locations/us-central1/jobs/job01".
         # @!attribute [r] uid
         #   @return [::String]
-        #     Output only. A system generated unique ID (in UUID4 format) for the Job.
+        #     Output only. A system generated unique ID for the Job.
         # @!attribute [rw] priority
         #   @return [::Integer]
         #     Priority of the Job.
