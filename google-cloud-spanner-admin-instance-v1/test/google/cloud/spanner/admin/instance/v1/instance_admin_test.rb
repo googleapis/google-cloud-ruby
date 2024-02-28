@@ -459,6 +459,7 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientTest <
     page_size = 42
     page_token = "hello world"
     filter = "hello world"
+    instance_deadline = {}
 
     list_instances_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_instances, name
@@ -467,6 +468,7 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientTest <
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
       assert_equal "hello world", request["filter"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["instance_deadline"]
       refute_nil options
     end
 
@@ -477,35 +479,35 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientTest <
       end
 
       # Use hash object
-      client.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      client.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, instance_deadline: instance_deadline }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_instances parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      client.list_instances parent: parent, page_size: page_size, page_token: page_token, filter: filter, instance_deadline: instance_deadline do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_instances ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      client.list_instances ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, instance_deadline: instance_deadline) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      client.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, instance_deadline: instance_deadline }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_instances(::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      client.list_instances(::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, instance_deadline: instance_deadline), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -513,6 +515,75 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientTest <
 
       # Verify method calls
       assert_equal 5, list_instances_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_instance_partitions
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    instance_partition_deadline = {}
+
+    list_instance_partitions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_instance_partitions, name
+      assert_kind_of ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["instance_partition_deadline"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_instance_partitions_client_stub do
+      # Create client
+      client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_instance_partitions({ parent: parent, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_instance_partitions parent: parent, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_instance_partitions ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_instance_partitions({ parent: parent, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_instance_partitions(::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_instance_partitions_client_stub.call_rpc_count
     end
   end
 
@@ -945,6 +1016,327 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientTest <
 
       # Verify method calls
       assert_equal 5, test_iam_permissions_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_instance_partition
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Spanner::Admin::Instance::V1::InstancePartition.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_instance_partition_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_instance_partition, name
+      assert_kind_of ::Google::Cloud::Spanner::Admin::Instance::V1::GetInstancePartitionRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_instance_partition_client_stub do
+      # Create client
+      client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_instance_partition({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_instance_partition name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_instance_partition ::Google::Cloud::Spanner::Admin::Instance::V1::GetInstancePartitionRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_instance_partition({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_instance_partition(::Google::Cloud::Spanner::Admin::Instance::V1::GetInstancePartitionRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_instance_partition_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_instance_partition
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    instance_partition_id = "hello world"
+    instance_partition = {}
+
+    create_instance_partition_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_instance_partition, name
+      assert_kind_of ::Google::Cloud::Spanner::Admin::Instance::V1::CreateInstancePartitionRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["instance_partition_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::Admin::Instance::V1::InstancePartition), request["instance_partition"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_instance_partition_client_stub do
+      # Create client
+      client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_instance_partition({ parent: parent, instance_partition_id: instance_partition_id, instance_partition: instance_partition }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_instance_partition parent: parent, instance_partition_id: instance_partition_id, instance_partition: instance_partition do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_instance_partition ::Google::Cloud::Spanner::Admin::Instance::V1::CreateInstancePartitionRequest.new(parent: parent, instance_partition_id: instance_partition_id, instance_partition: instance_partition) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_instance_partition({ parent: parent, instance_partition_id: instance_partition_id, instance_partition: instance_partition }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_instance_partition(::Google::Cloud::Spanner::Admin::Instance::V1::CreateInstancePartitionRequest.new(parent: parent, instance_partition_id: instance_partition_id, instance_partition: instance_partition), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_instance_partition_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_instance_partition
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    etag = "hello world"
+
+    delete_instance_partition_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_instance_partition, name
+      assert_kind_of ::Google::Cloud::Spanner::Admin::Instance::V1::DeleteInstancePartitionRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["etag"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_instance_partition_client_stub do
+      # Create client
+      client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_instance_partition({ name: name, etag: etag }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_instance_partition name: name, etag: etag do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_instance_partition ::Google::Cloud::Spanner::Admin::Instance::V1::DeleteInstancePartitionRequest.new(name: name, etag: etag) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_instance_partition({ name: name, etag: etag }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_instance_partition(::Google::Cloud::Spanner::Admin::Instance::V1::DeleteInstancePartitionRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_instance_partition_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_instance_partition
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    instance_partition = {}
+    field_mask = {}
+
+    update_instance_partition_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_instance_partition, name
+      assert_kind_of ::Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstancePartitionRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::Admin::Instance::V1::InstancePartition), request["instance_partition"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["field_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_instance_partition_client_stub do
+      # Create client
+      client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_instance_partition({ instance_partition: instance_partition, field_mask: field_mask }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_instance_partition instance_partition: instance_partition, field_mask: field_mask do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_instance_partition ::Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstancePartitionRequest.new(instance_partition: instance_partition, field_mask: field_mask) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_instance_partition({ instance_partition: instance_partition, field_mask: field_mask }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_instance_partition(::Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstancePartitionRequest.new(instance_partition: instance_partition, field_mask: field_mask), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_instance_partition_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_instance_partition_operations
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionOperationsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    filter = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    instance_partition_deadline = {}
+
+    list_instance_partition_operations_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_instance_partition_operations, name
+      assert_kind_of ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionOperationsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["instance_partition_deadline"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_instance_partition_operations_client_stub do
+      # Create client
+      client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_instance_partition_operations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_instance_partition_operations parent: parent, filter: filter, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_instance_partition_operations ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionOperationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_instance_partition_operations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_instance_partition_operations(::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionOperationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_instance_partition_operations_client_stub.call_rpc_count
     end
   end
 
