@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.17.1 (2024-02-28)
+
+#### Documentation
+
+* Updated description of the Job uid field ([#25265](https://github.com/googleapis/google-cloud-ruby/issues/25265)) 
+
 ### 0.17.0 (2024-02-26)
 
 #### Features
