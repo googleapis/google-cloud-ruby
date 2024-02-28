@@ -1,5 +1,15 @@
 # Changelog
 
+### 0.8.0 (2024-02-28)
+
+#### Features
+
+* support for getting PSC DNS name from the GetConnectionInfo API 
+* Support for instance level network configuration 
+* Support for instance level Private Service Connect configuration 
+* Support for obtaining the public IP address of an instance 
+* Support for the list_databases RPC ([#25264](https://github.com/googleapis/google-cloud-ruby/issues/25264)) 
+
 ### 0.7.0 (2024-02-26)
 
 #### Features
