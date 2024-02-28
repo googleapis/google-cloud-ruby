@@ -651,6 +651,14 @@ module Google
             #       * `name:howl labels.env:dev` --> The instance's name contains "howl" and
             #                                      it has the label "env" with its value
             #                                      containing "dev".
+            # @!attribute [rw] instance_deadline
+            #   @return [::Google::Protobuf::Timestamp]
+            #     Deadline used while retrieving metadata for instances.
+            #     Instances whose metadata cannot be retrieved within this deadline will be
+            #     added to
+            #     {::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancesResponse#unreachable unreachable}
+            #     in
+            #     {::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancesResponse ListInstancesResponse}.
             class ListInstancesRequest
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -666,6 +674,12 @@ module Google
             #     `next_page_token` can be sent in a subsequent
             #     {::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#list_instances ListInstances}
             #     call to fetch more of the matching instances.
+            # @!attribute [rw] unreachable
+            #   @return [::Array<::String>]
+            #     The list of unreachable instances.
+            #     It includes the names of instances whose metadata could not be retrieved
+            #     within
+            #     {::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancesRequest#instance_deadline instance_deadline}.
             class ListInstancesResponse
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -780,6 +794,366 @@ module Google
             #   @return [::Google::Protobuf::Timestamp]
             #     The time at which this operation was cancelled.
             class UpdateInstanceConfigMetadata
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # An isolated set of Cloud Spanner resources that databases can define
+            # placements on.
+            # @!attribute [rw] name
+            #   @return [::String]
+            #     Required. A unique identifier for the instance partition. Values are of the
+            #     form
+            #     `projects/<project>/instances/<instance>/instancePartitions/[a-z][-a-z0-9]*[a-z0-9]`.
+            #     The final segment of the name must be between 2 and 64 characters in
+            #     length. An instance partition's name cannot be changed after the instance
+            #     partition is created.
+            # @!attribute [rw] config
+            #   @return [::String]
+            #     Required. The name of the instance partition's configuration. Values are of
+            #     the form `projects/<project>/instanceConfigs/<configuration>`. See also
+            #     {::Google::Cloud::Spanner::Admin::Instance::V1::InstanceConfig InstanceConfig} and
+            #     {::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#list_instance_configs ListInstanceConfigs}.
+            # @!attribute [rw] display_name
+            #   @return [::String]
+            #     Required. The descriptive name for this instance partition as it appears in
+            #     UIs. Must be unique per project and between 4 and 30 characters in length.
+            # @!attribute [rw] node_count
+            #   @return [::Integer]
+            #     The number of nodes allocated to this instance partition.
+            #
+            #     Users can set the node_count field to specify the target number of nodes
+            #     allocated to the instance partition.
+            #
+            #     This may be zero in API responses for instance partitions that are not
+            #     yet in state `READY`.
+            # @!attribute [rw] processing_units
+            #   @return [::Integer]
+            #     The number of processing units allocated to this instance partition.
+            #
+            #     Users can set the processing_units field to specify the target number of
+            #     processing units allocated to the instance partition.
+            #
+            #     This may be zero in API responses for instance partitions that are not
+            #     yet in state `READY`.
+            # @!attribute [r] state
+            #   @return [::Google::Cloud::Spanner::Admin::Instance::V1::InstancePartition::State]
+            #     Output only. The current instance partition state.
+            # @!attribute [r] create_time
+            #   @return [::Google::Protobuf::Timestamp]
+            #     Output only. The time at which the instance partition was created.
+            # @!attribute [r] update_time
+            #   @return [::Google::Protobuf::Timestamp]
+            #     Output only. The time at which the instance partition was most recently
+            #     updated.
+            # @!attribute [r] referencing_databases
+            #   @return [::Array<::String>]
+            #     Output only. The names of the databases that reference this
+            #     instance partition. Referencing databases should share the parent instance.
+            #     The existence of any referencing database prevents the instance partition
+            #     from being deleted.
+            # @!attribute [r] referencing_backups
+            #   @return [::Array<::String>]
+            #     Output only. The names of the backups that reference this instance
+            #     partition. Referencing backups should share the parent instance. The
+            #     existence of any referencing backup prevents the instance partition from
+            #     being deleted.
+            # @!attribute [rw] etag
+            #   @return [::String]
+            #     Used for optimistic concurrency control as a way
+            #     to help prevent simultaneous updates of a instance partition from
+            #     overwriting each other. It is strongly suggested that systems make use of
+            #     the etag in the read-modify-write cycle to perform instance partition
+            #     updates in order to avoid race conditions: An etag is returned in the
+            #     response which contains instance partitions, and systems are expected to
+            #     put that etag in the request to update instance partitions to ensure that
+            #     their change will be applied to the same version of the instance partition.
+            #     If no etag is provided in the call to update instance partition, then the
+            #     existing instance partition is overwritten blindly.
+            class InstancePartition
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Indicates the current state of the instance partition.
+              module State
+                # Not specified.
+                STATE_UNSPECIFIED = 0
+
+                # The instance partition is still being created. Resources may not be
+                # available yet, and operations such as creating placements using this
+                # instance partition may not work.
+                CREATING = 1
+
+                # The instance partition is fully created and ready to do work such as
+                # creating placements and using in databases.
+                READY = 2
+              end
+            end
+
+            # Metadata type for the operation returned by
+            # {::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#create_instance_partition CreateInstancePartition}.
+            # @!attribute [rw] instance_partition
+            #   @return [::Google::Cloud::Spanner::Admin::Instance::V1::InstancePartition]
+            #     The instance partition being created.
+            # @!attribute [rw] start_time
+            #   @return [::Google::Protobuf::Timestamp]
+            #     The time at which the
+            #     {::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#create_instance_partition CreateInstancePartition}
+            #     request was received.
+            # @!attribute [rw] cancel_time
+            #   @return [::Google::Protobuf::Timestamp]
+            #     The time at which this operation was cancelled. If set, this operation is
+            #     in the process of undoing itself (which is guaranteed to succeed) and
+            #     cannot be cancelled again.
+            # @!attribute [rw] end_time
+            #   @return [::Google::Protobuf::Timestamp]
+            #     The time at which this operation failed or was completed successfully.
+            class CreateInstancePartitionMetadata
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The request for
+            # {::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#create_instance_partition CreateInstancePartition}.
+            # @!attribute [rw] parent
+            #   @return [::String]
+            #     Required. The name of the instance in which to create the instance
+            #     partition. Values are of the form
+            #     `projects/<project>/instances/<instance>`.
+            # @!attribute [rw] instance_partition_id
+            #   @return [::String]
+            #     Required. The ID of the instance partition to create. Valid identifiers are
+            #     of the form `[a-z][-a-z0-9]*[a-z0-9]` and must be between 2 and 64
+            #     characters in length.
+            # @!attribute [rw] instance_partition
+            #   @return [::Google::Cloud::Spanner::Admin::Instance::V1::InstancePartition]
+            #     Required. The instance partition to create. The instance_partition.name may
+            #     be omitted, but if specified must be
+            #     `<parent>/instancePartitions/<instance_partition_id>`.
+            class CreateInstancePartitionRequest
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The request for
+            # {::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#delete_instance_partition DeleteInstancePartition}.
+            # @!attribute [rw] name
+            #   @return [::String]
+            #     Required. The name of the instance partition to be deleted.
+            #     Values are of the form
+            #     `projects/{project}/instances/{instance}/instancePartitions/{instance_partition}`
+            # @!attribute [rw] etag
+            #   @return [::String]
+            #     Optional. If not empty, the API only deletes the instance partition when
+            #     the etag provided matches the current status of the requested instance
+            #     partition. Otherwise, deletes the instance partition without checking the
+            #     current status of the requested instance partition.
+            class DeleteInstancePartitionRequest
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The request for
+            # {::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#get_instance_partition GetInstancePartition}.
+            # @!attribute [rw] name
+            #   @return [::String]
+            #     Required. The name of the requested instance partition. Values are of
+            #     the form
+            #     `projects/{project}/instances/{instance}/instancePartitions/{instance_partition}`.
+            class GetInstancePartitionRequest
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The request for
+            # {::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#update_instance_partition UpdateInstancePartition}.
+            # @!attribute [rw] instance_partition
+            #   @return [::Google::Cloud::Spanner::Admin::Instance::V1::InstancePartition]
+            #     Required. The instance partition to update, which must always include the
+            #     instance partition name. Otherwise, only fields mentioned in
+            #     {::Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstancePartitionRequest#field_mask field_mask}
+            #     need be included.
+            # @!attribute [rw] field_mask
+            #   @return [::Google::Protobuf::FieldMask]
+            #     Required. A mask specifying which fields in
+            #     {::Google::Cloud::Spanner::Admin::Instance::V1::InstancePartition InstancePartition}
+            #     should be updated. The field mask must always be specified; this prevents
+            #     any future fields in
+            #     {::Google::Cloud::Spanner::Admin::Instance::V1::InstancePartition InstancePartition}
+            #     from being erased accidentally by clients that do not know about them.
+            class UpdateInstancePartitionRequest
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Metadata type for the operation returned by
+            # {::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#update_instance_partition UpdateInstancePartition}.
+            # @!attribute [rw] instance_partition
+            #   @return [::Google::Cloud::Spanner::Admin::Instance::V1::InstancePartition]
+            #     The desired end state of the update.
+            # @!attribute [rw] start_time
+            #   @return [::Google::Protobuf::Timestamp]
+            #     The time at which
+            #     {::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#update_instance_partition UpdateInstancePartition}
+            #     request was received.
+            # @!attribute [rw] cancel_time
+            #   @return [::Google::Protobuf::Timestamp]
+            #     The time at which this operation was cancelled. If set, this operation is
+            #     in the process of undoing itself (which is guaranteed to succeed) and
+            #     cannot be cancelled again.
+            # @!attribute [rw] end_time
+            #   @return [::Google::Protobuf::Timestamp]
+            #     The time at which this operation failed or was completed successfully.
+            class UpdateInstancePartitionMetadata
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The request for
+            # {::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#list_instance_partitions ListInstancePartitions}.
+            # @!attribute [rw] parent
+            #   @return [::String]
+            #     Required. The instance whose instance partitions should be listed. Values
+            #     are of the form `projects/<project>/instances/<instance>`.
+            # @!attribute [rw] page_size
+            #   @return [::Integer]
+            #     Number of instance partitions to be returned in the response. If 0 or less,
+            #     defaults to the server's maximum allowed page size.
+            # @!attribute [rw] page_token
+            #   @return [::String]
+            #     If non-empty, `page_token` should contain a
+            #     {::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionsResponse#next_page_token next_page_token}
+            #     from a previous
+            #     {::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionsResponse ListInstancePartitionsResponse}.
+            # @!attribute [rw] instance_partition_deadline
+            #   @return [::Google::Protobuf::Timestamp]
+            #     Optional. Deadline used while retrieving metadata for instance partitions.
+            #     Instance partitions whose metadata cannot be retrieved within this deadline
+            #     will be added to
+            #     {::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionsResponse#unreachable unreachable}
+            #     in
+            #     {::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionsResponse ListInstancePartitionsResponse}.
+            class ListInstancePartitionsRequest
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The response for
+            # {::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#list_instance_partitions ListInstancePartitions}.
+            # @!attribute [rw] instance_partitions
+            #   @return [::Array<::Google::Cloud::Spanner::Admin::Instance::V1::InstancePartition>]
+            #     The list of requested instancePartitions.
+            # @!attribute [rw] next_page_token
+            #   @return [::String]
+            #     `next_page_token` can be sent in a subsequent
+            #     {::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#list_instance_partitions ListInstancePartitions}
+            #     call to fetch more of the matching instance partitions.
+            # @!attribute [rw] unreachable
+            #   @return [::Array<::String>]
+            #     The list of unreachable instance partitions.
+            #     It includes the names of instance partitions whose metadata could
+            #     not be retrieved within
+            #     {::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionsRequest#instance_partition_deadline instance_partition_deadline}.
+            class ListInstancePartitionsResponse
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The request for
+            # {::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#list_instance_partition_operations ListInstancePartitionOperations}.
+            # @!attribute [rw] parent
+            #   @return [::String]
+            #     Required. The parent instance of the instance partition operations.
+            #     Values are of the form `projects/<project>/instances/<instance>`.
+            # @!attribute [rw] filter
+            #   @return [::String]
+            #     Optional. An expression that filters the list of returned operations.
+            #
+            #     A filter expression consists of a field name, a
+            #     comparison operator, and a value for filtering.
+            #     The value must be a string, a number, or a boolean. The comparison operator
+            #     must be one of: `<`, `>`, `<=`, `>=`, `!=`, `=`, or `:`.
+            #     Colon `:` is the contains operator. Filter rules are not case sensitive.
+            #
+            #     The following fields in the {::Google::Longrunning::Operation Operation}
+            #     are eligible for filtering:
+            #
+            #       * `name` - The name of the long-running operation
+            #       * `done` - False if the operation is in progress, else true.
+            #       * `metadata.@type` - the type of metadata. For example, the type string
+            #          for
+            #          {::Google::Cloud::Spanner::Admin::Instance::V1::CreateInstancePartitionMetadata CreateInstancePartitionMetadata}
+            #          is
+            #          `type.googleapis.com/google.spanner.admin.instance.v1.CreateInstancePartitionMetadata`.
+            #       * `metadata.<field_name>` - any field in metadata.value.
+            #          `metadata.@type` must be specified first, if filtering on metadata
+            #          fields.
+            #       * `error` - Error associated with the long-running operation.
+            #       * `response.@type` - the type of response.
+            #       * `response.<field_name>` - any field in response.value.
+            #
+            #     You can combine multiple expressions by enclosing each expression in
+            #     parentheses. By default, expressions are combined with AND logic. However,
+            #     you can specify AND, OR, and NOT logic explicitly.
+            #
+            #     Here are a few examples:
+            #
+            #       * `done:true` - The operation is complete.
+            #       * `(metadata.@type=` \
+            #         `type.googleapis.com/google.spanner.admin.instance.v1.CreateInstancePartitionMetadata)
+            #         AND` \
+            #         `(metadata.instance_partition.name:custom-instance-partition) AND` \
+            #         `(metadata.start_time < \"2021-03-28T14:50:00Z\") AND` \
+            #         `(error:*)` - Return operations where:
+            #         * The operation's metadata type is
+            #         {::Google::Cloud::Spanner::Admin::Instance::V1::CreateInstancePartitionMetadata CreateInstancePartitionMetadata}.
+            #         * The instance partition name contains "custom-instance-partition".
+            #         * The operation started before 2021-03-28T14:50:00Z.
+            #         * The operation resulted in an error.
+            # @!attribute [rw] page_size
+            #   @return [::Integer]
+            #     Optional. Number of operations to be returned in the response. If 0 or
+            #     less, defaults to the server's maximum allowed page size.
+            # @!attribute [rw] page_token
+            #   @return [::String]
+            #     Optional. If non-empty, `page_token` should contain a
+            #     {::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionOperationsResponse#next_page_token next_page_token}
+            #     from a previous
+            #     {::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionOperationsResponse ListInstancePartitionOperationsResponse}
+            #     to the same `parent` and with the same `filter`.
+            # @!attribute [rw] instance_partition_deadline
+            #   @return [::Google::Protobuf::Timestamp]
+            #     Optional. Deadline used while retrieving metadata for instance partition
+            #     operations. Instance partitions whose operation metadata cannot be
+            #     retrieved within this deadline will be added to
+            #     [unreachable][ListInstancePartitionOperationsResponse.unreachable] in
+            #     {::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionOperationsResponse ListInstancePartitionOperationsResponse}.
+            class ListInstancePartitionOperationsRequest
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The response for
+            # {::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#list_instance_partition_operations ListInstancePartitionOperations}.
+            # @!attribute [rw] operations
+            #   @return [::Array<::Google::Longrunning::Operation>]
+            #     The list of matching instance partition [long-running
+            #     operations][google.longrunning.Operation]. Each operation's name will be
+            #     prefixed by the instance partition's name. The operation's
+            #     {::Google::Longrunning::Operation#metadata metadata} field type
+            #     `metadata.type_url` describes the type of the metadata.
+            # @!attribute [rw] next_page_token
+            #   @return [::String]
+            #     `next_page_token` can be sent in a subsequent
+            #     {::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#list_instance_partition_operations ListInstancePartitionOperations}
+            #     call to fetch more of the matching metadata.
+            # @!attribute [rw] unreachable_instance_partitions
+            #   @return [::Array<::String>]
+            #     The list of unreachable instance partitions.
+            #     It includes the names of instance partitions whose operation metadata could
+            #     not be retrieved within
+            #     {::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionOperationsRequest#instance_partition_deadline instance_partition_deadline}.
+            class ListInstancePartitionOperationsResponse
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
