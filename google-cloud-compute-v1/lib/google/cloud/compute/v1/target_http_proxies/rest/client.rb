@@ -190,7 +190,7 @@ module Google
               # Service calls
 
               ##
-              # Retrieves the list of all TargetHttpProxy resources, regional and global, available to the specified project.
+              # Retrieves the list of all TargetHttpProxy resources, regional and global, available to the specified project. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.
               #
               # @overload aggregated_list(request, options = nil)
               #   Pass arguments to `aggregated_list` via a request object, either of type
@@ -220,7 +220,7 @@ module Google
               #   @param project [::String]
               #     Name of the project scoping this request.
               #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
               #   @param service_project_number [::Integer]
               #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
               # @yield [result, operation] Access the result along with the TransportOperation object
@@ -571,7 +571,7 @@ module Google
               #   @param project [::String]
               #     Project ID for this request.
               #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::TargetHttpProxy>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

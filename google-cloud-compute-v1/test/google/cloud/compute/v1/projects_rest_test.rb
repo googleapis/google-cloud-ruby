@@ -631,6 +631,62 @@ class ::Google::Cloud::Compute::V1::Projects::Rest::ClientTest < Minitest::Test
     end
   end
 
+  def test_set_cloud_armor_tier
+    # Create test objects.
+    client_result = ::Google::Cloud::Compute::V1::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    project = "hello world"
+    projects_set_cloud_armor_tier_request_resource = {}
+    request_id = "hello world"
+
+    set_cloud_armor_tier_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Compute::V1::Projects::Rest::ServiceStub.stub :transcode_set_cloud_armor_tier_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, set_cloud_armor_tier_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::Projects::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.set_cloud_armor_tier({ project: project, projects_set_cloud_armor_tier_request_resource: projects_set_cloud_armor_tier_request_resource, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.set_cloud_armor_tier project: project, projects_set_cloud_armor_tier_request_resource: projects_set_cloud_armor_tier_request_resource, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.set_cloud_armor_tier ::Google::Cloud::Compute::V1::SetCloudArmorTierProjectRequest.new(project: project, projects_set_cloud_armor_tier_request_resource: projects_set_cloud_armor_tier_request_resource, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.set_cloud_armor_tier({ project: project, projects_set_cloud_armor_tier_request_resource: projects_set_cloud_armor_tier_request_resource, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.set_cloud_armor_tier(::Google::Cloud::Compute::V1::SetCloudArmorTierProjectRequest.new(project: project, projects_set_cloud_armor_tier_request_resource: projects_set_cloud_armor_tier_request_resource, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, set_cloud_armor_tier_client_stub.call_count
+      end
+    end
+  end
+
   def test_set_common_instance_metadata
     # Create test objects.
     client_result = ::Google::Cloud::Compute::V1::Operation.new

@@ -485,7 +485,7 @@ module Google
               end
 
               ##
-              # Retrieves an aggregated list of all of the instances in your project across all regions and zones. The performance of this method degrades when a filter is specified on a project that has a very large number of instances.
+              # Retrieves an aggregated list of all of the instances in your project across all regions and zones. The performance of this method degrades when a filter is specified on a project that has a very large number of instances. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.
               #
               # @overload aggregated_list(request, options = nil)
               #   Pass arguments to `aggregated_list` via a request object, either of type
@@ -515,7 +515,7 @@ module Google
               #   @param project [::String]
               #     Project ID for this request.
               #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
               #   @param service_project_number [::Integer]
               #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
               # @yield [result, operation] Access the result along with the TransportOperation object
@@ -1764,7 +1764,7 @@ module Google
               #   @param project [::String]
               #     Project ID for this request.
               #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
               #   @param zone [::String]
               #     The name of the zone for this request.
               # @yield [result, operation] Access the result along with the TransportOperation object
@@ -1857,7 +1857,7 @@ module Google
               #   @param project [::String]
               #     Project ID for this request.
               #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
               #   @param zone [::String]
               #     The name of the zone for this request.
               # @yield [result, operation] Access the result along with the TransportOperation object
