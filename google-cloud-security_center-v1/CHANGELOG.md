@@ -1,5 +1,13 @@
 # Release History
 
+### 0.38.0 (2024-03-04)
+
+#### Features
+
+* support create_time for container 
+* support impact, exploitation_activity, observed_in_the_wild, zero_day for CVE 
+* support offending_package, fixed_package, security_bulletin for vulnerability 
+
 ### 0.37.0 (2024-02-26)
 
 #### Features
