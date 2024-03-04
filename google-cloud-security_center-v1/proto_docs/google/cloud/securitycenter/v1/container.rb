@@ -36,6 +36,9 @@ module Google
         # @!attribute [rw] labels
         #   @return [::Array<::Google::Cloud::SecurityCenter::V1::Label>]
         #     Container labels, as provided by the container runtime.
+        # @!attribute [rw] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time that the container was created.
         class Container
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -5,9 +5,10 @@
 require 'google/protobuf'
 
 require 'google/cloud/securitycenter/v1/label_pb'
+require 'google/protobuf/timestamp_pb'
 
 
-descriptor_data = "\n.google/cloud/securitycenter/v1/container.proto\x12\x1egoogle.cloud.securitycenter.v1\x1a*google/cloud/securitycenter/v1/label.proto\"o\n\tContainer\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0b\n\x03uri\x18\x02 \x01(\t\x12\x10\n\x08image_id\x18\x03 \x01(\t\x12\x35\n\x06labels\x18\x04 \x03(\x0b\x32%.google.cloud.securitycenter.v1.LabelB\xe8\x01\n\"com.google.cloud.securitycenter.v1B\x0e\x43ontainerProtoP\x01ZJcloud.google.com/go/securitycenter/apiv1/securitycenterpb;securitycenterpb\xaa\x02\x1eGoogle.Cloud.SecurityCenter.V1\xca\x02\x1eGoogle\\Cloud\\SecurityCenter\\V1\xea\x02!Google::Cloud::SecurityCenter::V1b\x06proto3"
+descriptor_data = "\n.google/cloud/securitycenter/v1/container.proto\x12\x1egoogle.cloud.securitycenter.v1\x1a*google/cloud/securitycenter/v1/label.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xa0\x01\n\tContainer\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0b\n\x03uri\x18\x02 \x01(\t\x12\x10\n\x08image_id\x18\x03 \x01(\t\x12\x35\n\x06labels\x18\x04 \x03(\x0b\x32%.google.cloud.securitycenter.v1.Label\x12/\n\x0b\x63reate_time\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\xe8\x01\n\"com.google.cloud.securitycenter.v1B\x0e\x43ontainerProtoP\x01ZJcloud.google.com/go/securitycenter/apiv1/securitycenterpb;securitycenterpb\xaa\x02\x1eGoogle.Cloud.SecurityCenter.V1\xca\x02\x1eGoogle\\Cloud\\SecurityCenter\\V1\xea\x02!Google::Cloud::SecurityCenter::V1b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
@@ -23,6 +24,7 @@ rescue TypeError
   warn "Warning: Protobuf detected an import path issue while loading generated file #{__FILE__}"
   imports = [
     ["google.cloud.securitycenter.v1.Label", "google/cloud/securitycenter/v1/label.proto"],
+    ["google.protobuf.Timestamp", "google/protobuf/timestamp.proto"],
   ]
   imports.each do |type_name, expected_filename|
     import_file = pool.lookup(type_name).file_descriptor
