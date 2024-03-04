@@ -292,6 +292,46 @@
       ]
     },
     {
+      "region_tag": "spanner_v1_generated_InstanceAdmin_ListInstancePartitions_sync",
+      "title": "Snippet for the list_instance_partitions call in the InstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#list_instance_partitions.",
+      "file": "instance_admin/list_instance_partitions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_instance_partitions",
+        "full_name": "::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#list_instance_partitions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionsResponse",
+        "client": {
+          "short_name": "InstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "ListInstancePartitions",
+          "full_name": "google.spanner.admin.instance.v1.InstanceAdmin.ListInstancePartitions",
+          "service": {
+            "short_name": "InstanceAdmin",
+            "full_name": "google.spanner.admin.instance.v1.InstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "spanner_v1_generated_InstanceAdmin_GetInstance_sync",
       "title": "Snippet for the get_instance call in the InstanceAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#get_instance.",
@@ -567,6 +607,206 @@
         {
           "start": 20,
           "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "spanner_v1_generated_InstanceAdmin_GetInstancePartition_sync",
+      "title": "Snippet for the get_instance_partition call in the InstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#get_instance_partition.",
+      "file": "instance_admin/get_instance_partition.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_instance_partition",
+        "full_name": "::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#get_instance_partition",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Spanner::Admin::Instance::V1::GetInstancePartitionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Spanner::Admin::Instance::V1::InstancePartition",
+        "client": {
+          "short_name": "InstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "GetInstancePartition",
+          "full_name": "google.spanner.admin.instance.v1.InstanceAdmin.GetInstancePartition",
+          "service": {
+            "short_name": "InstanceAdmin",
+            "full_name": "google.spanner.admin.instance.v1.InstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "spanner_v1_generated_InstanceAdmin_CreateInstancePartition_sync",
+      "title": "Snippet for the create_instance_partition call in the InstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#create_instance_partition.",
+      "file": "instance_admin/create_instance_partition.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_instance_partition",
+        "full_name": "::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#create_instance_partition",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Spanner::Admin::Instance::V1::CreateInstancePartitionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "InstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "CreateInstancePartition",
+          "full_name": "google.spanner.admin.instance.v1.InstanceAdmin.CreateInstancePartition",
+          "service": {
+            "short_name": "InstanceAdmin",
+            "full_name": "google.spanner.admin.instance.v1.InstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "spanner_v1_generated_InstanceAdmin_DeleteInstancePartition_sync",
+      "title": "Snippet for the delete_instance_partition call in the InstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#delete_instance_partition.",
+      "file": "instance_admin/delete_instance_partition.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_instance_partition",
+        "full_name": "::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#delete_instance_partition",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Spanner::Admin::Instance::V1::DeleteInstancePartitionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "InstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "DeleteInstancePartition",
+          "full_name": "google.spanner.admin.instance.v1.InstanceAdmin.DeleteInstancePartition",
+          "service": {
+            "short_name": "InstanceAdmin",
+            "full_name": "google.spanner.admin.instance.v1.InstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "spanner_v1_generated_InstanceAdmin_UpdateInstancePartition_sync",
+      "title": "Snippet for the update_instance_partition call in the InstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#update_instance_partition.",
+      "file": "instance_admin/update_instance_partition.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_instance_partition",
+        "full_name": "::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#update_instance_partition",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstancePartitionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "InstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "UpdateInstancePartition",
+          "full_name": "google.spanner.admin.instance.v1.InstanceAdmin.UpdateInstancePartition",
+          "service": {
+            "short_name": "InstanceAdmin",
+            "full_name": "google.spanner.admin.instance.v1.InstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "spanner_v1_generated_InstanceAdmin_ListInstancePartitionOperations_sync",
+      "title": "Snippet for the list_instance_partition_operations call in the InstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#list_instance_partition_operations.",
+      "file": "instance_admin/list_instance_partition_operations.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_instance_partition_operations",
+        "full_name": "::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#list_instance_partition_operations",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionOperationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionOperationsResponse",
+        "client": {
+          "short_name": "InstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "ListInstancePartitionOperations",
+          "full_name": "google.spanner.admin.instance.v1.InstanceAdmin.ListInstancePartitionOperations",
+          "service": {
+            "short_name": "InstanceAdmin",
+            "full_name": "google.spanner.admin.instance.v1.InstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
           "type": "FULL"
         }
       ]

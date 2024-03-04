@@ -169,6 +169,8 @@ module Google
                 rpc :ListInstanceConfigOperations, ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstanceConfigOperationsRequest, ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstanceConfigOperationsResponse
                 # Lists all instances in the given project.
                 rpc :ListInstances, ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancesRequest, ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancesResponse
+                # Lists all instance partitions for the given instance.
+                rpc :ListInstancePartitions, ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionsRequest, ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionsResponse
                 # Gets information about a particular instance.
                 rpc :GetInstance, ::Google::Cloud::Spanner::Admin::Instance::V1::GetInstanceRequest, ::Google::Cloud::Spanner::Admin::Instance::V1::Instance
                 # Creates an instance and begins preparing it to begin serving. The
@@ -278,6 +280,115 @@ module Google
                 # permission on the containing Google Cloud Project. Otherwise returns an
                 # empty set of permissions.
                 rpc :TestIamPermissions, ::Google::Iam::V1::TestIamPermissionsRequest, ::Google::Iam::V1::TestIamPermissionsResponse
+                # Gets information about a particular instance partition.
+                rpc :GetInstancePartition, ::Google::Cloud::Spanner::Admin::Instance::V1::GetInstancePartitionRequest, ::Google::Cloud::Spanner::Admin::Instance::V1::InstancePartition
+                # Creates an instance partition and begins preparing it to be used. The
+                # returned [long-running operation][google.longrunning.Operation]
+                # can be used to track the progress of preparing the new instance partition.
+                # The instance partition name is assigned by the caller. If the named
+                # instance partition already exists, `CreateInstancePartition` returns
+                # `ALREADY_EXISTS`.
+                #
+                # Immediately upon completion of this request:
+                #
+                #   * The instance partition is readable via the API, with all requested
+                #     attributes but no allocated resources. Its state is `CREATING`.
+                #
+                # Until completion of the returned operation:
+                #
+                #   * Cancelling the operation renders the instance partition immediately
+                #     unreadable via the API.
+                #   * The instance partition can be deleted.
+                #   * All other attempts to modify the instance partition are rejected.
+                #
+                # Upon completion of the returned operation:
+                #
+                #   * Billing for all successfully-allocated resources begins (some types
+                #     may have lower than the requested levels).
+                #   * Databases can start using this instance partition.
+                #   * The instance partition's allocated resource levels are readable via the
+                #     API.
+                #   * The instance partition's state becomes `READY`.
+                #
+                # The returned [long-running operation][google.longrunning.Operation] will
+                # have a name of the format
+                # `<instance_partition_name>/operations/<operation_id>` and can be used to
+                # track creation of the instance partition.  The
+                # [metadata][google.longrunning.Operation.metadata] field type is
+                # [CreateInstancePartitionMetadata][google.spanner.admin.instance.v1.CreateInstancePartitionMetadata].
+                # The [response][google.longrunning.Operation.response] field type is
+                # [InstancePartition][google.spanner.admin.instance.v1.InstancePartition], if
+                # successful.
+                rpc :CreateInstancePartition, ::Google::Cloud::Spanner::Admin::Instance::V1::CreateInstancePartitionRequest, ::Google::Longrunning::Operation
+                # Deletes an existing instance partition. Requires that the
+                # instance partition is not used by any database or backup and is not the
+                # default instance partition of an instance.
+                #
+                # Authorization requires `spanner.instancePartitions.delete` permission on
+                # the resource
+                # [name][google.spanner.admin.instance.v1.InstancePartition.name].
+                rpc :DeleteInstancePartition, ::Google::Cloud::Spanner::Admin::Instance::V1::DeleteInstancePartitionRequest, ::Google::Protobuf::Empty
+                # Updates an instance partition, and begins allocating or releasing resources
+                # as requested. The returned [long-running
+                # operation][google.longrunning.Operation] can be used to track the
+                # progress of updating the instance partition. If the named instance
+                # partition does not exist, returns `NOT_FOUND`.
+                #
+                # Immediately upon completion of this request:
+                #
+                #   * For resource types for which a decrease in the instance partition's
+                #   allocation has been requested, billing is based on the newly-requested
+                #   level.
+                #
+                # Until completion of the returned operation:
+                #
+                #   * Cancelling the operation sets its metadata's
+                #     [cancel_time][google.spanner.admin.instance.v1.UpdateInstancePartitionMetadata.cancel_time],
+                #     and begins restoring resources to their pre-request values. The
+                #     operation is guaranteed to succeed at undoing all resource changes,
+                #     after which point it terminates with a `CANCELLED` status.
+                #   * All other attempts to modify the instance partition are rejected.
+                #   * Reading the instance partition via the API continues to give the
+                #     pre-request resource levels.
+                #
+                # Upon completion of the returned operation:
+                #
+                #   * Billing begins for all successfully-allocated resources (some types
+                #     may have lower than the requested levels).
+                #   * All newly-reserved resources are available for serving the instance
+                #     partition's tables.
+                #   * The instance partition's new resource levels are readable via the API.
+                #
+                # The returned [long-running operation][google.longrunning.Operation] will
+                # have a name of the format
+                # `<instance_partition_name>/operations/<operation_id>` and can be used to
+                # track the instance partition modification. The
+                # [metadata][google.longrunning.Operation.metadata] field type is
+                # [UpdateInstancePartitionMetadata][google.spanner.admin.instance.v1.UpdateInstancePartitionMetadata].
+                # The [response][google.longrunning.Operation.response] field type is
+                # [InstancePartition][google.spanner.admin.instance.v1.InstancePartition], if
+                # successful.
+                #
+                # Authorization requires `spanner.instancePartitions.update` permission on
+                # the resource
+                # [name][google.spanner.admin.instance.v1.InstancePartition.name].
+                rpc :UpdateInstancePartition, ::Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstancePartitionRequest, ::Google::Longrunning::Operation
+                # Lists instance partition [long-running
+                # operations][google.longrunning.Operation] in the given instance.
+                # An instance partition operation has a name of the form
+                # `projects/<project>/instances/<instance>/instancePartitions/<instance_partition>/operations/<operation>`.
+                # The long-running operation
+                # [metadata][google.longrunning.Operation.metadata] field type
+                # `metadata.type_url` describes the type of the metadata. Operations returned
+                # include those that have completed/failed/canceled within the last 7 days,
+                # and pending operations. Operations returned are ordered by
+                # `operation.metadata.value.start_time` in descending order starting from the
+                # most recently started operation.
+                #
+                # Authorization requires `spanner.instancePartitionOperations.list`
+                # permission on the resource
+                # [parent][google.spanner.admin.instance.v1.ListInstancePartitionOperationsRequest.parent].
+                rpc :ListInstancePartitionOperations, ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionOperationsRequest, ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionOperationsResponse
               end
 
               Stub = Service.rpc_stub_class
