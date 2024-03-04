@@ -64,6 +64,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
 
     # Create request parameters for a server streaming method.
     table_name = "hello world"
+    authorized_view_name = "hello world"
     app_profile_id = "hello world"
     rows = {}
     filter = {}
@@ -75,6 +76,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       assert_equal :read_rows, name
       assert_kind_of ::Google::Cloud::Bigtable::V2::ReadRowsRequest, request
       assert_equal "hello world", request["table_name"]
+      assert_equal "hello world", request["authorized_view_name"]
       assert_equal "hello world", request["app_profile_id"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigtable::V2::RowSet), request["rows"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigtable::V2::RowFilter), request["filter"]
@@ -91,7 +93,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.read_rows({ table_name: table_name, app_profile_id: app_profile_id, rows: rows, filter: filter, rows_limit: rows_limit, request_stats_view: request_stats_view, reversed: reversed }) do |response, operation|
+      client.read_rows({ table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, rows: rows, filter: filter, rows_limit: rows_limit, request_stats_view: request_stats_view, reversed: reversed }) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::ReadRowsResponse, r
@@ -100,7 +102,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use named arguments
-      client.read_rows table_name: table_name, app_profile_id: app_profile_id, rows: rows, filter: filter, rows_limit: rows_limit, request_stats_view: request_stats_view, reversed: reversed do |response, operation|
+      client.read_rows table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, rows: rows, filter: filter, rows_limit: rows_limit, request_stats_view: request_stats_view, reversed: reversed do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::ReadRowsResponse, r
@@ -109,7 +111,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.read_rows ::Google::Cloud::Bigtable::V2::ReadRowsRequest.new(table_name: table_name, app_profile_id: app_profile_id, rows: rows, filter: filter, rows_limit: rows_limit, request_stats_view: request_stats_view, reversed: reversed) do |response, operation|
+      client.read_rows ::Google::Cloud::Bigtable::V2::ReadRowsRequest.new(table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, rows: rows, filter: filter, rows_limit: rows_limit, request_stats_view: request_stats_view, reversed: reversed) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::ReadRowsResponse, r
@@ -118,7 +120,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use hash object with options
-      client.read_rows({ table_name: table_name, app_profile_id: app_profile_id, rows: rows, filter: filter, rows_limit: rows_limit, request_stats_view: request_stats_view, reversed: reversed }, grpc_options) do |response, operation|
+      client.read_rows({ table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, rows: rows, filter: filter, rows_limit: rows_limit, request_stats_view: request_stats_view, reversed: reversed }, grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::ReadRowsResponse, r
@@ -127,7 +129,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.read_rows(::Google::Cloud::Bigtable::V2::ReadRowsRequest.new(table_name: table_name, app_profile_id: app_profile_id, rows: rows, filter: filter, rows_limit: rows_limit, request_stats_view: request_stats_view, reversed: reversed), grpc_options) do |response, operation|
+      client.read_rows(::Google::Cloud::Bigtable::V2::ReadRowsRequest.new(table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, rows: rows, filter: filter, rows_limit: rows_limit, request_stats_view: request_stats_view, reversed: reversed), grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::ReadRowsResponse, r
@@ -149,12 +151,14 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
 
     # Create request parameters for a server streaming method.
     table_name = "hello world"
+    authorized_view_name = "hello world"
     app_profile_id = "hello world"
 
     sample_row_keys_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
       assert_equal :sample_row_keys, name
       assert_kind_of ::Google::Cloud::Bigtable::V2::SampleRowKeysRequest, request
       assert_equal "hello world", request["table_name"]
+      assert_equal "hello world", request["authorized_view_name"]
       assert_equal "hello world", request["app_profile_id"]
       refute_nil options
     end
@@ -166,7 +170,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.sample_row_keys({ table_name: table_name, app_profile_id: app_profile_id }) do |response, operation|
+      client.sample_row_keys({ table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id }) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::SampleRowKeysResponse, r
@@ -175,7 +179,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use named arguments
-      client.sample_row_keys table_name: table_name, app_profile_id: app_profile_id do |response, operation|
+      client.sample_row_keys table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::SampleRowKeysResponse, r
@@ -184,7 +188,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.sample_row_keys ::Google::Cloud::Bigtable::V2::SampleRowKeysRequest.new(table_name: table_name, app_profile_id: app_profile_id) do |response, operation|
+      client.sample_row_keys ::Google::Cloud::Bigtable::V2::SampleRowKeysRequest.new(table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::SampleRowKeysResponse, r
@@ -193,7 +197,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use hash object with options
-      client.sample_row_keys({ table_name: table_name, app_profile_id: app_profile_id }, grpc_options) do |response, operation|
+      client.sample_row_keys({ table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id }, grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::SampleRowKeysResponse, r
@@ -202,7 +206,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.sample_row_keys(::Google::Cloud::Bigtable::V2::SampleRowKeysRequest.new(table_name: table_name, app_profile_id: app_profile_id), grpc_options) do |response, operation|
+      client.sample_row_keys(::Google::Cloud::Bigtable::V2::SampleRowKeysRequest.new(table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id), grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::SampleRowKeysResponse, r
@@ -224,6 +228,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
 
     # Create request parameters for a unary method.
     table_name = "hello world"
+    authorized_view_name = "hello world"
     app_profile_id = "hello world"
     row_key = "hello world"
     mutations = [{}]
@@ -232,6 +237,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       assert_equal :mutate_row, name
       assert_kind_of ::Google::Cloud::Bigtable::V2::MutateRowRequest, request
       assert_equal "hello world", request["table_name"]
+      assert_equal "hello world", request["authorized_view_name"]
       assert_equal "hello world", request["app_profile_id"]
       assert_equal "hello world", request["row_key"]
       assert_kind_of ::Google::Cloud::Bigtable::V2::Mutation, request["mutations"].first
@@ -245,31 +251,31 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.mutate_row({ table_name: table_name, app_profile_id: app_profile_id, row_key: row_key, mutations: mutations }) do |response, operation|
+      client.mutate_row({ table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, mutations: mutations }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.mutate_row table_name: table_name, app_profile_id: app_profile_id, row_key: row_key, mutations: mutations do |response, operation|
+      client.mutate_row table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, mutations: mutations do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.mutate_row ::Google::Cloud::Bigtable::V2::MutateRowRequest.new(table_name: table_name, app_profile_id: app_profile_id, row_key: row_key, mutations: mutations) do |response, operation|
+      client.mutate_row ::Google::Cloud::Bigtable::V2::MutateRowRequest.new(table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, mutations: mutations) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.mutate_row({ table_name: table_name, app_profile_id: app_profile_id, row_key: row_key, mutations: mutations }, grpc_options) do |response, operation|
+      client.mutate_row({ table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, mutations: mutations }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.mutate_row(::Google::Cloud::Bigtable::V2::MutateRowRequest.new(table_name: table_name, app_profile_id: app_profile_id, row_key: row_key, mutations: mutations), grpc_options) do |response, operation|
+      client.mutate_row(::Google::Cloud::Bigtable::V2::MutateRowRequest.new(table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, mutations: mutations), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -288,6 +294,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
 
     # Create request parameters for a server streaming method.
     table_name = "hello world"
+    authorized_view_name = "hello world"
     app_profile_id = "hello world"
     entries = [{}]
 
@@ -295,6 +302,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       assert_equal :mutate_rows, name
       assert_kind_of ::Google::Cloud::Bigtable::V2::MutateRowsRequest, request
       assert_equal "hello world", request["table_name"]
+      assert_equal "hello world", request["authorized_view_name"]
       assert_equal "hello world", request["app_profile_id"]
       assert_kind_of ::Google::Cloud::Bigtable::V2::MutateRowsRequest::Entry, request["entries"].first
       refute_nil options
@@ -307,7 +315,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.mutate_rows({ table_name: table_name, app_profile_id: app_profile_id, entries: entries }) do |response, operation|
+      client.mutate_rows({ table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, entries: entries }) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::MutateRowsResponse, r
@@ -316,7 +324,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use named arguments
-      client.mutate_rows table_name: table_name, app_profile_id: app_profile_id, entries: entries do |response, operation|
+      client.mutate_rows table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, entries: entries do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::MutateRowsResponse, r
@@ -325,7 +333,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.mutate_rows ::Google::Cloud::Bigtable::V2::MutateRowsRequest.new(table_name: table_name, app_profile_id: app_profile_id, entries: entries) do |response, operation|
+      client.mutate_rows ::Google::Cloud::Bigtable::V2::MutateRowsRequest.new(table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, entries: entries) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::MutateRowsResponse, r
@@ -334,7 +342,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use hash object with options
-      client.mutate_rows({ table_name: table_name, app_profile_id: app_profile_id, entries: entries }, grpc_options) do |response, operation|
+      client.mutate_rows({ table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, entries: entries }, grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::MutateRowsResponse, r
@@ -343,7 +351,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.mutate_rows(::Google::Cloud::Bigtable::V2::MutateRowsRequest.new(table_name: table_name, app_profile_id: app_profile_id, entries: entries), grpc_options) do |response, operation|
+      client.mutate_rows(::Google::Cloud::Bigtable::V2::MutateRowsRequest.new(table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, entries: entries), grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::MutateRowsResponse, r
@@ -365,6 +373,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
 
     # Create request parameters for a unary method.
     table_name = "hello world"
+    authorized_view_name = "hello world"
     app_profile_id = "hello world"
     row_key = "hello world"
     predicate_filter = {}
@@ -375,6 +384,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       assert_equal :check_and_mutate_row, name
       assert_kind_of ::Google::Cloud::Bigtable::V2::CheckAndMutateRowRequest, request
       assert_equal "hello world", request["table_name"]
+      assert_equal "hello world", request["authorized_view_name"]
       assert_equal "hello world", request["app_profile_id"]
       assert_equal "hello world", request["row_key"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigtable::V2::RowFilter), request["predicate_filter"]
@@ -390,31 +400,31 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.check_and_mutate_row({ table_name: table_name, app_profile_id: app_profile_id, row_key: row_key, predicate_filter: predicate_filter, true_mutations: true_mutations, false_mutations: false_mutations }) do |response, operation|
+      client.check_and_mutate_row({ table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, predicate_filter: predicate_filter, true_mutations: true_mutations, false_mutations: false_mutations }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.check_and_mutate_row table_name: table_name, app_profile_id: app_profile_id, row_key: row_key, predicate_filter: predicate_filter, true_mutations: true_mutations, false_mutations: false_mutations do |response, operation|
+      client.check_and_mutate_row table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, predicate_filter: predicate_filter, true_mutations: true_mutations, false_mutations: false_mutations do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.check_and_mutate_row ::Google::Cloud::Bigtable::V2::CheckAndMutateRowRequest.new(table_name: table_name, app_profile_id: app_profile_id, row_key: row_key, predicate_filter: predicate_filter, true_mutations: true_mutations, false_mutations: false_mutations) do |response, operation|
+      client.check_and_mutate_row ::Google::Cloud::Bigtable::V2::CheckAndMutateRowRequest.new(table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, predicate_filter: predicate_filter, true_mutations: true_mutations, false_mutations: false_mutations) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.check_and_mutate_row({ table_name: table_name, app_profile_id: app_profile_id, row_key: row_key, predicate_filter: predicate_filter, true_mutations: true_mutations, false_mutations: false_mutations }, grpc_options) do |response, operation|
+      client.check_and_mutate_row({ table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, predicate_filter: predicate_filter, true_mutations: true_mutations, false_mutations: false_mutations }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.check_and_mutate_row(::Google::Cloud::Bigtable::V2::CheckAndMutateRowRequest.new(table_name: table_name, app_profile_id: app_profile_id, row_key: row_key, predicate_filter: predicate_filter, true_mutations: true_mutations, false_mutations: false_mutations), grpc_options) do |response, operation|
+      client.check_and_mutate_row(::Google::Cloud::Bigtable::V2::CheckAndMutateRowRequest.new(table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, predicate_filter: predicate_filter, true_mutations: true_mutations, false_mutations: false_mutations), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -493,6 +503,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
 
     # Create request parameters for a unary method.
     table_name = "hello world"
+    authorized_view_name = "hello world"
     app_profile_id = "hello world"
     row_key = "hello world"
     rules = [{}]
@@ -501,6 +512,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       assert_equal :read_modify_write_row, name
       assert_kind_of ::Google::Cloud::Bigtable::V2::ReadModifyWriteRowRequest, request
       assert_equal "hello world", request["table_name"]
+      assert_equal "hello world", request["authorized_view_name"]
       assert_equal "hello world", request["app_profile_id"]
       assert_equal "hello world", request["row_key"]
       assert_kind_of ::Google::Cloud::Bigtable::V2::ReadModifyWriteRule, request["rules"].first
@@ -514,31 +526,31 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.read_modify_write_row({ table_name: table_name, app_profile_id: app_profile_id, row_key: row_key, rules: rules }) do |response, operation|
+      client.read_modify_write_row({ table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, rules: rules }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.read_modify_write_row table_name: table_name, app_profile_id: app_profile_id, row_key: row_key, rules: rules do |response, operation|
+      client.read_modify_write_row table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, rules: rules do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.read_modify_write_row ::Google::Cloud::Bigtable::V2::ReadModifyWriteRowRequest.new(table_name: table_name, app_profile_id: app_profile_id, row_key: row_key, rules: rules) do |response, operation|
+      client.read_modify_write_row ::Google::Cloud::Bigtable::V2::ReadModifyWriteRowRequest.new(table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, rules: rules) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.read_modify_write_row({ table_name: table_name, app_profile_id: app_profile_id, row_key: row_key, rules: rules }, grpc_options) do |response, operation|
+      client.read_modify_write_row({ table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, rules: rules }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.read_modify_write_row(::Google::Cloud::Bigtable::V2::ReadModifyWriteRowRequest.new(table_name: table_name, app_profile_id: app_profile_id, row_key: row_key, rules: rules), grpc_options) do |response, operation|
+      client.read_modify_write_row(::Google::Cloud::Bigtable::V2::ReadModifyWriteRowRequest.new(table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, rules: rules), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

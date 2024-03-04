@@ -196,15 +196,21 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload read_rows(table_name: nil, app_profile_id: nil, rows: nil, filter: nil, rows_limit: nil, request_stats_view: nil, reversed: nil)
+            # @overload read_rows(table_name: nil, authorized_view_name: nil, app_profile_id: nil, rows: nil, filter: nil, rows_limit: nil, request_stats_view: nil, reversed: nil)
             #   Pass arguments to `read_rows` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param table_name [::String]
-            #     Required. The unique name of the table from which to read.
+            #     Optional. The unique name of the table from which to read.
+            #
             #     Values are of the form
             #     `projects/<project>/instances/<instance>/tables/<table>`.
+            #   @param authorized_view_name [::String]
+            #     Optional. The unique name of the AuthorizedView from which to read.
+            #
+            #     Values are of the form
+            #     `projects/<project>/instances/<instance>/tables/<table>/authorizedViews/<authorized_view>`.
             #   @param app_profile_id [::String]
             #     This value specifies routing for replication. If not specified, the
             #     "default" application profile will be used.
@@ -284,6 +290,10 @@ module Google
               if request.app_profile_id && !request.app_profile_id.empty?
                 header_params["app_profile_id"] = request.app_profile_id
               end
+              if request.authorized_view_name &&
+                 %r{^projects/[^/]+/instances/[^/]+/tables/[^/]+/authorizedViews/[^/]+/?$}.match?(request.authorized_view_name)
+                header_params["authorized_view_name"] = request.authorized_view_name
+              end
 
               request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
@@ -320,15 +330,22 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload sample_row_keys(table_name: nil, app_profile_id: nil)
+            # @overload sample_row_keys(table_name: nil, authorized_view_name: nil, app_profile_id: nil)
             #   Pass arguments to `sample_row_keys` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param table_name [::String]
-            #     Required. The unique name of the table from which to sample row keys.
+            #     Optional. The unique name of the table from which to sample row keys.
+            #
             #     Values are of the form
             #     `projects/<project>/instances/<instance>/tables/<table>`.
+            #   @param authorized_view_name [::String]
+            #     Optional. The unique name of the AuthorizedView from which to sample row
+            #     keys.
+            #
+            #     Values are of the form
+            #     `projects/<project>/instances/<instance>/tables/<table>/authorizedViews/<authorized_view>`.
             #   @param app_profile_id [::String]
             #     This value specifies routing for replication. If not specified, the
             #     "default" application profile will be used.
@@ -384,6 +401,10 @@ module Google
               if request.app_profile_id && !request.app_profile_id.empty?
                 header_params["app_profile_id"] = request.app_profile_id
               end
+              if request.authorized_view_name &&
+                 %r{^projects/[^/]+/instances/[^/]+/tables/[^/]+/authorizedViews/[^/]+/?$}.match?(request.authorized_view_name)
+                header_params["authorized_view_name"] = request.authorized_view_name
+              end
 
               request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
@@ -418,15 +439,23 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload mutate_row(table_name: nil, app_profile_id: nil, row_key: nil, mutations: nil)
+            # @overload mutate_row(table_name: nil, authorized_view_name: nil, app_profile_id: nil, row_key: nil, mutations: nil)
             #   Pass arguments to `mutate_row` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param table_name [::String]
-            #     Required. The unique name of the table to which the mutation should be
-            #     applied. Values are of the form
+            #     Optional. The unique name of the table to which the mutation should be
+            #     applied.
+            #
+            #     Values are of the form
             #     `projects/<project>/instances/<instance>/tables/<table>`.
+            #   @param authorized_view_name [::String]
+            #     Optional. The unique name of the AuthorizedView to which the mutation
+            #     should be applied.
+            #
+            #     Values are of the form
+            #     `projects/<project>/instances/<instance>/tables/<table>/authorizedViews/<authorized_view>`.
             #   @param app_profile_id [::String]
             #     This value specifies routing for replication. If not specified, the
             #     "default" application profile will be used.
@@ -485,6 +514,10 @@ module Google
               if request.app_profile_id && !request.app_profile_id.empty?
                 header_params["app_profile_id"] = request.app_profile_id
               end
+              if request.authorized_view_name &&
+                 %r{^projects/[^/]+/instances/[^/]+/tables/[^/]+/authorizedViews/[^/]+/?$}.match?(request.authorized_view_name)
+                header_params["authorized_view_name"] = request.authorized_view_name
+              end
 
               request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
@@ -520,14 +553,23 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload mutate_rows(table_name: nil, app_profile_id: nil, entries: nil)
+            # @overload mutate_rows(table_name: nil, authorized_view_name: nil, app_profile_id: nil, entries: nil)
             #   Pass arguments to `mutate_rows` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param table_name [::String]
-            #     Required. The unique name of the table to which the mutations should be
+            #     Optional. The unique name of the table to which the mutations should be
             #     applied.
+            #
+            #     Values are of the form
+            #     `projects/<project>/instances/<instance>/tables/<table>`.
+            #   @param authorized_view_name [::String]
+            #     Optional. The unique name of the AuthorizedView to which the mutations
+            #     should be applied.
+            #
+            #     Values are of the form
+            #     `projects/<project>/instances/<instance>/tables/<table>/authorizedViews/<authorized_view>`.
             #   @param app_profile_id [::String]
             #     This value specifies routing for replication. If not specified, the
             #     "default" application profile will be used.
@@ -589,6 +631,10 @@ module Google
               if request.app_profile_id && !request.app_profile_id.empty?
                 header_params["app_profile_id"] = request.app_profile_id
               end
+              if request.authorized_view_name &&
+                 %r{^projects/[^/]+/instances/[^/]+/tables/[^/]+/authorizedViews/[^/]+/?$}.match?(request.authorized_view_name)
+                header_params["authorized_view_name"] = request.authorized_view_name
+              end
 
               request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
@@ -622,15 +668,23 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload check_and_mutate_row(table_name: nil, app_profile_id: nil, row_key: nil, predicate_filter: nil, true_mutations: nil, false_mutations: nil)
+            # @overload check_and_mutate_row(table_name: nil, authorized_view_name: nil, app_profile_id: nil, row_key: nil, predicate_filter: nil, true_mutations: nil, false_mutations: nil)
             #   Pass arguments to `check_and_mutate_row` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param table_name [::String]
-            #     Required. The unique name of the table to which the conditional mutation
-            #     should be applied. Values are of the form
+            #     Optional. The unique name of the table to which the conditional mutation
+            #     should be applied.
+            #
+            #     Values are of the form
             #     `projects/<project>/instances/<instance>/tables/<table>`.
+            #   @param authorized_view_name [::String]
+            #     Optional. The unique name of the AuthorizedView to which the conditional
+            #     mutation should be applied.
+            #
+            #     Values are of the form
+            #     `projects/<project>/instances/<instance>/tables/<table>/authorizedViews/<authorized_view>`.
             #   @param app_profile_id [::String]
             #     This value specifies routing for replication. If not specified, the
             #     "default" application profile will be used.
@@ -702,6 +756,10 @@ module Google
               end
               if request.app_profile_id && !request.app_profile_id.empty?
                 header_params["app_profile_id"] = request.app_profile_id
+              end
+              if request.authorized_view_name &&
+                 %r{^projects/[^/]+/instances/[^/]+/tables/[^/]+/authorizedViews/[^/]+/?$}.match?(request.authorized_view_name)
+                header_params["authorized_view_name"] = request.authorized_view_name
               end
 
               request_params_header = URI.encode_www_form header_params
@@ -835,15 +893,23 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload read_modify_write_row(table_name: nil, app_profile_id: nil, row_key: nil, rules: nil)
+            # @overload read_modify_write_row(table_name: nil, authorized_view_name: nil, app_profile_id: nil, row_key: nil, rules: nil)
             #   Pass arguments to `read_modify_write_row` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param table_name [::String]
-            #     Required. The unique name of the table to which the read/modify/write rules
-            #     should be applied. Values are of the form
+            #     Optional. The unique name of the table to which the read/modify/write rules
+            #     should be applied.
+            #
+            #     Values are of the form
             #     `projects/<project>/instances/<instance>/tables/<table>`.
+            #   @param authorized_view_name [::String]
+            #     Optional. The unique name of the AuthorizedView to which the
+            #     read/modify/write rules should be applied.
+            #
+            #     Values are of the form
+            #     `projects/<project>/instances/<instance>/tables/<table>/authorizedViews/<authorized_view>`.
             #   @param app_profile_id [::String]
             #     This value specifies routing for replication. If not specified, the
             #     "default" application profile will be used.
@@ -902,6 +968,10 @@ module Google
               end
               if request.app_profile_id && !request.app_profile_id.empty?
                 header_params["app_profile_id"] = request.app_profile_id
+              end
+              if request.authorized_view_name &&
+                 %r{^projects/[^/]+/instances/[^/]+/tables/[^/]+/authorizedViews/[^/]+/?$}.match?(request.authorized_view_name)
+                header_params["authorized_view_name"] = request.authorized_view_name
               end
 
               request_params_header = URI.encode_www_form header_params
