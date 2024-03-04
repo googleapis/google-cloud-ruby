@@ -473,7 +473,7 @@ module Google
               #   @param project [::String]
               #     Project ID for this request.
               #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::ExternalVpnGateway>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

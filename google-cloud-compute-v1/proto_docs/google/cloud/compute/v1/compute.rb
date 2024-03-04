@@ -959,7 +959,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] service_project_number
         #   @return [::Integer]
         #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
@@ -989,7 +989,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] service_project_number
         #   @return [::Integer]
         #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
@@ -1019,7 +1019,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] service_project_number
         #   @return [::Integer]
         #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
@@ -1049,7 +1049,7 @@ module Google
         #     Name of the project scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] service_project_number
         #   @return [::Integer]
         #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
@@ -1079,7 +1079,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] service_project_number
         #   @return [::Integer]
         #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
@@ -1109,7 +1109,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] service_project_number
         #   @return [::Integer]
         #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
@@ -1139,7 +1139,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] service_project_number
         #   @return [::Integer]
         #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
@@ -1169,7 +1169,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] service_project_number
         #   @return [::Integer]
         #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
@@ -1199,7 +1199,7 @@ module Google
         #     Name of the project scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] service_project_number
         #   @return [::Integer]
         #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
@@ -1229,7 +1229,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] service_project_number
         #   @return [::Integer]
         #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
@@ -1259,7 +1259,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] service_project_number
         #   @return [::Integer]
         #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
@@ -1289,7 +1289,7 @@ module Google
         #     Name of the project scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] service_project_number
         #   @return [::Integer]
         #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
@@ -1319,11 +1319,41 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] service_project_number
         #   @return [::Integer]
         #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
         class AggregatedListInstancesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for InstantSnapshots.AggregatedList. See the method description for details.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+        # @!attribute [rw] include_all_scopes
+        #   @return [::Boolean]
+        #     Indicates whether every visible scope for each scope type (zone, region, global) should be included in the response. For new resource types added after this field, the flag has no effect as new resource types will always include every visible scope for each scope type in response. For resource types which predate this field, if this flag is omitted or false, only scopes of the scope types where the resource type is expected to be found will be included.
+        # @!attribute [rw] max_results
+        #   @return [::Integer]
+        #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] return_partial_success
+        #   @return [::Boolean]
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+        # @!attribute [rw] service_project_number
+        #   @return [::Integer]
+        #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
+        class AggregatedListInstantSnapshotsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1349,7 +1379,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] service_project_number
         #   @return [::Integer]
         #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
@@ -1379,7 +1409,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] service_project_number
         #   @return [::Integer]
         #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
@@ -1409,7 +1439,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] service_project_number
         #   @return [::Integer]
         #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
@@ -1439,7 +1469,7 @@ module Google
         #     Name of the project scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] service_project_number
         #   @return [::Integer]
         #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
@@ -1469,7 +1499,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] service_project_number
         #   @return [::Integer]
         #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
@@ -1499,7 +1529,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] service_project_number
         #   @return [::Integer]
         #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
@@ -1529,7 +1559,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] service_project_number
         #   @return [::Integer]
         #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
@@ -1559,7 +1589,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] service_project_number
         #   @return [::Integer]
         #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
@@ -1589,7 +1619,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] service_project_number
         #   @return [::Integer]
         #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
@@ -1619,7 +1649,7 @@ module Google
         #     Name of the project scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] service_project_number
         #   @return [::Integer]
         #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
@@ -1649,7 +1679,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] service_project_number
         #   @return [::Integer]
         #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
@@ -1679,7 +1709,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] service_project_number
         #   @return [::Integer]
         #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
@@ -1709,7 +1739,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] service_project_number
         #   @return [::Integer]
         #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
@@ -1739,7 +1769,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] service_project_number
         #   @return [::Integer]
         #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
@@ -1769,7 +1799,7 @@ module Google
         #     Name of the project scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] service_project_number
         #   @return [::Integer]
         #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
@@ -1799,7 +1829,7 @@ module Google
         #     Name of the project scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] service_project_number
         #   @return [::Integer]
         #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
@@ -1829,7 +1859,7 @@ module Google
         #     Name of the project scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] service_project_number
         #   @return [::Integer]
         #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
@@ -1859,7 +1889,7 @@ module Google
         #     Name of the project scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] service_project_number
         #   @return [::Integer]
         #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
@@ -1889,7 +1919,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] service_project_number
         #   @return [::Integer]
         #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
@@ -1919,7 +1949,7 @@ module Google
         #     Name of the project scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] service_project_number
         #   @return [::Integer]
         #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
@@ -1949,7 +1979,7 @@ module Google
         #     Name of the project scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] service_project_number
         #   @return [::Integer]
         #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
@@ -1979,7 +2009,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] service_project_number
         #   @return [::Integer]
         #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
@@ -2009,7 +2039,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] service_project_number
         #   @return [::Integer]
         #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
@@ -2039,7 +2069,7 @@ module Google
         #     Name of the project scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] service_project_number
         #   @return [::Integer]
         #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
@@ -2069,7 +2099,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] service_project_number
         #   @return [::Integer]
         #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
@@ -2099,7 +2129,7 @@ module Google
         #     Name of the project scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] service_project_number
         #   @return [::Integer]
         #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
@@ -2129,7 +2159,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] service_project_number
         #   @return [::Integer]
         #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
@@ -2159,7 +2189,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] service_project_number
         #   @return [::Integer]
         #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
@@ -2650,7 +2680,7 @@ module Google
         #     Indicates how many IOPS to provision for the disk. This sets the number of I/O operations per second that the disk can handle. Values must be between 10,000 and 120,000. For more details, see the Extreme persistent disk documentation.
         # @!attribute [rw] provisioned_throughput
         #   @return [::Integer]
-        #     Indicates how much throughput to provision for the disk. This sets the number of throughput mb per second that the disk can handle. Values must be between 1 and 7,124.
+        #     Indicates how much throughput to provision for the disk. This sets the number of throughput mb per second that the disk can handle. Values must greater than or equal to 1.
         # @!attribute [rw] replica_zones
         #   @return [::Array<::String>]
         #     Required for each regional disk associated with the instance. Specify the URLs of the zones where the disk should be replicated to. You must provide exactly two replica zones, and one zone must be the same as the instance zone.
@@ -3233,6 +3263,10 @@ module Google
         # @!attribute [rw] max_utilization
         #   @return [::Float]
         #     Optional parameter to define a target capacity for the UTILIZATION balancing mode. The valid range is [0.0, 1.0]. For usage guidelines, see Utilization balancing mode.
+        # @!attribute [rw] preference
+        #   @return [::String]
+        #     This field indicates whether this backend should be fully utilized before sending traffic to backends with default preference. The possible values are: - PREFERRED: Backends with this preference level will be filled up to their capacity limits first, based on RTT. - DEFAULT: If preferred backends don't have enough capacity, backends in this layer would be used and traffic would be assigned based on the load balancing algorithm you use. This is the default
+        #     Check the Preference enum for the list of possible values.
         class Backend
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3250,6 +3284,21 @@ module Google
 
             # Balance based on the backend utilization.
             UTILIZATION = 157_008_386
+          end
+
+          # This field indicates whether this backend should be fully utilized before sending traffic to backends with default preference. The possible values are: - PREFERRED: Backends with this preference level will be filled up to their capacity limits first, based on RTT. - DEFAULT: If preferred backends don't have enough capacity, backends in this layer would be used and traffic would be assigned based on the load balancing algorithm you use. This is the default
+          module Preference
+            # A value indicating that the enum field is not set.
+            UNDEFINED_PREFERENCE = 0
+
+            # No preference.
+            DEFAULT = 115_302_945
+
+            # If preference is unspecified, we set it to the DEFAULT value
+            PREFERENCE_UNSPECIFIED = 496_219_571
+
+            # Traffic will be sent to this backend first.
+            PREFERRED = 418_847_841
           end
         end
 
@@ -3539,6 +3588,9 @@ module Google
         # @!attribute [rw] service_bindings
         #   @return [::Array<::String>]
         #     URLs of networkservices.ServiceBinding resources. Can only be set if load balancing scheme is INTERNAL_SELF_MANAGED. If set, lists of backends and health checks must be both empty.
+        # @!attribute [rw] service_lb_policy
+        #   @return [::String]
+        #     URL to networkservices.ServiceLbPolicy resource. Can only be set if load balancing scheme is EXTERNAL, EXTERNAL_MANAGED, INTERNAL_MANAGED or INTERNAL_SELF_MANAGED and the scope is global.
         # @!attribute [rw] session_affinity
         #   @return [::String]
         #     Type of session affinity to use. The default is NONE. Only NONE and HEADER_FIELD are supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true. For more details, see: [Session Affinity](https://cloud.google.com/load-balancing/docs/backend-service#session_affinity).
@@ -5508,6 +5560,24 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for InstantSnapshots.Delete. See the method description for details.
+        # @!attribute [rw] instant_snapshot
+        #   @return [::String]
+        #     Name of the InstantSnapshot resource to delete.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     The name of the zone for this request.
+        class DeleteInstantSnapshotRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for InterconnectAttachments.Delete. See the method description for details.
         # @!attribute [rw] interconnect_attachment
         #   @return [::String]
@@ -5921,6 +5991,24 @@ module Google
         #   @return [::String]
         #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
         class DeleteRegionInstanceTemplateRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionInstantSnapshots.Delete. See the method description for details.
+        # @!attribute [rw] instant_snapshot
+        #   @return [::String]
+        #     Name of the InstantSnapshot resource to delete.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The name of the region for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        class DeleteRegionInstantSnapshotRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -6771,7 +6859,7 @@ module Google
         #     Indicates how many IOPS to provision for the disk. This sets the number of I/O operations per second that the disk can handle. Values must be between 10,000 and 120,000. For more details, see the Extreme persistent disk documentation.
         # @!attribute [rw] provisioned_throughput
         #   @return [::Integer]
-        #     Indicates how much throughput to provision for the disk. This sets the number of throughput mb per second that the disk can handle. Values must be between 1 and 7,124.
+        #     Indicates how much throughput to provision for the disk. This sets the number of throughput mb per second that the disk can handle. Values must be greater than or equal to 1.
         # @!attribute [rw] region
         #   @return [::String]
         #     [Output Only] URL of the region where the disk resides. Only applicable for regional resources. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.
@@ -6817,6 +6905,12 @@ module Google
         # @!attribute [rw] source_image_id
         #   @return [::String]
         #     [Output Only] The ID value of the image used to create this disk. This value identifies the exact image that was used to create this persistent disk. For example, if you created the persistent disk from an image that was later deleted and recreated under the same name, the source image ID would identify the exact version of the image that was used.
+        # @!attribute [rw] source_instant_snapshot
+        #   @return [::String]
+        #     The source instant snapshot used to create this disk. You can provide this as a partial or full URL to the resource. For example, the following are valid values: - https://www.googleapis.com/compute/v1/projects/project/zones/zone /instantSnapshots/instantSnapshot - projects/project/zones/zone/instantSnapshots/instantSnapshot - zones/zone/instantSnapshots/instantSnapshot
+        # @!attribute [rw] source_instant_snapshot_id
+        #   @return [::String]
+        #     [Output Only] The unique ID of the instant snapshot used to create this disk. This value identifies the exact instant snapshot that was used to create this persistent disk. For example, if you created the persistent disk from an instant snapshot that was later deleted and recreated under the same name, the source instant snapshot ID would identify the exact version of the instant snapshot that was used.
         # @!attribute [rw] source_snapshot
         #   @return [::String]
         #     The source snapshot used to create this disk. You can provide this as a partial or full URL to the resource. For example, the following are valid values: - https://www.googleapis.com/compute/v1/projects/project /global/snapshots/snapshot - projects/project/global/snapshots/snapshot - global/snapshots/snapshot
@@ -7585,6 +7679,9 @@ module Google
         # @!attribute [rw] ip_address
         #   @return [::String]
         #     IP address of the interface in the external VPN gateway. Only IPv4 is supported. This IP address can be either from your on-premise gateway or another Cloud provider's VPN gateway, it cannot be an IP address from Google Compute Engine.
+        # @!attribute [rw] ipv6_address
+        #   @return [::String]
+        #     IPv6 address of the interface in the external VPN gateway. This IPv6 address can be either from your on-premise gateway or another Cloud provider's VPN gateway, it cannot be an IP address from Google Compute Engine. Must specify an IPv6 address (not IPV4-mapped) using any format described in RFC 4291 (e.g. 2001:db8:0:0:2d9:51:0:0). The output format is RFC 5952 format (e.g. 2001:db8::2d9:51:0:0).
         class ExternalVpnGatewayInterface
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -8876,6 +8973,24 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for InstantSnapshots.GetIamPolicy. See the method description for details.
+        # @!attribute [rw] options_requested_policy_version
+        #   @return [::Integer]
+        #     Requested IAM Policy version.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     The name of the zone for this request.
+        class GetIamPolicyInstantSnapshotRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for Licenses.GetIamPolicy. See the method description for details.
         # @!attribute [rw] options_requested_policy_version
         #   @return [::Integer]
@@ -9007,6 +9122,24 @@ module Google
         #   @return [::String]
         #     Name or id of the resource for this request.
         class GetIamPolicyRegionDiskRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionInstantSnapshots.GetIamPolicy. See the method description for details.
+        # @!attribute [rw] options_requested_policy_version
+        #   @return [::Integer]
+        #     Requested IAM Policy version.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The name of the region for this request.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        class GetIamPolicyRegionInstantSnapshotRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -9200,6 +9333,21 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for InstantSnapshots.Get. See the method description for details.
+        # @!attribute [rw] instant_snapshot
+        #   @return [::String]
+        #     Name of the InstantSnapshot resource to return.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     The name of the zone for this request.
+        class GetInstantSnapshotRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for InterconnectAttachments.Get. See the method description for details.
         # @!attribute [rw] interconnect_attachment
         #   @return [::String]
@@ -9356,7 +9504,7 @@ module Google
         #     Name of the region for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] router
         #   @return [::String]
         #     Name of the Router resource to query for Nat Mapping information of VM endpoints.
@@ -9676,6 +9824,21 @@ module Google
         #   @return [::String]
         #     The name of the region for this request.
         class GetRegionInstanceTemplateRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionInstantSnapshots.Get. See the method description for details.
+        # @!attribute [rw] instant_snapshot
+        #   @return [::String]
+        #     Name of the InstantSnapshot resource to return.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The name of the region for this request.
+        class GetRegionInstantSnapshotRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -10334,7 +10497,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class GetXpnResourcesProjectsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -11875,6 +12038,24 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for InstantSnapshots.Insert. See the method description for details.
+        # @!attribute [rw] instant_snapshot_resource
+        #   @return [::Google::Cloud::Compute::V1::InstantSnapshot]
+        #     The body resource for this request
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     Name of the zone for this request.
+        class InsertInstantSnapshotRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for InterconnectAttachments.Insert. See the method description for details.
         # @!attribute [rw] interconnect_attachment_resource
         #   @return [::Google::Cloud::Compute::V1::InterconnectAttachment]
@@ -12264,6 +12445,24 @@ module Google
         #   @return [::String]
         #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
         class InsertRegionInstanceTemplateRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionInstantSnapshots.Insert. See the method description for details.
+        # @!attribute [rw] instant_snapshot_resource
+        #   @return [::Google::Cloud::Compute::V1::InstantSnapshot]
+        #     The body resource for this request
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        class InsertRegionInstantSnapshotRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -13376,6 +13575,10 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # @!attribute [rw] default_action_on_failure
+        #   @return [::String]
+        #     The action that a MIG performs on a failed or an unhealthy VM. A VM is marked as unhealthy when the application running on that VM fails a health check. Valid values are - REPAIR (default): MIG automatically repairs a failed or an unhealthy VM by recreating it. For more information, see About repairing VMs in a MIG. - DO_NOTHING: MIG does not repair a failed or an unhealthy VM.
+        #     Check the DefaultActionOnFailure enum for the list of possible values.
         # @!attribute [rw] force_update_on_repair
         #   @return [::String]
         #     A bit indicating whether to forcefully apply the group's latest configuration when repairing a VM. Valid options are: - NO (default): If configuration updates are available, they are not forcefully applied during repair. Instead, configuration updates are applied according to the group's update policy. - YES: If configuration updates are available, they are applied during repair.
@@ -13383,6 +13586,18 @@ module Google
         class InstanceGroupManagerInstanceLifecyclePolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The action that a MIG performs on a failed or an unhealthy VM. A VM is marked as unhealthy when the application running on that VM fails a health check. Valid values are - REPAIR (default): MIG automatically repairs a failed or an unhealthy VM by recreating it. For more information, see About repairing VMs in a MIG. - DO_NOTHING: MIG does not repair a failed or an unhealthy VM.
+          module DefaultActionOnFailure
+            # A value indicating that the enum field is not set.
+            UNDEFINED_DEFAULT_ACTION_ON_FAILURE = 0
+
+            # MIG does not repair a failed or an unhealthy VM.
+            DO_NOTHING = 451_307_513
+
+            # (Default) MIG automatically repairs a failed or an unhealthy VM by recreating it. For more information, see About repairing VMs in a MIG.
+            REPAIR = 266_277_773
+          end
 
           # A bit indicating whether to forcefully apply the group's latest configuration when repairing a VM. Valid options are: - NO (default): If configuration updates are available, they are not forcefully applied during repair. Instead, configuration updates are applied according to the group's update policy. - YES: If configuration updates are available, they are applied during repair.
           module ForceUpdateOnRepair
@@ -14472,6 +14687,191 @@ module Google
         #   @return [::Array<::Google::Cloud::Compute::V1::CustomerEncryptionKeyProtectedDisk>]
         #     Array of disks associated with this instance that are protected with a customer-supplied encryption key. In order to start the instance, the disk url and its corresponding key must be provided. If the disk is not protected with a customer-supplied encryption key it should not be specified.
         class InstancesStartWithEncryptionKeyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents a InstantSnapshot resource. You can use instant snapshots to create disk rollback points quickly..
+        # @!attribute [rw] architecture
+        #   @return [::String]
+        #     [Output Only] The architecture of the instant snapshot. Valid values are ARM64 or X86_64.
+        #     Check the Architecture enum for the list of possible values.
+        # @!attribute [rw] creation_timestamp
+        #   @return [::String]
+        #     [Output Only] Creation timestamp in RFC3339 text format.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     An optional description of this resource. Provide this property when you create the resource.
+        # @!attribute [rw] disk_size_gb
+        #   @return [::Integer]
+        #     [Output Only] Size of the source disk, specified in GB.
+        # @!attribute [rw] id
+        #   @return [::Integer]
+        #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
+        # @!attribute [rw] kind
+        #   @return [::String]
+        #     [Output Only] Type of the resource. Always compute#instantSnapshot for InstantSnapshot resources.
+        # @!attribute [rw] label_fingerprint
+        #   @return [::String]
+        #     A fingerprint for the labels being applied to this InstantSnapshot, which is essentially a hash of the labels set used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update labels. You must always provide an up-to-date fingerprint hash in order to update or change labels, otherwise the request will fail with error 412 conditionNotMet. To see the latest fingerprint, make a get() request to retrieve a InstantSnapshot.
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Labels to apply to this InstantSnapshot. These can be later modified by the setLabels method. Label values may be empty.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     [Output Only] URL of the region where the instant snapshot resides. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.
+        # @!attribute [rw] resource_status
+        #   @return [::Google::Cloud::Compute::V1::InstantSnapshotResourceStatus]
+        #     [Output Only] Status information for the instant snapshot resource.
+        # @!attribute [rw] satisfies_pzi
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
+        # @!attribute [rw] satisfies_pzs
+        #   @return [::Boolean]
+        #     [Output Only] Reserved for future use.
+        # @!attribute [rw] self_link
+        #   @return [::String]
+        #     [Output Only] Server-defined URL for the resource.
+        # @!attribute [rw] self_link_with_id
+        #   @return [::String]
+        #     [Output Only] Server-defined URL for this resource's resource id.
+        # @!attribute [rw] source_disk
+        #   @return [::String]
+        #     URL of the source disk used to create this instant snapshot. Note that the source disk must be in the same zone/region as the instant snapshot to be created. This can be a full or valid partial URL. For example, the following are valid values: - https://www.googleapis.com/compute/v1/projects/project/zones/zone /disks/disk - https://www.googleapis.com/compute/v1/projects/project/regions/region /disks/disk - projects/project/zones/zone/disks/disk - projects/project/regions/region/disks/disk - zones/zone/disks/disk - regions/region/disks/disk
+        # @!attribute [rw] source_disk_id
+        #   @return [::String]
+        #     [Output Only] The ID value of the disk used to create this InstantSnapshot. This value may be used to determine whether the InstantSnapshot was taken from the current or a previous instance of a given disk name.
+        # @!attribute [rw] status
+        #   @return [::String]
+        #     [Output Only] The status of the instantSnapshot. This can be CREATING, DELETING, FAILED, or READY.
+        #     Check the Status enum for the list of possible values.
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     [Output Only] URL of the zone where the instant snapshot resides. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.
+        class InstantSnapshot
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # [Output Only] The architecture of the instant snapshot. Valid values are ARM64 or X86_64.
+          module Architecture
+            # A value indicating that the enum field is not set.
+            UNDEFINED_ARCHITECTURE = 0
+
+            # Default value indicating Architecture is not set.
+            ARCHITECTURE_UNSPECIFIED = 394_750_507
+
+            # Machines with architecture ARM64
+            ARM64 = 62_547_450
+
+            # Machines with architecture X86_64
+            X86_64 = 425_300_551
+          end
+
+          # [Output Only] The status of the instantSnapshot. This can be CREATING, DELETING, FAILED, or READY.
+          module Status
+            # A value indicating that the enum field is not set.
+            UNDEFINED_STATUS = 0
+
+            # InstantSnapshot creation is in progress.
+            CREATING = 455_564_985
+
+            # InstantSnapshot is currently being deleted.
+            DELETING = 528_602_024
+
+            # InstantSnapshot creation failed.
+            FAILED = 455_706_685
+
+            # InstantSnapshot has been created successfully.
+            READY = 77_848_963
+          end
+        end
+
+        # @!attribute [rw] id
+        #   @return [::String]
+        #     [Output Only] Unique identifier for the resource; defined by the server.
+        # @!attribute [rw] items
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Compute::V1::InstantSnapshotsScopedList}]
+        #     A list of InstantSnapshotsScopedList resources.
+        # @!attribute [rw] kind
+        #   @return [::String]
+        #     [Output Only] Type of resource. Always compute#instantSnapshotAggregatedList for aggregated lists of instantSnapshots.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     [Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.
+        # @!attribute [rw] self_link
+        #   @return [::String]
+        #     [Output Only] Server-defined URL for this resource.
+        # @!attribute [rw] unreachables
+        #   @return [::Array<::String>]
+        #     [Output Only] Unreachable resources.
+        # @!attribute [rw] warning
+        #   @return [::Google::Cloud::Compute::V1::Warning]
+        #     [Output Only] Informational warning message.
+        class InstantSnapshotAggregatedList
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Compute::V1::InstantSnapshotsScopedList]
+          class ItemsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Contains a list of InstantSnapshot resources.
+        # @!attribute [rw] id
+        #   @return [::String]
+        #     [Output Only] Unique identifier for the resource; defined by the server.
+        # @!attribute [rw] items
+        #   @return [::Array<::Google::Cloud::Compute::V1::InstantSnapshot>]
+        #     A list of InstantSnapshot resources.
+        # @!attribute [rw] kind
+        #   @return [::String]
+        #     Type of resource.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     [Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.
+        # @!attribute [rw] self_link
+        #   @return [::String]
+        #     [Output Only] Server-defined URL for this resource.
+        # @!attribute [rw] warning
+        #   @return [::Google::Cloud::Compute::V1::Warning]
+        #     [Output Only] Informational warning message.
+        class InstantSnapshotList
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] storage_size_bytes
+        #   @return [::Integer]
+        #     [Output Only] The storage size of this instant snapshot.
+        class InstantSnapshotResourceStatus
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] instant_snapshots
+        #   @return [::Array<::Google::Cloud::Compute::V1::InstantSnapshot>]
+        #     [Output Only] A list of instantSnapshots contained in this scope.
+        # @!attribute [rw] warning
+        #   @return [::Google::Cloud::Compute::V1::Warning]
+        #     [Output Only] Informational warning which replaces the list of instantSnapshots when the list is empty.
+        class InstantSnapshotsScopedList
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -15996,7 +16396,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] zone
         #   @return [::String]
         #     The name of the zone for this request.
@@ -16026,7 +16426,7 @@ module Google
         #     Name of the region for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListAddressesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -16059,7 +16459,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] zone
         #   @return [::String]
         #     Name of the zone for this request.
@@ -16089,7 +16489,7 @@ module Google
         #     Name of the region scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListAvailableFeaturesRegionSslPoliciesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -16113,7 +16513,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListAvailableFeaturesSslPoliciesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -16137,7 +16537,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListBackendBucketsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -16161,7 +16561,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListBackendServicesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -16185,7 +16585,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] zone
         #   @return [::String]
         #     The name of the zone for this request.
@@ -16212,7 +16612,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] zone
         #   @return [::String]
         #     The name of the zone for this request.
@@ -16242,7 +16642,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] zone
         #   @return [::String]
         #     The name of the zone where the managed instance group is located. It should conform to RFC1035.
@@ -16275,7 +16675,7 @@ module Google
         #     Name of the region scoping this request. This should conform to RFC1035.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListErrorsRegionInstanceGroupManagersRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -16299,7 +16699,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListExternalVpnGatewaysRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -16323,7 +16723,7 @@ module Google
         #     Parent ID for this request. The ID can be either be "folders/[FOLDER_ID]" if the parent is a folder or "organizations/[ORGANIZATION_ID]" if the parent is an organization.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListFirewallPoliciesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -16347,7 +16747,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListFirewallsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -16374,7 +16774,7 @@ module Google
         #     Name of the region scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListForwardingRulesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -16398,7 +16798,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListGlobalAddressesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -16422,7 +16822,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListGlobalForwardingRulesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -16446,7 +16846,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListGlobalNetworkEndpointGroupsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -16470,7 +16870,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListGlobalOperationsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -16494,7 +16894,7 @@ module Google
         #     Parent ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListGlobalOrganizationOperationsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -16518,7 +16918,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListGlobalPublicDelegatedPrefixesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -16542,7 +16942,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListHealthChecksRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -16566,7 +16966,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListImagesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -16590,7 +16990,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] zone
         #   @return [::String]
         #     The name of the zone where the managed instance group is located.
@@ -16617,7 +17017,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] zone
         #   @return [::String]
         #     The name of the zone where the instance group is located.
@@ -16644,7 +17044,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListInstanceTemplatesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -16674,7 +17074,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] zone
         #   @return [::String]
         #     The name of the zone where the instance group is located.
@@ -16710,7 +17110,7 @@ module Google
         #     The body resource for this request
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListInstancesRegionInstanceGroupsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -16734,11 +17134,38 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] zone
         #   @return [::String]
         #     The name of the zone for this request.
         class ListInstancesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for InstantSnapshots.List. See the method description for details.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+        # @!attribute [rw] max_results
+        #   @return [::Integer]
+        #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] return_partial_success
+        #   @return [::Boolean]
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     The name of the zone for this request.
+        class ListInstantSnapshotsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -16764,7 +17191,7 @@ module Google
         #     Name of the region for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListInterconnectAttachmentsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -16788,7 +17215,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListInterconnectLocationsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -16812,7 +17239,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListInterconnectRemoteLocationsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -16836,7 +17263,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListInterconnectsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -16860,7 +17287,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListLicensesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -16884,7 +17311,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListMachineImagesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -16908,7 +17335,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] zone
         #   @return [::String]
         #     The name of the zone for this request.
@@ -16938,7 +17365,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] zone
         #   @return [::String]
         #     The name of the zone where the managed instance group is located.
@@ -16971,7 +17398,7 @@ module Google
         #     Name of the region scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListManagedInstancesRegionInstanceGroupManagersRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -16998,7 +17425,7 @@ module Google
         #     Name of the region of this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListNetworkAttachmentsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -17022,7 +17449,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] zone
         #   @return [::String]
         #     The name of the zone where the network endpoint group is located. It should comply with RFC1035.
@@ -17052,7 +17479,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -17082,7 +17509,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] zone
         #   @return [::String]
         #     The name of the zone where the network endpoint group is located. It should comply with RFC1035.
@@ -17115,7 +17542,7 @@ module Google
         #     The name of the region where the network endpoint group is located. It should comply with RFC1035.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListNetworkEndpointsRegionNetworkEndpointGroupsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -17139,7 +17566,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListNetworkFirewallPoliciesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -17163,7 +17590,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListNetworksRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -17187,7 +17614,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] zone
         #   @return [::String]
         #     The name of the zone for this request.
@@ -17217,7 +17644,7 @@ module Google
         #     The name of the region for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListNodeTemplatesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -17241,7 +17668,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] zone
         #   @return [::String]
         #     The name of the zone for this request.
@@ -17271,7 +17698,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] zone
         #   @return [::String]
         #     The name of the zone for this request.
@@ -17301,7 +17728,7 @@ module Google
         #     Name of the region for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListPacketMirroringsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -17338,7 +17765,7 @@ module Google
         #     The region of the request. The response will include all subnet routes, static routes and dynamic routes in the region.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListPeeringRoutesNetworksRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -17377,7 +17804,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] zone
         #   @return [::String]
         #     The name of the zone where the managed instance group is located. It should conform to RFC1035.
@@ -17410,7 +17837,7 @@ module Google
         #     Name of the region scoping this request, should conform to RFC1035.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListPerInstanceConfigsRegionInstanceGroupManagersRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -17434,7 +17861,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListPreconfiguredExpressionSetsSecurityPoliciesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -17458,7 +17885,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListPublicAdvertisedPrefixesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -17485,7 +17912,7 @@ module Google
         #     Name of the region of this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListPublicDelegatedPrefixesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -17512,7 +17939,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] zone
         #   @return [::String]
         #     The name of the zone for this request.
@@ -17542,7 +17969,7 @@ module Google
         #     Name of the region scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListRegionAutoscalersRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -17569,7 +17996,7 @@ module Google
         #     Name of the region scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListRegionBackendServicesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -17596,7 +18023,7 @@ module Google
         #     Name of the region for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListRegionCommitmentsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -17623,7 +18050,7 @@ module Google
         #     The name of the region for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListRegionDiskTypesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -17650,7 +18077,7 @@ module Google
         #     Name of the region for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListRegionDisksRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -17677,7 +18104,7 @@ module Google
         #     Name of the region scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListRegionHealthCheckServicesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -17704,7 +18131,7 @@ module Google
         #     Name of the region scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListRegionHealthChecksRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -17731,7 +18158,7 @@ module Google
         #     Name of the region scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListRegionInstanceGroupManagersRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -17758,7 +18185,7 @@ module Google
         #     Name of the region scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListRegionInstanceGroupsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -17785,8 +18212,35 @@ module Google
         #     The name of the regions for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListRegionInstanceTemplatesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionInstantSnapshots.List. See the method description for details.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+        # @!attribute [rw] max_results
+        #   @return [::Integer]
+        #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The name of the region for this request.
+        # @!attribute [rw] return_partial_success
+        #   @return [::Boolean]
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+        class ListRegionInstantSnapshotsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -17812,7 +18266,7 @@ module Google
         #     The name of the region where the network endpoint group is located. It should comply with RFC1035.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListRegionNetworkEndpointGroupsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -17839,7 +18293,7 @@ module Google
         #     Name of the region scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListRegionNetworkFirewallPoliciesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -17866,7 +18320,7 @@ module Google
         #     Name of the region scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListRegionNotificationEndpointsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -17893,7 +18347,7 @@ module Google
         #     Name of the region for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListRegionOperationsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -17920,7 +18374,7 @@ module Google
         #     Name of the region scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListRegionSecurityPoliciesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -17947,7 +18401,7 @@ module Google
         #     Name of the region scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListRegionSslCertificatesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -17974,7 +18428,7 @@ module Google
         #     Name of the region scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListRegionSslPoliciesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -18001,7 +18455,7 @@ module Google
         #     Name of the region scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListRegionTargetHttpProxiesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -18028,7 +18482,7 @@ module Google
         #     Name of the region scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListRegionTargetHttpsProxiesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -18055,7 +18509,7 @@ module Google
         #     Name of the region scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListRegionTargetTcpProxiesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -18082,7 +18536,7 @@ module Google
         #     Name of the region scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListRegionUrlMapsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -18109,7 +18563,7 @@ module Google
         #     Region for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListRegionZonesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -18133,7 +18587,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListRegionsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -18157,7 +18611,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] zone
         #   @return [::String]
         #     Name of the zone for this request.
@@ -18187,7 +18641,7 @@ module Google
         #     Name of the region for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListResourcePoliciesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -18214,7 +18668,7 @@ module Google
         #     Name of the region for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListRoutersRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -18238,7 +18692,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListRoutesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -18262,7 +18716,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListSecurityPoliciesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -18289,7 +18743,7 @@ module Google
         #     Name of the region of this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListServiceAttachmentsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -18313,7 +18767,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListSnapshotsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -18337,7 +18791,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListSslCertificatesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -18361,7 +18815,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListSslPoliciesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -18388,7 +18842,7 @@ module Google
         #     Name of the region scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListSubnetworksRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -18412,7 +18866,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListTargetGrpcProxiesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -18436,7 +18890,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListTargetHttpProxiesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -18460,7 +18914,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListTargetHttpsProxiesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -18484,7 +18938,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] zone
         #   @return [::String]
         #     Name of the zone scoping this request.
@@ -18514,7 +18968,7 @@ module Google
         #     Name of the region scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListTargetPoolsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -18538,7 +18992,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListTargetSslProxiesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -18562,7 +19016,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListTargetTcpProxiesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -18589,7 +19043,7 @@ module Google
         #     Name of the region for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListTargetVpnGatewaysRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -18613,7 +19067,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListUrlMapsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -18637,7 +19091,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListUsableBackendServicesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -18664,7 +19118,7 @@ module Google
         #     Name of the region scoping this request. It must be a string that meets the requirements in RFC1035.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListUsableRegionBackendServicesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -18688,7 +19142,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListUsableSubnetworksRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -18715,7 +19169,7 @@ module Google
         #     Name of the region for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListVpnGatewaysRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -18742,7 +19196,7 @@ module Google
         #     Name of the region for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListVpnTunnelsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -18769,7 +19223,7 @@ module Google
         #     The body resource for this request
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListXpnHostsProjectsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -18793,7 +19247,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         # @!attribute [rw] zone
         #   @return [::String]
         #     Name of the zone for request.
@@ -18820,7 +19274,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListZonesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -23045,6 +23499,10 @@ module Google
         end
 
         # Represents a Project resource. A project is used to organize resources in a Google Cloud Platform environment. For more information, read about the Resource Hierarchy.
+        # @!attribute [rw] cloud_armor_tier
+        #   @return [::String]
+        #     [Output Only] The Cloud Armor tier for this project. It can be one of the following values: CA_STANDARD, CA_ENTERPRISE_PAYGO. If this field is not specified, it is assumed to be CA_STANDARD.
+        #     Check the CloudArmorTier enum for the list of possible values.
         # @!attribute [rw] common_instance_metadata
         #   @return [::Google::Cloud::Compute::V1::Metadata]
         #     Metadata key/value pairs available to all instances contained in this project. See Custom metadata for more information.
@@ -23093,6 +23551,21 @@ module Google
         class Project
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # [Output Only] The Cloud Armor tier for this project. It can be one of the following values: CA_STANDARD, CA_ENTERPRISE_PAYGO. If this field is not specified, it is assumed to be CA_STANDARD.
+          module CloudArmorTier
+            # A value indicating that the enum field is not set.
+            UNDEFINED_CLOUD_ARMOR_TIER = 0
+
+            # Enterprise tier protection billed annually.
+            CA_ENTERPRISE_ANNUAL = 219_921_116
+
+            # Enterprise tier protection billed monthly.
+            CA_ENTERPRISE_PAYGO = 453_530_323
+
+            # Standard protection.
+            CA_STANDARD = 13_156_734
+          end
 
           # This signifies the default network tier used for configuring resources of the project and can only take the following values: PREMIUM, STANDARD. Initially the default network tier is PREMIUM.
           module DefaultNetworkTier
@@ -23173,6 +23646,30 @@ module Google
         class ProjectsListXpnHostsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] cloud_armor_tier
+        #   @return [::String]
+        #     Managed protection tier to be set.
+        #     Check the CloudArmorTier enum for the list of possible values.
+        class ProjectsSetCloudArmorTierRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Managed protection tier to be set.
+          module CloudArmorTier
+            # A value indicating that the enum field is not set.
+            UNDEFINED_CLOUD_ARMOR_TIER = 0
+
+            # Enterprise tier protection billed annually.
+            CA_ENTERPRISE_ANNUAL = 219_921_116
+
+            # Enterprise tier protection billed monthly.
+            CA_ENTERPRISE_PAYGO = 453_530_323
+
+            # Standard protection.
+            CA_STANDARD = 13_156_734
+          end
         end
 
         # @!attribute [rw] network_tier
@@ -28013,6 +28510,21 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for Projects.SetCloudArmorTier. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] projects_set_cloud_armor_tier_request_resource
+        #   @return [::Google::Cloud::Compute::V1::ProjectsSetCloudArmorTierRequest]
+        #     The body resource for this request
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        class SetCloudArmorTierProjectRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # @!attribute [rw] client_operation_id
         #   @return [::String]
         #     [Output Only] The client operation id.
@@ -28287,6 +28799,24 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for InstantSnapshots.SetIamPolicy. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     The name of the zone for this request.
+        # @!attribute [rw] zone_set_policy_request_resource
+        #   @return [::Google::Cloud::Compute::V1::ZoneSetPolicyRequest]
+        #     The body resource for this request
+        class SetIamPolicyInstantSnapshotRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for Licenses.SetIamPolicy. See the method description for details.
         # @!attribute [rw] global_set_policy_request_resource
         #   @return [::Google::Cloud::Compute::V1::GlobalSetPolicyRequest]
@@ -28418,6 +28948,24 @@ module Google
         #   @return [::String]
         #     Name or id of the resource for this request.
         class SetIamPolicyRegionDiskRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionInstantSnapshots.SetIamPolicy. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The name of the region for this request.
+        # @!attribute [rw] region_set_policy_request_resource
+        #   @return [::Google::Cloud::Compute::V1::RegionSetPolicyRequest]
+        #     The body resource for this request
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        class SetIamPolicyRegionInstantSnapshotRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -28713,6 +29261,27 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for InstantSnapshots.SetLabels. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     The name of the zone for this request.
+        # @!attribute [rw] zone_set_labels_request_resource
+        #   @return [::Google::Cloud::Compute::V1::ZoneSetLabelsRequest]
+        #     The body resource for this request
+        class SetLabelsInstantSnapshotRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for InterconnectAttachments.SetLabels. See the method description for details.
         # @!attribute [rw] project
         #   @return [::String]
@@ -28766,6 +29335,27 @@ module Google
         #   @return [::String]
         #     Name or id of the resource for this request.
         class SetLabelsRegionDiskRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionInstantSnapshots.SetLabels. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The region for this request.
+        # @!attribute [rw] region_set_labels_request_resource
+        #   @return [::Google::Cloud::Compute::V1::RegionSetLabelsRequest]
+        #     The body resource for this request
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        class SetLabelsRegionInstantSnapshotRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -29797,6 +30387,15 @@ module Google
         # @!attribute [rw] source_disk_id
         #   @return [::String]
         #     [Output Only] The ID value of the disk used to create this snapshot. This value may be used to determine whether the snapshot was taken from the current or a previous instance of a given disk name.
+        # @!attribute [rw] source_instant_snapshot
+        #   @return [::String]
+        #     The source instant snapshot used to create this snapshot. You can provide this as a partial or full URL to the resource. For example, the following are valid values: - https://www.googleapis.com/compute/v1/projects/project/zones/zone /instantSnapshots/instantSnapshot - projects/project/zones/zone/instantSnapshots/instantSnapshot - zones/zone/instantSnapshots/instantSnapshot
+        # @!attribute [rw] source_instant_snapshot_encryption_key
+        #   @return [::Google::Cloud::Compute::V1::CustomerEncryptionKey]
+        #     Customer provided encryption key when creating Snapshot from Instant Snapshot.
+        # @!attribute [rw] source_instant_snapshot_id
+        #   @return [::String]
+        #     [Output Only] The unique ID of the instant snapshot used to create this snapshot. This value identifies the exact instant snapshot that was used to create this persistent disk. For example, if you created the persistent disk from an instant snapshot that was later deleted and recreated under the same name, the source instant snapshot ID would identify the exact instant snapshot that was used.
         # @!attribute [rw] source_snapshot_schedule_policy
         #   @return [::String]
         #     [Output Only] URL of the resource policy which created this scheduled snapshot.
@@ -32367,6 +32966,24 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for InstantSnapshots.TestIamPermissions. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        # @!attribute [rw] test_permissions_request_resource
+        #   @return [::Google::Cloud::Compute::V1::TestPermissionsRequest]
+        #     The body resource for this request
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     The name of the zone for this request.
+        class TestIamPermissionsInstantSnapshotRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for LicenseCodes.TestIamPermissions. See the method description for details.
         # @!attribute [rw] project
         #   @return [::String]
@@ -32549,6 +33166,24 @@ module Google
         #   @return [::Google::Cloud::Compute::V1::TestPermissionsRequest]
         #     The body resource for this request
         class TestIamPermissionsRegionDiskRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionInstantSnapshots.TestIamPermissions. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The name of the region for this request.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        # @!attribute [rw] test_permissions_request_resource
+        #   @return [::Google::Cloud::Compute::V1::TestPermissionsRequest]
+        #     The body resource for this request
+        class TestIamPermissionsRegionInstantSnapshotRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -33782,6 +34417,10 @@ module Google
         # @!attribute [rw] description
         #   @return [::String]
         #     An optional description of this resource. Provide this property when you create the resource.
+        # @!attribute [rw] gateway_ip_version
+        #   @return [::String]
+        #     The IP family of the gateway IPs for the HA-VPN gateway interfaces. If not specified, IPV4 will be used.
+        #     Check the GatewayIpVersion enum for the list of possible values.
         # @!attribute [rw] id
         #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
@@ -33824,6 +34463,18 @@ module Google
           class LabelsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The IP family of the gateway IPs for the HA-VPN gateway interfaces. If not specified, IPV4 will be used.
+          module GatewayIpVersion
+            # A value indicating that the enum field is not set.
+            UNDEFINED_GATEWAY_IP_VERSION = 0
+
+            # Every HA-VPN gateway interface is configured with an IPv4 address.
+            IPV4 = 2_254_341
+
+            # Every HA-VPN gateway interface is configured with an IPv6 address.
+            IPV6 = 2_254_343
           end
 
           # The stack type for this VPN gateway to identify the IP protocols that are enabled. Possible values are: IPV4_ONLY, IPV4_IPV6. If not specified, IPV4_ONLY will be used.
@@ -33983,6 +34634,9 @@ module Google
         # @!attribute [rw] ip_address
         #   @return [::String]
         #     [Output Only] IP address for this VPN interface associated with the VPN gateway. The IP address could be either a regional external IP address or a regional internal IP address. The two IP addresses for a VPN gateway must be all regional external or regional internal IP addresses. There cannot be a mix of regional external IP addresses and regional internal IP addresses. For HA VPN over Cloud Interconnect, the IP addresses for both interfaces could either be regional internal IP addresses or regional external IP addresses. For regular (non HA VPN over Cloud Interconnect) HA VPN tunnels, the IP address must be a regional external IP address.
+        # @!attribute [rw] ipv6_address
+        #   @return [::String]
+        #     [Output Only] IPv6 address for this VPN interface associated with the VPN gateway. The IPv6 address must be a regional external IPv6 address. The format is RFC 5952 format (e.g. 2001:db8::2d9:51:0:0).
         class VpnGatewayVpnGatewayInterface
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
