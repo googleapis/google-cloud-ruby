@@ -157,11 +157,10 @@ module Google
         #     APIs, its JSON representation will be a `string` instead of an `integer`.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Unstructured key value map that can be used to organize and categorize
-        #     objects.
-        #     User-provided labels are shared with Google's billing system, so they can
-        #     be used to filter, or break down billing charges by team, component,
-        #     environment, state, etc. For more information, visit
+        #     Optional. Unstructured key value map that can be used to organize and
+        #     categorize objects. User-provided labels are shared with Google's billing
+        #     system, so they can be used to filter, or break down billing charges by
+        #     team, component, environment, state, etc. For more information, visit
         #     https://cloud.google.com/resource-manager/docs/creating-managing-labels or
         #     https://cloud.google.com/run/docs/configuring/labels.
         #
@@ -171,9 +170,9 @@ module Google
         #     corresponding field in v2 Service.
         # @!attribute [rw] annotations
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Unstructured key value map that may be set by external tools to store and
-        #     arbitrary metadata. They are not queryable and should be preserved
-        #     when modifying objects.
+        #     Optional. Unstructured key value map that may be set by external tools to
+        #     store and arbitrary metadata. They are not queryable and should be
+        #     preserved when modifying objects.
         #
         #     <p>Cloud Run API v2 does not support annotations with `run.googleapis.com`,
         #     `cloud.googleapis.com`, `serving.knative.dev`, or `autoscaling.knative.dev`
@@ -235,6 +234,12 @@ module Google
         #     Specifies how to distribute traffic over a collection of Revisions
         #     belonging to the Service. If traffic is empty or not provided, defaults to
         #     100% traffic to the latest `Ready` Revision.
+        # @!attribute [rw] scaling
+        #   @return [::Google::Cloud::Run::V2::ServiceScaling]
+        #     Optional. Specifies service-level scaling settings
+        # @!attribute [rw] default_uri_disabled
+        #   @return [::Boolean]
+        #     Optional. Disables public resolution of the default URI of this service.
         # @!attribute [r] observed_generation
         #   @return [::Integer]
         #     Output only. The generation of this Service currently serving traffic. See

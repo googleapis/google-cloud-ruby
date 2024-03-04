@@ -106,6 +106,18 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Scaling settings applied at the service level rather than
+        # at the revision level.
+        # @!attribute [rw] min_instance_count
+        #   @return [::Integer]
+        #     total min instances for the service. This number of instances is
+        #     divided among all revisions with specified traffic based on the percent
+        #     of traffic they are receiving. (BETA)
+        class ServiceScaling
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Allowed ingress traffic for the Container.
         module IngressTraffic
           # Unspecified
