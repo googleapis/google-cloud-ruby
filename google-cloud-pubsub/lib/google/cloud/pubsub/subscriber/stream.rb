@@ -246,7 +246,7 @@ module Google
               break if synchronize { @stopped }
 
               begin
-                # Cannot syncronize the enumerator, causes deadlock
+                # Cannot synchronize the enumerator, causes deadlock
                 response = enum.next
                 new_exactly_once_delivery_enabled = response&.subscription_properties&.exactly_once_delivery_enabled
                 received_messages = response.received_messages
