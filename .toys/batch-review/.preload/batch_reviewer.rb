@@ -20,15 +20,37 @@ module Yoshi
   # Implementation of a batch review tool.
   #
   class BatchReviewer
+    def self.well_known_presets
+      @well_known_presets ||= begin
+        releases_preset = Preset.new do |preset|
+          preset.desc = "Selects all release pull requests, and expect diffs appropriate to a release pull request"
+          preset.pull_request_filter.only_titles(/^chore\(main\): release [\w-]+ \d+\.\d+\.\d+/)
+          preset.pull_request_filter.only_users(["release-please[bot]"])
+          preset.diff_expectations.expect_changed_paths(/\.release-please-manifest\.json$/)
+          preset.diff_expectations.expect_changed_paths(/\/CHANGELOG\.md$/)
+          preset.diff_expectations.expect_changed_paths(/\/version\.rb$/)
+        end
+        {
+          basic_releases: releases_preset
+        }
+      end
+    end
+
     def initialize repo
       @repo = repo
       @presets = {}
     end
 
-    def define_preset name
-      preset = Preset.new
-      @presets[name] = preset
-      yield preset
+    def define_preset name, based_on: nil
+      if based_on
+        preset = @presets[based_on] || BatchReviewer.well_known_presets[based_on]
+        raise "Unknown based_on #{based_on.inspect}" unless preset
+        preset = preset.clone
+      else
+        preset = Preset.new
+      end
+      @presets[name.to_s] = preset
+      yield preset if block_given?
     end
 
     def preset_names
@@ -324,7 +346,7 @@ module Yoshi
       @context.puts result&.captured_err
       @context.exit 1
     end
-    
+
     class Preset
       def initialize
         @pull_request_filter = PullRequestFilter.new
@@ -332,6 +354,17 @@ module Yoshi
         @message = :pr_title_number
         @detail = :none
         @desc = "(no description provided)"
+        yield self if block_given?
+      end
+
+      def clone
+        copy = Preset.new
+        copy.pull_request_filter = @pull_request_filter.clone
+        copy.diff_expectations = @diff_expectations.clone
+        copy.message = @message.dup
+        copy.detail = @detail.dup
+        copy.desc = @desc.dup
+        copy
       end
 
       attr_accessor :pull_request_filter
@@ -343,37 +376,86 @@ module Yoshi
 
     class PullRequestFilter
       def initialize
-        @only_titles = []
-        @omit_titles = []
-        @only_users = []
-        @omit_users = []
-        @only_labels = []
-        @omit_labels = ["do not merge"]
+        clear_only_titles!
+        clear_omit_titles!
+        clear_only_users!
+        clear_omit_users!
+        clear_only_labels!
+        clear_omit_labels!
+        omit_labels "do not merge"
         yield self if block_given?
       end
 
       def only_titles titles
         @only_titles += Array(titles)
+        self
       end
 
       def omit_titles titles
         @omit_titles += Array(titles)
+        self
       end
 
       def only_users users
         @only_users += Array(users)
+        self
       end
 
       def omit_users users
         @omit_users += Array(users)
+        self
       end
 
       def only_labels labels
         @only_labels += Array(labels)
+        self
       end
 
       def omit_labels labels
         @omit_labels += Array(labels)
+        self
+      end
+
+      def clear_only_titles!
+        @only_titles = []
+        self
+      end
+
+      def clear_omit_titles!
+        @omit_titles = []
+        self
+      end
+
+      def clear_only_users!
+        @only_users = []
+        self
+      end
+
+      def clear_omit_users!
+        @omit_users = []
+        self
+      end
+
+      def clear_only_labels!
+        @only_labels = []
+        self
+      end
+
+      def clear_omit_labels!
+        @omit_labels = []
+        self
+      end
+
+      def clone
+        copy = PullRequestFilter.new
+        copy.clear_omit_labels!
+        copy.only_titles @only_titles
+        copy.omit_titles @omit_titles
+        copy.only_users @only_users
+        copy.omit_users @omit_users
+        copy.only_labels @only_labels
+        copy.omit_labels @omit_labels
+        copy
       end
 
       def match? pr_resource
@@ -399,26 +481,31 @@ module Yoshi
       def expect_paths path_pattern, desc: nil
         desc ||= "Any file path matching: #{path_pattern}"
         @expected << Expectation.new(desc) { |file| path_pattern === file.path }
+        self
       end
 
       def expect_changed_paths path_pattern, desc: nil
         desc ||= "Any changed file path matching: #{path_pattern}"
         @expected << Expectation.new(desc) { |file| file.type == "C" && path_pattern === file.path }
+        self
       end
 
       def expect_added_paths path_pattern, desc: nil
         desc ||= "Any added file path matching: #{path_pattern}"
         @expected << Expectation.new(desc) { |file| file.type == "A" && path_pattern === file.path }
+        self
       end
 
       def expect_deleted_paths path_pattern, desc: nil
         desc ||= "Any deleted file path matching: #{path_pattern}"
         @expected << Expectation.new(desc) { |file| file.type == "D" && path_pattern === file.path }
+        self
       end
 
       def expect_indented_paths path_pattern, desc: nil
         desc ||= "Any file with only indentation changes and path matching: #{path_pattern}"
         @expected << Expectation.new(desc) { |file| file.only_indentation && path_pattern === file.path }
+        self
       end
 
       def expect_diffs path_patterns: nil, additions: nil, removals: nil, desc: nil
@@ -438,6 +525,20 @@ module Yoshi
                 true
               end
             end
+        end
+        self
+      end
+
+      def expect_generic expectation
+        @expected << expectation
+        self
+      end
+
+      def clone
+        DiffExpectations.new do |copy|
+          @expected.each do |expectation|
+            copy.expect_generic expectation
+          end
         end
       end
 
