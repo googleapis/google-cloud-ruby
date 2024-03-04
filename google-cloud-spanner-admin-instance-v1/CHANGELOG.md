@@ -1,5 +1,11 @@
 # Release History
 
+### 0.15.0 (2024-03-04)
+
+#### Features
+
+* Add instance partition support to spanner instance proto ([#25276](https://github.com/googleapis/google-cloud-ruby/issues/25276)) 
+
 ### 0.14.0 (2024-02-26)
 
 #### Features
