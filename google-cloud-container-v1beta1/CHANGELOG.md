@@ -1,5 +1,11 @@
 # Release History
 
+### 0.37.0 (2024-03-04)
+
+#### Features
+
+* add secondary boot disks field to NodePool API ([#25269](https://github.com/googleapis/google-cloud-ruby/issues/25269)) 
+
 ### 0.36.0 (2024-02-26)
 
 #### Features
