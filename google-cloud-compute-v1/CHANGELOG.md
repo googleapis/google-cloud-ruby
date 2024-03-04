@@ -1,5 +1,11 @@
 # Release History
 
+### 2.10.0 (2024-03-04)
+
+#### Features
+
+* support instant_snapshots and region_instant_snapshot services, add set_cloud_armor_tier 
+
 ### 2.9.0 (2024-02-26)
 
 #### Features
