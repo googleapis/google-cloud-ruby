@@ -955,6 +955,504 @@ module Google
               end
 
               ##
+              # Creates a new AuthorizedView in a table.
+              #
+              # @overload create_authorized_view(request, options = nil)
+              #   Pass arguments to `create_authorized_view` via a request object, either of type
+              #   {::Google::Cloud::Bigtable::Admin::V2::CreateAuthorizedViewRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigtable::Admin::V2::CreateAuthorizedViewRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload create_authorized_view(parent: nil, authorized_view_id: nil, authorized_view: nil)
+              #   Pass arguments to `create_authorized_view` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. This is the name of the table the AuthorizedView belongs to.
+              #     Values are of the form
+              #     `projects/{project}/instances/{instance}/tables/{table}`.
+              #   @param authorized_view_id [::String]
+              #     Required. The id of the AuthorizedView to create. This AuthorizedView must
+              #     not already exist. The `authorized_view_id` appended to `parent` forms the
+              #     full AuthorizedView name of the form
+              #     `projects/{project}/instances/{instance}/tables/{table}/authorizedView/{authorized_view}`.
+              #   @param authorized_view [::Google::Cloud::Bigtable::Admin::V2::AuthorizedView, ::Hash]
+              #     Required. The AuthorizedView to create.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::Operation]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::CreateAuthorizedViewRequest.new
+              #
+              #   # Call the create_authorized_view method.
+              #   result = client.create_authorized_view request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def create_authorized_view request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigtable::Admin::V2::CreateAuthorizedViewRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.create_authorized_view.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.create_authorized_view.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.create_authorized_view.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @bigtable_table_admin_stub.call_rpc :create_authorized_view, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
+                  yield response, operation if block_given?
+                  return response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists all AuthorizedViews from a specific table.
+              #
+              # @overload list_authorized_views(request, options = nil)
+              #   Pass arguments to `list_authorized_views` via a request object, either of type
+              #   {::Google::Cloud::Bigtable::Admin::V2::ListAuthorizedViewsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigtable::Admin::V2::ListAuthorizedViewsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload list_authorized_views(parent: nil, page_size: nil, page_token: nil, view: nil)
+              #   Pass arguments to `list_authorized_views` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The unique name of the table for which AuthorizedViews should be
+              #     listed. Values are of the form
+              #     `projects/{project}/instances/{instance}/tables/{table}`.
+              #   @param page_size [::Integer]
+              #     Optional. Maximum number of results per page.
+              #
+              #     A page_size of zero lets the server choose the number of items to return.
+              #     A page_size which is strictly positive will return at most that many items.
+              #     A negative page_size will cause an error.
+              #
+              #     Following the first request, subsequent paginated calls are not required
+              #     to pass a page_size. If a page_size is set in subsequent calls, it must
+              #     match the page_size given in the first request.
+              #   @param page_token [::String]
+              #     Optional. The value of `next_page_token` returned by a previous call.
+              #   @param view [::Google::Cloud::Bigtable::Admin::V2::AuthorizedView::ResponseView]
+              #     Optional. The resource_view to be applied to the returned views' fields.
+              #     Default to NAME_ONLY.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Bigtable::Admin::V2::AuthorizedView>]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::PagedEnumerable<::Google::Cloud::Bigtable::Admin::V2::AuthorizedView>]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::ListAuthorizedViewsRequest.new
+              #
+              #   # Call the list_authorized_views method.
+              #   result = client.list_authorized_views request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Bigtable::Admin::V2::AuthorizedView.
+              #     p item
+              #   end
+              #
+              def list_authorized_views request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigtable::Admin::V2::ListAuthorizedViewsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.list_authorized_views.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.list_authorized_views.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.list_authorized_views.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @bigtable_table_admin_stub.call_rpc :list_authorized_views, request, options: options do |response, operation|
+                  response = ::Gapic::PagedEnumerable.new @bigtable_table_admin_stub, :list_authorized_views, request, response, operation, options
+                  yield response, operation if block_given?
+                  return response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets information from a specified AuthorizedView.
+              #
+              # @overload get_authorized_view(request, options = nil)
+              #   Pass arguments to `get_authorized_view` via a request object, either of type
+              #   {::Google::Cloud::Bigtable::Admin::V2::GetAuthorizedViewRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigtable::Admin::V2::GetAuthorizedViewRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload get_authorized_view(name: nil, view: nil)
+              #   Pass arguments to `get_authorized_view` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The unique name of the requested AuthorizedView.
+              #     Values are of the form
+              #     `projects/{project}/instances/{instance}/tables/{table}/authorizedViews/{authorized_view}`.
+              #   @param view [::Google::Cloud::Bigtable::Admin::V2::AuthorizedView::ResponseView]
+              #     Optional. The resource_view to be applied to the returned AuthorizedView's
+              #     fields. Default to BASIC.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Cloud::Bigtable::Admin::V2::AuthorizedView]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Cloud::Bigtable::Admin::V2::AuthorizedView]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::GetAuthorizedViewRequest.new
+              #
+              #   # Call the get_authorized_view method.
+              #   result = client.get_authorized_view request
+              #
+              #   # The returned object is of type Google::Cloud::Bigtable::Admin::V2::AuthorizedView.
+              #   p result
+              #
+              def get_authorized_view request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigtable::Admin::V2::GetAuthorizedViewRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.get_authorized_view.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.get_authorized_view.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.get_authorized_view.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @bigtable_table_admin_stub.call_rpc :get_authorized_view, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                  return response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates an AuthorizedView in a table.
+              #
+              # @overload update_authorized_view(request, options = nil)
+              #   Pass arguments to `update_authorized_view` via a request object, either of type
+              #   {::Google::Cloud::Bigtable::Admin::V2::UpdateAuthorizedViewRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigtable::Admin::V2::UpdateAuthorizedViewRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload update_authorized_view(authorized_view: nil, update_mask: nil, ignore_warnings: nil)
+              #   Pass arguments to `update_authorized_view` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param authorized_view [::Google::Cloud::Bigtable::Admin::V2::AuthorizedView, ::Hash]
+              #     Required. The AuthorizedView to update. The `name` in `authorized_view` is
+              #     used to identify the AuthorizedView. AuthorizedView name must in this
+              #     format
+              #     projects/<project>/instances/<instance>/tables/<table>/authorizedViews/<authorized_view>
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. The list of fields to update.
+              #     A mask specifying which fields in the AuthorizedView resource should be
+              #     updated. This mask is relative to the AuthorizedView resource, not to the
+              #     request message. A field will be overwritten if it is in the mask. If
+              #     empty, all fields set in the request will be overwritten. A special value
+              #     `*` means to overwrite all fields (including fields not set in the
+              #     request).
+              #   @param ignore_warnings [::Boolean]
+              #     Optional. If true, ignore the safety checks when updating the
+              #     AuthorizedView.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::Operation]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::UpdateAuthorizedViewRequest.new
+              #
+              #   # Call the update_authorized_view method.
+              #   result = client.update_authorized_view request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def update_authorized_view request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigtable::Admin::V2::UpdateAuthorizedViewRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.update_authorized_view.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.authorized_view&.name
+                  header_params["authorized_view.name"] = request.authorized_view.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.update_authorized_view.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.update_authorized_view.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @bigtable_table_admin_stub.call_rpc :update_authorized_view, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
+                  yield response, operation if block_given?
+                  return response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Permanently deletes a specified AuthorizedView.
+              #
+              # @overload delete_authorized_view(request, options = nil)
+              #   Pass arguments to `delete_authorized_view` via a request object, either of type
+              #   {::Google::Cloud::Bigtable::Admin::V2::DeleteAuthorizedViewRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigtable::Admin::V2::DeleteAuthorizedViewRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload delete_authorized_view(name: nil, etag: nil)
+              #   Pass arguments to `delete_authorized_view` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The unique name of the AuthorizedView to be deleted.
+              #     Values are of the form
+              #     `projects/{project}/instances/{instance}/tables/{table}/authorizedViews/{authorized_view}`.
+              #   @param etag [::String]
+              #     Optional. The current etag of the AuthorizedView.
+              #     If an etag is provided and does not match the current etag of the
+              #     AuthorizedView, deletion will be blocked and an ABORTED error will be
+              #     returned.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Protobuf::Empty]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::DeleteAuthorizedViewRequest.new
+              #
+              #   # Call the delete_authorized_view method.
+              #   result = client.delete_authorized_view request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
+              def delete_authorized_view request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigtable::Admin::V2::DeleteAuthorizedViewRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.delete_authorized_view.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.delete_authorized_view.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.delete_authorized_view.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @bigtable_table_admin_stub.call_rpc :delete_authorized_view, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                  return response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Performs a series of column family modifications on the specified table.
               # Either all or none of the modifications will occur before this method
               # returns, but data requests received prior to that point may see a table
@@ -2970,6 +3468,31 @@ module Google
                   #
                   attr_reader :undelete_table
                   ##
+                  # RPC-specific configuration for `create_authorized_view`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_authorized_view
+                  ##
+                  # RPC-specific configuration for `list_authorized_views`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_authorized_views
+                  ##
+                  # RPC-specific configuration for `get_authorized_view`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_authorized_view
+                  ##
+                  # RPC-specific configuration for `update_authorized_view`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_authorized_view
+                  ##
+                  # RPC-specific configuration for `delete_authorized_view`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_authorized_view
+                  ##
                   # RPC-specific configuration for `modify_column_families`
                   # @return [::Gapic::Config::Method]
                   #
@@ -3076,6 +3599,16 @@ module Google
                     @delete_table = ::Gapic::Config::Method.new delete_table_config
                     undelete_table_config = parent_rpcs.undelete_table if parent_rpcs.respond_to? :undelete_table
                     @undelete_table = ::Gapic::Config::Method.new undelete_table_config
+                    create_authorized_view_config = parent_rpcs.create_authorized_view if parent_rpcs.respond_to? :create_authorized_view
+                    @create_authorized_view = ::Gapic::Config::Method.new create_authorized_view_config
+                    list_authorized_views_config = parent_rpcs.list_authorized_views if parent_rpcs.respond_to? :list_authorized_views
+                    @list_authorized_views = ::Gapic::Config::Method.new list_authorized_views_config
+                    get_authorized_view_config = parent_rpcs.get_authorized_view if parent_rpcs.respond_to? :get_authorized_view
+                    @get_authorized_view = ::Gapic::Config::Method.new get_authorized_view_config
+                    update_authorized_view_config = parent_rpcs.update_authorized_view if parent_rpcs.respond_to? :update_authorized_view
+                    @update_authorized_view = ::Gapic::Config::Method.new update_authorized_view_config
+                    delete_authorized_view_config = parent_rpcs.delete_authorized_view if parent_rpcs.respond_to? :delete_authorized_view
+                    @delete_authorized_view = ::Gapic::Config::Method.new delete_authorized_view_config
                     modify_column_families_config = parent_rpcs.modify_column_families if parent_rpcs.respond_to? :modify_column_families
                     @modify_column_families = ::Gapic::Config::Method.new modify_column_families_config
                     drop_row_range_config = parent_rpcs.drop_row_range if parent_rpcs.respond_to? :drop_row_range

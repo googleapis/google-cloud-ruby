@@ -192,6 +192,87 @@ module Google
             end
           end
 
+          # AuthorizedViews represent subsets of a particular Cloud Bigtable table. Users
+          # can configure access to each Authorized View independently from the table and
+          # use the existing Data APIs to access the subset of data.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Identifier. The name of this AuthorizedView.
+          #     Values are of the form
+          #     `projects/{project}/instances/{instance}/tables/{table}/authorizedViews/{authorized_view}`
+          # @!attribute [rw] subset_view
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::AuthorizedView::SubsetView]
+          #     An AuthorizedView permitting access to an explicit subset of a Table.
+          # @!attribute [rw] etag
+          #   @return [::String]
+          #     The etag for this AuthorizedView.
+          #     If this is provided on update, it must match the server's etag. The server
+          #     returns ABORTED error on a mismatched etag.
+          # @!attribute [rw] deletion_protection
+          #   @return [::Boolean]
+          #     Set to true to make the AuthorizedView protected against deletion.
+          #     The parent Table and containing Instance cannot be deleted if an
+          #     AuthorizedView has this bit set.
+          class AuthorizedView
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Subsets of a column family that are included in this AuthorizedView.
+            # @!attribute [rw] qualifiers
+            #   @return [::Array<::String>]
+            #     Individual exact column qualifiers to be included in the AuthorizedView.
+            # @!attribute [rw] qualifier_prefixes
+            #   @return [::Array<::String>]
+            #     Prefixes for qualifiers to be included in the AuthorizedView. Every
+            #     qualifier starting with one of these prefixes is included in the
+            #     AuthorizedView. To provide access to all qualifiers, include the empty
+            #     string as a prefix
+            #     ("").
+            class FamilySubsets
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Defines a simple AuthorizedView that is a subset of the underlying Table.
+            # @!attribute [rw] row_prefixes
+            #   @return [::Array<::String>]
+            #     Row prefixes to be included in the AuthorizedView.
+            #     To provide access to all rows, include the empty string as a prefix ("").
+            # @!attribute [rw] family_subsets
+            #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Bigtable::Admin::V2::AuthorizedView::FamilySubsets}]
+            #     Map from column family name to the columns in this family to be included
+            #     in the AuthorizedView.
+            class SubsetView
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # @!attribute [rw] key
+              #   @return [::String]
+              # @!attribute [rw] value
+              #   @return [::Google::Cloud::Bigtable::Admin::V2::AuthorizedView::FamilySubsets]
+              class FamilySubsetsEntry
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+            end
+
+            # Defines a subset of an AuthorizedView's fields.
+            module ResponseView
+              # Uses the default view for each method as documented in the request.
+              RESPONSE_VIEW_UNSPECIFIED = 0
+
+              # Only populates `name`.
+              NAME_ONLY = 1
+
+              # Only populates the AuthorizedView's basic metadata. This includes:
+              # name, deletion_protection, etag.
+              BASIC = 2
+
+              # Populates every fields.
+              FULL = 3
+            end
+          end
+
           # A set of columns within a table which share a common configuration.
           # @!attribute [rw] gc_rule
           #   @return [::Google::Cloud::Bigtable::Admin::V2::GcRule]

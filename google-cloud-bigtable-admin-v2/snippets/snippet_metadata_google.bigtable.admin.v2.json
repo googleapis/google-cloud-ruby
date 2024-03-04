@@ -1132,6 +1132,206 @@
       ]
     },
     {
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_CreateAuthorizedView_sync",
+      "title": "Snippet for the create_authorized_view call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#create_authorized_view.",
+      "file": "bigtable_table_admin/create_authorized_view.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_authorized_view",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#create_authorized_view",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::CreateAuthorizedViewRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BigtableTableAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client"
+        },
+        "method": {
+          "short_name": "CreateAuthorizedView",
+          "full_name": "google.bigtable.admin.v2.BigtableTableAdmin.CreateAuthorizedView",
+          "service": {
+            "short_name": "BigtableTableAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableTableAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_ListAuthorizedViews_sync",
+      "title": "Snippet for the list_authorized_views call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#list_authorized_views.",
+      "file": "bigtable_table_admin/list_authorized_views.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_authorized_views",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#list_authorized_views",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::ListAuthorizedViewsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigtable::Admin::V2::ListAuthorizedViewsResponse",
+        "client": {
+          "short_name": "BigtableTableAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client"
+        },
+        "method": {
+          "short_name": "ListAuthorizedViews",
+          "full_name": "google.bigtable.admin.v2.BigtableTableAdmin.ListAuthorizedViews",
+          "service": {
+            "short_name": "BigtableTableAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableTableAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_GetAuthorizedView_sync",
+      "title": "Snippet for the get_authorized_view call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#get_authorized_view.",
+      "file": "bigtable_table_admin/get_authorized_view.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_authorized_view",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#get_authorized_view",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::GetAuthorizedViewRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigtable::Admin::V2::AuthorizedView",
+        "client": {
+          "short_name": "BigtableTableAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client"
+        },
+        "method": {
+          "short_name": "GetAuthorizedView",
+          "full_name": "google.bigtable.admin.v2.BigtableTableAdmin.GetAuthorizedView",
+          "service": {
+            "short_name": "BigtableTableAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableTableAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_UpdateAuthorizedView_sync",
+      "title": "Snippet for the update_authorized_view call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#update_authorized_view.",
+      "file": "bigtable_table_admin/update_authorized_view.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_authorized_view",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#update_authorized_view",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::UpdateAuthorizedViewRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BigtableTableAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client"
+        },
+        "method": {
+          "short_name": "UpdateAuthorizedView",
+          "full_name": "google.bigtable.admin.v2.BigtableTableAdmin.UpdateAuthorizedView",
+          "service": {
+            "short_name": "BigtableTableAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableTableAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_DeleteAuthorizedView_sync",
+      "title": "Snippet for the delete_authorized_view call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#delete_authorized_view.",
+      "file": "bigtable_table_admin/delete_authorized_view.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_authorized_view",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#delete_authorized_view",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::DeleteAuthorizedViewRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "BigtableTableAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client"
+        },
+        "method": {
+          "short_name": "DeleteAuthorizedView",
+          "full_name": "google.bigtable.admin.v2.BigtableTableAdmin.DeleteAuthorizedView",
+          "service": {
+            "short_name": "BigtableTableAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableTableAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_ModifyColumnFamilies_sync",
       "title": "Snippet for the modify_column_families call in the BigtableTableAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#modify_column_families.",

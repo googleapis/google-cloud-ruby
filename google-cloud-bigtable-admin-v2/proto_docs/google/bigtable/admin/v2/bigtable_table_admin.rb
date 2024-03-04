@@ -809,6 +809,164 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+
+          # The request for
+          # {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#create_authorized_view CreateAuthorizedView}
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. This is the name of the table the AuthorizedView belongs to.
+          #     Values are of the form
+          #     `projects/{project}/instances/{instance}/tables/{table}`.
+          # @!attribute [rw] authorized_view_id
+          #   @return [::String]
+          #     Required. The id of the AuthorizedView to create. This AuthorizedView must
+          #     not already exist. The `authorized_view_id` appended to `parent` forms the
+          #     full AuthorizedView name of the form
+          #     `projects/{project}/instances/{instance}/tables/{table}/authorizedView/{authorized_view}`.
+          # @!attribute [rw] authorized_view
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::AuthorizedView]
+          #     Required. The AuthorizedView to create.
+          class CreateAuthorizedViewRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The metadata for the Operation returned by CreateAuthorizedView.
+          # @!attribute [rw] original_request
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::CreateAuthorizedViewRequest]
+          #     The request that prompted the initiation of this CreateInstance operation.
+          # @!attribute [rw] request_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The time at which the original request was received.
+          # @!attribute [rw] finish_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The time at which the operation failed or was completed successfully.
+          class CreateAuthorizedViewMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for
+          # {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#list_authorized_views google.bigtable.admin.v2.BigtableTableAdmin.ListAuthorizedViews}
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The unique name of the table for which AuthorizedViews should be
+          #     listed. Values are of the form
+          #     `projects/{project}/instances/{instance}/tables/{table}`.
+          # @!attribute [rw] page_size
+          #   @return [::Integer]
+          #     Optional. Maximum number of results per page.
+          #
+          #     A page_size of zero lets the server choose the number of items to return.
+          #     A page_size which is strictly positive will return at most that many items.
+          #     A negative page_size will cause an error.
+          #
+          #     Following the first request, subsequent paginated calls are not required
+          #     to pass a page_size. If a page_size is set in subsequent calls, it must
+          #     match the page_size given in the first request.
+          # @!attribute [rw] page_token
+          #   @return [::String]
+          #     Optional. The value of `next_page_token` returned by a previous call.
+          # @!attribute [rw] view
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::AuthorizedView::ResponseView]
+          #     Optional. The resource_view to be applied to the returned views' fields.
+          #     Default to NAME_ONLY.
+          class ListAuthorizedViewsRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Response message for
+          # {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#list_authorized_views google.bigtable.admin.v2.BigtableTableAdmin.ListAuthorizedViews}
+          # @!attribute [rw] authorized_views
+          #   @return [::Array<::Google::Cloud::Bigtable::Admin::V2::AuthorizedView>]
+          #     The AuthorizedViews present in the requested table.
+          # @!attribute [rw] next_page_token
+          #   @return [::String]
+          #     Set if not all tables could be returned in a single response.
+          #     Pass this value to `page_token` in another request to get the next
+          #     page of results.
+          class ListAuthorizedViewsResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for
+          # {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#get_authorized_view google.bigtable.admin.v2.BigtableTableAdmin.GetAuthorizedView}
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The unique name of the requested AuthorizedView.
+          #     Values are of the form
+          #     `projects/{project}/instances/{instance}/tables/{table}/authorizedViews/{authorized_view}`.
+          # @!attribute [rw] view
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::AuthorizedView::ResponseView]
+          #     Optional. The resource_view to be applied to the returned AuthorizedView's
+          #     fields. Default to BASIC.
+          class GetAuthorizedViewRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The request for
+          # {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#update_authorized_view UpdateAuthorizedView}.
+          # @!attribute [rw] authorized_view
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::AuthorizedView]
+          #     Required. The AuthorizedView to update. The `name` in `authorized_view` is
+          #     used to identify the AuthorizedView. AuthorizedView name must in this
+          #     format
+          #     projects/<project>/instances/<instance>/tables/<table>/authorizedViews/<authorized_view>
+          # @!attribute [rw] update_mask
+          #   @return [::Google::Protobuf::FieldMask]
+          #     Optional. The list of fields to update.
+          #     A mask specifying which fields in the AuthorizedView resource should be
+          #     updated. This mask is relative to the AuthorizedView resource, not to the
+          #     request message. A field will be overwritten if it is in the mask. If
+          #     empty, all fields set in the request will be overwritten. A special value
+          #     `*` means to overwrite all fields (including fields not set in the
+          #     request).
+          # @!attribute [rw] ignore_warnings
+          #   @return [::Boolean]
+          #     Optional. If true, ignore the safety checks when updating the
+          #     AuthorizedView.
+          class UpdateAuthorizedViewRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Metadata for the google.longrunning.Operation returned by
+          # {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#update_authorized_view UpdateAuthorizedView}.
+          # @!attribute [rw] original_request
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::UpdateAuthorizedViewRequest]
+          #     The request that prompted the initiation of this UpdateAuthorizedView
+          #     operation.
+          # @!attribute [rw] request_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The time at which the original request was received.
+          # @!attribute [rw] finish_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The time at which the operation failed or was completed successfully.
+          class UpdateAuthorizedViewMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for
+          # {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#delete_authorized_view google.bigtable.admin.v2.BigtableTableAdmin.DeleteAuthorizedView}
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The unique name of the AuthorizedView to be deleted.
+          #     Values are of the form
+          #     `projects/{project}/instances/{instance}/tables/{table}/authorizedViews/{authorized_view}`.
+          # @!attribute [rw] etag
+          #   @return [::String]
+          #     Optional. The current etag of the AuthorizedView.
+          #     If an etag is provided and does not match the current etag of the
+          #     AuthorizedView, deletion will be blocked and an ABORTED error will be
+          #     returned.
+          class DeleteAuthorizedViewRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
       end
     end

@@ -159,6 +159,31 @@
                 "undelete_table"
               ]
             },
+            "CreateAuthorizedView": {
+              "methods": [
+                "create_authorized_view"
+              ]
+            },
+            "ListAuthorizedViews": {
+              "methods": [
+                "list_authorized_views"
+              ]
+            },
+            "GetAuthorizedView": {
+              "methods": [
+                "get_authorized_view"
+              ]
+            },
+            "UpdateAuthorizedView": {
+              "methods": [
+                "update_authorized_view"
+              ]
+            },
+            "DeleteAuthorizedView": {
+              "methods": [
+                "delete_authorized_view"
+              ]
+            },
             "ModifyColumnFamilies": {
               "methods": [
                 "modify_column_families"
