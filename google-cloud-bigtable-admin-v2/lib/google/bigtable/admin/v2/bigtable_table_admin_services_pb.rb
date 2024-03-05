@@ -61,6 +61,16 @@ module Google
               rpc :DeleteTable, ::Google::Cloud::Bigtable::Admin::V2::DeleteTableRequest, ::Google::Protobuf::Empty
               # Restores a specified table which was accidentally deleted.
               rpc :UndeleteTable, ::Google::Cloud::Bigtable::Admin::V2::UndeleteTableRequest, ::Google::Longrunning::Operation
+              # Creates a new AuthorizedView in a table.
+              rpc :CreateAuthorizedView, ::Google::Cloud::Bigtable::Admin::V2::CreateAuthorizedViewRequest, ::Google::Longrunning::Operation
+              # Lists all AuthorizedViews from a specific table.
+              rpc :ListAuthorizedViews, ::Google::Cloud::Bigtable::Admin::V2::ListAuthorizedViewsRequest, ::Google::Cloud::Bigtable::Admin::V2::ListAuthorizedViewsResponse
+              # Gets information from a specified AuthorizedView.
+              rpc :GetAuthorizedView, ::Google::Cloud::Bigtable::Admin::V2::GetAuthorizedViewRequest, ::Google::Cloud::Bigtable::Admin::V2::AuthorizedView
+              # Updates an AuthorizedView in a table.
+              rpc :UpdateAuthorizedView, ::Google::Cloud::Bigtable::Admin::V2::UpdateAuthorizedViewRequest, ::Google::Longrunning::Operation
+              # Permanently deletes a specified AuthorizedView.
+              rpc :DeleteAuthorizedView, ::Google::Cloud::Bigtable::Admin::V2::DeleteAuthorizedViewRequest, ::Google::Protobuf::Empty
               # Performs a series of column family modifications on the specified table.
               # Either all or none of the modifications will occur before this method
               # returns, but data requests received prior to that point may see a table
