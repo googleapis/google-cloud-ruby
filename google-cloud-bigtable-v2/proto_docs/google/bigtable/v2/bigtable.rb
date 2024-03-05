@@ -24,9 +24,16 @@ module Google
         # Request message for Bigtable.ReadRows.
         # @!attribute [rw] table_name
         #   @return [::String]
-        #     Required. The unique name of the table from which to read.
+        #     Optional. The unique name of the table from which to read.
+        #
         #     Values are of the form
         #     `projects/<project>/instances/<instance>/tables/<table>`.
+        # @!attribute [rw] authorized_view_name
+        #   @return [::String]
+        #     Optional. The unique name of the AuthorizedView from which to read.
+        #
+        #     Values are of the form
+        #     `projects/<project>/instances/<instance>/tables/<table>/authorizedViews/<authorized_view>`.
         # @!attribute [rw] app_profile_id
         #   @return [::String]
         #     This value specifies routing for replication. If not specified, the
@@ -187,9 +194,17 @@ module Google
         # Request message for Bigtable.SampleRowKeys.
         # @!attribute [rw] table_name
         #   @return [::String]
-        #     Required. The unique name of the table from which to sample row keys.
+        #     Optional. The unique name of the table from which to sample row keys.
+        #
         #     Values are of the form
         #     `projects/<project>/instances/<instance>/tables/<table>`.
+        # @!attribute [rw] authorized_view_name
+        #   @return [::String]
+        #     Optional. The unique name of the AuthorizedView from which to sample row
+        #     keys.
+        #
+        #     Values are of the form
+        #     `projects/<project>/instances/<instance>/tables/<table>/authorizedViews/<authorized_view>`.
         # @!attribute [rw] app_profile_id
         #   @return [::String]
         #     This value specifies routing for replication. If not specified, the
@@ -223,9 +238,18 @@ module Google
         # Request message for Bigtable.MutateRow.
         # @!attribute [rw] table_name
         #   @return [::String]
-        #     Required. The unique name of the table to which the mutation should be
-        #     applied. Values are of the form
+        #     Optional. The unique name of the table to which the mutation should be
+        #     applied.
+        #
+        #     Values are of the form
         #     `projects/<project>/instances/<instance>/tables/<table>`.
+        # @!attribute [rw] authorized_view_name
+        #   @return [::String]
+        #     Optional. The unique name of the AuthorizedView to which the mutation
+        #     should be applied.
+        #
+        #     Values are of the form
+        #     `projects/<project>/instances/<instance>/tables/<table>/authorizedViews/<authorized_view>`.
         # @!attribute [rw] app_profile_id
         #   @return [::String]
         #     This value specifies routing for replication. If not specified, the
@@ -252,8 +276,18 @@ module Google
         # Request message for BigtableService.MutateRows.
         # @!attribute [rw] table_name
         #   @return [::String]
-        #     Required. The unique name of the table to which the mutations should be
+        #     Optional. The unique name of the table to which the mutations should be
         #     applied.
+        #
+        #     Values are of the form
+        #     `projects/<project>/instances/<instance>/tables/<table>`.
+        # @!attribute [rw] authorized_view_name
+        #   @return [::String]
+        #     Optional. The unique name of the AuthorizedView to which the mutations
+        #     should be applied.
+        #
+        #     Values are of the form
+        #     `projects/<project>/instances/<instance>/tables/<table>/authorizedViews/<authorized_view>`.
         # @!attribute [rw] app_profile_id
         #   @return [::String]
         #     This value specifies routing for replication. If not specified, the
@@ -342,9 +376,18 @@ module Google
         # Request message for Bigtable.CheckAndMutateRow.
         # @!attribute [rw] table_name
         #   @return [::String]
-        #     Required. The unique name of the table to which the conditional mutation
-        #     should be applied. Values are of the form
+        #     Optional. The unique name of the table to which the conditional mutation
+        #     should be applied.
+        #
+        #     Values are of the form
         #     `projects/<project>/instances/<instance>/tables/<table>`.
+        # @!attribute [rw] authorized_view_name
+        #   @return [::String]
+        #     Optional. The unique name of the AuthorizedView to which the conditional
+        #     mutation should be applied.
+        #
+        #     Values are of the form
+        #     `projects/<project>/instances/<instance>/tables/<table>/authorizedViews/<authorized_view>`.
         # @!attribute [rw] app_profile_id
         #   @return [::String]
         #     This value specifies routing for replication. If not specified, the
@@ -412,9 +455,18 @@ module Google
         # Request message for Bigtable.ReadModifyWriteRow.
         # @!attribute [rw] table_name
         #   @return [::String]
-        #     Required. The unique name of the table to which the read/modify/write rules
-        #     should be applied. Values are of the form
+        #     Optional. The unique name of the table to which the read/modify/write rules
+        #     should be applied.
+        #
+        #     Values are of the form
         #     `projects/<project>/instances/<instance>/tables/<table>`.
+        # @!attribute [rw] authorized_view_name
+        #   @return [::String]
+        #     Optional. The unique name of the AuthorizedView to which the
+        #     read/modify/write rules should be applied.
+        #
+        #     Values are of the form
+        #     `projects/<project>/instances/<instance>/tables/<table>/authorizedViews/<authorized_view>`.
         # @!attribute [rw] app_profile_id
         #   @return [::String]
         #     This value specifies routing for replication. If not specified, the

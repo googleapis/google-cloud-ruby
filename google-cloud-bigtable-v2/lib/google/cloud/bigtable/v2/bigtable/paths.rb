@@ -25,6 +25,27 @@ module Google
           # Path helper methods for the Bigtable API.
           module Paths
             ##
+            # Create a fully-qualified AuthorizedView resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/instances/{instance}/tables/{table}/authorizedViews/{authorized_view}`
+            #
+            # @param project [String]
+            # @param instance [String]
+            # @param table [String]
+            # @param authorized_view [String]
+            #
+            # @return [::String]
+            def authorized_view_path project:, instance:, table:, authorized_view:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "instance cannot contain /" if instance.to_s.include? "/"
+              raise ::ArgumentError, "table cannot contain /" if table.to_s.include? "/"
+
+              "projects/#{project}/instances/#{instance}/tables/#{table}/authorizedViews/#{authorized_view}"
+            end
+
+            ##
             # Create a fully-qualified Instance resource string.
             #
             # The resource will be in the following format:
