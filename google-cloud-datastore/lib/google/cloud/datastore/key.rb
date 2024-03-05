@@ -261,7 +261,7 @@ module Google
         #
         def path
           new_path = parent ? parent.path : []
-          new_path << [kind, (id || name)]
+          new_path << [kind, id || name]
         end
 
         ##

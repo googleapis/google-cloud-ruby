@@ -75,7 +75,7 @@ module Stackdriver
                   else
                     is_new ? true : false
                   end
-        @span_id = span_id ? span_id.to_i : nil
+        @span_id = span_id&.to_i
         @sampled = sampled
         if @sampled.nil?
           @capture_stack = nil
@@ -153,8 +153,7 @@ module Stackdriver
       # @return [Integer]
       #
       def hash
-        @hash ||= @trace_id.hash ^ @is_new.hash ^ @span_id.hash ^
-                  @sampled.hash ^ @capture_stack.hash
+        @hash ||= [@trace_id, @is_new, @span_id, @sampled, @capture_stack].hash
       end
 
       ##
@@ -229,8 +228,8 @@ module Stackdriver
         return unless match
 
         trace_id = match[1]
-        span_id = match[3] ? match[3].to_i : nil
-        options = match[5] ? match[5].to_i : nil
+        span_id = match[3]&.to_i
+        options = match[5]&.to_i
         if options.nil?
           sampled = capture_stack = nil
         else

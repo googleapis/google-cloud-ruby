@@ -88,7 +88,7 @@ module Google
         scope         ||= configure.scope
         timeout       ||= configure.timeout
         endpoint      ||= configure.endpoint
-        credentials   ||= (keyfile || default_credentials(scope: scope))
+        credentials   ||= keyfile || default_credentials(scope: scope)
 
         credentials = resolve_credentials credentials, scope
         project_id = resolve_project_id project_id, credentials

@@ -370,8 +370,7 @@ module Google
           added_keys = @column_families.keys - comparison_map.keys
 
           added_keys.map do |name|
-            Google::Cloud::Bigtable::Admin::V2::ModifyColumnFamiliesRequest:: \
-            Modification.new(
+            Google::Cloud::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification.new(
               id:     name,
               create: @column_families[name]
             )
@@ -394,8 +393,7 @@ module Google
           end
 
           updated_keys.map do |name|
-            Google::Cloud::Bigtable::Admin::V2::ModifyColumnFamiliesRequest:: \
-            Modification.new(
+            Google::Cloud::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification.new(
               id:     name,
               update: @column_families[name]
             )
@@ -415,8 +413,7 @@ module Google
           dropped_keys = comparison_map.keys - @column_families.keys
 
           dropped_keys.map do |name|
-            Google::Cloud::Bigtable::Admin::V2::ModifyColumnFamiliesRequest:: \
-            Modification.new(
+            Google::Cloud::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification.new(
               id:   name,
               drop: true
             )

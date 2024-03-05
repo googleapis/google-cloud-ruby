@@ -64,9 +64,11 @@ module Google
     #   dns = gcloud.dns scope: dns_readonly
     #
     def dns scope: nil, retries: nil, timeout: nil
+      retries ||= @retries
+      timeout ||= @timeout
       Google::Cloud.dns @project, @keyfile, scope: scope,
-                                            retries: (retries || @retries),
-                                            timeout: (timeout || @timeout)
+                                            retries: retries,
+                                            timeout: timeout
     end
 
     ##

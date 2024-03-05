@@ -84,7 +84,6 @@ module Google
 
         protected
 
-        # rubocop:disable Style/IdenticalConditionalBranches
         # rubocop:disable Style/GuardClause
 
         def acquire_or_wait message_size
@@ -117,7 +116,6 @@ module Google
           end
         end
 
-        # rubocop:enable Style/IdenticalConditionalBranches
         # rubocop:enable Style/GuardClause
 
         def is_new_and_others_wait? waiter

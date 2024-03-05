@@ -41,7 +41,7 @@ module Google
 
         def logging
           return mocked_logging if mocked_logging
-          @logging ||= \
+          @logging ||=
             V2::LoggingService::Client.new do |config|
               config.credentials = credentials if credentials
               config.timeout = timeout if timeout
@@ -55,7 +55,7 @@ module Google
 
         def sinks
           return mocked_sinks if mocked_sinks
-          @sinks ||= \
+          @sinks ||=
             V2::ConfigService::Client.new do |config|
               config.credentials = credentials if credentials
               config.timeout = timeout if timeout
@@ -69,7 +69,7 @@ module Google
 
         def metrics
           return mocked_metrics if mocked_metrics
-          @metrics ||= \
+          @metrics ||=
             V2::MetricsService::Client.new do |config|
               config.credentials = credentials if credentials
               config.timeout = timeout if timeout

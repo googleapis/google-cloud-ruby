@@ -68,8 +68,10 @@ module Google
     #   datastore = gcloud.datastore scope: platform_scope
     #
     def datastore scope: nil, timeout: nil, database_id: nil
+      timeout ||= @timeout
       Google::Cloud.datastore @project, @keyfile,
-                              scope: scope, timeout: (timeout || @timeout),
+                              scope: scope,
+                              timeout: timeout,
                               database_id: database_id
     end
 
@@ -117,7 +119,8 @@ module Google
       require "google/cloud/datastore"
       Google::Cloud::Datastore.new project_id: project_id,
                                    credentials: credentials,
-                                   scope: scope, timeout: timeout,
+                                   scope: scope,
+                                   timeout: timeout,
                                    database_id: database_id
     end
   end

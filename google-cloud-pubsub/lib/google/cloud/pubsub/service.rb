@@ -262,7 +262,7 @@ module Google
         # Modifies the PushConfig for a specified subscription.
         def modify_push_config subscription, endpoint, attributes
           # Convert attributes to strings to match the protobuf definition
-          attributes = Hash[attributes.map { |k, v| [String(k), String(v)] }]
+          attributes = attributes.to_h { |k, v| [String(k), String(v)] }
           push_config = Google::Cloud::PubSub::V1::PushConfig.new(
             push_endpoint: endpoint,
             attributes:    attributes

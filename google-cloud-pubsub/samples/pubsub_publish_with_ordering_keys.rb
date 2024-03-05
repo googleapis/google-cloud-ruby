@@ -28,7 +28,7 @@ def publish_ordered_messages topic_id:
   }
   topic.enable_message_ordering!
   10.times do |i|
-    topic.publish_async "This is message \##{i}.",
+    topic.publish_async "This is message ##{i}.",
                         ordering_key: "ordering-key"
   end
 

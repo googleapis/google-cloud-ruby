@@ -74,9 +74,10 @@ module Google
                   database_id: nil,
                   transport: nil
       transport ||= Google::Cloud.configure.firestore.transport
+      timeout ||= @timeout
       Google::Cloud.firestore @project, @keyfile,
                               scope: scope,
-                              timeout: (timeout || @timeout),
+                              timeout: timeout,
                               database_id: database_id,
                               transport: transport
     end

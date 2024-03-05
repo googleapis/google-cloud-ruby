@@ -62,7 +62,7 @@ module Google
         # This can be used to publish several messages in bulk.
         def initialize data = nil, attributes = {}
           # Convert attributes to strings to match the protobuf definition
-          attributes = Hash[attributes.map { |k, v| [String(k), String(v)] }]
+          attributes = attributes.to_h { |k, v| [String(k), String(v)] }
 
           @grpc = Google::Cloud::PubSub::V1::PubsubMessage.new(
             data:       String(data).dup.force_encoding(Encoding::ASCII_8BIT),
@@ -81,8 +81,7 @@ module Google
         # Optional attributes for the message.
         def attributes
           return @grpc.attributes.to_h if @grpc.attributes.respond_to? :to_h
-          # Enumerable doesn't have to_h on Ruby 2.0, so fallback to this
-          Hash[@grpc.attributes.to_a]
+          @grpc.attributes.to_a.to_h
         end
 
         ##

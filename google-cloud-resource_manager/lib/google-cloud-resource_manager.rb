@@ -65,9 +65,11 @@ module Google
     #   resource_manager = gcloud.resource_manager scope: readonly_scope
     #
     def resource_manager scope: nil, retries: nil, timeout: nil
+      retries ||= @retries
+      timeout ||= @timeout
       Google::Cloud.resource_manager @keyfile, scope: scope,
-                                               retries: (retries || @retries),
-                                               timeout: (timeout || @timeout)
+                                               retries: retries,
+                                               timeout: timeout
     end
 
     ##

@@ -27,7 +27,7 @@ def publish_messages_async_with_batch_settings topic_id:
     max_messages: 20
   }
   10.times do |i|
-    topic.publish_async "This is message \##{i}."
+    topic.publish_async "This is message ##{i}."
   end
 
   # Stop the async_publisher to send all queued messages immediately.

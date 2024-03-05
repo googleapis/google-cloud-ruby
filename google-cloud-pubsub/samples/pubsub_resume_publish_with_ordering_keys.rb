@@ -28,12 +28,12 @@ def publish_resume_publish topic_id:
   }
   topic.enable_message_ordering!
   10.times do |i|
-    topic.publish_async "This is message \##{i}.",
+    topic.publish_async "This is message ##{i}.",
                         ordering_key: "ordering-key" do |result|
       if result.succeeded?
-        puts "Message \##{i} successfully published."
+        puts "Message ##{i} successfully published."
       else
-        puts "Message \##{i} failed to publish"
+        puts "Message ##{i} failed to publish"
         # Allow publishing to continue on "ordering-key" after processing the
         # failure.
         topic.resume_publish "ordering-key"

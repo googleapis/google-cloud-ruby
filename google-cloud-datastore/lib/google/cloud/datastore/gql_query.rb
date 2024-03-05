@@ -127,15 +127,14 @@ module Google
         #   query string to valid GQL arguments
         #
         def named_bindings
-          bindings = Hash[@grpc.named_bindings.map do |name, gql_query_param|
+          bindings_elems = @grpc.named_bindings.map do |name, gql_query_param|
             if gql_query_param.parameter_type == :cursor
               [name, Cursor.from_grpc(gql_query_param.cursor)]
             else
               [name, Convert.from_value(gql_query_param.value)]
             end
-          end]
-          bindings.freeze
-          bindings
+          end
+          bindings_elems.to_h.freeze
         end
 
         ##

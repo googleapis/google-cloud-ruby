@@ -120,10 +120,9 @@ module Google
                                    [aggregate_alias, value.double_value]
                                  end
                                end
-                               .to_h
 
             new.tap do |s|
-              s.instance_variable_set :@aggregate_fields, aggregate_fields
+              s.instance_variable_set :@aggregate_fields, aggregate_fields.to_h
               s.instance_variable_set :@read_time, aggregate_query_response.batch.read_time
             end
           end

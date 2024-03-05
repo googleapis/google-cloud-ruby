@@ -4,3 +4,12 @@ gemspec
 
 gem "google-cloud-core", path: "../google-cloud-core"
 gem "google-cloud-errors", path: "../google-cloud-errors"
+gem "google-style", "~> 1.27.1"
+gem "minitest", "~> 5.16"
+gem "minitest-focus", "~> 1.1"
+gem "minitest-rg", "~> 5.2"
+gem "rake", ">= 12.0"
+gem "redcarpet", "~> 3.0"
+gem "simplecov", "~> 0.18"
+gem "yard", "~> 0.9"
+gem "yard-doctest", "~> 0.1.13"

@@ -41,7 +41,7 @@ module Google
 
         def error_reporting
           return mocked_error_reporting if mocked_error_reporting
-          @error_reporting ||= \
+          @error_reporting ||=
             V1beta1::ReportErrorsService::Client.new do |config|
               config.credentials = credentials if credentials
               config.timeout = timeout if timeout
