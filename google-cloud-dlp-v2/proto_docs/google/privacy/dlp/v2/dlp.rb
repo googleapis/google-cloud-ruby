@@ -111,7 +111,7 @@ module Google
         #   @return [::Array<::Google::Cloud::Dlp::V2::InfoType>]
         #     Restricts what info_types to look for. The values must correspond to
         #     InfoType values returned by ListInfoTypes or listed at
-        #     https://cloud.google.com/dlp/docs/infotypes-reference.
+        #     https://cloud.google.com/sensitive-data-protection/docs/infotypes-reference.
         #
         #     When no InfoTypes or CustomInfoTypes are specified in a request, the
         #     system may automatically choose a default list of detectors to run, which
@@ -127,7 +127,8 @@ module Google
         #
         #     In general, the highest likelihood setting yields the fewest findings in
         #     results and the lowest chance of a false positive. For more information,
-        #     see [Match likelihood](https://cloud.google.com/dlp/docs/likelihood).
+        #     see [Match
+        #     likelihood](https://cloud.google.com/sensitive-data-protection/docs/likelihood).
         # @!attribute [rw] min_likelihood_per_info_type
         #   @return [::Array<::Google::Cloud::Dlp::V2::InspectConfig::InfoTypeLikelihood>]
         #     Minimum likelihood per infotype. For each infotype, a user can specify a
@@ -164,7 +165,8 @@ module Google
         # @!attribute [rw] custom_info_types
         #   @return [::Array<::Google::Cloud::Dlp::V2::CustomInfoType>]
         #     CustomInfoTypes provided by the user. See
-        #     https://cloud.google.com/dlp/docs/creating-custom-infotypes to learn more.
+        #     https://cloud.google.com/sensitive-data-protection/docs/creating-custom-infotypes
+        #     to learn more.
         # @!attribute [rw] content_options
         #   @return [::Array<::Google::Cloud::Dlp::V2::ContentOption>]
         #     Deprecated and unused.
@@ -267,7 +269,7 @@ module Google
 
           # The type of data being sent for inspection. To learn more, see
           # [Supported file
-          # types](https://cloud.google.com/dlp/docs/supported-file-types).
+          # types](https://cloud.google.com/sensitive-data-protection/docs/supported-file-types).
           module BytesType
             # Unused
             BYTES_TYPE_UNSPECIFIED = 0
@@ -313,14 +315,15 @@ module Google
           end
         end
 
+        # Type of content to inspect.
         # @!attribute [rw] value
         #   @return [::String]
         #     String data to inspect or redact.
         # @!attribute [rw] table
         #   @return [::Google::Cloud::Dlp::V2::Table]
         #     Structured content for inspection. See
-        #     https://cloud.google.com/dlp/docs/inspecting-text#inspecting_a_table to
-        #     learn more.
+        #     https://cloud.google.com/sensitive-data-protection/docs/inspecting-text#inspecting_a_table
+        #     to learn more.
         # @!attribute [rw] byte_item
         #   @return [::Google::Cloud::Dlp::V2::ByteContentItem]
         #     Content data to inspect or redact. Replaces `type` and `data`.
@@ -330,7 +333,7 @@ module Google
         end
 
         # Structured content to inspect. Up to 50,000 `Value`s per request allowed. See
-        # https://cloud.google.com/dlp/docs/inspecting-structured-text#inspecting_a_table
+        # https://cloud.google.com/sensitive-data-protection/docs/inspecting-structured-text#inspecting_a_table
         # to learn more.
         # @!attribute [rw] headers
         #   @return [::Array<::Google::Cloud::Dlp::V2::FieldId>]
@@ -525,6 +528,7 @@ module Google
         # Storage metadata label to indicate which metadata entry contains findings.
         # @!attribute [rw] key
         #   @return [::String]
+        #     Label name.
         class StorageMetadataLabel
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -664,7 +668,7 @@ module Google
         #
         #     The format of this value varies depending on whether you have [specified a
         #     processing
-        #     location](https://cloud.google.com/dlp/docs/specifying-location):
+        #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
         #
         #     + Projects scope, location specified:<br/>
         #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -756,7 +760,7 @@ module Google
         #
         #     The format of this value varies depending on whether you have [specified a
         #     processing
-        #     location](https://cloud.google.com/dlp/docs/specifying-location):
+        #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
         #
         #     + Projects scope, location specified:<br/>
         #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -829,7 +833,7 @@ module Google
         #
         #     The format of this value varies depending on whether you have [specified a
         #     processing
-        #     location](https://cloud.google.com/dlp/docs/specifying-location):
+        #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
         #
         #     + Projects scope, location specified:<br/>
         #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -902,7 +906,7 @@ module Google
         #
         #     The format of this value varies depending on whether you have [specified a
         #     processing
-        #     location](https://cloud.google.com/dlp/docs/specifying-location):
+        #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
         #
         #     + Projects scope, location specified:<br/>
         #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -1424,7 +1428,8 @@ module Google
         end
 
         # Configuration for a risk analysis job. See
-        # https://cloud.google.com/dlp/docs/concepts-risk-analysis to learn more.
+        # https://cloud.google.com/sensitive-data-protection/docs/concepts-risk-analysis
+        # to learn more.
         # @!attribute [rw] privacy_metric
         #   @return [::Google::Cloud::Dlp::V2::PrivacyMetric]
         #     Privacy metric to compute.
@@ -2119,6 +2124,7 @@ module Google
         # A type of transformation that is applied over images.
         # @!attribute [rw] transforms
         #   @return [::Array<::Google::Cloud::Dlp::V2::ImageTransformations::ImageTransformation>]
+        #     List of transforms to make.
         class ImageTransformations
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2284,7 +2290,8 @@ module Google
         # Outputs a base64 encoded representation of the hashed output
         # (for example, L7k0BHmF1ha5U3NfGykjro4xWi1MPVQPjhMAZbSV9mM=).
         # Currently, only string and integer values can be hashed.
-        # See https://cloud.google.com/dlp/docs/pseudonymization to learn more.
+        # See https://cloud.google.com/sensitive-data-protection/docs/pseudonymization
+        # to learn more.
         # @!attribute [rw] crypto_key
         #   @return [::Google::Cloud::Dlp::V2::CryptoKey]
         #     The key used by the hash function.
@@ -2373,8 +2380,8 @@ module Google
         # @!attribute [rw] word_list
         #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::Dictionary::WordList]
         #     A list of words to select from for random replacement. The
-        #     [limits](https://cloud.google.com/dlp/limits) page contains details about
-        #     the size limits of dictionaries.
+        #     [limits](https://cloud.google.com/sensitive-data-protection/limits) page
+        #     contains details about the size limits of dictionaries.
         class ReplaceDictionaryConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2493,7 +2500,9 @@ module Google
         # being transformed, we will first attempt converting the type of the data to
         # be transformed to match the type of the bound before comparing.
         #
-        # See https://cloud.google.com/dlp/docs/concepts-bucketing to learn more.
+        # See
+        # https://cloud.google.com/sensitive-data-protection/docs/concepts-bucketing to
+        # learn more.
         # @!attribute [rw] lower_bound
         #   @return [::Google::Cloud::Dlp::V2::Value]
         #     Required. Lower bound value of buckets. All values less than `lower_bound`
@@ -2523,7 +2532,9 @@ module Google
         # If the bound `Value` type differs from the type of data being transformed, we
         # will first attempt converting the type of the data to be transformed to match
         # the type of the bound before comparing.
-        # See https://cloud.google.com/dlp/docs/concepts-bucketing to learn more.
+        # See
+        # https://cloud.google.com/sensitive-data-protection/docs/concepts-bucketing to
+        # learn more.
         # @!attribute [rw] buckets
         #   @return [::Array<::Google::Cloud::Dlp::V2::BucketingConfig::Bucket>]
         #     Set of buckets. Ranges must be non-overlapping.
@@ -2555,8 +2566,9 @@ module Google
         # encoded as ASCII. For a given crypto key and context, the same identifier
         # will be replaced with the same surrogate. Identifiers must be at least two
         # characters long. In the case that the identifier is the empty string, it will
-        # be skipped. See https://cloud.google.com/dlp/docs/pseudonymization to learn
-        # more.
+        # be skipped. See
+        # https://cloud.google.com/sensitive-data-protection/docs/pseudonymization to
+        # learn more.
         #
         # Note: We recommend using  CryptoDeterministicConfig for all use cases which
         # do not require preserving the input alphabet space and size, plus warrant
@@ -2618,7 +2630,7 @@ module Google
         #
         #     This annotation identifies the surrogate when inspecting content using the
         #     custom infoType
-        #     [`SurrogateType`](https://cloud.google.com/dlp/docs/reference/rest/v2/InspectConfig#surrogatetype).
+        #     [`SurrogateType`](https://cloud.google.com/sensitive-data-protection/docs/reference/rest/v2/InspectConfig#surrogatetype).
         #     This facilitates reversal of the surrogate when it occurs in free text.
         #
         #     In order for inspection to work properly, the name of this infoType must
@@ -2708,7 +2720,7 @@ module Google
         # dlp.kms.encrypt
         #
         # For more information, see [Creating a wrapped key]
-        # (https://cloud.google.com/dlp/docs/create-wrapped-key).
+        # (https://cloud.google.com/sensitive-data-protection/docs/create-wrapped-key).
         #
         # Note: When you use Cloud KMS for cryptographic operations,
         # [charges apply](https://cloud.google.com/kms/pricing).
@@ -2724,7 +2736,8 @@ module Google
         end
 
         # Shifts dates by random number of days, with option to be consistent for the
-        # same context. See https://cloud.google.com/dlp/docs/concepts-date-shifting
+        # same context. See
+        # https://cloud.google.com/sensitive-data-protection/docs/concepts-date-shifting
         # to learn more.
         # @!attribute [rw] upper_bound_days
         #   @return [::Integer]
@@ -3068,6 +3081,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # The field in a record to transform.
         # @!attribute [rw] field_id
         #   @return [::Google::Cloud::Dlp::V2::FieldId]
         #     For record transformations, provide a field.
@@ -3082,6 +3096,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # The outcome of a transformation.
         # @!attribute [rw] result_status_type
         #   @return [::Google::Cloud::Dlp::V2::TransformationResultStatusType]
         #     Transformation result status type, this will be either SUCCESS, or it will
@@ -3133,8 +3148,9 @@ module Google
 
         # The inspectTemplate contains a configuration (set of types of sensitive data
         # to be detected) to be used anywhere you otherwise would normally specify
-        # InspectConfig. See https://cloud.google.com/dlp/docs/concepts-templates
-        # to learn more.
+        # InspectConfig. See
+        # https://cloud.google.com/sensitive-data-protection/docs/concepts-templates to
+        # learn more.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The template name.
@@ -3163,7 +3179,9 @@ module Google
         end
 
         # DeidentifyTemplates contains instructions on how to de-identify content.
-        # See https://cloud.google.com/dlp/docs/concepts-templates to learn more.
+        # See
+        # https://cloud.google.com/sensitive-data-protection/docs/concepts-templates to
+        # learn more.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The template name.
@@ -3206,7 +3224,9 @@ module Google
         end
 
         # Contains a configuration to make dlp api calls on a repeating basis.
-        # See https://cloud.google.com/dlp/docs/concepts-job-triggers to learn more.
+        # See
+        # https://cloud.google.com/sensitive-data-protection/docs/concepts-job-triggers
+        # to learn more.
         # @!attribute [rw] name
         #   @return [::String]
         #     Unique resource name for the triggeredJob, assigned by the service when the
@@ -3280,7 +3300,8 @@ module Google
         end
 
         # A task to execute on the completion of a job.
-        # See https://cloud.google.com/dlp/docs/concepts-actions to learn more.
+        # See https://cloud.google.com/sensitive-data-protection/docs/concepts-actions
+        # to learn more.
         # @!attribute [rw] save_findings
         #   @return [::Google::Cloud::Dlp::V2::Action::SaveFindings]
         #     Save resulting findings in a provided location.
@@ -3323,7 +3344,7 @@ module Google
           # Publish a message into a given Pub/Sub topic when DlpJob has completed. The
           # message contains a single field, `DlpJobName`, which is equal to the
           # finished job's
-          # [`DlpJob.name`](https://cloud.google.com/dlp/docs/reference/rest/v2/projects.dlpJobs#DlpJob).
+          # [`DlpJob.name`](https://cloud.google.com/sensitive-data-protection/docs/reference/rest/v2/projects.dlpJobs#DlpJob).
           # Compatible with: Inspect, Risk
           # @!attribute [rw] topic
           #   @return [::String]
@@ -3478,7 +3499,7 @@ module Google
         #
         #     The format of this value varies depending on the scope of the request
         #     (project or organization) and whether you have [specified a processing
-        #     location](https://cloud.google.com/dlp/docs/specifying-location):
+        #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
         #
         #     + Projects scope, location specified:<br/>
         #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -3546,7 +3567,7 @@ module Google
         #
         #     The format of this value varies depending on the scope of the request
         #     (project or organization) and whether you have [specified a processing
-        #     location](https://cloud.google.com/dlp/docs/specifying-location):
+        #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
         #
         #     + Projects scope, location specified:<br/>
         #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -3624,7 +3645,7 @@ module Google
         #
         #     The format of this value varies depending on whether you have [specified a
         #     processing
-        #     location](https://cloud.google.com/dlp/docs/specifying-location):
+        #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
         #
         #     + Projects scope, location specified:<br/>
         #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -3814,7 +3835,7 @@ module Google
         #
         #     The format of this value varies depending on whether you have [specified a
         #     processing
-        #     location](https://cloud.google.com/dlp/docs/specifying-location):
+        #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
         #
         #     + Projects scope, location specified:<br/>
         #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -3854,7 +3875,7 @@ module Google
         #
         #     The format of this value varies depending on whether you have [specified a
         #     processing
-        #     location](https://cloud.google.com/dlp/docs/specifying-location):
+        #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
         #
         #     + Projects scope, location specified:<br/>
         #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -4062,7 +4083,7 @@ module Google
         #
         # The generated data profiles are retained according to the
         # [data retention policy]
-        # (https://cloud.google.com/dlp/docs/data-profiles#retention).
+        # (https://cloud.google.com/sensitive-data-protection/docs/data-profiles#retention).
         # @!attribute [rw] location
         #   @return [::Google::Cloud::Dlp::V2::DataProfileLocation]
         #     The data to scan.
@@ -4088,7 +4109,7 @@ module Google
         #     scanned.
         #
         #     For more information, see
-        #     https://cloud.google.com/dlp/docs/data-profiles#data-residency.
+        #     https://cloud.google.com/sensitive-data-protection/docs/data-profiles#data-residency.
         # @!attribute [rw] data_profile_actions
         #   @return [::Array<::Google::Cloud::Dlp::V2::DataProfileAction>]
         #     Actions to execute at the completion of the job.
@@ -4161,7 +4182,7 @@ module Google
         #
         # The generated data profiles are retained according to the
         # [data retention policy]
-        # (https://cloud.google.com/dlp/docs/data-profiles#retention).
+        # (https://cloud.google.com/sensitive-data-protection/docs/data-profiles#retention).
         # @!attribute [rw] name
         #   @return [::String]
         #     Unique resource name for the DiscoveryConfig, assigned by the service when
@@ -4190,7 +4211,7 @@ module Google
         #     scanned.
         #
         #     For more information, see
-        #     https://cloud.google.com/dlp/docs/data-profiles#data-residency.
+        #     https://cloud.google.com/sensitive-data-protection/docs/data-profiles#data-residency.
         # @!attribute [rw] actions
         #   @return [::Array<::Google::Cloud::Dlp::V2::DataProfileAction>]
         #     Actions to execute at the completion of scanning.
@@ -4499,7 +4520,7 @@ module Google
         #
         #     The format of this value varies depending on whether you have [specified a
         #     processing
-        #     location](https://cloud.google.com/dlp/docs/specifying-location):
+        #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
         #
         #     + Projects scope, location specified:<br/>
         #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -4597,7 +4618,7 @@ module Google
         # The request message for finishing a DLP hybrid job.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The name of the DlpJob resource to be cancelled.
+        #     Required. The name of the DlpJob resource to be finished.
         class FinishDlpJobRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -4619,7 +4640,7 @@ module Google
         #
         #     The format of this value varies depending on the scope of the request
         #     (project or organization) and whether you have [specified a processing
-        #     location](https://cloud.google.com/dlp/docs/specifying-location):
+        #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
         #
         #     + Projects scope, location specified:<br/>
         #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -4688,7 +4709,7 @@ module Google
         #
         #     The format of this value varies depending on the scope of the request
         #     (project or organization) and whether you have [specified a processing
-        #     location](https://cloud.google.com/dlp/docs/specifying-location):
+        #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
         #
         #     + Projects scope, location specified:<br/>
         #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -4763,8 +4784,8 @@ module Google
 
         # Configuration for a custom dictionary created from a data source of any size
         # up to the maximum size defined in the
-        # [limits](https://cloud.google.com/dlp/limits) page. The artifacts of
-        # dictionary creation are stored in the specified Cloud Storage
+        # [limits](https://cloud.google.com/sensitive-data-protection/limits) page. The
+        # artifacts of dictionary creation are stored in the specified Cloud Storage
         # location. Consider using `CustomInfoType.Dictionary` for smaller dictionaries
         # that satisfy the size requirements.
         # @!attribute [rw] output_path
@@ -4795,7 +4816,7 @@ module Google
 
         # Configuration for stored infoTypes. All fields and subfield are provided
         # by the user. For more information, see
-        # https://cloud.google.com/dlp/docs/creating-custom-infotypes.
+        # https://cloud.google.com/sensitive-data-protection/docs/creating-custom-infotypes.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Display name of the StoredInfoType (max 256 characters).
@@ -4885,7 +4906,7 @@ module Google
         #
         #     The format of this value varies depending on the scope of the request
         #     (project or organization) and whether you have [specified a processing
-        #     location](https://cloud.google.com/dlp/docs/specifying-location):
+        #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
         #
         #     + Projects scope, location specified:<br/>
         #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -4955,7 +4976,7 @@ module Google
         #
         #     The format of this value varies depending on the scope of the request
         #     (project or organization) and whether you have [specified a processing
-        #     location](https://cloud.google.com/dlp/docs/specifying-location):
+        #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
         #
         #     + Projects scope, location specified:<br/>
         #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -5122,6 +5143,240 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request to list the profiles generated for a given organization or project.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. organizations/\\{org_id}/locations/\\{loc_id}
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Page token to continue retrieval.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Size of the page. This value can be limited by the server. If zero, server
+        #     returns a page of max size 100.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Comma separated list of fields to order by, followed by `asc` or `desc`
+        #     postfix. This list is case insensitive. The default sorting order is
+        #     ascending. Redundant space characters are insignificant. Only one order
+        #     field at a time is allowed.
+        #
+        #     Examples:
+        #     * `project_id`
+        #     * `sensitivity_level desc`
+        #
+        #     Supported fields are:
+        #
+        #     - `project_id`: GCP project ID
+        #     - `sensitivity_level`: How sensitive the data in a project is, at most.
+        #     - `data_risk_level`: How much risk is associated with this data.
+        #     - `profile_last_generated`: When the profile was last updated in epoch
+        #     seconds.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Allows filtering.
+        #
+        #     Supported syntax:
+        #
+        #     * Filter expressions are made up of one or more restrictions.
+        #     * Restrictions can be combined by `AND` or `OR` logical operators. A
+        #     sequence of restrictions implicitly uses `AND`.
+        #     * A restriction has the form of `{field} {operator} {value}`.
+        #     * Supported fields/values:
+        #         - `sensitivity_level` - HIGH|MODERATE|LOW
+        #         - `data_risk_level` - HIGH|MODERATE|LOW
+        #         - `status_code` - an RPC status code as defined in
+        #         https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+        #     * The operator must be `=` or `!=`.
+        #
+        #     Examples:
+        #
+        #     * `project_id = 12345 AND status_code = 1`
+        #     * `project_id = 12345 AND sensitivity_level = HIGH`
+        #
+        #     The length of this field should be no more than 500 characters.
+        class ListProjectDataProfilesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # List of profiles generated for a given organization or project.
+        # @!attribute [rw] project_data_profiles
+        #   @return [::Array<::Google::Cloud::Dlp::V2::ProjectDataProfile>]
+        #     List of data profiles.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     The next page token.
+        class ListProjectDataProfilesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to list the profiles generated for a given organization or project.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Resource name of the organization or project, for
+        #     example `organizations/433245324/locations/europe` or
+        #     `projects/project-id/locations/asia`.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Page token to continue retrieval.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Size of the page. This value can be limited by the server. If zero, server
+        #     returns a page of max size 100.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Comma separated list of fields to order by, followed by `asc` or `desc`
+        #     postfix. This list is case insensitive. The default sorting order is
+        #     ascending. Redundant space characters are insignificant. Only one order
+        #     field at a time is allowed.
+        #
+        #     Examples:
+        #     * `project_id asc`
+        #     * `table_id`
+        #     * `sensitivity_level desc`
+        #
+        #     Supported fields are:
+        #
+        #     - `project_id`: The GCP project ID.
+        #     - `dataset_id`: The ID of a BigQuery dataset.
+        #     - `table_id`: The ID of a BigQuery table.
+        #     - `sensitivity_level`: How sensitive the data in a table is, at most.
+        #     - `data_risk_level`: How much risk is associated with this data.
+        #     - `profile_last_generated`: When the profile was last updated in epoch
+        #     seconds.
+        #     - `last_modified`: The last time the resource was modified.
+        #     - `resource_visibility`: Visibility restriction for this resource.
+        #     - `row_count`: Number of rows in this resource.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Allows filtering.
+        #
+        #     Supported syntax:
+        #
+        #     * Filter expressions are made up of one or more restrictions.
+        #     * Restrictions can be combined by `AND` or `OR` logical operators. A
+        #     sequence of restrictions implicitly uses `AND`.
+        #     * A restriction has the form of `{field} {operator} {value}`.
+        #     * Supported fields/values:
+        #         - `project_id` - The GCP project ID.
+        #         - `dataset_id` - The BigQuery dataset ID.
+        #         - `table_id` - The ID of the BigQuery table.
+        #         - `sensitivity_level` - HIGH|MODERATE|LOW
+        #         - `data_risk_level` - HIGH|MODERATE|LOW
+        #         - `resource_visibility`: PUBLIC|RESTRICTED
+        #         - `status_code` - an RPC status code as defined in
+        #         https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+        #     * The operator must be `=` or `!=`.
+        #
+        #     Examples:
+        #
+        #     * `project_id = 12345 AND status_code = 1`
+        #     * `project_id = 12345 AND sensitivity_level = HIGH`
+        #     * `project_id = 12345 AND resource_visibility = PUBLIC`
+        #
+        #     The length of this field should be no more than 500 characters.
+        class ListTableDataProfilesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # List of profiles generated for a given organization or project.
+        # @!attribute [rw] table_data_profiles
+        #   @return [::Array<::Google::Cloud::Dlp::V2::TableDataProfile>]
+        #     List of data profiles.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     The next page token.
+        class ListTableDataProfilesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to list the profiles generated for a given organization or project.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Resource name of the organization or project, for
+        #     example `organizations/433245324/locations/europe` or
+        #     `projects/project-id/locations/asia`.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Page token to continue retrieval.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Size of the page. This value can be limited by the server. If zero, server
+        #     returns a page of max size 100.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Comma separated list of fields to order by, followed by `asc` or `desc`
+        #     postfix. This list is case insensitive. The default sorting order is
+        #     ascending. Redundant space characters are insignificant. Only one order
+        #     field at a time is allowed.
+        #
+        #     Examples:
+        #     * `project_id asc`
+        #     * `table_id`
+        #     * `sensitivity_level desc`
+        #
+        #     Supported fields are:
+        #
+        #     - `project_id`: The Google Cloud project ID.
+        #     - `dataset_id`: The ID of a BigQuery dataset.
+        #     - `table_id`: The ID of a BigQuery table.
+        #     - `sensitivity_level`: How sensitive the data in a column is, at most.
+        #     - `data_risk_level`: How much risk is associated with this data.
+        #     - `profile_last_generated`: When the profile was last updated in epoch
+        #     seconds.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Allows filtering.
+        #
+        #     Supported syntax:
+        #
+        #     * Filter expressions are made up of one or more restrictions.
+        #     * Restrictions can be combined by `AND` or `OR` logical operators. A
+        #     sequence of restrictions implicitly uses `AND`.
+        #     * A restriction has the form of `{field} {operator} {value}`.
+        #     * Supported fields/values:
+        #         - `table_data_profile_name` - The name of the related table data
+        #         profile.
+        #         - `project_id` - The Google Cloud project ID. (REQUIRED)
+        #         - `dataset_id` - The BigQuery dataset ID. (REQUIRED)
+        #         - `table_id` - The BigQuery table ID. (REQUIRED)
+        #         - `field_id` - The ID of the BigQuery field.
+        #         - `info_type` - The infotype detected in the resource.
+        #         - `sensitivity_level` - HIGH|MEDIUM|LOW
+        #         - `data_risk_level`: How much risk is associated with this data.
+        #         - `status_code` - an RPC status code as defined in
+        #         https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+        #     * The operator must be `=` for project_id, dataset_id, and table_id. Other
+        #       filters also support `!=`.
+        #
+        #     Examples:
+        #
+        #     * project_id = 12345 AND status_code = 1
+        #     * project_id = 12345 AND sensitivity_level = HIGH
+        #     * project_id = 12345 AND info_type = STREET_ADDRESS
+        #
+        #     The length of this field should be no more than 500 characters.
+        class ListColumnDataProfilesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # List of profiles generated for a given organization or project.
+        # @!attribute [rw] column_data_profiles
+        #   @return [::Array<::Google::Cloud::Dlp::V2::ColumnDataProfile>]
+        #     List of data profiles.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     The next page token.
+        class ListColumnDataProfilesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Score is a summary of all elements in the data profile.
         # A higher number means more risk.
         # @!attribute [rw] score
@@ -5153,14 +5408,53 @@ module Google
           end
         end
 
+        # An aggregated profile for this project, based on the resources profiled
+        # within it.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     The resource name of the profile.
+        # @!attribute [rw] project_id
+        #   @return [::String]
+        #     Project ID that was profiled.
+        # @!attribute [rw] profile_last_generated
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The last time the profile was generated.
+        # @!attribute [rw] sensitivity_score
+        #   @return [::Google::Cloud::Dlp::V2::SensitivityScore]
+        #     The sensitivity score of this project.
+        # @!attribute [rw] data_risk_level
+        #   @return [::Google::Cloud::Dlp::V2::DataRiskLevel]
+        #     The data risk level of this project.
+        # @!attribute [rw] profile_status
+        #   @return [::Google::Cloud::Dlp::V2::ProfileStatus]
+        #     Success or error status of the last attempt to profile the project.
+        class ProjectDataProfile
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Snapshot of the configurations used to generate the profile.
         # @!attribute [rw] inspect_config
         #   @return [::Google::Cloud::Dlp::V2::InspectConfig]
         #     A copy of the inspection config used to generate this profile. This
         #     is a copy of the inspect_template specified in `DataProfileJobConfig`.
         # @!attribute [rw] data_profile_job
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::Dlp::V2::DataProfileJobConfig]
+        #     A copy of the configuration used to generate this profile. This is
+        #     deprecated, and the DiscoveryConfig field is preferred moving forward.
+        #     DataProfileJobConfig will still be written here for Discovery in BigQuery
+        #     for backwards compatibility, but will not be updated with new fields, while
+        #     DiscoveryConfig will.
+        # @!attribute [rw] discovery_config
+        #   @return [::Google::Cloud::Dlp::V2::DiscoveryConfig]
         #     A copy of the configuration used to generate this profile.
+        # @!attribute [rw] inspect_template_name
+        #   @return [::String]
+        #     Name of the inspection template used to generate this profile
+        # @!attribute [rw] inspect_template_modified_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Timestamp when the template was modified
         class DataProfileConfigSnapshot
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -5170,26 +5464,29 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     The name of the profile.
+        # @!attribute [rw] data_source_type
+        #   @return [::Google::Cloud::Dlp::V2::DataSourceType]
+        #     The resource type that was profiled.
         # @!attribute [rw] project_data_profile
         #   @return [::String]
         #     The resource name to the project data profile for this table.
         # @!attribute [rw] dataset_project_id
         #   @return [::String]
-        #     The Google Cloud project ID that owns the BigQuery dataset.
+        #     The Google Cloud project ID that owns the resource.
         # @!attribute [rw] dataset_location
         #   @return [::String]
-        #     The BigQuery location where the dataset's data is stored.
+        #     If supported, the location where the dataset's data is stored.
         #     See https://cloud.google.com/bigquery/docs/locations for supported
         #     locations.
         # @!attribute [rw] dataset_id
         #   @return [::String]
-        #     The BigQuery dataset ID.
+        #     If the resource is BigQuery, the  dataset ID.
         # @!attribute [rw] table_id
         #   @return [::String]
-        #     The BigQuery table ID.
+        #     If the resource is BigQuery, the BigQuery table ID.
         # @!attribute [rw] full_resource
         #   @return [::String]
-        #     The resource name of the table.
+        #     The resource name of the resource profiled.
         #     https://cloud.google.com/apis/design/resource_names#full_resource_name
         # @!attribute [rw] profile_status
         #   @return [::Google::Cloud::Dlp::V2::ProfileStatus]
@@ -5276,6 +5573,7 @@ module Google
           end
         end
 
+        # Success or errors for the profile generation.
         # @!attribute [rw] status
         #   @return [::Google::Rpc::Status]
         #     Profiling status code and optional message. The `status.code` value is 0
@@ -5337,10 +5635,10 @@ module Google
         #     The resource name of the table data profile.
         # @!attribute [rw] table_full_resource
         #   @return [::String]
-        #     The resource name of the table this column is within.
+        #     The resource name of the resource this column is within.
         # @!attribute [rw] dataset_project_id
         #   @return [::String]
-        #     The Google Cloud project ID that owns the BigQuery dataset.
+        #     The Google Cloud project ID that owns the profiled resource.
         # @!attribute [rw] dataset_location
         #   @return [::String]
         #     The BigQuery location where the dataset's data is stored.
@@ -5465,6 +5763,36 @@ module Google
           end
         end
 
+        # Request to get a project data profile.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Resource name, for example
+        #     `organizations/12345/locations/us/projectDataProfiles/53234423`.
+        class GetProjectDataProfileRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to get a table data profile.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Resource name, for example
+        #     `organizations/12345/locations/us/tableDataProfiles/53234423`.
+        class GetTableDataProfileRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to get a column data profile.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Resource name, for example
+        #     `organizations/12345/locations/us/columnDataProfiles/53234423`.
+        class GetColumnDataProfileRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A condition for determining whether a Pub/Sub should be triggered.
         # @!attribute [rw] expressions
         #   @return [::Google::Cloud::Dlp::V2::DataProfilePubSubCondition::PubSubExpressions]
@@ -5538,10 +5866,21 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Message used to identify the type of resource being profiled.
+        # @!attribute [r] data_source
+        #   @return [::String]
+        #     Output only. An identifying string to the type of resource being profiled.
+        #     Current values: google/bigquery/table, google/project
+        class DataSourceType
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Enum of possible outcomes of transformations. SUCCESS if transformation and
         # storing of transformation was successful, otherwise, reason for not
         # transforming.
         module TransformationResultStatusType
+          # Unused.
           STATE_TYPE_UNSPECIFIED = 0
 
           # This will be set when a finding could not be transformed (i.e. outside user
@@ -5564,12 +5903,16 @@ module Google
 
         # Describes functionality of a given container in its original format.
         module TransformationContainerType
+          # Unused.
           TRANSFORM_UNKNOWN_CONTAINER = 0
 
+          # Body of a file.
           TRANSFORM_BODY = 1
 
+          # Metadata for a file.
           TRANSFORM_METADATA = 2
 
+          # A table.
           TRANSFORM_TABLE = 3
         end
 
@@ -5818,8 +6161,8 @@ module Google
           INVALID = 4
         end
 
-        # How broadly a resource has been shared. New items may be added over time.
-        # A higher number means more restricted.
+        # How broadly the data in the resource has been shared. New items may be added
+        # over time. A higher number means more restricted.
         module ResourceVisibility
           # Unused.
           RESOURCE_VISIBILITY_UNSPECIFIED = 0
@@ -5855,6 +6198,7 @@ module Google
           # Some null entries.
           NULL_PERCENTAGE_LOW = 2
 
+          # A few null entries.
           NULL_PERCENTAGE_MEDIUM = 3
 
           # A lot of null entries.

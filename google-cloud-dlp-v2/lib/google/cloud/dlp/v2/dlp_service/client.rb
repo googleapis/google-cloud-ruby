@@ -36,7 +36,7 @@ module Google
           # scheduling of data scans on Google Cloud Platform based data sets.
           #
           # To learn more about concepts and find how-to guides see
-          # https://cloud.google.com/dlp/docs/.
+          # https://cloud.google.com/sensitive-data-protection/docs/.
           #
           class Client
             # @private
@@ -219,6 +219,36 @@ module Google
                   initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
+                default_config.rpcs.list_project_data_profiles.timeout = 300.0
+                default_config.rpcs.list_project_data_profiles.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                }
+
+                default_config.rpcs.list_table_data_profiles.timeout = 300.0
+                default_config.rpcs.list_table_data_profiles.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                }
+
+                default_config.rpcs.list_column_data_profiles.timeout = 300.0
+                default_config.rpcs.list_column_data_profiles.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                }
+
+                default_config.rpcs.get_project_data_profile.timeout = 300.0
+                default_config.rpcs.get_project_data_profile.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                }
+
+                default_config.rpcs.get_table_data_profile.timeout = 300.0
+                default_config.rpcs.get_table_data_profile.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                }
+
+                default_config.rpcs.get_column_data_profile.timeout = 300.0
+                default_config.rpcs.get_column_data_profile.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                }
+
                 default_config.rpcs.hybrid_inspect_dlp_job.timeout = 300.0
 
                 default_config.rpcs.finish_dlp_job.timeout = 300.0
@@ -338,8 +368,10 @@ module Google
             # system will automatically choose what detectors to run. By default this may
             # be all types, but may change over time as detectors are updated.
             #
-            # For how to guides, see https://cloud.google.com/dlp/docs/inspecting-images
-            # and https://cloud.google.com/dlp/docs/inspecting-text,
+            # For how to guides, see
+            # https://cloud.google.com/sensitive-data-protection/docs/inspecting-images
+            # and
+            # https://cloud.google.com/sensitive-data-protection/docs/inspecting-text,
             #
             # @overload inspect_content(request, options = nil)
             #   Pass arguments to `inspect_content` via a request object, either of type
@@ -361,7 +393,7 @@ module Google
             #
             #     The format of this value varies depending on whether you have [specified a
             #     processing
-            #     location](https://cloud.google.com/dlp/docs/specifying-location):
+            #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
             #
             #     + Projects scope, location specified:<br/>
             #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -454,8 +486,9 @@ module Google
             ##
             # Redacts potentially sensitive info from an image.
             # This method has limits on input size, processing time, and output size.
-            # See https://cloud.google.com/dlp/docs/redacting-sensitive-data-images to
-            # learn more.
+            # See
+            # https://cloud.google.com/sensitive-data-protection/docs/redacting-sensitive-data-images
+            # to learn more.
             #
             # When no InfoTypes or CustomInfoTypes are specified in this request, the
             # system will automatically choose what detectors to run. By default this may
@@ -481,7 +514,7 @@ module Google
             #
             #     The format of this value varies depending on whether you have [specified a
             #     processing
-            #     location](https://cloud.google.com/dlp/docs/specifying-location):
+            #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
             #
             #     + Projects scope, location specified:<br/>
             #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -572,8 +605,9 @@ module Google
             ##
             # De-identifies potentially sensitive info from a ContentItem.
             # This method has limits on input size and output size.
-            # See https://cloud.google.com/dlp/docs/deidentify-sensitive-data to
-            # learn more.
+            # See
+            # https://cloud.google.com/sensitive-data-protection/docs/deidentify-sensitive-data
+            # to learn more.
             #
             # When no InfoTypes or CustomInfoTypes are specified in this request, the
             # system will automatically choose what detectors to run. By default this may
@@ -599,7 +633,7 @@ module Google
             #
             #     The format of this value varies depending on whether you have [specified a
             #     processing
-            #     location](https://cloud.google.com/dlp/docs/specifying-location):
+            #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
             #
             #     + Projects scope, location specified:<br/>
             #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -710,7 +744,7 @@ module Google
             ##
             # Re-identifies content that has been de-identified.
             # See
-            # https://cloud.google.com/dlp/docs/pseudonymization#re-identification_in_free_text_code_example
+            # https://cloud.google.com/sensitive-data-protection/docs/pseudonymization#re-identification_in_free_text_code_example
             # to learn more.
             #
             # @overload reidentify_content(request, options = nil)
@@ -733,7 +767,7 @@ module Google
             #
             #     The format of this value varies depending on whether you have [specified a
             #     processing
-            #     location](https://cloud.google.com/dlp/docs/specifying-location):
+            #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
             #
             #     + Projects scope, location specified:<br/>
             #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -843,8 +877,9 @@ module Google
 
             ##
             # Returns a list of the sensitive information types that DLP API
-            # supports. See https://cloud.google.com/dlp/docs/infotypes-reference to
-            # learn more.
+            # supports. See
+            # https://cloud.google.com/sensitive-data-protection/docs/infotypes-reference
+            # to learn more.
             #
             # @overload list_info_types(request, options = nil)
             #   Pass arguments to `list_info_types` via a request object, either of type
@@ -936,7 +971,9 @@ module Google
             ##
             # Creates an InspectTemplate for reusing frequently used configuration
             # for inspecting content, images, and storage.
-            # See https://cloud.google.com/dlp/docs/creating-templates to learn more.
+            # See
+            # https://cloud.google.com/sensitive-data-protection/docs/creating-templates
+            # to learn more.
             #
             # @overload create_inspect_template(request, options = nil)
             #   Pass arguments to `create_inspect_template` via a request object, either of type
@@ -958,7 +995,7 @@ module Google
             #
             #     The format of this value varies depending on the scope of the request
             #     (project or organization) and whether you have [specified a processing
-            #     location](https://cloud.google.com/dlp/docs/specifying-location):
+            #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
             #
             #     + Projects scope, location specified:<br/>
             #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -1050,7 +1087,9 @@ module Google
 
             ##
             # Updates the InspectTemplate.
-            # See https://cloud.google.com/dlp/docs/creating-templates to learn more.
+            # See
+            # https://cloud.google.com/sensitive-data-protection/docs/creating-templates
+            # to learn more.
             #
             # @overload update_inspect_template(request, options = nil)
             #   Pass arguments to `update_inspect_template` via a request object, either of type
@@ -1142,7 +1181,9 @@ module Google
 
             ##
             # Gets an InspectTemplate.
-            # See https://cloud.google.com/dlp/docs/creating-templates to learn more.
+            # See
+            # https://cloud.google.com/sensitive-data-protection/docs/creating-templates
+            # to learn more.
             #
             # @overload get_inspect_template(request, options = nil)
             #   Pass arguments to `get_inspect_template` via a request object, either of type
@@ -1230,7 +1271,9 @@ module Google
 
             ##
             # Lists InspectTemplates.
-            # See https://cloud.google.com/dlp/docs/creating-templates to learn more.
+            # See
+            # https://cloud.google.com/sensitive-data-protection/docs/creating-templates
+            # to learn more.
             #
             # @overload list_inspect_templates(request, options = nil)
             #   Pass arguments to `list_inspect_templates` via a request object, either of type
@@ -1252,7 +1295,7 @@ module Google
             #
             #     The format of this value varies depending on the scope of the request
             #     (project or organization) and whether you have [specified a processing
-            #     location](https://cloud.google.com/dlp/docs/specifying-location):
+            #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
             #
             #     + Projects scope, location specified:<br/>
             #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -1362,7 +1405,9 @@ module Google
 
             ##
             # Deletes an InspectTemplate.
-            # See https://cloud.google.com/dlp/docs/creating-templates to learn more.
+            # See
+            # https://cloud.google.com/sensitive-data-protection/docs/creating-templates
+            # to learn more.
             #
             # @overload delete_inspect_template(request, options = nil)
             #   Pass arguments to `delete_inspect_template` via a request object, either of type
@@ -1451,8 +1496,9 @@ module Google
             ##
             # Creates a DeidentifyTemplate for reusing frequently used configuration
             # for de-identifying content, images, and storage.
-            # See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
-            # more.
+            # See
+            # https://cloud.google.com/sensitive-data-protection/docs/creating-templates-deid
+            # to learn more.
             #
             # @overload create_deidentify_template(request, options = nil)
             #   Pass arguments to `create_deidentify_template` via a request object, either of type
@@ -1474,7 +1520,7 @@ module Google
             #
             #     The format of this value varies depending on the scope of the request
             #     (project or organization) and whether you have [specified a processing
-            #     location](https://cloud.google.com/dlp/docs/specifying-location):
+            #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
             #
             #     + Projects scope, location specified:<br/>
             #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -1566,8 +1612,9 @@ module Google
 
             ##
             # Updates the DeidentifyTemplate.
-            # See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
-            # more.
+            # See
+            # https://cloud.google.com/sensitive-data-protection/docs/creating-templates-deid
+            # to learn more.
             #
             # @overload update_deidentify_template(request, options = nil)
             #   Pass arguments to `update_deidentify_template` via a request object, either of type
@@ -1660,8 +1707,9 @@ module Google
 
             ##
             # Gets a DeidentifyTemplate.
-            # See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
-            # more.
+            # See
+            # https://cloud.google.com/sensitive-data-protection/docs/creating-templates-deid
+            # to learn more.
             #
             # @overload get_deidentify_template(request, options = nil)
             #   Pass arguments to `get_deidentify_template` via a request object, either of type
@@ -1749,8 +1797,9 @@ module Google
 
             ##
             # Lists DeidentifyTemplates.
-            # See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
-            # more.
+            # See
+            # https://cloud.google.com/sensitive-data-protection/docs/creating-templates-deid
+            # to learn more.
             #
             # @overload list_deidentify_templates(request, options = nil)
             #   Pass arguments to `list_deidentify_templates` via a request object, either of type
@@ -1772,7 +1821,7 @@ module Google
             #
             #     The format of this value varies depending on the scope of the request
             #     (project or organization) and whether you have [specified a processing
-            #     location](https://cloud.google.com/dlp/docs/specifying-location):
+            #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
             #
             #     + Projects scope, location specified:<br/>
             #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -1882,8 +1931,9 @@ module Google
 
             ##
             # Deletes a DeidentifyTemplate.
-            # See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
-            # more.
+            # See
+            # https://cloud.google.com/sensitive-data-protection/docs/creating-templates-deid
+            # to learn more.
             #
             # @overload delete_deidentify_template(request, options = nil)
             #   Pass arguments to `delete_deidentify_template` via a request object, either of type
@@ -1973,7 +2023,9 @@ module Google
             ##
             # Creates a job trigger to run DLP actions such as scanning storage for
             # sensitive information on a set schedule.
-            # See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
+            # See
+            # https://cloud.google.com/sensitive-data-protection/docs/creating-job-triggers
+            # to learn more.
             #
             # @overload create_job_trigger(request, options = nil)
             #   Pass arguments to `create_job_trigger` via a request object, either of type
@@ -1995,7 +2047,7 @@ module Google
             #
             #     The format of this value varies depending on whether you have [specified a
             #     processing
-            #     location](https://cloud.google.com/dlp/docs/specifying-location):
+            #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
             #
             #     + Projects scope, location specified:<br/>
             #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -2083,7 +2135,9 @@ module Google
 
             ##
             # Updates a job trigger.
-            # See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
+            # See
+            # https://cloud.google.com/sensitive-data-protection/docs/creating-job-triggers
+            # to learn more.
             #
             # @overload update_job_trigger(request, options = nil)
             #   Pass arguments to `update_job_trigger` via a request object, either of type
@@ -2264,7 +2318,9 @@ module Google
 
             ##
             # Gets a job trigger.
-            # See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
+            # See
+            # https://cloud.google.com/sensitive-data-protection/docs/creating-job-triggers
+            # to learn more.
             #
             # @overload get_job_trigger(request, options = nil)
             #   Pass arguments to `get_job_trigger` via a request object, either of type
@@ -2351,7 +2407,9 @@ module Google
 
             ##
             # Lists job triggers.
-            # See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
+            # See
+            # https://cloud.google.com/sensitive-data-protection/docs/creating-job-triggers
+            # to learn more.
             #
             # @overload list_job_triggers(request, options = nil)
             #   Pass arguments to `list_job_triggers` via a request object, either of type
@@ -2373,7 +2431,7 @@ module Google
             #
             #     The format of this value varies depending on whether you have [specified a
             #     processing
-            #     location](https://cloud.google.com/dlp/docs/specifying-location):
+            #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
             #
             #     + Projects scope, location specified:<br/>
             #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -2508,7 +2566,9 @@ module Google
 
             ##
             # Deletes a job trigger.
-            # See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
+            # See
+            # https://cloud.google.com/sensitive-data-protection/docs/creating-job-triggers
+            # to learn more.
             #
             # @overload delete_job_trigger(request, options = nil)
             #   Pass arguments to `delete_job_trigger` via a request object, either of type
@@ -3163,8 +3223,11 @@ module Google
 
             ##
             # Creates a new job to inspect storage or calculate risk metrics.
-            # See https://cloud.google.com/dlp/docs/inspecting-storage and
-            # https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.
+            # See
+            # https://cloud.google.com/sensitive-data-protection/docs/inspecting-storage
+            # and
+            # https://cloud.google.com/sensitive-data-protection/docs/compute-risk-analysis
+            # to learn more.
             #
             # When no InfoTypes or CustomInfoTypes are specified in inspect jobs, the
             # system will automatically choose what detectors to run. By default this may
@@ -3190,7 +3253,7 @@ module Google
             #
             #     The format of this value varies depending on whether you have [specified a
             #     processing
-            #     location](https://cloud.google.com/dlp/docs/specifying-location):
+            #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
             #
             #     + Projects scope, location specified:<br/>
             #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -3281,8 +3344,11 @@ module Google
 
             ##
             # Lists DlpJobs that match the specified filter in the request.
-            # See https://cloud.google.com/dlp/docs/inspecting-storage and
-            # https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.
+            # See
+            # https://cloud.google.com/sensitive-data-protection/docs/inspecting-storage
+            # and
+            # https://cloud.google.com/sensitive-data-protection/docs/compute-risk-analysis
+            # to learn more.
             #
             # @overload list_dlp_jobs(request, options = nil)
             #   Pass arguments to `list_dlp_jobs` via a request object, either of type
@@ -3304,7 +3370,7 @@ module Google
             #
             #     The format of this value varies depending on whether you have [specified a
             #     processing
-            #     location](https://cloud.google.com/dlp/docs/specifying-location):
+            #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
             #
             #     + Projects scope, location specified:<br/>
             #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -3439,8 +3505,11 @@ module Google
 
             ##
             # Gets the latest state of a long-running DlpJob.
-            # See https://cloud.google.com/dlp/docs/inspecting-storage and
-            # https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.
+            # See
+            # https://cloud.google.com/sensitive-data-protection/docs/inspecting-storage
+            # and
+            # https://cloud.google.com/sensitive-data-protection/docs/compute-risk-analysis
+            # to learn more.
             #
             # @overload get_dlp_job(request, options = nil)
             #   Pass arguments to `get_dlp_job` via a request object, either of type
@@ -3528,8 +3597,11 @@ module Google
             # Deletes a long-running DlpJob. This method indicates that the client is
             # no longer interested in the DlpJob result. The job will be canceled if
             # possible.
-            # See https://cloud.google.com/dlp/docs/inspecting-storage and
-            # https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.
+            # See
+            # https://cloud.google.com/sensitive-data-protection/docs/inspecting-storage
+            # and
+            # https://cloud.google.com/sensitive-data-protection/docs/compute-risk-analysis
+            # to learn more.
             #
             # @overload delete_dlp_job(request, options = nil)
             #   Pass arguments to `delete_dlp_job` via a request object, either of type
@@ -3617,8 +3689,11 @@ module Google
             # Starts asynchronous cancellation on a long-running DlpJob. The server
             # makes a best effort to cancel the DlpJob, but success is not
             # guaranteed.
-            # See https://cloud.google.com/dlp/docs/inspecting-storage and
-            # https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.
+            # See
+            # https://cloud.google.com/sensitive-data-protection/docs/inspecting-storage
+            # and
+            # https://cloud.google.com/sensitive-data-protection/docs/compute-risk-analysis
+            # to learn more.
             #
             # @overload cancel_dlp_job(request, options = nil)
             #   Pass arguments to `cancel_dlp_job` via a request object, either of type
@@ -3704,8 +3779,9 @@ module Google
 
             ##
             # Creates a pre-built stored infoType to be used for inspection.
-            # See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
-            # learn more.
+            # See
+            # https://cloud.google.com/sensitive-data-protection/docs/creating-stored-infotypes
+            # to learn more.
             #
             # @overload create_stored_info_type(request, options = nil)
             #   Pass arguments to `create_stored_info_type` via a request object, either of type
@@ -3727,7 +3803,7 @@ module Google
             #
             #     The format of this value varies depending on the scope of the request
             #     (project or organization) and whether you have [specified a processing
-            #     location](https://cloud.google.com/dlp/docs/specifying-location):
+            #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
             #
             #     + Projects scope, location specified:<br/>
             #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -3820,8 +3896,9 @@ module Google
             ##
             # Updates the stored infoType by creating a new version. The existing version
             # will continue to be used until the new version is ready.
-            # See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
-            # learn more.
+            # See
+            # https://cloud.google.com/sensitive-data-protection/docs/creating-stored-infotypes
+            # to learn more.
             #
             # @overload update_stored_info_type(request, options = nil)
             #   Pass arguments to `update_stored_info_type` via a request object, either of type
@@ -3915,8 +3992,9 @@ module Google
 
             ##
             # Gets a stored infoType.
-            # See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
-            # learn more.
+            # See
+            # https://cloud.google.com/sensitive-data-protection/docs/creating-stored-infotypes
+            # to learn more.
             #
             # @overload get_stored_info_type(request, options = nil)
             #   Pass arguments to `get_stored_info_type` via a request object, either of type
@@ -4004,8 +4082,9 @@ module Google
 
             ##
             # Lists stored infoTypes.
-            # See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
-            # learn more.
+            # See
+            # https://cloud.google.com/sensitive-data-protection/docs/creating-stored-infotypes
+            # to learn more.
             #
             # @overload list_stored_info_types(request, options = nil)
             #   Pass arguments to `list_stored_info_types` via a request object, either of type
@@ -4027,7 +4106,7 @@ module Google
             #
             #     The format of this value varies depending on the scope of the request
             #     (project or organization) and whether you have [specified a processing
-            #     location](https://cloud.google.com/dlp/docs/specifying-location):
+            #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
             #
             #     + Projects scope, location specified:<br/>
             #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -4134,8 +4213,9 @@ module Google
 
             ##
             # Deletes a stored infoType.
-            # See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
-            # learn more.
+            # See
+            # https://cloud.google.com/sensitive-data-protection/docs/creating-stored-infotypes
+            # to learn more.
             #
             # @overload delete_stored_info_type(request, options = nil)
             #   Pass arguments to `delete_stored_info_type` via a request object, either of type
@@ -4214,6 +4294,693 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :delete_stored_info_type, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists data profiles for an organization.
+            #
+            # @overload list_project_data_profiles(request, options = nil)
+            #   Pass arguments to `list_project_data_profiles` via a request object, either of type
+            #   {::Google::Cloud::Dlp::V2::ListProjectDataProfilesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dlp::V2::ListProjectDataProfilesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_project_data_profiles(parent: nil, page_token: nil, page_size: nil, order_by: nil, filter: nil)
+            #   Pass arguments to `list_project_data_profiles` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. organizations/\\{org_id}/locations/\\{loc_id}
+            #   @param page_token [::String]
+            #     Page token to continue retrieval.
+            #   @param page_size [::Integer]
+            #     Size of the page. This value can be limited by the server. If zero, server
+            #     returns a page of max size 100.
+            #   @param order_by [::String]
+            #     Comma separated list of fields to order by, followed by `asc` or `desc`
+            #     postfix. This list is case insensitive. The default sorting order is
+            #     ascending. Redundant space characters are insignificant. Only one order
+            #     field at a time is allowed.
+            #
+            #     Examples:
+            #     * `project_id`
+            #     * `sensitivity_level desc`
+            #
+            #     Supported fields are:
+            #
+            #     - `project_id`: GCP project ID
+            #     - `sensitivity_level`: How sensitive the data in a project is, at most.
+            #     - `data_risk_level`: How much risk is associated with this data.
+            #     - `profile_last_generated`: When the profile was last updated in epoch
+            #     seconds.
+            #   @param filter [::String]
+            #     Allows filtering.
+            #
+            #     Supported syntax:
+            #
+            #     * Filter expressions are made up of one or more restrictions.
+            #     * Restrictions can be combined by `AND` or `OR` logical operators. A
+            #     sequence of restrictions implicitly uses `AND`.
+            #     * A restriction has the form of `{field} {operator} {value}`.
+            #     * Supported fields/values:
+            #         - `sensitivity_level` - HIGH|MODERATE|LOW
+            #         - `data_risk_level` - HIGH|MODERATE|LOW
+            #         - `status_code` - an RPC status code as defined in
+            #         https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+            #     * The operator must be `=` or `!=`.
+            #
+            #     Examples:
+            #
+            #     * `project_id = 12345 AND status_code = 1`
+            #     * `project_id = 12345 AND sensitivity_level = HIGH`
+            #
+            #     The length of this field should be no more than 500 characters.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Dlp::V2::ProjectDataProfile>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Dlp::V2::ProjectDataProfile>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::ListProjectDataProfilesRequest.new
+            #
+            #   # Call the list_project_data_profiles method.
+            #   result = client.list_project_data_profiles request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::Dlp::V2::ProjectDataProfile.
+            #     p item
+            #   end
+            #
+            def list_project_data_profiles request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::ListProjectDataProfilesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_project_data_profiles.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dlp::V2::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_project_data_profiles.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_project_data_profiles.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dlp_service_stub.call_rpc :list_project_data_profiles, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @dlp_service_stub, :list_project_data_profiles, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists data profiles for an organization.
+            #
+            # @overload list_table_data_profiles(request, options = nil)
+            #   Pass arguments to `list_table_data_profiles` via a request object, either of type
+            #   {::Google::Cloud::Dlp::V2::ListTableDataProfilesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dlp::V2::ListTableDataProfilesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_table_data_profiles(parent: nil, page_token: nil, page_size: nil, order_by: nil, filter: nil)
+            #   Pass arguments to `list_table_data_profiles` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Resource name of the organization or project, for
+            #     example `organizations/433245324/locations/europe` or
+            #     `projects/project-id/locations/asia`.
+            #   @param page_token [::String]
+            #     Page token to continue retrieval.
+            #   @param page_size [::Integer]
+            #     Size of the page. This value can be limited by the server. If zero, server
+            #     returns a page of max size 100.
+            #   @param order_by [::String]
+            #     Comma separated list of fields to order by, followed by `asc` or `desc`
+            #     postfix. This list is case insensitive. The default sorting order is
+            #     ascending. Redundant space characters are insignificant. Only one order
+            #     field at a time is allowed.
+            #
+            #     Examples:
+            #     * `project_id asc`
+            #     * `table_id`
+            #     * `sensitivity_level desc`
+            #
+            #     Supported fields are:
+            #
+            #     - `project_id`: The GCP project ID.
+            #     - `dataset_id`: The ID of a BigQuery dataset.
+            #     - `table_id`: The ID of a BigQuery table.
+            #     - `sensitivity_level`: How sensitive the data in a table is, at most.
+            #     - `data_risk_level`: How much risk is associated with this data.
+            #     - `profile_last_generated`: When the profile was last updated in epoch
+            #     seconds.
+            #     - `last_modified`: The last time the resource was modified.
+            #     - `resource_visibility`: Visibility restriction for this resource.
+            #     - `row_count`: Number of rows in this resource.
+            #   @param filter [::String]
+            #     Allows filtering.
+            #
+            #     Supported syntax:
+            #
+            #     * Filter expressions are made up of one or more restrictions.
+            #     * Restrictions can be combined by `AND` or `OR` logical operators. A
+            #     sequence of restrictions implicitly uses `AND`.
+            #     * A restriction has the form of `{field} {operator} {value}`.
+            #     * Supported fields/values:
+            #         - `project_id` - The GCP project ID.
+            #         - `dataset_id` - The BigQuery dataset ID.
+            #         - `table_id` - The ID of the BigQuery table.
+            #         - `sensitivity_level` - HIGH|MODERATE|LOW
+            #         - `data_risk_level` - HIGH|MODERATE|LOW
+            #         - `resource_visibility`: PUBLIC|RESTRICTED
+            #         - `status_code` - an RPC status code as defined in
+            #         https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+            #     * The operator must be `=` or `!=`.
+            #
+            #     Examples:
+            #
+            #     * `project_id = 12345 AND status_code = 1`
+            #     * `project_id = 12345 AND sensitivity_level = HIGH`
+            #     * `project_id = 12345 AND resource_visibility = PUBLIC`
+            #
+            #     The length of this field should be no more than 500 characters.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Dlp::V2::TableDataProfile>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Dlp::V2::TableDataProfile>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::ListTableDataProfilesRequest.new
+            #
+            #   # Call the list_table_data_profiles method.
+            #   result = client.list_table_data_profiles request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::Dlp::V2::TableDataProfile.
+            #     p item
+            #   end
+            #
+            def list_table_data_profiles request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::ListTableDataProfilesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_table_data_profiles.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dlp::V2::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_table_data_profiles.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_table_data_profiles.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dlp_service_stub.call_rpc :list_table_data_profiles, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @dlp_service_stub, :list_table_data_profiles, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists data profiles for an organization.
+            #
+            # @overload list_column_data_profiles(request, options = nil)
+            #   Pass arguments to `list_column_data_profiles` via a request object, either of type
+            #   {::Google::Cloud::Dlp::V2::ListColumnDataProfilesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dlp::V2::ListColumnDataProfilesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_column_data_profiles(parent: nil, page_token: nil, page_size: nil, order_by: nil, filter: nil)
+            #   Pass arguments to `list_column_data_profiles` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Resource name of the organization or project, for
+            #     example `organizations/433245324/locations/europe` or
+            #     `projects/project-id/locations/asia`.
+            #   @param page_token [::String]
+            #     Page token to continue retrieval.
+            #   @param page_size [::Integer]
+            #     Size of the page. This value can be limited by the server. If zero, server
+            #     returns a page of max size 100.
+            #   @param order_by [::String]
+            #     Comma separated list of fields to order by, followed by `asc` or `desc`
+            #     postfix. This list is case insensitive. The default sorting order is
+            #     ascending. Redundant space characters are insignificant. Only one order
+            #     field at a time is allowed.
+            #
+            #     Examples:
+            #     * `project_id asc`
+            #     * `table_id`
+            #     * `sensitivity_level desc`
+            #
+            #     Supported fields are:
+            #
+            #     - `project_id`: The Google Cloud project ID.
+            #     - `dataset_id`: The ID of a BigQuery dataset.
+            #     - `table_id`: The ID of a BigQuery table.
+            #     - `sensitivity_level`: How sensitive the data in a column is, at most.
+            #     - `data_risk_level`: How much risk is associated with this data.
+            #     - `profile_last_generated`: When the profile was last updated in epoch
+            #     seconds.
+            #   @param filter [::String]
+            #     Allows filtering.
+            #
+            #     Supported syntax:
+            #
+            #     * Filter expressions are made up of one or more restrictions.
+            #     * Restrictions can be combined by `AND` or `OR` logical operators. A
+            #     sequence of restrictions implicitly uses `AND`.
+            #     * A restriction has the form of `{field} {operator} {value}`.
+            #     * Supported fields/values:
+            #         - `table_data_profile_name` - The name of the related table data
+            #         profile.
+            #         - `project_id` - The Google Cloud project ID. (REQUIRED)
+            #         - `dataset_id` - The BigQuery dataset ID. (REQUIRED)
+            #         - `table_id` - The BigQuery table ID. (REQUIRED)
+            #         - `field_id` - The ID of the BigQuery field.
+            #         - `info_type` - The infotype detected in the resource.
+            #         - `sensitivity_level` - HIGH|MEDIUM|LOW
+            #         - `data_risk_level`: How much risk is associated with this data.
+            #         - `status_code` - an RPC status code as defined in
+            #         https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+            #     * The operator must be `=` for project_id, dataset_id, and table_id. Other
+            #       filters also support `!=`.
+            #
+            #     Examples:
+            #
+            #     * project_id = 12345 AND status_code = 1
+            #     * project_id = 12345 AND sensitivity_level = HIGH
+            #     * project_id = 12345 AND info_type = STREET_ADDRESS
+            #
+            #     The length of this field should be no more than 500 characters.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Dlp::V2::ColumnDataProfile>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Dlp::V2::ColumnDataProfile>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::ListColumnDataProfilesRequest.new
+            #
+            #   # Call the list_column_data_profiles method.
+            #   result = client.list_column_data_profiles request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::Dlp::V2::ColumnDataProfile.
+            #     p item
+            #   end
+            #
+            def list_column_data_profiles request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::ListColumnDataProfilesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_column_data_profiles.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dlp::V2::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_column_data_profiles.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_column_data_profiles.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dlp_service_stub.call_rpc :list_column_data_profiles, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @dlp_service_stub, :list_column_data_profiles, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets a project data profile.
+            #
+            # @overload get_project_data_profile(request, options = nil)
+            #   Pass arguments to `get_project_data_profile` via a request object, either of type
+            #   {::Google::Cloud::Dlp::V2::GetProjectDataProfileRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dlp::V2::GetProjectDataProfileRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_project_data_profile(name: nil)
+            #   Pass arguments to `get_project_data_profile` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Resource name, for example
+            #     `organizations/12345/locations/us/projectDataProfiles/53234423`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Dlp::V2::ProjectDataProfile]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Dlp::V2::ProjectDataProfile]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::GetProjectDataProfileRequest.new
+            #
+            #   # Call the get_project_data_profile method.
+            #   result = client.get_project_data_profile request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::ProjectDataProfile.
+            #   p result
+            #
+            def get_project_data_profile request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::GetProjectDataProfileRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_project_data_profile.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dlp::V2::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_project_data_profile.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_project_data_profile.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dlp_service_stub.call_rpc :get_project_data_profile, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets a table data profile.
+            #
+            # @overload get_table_data_profile(request, options = nil)
+            #   Pass arguments to `get_table_data_profile` via a request object, either of type
+            #   {::Google::Cloud::Dlp::V2::GetTableDataProfileRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dlp::V2::GetTableDataProfileRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_table_data_profile(name: nil)
+            #   Pass arguments to `get_table_data_profile` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Resource name, for example
+            #     `organizations/12345/locations/us/tableDataProfiles/53234423`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Dlp::V2::TableDataProfile]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Dlp::V2::TableDataProfile]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::GetTableDataProfileRequest.new
+            #
+            #   # Call the get_table_data_profile method.
+            #   result = client.get_table_data_profile request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::TableDataProfile.
+            #   p result
+            #
+            def get_table_data_profile request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::GetTableDataProfileRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_table_data_profile.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dlp::V2::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_table_data_profile.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_table_data_profile.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dlp_service_stub.call_rpc :get_table_data_profile, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets a column data profile.
+            #
+            # @overload get_column_data_profile(request, options = nil)
+            #   Pass arguments to `get_column_data_profile` via a request object, either of type
+            #   {::Google::Cloud::Dlp::V2::GetColumnDataProfileRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dlp::V2::GetColumnDataProfileRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_column_data_profile(name: nil)
+            #   Pass arguments to `get_column_data_profile` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Resource name, for example
+            #     `organizations/12345/locations/us/columnDataProfiles/53234423`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Dlp::V2::ColumnDataProfile]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Dlp::V2::ColumnDataProfile]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::GetColumnDataProfileRequest.new
+            #
+            #   # Call the get_column_data_profile method.
+            #   result = client.get_column_data_profile request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::ColumnDataProfile.
+            #   p result
+            #
+            def get_column_data_profile request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::GetColumnDataProfileRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_column_data_profile.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dlp::V2::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_column_data_profile.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_column_data_profile.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dlp_service_stub.call_rpc :get_column_data_profile, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -4331,7 +5098,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the DlpJob resource to be cancelled.
+            #     Required. The name of the DlpJob resource to be finished.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Protobuf::Empty]
@@ -4736,6 +5503,36 @@ module Google
                 #
                 attr_reader :delete_stored_info_type
                 ##
+                # RPC-specific configuration for `list_project_data_profiles`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_project_data_profiles
+                ##
+                # RPC-specific configuration for `list_table_data_profiles`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_table_data_profiles
+                ##
+                # RPC-specific configuration for `list_column_data_profiles`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_column_data_profiles
+                ##
+                # RPC-specific configuration for `get_project_data_profile`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_project_data_profile
+                ##
+                # RPC-specific configuration for `get_table_data_profile`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_table_data_profile
+                ##
+                # RPC-specific configuration for `get_column_data_profile`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_column_data_profile
+                ##
                 # RPC-specific configuration for `hybrid_inspect_dlp_job`
                 # @return [::Gapic::Config::Method]
                 #
@@ -4822,6 +5619,18 @@ module Google
                   @list_stored_info_types = ::Gapic::Config::Method.new list_stored_info_types_config
                   delete_stored_info_type_config = parent_rpcs.delete_stored_info_type if parent_rpcs.respond_to? :delete_stored_info_type
                   @delete_stored_info_type = ::Gapic::Config::Method.new delete_stored_info_type_config
+                  list_project_data_profiles_config = parent_rpcs.list_project_data_profiles if parent_rpcs.respond_to? :list_project_data_profiles
+                  @list_project_data_profiles = ::Gapic::Config::Method.new list_project_data_profiles_config
+                  list_table_data_profiles_config = parent_rpcs.list_table_data_profiles if parent_rpcs.respond_to? :list_table_data_profiles
+                  @list_table_data_profiles = ::Gapic::Config::Method.new list_table_data_profiles_config
+                  list_column_data_profiles_config = parent_rpcs.list_column_data_profiles if parent_rpcs.respond_to? :list_column_data_profiles
+                  @list_column_data_profiles = ::Gapic::Config::Method.new list_column_data_profiles_config
+                  get_project_data_profile_config = parent_rpcs.get_project_data_profile if parent_rpcs.respond_to? :get_project_data_profile
+                  @get_project_data_profile = ::Gapic::Config::Method.new get_project_data_profile_config
+                  get_table_data_profile_config = parent_rpcs.get_table_data_profile if parent_rpcs.respond_to? :get_table_data_profile
+                  @get_table_data_profile = ::Gapic::Config::Method.new get_table_data_profile_config
+                  get_column_data_profile_config = parent_rpcs.get_column_data_profile if parent_rpcs.respond_to? :get_column_data_profile
+                  @get_column_data_profile = ::Gapic::Config::Method.new get_column_data_profile_config
                   hybrid_inspect_dlp_job_config = parent_rpcs.hybrid_inspect_dlp_job if parent_rpcs.respond_to? :hybrid_inspect_dlp_job
                   @hybrid_inspect_dlp_job = ::Gapic::Config::Method.new hybrid_inspect_dlp_job_config
                   finish_dlp_job_config = parent_rpcs.finish_dlp_job if parent_rpcs.respond_to? :finish_dlp_job

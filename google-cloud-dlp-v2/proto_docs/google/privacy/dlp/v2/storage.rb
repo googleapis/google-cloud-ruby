@@ -26,9 +26,11 @@ module Google
         #   @return [::String]
         #     Name of the information type. Either a name of your choosing when
         #     creating a CustomInfoType, or one of the names listed
-        #     at https://cloud.google.com/dlp/docs/infotypes-reference when specifying
-        #     a built-in type.  When sending Cloud DLP results to Data Catalog, infoType
-        #     names should conform to the pattern `[A-Za-z0-9$_-]{1,64}`.
+        #     at
+        #     https://cloud.google.com/sensitive-data-protection/docs/infotypes-reference
+        #     when specifying a built-in type.  When sending Cloud DLP results to Data
+        #     Catalog, infoType names should conform to the pattern
+        #     `[A-Za-z0-9$_-]{1,64}`.
         # @!attribute [rw] version
         #   @return [::String]
         #     Optional version name for this InfoType.
@@ -156,10 +158,10 @@ module Google
           # Dictionary words containing a large number of characters that are not
           # letters or digits may result in unexpected findings because such characters
           # are treated as whitespace. The
-          # [limits](https://cloud.google.com/dlp/limits) page contains details about
-          # the size limits of dictionaries. For dictionaries that do not fit within
-          # these constraints, consider using `LargeCustomDictionaryConfig` in the
-          # `StoredInfoType` API.
+          # [limits](https://cloud.google.com/sensitive-data-protection/limits) page
+          # contains details about the size limits of dictionaries. For dictionaries
+          # that do not fit within these constraints, consider using
+          # `LargeCustomDictionaryConfig` in the `StoredInfoType` API.
           # @!attribute [rw] word_list
           #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::Dictionary::WordList]
           #     List of words or phrases to search for.
@@ -200,7 +202,7 @@ module Google
 
           # Message for detecting output from deidentification transformations
           # such as
-          # [`CryptoReplaceFfxFpeConfig`](https://cloud.google.com/dlp/docs/reference/rest/v2/organizations.deidentifyTemplates#cryptoreplaceffxfpeconfig).
+          # [`CryptoReplaceFfxFpeConfig`](https://cloud.google.com/sensitive-data-protection/docs/reference/rest/v2/organizations.deidentifyTemplates#cryptoreplaceffxfpeconfig).
           # These types of transformations are
           # those that perform pseudonymization, thereby producing a "surrogate" as
           # output. This should be used in conjunction with a field on the
@@ -230,7 +232,7 @@ module Google
             #     if you want to modify the likelihood of an entire column of findngs,
             #     set this to 1. For more information, see
             #     [Hotword example: Set the match likelihood of a table column]
-            #     (https://cloud.google.com/dlp/docs/creating-custom-infotypes-likelihood#match-column-values).
+            #     (https://cloud.google.com/sensitive-data-protection/docs/creating-custom-infotypes-likelihood#match-column-values).
             # @!attribute [rw] window_after
             #   @return [::Integer]
             #     Number of characters after the finding to consider.
@@ -278,7 +280,7 @@ module Google
             #     For tabular data, if you want to modify the likelihood of an entire
             #     column of findngs, see
             #     [Hotword example: Set the match likelihood of a table column]
-            #     (https://cloud.google.com/dlp/docs/creating-custom-infotypes-likelihood#match-column-values).
+            #     (https://cloud.google.com/sensitive-data-protection/docs/creating-custom-infotypes-likelihood#match-column-values).
             # @!attribute [rw] likelihood_adjustment
             #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::DetectionRule::LikelihoodAdjustment]
             #     Likelihood adjustment to apply to all matching findings.
@@ -288,6 +290,7 @@ module Google
             end
           end
 
+          # Type of exclusion rule.
           module ExclusionType
             # A finding of this custom info type will not be excluded from results.
             EXCLUSION_TYPE_UNSPECIFIED = 0
@@ -419,7 +422,7 @@ module Google
         #     This field can't be set if de-identification is requested. For certain file
         #     types, setting this field has no effect. For more information, see [Limits
         #     on bytes scanned per
-        #     file](https://cloud.google.com/dlp/docs/supported-file-types#max-byte-size-per-file).
+        #     file](https://cloud.google.com/sensitive-data-protection/docs/supported-file-types#max-byte-size-per-file).
         # @!attribute [rw] bytes_limit_per_file_percent
         #   @return [::Integer]
         #     Max percentage of bytes to scan from a file. The rest are omitted. The
@@ -429,7 +432,7 @@ module Google
         #     This field can't be set if de-identification is requested. For certain file
         #     types, setting this field has no effect. For more information, see [Limits
         #     on bytes scanned per
-        #     file](https://cloud.google.com/dlp/docs/supported-file-types#max-byte-size-per-file).
+        #     file](https://cloud.google.com/sensitive-data-protection/docs/supported-file-types#max-byte-size-per-file).
         # @!attribute [rw] file_types
         #   @return [::Array<::Google::Cloud::Dlp::V2::FileType>]
         #     List of file type groups to include in the scan.
@@ -441,6 +444,7 @@ module Google
         #     Image inspection is restricted to 'global', 'us', 'asia', and 'europe'.
         # @!attribute [rw] sample_method
         #   @return [::Google::Cloud::Dlp::V2::CloudStorageOptions::SampleMethod]
+        #     How to sample the data.
         # @!attribute [rw] files_limit_percent
         #   @return [::Integer]
         #     Limits the number of files to scan to this percentage of the input FileSet.
@@ -476,6 +480,7 @@ module Google
           # in conjunction with bytes_limit_per_file. If not specified, scanning would
           # start from the top.
           module SampleMethod
+            # No sampling.
             SAMPLE_METHOD_UNSPECIFIED = 0
 
             # Scan from the top (default).
@@ -500,8 +505,8 @@ module Google
         # Message representing a single file or path in Cloud Storage.
         # @!attribute [rw] path
         #   @return [::String]
-        #     A url representing a file or path (no wildcards) in Cloud Storage.
-        #     Example: gs://[BUCKET_NAME]/dictionary.txt
+        #     A URL representing a file or path (no wildcards) in Cloud Storage.
+        #     Example: `gs://[BUCKET_NAME]/dictionary.txt`
         class CloudStoragePath
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -531,8 +536,14 @@ module Google
         #     100 means no limit. Defaults to 0. Only one of rows_limit and
         #     rows_limit_percent can be specified. Cannot be used in conjunction with
         #     TimespanConfig.
+        #
+        #     Caution: A [known
+        #     issue](https://cloud.google.com/sensitive-data-protection/docs/known-issues#bq-sampling)
+        #     is causing the `rowsLimitPercent` field to behave unexpectedly. We
+        #     recommend using `rowsLimit` instead.
         # @!attribute [rw] sample_method
         #   @return [::Google::Cloud::Dlp::V2::BigQueryOptions::SampleMethod]
+        #     How to sample the data.
         # @!attribute [rw] excluded_fields
         #   @return [::Array<::Google::Cloud::Dlp::V2::FieldId>]
         #     References to fields excluded from scanning. This allows you to skip
@@ -554,6 +565,7 @@ module Google
           # in conjunction with either rows_limit or rows_limit_percent. If not
           # specified, rows are scanned in the order BigQuery reads them.
           module SampleMethod
+            # No sampling.
             SAMPLE_METHOD_UNSPECIFIED = 0
 
             # Scan groups of rows in the order BigQuery provides (default). Multiple
@@ -581,6 +593,7 @@ module Google
         #     Hybrid inspection options.
         # @!attribute [rw] timespan_config
         #   @return [::Google::Cloud::Dlp::V2::StorageConfig::TimespanConfig]
+        #     Configuration of the timespan of the items to include in scanning.
         class StorageConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -629,7 +642,8 @@ module Google
           #     Valid data types of the provided timestamp property are: `TIMESTAMP`.
           #
           #     See the
-          #     [known issue](https://cloud.google.com/dlp/docs/known-issues#bq-timespan)
+          #     [known
+          #     issue](https://cloud.google.com/sensitive-data-protection/docs/known-issues#bq-timespan)
           #     related to this operation.
           # @!attribute [rw] enable_auto_population_of_timespan_config
           #   @return [::Boolean]
@@ -772,8 +786,10 @@ module Google
         # Message for a unique key indicating a record that contains a finding.
         # @!attribute [rw] datastore_key
         #   @return [::Google::Cloud::Dlp::V2::DatastoreKey]
+        #     BigQuery key
         # @!attribute [rw] big_query_key
         #   @return [::Google::Cloud::Dlp::V2::BigQueryKey]
+        #     Datastore key
         # @!attribute [rw] id_values
         #   @return [::Array<::String>]
         #     Values of identifying columns in the given row. Order of values matches
@@ -854,7 +870,7 @@ module Google
         #
         # For more information about each likelihood level
         # and how likelihood works, see [Match
-        # likelihood](https://cloud.google.com/dlp/docs/likelihood).
+        # likelihood](https://cloud.google.com/sensitive-data-protection/docs/likelihood).
         module Likelihood
           # Default value; same as POSSIBLE.
           LIKELIHOOD_UNSPECIFIED = 0
@@ -893,8 +909,9 @@ module Google
           #   dat, dot, eml,, epbub, ged, go, h, hh, hpp, hxx, h++, hs, html, htm,
           #   mkd, markdown, m, ml, mli, perl, pl, plist, pm, php, phtml, pht,
           #   properties, py, pyw, rb, rbw, rs, rss,  rc, scala, sh, sql, swift, tex,
-          #   shtml, shtm, xhtml, lhs, ics, ini, java, js, json, kix, kml, ocaml, md,
-          #   txt, text, tsv, vb, vcard, vcs, wml, xcodeproj, xml, xsl, xsd, yml, yaml.
+          #   shtml, shtm, xhtml, lhs, ics, ini, java, js, json, jsonl, kix, kml,
+          #   ocaml, md, txt, text, tsv, vb, vcard, vcs, wml, xcodeproj, xml, xsl, xsd,
+          #   yml, yaml.
           TEXT_FILE = 2
 
           # Included file extensions:

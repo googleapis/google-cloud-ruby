@@ -40,7 +40,7 @@ module Google
         # scheduling of data scans on Google Cloud Platform based data sets.
         #
         # To learn more about concepts and find how-to guides see
-        # https://cloud.google.com/dlp/docs/.
+        # https://cloud.google.com/sensitive-data-protection/docs/.
         #
         # @example Load this service and instantiate a gRPC client
         #
