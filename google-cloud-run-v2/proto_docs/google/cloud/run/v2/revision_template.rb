@@ -90,7 +90,10 @@ module Google
         #     Sets the maximum number of requests that each serving instance can receive.
         # @!attribute [rw] session_affinity
         #   @return [::Boolean]
-        #     Enable session affinity.
+        #     Optional. Enable session affinity.
+        # @!attribute [rw] health_check_disabled
+        #   @return [::Boolean]
+        #     Optional. Disables health checking containers during deployment.
         class RevisionTemplate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

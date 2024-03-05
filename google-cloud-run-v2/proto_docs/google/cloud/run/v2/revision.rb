@@ -209,6 +209,9 @@ module Google
         # @!attribute [rw] session_affinity
         #   @return [::Boolean]
         #     Enable session affinity.
+        # @!attribute [r] scaling_status
+        #   @return [::Google::Cloud::Run::V2::RevisionScalingStatus]
+        #     Output only. The current effective scaling settings for the revision.
         # @!attribute [r] etag
         #   @return [::String]
         #     Output only. A system-generated fingerprint for this version of the

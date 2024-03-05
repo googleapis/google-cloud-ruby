@@ -85,7 +85,7 @@ module Google
         # ResourceRequirements describes the compute resource requirements.
         # @!attribute [rw] limits
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Only ´memory´ and 'cpu' are supported.
+        #     Only `memory` and `cpu` keys in the map are supported.
         #
         #     <p>Notes:
         #      * The only supported values for CPU are '1', '2', '4', and '8'. Setting 4
@@ -95,7 +95,9 @@ module Google
         #      https://cloud.google.com/run/docs/configuring/memory-limits
         # @!attribute [rw] cpu_idle
         #   @return [::Boolean]
-        #     Determines whether CPU should be throttled or not outside of requests.
+        #     Determines whether CPU is only allocated during requests (true by default).
+        #     However, if ResourceRequirements is set, the caller must explicitly
+        #     set this field to true to preserve the default behavior.
         # @!attribute [rw] startup_cpu_boost
         #   @return [::Boolean]
         #     Determines whether CPU should be boosted on startup of a new container
@@ -209,6 +211,12 @@ module Google
         # @!attribute [rw] empty_dir
         #   @return [::Google::Cloud::Run::V2::EmptyDirVolumeSource]
         #     Ephemeral storage used as a shared volume.
+        # @!attribute [rw] nfs
+        #   @return [::Google::Cloud::Run::V2::NFSVolumeSource]
+        #     For NFS Voumes, contains the path to the nfs Volume
+        # @!attribute [rw] gcs
+        #   @return [::Google::Cloud::Run::V2::GCSVolumeSource]
+        #     Persistent storage backed by a Google Cloud Storage bucket.
         class Volume
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -335,6 +343,33 @@ module Google
             # Explicitly set the EmptyDir to be in memory. Uses tmpfs.
             MEMORY = 1
           end
+        end
+
+        # Represents an NFS mount.
+        # @!attribute [rw] server
+        #   @return [::String]
+        #     Hostname or IP address of the NFS server
+        # @!attribute [rw] path
+        #   @return [::String]
+        #     Path that is exported by the NFS server.
+        # @!attribute [rw] read_only
+        #   @return [::Boolean]
+        #     If true, mount the NFS volume as read only
+        class NFSVolumeSource
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents a GCS Bucket mounted as a volume.
+        # @!attribute [rw] bucket
+        #   @return [::String]
+        #     GCS Bucket name
+        # @!attribute [rw] read_only
+        #   @return [::Boolean]
+        #     If true, mount the GCS bucket as read-only
+        class GCSVolumeSource
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Probe describes a health check to be performed against a container to
