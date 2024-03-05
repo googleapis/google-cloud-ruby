@@ -248,6 +248,15 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_instant_snapshots_rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Compute.instant_snapshots do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::InstantSnapshots::Rest::Client, client
+    end
+  end
+
   def test_interconnect_attachments_rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::Compute.interconnect_attachments do |config|
@@ -524,6 +533,15 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Cloud::Compute::V1::RegionInstances::Rest::Client, client
+    end
+  end
+
+  def test_region_instant_snapshots_rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Compute.region_instant_snapshots do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::RegionInstantSnapshots::Rest::Client, client
     end
   end
 
