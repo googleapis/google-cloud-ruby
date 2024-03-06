@@ -1975,6 +1975,18 @@ module Google
           # @!attribute [rw] condition
           #   @return [::Google::Type::Expr]
           #     The evaluating condition for this rule.
+          # @!attribute [rw] condition_evaluation
+          #   @return [::Google::Cloud::Asset::V1::ConditionEvaluation]
+          #     The condition evaluation result for this rule.
+          #     Only populated if it meets all the following criteria:
+          #     * there is a
+          #     {::Google::Cloud::Asset::V1::AnalyzerOrgPolicy::Rule#condition condition}
+          #     defined for this rule
+          #     * this rule is within a consolidated_policy
+          #     * the consolidated_policy is within
+          #       {::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedContainersResponse::GovernedContainer AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer}
+          #       or
+          #       {::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedAssetsResponse::GovernedResource AnalyzeOrgPolicyGovernedAssetsResponse.GovernedResource}
           class Rule
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2217,6 +2229,21 @@ module Google
           #
           #     If the constraint is defined with default policy, it will also appear in
           #     the list.
+          # @!attribute [rw] project
+          #   @return [::String]
+          #     The project that this consolidated policy belongs to, in the format of
+          #     projects/\\{PROJECT_NUMBER}. This field is available when the consolidated
+          #     policy belongs to a project.
+          # @!attribute [rw] folders
+          #   @return [::Array<::String>]
+          #     The folder(s) that this consolidated policy belongs to, in the format of
+          #     folders/\\{FOLDER_NUMBER}. This field is available when the consolidated
+          #     policy belongs (directly or cascadingly) to one or more folders.
+          # @!attribute [rw] organization
+          #   @return [::String]
+          #     The organization that this consolidated policy belongs to, in the format
+          #     of organizations/\\{ORGANIZATION_NUMBER}. This field is available when the
+          #     consolidated policy belongs (directly or cascadingly) to an organization.
           class OrgPolicyResult
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2309,6 +2336,24 @@ module Google
           #
           #     If the constraint is defined with default policy, it will also appear in
           #     the list.
+          # @!attribute [rw] project
+          #   @return [::String]
+          #     The project that this resource belongs to, in the format of
+          #     projects/\\{PROJECT_NUMBER}. This field is available when the resource
+          #     belongs to a project.
+          # @!attribute [rw] folders
+          #   @return [::Array<::String>]
+          #     The folder(s) that this resource belongs to, in the format of
+          #     folders/\\{FOLDER_NUMBER}. This field is available when the resource
+          #     belongs (directly or cascadingly) to one or more folders.
+          # @!attribute [rw] organization
+          #   @return [::String]
+          #     The organization that this resource belongs to, in the format of
+          #     organizations/\\{ORGANIZATION_NUMBER}. This field is available when the
+          #     resource belongs (directly or cascadingly) to an organization.
+          # @!attribute [rw] effective_tags
+          #   @return [::Array<::Google::Cloud::Asset::V1::EffectiveTagDetails>]
+          #     The effective tags on this resource.
           class GovernedContainer
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2416,6 +2461,18 @@ module Google
           #     The organization that this resource belongs to, in the format of
           #     organizations/\\{ORGANIZATION_NUMBER}. This field is available when the
           #     resource belongs (directly or cascadingly) to an organization.
+          # @!attribute [rw] asset_type
+          #   @return [::String]
+          #     The asset type of the
+          #     {::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedAssetsResponse::GovernedResource#full_resource_name AnalyzeOrgPolicyGovernedAssetsResponse.GovernedResource.full_resource_name}
+          #     Example:
+          #     `cloudresourcemanager.googleapis.com/Project`
+          #     See [Cloud Asset Inventory Supported Asset
+          #     Types](https://cloud.google.com/asset-inventory/docs/supported-asset-types)
+          #     for all supported asset types.
+          # @!attribute [rw] effective_tags
+          #   @return [::Array<::Google::Cloud::Asset::V1::EffectiveTagDetails>]
+          #     The effective tags on this resource.
           class GovernedResource
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2449,6 +2506,15 @@ module Google
           #     The organization that this IAM policy belongs to, in the format of
           #     organizations/\\{ORGANIZATION_NUMBER}. This field is available when the
           #     IAM policy belongs (directly or cascadingly) to an organization.
+          # @!attribute [rw] asset_type
+          #   @return [::String]
+          #     The asset type of the
+          #     {::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedAssetsResponse::GovernedIamPolicy#attached_resource AnalyzeOrgPolicyGovernedAssetsResponse.GovernedIamPolicy.attached_resource}.
+          #     Example:
+          #     `cloudresourcemanager.googleapis.com/Project`
+          #     See [Cloud Asset Inventory Supported Asset
+          #     Types](https://cloud.google.com/asset-inventory/docs/supported-asset-types)
+          #     for all supported asset types.
           class GovernedIamPolicy
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
