@@ -2017,6 +2017,9 @@ module Google
         # @!attribute [rw] desired_in_transit_encryption_config
         #   @return [::Google::Cloud::Container::V1::InTransitEncryptionConfig]
         #     Specify the details of in-transit encryption.
+        # @!attribute [rw] desired_enable_cilium_clusterwide_network_policy
+        #   @return [::Boolean]
+        #     Enable/Disable Cilium Clusterwide Network Policy for the cluster.
         class ClusterUpdate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -4411,6 +4414,9 @@ module Google
         # @!attribute [rw] in_transit_encryption_config
         #   @return [::Google::Cloud::Container::V1::InTransitEncryptionConfig]
         #     Specify the details of in-transit encryption.
+        # @!attribute [rw] enable_cilium_clusterwide_network_policy
+        #   @return [::Boolean]
+        #     Whether CiliumClusterwideNetworkPolicy is enabled on this cluster.
         class NetworkConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
