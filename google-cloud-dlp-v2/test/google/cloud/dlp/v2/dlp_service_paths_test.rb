@@ -33,6 +33,21 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientPathsTest < Minitest::Test
     end
   end
 
+  def test_column_data_profile_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Dlp::V2::DlpService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.column_data_profile_path organization: "value0", location: "value1", column_data_profile: "value2"
+      assert_equal "organizations/value0/locations/value1/columnDataProfiles/value2", path
+
+      path = client.column_data_profile_path project: "value0", location: "value1", column_data_profile: "value2"
+      assert_equal "projects/value0/locations/value1/columnDataProfiles/value2", path
+    end
+  end
+
   def test_deidentify_template_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -165,6 +180,21 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientPathsTest < Minitest::Test
     end
   end
 
+  def test_project_data_profile_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Dlp::V2::DlpService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.project_data_profile_path organization: "value0", location: "value1", project_data_profile: "value2"
+      assert_equal "organizations/value0/locations/value1/projectDataProfiles/value2", path
+
+      path = client.project_data_profile_path project: "value0", location: "value1", project_data_profile: "value2"
+      assert_equal "projects/value0/locations/value1/projectDataProfiles/value2", path
+    end
+  end
+
   def test_stored_info_type_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -183,6 +213,21 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientPathsTest < Minitest::Test
 
       path = client.stored_info_type_path project: "value0", location: "value1", stored_info_type: "value2"
       assert_equal "projects/value0/locations/value1/storedInfoTypes/value2", path
+    end
+  end
+
+  def test_table_data_profile_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Dlp::V2::DlpService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.table_data_profile_path organization: "value0", location: "value1", table_data_profile: "value2"
+      assert_equal "organizations/value0/locations/value1/tableDataProfiles/value2", path
+
+      path = client.table_data_profile_path project: "value0", location: "value1", table_data_profile: "value2"
+      assert_equal "projects/value0/locations/value1/tableDataProfiles/value2", path
     end
   end
 end
