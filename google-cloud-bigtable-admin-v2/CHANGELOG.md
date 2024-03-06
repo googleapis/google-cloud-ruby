@@ -1,5 +1,11 @@
 # Release History
 
+### 0.23.0 (2024-03-06)
+
+#### Features
+
+* support authorized views services 
+
 ### 0.22.0 (2024-02-26)
 
 #### Features
