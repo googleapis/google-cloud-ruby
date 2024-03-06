@@ -1998,6 +1998,9 @@ module Google
         # @!attribute [rw] enterprise_config
         #   @return [::Google::Cloud::Container::V1beta1::EnterpriseConfig]
         #     GKE Enterprise Configuration.
+        # @!attribute [rw] secret_manager_config
+        #   @return [::Google::Cloud::Container::V1beta1::SecretManagerConfig]
+        #     Secret CSI driver configuration.
         class Cluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2440,6 +2443,12 @@ module Google
         # @!attribute [rw] desired_in_transit_encryption_config
         #   @return [::Google::Cloud::Container::V1beta1::InTransitEncryptionConfig]
         #     Specify the details of in-transit encryption.
+        # @!attribute [rw] desired_enable_cilium_clusterwide_network_policy
+        #   @return [::Boolean]
+        #     Enable/Disable Cilium Clusterwide Network Policy for the cluster.
+        # @!attribute [rw] desired_secret_manager_config
+        #   @return [::Google::Cloud::Container::V1beta1::SecretManagerConfig]
+        #     Enable/Disable Secret Manager Config.
         class ClusterUpdate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -5012,6 +5021,9 @@ module Google
         # @!attribute [rw] in_transit_encryption_config
         #   @return [::Google::Cloud::Container::V1beta1::InTransitEncryptionConfig]
         #     Specify the details of in-transit encryption.
+        # @!attribute [rw] enable_cilium_clusterwide_network_policy
+        #   @return [::Boolean]
+        #     Whether CiliumClusterWideNetworkPolicy is enabled on this cluster.
         class NetworkConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -6097,6 +6109,15 @@ module Google
             # ENTERPRISE indicates a GKE Enterprise cluster.
             ENTERPRISE = 2
           end
+        end
+
+        # SecretManagerConfig is config for secret manager enablement.
+        # @!attribute [rw] enabled
+        #   @return [::Boolean]
+        #     Whether the cluster is configured to use secret manager CSI component.
+        class SecretManagerConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # SecondaryBootDisk represents a persistent disk attached to a node
