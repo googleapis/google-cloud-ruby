@@ -41,6 +41,7 @@ describe "Create Assessment" do
     options.add_argument "--no-sandbox"
     options.add_argument "--headless"
     options.add_argument "--disable-gpu"
+    options.addArguments "--disable-dev-shm-usage"
     @driver = Selenium::WebDriver.for :chrome, options: options
   end
 
