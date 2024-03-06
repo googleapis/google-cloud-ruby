@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.7.0 (2024-03-06)
+
+#### Features
+
+* Updated dependency on google-cloud-compute-v1 to the latest version ([#25277](https://github.com/googleapis/google-cloud-ruby/issues/25277)) 
+
 ### 1.6.0 (2024-02-26)
 
 #### Features
