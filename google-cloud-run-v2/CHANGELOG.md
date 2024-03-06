@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.15.0 (2024-03-06)
+
+#### Features
+
+* allow disabling the default URL (run.app) for Cloud Run Services 
+* support disabling waiting for health checks during Service deployment 
+* support mounting NFS and GCS volumes in Cloud Run Jobs and Services 
+* support specifying a per-Service min-instance-count and service scaling 
+
 ### 0.14.0 (2024-02-26)
 
 #### Features
