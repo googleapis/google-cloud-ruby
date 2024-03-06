@@ -68,7 +68,7 @@ module Google
       # scheduling of data scans on Google Cloud Platform based data sets.
       #
       # To learn more about concepts and find how-to guides see
-      # https://cloud.google.com/dlp/docs/.
+      # https://cloud.google.com/sensitive-data-protection/docs/.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.
