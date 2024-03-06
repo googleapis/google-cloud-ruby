@@ -1,5 +1,11 @@
 # Release History
 
+### 0.19.0 (2024-03-06)
+
+#### Features
+
+* support authorized_view_name for apis 
+
 ### 0.18.0 (2024-02-26)
 
 #### Features
