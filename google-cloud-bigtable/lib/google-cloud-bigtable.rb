@@ -65,11 +65,13 @@ module Google
     #   bigtable = gcloud.bigtable
     #
     def bigtable scope: nil, timeout: nil, credentials: nil
+      credentials ||= @keyfile
+      timeout ||= @timeout
       Google::Cloud.bigtable(
         project_id:  @project,
-        credentials: (credentials || @keyfile),
+        credentials: credentials,
         scope:       scope,
-        timeout:     (timeout || @timeout)
+        timeout:     timeout
       )
     end
 

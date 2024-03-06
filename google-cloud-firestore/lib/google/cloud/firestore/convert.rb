@@ -381,12 +381,12 @@ module Google
                 return val if val
               end
             when Hash
-              obj.each do |_k, v|
+              obj.each_value do |v|
                 val = field_value_nested? v, field_value_type
                 return val if val
               end
             end
-            nil
+            nil # rubocop:disable Style/ReturnNilInPredicateMethodDefinition
           end
 
           def remove_field_value_from obj, field_value_type = nil
@@ -535,13 +535,13 @@ module Google
           ESCAPED_FIELD_PATH = /\A`(.*)`\z/.freeze
 
           def build_hash_from_field_paths_and_values pairs
-            pairs.each do |field_path, _value|
-              raise ArgumentError unless field_path.is_a? FieldPath
+            pairs.each do |pair|
+              raise ArgumentError unless pair.first.is_a? FieldPath
             end
 
             dup_hash = {}
 
-            pairs.each do |field_path, value|
+            pairs.each do |(field_path, value)|
               tmp_dup = dup_hash
               last_field = nil
               field_path.fields.map(&:to_sym).each do |field|

@@ -58,9 +58,10 @@ module Google
     #   error_reporting.report error_event
     #
     def error_reporting scope: nil, timeout: nil
+      timeout ||= @timeout
       Google::Cloud.error_reporting @project, @keyfile,
                                     scope: scope,
-                                    timeout: (timeout || @timeout)
+                                    timeout: timeout
     end
 
     ##

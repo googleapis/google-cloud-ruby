@@ -71,9 +71,11 @@ module Google
     #   bigquery = gcloud.bigquery scope: platform_scope
     #
     def bigquery scope: nil, retries: nil, timeout: nil
+      retries ||= @retries
+      timeout ||= @timeout
       Google::Cloud.bigquery @project, @keyfile, scope:   scope,
-                                                 retries: (retries || @retries),
-                                                 timeout: (timeout || @timeout)
+                                                 retries: retries,
+                                                 timeout: timeout
     end
 
     ##

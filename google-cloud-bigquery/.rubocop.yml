@@ -36,3 +36,7 @@ Naming/FileName:
 Naming/MethodParameterName:
   Exclude:
     - "lib/google/cloud/bigquery/external/**/*.rb"
+Style/ReturnNilInPredicateMethodDefinition:
+  Exclude:
+    - "lib/google/cloud/bigquery/table.rb"
+    - "lib/google/cloud/bigquery/table/async_inserter.rb"

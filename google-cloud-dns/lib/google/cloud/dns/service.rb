@@ -38,15 +38,14 @@ module Google
           @project = project
           @credentials = credentials
           @service = API::DnsService.new
-          @service.client_options.application_name    = "gcloud-ruby"
-          @service.client_options.application_version = \
-            Google::Cloud::Dns::VERSION
+          @service.client_options.application_name = "gcloud-ruby"
+          @service.client_options.application_version = Google::Cloud::Dns::VERSION
           @service.client_options.open_timeout_sec = timeout
           @service.client_options.read_timeout_sec = timeout
           @service.client_options.send_timeout_sec = timeout
           @service.request_options.retries = retries || 3
           @service.request_options.header ||= {}
-          @service.request_options.header["x-goog-api-client"] = \
+          @service.request_options.header["x-goog-api-client"] =
             "gl-ruby/#{RUBY_VERSION} gccl/#{Google::Cloud::Dns::VERSION}"
           @service.request_options.quota_project = quota_project if quota_project
           @service.authorization = @credentials.client
@@ -84,11 +83,12 @@ module Google
         # Returns Google::Apis::DnsV1::ManagedZone
         def create_zone zone_name, zone_dns, description: nil,
                         name_server_set: nil
+          description ||= ""
           managed_zone = Google::Apis::DnsV1::ManagedZone.new(
             kind: "dns#managedZone",
             name: zone_name,
             dns_name: zone_dns,
-            description: (description || ""),
+            description: description,
             name_server_set: name_server_set
           )
           execute { service.create_managed_zone @project, managed_zone }

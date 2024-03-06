@@ -180,7 +180,7 @@ module Google
         ##
         # Fallback to default configuration values if not defined already
         def init_default_config
-          configuration.project_id ||= (Cloud.configure.project_id || ErrorReporting::Project.default_project_id)
+          configuration.project_id ||= Cloud.configure.project_id || ErrorReporting::Project.default_project_id
           configuration.credentials ||= Cloud.configure.credentials
           configuration.service_name ||= ErrorReporting::Project.default_service_name
           configuration.service_version ||= ErrorReporting::Project.default_service_version

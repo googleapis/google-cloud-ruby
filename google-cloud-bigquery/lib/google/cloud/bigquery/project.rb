@@ -633,6 +633,7 @@ module Google
                       create_session: nil,
                       session_id: nil
           ensure_service!
+          project ||= self.project
           options = {
             params: params,
             types: types,
@@ -644,7 +645,7 @@ module Google
             write: write,
             dryrun: dryrun,
             dataset: dataset,
-            project: (project || self.project),
+            project: project,
             standard_sql: standard_sql,
             legacy_sql: legacy_sql,
             large_results: large_results,

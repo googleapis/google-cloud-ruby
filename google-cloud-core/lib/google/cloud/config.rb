@@ -257,8 +257,7 @@ module Google
             @values[key] = @defaults[key]
             @values[key].reset! if @validators[key] == SUBCONFIG
           elsif @values.key? key
-            warn! "Key #{key.inspect} has not been added, but has a value." \
-                  " Removing the value."
+            warn! "Key #{key.inspect} has not been added, but has a value. Removing the value."
             @values.delete key
           else
             warn! "Key #{key.inspect} does not exist. Nothing to reset."
@@ -521,8 +520,7 @@ module Google
         key_str = key.to_s
         key = key.to_sym
         if key_str !~ /^[a-zA-Z]\w*$/ || ILLEGAL_KEYS.include?(key)
-          warn! "Illegal key name: #{key_str.inspect}. Method dispatch will" \
-                " not work for this key."
+          warn! "Illegal key name: #{key_str.inspect}. Method dispatch will not work for this key."
         end
         warn! "Key #{key.inspect} already exists. It will be replaced." if @validators.key? key
         key
@@ -567,13 +565,11 @@ module Google
         case validator
         when ::Proc
           unless validator.call value
-            warn! "Invalid value #{value.inspect} for key #{key.inspect}." \
-                  " Setting anyway."
+            warn! "Invalid value #{value.inspect} for key #{key.inspect}. Setting anyway."
           end
         when Config
           if value != validator
-            warn! "Key #{key.inspect} refers to a subconfig and shouldn't" \
-                  " be changed. Setting anyway."
+            warn! "Key #{key.inspect} refers to a subconfig and shouldn't be changed. Setting anyway."
           end
         else
           warn! "Key #{key.inspect} has not been added. Setting anyway."

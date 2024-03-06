@@ -318,7 +318,7 @@ module Google
         ##
         # @private
         def eql? other
-          return nil unless other.is_a? DocumentSnapshot
+          return false unless other.is_a? DocumentSnapshot
           return data.eql? other.data if path == other.path
           path.eql? other.path
         end

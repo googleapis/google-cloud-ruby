@@ -207,7 +207,7 @@ module Google
         ##
         # @private
         def start new_aggregate
-          combined_aggregates = [].concat(grpc.aggregations).concat([new_aggregate])
+          combined_aggregates = [].concat(grpc.aggregations).push(new_aggregate)
           new_grpc = Google::Cloud::Firestore::V1::StructuredAggregationQuery.new(
             structured_query: @query.query,
             aggregations: combined_aggregates

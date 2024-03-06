@@ -69,7 +69,7 @@ module Google
             data_bytes = String(data).dup.force_encoding(Encoding::ASCII_8BIT).freeze
 
             # Convert attributes to strings to match the protobuf definition
-            attributes = Hash[attributes.map { |k, v| [String(k), String(v)] }]
+            attributes = attributes.to_h { |k, v| [String(k), String(v)] }
 
             # Ordering Key must always be a string
             ordering_key = String(ordering_key).freeze

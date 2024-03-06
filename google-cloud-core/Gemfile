@@ -2,7 +2,17 @@ source "https://rubygems.org"
 
 gemspec
 
-gem "googleauth", "~> 1.0"
 gem "google-cloud-errors", path: "../google-cloud-errors"
 
+gem "autotest-suffix", "~> 1.1"
+gem "googleauth", "~> 1.0"
+gem "google-style", "~> 1.27.1"
+gem "minitest", "~> 5.14"
+gem "minitest-autotest", "~> 1.0"
+gem "minitest-focus", "~> 1.1"
+gem "minitest-rg", "~> 5.2"
 gem "rake"
+gem "redcarpet", "~> 3.0"
+gem "simplecov", "~> 0.9"
+gem "yard", "~> 0.9"
+gem "yard-doctest", "~> 0.1.13"

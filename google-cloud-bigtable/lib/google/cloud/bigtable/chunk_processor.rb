@@ -76,11 +76,11 @@ module Google
         def validate_reset_row
           return unless chunk.reset_row
 
-          value = (!chunk.row_key.empty? ||
-              chunk.family_name ||
-              chunk.qualifier ||
-              !chunk.value.empty? ||
-              chunk.timestamp_micros.positive?)
+          value = !chunk.row_key.empty? ||
+                  chunk.family_name ||
+                  chunk.qualifier ||
+                  !chunk.value.empty? ||
+                  chunk.timestamp_micros.positive?
 
           raise_if value, "A reset should have no data"
         end

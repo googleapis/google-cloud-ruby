@@ -28,3 +28,6 @@ Metrics/PerceivedComplexity:
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-pubsub.rb"
+Style/ReturnNilInPredicateMethodDefinition:
+  Exclude:
+    - "lib/google/cloud/pubsub/subscriber/stream.rb"

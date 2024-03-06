@@ -80,7 +80,7 @@ module Google
         retries     ||= configure.retries
         timeout     ||= configure.timeout
         endpoint    ||= configure.endpoint
-        credentials ||= (keyfile || default_credentials(scope: scope))
+        credentials ||= keyfile || default_credentials(scope: scope)
 
         unless credentials.is_a? Google::Auth::Credentials
           credentials = Dns::Credentials.new credentials, scope: scope

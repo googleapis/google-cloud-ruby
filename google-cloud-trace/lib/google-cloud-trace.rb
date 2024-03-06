@@ -58,8 +58,9 @@ module Google
     #   end
     #
     def trace scope: nil, timeout: nil
+      timeout ||= @timeout
       Google::Cloud.trace @project, @keyfile, scope: scope,
-                                              timeout: (timeout || @timeout)
+                                              timeout: timeout
     end
 
     ##

@@ -84,7 +84,7 @@ module Google
                    transport: nil,
                    project: nil,
                    keyfile: nil
-        project_id ||= (project || default_project_id)
+        project_id ||= project || default_project_id
         scope ||= configure.scope
         timeout ||= configure.timeout
         endpoint ||= configure.endpoint
@@ -101,7 +101,7 @@ module Google
           return Firestore::Client.new service
         end
 
-        credentials ||= (keyfile || default_credentials(scope: scope))
+        credentials ||= keyfile || default_credentials(scope: scope)
         unless credentials.is_a? Google::Auth::Credentials
           credentials = Firestore::Credentials.new credentials, scope: scope
         end

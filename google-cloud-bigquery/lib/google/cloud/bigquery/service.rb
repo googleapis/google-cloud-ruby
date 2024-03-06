@@ -558,13 +558,15 @@ module Google
         def dataset_ref_from dts, pjt = nil
           return nil if dts.nil?
           if dts.respond_to? :dataset_id
+            pjt ||= dts.project_id || @project
             Google::Apis::BigqueryV2::DatasetReference.new(
-              project_id: (pjt || dts.project_id || @project),
+              project_id: pjt,
               dataset_id: dts.dataset_id
             )
           else
+            pjt ||= @project
             Google::Apis::BigqueryV2::DatasetReference.new(
-              project_id: (pjt || @project),
+              project_id: pjt,
               dataset_id: dts
             )
           end

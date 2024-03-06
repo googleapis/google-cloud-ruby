@@ -74,12 +74,13 @@ module Google
 
         def to_grpc
           # Convert to Hash with Google::Cloud::Datastore::V1::Value values.
-          Hash[@hash.map { |k, v| [k.to_s, Convert.to_value(v)] }]
+          @hash.to_h { |k, v| [k.to_s, Convert.to_value(v)] }
         end
 
         def self.from_grpc grpc_map
           # Convert to Hash of string keys and raw values.
-          new Hash[grpc_map.map { |k, v| [k.to_s, Convert.from_value(v)] }]
+          map_elems = grpc_map.map { |k, v| [k.to_s, Convert.from_value(v)] }
+          new map_elems.to_h
         end
 
         protected

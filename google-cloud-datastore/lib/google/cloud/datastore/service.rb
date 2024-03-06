@@ -117,14 +117,13 @@ module Google
         def begin_transaction read_only: nil, previous_transaction: nil, read_time: nil
           if read_only
             transaction_options = Google::Cloud::Datastore::V1::TransactionOptions.new
-            transaction_options.read_only = \
+            transaction_options.read_only =
               Google::Cloud::Datastore::V1::TransactionOptions::ReadOnly.new \
                 read_time: read_time_to_timestamp(read_time)
 
           end
           if previous_transaction
-            transaction_options ||= \
-              Google::Cloud::Datastore::V1::TransactionOptions.new
+            transaction_options ||= Google::Cloud::Datastore::V1::TransactionOptions.new
             rw = Google::Cloud::Datastore::V1::TransactionOptions::ReadWrite.new(
               previous_transaction: previous_transaction.encode("ASCII-8BIT")
             )

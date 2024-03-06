@@ -93,11 +93,11 @@ module Google
                    endpoint: nil,
                    project: nil,
                    keyfile: nil
-        project_id    ||= (project || default_project_id)
+        project_id    ||= project || default_project_id
         scope         ||= configure.scope
         timeout       ||= configure.timeout
         endpoint      ||= configure.endpoint
-        credentials   ||= (keyfile || default_credentials(scope: scope))
+        credentials   ||= keyfile || default_credentials(scope: scope)
 
         credentials = resolve_credentials credentials, scope
         if credentials.respond_to? :project_id
