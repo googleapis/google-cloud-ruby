@@ -359,6 +359,9 @@ module Google
         # @!attribute [rw] enable_confidential_storage
         #   @return [::Boolean]
         #     Optional. Reserved for future use.
+        # @!attribute [rw] secondary_boot_disks
+        #   @return [::Array<::Google::Cloud::Container::V1::SecondaryBootDisk>]
+        #     List of secondary boot disks attached to the nodes.
         class NodeConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -5468,6 +5471,30 @@ module Google
 
             # ENTERPRISE indicates a GKE Enterprise cluster.
             ENTERPRISE = 2
+          end
+        end
+
+        # SecondaryBootDisk represents a persistent disk attached to a node
+        # with special configurations based on its mode.
+        # @!attribute [rw] mode
+        #   @return [::Google::Cloud::Container::V1::SecondaryBootDisk::Mode]
+        #     Disk mode (container image cache, etc.)
+        # @!attribute [rw] disk_image
+        #   @return [::String]
+        #     Fully-qualified resource ID for an existing disk image.
+        class SecondaryBootDisk
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Mode specifies how the secondary boot disk will be used.
+          # This triggers mode-specified logic in the control plane.
+          module Mode
+            # MODE_UNSPECIFIED is when mode is not set.
+            MODE_UNSPECIFIED = 0
+
+            # CONTAINER_IMAGE_CACHE is for using the secondary boot disk as
+            # a container image cache.
+            CONTAINER_IMAGE_CACHE = 1
           end
         end
 
