@@ -1,5 +1,11 @@
 # Release History
 
+### 1.6.1 (2024-03-07)
+
+#### Documentation
+
+* update doc to point to sensitive-data-protection reference 
+
 ### 1.6.0 (2024-02-26)
 
 #### Features
