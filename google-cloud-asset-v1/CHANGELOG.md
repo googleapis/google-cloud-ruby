@@ -1,5 +1,14 @@
 # Release History
 
+### 0.31.0 (2024-03-07)
+
+#### Features
+
+* Add asset_type effective_tags field to GovernedResource 
+* Add field condition_evaluation to AnalyzerOrgPolicy.Rule 
+* Add fields project, folders and organization to OrgPolicyResult 
+* Add fields project, folders, organization and effective_tags to GovernedContainer 
+
 ### 0.30.0 (2024-02-26)
 
 #### Features
