@@ -148,10 +148,11 @@ module Google
         #     Required. Password of the Active Directory domain administrator.
         # @!attribute [rw] backup_operators
         #   @return [::Array<::String>]
-        #     Users to be added to the Built-in Backup Operator active directory group.
+        #     Optional. Users to be added to the Built-in Backup Operator active
+        #     directory group.
         # @!attribute [rw] security_operators
         #   @return [::Array<::String>]
-        #     Domain users to be given the SeSecurityPrivilege.
+        #     Optional. Domain users to be given the SeSecurityPrivilege.
         # @!attribute [rw] kdc_hostname
         #   @return [::String]
         #     Name of the active directory machine. This optional parameter is used only

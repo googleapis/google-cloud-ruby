@@ -366,14 +366,15 @@ module Google
             #   @param parent [::String]
             #     Required. Parent value
             #   @param page_size [::Integer]
-            #     The maximum number of items to return.
+            #     Optional. The maximum number of items to return.
             #   @param page_token [::String]
-            #     The next_page_token value to use if there are additional
+            #     Optional. The next_page_token value to use if there are additional
             #     results to retrieve for this list request.
             #   @param order_by [::String]
-            #     Sort results. Supported values are "name", "name desc" or "" (unsorted).
+            #     Optional. Sort results. Supported values are "name", "name desc" or ""
+            #     (unsorted).
             #   @param filter [::String]
-            #     List filter.
+            #     Optional. List filter.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::NetApp::V1::StoragePool>]

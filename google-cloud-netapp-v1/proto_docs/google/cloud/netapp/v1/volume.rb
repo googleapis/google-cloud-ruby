@@ -147,8 +147,8 @@ module Google
         #     Required. Share name of the volume
         # @!attribute [r] psa_range
         #   @return [::String]
-        #     Output only. Name of the Private Service Access allocated range. This is
-        #     optional. If not provided, any available range will be chosen.
+        #     Output only. This field is currently not implemented. Currently values
+        #     provided in this field will be ignored.
         # @!attribute [rw] storage_pool
         #   @return [::String]
         #     Required. StoragePool name of the volume

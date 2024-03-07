@@ -21,7 +21,7 @@ module Google
   module Cloud
     module NetApp
       module V1
-        # The service levels - Storage Pool, Volumes
+        # The service level of a storage pool and its volumes.
         module ServiceLevel
           # Unspecified service level.
           SERVICE_LEVEL_UNSPECIFIED = 0
@@ -32,13 +32,13 @@ module Google
           # Extreme service level.
           EXTREME = 2
 
-          # Standard (Software offering)
+          # Standard service level.
           STANDARD = 3
         end
 
-        # Defined the current volume encryption key source.
+        # The volume encryption key source.
         module EncryptionType
-          # The source of encryption key is not specified.
+          # The source of the encryption key is not specified.
           ENCRYPTION_TYPE_UNSPECIFIED = 0
 
           # Google managed encryption key.
