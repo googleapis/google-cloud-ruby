@@ -36,17 +36,18 @@ module Google
         #     Required. Parent value
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     The maximum number of items to return.
+        #     Optional. The maximum number of items to return.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     The next_page_token value to use if there are additional
+        #     Optional. The next_page_token value to use if there are additional
         #     results to retrieve for this list request.
         # @!attribute [rw] order_by
         #   @return [::String]
-        #     Sort results. Supported values are "name", "name desc" or "" (unsorted).
+        #     Optional. Sort results. Supported values are "name", "name desc" or ""
+        #     (unsorted).
         # @!attribute [rw] filter
         #   @return [::String]
-        #     List filter.
+        #     Optional. List filter.
         class ListStoragePoolsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -138,27 +139,28 @@ module Google
         #     Output only. Create time of the storage pool
         # @!attribute [rw] description
         #   @return [::String]
-        #     Description of the storage pool
+        #     Optional. Description of the storage pool
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Labels as key value pairs
+        #     Optional. Labels as key value pairs
         # @!attribute [rw] network
         #   @return [::String]
         #     Required. VPC Network name.
         #     Format: projects/\\{project}/global/networks/\\{network}
         # @!attribute [rw] active_directory
         #   @return [::String]
-        #     Specifies the Active Directory to be used for creating a SMB volume.
+        #     Optional. Specifies the Active Directory to be used for creating a SMB
+        #     volume.
         # @!attribute [rw] kms_config
         #   @return [::String]
-        #     Specifies the KMS config to be used for volume encryption.
+        #     Optional. Specifies the KMS config to be used for volume encryption.
         # @!attribute [rw] ldap_enabled
         #   @return [::Boolean]
-        #     Flag indicating if the pool is NFS LDAP enabled or not.
+        #     Optional. Flag indicating if the pool is NFS LDAP enabled or not.
         # @!attribute [rw] psa_range
         #   @return [::String]
-        #     Name of the Private Service Access allocated range. If
-        #     not provided, any available range will be chosen.
+        #     Optional. This field is currently not implemented. Currently values
+        #     provided in this field will be ignored.
         # @!attribute [r] encryption_type
         #   @return [::Google::Cloud::NetApp::V1::EncryptionType]
         #     Output only. Specifies the current pool encryption key source.
