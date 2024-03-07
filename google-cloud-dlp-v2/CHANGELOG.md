@@ -1,5 +1,11 @@
 # Release History
 
+### 0.22.0 (2024-03-07)
+
+#### Features
+
+* support getting and listing project, table, and column data profiles 
+
 ### 0.21.0 (2024-02-26)
 
 #### Features
