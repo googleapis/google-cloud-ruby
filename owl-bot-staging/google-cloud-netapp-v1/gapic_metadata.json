@@ -1,0 +1,273 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.netapp.v1",
+  "libraryPackage": "::Google::Cloud::NetApp::V1",
+  "services": {
+    "NetApp": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::NetApp::V1::NetApp::Client",
+          "rpcs": {
+            "ListStoragePools": {
+              "methods": [
+                "list_storage_pools"
+              ]
+            },
+            "CreateStoragePool": {
+              "methods": [
+                "create_storage_pool"
+              ]
+            },
+            "GetStoragePool": {
+              "methods": [
+                "get_storage_pool"
+              ]
+            },
+            "UpdateStoragePool": {
+              "methods": [
+                "update_storage_pool"
+              ]
+            },
+            "DeleteStoragePool": {
+              "methods": [
+                "delete_storage_pool"
+              ]
+            },
+            "ListVolumes": {
+              "methods": [
+                "list_volumes"
+              ]
+            },
+            "GetVolume": {
+              "methods": [
+                "get_volume"
+              ]
+            },
+            "CreateVolume": {
+              "methods": [
+                "create_volume"
+              ]
+            },
+            "UpdateVolume": {
+              "methods": [
+                "update_volume"
+              ]
+            },
+            "DeleteVolume": {
+              "methods": [
+                "delete_volume"
+              ]
+            },
+            "RevertVolume": {
+              "methods": [
+                "revert_volume"
+              ]
+            },
+            "ListSnapshots": {
+              "methods": [
+                "list_snapshots"
+              ]
+            },
+            "GetSnapshot": {
+              "methods": [
+                "get_snapshot"
+              ]
+            },
+            "CreateSnapshot": {
+              "methods": [
+                "create_snapshot"
+              ]
+            },
+            "DeleteSnapshot": {
+              "methods": [
+                "delete_snapshot"
+              ]
+            },
+            "UpdateSnapshot": {
+              "methods": [
+                "update_snapshot"
+              ]
+            },
+            "ListActiveDirectories": {
+              "methods": [
+                "list_active_directories"
+              ]
+            },
+            "GetActiveDirectory": {
+              "methods": [
+                "get_active_directory"
+              ]
+            },
+            "CreateActiveDirectory": {
+              "methods": [
+                "create_active_directory"
+              ]
+            },
+            "UpdateActiveDirectory": {
+              "methods": [
+                "update_active_directory"
+              ]
+            },
+            "DeleteActiveDirectory": {
+              "methods": [
+                "delete_active_directory"
+              ]
+            },
+            "ListKmsConfigs": {
+              "methods": [
+                "list_kms_configs"
+              ]
+            },
+            "CreateKmsConfig": {
+              "methods": [
+                "create_kms_config"
+              ]
+            },
+            "GetKmsConfig": {
+              "methods": [
+                "get_kms_config"
+              ]
+            },
+            "UpdateKmsConfig": {
+              "methods": [
+                "update_kms_config"
+              ]
+            },
+            "EncryptVolumes": {
+              "methods": [
+                "encrypt_volumes"
+              ]
+            },
+            "VerifyKmsConfig": {
+              "methods": [
+                "verify_kms_config"
+              ]
+            },
+            "DeleteKmsConfig": {
+              "methods": [
+                "delete_kms_config"
+              ]
+            },
+            "ListReplications": {
+              "methods": [
+                "list_replications"
+              ]
+            },
+            "GetReplication": {
+              "methods": [
+                "get_replication"
+              ]
+            },
+            "CreateReplication": {
+              "methods": [
+                "create_replication"
+              ]
+            },
+            "DeleteReplication": {
+              "methods": [
+                "delete_replication"
+              ]
+            },
+            "UpdateReplication": {
+              "methods": [
+                "update_replication"
+              ]
+            },
+            "StopReplication": {
+              "methods": [
+                "stop_replication"
+              ]
+            },
+            "ResumeReplication": {
+              "methods": [
+                "resume_replication"
+              ]
+            },
+            "ReverseReplicationDirection": {
+              "methods": [
+                "reverse_replication_direction"
+              ]
+            },
+            "CreateBackupVault": {
+              "methods": [
+                "create_backup_vault"
+              ]
+            },
+            "GetBackupVault": {
+              "methods": [
+                "get_backup_vault"
+              ]
+            },
+            "ListBackupVaults": {
+              "methods": [
+                "list_backup_vaults"
+              ]
+            },
+            "UpdateBackupVault": {
+              "methods": [
+                "update_backup_vault"
+              ]
+            },
+            "DeleteBackupVault": {
+              "methods": [
+                "delete_backup_vault"
+              ]
+            },
+            "CreateBackup": {
+              "methods": [
+                "create_backup"
+              ]
+            },
+            "GetBackup": {
+              "methods": [
+                "get_backup"
+              ]
+            },
+            "ListBackups": {
+              "methods": [
+                "list_backups"
+              ]
+            },
+            "DeleteBackup": {
+              "methods": [
+                "delete_backup"
+              ]
+            },
+            "UpdateBackup": {
+              "methods": [
+                "update_backup"
+              ]
+            },
+            "CreateBackupPolicy": {
+              "methods": [
+                "create_backup_policy"
+              ]
+            },
+            "GetBackupPolicy": {
+              "methods": [
+                "get_backup_policy"
+              ]
+            },
+            "ListBackupPolicies": {
+              "methods": [
+                "list_backup_policies"
+              ]
+            },
+            "UpdateBackupPolicy": {
+              "methods": [
+                "update_backup_policy"
+              ]
+            },
+            "DeleteBackupPolicy": {
+              "methods": [
+                "delete_backup_policy"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
