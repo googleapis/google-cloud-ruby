@@ -1,5 +1,11 @@
 # Release History
 
+### 0.38.0 (2024-03-07)
+
+#### Features
+
+* add secondary boot disks field to NodePool API 
+
 ### 0.37.0 (2024-02-26)
 
 #### Features
