@@ -221,6 +221,9 @@ module Google
         # @!attribute [rw] backup_disaster_recovery
         #   @return [::Google::Cloud::SecurityCenter::V1::BackupDisasterRecovery]
         #     Fields related to Backup and DR findings.
+        # @!attribute [rw] security_posture
+        #   @return [::Google::Cloud::SecurityCenter::V1::SecurityPosture]
+        #     The security posture associated with the finding.
         # @!attribute [rw] log_entries
         #   @return [::Array<::Google::Cloud::SecurityCenter::V1::LogEntry>]
         #     Log entries that are relevant to the finding.
@@ -367,6 +370,10 @@ module Google
 
             # Describes an error that prevents some SCC functionality.
             SCC_ERROR = 5
+
+            # Describes a potential security risk due to a change in the security
+            # posture.
+            POSTURE_VIOLATION = 6
           end
         end
       end
