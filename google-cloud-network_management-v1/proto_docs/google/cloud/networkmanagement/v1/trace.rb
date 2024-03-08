@@ -128,6 +128,9 @@ module Google
         # @!attribute [rw] cloud_run_revision
         #   @return [::Google::Cloud::NetworkManagement::V1::CloudRunRevisionInfo]
         #     Display information of a Cloud Run revision.
+        # @!attribute [rw] nat
+        #   @return [::Google::Cloud::NetworkManagement::V1::NatInfo]
+        #     Display information of a NAT.
         # @!attribute [rw] proxy_connection
         #   @return [::Google::Cloud::NetworkManagement::V1::ProxyConnectionInfo]
         #     Display information of a ProxyConnection.
@@ -1274,6 +1277,71 @@ module Google
         class VpcConnectorInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # For display only. Metadata associated with NAT.
+        # @!attribute [rw] type
+        #   @return [::Google::Cloud::NetworkManagement::V1::NatInfo::Type]
+        #     Type of NAT.
+        # @!attribute [rw] protocol
+        #   @return [::String]
+        #     IP protocol in string format, for example: "TCP", "UDP", "ICMP".
+        # @!attribute [rw] network_uri
+        #   @return [::String]
+        #     URI of the network where NAT translation takes place.
+        # @!attribute [rw] old_source_ip
+        #   @return [::String]
+        #     Source IP address before NAT translation.
+        # @!attribute [rw] new_source_ip
+        #   @return [::String]
+        #     Source IP address after NAT translation.
+        # @!attribute [rw] old_destination_ip
+        #   @return [::String]
+        #     Destination IP address before NAT translation.
+        # @!attribute [rw] new_destination_ip
+        #   @return [::String]
+        #     Destination IP address after NAT translation.
+        # @!attribute [rw] old_source_port
+        #   @return [::Integer]
+        #     Source port before NAT translation. Only valid when protocol is TCP or UDP.
+        # @!attribute [rw] new_source_port
+        #   @return [::Integer]
+        #     Source port after NAT translation. Only valid when protocol is TCP or UDP.
+        # @!attribute [rw] old_destination_port
+        #   @return [::Integer]
+        #     Destination port before NAT translation. Only valid when protocol is TCP or
+        #     UDP.
+        # @!attribute [rw] new_destination_port
+        #   @return [::Integer]
+        #     Destination port after NAT translation. Only valid when protocol is TCP or
+        #     UDP.
+        # @!attribute [rw] router_uri
+        #   @return [::String]
+        #     Uri of the Cloud Router. Only valid when type is CLOUD_NAT.
+        # @!attribute [rw] nat_gateway_name
+        #   @return [::String]
+        #     The name of Cloud NAT Gateway. Only valid when type is CLOUD_NAT.
+        class NatInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Types of NAT.
+          module Type
+            # Type is unspecified.
+            TYPE_UNSPECIFIED = 0
+
+            # From Compute Engine instance's internal address to external address.
+            INTERNAL_TO_EXTERNAL = 1
+
+            # From Compute Engine instance's external address to internal address.
+            EXTERNAL_TO_INTERNAL = 2
+
+            # Cloud NAT Gateway.
+            CLOUD_NAT = 3
+
+            # Private service connect NAT.
+            PRIVATE_SERVICE_CONNECT = 4
+          end
         end
 
         # For display only. Metadata associated with ProxyConnection.
