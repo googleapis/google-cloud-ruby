@@ -94,6 +94,27 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # `Value` represents a dynamically typed value.
+        # The typed fields in `Value` are used as a transport encoding for the actual
+        # value (which may be of a more complex type). See the documentation of the
+        # `Type` message for more details.
+        # @!attribute [rw] raw_value
+        #   @return [::String]
+        #     Represents a raw byte sequence with no type information.
+        #     The `type` field must be omitted.
+        # @!attribute [rw] raw_timestamp_micros
+        #   @return [::Integer]
+        #     Represents a raw cell timestamp with no type information.
+        #     The `type` field must be omitted.
+        # @!attribute [rw] int_value
+        #   @return [::Integer]
+        #     Represents a typed value transported as an integer.
+        #     Default type for writes: `Int64`
+        class Value
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Specifies a contiguous range of rows.
         # @!attribute [rw] start_key_closed
         #   @return [::String]
@@ -452,6 +473,9 @@ module Google
         # @!attribute [rw] set_cell
         #   @return [::Google::Cloud::Bigtable::V2::Mutation::SetCell]
         #     Set a cell's value.
+        # @!attribute [rw] add_to_cell
+        #   @return [::Google::Cloud::Bigtable::V2::Mutation::AddToCell]
+        #     Incrementally updates an `Aggregate` cell.
         # @!attribute [rw] delete_from_column
         #   @return [::Google::Cloud::Bigtable::V2::Mutation::DeleteFromColumn]
         #     Deletes cells from a column.
@@ -485,6 +509,29 @@ module Google
           #   @return [::String]
           #     The value to be written into the specified cell.
           class SetCell
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # A Mutation which incrementally updates a cell in an `Aggregate` family.
+          # @!attribute [rw] family_name
+          #   @return [::String]
+          #     The name of the `Aggregate` family into which new data should be added.
+          #     This must be a family with a `value_type` of `Aggregate`.
+          #     Format: `[-_.a-zA-Z0-9]+`
+          # @!attribute [rw] column_qualifier
+          #   @return [::Google::Cloud::Bigtable::V2::Value]
+          #     The qualifier of the column into which new data should be added. This
+          #     must be a `raw_value`.
+          # @!attribute [rw] timestamp
+          #   @return [::Google::Cloud::Bigtable::V2::Value]
+          #     The timestamp of the cell to which new data should be added. This must
+          #     be a `raw_timestamp_micros` that matches the table's `granularity`.
+          # @!attribute [rw] input
+          #   @return [::Google::Cloud::Bigtable::V2::Value]
+          #     The input value to be accumulated into the specified cell. This must be
+          #     compatible with the family's `value_type.input_type`.
+          class AddToCell
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
