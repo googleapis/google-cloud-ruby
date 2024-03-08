@@ -1217,7 +1217,8 @@ module Google
         end
 
         ##
-        # Sets the value for Soft Delete Policy in the bucket. This value can be queried by calling {#soft_delete_policy}.
+        # Sets the value for Soft Delete Policy in the bucket. This value can
+        # be queried by calling {#soft_delete_policy}.
         #
         # @param [Google::Apis::StorageV1::Bucket::SoftDeletePolicy,
         #         Hash(String => String)] new_soft_delete_policy The bucket's
@@ -1826,29 +1827,29 @@ module Google
         #   bucket.restore_file "path/of/file"
         #
         def restore_file file_path,
-                        copy_source_acl: nil,
-                        if_generation_match: nil,
-                        if_generation_not_match: nil,
-                        if_metageneration_match: nil,
-                        if_metageneration_not_match: nil,
-                        projection: nil,
-                        user_project: nil,
-                        fields: nil,
-                        options: {}
+                         copy_source_acl: nil,
+                         if_generation_match: nil,
+                         if_generation_not_match: nil,
+                         if_metageneration_match: nil,
+                         if_metageneration_not_match: nil,
+                         projection: nil,
+                         user_project: nil,
+                         fields: nil,
+                         options: {}
           ensure_service!
           file_gapi = API::Object.new
           gapi = service.restore_file name,
-                                     file_path,
-                                     file_gapi,
-                                     copy_source_acl: File::Acl.predefined_rule_for(copy_source_acl),
-                                     if_generation_match: if_generation_match,
-                                     if_generation_not_match: if_generation_not_match,
-                                     if_metageneration_match: if_metageneration_match,
-                                     if_metageneration_not_match: if_metageneration_not_match,
-                                     projection: projection,
-                                     user_project: user_project,
-                                     fields: fields,
-                                     options: options
+                                      file_path,
+                                      file_gapi,
+                                      copy_source_acl: File::Acl.predefined_rule_for(copy_source_acl),
+                                      if_generation_match: if_generation_match,
+                                      if_generation_not_match: if_generation_not_match,
+                                      if_metageneration_match: if_metageneration_match,
+                                      if_metageneration_not_match: if_metageneration_not_match,
+                                      projection: projection,
+                                      user_project: user_project,
+                                      fields: fields,
+                                      options: options
           File.from_gapi gapi, service, user_project: user_project
         end
 

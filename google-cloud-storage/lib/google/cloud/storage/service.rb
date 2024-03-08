@@ -657,17 +657,17 @@ module Google
         ##
         # Restores a soft-deleted object.
         def restore_file bucket_name,
-                        file_path,
-                        file_gapi = nil,
-                        copy_source_acl: nil,
-                        if_generation_match: nil,
-                        if_generation_not_match: nil,
-                        if_metageneration_match: nil,
-                        if_metageneration_not_match: nil,
-                        projection: nil,
-                        user_project: nil,
-                        fields: nil,
-                        options: {}
+                         file_path,
+                         file_gapi = nil,
+                         copy_source_acl: nil,
+                         if_generation_match: nil,
+                         if_generation_not_match: nil,
+                         if_metageneration_match: nil,
+                         if_metageneration_not_match: nil,
+                         projection: nil,
+                         user_project: nil,
+                         fields: nil,
+                         options: {}
 
           if options[:retries].nil?
             is_idempotent = retry? generation: generation, if_generation_match: if_generation_match
@@ -675,7 +675,7 @@ module Google
           end
 
           execute do
-            service.restore_object bucket_name, file_path, object_object = nil,
+            service.restore_object bucket_name, file_path, file_gapi,
                                    copy_source_acl: copy_source_acl,
                                    if_generation_match: if_generation_match,
                                    if_generation_not_match: if_generation_not_match,
