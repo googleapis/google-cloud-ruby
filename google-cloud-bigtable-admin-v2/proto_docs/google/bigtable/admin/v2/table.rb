@@ -282,6 +282,18 @@ module Google
           #     NOTE: Garbage collection executes opportunistically in the background, and
           #     so it's possible for reads to return a cell even if it matches the active
           #     GC expression for its family.
+          # @!attribute [rw] value_type
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::Type]
+          #     The type of data stored in each of this family's cell values, including its
+          #     full encoding. If omitted, the family only serves raw untyped bytes.
+          #
+          #     For now, only the `Aggregate` type is supported.
+          #
+          #     `Aggregate` can only be set at family creation and is immutable afterwards.
+          #
+          #
+          #     If `value_type` is `Aggregate`, written data must be compatible with:
+          #      * `value_type.input_type` for `AddInput` mutations
           class ColumnFamily
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
