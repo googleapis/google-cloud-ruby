@@ -1224,7 +1224,7 @@ module Google
         #         Hash(String => String)] new_soft_delete_policy The bucket's
         #         new Soft Delete Policy.
         #
-        # @example Set Soft Delete Policy to 5 days using SoftDeletePolicy class:
+        # @example Set Soft Delete Policy to 10 days using SoftDeletePolicy class:
         #   require "google/cloud/storage"
         #   require "date"
         #
@@ -1234,7 +1234,7 @@ module Google
         #
         #   soft_delete_policy = Google::Apis::StorageV1::Bucket::SoftDeletePolicy.new
         #   soft_delete_policy.effective_time = DateTime.new(2024, 3, 1)
-        #   soft_delete_policy.retention_duration_seconds = 432000
+        #   soft_delete_policy.retention_duration_seconds = 864000
         #
         #   bucket.soft_delete_policy = soft_delete_policy
         #
@@ -1248,7 +1248,7 @@ module Google
         #
         #   soft_delete_policy = {
         #                          effective_time: DateTime.new(2024, 3, 1),
-        #                          retention_duration_seconds = 432000
+        #                          retention_duration_seconds: 432000
         #                        }
         #   bucket.soft_delete_policy = soft_delete_policy
         #

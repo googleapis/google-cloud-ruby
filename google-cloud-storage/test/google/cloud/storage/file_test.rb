@@ -91,6 +91,9 @@ describe Google::Cloud::Storage::File, :mock_storage do
     _(file.temporary_hold?).must_equal true
     _(file.event_based_hold?).must_equal true
     _(file.retention_expires_at).must_be_within_delta Time.now.to_datetime
+
+    _(file.soft_delete_time).must_be_nil
+    _(file.hard_delete_time).must_be_nil
   end
 
   it "can delete itself" do
