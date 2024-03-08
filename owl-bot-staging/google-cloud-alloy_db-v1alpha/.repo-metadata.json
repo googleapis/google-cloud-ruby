@@ -1,0 +1,17 @@
+{
+    "api_id": "alloydb.googleapis.com",
+    "api_shortname": "alloydb",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-alloy_db-v1alpha/latest",
+    "distribution_name": "google-cloud-alloy_db-v1alpha",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "alloydb",
+    "name_pretty": "AlloyDB V1ALPHA API",
+    "product_documentation": "https://cloud.google.com/alloydb/docs",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "AlloyDB for PostgreSQL is an open source-compatible database service that provides a powerful option for migrating, modernizing, or building commercial-grade applications. It offers full compatibility with standard PostgreSQL, and is more than 4x faster for transactional workloads and up to 100x faster for analytical queries than standard PostgreSQL in our performance tests. AlloyDB for PostgreSQL offers a 99.99 percent availability SLA inclusive of maintenance.  AlloyDB is optimized for the most demanding use cases, allowing you to build new applications that require high transaction throughput, large database sizes, or multiple read resources; scale existing PostgreSQL workloads with no application changes; and modernize legacy proprietary databases. Note that google-cloud-alloy_db-v1alpha is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-alloy_db instead. See the readme for more details.",
+    "ruby-cloud-product-url": "https://cloud.google.com/alloydb/docs",
+    "library_type": "GAPIC_AUTO"
+}
