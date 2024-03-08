@@ -341,6 +341,7 @@ class MockStorage < Minitest::Spec
                       if_metageneration_match: nil,
                       if_metageneration_not_match: nil,
                       user_project: nil,
+                      soft_deleted: nil,
                       options: {}
     {
       generation: generation,
@@ -349,6 +350,7 @@ class MockStorage < Minitest::Spec
       if_metageneration_match: if_metageneration_match,
       if_metageneration_not_match: if_metageneration_not_match,
       user_project: user_project,
+      soft_deleted: soft_deleted,
       options: options
     }
   end
