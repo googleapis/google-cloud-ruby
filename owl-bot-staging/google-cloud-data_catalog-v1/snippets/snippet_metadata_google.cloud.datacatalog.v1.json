@@ -1,0 +1,2015 @@
+{
+  "client_library": {
+    "name": "google-cloud-data_catalog-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.datacatalog.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "datacatalog_v1_generated_DataCatalog_SearchCatalog_sync",
+      "title": "Snippet for the search_catalog call in the DataCatalog service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#search_catalog.",
+      "file": "data_catalog/search_catalog.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "search_catalog",
+        "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client#search_catalog",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::V1::SearchCatalogRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::V1::SearchCatalogResponse",
+        "client": {
+          "short_name": "DataCatalog::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client"
+        },
+        "method": {
+          "short_name": "SearchCatalog",
+          "full_name": "google.cloud.datacatalog.v1.DataCatalog.SearchCatalog",
+          "service": {
+            "short_name": "DataCatalog",
+            "full_name": "google.cloud.datacatalog.v1.DataCatalog"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_DataCatalog_CreateEntryGroup_sync",
+      "title": "Snippet for the create_entry_group call in the DataCatalog service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#create_entry_group.",
+      "file": "data_catalog/create_entry_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_entry_group",
+        "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client#create_entry_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::V1::CreateEntryGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::V1::EntryGroup",
+        "client": {
+          "short_name": "DataCatalog::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client"
+        },
+        "method": {
+          "short_name": "CreateEntryGroup",
+          "full_name": "google.cloud.datacatalog.v1.DataCatalog.CreateEntryGroup",
+          "service": {
+            "short_name": "DataCatalog",
+            "full_name": "google.cloud.datacatalog.v1.DataCatalog"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_DataCatalog_GetEntryGroup_sync",
+      "title": "Snippet for the get_entry_group call in the DataCatalog service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#get_entry_group.",
+      "file": "data_catalog/get_entry_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_entry_group",
+        "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client#get_entry_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::V1::GetEntryGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::V1::EntryGroup",
+        "client": {
+          "short_name": "DataCatalog::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client"
+        },
+        "method": {
+          "short_name": "GetEntryGroup",
+          "full_name": "google.cloud.datacatalog.v1.DataCatalog.GetEntryGroup",
+          "service": {
+            "short_name": "DataCatalog",
+            "full_name": "google.cloud.datacatalog.v1.DataCatalog"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_DataCatalog_UpdateEntryGroup_sync",
+      "title": "Snippet for the update_entry_group call in the DataCatalog service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#update_entry_group.",
+      "file": "data_catalog/update_entry_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_entry_group",
+        "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client#update_entry_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::V1::UpdateEntryGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::V1::EntryGroup",
+        "client": {
+          "short_name": "DataCatalog::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client"
+        },
+        "method": {
+          "short_name": "UpdateEntryGroup",
+          "full_name": "google.cloud.datacatalog.v1.DataCatalog.UpdateEntryGroup",
+          "service": {
+            "short_name": "DataCatalog",
+            "full_name": "google.cloud.datacatalog.v1.DataCatalog"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_DataCatalog_DeleteEntryGroup_sync",
+      "title": "Snippet for the delete_entry_group call in the DataCatalog service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#delete_entry_group.",
+      "file": "data_catalog/delete_entry_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_entry_group",
+        "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client#delete_entry_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::V1::DeleteEntryGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "DataCatalog::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client"
+        },
+        "method": {
+          "short_name": "DeleteEntryGroup",
+          "full_name": "google.cloud.datacatalog.v1.DataCatalog.DeleteEntryGroup",
+          "service": {
+            "short_name": "DataCatalog",
+            "full_name": "google.cloud.datacatalog.v1.DataCatalog"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_DataCatalog_ListEntryGroups_sync",
+      "title": "Snippet for the list_entry_groups call in the DataCatalog service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#list_entry_groups.",
+      "file": "data_catalog/list_entry_groups.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_entry_groups",
+        "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client#list_entry_groups",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::V1::ListEntryGroupsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::V1::ListEntryGroupsResponse",
+        "client": {
+          "short_name": "DataCatalog::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client"
+        },
+        "method": {
+          "short_name": "ListEntryGroups",
+          "full_name": "google.cloud.datacatalog.v1.DataCatalog.ListEntryGroups",
+          "service": {
+            "short_name": "DataCatalog",
+            "full_name": "google.cloud.datacatalog.v1.DataCatalog"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_DataCatalog_CreateEntry_sync",
+      "title": "Snippet for the create_entry call in the DataCatalog service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#create_entry.",
+      "file": "data_catalog/create_entry.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_entry",
+        "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client#create_entry",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::V1::CreateEntryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::V1::Entry",
+        "client": {
+          "short_name": "DataCatalog::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client"
+        },
+        "method": {
+          "short_name": "CreateEntry",
+          "full_name": "google.cloud.datacatalog.v1.DataCatalog.CreateEntry",
+          "service": {
+            "short_name": "DataCatalog",
+            "full_name": "google.cloud.datacatalog.v1.DataCatalog"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_DataCatalog_UpdateEntry_sync",
+      "title": "Snippet for the update_entry call in the DataCatalog service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#update_entry.",
+      "file": "data_catalog/update_entry.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_entry",
+        "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client#update_entry",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::V1::UpdateEntryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::V1::Entry",
+        "client": {
+          "short_name": "DataCatalog::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client"
+        },
+        "method": {
+          "short_name": "UpdateEntry",
+          "full_name": "google.cloud.datacatalog.v1.DataCatalog.UpdateEntry",
+          "service": {
+            "short_name": "DataCatalog",
+            "full_name": "google.cloud.datacatalog.v1.DataCatalog"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_DataCatalog_DeleteEntry_sync",
+      "title": "Snippet for the delete_entry call in the DataCatalog service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#delete_entry.",
+      "file": "data_catalog/delete_entry.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_entry",
+        "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client#delete_entry",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::V1::DeleteEntryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "DataCatalog::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client"
+        },
+        "method": {
+          "short_name": "DeleteEntry",
+          "full_name": "google.cloud.datacatalog.v1.DataCatalog.DeleteEntry",
+          "service": {
+            "short_name": "DataCatalog",
+            "full_name": "google.cloud.datacatalog.v1.DataCatalog"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_DataCatalog_GetEntry_sync",
+      "title": "Snippet for the get_entry call in the DataCatalog service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#get_entry.",
+      "file": "data_catalog/get_entry.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_entry",
+        "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client#get_entry",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::V1::GetEntryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::V1::Entry",
+        "client": {
+          "short_name": "DataCatalog::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client"
+        },
+        "method": {
+          "short_name": "GetEntry",
+          "full_name": "google.cloud.datacatalog.v1.DataCatalog.GetEntry",
+          "service": {
+            "short_name": "DataCatalog",
+            "full_name": "google.cloud.datacatalog.v1.DataCatalog"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_DataCatalog_LookupEntry_sync",
+      "title": "Snippet for the lookup_entry call in the DataCatalog service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#lookup_entry.",
+      "file": "data_catalog/lookup_entry.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "lookup_entry",
+        "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client#lookup_entry",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::V1::LookupEntryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::V1::Entry",
+        "client": {
+          "short_name": "DataCatalog::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client"
+        },
+        "method": {
+          "short_name": "LookupEntry",
+          "full_name": "google.cloud.datacatalog.v1.DataCatalog.LookupEntry",
+          "service": {
+            "short_name": "DataCatalog",
+            "full_name": "google.cloud.datacatalog.v1.DataCatalog"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_DataCatalog_ListEntries_sync",
+      "title": "Snippet for the list_entries call in the DataCatalog service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#list_entries.",
+      "file": "data_catalog/list_entries.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_entries",
+        "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client#list_entries",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::V1::ListEntriesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::V1::ListEntriesResponse",
+        "client": {
+          "short_name": "DataCatalog::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client"
+        },
+        "method": {
+          "short_name": "ListEntries",
+          "full_name": "google.cloud.datacatalog.v1.DataCatalog.ListEntries",
+          "service": {
+            "short_name": "DataCatalog",
+            "full_name": "google.cloud.datacatalog.v1.DataCatalog"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_DataCatalog_ModifyEntryOverview_sync",
+      "title": "Snippet for the modify_entry_overview call in the DataCatalog service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#modify_entry_overview.",
+      "file": "data_catalog/modify_entry_overview.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "modify_entry_overview",
+        "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client#modify_entry_overview",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::V1::ModifyEntryOverviewRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::V1::EntryOverview",
+        "client": {
+          "short_name": "DataCatalog::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client"
+        },
+        "method": {
+          "short_name": "ModifyEntryOverview",
+          "full_name": "google.cloud.datacatalog.v1.DataCatalog.ModifyEntryOverview",
+          "service": {
+            "short_name": "DataCatalog",
+            "full_name": "google.cloud.datacatalog.v1.DataCatalog"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_DataCatalog_ModifyEntryContacts_sync",
+      "title": "Snippet for the modify_entry_contacts call in the DataCatalog service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#modify_entry_contacts.",
+      "file": "data_catalog/modify_entry_contacts.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "modify_entry_contacts",
+        "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client#modify_entry_contacts",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::V1::ModifyEntryContactsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::V1::Contacts",
+        "client": {
+          "short_name": "DataCatalog::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client"
+        },
+        "method": {
+          "short_name": "ModifyEntryContacts",
+          "full_name": "google.cloud.datacatalog.v1.DataCatalog.ModifyEntryContacts",
+          "service": {
+            "short_name": "DataCatalog",
+            "full_name": "google.cloud.datacatalog.v1.DataCatalog"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_DataCatalog_CreateTagTemplate_sync",
+      "title": "Snippet for the create_tag_template call in the DataCatalog service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#create_tag_template.",
+      "file": "data_catalog/create_tag_template.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_tag_template",
+        "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client#create_tag_template",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::V1::CreateTagTemplateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::V1::TagTemplate",
+        "client": {
+          "short_name": "DataCatalog::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client"
+        },
+        "method": {
+          "short_name": "CreateTagTemplate",
+          "full_name": "google.cloud.datacatalog.v1.DataCatalog.CreateTagTemplate",
+          "service": {
+            "short_name": "DataCatalog",
+            "full_name": "google.cloud.datacatalog.v1.DataCatalog"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_DataCatalog_GetTagTemplate_sync",
+      "title": "Snippet for the get_tag_template call in the DataCatalog service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#get_tag_template.",
+      "file": "data_catalog/get_tag_template.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_tag_template",
+        "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client#get_tag_template",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::V1::GetTagTemplateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::V1::TagTemplate",
+        "client": {
+          "short_name": "DataCatalog::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client"
+        },
+        "method": {
+          "short_name": "GetTagTemplate",
+          "full_name": "google.cloud.datacatalog.v1.DataCatalog.GetTagTemplate",
+          "service": {
+            "short_name": "DataCatalog",
+            "full_name": "google.cloud.datacatalog.v1.DataCatalog"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_DataCatalog_UpdateTagTemplate_sync",
+      "title": "Snippet for the update_tag_template call in the DataCatalog service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#update_tag_template.",
+      "file": "data_catalog/update_tag_template.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_tag_template",
+        "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client#update_tag_template",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::V1::UpdateTagTemplateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::V1::TagTemplate",
+        "client": {
+          "short_name": "DataCatalog::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client"
+        },
+        "method": {
+          "short_name": "UpdateTagTemplate",
+          "full_name": "google.cloud.datacatalog.v1.DataCatalog.UpdateTagTemplate",
+          "service": {
+            "short_name": "DataCatalog",
+            "full_name": "google.cloud.datacatalog.v1.DataCatalog"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_DataCatalog_DeleteTagTemplate_sync",
+      "title": "Snippet for the delete_tag_template call in the DataCatalog service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#delete_tag_template.",
+      "file": "data_catalog/delete_tag_template.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_tag_template",
+        "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client#delete_tag_template",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::V1::DeleteTagTemplateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "DataCatalog::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client"
+        },
+        "method": {
+          "short_name": "DeleteTagTemplate",
+          "full_name": "google.cloud.datacatalog.v1.DataCatalog.DeleteTagTemplate",
+          "service": {
+            "short_name": "DataCatalog",
+            "full_name": "google.cloud.datacatalog.v1.DataCatalog"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_DataCatalog_CreateTagTemplateField_sync",
+      "title": "Snippet for the create_tag_template_field call in the DataCatalog service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#create_tag_template_field.",
+      "file": "data_catalog/create_tag_template_field.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_tag_template_field",
+        "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client#create_tag_template_field",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::V1::CreateTagTemplateFieldRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::V1::TagTemplateField",
+        "client": {
+          "short_name": "DataCatalog::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client"
+        },
+        "method": {
+          "short_name": "CreateTagTemplateField",
+          "full_name": "google.cloud.datacatalog.v1.DataCatalog.CreateTagTemplateField",
+          "service": {
+            "short_name": "DataCatalog",
+            "full_name": "google.cloud.datacatalog.v1.DataCatalog"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_DataCatalog_UpdateTagTemplateField_sync",
+      "title": "Snippet for the update_tag_template_field call in the DataCatalog service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#update_tag_template_field.",
+      "file": "data_catalog/update_tag_template_field.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_tag_template_field",
+        "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client#update_tag_template_field",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::V1::UpdateTagTemplateFieldRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::V1::TagTemplateField",
+        "client": {
+          "short_name": "DataCatalog::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client"
+        },
+        "method": {
+          "short_name": "UpdateTagTemplateField",
+          "full_name": "google.cloud.datacatalog.v1.DataCatalog.UpdateTagTemplateField",
+          "service": {
+            "short_name": "DataCatalog",
+            "full_name": "google.cloud.datacatalog.v1.DataCatalog"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_DataCatalog_RenameTagTemplateField_sync",
+      "title": "Snippet for the rename_tag_template_field call in the DataCatalog service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#rename_tag_template_field.",
+      "file": "data_catalog/rename_tag_template_field.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "rename_tag_template_field",
+        "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client#rename_tag_template_field",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::V1::RenameTagTemplateFieldRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::V1::TagTemplateField",
+        "client": {
+          "short_name": "DataCatalog::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client"
+        },
+        "method": {
+          "short_name": "RenameTagTemplateField",
+          "full_name": "google.cloud.datacatalog.v1.DataCatalog.RenameTagTemplateField",
+          "service": {
+            "short_name": "DataCatalog",
+            "full_name": "google.cloud.datacatalog.v1.DataCatalog"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_DataCatalog_RenameTagTemplateFieldEnumValue_sync",
+      "title": "Snippet for the rename_tag_template_field_enum_value call in the DataCatalog service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#rename_tag_template_field_enum_value.",
+      "file": "data_catalog/rename_tag_template_field_enum_value.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "rename_tag_template_field_enum_value",
+        "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client#rename_tag_template_field_enum_value",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::V1::RenameTagTemplateFieldEnumValueRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::V1::TagTemplateField",
+        "client": {
+          "short_name": "DataCatalog::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client"
+        },
+        "method": {
+          "short_name": "RenameTagTemplateFieldEnumValue",
+          "full_name": "google.cloud.datacatalog.v1.DataCatalog.RenameTagTemplateFieldEnumValue",
+          "service": {
+            "short_name": "DataCatalog",
+            "full_name": "google.cloud.datacatalog.v1.DataCatalog"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_DataCatalog_DeleteTagTemplateField_sync",
+      "title": "Snippet for the delete_tag_template_field call in the DataCatalog service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#delete_tag_template_field.",
+      "file": "data_catalog/delete_tag_template_field.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_tag_template_field",
+        "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client#delete_tag_template_field",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::V1::DeleteTagTemplateFieldRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "DataCatalog::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client"
+        },
+        "method": {
+          "short_name": "DeleteTagTemplateField",
+          "full_name": "google.cloud.datacatalog.v1.DataCatalog.DeleteTagTemplateField",
+          "service": {
+            "short_name": "DataCatalog",
+            "full_name": "google.cloud.datacatalog.v1.DataCatalog"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_DataCatalog_CreateTag_sync",
+      "title": "Snippet for the create_tag call in the DataCatalog service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#create_tag.",
+      "file": "data_catalog/create_tag.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_tag",
+        "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client#create_tag",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::V1::CreateTagRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::V1::Tag",
+        "client": {
+          "short_name": "DataCatalog::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client"
+        },
+        "method": {
+          "short_name": "CreateTag",
+          "full_name": "google.cloud.datacatalog.v1.DataCatalog.CreateTag",
+          "service": {
+            "short_name": "DataCatalog",
+            "full_name": "google.cloud.datacatalog.v1.DataCatalog"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_DataCatalog_UpdateTag_sync",
+      "title": "Snippet for the update_tag call in the DataCatalog service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#update_tag.",
+      "file": "data_catalog/update_tag.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_tag",
+        "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client#update_tag",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::V1::UpdateTagRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::V1::Tag",
+        "client": {
+          "short_name": "DataCatalog::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client"
+        },
+        "method": {
+          "short_name": "UpdateTag",
+          "full_name": "google.cloud.datacatalog.v1.DataCatalog.UpdateTag",
+          "service": {
+            "short_name": "DataCatalog",
+            "full_name": "google.cloud.datacatalog.v1.DataCatalog"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_DataCatalog_DeleteTag_sync",
+      "title": "Snippet for the delete_tag call in the DataCatalog service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#delete_tag.",
+      "file": "data_catalog/delete_tag.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_tag",
+        "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client#delete_tag",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::V1::DeleteTagRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "DataCatalog::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client"
+        },
+        "method": {
+          "short_name": "DeleteTag",
+          "full_name": "google.cloud.datacatalog.v1.DataCatalog.DeleteTag",
+          "service": {
+            "short_name": "DataCatalog",
+            "full_name": "google.cloud.datacatalog.v1.DataCatalog"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_DataCatalog_ListTags_sync",
+      "title": "Snippet for the list_tags call in the DataCatalog service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#list_tags.",
+      "file": "data_catalog/list_tags.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_tags",
+        "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client#list_tags",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::V1::ListTagsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::V1::ListTagsResponse",
+        "client": {
+          "short_name": "DataCatalog::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client"
+        },
+        "method": {
+          "short_name": "ListTags",
+          "full_name": "google.cloud.datacatalog.v1.DataCatalog.ListTags",
+          "service": {
+            "short_name": "DataCatalog",
+            "full_name": "google.cloud.datacatalog.v1.DataCatalog"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_DataCatalog_ReconcileTags_sync",
+      "title": "Snippet for the reconcile_tags call in the DataCatalog service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#reconcile_tags.",
+      "file": "data_catalog/reconcile_tags.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "reconcile_tags",
+        "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client#reconcile_tags",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::V1::ReconcileTagsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DataCatalog::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client"
+        },
+        "method": {
+          "short_name": "ReconcileTags",
+          "full_name": "google.cloud.datacatalog.v1.DataCatalog.ReconcileTags",
+          "service": {
+            "short_name": "DataCatalog",
+            "full_name": "google.cloud.datacatalog.v1.DataCatalog"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_DataCatalog_StarEntry_sync",
+      "title": "Snippet for the star_entry call in the DataCatalog service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#star_entry.",
+      "file": "data_catalog/star_entry.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "star_entry",
+        "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client#star_entry",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::V1::StarEntryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::V1::StarEntryResponse",
+        "client": {
+          "short_name": "DataCatalog::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client"
+        },
+        "method": {
+          "short_name": "StarEntry",
+          "full_name": "google.cloud.datacatalog.v1.DataCatalog.StarEntry",
+          "service": {
+            "short_name": "DataCatalog",
+            "full_name": "google.cloud.datacatalog.v1.DataCatalog"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_DataCatalog_UnstarEntry_sync",
+      "title": "Snippet for the unstar_entry call in the DataCatalog service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#unstar_entry.",
+      "file": "data_catalog/unstar_entry.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "unstar_entry",
+        "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client#unstar_entry",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::V1::UnstarEntryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::V1::UnstarEntryResponse",
+        "client": {
+          "short_name": "DataCatalog::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client"
+        },
+        "method": {
+          "short_name": "UnstarEntry",
+          "full_name": "google.cloud.datacatalog.v1.DataCatalog.UnstarEntry",
+          "service": {
+            "short_name": "DataCatalog",
+            "full_name": "google.cloud.datacatalog.v1.DataCatalog"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_DataCatalog_SetIamPolicy_sync",
+      "title": "Snippet for the set_iam_policy call in the DataCatalog service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#set_iam_policy.",
+      "file": "data_catalog/set_iam_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "set_iam_policy",
+        "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client#set_iam_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::SetIamPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::Policy",
+        "client": {
+          "short_name": "DataCatalog::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client"
+        },
+        "method": {
+          "short_name": "SetIamPolicy",
+          "full_name": "google.cloud.datacatalog.v1.DataCatalog.SetIamPolicy",
+          "service": {
+            "short_name": "DataCatalog",
+            "full_name": "google.cloud.datacatalog.v1.DataCatalog"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_DataCatalog_GetIamPolicy_sync",
+      "title": "Snippet for the get_iam_policy call in the DataCatalog service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#get_iam_policy.",
+      "file": "data_catalog/get_iam_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_iam_policy",
+        "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client#get_iam_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::GetIamPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::Policy",
+        "client": {
+          "short_name": "DataCatalog::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client"
+        },
+        "method": {
+          "short_name": "GetIamPolicy",
+          "full_name": "google.cloud.datacatalog.v1.DataCatalog.GetIamPolicy",
+          "service": {
+            "short_name": "DataCatalog",
+            "full_name": "google.cloud.datacatalog.v1.DataCatalog"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_DataCatalog_TestIamPermissions_sync",
+      "title": "Snippet for the test_iam_permissions call in the DataCatalog service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#test_iam_permissions.",
+      "file": "data_catalog/test_iam_permissions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "test_iam_permissions",
+        "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client#test_iam_permissions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::TestIamPermissionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::TestIamPermissionsResponse",
+        "client": {
+          "short_name": "DataCatalog::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client"
+        },
+        "method": {
+          "short_name": "TestIamPermissions",
+          "full_name": "google.cloud.datacatalog.v1.DataCatalog.TestIamPermissions",
+          "service": {
+            "short_name": "DataCatalog",
+            "full_name": "google.cloud.datacatalog.v1.DataCatalog"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_DataCatalog_ImportEntries_sync",
+      "title": "Snippet for the import_entries call in the DataCatalog service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#import_entries.",
+      "file": "data_catalog/import_entries.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "import_entries",
+        "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client#import_entries",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::V1::ImportEntriesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DataCatalog::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client"
+        },
+        "method": {
+          "short_name": "ImportEntries",
+          "full_name": "google.cloud.datacatalog.v1.DataCatalog.ImportEntries",
+          "service": {
+            "short_name": "DataCatalog",
+            "full_name": "google.cloud.datacatalog.v1.DataCatalog"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_PolicyTagManager_CreateTaxonomy_sync",
+      "title": "Snippet for the create_taxonomy call in the PolicyTagManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#create_taxonomy.",
+      "file": "policy_tag_manager/create_taxonomy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_taxonomy",
+        "full_name": "::Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#create_taxonomy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::V1::CreateTaxonomyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::V1::Taxonomy",
+        "client": {
+          "short_name": "PolicyTagManager::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::PolicyTagManager::Client"
+        },
+        "method": {
+          "short_name": "CreateTaxonomy",
+          "full_name": "google.cloud.datacatalog.v1.PolicyTagManager.CreateTaxonomy",
+          "service": {
+            "short_name": "PolicyTagManager",
+            "full_name": "google.cloud.datacatalog.v1.PolicyTagManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_PolicyTagManager_DeleteTaxonomy_sync",
+      "title": "Snippet for the delete_taxonomy call in the PolicyTagManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#delete_taxonomy.",
+      "file": "policy_tag_manager/delete_taxonomy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_taxonomy",
+        "full_name": "::Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#delete_taxonomy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::V1::DeleteTaxonomyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "PolicyTagManager::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::PolicyTagManager::Client"
+        },
+        "method": {
+          "short_name": "DeleteTaxonomy",
+          "full_name": "google.cloud.datacatalog.v1.PolicyTagManager.DeleteTaxonomy",
+          "service": {
+            "short_name": "PolicyTagManager",
+            "full_name": "google.cloud.datacatalog.v1.PolicyTagManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_PolicyTagManager_UpdateTaxonomy_sync",
+      "title": "Snippet for the update_taxonomy call in the PolicyTagManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#update_taxonomy.",
+      "file": "policy_tag_manager/update_taxonomy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_taxonomy",
+        "full_name": "::Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#update_taxonomy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::V1::UpdateTaxonomyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::V1::Taxonomy",
+        "client": {
+          "short_name": "PolicyTagManager::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::PolicyTagManager::Client"
+        },
+        "method": {
+          "short_name": "UpdateTaxonomy",
+          "full_name": "google.cloud.datacatalog.v1.PolicyTagManager.UpdateTaxonomy",
+          "service": {
+            "short_name": "PolicyTagManager",
+            "full_name": "google.cloud.datacatalog.v1.PolicyTagManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_PolicyTagManager_ListTaxonomies_sync",
+      "title": "Snippet for the list_taxonomies call in the PolicyTagManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#list_taxonomies.",
+      "file": "policy_tag_manager/list_taxonomies.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_taxonomies",
+        "full_name": "::Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#list_taxonomies",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::V1::ListTaxonomiesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::V1::ListTaxonomiesResponse",
+        "client": {
+          "short_name": "PolicyTagManager::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::PolicyTagManager::Client"
+        },
+        "method": {
+          "short_name": "ListTaxonomies",
+          "full_name": "google.cloud.datacatalog.v1.PolicyTagManager.ListTaxonomies",
+          "service": {
+            "short_name": "PolicyTagManager",
+            "full_name": "google.cloud.datacatalog.v1.PolicyTagManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_PolicyTagManager_GetTaxonomy_sync",
+      "title": "Snippet for the get_taxonomy call in the PolicyTagManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#get_taxonomy.",
+      "file": "policy_tag_manager/get_taxonomy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_taxonomy",
+        "full_name": "::Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#get_taxonomy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::V1::GetTaxonomyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::V1::Taxonomy",
+        "client": {
+          "short_name": "PolicyTagManager::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::PolicyTagManager::Client"
+        },
+        "method": {
+          "short_name": "GetTaxonomy",
+          "full_name": "google.cloud.datacatalog.v1.PolicyTagManager.GetTaxonomy",
+          "service": {
+            "short_name": "PolicyTagManager",
+            "full_name": "google.cloud.datacatalog.v1.PolicyTagManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_PolicyTagManager_CreatePolicyTag_sync",
+      "title": "Snippet for the create_policy_tag call in the PolicyTagManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#create_policy_tag.",
+      "file": "policy_tag_manager/create_policy_tag.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_policy_tag",
+        "full_name": "::Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#create_policy_tag",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::V1::CreatePolicyTagRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::V1::PolicyTag",
+        "client": {
+          "short_name": "PolicyTagManager::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::PolicyTagManager::Client"
+        },
+        "method": {
+          "short_name": "CreatePolicyTag",
+          "full_name": "google.cloud.datacatalog.v1.PolicyTagManager.CreatePolicyTag",
+          "service": {
+            "short_name": "PolicyTagManager",
+            "full_name": "google.cloud.datacatalog.v1.PolicyTagManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_PolicyTagManager_DeletePolicyTag_sync",
+      "title": "Snippet for the delete_policy_tag call in the PolicyTagManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#delete_policy_tag.",
+      "file": "policy_tag_manager/delete_policy_tag.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_policy_tag",
+        "full_name": "::Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#delete_policy_tag",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::V1::DeletePolicyTagRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "PolicyTagManager::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::PolicyTagManager::Client"
+        },
+        "method": {
+          "short_name": "DeletePolicyTag",
+          "full_name": "google.cloud.datacatalog.v1.PolicyTagManager.DeletePolicyTag",
+          "service": {
+            "short_name": "PolicyTagManager",
+            "full_name": "google.cloud.datacatalog.v1.PolicyTagManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_PolicyTagManager_UpdatePolicyTag_sync",
+      "title": "Snippet for the update_policy_tag call in the PolicyTagManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#update_policy_tag.",
+      "file": "policy_tag_manager/update_policy_tag.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_policy_tag",
+        "full_name": "::Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#update_policy_tag",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::V1::UpdatePolicyTagRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::V1::PolicyTag",
+        "client": {
+          "short_name": "PolicyTagManager::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::PolicyTagManager::Client"
+        },
+        "method": {
+          "short_name": "UpdatePolicyTag",
+          "full_name": "google.cloud.datacatalog.v1.PolicyTagManager.UpdatePolicyTag",
+          "service": {
+            "short_name": "PolicyTagManager",
+            "full_name": "google.cloud.datacatalog.v1.PolicyTagManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_PolicyTagManager_ListPolicyTags_sync",
+      "title": "Snippet for the list_policy_tags call in the PolicyTagManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#list_policy_tags.",
+      "file": "policy_tag_manager/list_policy_tags.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_policy_tags",
+        "full_name": "::Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#list_policy_tags",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::V1::ListPolicyTagsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::V1::ListPolicyTagsResponse",
+        "client": {
+          "short_name": "PolicyTagManager::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::PolicyTagManager::Client"
+        },
+        "method": {
+          "short_name": "ListPolicyTags",
+          "full_name": "google.cloud.datacatalog.v1.PolicyTagManager.ListPolicyTags",
+          "service": {
+            "short_name": "PolicyTagManager",
+            "full_name": "google.cloud.datacatalog.v1.PolicyTagManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_PolicyTagManager_GetPolicyTag_sync",
+      "title": "Snippet for the get_policy_tag call in the PolicyTagManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#get_policy_tag.",
+      "file": "policy_tag_manager/get_policy_tag.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_policy_tag",
+        "full_name": "::Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#get_policy_tag",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::V1::GetPolicyTagRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::V1::PolicyTag",
+        "client": {
+          "short_name": "PolicyTagManager::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::PolicyTagManager::Client"
+        },
+        "method": {
+          "short_name": "GetPolicyTag",
+          "full_name": "google.cloud.datacatalog.v1.PolicyTagManager.GetPolicyTag",
+          "service": {
+            "short_name": "PolicyTagManager",
+            "full_name": "google.cloud.datacatalog.v1.PolicyTagManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_PolicyTagManager_GetIamPolicy_sync",
+      "title": "Snippet for the get_iam_policy call in the PolicyTagManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#get_iam_policy.",
+      "file": "policy_tag_manager/get_iam_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_iam_policy",
+        "full_name": "::Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#get_iam_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::GetIamPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::Policy",
+        "client": {
+          "short_name": "PolicyTagManager::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::PolicyTagManager::Client"
+        },
+        "method": {
+          "short_name": "GetIamPolicy",
+          "full_name": "google.cloud.datacatalog.v1.PolicyTagManager.GetIamPolicy",
+          "service": {
+            "short_name": "PolicyTagManager",
+            "full_name": "google.cloud.datacatalog.v1.PolicyTagManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_PolicyTagManager_SetIamPolicy_sync",
+      "title": "Snippet for the set_iam_policy call in the PolicyTagManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#set_iam_policy.",
+      "file": "policy_tag_manager/set_iam_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "set_iam_policy",
+        "full_name": "::Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#set_iam_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::SetIamPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::Policy",
+        "client": {
+          "short_name": "PolicyTagManager::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::PolicyTagManager::Client"
+        },
+        "method": {
+          "short_name": "SetIamPolicy",
+          "full_name": "google.cloud.datacatalog.v1.PolicyTagManager.SetIamPolicy",
+          "service": {
+            "short_name": "PolicyTagManager",
+            "full_name": "google.cloud.datacatalog.v1.PolicyTagManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_PolicyTagManager_TestIamPermissions_sync",
+      "title": "Snippet for the test_iam_permissions call in the PolicyTagManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#test_iam_permissions.",
+      "file": "policy_tag_manager/test_iam_permissions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "test_iam_permissions",
+        "full_name": "::Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#test_iam_permissions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::TestIamPermissionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::TestIamPermissionsResponse",
+        "client": {
+          "short_name": "PolicyTagManager::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::PolicyTagManager::Client"
+        },
+        "method": {
+          "short_name": "TestIamPermissions",
+          "full_name": "google.cloud.datacatalog.v1.PolicyTagManager.TestIamPermissions",
+          "service": {
+            "short_name": "PolicyTagManager",
+            "full_name": "google.cloud.datacatalog.v1.PolicyTagManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_PolicyTagManagerSerialization_ReplaceTaxonomy_sync",
+      "title": "Snippet for the replace_taxonomy call in the PolicyTagManagerSerialization service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::Client#replace_taxonomy.",
+      "file": "policy_tag_manager_serialization/replace_taxonomy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "replace_taxonomy",
+        "full_name": "::Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::Client#replace_taxonomy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::V1::ReplaceTaxonomyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::V1::Taxonomy",
+        "client": {
+          "short_name": "PolicyTagManagerSerialization::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::Client"
+        },
+        "method": {
+          "short_name": "ReplaceTaxonomy",
+          "full_name": "google.cloud.datacatalog.v1.PolicyTagManagerSerialization.ReplaceTaxonomy",
+          "service": {
+            "short_name": "PolicyTagManagerSerialization",
+            "full_name": "google.cloud.datacatalog.v1.PolicyTagManagerSerialization"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_PolicyTagManagerSerialization_ImportTaxonomies_sync",
+      "title": "Snippet for the import_taxonomies call in the PolicyTagManagerSerialization service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::Client#import_taxonomies.",
+      "file": "policy_tag_manager_serialization/import_taxonomies.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "import_taxonomies",
+        "full_name": "::Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::Client#import_taxonomies",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::V1::ImportTaxonomiesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::V1::ImportTaxonomiesResponse",
+        "client": {
+          "short_name": "PolicyTagManagerSerialization::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::Client"
+        },
+        "method": {
+          "short_name": "ImportTaxonomies",
+          "full_name": "google.cloud.datacatalog.v1.PolicyTagManagerSerialization.ImportTaxonomies",
+          "service": {
+            "short_name": "PolicyTagManagerSerialization",
+            "full_name": "google.cloud.datacatalog.v1.PolicyTagManagerSerialization"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_PolicyTagManagerSerialization_ExportTaxonomies_sync",
+      "title": "Snippet for the export_taxonomies call in the PolicyTagManagerSerialization service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::Client#export_taxonomies.",
+      "file": "policy_tag_manager_serialization/export_taxonomies.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "export_taxonomies",
+        "full_name": "::Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::Client#export_taxonomies",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::V1::ExportTaxonomiesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::V1::ExportTaxonomiesResponse",
+        "client": {
+          "short_name": "PolicyTagManagerSerialization::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::Client"
+        },
+        "method": {
+          "short_name": "ExportTaxonomies",
+          "full_name": "google.cloud.datacatalog.v1.PolicyTagManagerSerialization.ExportTaxonomies",
+          "service": {
+            "short_name": "PolicyTagManagerSerialization",
+            "full_name": "google.cloud.datacatalog.v1.PolicyTagManagerSerialization"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
