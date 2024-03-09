@@ -13,7 +13,6 @@
 # limitations under the License.
 
 # rubocop:disable Style/Documentation
-# rubocop:disable Style/RedundantLineContinuation
 
 require "uri"
 
@@ -1226,5 +1225,4 @@ module Google
   end
 end
 
-# rubocop:enable Style/RedundantLineContinuation
 # rubocop:enable Style/Documentation
