@@ -357,6 +357,11 @@ module Google
             #   @return [::Boolean]
             #     Drop (delete) the column family with the given ID, or fail if no such
             #     family exists.
+            # @!attribute [rw] update_mask
+            #   @return [::Google::Protobuf::FieldMask]
+            #     Optional. A mask specifying which fields (e.g. `gc_rule`) in the `update`
+            #     mod should be updated, ignored for other modification types. If unset or
+            #     empty, we treat it as updating `gc_rule` to be backward compatible.
             class Modification
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
