@@ -118,6 +118,10 @@ module Google
     #   @return [::String]
     #     Optional link to proto reference documentation.  Example:
     #     https://cloud.google.com/pubsub/lite/docs/reference/rpc
+    # @!attribute [rw] rest_reference_documentation_uri
+    #   @return [::String]
+    #     Optional link to REST reference documentation.  Example:
+    #     https://cloud.google.com/pubsub/lite/docs/reference/rest
     class Publishing
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
