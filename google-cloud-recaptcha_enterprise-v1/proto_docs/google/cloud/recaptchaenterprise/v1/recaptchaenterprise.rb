@@ -1479,6 +1479,10 @@ module Google
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::FirewallAction::BlockAction]
         #     This action will deny access to a given page. The user will get an HTTP
         #     error code.
+        # @!attribute [rw] include_recaptcha_script
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::FirewallAction::IncludeRecaptchaScriptAction]
+        #     This action will inject reCAPTCHA JavaScript code into the HTML page
+        #     returned by the site backend.
         # @!attribute [rw] redirect
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::FirewallAction::RedirectAction]
         #     This action will redirect the request to a ReCaptcha interstitial to
@@ -1504,6 +1508,16 @@ module Google
           # A block action serves an HTTP error code a prevents the request from
           # hitting the backend.
           class BlockAction
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # An include reCAPTCHA script action involves injecting reCAPTCHA JavaScript
+          # code into the HTML returned by the site backend. This reCAPTCHA
+          # script is tasked with collecting user signals on the requested web page,
+          # issuing tokens as a cookie within the site domain, and enabling their
+          # utilization in subsequent page requests.
+          class IncludeRecaptchaScriptAction
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
