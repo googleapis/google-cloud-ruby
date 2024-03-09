@@ -32,7 +32,8 @@ module Google
     module DiscoveryEngine
       module V1beta
         ##
-        # Service for modifying ServingConfig.
+        # Service for operations related to
+        # {::Google::Cloud::DiscoveryEngine::V1beta::ServingConfig ServingConfig}.
         #
         # @example Load this service and instantiate a gRPC client
         #

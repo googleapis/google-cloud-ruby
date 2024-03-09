@@ -31,7 +31,8 @@ module Google
     module DiscoveryEngine
       module V1beta
         ##
-        # Service for modifying ServingConfig.
+        # Service for operations related to
+        # {::Google::Cloud::DiscoveryEngine::V1beta::ServingConfig ServingConfig}.
         #
         # To load this service and instantiate a REST client:
         #
