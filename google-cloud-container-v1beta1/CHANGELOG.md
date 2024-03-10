@@ -1,5 +1,11 @@
 # Release History
 
+### 0.38.0 (2024-03-10)
+
+#### Features
+
+* support secret_manager_config for clusters 
+
 ### 0.37.0 (2024-03-04)
 
 #### Features
