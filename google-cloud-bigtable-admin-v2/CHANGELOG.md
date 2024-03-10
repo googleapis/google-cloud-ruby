@@ -1,5 +1,12 @@
 # Release History
 
+### 0.24.0 (2024-03-10)
+
+#### Features
+
+* Support for ColumnFamily#value_type 
+* Support for Modification#update_mask 
+
 ### 0.23.0 (2024-03-06)
 
 #### Features
