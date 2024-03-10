@@ -1,5 +1,11 @@
 # Release History
 
+### 0.20.0 (2024-03-10)
+
+#### Features
+
+* Support for Bigtable Aggregates ([#25338](https://github.com/googleapis/google-cloud-ruby/issues/25338)) 
+
 ### 0.19.0 (2024-03-06)
 
 #### Features
