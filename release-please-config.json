@@ -351,6 +351,10 @@
       "component": "google-cloud-channel-v1",
       "version_file": "lib/google/cloud/channel/v1/version.rb"
     },
+    "google-cloud-cloud_controls_partner-v1beta": {
+      "component": "google-cloud-cloud_controls_partner-v1beta",
+      "version_file": "lib/google/cloud/cloud_controls_partner/v1beta/version.rb"
+    },
     "google-cloud-cloud_dms": {
       "component": "google-cloud-cloud_dms",
       "version_file": "lib/google/cloud/cloud_dms/version.rb"

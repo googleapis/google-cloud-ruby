@@ -1,0 +1,415 @@
+{
+  "client_library": {
+    "name": "google-cloud-cloud_controls_partner-v1beta",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.cloudcontrolspartner.v1beta",
+        "version": "v1beta"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "cloudcontrolspartner_v1beta_generated_CloudControlsPartnerCore_GetWorkload_sync",
+      "title": "Snippet for the get_workload call in the CloudControlsPartnerCore service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client#get_workload.",
+      "file": "cloud_controls_partner_core/get_workload.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_workload",
+        "full_name": "::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client#get_workload",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CloudControlsPartner::V1beta::GetWorkloadRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CloudControlsPartner::V1beta::Workload",
+        "client": {
+          "short_name": "CloudControlsPartnerCore::Client",
+          "full_name": "::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client"
+        },
+        "method": {
+          "short_name": "GetWorkload",
+          "full_name": "google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore.GetWorkload",
+          "service": {
+            "short_name": "CloudControlsPartnerCore",
+            "full_name": "google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudcontrolspartner_v1beta_generated_CloudControlsPartnerCore_ListWorkloads_sync",
+      "title": "Snippet for the list_workloads call in the CloudControlsPartnerCore service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client#list_workloads.",
+      "file": "cloud_controls_partner_core/list_workloads.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_workloads",
+        "full_name": "::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client#list_workloads",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CloudControlsPartner::V1beta::ListWorkloadsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CloudControlsPartner::V1beta::ListWorkloadsResponse",
+        "client": {
+          "short_name": "CloudControlsPartnerCore::Client",
+          "full_name": "::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client"
+        },
+        "method": {
+          "short_name": "ListWorkloads",
+          "full_name": "google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore.ListWorkloads",
+          "service": {
+            "short_name": "CloudControlsPartnerCore",
+            "full_name": "google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudcontrolspartner_v1beta_generated_CloudControlsPartnerCore_GetCustomer_sync",
+      "title": "Snippet for the get_customer call in the CloudControlsPartnerCore service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client#get_customer.",
+      "file": "cloud_controls_partner_core/get_customer.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_customer",
+        "full_name": "::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client#get_customer",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CloudControlsPartner::V1beta::GetCustomerRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CloudControlsPartner::V1beta::Customer",
+        "client": {
+          "short_name": "CloudControlsPartnerCore::Client",
+          "full_name": "::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client"
+        },
+        "method": {
+          "short_name": "GetCustomer",
+          "full_name": "google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore.GetCustomer",
+          "service": {
+            "short_name": "CloudControlsPartnerCore",
+            "full_name": "google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudcontrolspartner_v1beta_generated_CloudControlsPartnerCore_ListCustomers_sync",
+      "title": "Snippet for the list_customers call in the CloudControlsPartnerCore service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client#list_customers.",
+      "file": "cloud_controls_partner_core/list_customers.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_customers",
+        "full_name": "::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client#list_customers",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CloudControlsPartner::V1beta::ListCustomersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CloudControlsPartner::V1beta::ListCustomersResponse",
+        "client": {
+          "short_name": "CloudControlsPartnerCore::Client",
+          "full_name": "::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client"
+        },
+        "method": {
+          "short_name": "ListCustomers",
+          "full_name": "google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore.ListCustomers",
+          "service": {
+            "short_name": "CloudControlsPartnerCore",
+            "full_name": "google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudcontrolspartner_v1beta_generated_CloudControlsPartnerCore_GetEkmConnections_sync",
+      "title": "Snippet for the get_ekm_connections call in the CloudControlsPartnerCore service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client#get_ekm_connections.",
+      "file": "cloud_controls_partner_core/get_ekm_connections.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_ekm_connections",
+        "full_name": "::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client#get_ekm_connections",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CloudControlsPartner::V1beta::GetEkmConnectionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CloudControlsPartner::V1beta::EkmConnections",
+        "client": {
+          "short_name": "CloudControlsPartnerCore::Client",
+          "full_name": "::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client"
+        },
+        "method": {
+          "short_name": "GetEkmConnections",
+          "full_name": "google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore.GetEkmConnections",
+          "service": {
+            "short_name": "CloudControlsPartnerCore",
+            "full_name": "google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudcontrolspartner_v1beta_generated_CloudControlsPartnerCore_GetPartnerPermissions_sync",
+      "title": "Snippet for the get_partner_permissions call in the CloudControlsPartnerCore service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client#get_partner_permissions.",
+      "file": "cloud_controls_partner_core/get_partner_permissions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_partner_permissions",
+        "full_name": "::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client#get_partner_permissions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CloudControlsPartner::V1beta::GetPartnerPermissionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CloudControlsPartner::V1beta::PartnerPermissions",
+        "client": {
+          "short_name": "CloudControlsPartnerCore::Client",
+          "full_name": "::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client"
+        },
+        "method": {
+          "short_name": "GetPartnerPermissions",
+          "full_name": "google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore.GetPartnerPermissions",
+          "service": {
+            "short_name": "CloudControlsPartnerCore",
+            "full_name": "google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudcontrolspartner_v1beta_generated_CloudControlsPartnerCore_ListAccessApprovalRequests_sync",
+      "title": "Snippet for the list_access_approval_requests call in the CloudControlsPartnerCore service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client#list_access_approval_requests.",
+      "file": "cloud_controls_partner_core/list_access_approval_requests.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_access_approval_requests",
+        "full_name": "::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client#list_access_approval_requests",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CloudControlsPartner::V1beta::ListAccessApprovalRequestsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CloudControlsPartner::V1beta::ListAccessApprovalRequestsResponse",
+        "client": {
+          "short_name": "CloudControlsPartnerCore::Client",
+          "full_name": "::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client"
+        },
+        "method": {
+          "short_name": "ListAccessApprovalRequests",
+          "full_name": "google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore.ListAccessApprovalRequests",
+          "service": {
+            "short_name": "CloudControlsPartnerCore",
+            "full_name": "google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudcontrolspartner_v1beta_generated_CloudControlsPartnerCore_GetPartner_sync",
+      "title": "Snippet for the get_partner call in the CloudControlsPartnerCore service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client#get_partner.",
+      "file": "cloud_controls_partner_core/get_partner.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_partner",
+        "full_name": "::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client#get_partner",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CloudControlsPartner::V1beta::GetPartnerRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CloudControlsPartner::V1beta::Partner",
+        "client": {
+          "short_name": "CloudControlsPartnerCore::Client",
+          "full_name": "::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client"
+        },
+        "method": {
+          "short_name": "GetPartner",
+          "full_name": "google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore.GetPartner",
+          "service": {
+            "short_name": "CloudControlsPartnerCore",
+            "full_name": "google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudcontrolspartner_v1beta_generated_CloudControlsPartnerMonitoring_ListViolations_sync",
+      "title": "Snippet for the list_violations call in the CloudControlsPartnerMonitoring service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerMonitoring::Client#list_violations.",
+      "file": "cloud_controls_partner_monitoring/list_violations.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_violations",
+        "full_name": "::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerMonitoring::Client#list_violations",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CloudControlsPartner::V1beta::ListViolationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CloudControlsPartner::V1beta::ListViolationsResponse",
+        "client": {
+          "short_name": "CloudControlsPartnerMonitoring::Client",
+          "full_name": "::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerMonitoring::Client"
+        },
+        "method": {
+          "short_name": "ListViolations",
+          "full_name": "google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerMonitoring.ListViolations",
+          "service": {
+            "short_name": "CloudControlsPartnerMonitoring",
+            "full_name": "google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerMonitoring"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudcontrolspartner_v1beta_generated_CloudControlsPartnerMonitoring_GetViolation_sync",
+      "title": "Snippet for the get_violation call in the CloudControlsPartnerMonitoring service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerMonitoring::Client#get_violation.",
+      "file": "cloud_controls_partner_monitoring/get_violation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_violation",
+        "full_name": "::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerMonitoring::Client#get_violation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CloudControlsPartner::V1beta::GetViolationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CloudControlsPartner::V1beta::Violation",
+        "client": {
+          "short_name": "CloudControlsPartnerMonitoring::Client",
+          "full_name": "::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerMonitoring::Client"
+        },
+        "method": {
+          "short_name": "GetViolation",
+          "full_name": "google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerMonitoring.GetViolation",
+          "service": {
+            "short_name": "CloudControlsPartnerMonitoring",
+            "full_name": "google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerMonitoring"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
