@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.5.1 (2024-03-10)
+
+#### Documentation
+
+* mark optional fields explicitly in Storage Pool ([#25330](https://github.com/googleapis/google-cloud-ruby/issues/25330)) 
+
 ### 0.5.0 (2024-02-26)
 
 #### Features
