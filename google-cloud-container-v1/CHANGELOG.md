@@ -1,5 +1,12 @@
 # Release History
 
+### 0.39.0 (2024-03-10)
+
+#### Features
+
+* support desired_enable_cilium_clusterwide_network_policy for clusters 
+* support enable_cilium_clusterwide_network_policy for NetworkConfig 
+
 ### 0.38.0 (2024-03-07)
 
 #### Features
