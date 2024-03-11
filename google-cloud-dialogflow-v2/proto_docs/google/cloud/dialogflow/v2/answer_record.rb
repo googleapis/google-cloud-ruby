@@ -224,9 +224,21 @@ module Google
           # @!attribute [rw] summary_text
           #   @return [::String]
           #     Text of actual submitted summary.
+          # @!attribute [rw] text_sections
+          #   @return [::Google::Protobuf::Map{::String => ::String}]
+          #     Optional. Actual text sections of submitted summary.
           class SummarizationFeedback
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::String]
+            class TextSectionsEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
 
           # Feedback for knowledge search.
