@@ -121,12 +121,14 @@ module Google
         #         * `labels.key=value` - key:value equality
         #         * `labels.key:* or labels:key - key existence
         #         * A key including a space must be quoted. `labels."a key"`.
+        #       * `base_model_name` only supports =
         #
         #     Some examples:
         #
         #       * `model=1234`
         #       * `displayName="myDisplayName"`
         #       * `labels.myKey="myValue"`
+        #       * `baseModelName="text-bison"`
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The standard list page size.

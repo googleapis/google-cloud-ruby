@@ -38,6 +38,14 @@ module Google
         # @!attribute [r] big_query_dataset_name
         #   @return [::String]
         #     Output only. Name of the associated BigQuery dataset.
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     The user-defined name of the DatasetVersion.
+        #     The name can be up to 128 characters long and can consist of any UTF-8
+        #     characters.
+        # @!attribute [r] metadata
+        #   @return [::Google::Protobuf::Value]
+        #     Required. Output only. Additional information about the DatasetVersion.
         class DatasetVersion
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

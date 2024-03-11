@@ -69,8 +69,8 @@ module Google
           #     BigQuery Table or View.
           # @!attribute [rw] entity_id_columns
           #   @return [::Array<::String>]
-          #     Optional. Columns to construct entity_id / row keys. Currently only
-          #     supports 1 entity_id_column. If not provided defaults to `entity_id`.
+          #     Optional. Columns to construct entity_id / row keys.
+          #     If not provided defaults to `entity_id`.
           class BigQuery
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

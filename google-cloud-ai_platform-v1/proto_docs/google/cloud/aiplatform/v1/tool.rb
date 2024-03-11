@@ -25,17 +25,29 @@ module Google
         #
         # A `Tool` is a piece of code that enables the system to interact with
         # external systems to perform an action, or set of actions, outside of
-        # knowledge and scope of the model.
+        # knowledge and scope of the model. A Tool object should contain exactly
+        # one type of Tool (e.g FunctionDeclaration, Retrieval or
+        # GoogleSearchRetrieval).
         # @!attribute [rw] function_declarations
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::FunctionDeclaration>]
-        #     Optional. One or more function declarations to be passed to the model along
-        #     with the current user query. Model may decide to call a subset of these
-        #     functions by populating [FunctionCall][content.part.function_call] in the
-        #     response. User should provide a
-        #     [FunctionResponse][content.part.function_response] for each function call
-        #     in the next turn. Based on the function responses, Model will generate the
-        #     final response back to the user. Maximum 64 function declarations can be
-        #     provided.
+        #     Optional. Function tool type.
+        #     One or more function declarations to be passed to the model along with the
+        #     current user query. Model may decide to call a subset of these functions
+        #     by populating [FunctionCall][content.part.function_call] in the response.
+        #     User should provide a [FunctionResponse][content.part.function_response]
+        #     for each function call in the next turn. Based on the function responses,
+        #     Model will generate the final response back to the user.
+        #     Maximum 64 function declarations can be provided.
+        # @!attribute [rw] retrieval
+        #   @return [::Google::Cloud::AIPlatform::V1::Retrieval]
+        #     Optional. Retrieval tool type.
+        #     System will always execute the provided retrieval tool(s) to get external
+        #     knowledge to answer the prompt. Retrieval results are presented to the
+        #     model for generation.
+        # @!attribute [rw] google_search_retrieval
+        #   @return [::Google::Cloud::AIPlatform::V1::GoogleSearchRetrieval]
+        #     Optional. GoogleSearchRetrieval tool type.
+        #     Specialized retrieval tool that is powered by Google search.
         class Tool
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -103,6 +115,43 @@ module Google
         #   @return [::Google::Protobuf::Struct]
         #     Required. The function response in JSON object format.
         class FunctionResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Defines a retrieval tool that model can call to access external knowledge.
+        # @!attribute [rw] vertex_ai_search
+        #   @return [::Google::Cloud::AIPlatform::V1::VertexAISearch]
+        #     Set to use data source powered by Vertex AI Search.
+        # @!attribute [rw] disable_attribution
+        #   @return [::Boolean]
+        #     Optional. Disable using the result from this tool in detecting grounding
+        #     attribution. This does not affect how the result is given to the model for
+        #     generation.
+        class Retrieval
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Retrieve from Vertex AI Search datastore for grounding.
+        # See https://cloud.google.com/vertex-ai-search-and-conversation
+        # @!attribute [rw] datastore
+        #   @return [::String]
+        #     Required. Fully-qualified Vertex AI Search's datastore resource ID.
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}/collections/\\{collection}/dataStores/\\{dataStore}
+        class VertexAISearch
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Tool to retrieve public web data for grounding, powered by Google.
+        # @!attribute [rw] disable_attribution
+        #   @return [::Boolean]
+        #     Optional. Disable using the result from this tool in detecting grounding
+        #     attribution. This does not affect how the result is given to the model for
+        #     generation.
+        class GoogleSearchRetrieval
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

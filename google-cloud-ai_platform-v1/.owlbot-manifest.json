@@ -583,6 +583,8 @@
     "snippets/model_service/update_explanation_dataset.rb",
     "snippets/model_service/update_model.rb",
     "snippets/model_service/upload_model.rb",
+    "snippets/pipeline_service/batch_cancel_pipeline_jobs.rb",
+    "snippets/pipeline_service/batch_delete_pipeline_jobs.rb",
     "snippets/pipeline_service/cancel_pipeline_job.rb",
     "snippets/pipeline_service/cancel_training_pipeline.rb",
     "snippets/pipeline_service/create_pipeline_job.rb",

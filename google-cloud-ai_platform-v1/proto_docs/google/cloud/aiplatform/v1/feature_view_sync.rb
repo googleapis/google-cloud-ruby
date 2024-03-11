@@ -38,9 +38,25 @@ module Google
         # @!attribute [r] final_status
         #   @return [::Google::Rpc::Status]
         #     Output only. Final status of the FeatureViewSync.
+        # @!attribute [r] sync_summary
+        #   @return [::Google::Cloud::Aiplatform::V1::FeatureViewSync::SyncSummary]
+        #     Output only. Summary of the sync job.
         class FeatureViewSync
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Summary from the Sync job. For continuous syncs, the summary is updated
+          # periodically. For batch syncs, it gets updated on completion of the sync.
+          # @!attribute [r] row_synced
+          #   @return [::Integer]
+          #     Output only. Total number of rows synced.
+          # @!attribute [r] total_slot
+          #   @return [::Integer]
+          #     Output only. BigQuery slot milliseconds consumed for the sync job.
+          class SyncSummary
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
       end
     end
