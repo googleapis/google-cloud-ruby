@@ -100,6 +100,10 @@ module Google
         # @!attribute [rw] gql_query
         #   @return [::Google::Cloud::Datastore::V1::GqlQuery]
         #     The GQL query to run. This query must be a non-aggregation query.
+        # @!attribute [rw] explain_options
+        #   @return [::Google::Cloud::Datastore::V1::ExplainOptions]
+        #     Optional. Explain options for the query. If set, additional query
+        #     statistics will be returned. If not, only query results will be returned.
         class RunQueryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -122,6 +126,11 @@ module Google
         #     {::Google::Cloud::Datastore::V1::ReadOptions#new_transaction ReadOptions.new_transaction}
         #     was set in
         #     {::Google::Cloud::Datastore::V1::RunQueryRequest#read_options RunQueryRequest.read_options}.
+        # @!attribute [rw] explain_metrics
+        #   @return [::Google::Cloud::Datastore::V1::ExplainMetrics]
+        #     Query explain metrics. This is only present when the
+        #     {::Google::Cloud::Datastore::V1::RunQueryRequest#explain_options RunQueryRequest.explain_options}
+        #     is provided, and it is sent only once with the last response in the stream.
         class RunQueryResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -153,6 +162,10 @@ module Google
         # @!attribute [rw] gql_query
         #   @return [::Google::Cloud::Datastore::V1::GqlQuery]
         #     The GQL query to run. This query must be an aggregation query.
+        # @!attribute [rw] explain_options
+        #   @return [::Google::Cloud::Datastore::V1::ExplainOptions]
+        #     Optional. Explain options for the query. If set, additional query
+        #     statistics will be returned. If not, only query results will be returned.
         class RunAggregationQueryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -175,6 +188,11 @@ module Google
         #     {::Google::Cloud::Datastore::V1::ReadOptions#new_transaction ReadOptions.new_transaction}
         #     was set in
         #     {::Google::Cloud::Datastore::V1::RunAggregationQueryRequest#read_options RunAggregationQueryRequest.read_options}.
+        # @!attribute [rw] explain_metrics
+        #   @return [::Google::Cloud::Datastore::V1::ExplainMetrics]
+        #     Query explain metrics. This is only present when the
+        #     {::Google::Cloud::Datastore::V1::RunAggregationQueryRequest#explain_options RunAggregationQueryRequest.explain_options}
+        #     is provided, and it is sent only once with the last response in the stream.
         class RunAggregationQueryResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
