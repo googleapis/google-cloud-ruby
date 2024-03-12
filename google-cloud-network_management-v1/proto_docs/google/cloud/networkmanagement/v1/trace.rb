@@ -128,6 +128,18 @@ module Google
         # @!attribute [rw] cloud_run_revision
         #   @return [::Google::Cloud::NetworkManagement::V1::CloudRunRevisionInfo]
         #     Display information of a Cloud Run revision.
+        # @!attribute [rw] nat
+        #   @return [::Google::Cloud::NetworkManagement::V1::NatInfo]
+        #     Display information of a NAT.
+        # @!attribute [rw] proxy_connection
+        #   @return [::Google::Cloud::NetworkManagement::V1::ProxyConnectionInfo]
+        #     Display information of a ProxyConnection.
+        # @!attribute [rw] load_balancer_backend_info
+        #   @return [::Google::Cloud::NetworkManagement::V1::LoadBalancerBackendInfo]
+        #     Display information of a specific load balancer backend.
+        # @!attribute [rw] storage_bucket
+        #   @return [::Google::Cloud::NetworkManagement::V1::StorageBucketInfo]
+        #     Display information of a Storage Bucket. Used only for return traces.
         class Step
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -189,6 +201,9 @@ module Google
 
             # Config checking state: match forwarding rule.
             APPLY_FORWARDING_RULE = 7
+
+            # Config checking state: verify load balancer backend configuration.
+            ANALYZE_LOAD_BALANCER_BACKEND = 28
 
             # Config checking state: packet sent or received under foreign IP
             # address and allowed.
@@ -820,6 +835,9 @@ module Google
 
             # Target is a serverless network endpoint group.
             SERVERLESS_NEG = 9
+
+            # Target is a Cloud Storage bucket.
+            STORAGE_BUCKET = 10
           end
         end
 
@@ -1257,6 +1275,193 @@ module Google
         #   @return [::String]
         #     Location in which the VPC connector is deployed.
         class VpcConnectorInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # For display only. Metadata associated with NAT.
+        # @!attribute [rw] type
+        #   @return [::Google::Cloud::NetworkManagement::V1::NatInfo::Type]
+        #     Type of NAT.
+        # @!attribute [rw] protocol
+        #   @return [::String]
+        #     IP protocol in string format, for example: "TCP", "UDP", "ICMP".
+        # @!attribute [rw] network_uri
+        #   @return [::String]
+        #     URI of the network where NAT translation takes place.
+        # @!attribute [rw] old_source_ip
+        #   @return [::String]
+        #     Source IP address before NAT translation.
+        # @!attribute [rw] new_source_ip
+        #   @return [::String]
+        #     Source IP address after NAT translation.
+        # @!attribute [rw] old_destination_ip
+        #   @return [::String]
+        #     Destination IP address before NAT translation.
+        # @!attribute [rw] new_destination_ip
+        #   @return [::String]
+        #     Destination IP address after NAT translation.
+        # @!attribute [rw] old_source_port
+        #   @return [::Integer]
+        #     Source port before NAT translation. Only valid when protocol is TCP or UDP.
+        # @!attribute [rw] new_source_port
+        #   @return [::Integer]
+        #     Source port after NAT translation. Only valid when protocol is TCP or UDP.
+        # @!attribute [rw] old_destination_port
+        #   @return [::Integer]
+        #     Destination port before NAT translation. Only valid when protocol is TCP or
+        #     UDP.
+        # @!attribute [rw] new_destination_port
+        #   @return [::Integer]
+        #     Destination port after NAT translation. Only valid when protocol is TCP or
+        #     UDP.
+        # @!attribute [rw] router_uri
+        #   @return [::String]
+        #     Uri of the Cloud Router. Only valid when type is CLOUD_NAT.
+        # @!attribute [rw] nat_gateway_name
+        #   @return [::String]
+        #     The name of Cloud NAT Gateway. Only valid when type is CLOUD_NAT.
+        class NatInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Types of NAT.
+          module Type
+            # Type is unspecified.
+            TYPE_UNSPECIFIED = 0
+
+            # From Compute Engine instance's internal address to external address.
+            INTERNAL_TO_EXTERNAL = 1
+
+            # From Compute Engine instance's external address to internal address.
+            EXTERNAL_TO_INTERNAL = 2
+
+            # Cloud NAT Gateway.
+            CLOUD_NAT = 3
+
+            # Private service connect NAT.
+            PRIVATE_SERVICE_CONNECT = 4
+          end
+        end
+
+        # For display only. Metadata associated with ProxyConnection.
+        # @!attribute [rw] protocol
+        #   @return [::String]
+        #     IP protocol in string format, for example: "TCP", "UDP", "ICMP".
+        # @!attribute [rw] old_source_ip
+        #   @return [::String]
+        #     Source IP address of an original connection.
+        # @!attribute [rw] new_source_ip
+        #   @return [::String]
+        #     Source IP address of a new connection.
+        # @!attribute [rw] old_destination_ip
+        #   @return [::String]
+        #     Destination IP address of an original connection
+        # @!attribute [rw] new_destination_ip
+        #   @return [::String]
+        #     Destination IP address of a new connection.
+        # @!attribute [rw] old_source_port
+        #   @return [::Integer]
+        #     Source port of an original connection. Only valid when protocol is TCP or
+        #     UDP.
+        # @!attribute [rw] new_source_port
+        #   @return [::Integer]
+        #     Source port of a new connection. Only valid when protocol is TCP or UDP.
+        # @!attribute [rw] old_destination_port
+        #   @return [::Integer]
+        #     Destination port of an original connection. Only valid when protocol is TCP
+        #     or UDP.
+        # @!attribute [rw] new_destination_port
+        #   @return [::Integer]
+        #     Destination port of a new connection. Only valid when protocol is TCP or
+        #     UDP.
+        # @!attribute [rw] subnet_uri
+        #   @return [::String]
+        #     Uri of proxy subnet.
+        # @!attribute [rw] network_uri
+        #   @return [::String]
+        #     URI of the network where connection is proxied.
+        class ProxyConnectionInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # For display only. Metadata associated with the load balancer backend.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Display name of the backend. For example, it might be an instance name for
+        #     the instance group backends, or an IP address and port for zonal network
+        #     endpoint group backends.
+        # @!attribute [rw] instance_uri
+        #   @return [::String]
+        #     URI of the backend instance (if applicable). Populated for instance group
+        #     backends, and zonal NEG backends.
+        # @!attribute [rw] backend_service_uri
+        #   @return [::String]
+        #     URI of the backend service this backend belongs to (if applicable).
+        # @!attribute [rw] instance_group_uri
+        #   @return [::String]
+        #     URI of the instance group this backend belongs to (if applicable).
+        # @!attribute [rw] network_endpoint_group_uri
+        #   @return [::String]
+        #     URI of the network endpoint group this backend belongs to (if applicable).
+        # @!attribute [rw] backend_bucket_uri
+        #   @return [::String]
+        #     URI of the backend bucket this backend targets (if applicable).
+        # @!attribute [rw] psc_service_attachment_uri
+        #   @return [::String]
+        #     URI of the PSC service attachment this PSC NEG backend targets (if
+        #     applicable).
+        # @!attribute [rw] psc_google_api_target
+        #   @return [::String]
+        #     PSC Google API target this PSC NEG backend targets (if applicable).
+        # @!attribute [rw] health_check_uri
+        #   @return [::String]
+        #     URI of the health check attached to this backend (if applicable).
+        # @!attribute [r] health_check_firewalls_config_state
+        #   @return [::Google::Cloud::NetworkManagement::V1::LoadBalancerBackendInfo::HealthCheckFirewallsConfigState]
+        #     Health check firewalls configuration state for the backend. This is a
+        #     result of the static firewall analysis (verifying that health check traffic
+        #     from required IP ranges to the backend is allowed or not). The backend
+        #     might still be unhealthy even if these firewalls are configured. Please
+        #     refer to the documentation for more information:
+        #     https://cloud.google.com/load-balancing/docs/firewall-rules
+        class LoadBalancerBackendInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Health check firewalls configuration state enum.
+          module HealthCheckFirewallsConfigState
+            # Configuration state unspecified. It usually means that the backend has
+            # no health check attached, or there was an unexpected configuration error
+            # preventing Connectivity tests from verifying health check configuration.
+            HEALTH_CHECK_FIREWALLS_CONFIG_STATE_UNSPECIFIED = 0
+
+            # Firewall rules (policies) allowing health check traffic from all required
+            # IP ranges to the backend are configured.
+            FIREWALLS_CONFIGURED = 1
+
+            # Firewall rules (policies) allow health check traffic only from a part of
+            # required IP ranges.
+            FIREWALLS_PARTIALLY_CONFIGURED = 2
+
+            # Firewall rules (policies) deny health check traffic from all required
+            # IP ranges to the backend.
+            FIREWALLS_NOT_CONFIGURED = 3
+
+            # The network contains firewall rules of unsupported types, so Connectivity
+            # tests were not able to verify health check configuration status. Please
+            # refer to the documentation for the list of unsupported configurations:
+            # https://cloud.google.com/network-intelligence-center/docs/connectivity-tests/concepts/overview#unsupported-configs
+            FIREWALLS_UNSUPPORTED = 4
+          end
+        end
+
+        # For display only. Metadata associated with Storage Bucket.
+        # @!attribute [rw] bucket
+        #   @return [::String]
+        #     Cloud Storage Bucket name.
+        class StorageBucketInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
