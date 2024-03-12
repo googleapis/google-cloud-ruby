@@ -658,8 +658,8 @@ module Google
         # Restores a soft-deleted object.
         def restore_file bucket_name,
                          file_path,
-                         file_gapi = nil,
                          copy_source_acl: nil,
+                         generation: nil,
                          if_generation_match: nil,
                          if_generation_not_match: nil,
                          if_metageneration_match: nil,
@@ -675,8 +675,9 @@ module Google
           end
 
           execute do
-            service.restore_object bucket_name, file_path, file_gapi,
+            service.restore_object bucket_name, file_path,
                                    copy_source_acl: copy_source_acl,
+                                   generation: generation,
                                    if_generation_match: if_generation_match,
                                    if_generation_not_match: if_generation_not_match,
                                    if_metageneration_match: if_metageneration_match,

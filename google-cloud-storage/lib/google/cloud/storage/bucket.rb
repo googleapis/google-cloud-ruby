@@ -1827,6 +1827,7 @@ module Google
         #   bucket.restore_file "path/of/file"
         #
         def restore_file file_path,
+                         generation: nil,
                          copy_source_acl: nil,
                          if_generation_match: nil,
                          if_generation_not_match: nil,
@@ -1837,11 +1838,10 @@ module Google
                          fields: nil,
                          options: {}
           ensure_service!
-          file_gapi = API::Object.new
           gapi = service.restore_file name,
                                       file_path,
-                                      file_gapi,
                                       copy_source_acl: File::Acl.predefined_rule_for(copy_source_acl),
+                                      generation: generation,
                                       if_generation_match: if_generation_match,
                                       if_generation_not_match: if_generation_not_match,
                                       if_metageneration_match: if_metageneration_match,
