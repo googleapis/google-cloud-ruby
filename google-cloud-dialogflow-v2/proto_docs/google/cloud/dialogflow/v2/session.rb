@@ -627,8 +627,8 @@ module Google
             # Message contains a (possibly partial) transcript.
             TRANSCRIPT = 1
 
-            # Event indicates that the server has detected the end of the user's speech
-            # utterance and expects no additional inputs.
+            # This event indicates that the server has detected the end of the user's
+            # speech utterance and expects no additional inputs.
             # Therefore, the server will not process additional audio (although it may
             # subsequently return additional results). The client should stop sending
             # additional audio data, half-close the gRPC connection, and wait for any

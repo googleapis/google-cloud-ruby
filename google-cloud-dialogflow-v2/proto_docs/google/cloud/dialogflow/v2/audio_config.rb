@@ -159,6 +159,12 @@ module Google
         # @!attribute [rw] enable_automatic_punctuation
         #   @return [::Boolean]
         #     Enable automatic punctuation option at the speech backend.
+        # @!attribute [rw] opt_out_conformer_model_migration
+        #   @return [::Boolean]
+        #     If `true`, the request will opt out for STT conformer model migration.
+        #     This field will be deprecated once force migration takes place in June
+        #     2024. Please refer to [Dialogflow ES Speech model
+        #     migration](https://cloud.google.com/dialogflow/es/docs/speech-model-migration).
         class InputAudioConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
