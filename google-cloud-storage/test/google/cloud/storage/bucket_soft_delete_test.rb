@@ -20,7 +20,8 @@ describe Google::Cloud::Storage::Bucket, :soft_delete_policy, :mock_storage do
   let(:bucket_gapi) { Google::Apis::StorageV1::Bucket.from_json bucket_hash.to_json }
   let(:bucket) { Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service }
 
-  let(:soft_delete_policy) {{ effective_time: DateTime.new(2024, 3, 12),
+  let(:effective_time) { DateTime.now }
+  let(:soft_delete_policy) {{ effective_time: effective_time,
                              retention_duration_seconds: 864000 }} # 10 days
   let(:file_hash) { random_file_hash bucket.name, "file.ext" }
   let(:file_gapi) { Google::Apis::StorageV1::Object.from_json file_hash.to_json }
@@ -30,7 +31,9 @@ describe Google::Cloud::Storage::Bucket, :soft_delete_policy, :mock_storage do
   let(:hard_delete_time) { soft_delete_time + 10 } # Soft delete time + 10 days
 
   it "knows its soft_delete_policy value" do
-    _(bucket.soft_delete_policy).must_be_nil
+    _(bucket.soft_delete_policy).wont_be_nil
+    _(bucket.soft_delete_policy.effective_time).must_be_kind_of DateTime
+    _(bucket.soft_delete_policy.retention_duration_seconds).must_equal 604800
   end
 
   it "can update its soft_delete_policy" do
@@ -40,11 +43,10 @@ describe Google::Cloud::Storage::Bucket, :soft_delete_policy, :mock_storage do
 
     bucket.service.mocked_service = mock
 
-    _(bucket.soft_delete_policy).must_be_nil
-
     bucket.soft_delete_policy = soft_delete_policy
 
-    _(bucket.soft_delete_policy).must_equal soft_delete_policy
+    _(bucket.soft_delete_policy.effective_time).must_equal effective_time
+    _(bucket.soft_delete_policy.retention_duration_seconds).must_equal 864000
 
     mock.verify
   end
@@ -76,7 +78,7 @@ describe Google::Cloud::Storage::Bucket, :soft_delete_policy, :mock_storage do
     files = bucket.files soft_deleted: true
     mock.verify
 
-    _(files.count).must_equal 0
+    _(files).must_be_empty
 
     mock = Minitest::Mock.new
     mock.expect :delete_object, nil, [bucket_name, file.name], **delete_object_args(options: {retries: 0})
