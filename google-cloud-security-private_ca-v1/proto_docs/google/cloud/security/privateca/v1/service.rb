@@ -665,10 +665,9 @@ module Google
           # {::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Client#fetch_ca_certs CertificateAuthorityService.FetchCaCerts}.
           # @!attribute [rw] ca_certs
           #   @return [::Array<::Google::Cloud::Security::PrivateCA::V1::FetchCaCertsResponse::CertChain>]
-          #     The PEM encoded CA certificate chains of all
-          #     [ACTIVE][CertificateAuthority.State.ACTIVE]
-          #     {::Google::Cloud::Security::PrivateCA::V1::CertificateAuthority CertificateAuthority}
-          #     resources in this {::Google::Cloud::Security::PrivateCA::V1::CaPool CaPool}.
+          #     The PEM encoded CA certificate chains of all Certificate Authorities in
+          #     this {::Google::Cloud::Security::PrivateCA::V1::CaPool CaPool} in the ENABLED,
+          #     DISABLED, or STAGED states.
           class FetchCaCertsResponse
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -742,6 +742,23 @@ module Google
           #     Output only. The resource name for this
           #     {::Google::Cloud::Security::PrivateCA::V1::CertificateTemplate CertificateTemplate}
           #     in the format `projects/*/locations/*/certificateTemplates/*`.
+          # @!attribute [rw] maximum_lifetime
+          #   @return [::Google::Protobuf::Duration]
+          #     Optional. The maximum lifetime allowed for issued
+          #     {::Google::Cloud::Security::PrivateCA::V1::Certificate Certificates} that use
+          #     this template. If the issuing
+          #     {::Google::Cloud::Security::PrivateCA::V1::CaPool CaPool}'s
+          #     {::Google::Cloud::Security::PrivateCA::V1::CaPool::IssuancePolicy IssuancePolicy}
+          #     specifies a
+          #     {::Google::Cloud::Security::PrivateCA::V1::CaPool::IssuancePolicy#maximum_lifetime maximum_lifetime}
+          #     the minimum of the two durations will be the maximum lifetime for issued
+          #     {::Google::Cloud::Security::PrivateCA::V1::Certificate Certificates}. Note that
+          #     if the issuing
+          #     {::Google::Cloud::Security::PrivateCA::V1::CertificateAuthority CertificateAuthority}
+          #     expires before a
+          #     {::Google::Cloud::Security::PrivateCA::V1::Certificate Certificate}'s requested
+          #     maximum_lifetime, the effective lifetime will be explicitly truncated
+          #      to match it.
           # @!attribute [rw] predefined_values
           #   @return [::Google::Cloud::Security::PrivateCA::V1::X509Parameters]
           #     Optional. A set of X.509 values that will be applied to all issued
@@ -1009,6 +1026,12 @@ module Google
           #     or
           #     {::Google::Cloud::Security::PrivateCA::V1::CertificateAuthority CertificateAuthority}
           #     CSR.
+          # @!attribute [rw] subject_key_id
+          #   @return [::Google::Cloud::Security::PrivateCA::V1::CertificateConfig::KeyId]
+          #     Optional. When specified this provides a custom SKI to be used in the
+          #     certificate. This should only be used to maintain a SKI of an existing CA
+          #     originally created outside CAS, which was not generated using method (1)
+          #     described in RFC 5280 section 4.2.1.2.
           class CertificateConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1017,12 +1040,23 @@ module Google
             # alternative name fields in an X.509 certificate.
             # @!attribute [rw] subject
             #   @return [::Google::Cloud::Security::PrivateCA::V1::Subject]
-            #     Required. Contains distinguished name fields such as the common name,
+            #     Optional. Contains distinguished name fields such as the common name,
             #     location and organization.
             # @!attribute [rw] subject_alt_name
             #   @return [::Google::Cloud::Security::PrivateCA::V1::SubjectAltNames]
             #     Optional. The subject alternative name fields.
             class SubjectConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # A KeyId identifies a specific public key, usually by hashing the public
+            # key.
+            # @!attribute [rw] key_id
+            #   @return [::String]
+            #     Required. The value of this KeyId encoded in lowercase hexadecimal. This
+            #     is most likely the 160 bit SHA-1 hash of the public key.
+            class KeyId
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
