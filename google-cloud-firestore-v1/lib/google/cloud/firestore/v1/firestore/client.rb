@@ -1091,7 +1091,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload run_query(parent: nil, structured_query: nil, transaction: nil, new_transaction: nil, read_time: nil)
+            # @overload run_query(parent: nil, structured_query: nil, transaction: nil, new_transaction: nil, read_time: nil, explain_options: nil)
             #   Pass arguments to `run_query` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1120,6 +1120,9 @@ module Google
             #     This must be a microsecond precision timestamp within the past one hour,
             #     or if Point-in-Time Recovery is enabled, can additionally be a whole
             #     minute timestamp within the past 7 days.
+            #   @param explain_options [::Google::Cloud::Firestore::V1::ExplainOptions, ::Hash]
+            #     Optional. Explain options for the query. If set, additional query
+            #     statistics will be returned. If not, only query results will be returned.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Enumerable<::Google::Cloud::Firestore::V1::RunQueryResponse>]
@@ -1213,7 +1216,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload run_aggregation_query(parent: nil, structured_aggregation_query: nil, transaction: nil, new_transaction: nil, read_time: nil)
+            # @overload run_aggregation_query(parent: nil, structured_aggregation_query: nil, transaction: nil, new_transaction: nil, read_time: nil, explain_options: nil)
             #   Pass arguments to `run_aggregation_query` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1242,6 +1245,9 @@ module Google
             #     This must be a microsecond precision timestamp within the past one hour,
             #     or if Point-in-Time Recovery is enabled, can additionally be a whole
             #     minute timestamp within the past 7 days.
+            #   @param explain_options [::Google::Cloud::Firestore::V1::ExplainOptions, ::Hash]
+            #     Optional. Explain options for the query. If set, additional query
+            #     statistics will be returned. If not, only query results will be returned.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Enumerable<::Google::Cloud::Firestore::V1::RunAggregationQueryResponse>]
