@@ -9,7 +9,7 @@ require 'grafeas/v1/intoto_statement_pb'
 require 'grafeas/v1/provenance_pb'
 
 
-descriptor_data = "\n\x16grafeas/v1/build.proto\x12\ngrafeas.v1\x1a\"grafeas/v1/intoto_provenance.proto\x1a!grafeas/v1/intoto_statement.proto\x1a\x1bgrafeas/v1/provenance.proto\"$\n\tBuildNote\x12\x17\n\x0f\x62uilder_version\x18\x01 \x01(\t\"\xcc\x01\n\x0f\x42uildOccurrence\x12/\n\nprovenance\x18\x01 \x01(\x0b\x32\x1b.grafeas.v1.BuildProvenance\x12\x18\n\x10provenance_bytes\x18\x02 \x01(\t\x12\x37\n\x11intoto_provenance\x18\x03 \x01(\x0b\x32\x1c.grafeas.v1.InTotoProvenance\x12\x35\n\x10intoto_statement\x18\x04 \x01(\x0b\x32\x1b.grafeas.v1.InTotoStatementBQ\n\rio.grafeas.v1P\x01Z8google.golang.org/genproto/googleapis/grafeas/v1;grafeas\xa2\x02\x03GRAb\x06proto3"
+descriptor_data = "\n\x16grafeas/v1/build.proto\x12\ngrafeas.v1\x1a\"grafeas/v1/intoto_provenance.proto\x1a!grafeas/v1/intoto_statement.proto\x1a\x1bgrafeas/v1/provenance.proto\"$\n\tBuildNote\x12\x17\n\x0f\x62uilder_version\x18\x01 \x01(\t\"\x94\x02\n\x0f\x42uildOccurrence\x12/\n\nprovenance\x18\x01 \x01(\x0b\x32\x1b.grafeas.v1.BuildProvenance\x12\x18\n\x10provenance_bytes\x18\x02 \x01(\t\x12\x37\n\x11intoto_provenance\x18\x03 \x01(\x0b\x32\x1c.grafeas.v1.InTotoProvenance\x12\x35\n\x10intoto_statement\x18\x04 \x01(\x0b\x32\x1b.grafeas.v1.InTotoStatement\x12\x46\n\x1ain_toto_slsa_provenance_v1\x18\x05 \x01(\x0b\x32\".grafeas.v1.InTotoSlsaProvenanceV1BQ\n\rio.grafeas.v1P\x01Z8google.golang.org/genproto/googleapis/grafeas/v1;grafeas\xa2\x02\x03GRAb\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 

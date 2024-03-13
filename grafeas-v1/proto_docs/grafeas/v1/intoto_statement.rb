@@ -63,5 +63,124 @@ module Grafeas
         extend ::Google::Protobuf::MessageExts::ClassMethods
       end
     end
+
+    # @!attribute [rw] type
+    #   @return [::String]
+    #     InToto spec defined at
+    #     https://github.com/in-toto/attestation/tree/main/spec#statement
+    # @!attribute [rw] subject
+    #   @return [::Array<::Grafeas::V1::Subject>]
+    # @!attribute [rw] predicate_type
+    #   @return [::String]
+    # @!attribute [rw] predicate
+    #   @return [::Grafeas::V1::InTotoSlsaProvenanceV1::SlsaProvenanceV1]
+    class InTotoSlsaProvenanceV1
+      include ::Google::Protobuf::MessageExts
+      extend ::Google::Protobuf::MessageExts::ClassMethods
+
+      # Keep in sync with schema at
+      # https://github.com/slsa-framework/slsa/blob/main/docs/provenance/schema/v1/provenance.proto
+      # Builder renamed to ProvenanceBuilder because of Java conflicts.
+      # @!attribute [rw] build_definition
+      #   @return [::Grafeas::V1::InTotoSlsaProvenanceV1::BuildDefinition]
+      # @!attribute [rw] run_details
+      #   @return [::Grafeas::V1::InTotoSlsaProvenanceV1::RunDetails]
+      class SlsaProvenanceV1
+        include ::Google::Protobuf::MessageExts
+        extend ::Google::Protobuf::MessageExts::ClassMethods
+      end
+
+      # @!attribute [rw] build_type
+      #   @return [::String]
+      # @!attribute [rw] external_parameters
+      #   @return [::Google::Protobuf::Struct]
+      # @!attribute [rw] internal_parameters
+      #   @return [::Google::Protobuf::Struct]
+      # @!attribute [rw] resolved_dependencies
+      #   @return [::Array<::Grafeas::V1::InTotoSlsaProvenanceV1::ResourceDescriptor>]
+      class BuildDefinition
+        include ::Google::Protobuf::MessageExts
+        extend ::Google::Protobuf::MessageExts::ClassMethods
+      end
+
+      # @!attribute [rw] name
+      #   @return [::String]
+      # @!attribute [rw] uri
+      #   @return [::String]
+      # @!attribute [rw] digest
+      #   @return [::Google::Protobuf::Map{::String => ::String}]
+      # @!attribute [rw] content
+      #   @return [::String]
+      # @!attribute [rw] download_location
+      #   @return [::String]
+      # @!attribute [rw] media_type
+      #   @return [::String]
+      # @!attribute [rw] annotations
+      #   @return [::Google::Protobuf::Map{::String => ::Google::Protobuf::Value}]
+      class ResourceDescriptor
+        include ::Google::Protobuf::MessageExts
+        extend ::Google::Protobuf::MessageExts::ClassMethods
+
+        # @!attribute [rw] key
+        #   @return [::String]
+        # @!attribute [rw] value
+        #   @return [::String]
+        class DigestEntry
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] key
+        #   @return [::String]
+        # @!attribute [rw] value
+        #   @return [::Google::Protobuf::Value]
+        class AnnotationsEntry
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+      end
+
+      # @!attribute [rw] builder
+      #   @return [::Grafeas::V1::InTotoSlsaProvenanceV1::ProvenanceBuilder]
+      # @!attribute [rw] metadata
+      #   @return [::Grafeas::V1::InTotoSlsaProvenanceV1::BuildMetadata]
+      # @!attribute [rw] byproducts
+      #   @return [::Array<::Grafeas::V1::InTotoSlsaProvenanceV1::ResourceDescriptor>]
+      class RunDetails
+        include ::Google::Protobuf::MessageExts
+        extend ::Google::Protobuf::MessageExts::ClassMethods
+      end
+
+      # @!attribute [rw] id
+      #   @return [::String]
+      # @!attribute [rw] version
+      #   @return [::Google::Protobuf::Map{::String => ::String}]
+      # @!attribute [rw] builder_dependencies
+      #   @return [::Array<::Grafeas::V1::InTotoSlsaProvenanceV1::ResourceDescriptor>]
+      class ProvenanceBuilder
+        include ::Google::Protobuf::MessageExts
+        extend ::Google::Protobuf::MessageExts::ClassMethods
+
+        # @!attribute [rw] key
+        #   @return [::String]
+        # @!attribute [rw] value
+        #   @return [::String]
+        class VersionEntry
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+      end
+
+      # @!attribute [rw] invocation_id
+      #   @return [::String]
+      # @!attribute [rw] started_on
+      #   @return [::Google::Protobuf::Timestamp]
+      # @!attribute [rw] finished_on
+      #   @return [::Google::Protobuf::Timestamp]
+      class BuildMetadata
+        include ::Google::Protobuf::MessageExts
+        extend ::Google::Protobuf::MessageExts::ClassMethods
+      end
+    end
   end
 end

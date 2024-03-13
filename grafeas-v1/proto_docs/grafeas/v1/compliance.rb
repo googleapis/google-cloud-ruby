@@ -39,6 +39,8 @@ module Grafeas
     # @!attribute [rw] scan_instructions
     #   @return [::String]
     #     Serialized scan instructions with a predefined format.
+    # @!attribute [rw] impact
+    #   @return [::String]
     class ComplianceNote
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods

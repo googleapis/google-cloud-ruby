@@ -78,6 +78,9 @@ module Grafeas
     # @!attribute [rw] dsse_attestation
     #   @return [::Grafeas::V1::DSSEAttestationOccurrence]
     #     Describes an attestation of an artifact using dsse.
+    # @!attribute [rw] sbom_reference
+    #   @return [::Grafeas::V1::SBOMReferenceOccurrence]
+    #     Describes a specific SBOM reference occurrences.
     # @!attribute [rw] envelope
     #   @return [::Grafeas::V1::Envelope]
     #     https://github.com/secure-systems-lab/dsse
@@ -151,6 +154,9 @@ module Grafeas
     # @!attribute [rw] vulnerability_assessment
     #   @return [::Grafeas::V1::VulnerabilityAssessmentNote]
     #     A note describing a vulnerability assessment.
+    # @!attribute [rw] sbom_reference
+    #   @return [::Grafeas::V1::SBOMReferenceNote]
+    #     A note describing an SBOM reference.
     class Note
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
