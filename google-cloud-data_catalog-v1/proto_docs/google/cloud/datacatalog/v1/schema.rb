@@ -75,6 +75,14 @@ module Google
         # @!attribute [rw] looker_column_spec
         #   @return [::Google::Cloud::DataCatalog::V1::ColumnSchema::LookerColumnSpec]
         #     Looker specific column info of this column.
+        # @!attribute [rw] range_element_type
+        #   @return [::Google::Cloud::DataCatalog::V1::ColumnSchema::FieldElementType]
+        #     Optional. The subtype of the RANGE, if the type of this field is RANGE. If
+        #     the type is RANGE, this field is required. Possible values for the field
+        #     element type of a RANGE include:
+        #     * DATE
+        #     * DATETIME
+        #     * TIMESTAMP
         # @!attribute [rw] gc_rule
         #   @return [::String]
         #     Optional. Garbage collection policy for the column or column family.
@@ -111,6 +119,16 @@ module Google
               # Parameter.
               PARAMETER = 5
             end
+          end
+
+          # Represents the type of a field element.
+          # @!attribute [rw] type
+          #   @return [::String]
+          #     Required. The type of a field element. See
+          #     {::Google::Cloud::DataCatalog::V1::ColumnSchema#type ColumnSchema.type}.
+          class FieldElementType
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Specifies inclusion of the column in an index
