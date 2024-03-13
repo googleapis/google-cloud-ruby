@@ -28,21 +28,22 @@ describe Google::Cloud::Bigtable::RowsReader, :row_reader, :mock_bigtable do
 
     _(rows_reader.last_key).must_equal "3"
 
-    rows_limit, retry_row_set = rows_reader.retry_options(100, row_set)
+    retry_status = rows_reader.retry_options(100, row_set)
 
-    _(rows_limit).must_equal 90
-    _(retry_row_set.row_keys).must_equal ["5"]
+    _(retry_status.rows_limit).must_equal 90
+    _(retry_status.row_set.row_keys).must_equal ["5"]
   end
 
   it "add row range if row set row ranges empty" do
     rows_reader = Google::Cloud::Bigtable::RowsReader.new("dummy-table-client")
     chunk_processor = rows_reader.instance_variable_get("@chunk_processor")
 
-    row_set = Google::Cloud::Bigtable::V2::RowSet.new
+    row_set = Google::Cloud::Bigtable::V2::RowSet.new(row_ranges: [{}])
+    
     chunk_processor.last_key = "3"
 
-    _, retry_row_set = rows_reader.retry_options(100, row_set)
-    row_ranges = retry_row_set.row_ranges
+    retry_status = rows_reader.retry_options(100, row_set)
+    row_ranges = retry_status.row_set.row_ranges
 
     _(row_ranges.length).must_equal 1
     _(row_ranges.first).must_equal Google::Cloud::Bigtable::V2::RowRange.new(start_key_open: "3")
@@ -56,8 +57,8 @@ describe Google::Cloud::Bigtable::RowsReader, :row_reader, :mock_bigtable do
       row_ranges: [{ end_key_closed: "3" }, { end_key_closed: "5" }]
     )
     chunk_processor.last_key = "3"
-    _, retry_row_set = rows_reader.retry_options(100, row_set)
-    row_ranges = retry_row_set.row_ranges
+    retry_status = rows_reader.retry_options(100, row_set)
+    row_ranges = retry_status.row_set.row_ranges
 
     _(row_ranges.length).must_equal 1
     _(row_ranges.first.end_key_closed).must_equal "5"
@@ -71,11 +72,35 @@ describe Google::Cloud::Bigtable::RowsReader, :row_reader, :mock_bigtable do
       row_ranges: [{ end_key_closed: "5" }]
     )
     chunk_processor.last_key = "3"
-    _, retry_row_set = rows_reader.retry_options(100, row_set)
-    row_ranges = retry_row_set.row_ranges
+    retry_status = rows_reader.retry_options(100, row_set)
+    row_ranges = retry_status.row_set.row_ranges
 
     _(row_ranges.length).must_equal 1
     _(row_ranges.first).must_equal Google::Cloud::Bigtable::V2::RowRange.new(start_key_open: "3", end_key_closed: "5")
+  end
+
+  it "start key is updated correctly" do
+    rows_reader = Google::Cloud::Bigtable::RowsReader.new("dummy-table-client")
+    chunk_processor = rows_reader.instance_variable_get("@chunk_processor")
+
+    row_set = Google::Cloud::Bigtable::V2::RowSet.new(
+      row_ranges: [{ start_key_closed: "3" }]
+    )
+    chunk_processor.last_key = "3"
+    retry_status = rows_reader.retry_options(100, row_set)
+    row_ranges = retry_status.row_set.row_ranges
+
+    _(row_ranges.length).must_equal 1
+    _(row_ranges.first).must_equal Google::Cloud::Bigtable::V2::RowRange.new(start_key_open: "3")
+
+    row_set = Google::Cloud::Bigtable::V2::RowSet.new(
+      row_ranges: [{ start_key_open: "3" }]
+    )
+    retry_status = rows_reader.retry_options(100, row_set)
+
+    row_ranges = retry_status.row_set.row_ranges
+    _(row_ranges.length).must_equal 1
+    _(row_ranges.first).must_equal Google::Cloud::Bigtable::V2::RowRange.new(start_key_open: "3")
   end
 
   it "increment and check read is retryable" do
@@ -87,5 +112,59 @@ describe Google::Cloud::Bigtable::RowsReader, :row_reader, :mock_bigtable do
       rows_reader.retry_count += 1
       _(rows_reader.retryable?).must_equal expected_value
     end
+  end
+
+  it "row limit is nil after rows limit number of rows are read" do
+    rows_reader = Google::Cloud::Bigtable::RowsReader.new("dummy-table-client")
+
+    chunk_processor = rows_reader.instance_variable_get("@chunk_processor")
+    chunk_processor.last_key = "3"
+    rows_reader.instance_variable_set("@rows_count", 10)
+
+    _(rows_reader.last_key).must_equal "3"
+
+    retry_status = rows_reader.retry_options(10, Google::Cloud::Bigtable::V2::RowSet.new())
+
+    _(retry_status.should_retry).must_equal false
+  end
+
+  it "row limit is nil after all the row ranges are read" do
+    rows_reader = Google::Cloud::Bigtable::RowsReader.new("dummy-table-client")
+
+    row_set = Google::Cloud::Bigtable::V2::RowSet.new(
+      row_ranges: [{ end_key_closed: "3" }]
+    )
+
+    chunk_processor = rows_reader.instance_variable_get("@chunk_processor")
+    chunk_processor.last_key = "3"
+    rows_reader.instance_variable_set("@rows_count", 10)
+
+    _(rows_reader.last_key).must_equal "3"
+
+    retry_status = rows_reader.retry_options(100, Google::Cloud::Bigtable::V2::RowSet.new(
+      row_ranges: [{ end_key_closed: "3" }]
+    ))
+    _(retry_status.should_retry).must_equal false
+
+    retry_status = rows_reader.retry_options(100, Google::Cloud::Bigtable::V2::RowSet.new(
+      row_ranges: [{ end_key_open: "3" }]
+    ))
+    _(retry_status.should_retry).must_equal false
+  end
+
+  it "row limit is nil after all the row keys are read" do
+    rows_reader = Google::Cloud::Bigtable::RowsReader.new("dummy-table-client")
+
+    row_set = Google::Cloud::Bigtable::V2::RowSet.new(row_keys: %w[1 2 3])
+
+    chunk_processor = rows_reader.instance_variable_get("@chunk_processor")
+    chunk_processor.last_key = "3"
+    rows_reader.instance_variable_set("@rows_count", 10)
+
+    _(rows_reader.last_key).must_equal "3"
+
+    retry_status = rows_reader.retry_options(100, row_set)
+
+    _(retry_status.should_retry).must_equal false
   end
 end

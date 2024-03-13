@@ -75,6 +75,7 @@ module Google
         #   Array of row or yield block for each processed row.
         #
         def read rows: nil, filter: nil, rows_limit: nil
+          @rows_count = 0
           response = @table.service.read_rows(
             @table.instance_id,
             @table.table_id,
@@ -116,19 +117,33 @@ module Google
         #   If not specified, reads from all rows.
         #   A hash of the same form as `Google::Cloud::Bigtable::V2::RowSet`
         #   can also be provided.
-        # @return [Integer, Google::Cloud::Bigtable::V2::RowSet]
+        # @return RetryStatus
         #
         def retry_options rows_limit, row_set
-          return [rows_limit, row_set] unless last_key
+          return RetryStatus.new true, rows_limit, row_set unless last_key
+
+          # Check if we've already read read rows_limit number of rows.
+          # If true, return nil to indicate that the read has succeeded.
+          return RetryStatus.new false, nil, nil if rows_limit == @rows_count
 
           # 1. Reduce the limit by the number of already returned responses.
           rows_limit -= @rows_count if rows_limit
 
-          # 2. Remove ranges that have already been read, and reduce ranges that
+          reset_row_set rows_limit, row_set
+        end
+
+        ##
+        # Calculate the new row_set for the retry request
+        # @param rows_limit [Integer]
+        #    the updated rows_limit
+        # @param row_set [Google::Cloud::Bigtable::V2::RowSet]
+        #    original row_set
+        # @return RetryStatus
+        def reset_row_set rows_limit, row_set
+          # 1. Remove ranges that have already been read, and reduce ranges that
           # include the last read rows
           if last_key
             delete_indexes = []
-
             row_set.row_ranges.each_with_index do |range, i|
               if end_key_read? range
                 delete_indexes << i
@@ -140,16 +155,20 @@ module Google
             delete_indexes.each { |i| row_set.row_ranges.delete_at i }
           end
 
-          if row_set.row_ranges.empty?
-            row_set.row_ranges <<
-              Google::Cloud::Bigtable::V2::RowRange.new(start_key_open: last_key)
-          end
-
-          # 3. Remove all individual keys before and up to the last read key
+          # 2. Remove all individual keys before and up to the last read key
           row_set.row_keys.select! { |k| k > last_key }
 
+          # 3. In read_operations, we always add an empty row_range if row_ranges and
+          # row_keys are not defined. So if both row_ranges and row_keys are empty,
+          # it means that we've already read all the ranges and keys, set RetryStatus
+          # should_retry to false to indicate that this read is successful.
+          if last_key && row_set.row_ranges.empty? && row_set.row_keys.empty?
+            return RetryStatus.new false, nil, nil
+          end
+
           @chunk_processor.reset_to_new_row
-          [rows_limit, row_set]
+
+          RetryStatus.new true, rows_limit, row_set
         end
 
         ##
@@ -170,13 +189,13 @@ module Google
         # @return [Boolean]
         #
         def start_key_read? range
-          start_key = if range.start_key_closed.empty?
-                        range.start_key_open
-                      else
-                        range.start_key_closed
-                      end
-
-          start_key.empty? || last_key >= start_key
+          if range.start_key_closed.empty? && range.end_key_open.empty?
+            true
+          elsif !range.start_key_closed.empty?
+            last_key >= range.start_key_closed
+          else
+            last_key > range.start_key_open
+          end
         end
 
         ##
@@ -186,13 +205,49 @@ module Google
         # @return [Boolean]
         #
         def end_key_read? range
-          end_key = if range.end_key_closed.empty?
-                      range.end_key_open
-                    else
-                      range.end_key_closed
-                    end
+          if range.end_key_closed.empty? && range.end_key_open.empty?
+            false
+          elsif !range.end_key_closed.empty?
+            range.end_key_closed <= last_key
+          else
+            range.end_key_open <= last_key
+          end
+        end
+      end
 
-          end_key && end_key <= last_key
+      # @private
+      # RetryStatus
+      # Helper class returned by retry_options
+      class RetryStatus
+        # @private
+        # Creates a RetryStatus instance
+        # @param should_retry [Boolean]
+        # @param rows_limit [Integer]
+        #    limit of the retry request
+        # @param row_set [Google::Cloud::Bigtable::V2::RowSet]
+        #    row_set of the retry request
+        def initialize should_retry, rows_limit, row_set
+          @should_retry = should_retry
+          @rows_limit = rows_limit
+          @row_set = row_set
+        end
+
+        ##
+        # returns if this operation should be retried
+        def should_retry
+          @should_retry
+        end
+
+        ##
+        # returns new new rows_limit for the retry
+        def rows_limit
+          @rows_limit
+        end
+
+        ##
+        # returns new new row_set for the retry
+        def row_set
+          @row_set
         end
       end
     end

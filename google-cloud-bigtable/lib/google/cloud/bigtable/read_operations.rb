@@ -159,8 +159,10 @@ module Google
           rescue *RowsReader::RETRYABLE_ERRORS => e
             rows_reader.retry_count += 1
             raise Google::Cloud::Error.from_error(e) unless rows_reader.retryable?
-            rows_limit, row_set = rows_reader.retry_options limit, row_set
-            retry
+            retry_status = rows_reader.retry_options limit, row_set
+            rows_limit = retry_status.rows_limit
+            row_set = retry_status.row_set
+            retry if retry_status.should_retry
           end
         end
 
@@ -318,6 +320,11 @@ module Google
           if row_ranges
             row_ranges = [row_ranges] unless row_ranges.instance_of? Array
             row_set[:row_ranges] = row_ranges.map(&:to_grpc)
+          end
+
+          # Set the row range to full table scan if the row set is empty
+          if row_set.empty?
+            return Google::Cloud::Bigtable::V2::RowSet.new row_ranges: []
           end
 
           Google::Cloud::Bigtable::V2::RowSet.new row_set
