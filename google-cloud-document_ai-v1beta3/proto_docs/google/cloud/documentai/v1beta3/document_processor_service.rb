@@ -1097,6 +1097,8 @@ module Google
         #   @return [::String]
         #     The source processor version to import from. The source processor version
         #     and destination processor need to be in the same environment and region.
+        #     Note that ProcessorVersions with `model_type` `MODEL_TYPE_LLM` are not
+        #     supported.
         # @!attribute [rw] external_processor_version_source
         #   @return [::Google::Cloud::DocumentAI::V1beta3::ImportProcessorVersionRequest::ExternalProcessorVersionSource]
         #     The source processor version to import from. It can be from a different
