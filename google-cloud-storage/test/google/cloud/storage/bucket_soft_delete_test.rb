@@ -21,8 +21,10 @@ describe Google::Cloud::Storage::Bucket, :soft_delete_policy, :mock_storage do
   let(:bucket) { Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service }
 
   let(:effective_time) { DateTime.now }
-  let(:soft_delete_policy) {{ effective_time: effective_time,
-                             retention_duration_seconds: 864000 }} # 10 days
+  let(:soft_delete_policy) do
+      soft_delete_policy_object(effective_time: effective_time,
+                                retention_duration_seconds: 864000)
+  end
   let(:file_hash) { random_file_hash bucket.name, "file.ext" }
   let(:file_gapi) { Google::Apis::StorageV1::Object.from_json file_hash.to_json }
   let(:file) { Google::Cloud::Storage::File.from_gapi file_gapi, storage.service }

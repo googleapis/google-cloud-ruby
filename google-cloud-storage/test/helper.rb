@@ -68,7 +68,9 @@ class MockStorage < Minitest::Spec
                          rpo: "DEFAULT",
                          autoclass_enabled: nil,
                          autoclass_terminal_storage_class: nil,
-                         enable_object_retention: nil
+                         enable_object_retention: nil,
+                         effective_time: DateTime.now,
+                         retention_duration_seconds: 604800
     versioning_config = { "enabled" => versioning } if versioning
     { "kind" => "storage#bucket",
       "id" => name,
@@ -90,8 +92,16 @@ class MockStorage < Minitest::Spec
       "billing" => billing_hash(requester_pays),
       "etag" => "CAE=",
       "autoclass" => autoclass_config_hash(autoclass_enabled, autoclass_terminal_storage_class),
-      "enableObjectRetention" => enable_object_retention
+      "enableObjectRetention" => enable_object_retention,
+      "softDeletePolicy" => soft_delete_policy_object(effective_time: effective_time, retention_duration_seconds: retention_duration_seconds)
     }.delete_if { |_, v| v.nil? }
+  end
+
+  def soft_delete_policy_object effective_time: DateTime.now, retention_duration_seconds: 604800
+    Google::Apis::StorageV1::Bucket::SoftDeletePolicy.new(
+      effective_time: effective_time,
+      retention_duration_seconds: retention_duration_seconds
+    )
   end
 
   def autoclass_config_hash(enabled, terminal_storage_class)
