@@ -21,8 +21,8 @@ module Google
   module Cloud
     module Build
       module V2
-        # A connection to a SCM like GitHub, GitHub Enterprise, Bitbucket Server or
-        # GitLab.
+        # A connection to a SCM like GitHub, GitHub Enterprise, Bitbucket Data Center,
+        # Bitbucket Cloud or GitLab.
         # @!attribute [rw] name
         #   @return [::String]
         #     Immutable. The resource name of the connection, in the format
@@ -43,6 +43,12 @@ module Google
         #   @return [::Google::Cloud::Build::V2::GitLabConfig]
         #     Configuration for connections to gitlab.com or an instance of GitLab
         #     Enterprise.
+        # @!attribute [rw] bitbucket_data_center_config
+        #   @return [::Google::Cloud::Build::V2::BitbucketDataCenterConfig]
+        #     Configuration for connections to Bitbucket Data Center.
+        # @!attribute [rw] bitbucket_cloud_config
+        #   @return [::Google::Cloud::Build::V2::BitbucketCloudConfig]
+        #     Configuration for connections to Bitbucket Cloud.
         # @!attribute [r] installation_state
         #   @return [::Google::Cloud::Build::V2::InstallationState]
         #     Output only. Installation state of the Connection.
@@ -232,6 +238,66 @@ module Google
         #     Output only. Version of the GitLab Enterprise server running on the
         #     `host_uri`.
         class GitLabConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration for connections to Bitbucket Data Center.
+        # @!attribute [rw] host_uri
+        #   @return [::String]
+        #     Required. The URI of the Bitbucket Data Center instance or cluster this
+        #     connection is for.
+        # @!attribute [rw] webhook_secret_secret_version
+        #   @return [::String]
+        #     Required. Immutable. SecretManager resource containing the webhook secret
+        #     used to verify webhook events, formatted as
+        #     `projects/*/secrets/*/versions/*`.
+        # @!attribute [rw] read_authorizer_credential
+        #   @return [::Google::Cloud::Build::V2::UserCredential]
+        #     Required. A http access token with the `REPO_READ` access.
+        # @!attribute [rw] authorizer_credential
+        #   @return [::Google::Cloud::Build::V2::UserCredential]
+        #     Required. A http access token with the `REPO_ADMIN` scope access.
+        # @!attribute [rw] service_directory_config
+        #   @return [::Google::Cloud::Build::V2::ServiceDirectoryConfig]
+        #     Optional. Configuration for using Service Directory to privately connect to
+        #     a Bitbucket Data Center. This should only be set if the Bitbucket Data
+        #     Center is hosted on-premises and not reachable by public internet. If this
+        #     field is left empty, calls to the Bitbucket Data Center will be made over
+        #     the public internet.
+        # @!attribute [rw] ssl_ca
+        #   @return [::String]
+        #     Optional. SSL certificate to use for requests to the Bitbucket Data Center.
+        # @!attribute [r] server_version
+        #   @return [::String]
+        #     Output only. Version of the Bitbucket Data Center running on the
+        #     `host_uri`.
+        class BitbucketDataCenterConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration for connections to Bitbucket Cloud.
+        # @!attribute [rw] workspace
+        #   @return [::String]
+        #     Required. The Bitbucket Cloud Workspace ID to be connected to Google Cloud
+        #     Platform.
+        # @!attribute [rw] webhook_secret_secret_version
+        #   @return [::String]
+        #     Required. SecretManager resource containing the webhook secret used to
+        #     verify webhook events, formatted as `projects/*/secrets/*/versions/*`.
+        # @!attribute [rw] read_authorizer_credential
+        #   @return [::Google::Cloud::Build::V2::UserCredential]
+        #     Required. An access token with the `repository` access. It can be either a
+        #     workspace, project or repository access token. It's recommended to use a
+        #     system account to generate the credentials.
+        # @!attribute [rw] authorizer_credential
+        #   @return [::Google::Cloud::Build::V2::UserCredential]
+        #     Required. An access token with the `webhook`, `repository`,
+        #     `repository:admin` and `pullrequest` scope access. It can be either a
+        #     workspace, project or repository access token. It's recommended to use a
+        #     system account to generate these credentials.
+        class BitbucketCloudConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
