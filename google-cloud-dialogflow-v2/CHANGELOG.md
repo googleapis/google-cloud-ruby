@@ -1,5 +1,12 @@
 # Release History
 
+### 0.34.0 (2024-03-14)
+
+#### Features
+
+* Support opt_out_conformer_model_migration field to InputAudioConfig ([#25371](https://github.com/googleapis/google-cloud-ruby/issues/25371)) 
+* Support text_sections field to SummarizationFeedback ([#25371](https://github.com/googleapis/google-cloud-ruby/issues/25371)) 
+
 ### 0.33.0 (2024-02-26)
 
 #### Features
