@@ -117,16 +117,16 @@ module Google
         #   If not specified, reads from all rows.
         #   A hash of the same form as `Google::Cloud::Bigtable::V2::RowSet`
         #   can also be provided.
-        # @return RetryStatus
+        # @return ResumptionOption
         #
         def retry_options rows_limit, row_set
-          return RetryStatus.new true, rows_limit, row_set unless last_key
+          return ResumptionOption.new true, rows_limit, row_set unless last_key
 
           # Check if we've already read read rows_limit number of rows.
           # If true, return nil to indicate that the read has succeeded.
-          return RetryStatus.new false, nil, nil if rows_limit == @rows_count
+          return ResumptionOption.new false, nil, nil if rows_limit && rows_limit == @rows_count
 
-          # 1. Reduce the limit by the number of already returned responses.
+          # Reduce the limit by the number of already returned responses.
           rows_limit -= @rows_count if rows_limit
 
           reset_row_set rows_limit, row_set
@@ -138,7 +138,7 @@ module Google
         #    the updated rows_limit
         # @param row_set [Google::Cloud::Bigtable::V2::RowSet]
         #    original row_set
-        # @return RetryStatus
+        # @return ResumptionOption
         def reset_row_set rows_limit, row_set
           # 1. Remove ranges that have already been read, and reduce ranges that
           # include the last read rows
@@ -152,7 +152,7 @@ module Google
               end
             end
 
-            delete_indexes.each { |i| row_set.row_ranges.delete_at i }
+            delete_indexes.sort.reverse_each { |i| row_set.row_ranges.delete_at i }
           end
 
           # 2. Remove all individual keys before and up to the last read key
@@ -160,15 +160,15 @@ module Google
 
           # 3. In read_operations, we always add an empty row_range if row_ranges and
           # row_keys are not defined. So if both row_ranges and row_keys are empty,
-          # it means that we've already read all the ranges and keys, set RetryStatus
+          # it means that we've already read all the ranges and keys, set ResumptionOption
           # should_retry to false to indicate that this read is successful.
           if last_key && row_set.row_ranges.empty? && row_set.row_keys.empty?
-            return RetryStatus.new false, nil, nil
+            return ResumptionOption.new false, nil, nil
           end
 
           @chunk_processor.reset_to_new_row
 
-          RetryStatus.new true, rows_limit, row_set
+          ResumptionOption.new true, rows_limit, row_set
         end
 
         ##
@@ -216,26 +216,27 @@ module Google
       end
 
       # @private
-      # RetryStatus
+      # ResumptionOption
       # Helper class returned by retry_options
-      class RetryStatus
+      class ResumptionOption
         # @private
-        # Creates a RetryStatus instance
-        # @param should_retry [Boolean]
+        # Creates a ResumptionOption instance
+        # @param is_complete [Boolean]
+        #    marks if the current read is complete
         # @param rows_limit [Integer]
         #    limit of the retry request
         # @param row_set [Google::Cloud::Bigtable::V2::RowSet]
         #    row_set of the retry request
-        def initialize should_retry, rows_limit, row_set
-          @should_retry = should_retry
+        def initialize is_complete, rows_limit, row_set
+          @is_complete = is_complete
           @rows_limit = rows_limit
           @row_set = row_set
         end
 
         ##
         # returns if this operation should be retried
-        def should_retry
-          @should_retry
+        def is_complete
+          @is_complete
         end
 
         ##

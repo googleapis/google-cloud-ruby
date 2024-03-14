@@ -159,10 +159,10 @@ module Google
           rescue *RowsReader::RETRYABLE_ERRORS => e
             rows_reader.retry_count += 1
             raise Google::Cloud::Error.from_error(e) unless rows_reader.retryable?
-            retry_status = rows_reader.retry_options limit, row_set
-            rows_limit = retry_status.rows_limit
-            row_set = retry_status.row_set
-            retry if retry_status.should_retry
+            resumption_option = rows_reader.retry_options limit, row_set
+            rows_limit = resumption_option.rows_limit
+            row_set = resumption_option.row_set
+            retry if resumption_option.is_complete
           end
         end
 
