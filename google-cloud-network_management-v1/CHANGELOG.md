@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.12.0 (2024-03-14)
+
+#### Features
+
+* Support metadata for load balancer ([#25352](https://github.com/googleapis/google-cloud-ruby/issues/25352)) 
+* Support metadata for NAT ([#25352](https://github.com/googleapis/google-cloud-ruby/issues/25352)) 
+* Support metadata for ProxyConnection ([#25352](https://github.com/googleapis/google-cloud-ruby/issues/25352)) 
+* Support metadata for Storage Bucket ([#25352](https://github.com/googleapis/google-cloud-ruby/issues/25352)) 
+
 ### 0.11.0 (2024-02-26)
 
 #### Features
