@@ -2406,9 +2406,8 @@ module Google
               ##
               # FetchCaCerts returns the current trust anchor for the
               # {::Google::Cloud::Security::PrivateCA::V1::CaPool CaPool}. This will include CA
-              # certificate chains for all ACTIVE
-              # {::Google::Cloud::Security::PrivateCA::V1::CertificateAuthority CertificateAuthority}
-              # resources in the {::Google::Cloud::Security::PrivateCA::V1::CaPool CaPool}.
+              # certificate chains for all Certificate Authorities in the ENABLED,
+              # DISABLED, or STAGED states.
               #
               # @overload fetch_ca_certs(request, options = nil)
               #   Pass arguments to `fetch_ca_certs` via a request object, either of type
