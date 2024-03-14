@@ -33,18 +33,64 @@ module Google
         #     References primary/secondary etc assignees in the external system.
         # @!attribute [rw] external_uid
         #   @return [::String]
-        #     Identifier that's used to track the given finding in the external system.
+        #     The identifier that's used to track the finding's corresponding case in the
+        #     external system.
         # @!attribute [rw] status
         #   @return [::String]
-        #     Most recent status of the corresponding finding's ticket/tracker in the
-        #     external system.
+        #     The most recent status of the finding's corresponding case, as reported by
+        #     the external system.
         # @!attribute [rw] external_system_update_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     The most recent time when the corresponding finding's ticket/tracker was
-        #     updated in the external system.
+        #     The time when the case was last updated, as reported by the external
+        #     system.
+        # @!attribute [rw] case_uri
+        #   @return [::String]
+        #     The link to the finding's corresponding case in the external system.
+        # @!attribute [rw] case_priority
+        #   @return [::String]
+        #     The priority of the finding's corresponding case in the external system.
+        # @!attribute [rw] case_sla
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The SLA of the finding's corresponding case in the external system.
+        # @!attribute [rw] case_create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time when the case was created, as reported by the external system.
+        # @!attribute [rw] case_close_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time when the case was closed, as reported by the external system.
+        # @!attribute [rw] ticket_info
+        #   @return [::Google::Cloud::SecurityCenter::V1::ExternalSystem::TicketInfo]
+        #     Information about the ticket, if any, that is being used to track the
+        #     resolution of the issue that is identified by this finding.
         class ExternalSystem
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Information about the ticket, if any, that is being used to track the
+          # resolution of the issue that is identified by this finding.
+          # @!attribute [rw] id
+          #   @return [::String]
+          #     The identifier of the ticket in the ticket system.
+          # @!attribute [rw] assignee
+          #   @return [::String]
+          #     The assignee of the ticket in the ticket system.
+          # @!attribute [rw] description
+          #   @return [::String]
+          #     The description of the ticket in the ticket system.
+          # @!attribute [rw] uri
+          #   @return [::String]
+          #     The link to the ticket in the ticket system.
+          # @!attribute [rw] status
+          #   @return [::String]
+          #     The latest status of the ticket, as reported by the ticket system.
+          # @!attribute [rw] update_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The time when the ticket was last updated, as reported by the ticket
+          #     system.
+          class TicketInfo
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
       end
     end
