@@ -130,6 +130,43 @@ module Google
               rpc :UpdateDatabase, ::Google::Cloud::Firestore::Admin::V1::UpdateDatabaseRequest, ::Google::Longrunning::Operation
               # Deletes a database.
               rpc :DeleteDatabase, ::Google::Cloud::Firestore::Admin::V1::DeleteDatabaseRequest, ::Google::Longrunning::Operation
+              # Gets information about a backup.
+              rpc :GetBackup, ::Google::Cloud::Firestore::Admin::V1::GetBackupRequest, ::Google::Cloud::Firestore::Admin::V1::Backup
+              # Lists all the backups.
+              rpc :ListBackups, ::Google::Cloud::Firestore::Admin::V1::ListBackupsRequest, ::Google::Cloud::Firestore::Admin::V1::ListBackupsResponse
+              # Deletes a backup.
+              rpc :DeleteBackup, ::Google::Cloud::Firestore::Admin::V1::DeleteBackupRequest, ::Google::Protobuf::Empty
+              # Creates a new database by restoring from an existing backup.
+              #
+              # The new database must be in the same cloud region or multi-region location
+              # as the existing backup. This behaves similar to
+              # [FirestoreAdmin.CreateDatabase][google.firestore.admin.v1.CreateDatabase]
+              # except instead of creating a new empty database, a new database is created
+              # with the database type, index configuration, and documents from an existing
+              # backup.
+              #
+              # The [long-running operation][google.longrunning.Operation] can be used to
+              # track the progress of the restore, with the Operation's
+              # [metadata][google.longrunning.Operation.metadata] field type being the
+              # [RestoreDatabaseMetadata][google.firestore.admin.v1.RestoreDatabaseMetadata].
+              # The [response][google.longrunning.Operation.response] type is the
+              # [Database][google.firestore.admin.v1.Database] if the restore was
+              # successful. The new database is not readable or writeable until the LRO has
+              # completed.
+              rpc :RestoreDatabase, ::Google::Cloud::Firestore::Admin::V1::RestoreDatabaseRequest, ::Google::Longrunning::Operation
+              # Creates a backup schedule on a database.
+              # At most two backup schedules can be configured on a database, one daily
+              # backup schedule with retention up to 7 days and one weekly backup schedule
+              # with retention up to 14 weeks.
+              rpc :CreateBackupSchedule, ::Google::Cloud::Firestore::Admin::V1::CreateBackupScheduleRequest, ::Google::Cloud::Firestore::Admin::V1::BackupSchedule
+              # Gets information about a backup schedule.
+              rpc :GetBackupSchedule, ::Google::Cloud::Firestore::Admin::V1::GetBackupScheduleRequest, ::Google::Cloud::Firestore::Admin::V1::BackupSchedule
+              # List backup schedules.
+              rpc :ListBackupSchedules, ::Google::Cloud::Firestore::Admin::V1::ListBackupSchedulesRequest, ::Google::Cloud::Firestore::Admin::V1::ListBackupSchedulesResponse
+              # Updates a backup schedule.
+              rpc :UpdateBackupSchedule, ::Google::Cloud::Firestore::Admin::V1::UpdateBackupScheduleRequest, ::Google::Cloud::Firestore::Admin::V1::BackupSchedule
+              # Deletes a backup schedule.
+              rpc :DeleteBackupSchedule, ::Google::Cloud::Firestore::Admin::V1::DeleteBackupScheduleRequest, ::Google::Protobuf::Empty
             end
 
             Stub = Service.rpc_stub_class

@@ -570,6 +570,366 @@
           "type": "FULL"
         }
       ]
+    },
+    {
+      "region_tag": "firestore_v1_generated_FirestoreAdmin_GetBackup_sync",
+      "title": "Snippet for the get_backup call in the FirestoreAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#get_backup.",
+      "file": "firestore_admin/get_backup.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_backup",
+        "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#get_backup",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::Admin::V1::GetBackupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Firestore::Admin::V1::Backup",
+        "client": {
+          "short_name": "FirestoreAdmin::Client",
+          "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client"
+        },
+        "method": {
+          "short_name": "GetBackup",
+          "full_name": "google.firestore.admin.v1.FirestoreAdmin.GetBackup",
+          "service": {
+            "short_name": "FirestoreAdmin",
+            "full_name": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "firestore_v1_generated_FirestoreAdmin_ListBackups_sync",
+      "title": "Snippet for the list_backups call in the FirestoreAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_backups.",
+      "file": "firestore_admin/list_backups.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_backups",
+        "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_backups",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::Admin::V1::ListBackupsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Firestore::Admin::V1::ListBackupsResponse",
+        "client": {
+          "short_name": "FirestoreAdmin::Client",
+          "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client"
+        },
+        "method": {
+          "short_name": "ListBackups",
+          "full_name": "google.firestore.admin.v1.FirestoreAdmin.ListBackups",
+          "service": {
+            "short_name": "FirestoreAdmin",
+            "full_name": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "firestore_v1_generated_FirestoreAdmin_DeleteBackup_sync",
+      "title": "Snippet for the delete_backup call in the FirestoreAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#delete_backup.",
+      "file": "firestore_admin/delete_backup.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_backup",
+        "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#delete_backup",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::Admin::V1::DeleteBackupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "FirestoreAdmin::Client",
+          "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client"
+        },
+        "method": {
+          "short_name": "DeleteBackup",
+          "full_name": "google.firestore.admin.v1.FirestoreAdmin.DeleteBackup",
+          "service": {
+            "short_name": "FirestoreAdmin",
+            "full_name": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "firestore_v1_generated_FirestoreAdmin_RestoreDatabase_sync",
+      "title": "Snippet for the restore_database call in the FirestoreAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#restore_database.",
+      "file": "firestore_admin/restore_database.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "restore_database",
+        "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#restore_database",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::Admin::V1::RestoreDatabaseRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "FirestoreAdmin::Client",
+          "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client"
+        },
+        "method": {
+          "short_name": "RestoreDatabase",
+          "full_name": "google.firestore.admin.v1.FirestoreAdmin.RestoreDatabase",
+          "service": {
+            "short_name": "FirestoreAdmin",
+            "full_name": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "firestore_v1_generated_FirestoreAdmin_CreateBackupSchedule_sync",
+      "title": "Snippet for the create_backup_schedule call in the FirestoreAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#create_backup_schedule.",
+      "file": "firestore_admin/create_backup_schedule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_backup_schedule",
+        "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#create_backup_schedule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::Admin::V1::CreateBackupScheduleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Firestore::Admin::V1::BackupSchedule",
+        "client": {
+          "short_name": "FirestoreAdmin::Client",
+          "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client"
+        },
+        "method": {
+          "short_name": "CreateBackupSchedule",
+          "full_name": "google.firestore.admin.v1.FirestoreAdmin.CreateBackupSchedule",
+          "service": {
+            "short_name": "FirestoreAdmin",
+            "full_name": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "firestore_v1_generated_FirestoreAdmin_GetBackupSchedule_sync",
+      "title": "Snippet for the get_backup_schedule call in the FirestoreAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#get_backup_schedule.",
+      "file": "firestore_admin/get_backup_schedule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_backup_schedule",
+        "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#get_backup_schedule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::Admin::V1::GetBackupScheduleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Firestore::Admin::V1::BackupSchedule",
+        "client": {
+          "short_name": "FirestoreAdmin::Client",
+          "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client"
+        },
+        "method": {
+          "short_name": "GetBackupSchedule",
+          "full_name": "google.firestore.admin.v1.FirestoreAdmin.GetBackupSchedule",
+          "service": {
+            "short_name": "FirestoreAdmin",
+            "full_name": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "firestore_v1_generated_FirestoreAdmin_ListBackupSchedules_sync",
+      "title": "Snippet for the list_backup_schedules call in the FirestoreAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_backup_schedules.",
+      "file": "firestore_admin/list_backup_schedules.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_backup_schedules",
+        "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_backup_schedules",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::Admin::V1::ListBackupSchedulesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Firestore::Admin::V1::ListBackupSchedulesResponse",
+        "client": {
+          "short_name": "FirestoreAdmin::Client",
+          "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client"
+        },
+        "method": {
+          "short_name": "ListBackupSchedules",
+          "full_name": "google.firestore.admin.v1.FirestoreAdmin.ListBackupSchedules",
+          "service": {
+            "short_name": "FirestoreAdmin",
+            "full_name": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "firestore_v1_generated_FirestoreAdmin_UpdateBackupSchedule_sync",
+      "title": "Snippet for the update_backup_schedule call in the FirestoreAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#update_backup_schedule.",
+      "file": "firestore_admin/update_backup_schedule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_backup_schedule",
+        "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#update_backup_schedule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::Admin::V1::UpdateBackupScheduleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Firestore::Admin::V1::BackupSchedule",
+        "client": {
+          "short_name": "FirestoreAdmin::Client",
+          "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client"
+        },
+        "method": {
+          "short_name": "UpdateBackupSchedule",
+          "full_name": "google.firestore.admin.v1.FirestoreAdmin.UpdateBackupSchedule",
+          "service": {
+            "short_name": "FirestoreAdmin",
+            "full_name": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "firestore_v1_generated_FirestoreAdmin_DeleteBackupSchedule_sync",
+      "title": "Snippet for the delete_backup_schedule call in the FirestoreAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#delete_backup_schedule.",
+      "file": "firestore_admin/delete_backup_schedule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_backup_schedule",
+        "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#delete_backup_schedule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::Admin::V1::DeleteBackupScheduleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "FirestoreAdmin::Client",
+          "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client"
+        },
+        "method": {
+          "short_name": "DeleteBackupSchedule",
+          "full_name": "google.firestore.admin.v1.FirestoreAdmin.DeleteBackupSchedule",
+          "service": {
+            "short_name": "FirestoreAdmin",
+            "full_name": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
     }
   ]
 }
