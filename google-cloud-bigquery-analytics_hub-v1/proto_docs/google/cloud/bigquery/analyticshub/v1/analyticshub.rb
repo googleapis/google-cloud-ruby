@@ -86,6 +86,21 @@ module Google
             end
 
             # Data Clean Room (DCR), used for privacy-safe and secured data sharing.
+            # @!attribute [r] single_selected_resource_sharing_restriction
+            #   @return [::Boolean]
+            #     Output only. If True, this DCR restricts the contributors to sharing
+            #     only a single resource in a Listing. And no two resources should have the
+            #     same IDs. So if a contributor adds a view with a conflicting name, the
+            #     CreateListing API will reject the request. if False, the data contributor
+            #     can publish an entire dataset (as before). This is not configurable, and
+            #     by default, all new DCRs will have the restriction set to True.
+            # @!attribute [r] single_linked_dataset_per_cleanroom
+            #   @return [::Boolean]
+            #     Output only. If True, when subscribing to this DCR, it will create only
+            #     one linked dataset containing all resources shared within the
+            #     cleanroom. If False, when subscribing to this DCR, it will
+            #     create 1 linked dataset per listing. This is not configurable, and by
+            #     default, all new DCRs will have the restriction set to True.
             class DcrExchangeConfig
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -242,9 +257,26 @@ module Google
             #   @return [::String]
             #     Resource name of the dataset source for this listing.
             #     e.g. `projects/myproject/datasets/123`
+            # @!attribute [rw] selected_resources
+            #   @return [::Array<::Google::Cloud::Bigquery::AnalyticsHub::V1::Listing::BigQueryDatasetSource::SelectedResource>]
+            #     Optional. Resources in this dataset that are selectively shared.
+            #     If this field is empty, then the entire dataset (all resources) are
+            #     shared. This field is only valid for data clean room exchanges.
             class BigQueryDatasetSource
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Resource in this dataset that are selectively shared.
+              # @!attribute [rw] table
+              #   @return [::String]
+              #     Optional. Format:
+              #     For table:
+              #     `projects/{projectId}/datasets/{datasetId}/tables/{tableId}`
+              #     Example:"projects/test_project/datasets/test_dataset/tables/test_table"
+              class SelectedResource
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
             end
 
             # Restricted export config, used to configure restricted export on linked

@@ -1339,6 +1339,14 @@ module Google
                                                               ["resource", %r{^projects/[^/]+/locations/[^/]+/dataExchanges/[^/]+/listings/[^/]+/?$}, false]
                                                             ]
                                                           )
+                                                          .with_bindings(
+                                                            uri_method: :post,
+                                                            uri_template: "/v1/{resource}:getIamPolicy",
+                                                            body: "*",
+                                                            matches: [
+                                                              ["resource", %r{^projects/[^/]+/locations/[^/]+/subscriptions/[^/]+/?$}, false]
+                                                            ]
+                                                          )
                   transcoder.transcode request_pb
                 end
 
@@ -1367,6 +1375,14 @@ module Google
                                                             body: "*",
                                                             matches: [
                                                               ["resource", %r{^projects/[^/]+/locations/[^/]+/dataExchanges/[^/]+/listings/[^/]+/?$}, false]
+                                                            ]
+                                                          )
+                                                          .with_bindings(
+                                                            uri_method: :post,
+                                                            uri_template: "/v1/{resource}:setIamPolicy",
+                                                            body: "*",
+                                                            matches: [
+                                                              ["resource", %r{^projects/[^/]+/locations/[^/]+/subscriptions/[^/]+/?$}, false]
                                                             ]
                                                           )
                   transcoder.transcode request_pb
