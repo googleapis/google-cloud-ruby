@@ -1,5 +1,16 @@
 # Release History
 
+### 0.16.0 (2024-03-18)
+
+#### Features
+
+* Support InTotoSlsaProvenanceV1 ([#25380](https://github.com/googleapis/google-cloud-ruby/issues/25380)) 
+* Support new field "extra_details" in VulnerabilityOccurrence ([#25380](https://github.com/googleapis/google-cloud-ruby/issues/25380)) 
+* Support new field "impact" in Impact ([#25380](https://github.com/googleapis/google-cloud-ruby/issues/25380)) 
+* Support new field "in_toto_slsa_provenance_v1" in BuildOccurrence ([#25380](https://github.com/googleapis/google-cloud-ruby/issues/25380)) 
+* Support new field "sbom_status" in DiscoveryOccurence, Occurence and Note ([#25380](https://github.com/googleapis/google-cloud-ruby/issues/25380)) 
+* Support new field "vulnerability_id" in Assessment ([#25380](https://github.com/googleapis/google-cloud-ruby/issues/25380)) 
+
 ### 0.15.0 (2024-02-26)
 
 #### Features
