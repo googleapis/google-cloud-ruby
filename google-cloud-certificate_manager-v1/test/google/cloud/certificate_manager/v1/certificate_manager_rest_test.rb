@@ -1400,6 +1400,284 @@ class ::Google::Cloud::CertificateManager::V1::CertificateManager::Rest::ClientT
     end
   end
 
+  def test_list_trust_configs
+    # Create test objects.
+    client_result = ::Google::Cloud::CertificateManager::V1::ListTrustConfigsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_trust_configs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::CertificateManager::V1::CertificateManager::Rest::ServiceStub.stub :transcode_list_trust_configs_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_trust_configs_client_stub do
+        # Create client
+        client = ::Google::Cloud::CertificateManager::V1::CertificateManager::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_trust_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_trust_configs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_trust_configs ::Google::Cloud::CertificateManager::V1::ListTrustConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_trust_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_trust_configs(::Google::Cloud::CertificateManager::V1::ListTrustConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_trust_configs_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_trust_config
+    # Create test objects.
+    client_result = ::Google::Cloud::CertificateManager::V1::TrustConfig.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_trust_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::CertificateManager::V1::CertificateManager::Rest::ServiceStub.stub :transcode_get_trust_config_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_trust_config_client_stub do
+        # Create client
+        client = ::Google::Cloud::CertificateManager::V1::CertificateManager::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_trust_config({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_trust_config name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_trust_config ::Google::Cloud::CertificateManager::V1::GetTrustConfigRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_trust_config({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_trust_config(::Google::Cloud::CertificateManager::V1::GetTrustConfigRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_trust_config_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_trust_config
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    trust_config_id = "hello world"
+    trust_config = {}
+
+    create_trust_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::CertificateManager::V1::CertificateManager::Rest::ServiceStub.stub :transcode_create_trust_config_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_trust_config_client_stub do
+        # Create client
+        client = ::Google::Cloud::CertificateManager::V1::CertificateManager::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_trust_config({ parent: parent, trust_config_id: trust_config_id, trust_config: trust_config }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_trust_config parent: parent, trust_config_id: trust_config_id, trust_config: trust_config do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_trust_config ::Google::Cloud::CertificateManager::V1::CreateTrustConfigRequest.new(parent: parent, trust_config_id: trust_config_id, trust_config: trust_config) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_trust_config({ parent: parent, trust_config_id: trust_config_id, trust_config: trust_config }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_trust_config(::Google::Cloud::CertificateManager::V1::CreateTrustConfigRequest.new(parent: parent, trust_config_id: trust_config_id, trust_config: trust_config), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_trust_config_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_trust_config
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    trust_config = {}
+    update_mask = {}
+
+    update_trust_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::CertificateManager::V1::CertificateManager::Rest::ServiceStub.stub :transcode_update_trust_config_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_trust_config_client_stub do
+        # Create client
+        client = ::Google::Cloud::CertificateManager::V1::CertificateManager::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_trust_config({ trust_config: trust_config, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_trust_config trust_config: trust_config, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_trust_config ::Google::Cloud::CertificateManager::V1::UpdateTrustConfigRequest.new(trust_config: trust_config, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_trust_config({ trust_config: trust_config, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_trust_config(::Google::Cloud::CertificateManager::V1::UpdateTrustConfigRequest.new(trust_config: trust_config, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_trust_config_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_trust_config
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    etag = "hello world"
+
+    delete_trust_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::CertificateManager::V1::CertificateManager::Rest::ServiceStub.stub :transcode_delete_trust_config_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_trust_config_client_stub do
+        # Create client
+        client = ::Google::Cloud::CertificateManager::V1::CertificateManager::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_trust_config({ name: name, etag: etag }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_trust_config name: name, etag: etag do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_trust_config ::Google::Cloud::CertificateManager::V1::DeleteTrustConfigRequest.new(name: name, etag: etag) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_trust_config({ name: name, etag: etag }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_trust_config(::Google::Cloud::CertificateManager::V1::DeleteTrustConfigRequest.new(name: name, etag: etag), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_trust_config_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

@@ -366,7 +366,7 @@ module Google
             #   @param order_by [::String]
             #     A list of Certificate field names used to specify the order of the returned
             #     results. The default sorting order is ascending. To specify descending
-            #     order for a field, add a suffix " desc".
+            #     order for a field, add a suffix `" desc"`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::CertificateManager::V1::Certificate>]
@@ -844,7 +844,7 @@ module Google
             #   @param order_by [::String]
             #     A list of Certificate Map field names used to specify the order of the
             #     returned results. The default sorting order is ascending. To specify
-            #     descending order for a field, add a suffix " desc".
+            #     descending order for a field, add a suffix `" desc"`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::CertificateManager::V1::CertificateMap>]
@@ -1329,7 +1329,7 @@ module Google
             #   @param order_by [::String]
             #     A list of Certificate Map Entry field names used to specify
             #     the order of the returned results. The default sorting order is ascending.
-            #     To specify descending order for a field, add a suffix " desc".
+            #     To specify descending order for a field, add a suffix `" desc"`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::CertificateManager::V1::CertificateMapEntry>]
@@ -1807,7 +1807,7 @@ module Google
             #   @param order_by [::String]
             #     A list of Dns Authorization field names used to specify the order of the
             #     returned results. The default sorting order is ascending. To specify
-            #     descending order for a field, add a suffix " desc".
+            #     descending order for a field, add a suffix `" desc"`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::CertificateManager::V1::DnsAuthorization>]
@@ -2286,7 +2286,7 @@ module Google
             #   @param order_by [::String]
             #     A list of Certificate Config field names used to specify the order of the
             #     returned results. The default sorting order is ascending. To specify
-            #     descending order for a field, add a suffix " desc".
+            #     descending order for a field, add a suffix `" desc"`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::CertificateManager::V1::CertificateIssuanceConfig>]
@@ -2636,6 +2636,489 @@ module Google
             end
 
             ##
+            # Lists TrustConfigs in a given project and location.
+            #
+            # @overload list_trust_configs(request, options = nil)
+            #   Pass arguments to `list_trust_configs` via a request object, either of type
+            #   {::Google::Cloud::CertificateManager::V1::ListTrustConfigsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::CertificateManager::V1::ListTrustConfigsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_trust_configs(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+            #   Pass arguments to `list_trust_configs` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The project and location from which the TrustConfigs should be
+            #     listed, specified in the format `projects/*/locations/*`.
+            #   @param page_size [::Integer]
+            #     Maximum number of TrustConfigs to return per call.
+            #   @param page_token [::String]
+            #     The value returned by the last `ListTrustConfigsResponse`. Indicates
+            #     that this is a continuation of a prior `ListTrustConfigs` call, and that
+            #     the system should return the next page of data.
+            #   @param filter [::String]
+            #     Filter expression to restrict the TrustConfigs returned.
+            #   @param order_by [::String]
+            #     A list of TrustConfig field names used to specify the order of the
+            #     returned results. The default sorting order is ascending. To specify
+            #     descending order for a field, add a suffix `" desc"`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::CertificateManager::V1::TrustConfig>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::CertificateManager::V1::TrustConfig>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/certificate_manager/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CertificateManager::V1::CertificateManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CertificateManager::V1::ListTrustConfigsRequest.new
+            #
+            #   # Call the list_trust_configs method.
+            #   result = client.list_trust_configs request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::CertificateManager::V1::TrustConfig.
+            #     p item
+            #   end
+            #
+            def list_trust_configs request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::CertificateManager::V1::ListTrustConfigsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_trust_configs.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::CertificateManager::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_trust_configs.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_trust_configs.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @certificate_manager_stub.call_rpc :list_trust_configs, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @certificate_manager_stub, :list_trust_configs, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets details of a single TrustConfig.
+            #
+            # @overload get_trust_config(request, options = nil)
+            #   Pass arguments to `get_trust_config` via a request object, either of type
+            #   {::Google::Cloud::CertificateManager::V1::GetTrustConfigRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::CertificateManager::V1::GetTrustConfigRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_trust_config(name: nil)
+            #   Pass arguments to `get_trust_config` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. A name of the TrustConfig to describe. Must be in the format
+            #     `projects/*/locations/*/trustConfigs/*`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::CertificateManager::V1::TrustConfig]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::CertificateManager::V1::TrustConfig]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/certificate_manager/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CertificateManager::V1::CertificateManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CertificateManager::V1::GetTrustConfigRequest.new
+            #
+            #   # Call the get_trust_config method.
+            #   result = client.get_trust_config request
+            #
+            #   # The returned object is of type Google::Cloud::CertificateManager::V1::TrustConfig.
+            #   p result
+            #
+            def get_trust_config request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::CertificateManager::V1::GetTrustConfigRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_trust_config.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::CertificateManager::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_trust_config.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_trust_config.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @certificate_manager_stub.call_rpc :get_trust_config, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Creates a new TrustConfig in a given project and location.
+            #
+            # @overload create_trust_config(request, options = nil)
+            #   Pass arguments to `create_trust_config` via a request object, either of type
+            #   {::Google::Cloud::CertificateManager::V1::CreateTrustConfigRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::CertificateManager::V1::CreateTrustConfigRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_trust_config(parent: nil, trust_config_id: nil, trust_config: nil)
+            #   Pass arguments to `create_trust_config` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent resource of the TrustConfig. Must be in the format
+            #     `projects/*/locations/*`.
+            #   @param trust_config_id [::String]
+            #     Required. A user-provided name of the TrustConfig. Must match the regexp
+            #     `[a-z0-9-]{1,63}`.
+            #   @param trust_config [::Google::Cloud::CertificateManager::V1::TrustConfig, ::Hash]
+            #     Required. A definition of the TrustConfig to create.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/certificate_manager/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CertificateManager::V1::CertificateManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CertificateManager::V1::CreateTrustConfigRequest.new
+            #
+            #   # Call the create_trust_config method.
+            #   result = client.create_trust_config request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def create_trust_config request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::CertificateManager::V1::CreateTrustConfigRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_trust_config.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::CertificateManager::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_trust_config.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_trust_config.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @certificate_manager_stub.call_rpc :create_trust_config, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates a TrustConfig.
+            #
+            # @overload update_trust_config(request, options = nil)
+            #   Pass arguments to `update_trust_config` via a request object, either of type
+            #   {::Google::Cloud::CertificateManager::V1::UpdateTrustConfigRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::CertificateManager::V1::UpdateTrustConfigRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_trust_config(trust_config: nil, update_mask: nil)
+            #   Pass arguments to `update_trust_config` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param trust_config [::Google::Cloud::CertificateManager::V1::TrustConfig, ::Hash]
+            #     Required. A definition of the TrustConfig to update.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Required. The update mask applies to the resource. For the `FieldMask`
+            #     definition, see
+            #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/certificate_manager/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CertificateManager::V1::CertificateManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CertificateManager::V1::UpdateTrustConfigRequest.new
+            #
+            #   # Call the update_trust_config method.
+            #   result = client.update_trust_config request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def update_trust_config request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::CertificateManager::V1::UpdateTrustConfigRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_trust_config.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::CertificateManager::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.trust_config&.name
+                header_params["trust_config.name"] = request.trust_config.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_trust_config.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_trust_config.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @certificate_manager_stub.call_rpc :update_trust_config, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes a single TrustConfig.
+            #
+            # @overload delete_trust_config(request, options = nil)
+            #   Pass arguments to `delete_trust_config` via a request object, either of type
+            #   {::Google::Cloud::CertificateManager::V1::DeleteTrustConfigRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::CertificateManager::V1::DeleteTrustConfigRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_trust_config(name: nil, etag: nil)
+            #   Pass arguments to `delete_trust_config` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. A name of the TrustConfig to delete. Must be in the format
+            #     `projects/*/locations/*/trustConfigs/*`.
+            #   @param etag [::String]
+            #     The current etag of the TrustConfig.
+            #     If an etag is provided and does not match the current etag of the resource,
+            #     deletion will be blocked and an ABORTED error will be returned.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/certificate_manager/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CertificateManager::V1::CertificateManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CertificateManager::V1::DeleteTrustConfigRequest.new
+            #
+            #   # Call the delete_trust_config method.
+            #   result = client.delete_trust_config request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def delete_trust_config request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::CertificateManager::V1::DeleteTrustConfigRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_trust_config.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::CertificateManager::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_trust_config.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_trust_config.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @certificate_manager_stub.call_rpc :delete_trust_config, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the CertificateManager API.
             #
             # This class represents the configuration for CertificateManager,
@@ -2908,6 +3391,31 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_certificate_issuance_config
+                ##
+                # RPC-specific configuration for `list_trust_configs`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_trust_configs
+                ##
+                # RPC-specific configuration for `get_trust_config`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_trust_config
+                ##
+                # RPC-specific configuration for `create_trust_config`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_trust_config
+                ##
+                # RPC-specific configuration for `update_trust_config`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_trust_config
+                ##
+                # RPC-specific configuration for `delete_trust_config`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_trust_config
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -2959,6 +3467,16 @@ module Google
                   @create_certificate_issuance_config = ::Gapic::Config::Method.new create_certificate_issuance_config_config
                   delete_certificate_issuance_config_config = parent_rpcs.delete_certificate_issuance_config if parent_rpcs.respond_to? :delete_certificate_issuance_config
                   @delete_certificate_issuance_config = ::Gapic::Config::Method.new delete_certificate_issuance_config_config
+                  list_trust_configs_config = parent_rpcs.list_trust_configs if parent_rpcs.respond_to? :list_trust_configs
+                  @list_trust_configs = ::Gapic::Config::Method.new list_trust_configs_config
+                  get_trust_config_config = parent_rpcs.get_trust_config if parent_rpcs.respond_to? :get_trust_config
+                  @get_trust_config = ::Gapic::Config::Method.new get_trust_config_config
+                  create_trust_config_config = parent_rpcs.create_trust_config if parent_rpcs.respond_to? :create_trust_config
+                  @create_trust_config = ::Gapic::Config::Method.new create_trust_config_config
+                  update_trust_config_config = parent_rpcs.update_trust_config if parent_rpcs.respond_to? :update_trust_config
+                  @update_trust_config = ::Gapic::Config::Method.new update_trust_config_config
+                  delete_trust_config_config = parent_rpcs.delete_trust_config if parent_rpcs.respond_to? :delete_trust_config
+                  @delete_trust_config = ::Gapic::Config::Method.new delete_trust_config_config
 
                   yield self if block_given?
                 end

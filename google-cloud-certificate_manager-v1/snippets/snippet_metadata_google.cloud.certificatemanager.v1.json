@@ -970,6 +970,206 @@
           "type": "FULL"
         }
       ]
+    },
+    {
+      "region_tag": "certificatemanager_v1_generated_CertificateManager_ListTrustConfigs_sync",
+      "title": "Snippet for the list_trust_configs call in the CertificateManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CertificateManager::V1::CertificateManager::Client#list_trust_configs.",
+      "file": "certificate_manager/list_trust_configs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_trust_configs",
+        "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client#list_trust_configs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CertificateManager::V1::ListTrustConfigsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CertificateManager::V1::ListTrustConfigsResponse",
+        "client": {
+          "short_name": "CertificateManager::Client",
+          "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client"
+        },
+        "method": {
+          "short_name": "ListTrustConfigs",
+          "full_name": "google.cloud.certificatemanager.v1.CertificateManager.ListTrustConfigs",
+          "service": {
+            "short_name": "CertificateManager",
+            "full_name": "google.cloud.certificatemanager.v1.CertificateManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "certificatemanager_v1_generated_CertificateManager_GetTrustConfig_sync",
+      "title": "Snippet for the get_trust_config call in the CertificateManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CertificateManager::V1::CertificateManager::Client#get_trust_config.",
+      "file": "certificate_manager/get_trust_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_trust_config",
+        "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client#get_trust_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CertificateManager::V1::GetTrustConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CertificateManager::V1::TrustConfig",
+        "client": {
+          "short_name": "CertificateManager::Client",
+          "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client"
+        },
+        "method": {
+          "short_name": "GetTrustConfig",
+          "full_name": "google.cloud.certificatemanager.v1.CertificateManager.GetTrustConfig",
+          "service": {
+            "short_name": "CertificateManager",
+            "full_name": "google.cloud.certificatemanager.v1.CertificateManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "certificatemanager_v1_generated_CertificateManager_CreateTrustConfig_sync",
+      "title": "Snippet for the create_trust_config call in the CertificateManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CertificateManager::V1::CertificateManager::Client#create_trust_config.",
+      "file": "certificate_manager/create_trust_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_trust_config",
+        "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client#create_trust_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CertificateManager::V1::CreateTrustConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CertificateManager::Client",
+          "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client"
+        },
+        "method": {
+          "short_name": "CreateTrustConfig",
+          "full_name": "google.cloud.certificatemanager.v1.CertificateManager.CreateTrustConfig",
+          "service": {
+            "short_name": "CertificateManager",
+            "full_name": "google.cloud.certificatemanager.v1.CertificateManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "certificatemanager_v1_generated_CertificateManager_UpdateTrustConfig_sync",
+      "title": "Snippet for the update_trust_config call in the CertificateManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CertificateManager::V1::CertificateManager::Client#update_trust_config.",
+      "file": "certificate_manager/update_trust_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_trust_config",
+        "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client#update_trust_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CertificateManager::V1::UpdateTrustConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CertificateManager::Client",
+          "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client"
+        },
+        "method": {
+          "short_name": "UpdateTrustConfig",
+          "full_name": "google.cloud.certificatemanager.v1.CertificateManager.UpdateTrustConfig",
+          "service": {
+            "short_name": "CertificateManager",
+            "full_name": "google.cloud.certificatemanager.v1.CertificateManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "certificatemanager_v1_generated_CertificateManager_DeleteTrustConfig_sync",
+      "title": "Snippet for the delete_trust_config call in the CertificateManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CertificateManager::V1::CertificateManager::Client#delete_trust_config.",
+      "file": "certificate_manager/delete_trust_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_trust_config",
+        "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client#delete_trust_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CertificateManager::V1::DeleteTrustConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CertificateManager::Client",
+          "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client"
+        },
+        "method": {
+          "short_name": "DeleteTrustConfig",
+          "full_name": "google.cloud.certificatemanager.v1.CertificateManager.DeleteTrustConfig",
+          "service": {
+            "short_name": "CertificateManager",
+            "full_name": "google.cloud.certificatemanager.v1.CertificateManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
     }
   ]
 }

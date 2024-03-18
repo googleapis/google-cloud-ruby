@@ -42,7 +42,7 @@ module Google
         #   @return [::String]
         #     A list of Certificate Config field names used to specify the order of the
         #     returned results. The default sorting order is ascending. To specify
-        #     descending order for a field, add a suffix " desc".
+        #     descending order for a field, add a suffix `" desc"`.
         class ListCertificateIssuanceConfigsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

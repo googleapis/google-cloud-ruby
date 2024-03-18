@@ -129,6 +129,31 @@
               "methods": [
                 "delete_certificate_issuance_config"
               ]
+            },
+            "ListTrustConfigs": {
+              "methods": [
+                "list_trust_configs"
+              ]
+            },
+            "GetTrustConfig": {
+              "methods": [
+                "get_trust_config"
+              ]
+            },
+            "CreateTrustConfig": {
+              "methods": [
+                "create_trust_config"
+              ]
+            },
+            "UpdateTrustConfig": {
+              "methods": [
+                "update_trust_config"
+              ]
+            },
+            "DeleteTrustConfig": {
+              "methods": [
+                "delete_trust_config"
+              ]
             }
           }
         }

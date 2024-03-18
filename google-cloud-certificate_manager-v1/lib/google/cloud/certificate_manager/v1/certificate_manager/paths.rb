@@ -157,6 +157,25 @@ module Google
               "projects/#{project}/locations/#{location}"
             end
 
+            ##
+            # Create a fully-qualified TrustConfig resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/trustConfigs/{trust_config}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param trust_config [String]
+            #
+            # @return [::String]
+            def trust_config_path project:, location:, trust_config:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/trustConfigs/#{trust_config}"
+            end
+
             extend self
           end
         end
