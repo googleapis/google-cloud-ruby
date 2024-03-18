@@ -1,5 +1,20 @@
 # Changelog
 
+### 0.38.0 (2024-03-18)
+
+#### Features
+
+* Add APIs for cancelling & deleting pipeline jobs ([#25370](https://github.com/googleapis/google-cloud-ruby/issues/25370)) 
+* Support "NOT_EQUAL" operator ([#25370](https://github.com/googleapis/google-cloud-ruby/issues/25370)) 
+* Support new enum option "NVIDIA_H100_80GB" in AcceleratorType ([#25370](https://github.com/googleapis/google-cloud-ruby/issues/25370)) 
+* Support new enum options "BLOCKLIST", "PROHIBITED_CONTENT" & "SPII" in Candidate ([#25370](https://github.com/googleapis/google-cloud-ruby/issues/25370)) 
+* Support new field "grounding_metadata" in Candidate ([#25370](https://github.com/googleapis/google-cloud-ruby/issues/25370)) 
+* Support new field "project_number" in FeatureRegistrySource ([#25370](https://github.com/googleapis/google-cloud-ruby/issues/25370)) 
+* Support new field "sync_summary" in FeatureViewSync ([#25370](https://github.com/googleapis/google-cloud-ruby/issues/25370)) 
+* Support new fields "display_name" & "metadata" in DatasetVersion ([#25370](https://github.com/googleapis/google-cloud-ruby/issues/25370)) 
+* Support new fields "probability_score", "severity" and "severity_score" in SafetyRating ([#25370](https://github.com/googleapis/google-cloud-ruby/issues/25370)) 
+* Support new fields "retrieval" & "google_search_retrieval" in Tool ([#25370](https://github.com/googleapis/google-cloud-ruby/issues/25370)) 
+
 ### 0.37.0 (2024-02-26)
 
 #### Features
