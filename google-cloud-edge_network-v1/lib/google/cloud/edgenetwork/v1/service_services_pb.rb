@@ -38,8 +38,10 @@ module Google
 
             # InitializeZone will initialize resources for a zone in a project.
             rpc :InitializeZone, ::Google::Cloud::EdgeNetwork::V1::InitializeZoneRequest, ::Google::Cloud::EdgeNetwork::V1::InitializeZoneResponse
+            # Deprecated: not implemented.
             # Lists Zones in a given project and location.
             rpc :ListZones, ::Google::Cloud::EdgeNetwork::V1::ListZonesRequest, ::Google::Cloud::EdgeNetwork::V1::ListZonesResponse
+            # Deprecated: not implemented.
             # Gets details of a single Zone.
             rpc :GetZone, ::Google::Cloud::EdgeNetwork::V1::GetZoneRequest, ::Google::Cloud::EdgeNetwork::V1::Zone
             # Lists Networks in a given project and location.

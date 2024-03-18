@@ -32,10 +32,14 @@ module Google
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time when the zone was last updated.
         # @!attribute [rw] labels
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Labels as key value pairs
+        #     Deprecated: not implemented.
+        #     Labels as key value pairs.
         # @!attribute [rw] layout_name
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
+        #     Deprecated: not implemented.
         #     The deployment layout type.
         class Zone
           include ::Google::Protobuf::MessageExts
