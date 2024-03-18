@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.12.0 (2024-03-18)
+
+#### Features
+
+* Add support for fine-grained maximum certificate lifetime controls ([#25372](https://github.com/googleapis/google-cloud-ruby/issues/25372)) 
+#### Documentation
+
+* Improve documentation ([#25372](https://github.com/googleapis/google-cloud-ruby/issues/25372)) 
+
 ### 0.11.0 (2024-02-26)
 
 #### Features
