@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.13.0 (2024-03-18)
+
+#### Features
+
+* Support binding overrides for network management ([#25378](https://github.com/googleapis/google-cloud-ruby/issues/25378)) 
+
 ### 0.12.0 (2024-03-14)
 
 #### Features
