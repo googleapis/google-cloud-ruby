@@ -114,6 +114,16 @@
               "methods": [
                 "export_preview_result"
               ]
+            },
+            "ListTerraformVersions": {
+              "methods": [
+                "list_terraform_versions"
+              ]
+            },
+            "GetTerraformVersion": {
+              "methods": [
+                "get_terraform_version"
+              ]
             }
           }
         }

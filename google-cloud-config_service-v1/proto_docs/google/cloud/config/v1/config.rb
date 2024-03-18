@@ -109,6 +109,19 @@ module Google
         # @!attribute [r] lock_state
         #   @return [::Google::Cloud::ConfigService::V1::Deployment::LockState]
         #     Output only. Current lock state of the deployment.
+        # @!attribute [rw] tf_version_constraint
+        #   @return [::String]
+        #     Optional. The user-specified Terraform version constraint.
+        #     Example: "=1.3.10".
+        # @!attribute [r] tf_version
+        #   @return [::String]
+        #     Output only. The current Terraform version set on the deployment.
+        #     It is in the format of "Major.Minor.Patch", for example, "1.3.10".
+        # @!attribute [rw] quota_validation
+        #   @return [::Google::Cloud::ConfigService::V1::QuotaValidation]
+        #     Optional. Input to control quota checks for resources in terraform
+        #     configuration files. There are limited resources on which quota validation
+        #     applies.
         class Deployment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -287,8 +300,8 @@ module Google
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     When requesting a page of resources, 'page_size' specifies number of
-        #     resources to return. If unspecified or set to 0, all resources will be
-        #     returned.
+        #     resources to return. If unspecified, at most 500 will be returned. The
+        #     maximum value is 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Token returned by previous call to 'ListDeployments' which specifies the
@@ -357,8 +370,8 @@ module Google
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     When requesting a page of resources, `page_size` specifies number of
-        #     resources to return. If unspecified or set to 0, all resources will be
-        #     returned.
+        #     resources to return. If unspecified, at most 500 will be returned. The
+        #     maximum value is 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Token returned by previous call to 'ListRevisions' which specifies the
@@ -640,6 +653,24 @@ module Google
         #     `projects/{project}/locations/{location}/workerPools/{workerPoolId}`.
         #     If this field is unspecified, the default Cloud Build worker pool will be
         #     used.
+        # @!attribute [r] tf_version_constraint
+        #   @return [::String]
+        #     Output only. The user-specified Terraform version constraint.
+        #     Example: "=1.3.10".
+        # @!attribute [r] tf_version
+        #   @return [::String]
+        #     Output only. The version of Terraform used to create the Revision.
+        #     It is in the format of "Major.Minor.Patch", for example, "1.3.10".
+        # @!attribute [r] quota_validation_results
+        #   @return [::String]
+        #     Output only. Cloud Storage path containing quota validation results. This
+        #     field is set when a user sets Deployment.quota_validation field to ENABLED
+        #     or ENFORCED. Format: `gs://{bucket}/{object}`.
+        # @!attribute [rw] quota_validation
+        #   @return [::Google::Cloud::ConfigService::V1::QuotaValidation]
+        #     Optional. Input to control quota checks for resources in terraform
+        #     configuration files. There are limited resources on which quota validation
+        #     applies.
         class Revision
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -689,6 +720,10 @@ module Google
             # Cloud Build job associated with creating or updating a deployment was
             # started but failed.
             APPLY_BUILD_RUN_FAILED = 5
+
+            # quota validation failed for one or more resources in terraform
+            # configuration files.
+            QUOTA_VALIDATION_FAILED = 7
           end
         end
 
@@ -783,6 +818,12 @@ module Google
 
             # Operation failed
             FAILED = 10
+
+            # Validating the provided repository.
+            VALIDATING_REPOSITORY = 11
+
+            # Running quota validation
+            RUNNING_QUOTA_VALIDATION = 12
           end
         end
 
@@ -906,8 +947,8 @@ module Google
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     When requesting a page of resources, 'page_size' specifies number of
-        #     resources to return. If unspecified or set to 0, all resources will be
-        #     returned.
+        #     resources to return. If unspecified, at most 500 will be returned. The
+        #     maximum value is 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Token returned by previous call to 'ListResources' which specifies the
@@ -1111,9 +1152,9 @@ module Google
         #     Optional. Current mode of preview.
         # @!attribute [rw] service_account
         #   @return [::String]
-        #     Optional. Optional service account. If omitted, the deployment resource
-        #     reference must be provided, and the service account attached to the
-        #     deployment will be used.
+        #     Optional. User-specified Service Account (SA) credentials to be used when
+        #     previewing resources.
+        #     Format: `projects/{projectID}/serviceAccounts/{serviceAccount}`
         # @!attribute [rw] artifacts_gcs_bucket
         #   @return [::String]
         #     Optional. User-defined location of Cloud Build logs, artifacts, and
@@ -1286,6 +1327,9 @@ module Google
 
             # Operation failed.
             FAILED = 9
+
+            # Validating the provided repository.
+            VALIDATING_REPOSITORY = 10
           end
         end
 
@@ -1352,8 +1396,8 @@ module Google
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. When requesting a page of resources, 'page_size' specifies number
-        #     of resources to return. If unspecified or set to 0, all resources will be
-        #     returned.
+        #     of resources to return. If unspecified, at most 500 will be returned. The
+        #     maximum value is 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. Token returned by previous call to 'ListDeployments' which
@@ -1461,6 +1505,121 @@ module Google
         class PreviewResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for the GetTerraformVersion method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the TerraformVersion. Format:
+        #     'projects/\\{project_id}/locations/\\{location}/terraformVersions/\\{terraform_version}'
+        class GetTerraformVersionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for the ListTerraformVersions method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent in whose context the TerraformVersions are listed. The
+        #     parent value is in the format:
+        #     'projects/\\{project_id}/locations/\\{location}'.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. When requesting a page of resources, 'page_size' specifies number
+        #     of resources to return. If unspecified, at most 500 will be returned. The
+        #     maximum value is 1000.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. Token returned by previous call to 'ListTerraformVersions' which
+        #     specifies the position in the list from where to continue listing the
+        #     resources.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Lists the TerraformVersions that match the filter expression. A
+        #     filter expression filters the resources listed in the response. The
+        #     expression must be of the form '\\{field} \\{operator} \\{value}' where
+        #     operators: '<', '>',
+        #     '<=', '>=', '!=', '=', ':' are supported (colon ':' represents a HAS
+        #     operator which is roughly synonymous with equality). \\{field} can refer to a
+        #     proto or JSON field, or a synthetic field. Field names can be camelCase or
+        #     snake_case.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. Field to use to sort the list.
+        class ListTerraformVersionsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response message for the `ListTerraformVersions` method.
+        # @!attribute [rw] terraform_versions
+        #   @return [::Array<::Google::Cloud::ConfigService::V1::TerraformVersion>]
+        #     List of {::Google::Cloud::ConfigService::V1::TerraformVersion TerraformVersion}s.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     Token to be supplied to the next ListTerraformVersions request via
+        #     `page_token` to obtain the next set of results.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Unreachable resources, if any.
+        class ListTerraformVersionsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A TerraformVersion represents the support state the corresponding
+        # Terraform version.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. The version name is in the format:
+        #     'projects/\\{project_id}/locations/\\{location}/terraformVersions/\\{terraform_version}'.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::ConfigService::V1::TerraformVersion::State]
+        #     Output only. The state of the version, ACTIVE, DEPRECATED or OBSOLETE.
+        # @!attribute [r] support_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. When the version is supported.
+        # @!attribute [r] deprecate_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. When the version is deprecated.
+        # @!attribute [r] obsolete_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. When the version is obsolete.
+        class TerraformVersion
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Possible states of a TerraformVersion.
+          module State
+            # The default value. This value is used if the state is omitted.
+            STATE_UNSPECIFIED = 0
+
+            # The version is actively supported.
+            ACTIVE = 1
+
+            # The version is deprecated.
+            DEPRECATED = 2
+
+            # The version is obsolete.
+            OBSOLETE = 3
+          end
+        end
+
+        # Enum values to control quota checks for resources in terraform
+        # configuration files.
+        module QuotaValidation
+          # The default value.
+          # QuotaValidation on terraform configuration files will be disabled in
+          # this case.
+          QUOTA_VALIDATION_UNSPECIFIED = 0
+
+          # Enable computing quotas for resources in terraform configuration files to
+          # get visibility on resources with insufficient quotas.
+          ENABLED = 1
+
+          # Enforce quota checks so deployment fails if there isn't sufficient quotas
+          # available to deploy resources in terraform configuration files.
+          ENFORCED = 2
         end
       end
     end
