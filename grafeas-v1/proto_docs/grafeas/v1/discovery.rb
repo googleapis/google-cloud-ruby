@@ -58,6 +58,9 @@ module Grafeas
     # @!attribute [r] archive_time
     #   @return [::Google::Protobuf::Timestamp]
     #     The time occurrences related to this discovery occurrence were archived.
+    # @!attribute [rw] sbom_status
+    #   @return [::Grafeas::V1::DiscoveryOccurrence::SBOMStatus]
+    #     The status of an SBOM generation.
     class DiscoveryOccurrence
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -69,6 +72,31 @@ module Grafeas
       class AnalysisCompleted
         include ::Google::Protobuf::MessageExts
         extend ::Google::Protobuf::MessageExts::ClassMethods
+      end
+
+      # The status of an SBOM generation.
+      # @!attribute [rw] sbom_state
+      #   @return [::Grafeas::V1::DiscoveryOccurrence::SBOMStatus::SBOMState]
+      #     The progress of the SBOM generation.
+      # @!attribute [rw] error
+      #   @return [::String]
+      #     If there was an error generating an SBOM, this will indicate what that
+      #     error was.
+      class SBOMStatus
+        include ::Google::Protobuf::MessageExts
+        extend ::Google::Protobuf::MessageExts::ClassMethods
+
+        # An enum indicating the progress of the SBOM generation.
+        module SBOMState
+          # Default unknown state.
+          SBOM_STATE_UNSPECIFIED = 0
+
+          # SBOM scanning is pending.
+          PENDING = 1
+
+          # SBOM scanning has completed.
+          COMPLETE = 2
+        end
       end
 
       # Whether the resource is continuously analyzed.

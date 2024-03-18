@@ -56,6 +56,12 @@ module Grafeas
     #     The intoto_statement can contain any type of provenance. The serialized
     #     payload of the statement can be stored and signed in the Occurrence's
     #     envelope.
+    # @!attribute [rw] in_toto_slsa_provenance_v1
+    #   @return [::Grafeas::V1::InTotoSlsaProvenanceV1]
+    #     In-Toto Slsa Provenance V1 represents a slsa provenance meeting the slsa
+    #     spec, wrapped in an in-toto statement. This allows for direct
+    #     jsonification of a to-spec in-toto slsa statement with a to-spec
+    #     slsa provenance.
     class BuildOccurrence
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods

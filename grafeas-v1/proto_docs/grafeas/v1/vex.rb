@@ -95,9 +95,15 @@ module Grafeas
       # Assessment provides all information that is related to a single
       # vulnerability for this product.
       # @!attribute [rw] cve
+      #   @deprecated This field is deprecated and may be removed in the next major version update.
       #   @return [::String]
       #     Holds the MITRE standard Common Vulnerabilities and Exposures (CVE)
       #     tracking number for the vulnerability.
+      #     Deprecated: Use vulnerability_id instead to denote CVEs.
+      # @!attribute [rw] vulnerability_id
+      #   @return [::String]
+      #     The vulnerability identifier for this Assessment. Will hold one of
+      #     common identifiers e.g. CVE, GHSA etc.
       # @!attribute [rw] short_description
       #   @return [::String]
       #     A one sentence description of this Vex.
