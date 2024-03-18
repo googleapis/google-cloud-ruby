@@ -28,7 +28,8 @@ module Google
           ##
           # Client for the ServingConfigService service.
           #
-          # Service for modifying ServingConfig.
+          # Service for operations related to
+          # {::Google::Cloud::DiscoveryEngine::V1beta::ServingConfig ServingConfig}.
           #
           class Client
             # @private
@@ -292,7 +293,7 @@ module Google
             #
             #   @param name [::String]
             #     Required. The resource name of the ServingConfig to get. Format:
-            #     `projects/{project_number}/locations/{location}/collections/{collection}/dataStores/{data_store}/servingConfigs/{serving_config_id}`
+            #     `projects/{project_number}/locations/{location}/collections/{collection}/engines/{engine}/servingConfigs/{serving_config_id}`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DiscoveryEngine::V1beta::ServingConfig]
@@ -377,8 +378,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The dataStore resource name. Format:
-            #     `projects/{project_number}/locations/{location}/collections/{collection}/dataStores/{data_store}`
+            #     Required. Full resource name of the parent resource. Format:
+            #     `projects/{project_number}/locations/{location}/collections/{collection}/engines/{engine}`
             #   @param page_size [::Integer]
             #     Optional. Maximum number of results to return. If unspecified, defaults
             #     to 100. If a value greater than 100 is provided, at most 100 results are

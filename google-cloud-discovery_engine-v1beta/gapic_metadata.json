@@ -242,6 +242,20 @@
         }
       }
     },
+    "SearchTuningService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DiscoveryEngine::V1beta::SearchTuningService::Client",
+          "rpcs": {
+            "TrainCustomModel": {
+              "methods": [
+                "train_custom_model"
+              ]
+            }
+          }
+        }
+      }
+    },
     "ServingConfigService": {
       "clients": {
         "grpc": {

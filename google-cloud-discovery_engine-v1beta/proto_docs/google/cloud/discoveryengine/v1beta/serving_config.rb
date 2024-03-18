@@ -34,7 +34,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Immutable. Fully qualified name
-        #     `projects/{project}/locations/{location}/collections/{collection_id}/dataStores/{data_store_id}/servingConfigs/{serving_config_id}`
+        #     `projects/{project}/locations/{location}/collections/{collection_id}/engines/{engine_id}/servingConfigs/{serving_config_id}`
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Required. The human readable serving config display name. Used in Discovery
@@ -87,8 +87,9 @@ module Google
         #     The ranking expression controls the customized ranking on retrieval
         #     documents. To leverage this, document embedding is required. The ranking
         #     expression setting in ServingConfig applies to all search requests served
-        #     by the serving config. However, if [SearchRequest.ranking_expression][] is
-        #     specified, it overrides the ServingConfig ranking expression.
+        #     by the serving config. However, if
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest#ranking_expression SearchRequest.ranking_expression}
+        #     is specified, it overrides the ServingConfig ranking expression.
         #
         #     The ranking expression is a single function or multiple functions that are
         #     joined by "+".

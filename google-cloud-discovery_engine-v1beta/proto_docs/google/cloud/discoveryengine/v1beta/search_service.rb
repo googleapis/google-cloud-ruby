@@ -72,6 +72,9 @@ module Google
         #     is unset.
         #
         #     If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+        # @!attribute [rw] data_store_specs
+        #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::DataStoreSpec>]
+        #     A list of data store specs to apply on a search call.
         # @!attribute [rw] filter
         #   @return [::String]
         #     The filter syntax consists of an expression language for constructing a
@@ -245,6 +248,17 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # A struct to define data stores to filter on in a search call.
+          # @!attribute [rw] data_store
+          #   @return [::String]
+          #     Required. Full resource name of
+          #     {::Google::Cloud::DiscoveryEngine::V1beta::DataStore DataStore}, such as
+          #     `projects/{project}/locations/{location}/collections/{collection_id}/dataStores/{data_store_id}`.
+          class DataStoreSpec
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # A facet specification to perform faceted search.
           # @!attribute [rw] facet_key
           #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::FacetSpec::FacetKey]
@@ -404,9 +418,8 @@ module Google
             #     Examples:
             #
             #     * To boost documents with document ID "doc_1" or "doc_2", and
-            #     color
-            #       "Red" or "Blue":
-            #         * (id: ANY("doc_1", "doc_2")) AND (color: ANY("Red","Blue"))
+            #     color "Red" or "Blue":
+            #     `(document_id: ANY("doc_1", "doc_2")) AND (color: ANY("Red", "Blue"))`
             # @!attribute [rw] boost
             #   @return [::Float]
             #     Strength of the condition boost, which should be in [-1, 1]. Negative
@@ -540,7 +553,7 @@ module Google
             #     of results returned is less than `summaryResultCount`, the summary is
             #     generated from all of the results.
             #
-            #     At most five results can be used to generate a summary.
+            #     At most 10 results can be used to generate a summary.
             # @!attribute [rw] include_citations
             #   @return [::Boolean]
             #     Specifies whether to include citations in the summary. The default

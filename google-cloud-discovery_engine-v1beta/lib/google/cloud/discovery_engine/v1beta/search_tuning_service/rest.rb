@@ -22,24 +22,24 @@ require "gapic/config/method"
 
 require "google/cloud/discovery_engine/v1beta/version"
 
-require "google/cloud/discovery_engine/v1beta/serving_config_service/credentials"
-require "google/cloud/discovery_engine/v1beta/serving_config_service/paths"
-require "google/cloud/discovery_engine/v1beta/serving_config_service/rest/client"
+require "google/cloud/discovery_engine/v1beta/search_tuning_service/credentials"
+require "google/cloud/discovery_engine/v1beta/search_tuning_service/paths"
+require "google/cloud/discovery_engine/v1beta/search_tuning_service/rest/operations"
+require "google/cloud/discovery_engine/v1beta/search_tuning_service/rest/client"
 
 module Google
   module Cloud
     module DiscoveryEngine
       module V1beta
         ##
-        # Service for operations related to
-        # {::Google::Cloud::DiscoveryEngine::V1beta::ServingConfig ServingConfig}.
+        # Service for search tuning.
         #
         # To load this service and instantiate a REST client:
         #
-        #     require "google/cloud/discovery_engine/v1beta/serving_config_service/rest"
-        #     client = ::Google::Cloud::DiscoveryEngine::V1beta::ServingConfigService::Rest::Client.new
+        #     require "google/cloud/discovery_engine/v1beta/search_tuning_service/rest"
+        #     client = ::Google::Cloud::DiscoveryEngine::V1beta::SearchTuningService::Rest::Client.new
         #
-        module ServingConfigService
+        module SearchTuningService
           # Client for the REST transport
           module Rest
           end
@@ -50,4 +50,4 @@ module Google
 end
 
 helper_path = ::File.join __dir__, "rest", "helpers.rb"
-require "google/cloud/discovery_engine/v1beta/serving_config_service/rest/helpers" if ::File.file? helper_path
+require "google/cloud/discovery_engine/v1beta/search_tuning_service/rest/helpers" if ::File.file? helper_path

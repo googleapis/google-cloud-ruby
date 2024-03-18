@@ -1332,6 +1332,46 @@
       ]
     },
     {
+      "region_tag": "discoveryengine_v1beta_generated_SearchTuningService_TrainCustomModel_sync",
+      "title": "Snippet for the train_custom_model call in the SearchTuningService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SearchTuningService::Client#train_custom_model.",
+      "file": "search_tuning_service/train_custom_model.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "train_custom_model",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SearchTuningService::Client#train_custom_model",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::TrainCustomModelRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SearchTuningService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SearchTuningService::Client"
+        },
+        "method": {
+          "short_name": "TrainCustomModel",
+          "full_name": "google.cloud.discoveryengine.v1beta.SearchTuningService.TrainCustomModel",
+          "service": {
+            "short_name": "SearchTuningService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SearchTuningService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "discoveryengine_v1beta_generated_ServingConfigService_UpdateServingConfig_sync",
       "title": "Snippet for the update_serving_config call in the ServingConfigService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::ServingConfigService::Client#update_serving_config.",

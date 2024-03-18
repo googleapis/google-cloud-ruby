@@ -43,7 +43,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the ServingConfig to get. Format:
-        #     `projects/{project_number}/locations/{location}/collections/{collection}/dataStores/{data_store}/servingConfigs/{serving_config_id}`
+        #     `projects/{project_number}/locations/{location}/collections/{collection}/engines/{engine}/servingConfigs/{serving_config_id}`
         class GetServingConfigRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -52,8 +52,8 @@ module Google
         # Request for ListServingConfigs method.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The dataStore resource name. Format:
-        #     `projects/{project_number}/locations/{location}/collections/{collection}/dataStores/{data_store}`
+        #     Required. Full resource name of the parent resource. Format:
+        #     `projects/{project_number}/locations/{location}/collections/{collection}/engines/{engine}`
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. Maximum number of results to return. If unspecified, defaults

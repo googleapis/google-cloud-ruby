@@ -24,7 +24,8 @@ module Google
     module DiscoveryEngine
       module V1beta
         module ServingConfigService
-          # Service for modifying ServingConfig.
+          # Service for operations related to
+          # [ServingConfig][google.cloud.discoveryengine.v1beta.ServingConfig].
           class Service
 
             include ::GRPC::GenericService
