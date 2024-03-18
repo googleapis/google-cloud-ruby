@@ -1,5 +1,17 @@
 # Changelog
 
+### 0.10.0 (2024-03-18)
+
+#### Features
+
+* add document processing config services ([#25354](https://github.com/googleapis/google-cloud-ruby/issues/25354)) 
+* add search tuning services ([#25354](https://github.com/googleapis/google-cloud-ruby/issues/25354)) 
+* allow setting schema on schema creation ([#25354](https://github.com/googleapis/google-cloud-ruby/issues/25354)) 
+* support boost in multi-turn search ([#25354](https://github.com/googleapis/google-cloud-ruby/issues/25354)) 
+#### Documentation
+
+* keep the API doc up-to-date with recent changes ([#25354](https://github.com/googleapis/google-cloud-ruby/issues/25354)) 
+
 ### 0.9.0 (2024-02-26)
 
 #### Features
