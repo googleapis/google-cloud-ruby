@@ -1,5 +1,11 @@
 # Release History
 
+### 0.33.1 (2024-03-18)
+
+#### Documentation
+
+* Update parameter description in ImportProcessorVersionRequest ([#25382](https://github.com/googleapis/google-cloud-ruby/issues/25382)) 
+
 ### 0.33.0 (2024-02-26)
 
 #### Features
