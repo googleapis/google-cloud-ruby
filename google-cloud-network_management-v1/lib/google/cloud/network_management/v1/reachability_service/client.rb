@@ -18,6 +18,8 @@
 
 require "google/cloud/errors"
 require "google/cloud/networkmanagement/v1/reachability_pb"
+require "google/cloud/location"
+require "google/iam/v1"
 
 module Google
   module Cloud
@@ -172,6 +174,20 @@ module Google
                 interceptors: @config.interceptors,
                 channel_pool_config: @config.channel_pool
               )
+
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @reachability_service_stub.endpoint
+                config.universe_domain = @reachability_service_stub.universe_domain
+              end
+
+              @iam_policy_client = Google::Iam::V1::IAMPolicy::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @reachability_service_stub.endpoint
+                config.universe_domain = @reachability_service_stub.universe_domain
+              end
             end
 
             ##
@@ -180,6 +196,20 @@ module Google
             # @return [::Google::Cloud::NetworkManagement::V1::ReachabilityService::Operations]
             #
             attr_reader :operations_client
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
+
+            ##
+            # Get the associated client for mix-in of the IAMPolicy.
+            #
+            # @return [Google::Iam::V1::IAMPolicy::Client]
+            #
+            attr_reader :iam_policy_client
 
             # Service calls
 

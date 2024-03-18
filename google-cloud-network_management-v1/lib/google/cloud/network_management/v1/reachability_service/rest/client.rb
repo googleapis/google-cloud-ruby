@@ -19,6 +19,8 @@
 require "google/cloud/errors"
 require "google/cloud/networkmanagement/v1/reachability_pb"
 require "google/cloud/network_management/v1/reachability_service/rest/service_stub"
+require "google/cloud/location/rest"
+require "google/iam/v1/rest"
 
 module Google
   module Cloud
@@ -165,6 +167,22 @@ module Google
                   universe_domain: @config.universe_domain,
                   credentials: credentials
                 )
+
+                @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @reachability_service_stub.endpoint
+                  config.universe_domain = @reachability_service_stub.universe_domain
+                  config.bindings_override = @config.bindings_override
+                end
+
+                @iam_policy_client = Google::Iam::V1::IAMPolicy::Rest::Client.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @reachability_service_stub.endpoint
+                  config.universe_domain = @reachability_service_stub.universe_domain
+                  config.bindings_override = @config.bindings_override
+                end
               end
 
               ##
@@ -173,6 +191,20 @@ module Google
               # @return [::Google::Cloud::NetworkManagement::V1::ReachabilityService::Rest::Operations]
               #
               attr_reader :operations_client
+
+              ##
+              # Get the associated client for mix-in of the Locations.
+              #
+              # @return [Google::Cloud::Location::Locations::Rest::Client]
+              #
+              attr_reader :location_client
+
+              ##
+              # Get the associated client for mix-in of the IAMPolicy.
+              #
+              # @return [Google::Iam::V1::IAMPolicy::Rest::Client]
+              #
+              attr_reader :iam_policy_client
 
               # Service calls
 
@@ -855,6 +887,13 @@ module Google
                 config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
                 config_attr :quota_project, nil, ::String, nil
                 config_attr :universe_domain, nil, ::String, nil
+
+                # @private
+                # Overrides for http bindings for the RPCs of this service
+                # are only used when this service is used as mixin, and only
+                # by the host service.
+                # @return [::Hash{::Symbol=>::Array<::Gapic::Rest::GrpcTranscoder::HttpBinding>}]
+                config_attr :bindings_override, {}, ::Hash, nil
 
                 # @private
                 def initialize parent_config = nil
