@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.7.0 (2024-03-18)
+
+#### Features
+
+* Add Bitbucket Data Center config and Bitbucket Cloud config ([#25379](https://github.com/googleapis/google-cloud-ruby/issues/25379)) 
+
 ### 0.6.0 (2024-02-26)
 
 #### Features
