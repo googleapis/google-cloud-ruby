@@ -1,5 +1,12 @@
 # Release History
 
+### 0.16.0 (2024-03-18)
+
+#### Features
+
+* Support backup APIs ([#24393](https://github.com/googleapis/google-cloud-ruby/issues/24393)) 
+* Support scheduling APIs for backups ([#24393](https://github.com/googleapis/google-cloud-ruby/issues/24393)) 
+
 ### 0.15.0 (2024-02-26)
 
 #### Features
