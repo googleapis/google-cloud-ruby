@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.8.0 (2024-03-18)
+
+#### Features
+
+* Support new enum option "SBOM_REFERENCE" in NoteKind ([#25381](https://github.com/googleapis/google-cloud-ruby/issues/25381)) 
+
 ### 0.7.0 (2024-02-26)
 
 #### Features
