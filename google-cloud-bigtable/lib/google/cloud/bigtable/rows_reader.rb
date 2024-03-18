@@ -120,11 +120,11 @@ module Google
         # @return ResumptionOption
         #
         def retry_options rows_limit, row_set
-          return ResumptionOption.new true, rows_limit, row_set unless last_key
+          return ResumptionOption.new false, rows_limit, row_set unless last_key
 
           # Check if we've already read read rows_limit number of rows.
-          # If true, return nil to indicate that the read has succeeded.
-          return ResumptionOption.new false, nil, nil if rows_limit && rows_limit == @rows_count
+          # If true, mark ResumptionOption is_complete to true.
+          return ResumptionOption.new true, nil, nil if rows_limit && rows_limit == @rows_count
 
           # Reduce the limit by the number of already returned responses.
           rows_limit -= @rows_count if rows_limit
@@ -161,14 +161,14 @@ module Google
           # 3. In read_operations, we always add an empty row_range if row_ranges and
           # row_keys are not defined. So if both row_ranges and row_keys are empty,
           # it means that we've already read all the ranges and keys, set ResumptionOption
-          # should_retry to false to indicate that this read is successful.
+          # is_complete to true to indicate that this read is successful.
           if last_key && row_set.row_ranges.empty? && row_set.row_keys.empty?
-            return ResumptionOption.new false, nil, nil
+            return ResumptionOption.new true, nil, nil
           end
 
           @chunk_processor.reset_to_new_row
 
-          ResumptionOption.new true, rows_limit, row_set
+          ResumptionOption.new false, rows_limit, row_set
         end
 
         ##
@@ -235,7 +235,7 @@ module Google
 
         ##
         # returns if this operation should be retried
-        def is_complete
+        def complete?
           @is_complete
         end
 

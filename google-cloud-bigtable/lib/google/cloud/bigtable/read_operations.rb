@@ -162,7 +162,7 @@ module Google
             resumption_option = rows_reader.retry_options limit, row_set
             rows_limit = resumption_option.rows_limit
             row_set = resumption_option.row_set
-            retry if resumption_option.is_complete
+            retry unless resumption_option.complete?
           end
         end
 
