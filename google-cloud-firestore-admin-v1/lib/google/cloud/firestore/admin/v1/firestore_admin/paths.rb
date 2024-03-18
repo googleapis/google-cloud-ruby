@@ -26,6 +26,44 @@ module Google
             # Path helper methods for the FirestoreAdmin API.
             module Paths
               ##
+              # Create a fully-qualified Backup resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/locations/{location}/backups/{backup}`
+              #
+              # @param project [String]
+              # @param location [String]
+              # @param backup [String]
+              #
+              # @return [::String]
+              def backup_path project:, location:, backup:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                "projects/#{project}/locations/#{location}/backups/#{backup}"
+              end
+
+              ##
+              # Create a fully-qualified BackupSchedule resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/databases/{database}/backupSchedules/{backup_schedule}`
+              #
+              # @param project [String]
+              # @param database [String]
+              # @param backup_schedule [String]
+              #
+              # @return [::String]
+              def backup_schedule_path project:, database:, backup_schedule:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                raise ::ArgumentError, "database cannot contain /" if database.to_s.include? "/"
+
+                "projects/#{project}/databases/#{database}/backupSchedules/#{backup_schedule}"
+              end
+
+              ##
               # Create a fully-qualified CollectionGroup resource string.
               #
               # The resource will be in the following format:
@@ -101,6 +139,23 @@ module Google
                 raise ::ArgumentError, "collection cannot contain /" if collection.to_s.include? "/"
 
                 "projects/#{project}/databases/#{database}/collectionGroups/#{collection}/indexes/#{index}"
+              end
+
+              ##
+              # Create a fully-qualified Location resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/locations/{location}`
+              #
+              # @param project [String]
+              # @param location [String]
+              #
+              # @return [::String]
+              def location_path project:, location:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+                "projects/#{project}/locations/#{location}"
               end
 
               ##

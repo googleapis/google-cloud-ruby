@@ -214,6 +214,31 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Metadata for the {::Google::Longrunning::Operation long-running operation} from
+          # the [RestoreDatabase][google.firestore.admin.v1.RestoreDatabase] request.
+          # @!attribute [rw] start_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The time the restore was started.
+          # @!attribute [rw] end_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The time the restore finished, unset for ongoing restores.
+          # @!attribute [rw] operation_state
+          #   @return [::Google::Cloud::Firestore::Admin::V1::OperationState]
+          #     The operation state of the restore.
+          # @!attribute [rw] database
+          #   @return [::String]
+          #     The name of the database being restored to.
+          # @!attribute [rw] backup
+          #   @return [::String]
+          #     The name of the backup restoring from.
+          # @!attribute [rw] progress_percentage
+          #   @return [::Google::Cloud::Firestore::Admin::V1::Progress]
+          #     How far along the restore is as an estimated percentage of remaining time.
+          class RestoreDatabaseMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Describes the progress of the operation.
           # Unit of work is generic and must be interpreted based on where
           # {::Google::Cloud::Firestore::Admin::V1::Progress Progress} is used.
