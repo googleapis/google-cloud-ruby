@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.3.1 (2024-03-18)
+
+#### Documentation
+
+* Update documentation related to example snippets ([#25377](https://github.com/googleapis/google-cloud-ruby/issues/25377)) 
+
 ### 0.3.0 (2024-02-26)
 
 #### Features
