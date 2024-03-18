@@ -1,5 +1,12 @@
 # Release History
 
+### 0.39.0 (2024-03-18)
+
+#### Features
+
+* Add several new fields for ExternalSystem ([#25353](https://github.com/googleapis/google-cloud-ruby/issues/25353)) 
+* Add support for security center ([#25353](https://github.com/googleapis/google-cloud-ruby/issues/25353)) 
+
 ### 0.38.0 (2024-03-04)
 
 #### Features
