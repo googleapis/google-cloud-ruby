@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.7.0 (2024-03-18)
+
+#### Features
+
+* support selective sharing on Data Clean Room Listings API ([#25394](https://github.com/googleapis/google-cloud-ruby/issues/25394)) 
+
 ### 0.6.0 (2024-02-26)
 
 #### Features
