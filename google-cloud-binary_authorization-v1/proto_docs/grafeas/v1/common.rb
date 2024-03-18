@@ -183,6 +183,9 @@ module Grafeas
 
       # This represents a Vulnerability Assessment.
       VULNERABILITY_ASSESSMENT = 11
+
+      # This represents an SBOM Reference.
+      SBOM_REFERENCE = 12
     end
   end
 end
