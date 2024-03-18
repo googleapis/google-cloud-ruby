@@ -114,7 +114,7 @@ describe Google::Cloud::Bigtable::RowsReader, :row_reader, :mock_bigtable do
     end
   end
 
-  it "row limit is nil after rows limit number of rows are read" do
+  it "resumption option is complete after limit number of rows are read" do
     rows_reader = Google::Cloud::Bigtable::RowsReader.new("dummy-table-client")
 
     chunk_processor = rows_reader.instance_variable_get("@chunk_processor")
@@ -125,10 +125,10 @@ describe Google::Cloud::Bigtable::RowsReader, :row_reader, :mock_bigtable do
 
     resumption_option = rows_reader.retry_options(10, Google::Cloud::Bigtable::V2::RowSet.new())
 
-    _(resumption_option.is_complete).must_equal false
+    _(resumption_option.complete?).must_equal true
   end
 
-  it "row limit is nil after all the row ranges are read" do
+  it "resumption option is complete after all the row ranges are read" do
     rows_reader = Google::Cloud::Bigtable::RowsReader.new("dummy-table-client")
 
     row_set = Google::Cloud::Bigtable::V2::RowSet.new(
@@ -144,15 +144,15 @@ describe Google::Cloud::Bigtable::RowsReader, :row_reader, :mock_bigtable do
     resumption_option = rows_reader.retry_options(100, Google::Cloud::Bigtable::V2::RowSet.new(
       row_ranges: [{ end_key_closed: "3" }]
     ))
-    _(resumption_option.is_complete).must_equal false
+    _(resumption_option.complete?).must_equal true
 
     resumption_option = rows_reader.retry_options(100, Google::Cloud::Bigtable::V2::RowSet.new(
       row_ranges: [{ end_key_open: "3" }]
     ))
-    _(resumption_option.is_complete).must_equal false
+    _(resumption_option.complete?).must_equal true
   end
 
-  it "row limit is nil after all the row keys are read" do
+  it "resumption option is complete after all the row set are read" do
     rows_reader = Google::Cloud::Bigtable::RowsReader.new("dummy-table-client")
 
     row_set = Google::Cloud::Bigtable::V2::RowSet.new(row_keys: %w[1 2 3])
@@ -165,6 +165,6 @@ describe Google::Cloud::Bigtable::RowsReader, :row_reader, :mock_bigtable do
 
     resumption_option = rows_reader.retry_options(100, row_set)
 
-    _(resumption_option.is_complete).must_equal false
+    _(resumption_option.complete?).must_equal true
   end
 end
