@@ -42,7 +42,7 @@ describe Google::Cloud::Bigtable::Table, :read_rows, :mock_bigtable do
 
     mock.expect :read_rows, get_res,
                 table_name: table_path(instance_id, table_id),
-                rows: Google::Cloud::Bigtable::V2::RowSet.new,
+                rows: Google::Cloud::Bigtable::V2::RowSet.new(row_ranges: [Google::Cloud::Bigtable::V2::RowRange.new]),
                 filter: nil,
                 rows_limit: nil,
                 app_profile_id: nil

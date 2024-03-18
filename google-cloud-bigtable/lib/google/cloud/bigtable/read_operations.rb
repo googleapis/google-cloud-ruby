@@ -324,7 +324,7 @@ module Google
 
           # Set the row range to full table scan if the row set is empty
           if row_set.empty?
-            return Google::Cloud::Bigtable::V2::RowSet.new row_ranges: []
+            row_set[:row_ranges] = [Google::Cloud::Bigtable::V2::RowRange.new]
           end
 
           Google::Cloud::Bigtable::V2::RowSet.new row_set

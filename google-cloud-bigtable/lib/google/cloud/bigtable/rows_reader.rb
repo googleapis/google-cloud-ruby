@@ -189,12 +189,13 @@ module Google
         # @return [Boolean]
         #
         def start_key_read? range
-          if range.start_key_closed.empty? && range.end_key_open.empty?
-            true
-          elsif !range.start_key_closed.empty?
+          if !range.start_key_closed.empty?
             last_key >= range.start_key_closed
+          elsif !range.start_key_open.empty?
+            last_key > range.start_key_closed
           else
-            last_key > range.start_key_open
+            # start is unbounded
+            true
           end
         end
 
@@ -205,12 +206,13 @@ module Google
         # @return [Boolean]
         #
         def end_key_read? range
-          if range.end_key_closed.empty? && range.end_key_open.empty?
-            false
-          elsif !range.end_key_closed.empty?
+          if !range.end_key_closed.empty?
             range.end_key_closed <= last_key
-          else
+          elsif !range.end_key_open.empty?
             range.end_key_open <= last_key
+          else
+            # end is unbounded
+            false
           end
         end
       end
@@ -233,22 +235,13 @@ module Google
           @row_set = row_set
         end
 
+        attr_reader :rows_limit
+        attr_reader :row_set
+
         ##
         # returns if this operation should be retried
         def complete?
           @is_complete
-        end
-
-        ##
-        # returns new new rows_limit for the retry
-        def rows_limit
-          @rows_limit
-        end
-
-        ##
-        # returns new new row_set for the retry
-        def row_set
-          @row_set
         end
       end
     end

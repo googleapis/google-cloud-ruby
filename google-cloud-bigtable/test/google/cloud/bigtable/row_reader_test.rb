@@ -167,4 +167,25 @@ describe Google::Cloud::Bigtable::RowsReader, :row_reader, :mock_bigtable do
 
     _(resumption_option.complete?).must_equal true
   end
+
+  it "empty read row range is updated correctly" do
+    rows_reader = Google::Cloud::Bigtable::RowsReader.new("dummy-table-client")
+
+    row_set = Google::Cloud::Bigtable::V2::RowSet.new row_ranges: [Google::Cloud::Bigtable::V2::RowRange.new]
+
+    chunk_processor = rows_reader.instance_variable_get("@chunk_processor")
+    chunk_processor.last_key = "3"
+    rows_reader.instance_variable_set("@rows_count", 10)
+
+    _(rows_reader.last_key).must_equal "3"
+
+    resumption_option = rows_reader.retry_options(100, row_set)
+
+    row_ranges = resumption_option.row_set.row_ranges
+
+    _(resumption_option.complete?).must_equal false
+    _(row_ranges.length).must_equal 1
+    _(row_ranges.first).must_equal Google::Cloud::Bigtable::V2::RowRange.new(start_key_open: "3")
+  end
+
 end
