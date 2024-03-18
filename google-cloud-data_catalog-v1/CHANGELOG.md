@@ -1,5 +1,11 @@
 # Release History
 
+### 0.23.0 (2024-03-18)
+
+#### Features
+
+* Add range_element_type field to ColumnSchema ([#25383](https://github.com/googleapis/google-cloud-ruby/issues/25383)) 
+
 ### 0.22.0 (2024-02-26)
 
 #### Features
