@@ -8372,6 +8372,46 @@
       ]
     },
     {
+      "region_tag": "aiplatform_v1_generated_PipelineService_BatchDeletePipelineJobs_sync",
+      "title": "Snippet for the batch_delete_pipeline_jobs call in the PipelineService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::PipelineService::Client#batch_delete_pipeline_jobs.",
+      "file": "pipeline_service/batch_delete_pipeline_jobs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_delete_pipeline_jobs",
+        "full_name": "::Google::Cloud::AIPlatform::V1::PipelineService::Client#batch_delete_pipeline_jobs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::BatchDeletePipelineJobsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "PipelineService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::PipelineService::Client"
+        },
+        "method": {
+          "short_name": "BatchDeletePipelineJobs",
+          "full_name": "google.cloud.aiplatform.v1.PipelineService.BatchDeletePipelineJobs",
+          "service": {
+            "short_name": "PipelineService",
+            "full_name": "google.cloud.aiplatform.v1.PipelineService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "aiplatform_v1_generated_PipelineService_CancelPipelineJob_sync",
       "title": "Snippet for the cancel_pipeline_job call in the PipelineService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::PipelineService::Client#cancel_pipeline_job.",
@@ -8407,6 +8447,46 @@
         {
           "start": 20,
           "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_PipelineService_BatchCancelPipelineJobs_sync",
+      "title": "Snippet for the batch_cancel_pipeline_jobs call in the PipelineService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::PipelineService::Client#batch_cancel_pipeline_jobs.",
+      "file": "pipeline_service/batch_cancel_pipeline_jobs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_cancel_pipeline_jobs",
+        "full_name": "::Google::Cloud::AIPlatform::V1::PipelineService::Client#batch_cancel_pipeline_jobs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::BatchCancelPipelineJobsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "PipelineService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::PipelineService::Client"
+        },
+        "method": {
+          "short_name": "BatchCancelPipelineJobs",
+          "full_name": "google.cloud.aiplatform.v1.PipelineService.BatchCancelPipelineJobs",
+          "service": {
+            "short_name": "PipelineService",
+            "full_name": "google.cloud.aiplatform.v1.PipelineService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
           "type": "FULL"
         }
       ]

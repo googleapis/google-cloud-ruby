@@ -176,6 +176,15 @@ module Google
         # @!attribute [r] probability
         #   @return [::Google::Cloud::AIPlatform::V1::SafetyRating::HarmProbability]
         #     Output only. Harm probability levels in the content.
+        # @!attribute [r] probability_score
+        #   @return [::Float]
+        #     Output only. Harm probability score.
+        # @!attribute [r] severity
+        #   @return [::Google::Cloud::AIPlatform::V1::SafetyRating::HarmSeverity]
+        #     Output only. Harm severity levels in the content.
+        # @!attribute [r] severity_score
+        #   @return [::Float]
+        #     Output only. Harm severity score.
         # @!attribute [r] blocked
         #   @return [::Boolean]
         #     Output only. Indicates whether the content was filtered out because of this
@@ -200,6 +209,24 @@ module Google
 
             # High level of harm.
             HIGH = 4
+          end
+
+          # Harm severity levels.
+          module HarmSeverity
+            # Harm severity unspecified.
+            HARM_SEVERITY_UNSPECIFIED = 0
+
+            # Negligible level of harm severity.
+            HARM_SEVERITY_NEGLIGIBLE = 1
+
+            # Low level of harm severity.
+            HARM_SEVERITY_LOW = 2
+
+            # Medium level of harm severity.
+            HARM_SEVERITY_MEDIUM = 3
+
+            # High level of harm severity.
+            HARM_SEVERITY_HIGH = 4
           end
         end
 
@@ -259,6 +286,9 @@ module Google
         # @!attribute [r] citation_metadata
         #   @return [::Google::Cloud::AIPlatform::V1::CitationMetadata]
         #     Output only. Source attribution of the generated content.
+        # @!attribute [r] grounding_metadata
+        #   @return [::Google::Cloud::AIPlatform::V1::GroundingMetadata]
+        #     Output only. Metadata specifies sources used to ground generated content.
         class Candidate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -286,7 +316,76 @@ module Google
 
             # All other reasons that stopped the token generation
             OTHER = 5
+
+            # The token generation was stopped as the response was flagged for the
+            # terms which are included from the terminology blocklist.
+            BLOCKLIST = 6
+
+            # The token generation was stopped as the response was flagged for
+            # the prohibited contents.
+            PROHIBITED_CONTENT = 7
+
+            # The token generation was stopped as the response was flagged for
+            # Sensitive Personally Identifiable Information (SPII) contents.
+            SPII = 8
           end
+        end
+
+        # Segment of the content.
+        # @!attribute [r] part_index
+        #   @return [::Integer]
+        #     Output only. The index of a Part object within its parent Content object.
+        # @!attribute [r] start_index
+        #   @return [::Integer]
+        #     Output only. Start index in the given Part, measured in bytes. Offset from
+        #     the start of the Part, inclusive, starting at zero.
+        # @!attribute [r] end_index
+        #   @return [::Integer]
+        #     Output only. End index in the given Part, measured in bytes. Offset from
+        #     the start of the Part, exclusive, starting at zero.
+        class Segment
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Grounding attribution.
+        # @!attribute [rw] web
+        #   @return [::Google::Cloud::AIPlatform::V1::GroundingAttribution::Web]
+        #     Optional. Attribution from the web.
+        # @!attribute [r] segment
+        #   @return [::Google::Cloud::AIPlatform::V1::Segment]
+        #     Output only. Segment of the content this attribution belongs to.
+        # @!attribute [r] confidence_score
+        #   @return [::Float]
+        #     Optional. Output only. Confidence score of the attribution. Ranges from 0
+        #     to 1. 1 is the most confident.
+        class GroundingAttribution
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Attribution from the web.
+          # @!attribute [r] uri
+          #   @return [::String]
+          #     Output only. URI reference of the attribution.
+          # @!attribute [r] title
+          #   @return [::String]
+          #     Output only. Title of the attribution.
+          class Web
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Metadata returned to client when grounding is enabled.
+        # @!attribute [rw] web_search_queries
+        #   @return [::Array<::String>]
+        #     Optional. Web search queries for the following-up web search.
+        # @!attribute [rw] grounding_attributions
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::GroundingAttribution>]
+        #     Optional. List of grounding attributions.
+        class GroundingMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Harm categories that will block the content.

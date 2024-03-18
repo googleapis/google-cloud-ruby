@@ -21,6 +21,16 @@ module Google
   module Cloud
     module AIPlatform
       module V1
+        # Runtime operation information for
+        # {::Google::Cloud::AIPlatform::V1::PipelineService::Client#batch_cancel_pipeline_jobs PipelineService.BatchCancelPipelineJobs}.
+        # @!attribute [rw] generic_metadata
+        #   @return [::Google::Cloud::AIPlatform::V1::GenericOperationMetadata]
+        #     The common part of the operation metadata.
+        class BatchCancelPipelineJobsOperationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for
         # {::Google::Cloud::AIPlatform::V1::PipelineService::Client#create_training_pipeline PipelineService.CreateTrainingPipeline}.
         # @!attribute [rw] parent
@@ -273,6 +283,33 @@ module Google
         end
 
         # Request message for
+        # {::Google::Cloud::AIPlatform::V1::PipelineService::Client#batch_delete_pipeline_jobs PipelineService.BatchDeletePipelineJobs}.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The name of the PipelineJobs' parent resource.
+        #     Format: `projects/{project}/locations/{location}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The names of the PipelineJobs to delete.
+        #     A maximum of 32 PipelineJobs can be deleted in a batch.
+        #     Format:
+        #     `projects/{project}/locations/{location}/pipelineJobs/{pipelineJob}`
+        class BatchDeletePipelineJobsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::PipelineService::Client#batch_delete_pipeline_jobs PipelineService.BatchDeletePipelineJobs}.
+        # @!attribute [rw] pipeline_jobs
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::PipelineJob>]
+        #     PipelineJobs deleted.
+        class BatchDeletePipelineJobsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
         # {::Google::Cloud::AIPlatform::V1::PipelineService::Client#cancel_pipeline_job PipelineService.CancelPipelineJob}.
         # @!attribute [rw] name
         #   @return [::String]
@@ -280,6 +317,33 @@ module Google
         #     Format:
         #     `projects/{project}/locations/{location}/pipelineJobs/{pipeline_job}`
         class CancelPipelineJobRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::PipelineService::Client#batch_cancel_pipeline_jobs PipelineService.BatchCancelPipelineJobs}.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The name of the PipelineJobs' parent resource.
+        #     Format: `projects/{project}/locations/{location}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The names of the PipelineJobs to cancel.
+        #     A maximum of 32 PipelineJobs can be cancelled in a batch.
+        #     Format:
+        #     `projects/{project}/locations/{location}/pipelineJobs/{pipelineJob}`
+        class BatchCancelPipelineJobsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::PipelineService::Client#batch_cancel_pipeline_jobs PipelineService.BatchCancelPipelineJobs}.
+        # @!attribute [rw] pipeline_jobs
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::PipelineJob>]
+        #     PipelineJobs cancelled.
+        class BatchCancelPipelineJobsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

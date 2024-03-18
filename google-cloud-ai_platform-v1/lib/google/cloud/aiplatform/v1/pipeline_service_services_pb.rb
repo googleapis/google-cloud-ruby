@@ -67,6 +67,10 @@ module Google
             rpc :ListPipelineJobs, ::Google::Cloud::AIPlatform::V1::ListPipelineJobsRequest, ::Google::Cloud::AIPlatform::V1::ListPipelineJobsResponse
             # Deletes a PipelineJob.
             rpc :DeletePipelineJob, ::Google::Cloud::AIPlatform::V1::DeletePipelineJobRequest, ::Google::Longrunning::Operation
+            # Batch deletes PipelineJobs
+            # The Operation is atomic. If it fails, none of the PipelineJobs are deleted.
+            # If it succeeds, all of the PipelineJobs are deleted.
+            rpc :BatchDeletePipelineJobs, ::Google::Cloud::AIPlatform::V1::BatchDeletePipelineJobsRequest, ::Google::Longrunning::Operation
             # Cancels a PipelineJob.
             # Starts asynchronous cancellation on the PipelineJob. The server
             # makes a best effort to cancel the pipeline, but success is not
@@ -81,6 +85,14 @@ module Google
             # [PipelineJob.state][google.cloud.aiplatform.v1.PipelineJob.state] is set to
             # `CANCELLED`.
             rpc :CancelPipelineJob, ::Google::Cloud::AIPlatform::V1::CancelPipelineJobRequest, ::Google::Protobuf::Empty
+            # Batch cancel PipelineJobs.
+            # Firstly the server will check if all the jobs are in non-terminal states,
+            # and skip the jobs that are already terminated.
+            # If the operation failed, none of the pipeline jobs are cancelled.
+            # The server will poll the states of all the pipeline jobs periodically
+            # to check the cancellation status.
+            # This operation will return an LRO.
+            rpc :BatchCancelPipelineJobs, ::Google::Cloud::AIPlatform::V1::BatchCancelPipelineJobsRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

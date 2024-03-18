@@ -1217,9 +1217,19 @@
                 "delete_pipeline_job"
               ]
             },
+            "BatchDeletePipelineJobs": {
+              "methods": [
+                "batch_delete_pipeline_jobs"
+              ]
+            },
             "CancelPipelineJob": {
               "methods": [
                 "cancel_pipeline_job"
+              ]
+            },
+            "BatchCancelPipelineJobs": {
+              "methods": [
+                "batch_cancel_pipeline_jobs"
               ]
             }
           }

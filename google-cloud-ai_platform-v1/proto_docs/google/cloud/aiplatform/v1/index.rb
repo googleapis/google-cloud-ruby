@@ -208,6 +208,9 @@ module Google
 
               # Datapoints are eligible iff their value is > the query's.
               GREATER = 5
+
+              # Datapoints are eligible iff their value is != the query's.
+              NOT_EQUAL = 6
             end
           end
 

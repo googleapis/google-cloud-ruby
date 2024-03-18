@@ -1129,6 +1129,107 @@ module Google
             end
 
             ##
+            # Batch deletes PipelineJobs
+            # The Operation is atomic. If it fails, none of the PipelineJobs are deleted.
+            # If it succeeds, all of the PipelineJobs are deleted.
+            #
+            # @overload batch_delete_pipeline_jobs(request, options = nil)
+            #   Pass arguments to `batch_delete_pipeline_jobs` via a request object, either of type
+            #   {::Google::Cloud::AIPlatform::V1::BatchDeletePipelineJobsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AIPlatform::V1::BatchDeletePipelineJobsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload batch_delete_pipeline_jobs(parent: nil, names: nil)
+            #   Pass arguments to `batch_delete_pipeline_jobs` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The name of the PipelineJobs' parent resource.
+            #     Format: `projects/{project}/locations/{location}`
+            #   @param names [::Array<::String>]
+            #     Required. The names of the PipelineJobs to delete.
+            #     A maximum of 32 PipelineJobs can be deleted in a batch.
+            #     Format:
+            #     `projects/{project}/locations/{location}/pipelineJobs/{pipelineJob}`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::PipelineService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AIPlatform::V1::BatchDeletePipelineJobsRequest.new
+            #
+            #   # Call the batch_delete_pipeline_jobs method.
+            #   result = client.batch_delete_pipeline_jobs request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def batch_delete_pipeline_jobs request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::BatchDeletePipelineJobsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.batch_delete_pipeline_jobs.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.batch_delete_pipeline_jobs.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.batch_delete_pipeline_jobs.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @pipeline_service_stub.call_rpc :batch_delete_pipeline_jobs, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Cancels a PipelineJob.
             # Starts asynchronous cancellation on the PipelineJob. The server
             # makes a best effort to cancel the pipeline, but success is not
@@ -1220,6 +1321,111 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @pipeline_service_stub.call_rpc :cancel_pipeline_job, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Batch cancel PipelineJobs.
+            # Firstly the server will check if all the jobs are in non-terminal states,
+            # and skip the jobs that are already terminated.
+            # If the operation failed, none of the pipeline jobs are cancelled.
+            # The server will poll the states of all the pipeline jobs periodically
+            # to check the cancellation status.
+            # This operation will return an LRO.
+            #
+            # @overload batch_cancel_pipeline_jobs(request, options = nil)
+            #   Pass arguments to `batch_cancel_pipeline_jobs` via a request object, either of type
+            #   {::Google::Cloud::AIPlatform::V1::BatchCancelPipelineJobsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AIPlatform::V1::BatchCancelPipelineJobsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload batch_cancel_pipeline_jobs(parent: nil, names: nil)
+            #   Pass arguments to `batch_cancel_pipeline_jobs` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The name of the PipelineJobs' parent resource.
+            #     Format: `projects/{project}/locations/{location}`
+            #   @param names [::Array<::String>]
+            #     Required. The names of the PipelineJobs to cancel.
+            #     A maximum of 32 PipelineJobs can be cancelled in a batch.
+            #     Format:
+            #     `projects/{project}/locations/{location}/pipelineJobs/{pipelineJob}`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::PipelineService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AIPlatform::V1::BatchCancelPipelineJobsRequest.new
+            #
+            #   # Call the batch_cancel_pipeline_jobs method.
+            #   result = client.batch_cancel_pipeline_jobs request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def batch_cancel_pipeline_jobs request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::BatchCancelPipelineJobsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.batch_cancel_pipeline_jobs.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.batch_cancel_pipeline_jobs.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.batch_cancel_pipeline_jobs.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @pipeline_service_stub.call_rpc :batch_cancel_pipeline_jobs, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
@@ -1426,10 +1632,20 @@ module Google
                 #
                 attr_reader :delete_pipeline_job
                 ##
+                # RPC-specific configuration for `batch_delete_pipeline_jobs`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :batch_delete_pipeline_jobs
+                ##
                 # RPC-specific configuration for `cancel_pipeline_job`
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :cancel_pipeline_job
+                ##
+                # RPC-specific configuration for `batch_cancel_pipeline_jobs`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :batch_cancel_pipeline_jobs
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -1451,8 +1667,12 @@ module Google
                   @list_pipeline_jobs = ::Gapic::Config::Method.new list_pipeline_jobs_config
                   delete_pipeline_job_config = parent_rpcs.delete_pipeline_job if parent_rpcs.respond_to? :delete_pipeline_job
                   @delete_pipeline_job = ::Gapic::Config::Method.new delete_pipeline_job_config
+                  batch_delete_pipeline_jobs_config = parent_rpcs.batch_delete_pipeline_jobs if parent_rpcs.respond_to? :batch_delete_pipeline_jobs
+                  @batch_delete_pipeline_jobs = ::Gapic::Config::Method.new batch_delete_pipeline_jobs_config
                   cancel_pipeline_job_config = parent_rpcs.cancel_pipeline_job if parent_rpcs.respond_to? :cancel_pipeline_job
                   @cancel_pipeline_job = ::Gapic::Config::Method.new cancel_pipeline_job_config
+                  batch_cancel_pipeline_jobs_config = parent_rpcs.batch_cancel_pipeline_jobs if parent_rpcs.respond_to? :batch_cancel_pipeline_jobs
+                  @batch_cancel_pipeline_jobs = ::Gapic::Config::Method.new batch_cancel_pipeline_jobs_config
 
                   yield self if block_given?
                 end

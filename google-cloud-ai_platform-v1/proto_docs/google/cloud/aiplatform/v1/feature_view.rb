@@ -73,8 +73,7 @@ module Google
           #     trigger based on FeatureView.SyncConfig.
           # @!attribute [rw] entity_id_columns
           #   @return [::Array<::String>]
-          #     Required. Columns to construct entity_id / row keys. Start by supporting
-          #     1 only.
+          #     Required. Columns to construct entity_id / row keys.
           class BigQuerySource
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -99,6 +98,9 @@ module Google
           # @!attribute [rw] feature_groups
           #   @return [::Array<::Google::Cloud::AIPlatform::V1::FeatureView::FeatureRegistrySource::FeatureGroup>]
           #     Required. List of features that need to be synced to Online Store.
+          # @!attribute [rw] project_number
+          #   @return [::Integer]
+          #     Optional. The project number of the parent project of the Feature Groups.
           class FeatureRegistrySource
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

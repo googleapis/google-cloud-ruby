@@ -295,6 +295,10 @@ module Google
         #     MetadataStore when creating the Model. The Artifact resource name pattern
         #     is
         #     `projects/{project}/locations/{location}/metadataStores/{metadata_store}/artifacts/{artifact}`.
+        # @!attribute [rw] base_model_source
+        #   @return [::Google::Cloud::AIPlatform::V1::Model::BaseModelSource]
+        #     Optional. User input field to specify the base model source. Currently it
+        #     only supports specifing the Model Garden models and Genie models.
         class Model
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -394,6 +398,19 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # User input field to specify the base model source. Currently it only
+          # supports specifing the Model Garden models and Genie models.
+          # @!attribute [rw] model_garden_source
+          #   @return [::Google::Cloud::AIPlatform::V1::ModelGardenSource]
+          #     Source information of Model Garden models.
+          # @!attribute [rw] genie_source
+          #   @return [::Google::Cloud::AIPlatform::V1::GenieSource]
+          #     Information about the base model of Genie models.
+          class BaseModelSource
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # @!attribute [rw] key
           #   @return [::String]
           # @!attribute [rw] value
@@ -433,6 +450,26 @@ module Google
         #     "chat-bison", "text-bison". Or model name with version ID, like
         #     "chat-bison@001", "text-bison@005", etc.
         class LargeModelReference
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Contains information about the source of the models generated from Model
+        # Garden.
+        # @!attribute [rw] public_model_name
+        #   @return [::String]
+        #     Required. The model garden source model resource name.
+        class ModelGardenSource
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Contains information about the source of the models generated from Generative
+        # AI Studio.
+        # @!attribute [rw] base_model_uri
+        #   @return [::String]
+        #     Required. The public base model URI.
+        class GenieSource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
