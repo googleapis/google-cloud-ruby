@@ -143,16 +143,12 @@ module Google
           # 1. Remove ranges that have already been read, and reduce ranges that
           # include the last read rows
           if last_key
-            delete_indexes = []
-            row_set.row_ranges.each_with_index do |range, i|
-              if end_key_read? range
-                delete_indexes << i
-              elsif start_key_read? range
+            row_set.row_ranges.reject! { |r| end_key_read? r }
+            row_set.row_ranges.each do |range|
+              if start_key_read? range
                 range.start_key_open = last_key
               end
             end
-
-            delete_indexes.sort.reverse_each { |i| row_set.row_ranges.delete_at i }
           end
 
           # 2. Remove all individual keys before and up to the last read key
