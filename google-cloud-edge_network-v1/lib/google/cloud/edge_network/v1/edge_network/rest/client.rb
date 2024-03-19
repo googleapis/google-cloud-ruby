@@ -350,6 +350,7 @@ module Google
               end
 
               ##
+              # Deprecated: not implemented.
               # Lists Zones in a given project and location.
               #
               # @overload list_zones(request, options = nil)
@@ -441,6 +442,7 @@ module Google
               end
 
               ##
+              # Deprecated: not implemented.
               # Gets details of a single Zone.
               #
               # @overload get_zone(request, options = nil)

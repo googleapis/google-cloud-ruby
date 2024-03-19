@@ -21,7 +21,9 @@ module Google
   module Cloud
     module EdgeNetwork
       module V1
+        # Deprecated: not implemented.
         # Message for requesting list of Zones
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Parent value for ListZonesRequest
@@ -43,7 +45,9 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Deprecated: not implemented.
         # Message for response to listing Zones
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] zones
         #   @return [::Array<::Google::Cloud::EdgeNetwork::V1::Zone>]
         #     The list of Zone
@@ -58,7 +62,9 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Deprecated: not implemented.
         # Message for getting a Zone
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Name of the resource
