@@ -141,6 +141,25 @@ module Google
             end
 
             ##
+            # Create a fully-qualified TerraformVersion resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/terraformVersions/{terraform_version}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param terraform_version [String]
+            #
+            # @return [::String]
+            def terraform_version_path project:, location:, terraform_version:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/terraformVersions/#{terraform_version}"
+            end
+
+            ##
             # Create a fully-qualified WorkerPool resource string.
             #
             # The resource will be in the following format:

@@ -1237,6 +1237,118 @@ class ::Google::Cloud::ConfigService::V1::Config::Rest::ClientTest < Minitest::T
     end
   end
 
+  def test_list_terraform_versions
+    # Create test objects.
+    client_result = ::Google::Cloud::ConfigService::V1::ListTerraformVersionsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_terraform_versions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ConfigService::V1::Config::Rest::ServiceStub.stub :transcode_list_terraform_versions_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_terraform_versions_client_stub do
+        # Create client
+        client = ::Google::Cloud::ConfigService::V1::Config::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_terraform_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_terraform_versions parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_terraform_versions ::Google::Cloud::ConfigService::V1::ListTerraformVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_terraform_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_terraform_versions(::Google::Cloud::ConfigService::V1::ListTerraformVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_terraform_versions_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_terraform_version
+    # Create test objects.
+    client_result = ::Google::Cloud::ConfigService::V1::TerraformVersion.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_terraform_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ConfigService::V1::Config::Rest::ServiceStub.stub :transcode_get_terraform_version_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_terraform_version_client_stub do
+        # Create client
+        client = ::Google::Cloud::ConfigService::V1::Config::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_terraform_version({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_terraform_version name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_terraform_version ::Google::Cloud::ConfigService::V1::GetTerraformVersionRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_terraform_version({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_terraform_version(::Google::Cloud::ConfigService::V1::GetTerraformVersionRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_terraform_version_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

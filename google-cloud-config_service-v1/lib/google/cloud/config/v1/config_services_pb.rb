@@ -80,6 +80,12 @@ module Google
             rpc :DeletePreview, ::Google::Cloud::ConfigService::V1::DeletePreviewRequest, ::Google::Longrunning::Operation
             # Export [Preview][google.cloud.config.v1.Preview] results.
             rpc :ExportPreviewResult, ::Google::Cloud::ConfigService::V1::ExportPreviewResultRequest, ::Google::Cloud::ConfigService::V1::ExportPreviewResultResponse
+            # Lists [TerraformVersion][google.cloud.config.v1.TerraformVersion]s in a
+            # given project and location.
+            rpc :ListTerraformVersions, ::Google::Cloud::ConfigService::V1::ListTerraformVersionsRequest, ::Google::Cloud::ConfigService::V1::ListTerraformVersionsResponse
+            # Gets details about a
+            # [TerraformVersion][google.cloud.config.v1.TerraformVersion].
+            rpc :GetTerraformVersion, ::Google::Cloud::ConfigService::V1::GetTerraformVersionRequest, ::Google::Cloud::ConfigService::V1::TerraformVersion
           end
 
           Stub = Service.rpc_stub_class

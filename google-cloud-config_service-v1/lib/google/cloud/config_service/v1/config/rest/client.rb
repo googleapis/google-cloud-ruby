@@ -225,8 +225,8 @@ module Google
               #     'projects/\\{project_id}/locations/\\{location}'.
               #   @param page_size [::Integer]
               #     When requesting a page of resources, 'page_size' specifies number of
-              #     resources to return. If unspecified or set to 0, all resources will be
-              #     returned.
+              #     resources to return. If unspecified, at most 500 will be returned. The
+              #     maximum value is 1000.
               #   @param page_token [::String]
               #     Token returned by previous call to 'ListDeployments' which specifies the
               #     position in the list from where to continue listing the resources.
@@ -745,8 +745,8 @@ module Google
               #     'projects/\\{project_id}/locations/\\{location}/deployments/\\{deployment}'.
               #   @param page_size [::Integer]
               #     When requesting a page of resources, `page_size` specifies number of
-              #     resources to return. If unspecified or set to 0, all resources will be
-              #     returned.
+              #     resources to return. If unspecified, at most 500 will be returned. The
+              #     maximum value is 1000.
               #   @param page_token [::String]
               #     Token returned by previous call to 'ListRevisions' which specifies the
               #     position in the list from where to continue listing the resources.
@@ -1019,8 +1019,8 @@ module Google
               #     'projects/\\{project_id}/locations/\\{location}/deployments/\\{deployment}/revisions/\\{revision}'.
               #   @param page_size [::Integer]
               #     When requesting a page of resources, 'page_size' specifies number of
-              #     resources to return. If unspecified or set to 0, all resources will be
-              #     returned.
+              #     resources to return. If unspecified, at most 500 will be returned. The
+              #     maximum value is 1000.
               #   @param page_token [::String]
               #     Token returned by previous call to 'ListResources' which specifies the
               #     position in the list from where to continue listing the resources.
@@ -1897,8 +1897,8 @@ module Google
               #     value is in the format: 'projects/\\{project_id}/locations/\\{location}'.
               #   @param page_size [::Integer]
               #     Optional. When requesting a page of resources, 'page_size' specifies number
-              #     of resources to return. If unspecified or set to 0, all resources will be
-              #     returned.
+              #     of resources to return. If unspecified, at most 500 will be returned. The
+              #     maximum value is 1000.
               #   @param page_token [::String]
               #     Optional. Token returned by previous call to 'ListDeployments' which
               #     specifies the position in the list from where to continue listing the
@@ -2171,6 +2171,190 @@ module Google
               end
 
               ##
+              # Lists {::Google::Cloud::ConfigService::V1::TerraformVersion TerraformVersion}s in a
+              # given project and location.
+              #
+              # @overload list_terraform_versions(request, options = nil)
+              #   Pass arguments to `list_terraform_versions` via a request object, either of type
+              #   {::Google::Cloud::ConfigService::V1::ListTerraformVersionsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ConfigService::V1::ListTerraformVersionsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_terraform_versions(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+              #   Pass arguments to `list_terraform_versions` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent in whose context the TerraformVersions are listed. The
+              #     parent value is in the format:
+              #     'projects/\\{project_id}/locations/\\{location}'.
+              #   @param page_size [::Integer]
+              #     Optional. When requesting a page of resources, 'page_size' specifies number
+              #     of resources to return. If unspecified, at most 500 will be returned. The
+              #     maximum value is 1000.
+              #   @param page_token [::String]
+              #     Optional. Token returned by previous call to 'ListTerraformVersions' which
+              #     specifies the position in the list from where to continue listing the
+              #     resources.
+              #   @param filter [::String]
+              #     Optional. Lists the TerraformVersions that match the filter expression. A
+              #     filter expression filters the resources listed in the response. The
+              #     expression must be of the form '\\{field} \\{operator} \\{value}' where
+              #     operators: '<', '>',
+              #     '<=', '>=', '!=', '=', ':' are supported (colon ':' represents a HAS
+              #     operator which is roughly synonymous with equality). \\{field} can refer to a
+              #     proto or JSON field, or a synthetic field. Field names can be camelCase or
+              #     snake_case.
+              #   @param order_by [::String]
+              #     Optional. Field to use to sort the list.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::ConfigService::V1::ListTerraformVersionsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::ConfigService::V1::ListTerraformVersionsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/config_service/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ConfigService::V1::Config::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ConfigService::V1::ListTerraformVersionsRequest.new
+              #
+              #   # Call the list_terraform_versions method.
+              #   result = client.list_terraform_versions request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::ConfigService::V1::TerraformVersion.
+              #     p item
+              #   end
+              #
+              def list_terraform_versions request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ConfigService::V1::ListTerraformVersionsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_terraform_versions.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ConfigService::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_terraform_versions.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_terraform_versions.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @config_stub.list_terraform_versions request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets details about a
+              # {::Google::Cloud::ConfigService::V1::TerraformVersion TerraformVersion}.
+              #
+              # @overload get_terraform_version(request, options = nil)
+              #   Pass arguments to `get_terraform_version` via a request object, either of type
+              #   {::Google::Cloud::ConfigService::V1::GetTerraformVersionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ConfigService::V1::GetTerraformVersionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_terraform_version(name: nil)
+              #   Pass arguments to `get_terraform_version` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the TerraformVersion. Format:
+              #     'projects/\\{project_id}/locations/\\{location}/terraformVersions/\\{terraform_version}'
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::ConfigService::V1::TerraformVersion]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::ConfigService::V1::TerraformVersion]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/config_service/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ConfigService::V1::Config::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ConfigService::V1::GetTerraformVersionRequest.new
+              #
+              #   # Call the get_terraform_version method.
+              #   result = client.get_terraform_version request
+              #
+              #   # The returned object is of type Google::Cloud::ConfigService::V1::TerraformVersion.
+              #   p result
+              #
+              def get_terraform_version request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ConfigService::V1::GetTerraformVersionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_terraform_version.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ConfigService::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_terraform_version.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_terraform_version.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @config_stub.get_terraform_version request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the Config REST API.
               #
               # This class represents the configuration for Config REST,
@@ -2415,6 +2599,16 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :export_preview_result
+                  ##
+                  # RPC-specific configuration for `list_terraform_versions`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_terraform_versions
+                  ##
+                  # RPC-specific configuration for `get_terraform_version`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_terraform_version
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -2460,6 +2654,10 @@ module Google
                     @delete_preview = ::Gapic::Config::Method.new delete_preview_config
                     export_preview_result_config = parent_rpcs.export_preview_result if parent_rpcs.respond_to? :export_preview_result
                     @export_preview_result = ::Gapic::Config::Method.new export_preview_result_config
+                    list_terraform_versions_config = parent_rpcs.list_terraform_versions if parent_rpcs.respond_to? :list_terraform_versions
+                    @list_terraform_versions = ::Gapic::Config::Method.new list_terraform_versions_config
+                    get_terraform_version_config = parent_rpcs.get_terraform_version if parent_rpcs.respond_to? :get_terraform_version
+                    @get_terraform_version = ::Gapic::Config::Method.new get_terraform_version_config
 
                     yield self if block_given?
                   end
