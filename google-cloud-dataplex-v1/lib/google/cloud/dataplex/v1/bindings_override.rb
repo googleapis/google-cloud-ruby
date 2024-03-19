@@ -25,7 +25,7 @@ module Google
       # @example Loading just the REST part of this package, including all its services, and instantiating a REST client
       #
       #     require "google/cloud/dataplex/v1/rest"
-      #     client = ::Google::Cloud::Dataplex::V1::ContentService::Rest::Client.new
+      #     client = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new
       #
       module V1
         ##
