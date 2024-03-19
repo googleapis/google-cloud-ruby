@@ -108,6 +108,16 @@ module Google
             rpc :CreateCertificateIssuanceConfig, ::Google::Cloud::CertificateManager::V1::CreateCertificateIssuanceConfigRequest, ::Google::Longrunning::Operation
             # Deletes a single CertificateIssuanceConfig.
             rpc :DeleteCertificateIssuanceConfig, ::Google::Cloud::CertificateManager::V1::DeleteCertificateIssuanceConfigRequest, ::Google::Longrunning::Operation
+            # Lists TrustConfigs in a given project and location.
+            rpc :ListTrustConfigs, ::Google::Cloud::CertificateManager::V1::ListTrustConfigsRequest, ::Google::Cloud::CertificateManager::V1::ListTrustConfigsResponse
+            # Gets details of a single TrustConfig.
+            rpc :GetTrustConfig, ::Google::Cloud::CertificateManager::V1::GetTrustConfigRequest, ::Google::Cloud::CertificateManager::V1::TrustConfig
+            # Creates a new TrustConfig in a given project and location.
+            rpc :CreateTrustConfig, ::Google::Cloud::CertificateManager::V1::CreateTrustConfigRequest, ::Google::Longrunning::Operation
+            # Updates a TrustConfig.
+            rpc :UpdateTrustConfig, ::Google::Cloud::CertificateManager::V1::UpdateTrustConfigRequest, ::Google::Longrunning::Operation
+            # Deletes a single TrustConfig.
+            rpc :DeleteTrustConfig, ::Google::Cloud::CertificateManager::V1::DeleteTrustConfigRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

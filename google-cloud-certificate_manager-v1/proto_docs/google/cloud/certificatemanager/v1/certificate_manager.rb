@@ -41,7 +41,7 @@ module Google
         #   @return [::String]
         #     A list of Certificate field names used to specify the order of the returned
         #     results. The default sorting order is ascending. To specify descending
-        #     order for a field, add a suffix " desc".
+        #     order for a field, add a suffix `" desc"`.
         class ListCertificatesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -134,7 +134,7 @@ module Google
         #   @return [::String]
         #     A list of Certificate Map field names used to specify the order of the
         #     returned results. The default sorting order is ascending. To specify
-        #     descending order for a field, add a suffix " desc".
+        #     descending order for a field, add a suffix `" desc"`.
         class ListCertificateMapsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -232,7 +232,7 @@ module Google
         #   @return [::String]
         #     A list of Certificate Map Entry field names used to specify
         #     the order of the returned results. The default sorting order is ascending.
-        #     To specify descending order for a field, add a suffix " desc".
+        #     To specify descending order for a field, add a suffix `" desc"`.
         class ListCertificateMapEntriesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -325,7 +325,7 @@ module Google
         #   @return [::String]
         #     A list of Dns Authorization field names used to specify the order of the
         #     returned results. The default sorting order is ascending. To specify
-        #     descending order for a field, add a suffix " desc".
+        #     descending order for a field, add a suffix `" desc"`.
         class ListDnsAuthorizationsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -578,8 +578,8 @@ module Google
                 # State is unspecified.
                 STATE_UNSPECIFIED = 0
 
-                # Certificate provisioning for this domain is under way. GCP will
-                # attempt to authorize the domain.
+                # Certificate provisioning for this domain is under way. Google Cloud
+                # will attempt to authorize the domain.
                 AUTHORIZING = 1
 
                 # A managed certificate can be provisioned, no issues for this domain.
@@ -648,8 +648,13 @@ module Google
             DEFAULT = 0
 
             # Certificates with scope EDGE_CACHE are special-purposed certificates,
-            # served from non-core Google data centers.
+            # served from Edge Points of Presence.
+            # See https://cloud.google.com/vpc/docs/edge-locations.
             EDGE_CACHE = 1
+
+            # Certificates with ALL_REGIONS scope are served from all Google Cloud
+            # regions. See https://cloud.google.com/compute/docs/regions-zones.
+            ALL_REGIONS = 2
           end
         end
 
@@ -810,6 +815,11 @@ module Google
         #   @return [::Google::Cloud::CertificateManager::V1::DnsAuthorization::DnsResourceRecord]
         #     Output only. DNS Resource Record that needs to be added to DNS
         #     configuration.
+        # @!attribute [rw] type
+        #   @return [::Google::Cloud::CertificateManager::V1::DnsAuthorization::Type]
+        #     Immutable. Type of DnsAuthorization. If unset during resource creation the
+        #     following default will be used:
+        #     - in location global: FIXED_RECORD.
         class DnsAuthorization
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -840,6 +850,20 @@ module Google
           class LabelsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # DnsAuthorization type.
+          module Type
+            # Type is unspecified.
+            TYPE_UNSPECIFIED = 0
+
+            # FIXED_RECORD DNS authorization uses DNS-01 validation method.
+            FIXED_RECORD = 1
+
+            # PER_PROJECT_RECORD DNS authorization allows for independent management
+            # of Google-managed certificates with DNS authorization across multiple
+            # projects.
+            PER_PROJECT_RECORD = 2
           end
         end
 
