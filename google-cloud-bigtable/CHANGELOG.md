@@ -1,5 +1,11 @@
 # Release History
 
+### 2.10.1 (2024-03-19)
+
+#### Bug Fixes
+
+* fix read rows retry so it doesn't trigger a full table scan in t… ([#25391](https://github.com/googleapis/google-cloud-ruby/issues/25391)) 
+
 ### 2.10.0 (2024-03-07)
 
 #### Features
