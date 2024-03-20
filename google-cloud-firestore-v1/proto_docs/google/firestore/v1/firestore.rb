@@ -377,6 +377,10 @@ module Google
         #     This must be a microsecond precision timestamp within the past one hour,
         #     or if Point-in-Time Recovery is enabled, can additionally be a whole
         #     minute timestamp within the past 7 days.
+        # @!attribute [rw] explain_options
+        #   @return [::Google::Cloud::Firestore::V1::ExplainOptions]
+        #     Optional. Explain options for the query. If set, additional query
+        #     statistics will be returned. If not, only query results will be returned.
         class RunQueryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -411,6 +415,11 @@ module Google
         #   @return [::Boolean]
         #     If present, Firestore has completely finished the request and no more
         #     documents will be returned.
+        # @!attribute [rw] explain_metrics
+        #   @return [::Google::Cloud::Firestore::V1::ExplainMetrics]
+        #     Query explain metrics. This is only present when the
+        #     {::Google::Cloud::Firestore::V1::RunQueryRequest#explain_options RunQueryRequest.explain_options}
+        #     is provided, and it is sent only once with the last response in the stream.
         class RunQueryResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -447,6 +456,10 @@ module Google
         #     This must be a microsecond precision timestamp within the past one hour,
         #     or if Point-in-Time Recovery is enabled, can additionally be a whole
         #     minute timestamp within the past 7 days.
+        # @!attribute [rw] explain_options
+        #   @return [::Google::Cloud::Firestore::V1::ExplainOptions]
+        #     Optional. Explain options for the query. If set, additional query
+        #     statistics will be returned. If not, only query results will be returned.
         class RunAggregationQueryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -475,6 +488,11 @@ module Google
         #     If the query returns no results, a response with `read_time` and no
         #     `result` will be sent, and this represents the time at which the query
         #     was run.
+        # @!attribute [rw] explain_metrics
+        #   @return [::Google::Cloud::Firestore::V1::ExplainMetrics]
+        #     Query explain metrics. This is only present when the
+        #     {::Google::Cloud::Firestore::V1::RunAggregationQueryRequest#explain_options RunAggregationQueryRequest.explain_options}
+        #     is provided, and it is sent only once with the last response in the stream.
         class RunAggregationQueryResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
