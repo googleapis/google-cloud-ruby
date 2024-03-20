@@ -298,7 +298,7 @@ module Google
         end
 
         # The key and value for a
-        # [tag](https://cloud.google.com/resource-manager/docs/tags/tags-overview),
+        # [tag](https://cloud.google.com/resource-manager/docs/tags/tags-overview).
         # @!attribute [rw] tag_key
         #   @return [::String]
         #     TagKey namespaced name, in the format of \\{ORG_ID}/\\{TAG_KEY_SHORT_NAME}.
@@ -925,7 +925,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The Condition evaluation.
+        # The condition evaluation.
         # @!attribute [rw] evaluation_value
         #   @return [::Google::Cloud::Asset::V1::ConditionEvaluation::EvaluationValue]
         #     The evaluation result.
@@ -946,7 +946,7 @@ module Google
 
             # The evaluation result is `conditional` when the condition expression
             # contains variables that are either missing input values or have not been
-            # supported by Analyzer yet.
+            # supported by Policy Analyzer yet.
             CONDITIONAL = 3
           end
         end
