@@ -158,10 +158,8 @@ module Google
             # The endpoint information is populated.
             START_FROM_INTERNET = 2
 
-            # Initial state: packet originating from a Google service. Some Google
-            # services, such as health check probers or Identity Aware Proxy use
-            # special routes, outside VPC routing configuration to reach Compute Engine
-            # Instances.
+            # Initial state: packet originating from a Google service.
+            # The google_service information is populated.
             START_FROM_GOOGLE_SERVICE = 27
 
             # Initial state: packet originating from a VPC or on-premises network
@@ -540,7 +538,7 @@ module Google
 
           # Recognized type of a Google Service.
           module GoogleServiceType
-            # Unspecified Google Service. Includes most of Google APIs and services.
+            # Unspecified Google Service.
             GOOGLE_SERVICE_TYPE_UNSPECIFIED = 0
 
             # Identity aware proxy.
@@ -558,6 +556,17 @@ module Google
             # https://cloud.google.com/dns/docs/zones/forwarding-zones#firewall-rules
             # https://cloud.google.com/dns/docs/policies#firewall-rules
             CLOUD_DNS = 3
+
+            # private.googleapis.com and restricted.googleapis.com
+            GOOGLE_API = 4
+
+            # Google API via Private Service Connect.
+            # https://cloud.google.com/vpc/docs/configure-private-service-connect-apis
+            GOOGLE_API_PSC = 5
+
+            # Google API via VPC Service Controls.
+            # https://cloud.google.com/vpc/docs/configure-private-service-connect-apis
+            GOOGLE_API_VPC_SC = 6
           end
         end
 
