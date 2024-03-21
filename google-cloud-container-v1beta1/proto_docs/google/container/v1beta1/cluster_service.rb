@@ -372,6 +372,9 @@ module Google
         # @!attribute [rw] secondary_boot_disks
         #   @return [::Array<::Google::Cloud::Container::V1beta1::SecondaryBootDisk>]
         #     List of secondary boot disks attached to the nodes.
+        # @!attribute [rw] secondary_boot_disk_update_strategy
+        #   @return [::Google::Cloud::Container::V1beta1::SecondaryBootDiskUpdateStrategy]
+        #     Secondary boot disk update strategy.
         class NodeConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2436,6 +2439,9 @@ module Google
         #   @return [::Google::Cloud::Container::V1beta1::HostMaintenancePolicy]
         #     HostMaintenancePolicy contains the desired maintenance policy for the
         #     Google Compute Engine hosts.
+        # @!attribute [rw] desired_enable_multi_networking
+        #   @return [::Boolean]
+        #     Enable/Disable Multi-Networking for the cluster
         # @!attribute [rw] desired_node_pool_auto_config_resource_manager_tags
         #   @return [::Google::Cloud::Container::V1beta1::ResourceManagerTags]
         #     The desired resource manager tags that apply to all auto-provisioned node
@@ -6142,6 +6148,13 @@ module Google
             # a container image cache.
             CONTAINER_IMAGE_CACHE = 1
           end
+        end
+
+        # SecondaryBootDiskUpdateStrategy is a placeholder which will be extended
+        # in the future to define different options for updating secondary boot disks.
+        class SecondaryBootDiskUpdateStrategy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # PrivateIPv6GoogleAccess controls whether and how the pods can communicate
