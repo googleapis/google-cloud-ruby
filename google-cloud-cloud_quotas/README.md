@@ -18,7 +18,7 @@ themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-cloud_quotas-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-cloud_quotas-v1/latest).
 
-See also the [Product Documentation](https://cloud.google.com/docs/quota/api-overview)
+See also the [Product Documentation](https://cloud.google.com/docs/quotas/api-overview)
 for more usage information.
 
 ## Quick Start
