@@ -400,7 +400,31 @@ module Google
           # @!attribute [rw] consistency_token
           #   @return [::String]
           #     Required. The token created using GenerateConsistencyToken for the Table.
+          # @!attribute [rw] standard_read_remote_writes
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::StandardReadRemoteWrites]
+          #     Checks that reads using an app profile with `StandardIsolation` can
+          #     see all writes committed before the token was created, even if the
+          #     read and write target different clusters.
+          # @!attribute [rw] data_boost_read_local_writes
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::DataBoostReadLocalWrites]
+          #     Checks that reads using an app profile with `DataBoostIsolationReadOnly`
+          #     can see all writes committed before the token was created, but only if
+          #     the read and write target the same cluster.
           class CheckConsistencyRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Checks that all writes before the consistency token was generated are
+          # replicated in every cluster and readable.
+          class StandardReadRemoteWrites
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Checks that all writes before the consistency token was generated in the same
+          # cluster are readable by Databoost.
+          class DataBoostReadLocalWrites
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
