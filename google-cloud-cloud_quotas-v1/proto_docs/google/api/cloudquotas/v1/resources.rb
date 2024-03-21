@@ -151,9 +151,9 @@ module Google
         #     `projects/123/locations/global/quotaPreferences/my-config-for-us-east1`
         # @!attribute [rw] dimensions
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     The dimensions that this quota preference applies to. The key of the map
-        #     entry is the name of a dimension, such as "region", "zone", "network_id",
-        #     and the value of the map entry is the dimension value.
+        #     Immutable. The dimensions that this quota preference applies to. The key of
+        #     the map entry is the name of a dimension, such as "region", "zone",
+        #     "network_id", and the value of the map entry is the dimension value.
         #
         #     If a dimension is missing from the map of dimensions, the quota preference
         #     applies to all the dimension values except for those that have other quota
@@ -237,9 +237,9 @@ module Google
         #     quota decrease requests do not have a trace id.
         # @!attribute [rw] annotations
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     The annotations map for clients to store small amounts of arbitrary data.
-        #     Do not put PII or other sensitive information here.
-        #     See https://google.aip.dev/128#annotations
+        #     Optional. The annotations map for clients to store small amounts of
+        #     arbitrary data. Do not put PII or other sensitive information here. See
+        #     https://google.aip.dev/128#annotations
         # @!attribute [r] request_origin
         #   @return [::Google::Cloud::CloudQuotas::V1::QuotaConfig::Origin]
         #     Output only. The origin of the quota preference request.

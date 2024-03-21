@@ -40,7 +40,7 @@ response = client.list_quota_infos request
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-cloud_quotas-v1/latest)
 for class and method documentation.
 
-See also the [Product Documentation](https://cloud.google.com/docs/quota/api-overview)
+See also the [Product Documentation](https://cloud.google.com/docs/quotas/api-overview)
 for general usage information.
 
 ## Enabling Logging
