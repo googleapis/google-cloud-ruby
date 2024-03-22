@@ -9,7 +9,7 @@
 * Infrastructure manager supports the following versions of Terraform when creating a deployment: Terraform version 1.2.3, 1.3.10, 1.4.7, 1.5.7 
 #### Documentation
 
-* comment updates to `page_size` and `service_account` 
+* Comment updates to `page_size` and `service_account` 
 
 ### 0.4.0 (2024-02-26)
 
