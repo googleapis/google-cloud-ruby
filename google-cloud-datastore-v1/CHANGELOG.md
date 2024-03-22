@@ -1,5 +1,11 @@
 # Release History
 
+### 0.18.0 (2024-03-22)
+
+#### Features
+
+* Add new types ExplainOptions, ExplainMetrics, PlanSummary, ExecutionStats ([#25374](https://github.com/googleapis/google-cloud-ruby/issues/25374)) 
+
 ### 0.17.0 (2024-02-26)
 
 #### Features
