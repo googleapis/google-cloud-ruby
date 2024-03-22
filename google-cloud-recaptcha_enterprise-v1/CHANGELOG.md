@@ -1,5 +1,11 @@
 # Release History
 
+### 0.19.0 (2024-03-22)
+
+#### Features
+
+* Support for the include_recaptcha_script firewall action ([#25297](https://github.com/googleapis/google-cloud-ruby/issues/25297)) 
+
 ### 0.18.0 (2024-02-26)
 
 #### Features
