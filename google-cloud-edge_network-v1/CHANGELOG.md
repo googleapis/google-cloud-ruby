@@ -4,7 +4,7 @@
 
 #### Bug Fixes
 
-* deprecate unimplemented Zone fields and methods ([#25405](https://github.com/googleapis/google-cloud-ruby/issues/25405)) 
+* Deprecate unimplemented Zone fields and methods ([#25405](https://github.com/googleapis/google-cloud-ruby/issues/25405)) 
 
 ### 0.4.0 (2024-02-26)
 
