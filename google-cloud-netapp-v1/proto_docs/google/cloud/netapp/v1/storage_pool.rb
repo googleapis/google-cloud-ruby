@@ -159,8 +159,8 @@ module Google
         #     Optional. Flag indicating if the pool is NFS LDAP enabled or not.
         # @!attribute [rw] psa_range
         #   @return [::String]
-        #     Optional. This field is currently not implemented. Currently values
-        #     provided in this field will be ignored.
+        #     Optional. This field is not implemented. The values provided in this field
+        #     are ignored.
         # @!attribute [r] encryption_type
         #   @return [::Google::Cloud::NetApp::V1::EncryptionType]
         #     Output only. Specifies the current pool encryption key source.

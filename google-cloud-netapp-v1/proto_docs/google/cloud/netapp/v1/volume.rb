@@ -147,8 +147,8 @@ module Google
         #     Required. Share name of the volume
         # @!attribute [r] psa_range
         #   @return [::String]
-        #     Output only. This field is currently not implemented. Currently values
-        #     provided in this field will be ignored.
+        #     Output only. This field is not implemented. The values provided in this
+        #     field are ignored.
         # @!attribute [rw] storage_pool
         #   @return [::String]
         #     Required. StoragePool name of the volume
@@ -553,7 +553,7 @@ module Google
           # SecurityStyle uses NTFS
           NTFS = 1
 
-          # SecurityStyle uses NTFS
+          # SecurityStyle uses UNIX
           UNIX = 2
         end
 
