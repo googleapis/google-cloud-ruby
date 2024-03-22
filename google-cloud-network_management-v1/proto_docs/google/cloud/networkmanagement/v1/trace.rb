@@ -108,8 +108,10 @@ module Google
         #   @return [::Google::Cloud::NetworkManagement::V1::DropInfo]
         #     Display information of the final state "drop" and reason.
         # @!attribute [rw] load_balancer
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::NetworkManagement::V1::LoadBalancerInfo]
-        #     Display information of the load balancers.
+        #     Display information of the load balancers. Deprecated in favor of the
+        #     `load_balancer_backend_info` field, not used in new tests.
         # @!attribute [rw] network
         #   @return [::Google::Cloud::NetworkManagement::V1::NetworkInfo]
         #     Display information of a Google Cloud network.
@@ -602,8 +604,11 @@ module Google
         #   @return [::Google::Cloud::NetworkManagement::V1::LoadBalancerInfo::LoadBalancerType]
         #     Type of the load balancer.
         # @!attribute [rw] health_check_uri
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
-        #     URI of the health check for the load balancer.
+        #     URI of the health check for the load balancer. Deprecated and no longer
+        #     populated as different load balancer backends might have different health
+        #     checks.
         # @!attribute [rw] backends
         #   @return [::Array<::Google::Cloud::NetworkManagement::V1::LoadBalancerBackend>]
         #     Information for the loadbalancer backends.
