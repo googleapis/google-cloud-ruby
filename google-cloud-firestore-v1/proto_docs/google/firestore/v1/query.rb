@@ -128,6 +128,13 @@ module Google
         #     Requires:
         #
         #     * The value must be greater than or equal to zero if specified.
+        # @!attribute [rw] find_nearest
+        #   @return [::Google::Cloud::Firestore::V1::StructuredQuery::FindNearest]
+        #     Optional. A potential Nearest Neighbors Search.
+        #
+        #     Applies after all other filters and ordering.
+        #
+        #     Finds the closest vector embeddings to the given query vector.
         class StructuredQuery
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -360,6 +367,52 @@ module Google
           class Projection
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Nearest Neighbors search config.
+          # @!attribute [rw] vector_field
+          #   @return [::Google::Cloud::Firestore::V1::StructuredQuery::FieldReference]
+          #     Required. An indexed vector field to search upon. Only documents which
+          #     contain vectors whose dimensionality match the query_vector can be
+          #     returned.
+          # @!attribute [rw] query_vector
+          #   @return [::Google::Cloud::Firestore::V1::Value]
+          #     Required. The query vector that we are searching on. Must be a vector of
+          #     no more than 2048 dimensions.
+          # @!attribute [rw] distance_measure
+          #   @return [::Google::Cloud::Firestore::V1::StructuredQuery::FindNearest::DistanceMeasure]
+          #     Required. The Distance Measure to use, required.
+          # @!attribute [rw] limit
+          #   @return [::Google::Protobuf::Int32Value]
+          #     Required. The number of nearest neighbors to return. Must be a positive
+          #     integer of no more than 1000.
+          class FindNearest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The distance measure to use when comparing vectors.
+            module DistanceMeasure
+              # Should not be set.
+              DISTANCE_MEASURE_UNSPECIFIED = 0
+
+              # Measures the EUCLIDEAN distance between the vectors. See
+              # [Euclidean](https://en.wikipedia.org/wiki/Euclidean_distance) to learn
+              # more
+              EUCLIDEAN = 1
+
+              # Compares vectors based on the angle between them, which allows you to
+              # measure similarity that isn't based on the vectors magnitude.
+              # We recommend using DOT_PRODUCT with unit normalized vectors instead of
+              # COSINE distance, which is mathematically equivalent with better
+              # performance. See [Cosine
+              # Similarity](https://en.wikipedia.org/wiki/Cosine_similarity) to learn
+              # more.
+              COSINE = 2
+
+              # Similar to cosine but is affected by the magnitude of the vectors. See
+              # [Dot Product](https://en.wikipedia.org/wiki/Dot_product) to learn more.
+              DOT_PRODUCT = 3
+            end
           end
 
           # A sort direction.
