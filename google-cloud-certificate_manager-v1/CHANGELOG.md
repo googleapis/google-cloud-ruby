@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.10.0 (2024-03-22)
+
+#### Features
+
+* Added Trust Configs and DnsAuthorization.Type to Certificate Manager ([#25403](https://github.com/googleapis/google-cloud-ruby/issues/25403)) 
+
 ### 0.9.0 (2024-02-26)
 
 #### Features
