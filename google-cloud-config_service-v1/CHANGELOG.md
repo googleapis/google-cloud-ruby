@@ -1,5 +1,16 @@
 # Changelog
 
+### 0.5.0 (2024-03-22)
+
+#### Features
+
+* Infrastructure Manager can validate and enforce quota limits, preventing infrastructure that exceeds quota limits from being deployed 
+* Infrastructure Manager supports the deployment of infrastructure from Terraform configurations in a private Git repository ([#25404](https://github.com/googleapis/google-cloud-ruby/issues/25404)) 
+* Infrastructure manager supports the following versions of Terraform when creating a deployment: Terraform version 1.2.3, 1.3.10, 1.4.7, 1.5.7 
+#### Documentation
+
+* Comment updates to `page_size` and `service_account` 
+
 ### 0.4.0 (2024-02-26)
 
 #### Features
