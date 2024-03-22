@@ -1796,6 +1796,9 @@ module Google
 
             # Fastly
             FASTLY = 3
+
+            # Cloudflare
+            CLOUDFLARE = 4
           end
         end
       end
