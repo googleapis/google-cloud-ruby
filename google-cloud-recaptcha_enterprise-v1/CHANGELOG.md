@@ -4,7 +4,7 @@
 
 #### Features
 
-* Add include_recaptcha_script for as a new action in firewall policies ([#25297](https://github.com/googleapis/google-cloud-ruby/issues/25297)) 
+* Support for the include_recaptcha_script firewall action ([#25297](https://github.com/googleapis/google-cloud-ruby/issues/25297)) 
 
 ### 0.18.0 (2024-02-26)
 
