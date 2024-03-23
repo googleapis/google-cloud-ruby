@@ -46,40 +46,6 @@ module Google
   module Cloud
     module Dataplex
       ##
-      # Create a new client object for ContentService.
-      #
-      # By default, this returns an instance of
-      # [Google::Cloud::Dataplex::V1::ContentService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dataplex-v1/latest/Google-Cloud-Dataplex-V1-ContentService-Client)
-      # for a gRPC client for version V1 of the API.
-      # However, you can specify a different API version by passing it in the
-      # `version` parameter. If the ContentService service is
-      # supported by that API version, and the corresponding gem is available, the
-      # appropriate versioned client will be returned.
-      # You can also specify a different transport by passing `:rest` or `:grpc` in
-      # the `transport` parameter.
-      #
-      # ## About ContentService
-      #
-      # ContentService manages Notebook and SQL Scripts for Dataplex.
-      #
-      # @param version [::String, ::Symbol] The API version to connect to. Optional.
-      #   Defaults to `:v1`.
-      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
-      # @return [::Object] A client object for the specified version.
-      #
-      def self.content_service version: :v1, transport: :grpc, &block
-        require "google/cloud/dataplex/#{version.to_s.downcase}"
-
-        package_name = Google::Cloud::Dataplex
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
-        service_module = Google::Cloud::Dataplex.const_get(package_name).const_get(:ContentService)
-        service_module = service_module.const_get(:Rest) if transport == :rest
-        service_module.const_get(:Client).new(&block)
-      end
-
-      ##
       # Create a new client object for DataplexService.
       #
       # By default, this returns an instance of
@@ -113,6 +79,78 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::Dataplex.const_get(package_name).const_get(:DataplexService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
+      end
+
+      ##
+      # Create a new client object for CatalogService.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Dataplex::V1::CatalogService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dataplex-v1/latest/Google-Cloud-Dataplex-V1-CatalogService-Client)
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the CatalogService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
+      #
+      # ## About CatalogService
+      #
+      # The primary resources offered by this service are EntryGroups, EntryTypes,
+      # AspectTypes, Entry and Aspect which collectively allow a data administrator
+      # to organize, manage, secure and catalog data across their organization
+      # located across cloud projects in a variety of storage systems including Cloud
+      # Storage and BigQuery.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.catalog_service version: :v1, transport: :grpc, &block
+        require "google/cloud/dataplex/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Dataplex
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::Dataplex.const_get(package_name).const_get(:CatalogService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
+      end
+
+      ##
+      # Create a new client object for ContentService.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Dataplex::V1::ContentService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dataplex-v1/latest/Google-Cloud-Dataplex-V1-ContentService-Client)
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the ContentService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
+      #
+      # ## About ContentService
+      #
+      # ContentService manages Notebook and SQL Scripts for Dataplex.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.content_service version: :v1, transport: :grpc, &block
+        require "google/cloud/dataplex/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Dataplex
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::Dataplex.const_get(package_name).const_get(:ContentService)
         service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
