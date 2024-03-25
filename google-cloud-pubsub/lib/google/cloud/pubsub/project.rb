@@ -263,6 +263,8 @@ module Google
         #   that is up to `retention` number of seconds in the past. If this field is
         #   not set, message retention is controlled by settings on individual
         #   subscriptions. Cannot be less than 600 (10 minutes) or more than 604,800 (7 days).
+        #   @param ingestion_data_source_settings [::Google::Cloud::PubSub::V1::IngestionDataSourceSettings, ::Hash]
+        #     Optional. Settings for ingestion from a data source into this topic.
         #
         # @return [Google::Cloud::PubSub::Topic]
         #
@@ -279,15 +281,17 @@ module Google
                          async: nil,
                          schema_name: nil,
                          message_encoding: nil,
-                         retention: nil
+                         retention: nil,
+                         ingestion_data_source_settings: nil
           ensure_service!
           grpc = service.create_topic topic_name,
-                                      labels:              labels,
-                                      kms_key_name:        kms_key,
+                                      labels: labels,
+                                      kms_key_name: kms_key,
                                       persistence_regions: persistence_regions,
-                                      schema_name:         schema_name,
-                                      message_encoding:    message_encoding,
-                                      retention:           retention
+                                      schema_name: schema_name,
+                                      message_encoding: message_encoding,
+                                      retention: retention,
+                                      ingestion_data_source_settings: ingestion_data_source_settings
           Topic.from_grpc grpc, service, async: async
         end
         alias new_topic create_topic
