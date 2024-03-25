@@ -46,6 +46,11 @@ module Google
         #     The steps are ordered by the processing sequence within the simulated
         #     network state machine. It is critical to preserve the order of the steps
         #     and avoid reordering or sorting them.
+        # @!attribute [rw] forward_trace_id
+        #   @return [::Integer]
+        #     ID of trace. For forward traces, this ID is unique for each trace. For
+        #     return traces, it matches ID of associated forward trace. A single forward
+        #     trace can be associated with none, one or more than one return trace.
         class Trace
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -189,6 +194,15 @@ module Google
             # Initial state: packet originating from a Cloud Run revision.
             # A CloudRunRevisionInfo is populated with starting revision information.
             START_FROM_CLOUD_RUN_REVISION = 26
+
+            # Initial state: packet originating from a Storage Bucket. Used only for
+            # return traces.
+            # The storage_bucket information is populated.
+            START_FROM_STORAGE_BUCKET = 29
+
+            # Initial state: packet originating from a published service that uses
+            # Private Service Connect. Used only for return traces.
+            START_FROM_PSC_PUBLISHED_SERVICE = 30
 
             # Config checking state: verify ingress firewall rule.
             APPLY_INGRESS_FIREWALL_RULE = 4
@@ -375,6 +389,12 @@ module Google
             # For details, see [Regional network firewall
             # policies](https://cloud.google.com/firewall/docs/regional-firewall-policies).
             NETWORK_REGIONAL_FIREWALL_POLICY_RULE = 6
+
+            # Tracking state for response traffic created when request traffic goes
+            # through allow firewall rule.
+            # For details, see [firewall rules
+            # specifications](https://cloud.google.com/firewall/docs/firewalls#specifications)
+            TRACKING_STATE = 101
           end
         end
 
@@ -1120,7 +1140,7 @@ module Google
             # Route's next hop resource is not found.
             ROUTE_NEXT_HOP_RESOURCE_NOT_FOUND = 43
 
-            # Route's next hop instance doesn't hace a NIC in the route's network.
+            # Route's next hop instance doesn't have a NIC in the route's network.
             ROUTE_NEXT_HOP_INSTANCE_WRONG_NETWORK = 49
 
             # Route's next hop IP address is not a primary IP address of the next hop
