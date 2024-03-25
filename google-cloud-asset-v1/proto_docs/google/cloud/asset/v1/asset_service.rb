@@ -941,10 +941,10 @@ module Google
         #     folder number (such as "folders/123"), a project ID (such as
         #     "projects/my-project-id"), or a project number (such as "projects/12345").
         #
-        #     To know how to get organization id, visit [here
+        #     To know how to get organization ID, visit [here
         #     ](https://cloud.google.com/resource-manager/docs/creating-managing-organization#retrieving_your_organization_id).
         #
-        #     To know how to get folder or project id, visit [here
+        #     To know how to get folder or project ID, visit [here
         #     ](https://cloud.google.com/resource-manager/docs/creating-managing-folders#viewing_or_listing_folders_and_projects).
         # @!attribute [rw] resource_selector
         #   @return [::Google::Cloud::Asset::V1::IamPolicyAnalysisQuery::ResourceSelector]
@@ -1824,10 +1824,10 @@ module Google
         #     folder number (such as "folders/123"), a project ID (such as
         #     "projects/my-project-id"), or a project number (such as "projects/12345").
         #
-        #     To know how to get organization id, visit [here
+        #     To know how to get organization ID, visit [here
         #     ](https://cloud.google.com/resource-manager/docs/creating-managing-organization#retrieving_your_organization_id).
         #
-        #     To know how to get folder or project id, visit [here
+        #     To know how to get folder or project ID, visit [here
         #     ](https://cloud.google.com/resource-manager/docs/creating-managing-folders#viewing_or_listing_folders_and_projects).
         # @!attribute [rw] names
         #   @return [::Array<::String>]
@@ -1957,8 +1957,8 @@ module Google
           # specific circumstances to support analysis results.
           # @!attribute [rw] values
           #   @return [::Google::Cloud::Asset::V1::AnalyzerOrgPolicy::Rule::StringValues]
-          #     List of values to be used for this PolicyRule. This field can be set
-          #     only in Policies for list constraints.
+          #     List of values to be used for this policy rule. This field can be set
+          #     only in policies for list constraints.
           # @!attribute [rw] allow_all
           #   @return [::Boolean]
           #     Setting this to true means that all values are allowed. This field can
@@ -1979,14 +1979,18 @@ module Google
           #   @return [::Google::Cloud::Asset::V1::ConditionEvaluation]
           #     The condition evaluation result for this rule.
           #     Only populated if it meets all the following criteria:
-          #     * there is a
+          #
+          #     * There is a
           #     {::Google::Cloud::Asset::V1::AnalyzerOrgPolicy::Rule#condition condition}
-          #     defined for this rule
-          #     * this rule is within a consolidated_policy
-          #     * the consolidated_policy is within
-          #       {::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedContainersResponse::GovernedContainer AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer}
+          #     defined for this rule.
+          #     * This rule is within
+          #       {::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedContainersResponse::GovernedContainer#consolidated_policy AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer.consolidated_policy},
           #       or
-          #       {::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedAssetsResponse::GovernedResource AnalyzeOrgPolicyGovernedAssetsResponse.GovernedResource}
+          #       {::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedAssetsResponse::GovernedAsset#consolidated_policy AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset.consolidated_policy}
+          #       when the
+          #       {::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedAssetsResponse::GovernedAsset AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset}
+          #       has
+          #       {::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedAssetsResponse::GovernedAsset#governed_resource AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset.governed_resource}.
           class Rule
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
