@@ -1,0 +1,48 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.api.cloudquotas.v1",
+  "libraryPackage": "::Google::Cloud::CloudQuotas::V1",
+  "services": {
+    "CloudQuotas": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::CloudQuotas::V1::CloudQuotas::Client",
+          "rpcs": {
+            "ListQuotaInfos": {
+              "methods": [
+                "list_quota_infos"
+              ]
+            },
+            "GetQuotaInfo": {
+              "methods": [
+                "get_quota_info"
+              ]
+            },
+            "ListQuotaPreferences": {
+              "methods": [
+                "list_quota_preferences"
+              ]
+            },
+            "GetQuotaPreference": {
+              "methods": [
+                "get_quota_preference"
+              ]
+            },
+            "CreateQuotaPreference": {
+              "methods": [
+                "create_quota_preference"
+              ]
+            },
+            "UpdateQuotaPreference": {
+              "methods": [
+                "update_quota_preference"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
