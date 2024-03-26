@@ -16,8 +16,8 @@
 
 OwlBot.modifier path: "proto_docs/google/apps/card/v1/card.rb", name: "Replace keyword usage in card horizontal alignment" do |content|
   content&.sub("START =", "HORIZONTAL_ALIGNMENT_START =")
-    .sub("CENTER =", "HORIZONTAL_ALIGNMENT_CENTER =")
-    .sub("END =", "HORIZONTAL_ALIGNMENT_END =")
+         &.sub("CENTER =", "HORIZONTAL_ALIGNMENT_CENTER =")
+         &.sub("END =", "HORIZONTAL_ALIGNMENT_END =")
 end
 
 OwlBot.move_files
