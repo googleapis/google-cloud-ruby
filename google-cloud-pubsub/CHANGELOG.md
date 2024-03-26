@@ -1,5 +1,11 @@
 # Release History
 
+### 2.18.0 (2024-03-26)
+
+#### Features
+
+* support ingestion_data_source_settings for create_topic ([#25418](https://github.com/googleapis/google-cloud-ruby/issues/25418)) 
+
 ### 2.17.0 (2024-03-07)
 
 #### Features
