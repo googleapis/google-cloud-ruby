@@ -68,7 +68,9 @@ class MockStorage < Minitest::Spec
                          rpo: "DEFAULT",
                          autoclass_enabled: nil,
                          autoclass_terminal_storage_class: nil,
-                         enable_object_retention: nil
+                         enable_object_retention: nil,
+                         effective_time: DateTime.now,
+                         retention_duration_seconds: 604800
     versioning_config = { "enabled" => versioning } if versioning
     { "kind" => "storage#bucket",
       "id" => name,
@@ -90,8 +92,16 @@ class MockStorage < Minitest::Spec
       "billing" => billing_hash(requester_pays),
       "etag" => "CAE=",
       "autoclass" => autoclass_config_hash(autoclass_enabled, autoclass_terminal_storage_class),
-      "enableObjectRetention" => enable_object_retention
+      "enableObjectRetention" => enable_object_retention,
+      "softDeletePolicy" => soft_delete_policy_object(effective_time: effective_time, retention_duration_seconds: retention_duration_seconds)
     }.delete_if { |_, v| v.nil? }
+  end
+
+  def soft_delete_policy_object effective_time: DateTime.now, retention_duration_seconds: 604800
+    Google::Apis::StorageV1::Bucket::SoftDeletePolicy.new(
+      effective_time: effective_time,
+      retention_duration_seconds: retention_duration_seconds
+    )
   end
 
   def autoclass_config_hash(enabled, terminal_storage_class)
@@ -122,7 +132,15 @@ class MockStorage < Minitest::Spec
     }.delete_if { |_, v| v.nil? } if !retention_params.nil? && !retention_params.empty?
   end
 
-  def random_file_hash bucket=random_bucket_name, name=random_file_path, generation="1234567890", kms_key_name="path/to/encryption_key_name", custom_time: nil, retention_params: nil, override_unlocked_retention: nil
+  def random_file_hash bucket=random_bucket_name,
+                       name=random_file_path,
+                       generation="1234567890",
+                       kms_key_name="path/to/encryption_key_name",
+                       custom_time: nil,
+                       retention_params: nil,
+                       override_unlocked_retention: nil,
+                       soft_delete_time: nil,
+                       hard_delete_time: nil
     { "kind" => "storage#object",
       "id" => "#{bucket}/#{name}/1234567890",
       "selfLink" => "https://www.googleapis.com/storage/v1/b/#{bucket}/o/#{name}",
@@ -151,7 +169,9 @@ class MockStorage < Minitest::Spec
       "eventBasedHold" => true,
       "retentionExpirationTime" => Time.now,
       "retention" => file_retention_hash(retention_params),
-      "overrideUnlockedRetention" => override_unlocked_retention }
+      "overrideUnlockedRetention" => override_unlocked_retention,
+      "softDeleteTime" => soft_delete_time,
+      "hardDeleteTime" => hard_delete_time }
   end
 
   def random_bucket_name
@@ -341,6 +361,7 @@ class MockStorage < Minitest::Spec
                       if_metageneration_match: nil,
                       if_metageneration_not_match: nil,
                       user_project: nil,
+                      soft_deleted: nil,
                       options: {}
     {
       generation: generation,
@@ -349,6 +370,31 @@ class MockStorage < Minitest::Spec
       if_metageneration_match: if_metageneration_match,
       if_metageneration_not_match: if_metageneration_not_match,
       user_project: user_project,
+      soft_deleted: soft_deleted,
+      options: options
+    }
+  end
+
+  def list_objects_args delimiter: nil,
+                        max_results: nil,
+                        page_token: nil,
+                        prefix: nil,
+                        versions: nil,
+                        user_project: nil,
+                        match_glob: nil,
+                        include_folders_as_prefixes: nil,
+                        soft_deleted: nil,
+                        options: {}
+    {
+      delimiter: delimiter,
+      max_results: max_results,
+      page_token: page_token,
+      prefix: prefix,
+      versions: versions,
+      user_project: user_project,
+      match_glob: match_glob,
+      include_folders_as_prefixes: include_folders_as_prefixes,
+      soft_deleted: soft_deleted,
       options: options
     }
   end
@@ -466,5 +512,10 @@ class MockStorage < Minitest::Spec
       destination: destination_gapi,
       source_objects: source_objects
     )
+  end
+
+  def list_files_gapi count = 2, token = nil, prefixes = nil
+    files = count.times.map { Google::Apis::StorageV1::Object.from_json random_file_hash.to_json }
+    Google::Apis::StorageV1::Objects.new kind: "storage#objects", items: files, next_page_token: token, prefixes: prefixes
   end
 end

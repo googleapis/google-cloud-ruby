@@ -764,6 +764,30 @@ module Google
         end
 
         ##
+        # This soft delete time is the time when the object became
+        # soft-deleted.
+        #
+        # @return [DateTime, nil] A DateTime representing the time at
+        #   which the object became soft-deleted, or `nil` if the file was
+        #   not deleted.
+        #
+        def soft_delete_time
+          @gapi.soft_delete_time
+        end
+
+        ##
+        # This hard delete time is The time when the file will be permanently
+        # deleted.
+        #
+        # @return [DateTime, nil] A DateTime representing the time at
+        #   which the file will be permanently deleted, or `nil` if the file is
+        #   not soft deleted.
+        #
+        def hard_delete_time
+          @gapi.hard_delete_time
+        end
+
+        ##
         # Retrieves a list of versioned files for the current object.
         #
         # Useful for listing archived versions of the file, restoring the live
