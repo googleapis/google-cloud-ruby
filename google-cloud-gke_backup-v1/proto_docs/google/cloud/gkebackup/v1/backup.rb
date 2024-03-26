@@ -25,7 +25,6 @@ module Google
         # some portion of the state of a GKE cluster, the record of the backup
         # operation itself, and an anchor for the underlying artifacts that
         # comprise the Backup (the config backup and VolumeBackups).
-        # Next id: 28
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The fully qualified name of the Backup.
@@ -47,12 +46,12 @@ module Google
         #     means that the Backup was created manually.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     A set of custom labels supplied by user.
+        #     Optional. A set of custom labels supplied by user.
         # @!attribute [rw] delete_lock_days
         #   @return [::Integer]
-        #     Minimum age for this Backup (in days). If this field is set to a non-zero
-        #     value, the Backup will be "locked" against deletion (either manual or
-        #     automatic deletion) for the number of days provided (measured from the
+        #     Optional. Minimum age for this Backup (in days). If this field is set to a
+        #     non-zero value, the Backup will be "locked" against deletion (either manual
+        #     or automatic deletion) for the number of days provided (measured from the
         #     creation time of the Backup).  MUST be an integer value between 0-90
         #     (inclusive).
         #
@@ -67,8 +66,8 @@ module Google
         #     {::Google::Cloud::GkeBackup::V1::Backup#delete_lock_days delete_lock_days}).
         # @!attribute [rw] retain_days
         #   @return [::Integer]
-        #     The age (in days) after which this Backup will be automatically deleted.
-        #     Must be an integer value >= 0:
+        #     Optional. The age (in days) after which this Backup will be automatically
+        #     deleted. Must be an integer value >= 0:
         #
         #     - If 0, no automatic deletion will occur for this Backup.
         #     - If not 0, this must be >=
@@ -151,7 +150,7 @@ module Google
         #     applied to the same version of the resource.
         # @!attribute [rw] description
         #   @return [::String]
-        #     User specified descriptive string for this Backup.
+        #     Optional. User specified descriptive string for this Backup.
         # @!attribute [r] pod_count
         #   @return [::Integer]
         #     Output only. The total number of Kubernetes Pods contained in the Backup.
@@ -163,9 +162,9 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Information about the GKE cluster from which this Backup was created.
-          # @!attribute [rw] cluster
+          # @!attribute [r] cluster
           #   @return [::String]
-          #     The source cluster from which this Backup was created.
+          #     Output only. The source cluster from which this Backup was created.
           #     Valid formats:
           #
           #       - `projects/*/locations/*/clusters/*`
@@ -173,18 +172,19 @@ module Google
           #
           #     This is inherited from the parent BackupPlan's
           #     {::Google::Cloud::GkeBackup::V1::BackupPlan#cluster cluster} field.
-          # @!attribute [rw] k8s_version
+          # @!attribute [r] k8s_version
           #   @return [::String]
-          #     The Kubernetes server version of the source cluster.
-          # @!attribute [rw] backup_crd_versions
+          #     Output only. The Kubernetes server version of the source cluster.
+          # @!attribute [r] backup_crd_versions
           #   @return [::Google::Protobuf::Map{::String => ::String}]
-          #     A list of the Backup for GKE CRD versions found in the cluster.
-          # @!attribute [rw] gke_version
+          #     Output only. A list of the Backup for GKE CRD versions found in the
+          #     cluster.
+          # @!attribute [r] gke_version
           #   @return [::String]
-          #     GKE version
-          # @!attribute [rw] anthos_version
+          #     Output only. GKE version
+          # @!attribute [r] anthos_version
           #   @return [::String]
-          #     Anthos version
+          #     Output only. Anthos version
           class ClusterMetadata
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

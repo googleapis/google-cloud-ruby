@@ -857,9 +857,9 @@ module Google
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :delete,
-                                                          uri_template: "/v1/{name}/operations",
+                                                          uri_template: "/v1/{name}",
                                                           matches: [
-                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/operations/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

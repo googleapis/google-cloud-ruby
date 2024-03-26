@@ -23,7 +23,6 @@ module Google
       module V1
         # The configuration of a potential series of Restore operations to be performed
         # against Backups belong to a particular BackupPlan.
-        # Next id: 13
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The full name of the RestorePlan resource.
@@ -42,7 +41,7 @@ module Google
         #     updated.
         # @!attribute [rw] description
         #   @return [::String]
-        #     User specified descriptive string for this RestorePlan.
+        #     Optional. User specified descriptive string for this RestorePlan.
         # @!attribute [rw] backup_plan
         #   @return [::String]
         #     Required. Immutable. A reference to the
@@ -62,7 +61,7 @@ module Google
         #     Required. Configuration of Restores created via this RestorePlan.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     A set of custom labels supplied by user.
+        #     Optional. A set of custom labels supplied by user.
         # @!attribute [r] etag
         #   @return [::String]
         #     Output only. `etag` is used for optimistic concurrency control as a way to

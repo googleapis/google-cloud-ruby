@@ -129,6 +129,11 @@
               "methods": [
                 "get_volume_restore"
               ]
+            },
+            "GetBackupIndexDownloadUrl": {
+              "methods": [
+                "get_backup_index_download_url"
+              ]
             }
           }
         }

@@ -24,7 +24,6 @@ module Google
         # Represents the backup of a specific persistent volume as a component of a
         # Backup - both the record of the operation and a pointer to the underlying
         # storage-specific artifacts.
-        # Next id: 14
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The full name of the VolumeBackup resource.
@@ -126,7 +125,6 @@ module Google
         end
 
         # Represents the operation of restoring a volume from a VolumeBackup.
-        # Next id: 13
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. Full name of the VolumeRestore resource.
