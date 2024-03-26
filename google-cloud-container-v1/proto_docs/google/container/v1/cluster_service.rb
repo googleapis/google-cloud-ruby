@@ -4804,9 +4804,38 @@ module Google
         # @!attribute [rw] state
         #   @return [::Google::Cloud::Container::V1::DatabaseEncryption::State]
         #     The desired state of etcd encryption.
+        # @!attribute [r] current_state
+        #   @return [::Google::Cloud::Container::V1::DatabaseEncryption::CurrentState]
+        #     Output only. The current state of etcd encryption.
+        # @!attribute [r] decryption_keys
+        #   @return [::Array<::String>]
+        #     Output only. Keys in use by the cluster for decrypting
+        #     existing objects, in addition to the key in `key_name`.
+        #
+        #     Each item is a CloudKMS key resource.
+        # @!attribute [r] last_operation_errors
+        #   @return [::Array<::Google::Cloud::Container::V1::DatabaseEncryption::OperationError>]
+        #     Output only. Records errors seen during DatabaseEncryption update
+        #     operations.
         class DatabaseEncryption
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # OperationError records errors seen from CloudKMS keys
+          # encountered during updates to DatabaseEncryption configuration.
+          # @!attribute [rw] key_name
+          #   @return [::String]
+          #     CloudKMS key resource that had the error.
+          # @!attribute [rw] error_message
+          #   @return [::String]
+          #     Description of the error seen during the operation.
+          # @!attribute [rw] timestamp
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Time when the CloudKMS error was seen.
+          class OperationError
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # State of etcd encryption.
           module State
@@ -4819,6 +4848,33 @@ module Google
             # Secrets in etcd are stored in plain text (at etcd level) - this is
             # unrelated to Compute Engine level full disk encryption.
             DECRYPTED = 2
+          end
+
+          # Current State of etcd encryption.
+          module CurrentState
+            # Should never be set
+            CURRENT_STATE_UNSPECIFIED = 0
+
+            # Secrets in etcd are encrypted.
+            CURRENT_STATE_ENCRYPTED = 7
+
+            # Secrets in etcd are stored in plain text (at etcd level) - this is
+            # unrelated to Compute Engine level full disk encryption.
+            CURRENT_STATE_DECRYPTED = 2
+
+            # Encryption (or re-encryption with a different CloudKMS key)
+            # of Secrets is in progress.
+            CURRENT_STATE_ENCRYPTION_PENDING = 3
+
+            # Encryption (or re-encryption with a different CloudKMS key) of Secrets in
+            # etcd encountered an error.
+            CURRENT_STATE_ENCRYPTION_ERROR = 4
+
+            # De-crypting Secrets to plain text in etcd is in progress.
+            CURRENT_STATE_DECRYPTION_PENDING = 5
+
+            # De-crypting Secrets to plain text in etcd encountered an error.
+            CURRENT_STATE_DECRYPTION_ERROR = 6
           end
         end
 
