@@ -77,9 +77,35 @@ module Google
             # @!attribute [rw] array_config
             #   @return [::Google::Cloud::Firestore::Admin::V1::Index::IndexField::ArrayConfig]
             #     Indicates that this field supports operations on `array_value`s.
+            # @!attribute [rw] vector_config
+            #   @return [::Google::Cloud::Firestore::Admin::V1::Index::IndexField::VectorConfig]
+            #     Indicates that this field supports nearest neighbors and distance
+            #     operations on vector.
             class IndexField
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # The index configuration to support vector search operations
+              # @!attribute [rw] dimension
+              #   @return [::Integer]
+              #     Required. The vector dimension this configuration applies to.
+              #
+              #     The resulting index will only include vectors of this dimension, and
+              #     can be used for vector search with the same dimension.
+              # @!attribute [rw] flat
+              #   @return [::Google::Cloud::Firestore::Admin::V1::Index::IndexField::VectorConfig::FlatIndex]
+              #     Indicates the vector index is a flat index.
+              class VectorConfig
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+
+                # An index that stores vectors in a flat data structure, and supports
+                # exhaustive search.
+                class FlatIndex
+                  include ::Google::Protobuf::MessageExts
+                  extend ::Google::Protobuf::MessageExts::ClassMethods
+                end
+              end
 
               # The supported orderings.
               module Order
