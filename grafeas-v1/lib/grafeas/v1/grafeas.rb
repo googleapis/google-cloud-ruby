@@ -24,7 +24,6 @@ require "grafeas/v1/version"
 
 require "grafeas/v1/grafeas/paths"
 require "grafeas/v1/grafeas/client"
-require "grafeas/v1/grafeas/rest"
 
 module Grafeas
   module V1
@@ -48,11 +47,6 @@ module Grafeas
     #
     #     require "grafeas/v1/grafeas"
     #     client = ::Grafeas::V1::Grafeas::Client.new
-    #
-    # @example Load this service and instantiate a REST client
-    #
-    #     require "grafeas/v1/grafeas/rest"
-    #     client = ::Grafeas::V1::Grafeas::Rest::Client.new
     #
     module Grafeas
     end

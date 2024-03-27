@@ -28,11 +28,6 @@ module Grafeas
   #     require "grafeas/v1"
   #     client = ::Grafeas::V1::Grafeas::Client.new
   #
-  # @example Load this package, including all its services, and instantiate a REST client
-  #
-  #     require "grafeas/v1"
-  #     client = ::Grafeas::V1::Grafeas::Rest::Client.new
-  #
   module V1
   end
 end
