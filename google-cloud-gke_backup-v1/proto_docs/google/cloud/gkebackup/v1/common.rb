@@ -24,7 +24,7 @@ module Google
         # A list of Kubernetes Namespaces
         # @!attribute [rw] namespaces
         #   @return [::Array<::String>]
-        #     A list of Kubernetes Namespaces
+        #     Optional. A list of Kubernetes Namespaces
         class Namespaces
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -33,10 +33,10 @@ module Google
         # A reference to a namespaced resource in Kubernetes.
         # @!attribute [rw] namespace
         #   @return [::String]
-        #     The Namespace of the Kubernetes resource.
+        #     Optional. The Namespace of the Kubernetes resource.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The name of the Kubernetes resource.
+        #     Optional. The name of the Kubernetes resource.
         class NamespacedName
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -45,7 +45,7 @@ module Google
         # A list of namespaced Kubernetes resources.
         # @!attribute [rw] namespaced_names
         #   @return [::Array<::Google::Cloud::GkeBackup::V1::NamespacedName>]
-        #     A list of namespaced Kubernetes resources.
+        #     Optional. A list of namespaced Kubernetes resources.
         class NamespacedNames
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -55,7 +55,7 @@ module Google
         # artifacts.
         # @!attribute [rw] gcp_kms_encryption_key
         #   @return [::String]
-        #     Google Cloud KMS encryption key. Format:
+        #     Optional. Google Cloud KMS encryption key. Format:
         #     `projects/*/locations/*/keyRings/*/cryptoKeys/*`
         class EncryptionKey
           include ::Google::Protobuf::MessageExts

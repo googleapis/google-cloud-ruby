@@ -1409,6 +1409,60 @@ class ::Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::ClientTest < Minitest:
     end
   end
 
+  def test_get_backup_index_download_url
+    # Create test objects.
+    client_result = ::Google::Cloud::GkeBackup::V1::GetBackupIndexDownloadUrlResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    backup = "hello world"
+
+    get_backup_index_download_url_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::ServiceStub.stub :transcode_get_backup_index_download_url_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_backup_index_download_url_client_stub do
+        # Create client
+        client = ::Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_backup_index_download_url({ backup: backup }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_backup_index_download_url backup: backup do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_backup_index_download_url ::Google::Cloud::GkeBackup::V1::GetBackupIndexDownloadUrlRequest.new(backup: backup) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_backup_index_download_url({ backup: backup }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_backup_index_download_url(::Google::Cloud::GkeBackup::V1::GetBackupIndexDownloadUrlRequest.new(backup: backup), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_backup_index_download_url_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 
