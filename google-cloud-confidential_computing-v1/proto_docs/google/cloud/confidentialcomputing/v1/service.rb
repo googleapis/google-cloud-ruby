@@ -255,6 +255,12 @@ module Google
 
           # OpenID Connect (OIDC) token type
           TOKEN_TYPE_OIDC = 1
+
+          # Public Key Infrastructure (PKI) token type
+          TOKEN_TYPE_PKI = 2
+
+          # Limited claim token type for AWS integration
+          TOKEN_TYPE_LIMITED_AWS = 3
         end
       end
     end
