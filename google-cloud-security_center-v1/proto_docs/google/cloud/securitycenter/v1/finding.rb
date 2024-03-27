@@ -230,6 +230,9 @@ module Google
         # @!attribute [rw] load_balancers
         #   @return [::Array<::Google::Cloud::SecurityCenter::V1::LoadBalancer>]
         #     The load balancers associated with the finding.
+        # @!attribute [rw] notebook
+        #   @return [::Google::Cloud::SecurityCenter::V1::Notebook]
+        #     Notebook associated with the finding.
         class Finding
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
