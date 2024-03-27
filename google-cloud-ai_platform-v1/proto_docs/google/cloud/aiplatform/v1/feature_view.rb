@@ -63,6 +63,12 @@ module Google
         #     Configures when data is to be synced/updated for this FeatureView. At the
         #     end of the sync the latest featureValues for each entityId of this
         #     FeatureView are made ready for online serving.
+        # @!attribute [rw] index_config
+        #   @return [::Google::Cloud::AIPlatform::V1::FeatureView::IndexConfig]
+        #     Optional. Configuration for index preparation for vector search. It
+        #     contains the required configurations to create an index from source data,
+        #     so that approximate nearest neighbor (a.k.a ANN) algorithms search can be
+        #     performed during online serving.
         class FeatureView
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -91,6 +97,86 @@ module Google
           class SyncConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Configuration for vector indexing.
+          # @!attribute [rw] tree_ah_config
+          #   @return [::Google::Cloud::AIPlatform::V1::FeatureView::IndexConfig::TreeAHConfig]
+          #     Optional. Configuration options for the tree-AH algorithm (Shallow tree
+          #     + Asymmetric Hashing). Please refer to this paper for more details:
+          #     https://arxiv.org/abs/1908.10396
+          # @!attribute [rw] brute_force_config
+          #   @return [::Google::Cloud::AIPlatform::V1::FeatureView::IndexConfig::BruteForceConfig]
+          #     Optional. Configuration options for using brute force search, which
+          #     simply implements the standard linear search in the database for each
+          #     query. It is primarily meant for benchmarking and to generate the
+          #     ground truth for approximate search.
+          # @!attribute [rw] embedding_column
+          #   @return [::String]
+          #     Optional. Column of embedding. This column contains the source data to
+          #     create index for vector search. embedding_column must be set when using
+          #     vector search.
+          # @!attribute [rw] filter_columns
+          #   @return [::Array<::String>]
+          #     Optional. Columns of features that're used to filter vector search
+          #     results.
+          # @!attribute [rw] crowding_column
+          #   @return [::String]
+          #     Optional. Column of crowding. This column contains crowding attribute
+          #     which is a constraint on a neighbor list produced by
+          #     {::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreService::Client#search_nearest_entities FeatureOnlineStoreService.SearchNearestEntities}
+          #     to diversify search results. If
+          #     {::Google::Cloud::AIPlatform::V1::NearestNeighborQuery#per_crowding_attribute_neighbor_count NearestNeighborQuery.per_crowding_attribute_neighbor_count}
+          #     is set to K in
+          #     {::Google::Cloud::AIPlatform::V1::SearchNearestEntitiesRequest SearchNearestEntitiesRequest},
+          #     it's guaranteed that no more than K entities of the same crowding
+          #     attribute are returned in the response.
+          # @!attribute [rw] embedding_dimension
+          #   @return [::Integer]
+          #     Optional. The number of dimensions of the input embedding.
+          # @!attribute [rw] distance_measure_type
+          #   @return [::Google::Cloud::AIPlatform::V1::FeatureView::IndexConfig::DistanceMeasureType]
+          #     Optional. The distance measure used in nearest neighbor search.
+          class IndexConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Configuration options for using brute force search.
+            class BruteForceConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Configuration options for the tree-AH algorithm.
+            # @!attribute [rw] leaf_node_embedding_count
+            #   @return [::Integer]
+            #     Optional. Number of embeddings on each leaf node. The default value is
+            #     1000 if not set.
+            class TreeAHConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The distance measure used in nearest neighbor search.
+            module DistanceMeasureType
+              # Should not be set.
+              DISTANCE_MEASURE_TYPE_UNSPECIFIED = 0
+
+              # Euclidean (L_2) Distance.
+              SQUARED_L2_DISTANCE = 1
+
+              # Cosine Distance. Defined as 1 - cosine similarity.
+              #
+              # We strongly suggest using DOT_PRODUCT_DISTANCE + UNIT_L2_NORM instead
+              # of COSINE distance. Our algorithms have been more optimized for
+              # DOT_PRODUCT distance which, when combined with UNIT_L2_NORM, is
+              # mathematically equivalent to COSINE distance and results in the same
+              # ranking.
+              COSINE_DISTANCE = 2
+
+              # Dot Product Distance. Defined as a negative of the dot product.
+              DOT_PRODUCT_DISTANCE = 3
+            end
           end
 
           # A Feature Registry source for features that need to be synced to Online

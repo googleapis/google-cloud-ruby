@@ -72,6 +72,11 @@ module Google
         # @!attribute [rw] proto_struct
         #   @return [::Google::Protobuf::Struct]
         #     Feature values in proto Struct format.
+        # @!attribute [rw] data_key
+        #   @return [::Google::Cloud::AIPlatform::V1::FeatureViewDataKey]
+        #     The data key associated with this response.
+        #     Will only be populated for
+        #     [FeatureOnlineStoreService.StreamingFetchFeatureValues][] RPCs.
         class FetchFeatureValuesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
