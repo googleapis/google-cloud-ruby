@@ -25,7 +25,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Unique name of the resource using the form:
-        #         `projects/{project_id}/locations/global/connectivityTests/{test}`
+        #         `projects/{project_id}/locations/global/connectivityTests/{test_id}`
         # @!attribute [rw] description
         #   @return [::String]
         #     The user-supplied description of the Connectivity Test.
@@ -104,6 +104,10 @@ module Google
         #     for applicable tests only. The details are updated when creating a new
         #     test, updating an existing test, or triggering a one-time rerun of an
         #     existing test.
+        # @!attribute [rw] bypass_firewall_checks
+        #   @return [::Boolean]
+        #     Whether the test should skip firewall checking.
+        #     If not provided, we assume false.
         class ConnectivityTest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -122,9 +126,6 @@ module Google
         # @!attribute [rw] ip_address
         #   @return [::String]
         #     The IP address of the endpoint, which can be an external or internal IP.
-        #     An IPv6 address is only allowed when the test's destination is a
-        #     [global load balancer
-        #     VIP](https://cloud.google.com/load-balancing/docs/load-balancing-overview).
         # @!attribute [rw] port
         #   @return [::Integer]
         #     The IP protocol port of the endpoint.
@@ -300,7 +301,9 @@ module Google
             # The source and destination endpoints do not uniquely identify
             # the test location in the network, and the reachability result contains
             # multiple traces. For some traces, a packet could be delivered, and for
-            # others, it would not be.
+            # others, it would not be. This result is also assigned to
+            # configuration analysis of return path if on its own it should be
+            # REACHABLE, but configuration analysis of forward path is AMBIGUOUS.
             AMBIGUOUS = 4
 
             # The configuration analysis did not complete. Possible reasons are:

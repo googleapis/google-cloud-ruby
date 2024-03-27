@@ -46,6 +46,11 @@ module Google
         #     The steps are ordered by the processing sequence within the simulated
         #     network state machine. It is critical to preserve the order of the steps
         #     and avoid reordering or sorting them.
+        # @!attribute [rw] forward_trace_id
+        #   @return [::Integer]
+        #     ID of trace. For forward traces, this ID is unique for each trace. For
+        #     return traces, it matches ID of associated forward trace. A single forward
+        #     trace can be associated with none, one or more than one return trace.
         class Trace
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -108,8 +113,10 @@ module Google
         #   @return [::Google::Cloud::NetworkManagement::V1::DropInfo]
         #     Display information of the final state "drop" and reason.
         # @!attribute [rw] load_balancer
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::NetworkManagement::V1::LoadBalancerInfo]
-        #     Display information of the load balancers.
+        #     Display information of the load balancers. Deprecated in favor of the
+        #     `load_balancer_backend_info` field, not used in new tests.
         # @!attribute [rw] network
         #   @return [::Google::Cloud::NetworkManagement::V1::NetworkInfo]
         #     Display information of a Google Cloud network.
@@ -158,10 +165,8 @@ module Google
             # The endpoint information is populated.
             START_FROM_INTERNET = 2
 
-            # Initial state: packet originating from a Google service. Some Google
-            # services, such as health check probers or Identity Aware Proxy use
-            # special routes, outside VPC routing configuration to reach Compute Engine
-            # Instances.
+            # Initial state: packet originating from a Google service.
+            # The google_service information is populated.
             START_FROM_GOOGLE_SERVICE = 27
 
             # Initial state: packet originating from a VPC or on-premises network
@@ -189,6 +194,15 @@ module Google
             # Initial state: packet originating from a Cloud Run revision.
             # A CloudRunRevisionInfo is populated with starting revision information.
             START_FROM_CLOUD_RUN_REVISION = 26
+
+            # Initial state: packet originating from a Storage Bucket. Used only for
+            # return traces.
+            # The storage_bucket information is populated.
+            START_FROM_STORAGE_BUCKET = 29
+
+            # Initial state: packet originating from a published service that uses
+            # Private Service Connect. Used only for return traces.
+            START_FROM_PSC_PUBLISHED_SERVICE = 30
 
             # Config checking state: verify ingress firewall rule.
             APPLY_INGRESS_FIREWALL_RULE = 4
@@ -375,6 +389,12 @@ module Google
             # For details, see [Regional network firewall
             # policies](https://cloud.google.com/firewall/docs/regional-firewall-policies).
             NETWORK_REGIONAL_FIREWALL_POLICY_RULE = 6
+
+            # Tracking state for response traffic created when request traffic goes
+            # through allow firewall rule.
+            # For details, see [firewall rules
+            # specifications](https://cloud.google.com/firewall/docs/firewalls#specifications)
+            TRACKING_STATE = 101
           end
         end
 
@@ -540,7 +560,7 @@ module Google
 
           # Recognized type of a Google Service.
           module GoogleServiceType
-            # Unspecified Google Service. Includes most of Google APIs and services.
+            # Unspecified Google Service.
             GOOGLE_SERVICE_TYPE_UNSPECIFIED = 0
 
             # Identity aware proxy.
@@ -558,6 +578,17 @@ module Google
             # https://cloud.google.com/dns/docs/zones/forwarding-zones#firewall-rules
             # https://cloud.google.com/dns/docs/policies#firewall-rules
             CLOUD_DNS = 3
+
+            # private.googleapis.com and restricted.googleapis.com
+            GOOGLE_API = 4
+
+            # Google API via Private Service Connect.
+            # https://cloud.google.com/vpc/docs/configure-private-service-connect-apis
+            GOOGLE_API_PSC = 5
+
+            # Google API via VPC Service Controls.
+            # https://cloud.google.com/vpc/docs/configure-private-service-connect-apis
+            GOOGLE_API_VPC_SC = 6
           end
         end
 
@@ -593,8 +624,11 @@ module Google
         #   @return [::Google::Cloud::NetworkManagement::V1::LoadBalancerInfo::LoadBalancerType]
         #     Type of the load balancer.
         # @!attribute [rw] health_check_uri
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
-        #     URI of the health check for the load balancer.
+        #     URI of the health check for the load balancer. Deprecated and no longer
+        #     populated as different load balancer backends might have different health
+        #     checks.
         # @!attribute [rw] backends
         #   @return [::Array<::Google::Cloud::NetworkManagement::V1::LoadBalancerBackend>]
         #     Information for the loadbalancer backends.
@@ -1106,7 +1140,7 @@ module Google
             # Route's next hop resource is not found.
             ROUTE_NEXT_HOP_RESOURCE_NOT_FOUND = 43
 
-            # Route's next hop instance doesn't hace a NIC in the route's network.
+            # Route's next hop instance doesn't have a NIC in the route's network.
             ROUTE_NEXT_HOP_INSTANCE_WRONG_NETWORK = 49
 
             # Route's next hop IP address is not a primary IP address of the next hop
