@@ -1015,12 +1015,15 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::ClientTest < Min
     # Create request parameters for a unary method.
     name = "hello world"
     consistency_token = "hello world"
+    standard_read_remote_writes = {}
 
     check_consistency_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :check_consistency, name
       assert_kind_of ::Google::Cloud::Bigtable::Admin::V2::CheckConsistencyRequest, request
       assert_equal "hello world", request["name"]
       assert_equal "hello world", request["consistency_token"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigtable::Admin::V2::StandardReadRemoteWrites), request["standard_read_remote_writes"]
+      assert_equal :standard_read_remote_writes, request.mode
       refute_nil options
     end
 
@@ -1031,31 +1034,31 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::ClientTest < Min
       end
 
       # Use hash object
-      client.check_consistency({ name: name, consistency_token: consistency_token }) do |response, operation|
+      client.check_consistency({ name: name, consistency_token: consistency_token, standard_read_remote_writes: standard_read_remote_writes }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.check_consistency name: name, consistency_token: consistency_token do |response, operation|
+      client.check_consistency name: name, consistency_token: consistency_token, standard_read_remote_writes: standard_read_remote_writes do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.check_consistency ::Google::Cloud::Bigtable::Admin::V2::CheckConsistencyRequest.new(name: name, consistency_token: consistency_token) do |response, operation|
+      client.check_consistency ::Google::Cloud::Bigtable::Admin::V2::CheckConsistencyRequest.new(name: name, consistency_token: consistency_token, standard_read_remote_writes: standard_read_remote_writes) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.check_consistency({ name: name, consistency_token: consistency_token }, grpc_options) do |response, operation|
+      client.check_consistency({ name: name, consistency_token: consistency_token, standard_read_remote_writes: standard_read_remote_writes }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.check_consistency(::Google::Cloud::Bigtable::Admin::V2::CheckConsistencyRequest.new(name: name, consistency_token: consistency_token), grpc_options) do |response, operation|
+      client.check_consistency(::Google::Cloud::Bigtable::Admin::V2::CheckConsistencyRequest.new(name: name, consistency_token: consistency_token, standard_read_remote_writes: standard_read_remote_writes), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

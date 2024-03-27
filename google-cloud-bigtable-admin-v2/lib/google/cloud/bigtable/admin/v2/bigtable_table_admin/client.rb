@@ -1748,7 +1748,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload check_consistency(name: nil, consistency_token: nil)
+              # @overload check_consistency(name: nil, consistency_token: nil, standard_read_remote_writes: nil, data_boost_read_local_writes: nil)
               #   Pass arguments to `check_consistency` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1759,6 +1759,14 @@ module Google
               #     `projects/{project}/instances/{instance}/tables/{table}`.
               #   @param consistency_token [::String]
               #     Required. The token created using GenerateConsistencyToken for the Table.
+              #   @param standard_read_remote_writes [::Google::Cloud::Bigtable::Admin::V2::StandardReadRemoteWrites, ::Hash]
+              #     Checks that reads using an app profile with `StandardIsolation` can
+              #     see all writes committed before the token was created, even if the
+              #     read and write target different clusters.
+              #   @param data_boost_read_local_writes [::Google::Cloud::Bigtable::Admin::V2::DataBoostReadLocalWrites, ::Hash]
+              #     Checks that reads using an app profile with `DataBoostIsolationReadOnly`
+              #     can see all writes committed before the token was created, but only if
+              #     the read and write target the same cluster.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Cloud::Bigtable::Admin::V2::CheckConsistencyResponse]
