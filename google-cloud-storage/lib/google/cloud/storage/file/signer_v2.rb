@@ -47,7 +47,7 @@ module Google
           # https://cloud.google.com/storage/docs/xml-api/post-object
           #
           def ext_path
-            path = "/#{@bucket}/#{@path}"
+            path = "#{@bucket}/#{@path}"
             escaped = Addressable::URI.encode_component path, Addressable::URI::CharacterClasses::PATH
             special_var = "${filename}"
             # Restore the unencoded `${filename}` variable, if present.
@@ -60,7 +60,7 @@ module Google
           ##
           # The external url to the file.
           def ext_url
-            "#{GOOGLEAPIS_URL}#{ext_path}"
+            "#{@service.service.root_url}#{ext_path}"
           end
 
           def apply_option_defaults options
@@ -71,9 +71,10 @@ module Google
           end
 
           def signature_str options
+            path = "/#{ext_path}"
             [options[:method], options[:content_md5],
              options[:content_type], options[:expires],
-             format_extension_headers(options[:headers]) + ext_path].join "\n"
+             format_extension_headers(options[:headers]) + path].join "\n"
           end
 
           def determine_signing_key options = {}
@@ -98,7 +99,7 @@ module Google
             options = apply_option_defaults options
 
             fields = {
-              key: ext_path.sub("/", "")
+              key: ext_path
             }
 
             p = options[:policy] || {}

@@ -22,6 +22,8 @@ describe Google::Cloud::Storage::File, :signed_url, :mock_storage do
   let(:file_name) { "file.ext" }
   let(:file_gapi) { Google::Apis::StorageV1::Object.from_json random_file_hash(bucket.name, file_name).to_json }
   let(:file) { Google::Cloud::Storage::File.from_gapi file_gapi, storage.service }
+  let(:custom_universe_domain) { "mydomain1.com" }
+  let(:custom_endpoint) { "https://storage.#{custom_universe_domain}/" }
 
   it "uses the credentials' issuer and signing_key to generate signed_url" do
     Time.stub :now, Time.new(2012,1,1,0,0,0, "+00:00") do
@@ -231,6 +233,52 @@ describe Google::Cloud::Storage::File, :signed_url, :mock_storage do
       _(signed_url_params["disposition"]).must_equal ["inline"]
 
       signing_key_mock.verify
+    end
+  end
+
+  describe "Supports custom endpoint" do
+    after do
+      Google::Cloud.configure.reset!
+    end
+
+    it "returns signed_url with custom universe_domain" do
+      service = Google::Cloud::Storage::Service.new project, credentials, universe_domain: custom_universe_domain
+      file = Google::Cloud::Storage::File.from_gapi file_gapi, service
+
+      Time.stub :now, Time.new(2012,1,1,0,0,0, "+00:00") do
+        signing_key_mock = Minitest::Mock.new
+        signing_key_mock.expect :is_a?, false, [Proc]
+        signing_key_mock.expect :sign, "native-signature", [OpenSSL::Digest::SHA256, "GET\n\n\n1325376300\n/bucket/file.ext"]
+
+        credentials.issuer = "native_client_email"
+        credentials.signing_key = signing_key_mock
+
+        signed_url = file.signed_url
+
+        signed_url = URI(signed_url)
+        _(signed_url.host).must_equal URI(custom_endpoint).host
+        signing_key_mock.verify
+      end
+    end
+
+    it "returns signed_url with custom endpoint" do
+      Google::Cloud::Storage.configure do |config|
+        config.endpoint = custom_endpoint
+      end
+      storage = Google::Cloud::Storage.new(project_id: project)
+      file = Google::Cloud::Storage::File.from_gapi file_gapi, storage.service
+
+      Time.stub :now, Time.new(2012,1,1,0,0,0, "+00:00") do
+        signing_key_mock = Minitest::Mock.new
+        signing_key_mock.expect :is_a?, false, [Proc]
+        signing_key_mock.expect :sign, "native-signature", [OpenSSL::Digest::SHA256, "GET\n\n\n1325376300\n/bucket/file.ext"]
+
+        signed_url = file.signed_url issuer: "native_client_email", signing_key: signing_key_mock
+
+        signed_url = URI(signed_url)
+        _(signed_url.host).must_equal URI(custom_endpoint).host
+        signing_key_mock.verify
+      end
     end
   end
 
