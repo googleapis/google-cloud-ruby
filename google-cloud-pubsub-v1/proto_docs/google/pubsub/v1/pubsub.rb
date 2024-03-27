@@ -122,7 +122,7 @@ module Google
               KINESIS_PERMISSION_DENIED = 2
 
               # Permission denied encountered while publishing to the topic. This can
-              # happen due to Pub/Sub SA has not been granted the [appropriate publish
+              # happen if the Pub/Sub SA has not been granted the [appropriate publish
               # permissions](https://cloud.google.com/pubsub/docs/access-control#pubsub.publisher)
               PUBLISH_PERMISSION_DENIED = 3
 
@@ -862,6 +862,11 @@ module Google
         #     Optional. User-provided suffix for Cloud Storage filename. See the [object
         #     naming requirements](https://cloud.google.com/storage/docs/objects#naming).
         #     Must not end in "/".
+        # @!attribute [rw] filename_datetime_format
+        #   @return [::String]
+        #     Optional. User-provided format string specifying how to represent datetimes
+        #     in Cloud Storage filenames. See the [datetime format
+        #     guidance](https://cloud.google.com/pubsub/docs/create-cloudstorage-subscription#file_names).
         # @!attribute [rw] text_config
         #   @return [::Google::Cloud::PubSub::V1::CloudStorageConfig::TextConfig]
         #     Optional. If set, message data will be written to Cloud Storage in text
