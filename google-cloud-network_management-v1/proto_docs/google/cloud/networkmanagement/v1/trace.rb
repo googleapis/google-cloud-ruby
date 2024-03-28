@@ -328,7 +328,7 @@ module Google
         #     Possible values: INGRESS, EGRESS
         # @!attribute [rw] action
         #   @return [::String]
-        #     Possible values: ALLOW, DENY
+        #     Possible values: ALLOW, DENY, APPLY_SECURITY_PROFILE_GROUP
         # @!attribute [rw] priority
         #   @return [::Integer]
         #     The priority of the firewall rule.
