@@ -5,55 +5,6 @@
   "protoPackage": "google.cloud.dataplex.v1",
   "libraryPackage": "::Google::Cloud::Dataplex::V1",
   "services": {
-    "ContentService": {
-      "clients": {
-        "grpc": {
-          "libraryClient": "::Google::Cloud::Dataplex::V1::ContentService::Client",
-          "rpcs": {
-            "CreateContent": {
-              "methods": [
-                "create_content"
-              ]
-            },
-            "UpdateContent": {
-              "methods": [
-                "update_content"
-              ]
-            },
-            "DeleteContent": {
-              "methods": [
-                "delete_content"
-              ]
-            },
-            "GetContent": {
-              "methods": [
-                "get_content"
-              ]
-            },
-            "GetIamPolicy": {
-              "methods": [
-                "get_iam_policy"
-              ]
-            },
-            "SetIamPolicy": {
-              "methods": [
-                "set_iam_policy"
-              ]
-            },
-            "TestIamPermissions": {
-              "methods": [
-                "test_iam_permissions"
-              ]
-            },
-            "ListContent": {
-              "methods": [
-                "list_content"
-              ]
-            }
-          }
-        }
-      }
-    },
     "DataplexService": {
       "clients": {
         "grpc": {
@@ -228,6 +179,174 @@
         }
       }
     },
+    "CatalogService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dataplex::V1::CatalogService::Client",
+          "rpcs": {
+            "CreateEntryType": {
+              "methods": [
+                "create_entry_type"
+              ]
+            },
+            "UpdateEntryType": {
+              "methods": [
+                "update_entry_type"
+              ]
+            },
+            "DeleteEntryType": {
+              "methods": [
+                "delete_entry_type"
+              ]
+            },
+            "ListEntryTypes": {
+              "methods": [
+                "list_entry_types"
+              ]
+            },
+            "GetEntryType": {
+              "methods": [
+                "get_entry_type"
+              ]
+            },
+            "CreateAspectType": {
+              "methods": [
+                "create_aspect_type"
+              ]
+            },
+            "UpdateAspectType": {
+              "methods": [
+                "update_aspect_type"
+              ]
+            },
+            "DeleteAspectType": {
+              "methods": [
+                "delete_aspect_type"
+              ]
+            },
+            "ListAspectTypes": {
+              "methods": [
+                "list_aspect_types"
+              ]
+            },
+            "GetAspectType": {
+              "methods": [
+                "get_aspect_type"
+              ]
+            },
+            "CreateEntryGroup": {
+              "methods": [
+                "create_entry_group"
+              ]
+            },
+            "UpdateEntryGroup": {
+              "methods": [
+                "update_entry_group"
+              ]
+            },
+            "DeleteEntryGroup": {
+              "methods": [
+                "delete_entry_group"
+              ]
+            },
+            "ListEntryGroups": {
+              "methods": [
+                "list_entry_groups"
+              ]
+            },
+            "GetEntryGroup": {
+              "methods": [
+                "get_entry_group"
+              ]
+            },
+            "CreateEntry": {
+              "methods": [
+                "create_entry"
+              ]
+            },
+            "UpdateEntry": {
+              "methods": [
+                "update_entry"
+              ]
+            },
+            "DeleteEntry": {
+              "methods": [
+                "delete_entry"
+              ]
+            },
+            "ListEntries": {
+              "methods": [
+                "list_entries"
+              ]
+            },
+            "GetEntry": {
+              "methods": [
+                "get_entry"
+              ]
+            },
+            "LookupEntry": {
+              "methods": [
+                "lookup_entry"
+              ]
+            },
+            "SearchEntries": {
+              "methods": [
+                "search_entries"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ContentService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dataplex::V1::ContentService::Client",
+          "rpcs": {
+            "CreateContent": {
+              "methods": [
+                "create_content"
+              ]
+            },
+            "UpdateContent": {
+              "methods": [
+                "update_content"
+              ]
+            },
+            "DeleteContent": {
+              "methods": [
+                "delete_content"
+              ]
+            },
+            "GetContent": {
+              "methods": [
+                "get_content"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            },
+            "ListContent": {
+              "methods": [
+                "list_content"
+              ]
+            }
+          }
+        }
+      }
+    },
     "DataTaxonomyService": {
       "clients": {
         "grpc": {
@@ -355,6 +474,11 @@
             "ListDataScanJobs": {
               "methods": [
                 "list_data_scan_jobs"
+              ]
+            },
+            "GenerateDataQualityRules": {
+              "methods": [
+                "generate_data_quality_rules"
               ]
             }
           }

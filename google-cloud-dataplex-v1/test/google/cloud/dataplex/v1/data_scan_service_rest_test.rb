@@ -516,6 +516,60 @@ class ::Google::Cloud::Dataplex::V1::DataScanService::Rest::ClientTest < Minites
     end
   end
 
+  def test_generate_data_quality_rules
+    # Create test objects.
+    client_result = ::Google::Cloud::Dataplex::V1::GenerateDataQualityRulesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    generate_data_quality_rules_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataplex::V1::DataScanService::Rest::ServiceStub.stub :transcode_generate_data_quality_rules_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, generate_data_quality_rules_client_stub do
+        # Create client
+        client = ::Google::Cloud::Dataplex::V1::DataScanService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.generate_data_quality_rules({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.generate_data_quality_rules name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.generate_data_quality_rules ::Google::Cloud::Dataplex::V1::GenerateDataQualityRulesRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.generate_data_quality_rules({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.generate_data_quality_rules(::Google::Cloud::Dataplex::V1::GenerateDataQualityRulesRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, generate_data_quality_rules_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

@@ -258,6 +258,27 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Generate recommended DataQualityRules request.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name should be either
+        #     * the name of a datascan with at least one successful completed data
+        #     profiling job, or
+        #     * the name of a successful completed data profiling datascan job.
+        class GenerateDataQualityRulesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Generate recommended DataQualityRules response.
+        # @!attribute [rw] rule
+        #   @return [::Array<::Google::Cloud::Dataplex::V1::DataQualityRule>]
+        #     Generated recommended \\{@link DataQualityRule}s.
+        class GenerateDataQualityRulesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Represents a user-visible job which provides the insights for the related
         # data source.
         #
