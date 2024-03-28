@@ -52,16 +52,16 @@ module Google
           #     the backup should be deleted, e.g. keep backups for 7 days.
           # @!attribute [rw] daily_recurrence
           #   @return [::Google::Cloud::Firestore::Admin::V1::DailyRecurrence]
-          #     For a schedule that runs daily at a specified time.
+          #     For a schedule that runs daily.
           # @!attribute [rw] weekly_recurrence
           #   @return [::Google::Cloud::Firestore::Admin::V1::WeeklyRecurrence]
-          #     For a schedule that runs weekly on a specific day and time.
+          #     For a schedule that runs weekly on a specific day.
           class BackupSchedule
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Represent a recurring schedule that runs at a specific time every day.
+          # Represents a recurring schedule that runs at a specific time every day.
           #
           # The time zone is UTC.
           class DailyRecurrence

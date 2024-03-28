@@ -200,7 +200,7 @@ module Google
           # The request for [FirestoreAdmin.DeleteBackupSchedules][].
           # @!attribute [rw] name
           #   @return [::String]
-          #     Required. The name of backup schedule.
+          #     Required. The name of the backup schedule.
           #
           #     Format
           #     `projects/{project}/databases/{database}/backupSchedules/{backup_schedule}`
