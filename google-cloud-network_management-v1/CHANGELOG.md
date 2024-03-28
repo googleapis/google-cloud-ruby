@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.14.0 (2024-03-28)
+
+#### Features
+
+* add new fields and enum values related to round-trip ([#25417](https://github.com/googleapis/google-cloud-ruby/issues/25417)) 
+
 ### 0.13.0 (2024-03-18)
 
 #### Features
