@@ -1,5 +1,11 @@
 # Release History
 
+### 0.23.0 (2024-03-28)
+
+#### Features
+
+* add custom datetime format for Cloud Storage subscriptions ([#25438](https://github.com/googleapis/google-cloud-ruby/issues/25438)) 
+
 ### 0.22.0 (2024-02-26)
 
 #### Features
