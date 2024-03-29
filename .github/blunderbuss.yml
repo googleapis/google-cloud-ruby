@@ -1,5 +1,9 @@
 assign_issues_by:
   - labels:
-    - 'api: spanner'
+    - 'api: storage'
     to:
-    - shivgautam
+    - bajajneha27
+
+assign_issues:
+ - dazuma
+ - aandreassa
