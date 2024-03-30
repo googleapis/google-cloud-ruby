@@ -77,15 +77,16 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Raw media bytes.
+        # Content blob.
         #
-        # Text should not be sent as raw bytes, use the 'text' field.
+        # It's preferred to send as {::Google::Cloud::AIPlatform::V1::Part#text text}
+        # directly rather than raw bytes.
         # @!attribute [rw] mime_type
         #   @return [::String]
         #     Required. The IANA standard MIME type of the source data.
         # @!attribute [rw] data
         #   @return [::String]
-        #     Required. Raw bytes for media formats.
+        #     Required. Raw bytes.
         class Blob
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -134,6 +135,21 @@ module Google
         # @!attribute [rw] stop_sequences
         #   @return [::Array<::String>]
         #     Optional. Stop sequences.
+        # @!attribute [rw] presence_penalty
+        #   @return [::Float]
+        #     Optional. Positive penalties.
+        # @!attribute [rw] frequency_penalty
+        #   @return [::Float]
+        #     Optional. Frequency penalties.
+        # @!attribute [rw] response_mime_type
+        #   @return [::String]
+        #     Optional. Output response mimetype of the generated candidate text.
+        #     Supported mimetype:
+        #     - `text/plain`: (default) Text output.
+        #     - `application/json`: JSON response in the candidates.
+        #     The model needs to be prompted to output the appropriate response type,
+        #     otherwise the behavior is undefined.
+        #     This is a preview feature.
         class GenerationConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -146,6 +162,10 @@ module Google
         # @!attribute [rw] threshold
         #   @return [::Google::Cloud::AIPlatform::V1::SafetySetting::HarmBlockThreshold]
         #     Required. The harm block threshold.
+        # @!attribute [rw] method
+        #   @return [::Google::Cloud::AIPlatform::V1::SafetySetting::HarmBlockMethod]
+        #     Optional. Specify if the threshold is used for probability or severity
+        #     score. If not specified, the threshold is used for probability score.
         class SafetySetting
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -166,6 +186,18 @@ module Google
 
             # Block none.
             BLOCK_NONE = 4
+          end
+
+          # Probability vs severity.
+          module HarmBlockMethod
+            # The harm block method is unspecified.
+            HARM_BLOCK_METHOD_UNSPECIFIED = 0
+
+            # The harm block method uses both probability and severity scores.
+            SEVERITY = 1
+
+            # The harm block method uses the probability score.
+            PROBABILITY = 2
           end
         end
 

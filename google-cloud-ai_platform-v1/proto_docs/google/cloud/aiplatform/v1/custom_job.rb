@@ -109,6 +109,15 @@ module Google
         end
 
         # Represents the spec of a CustomJob.
+        # @!attribute [rw] persistent_resource_id
+        #   @return [::String]
+        #     Optional. The ID of the PersistentResource in the same Project and Location
+        #     which to run
+        #
+        #     If this is specified, the job will be run on existing machines held by the
+        #     PersistentResource instead of on-demand short-live machines.
+        #     The network and CMEK configs on the job should be consistent with those on
+        #     the PersistentResource, otherwise, the job will be rejected.
         # @!attribute [rw] worker_pool_specs
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::WorkerPoolSpec>]
         #     Required. The spec of the worker pools including machine type and Docker

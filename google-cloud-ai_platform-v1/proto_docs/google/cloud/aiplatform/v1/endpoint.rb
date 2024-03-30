@@ -197,6 +197,13 @@ module Google
         #     is not populated, all fields of the
         #     {::Google::Cloud::AIPlatform::V1::DeployedModel#explanation_spec explanation_spec}
         #     will be used for the explanation configuration.
+        # @!attribute [rw] disable_explanations
+        #   @return [::Boolean]
+        #     If true, deploy the model without explainable feature, regardless the
+        #     existence of
+        #     {::Google::Cloud::AIPlatform::V1::Model#explanation_spec Model.explanation_spec}
+        #     or
+        #     {::Google::Cloud::AIPlatform::V1::DeployedModel#explanation_spec explanation_spec}.
         # @!attribute [rw] service_account
         #   @return [::String]
         #     The service account that the DeployedModel's container runs as. Specify the

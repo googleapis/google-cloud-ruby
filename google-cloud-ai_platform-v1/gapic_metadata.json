@@ -1226,6 +1226,45 @@
         }
       }
     },
+    "PersistentResourceService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::AIPlatform::V1::PersistentResourceService::Client",
+          "rpcs": {
+            "CreatePersistentResource": {
+              "methods": [
+                "create_persistent_resource"
+              ]
+            },
+            "GetPersistentResource": {
+              "methods": [
+                "get_persistent_resource"
+              ]
+            },
+            "ListPersistentResources": {
+              "methods": [
+                "list_persistent_resources"
+              ]
+            },
+            "DeletePersistentResource": {
+              "methods": [
+                "delete_persistent_resource"
+              ]
+            },
+            "UpdatePersistentResource": {
+              "methods": [
+                "update_persistent_resource"
+              ]
+            },
+            "RebootPersistentResource": {
+              "methods": [
+                "reboot_persistent_resource"
+              ]
+            }
+          }
+        }
+      }
+    },
     "PipelineService": {
       "clients": {
         "grpc": {

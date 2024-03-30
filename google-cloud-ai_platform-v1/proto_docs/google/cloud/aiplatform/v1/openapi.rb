@@ -32,17 +32,31 @@ module Google
         #   @return [::String]
         #     Optional. The format of the data.
         #     Supported formats:
-        #      for NUMBER type: float, double
-        #      for INTEGER type: int32, int64
+        #      for NUMBER type: "float", "double"
+        #      for INTEGER type: "int32", "int64"
+        #      for STRING type: "email", "byte", etc
+        # @!attribute [rw] title
+        #   @return [::String]
+        #     Optional. The title of the Schema.
         # @!attribute [rw] description
         #   @return [::String]
         #     Optional. The description of the data.
         # @!attribute [rw] nullable
         #   @return [::Boolean]
         #     Optional. Indicates if the value may be null.
+        # @!attribute [rw] default
+        #   @return [::Google::Protobuf::Value]
+        #     Optional. Default value of the data.
         # @!attribute [rw] items
         #   @return [::Google::Cloud::AIPlatform::V1::Schema]
-        #     Optional. Schema of the elements of Type.ARRAY.
+        #     Optional. SCHEMA FIELDS FOR TYPE ARRAY
+        #     Schema of the elements of Type.ARRAY.
+        # @!attribute [rw] min_items
+        #   @return [::Integer]
+        #     Optional. Minimum number of the elements for Type.ARRAY.
+        # @!attribute [rw] max_items
+        #   @return [::Integer]
+        #     Optional. Maximum number of the elements for Type.ARRAY.
         # @!attribute [rw] enum
         #   @return [::Array<::String>]
         #     Optional. Possible values of the element of Type.STRING with enum format.
@@ -50,10 +64,35 @@ module Google
         #     \\{type:STRING, format:enum, enum:["EAST", NORTH", "SOUTH", "WEST"]}
         # @!attribute [rw] properties
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::AIPlatform::V1::Schema}]
-        #     Optional. Properties of Type.OBJECT.
+        #     Optional. SCHEMA FIELDS FOR TYPE OBJECT
+        #     Properties of Type.OBJECT.
         # @!attribute [rw] required
         #   @return [::Array<::String>]
         #     Optional. Required properties of Type.OBJECT.
+        # @!attribute [rw] min_properties
+        #   @return [::Integer]
+        #     Optional. Minimum number of the properties for Type.OBJECT.
+        # @!attribute [rw] max_properties
+        #   @return [::Integer]
+        #     Optional. Maximum number of the properties for Type.OBJECT.
+        # @!attribute [rw] minimum
+        #   @return [::Float]
+        #     Optional. SCHEMA FIELDS FOR TYPE INTEGER and NUMBER
+        #     Minimum value of the Type.INTEGER and Type.NUMBER
+        # @!attribute [rw] maximum
+        #   @return [::Float]
+        #     Optional. Maximum value of the Type.INTEGER and Type.NUMBER
+        # @!attribute [rw] min_length
+        #   @return [::Integer]
+        #     Optional. SCHEMA FIELDS FOR TYPE STRING
+        #     Minimum length of the Type.STRING
+        # @!attribute [rw] max_length
+        #   @return [::Integer]
+        #     Optional. Maximum length of the Type.STRING
+        # @!attribute [rw] pattern
+        #   @return [::String]
+        #     Optional. Pattern of the Type.STRING to restrict a string to a regular
+        #     expression.
         # @!attribute [rw] example
         #   @return [::Google::Protobuf::Value]
         #     Optional. Example of the object. Will only populated when the object is the
