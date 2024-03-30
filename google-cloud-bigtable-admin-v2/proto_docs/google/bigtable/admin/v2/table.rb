@@ -91,6 +91,10 @@ module Google
           #     * The instance containing the table.
           #
           #     Note one can still delete the data stored in the table through Data APIs.
+          # @!attribute [rw] automated_backup_policy
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::Table::AutomatedBackupPolicy]
+          #     If specified, automated backups are enabled for this table.
+          #     Otherwise, automated backups are disabled.
           class Table
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -138,6 +142,20 @@ module Google
                 # table will transition to `READY` state.
                 READY_OPTIMIZING = 5
               end
+            end
+
+            # Defines an automated backup policy for a table
+            # @!attribute [rw] retention_period
+            #   @return [::Google::Protobuf::Duration]
+            #     Required. How long the automated backups should be retained. The only
+            #     supported value at this time is 3 days.
+            # @!attribute [rw] frequency
+            #   @return [::Google::Protobuf::Duration]
+            #     Required. How frequently automated backups should occur. The only
+            #     supported value at this time is 24 hours.
+            class AutomatedBackupPolicy
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
             # @!attribute [rw] key
