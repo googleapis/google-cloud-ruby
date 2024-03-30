@@ -328,7 +328,7 @@ module Google
         #     Possible values: INGRESS, EGRESS
         # @!attribute [rw] action
         #   @return [::String]
-        #     Possible values: ALLOW, DENY
+        #     Possible values: ALLOW, DENY, APPLY_SECURITY_PROFILE_GROUP
         # @!attribute [rw] priority
         #   @return [::Integer]
         #     The priority of the firewall rule.
@@ -389,6 +389,12 @@ module Google
             # For details, see [Regional network firewall
             # policies](https://cloud.google.com/firewall/docs/regional-firewall-policies).
             NETWORK_REGIONAL_FIREWALL_POLICY_RULE = 6
+
+            # Firewall policy rule containing attributes not yet supported in
+            # Connectivity tests. Firewall analysis is skipped if such a rule can
+            # potentially be matched. Please see the [list of unsupported
+            # configurations](https://cloud.google.com/network-intelligence-center/docs/connectivity-tests/concepts/overview#unsupported-configs).
+            UNSUPPORTED_FIREWALL_POLICY_RULE = 100
 
             # Tracking state for response traffic created when request traffic goes
             # through allow firewall rule.
