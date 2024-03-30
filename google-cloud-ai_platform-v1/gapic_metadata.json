@@ -1167,6 +1167,65 @@
         }
       }
     },
+    "NotebookService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::AIPlatform::V1::NotebookService::Client",
+          "rpcs": {
+            "CreateNotebookRuntimeTemplate": {
+              "methods": [
+                "create_notebook_runtime_template"
+              ]
+            },
+            "GetNotebookRuntimeTemplate": {
+              "methods": [
+                "get_notebook_runtime_template"
+              ]
+            },
+            "ListNotebookRuntimeTemplates": {
+              "methods": [
+                "list_notebook_runtime_templates"
+              ]
+            },
+            "DeleteNotebookRuntimeTemplate": {
+              "methods": [
+                "delete_notebook_runtime_template"
+              ]
+            },
+            "AssignNotebookRuntime": {
+              "methods": [
+                "assign_notebook_runtime"
+              ]
+            },
+            "GetNotebookRuntime": {
+              "methods": [
+                "get_notebook_runtime"
+              ]
+            },
+            "ListNotebookRuntimes": {
+              "methods": [
+                "list_notebook_runtimes"
+              ]
+            },
+            "DeleteNotebookRuntime": {
+              "methods": [
+                "delete_notebook_runtime"
+              ]
+            },
+            "UpgradeNotebookRuntime": {
+              "methods": [
+                "upgrade_notebook_runtime"
+              ]
+            },
+            "StartNotebookRuntime": {
+              "methods": [
+                "start_notebook_runtime"
+              ]
+            }
+          }
+        }
+      }
+    },
     "PipelineService": {
       "clients": {
         "grpc": {
