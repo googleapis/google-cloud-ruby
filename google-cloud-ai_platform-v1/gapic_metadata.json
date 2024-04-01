@@ -477,6 +477,35 @@
         }
       }
     },
+    "GenAiTuningService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::AIPlatform::V1::GenAiTuningService::Client",
+          "rpcs": {
+            "CreateTuningJob": {
+              "methods": [
+                "create_tuning_job"
+              ]
+            },
+            "GetTuningJob": {
+              "methods": [
+                "get_tuning_job"
+              ]
+            },
+            "ListTuningJobs": {
+              "methods": [
+                "list_tuning_jobs"
+              ]
+            },
+            "CancelTuningJob": {
+              "methods": [
+                "cancel_tuning_job"
+              ]
+            }
+          }
+        }
+      }
+    },
     "IndexEndpointService": {
       "clients": {
         "grpc": {

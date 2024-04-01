@@ -3212,6 +3212,166 @@
       ]
     },
     {
+      "region_tag": "aiplatform_v1_generated_GenAiTuningService_CreateTuningJob_sync",
+      "title": "Snippet for the create_tuning_job call in the GenAiTuningService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::GenAiTuningService::Client#create_tuning_job.",
+      "file": "gen_ai_tuning_service/create_tuning_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_tuning_job",
+        "full_name": "::Google::Cloud::AIPlatform::V1::GenAiTuningService::Client#create_tuning_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::CreateTuningJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::TuningJob",
+        "client": {
+          "short_name": "GenAiTuningService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::GenAiTuningService::Client"
+        },
+        "method": {
+          "short_name": "CreateTuningJob",
+          "full_name": "google.cloud.aiplatform.v1.GenAiTuningService.CreateTuningJob",
+          "service": {
+            "short_name": "GenAiTuningService",
+            "full_name": "google.cloud.aiplatform.v1.GenAiTuningService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_GenAiTuningService_GetTuningJob_sync",
+      "title": "Snippet for the get_tuning_job call in the GenAiTuningService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::GenAiTuningService::Client#get_tuning_job.",
+      "file": "gen_ai_tuning_service/get_tuning_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_tuning_job",
+        "full_name": "::Google::Cloud::AIPlatform::V1::GenAiTuningService::Client#get_tuning_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::GetTuningJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::TuningJob",
+        "client": {
+          "short_name": "GenAiTuningService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::GenAiTuningService::Client"
+        },
+        "method": {
+          "short_name": "GetTuningJob",
+          "full_name": "google.cloud.aiplatform.v1.GenAiTuningService.GetTuningJob",
+          "service": {
+            "short_name": "GenAiTuningService",
+            "full_name": "google.cloud.aiplatform.v1.GenAiTuningService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_GenAiTuningService_ListTuningJobs_sync",
+      "title": "Snippet for the list_tuning_jobs call in the GenAiTuningService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::GenAiTuningService::Client#list_tuning_jobs.",
+      "file": "gen_ai_tuning_service/list_tuning_jobs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_tuning_jobs",
+        "full_name": "::Google::Cloud::AIPlatform::V1::GenAiTuningService::Client#list_tuning_jobs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::ListTuningJobsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::ListTuningJobsResponse",
+        "client": {
+          "short_name": "GenAiTuningService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::GenAiTuningService::Client"
+        },
+        "method": {
+          "short_name": "ListTuningJobs",
+          "full_name": "google.cloud.aiplatform.v1.GenAiTuningService.ListTuningJobs",
+          "service": {
+            "short_name": "GenAiTuningService",
+            "full_name": "google.cloud.aiplatform.v1.GenAiTuningService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_GenAiTuningService_CancelTuningJob_sync",
+      "title": "Snippet for the cancel_tuning_job call in the GenAiTuningService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::GenAiTuningService::Client#cancel_tuning_job.",
+      "file": "gen_ai_tuning_service/cancel_tuning_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "cancel_tuning_job",
+        "full_name": "::Google::Cloud::AIPlatform::V1::GenAiTuningService::Client#cancel_tuning_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::CancelTuningJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "GenAiTuningService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::GenAiTuningService::Client"
+        },
+        "method": {
+          "short_name": "CancelTuningJob",
+          "full_name": "google.cloud.aiplatform.v1.GenAiTuningService.CancelTuningJob",
+          "service": {
+            "short_name": "GenAiTuningService",
+            "full_name": "google.cloud.aiplatform.v1.GenAiTuningService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "aiplatform_v1_generated_IndexEndpointService_CreateIndexEndpoint_sync",
       "title": "Snippet for the create_index_endpoint call in the IndexEndpointService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::IndexEndpointService::Client#create_index_endpoint.",
