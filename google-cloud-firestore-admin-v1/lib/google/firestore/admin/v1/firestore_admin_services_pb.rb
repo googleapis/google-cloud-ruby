@@ -156,8 +156,7 @@ module Google
               rpc :RestoreDatabase, ::Google::Cloud::Firestore::Admin::V1::RestoreDatabaseRequest, ::Google::Longrunning::Operation
               # Creates a backup schedule on a database.
               # At most two backup schedules can be configured on a database, one daily
-              # backup schedule with retention up to 7 days and one weekly backup schedule
-              # with retention up to 14 weeks.
+              # backup schedule and one weekly backup schedule.
               rpc :CreateBackupSchedule, ::Google::Cloud::Firestore::Admin::V1::CreateBackupScheduleRequest, ::Google::Cloud::Firestore::Admin::V1::BackupSchedule
               # Gets information about a backup schedule.
               rpc :GetBackupSchedule, ::Google::Cloud::Firestore::Admin::V1::GetBackupScheduleRequest, ::Google::Cloud::Firestore::Admin::V1::BackupSchedule
