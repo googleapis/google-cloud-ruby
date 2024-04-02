@@ -305,7 +305,21 @@ module Google
         # @!attribute [rw] value
         #   @return [::Integer]
         #     The value currently in effect and being enforced.
+        # @!attribute [rw] rollout_info
+        #   @return [::Google::Cloud::CloudQuotas::V1::RolloutInfo]
+        #     Rollout information of this quota.
+        #     This field is present only if the effective limit will change due to the
+        #     ongoing rollout of the service config.
         class QuotaDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # [Output only] Rollout information of a quota.
+        # @!attribute [rw] ongoing_rollout
+        #   @return [::Boolean]
+        #     Whether there is an ongoing rollout for a quota or not.
+        class RolloutInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
