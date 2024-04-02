@@ -353,9 +353,31 @@ module Google
             #     extension will not be written in issued certificates. CRLs will expire 7
             #     days from their creation. However, we will rebuild daily. CRLs are also
             #     rebuilt shortly after a certificate is revoked.
+            # @!attribute [rw] encoding_format
+            #   @return [::Google::Cloud::Security::PrivateCA::V1::CaPool::PublishingOptions::EncodingFormat]
+            #     Optional. Specifies the encoding format of each
+            #     {::Google::Cloud::Security::PrivateCA::V1::CertificateAuthority CertificateAuthority}
+            #     resource's CA certificate and CRLs. If this is omitted, CA certificates
+            #     and CRLs will be published in PEM.
             class PublishingOptions
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Supported encoding formats for publishing.
+              module EncodingFormat
+                # Not specified. By default, PEM format will be used.
+                ENCODING_FORMAT_UNSPECIFIED = 0
+
+                # The
+                # {::Google::Cloud::Security::PrivateCA::V1::CertificateAuthority CertificateAuthority}'s
+                # CA certificate and CRLs will be published in PEM format.
+                PEM = 1
+
+                # The
+                # {::Google::Cloud::Security::PrivateCA::V1::CertificateAuthority CertificateAuthority}'s
+                # CA certificate and CRLs will be published in DER format.
+                DER = 2
+              end
             end
 
             # Defines controls over all certificate issuance within a
@@ -373,9 +395,9 @@ module Google
             #     if the issuing
             #     {::Google::Cloud::Security::PrivateCA::V1::CertificateAuthority CertificateAuthority}
             #     expires before a
-            #     {::Google::Cloud::Security::PrivateCA::V1::Certificate Certificate}'s requested
-            #     maximum_lifetime, the effective lifetime will be explicitly truncated to
-            #     match it.
+            #     {::Google::Cloud::Security::PrivateCA::V1::Certificate Certificate} resource's
+            #     requested maximum_lifetime, the effective lifetime will be explicitly
+            #     truncated to match it.
             # @!attribute [rw] allowed_issuance_modes
             #   @return [::Google::Cloud::Security::PrivateCA::V1::CaPool::IssuancePolicy::IssuanceModes]
             #     Optional. If specified, then only methods allowed in the
@@ -747,7 +769,7 @@ module Google
           #     Optional. The maximum lifetime allowed for issued
           #     {::Google::Cloud::Security::PrivateCA::V1::Certificate Certificates} that use
           #     this template. If the issuing
-          #     {::Google::Cloud::Security::PrivateCA::V1::CaPool CaPool}'s
+          #     {::Google::Cloud::Security::PrivateCA::V1::CaPool CaPool} resource's
           #     {::Google::Cloud::Security::PrivateCA::V1::CaPool::IssuancePolicy IssuancePolicy}
           #     specifies a
           #     {::Google::Cloud::Security::PrivateCA::V1::CaPool::IssuancePolicy#maximum_lifetime maximum_lifetime}
@@ -1030,8 +1052,8 @@ module Google
           #   @return [::Google::Cloud::Security::PrivateCA::V1::CertificateConfig::KeyId]
           #     Optional. When specified this provides a custom SKI to be used in the
           #     certificate. This should only be used to maintain a SKI of an existing CA
-          #     originally created outside CAS, which was not generated using method (1)
-          #     described in RFC 5280 section 4.2.1.2.
+          #     originally created outside CA service, which was not generated using method
+          #     (1) described in RFC 5280 section 4.2.1.2.
           class CertificateConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
