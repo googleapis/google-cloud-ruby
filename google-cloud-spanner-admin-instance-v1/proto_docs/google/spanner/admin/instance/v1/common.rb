@@ -40,6 +40,20 @@ module Google
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
+
+            # Indicates the expected fulfillment period of an operation.
+            module FulfillmentPeriod
+              # Not specified.
+              FULFILLMENT_PERIOD_UNSPECIFIED = 0
+
+              # Normal fulfillment period. The operation is expected to complete within
+              # minutes.
+              FULFILLMENT_PERIOD_NORMAL = 1
+
+              # Extended fulfillment period. It can take up to an hour for the operation
+              # to complete.
+              FULFILLMENT_PERIOD_EXTENDED = 2
+            end
           end
         end
       end
