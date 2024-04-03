@@ -20,8 +20,7 @@ describe Google::Cloud::Storage::Bucket, :soft_delete, :storage do
     storage.bucket(bucket_name) ||
     safe_gcs_execute { storage.create_bucket(bucket_name) }
   end
-  let(:soft_delete_policy) { { effective_time: DateTime.now,
-                             retention_duration_seconds: 864000 } } # 10 days
+  let(:soft_delete_policy) { { retention_duration_seconds: 10*24*60*60 } } # 10 days
   let(:file_path) { "acceptance/data/CloudPlatform_128px_Retina.png" }
   let(:file_name) { "CloudLogo1" }
 
@@ -35,8 +34,7 @@ describe Google::Cloud::Storage::Bucket, :soft_delete, :storage do
       _(bucket.soft_delete_policy).wont_be_nil
 
       bucket.soft_delete_policy = soft_delete_policy
-      _(bucket.soft_delete_policy.effective_time).must_be_kind_of DateTime
-      _(bucket.soft_delete_policy.retention_duration_seconds).must_equal 864000
+      _(bucket.soft_delete_policy.retention_duration_seconds).must_equal 10*24*60*60
     end
 
     it "fetches soft deleted file" do
@@ -64,12 +62,12 @@ describe Google::Cloud::Storage::Bucket, :soft_delete, :storage do
       _(files).wont_be_empty
     end
 
-    it "restore the deleted file" do
+    it "restores the deleted file" do
       file = bucket.file file_name
       generation = file.generation
       file.delete
 
-      restored_file = bucket.restore_file file_name, generation: generation
+      restored_file = bucket.restore_file file_name, generation
 
       file = bucket.file file_name
       _(file).wont_be_nil

@@ -20,12 +20,11 @@ describe Google::Cloud::Storage::Bucket, :soft_delete_policy, :mock_storage do
   let(:bucket_gapi) { Google::Apis::StorageV1::Bucket.from_json bucket_hash.to_json }
   let(:bucket) { Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service }
 
-  let(:effective_time) { DateTime.now }
   let(:soft_delete_policy) do
-      soft_delete_policy_object(effective_time: effective_time,
-                                retention_duration_seconds: 864000)
+      soft_delete_policy_object(retention_duration_seconds: 10*24*60*60)
   end
-  let(:file_hash) { random_file_hash bucket.name, "file.ext" }
+  let(:file_name) { "file.ext" }
+  let(:file_hash) { random_file_hash bucket.name, file_name }
   let(:file_gapi) { Google::Apis::StorageV1::Object.from_json file_hash.to_json }
   let(:file) { Google::Cloud::Storage::File.from_gapi file_gapi, storage.service }
   let(:generation) { 1234567890 }
@@ -47,7 +46,7 @@ describe Google::Cloud::Storage::Bucket, :soft_delete_policy, :mock_storage do
 
     bucket.soft_delete_policy = soft_delete_policy
 
-    _(bucket.soft_delete_policy.effective_time).must_equal effective_time
+    _(bucket.soft_delete_policy.effective_time).must_be_kind_of DateTime
     _(bucket.soft_delete_policy.retention_duration_seconds).must_equal 864000
 
     mock.verify
@@ -96,6 +95,24 @@ describe Google::Cloud::Storage::Bucket, :soft_delete_policy, :mock_storage do
     mock.verify
 
     _(files.count).must_equal 1
+  end
+
+  it "can restore soft deleted file" do
+    mock = Minitest::Mock.new
+    mock.expect :delete_object, nil, [bucket_name, file.name], **delete_object_args(options: {retries: 0})
+    file.service.mocked_service = mock
+    file.delete
+    mock.verify
+
+    mock = Minitest::Mock.new
+    mock.expect :restore_object, restore_file_gapi(bucket_name, file_name),
+      [bucket_name, file.name, generation], **restore_object_args()
+    bucket.service.mocked_service = mock
+    file = bucket.restore_file file_name, generation
+    mock.verify
+
+    _(file.name).must_equal file_name
+    _(file.bucket).must_equal bucket_name
   end
 
   def patch_bucket_gapi soft_delete_policy: nil

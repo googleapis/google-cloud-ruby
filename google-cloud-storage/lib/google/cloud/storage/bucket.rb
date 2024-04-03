@@ -1233,8 +1233,7 @@ module Google
         #   bucket = storage.bucket "my-bucket"
         #
         #   soft_delete_policy = Google::Apis::StorageV1::Bucket::SoftDeletePolicy.new
-        #   soft_delete_policy.effective_time = DateTime.new(2024, 3, 1)
-        #   soft_delete_policy.retention_duration_seconds = 864000
+        #   soft_delete_policy.retention_duration_seconds = 10*24*60*60
         #
         #   bucket.soft_delete_policy = soft_delete_policy
         #
@@ -1246,10 +1245,7 @@ module Google
         #
         #   bucket = storage.bucket "my-bucket"
         #
-        #   soft_delete_policy = {
-        #                          effective_time: DateTime.new(2024, 3, 1),
-        #                          retention_duration_seconds: 432000
-        #                        }
+        #   soft_delete_policy = { retention_duration_seconds: 432000 }
         #   bucket.soft_delete_policy = soft_delete_policy
         #
         def soft_delete_policy= new_soft_delete_policy
@@ -1789,6 +1785,8 @@ module Google
         #
         # @param [String] file_path
         #   Name of the file.
+        # @param [Fixnum] generation
+        #   Selects a specific revision of this object.
         # @param [Boolean] copy_source_acl
         #   If true, copies the source file's ACL; otherwise, uses the
         #   bucket's default file ACL. The default is false.
@@ -1824,10 +1822,10 @@ module Google
         #
         #   bucket = storage.bucket "my-bucket"
         #
-        #   bucket.restore_file "path/of/file"
+        #   bucket.restore_file "path/of/file", <generation-of-the-file>
         #
         def restore_file file_path,
-                         generation: nil,
+                         generation,
                          copy_source_acl: nil,
                          if_generation_match: nil,
                          if_generation_not_match: nil,
@@ -1840,8 +1838,8 @@ module Google
           ensure_service!
           gapi = service.restore_file name,
                                       file_path,
+                                      generation,
                                       copy_source_acl: File::Acl.predefined_rule_for(copy_source_acl),
-                                      generation: generation,
                                       if_generation_match: if_generation_match,
                                       if_generation_not_match: if_generation_not_match,
                                       if_metageneration_match: if_metageneration_match,
