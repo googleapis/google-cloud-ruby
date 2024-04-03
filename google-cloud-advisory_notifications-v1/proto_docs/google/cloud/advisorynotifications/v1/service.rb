@@ -138,7 +138,7 @@ module Google
         #   @return [::String]
         #     Required. The parent, which owns this collection of notifications.
         #     Must be of the form "organizations/\\{organization}/locations/\\{location}"
-        #     or "projects/\\{project}/locations/\\{location}"
+        #     or "projects/\\{project}/locations/\\{location}".
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of notifications to return. The service may return
@@ -202,11 +202,12 @@ module Google
         end
 
         # Settings for Advisory Notifications.
-        # @!attribute [r] name
+        # @!attribute [rw] name
         #   @return [::String]
-        #     Output only. The resource name of the settings to retrieve.
+        #     Identifier. The resource name of the settings to retrieve.
         #     Format:
-        #     organizations/\\{organization}/locations/\\{location}/settings.
+        #     organizations/\\{organization}/locations/\\{location}/settings or
+        #     projects/\\{projects}/locations/\\{location}/settings.
         # @!attribute [rw] notification_settings
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::AdvisoryNotifications::V1::NotificationSettings}]
         #     Required. Map of each notification type and its settings to get/set all
@@ -246,7 +247,8 @@ module Google
         #   @return [::String]
         #     Required. The resource name of the settings to retrieve.
         #     Format:
-        #     organizations/\\{organization}/locations/\\{location}/settings.
+        #     organizations/\\{organization}/locations/\\{location}/settings or
+        #     projects/\\{projects}/locations/\\{location}/settings.
         class GetSettingsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -287,6 +287,13 @@ module Google
                                                             ["name", %r{^organizations/[^/]+/locations/[^/]+/settings/?$}, false]
                                                           ]
                                                         )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/settings/?$}, false]
+                                                          ]
+                                                        )
                 transcoder.transcode request_pb
               end
 
@@ -307,6 +314,14 @@ module Google
                                                           body: "settings",
                                                           matches: [
                                                             ["settings.name", %r{^organizations/[^/]+/locations/[^/]+/settings/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v1/{settings.name}",
+                                                          body: "settings",
+                                                          matches: [
+                                                            ["settings.name", %r{^projects/[^/]+/locations/[^/]+/settings/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

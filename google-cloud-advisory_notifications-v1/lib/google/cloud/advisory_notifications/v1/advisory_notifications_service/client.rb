@@ -191,7 +191,7 @@ module Google
             #   @param parent [::String]
             #     Required. The parent, which owns this collection of notifications.
             #     Must be of the form "organizations/\\{organization}/locations/\\{location}"
-            #     or "projects/\\{project}/locations/\\{location}"
+            #     or "projects/\\{project}/locations/\\{location}".
             #   @param page_size [::Integer]
             #     The maximum number of notifications to return. The service may return
             #     fewer than this value. If unspecified or equal to 0, at most 50
@@ -395,7 +395,8 @@ module Google
             #   @param name [::String]
             #     Required. The resource name of the settings to retrieve.
             #     Format:
-            #     organizations/\\{organization}/locations/\\{location}/settings.
+            #     organizations/\\{organization}/locations/\\{location}/settings or
+            #     projects/\\{projects}/locations/\\{location}/settings.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::AdvisoryNotifications::V1::Settings]
