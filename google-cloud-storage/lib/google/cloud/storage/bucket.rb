@@ -1195,6 +1195,65 @@ module Google
         end
 
         ##
+        # The bucket's soft delete policy. If this policy is set, any deleted
+        # objects will be soft-deleted according to the time specified in the
+        # policy.
+        # This value can be modified by calling {#soft_delete_policy=}.
+        #
+        # @return [Google::Apis::StorageV1::Bucket::SoftDeletePolicy] The default retention policy is for 7
+        # days.
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.soft_delete_policy
+        #
+        def soft_delete_policy
+          @gapi.soft_delete_policy
+        end
+
+        ##
+        # Sets the value for Soft Delete Policy in the bucket. This value can
+        # be queried by calling {#soft_delete_policy}.
+        #
+        # @param [Google::Apis::StorageV1::Bucket::SoftDeletePolicy,
+        #         Hash(String => String)] new_soft_delete_policy The bucket's
+        #         new Soft Delete Policy.
+        #
+        # @example Set Soft Delete Policy to 10 days using SoftDeletePolicy class:
+        #   require "google/cloud/storage"
+        #   require "date"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   soft_delete_policy = Google::Apis::StorageV1::Bucket::SoftDeletePolicy.new
+        #   soft_delete_policy.retention_duration_seconds = 10*24*60*60
+        #
+        #   bucket.soft_delete_policy = soft_delete_policy
+        #
+        # @example Set Soft Delete Policy to 5 days using Hash:
+        #   require "google/cloud/storage"
+        #   require "date"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   soft_delete_policy = { retention_duration_seconds: 432000 }
+        #   bucket.soft_delete_policy = soft_delete_policy
+        #
+        def soft_delete_policy= new_soft_delete_policy
+          @gapi.soft_delete_policy = new_soft_delete_policy || {}
+          patch_gapi! :soft_delete_policy
+        end
+
+        ##
         # Updates the bucket with changes made in the given block in a single
         # PATCH request. The following attributes may be set: {#cors},
         # {#logging_bucket=}, {#logging_prefix=}, {#versioning=},
@@ -1322,6 +1381,8 @@ module Google
         # @param [Boolean] include_folders_as_prefixes If `true`, will also include
         #   folders and managed folders, besides objects, in the returned prefixes.
         #   Only applicable if delimiter is set to '/'.
+        # @param [Boolean] soft_deleted If true, only soft-deleted object
+        #   versions will be listed. The default is false.
         #
         # @return [Array<Google::Cloud::Storage::File>] (See
         #   {Google::Cloud::Storage::File::List})
@@ -1349,19 +1410,22 @@ module Google
         #   end
         #
         def files prefix: nil, delimiter: nil, token: nil, max: nil,
-                  versions: nil, match_glob: nil, include_folders_as_prefixes: nil
+                  versions: nil, match_glob: nil, include_folders_as_prefixes: nil,
+                  soft_deleted: nil
           ensure_service!
           gapi = service.list_files name, prefix: prefix, delimiter: delimiter,
                                           token: token, max: max,
                                           versions: versions,
                                           user_project: user_project,
                                           match_glob: match_glob,
-                                          include_folders_as_prefixes: include_folders_as_prefixes
+                                          include_folders_as_prefixes: include_folders_as_prefixes,
+                                          soft_deleted: soft_deleted
           File::List.from_gapi gapi, service, name, prefix, delimiter, max,
                                versions,
                                user_project: user_project,
                                match_glob: match_glob,
-                               include_folders_as_prefixes: include_folders_as_prefixes
+                               include_folders_as_prefixes: include_folders_as_prefixes,
+                               soft_deleted: soft_deleted
         end
         alias find_files files
 
@@ -1397,6 +1461,8 @@ module Google
         # @param [String] encryption_key Optional. The customer-supplied,
         #   AES-256 encryption key used to encrypt the file, if one was provided
         #   to {#create_file}. (Not used if `skip_lookup` is also set.)
+        # @param [Boolean] soft_deleted Optional. If true, only soft-deleted
+        #   object versions will be listed. The default is false.
         #
         # @return [Google::Cloud::Storage::File, nil] Returns nil if file does
         #   not exist
@@ -1418,7 +1484,8 @@ module Google
                  if_metageneration_match: nil,
                  if_metageneration_not_match: nil,
                  skip_lookup: nil,
-                 encryption_key: nil
+                 encryption_key: nil,
+                 soft_deleted: nil
           ensure_service!
           if skip_lookup
             return File.new_lazy name, path, service,
@@ -1431,7 +1498,8 @@ module Google
                                               if_metageneration_match: if_metageneration_match,
                                               if_metageneration_not_match: if_metageneration_not_match,
                                               key: encryption_key,
-                                              user_project: user_project
+                                              user_project: user_project,
+                                              soft_deleted: soft_deleted
           File.from_gapi gapi, service, user_project: user_project
         rescue Google::Cloud::NotFoundError
           nil
@@ -1711,6 +1779,77 @@ module Google
         end
         alias upload_file create_file
         alias new_file create_file
+
+        ##
+        # Restores a soft-deleted object.
+        #
+        # @param [String] file_path
+        #   Name of the file.
+        # @param [Fixnum] generation
+        #   Selects a specific revision of this object.
+        # @param [Boolean] copy_source_acl
+        #   If true, copies the source file's ACL; otherwise, uses the
+        #   bucket's default file ACL. The default is false.
+        # @param [Fixnum] if_generation_match
+        #   Makes the operation conditional on whether the file's one live
+        #   generation matches the given value. Setting to 0 makes the
+        #   operation succeed only if there are no live versions of the file.
+        # @param [Fixnum] if_generation_not_match
+        #   Makes the operation conditional on whether none of the file's live
+        #   generations match the given value. If no live file exists, the
+        #   precondition fails. Setting to 0 makes the operation succeed only
+        #   if there is a live version of the file.
+        # @param [Fixnum] if_metageneration_match
+        #   Makes the operation conditional on whether the file's one live
+        #   metageneration matches the given value.
+        # @param [Fixnum] if_metageneration_not_match
+        #   Makes the operation conditional on whether none of the object's
+        #   live metagenerations match the given value.
+        # @param [String] projection
+        #   Set of properties to return. Defaults to full.
+        # @param [String] user_project
+        #   The project to be billed for this request. Required for Requester
+        #   Pays buckets.
+        # @param [String] fields
+        #   Selector specifying which fields to include in a partial response.
+        #
+        # @return [Google::Cloud::Storage::File]
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.restore_file "path/of/file", <generation-of-the-file>
+        #
+        def restore_file file_path,
+                         generation,
+                         copy_source_acl: nil,
+                         if_generation_match: nil,
+                         if_generation_not_match: nil,
+                         if_metageneration_match: nil,
+                         if_metageneration_not_match: nil,
+                         projection: nil,
+                         user_project: nil,
+                         fields: nil,
+                         options: {}
+          ensure_service!
+          gapi = service.restore_file name,
+                                      file_path,
+                                      generation,
+                                      copy_source_acl: File::Acl.predefined_rule_for(copy_source_acl),
+                                      if_generation_match: if_generation_match,
+                                      if_generation_not_match: if_generation_not_match,
+                                      if_metageneration_match: if_metageneration_match,
+                                      if_metageneration_not_match: if_metageneration_not_match,
+                                      projection: projection,
+                                      user_project: user_project,
+                                      fields: fields,
+                                      options: options
+          File.from_gapi gapi, service, user_project: user_project
+        end
 
         ##
         # Concatenates a list of existing files in the bucket into a new file in

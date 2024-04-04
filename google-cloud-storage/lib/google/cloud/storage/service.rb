@@ -364,7 +364,7 @@ module Google
         def list_files bucket_name, delimiter: nil, max: nil, token: nil,
                        prefix: nil, versions: nil, user_project: nil,
                        match_glob: nil, include_folders_as_prefixes: nil,
-                       options: {}
+                       soft_deleted: nil, options: {}
           execute do
             service.list_objects \
               bucket_name, delimiter: delimiter, max_results: max,
@@ -373,6 +373,7 @@ module Google
                            user_project: user_project(user_project),
                            match_glob: match_glob,
                            include_folders_as_prefixes: include_folders_as_prefixes,
+                           soft_deleted: soft_deleted,
                            options: options
           end
         end
@@ -456,6 +457,7 @@ module Google
                      if_metageneration_not_match: nil,
                      key: nil,
                      user_project: nil,
+                     soft_deleted: nil,
                      options: {}
           execute do
             service.get_object \
@@ -466,6 +468,7 @@ module Google
               if_metageneration_match: if_metageneration_match,
               if_metageneration_not_match: if_metageneration_not_match,
               user_project: user_project(user_project),
+              soft_deleted: soft_deleted,
               options: key_options(key).merge(options)
           end
         end
@@ -648,6 +651,40 @@ module Google
                                   if_metageneration_not_match: if_metageneration_not_match,
                                   user_project: user_project(user_project),
                                   options: options
+          end
+        end
+
+        ##
+        # Restores a soft-deleted object.
+        def restore_file bucket_name,
+                         file_path,
+                         generation,
+                         copy_source_acl: nil,
+                         if_generation_match: nil,
+                         if_generation_not_match: nil,
+                         if_metageneration_match: nil,
+                         if_metageneration_not_match: nil,
+                         projection: nil,
+                         user_project: nil,
+                         fields: nil,
+                         options: {}
+
+          if options[:retries].nil?
+            is_idempotent = retry? generation: generation, if_generation_match: if_generation_match
+            options = is_idempotent ? {} : { retries: 0 }
+          end
+
+          execute do
+            service.restore_object bucket_name, file_path, generation,
+                                   copy_source_acl: copy_source_acl,
+                                   if_generation_match: if_generation_match,
+                                   if_generation_not_match: if_generation_not_match,
+                                   if_metageneration_match: if_metageneration_match,
+                                   if_metageneration_not_match: if_metageneration_not_match,
+                                   projection: projection,
+                                   user_project: user_project(user_project),
+                                   fields: fields,
+                                   options: options
           end
         end
 
