@@ -287,7 +287,7 @@ module Google
           # The URI-encoded (percent encoded) external path to the file.
           def file_path path_style
             path = []
-            path << "#{@bucket_name}" if path_style
+            path << @bucket_name if path_style
             path << "/#{String(@file_name)}" if @file_name && !@file_name.empty?
             CGI.escape(path.join).gsub("%2F", "/").gsub "+", "%20"
           end

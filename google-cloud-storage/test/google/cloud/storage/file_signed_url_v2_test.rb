@@ -237,9 +237,6 @@ describe Google::Cloud::Storage::File, :signed_url, :mock_storage do
   end
 
   describe "Supports custom endpoint" do
-    after do
-      Google::Cloud.configure.reset!
-    end
 
     it "returns signed_url with custom universe_domain" do
       service = Google::Cloud::Storage::Service.new project, credentials, universe_domain: custom_universe_domain
@@ -262,11 +259,8 @@ describe Google::Cloud::Storage::File, :signed_url, :mock_storage do
     end
 
     it "returns signed_url with custom endpoint" do
-      Google::Cloud::Storage.configure do |config|
-        config.endpoint = custom_endpoint
-      end
-      storage = Google::Cloud::Storage.new(project_id: project)
-      file = Google::Cloud::Storage::File.from_gapi file_gapi, storage.service
+      service = Google::Cloud::Storage::Service.new project, credentials, host: custom_endpoint
+      file = Google::Cloud::Storage::File.from_gapi file_gapi, service
 
       Time.stub :now, Time.new(2012,1,1,0,0,0, "+00:00") do
         signing_key_mock = Minitest::Mock.new
