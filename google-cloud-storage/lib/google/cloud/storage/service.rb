@@ -15,6 +15,7 @@
 
 require "google/cloud/storage/version"
 require "google/apis/storage_v1"
+require "google/cloud/config"
 require "digest"
 require "mini_mime"
 require "pathname"
@@ -49,6 +50,7 @@ module Google
                        send_timeout: nil, host: nil, quota_project: nil,
                        max_elapsed_time: nil, base_interval: nil, max_interval: nil,
                        multiplier: nil, upload_chunk_size: nil, universe_domain: nil
+          host ||= Google::Cloud::Storage.configure.endpoint
           @project = project
           @credentials = credentials
           @service = API::StorageService.new
@@ -73,7 +75,7 @@ module Google
           @service.request_options.upload_chunk_size = upload_chunk_size if upload_chunk_size
           @service.authorization = @credentials.client if @credentials
           @service.root_url = host if host
-          @service.universe_domain = universe_domain
+          @service.universe_domain = universe_domain || Google::Cloud::Storage.configure.universe_domain
           begin
             @service.verify_universe_domain!
           rescue Google::Apis::UniverseDomainError => e
