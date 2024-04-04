@@ -70,7 +70,7 @@ class MockStorage < Minitest::Spec
                          autoclass_terminal_storage_class: nil,
                          enable_object_retention: nil,
                          effective_time: DateTime.now,
-                         retention_duration_seconds: 604800
+                         retention_duration_seconds: 604800 # 7 days
     versioning_config = { "enabled" => versioning } if versioning
     { "kind" => "storage#bucket",
       "id" => name,
@@ -97,7 +97,7 @@ class MockStorage < Minitest::Spec
     }.delete_if { |_, v| v.nil? }
   end
 
-  def soft_delete_policy_object retention_duration_seconds: 604800
+  def soft_delete_policy_object retention_duration_seconds: 604800 # 7 days
     Google::Apis::StorageV1::Bucket::SoftDeletePolicy.new(
       effective_time: DateTime.now,
       retention_duration_seconds: retention_duration_seconds
