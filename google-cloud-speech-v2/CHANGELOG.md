@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.12.0 (2024-04-05)
+
+#### Features
+
+* Enable specifying target language to perform automatic translation to via TranslationConfig. ([#25667](https://github.com/googleapis/google-cloud-ruby/issues/25667)) 
+
 ### 0.11.0 (2024-02-26)
 
 #### Features
