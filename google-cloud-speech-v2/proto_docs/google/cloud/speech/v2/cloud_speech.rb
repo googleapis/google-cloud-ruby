@@ -566,6 +566,16 @@ module Google
           end
         end
 
+        # Translation configuration. Use to translate the given audio into text for the
+        # desired language.
+        # @!attribute [rw] target_language
+        #   @return [::String]
+        #     Required. The language code to translate to.
+        class TranslationConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Provides "hints" to the speech recognizer to favor specific words and phrases
         # in the results. PhraseSets can be specified as an inline resource, or a
         # reference to an existing PhraseSet resource.
@@ -642,6 +652,10 @@ module Google
         #     the transcript with phrases of your choosing. For StreamingRecognize, this
         #     normalization only applies to stable partial transcripts (stability > 0.8)
         #     and final transcripts.
+        # @!attribute [rw] translation_config
+        #   @return [::Google::Cloud::Speech::V2::TranslationConfig]
+        #     Optional. Optional configuration used to automatically run translation on
+        #     the given audio to the desired language for supported models.
         class RecognitionConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
