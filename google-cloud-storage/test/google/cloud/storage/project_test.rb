@@ -55,6 +55,10 @@ describe Google::Cloud::Storage::Project, :mock_storage do
     creds
   end
 
+  after do
+    Google::Cloud.configure.reset!
+  end
+
   it "defaults to the correct endpoint and universe domain" do
     service = Google::Cloud::Storage::Service.new "my-project", default_credentials
     _(service.universe_domain).must_equal "googleapis.com"
@@ -100,6 +104,24 @@ describe Google::Cloud::Storage::Project, :mock_storage do
     expect do
       Google::Cloud::Storage::Service.new "my-project", default_universe_credentials, universe_domain: "wrongdomain.com"
     end.must_raise Google::Cloud::Error
+  end
+
+  it "supports setting a universe domain via configuration" do
+    Google::Cloud::Storage.configure do |config|
+      config.universe_domain = "mydomain4.com"
+    end
+    service = Google::Cloud::Storage::Service.new "my-project", default_credentials
+    _(service.universe_domain).must_equal "mydomain4.com"
+    _(service.service.root_url).must_equal "https://storage.mydomain4.com/"
+  end
+
+  it "supports setting an endpoint via configuration" do
+    Google::Cloud::Storage.configure do |config|
+      config.endpoint = "https://storage.mydomain5.com/"
+    end
+    service = Google::Cloud::Storage::Service.new "my-project", default_credentials
+    _(service.universe_domain).must_equal "googleapis.com"
+    _(service.service.root_url).must_equal "https://storage.mydomain5.com/"
   end
 
   it "adds custom headers to the request options" do
