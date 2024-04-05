@@ -4,7 +4,7 @@
 
 #### Features
 
-* add `translation_config` in `RecognitionConfig` message ([#25667](https://github.com/googleapis/google-cloud-ruby/issues/25667)) 
+* Enable specifying target language to perform automatic translation to via TranslationConfig. ([#25667](https://github.com/googleapis/google-cloud-ruby/issues/25667)) 
 
 ### 0.11.0 (2024-02-26)
 
