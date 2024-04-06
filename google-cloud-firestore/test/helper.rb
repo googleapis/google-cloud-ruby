@@ -21,6 +21,7 @@ require "minitest/rg"
 require "google/cloud/firestore"
 require "google/cloud/firestore/rate_limiter"
 require "grpc"
+require "ostruct"
 
 ##
 # Monkey-Patch CallOptions to support Mocks

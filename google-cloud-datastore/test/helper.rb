@@ -19,6 +19,7 @@ require "minitest/autorun"
 require "minitest/focus"
 require "minitest/rg"
 require "google/cloud/datastore"
+require "ostruct"
 
 class MockDatastore < Minitest::Spec
   let(:project) { "my-todo-project" }
