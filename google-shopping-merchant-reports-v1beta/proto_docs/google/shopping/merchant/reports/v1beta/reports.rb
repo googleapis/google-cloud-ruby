@@ -37,7 +37,7 @@ module Google
           # @!attribute [rw] page_size
           #   @return [::Integer]
           #     Optional. Number of `ReportRows` to retrieve in a single page. Defaults to
-          #     the maximum of 1000. Values above 1000 are coerced to 1000.
+          #     1000. Values above 5000 are coerced to 5000.
           # @!attribute [rw] page_token
           #   @return [::String]
           #     Optional. Token of the page to retrieve. If not specified, the first page
@@ -364,6 +364,15 @@ module Google
           #     **Only selected attributes of this field (for example,
           #     `item_issues.severity.aggregated_severity`) can be used for filtering the
           #     results.**
+          # @!attribute [rw] click_potential
+          #   @return [::Google::Shopping::Merchant::Reports::V1beta::ProductView::ClickPotential]
+          #     Estimated performance potential compared to highest performing products of
+          #     the merchant.
+          # @!attribute [rw] click_potential_rank
+          #   @return [::Integer]
+          #     Rank of the product based on its click potential. A product with
+          #     `click_potential_rank` 1 has the highest click potential among the
+          #     merchant's products that fulfill the search query conditions.
           class ProductView
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -482,6 +491,29 @@ module Google
 
               # Product is eligible for all reporting contexts.
               ELIGIBLE = 4
+            end
+
+            # A product's [click
+            # potential](https://support.google.com/merchants/answer/188488) estimates
+            # its performance potential compared to highest performing products of the
+            # merchant. Click potential of a product helps merchants to prioritize which
+            # products to fix and helps them understand how products are performing
+            # against their potential.
+            module ClickPotential
+              # Unknown predicted clicks impact.
+              CLICK_POTENTIAL_UNSPECIFIED = 0
+
+              # Potential to receive a low number of clicks compared to the highest
+              # performing products of the merchant.
+              LOW = 1
+
+              # Potential to receive a moderate number of clicks compared to the highest
+              # performing products of the merchant.
+              MEDIUM = 2
+
+              # Potential to receive a similar number of clicks as the highest performing
+              # products of the merchant.
+              HIGH = 3
             end
           end
 
