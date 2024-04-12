@@ -1013,7 +1013,7 @@ module Google
                 #   the default parameter values, pass an empty Hash as a request object (see above).
                 #
                 #   @param parent [::String]
-                #     Transfer configuration name in the form:
+                #     Required. Transfer configuration name in the form:
                 #     `projects/{project_id}/transferConfigs/{config_id}` or
                 #     `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`.
                 #   @param requested_time_range [::Google::Cloud::Bigquery::DataTransfer::V1::StartManualTransferRunsRequest::TimeRange, ::Hash]
@@ -1547,7 +1547,8 @@ module Google
                 #   the default parameter values, pass an empty Hash as a request object (see above).
                 #
                 #   @param name [::String]
-                #     The name of the project resource in the form: `projects/{project_id}`
+                #     Required. The name of the project resource in the form:
+                #     `projects/{project_id}`
                 #   @param data_source_ids [::Array<::String>]
                 #     Data sources that are enrolled. It is required to provide at least one
                 #     data source id.
@@ -1632,7 +1633,8 @@ module Google
                 #   the default parameter values, pass an empty Hash as a request object (see above).
                 #
                 #   @param name [::String]
-                #     The name of the project resource in the form: `projects/{project_id}`
+                #     Required. The name of the project resource in the form:
+                #     `projects/{project_id}`
                 #   @param data_source_ids [::Array<::String>]
                 #     Data sources that are unenrolled. It is required to provide at least one
                 #     data source id.
