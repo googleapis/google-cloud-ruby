@@ -22,6 +22,8 @@ require "google/cloud/discovery_engine/v1beta/conversational_search_service/rest
 require "google/cloud/discovery_engine/v1beta/data_store_service/rest"
 require "google/cloud/discovery_engine/v1beta/document_service/rest"
 require "google/cloud/discovery_engine/v1beta/engine_service/rest"
+require "google/cloud/discovery_engine/v1beta/grounded_generation_service/rest"
+require "google/cloud/discovery_engine/v1beta/rank_service/rest"
 require "google/cloud/discovery_engine/v1beta/recommendation_service/rest"
 require "google/cloud/discovery_engine/v1beta/schema_service/rest"
 require "google/cloud/discovery_engine/v1beta/search_tuning_service/rest"

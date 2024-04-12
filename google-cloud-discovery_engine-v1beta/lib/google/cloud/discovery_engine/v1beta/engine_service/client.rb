@@ -684,6 +684,281 @@ module Google
             end
 
             ##
+            # Pauses the training of an existing engine. Only applicable if
+            # {::Google::Cloud::DiscoveryEngine::V1beta::SolutionType SolutionType} is
+            # {::Google::Cloud::DiscoveryEngine::V1beta::SolutionType::SOLUTION_TYPE_RECOMMENDATION SOLUTION_TYPE_RECOMMENDATION}.
+            #
+            # @overload pause_engine(request, options = nil)
+            #   Pass arguments to `pause_engine` via a request object, either of type
+            #   {::Google::Cloud::DiscoveryEngine::V1beta::PauseEngineRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::DiscoveryEngine::V1beta::PauseEngineRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload pause_engine(name: nil)
+            #   Pass arguments to `pause_engine` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the engine to pause.
+            #     Format:
+            #     `projects/{project_number}/locations/{location_id}/collections/{collection_id}/engines/{engine_id}`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::DiscoveryEngine::V1beta::Engine]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::DiscoveryEngine::V1beta::Engine]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/discovery_engine/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DiscoveryEngine::V1beta::PauseEngineRequest.new
+            #
+            #   # Call the pause_engine method.
+            #   result = client.pause_engine request
+            #
+            #   # The returned object is of type Google::Cloud::DiscoveryEngine::V1beta::Engine.
+            #   p result
+            #
+            def pause_engine request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DiscoveryEngine::V1beta::PauseEngineRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.pause_engine.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::DiscoveryEngine::V1beta::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.pause_engine.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.pause_engine.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @engine_service_stub.call_rpc :pause_engine, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Resumes the training of an existing engine. Only applicable if
+            # {::Google::Cloud::DiscoveryEngine::V1beta::SolutionType SolutionType} is
+            # {::Google::Cloud::DiscoveryEngine::V1beta::SolutionType::SOLUTION_TYPE_RECOMMENDATION SOLUTION_TYPE_RECOMMENDATION}.
+            #
+            # @overload resume_engine(request, options = nil)
+            #   Pass arguments to `resume_engine` via a request object, either of type
+            #   {::Google::Cloud::DiscoveryEngine::V1beta::ResumeEngineRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::DiscoveryEngine::V1beta::ResumeEngineRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload resume_engine(name: nil)
+            #   Pass arguments to `resume_engine` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the engine to resume.
+            #     Format:
+            #     `projects/{project_number}/locations/{location_id}/collections/{collection_id}/engines/{engine_id}`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::DiscoveryEngine::V1beta::Engine]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::DiscoveryEngine::V1beta::Engine]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/discovery_engine/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DiscoveryEngine::V1beta::ResumeEngineRequest.new
+            #
+            #   # Call the resume_engine method.
+            #   result = client.resume_engine request
+            #
+            #   # The returned object is of type Google::Cloud::DiscoveryEngine::V1beta::Engine.
+            #   p result
+            #
+            def resume_engine request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DiscoveryEngine::V1beta::ResumeEngineRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.resume_engine.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::DiscoveryEngine::V1beta::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.resume_engine.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.resume_engine.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @engine_service_stub.call_rpc :resume_engine, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Tunes an existing engine. Only applicable if
+            # {::Google::Cloud::DiscoveryEngine::V1beta::SolutionType SolutionType} is
+            # {::Google::Cloud::DiscoveryEngine::V1beta::SolutionType::SOLUTION_TYPE_RECOMMENDATION SOLUTION_TYPE_RECOMMENDATION}.
+            #
+            # @overload tune_engine(request, options = nil)
+            #   Pass arguments to `tune_engine` via a request object, either of type
+            #   {::Google::Cloud::DiscoveryEngine::V1beta::TuneEngineRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::DiscoveryEngine::V1beta::TuneEngineRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload tune_engine(name: nil)
+            #   Pass arguments to `tune_engine` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The resource name of the engine to tune.
+            #     Format:
+            #     `projects/{project_number}/locations/{location_id}/collections/{collection_id}/engines/{engine_id}`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/discovery_engine/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DiscoveryEngine::V1beta::TuneEngineRequest.new
+            #
+            #   # Call the tune_engine method.
+            #   result = client.tune_engine request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def tune_engine request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DiscoveryEngine::V1beta::TuneEngineRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.tune_engine.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::DiscoveryEngine::V1beta::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.tune_engine.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.tune_engine.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @engine_service_stub.call_rpc :tune_engine, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the EngineService API.
             #
             # This class represents the configuration for EngineService,
@@ -861,6 +1136,21 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_engines
+                ##
+                # RPC-specific configuration for `pause_engine`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :pause_engine
+                ##
+                # RPC-specific configuration for `resume_engine`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :resume_engine
+                ##
+                # RPC-specific configuration for `tune_engine`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :tune_engine
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -874,6 +1164,12 @@ module Google
                   @get_engine = ::Gapic::Config::Method.new get_engine_config
                   list_engines_config = parent_rpcs.list_engines if parent_rpcs.respond_to? :list_engines
                   @list_engines = ::Gapic::Config::Method.new list_engines_config
+                  pause_engine_config = parent_rpcs.pause_engine if parent_rpcs.respond_to? :pause_engine
+                  @pause_engine = ::Gapic::Config::Method.new pause_engine_config
+                  resume_engine_config = parent_rpcs.resume_engine if parent_rpcs.respond_to? :resume_engine
+                  @resume_engine = ::Gapic::Config::Method.new resume_engine_config
+                  tune_engine_config = parent_rpcs.tune_engine if parent_rpcs.respond_to? :tune_engine
+                  @tune_engine = ::Gapic::Config::Method.new tune_engine_config
 
                   yield self if block_given?
                 end

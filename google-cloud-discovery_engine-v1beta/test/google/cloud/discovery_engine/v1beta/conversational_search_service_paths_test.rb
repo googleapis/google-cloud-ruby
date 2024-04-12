@@ -33,6 +33,39 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Cli
     end
   end
 
+  def test_answer_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.answer_path project: "value0", location: "value1", data_store: "value2", session: "value3", answer: "value4"
+      assert_equal "projects/value0/locations/value1/dataStores/value2/sessions/value3/answers/value4", path
+
+      path = client.answer_path project: "value0", location: "value1", collection: "value2", data_store: "value3", session: "value4", answer: "value5"
+      assert_equal "projects/value0/locations/value1/collections/value2/dataStores/value3/sessions/value4/answers/value5", path
+
+      path = client.answer_path project: "value0", location: "value1", collection: "value2", engine: "value3", session: "value4", answer: "value5"
+      assert_equal "projects/value0/locations/value1/collections/value2/engines/value3/sessions/value4/answers/value5", path
+    end
+  end
+
+  def test_chunk_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.chunk_path project: "value0", location: "value1", data_store: "value2", branch: "value3", document: "value4", chunk: "value5"
+      assert_equal "projects/value0/locations/value1/dataStores/value2/branches/value3/documents/value4/chunks/value5", path
+
+      path = client.chunk_path project: "value0", location: "value1", collection: "value2", data_store: "value3", branch: "value4", document: "value5", chunk: "value6"
+      assert_equal "projects/value0/locations/value1/collections/value2/dataStores/value3/branches/value4/documents/value5/chunks/value6", path
+    end
+  end
+
   def test_conversation_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -96,6 +129,24 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Cli
 
       path = client.serving_config_path project: "value0", location: "value1", collection: "value2", engine: "value3", serving_config: "value4"
       assert_equal "projects/value0/locations/value1/collections/value2/engines/value3/servingConfigs/value4", path
+    end
+  end
+
+  def test_session_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.session_path project: "value0", location: "value1", data_store: "value2", session: "value3"
+      assert_equal "projects/value0/locations/value1/dataStores/value2/sessions/value3", path
+
+      path = client.session_path project: "value0", location: "value1", collection: "value2", data_store: "value3", session: "value4"
+      assert_equal "projects/value0/locations/value1/collections/value2/dataStores/value3/sessions/value4", path
+
+      path = client.session_path project: "value0", location: "value1", collection: "value2", engine: "value3", session: "value4"
+      assert_equal "projects/value0/locations/value1/collections/value2/engines/value3/sessions/value4", path
     end
   end
 end

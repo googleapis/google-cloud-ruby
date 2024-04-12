@@ -77,6 +77,41 @@
               "methods": [
                 "list_conversations"
               ]
+            },
+            "AnswerQuery": {
+              "methods": [
+                "answer_query"
+              ]
+            },
+            "GetAnswer": {
+              "methods": [
+                "get_answer"
+              ]
+            },
+            "CreateSession": {
+              "methods": [
+                "create_session"
+              ]
+            },
+            "DeleteSession": {
+              "methods": [
+                "delete_session"
+              ]
+            },
+            "UpdateSession": {
+              "methods": [
+                "update_session"
+              ]
+            },
+            "GetSession": {
+              "methods": [
+                "get_session"
+              ]
+            },
+            "ListSessions": {
+              "methods": [
+                "list_sessions"
+              ]
             }
           }
         }
@@ -188,6 +223,49 @@
             "ListEngines": {
               "methods": [
                 "list_engines"
+              ]
+            },
+            "PauseEngine": {
+              "methods": [
+                "pause_engine"
+              ]
+            },
+            "ResumeEngine": {
+              "methods": [
+                "resume_engine"
+              ]
+            },
+            "TuneEngine": {
+              "methods": [
+                "tune_engine"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "GroundedGenerationService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DiscoveryEngine::V1beta::GroundedGenerationService::Client",
+          "rpcs": {
+            "CheckGrounding": {
+              "methods": [
+                "check_grounding"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RankService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DiscoveryEngine::V1beta::RankService::Client",
+          "rpcs": {
+            "Rank": {
+              "methods": [
+                "rank"
               ]
             }
           }

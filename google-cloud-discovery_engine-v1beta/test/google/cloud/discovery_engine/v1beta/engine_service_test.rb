@@ -372,6 +372,185 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::EngineService::ClientTest < Mini
     end
   end
 
+  def test_pause_engine
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::DiscoveryEngine::V1beta::Engine.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    pause_engine_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :pause_engine, name
+      assert_kind_of ::Google::Cloud::DiscoveryEngine::V1beta::PauseEngineRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, pause_engine_client_stub do
+      # Create client
+      client = ::Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.pause_engine({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.pause_engine name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.pause_engine ::Google::Cloud::DiscoveryEngine::V1beta::PauseEngineRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.pause_engine({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.pause_engine(::Google::Cloud::DiscoveryEngine::V1beta::PauseEngineRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, pause_engine_client_stub.call_rpc_count
+    end
+  end
+
+  def test_resume_engine
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::DiscoveryEngine::V1beta::Engine.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    resume_engine_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :resume_engine, name
+      assert_kind_of ::Google::Cloud::DiscoveryEngine::V1beta::ResumeEngineRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, resume_engine_client_stub do
+      # Create client
+      client = ::Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.resume_engine({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.resume_engine name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.resume_engine ::Google::Cloud::DiscoveryEngine::V1beta::ResumeEngineRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.resume_engine({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.resume_engine(::Google::Cloud::DiscoveryEngine::V1beta::ResumeEngineRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, resume_engine_client_stub.call_rpc_count
+    end
+  end
+
+  def test_tune_engine
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    tune_engine_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :tune_engine, name
+      assert_kind_of ::Google::Cloud::DiscoveryEngine::V1beta::TuneEngineRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, tune_engine_client_stub do
+      # Create client
+      client = ::Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.tune_engine({ name: name }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.tune_engine name: name do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.tune_engine ::Google::Cloud::DiscoveryEngine::V1beta::TuneEngineRequest.new(name: name) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.tune_engine({ name: name }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.tune_engine(::Google::Cloud::DiscoveryEngine::V1beta::TuneEngineRequest.new(name: name), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, tune_engine_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

@@ -72,12 +72,10 @@ module Google
 
             # The OCR parsing configurations for documents.
             # @!attribute [rw] enhanced_document_elements
+            #   @deprecated This field is deprecated and may be removed in the next major version update.
             #   @return [::Array<::String>]
-            #     Apply additional enhanced OCR processing to a list of document
-            #     elements.
-            #
-            #     Supported values:
-            #     * `table`: advanced table parsing model.
+            #     [DEPRECATED] This field is deprecated. To use the additional enhanced
+            #     document elements processing, please switch to `layout_parsing_config`.
             # @!attribute [rw] use_native_text
             #   @return [::Boolean]
             #     If true, will use native text instead of OCR text on pages containing

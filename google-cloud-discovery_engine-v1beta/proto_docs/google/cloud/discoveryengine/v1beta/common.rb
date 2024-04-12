@@ -131,6 +131,9 @@ module Google
 
           # The media industry vertical.
           MEDIA = 2
+
+          # The healthcare FHIR vertical.
+          HEALTHCARE_FHIR = 7
         end
 
         # The type of solution.
@@ -146,10 +149,15 @@ module Google
 
           # Used for use cases related to the Generative AI agent.
           SOLUTION_TYPE_CHAT = 3
+
+          # Used for use cases related to the Generative Chat agent.
+          # It's used for Generative chat engine only, the associated data stores
+          # must enrolled with `SOLUTION_TYPE_CHAT` solution.
+          SOLUTION_TYPE_GENERATIVE_CHAT = 4
         end
 
         # Tiers of search features. Different tiers might have different
-        # pricing. To learn more, please check the pricing documentation.
+        # pricing. To learn more, check the pricing documentation.
         module SearchTier
           # Default value when the enum is unspecified. This is invalid to use.
           SEARCH_TIER_UNSPECIFIED = 0

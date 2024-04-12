@@ -108,7 +108,7 @@ module Google
           #     The search feature tier of this engine.
           #
           #     Different tiers might have different
-          #     pricing. To learn more, please check the pricing documentation.
+          #     pricing. To learn more, check the pricing documentation.
           #
           #     Defaults to
           #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchTier::SEARCH_TIER_STANDARD SearchTier.SEARCH_TIER_STANDARD}
@@ -147,7 +147,7 @@ module Google
           #     {::Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client#get_engine EngineService.GetEngine}
           #     or
           #     {::Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client#list_engines EngineService.ListEngines}
-          #     API after engine creation. Please use
+          #     API after engine creation. Use
           #     {::Google::Cloud::DiscoveryEngine::V1beta::Engine::ChatEngineMetadata#dialogflow_agent ChatEngineMetadata.dialogflow_agent}
           #     for actual agent association after Engine is created.
           class ChatEngineConfig
