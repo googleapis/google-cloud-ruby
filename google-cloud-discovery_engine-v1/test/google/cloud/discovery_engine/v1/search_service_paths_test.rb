@@ -48,6 +48,21 @@ class ::Google::Cloud::DiscoveryEngine::V1::SearchService::ClientPathsTest < Min
     end
   end
 
+  def test_data_store_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::DiscoveryEngine::V1::SearchService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.data_store_path project: "value0", location: "value1", data_store: "value2"
+      assert_equal "projects/value0/locations/value1/dataStores/value2", path
+
+      path = client.data_store_path project: "value0", location: "value1", collection: "value2", data_store: "value3"
+      assert_equal "projects/value0/locations/value1/collections/value2/dataStores/value3", path
+    end
+  end
+
   def test_serving_config_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do

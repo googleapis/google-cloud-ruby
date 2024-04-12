@@ -61,6 +61,22 @@ module Google
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Timestamp the
         #     {::Google::Cloud::DiscoveryEngine::V1::DataStore DataStore} was created at.
+        # @!attribute [rw] starting_schema
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::Schema]
+        #     The start schema to use for this
+        #     {::Google::Cloud::DiscoveryEngine::V1::DataStore DataStore} when provisioning
+        #     it. If unset, a default vertical specialized schema will be used.
+        #
+        #     This field is only used by [CreateDataStore][] API, and will be ignored if
+        #     used in other APIs. This field will be omitted from all API responses
+        #     including [CreateDataStore][] API. To retrieve a schema of a
+        #     {::Google::Cloud::DiscoveryEngine::V1::DataStore DataStore}, use
+        #     {::Google::Cloud::DiscoveryEngine::V1::SchemaService::Client#get_schema SchemaService.GetSchema}
+        #     API instead.
+        #
+        #     The provided schema will be validated against certain rules on schema.
+        #     Learn more from [this
+        #     doc](https://cloud.google.com/generative-ai-app-builder/docs/provide-schema).
         class DataStore
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

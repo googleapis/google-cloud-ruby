@@ -193,7 +193,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload converse_conversation(name: nil, query: nil, serving_config: nil, conversation: nil, safe_search: nil, user_labels: nil, summary_spec: nil, filter: nil)
+            # @overload converse_conversation(name: nil, query: nil, serving_config: nil, conversation: nil, safe_search: nil, user_labels: nil, summary_spec: nil, filter: nil, boost_spec: nil)
             #   Pass arguments to `converse_conversation` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -254,6 +254,10 @@ module Google
             #     For more information about filtering including syntax and filter
             #     operators, see
             #     [Filter](https://cloud.google.com/generative-ai-app-builder/docs/filter-search-metadata)
+            #   @param boost_spec [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::BoostSpec, ::Hash]
+            #     Boost specification to boost certain documents in search results which may
+            #     affect the converse response. For more information on boosting, see
+            #     [Boosting](https://cloud.google.com/retail/docs/boosting#boost)
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DiscoveryEngine::V1::ConverseConversationResponse]

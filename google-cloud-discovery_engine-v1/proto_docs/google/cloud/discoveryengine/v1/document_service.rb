@@ -151,6 +151,10 @@ module Google
         #     If set to true, and the
         #     {::Google::Cloud::DiscoveryEngine::V1::Document Document} is not found, a new
         #     {::Google::Cloud::DiscoveryEngine::V1::Document Document} will be created.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Indicates which fields in the provided imported 'document' to update. If
+        #     not set, will by default update all fields.
         class UpdateDocumentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -88,6 +88,55 @@ module Google
               resource.call(**args)
             end
 
+            ##
+            # Create a fully-qualified Schema resource string.
+            #
+            # @overload schema_path(project:, location:, data_store:, schema:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/dataStores/{data_store}/schemas/{schema}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param data_store [String]
+            #   @param schema [String]
+            #
+            # @overload schema_path(project:, location:, collection:, data_store:, schema:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/schemas/{schema}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param collection [String]
+            #   @param data_store [String]
+            #   @param schema [String]
+            #
+            # @return [::String]
+            def schema_path **args
+              resources = {
+                "data_store:location:project:schema" => (proc do |project:, location:, data_store:, schema:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "data_store cannot contain /" if data_store.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/dataStores/#{data_store}/schemas/#{schema}"
+                end),
+                "collection:data_store:location:project:schema" => (proc do |project:, location:, collection:, data_store:, schema:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "collection cannot contain /" if collection.to_s.include? "/"
+                  raise ::ArgumentError, "data_store cannot contain /" if data_store.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/collections/#{collection}/dataStores/#{data_store}/schemas/#{schema}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
+            end
+
             extend self
           end
         end

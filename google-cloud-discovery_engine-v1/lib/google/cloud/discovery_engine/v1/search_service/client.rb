@@ -68,9 +68,9 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.timeout = 5.0
+                default_config.timeout = 30.0
                 default_config.retry_policy = {
-                  initial_delay: 0.1, max_delay: 5.0, multiplier: 1.3, retry_codes: [14]
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config
@@ -193,7 +193,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload search(serving_config: nil, branch: nil, query: nil, image_query: nil, page_size: nil, page_token: nil, offset: nil, filter: nil, canonical_filter: nil, order_by: nil, user_info: nil, facet_specs: nil, boost_spec: nil, params: nil, query_expansion_spec: nil, spell_correction_spec: nil, user_pseudo_id: nil, content_search_spec: nil, safe_search: nil, user_labels: nil)
+            # @overload search(serving_config: nil, branch: nil, query: nil, image_query: nil, page_size: nil, page_token: nil, offset: nil, data_store_specs: nil, filter: nil, canonical_filter: nil, order_by: nil, user_info: nil, facet_specs: nil, boost_spec: nil, params: nil, query_expansion_spec: nil, spell_correction_spec: nil, user_pseudo_id: nil, content_search_spec: nil, safe_search: nil, user_labels: nil)
             #   Pass arguments to `search` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -217,10 +217,14 @@ module Google
             #     Raw image query.
             #   @param page_size [::Integer]
             #     Maximum number of {::Google::Cloud::DiscoveryEngine::V1::Document Document}s to
-            #     return. If unspecified, defaults to a reasonable value. The maximum allowed
-            #     value is 100. Values above 100 are coerced to 100.
+            #     return. The maximum allowed value depends on the data type. Values above
+            #     the maximum value are coerced to the maximum value.
             #
-            #     If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+            #     * Websites with basic indexing: Default `10`, Maximum `25`.
+            #     * Websites with advanced indexing: Default `25`, Maximum `50`.
+            #     * Other: Default `50`, Maximum `100`.
+            #
+            #     If this field is negative, an  `INVALID_ARGUMENT` is returned.
             #   @param page_token [::String]
             #     A page token received from a previous
             #     {::Google::Cloud::DiscoveryEngine::V1::SearchService::Client#search SearchService.Search}
@@ -239,6 +243,8 @@ module Google
             #     unset.
             #
             #     If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+            #   @param data_store_specs [::Array<::Google::Cloud::DiscoveryEngine::V1::SearchRequest::DataStoreSpec, ::Hash>]
+            #     A list of data store specs to apply on a search call.
             #   @param filter [::String]
             #     The filter syntax consists of an expression language for constructing a
             #     predicate from one or more fields of the documents being filtered. Filter

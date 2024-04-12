@@ -252,12 +252,14 @@ class ::Google::Cloud::DiscoveryEngine::V1::DocumentService::ClientTest < Minite
     # Create request parameters for a unary method.
     document = {}
     allow_missing = true
+    update_mask = {}
 
     update_document_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_document, name
       assert_kind_of ::Google::Cloud::DiscoveryEngine::V1::UpdateDocumentRequest, request
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DiscoveryEngine::V1::Document), request["document"]
       assert_equal true, request["allow_missing"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -268,31 +270,31 @@ class ::Google::Cloud::DiscoveryEngine::V1::DocumentService::ClientTest < Minite
       end
 
       # Use hash object
-      client.update_document({ document: document, allow_missing: allow_missing }) do |response, operation|
+      client.update_document({ document: document, allow_missing: allow_missing, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_document document: document, allow_missing: allow_missing do |response, operation|
+      client.update_document document: document, allow_missing: allow_missing, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_document ::Google::Cloud::DiscoveryEngine::V1::UpdateDocumentRequest.new(document: document, allow_missing: allow_missing) do |response, operation|
+      client.update_document ::Google::Cloud::DiscoveryEngine::V1::UpdateDocumentRequest.new(document: document, allow_missing: allow_missing, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_document({ document: document, allow_missing: allow_missing }, grpc_options) do |response, operation|
+      client.update_document({ document: document, allow_missing: allow_missing, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_document(::Google::Cloud::DiscoveryEngine::V1::UpdateDocumentRequest.new(document: document, allow_missing: allow_missing), grpc_options) do |response, operation|
+      client.update_document(::Google::Cloud::DiscoveryEngine::V1::UpdateDocumentRequest.new(document: document, allow_missing: allow_missing, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -372,6 +374,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::DocumentService::ClientTest < Minite
     parent = "hello world"
     error_config = {}
     reconciliation_mode = :RECONCILIATION_MODE_UNSPECIFIED
+    update_mask = {}
     auto_generate_ids = true
     id_field = "hello world"
 
@@ -383,6 +386,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::DocumentService::ClientTest < Minite
       assert_equal "hello world", request["parent"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DiscoveryEngine::V1::ImportErrorConfig), request["error_config"]
       assert_equal :RECONCILIATION_MODE_UNSPECIFIED, request["reconciliation_mode"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       assert_equal true, request["auto_generate_ids"]
       assert_equal "hello world", request["id_field"]
       refute_nil options
@@ -395,35 +399,35 @@ class ::Google::Cloud::DiscoveryEngine::V1::DocumentService::ClientTest < Minite
       end
 
       # Use hash object
-      client.import_documents({ inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode, auto_generate_ids: auto_generate_ids, id_field: id_field }) do |response, operation|
+      client.import_documents({ inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode, update_mask: update_mask, auto_generate_ids: auto_generate_ids, id_field: id_field }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.import_documents inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode, auto_generate_ids: auto_generate_ids, id_field: id_field do |response, operation|
+      client.import_documents inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode, update_mask: update_mask, auto_generate_ids: auto_generate_ids, id_field: id_field do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.import_documents ::Google::Cloud::DiscoveryEngine::V1::ImportDocumentsRequest.new(inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode, auto_generate_ids: auto_generate_ids, id_field: id_field) do |response, operation|
+      client.import_documents ::Google::Cloud::DiscoveryEngine::V1::ImportDocumentsRequest.new(inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode, update_mask: update_mask, auto_generate_ids: auto_generate_ids, id_field: id_field) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.import_documents({ inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode, auto_generate_ids: auto_generate_ids, id_field: id_field }, grpc_options) do |response, operation|
+      client.import_documents({ inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode, update_mask: update_mask, auto_generate_ids: auto_generate_ids, id_field: id_field }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.import_documents(::Google::Cloud::DiscoveryEngine::V1::ImportDocumentsRequest.new(inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode, auto_generate_ids: auto_generate_ids, id_field: id_field), grpc_options) do |response, operation|
+      client.import_documents(::Google::Cloud::DiscoveryEngine::V1::ImportDocumentsRequest.new(inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode, update_mask: update_mask, auto_generate_ids: auto_generate_ids, id_field: id_field), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

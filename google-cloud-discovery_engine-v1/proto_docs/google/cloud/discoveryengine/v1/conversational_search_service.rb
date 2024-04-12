@@ -88,6 +88,11 @@ module Google
         #     For more information about filtering including syntax and filter
         #     operators, see
         #     [Filter](https://cloud.google.com/generative-ai-app-builder/docs/filter-search-metadata)
+        # @!attribute [rw] boost_spec
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::BoostSpec]
+        #     Boost specification to boost certain documents in search results which may
+        #     affect the converse response. For more information on boosting, see
+        #     [Boosting](https://cloud.google.com/retail/docs/boosting#boost)
         class ConverseConversationRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
