@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.3.2 (2024-04-15)
+
+#### Documentation
+
+* update comments in `contact_email` from required to optional ([#25443](https://github.com/googleapis/google-cloud-ruby/issues/25443)) 
+
 ### 0.3.1 (2024-03-18)
 
 #### Documentation
