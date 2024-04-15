@@ -1,5 +1,12 @@
 # Release History
 
+### 0.40.0 (2024-04-15)
+
+#### Features
+
+* add several fields to manage state of database encryption update ([#25442](https://github.com/googleapis/google-cloud-ruby/issues/25442)) 
+* support optional secondary boot disk update strategy ([#25422](https://github.com/googleapis/google-cloud-ruby/issues/25422)) 
+
 ### 0.39.0 (2024-03-10)
 
 #### Features
