@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.9.0 (2024-04-15)
+
+#### Features
+
+* Add additional `TokenType` options (`TOKEN_TYPE_PKI` and `TOKEN_TYPE_LIMITED_AWS`) ([#25444](https://github.com/googleapis/google-cloud-ruby/issues/25444)) 
+
 ### 0.8.0 (2024-02-26)
 
 #### Features
