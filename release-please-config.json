@@ -127,6 +127,10 @@
       "component": "google-cloud-app_engine-v1",
       "version_file": "lib/google/cloud/app_engine/v1/version.rb"
     },
+    "google-cloud-app_hub-v1": {
+      "component": "google-cloud-app_hub-v1",
+      "version_file": "lib/google/cloud/app_hub/v1/version.rb"
+    },
     "google-cloud-artifact_registry": {
       "component": "google-cloud-artifact_registry",
       "version_file": "lib/google/cloud/artifact_registry/version.rb"
