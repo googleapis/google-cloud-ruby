@@ -298,10 +298,13 @@ module Google
         end
 
         # The key and value for a
-        # [tag](https://cloud.google.com/resource-manager/docs/tags/tags-overview),
+        # [tag](https://cloud.google.com/resource-manager/docs/tags/tags-overview).
         # @!attribute [rw] tag_key
         #   @return [::String]
         #     TagKey namespaced name, in the format of \\{ORG_ID}/\\{TAG_KEY_SHORT_NAME}.
+        # @!attribute [rw] tag_key_id
+        #   @return [::String]
+        #     TagKey ID, in the format of tagKeys/\\{TAG_KEY_ID}.
         # @!attribute [rw] tag_value
         #   @return [::String]
         #     TagValue namespaced name, in the format of
@@ -644,6 +647,7 @@ module Google
         #         - `tagKeys:"123456789/env*"`
         #         - `tagKeys="123456789/env"`
         #         - `tagKeys:"env"`
+        #         - `tagKeyIds="tagKeys/123"`
         #         - `tagValues:"env"`
         #         - `tagValues:"env/prod"`
         #         - `tagValues:"123456789/env/prod*"`
@@ -665,6 +669,7 @@ module Google
         #         - `effectiveTagKeys:"123456789/env*"`
         #         - `effectiveTagKeys="123456789/env"`
         #         - `effectiveTagKeys:"env"`
+        #         - `effectiveTagKeyIds="tagKeys/123"`
         #         - `effectiveTagValues:"env"`
         #         - `effectiveTagValues:"env/prod"`
         #         - `effectiveTagValues:"123456789/env/prod*"`
@@ -925,7 +930,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The Condition evaluation.
+        # The condition evaluation.
         # @!attribute [rw] evaluation_value
         #   @return [::Google::Cloud::Asset::V1::ConditionEvaluation::EvaluationValue]
         #     The evaluation result.
@@ -946,7 +951,7 @@ module Google
 
             # The evaluation result is `conditional` when the condition expression
             # contains variables that are either missing input values or have not been
-            # supported by Analyzer yet.
+            # supported by Policy Analyzer yet.
             CONDITIONAL = 3
           end
         end
