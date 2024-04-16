@@ -57,6 +57,8 @@
   "google-cloud-app_engine+FILLER": "0.0.0",
   "google-cloud-app_engine-v1": "0.10.0",
   "google-cloud-app_engine-v1+FILLER": "0.0.0",
+  "google-cloud-app_hub-v1": "0.0.1",
+  "google-cloud-app_hub-v1+FILLER": "0.0.0",
   "google-cloud-artifact_registry": "1.4.0",
   "google-cloud-artifact_registry+FILLER": "0.0.0",
   "google-cloud-artifact_registry-v1": "0.13.0",
