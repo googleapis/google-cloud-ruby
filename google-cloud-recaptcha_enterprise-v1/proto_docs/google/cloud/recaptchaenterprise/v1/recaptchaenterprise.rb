@@ -1064,7 +1064,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response to request to list firewall policies belonging to a key.
+        # Response to request to list firewall policies belonging to a project.
         # @!attribute [rw] firewall_policies
         #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::FirewallPolicy>]
         #     Policy details.
