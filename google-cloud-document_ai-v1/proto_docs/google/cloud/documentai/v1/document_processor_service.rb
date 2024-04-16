@@ -38,11 +38,9 @@ module Google
         #     Returns error if set on other processor types.
         # @!attribute [rw] schema_override
         #   @return [::Google::Cloud::DocumentAI::V1::DocumentSchema]
-        #     Optional. Override the schema of the
-        #     {::Google::Cloud::DocumentAI::V1::ProcessorVersion ProcessorVersion}. Will
-        #     return an Invalid Argument error if this field is set when the underlying
-        #     {::Google::Cloud::DocumentAI::V1::ProcessorVersion ProcessorVersion} doesn't
-        #     support schema override.
+        #     Optional. Override the schema of the {::Google::Cloud::DocumentAI::V1::ProcessorVersion ProcessorVersion}. Will return an Invalid
+        #     Argument error if this field is set when the underlying
+        #     {::Google::Cloud::DocumentAI::V1::ProcessorVersion ProcessorVersion} doesn't support schema override.
         class ProcessOptions
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -58,8 +56,7 @@ module Google
         end
 
         # Request message for the
-        # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#process_document ProcessDocument}
-        # method.
+        # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#process_document ProcessDocument} method.
         # @!attribute [rw] inline_document
         #   @return [::Google::Cloud::DocumentAI::V1::Document]
         #     An inline document proto.
@@ -71,15 +68,11 @@ module Google
         #     A raw document on Google Cloud Storage.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The resource name of the
-        #     {::Google::Cloud::DocumentAI::V1::Processor Processor} or
+        #     Required. The resource name of the {::Google::Cloud::DocumentAI::V1::Processor Processor} or
         #     {::Google::Cloud::DocumentAI::V1::ProcessorVersion ProcessorVersion}
-        #     to use for processing. If a
-        #     {::Google::Cloud::DocumentAI::V1::Processor Processor} is specified, the server
-        #     will use its [default
-        #     version][google.cloud.documentai.v1.Processor.default_processor_version].
-        #     Format: `projects/{project}/locations/{location}/processors/{processor}`,
-        #     or
+        #     to use for processing. If a {::Google::Cloud::DocumentAI::V1::Processor Processor} is specified, the server will use
+        #     its {::Google::Cloud::DocumentAI::V1::Processor#default_processor_version default version}. Format:
+        #     `projects/{project}/locations/{location}/processors/{processor}`, or
         #     `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
         # @!attribute [rw] skip_human_review
         #   @return [::Boolean]
@@ -87,8 +80,7 @@ module Google
         #     `false`.
         # @!attribute [rw] field_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Specifies which fields to include in the
-        #     {::Google::Cloud::DocumentAI::V1::ProcessResponse#document ProcessResponse.document}
+        #     Specifies which fields to include in the {::Google::Cloud::DocumentAI::V1::ProcessResponse#document ProcessResponse.document}
         #     output. Only supports top-level document and pages field, so it must be in
         #     the form of `{document_field_name}` or `pages.{page_field_name}`.
         # @!attribute [rw] process_options
@@ -126,11 +118,9 @@ module Google
         # @!attribute [rw] human_review_operation
         #   @return [::String]
         #     The name of the operation triggered by the processed document. This field
-        #     is populated only when the
-        #     {::Google::Cloud::DocumentAI::V1::HumanReviewStatus#state state} is
-        #     `HUMAN_REVIEW_IN_PROGRESS`. It has the same response type and metadata as
-        #     the long-running operation returned by
-        #     {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#review_document ReviewDocument}.
+        #     is populated only when the {::Google::Cloud::DocumentAI::V1::HumanReviewStatus#state state} is `HUMAN_REVIEW_IN_PROGRESS`. It has
+        #     the same response type and metadata as the long-running operation returned
+        #     by {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#review_document ReviewDocument}.
         class HumanReviewStatus
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -152,15 +142,13 @@ module Google
             IN_PROGRESS = 3
 
             # Some error happened during triggering human review, see the
-            # {::Google::Cloud::DocumentAI::V1::HumanReviewStatus#state_message state_message}
-            # for details.
+            # {::Google::Cloud::DocumentAI::V1::HumanReviewStatus#state_message state_message} for details.
             ERROR = 4
           end
         end
 
         # Response message for the
-        # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#process_document ProcessDocument}
-        # method.
+        # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#process_document ProcessDocument} method.
         # @!attribute [rw] document
         #   @return [::Google::Cloud::DocumentAI::V1::Document]
         #     The document payload, will populate fields based on the processor's
@@ -177,8 +165,7 @@ module Google
         # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#batch_process_documents BatchProcessDocuments}.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The resource name of
-        #     {::Google::Cloud::DocumentAI::V1::Processor Processor} or
+        #     Required. The resource name of {::Google::Cloud::DocumentAI::V1::Processor Processor} or
         #     {::Google::Cloud::DocumentAI::V1::ProcessorVersion ProcessorVersion}.
         #     Format: `projects/{project}/locations/{location}/processors/{processor}`,
         #     or
@@ -254,17 +241,16 @@ module Google
           # The status of a each individual document in the batch process.
           # @!attribute [rw] input_gcs_source
           #   @return [::String]
-          #     The source of the document, same as the
-          #     {::Google::Cloud::DocumentAI::V1::BatchProcessMetadata::IndividualProcessStatus#input_gcs_source input_gcs_source}
-          #     field in the request when the batch process started.
+          #     The source of the document, same as the {::Google::Cloud::DocumentAI::V1::BatchProcessMetadata::IndividualProcessStatus#input_gcs_source input_gcs_source} field in the
+          #     request when the batch process started.
           # @!attribute [rw] status
           #   @return [::Google::Rpc::Status]
           #     The status processing the document.
           # @!attribute [rw] output_gcs_destination
           #   @return [::String]
           #     The Cloud Storage output destination (in the request as
-          #     {::Google::Cloud::DocumentAI::V1::DocumentOutputConfig::GcsOutputConfig#gcs_uri DocumentOutputConfig.GcsOutputConfig.gcs_uri})
-          #     of the processed document if it was successful, otherwise empty.
+          #     {::Google::Cloud::DocumentAI::V1::DocumentOutputConfig::GcsOutputConfig#gcs_uri DocumentOutputConfig.GcsOutputConfig.gcs_uri}) of the processed
+          #     document if it was successful, otherwise empty.
           # @!attribute [rw] human_review_status
           #   @return [::Google::Cloud::DocumentAI::V1::HumanReviewStatus]
           #     The status of human review on the processed document.
@@ -299,9 +285,8 @@ module Google
         end
 
         # Request message for the
-        # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#fetch_processor_types FetchProcessorTypes}
-        # method. Some processor types may require the project be added to an
-        # allowlist.
+        # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#fetch_processor_types FetchProcessorTypes} method.
+        # Some processor types may require the project be added to an allowlist.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The location of processor types to list.
@@ -312,8 +297,7 @@ module Google
         end
 
         # Response message for the
-        # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#fetch_processor_types FetchProcessorTypes}
-        # method.
+        # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#fetch_processor_types FetchProcessorTypes} method.
         # @!attribute [rw] processor_types
         #   @return [::Array<::Google::Cloud::DocumentAI::V1::ProcessorType>]
         #     The list of processor types.
@@ -323,9 +307,8 @@ module Google
         end
 
         # Request message for the
-        # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#list_processor_types ListProcessorTypes}
-        # method. Some processor types may require the project be added to an
-        # allowlist.
+        # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#list_processor_types ListProcessorTypes} method.
+        # Some processor types may require the project be added to an allowlist.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The location of processor types to list.
@@ -344,8 +327,7 @@ module Google
         end
 
         # Response message for the
-        # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#list_processor_types ListProcessorTypes}
-        # method.
+        # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#list_processor_types ListProcessorTypes} method.
         # @!attribute [rw] processor_types
         #   @return [::Array<::Google::Cloud::DocumentAI::V1::ProcessorType>]
         #     The processor types.
@@ -360,8 +342,8 @@ module Google
         # Request message for list all processors belongs to a project.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent (project and location) which owns this collection of
-        #     Processors. Format: `projects/{project}/locations/{location}`
+        #     Required. The parent (project and location) which owns this collection of Processors.
+        #     Format: `projects/{project}/locations/{location}`
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of processors to return.
@@ -377,8 +359,7 @@ module Google
         end
 
         # Response message for the
-        # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#list_processors ListProcessors}
-        # method.
+        # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#list_processors ListProcessors} method.
         # @!attribute [rw] processors
         #   @return [::Array<::Google::Cloud::DocumentAI::V1::Processor>]
         #     The list of processors.
@@ -391,8 +372,7 @@ module Google
         end
 
         # Request message for the
-        # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#get_processor_type GetProcessorType}
-        # method.
+        # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#get_processor_type GetProcessorType} method.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The processor type resource name.
@@ -401,8 +381,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for the
-        # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#get_processor GetProcessor}
+        # Request message for the {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#get_processor GetProcessor}
         # method.
         # @!attribute [rw] name
         #   @return [::String]
@@ -413,8 +392,7 @@ module Google
         end
 
         # Request message for the
-        # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#get_processor_version GetProcessorVersion}
-        # method.
+        # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#get_processor_version GetProcessorVersion} method.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The processor resource name.
@@ -426,9 +404,8 @@ module Google
         # Request message for list all processor versions belongs to a processor.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent (project, location and processor) to list all
-        #     versions. Format:
-        #     `projects/{project}/locations/{location}/processors/{processor}`
+        #     Required. The parent (project, location and processor) to list all versions.
+        #     Format: `projects/{project}/locations/{location}/processors/{processor}`
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of processor versions to return.
@@ -540,21 +517,17 @@ module Google
         end
 
         # Request message for the
-        # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#create_processor CreateProcessor}
-        # method. Notice this request is sent to a regionalized backend service. If the
-        # {::Google::Cloud::DocumentAI::V1::ProcessorType ProcessorType} isn't available in
-        # that region, the creation fails.
+        # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#create_processor CreateProcessor} method. Notice
+        # this request is sent to a regionalized backend service. If the
+        # {::Google::Cloud::DocumentAI::V1::ProcessorType ProcessorType} isn't available in that region, the creation fails.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent (project and location) under which to create the
-        #     processor. Format: `projects/{project}/locations/{location}`
+        #     Required. The parent (project and location) under which to create the processor.
+        #     Format: `projects/{project}/locations/{location}`
         # @!attribute [rw] processor
         #   @return [::Google::Cloud::DocumentAI::V1::Processor]
-        #     Required. The processor to be created, requires
-        #     {::Google::Cloud::DocumentAI::V1::Processor#type Processor.type} and
-        #     {::Google::Cloud::DocumentAI::V1::Processor#display_name Processor.display_name}
-        #     to be set. Also, the
-        #     {::Google::Cloud::DocumentAI::V1::Processor#kms_key_name Processor.kms_key_name}
+        #     Required. The processor to be created, requires {::Google::Cloud::DocumentAI::V1::Processor#type Processor.type} and
+        #     {::Google::Cloud::DocumentAI::V1::Processor#display_name Processor.display_name} to be set. Also, the {::Google::Cloud::DocumentAI::V1::Processor#kms_key_name Processor.kms_key_name}
         #     field must be set if the processor is under CMEK.
         class CreateProcessorRequest
           include ::Google::Protobuf::MessageExts
@@ -562,8 +535,7 @@ module Google
         end
 
         # Request message for the
-        # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#delete_processor DeleteProcessor}
-        # method.
+        # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#delete_processor DeleteProcessor} method.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The processor resource name to be deleted.
@@ -573,8 +545,7 @@ module Google
         end
 
         # The long-running operation metadata for the
-        # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#delete_processor DeleteProcessor}
-        # method.
+        # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#delete_processor DeleteProcessor} method.
         # @!attribute [rw] common_metadata
         #   @return [::Google::Cloud::DocumentAI::V1::CommonOperationMetadata]
         #     The basic metadata of the long-running operation.
@@ -584,8 +555,7 @@ module Google
         end
 
         # Request message for the
-        # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#enable_processor EnableProcessor}
-        # method.
+        # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#enable_processor EnableProcessor} method.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The processor resource name to be enabled.
@@ -595,16 +565,15 @@ module Google
         end
 
         # Response message for the
-        # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#enable_processor EnableProcessor}
-        # method. Intentionally empty proto for adding fields in future.
+        # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#enable_processor EnableProcessor} method.
+        # Intentionally empty proto for adding fields in future.
         class EnableProcessorResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The long-running operation metadata for the
-        # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#enable_processor EnableProcessor}
-        # method.
+        # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#enable_processor EnableProcessor} method.
         # @!attribute [rw] common_metadata
         #   @return [::Google::Cloud::DocumentAI::V1::CommonOperationMetadata]
         #     The basic metadata of the long-running operation.
@@ -614,8 +583,7 @@ module Google
         end
 
         # Request message for the
-        # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#disable_processor DisableProcessor}
-        # method.
+        # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#disable_processor DisableProcessor} method.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The processor resource name to be disabled.
@@ -625,16 +593,15 @@ module Google
         end
 
         # Response message for the
-        # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#disable_processor DisableProcessor}
-        # method. Intentionally empty proto for adding fields in future.
+        # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#disable_processor DisableProcessor} method.
+        # Intentionally empty proto for adding fields in future.
         class DisableProcessorResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The long-running operation metadata for the
-        # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#disable_processor DisableProcessor}
-        # method.
+        # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#disable_processor DisableProcessor} method.
         # @!attribute [rw] common_metadata
         #   @return [::Google::Cloud::DocumentAI::V1::CommonOperationMetadata]
         #     The basic metadata of the long-running operation.
@@ -648,14 +615,11 @@ module Google
         # method.
         # @!attribute [rw] processor
         #   @return [::String]
-        #     Required. The resource name of the
-        #     {::Google::Cloud::DocumentAI::V1::Processor Processor} to change default
-        #     version.
+        #     Required. The resource name of the {::Google::Cloud::DocumentAI::V1::Processor Processor} to change default version.
         # @!attribute [rw] default_processor_version
         #   @return [::String]
-        #     Required. The resource name of child
-        #     {::Google::Cloud::DocumentAI::V1::ProcessorVersion ProcessorVersion} to use as
-        #     default. Format:
+        #     Required. The resource name of child {::Google::Cloud::DocumentAI::V1::ProcessorVersion ProcessorVersion} to use as default.
+        #     Format:
         #     `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{version}`
         class SetDefaultProcessorVersionRequest
           include ::Google::Protobuf::MessageExts
@@ -687,11 +651,13 @@ module Google
         # @!attribute [rw] custom_document_extraction_options
         #   @return [::Google::Cloud::DocumentAI::V1::TrainProcessorVersionRequest::CustomDocumentExtractionOptions]
         #     Options to control Custom Document Extraction (CDE) Processor.
+        # @!attribute [rw] foundation_model_tuning_options
+        #   @return [::Google::Cloud::DocumentAI::V1::TrainProcessorVersionRequest::FoundationModelTuningOptions]
+        #     Options to control foundation model tuning of a processor.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent (project, location and processor) to create the new
-        #     version for. Format:
-        #     `projects/{project}/locations/{location}/processors/{processor}`.
+        #     Required. The parent (project, location and processor) to create the new version for.
+        #     Format: `projects/{project}/locations/{location}/processors/{processor}`.
         # @!attribute [rw] processor_version
         #   @return [::Google::Cloud::DocumentAI::V1::ProcessorVersion]
         #     Required. The processor version to be created.
@@ -700,19 +666,17 @@ module Google
         #     Optional. The schema the processor version will be trained with.
         # @!attribute [rw] input_data
         #   @return [::Google::Cloud::DocumentAI::V1::TrainProcessorVersionRequest::InputData]
-        #     Optional. The input data used to train the
-        #     {::Google::Cloud::DocumentAI::V1::ProcessorVersion ProcessorVersion}.
+        #     Optional. The input data used to train the {::Google::Cloud::DocumentAI::V1::ProcessorVersion ProcessorVersion}.
         # @!attribute [rw] base_processor_version
         #   @return [::String]
-        #     Optional. The processor version to use as a base for training. This
-        #     processor version must be a child of `parent`. Format:
+        #     Optional. The processor version to use as a base for training. This processor version
+        #     must be a child of `parent`. Format:
         #     `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`.
         class TrainProcessorVersionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # The input data used to train a new
-          # {::Google::Cloud::DocumentAI::V1::ProcessorVersion ProcessorVersion}.
+          # The input data used to train a new {::Google::Cloud::DocumentAI::V1::ProcessorVersion ProcessorVersion}.
           # @!attribute [rw] training_documents
           #   @return [::Google::Cloud::DocumentAI::V1::BatchDocumentsInputConfig]
           #     The documents used for training the new version.
@@ -742,6 +706,21 @@ module Google
 
               TEMPLATE_BASED = 2
             end
+          end
+
+          # Options to control foundation model tuning of the processor.
+          # @!attribute [rw] train_steps
+          #   @return [::Integer]
+          #     Optional. The number of steps to run for model tuning. Valid values are between
+          #     1 and 400. If not provided, recommended steps will be used.
+          # @!attribute [rw] learning_rate_multiplier
+          #   @return [::Float]
+          #     Optional. The multiplier to apply to the recommended learning rate. Valid values
+          #     are between 0.1 and 10. If not provided, recommended learning rate will
+          #     be used.
+          class FoundationModelTuningOptions
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
@@ -794,16 +773,14 @@ module Google
         end
 
         # Request message for the
-        # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#review_document ReviewDocument}
-        # method.
+        # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#review_document ReviewDocument} method.
         # @!attribute [rw] inline_document
         #   @return [::Google::Cloud::DocumentAI::V1::Document]
         #     An inline document proto.
         # @!attribute [rw] human_review_config
         #   @return [::String]
-        #     Required. The resource name of the
-        #     [HumanReviewConfig][google.cloud.documentai.v1.HumanReviewConfig] that the
-        #     document will be reviewed with.
+        #     Required. The resource name of the [HumanReviewConfig][google.cloud.documentai.v1.HumanReviewConfig] that the document will be
+        #     reviewed with.
         # @!attribute [rw] enable_schema_validation
         #   @return [::Boolean]
         #     Whether the validation should be performed on the ad-hoc review request.
@@ -829,8 +806,7 @@ module Google
         end
 
         # Response message for the
-        # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#review_document ReviewDocument}
-        # method.
+        # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#review_document ReviewDocument} method.
         # @!attribute [rw] gcs_destination
         #   @return [::String]
         #     The Cloud Storage uri for the human reviewed document if the review is
@@ -859,8 +835,7 @@ module Google
         end
 
         # The long-running operation metadata for the
-        # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#review_document ReviewDocument}
-        # method.
+        # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#review_document ReviewDocument} method.
         # @!attribute [rw] common_metadata
         #   @return [::Google::Cloud::DocumentAI::V1::CommonOperationMetadata]
         #     The basic metadata of the long-running operation.
@@ -872,19 +847,15 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Evaluates the given
-        # {::Google::Cloud::DocumentAI::V1::ProcessorVersion ProcessorVersion} against the
-        # supplied documents.
+        # Evaluates the given {::Google::Cloud::DocumentAI::V1::ProcessorVersion ProcessorVersion} against the supplied documents.
         # @!attribute [rw] processor_version
         #   @return [::String]
-        #     Required. The resource name of the
-        #     {::Google::Cloud::DocumentAI::V1::ProcessorVersion ProcessorVersion} to
-        #     evaluate.
+        #     Required. The resource name of the {::Google::Cloud::DocumentAI::V1::ProcessorVersion ProcessorVersion} to evaluate.
         #     `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
         # @!attribute [rw] evaluation_documents
         #   @return [::Google::Cloud::DocumentAI::V1::BatchDocumentsInputConfig]
-        #     Optional. The documents used in the evaluation. If unspecified, use the
-        #     processor's dataset as evaluation input.
+        #     Optional. The documents used in the evaluation. If unspecified, use the processor's
+        #     dataset as evaluation input.
         class EvaluateProcessorVersionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -915,21 +886,17 @@ module Google
         # Retrieves a specific Evaluation.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The resource name of the
-        #     {::Google::Cloud::DocumentAI::V1::Evaluation Evaluation} to get.
+        #     Required. The resource name of the {::Google::Cloud::DocumentAI::V1::Evaluation Evaluation} to get.
         #     `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}/evaluations/{evaluation}`
         class GetEvaluationRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Retrieves a list of evaluations for a given
-        # {::Google::Cloud::DocumentAI::V1::ProcessorVersion ProcessorVersion}.
+        # Retrieves a list of evaluations for a given {::Google::Cloud::DocumentAI::V1::ProcessorVersion ProcessorVersion}.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The resource name of the
-        #     {::Google::Cloud::DocumentAI::V1::ProcessorVersion ProcessorVersion} to list
-        #     evaluations for.
+        #     Required. The resource name of the {::Google::Cloud::DocumentAI::V1::ProcessorVersion ProcessorVersion} to list evaluations for.
         #     `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
         # @!attribute [rw] page_size
         #   @return [::Integer]
