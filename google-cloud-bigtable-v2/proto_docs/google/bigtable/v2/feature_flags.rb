@@ -55,6 +55,9 @@ module Google
         #   @return [::Boolean]
         #     Notify the server that the client supports using retry info back off
         #     durations to retry requests with.
+        # @!attribute [rw] client_side_metrics_enabled
+        #   @return [::Boolean]
+        #     Notify the server that the client has client side metrics enabled.
         class FeatureFlags
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
