@@ -352,6 +352,8 @@ module Google
         #   @return [::Google::Protobuf::Duration]
         #     Maximum duration the task should run.
         #     The task will be killed and marked as FAILED if over this limit.
+        #     The valid value range for max_run_duration in seconds is [0,
+        #     315576000000.999999999],
         # @!attribute [rw] max_retry_count
         #   @return [::Integer]
         #     Maximum number of retries on failures.
