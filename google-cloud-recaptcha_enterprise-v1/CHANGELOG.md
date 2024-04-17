@@ -1,5 +1,11 @@
 # Release History
 
+### 0.20.1 (2024-04-17)
+
+#### Documentation
+
+* Fixes the description of ListFirewallPoliciesResponse ([#25683](https://github.com/googleapis/google-cloud-ruby/issues/25683)) 
+
 ### 0.20.0 (2024-04-15)
 
 #### Features
