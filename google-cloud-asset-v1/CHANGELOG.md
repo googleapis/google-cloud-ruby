@@ -1,5 +1,11 @@
 # Release History
 
+### 0.32.0 (2024-04-17)
+
+#### Features
+
+* Add tag key id support ([#25414](https://github.com/googleapis/google-cloud-ruby/issues/25414)) 
+
 ### 0.31.0 (2024-03-07)
 
 #### Features
