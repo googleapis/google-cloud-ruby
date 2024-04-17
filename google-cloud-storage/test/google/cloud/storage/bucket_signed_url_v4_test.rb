@@ -26,7 +26,7 @@ describe Google::Cloud::Storage::Bucket, :signed_url, :v4, :mock_storage do
     Time.stub :now, Time.new(2012,1,1,0,0,0, "+00:00") do
       signing_key_mock = Minitest::Mock.new
       signing_key_mock.expect :is_a?, false, [Proc]
-      signing_key_mock.expect :sign, "native-signature", [OpenSSL::Digest::SHA256, "GOOG4-RSA-SHA256\n20120101T000000Z\n20120101/auto/storage/goog4_request\ne1e43b11fd8237bbc9aa341fdc80a01d0b06197ebaf3c6fc0cf76f93decacbac"]
+      signing_key_mock.expect :sign, "native-signature", [OpenSSL::Digest::SHA256, "GOOG4-RSA-SHA256\n20120101T000000Z\n20120101/auto/storage/goog4_request\nc709544abd06ec8c09e9825c9a786a8759cd089bf7c64534ccef6058c0b0f88a"]
       credentials.issuer = "native_client_email"
       credentials.signing_key = signing_key_mock
 
@@ -50,7 +50,7 @@ describe Google::Cloud::Storage::Bucket, :signed_url, :v4, :mock_storage do
     Time.stub :now, Time.new(2012,1,1,0,0,0, "+00:00") do
       signing_key_mock = Minitest::Mock.new
       signing_key_mock.expect :is_a?, false, [Proc]
-      signing_key_mock.expect :sign, "native-signature", [OpenSSL::Digest::SHA256, "GOOG4-RSA-SHA256\n20120101T000000Z\n20120101/auto/storage/goog4_request\n252fee6a927ec9b0546bb9b224a2db37834e32c71dd8ea9702cc0e9efda75d10"]
+      signing_key_mock.expect :sign, "native-signature", [OpenSSL::Digest::SHA256, "GOOG4-RSA-SHA256\n20120101T000000Z\n20120101/auto/storage/goog4_request\ndefeee4e2131c1e8e39d4bd739b856297e93b20265a427c5a70a2fd65c4cfd0a"]
       credentials.issuer = "native_client_email"
       credentials.signing_key = signing_key_mock
 
@@ -75,7 +75,7 @@ describe Google::Cloud::Storage::Bucket, :signed_url, :v4, :mock_storage do
 
       signing_key_mock = Minitest::Mock.new
       signing_key_mock.expect :is_a?, false, [Proc]
-      signing_key_mock.expect :sign, "option-signature", [OpenSSL::Digest::SHA256, "GOOG4-RSA-SHA256\n20120101T000000Z\n20120101/auto/storage/goog4_request\n5fa39815ca7f8547b8f9e23dce41d856444d111f0c6dbbf5cf53b86788f2ee00"]
+      signing_key_mock.expect :sign, "option-signature", [OpenSSL::Digest::SHA256, "GOOG4-RSA-SHA256\n20120101T000000Z\n20120101/auto/storage/goog4_request\n743e0f302812fbc80545275f54593e9186adee22752444edeeaf50cafe2c02d3"]
 
       signed_url = bucket.signed_url file_path,
                                      issuer: "option_issuer",
@@ -100,7 +100,7 @@ describe Google::Cloud::Storage::Bucket, :signed_url, :v4, :mock_storage do
 
       signer_mock = Minitest::Mock.new
       signer_mock.expect :is_a?, true, [Proc]
-      signer_mock.expect :call, "option-signature", ["GOOG4-RSA-SHA256\n20120101T000000Z\n20120101/auto/storage/goog4_request\n5fa39815ca7f8547b8f9e23dce41d856444d111f0c6dbbf5cf53b86788f2ee00"]
+      signer_mock.expect :call, "option-signature", ["GOOG4-RSA-SHA256\n20120101T000000Z\n20120101/auto/storage/goog4_request\n743e0f302812fbc80545275f54593e9186adee22752444edeeaf50cafe2c02d3"]
 
       signed_url = bucket.signed_url file_path, issuer: "option_issuer",
                                                 signer: signer_mock, version: :v4
@@ -123,7 +123,7 @@ describe Google::Cloud::Storage::Bucket, :signed_url, :v4, :mock_storage do
       credentials.signing_key = PoisonSigningKey.new
 
       signing_key_mock = Minitest::Mock.new
-      signing_key_mock.expect :sign, "option-signature", [OpenSSL::Digest::SHA256, "GOOG4-RSA-SHA256\n20120101T000000Z\n20120101/auto/storage/goog4_request\n84e760a9c6483d6c37a98f4ab99e1a9a208e111ad7381297dea05774e99b0fbc"]
+      signing_key_mock.expect :sign, "option-signature", [OpenSSL::Digest::SHA256, "GOOG4-RSA-SHA256\n20120101T000000Z\n20120101/auto/storage/goog4_request\nf02f56367165cb2745d426eabaf709f7c3d015ac9cd75158017a0f4fa72ca3d2"]
 
       OpenSSL::PKey::RSA.stub :new, signing_key_mock do
 
@@ -149,7 +149,7 @@ describe Google::Cloud::Storage::Bucket, :signed_url, :v4, :mock_storage do
     Time.stub :now, Time.new(2012,1,1,0,0,0, "+00:00") do
       signing_key_mock = Minitest::Mock.new
       signing_key_mock.expect :is_a?, false, [Proc]
-      signing_key_mock.expect :sign, "native-signature", [OpenSSL::Digest::SHA256, "GOOG4-RSA-SHA256\n20120101T000000Z\n20120101/auto/storage/goog4_request\n69d4a99930b6778335b72f716aee5a44ee3fcb20d19980d4419ea6c58b6e015f"]
+      signing_key_mock.expect :sign, "native-signature", [OpenSSL::Digest::SHA256, "GOOG4-RSA-SHA256\n20120101T000000Z\n20120101/auto/storage/goog4_request\nbf06932c7e0573d8ee8c4b7638a4043f7265c4e019694156a68773ad4d7ee25c"]
       credentials.issuer = "native_client_email"
       credentials.signing_key = signing_key_mock
 
@@ -203,7 +203,7 @@ describe Google::Cloud::Storage::Bucket, :signed_url, :v4, :mock_storage do
     Time.stub :now, Time.new(2012,1,1,0,0,0, "+00:00") do
       signing_key_mock = Minitest::Mock.new
       signing_key_mock.expect :is_a?, false, [Proc]
-      signing_key_mock.expect :sign, "native-signature", [OpenSSL::Digest::SHA256, "GOOG4-RSA-SHA256\n20120101T000000Z\n20120101/auto/storage/goog4_request\n89185f10c0e52e1bf904e270cdcaa0d6915f6c1efdc37b621681ebb0075b33a5"]
+      signing_key_mock.expect :sign, "native-signature", [OpenSSL::Digest::SHA256, "GOOG4-RSA-SHA256\n20120101T000000Z\n20120101/auto/storage/goog4_request\n3411dfa972b175ec287a97876a29c2652f633698eba7e4e6930b197812131ba3"]
       credentials.issuer = "native_client_email"
       credentials.signing_key = signing_key_mock
 
@@ -225,7 +225,7 @@ describe Google::Cloud::Storage::Bucket, :signed_url, :v4, :mock_storage do
     Time.stub :now, Time.new(2012,1,1,0,0,0, "+00:00") do
       signing_key_mock = Minitest::Mock.new
       signing_key_mock.expect :is_a?, false, [Proc]
-      signing_key_mock.expect :sign, "native-signature", [OpenSSL::Digest::SHA256, "GOOG4-RSA-SHA256\n20120101T000000Z\n20120101/auto/storage/goog4_request\n6890375b93ef0f2474757e2d1b49c061f9d0c3024a89934633c9b397a49884be"]
+      signing_key_mock.expect :sign, "native-signature", [OpenSSL::Digest::SHA256, "GOOG4-RSA-SHA256\n20120101T000000Z\n20120101/auto/storage/goog4_request\na7f06df47c14c9806213f0580c0490c862476820cd668f322850edb89d14484d"]
       credentials.issuer = "native_client_email"
       credentials.signing_key = signing_key_mock
 
@@ -253,7 +253,7 @@ describe Google::Cloud::Storage::Bucket, :signed_url, :v4, :mock_storage do
       Time.stub :now, Time.new(2012,1,1,0,0,0, "+00:00") do
         signing_key_mock = Minitest::Mock.new
         signing_key_mock.expect :is_a?, false, [Proc]
-        signing_key_mock.expect :sign, "native-signature", [OpenSSL::Digest::SHA256, "GOOG4-RSA-SHA256\n20120101T000000Z\n20120101/auto/storage/goog4_request\ne1e43b11fd8237bbc9aa341fdc80a01d0b06197ebaf3c6fc0cf76f93decacbac"]
+        signing_key_mock.expect :sign, "native-signature", [OpenSSL::Digest::SHA256, "GOOG4-RSA-SHA256\n20120101T000000Z\n20120101/auto/storage/goog4_request\nc709544abd06ec8c09e9825c9a786a8759cd089bf7c64534ccef6058c0b0f88a"]
 
         credentials.issuer = "native_client_email"
         credentials.signing_key = signing_key_mock
@@ -273,7 +273,7 @@ describe Google::Cloud::Storage::Bucket, :signed_url, :v4, :mock_storage do
       Time.stub :now, Time.new(2012,1,1,0,0,0, "+00:00") do
         signing_key_mock = Minitest::Mock.new
         signing_key_mock.expect :is_a?, false, [Proc]
-        signing_key_mock.expect :sign, "native-signature", [OpenSSL::Digest::SHA256, "GOOG4-RSA-SHA256\n20120101T000000Z\n20120101/auto/storage/goog4_request\n252fee6a927ec9b0546bb9b224a2db37834e32c71dd8ea9702cc0e9efda75d10"]
+        signing_key_mock.expect :sign, "native-signature", [OpenSSL::Digest::SHA256, "GOOG4-RSA-SHA256\n20120101T000000Z\n20120101/auto/storage/goog4_request\ndefeee4e2131c1e8e39d4bd739b856297e93b20265a427c5a70a2fd65c4cfd0a"]
 
         signed_url = bucket.signed_url file_path, issuer: "native_client_email", signing_key: signing_key_mock, version: :v4
 

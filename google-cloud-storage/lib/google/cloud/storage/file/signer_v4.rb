@@ -287,7 +287,7 @@ module Google
           # The URI-encoded (percent encoded) external path to the file.
           def file_path path_style
             path = []
-            path << @bucket_name if path_style
+            path << "/#{@bucket_name}" if path_style
             path << "/#{String(@file_name)}" if @file_name && !@file_name.empty?
             CGI.escape(path.join).gsub("%2F", "/").gsub "+", "%20"
           end
@@ -301,7 +301,7 @@ module Google
           ##
           # The external url to the file.
           def ext_url scheme, virtual_hosted_style, bucket_bound_hostname
-            url = @service.service.root_url
+            url = @service.service.root_url.chomp("/")
             if virtual_hosted_style
               parts = url.split "//"
               parts[1] = "#{@bucket_name}.#{parts[1]}"
