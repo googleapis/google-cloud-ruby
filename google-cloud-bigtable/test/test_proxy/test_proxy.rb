@@ -203,7 +203,7 @@ class TestProxyServer < tp::CloudBigtableV2TestProxy::Service
     # TODO: req.request.reverse is not supported by the client library; when it is, fix this
     result = Client.get(req.client_id)
                    .table(req.request.table_name)
-                   .read_rows(keys: req.request&.rows&.row_keys&.to_a)
+                   .read_rows(keys: req.request&.rows&.row_keys&.to_a, limit: req.request.rows_limit)
 
     result = result.to_a
 
