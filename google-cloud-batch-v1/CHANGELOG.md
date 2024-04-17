@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.17.2 (2024-04-17)
+
+#### Documentation
+
+* Update comments on ServiceAccount email and scopes fields ([#25472](https://github.com/googleapis/google-cloud-ruby/issues/25472)) 
+
 ### 0.17.1 (2024-02-28)
 
 #### Documentation
