@@ -734,6 +734,9 @@ module Google
             # @!attribute [rw] end_time
             #   @return [::Google::Protobuf::Timestamp]
             #     The time at which this operation failed or was completed successfully.
+            # @!attribute [rw] expected_fulfillment_period
+            #   @return [::Google::Cloud::Spanner::Admin::Instance::V1::FulfillmentPeriod]
+            #     The expected fulfillment period of this create operation.
             class CreateInstanceMetadata
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -757,6 +760,9 @@ module Google
             # @!attribute [rw] end_time
             #   @return [::Google::Protobuf::Timestamp]
             #     The time at which this operation failed or was completed successfully.
+            # @!attribute [rw] expected_fulfillment_period
+            #   @return [::Google::Cloud::Spanner::Admin::Instance::V1::FulfillmentPeriod]
+            #     The expected fulfillment period of this update operation.
             class UpdateInstanceMetadata
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
