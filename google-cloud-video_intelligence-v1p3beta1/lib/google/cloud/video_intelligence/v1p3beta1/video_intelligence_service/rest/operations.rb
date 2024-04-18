@@ -815,9 +815,9 @@ module Google
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :get,
-                                                          uri_template: "/v1p3beta1/{name}/operations",
+                                                          uri_template: "/v1/{name}",
                                                           matches: [
-                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
+                                                            ["name", %r{^operations/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -836,16 +836,9 @@ module Google
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :get,
-                                                          uri_template: "/v1p3beta1/{name}",
+                                                          uri_template: "/v1/{name}",
                                                           matches: [
-                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/operations/[^/]+/?$}, false]
-                                                          ]
-                                                        )
-                                                        .with_bindings(
-                                                          uri_method: :get,
-                                                          uri_template: "/v1p3beta1/operations/{name}",
-                                                          matches: [
-                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/operations/[^/]+/?$}, false]
+                                                            ["name", %r{^operations(?:/.*)?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -864,16 +857,9 @@ module Google
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :delete,
-                                                          uri_template: "/v1p3beta1/{name}",
+                                                          uri_template: "/v1/{name}",
                                                           matches: [
-                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/operations/[^/]+/?$}, false]
-                                                          ]
-                                                        )
-                                                        .with_bindings(
-                                                          uri_method: :delete,
-                                                          uri_template: "/v1p3beta1/operations/{name}",
-                                                          matches: [
-                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/operations/[^/]+/?$}, false]
+                                                            ["name", %r{^operations(?:/.*)?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -892,17 +878,10 @@ module Google
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :post,
-                                                          uri_template: "/v1p3beta1/{name}:cancel",
+                                                          uri_template: "/v1/{name}:cancel",
                                                           body: "*",
                                                           matches: [
-                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/operations/[^/]+/?$}, false]
-                                                          ]
-                                                        )
-                                                        .with_bindings(
-                                                          uri_method: :post,
-                                                          uri_template: "/v1p3beta1/operations/{name}:cancel",
-                                                          matches: [
-                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/operations/[^/]+/?$}, false]
+                                                            ["name", %r{^operations(?:/.*)?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
