@@ -48,11 +48,11 @@ module Google
         #       bits of SHA256(URI) encoded as a hex string.
         #     * `custom`: One custom data JSON per row in arbitrary format that conforms
         #       to the defined {::Google::Cloud::DiscoveryEngine::V1beta::Schema Schema} of
-        #       the data store. This can only be used by Gen App Builder.
+        #       the data store. This can only be used by the GENERIC Data Store vertical.
         #     * `csv`: A CSV file with header conforming to the defined
         #     {::Google::Cloud::DiscoveryEngine::V1beta::Schema Schema} of the
         #       data store. Each entry after the header is imported as a Document.
-        #       This can only be used by Gen App Builder.
+        #       This can only be used by the GENERIC Data Store vertical.
         #
         #     Supported values for user even imports:
         #
@@ -105,8 +105,263 @@ module Google
         #       {::Google::Cloud::DiscoveryEngine::V1beta::Document#struct_data Document.struct_data}.
         #     * `custom`: One custom data per row in arbitrary format that conforms to
         #       the defined {::Google::Cloud::DiscoveryEngine::V1beta::Schema Schema} of the
-        #       data store. This can only be used by Gen App Builder.
+        #       data store. This can only be used by the GENERIC Data Store vertical.
         class BigQuerySource
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The Spanner source for importing data
+        # @!attribute [rw] project_id
+        #   @return [::String]
+        #     The project ID that the Spanner source is in with a length limit of 128
+        #     characters. If not specified, inherits the project ID from the parent
+        #     request.
+        # @!attribute [rw] instance_id
+        #   @return [::String]
+        #     Required. The instance ID of the source Spanner table.
+        # @!attribute [rw] database_id
+        #   @return [::String]
+        #     Required. The database ID of the source Spanner table.
+        # @!attribute [rw] table_id
+        #   @return [::String]
+        #     Required. The table name of the Spanner database that needs to be imported.
+        # @!attribute [rw] enable_data_boost
+        #   @return [::Boolean]
+        #     Whether to apply data boost on Spanner export. Enabling this option will
+        #     incur additional cost. More info can be found
+        #     [here](https://cloud.google.com/spanner/docs/databoost/databoost-overview#billing_and_quotas).
+        class SpannerSource
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The Bigtable Options object that contains information to support
+        # the import.
+        # @!attribute [rw] key_field_name
+        #   @return [::String]
+        #     The field name used for saving row key value in the document. The name has
+        #     to match the pattern `[a-zA-Z0-9][a-zA-Z0-9-_]*`.
+        # @!attribute [rw] families
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::DiscoveryEngine::V1beta::BigtableOptions::BigtableColumnFamily}]
+        #     The mapping from family names to an object that contains column families
+        #     level information for the given column family. If a family is not present
+        #     in this map it will be ignored.
+        class BigtableOptions
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The column family of the Bigtable.
+          # @!attribute [rw] field_name
+          #   @return [::String]
+          #     The field name to use for this column family in the document. The
+          #     name has to match the pattern `[a-zA-Z0-9][a-zA-Z0-9-_]*`. If not set,
+          #     it is parsed from the family name with best effort. However, due to
+          #     different naming patterns, field name collisions could happen, where
+          #     parsing behavior is undefined.
+          # @!attribute [rw] encoding
+          #   @return [::Google::Cloud::DiscoveryEngine::V1beta::BigtableOptions::Encoding]
+          #     The encoding mode of the values when the type is not STRING.
+          #     Acceptable encoding values are:
+          #
+          #     * `TEXT`: indicates values are alphanumeric text strings.
+          #     * `BINARY`: indicates values are encoded using `HBase Bytes.toBytes`
+          #     family of functions. This can be overridden for a specific column
+          #     by listing that column in `columns` and specifying an encoding for it.
+          # @!attribute [rw] type
+          #   @return [::Google::Cloud::DiscoveryEngine::V1beta::BigtableOptions::Type]
+          #     The type of values in this column family.
+          #     The values are expected to be encoded using `HBase Bytes.toBytes`
+          #     function when the encoding value is set to `BINARY`.
+          # @!attribute [rw] columns
+          #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::BigtableOptions::BigtableColumn>]
+          #     The list of objects that contains column level information for each
+          #     column. If a column is not present in this list it will be ignored.
+          class BigtableColumnFamily
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The column of the Bigtable.
+          # @!attribute [rw] qualifier
+          #   @return [::String]
+          #     Required. Qualifier of the column. If it cannot be decoded with utf-8,
+          #     use a base-64 encoded string instead.
+          # @!attribute [rw] field_name
+          #   @return [::String]
+          #     The field name to use for this column in the document. The name has to
+          #     match the pattern `[a-zA-Z0-9][a-zA-Z0-9-_]*`.
+          #     If not set, it is parsed from the qualifier bytes with best effort.
+          #     However, due to different naming patterns, field name collisions could
+          #     happen, where parsing behavior is undefined.
+          # @!attribute [rw] encoding
+          #   @return [::Google::Cloud::DiscoveryEngine::V1beta::BigtableOptions::Encoding]
+          #     The encoding mode of the values when the type is not `STRING`.
+          #     Acceptable encoding values are:
+          #
+          #     * `TEXT`: indicates values are alphanumeric text strings.
+          #     * `BINARY`: indicates values are encoded using `HBase Bytes.toBytes`
+          #     family of functions. This can be overridden for a specific column
+          #     by listing that column in `columns` and specifying an encoding for it.
+          # @!attribute [rw] type
+          #   @return [::Google::Cloud::DiscoveryEngine::V1beta::BigtableOptions::Type]
+          #     The type of values in this column family.
+          #     The values are expected to be encoded using `HBase Bytes.toBytes`
+          #     function when the encoding value is set to `BINARY`.
+          class BigtableColumn
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::DiscoveryEngine::V1beta::BigtableOptions::BigtableColumnFamily]
+          class FamiliesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The type of values in a Bigtable column or column family.
+          # The values are expected to be encoded using
+          # [HBase
+          # Bytes.toBytes](https://hbase.apache.org/apidocs/org/apache/hadoop/hbase/util/Bytes.html)
+          # function when the encoding value is set to `BINARY`.
+          module Type
+            # The type is unspecified.
+            TYPE_UNSPECIFIED = 0
+
+            # String type.
+            STRING = 1
+
+            # Numerical type.
+            NUMBER = 2
+
+            # Integer type.
+            INTEGER = 3
+
+            # Variable length integer type.
+            VAR_INTEGER = 4
+
+            # BigDecimal type.
+            BIG_NUMERIC = 5
+
+            # Boolean type.
+            BOOLEAN = 6
+
+            # JSON type.
+            JSON = 7
+          end
+
+          # The encoding mode of a Bigtable column or column family.
+          module Encoding
+            # The encoding is unspecified.
+            ENCODING_UNSPECIFIED = 0
+
+            # Text encoding.
+            TEXT = 1
+
+            # Binary encoding.
+            BINARY = 2
+          end
+        end
+
+        # The Cloud Bigtable source for importing data.
+        # @!attribute [rw] project_id
+        #   @return [::String]
+        #     The project ID that the Bigtable source is in with a length limit of 128
+        #     characters. If not specified, inherits the project ID from the parent
+        #     request.
+        # @!attribute [rw] instance_id
+        #   @return [::String]
+        #     Required. The instance ID of the Cloud Bigtable that needs to be imported.
+        # @!attribute [rw] table_id
+        #   @return [::String]
+        #     Required. The table ID of the Cloud Bigtable that needs to be imported.
+        # @!attribute [rw] bigtable_options
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::BigtableOptions]
+        #     Required. Bigtable options that contains information needed when parsing
+        #     data into typed structures. For example, column type annotations.
+        class BigtableSource
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Cloud FhirStore source import data from.
+        # @!attribute [rw] fhir_store
+        #   @return [::String]
+        #     Required. The full resource name of the FHIR store to import data from, in
+        #     the format of
+        #     `projects/{project}/locations/{location}/datasets/{dataset}/fhirStores/{fhir_store}`.
+        # @!attribute [rw] gcs_staging_dir
+        #   @return [::String]
+        #     Intermediate Cloud Storage directory used for the import with a length
+        #     limit of 2,000 characters. Can be specified if one wants to have the
+        #     FhirStore export to a specific Cloud Storage directory.
+        class FhirStoreSource
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Cloud SQL source import data from.
+        # @!attribute [rw] project_id
+        #   @return [::String]
+        #     The project ID that the Cloud SQL source is in with a length limit of 128
+        #     characters. If not specified, inherits the project ID from the parent
+        #     request.
+        # @!attribute [rw] instance_id
+        #   @return [::String]
+        #     Required. The Cloud SQL instance to copy the data from with a length limit
+        #     of 256 characters.
+        # @!attribute [rw] database_id
+        #   @return [::String]
+        #     Required. The Cloud SQL database to copy the data from with a length limit
+        #     of 256 characters.
+        # @!attribute [rw] table_id
+        #   @return [::String]
+        #     Required. The Cloud SQL table to copy the data from with a length limit of
+        #     256 characters.
+        # @!attribute [rw] gcs_staging_dir
+        #   @return [::String]
+        #     Intermediate Cloud Storage directory used for the import with a length
+        #     limit of 2,000 characters. Can be specified if one wants to have the
+        #     Cloud SQL export to a specific Cloud Storage directory.
+        #
+        #     Ensure that the Cloud SQL service account has the necessary Cloud
+        #     Storage Admin permissions to access the specified Cloud Storage directory.
+        # @!attribute [rw] offload
+        #   @return [::Boolean]
+        #     Option for serverless export. Enabling this option will incur additional
+        #     cost. More info can be found
+        #     [here](https://cloud.google.com/sql/pricing#serverless).
+        class CloudSqlSource
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Firestore source import data from.
+        # @!attribute [rw] project_id
+        #   @return [::String]
+        #     The project ID that the Cloud SQL source is in with a length limit of 128
+        #     characters. If not specified, inherits the project ID from the parent
+        #     request.
+        # @!attribute [rw] database_id
+        #   @return [::String]
+        #     Required. The Firestore database to copy the data from with a length limit
+        #     of 256 characters.
+        # @!attribute [rw] collection_id
+        #   @return [::String]
+        #     Required. The Firestore collection to copy the data from with a length
+        #     limit of 1,500 characters.
+        # @!attribute [rw] gcs_staging_dir
+        #   @return [::String]
+        #     Intermediate Cloud Storage directory used for the import with a length
+        #     limit of 2,000 characters. Can be specified if one wants to have the
+        #     Firestore export to a specific Cloud Storage directory.
+        #
+        #     Ensure that the Firestore service account has the necessary Cloud
+        #     Storage Admin permissions to access the specified Cloud Storage directory.
+        class FirestoreSource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -212,6 +467,9 @@ module Google
         # @!attribute [rw] failure_count
         #   @return [::Integer]
         #     Count of entries that encountered errors while processing.
+        # @!attribute [rw] total_count
+        #   @return [::Integer]
+        #     Total count of entries that were processed.
         class ImportDocumentsMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -227,6 +485,21 @@ module Google
         # @!attribute [rw] bigquery_source
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::BigQuerySource]
         #     BigQuery input source.
+        # @!attribute [rw] fhir_store_source
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::FhirStoreSource]
+        #     FhirStore input source.
+        # @!attribute [rw] spanner_source
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SpannerSource]
+        #     Spanner input source.
+        # @!attribute [rw] cloud_sql_source
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::CloudSqlSource]
+        #     Cloud SQL input source.
+        # @!attribute [rw] firestore_source
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::FirestoreSource]
+        #     Firestore input source.
+        # @!attribute [rw] bigtable_source
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::BigtableSource]
+        #     Cloud Bigtable input source.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent branch resource name, such as
@@ -240,6 +513,10 @@ module Google
         #     The mode of reconciliation between existing documents and the documents to
         #     be imported. Defaults to
         #     {::Google::Cloud::DiscoveryEngine::V1beta::ImportDocumentsRequest::ReconciliationMode::INCREMENTAL ReconciliationMode.INCREMENTAL}.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Indicates which fields in the provided imported documents to update. If
+        #     not set, the default is to update all fields.
         # @!attribute [rw] auto_generate_ids
         #   @return [::Boolean]
         #     Whether to automatically generate IDs for the documents if absent.
@@ -255,45 +532,54 @@ module Google
         #     {::Google::Cloud::DiscoveryEngine::V1beta::ImportDocumentsRequest#id_field id_field},
         #     otherwise, documents without IDs fail to be imported.
         #
-        #     Only set this field when using
-        #     {::Google::Cloud::DiscoveryEngine::V1beta::GcsSource GcsSource} or
-        #     {::Google::Cloud::DiscoveryEngine::V1beta::BigQuerySource BigQuerySource}, and
-        #     when
+        #     Supported data sources:
+        #
+        #     * {::Google::Cloud::DiscoveryEngine::V1beta::GcsSource GcsSource}.
         #     {::Google::Cloud::DiscoveryEngine::V1beta::GcsSource#data_schema GcsSource.data_schema}
-        #     or
+        #     must be `custom` or `csv`. Otherwise, an INVALID_ARGUMENT error is thrown.
+        #     * {::Google::Cloud::DiscoveryEngine::V1beta::BigQuerySource BigQuerySource}.
         #     {::Google::Cloud::DiscoveryEngine::V1beta::BigQuerySource#data_schema BigQuerySource.data_schema}
-        #     is `custom` or `csv`. Otherwise, an INVALID_ARGUMENT error is thrown.
+        #     must be `custom` or `csv`. Otherwise, an INVALID_ARGUMENT error is thrown.
+        #     * {::Google::Cloud::DiscoveryEngine::V1beta::SpannerSource SpannerSource}.
+        #     * {::Google::Cloud::DiscoveryEngine::V1beta::CloudSqlSource CloudSqlSource}.
+        #     * {::Google::Cloud::DiscoveryEngine::V1beta::FirestoreSource FirestoreSource}.
+        #     * {::Google::Cloud::DiscoveryEngine::V1beta::BigtableSource BigtableSource}.
         # @!attribute [rw] id_field
         #   @return [::String]
-        #     The field in the Cloud Storage and BigQuery sources that indicates the
-        #     unique IDs of the documents.
+        #     The field indicates the ID field or column to be used as unique IDs of
+        #     the documents.
         #
         #     For {::Google::Cloud::DiscoveryEngine::V1beta::GcsSource GcsSource} it is the
         #     key of the JSON field. For instance, `my_id` for JSON `{"my_id":
-        #     "some_uuid"}`. For
-        #     {::Google::Cloud::DiscoveryEngine::V1beta::BigQuerySource BigQuerySource} it is
-        #     the column name of the BigQuery table where the unique ids are stored.
+        #     "some_uuid"}`. For others, it may be the column name of the table where the
+        #     unique ids are stored.
         #
-        #     The values of the JSON field or the BigQuery column are used as the
+        #     The values of the JSON field or the table column are used as the
         #     {::Google::Cloud::DiscoveryEngine::V1beta::Document#id Document.id}s. The JSON
-        #     field or the BigQuery column must be of string type, and the values must be
+        #     field or the table column must be of string type, and the values must be
         #     set as valid strings conform to
         #     [RFC-1034](https://tools.ietf.org/html/rfc1034) with 1-63 characters.
         #     Otherwise, documents without valid IDs fail to be imported.
         #
-        #     Only set this field when using
-        #     {::Google::Cloud::DiscoveryEngine::V1beta::GcsSource GcsSource} or
-        #     {::Google::Cloud::DiscoveryEngine::V1beta::BigQuerySource BigQuerySource}, and
-        #     when
-        #     {::Google::Cloud::DiscoveryEngine::V1beta::GcsSource#data_schema GcsSource.data_schema}
-        #     or
-        #     {::Google::Cloud::DiscoveryEngine::V1beta::BigQuerySource#data_schema BigQuerySource.data_schema}
-        #     is `custom`. And only set this field when
+        #     Only set this field when
         #     {::Google::Cloud::DiscoveryEngine::V1beta::ImportDocumentsRequest#auto_generate_ids auto_generate_ids}
         #     is unset or set as `false`. Otherwise, an INVALID_ARGUMENT error is thrown.
         #
         #     If it is unset, a default value `_id` is used when importing from the
         #     allowed data sources.
+        #
+        #     Supported data sources:
+        #
+        #     * {::Google::Cloud::DiscoveryEngine::V1beta::GcsSource GcsSource}.
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::GcsSource#data_schema GcsSource.data_schema}
+        #     must be `custom` or `csv`. Otherwise, an INVALID_ARGUMENT error is thrown.
+        #     * {::Google::Cloud::DiscoveryEngine::V1beta::BigQuerySource BigQuerySource}.
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::BigQuerySource#data_schema BigQuerySource.data_schema}
+        #     must be `custom` or `csv`. Otherwise, an INVALID_ARGUMENT error is thrown.
+        #     * {::Google::Cloud::DiscoveryEngine::V1beta::SpannerSource SpannerSource}.
+        #     * {::Google::Cloud::DiscoveryEngine::V1beta::CloudSqlSource CloudSqlSource}.
+        #     * {::Google::Cloud::DiscoveryEngine::V1beta::FirestoreSource FirestoreSource}.
+        #     * {::Google::Cloud::DiscoveryEngine::V1beta::BigtableSource BigtableSource}.
         class ImportDocumentsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

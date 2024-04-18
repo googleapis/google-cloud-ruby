@@ -70,9 +70,9 @@ module Google
                                   end
                   default_config = Client::Configuration.new parent_config
 
-                  default_config.timeout = 5.0
+                  default_config.timeout = 30.0
                   default_config.retry_policy = {
-                    initial_delay: 0.1, max_delay: 5.0, multiplier: 1.3, retry_codes: [14]
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                   }
 
                   default_config
@@ -210,10 +210,14 @@ module Google
               #     Raw image query.
               #   @param page_size [::Integer]
               #     Maximum number of {::Google::Cloud::DiscoveryEngine::V1beta::Document Document}s
-              #     to return. If unspecified, defaults to a reasonable value. The maximum
-              #     allowed value is 100. Values above 100 are coerced to 100.
+              #     to return. The maximum allowed value depends on the data type. Values above
+              #     the maximum value are coerced to the maximum value.
               #
-              #     If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+              #     * Websites with basic indexing: Default `10`, Maximum `25`.
+              #     * Websites with advanced indexing: Default `25`, Maximum `50`.
+              #     * Other: Default `50`, Maximum `100`.
+              #
+              #     If this field is negative, an  `INVALID_ARGUMENT` is returned.
               #   @param page_token [::String]
               #     A page token received from a previous
               #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchService::Rest::Client#search SearchService.Search}
@@ -335,7 +339,8 @@ module Google
               #
               #     If
               #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::EmbeddingSpec::EmbeddingVector#field_path SearchRequest.EmbeddingSpec.EmbeddingVector.field_path}
-              #     is not provided, it will use [ServingConfig.EmbeddingConfig.field_path][].
+              #     is not provided, it will use
+              #     {::Google::Cloud::DiscoveryEngine::V1beta::ServingConfig#embedding_config ServingConfig.EmbeddingConfig.field_path}.
               #   @param ranking_expression [::String]
               #     The ranking expression controls the customized ranking on retrieval
               #     documents. This overrides

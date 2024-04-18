@@ -173,6 +173,57 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
+        # Request for pausing training of an engine.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the engine to pause.
+        #     Format:
+        #     `projects/{project_number}/locations/{location_id}/collections/{collection_id}/engines/{engine_id}`
+        class PauseEngineRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for resuming training of an engine.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the engine to resume.
+        #     Format:
+        #     `projects/{project_number}/locations/{location_id}/collections/{collection_id}/engines/{engine_id}`
+        class ResumeEngineRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to manually start a tuning process now (instead of waiting for
+        # the periodically scheduled tuning to happen).
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the engine to tune.
+        #     Format:
+        #     `projects/{project_number}/locations/{location_id}/collections/{collection_id}/engines/{engine_id}`
+        class TuneEngineRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Metadata associated with a tune operation.
+        # @!attribute [rw] engine
+        #   @return [::String]
+        #     Required. The resource name of the engine that this tune applies to.
+        #     Format:
+        #     `projects/{project_number}/locations/{location_id}/collections/{collection_id}/engines/{engine_id}`
+        class TuneEngineMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response associated with a tune operation.
+        class TuneEngineResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
       end
     end
   end

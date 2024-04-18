@@ -45,6 +45,18 @@ module Google
             # Lists all the [Engine][google.cloud.discoveryengine.v1beta.Engine]s
             # associated with the project.
             rpc :ListEngines, ::Google::Cloud::DiscoveryEngine::V1beta::ListEnginesRequest, ::Google::Cloud::DiscoveryEngine::V1beta::ListEnginesResponse
+            # Pauses the training of an existing engine. Only applicable if
+            # [SolutionType][google.cloud.discoveryengine.v1beta.SolutionType] is
+            # [SOLUTION_TYPE_RECOMMENDATION][google.cloud.discoveryengine.v1beta.SolutionType.SOLUTION_TYPE_RECOMMENDATION].
+            rpc :PauseEngine, ::Google::Cloud::DiscoveryEngine::V1beta::PauseEngineRequest, ::Google::Cloud::DiscoveryEngine::V1beta::Engine
+            # Resumes the training of an existing engine. Only applicable if
+            # [SolutionType][google.cloud.discoveryengine.v1beta.SolutionType] is
+            # [SOLUTION_TYPE_RECOMMENDATION][google.cloud.discoveryengine.v1beta.SolutionType.SOLUTION_TYPE_RECOMMENDATION].
+            rpc :ResumeEngine, ::Google::Cloud::DiscoveryEngine::V1beta::ResumeEngineRequest, ::Google::Cloud::DiscoveryEngine::V1beta::Engine
+            # Tunes an existing engine. Only applicable if
+            # [SolutionType][google.cloud.discoveryengine.v1beta.SolutionType] is
+            # [SOLUTION_TYPE_RECOMMENDATION][google.cloud.discoveryengine.v1beta.SolutionType.SOLUTION_TYPE_RECOMMENDATION].
+            rpc :TuneEngine, ::Google::Cloud::DiscoveryEngine::V1beta::TuneEngineRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

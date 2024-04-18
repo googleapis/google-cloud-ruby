@@ -25,6 +25,137 @@ module Google
           # Path helper methods for the ConversationalSearchService API.
           module Paths
             ##
+            # Create a fully-qualified Answer resource string.
+            #
+            # @overload answer_path(project:, location:, data_store:, session:, answer:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/dataStores/{data_store}/sessions/{session}/answers/{answer}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param data_store [String]
+            #   @param session [String]
+            #   @param answer [String]
+            #
+            # @overload answer_path(project:, location:, collection:, data_store:, session:, answer:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/sessions/{session}/answers/{answer}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param collection [String]
+            #   @param data_store [String]
+            #   @param session [String]
+            #   @param answer [String]
+            #
+            # @overload answer_path(project:, location:, collection:, engine:, session:, answer:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/sessions/{session}/answers/{answer}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param collection [String]
+            #   @param engine [String]
+            #   @param session [String]
+            #   @param answer [String]
+            #
+            # @return [::String]
+            def answer_path **args
+              resources = {
+                "answer:data_store:location:project:session" => (proc do |project:, location:, data_store:, session:, answer:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "data_store cannot contain /" if data_store.to_s.include? "/"
+                  raise ::ArgumentError, "session cannot contain /" if session.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/dataStores/#{data_store}/sessions/#{session}/answers/#{answer}"
+                end),
+                "answer:collection:data_store:location:project:session" => (proc do |project:, location:, collection:, data_store:, session:, answer:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "collection cannot contain /" if collection.to_s.include? "/"
+                  raise ::ArgumentError, "data_store cannot contain /" if data_store.to_s.include? "/"
+                  raise ::ArgumentError, "session cannot contain /" if session.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/collections/#{collection}/dataStores/#{data_store}/sessions/#{session}/answers/#{answer}"
+                end),
+                "answer:collection:engine:location:project:session" => (proc do |project:, location:, collection:, engine:, session:, answer:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "collection cannot contain /" if collection.to_s.include? "/"
+                  raise ::ArgumentError, "engine cannot contain /" if engine.to_s.include? "/"
+                  raise ::ArgumentError, "session cannot contain /" if session.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/collections/#{collection}/engines/#{engine}/sessions/#{session}/answers/#{answer}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
+            end
+
+            ##
+            # Create a fully-qualified Chunk resource string.
+            #
+            # @overload chunk_path(project:, location:, data_store:, branch:, document:, chunk:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/dataStores/{data_store}/branches/{branch}/documents/{document}/chunks/{chunk}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param data_store [String]
+            #   @param branch [String]
+            #   @param document [String]
+            #   @param chunk [String]
+            #
+            # @overload chunk_path(project:, location:, collection:, data_store:, branch:, document:, chunk:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}/documents/{document}/chunks/{chunk}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param collection [String]
+            #   @param data_store [String]
+            #   @param branch [String]
+            #   @param document [String]
+            #   @param chunk [String]
+            #
+            # @return [::String]
+            def chunk_path **args
+              resources = {
+                "branch:chunk:data_store:document:location:project" => (proc do |project:, location:, data_store:, branch:, document:, chunk:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "data_store cannot contain /" if data_store.to_s.include? "/"
+                  raise ::ArgumentError, "branch cannot contain /" if branch.to_s.include? "/"
+                  raise ::ArgumentError, "document cannot contain /" if document.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/dataStores/#{data_store}/branches/#{branch}/documents/#{document}/chunks/#{chunk}"
+                end),
+                "branch:chunk:collection:data_store:document:location:project" => (proc do |project:, location:, collection:, data_store:, branch:, document:, chunk:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "collection cannot contain /" if collection.to_s.include? "/"
+                  raise ::ArgumentError, "data_store cannot contain /" if data_store.to_s.include? "/"
+                  raise ::ArgumentError, "branch cannot contain /" if branch.to_s.include? "/"
+                  raise ::ArgumentError, "document cannot contain /" if document.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/collections/#{collection}/dataStores/#{data_store}/branches/#{branch}/documents/#{document}/chunks/#{chunk}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
+            end
+
+            ##
             # Create a fully-qualified Conversation resource string.
             #
             # @overload conversation_path(project:, location:, data_store:, conversation:)
@@ -250,6 +381,74 @@ module Google
                   raise ::ArgumentError, "engine cannot contain /" if engine.to_s.include? "/"
 
                   "projects/#{project}/locations/#{location}/collections/#{collection}/engines/#{engine}/servingConfigs/#{serving_config}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
+            end
+
+            ##
+            # Create a fully-qualified Session resource string.
+            #
+            # @overload session_path(project:, location:, data_store:, session:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/dataStores/{data_store}/sessions/{session}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param data_store [String]
+            #   @param session [String]
+            #
+            # @overload session_path(project:, location:, collection:, data_store:, session:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/sessions/{session}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param collection [String]
+            #   @param data_store [String]
+            #   @param session [String]
+            #
+            # @overload session_path(project:, location:, collection:, engine:, session:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/sessions/{session}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param collection [String]
+            #   @param engine [String]
+            #   @param session [String]
+            #
+            # @return [::String]
+            def session_path **args
+              resources = {
+                "data_store:location:project:session" => (proc do |project:, location:, data_store:, session:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "data_store cannot contain /" if data_store.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/dataStores/#{data_store}/sessions/#{session}"
+                end),
+                "collection:data_store:location:project:session" => (proc do |project:, location:, collection:, data_store:, session:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "collection cannot contain /" if collection.to_s.include? "/"
+                  raise ::ArgumentError, "data_store cannot contain /" if data_store.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/collections/#{collection}/dataStores/#{data_store}/sessions/#{session}"
+                end),
+                "collection:engine:location:project:session" => (proc do |project:, location:, collection:, engine:, session:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "collection cannot contain /" if collection.to_s.include? "/"
+                  raise ::ArgumentError, "engine cannot contain /" if engine.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/collections/#{collection}/engines/#{engine}/sessions/#{session}"
                 end)
               }
 
