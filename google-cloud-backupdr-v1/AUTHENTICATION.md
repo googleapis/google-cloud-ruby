@@ -54,7 +54,7 @@ whenever possible.
 To configure a credentials file for an individual client initialization:
 
 ```ruby
-require "google/cloud/backupdr/v1"
+require "google/cloud/backup_dr/v1"
 
 client = ::Google::Cloud::BackupDR::V1::BackupDR::Client.new do |config|
   config.credentials = "path/to/credentialfile.json"
@@ -64,7 +64,7 @@ end
 To configure a credentials file globally for all clients:
 
 ```ruby
-require "google/cloud/backupdr/v1"
+require "google/cloud/backup_dr/v1"
 
 ::Google::Cloud::BackupDR::V1::BackupDR::Client.configure do |config|
   config.credentials = "path/to/credentialfile.json"
@@ -96,7 +96,7 @@ checks for credentials are:
 * `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
-require "google/cloud/backupdr/v1"
+require "google/cloud/backup_dr/v1"
 
 ENV["GOOGLE_APPLICATION_CREDENTIALS"] = "path/to/credentialfile.json"
 

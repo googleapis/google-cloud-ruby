@@ -5,7 +5,7 @@ require File.expand_path("lib/google/cloud/backupdr/v1/version", __dir__)
 
 Gem::Specification.new do |gem|
   gem.name          = "google-cloud-backupdr-v1"
-  gem.version       = Google::Cloud::BackupDR::V1::VERSION
+  gem.version       = Google::Cloud::Backupdr::V1::VERSION
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"

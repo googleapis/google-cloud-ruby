@@ -30,7 +30,7 @@ In order to use this library, you first need to go through the following steps:
 ## Quick Start
 
 ```ruby
-require "google/cloud/backupdr/v1"
+require "google/cloud/backup_dr/v1"
 
 client = ::Google::Cloud::BackupDR::V1::BackupDR::Client.new
 request = ::Google::Cloud::BackupDR::V1::ListManagementServersRequest.new # (request fields as keyword arguments...)
