@@ -190,16 +190,15 @@ module Google
         #     The reason / justification for this quota preference.
         # @!attribute [rw] contact_email
         #   @return [::String]
-        #     Input only. An email address that can be used for quota related
-        #     communication between the Google Cloud and the user in case the Google
-        #     Cloud needs further information to make a decision on whether the user
-        #     preferred quota can be granted.
+        #     Input only. An email address that can be used to contact the the user, in
+        #     case Google Cloud needs more information to make a decision before
+        #     additional quota can be granted.
         #
-        #     The email address is optional for decrease quota preferences. In another
-        #     word, QuotaConfig.preferred_value is smaller than the
-        #     QuotaDetails.reset_value. It is required for increase quota preferences.
-        #     The Google account for the email address must have quota update permission
-        #     for the project, folder or organization this quota preference is for.
+        #     When requesting a quota increase, the email address is required.
+        #     When requesting a quota decrease, the email address is optional.
+        #     For example, the email address is optional when the
+        #     `QuotaConfig.preferred_value` is smaller than the
+        #     `QuotaDetails.reset_value`.
         class QuotaPreference
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -305,7 +304,21 @@ module Google
         # @!attribute [rw] value
         #   @return [::Integer]
         #     The value currently in effect and being enforced.
+        # @!attribute [rw] rollout_info
+        #   @return [::Google::Cloud::CloudQuotas::V1::RolloutInfo]
+        #     Rollout information of this quota.
+        #     This field is present only if the effective limit will change due to the
+        #     ongoing rollout of the service config.
         class QuotaDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # [Output only] Rollout information of a quota.
+        # @!attribute [rw] ongoing_rollout
+        #   @return [::Boolean]
+        #     Whether there is an ongoing rollout for a quota or not.
+        class RolloutInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
