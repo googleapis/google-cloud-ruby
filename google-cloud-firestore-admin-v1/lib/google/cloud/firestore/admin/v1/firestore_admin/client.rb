@@ -2036,8 +2036,7 @@ module Google
               ##
               # Creates a backup schedule on a database.
               # At most two backup schedules can be configured on a database, one daily
-              # backup schedule with retention up to 7 days and one weekly backup schedule
-              # with retention up to 14 weeks.
+              # backup schedule and one weekly backup schedule.
               #
               # @overload create_backup_schedule(request, options = nil)
               #   Pass arguments to `create_backup_schedule` via a request object, either of type
