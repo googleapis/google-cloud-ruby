@@ -95,7 +95,7 @@ module Google
       # Reporting contexts are groups of surfaces and formats for product results on
       # Google. They can represent the entire destination (for example, [Shopping
       # ads](https://support.google.com/merchants/answer/6149970)) or a subset of
-      # formats within a destination (for example, [Discovery
+      # formats within a destination (for example, [Demand Gen
       # ads](https://support.google.com/merchants/answer/13389785)).
       class ReportingContext
         include ::Google::Protobuf::MessageExts
@@ -109,9 +109,17 @@ module Google
           # [Shopping ads](https://support.google.com/merchants/answer/6149970).
           SHOPPING_ADS = 1
 
+          # Deprecated:  Use `DEMAND_GEN_ADS` instead.
           # [Discovery and Demand Gen
           # ads](https://support.google.com/merchants/answer/13389785).
           DISCOVERY_ADS = 2
+
+          # [Demand Gen ads](https://support.google.com/merchants/answer/13389785).
+          DEMAND_GEN_ADS = 13
+
+          # [Demand Gen ads on Discover
+          # surface](https://support.google.com/merchants/answer/13389785).
+          DEMAND_GEN_ADS_DISCOVER_SURFACE = 14
 
           # [Video ads](https://support.google.com/google-ads/answer/6340491).
           VIDEO_ADS = 3
