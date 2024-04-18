@@ -151,9 +151,7 @@ module Google
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
         #     Turn on font identification model and return font style information.
-        #     Deprecated, use
-        #     {::Google::Cloud::DocumentAI::V1::OcrConfig::PremiumFeatures#compute_style_info PremiumFeatures.compute_style_info}
-        #     instead.
+        #     Deprecated, use {::Google::Cloud::DocumentAI::V1::OcrConfig::PremiumFeatures#compute_style_info PremiumFeatures.compute_style_info} instead.
         # @!attribute [rw] disable_character_boxes_detection
         #   @return [::Boolean]
         #     Turn off character box detector in OCR engine. Character box detection is

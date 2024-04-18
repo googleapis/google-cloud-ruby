@@ -156,8 +156,7 @@ module Google
         #     Output only. The processor version aliases.
         # @!attribute [r] process_endpoint
         #   @return [::String]
-        #     Output only. Immutable. The http endpoint that can be called to invoke
-        #     processing.
+        #     Output only. Immutable. The http endpoint that can be called to invoke processing.
         # @!attribute [rw] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The time the processor was created.
