@@ -48,10 +48,14 @@ module Google
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Maximum number of {::Google::Cloud::DiscoveryEngine::V1::Document Document}s to
-        #     return. If unspecified, defaults to a reasonable value. The maximum allowed
-        #     value is 100. Values above 100 are coerced to 100.
+        #     return. The maximum allowed value depends on the data type. Values above
+        #     the maximum value are coerced to the maximum value.
         #
-        #     If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+        #     * Websites with basic indexing: Default `10`, Maximum `25`.
+        #     * Websites with advanced indexing: Default `25`, Maximum `50`.
+        #     * Other: Default `50`, Maximum `100`.
+        #
+        #     If this field is negative, an  `INVALID_ARGUMENT` is returned.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     A page token received from a previous
@@ -72,6 +76,9 @@ module Google
         #     unset.
         #
         #     If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+        # @!attribute [rw] data_store_specs
+        #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::SearchRequest::DataStoreSpec>]
+        #     A list of data store specs to apply on a search call.
         # @!attribute [rw] filter
         #   @return [::String]
         #     The filter syntax consists of an expression language for constructing a
@@ -208,6 +215,17 @@ module Google
           #     Base64 encoded image bytes. Supported image formats: JPEG, PNG, and
           #     BMP.
           class ImageQuery
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # A struct to define data stores to filter on in a search call.
+          # @!attribute [rw] data_store
+          #   @return [::String]
+          #     Required. Full resource name of
+          #     {::Google::Cloud::DiscoveryEngine::V1::DataStore DataStore}, such as
+          #     `projects/{project}/locations/{location}/collections/{collection_id}/dataStores/{data_store_id}`.
+          class DataStoreSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -371,28 +389,29 @@ module Google
             #     Examples:
             #
             #     * To boost documents with document ID "doc_1" or "doc_2", and
-            #     color
-            #       "Red" or "Blue":
-            #         * (id: ANY("doc_1", "doc_2")) AND (color: ANY("Red","Blue"))
+            #     color "Red" or "Blue":
+            #     `(document_id: ANY("doc_1", "doc_2")) AND (color: ANY("Red", "Blue"))`
             # @!attribute [rw] boost
             #   @return [::Float]
             #     Strength of the condition boost, which should be in [-1, 1]. Negative
             #     boost means demotion. Default is 0.0.
             #
-            #     Setting to 1.0 gives the document a big promotion. However, it does not
-            #     necessarily mean that the boosted document will be the top result at
-            #     all times, nor that other documents will be excluded. Results could
-            #     still be shown even when none of them matches the condition. And
-            #     results that are significantly more relevant to the search query can
-            #     still trump your heavily favored but irrelevant documents.
+            #     Setting to 1.0 gives the document a big promotion. However, it does
+            #     not necessarily mean that the boosted document will be the top result
+            #     at all times, nor that other documents will be excluded. Results
+            #     could still be shown even when none of them matches the condition.
+            #     And results that are significantly more relevant to the search query
+            #     can still trump your heavily favored but irrelevant documents.
             #
             #     Setting to -1.0 gives the document a big demotion. However, results
             #     that are deeply relevant might still be shown. The document will have
-            #     an upstream battle to get a fairly high ranking, but it is not blocked
-            #     out completely.
+            #     an upstream battle to get a fairly high ranking, but it is not
+            #     blocked out completely.
             #
             #     Setting to 0.0 means no boost applied. The boosting condition is
-            #     ignored.
+            #     ignored. Only one of the (condition, boost) combination or the
+            #     boost_control_spec below are set. If both are set then the global boost
+            #     is ignored and the more fine-grained boost_control_spec is applied.
             class ConditionBoostSpec
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -469,6 +488,10 @@ module Google
           #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::ContentSearchSpec::SummarySpec]
           #     If `summarySpec` is not specified, summaries are not included in the
           #     search response.
+          # @!attribute [rw] extractive_content_spec
+          #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::ContentSearchSpec::ExtractiveContentSpec]
+          #     If there is no extractive_content_spec provided, there will be no
+          #     extractive answer in the search response.
           class ContentSearchSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -503,7 +526,10 @@ module Google
             #     of results returned is less than `summaryResultCount`, the summary is
             #     generated from all of the results.
             #
-            #     At most five results can be used to generate a summary.
+            #     At most 10 results for documents mode, or 50 for chunks mode, can be
+            #     used to generate a summary. The chunks mode is used when
+            #     [SearchRequest.ContentSearchSpec.search_result_mode][] is set to
+            #     [CHUNKS][SearchRequest.ContentSearchSpec.SearchResultMode.CHUNKS].
             # @!attribute [rw] include_citations
             #   @return [::Boolean]
             #     Specifies whether to include citations in the summary. The default
@@ -561,6 +587,14 @@ module Google
             #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::ContentSearchSpec::SummarySpec::ModelSpec]
             #     If specified, the spec will be used to modify the model specification
             #     provided to the LLM.
+            # @!attribute [rw] use_semantic_chunks
+            #   @return [::Boolean]
+            #     If true, answer will be generated from most relevant chunks from top
+            #     search results. This feature will improve summary quality.
+            #     Note that with this feature enabled, not all top search results
+            #     will be referenced and included in the reference list, so the citation
+            #     source index only points to the search results listed in the reference
+            #     list.
             class SummarySpec
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -583,15 +617,74 @@ module Google
               #     Supported values are:
               #
               #     * `stable`: string. Default value when no value is specified. Uses a
-              #       generally available, fine-tuned version of the text-bison@001
-              #       model.
-              #     * `preview`: string. (Public preview) Uses a fine-tuned version of
-              #       the text-bison@002 model. This model works only for summaries in
-              #       English.
+              #        generally available, fine-tuned model. For more information, see
+              #        [Answer generation model versions and
+              #        lifecycle](https://cloud.google.com/generative-ai-app-builder/docs/answer-generation-models).
+              #     * `preview`: string. (Public preview) Uses a preview model. For more
+              #        information, see
+              #        [Answer generation model versions and
+              #        lifecycle](https://cloud.google.com/generative-ai-app-builder/docs/answer-generation-models).
               class ModelSpec
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
               end
+            end
+
+            # A specification for configuring the extractive content in a search
+            # response.
+            # @!attribute [rw] max_extractive_answer_count
+            #   @return [::Integer]
+            #     The maximum number of extractive answers returned in each search
+            #     result.
+            #
+            #     An extractive answer is a verbatim answer extracted from the original
+            #     document, which provides a precise and contextually relevant answer to
+            #     the search query.
+            #
+            #     If the number of matching answers is less than the
+            #     `max_extractive_answer_count`, return all of the answers. Otherwise,
+            #     return the `max_extractive_answer_count`.
+            #
+            #     At most five answers are returned for each
+            #     {::Google::Cloud::DiscoveryEngine::V1::SearchResponse::SearchResult SearchResult}.
+            # @!attribute [rw] max_extractive_segment_count
+            #   @return [::Integer]
+            #     The max number of extractive segments returned in each search result.
+            #     Only applied if the
+            #     {::Google::Cloud::DiscoveryEngine::V1::DataStore DataStore} is set to
+            #     {::Google::Cloud::DiscoveryEngine::V1::DataStore::ContentConfig::CONTENT_REQUIRED DataStore.ContentConfig.CONTENT_REQUIRED}
+            #     or
+            #     {::Google::Cloud::DiscoveryEngine::V1::DataStore#solution_types DataStore.solution_types}
+            #     is
+            #     {::Google::Cloud::DiscoveryEngine::V1::SolutionType::SOLUTION_TYPE_CHAT SOLUTION_TYPE_CHAT}.
+            #
+            #     An extractive segment is a text segment extracted from the original
+            #     document that is relevant to the search query, and, in general, more
+            #     verbose than an extractive answer. The segment could then be used as
+            #     input for LLMs to generate summaries and answers.
+            #
+            #     If the number of matching segments is less than
+            #     `max_extractive_segment_count`, return all of the segments. Otherwise,
+            #     return the `max_extractive_segment_count`.
+            # @!attribute [rw] return_extractive_segment_score
+            #   @return [::Boolean]
+            #     Specifies whether to return the confidence score from the extractive
+            #     segments in each search result. This feature is available only for new
+            #     or allowlisted data stores. To allowlist your data store,
+            #     contact your Customer Engineer. The default value is `false`.
+            # @!attribute [rw] num_previous_segments
+            #   @return [::Integer]
+            #     Specifies whether to also include the adjacent from each selected
+            #     segments.
+            #     Return at most `num_previous_segments` segments before each selected
+            #     segments.
+            # @!attribute [rw] num_next_segments
+            #   @return [::Integer]
+            #     Return at most `num_next_segments` segments after each selected
+            #     segments.
+            class ExtractiveContentSpec
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
             end
           end
 
@@ -796,9 +889,24 @@ module Google
             # @!attribute [rw] uri
             #   @return [::String]
             #     Cloud Storage or HTTP uri for the document.
+            # @!attribute [rw] chunk_contents
+            #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::SearchResponse::Summary::Reference::ChunkContent>]
+            #     List of cited chunk contents derived from document content.
             class Reference
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Chunk content.
+              # @!attribute [rw] content
+              #   @return [::String]
+              #     Chunk textual content.
+              # @!attribute [rw] page_identifier
+              #   @return [::String]
+              #     Page identifier.
+              class ChunkContent
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
             end
 
             # Summary with metadata information.

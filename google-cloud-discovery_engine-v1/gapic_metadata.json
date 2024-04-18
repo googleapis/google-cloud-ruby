@@ -194,6 +194,20 @@
         }
       }
     },
+    "RecommendationService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DiscoveryEngine::V1::RecommendationService::Client",
+          "rpcs": {
+            "Recommend": {
+              "methods": [
+                "recommend"
+              ]
+            }
+          }
+        }
+      }
+    },
     "SchemaService": {
       "clients": {
         "grpc": {

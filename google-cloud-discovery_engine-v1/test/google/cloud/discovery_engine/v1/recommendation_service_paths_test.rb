@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,9 +20,9 @@ require "helper"
 
 require "gapic/grpc/service_stub"
 
-require "google/cloud/discovery_engine/v1/document_service"
+require "google/cloud/discovery_engine/v1/recommendation_service"
 
-class ::Google::Cloud::DiscoveryEngine::V1::DocumentService::ClientPathsTest < Minitest::Test
+class ::Google::Cloud::DiscoveryEngine::V1::RecommendationService::ClientPathsTest < Minitest::Test
   class DummyStub
     def endpoint
       "endpoint.example.com"
@@ -33,25 +33,10 @@ class ::Google::Cloud::DiscoveryEngine::V1::DocumentService::ClientPathsTest < M
     end
   end
 
-  def test_branch_path
-    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, DummyStub.new do
-      client = ::Google::Cloud::DiscoveryEngine::V1::DocumentService::Client.new do |config|
-        config.credentials = grpc_channel
-      end
-
-      path = client.branch_path project: "value0", location: "value1", data_store: "value2", branch: "value3"
-      assert_equal "projects/value0/locations/value1/dataStores/value2/branches/value3", path
-
-      path = client.branch_path project: "value0", location: "value1", collection: "value2", data_store: "value3", branch: "value4"
-      assert_equal "projects/value0/locations/value1/collections/value2/dataStores/value3/branches/value4", path
-    end
-  end
-
   def test_document_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
-      client = ::Google::Cloud::DiscoveryEngine::V1::DocumentService::Client.new do |config|
+      client = ::Google::Cloud::DiscoveryEngine::V1::RecommendationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -63,15 +48,21 @@ class ::Google::Cloud::DiscoveryEngine::V1::DocumentService::ClientPathsTest < M
     end
   end
 
-  def test_fhir_store_path
+  def test_serving_config_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
-      client = ::Google::Cloud::DiscoveryEngine::V1::DocumentService::Client.new do |config|
+      client = ::Google::Cloud::DiscoveryEngine::V1::RecommendationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
-      path = client.fhir_store_path project: "value0", location: "value1", dataset: "value2", fhir_store: "value3"
-      assert_equal "projects/value0/locations/value1/datasets/value2/fhirStores/value3", path
+      path = client.serving_config_path project: "value0", location: "value1", data_store: "value2", serving_config: "value3"
+      assert_equal "projects/value0/locations/value1/dataStores/value2/servingConfigs/value3", path
+
+      path = client.serving_config_path project: "value0", location: "value1", collection: "value2", data_store: "value3", serving_config: "value4"
+      assert_equal "projects/value0/locations/value1/collections/value2/dataStores/value3/servingConfigs/value4", path
+
+      path = client.serving_config_path project: "value0", location: "value1", collection: "value2", engine: "value3", serving_config: "value4"
+      assert_equal "projects/value0/locations/value1/collections/value2/engines/value3/servingConfigs/value4", path
     end
   end
 end

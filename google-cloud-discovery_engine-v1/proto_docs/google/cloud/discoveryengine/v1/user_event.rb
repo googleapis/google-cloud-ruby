@@ -105,22 +105,26 @@ module Google
         #     Token to attribute an API response to user action(s) to trigger the event.
         #
         #     Highly recommended for user events that are the result of
-        #     [RecommendationService.Recommend][]. This field enables accurate
-        #     attribution of recommendation model performance.
+        #     {::Google::Cloud::DiscoveryEngine::V1::RecommendationService::Client#recommend RecommendationService.Recommend}.
+        #     This field enables accurate attribution of recommendation model
+        #     performance.
         #
         #     The value must be one of:
         #
-        #     * [RecommendResponse.attribution_token][] for events that are the result of
-        #     [RecommendationService.Recommend][].
+        #     * {::Google::Cloud::DiscoveryEngine::V1::RecommendResponse#attribution_token RecommendResponse.attribution_token} for events that are the result of
+        #     {::Google::Cloud::DiscoveryEngine::V1::RecommendationService::Client#recommend RecommendationService.Recommend}.
         #     * {::Google::Cloud::DiscoveryEngine::V1::SearchResponse#attribution_token SearchResponse.attribution_token} for events that are the result of
         #     {::Google::Cloud::DiscoveryEngine::V1::SearchService::Client#search SearchService.Search}.
         #
         #     This token enables us to accurately attribute page view or conversion
         #     completion back to the event and the particular predict response containing
         #     this clicked/purchased product. If user clicks on product K in the
-        #     recommendation results, pass [RecommendResponse.attribution_token][] as a
-        #     URL parameter to product K's page. When recording events on product K's
-        #     page, log the [RecommendResponse.attribution_token][] to this field.
+        #     recommendation results, pass
+        #     {::Google::Cloud::DiscoveryEngine::V1::RecommendResponse#attribution_token RecommendResponse.attribution_token}
+        #     as a URL parameter to product K's page. When recording events on product
+        #     K's page, log the
+        #     {::Google::Cloud::DiscoveryEngine::V1::RecommendResponse#attribution_token RecommendResponse.attribution_token}
+        #     to this field.
         # @!attribute [rw] filter
         #   @return [::String]
         #     The filter syntax consists of an expression language for constructing a
@@ -133,9 +137,10 @@ module Google
         #     conforming to https://google.aip.dev/160#filtering.
         #
         #     Similarly, for `view-item-list` events that are generated from a
-        #     [RecommendRequest][], this field may be populated directly from
-        #     [RecommendRequest.filter][] conforming to
-        #     https://google.aip.dev/160#filtering.
+        #     {::Google::Cloud::DiscoveryEngine::V1::RecommendRequest RecommendRequest}, this
+        #     field may be populated directly from
+        #     {::Google::Cloud::DiscoveryEngine::V1::RecommendRequest#filter RecommendRequest.filter}
+        #     conforming to https://google.aip.dev/160#filtering.
         #
         #     The value must be a UTF-8 encoded string with a length limit of 1,000
         #     characters. Otherwise, an `INVALID_ARGUMENT` error is returned.
@@ -250,7 +255,7 @@ module Google
         #     The most specific category associated with a category page.
         #
         #     To represent full path of category, use '>' sign to separate different
-        #     hierarchies. If '>' is part of the category name, please replace it with
+        #     hierarchies. If '>' is part of the category name, replace it with
         #     other character(s).
         #
         #     Category pages include special pages such as sales or promotions. For

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,58 +21,9 @@ module Google
   module Cloud
     module DiscoveryEngine
       module V1
-        module DocumentService
-          # Path helper methods for the DocumentService API.
+        module RecommendationService
+          # Path helper methods for the RecommendationService API.
           module Paths
-            ##
-            # Create a fully-qualified Branch resource string.
-            #
-            # @overload branch_path(project:, location:, data_store:, branch:)
-            #   The resource will be in the following format:
-            #
-            #   `projects/{project}/locations/{location}/dataStores/{data_store}/branches/{branch}`
-            #
-            #   @param project [String]
-            #   @param location [String]
-            #   @param data_store [String]
-            #   @param branch [String]
-            #
-            # @overload branch_path(project:, location:, collection:, data_store:, branch:)
-            #   The resource will be in the following format:
-            #
-            #   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}`
-            #
-            #   @param project [String]
-            #   @param location [String]
-            #   @param collection [String]
-            #   @param data_store [String]
-            #   @param branch [String]
-            #
-            # @return [::String]
-            def branch_path **args
-              resources = {
-                "branch:data_store:location:project" => (proc do |project:, location:, data_store:, branch:|
-                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-                  raise ::ArgumentError, "data_store cannot contain /" if data_store.to_s.include? "/"
-
-                  "projects/#{project}/locations/#{location}/dataStores/#{data_store}/branches/#{branch}"
-                end),
-                "branch:collection:data_store:location:project" => (proc do |project:, location:, collection:, data_store:, branch:|
-                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-                  raise ::ArgumentError, "collection cannot contain /" if collection.to_s.include? "/"
-                  raise ::ArgumentError, "data_store cannot contain /" if data_store.to_s.include? "/"
-
-                  "projects/#{project}/locations/#{location}/collections/#{collection}/dataStores/#{data_store}/branches/#{branch}"
-                end)
-              }
-
-              resource = resources[args.keys.sort.join(":")]
-              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
-              resource.call(**args)
-            end
-
             ##
             # Create a fully-qualified Document resource string.
             #
@@ -127,24 +78,71 @@ module Google
             end
 
             ##
-            # Create a fully-qualified FhirStore resource string.
+            # Create a fully-qualified ServingConfig resource string.
             #
-            # The resource will be in the following format:
+            # @overload serving_config_path(project:, location:, data_store:, serving_config:)
+            #   The resource will be in the following format:
             #
-            # `projects/{project}/locations/{location}/datasets/{dataset}/fhirStores/{fhir_store}`
+            #   `projects/{project}/locations/{location}/dataStores/{data_store}/servingConfigs/{serving_config}`
             #
-            # @param project [String]
-            # @param location [String]
-            # @param dataset [String]
-            # @param fhir_store [String]
+            #   @param project [String]
+            #   @param location [String]
+            #   @param data_store [String]
+            #   @param serving_config [String]
+            #
+            # @overload serving_config_path(project:, location:, collection:, data_store:, serving_config:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/servingConfigs/{serving_config}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param collection [String]
+            #   @param data_store [String]
+            #   @param serving_config [String]
+            #
+            # @overload serving_config_path(project:, location:, collection:, engine:, serving_config:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/servingConfigs/{serving_config}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param collection [String]
+            #   @param engine [String]
+            #   @param serving_config [String]
             #
             # @return [::String]
-            def fhir_store_path project:, location:, dataset:, fhir_store:
-              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-              raise ::ArgumentError, "dataset cannot contain /" if dataset.to_s.include? "/"
+            def serving_config_path **args
+              resources = {
+                "data_store:location:project:serving_config" => (proc do |project:, location:, data_store:, serving_config:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "data_store cannot contain /" if data_store.to_s.include? "/"
 
-              "projects/#{project}/locations/#{location}/datasets/#{dataset}/fhirStores/#{fhir_store}"
+                  "projects/#{project}/locations/#{location}/dataStores/#{data_store}/servingConfigs/#{serving_config}"
+                end),
+                "collection:data_store:location:project:serving_config" => (proc do |project:, location:, collection:, data_store:, serving_config:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "collection cannot contain /" if collection.to_s.include? "/"
+                  raise ::ArgumentError, "data_store cannot contain /" if data_store.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/collections/#{collection}/dataStores/#{data_store}/servingConfigs/#{serving_config}"
+                end),
+                "collection:engine:location:project:serving_config" => (proc do |project:, location:, collection:, engine:, serving_config:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "collection cannot contain /" if collection.to_s.include? "/"
+                  raise ::ArgumentError, "engine cannot contain /" if engine.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/collections/#{collection}/engines/#{engine}/servingConfigs/#{serving_config}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
             end
 
             extend self

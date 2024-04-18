@@ -74,6 +74,9 @@ module Google
         # @!attribute [rw] failure_count
         #   @return [::Integer]
         #     Count of entries that encountered errors while processing.
+        # @!attribute [rw] ignored_count
+        #   @return [::Integer]
+        #     Count of entries that were ignored as entries were not found.
         class PurgeDocumentsMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
