@@ -109,18 +109,40 @@ module Google
             ##
             # Create a fully-qualified Settings resource string.
             #
-            # The resource will be in the following format:
+            # @overload settings_path(organization:, location:)
+            #   The resource will be in the following format:
             #
-            # `organizations/{organization}/locations/{location}/settings`
+            #   `organizations/{organization}/locations/{location}/settings`
             #
-            # @param organization [String]
-            # @param location [String]
+            #   @param organization [String]
+            #   @param location [String]
+            #
+            # @overload settings_path(project:, location:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/settings`
+            #
+            #   @param project [String]
+            #   @param location [String]
             #
             # @return [::String]
-            def settings_path organization:, location:
-              raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+            def settings_path **args
+              resources = {
+                "location:organization" => (proc do |organization:, location:|
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
 
-              "organizations/#{organization}/locations/#{location}/settings"
+                  "organizations/#{organization}/locations/#{location}/settings"
+                end),
+                "location:project" => (proc do |project:, location:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/settings"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
             end
 
             extend self

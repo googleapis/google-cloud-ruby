@@ -72,6 +72,9 @@ class ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::
 
       path = client.settings_path organization: "value0", location: "value1"
       assert_equal "organizations/value0/locations/value1/settings", path
+
+      path = client.settings_path project: "value0", location: "value1"
+      assert_equal "projects/value0/locations/value1/settings", path
     end
   end
 end
