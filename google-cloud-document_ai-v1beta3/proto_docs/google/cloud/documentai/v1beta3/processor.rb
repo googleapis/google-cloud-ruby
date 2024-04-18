@@ -27,7 +27,7 @@ module Google
         # Its document-processing behavior is defined by that version.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The resource name of the processor version.
+        #     Identifier. The resource name of the processor version.
         #     Format:
         #     `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processor_version}`
         # @!attribute [rw] display_name
@@ -36,9 +36,9 @@ module Google
         # @!attribute [rw] document_schema
         #   @return [::Google::Cloud::DocumentAI::V1beta3::DocumentSchema]
         #     The schema of the processor version. Describes the output.
-        # @!attribute [rw] state
+        # @!attribute [r] state
         #   @return [::Google::Cloud::DocumentAI::V1beta3::ProcessorVersion::State]
-        #     The state of the processor version.
+        #     Output only. The state of the processor version.
         # @!attribute [rw] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The time the processor version was created.
