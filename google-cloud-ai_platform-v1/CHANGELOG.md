@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.39.0 (2024-04-18)
+
+#### Features
+
+* GenAiTuningService aiplatform v1 initial release ([#25431](https://github.com/googleapis/google-cloud-ruby/issues/25431)) 
+
 ### 0.38.0 (2024-03-18)
 
 #### Features
