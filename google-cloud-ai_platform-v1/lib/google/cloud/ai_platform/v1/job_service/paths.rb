@@ -315,6 +315,25 @@ module Google
             end
 
             ##
+            # Create a fully-qualified PersistentResource resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/persistentResources/{persistent_resource}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param persistent_resource [String]
+            #
+            # @return [::String]
+            def persistent_resource_path project:, location:, persistent_resource:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/persistentResources/#{persistent_resource}"
+            end
+
+            ##
             # Create a fully-qualified Tensorboard resource string.
             #
             # The resource will be in the following format:

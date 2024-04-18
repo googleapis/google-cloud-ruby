@@ -29,6 +29,13 @@ module Google
         #     Contains settings for the Cloud Bigtable instance that will be created
         #     to serve featureValues for all FeatureViews under this
         #     FeatureOnlineStore.
+        # @!attribute [rw] optimized
+        #   @return [::Google::Cloud::AIPlatform::V1::FeatureOnlineStore::Optimized]
+        #     Contains settings for the Optimized store that will be created
+        #     to serve featureValues for all FeatureViews under this
+        #     FeatureOnlineStore. When choose Optimized storage type, need to set
+        #     {::Google::Cloud::AIPlatform::V1::PrivateServiceConnectConfig#enable_private_service_connect PrivateServiceConnectConfig.enable_private_service_connect}
+        #     to use private endpoint. Otherwise will use public endpoint by default.
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. Name of the FeatureOnlineStore. Format:
@@ -59,6 +66,10 @@ module Google
         # @!attribute [r] state
         #   @return [::Google::Cloud::AIPlatform::V1::FeatureOnlineStore::State]
         #     Output only. State of the featureOnlineStore.
+        # @!attribute [rw] dedicated_serving_endpoint
+        #   @return [::Google::Cloud::AIPlatform::V1::FeatureOnlineStore::DedicatedServingEndpoint]
+        #     Optional. The dedicated serving endpoint for this FeatureOnlineStore, which
+        #     is different from common Vertex service endpoint.
         class FeatureOnlineStore
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -90,6 +101,24 @@ module Google
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
+          end
+
+          # Optimized storage type
+          class Optimized
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The dedicated serving endpoint for this FeatureOnlineStore. Only need to
+          # set when you choose Optimized storage type. Public endpoint is provisioned
+          # by default.
+          # @!attribute [r] public_endpoint_domain_name
+          #   @return [::String]
+          #     Output only. This field will be populated with the domain name to use for
+          #     this FeatureOnlineStore
+          class DedicatedServingEndpoint
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # @!attribute [rw] key

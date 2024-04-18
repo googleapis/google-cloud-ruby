@@ -477,6 +477,35 @@
         }
       }
     },
+    "GenAiTuningService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::AIPlatform::V1::GenAiTuningService::Client",
+          "rpcs": {
+            "CreateTuningJob": {
+              "methods": [
+                "create_tuning_job"
+              ]
+            },
+            "GetTuningJob": {
+              "methods": [
+                "get_tuning_job"
+              ]
+            },
+            "ListTuningJobs": {
+              "methods": [
+                "list_tuning_jobs"
+              ]
+            },
+            "CancelTuningJob": {
+              "methods": [
+                "cancel_tuning_job"
+              ]
+            }
+          }
+        }
+      }
+    },
     "IndexEndpointService": {
       "clients": {
         "grpc": {
@@ -1161,6 +1190,104 @@
             "GetPublisherModel": {
               "methods": [
                 "get_publisher_model"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "NotebookService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::AIPlatform::V1::NotebookService::Client",
+          "rpcs": {
+            "CreateNotebookRuntimeTemplate": {
+              "methods": [
+                "create_notebook_runtime_template"
+              ]
+            },
+            "GetNotebookRuntimeTemplate": {
+              "methods": [
+                "get_notebook_runtime_template"
+              ]
+            },
+            "ListNotebookRuntimeTemplates": {
+              "methods": [
+                "list_notebook_runtime_templates"
+              ]
+            },
+            "DeleteNotebookRuntimeTemplate": {
+              "methods": [
+                "delete_notebook_runtime_template"
+              ]
+            },
+            "AssignNotebookRuntime": {
+              "methods": [
+                "assign_notebook_runtime"
+              ]
+            },
+            "GetNotebookRuntime": {
+              "methods": [
+                "get_notebook_runtime"
+              ]
+            },
+            "ListNotebookRuntimes": {
+              "methods": [
+                "list_notebook_runtimes"
+              ]
+            },
+            "DeleteNotebookRuntime": {
+              "methods": [
+                "delete_notebook_runtime"
+              ]
+            },
+            "UpgradeNotebookRuntime": {
+              "methods": [
+                "upgrade_notebook_runtime"
+              ]
+            },
+            "StartNotebookRuntime": {
+              "methods": [
+                "start_notebook_runtime"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "PersistentResourceService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::AIPlatform::V1::PersistentResourceService::Client",
+          "rpcs": {
+            "CreatePersistentResource": {
+              "methods": [
+                "create_persistent_resource"
+              ]
+            },
+            "GetPersistentResource": {
+              "methods": [
+                "get_persistent_resource"
+              ]
+            },
+            "ListPersistentResources": {
+              "methods": [
+                "list_persistent_resources"
+              ]
+            },
+            "DeletePersistentResource": {
+              "methods": [
+                "delete_persistent_resource"
+              ]
+            },
+            "UpdatePersistentResource": {
+              "methods": [
+                "update_persistent_resource"
+              ]
+            },
+            "RebootPersistentResource": {
+              "methods": [
+                "reboot_persistent_resource"
               ]
             }
           }

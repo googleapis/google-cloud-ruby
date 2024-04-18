@@ -3212,6 +3212,166 @@
       ]
     },
     {
+      "region_tag": "aiplatform_v1_generated_GenAiTuningService_CreateTuningJob_sync",
+      "title": "Snippet for the create_tuning_job call in the GenAiTuningService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::GenAiTuningService::Client#create_tuning_job.",
+      "file": "gen_ai_tuning_service/create_tuning_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_tuning_job",
+        "full_name": "::Google::Cloud::AIPlatform::V1::GenAiTuningService::Client#create_tuning_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::CreateTuningJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::TuningJob",
+        "client": {
+          "short_name": "GenAiTuningService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::GenAiTuningService::Client"
+        },
+        "method": {
+          "short_name": "CreateTuningJob",
+          "full_name": "google.cloud.aiplatform.v1.GenAiTuningService.CreateTuningJob",
+          "service": {
+            "short_name": "GenAiTuningService",
+            "full_name": "google.cloud.aiplatform.v1.GenAiTuningService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_GenAiTuningService_GetTuningJob_sync",
+      "title": "Snippet for the get_tuning_job call in the GenAiTuningService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::GenAiTuningService::Client#get_tuning_job.",
+      "file": "gen_ai_tuning_service/get_tuning_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_tuning_job",
+        "full_name": "::Google::Cloud::AIPlatform::V1::GenAiTuningService::Client#get_tuning_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::GetTuningJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::TuningJob",
+        "client": {
+          "short_name": "GenAiTuningService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::GenAiTuningService::Client"
+        },
+        "method": {
+          "short_name": "GetTuningJob",
+          "full_name": "google.cloud.aiplatform.v1.GenAiTuningService.GetTuningJob",
+          "service": {
+            "short_name": "GenAiTuningService",
+            "full_name": "google.cloud.aiplatform.v1.GenAiTuningService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_GenAiTuningService_ListTuningJobs_sync",
+      "title": "Snippet for the list_tuning_jobs call in the GenAiTuningService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::GenAiTuningService::Client#list_tuning_jobs.",
+      "file": "gen_ai_tuning_service/list_tuning_jobs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_tuning_jobs",
+        "full_name": "::Google::Cloud::AIPlatform::V1::GenAiTuningService::Client#list_tuning_jobs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::ListTuningJobsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::ListTuningJobsResponse",
+        "client": {
+          "short_name": "GenAiTuningService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::GenAiTuningService::Client"
+        },
+        "method": {
+          "short_name": "ListTuningJobs",
+          "full_name": "google.cloud.aiplatform.v1.GenAiTuningService.ListTuningJobs",
+          "service": {
+            "short_name": "GenAiTuningService",
+            "full_name": "google.cloud.aiplatform.v1.GenAiTuningService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_GenAiTuningService_CancelTuningJob_sync",
+      "title": "Snippet for the cancel_tuning_job call in the GenAiTuningService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::GenAiTuningService::Client#cancel_tuning_job.",
+      "file": "gen_ai_tuning_service/cancel_tuning_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "cancel_tuning_job",
+        "full_name": "::Google::Cloud::AIPlatform::V1::GenAiTuningService::Client#cancel_tuning_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::CancelTuningJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "GenAiTuningService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::GenAiTuningService::Client"
+        },
+        "method": {
+          "short_name": "CancelTuningJob",
+          "full_name": "google.cloud.aiplatform.v1.GenAiTuningService.CancelTuningJob",
+          "service": {
+            "short_name": "GenAiTuningService",
+            "full_name": "google.cloud.aiplatform.v1.GenAiTuningService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "aiplatform_v1_generated_IndexEndpointService_CreateIndexEndpoint_sync",
       "title": "Snippet for the create_index_endpoint call in the IndexEndpointService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::IndexEndpointService::Client#create_index_endpoint.",
@@ -8007,6 +8167,646 @@
         {
           "start": 20,
           "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_NotebookService_CreateNotebookRuntimeTemplate_sync",
+      "title": "Snippet for the create_notebook_runtime_template call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::NotebookService::Client#create_notebook_runtime_template.",
+      "file": "notebook_service/create_notebook_runtime_template.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_notebook_runtime_template",
+        "full_name": "::Google::Cloud::AIPlatform::V1::NotebookService::Client#create_notebook_runtime_template",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::CreateNotebookRuntimeTemplateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NotebookService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::NotebookService::Client"
+        },
+        "method": {
+          "short_name": "CreateNotebookRuntimeTemplate",
+          "full_name": "google.cloud.aiplatform.v1.NotebookService.CreateNotebookRuntimeTemplate",
+          "service": {
+            "short_name": "NotebookService",
+            "full_name": "google.cloud.aiplatform.v1.NotebookService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_NotebookService_GetNotebookRuntimeTemplate_sync",
+      "title": "Snippet for the get_notebook_runtime_template call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::NotebookService::Client#get_notebook_runtime_template.",
+      "file": "notebook_service/get_notebook_runtime_template.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_notebook_runtime_template",
+        "full_name": "::Google::Cloud::AIPlatform::V1::NotebookService::Client#get_notebook_runtime_template",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::GetNotebookRuntimeTemplateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::NotebookRuntimeTemplate",
+        "client": {
+          "short_name": "NotebookService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::NotebookService::Client"
+        },
+        "method": {
+          "short_name": "GetNotebookRuntimeTemplate",
+          "full_name": "google.cloud.aiplatform.v1.NotebookService.GetNotebookRuntimeTemplate",
+          "service": {
+            "short_name": "NotebookService",
+            "full_name": "google.cloud.aiplatform.v1.NotebookService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_NotebookService_ListNotebookRuntimeTemplates_sync",
+      "title": "Snippet for the list_notebook_runtime_templates call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::NotebookService::Client#list_notebook_runtime_templates.",
+      "file": "notebook_service/list_notebook_runtime_templates.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_notebook_runtime_templates",
+        "full_name": "::Google::Cloud::AIPlatform::V1::NotebookService::Client#list_notebook_runtime_templates",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::ListNotebookRuntimeTemplatesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::ListNotebookRuntimeTemplatesResponse",
+        "client": {
+          "short_name": "NotebookService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::NotebookService::Client"
+        },
+        "method": {
+          "short_name": "ListNotebookRuntimeTemplates",
+          "full_name": "google.cloud.aiplatform.v1.NotebookService.ListNotebookRuntimeTemplates",
+          "service": {
+            "short_name": "NotebookService",
+            "full_name": "google.cloud.aiplatform.v1.NotebookService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_NotebookService_DeleteNotebookRuntimeTemplate_sync",
+      "title": "Snippet for the delete_notebook_runtime_template call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::NotebookService::Client#delete_notebook_runtime_template.",
+      "file": "notebook_service/delete_notebook_runtime_template.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_notebook_runtime_template",
+        "full_name": "::Google::Cloud::AIPlatform::V1::NotebookService::Client#delete_notebook_runtime_template",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::DeleteNotebookRuntimeTemplateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NotebookService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::NotebookService::Client"
+        },
+        "method": {
+          "short_name": "DeleteNotebookRuntimeTemplate",
+          "full_name": "google.cloud.aiplatform.v1.NotebookService.DeleteNotebookRuntimeTemplate",
+          "service": {
+            "short_name": "NotebookService",
+            "full_name": "google.cloud.aiplatform.v1.NotebookService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_NotebookService_AssignNotebookRuntime_sync",
+      "title": "Snippet for the assign_notebook_runtime call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::NotebookService::Client#assign_notebook_runtime.",
+      "file": "notebook_service/assign_notebook_runtime.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "assign_notebook_runtime",
+        "full_name": "::Google::Cloud::AIPlatform::V1::NotebookService::Client#assign_notebook_runtime",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::AssignNotebookRuntimeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NotebookService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::NotebookService::Client"
+        },
+        "method": {
+          "short_name": "AssignNotebookRuntime",
+          "full_name": "google.cloud.aiplatform.v1.NotebookService.AssignNotebookRuntime",
+          "service": {
+            "short_name": "NotebookService",
+            "full_name": "google.cloud.aiplatform.v1.NotebookService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_NotebookService_GetNotebookRuntime_sync",
+      "title": "Snippet for the get_notebook_runtime call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::NotebookService::Client#get_notebook_runtime.",
+      "file": "notebook_service/get_notebook_runtime.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_notebook_runtime",
+        "full_name": "::Google::Cloud::AIPlatform::V1::NotebookService::Client#get_notebook_runtime",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::GetNotebookRuntimeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::NotebookRuntime",
+        "client": {
+          "short_name": "NotebookService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::NotebookService::Client"
+        },
+        "method": {
+          "short_name": "GetNotebookRuntime",
+          "full_name": "google.cloud.aiplatform.v1.NotebookService.GetNotebookRuntime",
+          "service": {
+            "short_name": "NotebookService",
+            "full_name": "google.cloud.aiplatform.v1.NotebookService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_NotebookService_ListNotebookRuntimes_sync",
+      "title": "Snippet for the list_notebook_runtimes call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::NotebookService::Client#list_notebook_runtimes.",
+      "file": "notebook_service/list_notebook_runtimes.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_notebook_runtimes",
+        "full_name": "::Google::Cloud::AIPlatform::V1::NotebookService::Client#list_notebook_runtimes",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::ListNotebookRuntimesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::ListNotebookRuntimesResponse",
+        "client": {
+          "short_name": "NotebookService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::NotebookService::Client"
+        },
+        "method": {
+          "short_name": "ListNotebookRuntimes",
+          "full_name": "google.cloud.aiplatform.v1.NotebookService.ListNotebookRuntimes",
+          "service": {
+            "short_name": "NotebookService",
+            "full_name": "google.cloud.aiplatform.v1.NotebookService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_NotebookService_DeleteNotebookRuntime_sync",
+      "title": "Snippet for the delete_notebook_runtime call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::NotebookService::Client#delete_notebook_runtime.",
+      "file": "notebook_service/delete_notebook_runtime.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_notebook_runtime",
+        "full_name": "::Google::Cloud::AIPlatform::V1::NotebookService::Client#delete_notebook_runtime",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::DeleteNotebookRuntimeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NotebookService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::NotebookService::Client"
+        },
+        "method": {
+          "short_name": "DeleteNotebookRuntime",
+          "full_name": "google.cloud.aiplatform.v1.NotebookService.DeleteNotebookRuntime",
+          "service": {
+            "short_name": "NotebookService",
+            "full_name": "google.cloud.aiplatform.v1.NotebookService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_NotebookService_UpgradeNotebookRuntime_sync",
+      "title": "Snippet for the upgrade_notebook_runtime call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::NotebookService::Client#upgrade_notebook_runtime.",
+      "file": "notebook_service/upgrade_notebook_runtime.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "upgrade_notebook_runtime",
+        "full_name": "::Google::Cloud::AIPlatform::V1::NotebookService::Client#upgrade_notebook_runtime",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::UpgradeNotebookRuntimeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NotebookService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::NotebookService::Client"
+        },
+        "method": {
+          "short_name": "UpgradeNotebookRuntime",
+          "full_name": "google.cloud.aiplatform.v1.NotebookService.UpgradeNotebookRuntime",
+          "service": {
+            "short_name": "NotebookService",
+            "full_name": "google.cloud.aiplatform.v1.NotebookService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_NotebookService_StartNotebookRuntime_sync",
+      "title": "Snippet for the start_notebook_runtime call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::NotebookService::Client#start_notebook_runtime.",
+      "file": "notebook_service/start_notebook_runtime.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "start_notebook_runtime",
+        "full_name": "::Google::Cloud::AIPlatform::V1::NotebookService::Client#start_notebook_runtime",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::StartNotebookRuntimeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NotebookService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::NotebookService::Client"
+        },
+        "method": {
+          "short_name": "StartNotebookRuntime",
+          "full_name": "google.cloud.aiplatform.v1.NotebookService.StartNotebookRuntime",
+          "service": {
+            "short_name": "NotebookService",
+            "full_name": "google.cloud.aiplatform.v1.NotebookService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_PersistentResourceService_CreatePersistentResource_sync",
+      "title": "Snippet for the create_persistent_resource call in the PersistentResourceService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::PersistentResourceService::Client#create_persistent_resource.",
+      "file": "persistent_resource_service/create_persistent_resource.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_persistent_resource",
+        "full_name": "::Google::Cloud::AIPlatform::V1::PersistentResourceService::Client#create_persistent_resource",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::CreatePersistentResourceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "PersistentResourceService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::PersistentResourceService::Client"
+        },
+        "method": {
+          "short_name": "CreatePersistentResource",
+          "full_name": "google.cloud.aiplatform.v1.PersistentResourceService.CreatePersistentResource",
+          "service": {
+            "short_name": "PersistentResourceService",
+            "full_name": "google.cloud.aiplatform.v1.PersistentResourceService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_PersistentResourceService_GetPersistentResource_sync",
+      "title": "Snippet for the get_persistent_resource call in the PersistentResourceService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::PersistentResourceService::Client#get_persistent_resource.",
+      "file": "persistent_resource_service/get_persistent_resource.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_persistent_resource",
+        "full_name": "::Google::Cloud::AIPlatform::V1::PersistentResourceService::Client#get_persistent_resource",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::GetPersistentResourceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::PersistentResource",
+        "client": {
+          "short_name": "PersistentResourceService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::PersistentResourceService::Client"
+        },
+        "method": {
+          "short_name": "GetPersistentResource",
+          "full_name": "google.cloud.aiplatform.v1.PersistentResourceService.GetPersistentResource",
+          "service": {
+            "short_name": "PersistentResourceService",
+            "full_name": "google.cloud.aiplatform.v1.PersistentResourceService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_PersistentResourceService_ListPersistentResources_sync",
+      "title": "Snippet for the list_persistent_resources call in the PersistentResourceService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::PersistentResourceService::Client#list_persistent_resources.",
+      "file": "persistent_resource_service/list_persistent_resources.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_persistent_resources",
+        "full_name": "::Google::Cloud::AIPlatform::V1::PersistentResourceService::Client#list_persistent_resources",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::ListPersistentResourcesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::ListPersistentResourcesResponse",
+        "client": {
+          "short_name": "PersistentResourceService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::PersistentResourceService::Client"
+        },
+        "method": {
+          "short_name": "ListPersistentResources",
+          "full_name": "google.cloud.aiplatform.v1.PersistentResourceService.ListPersistentResources",
+          "service": {
+            "short_name": "PersistentResourceService",
+            "full_name": "google.cloud.aiplatform.v1.PersistentResourceService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_PersistentResourceService_DeletePersistentResource_sync",
+      "title": "Snippet for the delete_persistent_resource call in the PersistentResourceService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::PersistentResourceService::Client#delete_persistent_resource.",
+      "file": "persistent_resource_service/delete_persistent_resource.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_persistent_resource",
+        "full_name": "::Google::Cloud::AIPlatform::V1::PersistentResourceService::Client#delete_persistent_resource",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::DeletePersistentResourceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "PersistentResourceService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::PersistentResourceService::Client"
+        },
+        "method": {
+          "short_name": "DeletePersistentResource",
+          "full_name": "google.cloud.aiplatform.v1.PersistentResourceService.DeletePersistentResource",
+          "service": {
+            "short_name": "PersistentResourceService",
+            "full_name": "google.cloud.aiplatform.v1.PersistentResourceService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_PersistentResourceService_UpdatePersistentResource_sync",
+      "title": "Snippet for the update_persistent_resource call in the PersistentResourceService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::PersistentResourceService::Client#update_persistent_resource.",
+      "file": "persistent_resource_service/update_persistent_resource.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_persistent_resource",
+        "full_name": "::Google::Cloud::AIPlatform::V1::PersistentResourceService::Client#update_persistent_resource",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::UpdatePersistentResourceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "PersistentResourceService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::PersistentResourceService::Client"
+        },
+        "method": {
+          "short_name": "UpdatePersistentResource",
+          "full_name": "google.cloud.aiplatform.v1.PersistentResourceService.UpdatePersistentResource",
+          "service": {
+            "short_name": "PersistentResourceService",
+            "full_name": "google.cloud.aiplatform.v1.PersistentResourceService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_PersistentResourceService_RebootPersistentResource_sync",
+      "title": "Snippet for the reboot_persistent_resource call in the PersistentResourceService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::PersistentResourceService::Client#reboot_persistent_resource.",
+      "file": "persistent_resource_service/reboot_persistent_resource.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "reboot_persistent_resource",
+        "full_name": "::Google::Cloud::AIPlatform::V1::PersistentResourceService::Client#reboot_persistent_resource",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::RebootPersistentResourceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "PersistentResourceService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::PersistentResourceService::Client"
+        },
+        "method": {
+          "short_name": "RebootPersistentResource",
+          "full_name": "google.cloud.aiplatform.v1.PersistentResourceService.RebootPersistentResource",
+          "service": {
+            "short_name": "PersistentResourceService",
+            "full_name": "google.cloud.aiplatform.v1.PersistentResourceService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
           "type": "FULL"
         }
       ]
