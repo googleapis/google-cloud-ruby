@@ -56,7 +56,7 @@ To configure a credentials file for an individual client initialization:
 ```ruby
 require "google/cloud/backupdr"
 
-client = Google::Cloud::BackupDR.backupdr do |config|
+client = Google::Cloud::Backupdr.backup_dr do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 ```
@@ -66,11 +66,11 @@ To configure a credentials file globally for all clients:
 ```ruby
 require "google/cloud/backupdr"
 
-Google::Cloud::BackupDR.configure do |config|
+Google::Cloud::Backupdr.configure do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 
-client = Google::Cloud::BackupDR.backupdr
+client = Google::Cloud::Backupdr.backup_dr
 ```
 
 ### Environment Variables
@@ -100,7 +100,7 @@ require "google/cloud/backupdr"
 
 ENV["GOOGLE_APPLICATION_CREDENTIALS"] = "path/to/credentialfile.json"
 
-client = Google::Cloud::BackupDR.backupdr
+client = Google::Cloud::Backupdr.backup_dr
 ```
 
 ### Local ADC file

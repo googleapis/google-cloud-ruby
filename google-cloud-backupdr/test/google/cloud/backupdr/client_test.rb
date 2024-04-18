@@ -22,7 +22,7 @@ require "gapic/common"
 require "gapic/grpc"
 require "gapic/rest"
 
-class Google::Cloud::BackupDR::ClientConstructionMinitest < Minitest::Test
+class Google::Cloud::Backupdr::ClientConstructionMinitest < Minitest::Test
   class DummyStub
     def endpoint
       "endpoint.example.com"
@@ -33,22 +33,22 @@ class Google::Cloud::BackupDR::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_backupdr_grpc
+  def test_backup_dr_grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::BackupDR.backupdr transport: :grpc do |config|
+      client = Google::Cloud::Backupdr.backup_dr transport: :grpc do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Cloud::BackupDR::V1::BackupDR::Client, client
+      assert_kind_of Google::Cloud::Backupdr::V1::BackupDR::Client, client
     end
   end
 
-  def test_backupdr_rest
+  def test_backup_dr_rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
-      client = Google::Cloud::BackupDR.backupdr transport: :rest do |config|
+      client = Google::Cloud::Backupdr.backup_dr transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
-      assert_kind_of Google::Cloud::BackupDR::V1::BackupDR::Rest::Client, client
+      assert_kind_of Google::Cloud::Backupdr::V1::BackupDR::Rest::Client, client
     end
   end
 end

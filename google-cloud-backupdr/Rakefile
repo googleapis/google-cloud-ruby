@@ -57,7 +57,7 @@ task :acceptance, :project, :keyfile do |t, args|
   if project.nil? || keyfile.nil?
     fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or GOOGLE_CLOUD_TEST_PROJECT=test123 GOOGLE_CLOUD_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
-  require "google/cloud/backupdr/v1/backupdr/credentials"
+  require "google/cloud/backup_dr/v1/backup_dr/credentials"
   ::Google::Cloud::BackupDR::V1::BackupDR::Credentials.env_vars.each do |path|
     ENV[path] = nil
   end

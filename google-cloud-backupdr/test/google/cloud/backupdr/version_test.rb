@@ -19,8 +19,8 @@
 require "helper"
 require "google/cloud/backupdr/version"
 
-class Google::Cloud::BackupDR::VersionMinitest < Minitest::Test
+class Google::Cloud::Backupdr::VersionMinitest < Minitest::Test
   def test_has_a_version
-    refute_nil Google::Cloud::BackupDR::VERSION
+    refute_nil Google::Cloud::Backupdr::VERSION
   end
 end

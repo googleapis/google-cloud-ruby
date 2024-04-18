@@ -44,12 +44,12 @@ end
 
 module Google
   module Cloud
-    module BackupDR
+    module Backupdr
       ##
       # Create a new client object for BackupDR.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::BackupDR::V1::BackupDR::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-backupdr-v1/latest/Google-Cloud-BackupDR-V1-BackupDR-Client)
+      # [Google::Cloud::Backupdr::V1::BackupDR::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-backupdr-v1/latest/Google-Cloud-Backupdr-V1-BackupDR-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the BackupDR service is
@@ -67,14 +67,14 @@ module Google
       # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.backupdr version: :v1, transport: :grpc, &block
+      def self.backup_dr version: :v1, transport: :grpc, &block
         require "google/cloud/backupdr/#{version.to_s.downcase}"
 
-        package_name = Google::Cloud::BackupDR
+        package_name = Google::Cloud::Backupdr
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        service_module = Google::Cloud::BackupDR.const_get(package_name).const_get(:BackupDR)
+        service_module = Google::Cloud::Backupdr.const_get(package_name).const_get(:BackupDR)
         service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
