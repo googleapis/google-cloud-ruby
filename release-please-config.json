@@ -179,6 +179,10 @@
       "component": "google-cloud-automl-v1beta1",
       "version_file": "lib/google/cloud/automl/v1beta1/version.rb"
     },
+    "google-cloud-backupdr": {
+      "component": "google-cloud-backupdr",
+      "version_file": "lib/google/cloud/backupdr/version.rb"
+    },
     "google-cloud-backupdr-v1": {
       "component": "google-cloud-backupdr-v1",
       "version_file": "lib/google/cloud/backupdr/v1/version.rb"
