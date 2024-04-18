@@ -39,7 +39,7 @@ module Google
         #     updated.
         # @!attribute [rw] description
         #   @return [::String]
-        #     User specified descriptive string for this BackupPlan.
+        #     Optional. User specified descriptive string for this BackupPlan.
         # @!attribute [rw] cluster
         #   @return [::String]
         #     Required. Immutable. The source cluster from which Backups will be created
@@ -49,13 +49,15 @@ module Google
         #     - `projects/*/zones/*/clusters/*`
         # @!attribute [rw] retention_policy
         #   @return [::Google::Cloud::GkeBackup::V1::BackupPlan::RetentionPolicy]
-        #     RetentionPolicy governs lifecycle of Backups created under this plan.
+        #     Optional. RetentionPolicy governs lifecycle of Backups created under this
+        #     plan.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     A set of custom labels supplied by user.
+        #     Optional. A set of custom labels supplied by user.
         # @!attribute [rw] backup_schedule
         #   @return [::Google::Cloud::GkeBackup::V1::BackupPlan::Schedule]
-        #     Defines a schedule for automatic Backup creation via this BackupPlan.
+        #     Optional. Defines a schedule for automatic Backup creation via this
+        #     BackupPlan.
         # @!attribute [r] etag
         #   @return [::String]
         #     Output only. `etag` is used for optimistic concurrency control as a way to
@@ -68,7 +70,7 @@ module Google
         #     will be applied to the same version of the resource.
         # @!attribute [rw] deactivated
         #   @return [::Boolean]
-        #     This flag indicates whether this BackupPlan has been deactivated.
+        #     Optional. This flag indicates whether this BackupPlan has been deactivated.
         #     Setting this field to True locks the BackupPlan such that no further
         #     updates will be allowed (except deletes), including the deactivated field
         #     itself. It also prevents any new Backups from being created via this
@@ -77,7 +79,7 @@ module Google
         #     Default: False
         # @!attribute [rw] backup_config
         #   @return [::Google::Cloud::GkeBackup::V1::BackupPlan::BackupConfig]
-        #     Defines the configuration of Backups created via this BackupPlan.
+        #     Optional. Defines the configuration of Backups created via this BackupPlan.
         # @!attribute [r] protected_pod_count
         #   @return [::Integer]
         #     Output only. The number of Kubernetes Pods backed up in the
@@ -92,6 +94,15 @@ module Google
         #   @return [::String]
         #     Output only. Human-readable description of why BackupPlan is in the current
         #     `state`
+        # @!attribute [r] rpo_risk_level
+        #   @return [::Integer]
+        #     Output only. A number that represents the current risk level of this
+        #     BackupPlan from RPO perspective with 1 being no risk and 5 being highest
+        #     risk.
+        # @!attribute [r] rpo_risk_reason
+        #   @return [::String]
+        #     Output only. Human-readable description of why the BackupPlan is in the
+        #     current rpo_risk_level and action items if any.
         class BackupPlan
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -99,7 +110,7 @@ module Google
           # RetentionPolicy defines a Backup retention policy for a BackupPlan.
           # @!attribute [rw] backup_delete_lock_days
           #   @return [::Integer]
-          #     Minimum age for Backups created via this BackupPlan (in days).
+          #     Optional. Minimum age for Backups created via this BackupPlan (in days).
           #     This field MUST be an integer value between 0-90 (inclusive).
           #     A Backup created under this BackupPlan will NOT be deletable until it
           #     reaches Backup's (create_time + backup_delete_lock_days).
@@ -110,29 +121,30 @@ module Google
           #     Default: 0 (no delete blocking)
           # @!attribute [rw] backup_retain_days
           #   @return [::Integer]
-          #     The default maximum age of a Backup created via this BackupPlan.
-          #     This field MUST be an integer value >= 0 and <= 365.
-          #     If specified, a Backup created under this BackupPlan will be
-          #     automatically deleted after its age reaches (create_time +
-          #     backup_retain_days).
-          #     If not specified, Backups created under this BackupPlan will NOT be
-          #     subject to automatic deletion.
-          #     Updating this field does NOT affect existing Backups under it. Backups
-          #     created AFTER a successful update will automatically pick up the new
-          #     value.
-          #     NOTE: backup_retain_days must be >=
+          #     Optional. The default maximum age of a Backup created via this
+          #     BackupPlan. This field MUST be an integer value >= 0 and <= 365. If
+          #     specified, a Backup created under this BackupPlan will be automatically
+          #     deleted after its age reaches (create_time + backup_retain_days). If not
+          #     specified, Backups created under this BackupPlan will NOT be subject to
+          #     automatic deletion. Updating this field does NOT affect existing Backups
+          #     under it. Backups created AFTER a successful update will automatically
+          #     pick up the new value. NOTE: backup_retain_days must be >=
           #     {::Google::Cloud::GkeBackup::V1::BackupPlan::RetentionPolicy#backup_delete_lock_days backup_delete_lock_days}.
           #     If
           #     {::Google::Cloud::GkeBackup::V1::BackupPlan::Schedule#cron_schedule cron_schedule}
           #     is defined, then this must be
-          #     <= 360 * the creation interval.
+          #     <= 360 * the creation interval. If
+          #     {::Google::Cloud::GkeBackup::V1::BackupPlan::Schedule#rpo_config rpo_config} is
+          #     defined, then this must be
+          #     <= 360 * [target_rpo_minutes][Schedule.rpo_config.target_rpo_minutes] /
+          #     (1440minutes/day).
           #
           #     Default: 0 (no automatic deletion)
           # @!attribute [rw] locked
           #   @return [::Boolean]
-          #     This flag denotes whether the retention policy of this BackupPlan is
-          #     locked.  If set to True, no further update is allowed on this policy,
-          #     including the `locked` field itself.
+          #     Optional. This flag denotes whether the retention policy of this
+          #     BackupPlan is locked.  If set to True, no further update is allowed on
+          #     this policy, including the `locked` field itself.
           #
           #     Default: False
           class RetentionPolicy
@@ -144,19 +156,37 @@ module Google
           # via this BackupPlan.
           # @!attribute [rw] cron_schedule
           #   @return [::String]
-          #     A standard [cron](https://wikipedia.com/wiki/cron) string that defines a
-          #     repeating schedule for creating Backups via this BackupPlan. If this is
-          #     defined, then
+          #     Optional. A standard [cron](https://wikipedia.com/wiki/cron) string that
+          #     defines a repeating schedule for creating Backups via this BackupPlan.
+          #     This is mutually exclusive with the
+          #     {::Google::Cloud::GkeBackup::V1::BackupPlan::Schedule#rpo_config rpo_config}
+          #     field since at most one schedule can be defined for a BackupPlan. If this
+          #     is defined, then
           #     {::Google::Cloud::GkeBackup::V1::BackupPlan::RetentionPolicy#backup_retain_days backup_retain_days}
           #     must also be defined.
           #
           #     Default (empty): no automatic backup creation will occur.
           # @!attribute [rw] paused
           #   @return [::Boolean]
-          #     This flag denotes whether automatic Backup creation is paused for this
-          #     BackupPlan.
+          #     Optional. This flag denotes whether automatic Backup creation is paused
+          #     for this BackupPlan.
           #
           #     Default: False
+          # @!attribute [rw] rpo_config
+          #   @return [::Google::Cloud::GkeBackup::V1::RpoConfig]
+          #     Optional. Defines the RPO schedule configuration for this BackupPlan.
+          #     This is mutually exclusive with the
+          #     {::Google::Cloud::GkeBackup::V1::BackupPlan::Schedule#cron_schedule cron_schedule}
+          #     field since at most one schedule can be defined for a BackupPLan. If this
+          #     is defined, then
+          #     {::Google::Cloud::GkeBackup::V1::BackupPlan::RetentionPolicy#backup_retain_days backup_retain_days}
+          #     must also be defined.
+          #
+          #     Default (empty): no automatic backup creation will occur.
+          # @!attribute [r] next_scheduled_backup_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. Start time of next scheduled backup under this BackupPlan by
+          #     either cron_schedule or rpo config.
           class Schedule
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -176,21 +206,21 @@ module Google
           #     ProtectedApplications.
           # @!attribute [rw] include_volume_data
           #   @return [::Boolean]
-          #     This flag specifies whether volume data should be backed up when
-          #     PVCs are included in the scope of a Backup.
+          #     Optional. This flag specifies whether volume data should be backed up
+          #     when PVCs are included in the scope of a Backup.
           #
           #     Default: False
           # @!attribute [rw] include_secrets
           #   @return [::Boolean]
-          #     This flag specifies whether Kubernetes Secret resources should be
-          #     included when they fall into the scope of Backups.
+          #     Optional. This flag specifies whether Kubernetes Secret resources should
+          #     be included when they fall into the scope of Backups.
           #
           #     Default: False
           # @!attribute [rw] encryption_key
           #   @return [::Google::Cloud::GkeBackup::V1::EncryptionKey]
-          #     This defines a customer managed encryption key that will be used to
-          #     encrypt the "config" portion (the Kubernetes resources) of Backups
-          #     created via this plan.
+          #     Optional. This defines a customer managed encryption key that will be
+          #     used to encrypt the "config" portion (the Kubernetes resources) of
+          #     Backups created via this plan.
           #
           #     Default (empty): Config backup artifacts will not be encrypted.
           class BackupConfig
@@ -229,6 +259,72 @@ module Google
 
             # The BackupPlan is in the process of being deleted.
             DELETING = 6
+          end
+        end
+
+        # Defines RPO scheduling configuration for automatically creating
+        # Backups via this BackupPlan.
+        # @!attribute [rw] target_rpo_minutes
+        #   @return [::Integer]
+        #     Required. Defines the target RPO for the BackupPlan in minutes, which means
+        #     the target maximum data loss in time that is acceptable for this
+        #     BackupPlan. This must be at least 60, i.e., 1 hour, and at most 86400,
+        #     i.e., 60 days.
+        # @!attribute [rw] exclusion_windows
+        #   @return [::Array<::Google::Cloud::GkeBackup::V1::ExclusionWindow>]
+        #     Optional. User specified time windows during which backup can NOT happen
+        #     for this BackupPlan - backups should start and finish outside of any given
+        #     exclusion window. Note: backup jobs will be scheduled to start and
+        #     finish outside the duration of the window as much as possible, but
+        #     running jobs will not get canceled when it runs into the window.
+        #     All the time and date values in exclusion_windows entry in the API are in
+        #     UTC.
+        #     We only allow <=1 recurrence (daily or weekly) exclusion window for a
+        #     BackupPlan while no restriction on number of single occurrence
+        #     windows.
+        class RpoConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Defines a time window during which no backup should
+        # happen. All time and date are in UTC.
+        # @!attribute [rw] start_time
+        #   @return [::Google::Type::TimeOfDay]
+        #     Required. Specifies the start time of the window using time of the day in
+        #     UTC.
+        # @!attribute [rw] duration
+        #   @return [::Google::Protobuf::Duration]
+        #     Required. Specifies duration of the window. Restrictions for duration based
+        #     on the recurrence type to allow some time for backup to happen:
+        #     - single_occurrence_date:  no restriction, but UI may warn about this when
+        #     duration >= target RPO
+        #     - daily window: duration < 24 hours
+        #     - weekly window:
+        #       - days of week includes all seven days of a week: duration < 24 hours
+        #       - all other weekly window: duration < 168 hours (i.e., 24 * 7 hours)
+        # @!attribute [rw] single_occurrence_date
+        #   @return [::Google::Type::Date]
+        #     No recurrence. The exclusion window occurs only once and on this
+        #     date in UTC.
+        # @!attribute [rw] daily
+        #   @return [::Boolean]
+        #     The exclusion window occurs every day if set to "True".
+        #     Specifying this field to "False" is an error.
+        # @!attribute [rw] days_of_week
+        #   @return [::Google::Cloud::GkeBackup::V1::ExclusionWindow::DayOfWeekList]
+        #     The exclusion window occurs on these days of each week in UTC.
+        class ExclusionWindow
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Holds repeated DaysOfWeek values as a container.
+          # @!attribute [rw] days_of_week
+          #   @return [::Array<::Google::Type::DayOfWeek>]
+          #     Optional. A list of days of week.
+          class DayOfWeekList
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
       end

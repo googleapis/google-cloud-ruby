@@ -82,6 +82,8 @@ module Google
             rpc :ListVolumeRestores, ::Google::Cloud::GkeBackup::V1::ListVolumeRestoresRequest, ::Google::Cloud::GkeBackup::V1::ListVolumeRestoresResponse
             # Retrieve the details of a single VolumeRestore.
             rpc :GetVolumeRestore, ::Google::Cloud::GkeBackup::V1::GetVolumeRestoreRequest, ::Google::Cloud::GkeBackup::V1::VolumeRestore
+            # Retrieve the link to the backupIndex.
+            rpc :GetBackupIndexDownloadUrl, ::Google::Cloud::GkeBackup::V1::GetBackupIndexDownloadUrlRequest, ::Google::Cloud::GkeBackup::V1::GetBackupIndexDownloadUrlResponse
           end
 
           Stub = Service.rpc_stub_class
