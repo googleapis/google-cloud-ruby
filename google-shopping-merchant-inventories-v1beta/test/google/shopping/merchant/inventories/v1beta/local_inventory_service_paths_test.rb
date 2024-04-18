@@ -44,4 +44,16 @@ class ::Google::Shopping::Merchant::Inventories::V1beta::LocalInventoryService::
       assert_equal "accounts/value0/products/value1/localInventories/value2", path
     end
   end
+
+  def test_product_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Shopping::Merchant::Inventories::V1beta::LocalInventoryService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.product_path account: "value0", product: "value1"
+      assert_equal "accounts/value0/products/value1", path
+    end
+  end
 end

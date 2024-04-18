@@ -38,10 +38,11 @@ module Google
           #     if set by the client.
           # @!attribute [rw] store_code
           #   @return [::String]
-          #     Required. Store code (the store ID from your Business Profile) of the
-          #     physical store the product is sold in. See the [Local product inventory
-          #     feed specification](https://support.google.com/merchants/answer/3061342)
-          #     for more information.
+          #     Required. Immutable. Store code (the store ID from your Business Profile)
+          #     of the physical store the product is sold in. See the [Local product
+          #     inventory feed
+          #     specification](https://support.google.com/merchants/answer/3061342) for
+          #     more information.
           # @!attribute [rw] price
           #   @return [::Google::Shopping::Type::Price]
           #     Price of the product at this store.

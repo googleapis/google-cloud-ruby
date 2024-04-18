@@ -39,7 +39,7 @@ module Google
           #     if set by the client.
           # @!attribute [rw] region
           #   @return [::String]
-          #     Required. ID of the region for this
+          #     Required. Immutable. ID of the region for this
           #     `RegionalInventory` resource. See the [Regional availability and
           #     pricing](https://support.google.com/merchants/answer/9698880) for more
           #     details.

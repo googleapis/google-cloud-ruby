@@ -44,6 +44,23 @@ module Google
                 "accounts/#{account}/products/#{product}/localInventories/#{store_code}"
               end
 
+              ##
+              # Create a fully-qualified Product resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `accounts/{account}/products/{product}`
+              #
+              # @param account [String]
+              # @param product [String]
+              #
+              # @return [::String]
+              def product_path account:, product:
+                raise ::ArgumentError, "account cannot contain /" if account.to_s.include? "/"
+
+                "accounts/#{account}/products/#{product}"
+              end
+
               extend self
             end
           end
