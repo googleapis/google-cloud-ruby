@@ -1,5 +1,14 @@
 # Release History
 
+### 1.50.0 (2024-04-19)
+
+#### Features
+
+* Add support for soft deletion ([#25340](https://github.com/googleapis/google-cloud-ruby/issues/25340)) 
+#### Bug Fixes
+
+* Set configured univer_domain and endpoint when initializing through Service ([#25665](https://github.com/googleapis/google-cloud-ruby/issues/25665)) 
+
 ### 1.49.0 (2024-02-21)
 
 #### Features
