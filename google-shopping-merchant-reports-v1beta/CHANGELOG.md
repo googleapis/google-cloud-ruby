@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.5.0 (2024-04-19)
+
+#### Features
+
+* Support click potential in reports ([#25446](https://github.com/googleapis/google-cloud-ruby/issues/25446)) 
+
 ### 0.4.0 (2024-02-26)
 
 #### Features
