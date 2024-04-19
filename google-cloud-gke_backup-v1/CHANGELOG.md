@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.9.0 (2024-04-19)
+
+#### Features
+
+* Support smart scheduling and backup indexing ([#25437](https://github.com/googleapis/google-cloud-ruby/issues/25437)) 
+#### Documentation
+
+* Update retention policy and cron schedule comment to include new constraints from smart scheduling 
+
 ### 0.8.0 (2024-02-26)
 
 #### Features
