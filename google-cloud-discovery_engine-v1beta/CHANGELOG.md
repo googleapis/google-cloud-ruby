@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.11.0 (2024-04-19)
+
+#### Features
+
+* Support advanced search boosting and advanced engine model 
+* Support answer generation API 
+* Support data import from Cloud Spanner, BigTable, SQL and Firestore ([#25671](https://github.com/googleapis/google-cloud-ruby/issues/25671)) 
+* Support standalone grounding and standalone ranking 
+
 ### 0.10.0 (2024-03-18)
 
 #### Features
