@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.9.1 (2024-04-19)
+
+#### Documentation
+
+* in google.cloud.kms.v1.PublicKey, pem field is always populated ([#25686](https://github.com/googleapis/google-cloud-ruby/issues/25686)) 
+
 ### 0.9.0 (2024-02-26)
 
 #### Features
