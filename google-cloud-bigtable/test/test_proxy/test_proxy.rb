@@ -171,20 +171,10 @@ class TestProxyServer < tp::CloudBigtableV2TestProxy::Service
                    .table(req.table_name)
                    .read_row(req.row_key)
 
-    if result.nil?
-      # TODO(meagar): Is this the right response?
-      #   It seems to allow the tests to pass...
-      tp::RowResult.new(
-        status: not_found_status,
-        row: bt::V2::Row.new(key: req.row_key)
-      )
-    else
-      tp::RowResult.new(
-        # The status is not available from the Ruby client library
-        status: ok_status,
-        row: row_to_v2_row(result)
-      )
-    end
+    tp::RowResult.new(
+      status: ok_status,
+      row: result.nil? ? bt::V2::Row.new(key: req.row_key) : row_to_v2_row(result)
+    )
   rescue Google::Cloud::Error => e
     LOGGER.info "ReadRow failed: Caught #{e}"
     abort "Unexpected codepath reached, populate the error handler for ReadRow"
