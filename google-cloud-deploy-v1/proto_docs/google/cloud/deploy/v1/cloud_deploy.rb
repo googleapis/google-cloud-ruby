@@ -1227,6 +1227,9 @@ module Google
         # @!attribute [rw] google_cloud_storage
         #   @return [::Google::Cloud::Deploy::V1::SkaffoldModules::SkaffoldGCSSource]
         #     Cloud Storage bucket containing the Skaffold Config modules.
+        # @!attribute [rw] google_cloud_build_repo
+        #   @return [::Google::Cloud::Deploy::V1::SkaffoldModules::SkaffoldGCBRepoSource]
+        #     Cloud Build V2 repository containing the Skaffold Config modules.
         class SkaffoldModules
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1240,7 +1243,7 @@ module Google
           #     Optional. Relative path from the repository root to the Skaffold file.
           # @!attribute [rw] ref
           #   @return [::String]
-          #     Optional. Git ref the package should be cloned from.
+          #     Optional. Git branch or tag to use when cloning the repository.
           class SkaffoldGitSource
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1256,6 +1259,24 @@ module Google
           #   @return [::String]
           #     Optional. Relative path from the source to the Skaffold file.
           class SkaffoldGCSSource
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Cloud Build V2 Repository containing Skaffold Configs.
+          # @!attribute [rw] repository
+          #   @return [::String]
+          #     Required. Name of the Cloud Build V2 Repository.
+          #     Format is
+          #     projects/\\{project}/locations/\\{location}/connections/\\{connection}/repositories/\\{repository}.
+          # @!attribute [rw] path
+          #   @return [::String]
+          #     Optional. Relative path from the repository root to the Skaffold Config
+          #     file.
+          # @!attribute [rw] ref
+          #   @return [::String]
+          #     Optional. Branch or tag to use when cloning the repository.
+          class SkaffoldGCBRepoSource
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
