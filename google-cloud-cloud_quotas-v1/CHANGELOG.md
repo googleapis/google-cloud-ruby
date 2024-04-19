@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.3.3 (2024-04-19)
+
+#### Documentation
+
+* Updates to contact email comments in QuotaPreference ([#25467](https://github.com/googleapis/google-cloud-ruby/issues/25467)) 
+
 ### 0.3.2 (2024-04-15)
 
 #### Documentation
