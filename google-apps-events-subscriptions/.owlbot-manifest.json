@@ -1,0 +1,25 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".toys.rb",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-apps-events-subscriptions.gemspec",
+    "lib/google-apps-events-subscriptions.rb",
+    "lib/google/apps/events/subscriptions.rb",
+    "lib/google/apps/events/subscriptions/version.rb",
+    "test/google/apps/events/subscriptions/client_test.rb",
+    "test/google/apps/events/subscriptions/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml"
+  ]
+}
