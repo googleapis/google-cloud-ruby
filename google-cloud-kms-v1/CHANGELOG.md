@@ -1,5 +1,11 @@
 # Release History
 
+### 0.25.1 (2024-04-19)
+
+#### Documentation
+
+* Clarify PEM format field in google.cloud.kms.v1.PublicKey is always populated ([#25685](https://github.com/googleapis/google-cloud-ruby/issues/25685)) 
+
 ### 0.25.0 (2024-02-26)
 
 #### Features
