@@ -4,7 +4,7 @@
 
 #### Documentation
 
-* in google.cloud.kms.v1.PublicKey, pem field is always populated ([#25685](https://github.com/googleapis/google-cloud-ruby/issues/25685)) 
+* Clarify PEM format field in google.cloud.kms.v1.PublicKey is always populated ([#25685](https://github.com/googleapis/google-cloud-ruby/issues/25685)) 
 
 ### 0.25.0 (2024-02-26)
 
