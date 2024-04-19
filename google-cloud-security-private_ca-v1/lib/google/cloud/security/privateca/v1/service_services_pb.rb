@@ -111,7 +111,7 @@ module Google
               rpc :DeleteCaPool, ::Google::Cloud::Security::PrivateCA::V1::DeleteCaPoolRequest, ::Google::Longrunning::Operation
               # FetchCaCerts returns the current trust anchor for the
               # [CaPool][google.cloud.security.privateca.v1.CaPool]. This will include CA
-              # certificate chains for all Certificate Authorities in the ENABLED,
+              # certificate chains for all certificate authorities in the ENABLED,
               # DISABLED, or STAGED states.
               rpc :FetchCaCerts, ::Google::Cloud::Security::PrivateCA::V1::FetchCaCertsRequest, ::Google::Cloud::Security::PrivateCA::V1::FetchCaCertsResponse
               # Returns a
