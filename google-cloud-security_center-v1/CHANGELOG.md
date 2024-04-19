@@ -1,5 +1,11 @@
 # Release History
 
+### 0.40.0 (2024-04-19)
+
+#### Features
+
+* Support Cloud Armor in findings ([#25449](https://github.com/googleapis/google-cloud-ruby/issues/25449)) 
+
 ### 0.39.0 (2024-03-18)
 
 #### Features
