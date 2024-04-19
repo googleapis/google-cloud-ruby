@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.10.0 (2024-04-19)
+
+#### Features
+
+* Add GetSettings and UpdateSettings at the project-level 
+
 ### 0.9.0 (2024-02-26)
 
 #### Features
