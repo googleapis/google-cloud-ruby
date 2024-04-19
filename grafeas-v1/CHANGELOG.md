@@ -1,5 +1,11 @@
 # Release History
 
+### 0.16.1 (2024-04-19)
+
+#### Bug Fixes
+
+* Set the transport of grafeas back to grpc only ([#25439](https://github.com/googleapis/google-cloud-ruby/issues/25439)) 
+
 ### 0.16.0 (2024-03-18)
 
 #### Features
