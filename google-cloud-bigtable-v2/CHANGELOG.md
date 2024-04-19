@@ -1,5 +1,11 @@
 # Release History
 
+### 0.21.0 (2024-04-19)
+
+#### Features
+
+* Support client side metrics feature flag ([#25448](https://github.com/googleapis/google-cloud-ruby/issues/25448)) 
+
 ### 0.20.0 (2024-03-10)
 
 #### Features
