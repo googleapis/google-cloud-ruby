@@ -25,4 +25,5 @@ Gem::Specification.new do |gem|
   gem.add_dependency "google-cloud-core", "~> 1.6"
   gem.add_dependency "google-cloud-security_center-v1", ">= 0.34", "< 2.a"
   gem.add_dependency "google-cloud-security_center-v1p1beta1", ">= 0.13", "< 2.a"
+  gem.add_dependency "google-cloud-security_center-v2", ">= 0.0", "< 2.a"
 end

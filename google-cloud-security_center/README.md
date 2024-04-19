@@ -17,7 +17,8 @@ constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-security_center-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-security_center-v1/latest),
-[google-cloud-security_center-v1p1beta1](https://cloud.google.com/ruby/docs/reference/google-cloud-security_center-v1p1beta1/latest).
+[google-cloud-security_center-v1p1beta1](https://cloud.google.com/ruby/docs/reference/google-cloud-security_center-v1p1beta1/latest),
+[google-cloud-security_center-v2](https://cloud.google.com/ruby/docs/reference/google-cloud-security_center-v2/latest).
 
 See also the [Product Documentation](https://cloud.google.com/security-command-center)
 for more usage information.
