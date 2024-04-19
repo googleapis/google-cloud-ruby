@@ -4,7 +4,7 @@
 
 #### Features
 
-* add support for soft delete ([#25340](https://github.com/googleapis/google-cloud-ruby/issues/25340)) 
+* Add support for soft deletion ([#25340](https://github.com/googleapis/google-cloud-ruby/issues/25340)) 
 #### Bug Fixes
 
 * Set configured univer_domain and endpoint when initializing through Service ([#25665](https://github.com/googleapis/google-cloud-ruby/issues/25665)) 
