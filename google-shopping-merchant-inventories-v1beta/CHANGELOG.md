@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.4.0 (2024-04-19)
+
+#### Features
+
+* Fix inventories sub-API path for LocalInventory and RegionalInventory ([#25447](https://github.com/googleapis/google-cloud-ruby/issues/25447)) 
+
 ### 0.3.0 (2024-02-26)
 
 #### Features
