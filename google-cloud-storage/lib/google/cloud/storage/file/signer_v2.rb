@@ -60,7 +60,7 @@ module Google
           ##
           # The external url to the file.
           def ext_url
-            root_url = @service.service.root_url.chomp("/")
+            root_url = @service.service.root_url.chomp "/"
             "#{root_url}#{ext_path}"
           end
 
