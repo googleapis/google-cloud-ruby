@@ -1,5 +1,13 @@
 # Changelog
 
+### 0.6.0 (2024-04-19)
+
+#### Features
+
+* Promote various services to client libraries (e.g. recommendation, blending & healthcare search) ([#25672](https://github.com/googleapis/google-cloud-ruby/issues/25672)) 
+* Support boosting on multi-turn searches 
+* Support data import from Cloud Spanner, BigTable, SQL and Firestore 
+
 ### 0.5.0 (2024-02-26)
 
 #### Features
