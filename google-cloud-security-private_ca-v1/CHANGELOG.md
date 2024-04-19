@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.13.0 (2024-04-19)
+
+#### Features
+
+* Support encoding format in CaPool resource ([#25465](https://github.com/googleapis/google-cloud-ruby/issues/25465)) 
+
 ### 0.12.0 (2024-03-18)
 
 #### Features
