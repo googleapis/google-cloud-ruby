@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.21.0 (2024-04-19)
+
+#### Features
+
+* Support FoundationModelTuningOptions ([#25687](https://github.com/googleapis/google-cloud-ruby/issues/25687)) 
+#### Documentation
+
+* Minor updates 
+
 ### 0.20.0 (2024-02-26)
 
 #### Features
