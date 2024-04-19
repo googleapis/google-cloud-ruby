@@ -1,5 +1,11 @@
 # Release History
 
+### 0.16.0 (2024-04-19)
+
+#### Features
+
+* Support FulfillmentPeriod expectation to instance creations triggered via On-Demand Capacity Feature ([#25471](https://github.com/googleapis/google-cloud-ruby/issues/25471)) 
+
 ### 0.15.0 (2024-03-04)
 
 #### Features
