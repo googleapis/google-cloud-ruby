@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.4.0 (2024-04-19)
+
+#### Features
+
+* Support Unified Metastore and CRUD Metastore (e.g. EntryGroup, AspectType, EntryType) ([#25408](https://github.com/googleapis/google-cloud-ruby/issues/25408)) 
+
 ### 1.3.0 (2024-02-26)
 
 #### Features
