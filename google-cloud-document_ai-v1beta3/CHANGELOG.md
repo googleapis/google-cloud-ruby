@@ -1,5 +1,11 @@
 # Release History
 
+### 0.34.0 (2024-04-19)
+
+#### Features
+
+* Support a new Layout Processor in Document AI ([#25466](https://github.com/googleapis/google-cloud-ruby/issues/25466)) 
+
 ### 0.33.1 (2024-03-18)
 
 #### Documentation
