@@ -288,6 +288,36 @@ module Google
       end
 
       ##
+      # Create a new client object for GenAiTuningService.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::AIPlatform::V1::GenAiTuningService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-ai_platform-v1/latest/Google-Cloud-AIPlatform-V1-GenAiTuningService-Client)
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the GenAiTuningService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # ## About GenAiTuningService
+      #
+      # A service for creating and managing GenAI Tuning Jobs.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.gen_ai_tuning_service version: :v1, &block
+        require "google/cloud/ai_platform/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::AIPlatform
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:GenAiTuningService)
+        service_module.const_get(:Client).new(&block)
+      end
+
+      ##
       # Create a new client object for IndexEndpointService.
       #
       # By default, this returns an instance of
@@ -586,6 +616,66 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:ModelGardenService)
+        service_module.const_get(:Client).new(&block)
+      end
+
+      ##
+      # Create a new client object for NotebookService.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::AIPlatform::V1::NotebookService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-ai_platform-v1/latest/Google-Cloud-AIPlatform-V1-NotebookService-Client)
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the NotebookService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # ## About NotebookService
+      #
+      # The interface for Vertex Notebook service (a.k.a. Colab on Workbench).
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.notebook_service version: :v1, &block
+        require "google/cloud/ai_platform/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::AIPlatform
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:NotebookService)
+        service_module.const_get(:Client).new(&block)
+      end
+
+      ##
+      # Create a new client object for PersistentResourceService.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::AIPlatform::V1::PersistentResourceService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-ai_platform-v1/latest/Google-Cloud-AIPlatform-V1-PersistentResourceService-Client)
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the PersistentResourceService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # ## About PersistentResourceService
+      #
+      # A service for managing Vertex AI's machine learning PersistentResource.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.persistent_resource_service version: :v1, &block
+        require "google/cloud/ai_platform/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::AIPlatform
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:PersistentResourceService)
         service_module.const_get(:Client).new(&block)
       end
 
