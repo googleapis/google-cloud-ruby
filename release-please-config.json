@@ -1207,6 +1207,10 @@
       "component": "google-cloud-security_center-v1p1beta1",
       "version_file": "lib/google/cloud/security_center/v1p1beta1/version.rb"
     },
+    "google-cloud-security_center-v2": {
+      "component": "google-cloud-security_center-v2",
+      "version_file": "lib/google/cloud/security_center/v2/version.rb"
+    },
     "google-cloud-service_control": {
       "component": "google-cloud-service_control",
       "version_file": "lib/google/cloud/service_control/version.rb"
