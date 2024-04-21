@@ -26,8 +26,8 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the project associated with the
-        #     {::Google::Cloud::SecretManager::V1::Secret Secrets}, in the format
-        #     `projects/*`.
+        #     {::Google::Cloud::SecretManager::V1::Secret Secrets}, in the format `projects/*`
+        #     or `projects/*/locations/*`
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. The maximum number of results to be returned in a single page. If
@@ -62,7 +62,10 @@ module Google
         #     to retrieve the next page.
         # @!attribute [rw] total_size
         #   @return [::Integer]
-        #     The total number of {::Google::Cloud::SecretManager::V1::Secret Secrets}.
+        #     The total number of {::Google::Cloud::SecretManager::V1::Secret Secrets} but 0
+        #     when the
+        #     {::Google::Cloud::SecretManager::V1::ListSecretsRequest#filter ListSecretsRequest.filter}
+        #     field is set.
         class ListSecretsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -73,7 +76,8 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the project to associate with the
-        #     {::Google::Cloud::SecretManager::V1::Secret Secret}, in the format `projects/*`.
+        #     {::Google::Cloud::SecretManager::V1::Secret Secret}, in the format `projects/*`
+        #     or `projects/*/locations/*`.
         # @!attribute [rw] secret_id
         #   @return [::String]
         #     Required. This must be unique within the project.
@@ -97,7 +101,7 @@ module Google
         #     Required. The resource name of the
         #     {::Google::Cloud::SecretManager::V1::Secret Secret} to associate with the
         #     {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} in the format
-        #     `projects/*/secrets/*`.
+        #     `projects/*/secrets/*` or `projects/*/locations/*/secrets/*`.
         # @!attribute [rw] payload
         #   @return [::Google::Cloud::SecretManager::V1::SecretPayload]
         #     Required. The secret payload of the
@@ -113,7 +117,7 @@ module Google
         #   @return [::String]
         #     Required. The resource name of the
         #     {::Google::Cloud::SecretManager::V1::Secret Secret}, in the format
-        #     `projects/*/secrets/*`.
+        #     `projects/*/secrets/*` or `projects/*/locations/*/secrets/*`.
         class GetSecretRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -126,7 +130,7 @@ module Google
         #     Required. The resource name of the
         #     {::Google::Cloud::SecretManager::V1::Secret Secret} associated with the
         #     {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersions} to list, in
-        #     the format `projects/*/secrets/*`.
+        #     the format `projects/*/secrets/*` or `projects/*/locations/*/secrets/*`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. The maximum number of results to be returned in a single page. If
@@ -162,7 +166,10 @@ module Google
         # @!attribute [rw] total_size
         #   @return [::Integer]
         #     The total number of
-        #     {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersions}.
+        #     {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersions} but 0 when
+        #     the
+        #     {::Google::Cloud::SecretManager::V1::ListSecretsRequest#filter ListSecretsRequest.filter}
+        #     field is set.
         class ListSecretVersionsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -174,10 +181,13 @@ module Google
         #   @return [::String]
         #     Required. The resource name of the
         #     {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} in the format
-        #     `projects/*/secrets/*/versions/*`.
+        #     `projects/*/secrets/*/versions/*` or
+        #     `projects/*/locations/*/secrets/*/versions/*`.
         #
-        #     `projects/*/secrets/*/versions/latest` is an alias to the most recently
-        #     created {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}.
+        #     `projects/*/secrets/*/versions/latest` or
+        #     `projects/*/locations/*/secrets/*/versions/latest` is an alias to the most
+        #     recently created
+        #     {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}.
         class GetSecretVersionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -203,10 +213,13 @@ module Google
         #   @return [::String]
         #     Required. The resource name of the
         #     {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} in the format
-        #     `projects/*/secrets/*/versions/*`.
+        #     `projects/*/secrets/*/versions/*` or
+        #     `projects/*/locations/*/secrets/*/versions/*`.
         #
-        #     `projects/*/secrets/*/versions/latest` is an alias to the most recently
-        #     created {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}.
+        #     `projects/*/secrets/*/versions/latest` or
+        #     `projects/*/locations/*/secrets/*/versions/latest` is an alias to the most
+        #     recently created
+        #     {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}.
         class AccessSecretVersionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -218,7 +231,8 @@ module Google
         #   @return [::String]
         #     The resource name of the
         #     {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} in the format
-        #     `projects/*/secrets/*/versions/*`.
+        #     `projects/*/secrets/*/versions/*` or
+        #     `projects/*/locations/*/secrets/*/versions/*`.
         # @!attribute [rw] payload
         #   @return [::Google::Cloud::SecretManager::V1::SecretPayload]
         #     Secret payload
@@ -250,7 +264,8 @@ module Google
         #   @return [::String]
         #     Required. The resource name of the
         #     {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} to disable in
-        #     the format `projects/*/secrets/*/versions/*`.
+        #     the format `projects/*/secrets/*/versions/*` or
+        #     `projects/*/locations/*/secrets/*/versions/*`.
         # @!attribute [rw] etag
         #   @return [::String]
         #     Optional. Etag of the
@@ -268,7 +283,8 @@ module Google
         #   @return [::String]
         #     Required. The resource name of the
         #     {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} to enable in
-        #     the format `projects/*/secrets/*/versions/*`.
+        #     the format `projects/*/secrets/*/versions/*` or
+        #     `projects/*/locations/*/secrets/*/versions/*`.
         # @!attribute [rw] etag
         #   @return [::String]
         #     Optional. Etag of the
@@ -286,7 +302,8 @@ module Google
         #   @return [::String]
         #     Required. The resource name of the
         #     {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} to destroy in
-        #     the format `projects/*/secrets/*/versions/*`.
+        #     the format `projects/*/secrets/*/versions/*` or
+        #     `projects/*/locations/*/secrets/*/versions/*`.
         # @!attribute [rw] etag
         #   @return [::String]
         #     Optional. Etag of the

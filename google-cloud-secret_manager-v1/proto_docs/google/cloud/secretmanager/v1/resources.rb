@@ -34,7 +34,7 @@ module Google
         #     `projects/*/secrets/*`.
         # @!attribute [rw] replication
         #   @return [::Google::Cloud::SecretManager::V1::Replication]
-        #     Required. Immutable. The replication policy of the secret data attached to
+        #     Optional. Immutable. The replication policy of the secret data attached to
         #     the {::Google::Cloud::SecretManager::V1::Secret Secret}.
         #
         #     The replication policy cannot be changed after the Secret has been created.
@@ -88,7 +88,7 @@ module Google
         #     No more than 50 aliases can be assigned to a given secret.
         #
         #     Version-Alias pairs will be viewable via GetSecret and modifiable via
-        #     UpdateSecret. At launch access by alias will only be supported on
+        #     UpdateSecret. Access by alias is only be supported on
         #     GetSecretVersion and AccessSecretVersion.
         # @!attribute [rw] annotations
         #   @return [::Google::Protobuf::Map{::String => ::String}]
@@ -104,6 +104,25 @@ module Google
         #     alphanumerics in between these symbols.
         #
         #     The total size of annotation keys and values must be less than 16KiB.
+        # @!attribute [rw] version_destroy_ttl
+        #   @return [::Google::Protobuf::Duration]
+        #     Optional. Secret Version TTL after destruction request
+        #
+        #     This is a part of the Delayed secret version destroy feature.
+        #     For secret with TTL>0, version destruction doesn't happen immediately
+        #     on calling destroy instead the version goes to a disabled state and
+        #     destruction happens after the TTL expires.
+        # @!attribute [rw] customer_managed_encryption
+        #   @return [::Google::Cloud::SecretManager::V1::CustomerManagedEncryption]
+        #     Optional. The customer-managed encryption configuration of the Regionalised
+        #     Secrets. If no configuration is provided, Google-managed default encryption
+        #     is used.
+        #
+        #     Updates to the {::Google::Cloud::SecretManager::V1::Secret Secret} encryption
+        #     configuration only apply to
+        #     {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersions} added
+        #     afterwards. They do not apply retroactively to existing
+        #     {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersions}.
         class Secret
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -177,6 +196,20 @@ module Google
         #     {::Google::Cloud::SecretManager::V1::SecretManagerService::Client SecretManagerService}
         #     on
         #     {::Google::Cloud::SecretManager::V1::SecretManagerService::Client#add_secret_version SecretManagerService.AddSecretVersion}.
+        # @!attribute [r] scheduled_destroy_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Optional. Output only. Scheduled destroy time for secret version.
+        #     This is a part of the Delayed secret version destroy feature. For a
+        #     Secret with a valid version destroy TTL, when a secert version is
+        #     destroyed, the version is moved to disabled state and it is scheduled for
+        #     destruction. The version is destroyed only after the
+        #     `scheduled_destroy_time`.
+        # @!attribute [r] customer_managed_encryption
+        #   @return [::Google::Cloud::SecretManager::V1::CustomerManagedEncryptionStatus]
+        #     Output only. The customer-managed encryption status of the
+        #     {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}. Only
+        #     populated if customer-managed encryption is used and
+        #     {::Google::Cloud::SecretManager::V1::Secret Secret} is a Regionalised Secret.
         class SecretVersion
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -386,8 +419,9 @@ module Google
         #   @return [::String]
         #     Required. The resource name of the Pub/Sub topic that will be published to,
         #     in the following format: `projects/*/topics/*`. For publication to succeed,
-        #     the Secret Manager P4SA must have `pubsub.publisher` permissions on the
-        #     topic.
+        #     the Secret Manager service agent must have the `pubsub.topic.publish`
+        #     permission on the topic. The Pub/Sub Publisher role
+        #     (`roles/pubsub.publisher`) includes this permission.
         class Topic
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -19,6 +19,7 @@
 require "google/cloud/errors"
 require "google/cloud/secretmanager/v1/service_pb"
 require "google/cloud/secret_manager/v1/secret_manager_service/rest/service_stub"
+require "google/cloud/location/rest"
 
 module Google
   module Cloud
@@ -188,7 +189,22 @@ module Google
                   universe_domain: @config.universe_domain,
                   credentials: credentials
                 )
+
+                @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @secret_manager_service_stub.endpoint
+                  config.universe_domain = @secret_manager_service_stub.universe_domain
+                  config.bindings_override = @config.bindings_override
+                end
               end
+
+              ##
+              # Get the associated client for mix-in of the Locations.
+              #
+              # @return [Google::Cloud::Location::Locations::Rest::Client]
+              #
+              attr_reader :location_client
 
               # Service calls
 
@@ -212,8 +228,8 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The resource name of the project associated with the
-              #     {::Google::Cloud::SecretManager::V1::Secret Secrets}, in the format
-              #     `projects/*`.
+              #     {::Google::Cloud::SecretManager::V1::Secret Secrets}, in the format `projects/*`
+              #     or `projects/*/locations/*`
               #   @param page_size [::Integer]
               #     Optional. The maximum number of results to be returned in a single page. If
               #     set to 0, the server decides the number of results to return. If the
@@ -311,7 +327,8 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The resource name of the project to associate with the
-              #     {::Google::Cloud::SecretManager::V1::Secret Secret}, in the format `projects/*`.
+              #     {::Google::Cloud::SecretManager::V1::Secret Secret}, in the format `projects/*`
+              #     or `projects/*/locations/*`.
               #   @param secret_id [::String]
               #     Required. This must be unique within the project.
               #
@@ -403,7 +420,7 @@ module Google
               #     Required. The resource name of the
               #     {::Google::Cloud::SecretManager::V1::Secret Secret} to associate with the
               #     {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} in the format
-              #     `projects/*/secrets/*`.
+              #     `projects/*/secrets/*` or `projects/*/locations/*/secrets/*`.
               #   @param payload [::Google::Cloud::SecretManager::V1::SecretPayload, ::Hash]
               #     Required. The secret payload of the
               #     {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}.
@@ -486,7 +503,7 @@ module Google
               #   @param name [::String]
               #     Required. The resource name of the
               #     {::Google::Cloud::SecretManager::V1::Secret Secret}, in the format
-              #     `projects/*/secrets/*`.
+              #     `projects/*/secrets/*` or `projects/*/locations/*/secrets/*`.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::SecretManager::V1::Secret]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -734,7 +751,7 @@ module Google
               #     Required. The resource name of the
               #     {::Google::Cloud::SecretManager::V1::Secret Secret} associated with the
               #     {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersions} to list, in
-              #     the format `projects/*/secrets/*`.
+              #     the format `projects/*/secrets/*` or `projects/*/locations/*/secrets/*`.
               #   @param page_size [::Integer]
               #     Optional. The maximum number of results to be returned in a single page. If
               #     set to 0, the server decides the number of results to return. If the
@@ -836,10 +853,13 @@ module Google
               #   @param name [::String]
               #     Required. The resource name of the
               #     {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} in the format
-              #     `projects/*/secrets/*/versions/*`.
+              #     `projects/*/secrets/*/versions/*` or
+              #     `projects/*/locations/*/secrets/*/versions/*`.
               #
-              #     `projects/*/secrets/*/versions/latest` is an alias to the most recently
-              #     created {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}.
+              #     `projects/*/secrets/*/versions/latest` or
+              #     `projects/*/locations/*/secrets/*/versions/latest` is an alias to the most
+              #     recently created
+              #     {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::SecretManager::V1::SecretVersion]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -923,10 +943,13 @@ module Google
               #   @param name [::String]
               #     Required. The resource name of the
               #     {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} in the format
-              #     `projects/*/secrets/*/versions/*`.
+              #     `projects/*/secrets/*/versions/*` or
+              #     `projects/*/locations/*/secrets/*/versions/*`.
               #
-              #     `projects/*/secrets/*/versions/latest` is an alias to the most recently
-              #     created {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}.
+              #     `projects/*/secrets/*/versions/latest` or
+              #     `projects/*/locations/*/secrets/*/versions/latest` is an alias to the most
+              #     recently created
+              #     {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::SecretManager::V1::AccessSecretVersionResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1010,7 +1033,8 @@ module Google
               #   @param name [::String]
               #     Required. The resource name of the
               #     {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} to disable in
-              #     the format `projects/*/secrets/*/versions/*`.
+              #     the format `projects/*/secrets/*/versions/*` or
+              #     `projects/*/locations/*/secrets/*/versions/*`.
               #   @param etag [::String]
               #     Optional. Etag of the
               #     {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}. The request
@@ -1099,7 +1123,8 @@ module Google
               #   @param name [::String]
               #     Required. The resource name of the
               #     {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} to enable in
-              #     the format `projects/*/secrets/*/versions/*`.
+              #     the format `projects/*/secrets/*/versions/*` or
+              #     `projects/*/locations/*/secrets/*/versions/*`.
               #   @param etag [::String]
               #     Optional. Etag of the
               #     {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}. The request
@@ -1189,7 +1214,8 @@ module Google
               #   @param name [::String]
               #     Required. The resource name of the
               #     {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} to destroy in
-              #     the format `projects/*/secrets/*/versions/*`.
+              #     the format `projects/*/secrets/*/versions/*` or
+              #     `projects/*/locations/*/secrets/*/versions/*`.
               #   @param etag [::String]
               #     Optional. Etag of the
               #     {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}. The request
@@ -1617,6 +1643,13 @@ module Google
                 config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
                 config_attr :quota_project, nil, ::String, nil
                 config_attr :universe_domain, nil, ::String, nil
+
+                # @private
+                # Overrides for http bindings for the RPCs of this service
+                # are only used when this service is used as mixin, and only
+                # by the host service.
+                # @return [::Hash{::Symbol=>::Array<::Gapic::Rest::GrpcTranscoder::HttpBinding>}]
+                config_attr :bindings_override, {}, ::Hash, nil
 
                 # @private
                 def initialize parent_config = nil

@@ -15,6 +15,7 @@
     "google-cloud-secret_manager-v1.gemspec",
     "lib/google-cloud-secret_manager-v1.rb",
     "lib/google/cloud/secret_manager/v1.rb",
+    "lib/google/cloud/secret_manager/v1/bindings_override.rb",
     "lib/google/cloud/secret_manager/v1/rest.rb",
     "lib/google/cloud/secret_manager/v1/secret_manager_service.rb",
     "lib/google/cloud/secret_manager/v1/secret_manager_service/client.rb",
