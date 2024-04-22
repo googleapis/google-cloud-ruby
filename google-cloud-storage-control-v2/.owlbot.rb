@@ -16,6 +16,7 @@
 # See https://github.com/googleapis/gapic-generator-ruby/issues/894
 paths = [
   "lib/google/cloud/storage/control/v2/storage_control/paths.rb",
+  "test/google/cloud/storage/control/v2/storage_control_paths_test.rb"
 ]
 OwlBot.modifier path: paths do |content|
   content.gsub(/managedFolder(?=[^s])/, "managed_folder")

@@ -64,7 +64,7 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::ClientPathsTest < M
         config.credentials = grpc_channel
       end
 
-      path = client.managed_folder_path project: "value0", bucket: "value1", managedFolder: "value2"
+      path = client.managed_folder_path project: "value0", bucket: "value1", managed_folder: "value2"
       assert_equal "projects/value0/buckets/value1/managedFolders/value2", path
     end
   end
