@@ -1295,6 +1295,10 @@
       "component": "google-cloud-storage",
       "version_file": "lib/google/cloud/storage/version.rb"
     },
+    "google-cloud-storage-control": {
+      "component": "google-cloud-storage-control",
+      "version_file": "lib/google/cloud/storage/control/version.rb"
+    },
     "google-cloud-storage_insights": {
       "component": "google-cloud-storage_insights",
       "version_file": "lib/google/cloud/storage_insights/version.rb"
