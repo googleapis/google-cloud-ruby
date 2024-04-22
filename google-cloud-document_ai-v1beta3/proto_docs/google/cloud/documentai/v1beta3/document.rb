@@ -460,16 +460,16 @@ module Google
               #     Whether the text is underlined.
               # @!attribute [rw] strikeout
               #   @return [::Boolean]
-              #     Whether the text is strikethrough.
+              #     Whether the text is strikethrough. This feature is not supported yet.
               # @!attribute [rw] subscript
               #   @return [::Boolean]
-              #     Whether the text is a subscript.
+              #     Whether the text is a subscript. This feature is not supported yet.
               # @!attribute [rw] superscript
               #   @return [::Boolean]
-              #     Whether the text is a superscript.
+              #     Whether the text is a superscript. This feature is not supported yet.
               # @!attribute [rw] smallcaps
               #   @return [::Boolean]
-              #     Whether the text is in small caps.
+              #     Whether the text is in small caps. This feature is not supported yet.
               # @!attribute [rw] font_weight
               #   @return [::Integer]
               #     TrueType weight on a scale `100` (thin) to `1000` (ultra-heavy).
@@ -1192,6 +1192,7 @@ module Google
             #     ID of the chunk.
             # @!attribute [rw] source_block_ids
             #   @return [::Array<::String>]
+            #     DO NOT USE.
             #     List of all parsed documents layout source blocks used to generate the
             #     chunk.
             # @!attribute [rw] content
@@ -1200,6 +1201,12 @@ module Google
             # @!attribute [rw] page_span
             #   @return [::Google::Cloud::DocumentAI::V1beta3::Document::ChunkedDocument::Chunk::ChunkPageSpan]
             #     Page span of the chunk.
+            # @!attribute [rw] page_headers
+            #   @return [::Array<::Google::Cloud::DocumentAI::V1beta3::Document::ChunkedDocument::Chunk::ChunkPageHeader>]
+            #     Page headers associated with the chunk.
+            # @!attribute [rw] page_footers
+            #   @return [::Array<::Google::Cloud::DocumentAI::V1beta3::Document::ChunkedDocument::Chunk::ChunkPageFooter>]
+            #     Page footers associated with the chunk.
             class Chunk
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1212,6 +1219,30 @@ module Google
               #   @return [::Integer]
               #     Page where chunk ends in the document.
               class ChunkPageSpan
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
+              # Represents the page header associated with the chunk.
+              # @!attribute [rw] text
+              #   @return [::String]
+              #     Header in text format.
+              # @!attribute [rw] page_span
+              #   @return [::Google::Cloud::DocumentAI::V1beta3::Document::ChunkedDocument::Chunk::ChunkPageSpan]
+              #     Page span of the header.
+              class ChunkPageHeader
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
+              # Represents the page footer associated with the chunk.
+              # @!attribute [rw] text
+              #   @return [::String]
+              #     Footer in text format.
+              # @!attribute [rw] page_span
+              #   @return [::Google::Cloud::DocumentAI::V1beta3::Document::ChunkedDocument::Chunk::ChunkPageSpan]
+              #     Page span of the footer.
+              class ChunkPageFooter
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
               end
