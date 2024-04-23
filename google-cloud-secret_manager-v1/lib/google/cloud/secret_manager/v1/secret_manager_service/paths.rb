@@ -25,6 +25,23 @@ module Google
           # Path helper methods for the SecretManagerService API.
           module Paths
             ##
+            # Create a fully-qualified Location resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}`
+            #
+            # @param project [String]
+            # @param location [String]
+            #
+            # @return [::String]
+            def location_path project:, location:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}"
+            end
+
+            ##
             # Create a fully-qualified Project resource string.
             #
             # The resource will be in the following format:
@@ -41,37 +58,87 @@ module Google
             ##
             # Create a fully-qualified Secret resource string.
             #
-            # The resource will be in the following format:
+            # @overload secret_path(project:, secret:)
+            #   The resource will be in the following format:
             #
-            # `projects/{project}/secrets/{secret}`
+            #   `projects/{project}/secrets/{secret}`
             #
-            # @param project [String]
-            # @param secret [String]
+            #   @param project [String]
+            #   @param secret [String]
+            #
+            # @overload secret_path(project:, location:, secret:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/secrets/{secret}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param secret [String]
             #
             # @return [::String]
-            def secret_path project:, secret:
-              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+            def secret_path **args
+              resources = {
+                "project:secret" => (proc do |project:, secret:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
-              "projects/#{project}/secrets/#{secret}"
+                  "projects/#{project}/secrets/#{secret}"
+                end),
+                "location:project:secret" => (proc do |project:, location:, secret:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/secrets/#{secret}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
             end
 
             ##
             # Create a fully-qualified SecretVersion resource string.
             #
-            # The resource will be in the following format:
+            # @overload secret_version_path(project:, secret:, secret_version:)
+            #   The resource will be in the following format:
             #
-            # `projects/{project}/secrets/{secret}/versions/{secret_version}`
+            #   `projects/{project}/secrets/{secret}/versions/{secret_version}`
             #
-            # @param project [String]
-            # @param secret [String]
-            # @param secret_version [String]
+            #   @param project [String]
+            #   @param secret [String]
+            #   @param secret_version [String]
+            #
+            # @overload secret_version_path(project:, location:, secret:, secret_version:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/secrets/{secret}/versions/{secret_version}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param secret [String]
+            #   @param secret_version [String]
             #
             # @return [::String]
-            def secret_version_path project:, secret:, secret_version:
-              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ::ArgumentError, "secret cannot contain /" if secret.to_s.include? "/"
+            def secret_version_path **args
+              resources = {
+                "project:secret:secret_version" => (proc do |project:, secret:, secret_version:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "secret cannot contain /" if secret.to_s.include? "/"
 
-              "projects/#{project}/secrets/#{secret}/versions/#{secret_version}"
+                  "projects/#{project}/secrets/#{secret}/versions/#{secret_version}"
+                end),
+                "location:project:secret:secret_version" => (proc do |project:, location:, secret:, secret_version:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "secret cannot contain /" if secret.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/secrets/#{secret}/versions/#{secret_version}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
             end
 
             ##
