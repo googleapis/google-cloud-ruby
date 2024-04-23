@@ -81,6 +81,14 @@ module Google
                   ["resource", %r{^projects/[^/]+/locations/[^/]+/targets/[^/]+/?$}, false]
                 ],
                 body: nil
+              ),
+              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
+                uri_method: :get,
+                uri_template: "/v1/{resource}:getIamPolicy",
+                matches: [
+                  ["resource", %r{^projects/[^/]+/locations/[^/]+/customTargetTypes/[^/]+/?$}, false]
+                ],
+                body: nil
               )
             ]
             default_config.bindings_override["google.iam.v1.IAMPolicy.SetIamPolicy"] = [
@@ -98,6 +106,14 @@ module Google
                 uri_template: "/v1/{resource}:setIamPolicy",
                 matches: [
                   ["resource", %r{^projects/[^/]+/locations/[^/]+/targets/[^/]+/?$}, false]
+                ],
+                body: "*"
+              ),
+              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
+                uri_method: :post,
+                uri_template: "/v1/{resource}:setIamPolicy",
+                matches: [
+                  ["resource", %r{^projects/[^/]+/locations/[^/]+/customTargetTypes/[^/]+/?$}, false]
                 ],
                 body: "*"
               )
