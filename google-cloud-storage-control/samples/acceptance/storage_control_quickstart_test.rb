@@ -16,10 +16,10 @@ require_relative "helper"
 require_relative "../storage_control_quickstart_sample"
 
 describe "Storage Control Quickstart" do
-  let(:bucket_name)    { random_bucket_name }
+  let(:bucket_name) { random_bucket_name }
 
   before :all do
-    bucket = create_bucket_helper bucket_name
+    create_bucket_helper bucket_name
   end
 
   after do

@@ -23,9 +23,9 @@ def quickstart bucket_name:
 
   # The storage layout path uses the global access pattern, in which the "_"
   # denotes this bucket exists in the global namespace.
-  layout_path = storage_control.storage_layout_path project:"_", bucket: bucket_name
-  
-  request = Google::Cloud::Storage::Control::V2::GetStorageLayoutRequest.new(name: layout_path)
+  layout_path = storage_control.storage_layout_path project: "_", bucket: bucket_name
+
+  request = Google::Cloud::Storage::Control::V2::GetStorageLayoutRequest.new name: layout_path
 
   response = storage_control.get_storage_layout request
 
