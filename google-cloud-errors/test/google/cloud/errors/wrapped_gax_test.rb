@@ -36,7 +36,12 @@ describe Google::Cloud::Error, :wrapped_gax do
     Google::Rpc::Help.new links: [link]
   end
 
-  def encoded_protobuf extended_details = false
+  ##
+  # Construct a new Google::Rpc::Status object and return its binary encoding
+  #
+  # @param extended_details [Boolean] 
+  #    Whether to encode multiple error details. Default is one DebugInfo message.
+  def encoded_protobuf extended_details: false
     any_debug = Google::Protobuf::Any.new
     any_debug.pack debug_info
 
@@ -75,8 +80,12 @@ describe Google::Cloud::Error, :wrapped_gax do
     GRPC::BadStatus.new status, msg, metadata
   end
 
-  it "contains multiple details" do
-    error = wrapped_error 1, "cancelled", { "foo" => "bar", "grpc-status-details-bin" => encoded_protobuf(true) }
+  # This test confirms that a whole array of any-wrapped detail messages
+  # containing various messages from the `google/rpc/error_details.proto`
+  # will be correctly deserialized and surfaced to the end-user
+  # in the `status_details` field
+  it "contains multiple detail messages" do
+    error = wrapped_error 1, "cancelled", { "foo" => "bar", "grpc-status-details-bin" => encoded_protobuf(extended_details: true) }
     di = error.status_details.find {|entry| entry.is_a?(Google::Rpc::DebugInfo)} 
     _(di).must_equal debug_info
 
