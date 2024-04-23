@@ -26,10 +26,9 @@ describe "Storage Control Quickstart" do
     delete_bucket_helper bucket_name
   end
 
-
   it "Gets the storage layout" do
     layout_name = "projects/_/buckets/#{bucket_name}/storageLayout"
-    
+
     assert_output "Performed get_storage_layout request for #{layout_name}\n" do
       retry_resource_exhaustion do
         quickstart bucket_name: bucket_name

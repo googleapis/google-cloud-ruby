@@ -1,6 +1,5 @@
 inherit_gem:
     google-style: google-style.yml
-
 Lint/EmptyBlock:
     Enabled: false
 Lint/ShadowingOuterLocalVariable:
