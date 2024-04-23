@@ -20,13 +20,36 @@ require "google/rpc/status_pb"
 
 describe Google::Cloud::Error, :wrapped_gax do
   def debug_info
-    Google::Rpc::DebugInfo.new detail: "lolz"
+    Google::Rpc::DebugInfo.new detail: "status_detail"
   end
-  def encoded_protobuf
-    any = Google::Protobuf::Any.new
-    any.pack debug_info
 
-    status = Google::Rpc::Status.new details: [any]
+  def error_info
+    Google::Rpc::ErrorInfo.new reason: "ErrorInfo reason", domain: "ErrorInfo domain", metadata: {"foo": "bar"}
+  end
+
+  def localized_message
+    Google::Rpc::LocalizedMessage.new locale: "fr-CH", message: "c'est un message d'erreur"
+  end
+
+  def help
+    link = Google::Rpc::Help::Link.new description: "example description", url: "https://example.com/error"
+    Google::Rpc::Help.new links: [link]
+  end
+
+  def encoded_protobuf extended_details = false
+    any_debug = Google::Protobuf::Any.new
+    any_debug.pack debug_info
+
+    any_message = Google::Protobuf::Any.new
+    any_message.pack localized_message
+
+    any_help = Google::Protobuf::Any.new
+    any_help.pack help
+
+    status_arr = [any_debug]
+    status_arr = [any_debug, any_message, any_help] if extended_details
+
+    status = Google::Rpc::Status.new details: status_arr
 
     Google::Rpc::Status.encode status
   end
@@ -50,6 +73,18 @@ describe Google::Cloud::Error, :wrapped_gax do
 
   def grpc_error status, msg, metadata = {}
     GRPC::BadStatus.new status, msg, metadata
+  end
+
+  it "contains multiple details" do
+    error = wrapped_error 1, "cancelled", { "foo" => "bar", "grpc-status-details-bin" => encoded_protobuf(true) }
+    di = error.status_details.find {|entry| entry.is_a?(Google::Rpc::DebugInfo)} 
+    _(di).must_equal debug_info
+
+    lm = error.status_details.find {|entry| entry.is_a?(Google::Rpc::LocalizedMessage)} 
+    _(lm).must_equal localized_message
+
+    help_detail = error.status_details.find {|entry| entry.is_a?(Google::Rpc::Help)} 
+    _(help_detail).must_equal help
   end
 
   it "wraps CanceledError" do
