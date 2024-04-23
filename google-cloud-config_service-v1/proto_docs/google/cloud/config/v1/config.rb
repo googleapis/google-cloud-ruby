@@ -122,6 +122,12 @@ module Google
         #     Optional. Input to control quota checks for resources in terraform
         #     configuration files. There are limited resources on which quota validation
         #     applies.
+        # @!attribute [rw] annotations
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Arbitrary key-value metadata storage e.g. to help client tools
+        #     identify deployments during automation. See
+        #     https://google.aip.dev/148#annotations for details on format and size
+        #     limitations.
         class Deployment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -131,6 +137,15 @@ module Google
           # @!attribute [rw] value
           #   @return [::String]
           class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class AnnotationsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -1199,6 +1214,14 @@ module Google
         # @!attribute [r] logs
         #   @return [::String]
         #     Output only. Location of preview logs in `gs://{bucket}/{object}` format.
+        # @!attribute [r] tf_version
+        #   @return [::String]
+        #     Output only. The current Terraform version set on the preview.
+        #     It is in the format of "Major.Minor.Patch", for example, "1.3.10".
+        # @!attribute [rw] tf_version_constraint
+        #   @return [::String]
+        #     Optional. The user-specified Terraform version constraint.
+        #     Example: "=1.3.10".
         class Preview
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
