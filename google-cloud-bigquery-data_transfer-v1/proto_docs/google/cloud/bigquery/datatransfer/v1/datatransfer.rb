@@ -616,7 +616,7 @@ module Google
           # A request to start manual transfer runs.
           # @!attribute [rw] parent
           #   @return [::String]
-          #     Transfer configuration name in the form:
+          #     Required. Transfer configuration name in the form:
           #     `projects/{project_id}/transferConfigs/{config_id}` or
           #     `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`.
           # @!attribute [rw] requested_time_range
@@ -668,7 +668,8 @@ module Google
           # BigQuery UI's `Transfer` tab.
           # @!attribute [rw] name
           #   @return [::String]
-          #     The name of the project resource in the form: `projects/{project_id}`
+          #     Required. The name of the project resource in the form:
+          #     `projects/{project_id}`
           # @!attribute [rw] data_source_ids
           #   @return [::Array<::String>]
           #     Data sources that are enrolled. It is required to provide at least one
@@ -682,7 +683,8 @@ module Google
           # the BigQuery UI's `Transfer` tab.
           # @!attribute [rw] name
           #   @return [::String]
-          #     The name of the project resource in the form: `projects/{project_id}`
+          #     Required. The name of the project resource in the form:
+          #     `projects/{project_id}`
           # @!attribute [rw] data_source_ids
           #   @return [::Array<::String>]
           #     Data sources that are unenrolled. It is required to provide at least one
