@@ -779,6 +779,8 @@
   "google-identity-access_context_manager+FILLER": "0.0.0",
   "google-identity-access_context_manager-v1": "0.8.0",
   "google-identity-access_context_manager-v1+FILLER": "0.0.0",
+  "google-shopping-merchant-conversions": "0.0.1",
+  "google-shopping-merchant-conversions+FILLER": "0.0.0",
   "google-shopping-merchant-conversions-v1beta": "0.0.1",
   "google-shopping-merchant-conversions-v1beta+FILLER": "0.0.0",
   "google-shopping-merchant-inventories": "0.3.0",
