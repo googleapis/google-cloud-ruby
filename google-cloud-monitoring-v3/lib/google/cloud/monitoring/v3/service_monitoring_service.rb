@@ -32,9 +32,9 @@ module Google
       module V3
         ##
         # The Cloud Monitoring Service-Oriented Monitoring API has endpoints for
-        # managing and querying aspects of a workspace's services. These include the
-        # `Service`'s monitored resources, its Service-Level Objectives, and a taxonomy
-        # of categorized Health Metrics.
+        # managing and querying aspects of a Metrics Scope's services. These include
+        # the `Service`'s monitored resources, its Service-Level Objectives, and a
+        # taxonomy of categorized Health Metrics.
         #
         # @example Load this service and instantiate a gRPC client
         #

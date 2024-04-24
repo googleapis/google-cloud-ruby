@@ -25,9 +25,9 @@ module Google
       module V3
         module ServiceMonitoringService
           # The Cloud Monitoring Service-Oriented Monitoring API has endpoints for
-          # managing and querying aspects of a workspace's services. These include the
-          # `Service`'s monitored resources, its Service-Level Objectives, and a taxonomy
-          # of categorized Health Metrics.
+          # managing and querying aspects of a Metrics Scope's services. These include
+          # the `Service`'s monitored resources, its Service-Level Objectives, and a
+          # taxonomy of categorized Health Metrics.
           class Service
 
             include ::GRPC::GenericService
@@ -40,7 +40,7 @@ module Google
             rpc :CreateService, ::Google::Cloud::Monitoring::V3::CreateServiceRequest, ::Google::Cloud::Monitoring::V3::Service
             # Get the named `Service`.
             rpc :GetService, ::Google::Cloud::Monitoring::V3::GetServiceRequest, ::Google::Cloud::Monitoring::V3::Service
-            # List `Service`s for this workspace.
+            # List `Service`s for this Metrics Scope.
             rpc :ListServices, ::Google::Cloud::Monitoring::V3::ListServicesRequest, ::Google::Cloud::Monitoring::V3::ListServicesResponse
             # Update this `Service`.
             rpc :UpdateService, ::Google::Cloud::Monitoring::V3::UpdateServiceRequest, ::Google::Cloud::Monitoring::V3::Service

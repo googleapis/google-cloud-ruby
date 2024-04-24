@@ -28,7 +28,7 @@ module Google
         # operational aspects of the service are accessible.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Resource name for this Service. The format is:
+        #     Identifier. Resource name for this Service. The format is:
         #
         #         projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]
         # @!attribute [rw] display_name
@@ -54,6 +54,24 @@ module Google
         #     Type used for canonical services scoped to an Istio mesh.
         #     Metrics for Istio are
         #     [documented here](https://istio.io/latest/docs/reference/config/metrics/)
+        # @!attribute [rw] cloud_run
+        #   @return [::Google::Cloud::Monitoring::V3::Service::CloudRun]
+        #     Type used for Cloud Run services.
+        # @!attribute [rw] gke_namespace
+        #   @return [::Google::Cloud::Monitoring::V3::Service::GkeNamespace]
+        #     Type used for GKE Namespaces.
+        # @!attribute [rw] gke_workload
+        #   @return [::Google::Cloud::Monitoring::V3::Service::GkeWorkload]
+        #     Type used for GKE Workloads.
+        # @!attribute [rw] gke_service
+        #   @return [::Google::Cloud::Monitoring::V3::Service::GkeService]
+        #     Type used for GKE Services (the Kubernetes concept of a service).
+        # @!attribute [rw] basic_service
+        #   @return [::Google::Cloud::Monitoring::V3::Service::BasicService]
+        #     Message that contains the service type and service labels of this service
+        #     if it is a basic service.
+        #     Documentation and examples
+        #     [here](https://cloud.google.com/stackdriver/docs/solutions/slo-monitoring/api/api-structures#basic-svc-w-basic-sli).
         # @!attribute [rw] telemetry
         #   @return [::Google::Cloud::Monitoring::V3::Service::Telemetry]
         #     Configuration for how to query telemetry on a Service.
@@ -69,8 +87,9 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Custom view of service telemetry. Currently a place-holder pending final
-          # design.
+          # Use a custom service to designate a service that you want to monitor
+          # when none of the other service types (like App Engine, Cloud Run, or
+          # a GKE type) matches your intended service.
           class Custom
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -80,8 +99,8 @@ module Google
           # @!attribute [rw] module_id
           #   @return [::String]
           #     The ID of the App Engine module underlying this service. Corresponds to
-          #     the `module_id` resource label in the `gae_app` monitored resource:
-          #     https://cloud.google.com/monitoring/api/resources#tag_gae_app
+          #     the `module_id` resource label in the [`gae_app` monitored
+          #     resource](https://cloud.google.com/monitoring/api/resources#tag_gae_app).
           class AppEngine
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -91,8 +110,8 @@ module Google
           # @!attribute [rw] service
           #   @return [::String]
           #     The name of the Cloud Endpoints service underlying this service.
-          #     Corresponds to the `service` resource label in the `api` monitored
-          #     resource: https://cloud.google.com/monitoring/api/resources#tag_api
+          #     Corresponds to the `service` resource label in the [`api` monitored
+          #     resource](https://cloud.google.com/monitoring/api/resources#tag_api).
           class CloudEndpoints
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -167,6 +186,129 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Cloud Run service. Learn more at https://cloud.google.com/run.
+          # @!attribute [rw] service_name
+          #   @return [::String]
+          #     The name of the Cloud Run service. Corresponds to the `service_name`
+          #     resource label in the [`cloud_run_revision` monitored
+          #     resource](https://cloud.google.com/monitoring/api/resources#tag_cloud_run_revision).
+          # @!attribute [rw] location
+          #   @return [::String]
+          #     The location the service is run. Corresponds to the `location`
+          #     resource label in the [`cloud_run_revision` monitored
+          #     resource](https://cloud.google.com/monitoring/api/resources#tag_cloud_run_revision).
+          class CloudRun
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # GKE Namespace. The field names correspond to the resource metadata labels
+          # on monitored resources that fall under a namespace (for example,
+          # `k8s_container` or `k8s_pod`).
+          # @!attribute [r] project_id
+          #   @return [::String]
+          #     Output only. The project this resource lives in. For legacy services
+          #     migrated from the `Custom` type, this may be a distinct project from the
+          #     one parenting the service itself.
+          # @!attribute [rw] location
+          #   @return [::String]
+          #     The location of the parent cluster. This may be a zone or region.
+          # @!attribute [rw] cluster_name
+          #   @return [::String]
+          #     The name of the parent cluster.
+          # @!attribute [rw] namespace_name
+          #   @return [::String]
+          #     The name of this namespace.
+          class GkeNamespace
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # A GKE Workload (Deployment, StatefulSet, etc). The field names correspond
+          # to the metadata labels on monitored resources that fall under a workload
+          # (for example, `k8s_container` or `k8s_pod`).
+          # @!attribute [r] project_id
+          #   @return [::String]
+          #     Output only. The project this resource lives in. For legacy services
+          #     migrated from the `Custom` type, this may be a distinct project from the
+          #     one parenting the service itself.
+          # @!attribute [rw] location
+          #   @return [::String]
+          #     The location of the parent cluster. This may be a zone or region.
+          # @!attribute [rw] cluster_name
+          #   @return [::String]
+          #     The name of the parent cluster.
+          # @!attribute [rw] namespace_name
+          #   @return [::String]
+          #     The name of the parent namespace.
+          # @!attribute [rw] top_level_controller_type
+          #   @return [::String]
+          #     The type of this workload (for example, "Deployment" or "DaemonSet")
+          # @!attribute [rw] top_level_controller_name
+          #   @return [::String]
+          #     The name of this workload.
+          class GkeWorkload
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # GKE Service. The "service" here represents a
+          # [Kubernetes service
+          # object](https://kubernetes.io/docs/concepts/services-networking/service).
+          # The field names correspond to the resource labels on [`k8s_service`
+          # monitored
+          # resources](https://cloud.google.com/monitoring/api/resources#tag_k8s_service).
+          # @!attribute [r] project_id
+          #   @return [::String]
+          #     Output only. The project this resource lives in. For legacy services
+          #     migrated from the `Custom` type, this may be a distinct project from the
+          #     one parenting the service itself.
+          # @!attribute [rw] location
+          #   @return [::String]
+          #     The location of the parent cluster. This may be a zone or region.
+          # @!attribute [rw] cluster_name
+          #   @return [::String]
+          #     The name of the parent cluster.
+          # @!attribute [rw] namespace_name
+          #   @return [::String]
+          #     The name of the parent namespace.
+          # @!attribute [rw] service_name
+          #   @return [::String]
+          #     The name of this service.
+          class GkeService
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # A well-known service type, defined by its service type and service labels.
+          # Documentation and examples
+          # [here](https://cloud.google.com/stackdriver/docs/solutions/slo-monitoring/api/api-structures#basic-svc-w-basic-sli).
+          # @!attribute [rw] service_type
+          #   @return [::String]
+          #     The type of service that this basic service defines, e.g.
+          #     APP_ENGINE service type.
+          #     Documentation and valid values
+          #     [here](https://cloud.google.com/stackdriver/docs/solutions/slo-monitoring/api/api-structures#basic-svc-w-basic-sli).
+          # @!attribute [rw] service_labels
+          #   @return [::Google::Protobuf::Map{::String => ::String}]
+          #     Labels that specify the resource that emits the monitoring data which
+          #     is used for SLO reporting of this `Service`.
+          #     Documentation and valid values for given service types
+          #     [here](https://cloud.google.com/stackdriver/docs/solutions/slo-monitoring/api/api-structures#basic-svc-w-basic-sli).
+          class BasicService
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::String]
+            class ServiceLabelsEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+
           # Configuration for how to query telemetry on a Service.
           # @!attribute [rw] resource_name
           #   @return [::String]
@@ -195,7 +337,7 @@ module Google
         # "99.5% of requests in each calendar month return successfully."
         # @!attribute [rw] name
         #   @return [::String]
-        #     Resource name for this `ServiceLevelObjective`. The format is:
+        #     Identifier. Resource name for this `ServiceLevelObjective`. The format is:
         #
         #         projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]/serviceLevelObjectives/[SLO_NAME]
         # @!attribute [rw] display_name

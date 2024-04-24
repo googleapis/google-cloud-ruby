@@ -39,6 +39,25 @@ module Google
             end
 
             ##
+            # Create a fully-qualified Function resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/functions/{function}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param function [String]
+            #
+            # @return [::String]
+            def function_path project:, location:, function:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/functions/#{function}"
+            end
+
+            ##
             # Create a fully-qualified Organization resource string.
             #
             # The resource will be in the following format:

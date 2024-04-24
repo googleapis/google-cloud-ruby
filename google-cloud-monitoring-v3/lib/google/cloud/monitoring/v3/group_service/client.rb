@@ -217,8 +217,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name)
-            #     whose groups are to be listed. The format is:
+            #     Required. The
+            #     [project](https://cloud.google.com/monitoring/api/v3#project_name) whose
+            #     groups are to be listed. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
             #   @param children_of_group [::String]
@@ -427,13 +428,14 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name) in
-            #     which to create the group. The format is:
+            #     Required. The
+            #     [project](https://cloud.google.com/monitoring/api/v3#project_name) in which
+            #     to create the group. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
             #   @param group [::Google::Cloud::Monitoring::V3::Group, ::Hash]
-            #     Required. A group definition. It is an error to define the `name` field because
-            #     the system assigns the name.
+            #     Required. A group definition. It is an error to define the `name` field
+            #     because the system assigns the name.
             #   @param validate_only [::Boolean]
             #     If true, validate this request but do not create the group.
             #
@@ -521,8 +523,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param group [::Google::Cloud::Monitoring::V3::Group, ::Hash]
-            #     Required. The new definition of the group.  All fields of the existing group,
-            #     excepting `name`, are replaced with the corresponding fields of this group.
+            #     Required. The new definition of the group.  All fields of the existing
+            #     group, excepting `name`, are replaced with the corresponding fields of this
+            #     group.
             #   @param validate_only [::Boolean]
             #     If true, validate this request but do not update the existing group.
             #

@@ -196,7 +196,7 @@ module Google
             # Service calls
 
             ##
-            # Lists monitored resource descriptors that match a filter. This method does not require a Workspace.
+            # Lists monitored resource descriptors that match a filter.
             #
             # @overload list_monitored_resource_descriptors(request, options = nil)
             #   Pass arguments to `list_monitored_resource_descriptors` via a request object, either of type
@@ -214,8 +214,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name) on
-            #     which to execute the request. The format is:
+            #     Required. The
+            #     [project](https://cloud.google.com/monitoring/api/v3#project_name) on which
+            #     to execute the request. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
             #   @param filter [::String]
@@ -302,7 +303,7 @@ module Google
             end
 
             ##
-            # Gets a single monitored resource descriptor. This method does not require a Workspace.
+            # Gets a single monitored resource descriptor.
             #
             # @overload get_monitored_resource_descriptor(request, options = nil)
             #   Pass arguments to `get_monitored_resource_descriptor` via a request object, either of type
@@ -392,7 +393,7 @@ module Google
             end
 
             ##
-            # Lists metric descriptors that match a filter. This method does not require a Workspace.
+            # Lists metric descriptors that match a filter.
             #
             # @overload list_metric_descriptors(request, options = nil)
             #   Pass arguments to `list_metric_descriptors` via a request object, either of type
@@ -410,8 +411,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name) on
-            #     which to execute the request. The format is:
+            #     Required. The
+            #     [project](https://cloud.google.com/monitoring/api/v3#project_name) on which
+            #     to execute the request. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
             #   @param filter [::String]
@@ -424,7 +426,9 @@ module Google
             #
             #         metric.type = starts_with("custom.googleapis.com/")
             #   @param page_size [::Integer]
-            #     A positive number that is the maximum number of results to return.
+            #     A positive number that is the maximum number of results to return. The
+            #     default and maximum value is 10,000. If a page_size <= 0 or > 10,000 is
+            #     submitted, will instead return a maximum of 10,000 results.
             #   @param page_token [::String]
             #     If this field is not empty then it must contain the `nextPageToken` value
             #     returned by a previous call to this method.  Using this field causes the
@@ -500,7 +504,7 @@ module Google
             end
 
             ##
-            # Gets a single metric descriptor. This method does not require a Workspace.
+            # Gets a single metric descriptor.
             #
             # @overload get_metric_descriptor(request, options = nil)
             #   Pass arguments to `get_metric_descriptor` via a request object, either of type
@@ -518,7 +522,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The metric descriptor on which to execute the request. The format is:
+            #     Required. The metric descriptor on which to execute the request. The format
+            #     is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]/metricDescriptors/[METRIC_ID]
             #
@@ -591,10 +596,11 @@ module Google
 
             ##
             # Creates a new metric descriptor.
-            # The creation is executed asynchronously and callers may check the returned
-            # operation to track its progress.
+            # The creation is executed asynchronously.
             # User-created metric descriptors define
             # [custom metrics](https://cloud.google.com/monitoring/custom-metrics).
+            # The metric descriptor is updated if it already exists,
+            # except that metric labels are never removed.
             #
             # @overload create_metric_descriptor(request, options = nil)
             #   Pass arguments to `create_metric_descriptor` via a request object, either of type
@@ -612,13 +618,14 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name) on
-            #     which to execute the request. The format is:
+            #     Required. The
+            #     [project](https://cloud.google.com/monitoring/api/v3#project_name) on which
+            #     to execute the request. The format is:
             #     4
             #         projects/[PROJECT_ID_OR_NUMBER]
             #   @param metric_descriptor [::Google::Api::MetricDescriptor, ::Hash]
-            #     Required. The new [custom metric](https://cloud.google.com/monitoring/custom-metrics)
-            #     descriptor.
+            #     Required. The new [custom
+            #     metric](https://cloud.google.com/monitoring/custom-metrics) descriptor.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Api::MetricDescriptor]
@@ -705,7 +712,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The metric descriptor on which to execute the request. The format is:
+            #     Required. The metric descriptor on which to execute the request. The format
+            #     is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]/metricDescriptors/[METRIC_ID]
             #
@@ -777,7 +785,7 @@ module Google
             end
 
             ##
-            # Lists time series that match a filter. This method does not require a Workspace.
+            # Lists time series that match a filter.
             #
             # @overload list_time_series(request, options = nil)
             #   Pass arguments to `list_time_series` via a request object, either of type
@@ -795,24 +803,26 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name),
+            #     Required. The
+            #     [project](https://cloud.google.com/monitoring/api/v3#project_name),
             #     organization or folder on which to execute the request. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
             #         organizations/[ORGANIZATION_ID]
             #         folders/[FOLDER_ID]
             #   @param filter [::String]
-            #     Required. A [monitoring filter](https://cloud.google.com/monitoring/api/v3/filters)
-            #     that specifies which time series should be returned.  The filter must
-            #     specify a single metric type, and can additionally specify metric labels
-            #     and other information. For example:
+            #     Required. A [monitoring
+            #     filter](https://cloud.google.com/monitoring/api/v3/filters) that specifies
+            #     which time series should be returned.  The filter must specify a single
+            #     metric type, and can additionally specify metric labels and other
+            #     information. For example:
             #
             #         metric.type = "compute.googleapis.com/instance/cpu/usage_time" AND
             #             metric.labels.instance_name = "my-instance-name"
             #   @param interval [::Google::Cloud::Monitoring::V3::TimeInterval, ::Hash]
-            #     Required. The time interval for which results should be returned. Only time series
-            #     that contain data points in the specified interval are included
-            #     in the response.
+            #     Required. The time interval for which results should be returned. Only time
+            #     series that contain data points in the specified interval are included in
+            #     the response.
             #   @param aggregation [::Google::Cloud::Monitoring::V3::Aggregation, ::Hash]
             #     Specifies the alignment of data points in individual time series as
             #     well as how to combine the retrieved time series across specified labels.
@@ -912,6 +922,9 @@ module Google
             # The response is empty if all time series in the request were written.
             # If any time series could not be written, a corresponding failure message is
             # included in the error response.
+            # This method does not support
+            # [resource locations constraint of an organization
+            # policy](https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations#setting_the_organization_policy).
             #
             # @overload create_time_series(request, options = nil)
             #   Pass arguments to `create_time_series` via a request object, either of type
@@ -929,8 +942,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name) on
-            #     which to execute the request. The format is:
+            #     Required. The
+            #     [project](https://cloud.google.com/monitoring/api/v3#project_name) on which
+            #     to execute the request. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
             #   @param time_series [::Array<::Google::Cloud::Monitoring::V3::TimeSeries, ::Hash>]
@@ -1033,8 +1047,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name) on
-            #     which to execute the request. The format is:
+            #     Required. The
+            #     [project](https://cloud.google.com/monitoring/api/v3#project_name) on which
+            #     to execute the request. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
             #   @param time_series [::Array<::Google::Cloud::Monitoring::V3::TimeSeries, ::Hash>]
