@@ -392,9 +392,30 @@ module Google
         #     Optional. Data describing a payment transaction to be assessed. Sending
         #     this data enables reCAPTCHA Enterprise Fraud Prevention and the
         #     FraudPreventionAssessment component in the response.
+        # @!attribute [rw] fraud_prevention
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1beta1::Event::FraudPrevention]
+        #     Optional. The Fraud Prevention setting for this Assessment.
         class Event
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Setting that controls Fraud Prevention assessments.
+          module FraudPrevention
+            # Default, unspecified setting. If opted in for automatic detection,
+            # `fraud_prevention_assessment` is returned based on the request.
+            # Otherwise, `fraud_prevention_assessment` is returned if
+            # `transaction_data` is present in the `Event` and Fraud Prevention is
+            # enabled in the Google Cloud console.
+            FRAUD_PREVENTION_UNSPECIFIED = 0
+
+            # Enable Fraud Prevention for this assessment, if Fraud Prevention is
+            # enabled in the Google Cloud console.
+            ENABLED = 1
+
+            # Disable Fraud Prevention for this assessment, regardless of opt-in
+            # status or the Google Cloud console settings.
+            DISABLED = 2
+          end
         end
 
         # Transaction data associated with a payment protected by reCAPTCHA Enterprise.
