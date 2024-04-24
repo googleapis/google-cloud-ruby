@@ -301,7 +301,7 @@ module Google
           ##
           # The external url to the file.
           def ext_url scheme, virtual_hosted_style, bucket_bound_hostname
-            url = GOOGLEAPIS_URL.dup
+            url = @service.service.root_url.chomp "/"
             if virtual_hosted_style
               parts = url.split "//"
               parts[1] = "#{@bucket_name}.#{parts[1]}"

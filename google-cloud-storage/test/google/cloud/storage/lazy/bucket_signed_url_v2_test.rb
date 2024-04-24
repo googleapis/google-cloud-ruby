@@ -17,7 +17,8 @@ require "helper"
 describe Google::Cloud::Storage::Bucket, :signed_url, :v2, :lazy, :mock_storage do
   let(:bucket_name) { "bucket" }
   let(:bucket) { Google::Cloud::Storage::Bucket.new_lazy bucket_name, storage.service }
-
+  let(:custom_universe_domain) { "mydomain1.com" }
+  let(:custom_endpoint) { "https://storage.#{custom_universe_domain}/" }
   let(:file_path) { "file.ext" }
 
   it "uses the credentials' issuer and signing_key to generate signed_url" do
@@ -160,6 +161,46 @@ describe Google::Cloud::Storage::Bucket, :signed_url, :v2, :lazy, :mock_storage 
       _(signed_url_params["response-content-disposition"]).must_equal ["attachment; filename=\"google-cloud.png\""]
 
       signing_key_mock.verify
+    end
+  end
+
+  describe "Supports custom endpoint" do
+
+    it "returns signed_url with custom universe_domain" do
+      service = Google::Cloud::Storage::Service.new project, credentials, universe_domain: custom_universe_domain
+      bucket = Google::Cloud::Storage::Bucket.new_lazy bucket_name, service
+
+      Time.stub :now, Time.new(2012,1,1,0,0,0, "+00:00") do
+        signing_key_mock = Minitest::Mock.new
+        signing_key_mock.expect :is_a?, false, [Proc]
+        signing_key_mock.expect :sign, "native-signature", [OpenSSL::Digest::SHA256, "GET\n\n\n1325376300\n/bucket/file.ext"]
+
+        credentials.issuer = "native_client_email"
+        credentials.signing_key = signing_key_mock
+
+        signed_url = bucket.signed_url file_path
+
+        signed_url = URI(signed_url)
+        _(signed_url.host).must_equal URI(custom_endpoint).host
+        signing_key_mock.verify
+      end
+    end
+
+    it "returns signed_url with custom endpoint" do
+      service = Google::Cloud::Storage::Service.new project, credentials, host: custom_endpoint
+      bucket = Google::Cloud::Storage::Bucket.new_lazy bucket_name, service
+
+      Time.stub :now, Time.new(2012,1,1,0,0,0, "+00:00") do
+        signing_key_mock = Minitest::Mock.new
+        signing_key_mock.expect :is_a?, false, [Proc]
+        signing_key_mock.expect :sign, "native-signature", [OpenSSL::Digest::SHA256, "GET\n\n\n1325376300\n/bucket/file.ext"]
+
+        signed_url = bucket.signed_url file_path, issuer: "native_client_email", signing_key: signing_key_mock
+
+        signed_url = URI(signed_url)
+        _(signed_url.host).must_equal URI(custom_endpoint).host
+        signing_key_mock.verify
+      end
     end
   end
 

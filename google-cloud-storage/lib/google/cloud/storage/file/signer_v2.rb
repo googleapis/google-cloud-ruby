@@ -60,7 +60,8 @@ module Google
           ##
           # The external url to the file.
           def ext_url
-            "#{GOOGLEAPIS_URL}#{ext_path}"
+            root_url = @service.service.root_url.chomp "/"
+            "#{root_url}#{ext_path}"
           end
 
           def apply_option_defaults options
