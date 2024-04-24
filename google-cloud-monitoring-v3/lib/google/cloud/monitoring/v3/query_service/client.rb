@@ -27,7 +27,7 @@ module Google
           ##
           # Client for the QueryService service.
           #
-          # The QueryService API is used to manage time series data in Stackdriver
+          # The QueryService API is used to manage time series data in Cloud
           # Monitoring. Time series data is a collection of data points that describes
           # the time-varying values of a metric.
           #
@@ -161,7 +161,7 @@ module Google
             # Service calls
 
             ##
-            # Queries time series using Monitoring Query Language. This method does not require a Workspace.
+            # Queries time series using Monitoring Query Language.
             #
             # @overload query_time_series(request, options = nil)
             #   Pass arguments to `query_time_series` via a request object, either of type
@@ -179,8 +179,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name) on
-            #     which to execute the request. The format is:
+            #     Required. The
+            #     [project](https://cloud.google.com/monitoring/api/v3#project_name) on which
+            #     to execute the request. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
             #   @param query [::String]

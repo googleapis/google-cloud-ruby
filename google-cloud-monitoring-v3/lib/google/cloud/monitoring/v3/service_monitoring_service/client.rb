@@ -28,9 +28,9 @@ module Google
           # Client for the ServiceMonitoringService service.
           #
           # The Cloud Monitoring Service-Oriented Monitoring API has endpoints for
-          # managing and querying aspects of a workspace's services. These include the
-          # `Service`'s monitored resources, its Service-Level Objectives, and a taxonomy
-          # of categorized Health Metrics.
+          # managing and querying aspects of a Metrics Scope's services. These include
+          # the `Service`'s monitored resources, its Service-Level Objectives, and a
+          # taxonomy of categorized Health Metrics.
           #
           class Client
             # @private
@@ -220,8 +220,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. Resource [name](https://cloud.google.com/monitoring/api/v3#project_name) of
-            #     the parent workspace. The format is:
+            #     Required. Resource
+            #     [name](https://cloud.google.com/monitoring/api/v3#project_name) of the
+            #     parent Metrics Scope. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
             #   @param service_id [::String]
@@ -382,7 +383,7 @@ module Google
             end
 
             ##
-            # List `Service`s for this workspace.
+            # List `Service`s for this Metrics Scope.
             #
             # @overload list_services(request, options = nil)
             #   Pass arguments to `list_services` via a request object, either of type
@@ -400,32 +401,31 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. Resource name of the parent containing the listed services, either a
-            #     [project](https://cloud.google.com/monitoring/api/v3#project_name) or a
-            #     Monitoring Workspace. The formats are:
+            #     Required. Resource name of the parent containing the listed services,
+            #     either a [project](https://cloud.google.com/monitoring/api/v3#project_name)
+            #     or a Monitoring Metrics Scope. The formats are:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
             #         workspaces/[HOST_PROJECT_ID_OR_NUMBER]
             #   @param filter [::String]
-            #     A filter specifying what `Service`s to return. The filter currently
-            #     supports the following fields:
+            #     A filter specifying what `Service`s to return. The filter supports
+            #     filtering on a particular service-identifier type or one of its attributes.
             #
-            #         - `identifier_case`
-            #         - `app_engine.module_id`
-            #         - `cloud_endpoints.service` (reserved for future use)
-            #         - `mesh_istio.mesh_uid`
-            #         - `mesh_istio.service_namespace`
-            #         - `mesh_istio.service_name`
-            #         - `cluster_istio.location` (deprecated)
-            #         - `cluster_istio.cluster_name` (deprecated)
-            #         - `cluster_istio.service_namespace` (deprecated)
-            #         - `cluster_istio.service_name` (deprecated)
+            #     To filter on a particular service-identifier type, the `identifier_case`
+            #     refers to which option in the `identifier` field is populated. For example,
+            #     the filter `identifier_case = "CUSTOM"` would match all services with a
+            #     value for the `custom` field. Valid options include "CUSTOM", "APP_ENGINE",
+            #     "MESH_ISTIO", and the other options listed at
+            #     https://cloud.google.com/monitoring/api/ref_v3/rest/v3/services#Service
             #
-            #     `identifier_case` refers to which option in the identifier oneof is
-            #     populated. For example, the filter `identifier_case = "CUSTOM"` would match
-            #     all services with a value for the `custom` field. Valid options are
-            #     "CUSTOM", "APP_ENGINE", "MESH_ISTIO", plus "CLUSTER_ISTIO" (deprecated)
-            #     and "CLOUD_ENDPOINTS" (reserved for future use).
+            #     To filter on an attribute of a service-identifier type, apply the filter
+            #     name by using the snake case of the service-identifier type and the
+            #     attribute of that service-identifier type, and join the two with a period.
+            #     For example, to filter by the `meshUid` field of the `MeshIstio`
+            #     service-identifier type, you must filter on `mesh_istio.mesh_uid =
+            #     "123"` to match all services with mesh UID "123". Service-identifier types
+            #     and their attributes are described at
+            #     https://cloud.google.com/monitoring/api/ref_v3/rest/v3/services#Service
             #   @param page_size [::Integer]
             #     A non-negative number that is the maximum number of results to return.
             #     When 0, use default page size.
@@ -703,7 +703,7 @@ module Google
             #   @param service_level_objective_id [::String]
             #     Optional. The ServiceLevelObjective id to use for this
             #     ServiceLevelObjective. If omitted, an id will be generated instead. Must
-            #     match the pattern `[a-z0-9\-]+`
+            #     match the pattern `^[a-zA-Z0-9-_:.]+$`
             #   @param service_level_objective [::Google::Cloud::Monitoring::V3::ServiceLevelObjective, ::Hash]
             #     Required. The `ServiceLevelObjective` to create.
             #     The provided `name` will be respected if no `ServiceLevelObjective` exists
@@ -792,7 +792,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. Resource name of the `ServiceLevelObjective` to get. The format is:
+            #     Required. Resource name of the `ServiceLevelObjective` to get. The format
+            #     is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]/serviceLevelObjectives/[SLO_NAME]
             #   @param view [::Google::Cloud::Monitoring::V3::ServiceLevelObjective::View]
@@ -885,7 +886,7 @@ module Google
             #
             #   @param parent [::String]
             #     Required. Resource name of the parent containing the listed SLOs, either a
-            #     project or a Monitoring Workspace. The formats are:
+            #     project or a Monitoring Metrics Scope. The formats are:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]
             #         workspaces/[HOST_PROJECT_ID_OR_NUMBER]/services/-
@@ -1080,7 +1081,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. Resource name of the `ServiceLevelObjective` to delete. The format is:
+            #     Required. Resource name of the `ServiceLevelObjective` to delete. The
+            #     format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]/serviceLevelObjectives/[SLO_NAME]
             #

@@ -132,8 +132,8 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # A content string and a MIME type that describes the content string's
-          # format.
+          # Documentation that is included in the notifications and incidents
+          # pertaining to this policy.
           # @!attribute [rw] content
           #   @return [::String]
           #     The body of the documentation, interpreted according to `mime_type`.
@@ -330,7 +330,8 @@ module Google
             # @!attribute [rw] evaluation_missing_data
             #   @return [::Google::Cloud::Monitoring::V3::AlertPolicy::Condition::EvaluationMissingData]
             #     A condition control that determines how metric-threshold conditions
-            #     are evaluated when data stops arriving.
+            #     are evaluated when data stops arriving. To use this control, the value
+            #     of the `duration` field must be greater than or equal to 60 seconds.
             class MetricThreshold
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods

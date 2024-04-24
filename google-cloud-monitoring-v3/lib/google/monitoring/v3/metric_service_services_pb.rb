@@ -34,30 +34,34 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.monitoring.v3.MetricService'
 
-            # Lists monitored resource descriptors that match a filter. This method does not require a Workspace.
+            # Lists monitored resource descriptors that match a filter.
             rpc :ListMonitoredResourceDescriptors, ::Google::Cloud::Monitoring::V3::ListMonitoredResourceDescriptorsRequest, ::Google::Cloud::Monitoring::V3::ListMonitoredResourceDescriptorsResponse
-            # Gets a single monitored resource descriptor. This method does not require a Workspace.
+            # Gets a single monitored resource descriptor.
             rpc :GetMonitoredResourceDescriptor, ::Google::Cloud::Monitoring::V3::GetMonitoredResourceDescriptorRequest, ::Google::Api::MonitoredResourceDescriptor
-            # Lists metric descriptors that match a filter. This method does not require a Workspace.
+            # Lists metric descriptors that match a filter.
             rpc :ListMetricDescriptors, ::Google::Cloud::Monitoring::V3::ListMetricDescriptorsRequest, ::Google::Cloud::Monitoring::V3::ListMetricDescriptorsResponse
-            # Gets a single metric descriptor. This method does not require a Workspace.
+            # Gets a single metric descriptor.
             rpc :GetMetricDescriptor, ::Google::Cloud::Monitoring::V3::GetMetricDescriptorRequest, ::Google::Api::MetricDescriptor
             # Creates a new metric descriptor.
-            # The creation is executed asynchronously and callers may check the returned
-            # operation to track its progress.
+            # The creation is executed asynchronously.
             # User-created metric descriptors define
             # [custom metrics](https://cloud.google.com/monitoring/custom-metrics).
+            # The metric descriptor is updated if it already exists,
+            # except that metric labels are never removed.
             rpc :CreateMetricDescriptor, ::Google::Cloud::Monitoring::V3::CreateMetricDescriptorRequest, ::Google::Api::MetricDescriptor
             # Deletes a metric descriptor. Only user-created
             # [custom metrics](https://cloud.google.com/monitoring/custom-metrics) can be
             # deleted.
             rpc :DeleteMetricDescriptor, ::Google::Cloud::Monitoring::V3::DeleteMetricDescriptorRequest, ::Google::Protobuf::Empty
-            # Lists time series that match a filter. This method does not require a Workspace.
+            # Lists time series that match a filter.
             rpc :ListTimeSeries, ::Google::Cloud::Monitoring::V3::ListTimeSeriesRequest, ::Google::Cloud::Monitoring::V3::ListTimeSeriesResponse
             # Creates or adds data to one or more time series.
             # The response is empty if all time series in the request were written.
             # If any time series could not be written, a corresponding failure message is
             # included in the error response.
+            # This method does not support
+            # [resource locations constraint of an organization
+            # policy](https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations#setting_the_organization_policy).
             rpc :CreateTimeSeries, ::Google::Cloud::Monitoring::V3::CreateTimeSeriesRequest, ::Google::Protobuf::Empty
             # Creates or adds data to one or more service time series. A service time
             # series is a time series for a metric from a Google Cloud service. The

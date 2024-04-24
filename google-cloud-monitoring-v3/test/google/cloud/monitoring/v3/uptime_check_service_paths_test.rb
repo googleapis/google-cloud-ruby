@@ -45,6 +45,18 @@ class ::Google::Cloud::Monitoring::V3::UptimeCheckService::ClientPathsTest < Min
     end
   end
 
+  def test_function_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Monitoring::V3::UptimeCheckService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.function_path project: "value0", location: "value1", function: "value2"
+      assert_equal "projects/value0/locations/value1/functions/value2", path
+    end
+  end
+
   def test_organization_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do

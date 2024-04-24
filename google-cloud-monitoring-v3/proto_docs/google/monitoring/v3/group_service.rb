@@ -24,8 +24,9 @@ module Google
         # The `ListGroup` request.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name)
-        #     whose groups are to be listed. The format is:
+        #     Required. The
+        #     [project](https://cloud.google.com/monitoring/api/v3#project_name) whose
+        #     groups are to be listed. The format is:
         #
         #         projects/[PROJECT_ID_OR_NUMBER]
         # @!attribute [rw] children_of_group
@@ -96,14 +97,15 @@ module Google
         # The `CreateGroup` request.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name) in
-        #     which to create the group. The format is:
+        #     Required. The
+        #     [project](https://cloud.google.com/monitoring/api/v3#project_name) in which
+        #     to create the group. The format is:
         #
         #         projects/[PROJECT_ID_OR_NUMBER]
         # @!attribute [rw] group
         #   @return [::Google::Cloud::Monitoring::V3::Group]
-        #     Required. A group definition. It is an error to define the `name` field because
-        #     the system assigns the name.
+        #     Required. A group definition. It is an error to define the `name` field
+        #     because the system assigns the name.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
         #     If true, validate this request but do not create the group.
@@ -115,8 +117,9 @@ module Google
         # The `UpdateGroup` request.
         # @!attribute [rw] group
         #   @return [::Google::Cloud::Monitoring::V3::Group]
-        #     Required. The new definition of the group.  All fields of the existing group,
-        #     excepting `name`, are replaced with the corresponding fields of this group.
+        #     Required. The new definition of the group.  All fields of the existing
+        #     group, excepting `name`, are replaced with the corresponding fields of this
+        #     group.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
         #     If true, validate this request but do not update the existing group.
