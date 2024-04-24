@@ -20,9 +20,9 @@
 module Google
   module Shopping
     module Merchant
-      module Conversions
+      module Notifications
         module V1beta
-          VERSION = "0.1.0"
+          VERSION = "0.0.1"
         end
       end
     end
