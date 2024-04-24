@@ -787,6 +787,8 @@
   "google-shopping-merchant-inventories+FILLER": "0.0.0",
   "google-shopping-merchant-inventories-v1beta": "0.4.0",
   "google-shopping-merchant-inventories-v1beta+FILLER": "0.0.0",
+  "google-shopping-merchant-lfp": "0.0.1",
+  "google-shopping-merchant-lfp+FILLER": "0.0.0",
   "google-shopping-merchant-lfp-v1beta": "0.0.1",
   "google-shopping-merchant-lfp-v1beta+FILLER": "0.0.0",
   "google-shopping-merchant-notifications": "0.0.1",
