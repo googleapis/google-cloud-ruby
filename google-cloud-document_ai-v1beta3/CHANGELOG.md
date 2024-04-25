@@ -1,5 +1,11 @@
 # Release History
 
+### 0.35.0 (2024-04-25)
+
+#### Features
+
+* Support chunk header and footer ([#25749](https://github.com/googleapis/google-cloud-ruby/issues/25749)) 
+
 ### 0.34.0 (2024-04-19)
 
 #### Features
