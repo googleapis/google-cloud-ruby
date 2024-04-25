@@ -1,5 +1,11 @@
 # Release History
 
+### 1.8.1 (2024-04-25)
+
+#### Documentation
+
+* Minor branding fix ([#25677](https://github.com/googleapis/google-cloud-ruby/issues/25677)) 
+
 ### 1.8.0 (2024-02-26)
 
 #### Features
