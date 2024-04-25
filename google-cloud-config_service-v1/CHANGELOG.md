@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.6.0 (2024-04-25)
+
+#### Features
+
+* Support for deployment annotations 
+* Support for Terraform version set on the Preview 
+
 ### 0.5.0 (2024-03-22)
 
 #### Features
