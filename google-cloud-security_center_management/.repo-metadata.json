@@ -8,7 +8,7 @@
     "name": "securitycentermanagement",
     "name_pretty": "Security Center Management API",
     "product_documentation": "https://cloud.google.com/security-command-center/docs/reference/security-center-management/rest",
-    "release_level": "unreleased",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "Management API for Security Command Center, a built-in security and risk management solution for Google Cloud. Use this API to programmatically update the settings and configuration of Security Command Center.",
