@@ -1,5 +1,11 @@
 # Release History
 
+### 0.14.0 (2024-04-25)
+
+#### Features
+
+* Support for fraud prevention settings ([#25762](https://github.com/googleapis/google-cloud-ruby/issues/25762)) 
+
 ### 0.13.0 (2024-02-26)
 
 #### Features
