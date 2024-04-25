@@ -1,5 +1,13 @@
 # Release History
 
+### 0.17.0 (2024-04-25)
+
+#### Features
+
+* Expand Service type to include Cloud Run, Kubernetes Engine, and other services 
+* Support for service agent authentication in HTTP checks 
+* Support for synthetic monitors in uptime checks 
+
 ### 0.16.0 (2024-02-26)
 
 #### Features
