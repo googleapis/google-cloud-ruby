@@ -1,5 +1,11 @@
 # Release History
 
+### 0.21.0 (2024-04-25)
+
+#### Features
+
+* Support for fraud prevention settings 
+
 ### 0.20.1 (2024-04-17)
 
 #### Documentation
