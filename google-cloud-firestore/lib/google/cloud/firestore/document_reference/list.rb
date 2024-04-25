@@ -86,8 +86,8 @@ module Google
           def next
             return nil unless next?
             ensure_client!
-            grpc = @client.service.list_documents @parent, @collection_id, token: token, max: @max, \
-              read_time: @read_time
+            grpc = @client.service.list_documents @parent, @collection_id,
+                                                  token: token, max: @max, read_time: @read_time
             self.class.from_grpc grpc, @client, @parent, @collection_id, @max, read_time: @read_time
           end
 

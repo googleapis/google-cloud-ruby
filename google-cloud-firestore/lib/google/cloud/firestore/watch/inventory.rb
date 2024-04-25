@@ -122,8 +122,7 @@ module Google
           def changes?
             # Act like there are changes if we have never run before
             return true if @old_order.nil?
-            added_paths, deleted_paths, changed_paths = \
-              change_paths current_order, @old_order
+            added_paths, deleted_paths, changed_paths = change_paths current_order, @old_order
             added_paths.any? || deleted_paths.any? || changed_paths.any?
           end
 
@@ -217,8 +216,7 @@ module Google
           def build_changes new_order, old_order
             new_paths = new_order.keys
             old_paths = old_order.keys
-            added_paths, deleted_paths, changed_paths = \
-              change_paths new_order, old_order
+            added_paths, deleted_paths, changed_paths = change_paths new_order, old_order
 
             changes = deleted_paths.map do |doc_path|
               build_deleted_doc_change doc_path, old_paths
