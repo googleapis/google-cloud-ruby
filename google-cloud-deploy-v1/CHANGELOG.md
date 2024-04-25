@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.19.0 (2024-04-25)
+
+#### Features
+
+* add Skaffold remote config support for Google Cloud Build repos ([#25742](https://github.com/googleapis/google-cloud-ruby/issues/25742)) 
+
 ### 0.18.0 (2024-02-26)
 
 #### Features
