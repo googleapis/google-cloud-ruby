@@ -1,5 +1,11 @@
 # Release History
 
+### 1.51.0 (2024-04-25)
+
+#### Features
+
+* Respect custom endpoint for signed_url ([#25469](https://github.com/googleapis/google-cloud-ruby/issues/25469)) 
+
 ### 1.50.0 (2024-04-19)
 
 #### Features
