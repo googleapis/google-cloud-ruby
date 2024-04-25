@@ -1,5 +1,13 @@
 # Release History
 
+### 0.21.0 (2024-04-25)
+
+#### Features
+
+* Support for customer-managed encryption 
+* Support for delayed secret version destroy 
+* Support for location-based secrets 
+
 ### 0.20.0 (2024-02-26)
 
 #### Features
