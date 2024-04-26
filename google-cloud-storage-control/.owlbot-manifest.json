@@ -20,6 +20,12 @@
     "test/helper.rb"
   ],
   "static": [
-    ".OwlBot.yaml"
+    ".OwlBot.yaml",
+    "samples/.rubocop.yml",
+    "samples/Gemfile",
+    "samples/Rakefile",
+    "samples/acceptance/helper.rb",
+    "samples/acceptance/storage_control_quickstart_test.rb",
+    "samples/storage_control_quickstart_sample.rb"
   ]
 }
