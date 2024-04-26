@@ -1,0 +1,25 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".toys.rb",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-apps-chat.gemspec",
+    "lib/google-apps-chat.rb",
+    "lib/google/apps/chat.rb",
+    "lib/google/apps/chat/version.rb",
+    "test/google/apps/chat/client_test.rb",
+    "test/google/apps/chat/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml"
+  ]
+}
