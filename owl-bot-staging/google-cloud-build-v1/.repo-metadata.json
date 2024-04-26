@@ -1,0 +1,18 @@
+{
+    "api_id": "cloudbuild.googleapis.com",
+    "api_shortname": "cloudbuild",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-build-v1/latest",
+    "distribution_name": "google-cloud-build-v1",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "cloudbuild",
+    "name_pretty": "Cloud Build V1 API",
+    "product_documentation": "https://cloud.google.com/cloud-build",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Cloud Build is a service that executes your builds on Google Cloud Platform infrastructure. Cloud Build can import source code from Google Cloud Storage, Cloud Source Repositories, GitHub, or Bitbucket, execute a build to your specifications, and produce artifacts such as Docker containers or Java archives. Note that google-cloud-build-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-build instead. See the readme for more details.",
+    "ruby-cloud-env-prefix": "CLOUD_BUILD",
+    "ruby-cloud-product-url": "https://cloud.google.com/cloud-build",
+    "library_type": "GAPIC_AUTO"
+}
