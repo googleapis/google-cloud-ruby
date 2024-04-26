@@ -1,0 +1,19 @@
+{
+    "api_id": "analyticsdata.googleapis.com",
+    "api_shortname": "analyticsdata",
+    "client_documentation": "https://rubydoc.info/gems/google-analytics-data",
+    "distribution_name": "google-analytics-data",
+    "is_cloud": false,
+    "language": "ruby",
+    "name": "analyticsdata",
+    "name_pretty": "Google Analytics Data API",
+    "product_documentation": "https://developers.google.com/analytics/devguides/reporting/data/v1",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "The Google Analytics Data API provides programmatic methods to access report data in Google Analytics 4 (GA4) properties. Google Analytics 4 helps you understand how people use your web, iOS, or Android app.",
+    "ruby-cloud-env-prefix": "ANALYTICS_DATA",
+    "ruby-cloud-product-url": "https://developers.google.com/analytics/devguides/reporting/data/v1",
+    "ruby-cloud-service-override": "BetaAnalyticsData=AnalyticsData",
+    "library_type": "GAPIC_AUTO"
+}
