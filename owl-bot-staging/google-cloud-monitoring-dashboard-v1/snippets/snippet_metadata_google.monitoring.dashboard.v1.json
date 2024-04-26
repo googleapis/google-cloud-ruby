@@ -1,0 +1,215 @@
+{
+  "client_library": {
+    "name": "google-cloud-monitoring-dashboard-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.monitoring.dashboard.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "monitoring_v1_generated_DashboardsService_CreateDashboard_sync",
+      "title": "Snippet for the create_dashboard call in the DashboardsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client#create_dashboard.",
+      "file": "dashboards_service/create_dashboard.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_dashboard",
+        "full_name": "::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client#create_dashboard",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::Dashboard::V1::CreateDashboardRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::Dashboard::V1::Dashboard",
+        "client": {
+          "short_name": "DashboardsService::Client",
+          "full_name": "::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client"
+        },
+        "method": {
+          "short_name": "CreateDashboard",
+          "full_name": "google.monitoring.dashboard.v1.DashboardsService.CreateDashboard",
+          "service": {
+            "short_name": "DashboardsService",
+            "full_name": "google.monitoring.dashboard.v1.DashboardsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v1_generated_DashboardsService_ListDashboards_sync",
+      "title": "Snippet for the list_dashboards call in the DashboardsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client#list_dashboards.",
+      "file": "dashboards_service/list_dashboards.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_dashboards",
+        "full_name": "::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client#list_dashboards",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::Dashboard::V1::ListDashboardsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::Dashboard::V1::ListDashboardsResponse",
+        "client": {
+          "short_name": "DashboardsService::Client",
+          "full_name": "::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client"
+        },
+        "method": {
+          "short_name": "ListDashboards",
+          "full_name": "google.monitoring.dashboard.v1.DashboardsService.ListDashboards",
+          "service": {
+            "short_name": "DashboardsService",
+            "full_name": "google.monitoring.dashboard.v1.DashboardsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v1_generated_DashboardsService_GetDashboard_sync",
+      "title": "Snippet for the get_dashboard call in the DashboardsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client#get_dashboard.",
+      "file": "dashboards_service/get_dashboard.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_dashboard",
+        "full_name": "::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client#get_dashboard",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::Dashboard::V1::GetDashboardRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::Dashboard::V1::Dashboard",
+        "client": {
+          "short_name": "DashboardsService::Client",
+          "full_name": "::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client"
+        },
+        "method": {
+          "short_name": "GetDashboard",
+          "full_name": "google.monitoring.dashboard.v1.DashboardsService.GetDashboard",
+          "service": {
+            "short_name": "DashboardsService",
+            "full_name": "google.monitoring.dashboard.v1.DashboardsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v1_generated_DashboardsService_DeleteDashboard_sync",
+      "title": "Snippet for the delete_dashboard call in the DashboardsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client#delete_dashboard.",
+      "file": "dashboards_service/delete_dashboard.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_dashboard",
+        "full_name": "::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client#delete_dashboard",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::Dashboard::V1::DeleteDashboardRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "DashboardsService::Client",
+          "full_name": "::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client"
+        },
+        "method": {
+          "short_name": "DeleteDashboard",
+          "full_name": "google.monitoring.dashboard.v1.DashboardsService.DeleteDashboard",
+          "service": {
+            "short_name": "DashboardsService",
+            "full_name": "google.monitoring.dashboard.v1.DashboardsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v1_generated_DashboardsService_UpdateDashboard_sync",
+      "title": "Snippet for the update_dashboard call in the DashboardsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client#update_dashboard.",
+      "file": "dashboards_service/update_dashboard.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_dashboard",
+        "full_name": "::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client#update_dashboard",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::Dashboard::V1::UpdateDashboardRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::Dashboard::V1::Dashboard",
+        "client": {
+          "short_name": "DashboardsService::Client",
+          "full_name": "::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client"
+        },
+        "method": {
+          "short_name": "UpdateDashboard",
+          "full_name": "google.monitoring.dashboard.v1.DashboardsService.UpdateDashboard",
+          "service": {
+            "short_name": "DashboardsService",
+            "full_name": "google.monitoring.dashboard.v1.DashboardsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
