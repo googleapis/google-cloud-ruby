@@ -27,6 +27,10 @@
       "component": "google-analytics-data-v1beta",
       "version_file": "lib/google/analytics/data/v1beta/version.rb"
     },
+    "google-apps-chat-v1": {
+      "component": "google-apps-chat-v1",
+      "version_file": "lib/google/apps/chat/v1/version.rb"
+    },
     "google-apps-events-subscriptions": {
       "component": "google-apps-events-subscriptions",
       "version_file": "lib/google/apps/events/subscriptions/version.rb"
