@@ -1,0 +1,895 @@
+{
+  "client_library": {
+    "name": "google-cloud-video-live_stream-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.video.livestream.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "livestream_v1_generated_LivestreamService_CreateChannel_sync",
+      "title": "Snippet for the create_channel call in the LivestreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#create_channel.",
+      "file": "livestream_service/create_channel.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_channel",
+        "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#create_channel",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Video::LiveStream::V1::CreateChannelRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "LivestreamService::Client",
+          "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client"
+        },
+        "method": {
+          "short_name": "CreateChannel",
+          "full_name": "google.cloud.video.livestream.v1.LivestreamService.CreateChannel",
+          "service": {
+            "short_name": "LivestreamService",
+            "full_name": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "livestream_v1_generated_LivestreamService_ListChannels_sync",
+      "title": "Snippet for the list_channels call in the LivestreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#list_channels.",
+      "file": "livestream_service/list_channels.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_channels",
+        "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#list_channels",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Video::LiveStream::V1::ListChannelsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Video::LiveStream::V1::ListChannelsResponse",
+        "client": {
+          "short_name": "LivestreamService::Client",
+          "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client"
+        },
+        "method": {
+          "short_name": "ListChannels",
+          "full_name": "google.cloud.video.livestream.v1.LivestreamService.ListChannels",
+          "service": {
+            "short_name": "LivestreamService",
+            "full_name": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "livestream_v1_generated_LivestreamService_GetChannel_sync",
+      "title": "Snippet for the get_channel call in the LivestreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#get_channel.",
+      "file": "livestream_service/get_channel.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_channel",
+        "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#get_channel",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Video::LiveStream::V1::GetChannelRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Video::LiveStream::V1::Channel",
+        "client": {
+          "short_name": "LivestreamService::Client",
+          "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client"
+        },
+        "method": {
+          "short_name": "GetChannel",
+          "full_name": "google.cloud.video.livestream.v1.LivestreamService.GetChannel",
+          "service": {
+            "short_name": "LivestreamService",
+            "full_name": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "livestream_v1_generated_LivestreamService_DeleteChannel_sync",
+      "title": "Snippet for the delete_channel call in the LivestreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#delete_channel.",
+      "file": "livestream_service/delete_channel.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_channel",
+        "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#delete_channel",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Video::LiveStream::V1::DeleteChannelRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "LivestreamService::Client",
+          "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client"
+        },
+        "method": {
+          "short_name": "DeleteChannel",
+          "full_name": "google.cloud.video.livestream.v1.LivestreamService.DeleteChannel",
+          "service": {
+            "short_name": "LivestreamService",
+            "full_name": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "livestream_v1_generated_LivestreamService_UpdateChannel_sync",
+      "title": "Snippet for the update_channel call in the LivestreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#update_channel.",
+      "file": "livestream_service/update_channel.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_channel",
+        "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#update_channel",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Video::LiveStream::V1::UpdateChannelRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "LivestreamService::Client",
+          "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client"
+        },
+        "method": {
+          "short_name": "UpdateChannel",
+          "full_name": "google.cloud.video.livestream.v1.LivestreamService.UpdateChannel",
+          "service": {
+            "short_name": "LivestreamService",
+            "full_name": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "livestream_v1_generated_LivestreamService_StartChannel_sync",
+      "title": "Snippet for the start_channel call in the LivestreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#start_channel.",
+      "file": "livestream_service/start_channel.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "start_channel",
+        "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#start_channel",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Video::LiveStream::V1::StartChannelRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "LivestreamService::Client",
+          "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client"
+        },
+        "method": {
+          "short_name": "StartChannel",
+          "full_name": "google.cloud.video.livestream.v1.LivestreamService.StartChannel",
+          "service": {
+            "short_name": "LivestreamService",
+            "full_name": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "livestream_v1_generated_LivestreamService_StopChannel_sync",
+      "title": "Snippet for the stop_channel call in the LivestreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#stop_channel.",
+      "file": "livestream_service/stop_channel.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "stop_channel",
+        "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#stop_channel",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Video::LiveStream::V1::StopChannelRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "LivestreamService::Client",
+          "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client"
+        },
+        "method": {
+          "short_name": "StopChannel",
+          "full_name": "google.cloud.video.livestream.v1.LivestreamService.StopChannel",
+          "service": {
+            "short_name": "LivestreamService",
+            "full_name": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "livestream_v1_generated_LivestreamService_CreateInput_sync",
+      "title": "Snippet for the create_input call in the LivestreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#create_input.",
+      "file": "livestream_service/create_input.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_input",
+        "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#create_input",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Video::LiveStream::V1::CreateInputRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "LivestreamService::Client",
+          "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client"
+        },
+        "method": {
+          "short_name": "CreateInput",
+          "full_name": "google.cloud.video.livestream.v1.LivestreamService.CreateInput",
+          "service": {
+            "short_name": "LivestreamService",
+            "full_name": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "livestream_v1_generated_LivestreamService_ListInputs_sync",
+      "title": "Snippet for the list_inputs call in the LivestreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#list_inputs.",
+      "file": "livestream_service/list_inputs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_inputs",
+        "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#list_inputs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Video::LiveStream::V1::ListInputsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Video::LiveStream::V1::ListInputsResponse",
+        "client": {
+          "short_name": "LivestreamService::Client",
+          "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client"
+        },
+        "method": {
+          "short_name": "ListInputs",
+          "full_name": "google.cloud.video.livestream.v1.LivestreamService.ListInputs",
+          "service": {
+            "short_name": "LivestreamService",
+            "full_name": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "livestream_v1_generated_LivestreamService_GetInput_sync",
+      "title": "Snippet for the get_input call in the LivestreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#get_input.",
+      "file": "livestream_service/get_input.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_input",
+        "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#get_input",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Video::LiveStream::V1::GetInputRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Video::LiveStream::V1::Input",
+        "client": {
+          "short_name": "LivestreamService::Client",
+          "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client"
+        },
+        "method": {
+          "short_name": "GetInput",
+          "full_name": "google.cloud.video.livestream.v1.LivestreamService.GetInput",
+          "service": {
+            "short_name": "LivestreamService",
+            "full_name": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "livestream_v1_generated_LivestreamService_DeleteInput_sync",
+      "title": "Snippet for the delete_input call in the LivestreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#delete_input.",
+      "file": "livestream_service/delete_input.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_input",
+        "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#delete_input",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Video::LiveStream::V1::DeleteInputRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "LivestreamService::Client",
+          "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client"
+        },
+        "method": {
+          "short_name": "DeleteInput",
+          "full_name": "google.cloud.video.livestream.v1.LivestreamService.DeleteInput",
+          "service": {
+            "short_name": "LivestreamService",
+            "full_name": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "livestream_v1_generated_LivestreamService_UpdateInput_sync",
+      "title": "Snippet for the update_input call in the LivestreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#update_input.",
+      "file": "livestream_service/update_input.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_input",
+        "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#update_input",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Video::LiveStream::V1::UpdateInputRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "LivestreamService::Client",
+          "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client"
+        },
+        "method": {
+          "short_name": "UpdateInput",
+          "full_name": "google.cloud.video.livestream.v1.LivestreamService.UpdateInput",
+          "service": {
+            "short_name": "LivestreamService",
+            "full_name": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "livestream_v1_generated_LivestreamService_CreateEvent_sync",
+      "title": "Snippet for the create_event call in the LivestreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#create_event.",
+      "file": "livestream_service/create_event.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_event",
+        "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#create_event",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Video::LiveStream::V1::CreateEventRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Video::LiveStream::V1::Event",
+        "client": {
+          "short_name": "LivestreamService::Client",
+          "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client"
+        },
+        "method": {
+          "short_name": "CreateEvent",
+          "full_name": "google.cloud.video.livestream.v1.LivestreamService.CreateEvent",
+          "service": {
+            "short_name": "LivestreamService",
+            "full_name": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "livestream_v1_generated_LivestreamService_ListEvents_sync",
+      "title": "Snippet for the list_events call in the LivestreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#list_events.",
+      "file": "livestream_service/list_events.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_events",
+        "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#list_events",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Video::LiveStream::V1::ListEventsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Video::LiveStream::V1::ListEventsResponse",
+        "client": {
+          "short_name": "LivestreamService::Client",
+          "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client"
+        },
+        "method": {
+          "short_name": "ListEvents",
+          "full_name": "google.cloud.video.livestream.v1.LivestreamService.ListEvents",
+          "service": {
+            "short_name": "LivestreamService",
+            "full_name": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "livestream_v1_generated_LivestreamService_GetEvent_sync",
+      "title": "Snippet for the get_event call in the LivestreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#get_event.",
+      "file": "livestream_service/get_event.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_event",
+        "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#get_event",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Video::LiveStream::V1::GetEventRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Video::LiveStream::V1::Event",
+        "client": {
+          "short_name": "LivestreamService::Client",
+          "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client"
+        },
+        "method": {
+          "short_name": "GetEvent",
+          "full_name": "google.cloud.video.livestream.v1.LivestreamService.GetEvent",
+          "service": {
+            "short_name": "LivestreamService",
+            "full_name": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "livestream_v1_generated_LivestreamService_DeleteEvent_sync",
+      "title": "Snippet for the delete_event call in the LivestreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#delete_event.",
+      "file": "livestream_service/delete_event.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_event",
+        "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#delete_event",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Video::LiveStream::V1::DeleteEventRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "LivestreamService::Client",
+          "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client"
+        },
+        "method": {
+          "short_name": "DeleteEvent",
+          "full_name": "google.cloud.video.livestream.v1.LivestreamService.DeleteEvent",
+          "service": {
+            "short_name": "LivestreamService",
+            "full_name": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "livestream_v1_generated_LivestreamService_CreateAsset_sync",
+      "title": "Snippet for the create_asset call in the LivestreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#create_asset.",
+      "file": "livestream_service/create_asset.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_asset",
+        "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#create_asset",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Video::LiveStream::V1::CreateAssetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "LivestreamService::Client",
+          "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client"
+        },
+        "method": {
+          "short_name": "CreateAsset",
+          "full_name": "google.cloud.video.livestream.v1.LivestreamService.CreateAsset",
+          "service": {
+            "short_name": "LivestreamService",
+            "full_name": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "livestream_v1_generated_LivestreamService_DeleteAsset_sync",
+      "title": "Snippet for the delete_asset call in the LivestreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#delete_asset.",
+      "file": "livestream_service/delete_asset.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_asset",
+        "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#delete_asset",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Video::LiveStream::V1::DeleteAssetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "LivestreamService::Client",
+          "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client"
+        },
+        "method": {
+          "short_name": "DeleteAsset",
+          "full_name": "google.cloud.video.livestream.v1.LivestreamService.DeleteAsset",
+          "service": {
+            "short_name": "LivestreamService",
+            "full_name": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "livestream_v1_generated_LivestreamService_GetAsset_sync",
+      "title": "Snippet for the get_asset call in the LivestreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#get_asset.",
+      "file": "livestream_service/get_asset.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_asset",
+        "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#get_asset",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Video::LiveStream::V1::GetAssetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Video::LiveStream::V1::Asset",
+        "client": {
+          "short_name": "LivestreamService::Client",
+          "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client"
+        },
+        "method": {
+          "short_name": "GetAsset",
+          "full_name": "google.cloud.video.livestream.v1.LivestreamService.GetAsset",
+          "service": {
+            "short_name": "LivestreamService",
+            "full_name": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "livestream_v1_generated_LivestreamService_ListAssets_sync",
+      "title": "Snippet for the list_assets call in the LivestreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#list_assets.",
+      "file": "livestream_service/list_assets.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_assets",
+        "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#list_assets",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Video::LiveStream::V1::ListAssetsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Video::LiveStream::V1::ListAssetsResponse",
+        "client": {
+          "short_name": "LivestreamService::Client",
+          "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client"
+        },
+        "method": {
+          "short_name": "ListAssets",
+          "full_name": "google.cloud.video.livestream.v1.LivestreamService.ListAssets",
+          "service": {
+            "short_name": "LivestreamService",
+            "full_name": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "livestream_v1_generated_LivestreamService_GetPool_sync",
+      "title": "Snippet for the get_pool call in the LivestreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#get_pool.",
+      "file": "livestream_service/get_pool.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_pool",
+        "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#get_pool",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Video::LiveStream::V1::GetPoolRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Video::LiveStream::V1::Pool",
+        "client": {
+          "short_name": "LivestreamService::Client",
+          "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client"
+        },
+        "method": {
+          "short_name": "GetPool",
+          "full_name": "google.cloud.video.livestream.v1.LivestreamService.GetPool",
+          "service": {
+            "short_name": "LivestreamService",
+            "full_name": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "livestream_v1_generated_LivestreamService_UpdatePool_sync",
+      "title": "Snippet for the update_pool call in the LivestreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#update_pool.",
+      "file": "livestream_service/update_pool.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_pool",
+        "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#update_pool",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Video::LiveStream::V1::UpdatePoolRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "LivestreamService::Client",
+          "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client"
+        },
+        "method": {
+          "short_name": "UpdatePool",
+          "full_name": "google.cloud.video.livestream.v1.LivestreamService.UpdatePool",
+          "service": {
+            "short_name": "LivestreamService",
+            "full_name": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
