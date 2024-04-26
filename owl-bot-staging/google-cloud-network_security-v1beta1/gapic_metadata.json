@@ -1,0 +1,93 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.networksecurity.v1beta1",
+  "libraryPackage": "::Google::Cloud::NetworkSecurity::V1beta1",
+  "services": {
+    "NetworkSecurity": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Client",
+          "rpcs": {
+            "ListAuthorizationPolicies": {
+              "methods": [
+                "list_authorization_policies"
+              ]
+            },
+            "GetAuthorizationPolicy": {
+              "methods": [
+                "get_authorization_policy"
+              ]
+            },
+            "CreateAuthorizationPolicy": {
+              "methods": [
+                "create_authorization_policy"
+              ]
+            },
+            "UpdateAuthorizationPolicy": {
+              "methods": [
+                "update_authorization_policy"
+              ]
+            },
+            "DeleteAuthorizationPolicy": {
+              "methods": [
+                "delete_authorization_policy"
+              ]
+            },
+            "ListServerTlsPolicies": {
+              "methods": [
+                "list_server_tls_policies"
+              ]
+            },
+            "GetServerTlsPolicy": {
+              "methods": [
+                "get_server_tls_policy"
+              ]
+            },
+            "CreateServerTlsPolicy": {
+              "methods": [
+                "create_server_tls_policy"
+              ]
+            },
+            "UpdateServerTlsPolicy": {
+              "methods": [
+                "update_server_tls_policy"
+              ]
+            },
+            "DeleteServerTlsPolicy": {
+              "methods": [
+                "delete_server_tls_policy"
+              ]
+            },
+            "ListClientTlsPolicies": {
+              "methods": [
+                "list_client_tls_policies"
+              ]
+            },
+            "GetClientTlsPolicy": {
+              "methods": [
+                "get_client_tls_policy"
+              ]
+            },
+            "CreateClientTlsPolicy": {
+              "methods": [
+                "create_client_tls_policy"
+              ]
+            },
+            "UpdateClientTlsPolicy": {
+              "methods": [
+                "update_client_tls_policy"
+              ]
+            },
+            "DeleteClientTlsPolicy": {
+              "methods": [
+                "delete_client_tls_policy"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

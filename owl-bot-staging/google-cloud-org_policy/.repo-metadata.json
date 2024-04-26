@@ -1,0 +1,18 @@
+{
+    "api_id": "orgpolicy.googleapis.com",
+    "api_shortname": "orgpolicy",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-org_policy/latest",
+    "distribution_name": "google-cloud-org_policy",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "orgpolicy",
+    "name_pretty": "Organization Policy API",
+    "product_documentation": "https://cloud.google.com/resource-manager/docs/organization-policy/overview",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "The Cloud Org Policy service provides a simple mechanism for organizations to restrict the allowed configurations across their entire Cloud Resource hierarchy.",
+    "ruby-cloud-env-prefix": "ORG_POLICY",
+    "ruby-cloud-product-url": "https://cloud.google.com/resource-manager/docs/organization-policy/overview",
+    "library_type": "GAPIC_AUTO"
+}
