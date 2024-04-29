@@ -1,5 +1,11 @@
 # Release History
 
+### 0.14.0 (2024-04-29)
+
+#### Features
+
+* add VectorSearch API ([#25424](https://github.com/googleapis/google-cloud-ruby/issues/25424)) 
+
 ### 0.13.0 (2024-03-22)
 
 #### Features
