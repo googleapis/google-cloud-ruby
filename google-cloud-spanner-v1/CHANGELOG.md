@@ -1,5 +1,11 @@
 # Release History
 
+### 0.26.0 (2024-04-29)
+
+#### Features
+
+* Support RESOURCE_EXHAUSTED as a retryable error code ([#25794](https://github.com/googleapis/google-cloud-ruby/issues/25794)) 
+
 ### 0.25.0 (2024-02-26)
 
 #### Features
