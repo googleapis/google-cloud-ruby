@@ -20,14 +20,41 @@
 module Google
   module Shopping
     module Type
+      # The weight represented as the value in string and the unit.
+      # @!attribute [rw] amount_micros
+      #   @return [::Integer]
+      #     Required. The weight represented as a number in micros (1 million micros is
+      #     an equivalent to one's currency standard unit, for example, 1 kg = 1000000
+      #     micros).
+      #     This field can also be set as infinity by setting to -1.
+      #     This field only support -1 and positive value.
+      # @!attribute [rw] unit
+      #   @return [::Google::Shopping::Type::Weight::WeightUnit]
+      #     Required. The weight unit.
+      #     Acceptable values are: kg and lb
+      class Weight
+        include ::Google::Protobuf::MessageExts
+        extend ::Google::Protobuf::MessageExts::ClassMethods
+
+        # The weight unit.
+        module WeightUnit
+          # unit unspecified
+          WEIGHT_UNIT_UNSPECIFIED = 0
+
+          # lb unit.
+          POUND = 1
+
+          # kg unit.
+          KILOGRAM = 2
+        end
+      end
+
       # The price represented as a number and currency.
       # @!attribute [rw] amount_micros
       #   @return [::Integer]
       #     The price represented as a number in micros (1 million micros is an
       #     equivalent to one's currency standard unit, for example, 1 USD = 1000000
       #     micros).
-      #     This field can also be set as infinity by setting to -1.
-      #     This field only support -1 and positive value.
       # @!attribute [rw] currency_code
       #   @return [::String]
       #     The currency of the price using three-letter acronyms according to [ISO
