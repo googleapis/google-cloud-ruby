@@ -191,9 +191,35 @@ class TestProxyServer < tp::CloudBigtableV2TestProxy::Service
     assert req.request.app_profile_id == "", "An app profile ID was specified when non was expected"
 
     # TODO: req.request.reverse is not supported by the client library; when it is, fix this
-    result = Client.get(req.client_id)
+    table = Client.get(req.client_id)
                    .table(req.request.table_name)
-                   .read_rows(keys: req.request&.rows&.row_keys&.to_a, limit: req.request.rows_limit)
+
+
+    options = {
+      keys: req.request&.rows&.row_keys&.to_a,
+      limit: req.request.rows_limit
+    }
+
+    if req.request.rows&.row_ranges&.any?
+      options[:ranges] = req.request.rows.row_ranges.map do |r|
+        range = table.new_row_range
+        if r.start_key_closed
+          range = range.from(r.start_key_closed, inclusive: true)
+        elsif r.start_key_open
+          range = range.from(r.start_key_open, inclusive: false)
+        end
+
+        if r.end_key_closed
+          range = range.to(r.end_key_closed, inclusive: true)
+        elsif r.end_key_open
+          range = range.to(r.end_key_open, inclusive: false)
+        end
+
+        range
+      end
+    end
+
+    result = table.read_rows(**options)
 
     result = result.to_a
 
