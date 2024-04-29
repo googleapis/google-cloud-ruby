@@ -245,7 +245,7 @@ module Google
           response = service.check_and_mutate_row(
             path,
             key,
-            predicate_filter: predicate.to_grpc,
+            predicate_filter: predicate&.to_grpc,
             true_mutations:   true_mutations,
             false_mutations:  false_mutations,
             app_profile_id:   @app_profile_id

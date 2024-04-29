@@ -163,6 +163,7 @@ module Google
       def self.resolve_credentials given_credentials, scope
         credentials = given_credentials || default_credentials(scope: scope)
         return credentials if credentials.is_a? Google::Auth::Credentials
+        return credentials if credentials.is_a? GRPC::Core::Channel
         Bigtable::Credentials.new credentials, scope: scope
       end
 
