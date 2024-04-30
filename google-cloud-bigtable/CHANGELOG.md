@@ -1,5 +1,12 @@
 # Release History
 
+### 2.10.2 (2024-04-30)
+
+#### Bug Fixes
+
+* Fixes for leaving predicate unset in check_and_mutate_row 
+* Fixes for using a preconfigured GRPC channel as credentials 
+
 ### 2.10.1 (2024-03-19)
 
 #### Bug Fixes
