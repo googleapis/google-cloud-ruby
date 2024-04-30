@@ -212,6 +212,15 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_instance_group_manager_resize_requests_rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Compute.instance_group_manager_resize_requests do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::InstanceGroupManagerResizeRequests::Rest::Client, client
+    end
+  end
+
   def test_instance_group_managers_rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::Compute.instance_group_managers do |config|
@@ -227,6 +236,15 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Cloud::Compute::V1::InstanceGroups::Rest::Client, client
+    end
+  end
+
+  def test_instance_settings_service_rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Compute.instance_settings_service do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::InstanceSettingsService::Rest::Client, client
     end
   end
 
@@ -749,6 +767,24 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Cloud::Compute::V1::SslPolicies::Rest::Client, client
+    end
+  end
+
+  def test_storage_pool_types_rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Compute.storage_pool_types do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::StoragePoolTypes::Rest::Client, client
+    end
+  end
+
+  def test_storage_pools_rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Compute.storage_pools do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::StoragePools::Rest::Client, client
     end
   end
 
