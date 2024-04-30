@@ -2396,7 +2396,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # This reservation type allows to pre allocate specific instance configuration. Next ID: 6
+        # This reservation type allows to pre allocate specific instance configuration.
         # @!attribute [rw] assured_count
         #   @return [::Integer]
         #     [Output Only] Indicates how many instances are actually usable currently.
@@ -8280,6 +8280,9 @@ module Google
         # @!attribute [rw] id
         #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
+        # @!attribute [rw] ip_collection
+        #   @return [::String]
+        #     Resource reference of a PublicDelegatedPrefix. The PDP must be a sub-PDP in EXTERNAL_IPV6_FORWARDING_RULE_CREATION mode. Use one of the following formats to specify a sub-PDP when creating an IPv6 NetLB forwarding rule using BYOIP: Full resource URL, as in https://www.googleapis.com/compute/v1/projects/project_id/regions/region /publicDelegatedPrefixes/sub-pdp-name Partial URL, as in: - projects/project_id/regions/region/publicDelegatedPrefixes/sub-pdp-name - regions/region/publicDelegatedPrefixes/sub-pdp-name
         # @!attribute [rw] ip_version
         #   @return [::String]
         #     The IP Version that will be used by this forwarding rule. Valid options are IPV4 or IPV6.
@@ -21594,6 +21597,10 @@ module Google
         # @!attribute [rw] location_hint
         #   @return [::String]
         #     An opaque location hint used to place the Node close to other resources. This field is for use by internal tools that use the public API. The location hint here on the NodeGroup overrides any location_hint present in the NodeTemplate.
+        # @!attribute [rw] maintenance_interval
+        #   @return [::String]
+        #     Specifies the frequency of planned maintenance events. The accepted values are: `AS_NEEDED` and `RECURRENT`.
+        #     Check the MaintenanceInterval enum for the list of possible values.
         # @!attribute [rw] maintenance_policy
         #   @return [::String]
         #     Specifies how to handle instances when a node in the group undergoes maintenance. Set to one of: DEFAULT, RESTART_IN_PLACE, or MIGRATE_WITHIN_NODE_GROUP. The default value is DEFAULT. For more information, see Maintenance policies.
@@ -21624,6 +21631,18 @@ module Google
         class NodeGroup
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Specifies the frequency of planned maintenance events. The accepted values are: `AS_NEEDED` and `RECURRENT`.
+          module MaintenanceInterval
+            # A value indicating that the enum field is not set.
+            UNDEFINED_MAINTENANCE_INTERVAL = 0
+
+            # VMs are eligible to receive infrastructure and hypervisor updates as they become available. This may result in more maintenance operations (live migrations or terminations) for the VM than the PERIODIC and RECURRENT options.
+            AS_NEEDED = 500_724_834
+
+            # VMs receive infrastructure and hypervisor updates on a periodic basis, minimizing the number of maintenance operations (live migrations or terminations) on an individual VM. This may mean a VM will take longer to receive an update than if it was configured for AS_NEEDED. Security updates will still be applied as soon as they are available. RECURRENT is used for GEN3 and Slice of Hardware VMs.
+            RECURRENT = 194_244_550
+          end
 
           # Specifies how to handle instances when a node in the group undergoes maintenance. Set to one of: DEFAULT, RESTART_IN_PLACE, or MIGRATE_WITHIN_NODE_GROUP. The default value is DEFAULT. For more information, see Maintenance policies.
           module MaintenancePolicy
@@ -21799,6 +21818,9 @@ module Google
         # @!attribute [rw] total_resources
         #   @return [::Google::Cloud::Compute::V1::InstanceConsumptionInfo]
         #     Total amount of available resources on the node.
+        # @!attribute [rw] upcoming_maintenance
+        #   @return [::Google::Cloud::Compute::V1::UpcomingMaintenance]
+        #     [Output Only] The information about an upcoming maintenance event.
         class NodeGroupNode
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -21866,6 +21888,17 @@ module Google
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
         class NodeGroupsListNodes
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] nodes
+        #   @return [::Array<::String>]
+        #     [Required] List of nodes affected by the call.
+        # @!attribute [rw] start_time
+        #   @return [::String]
+        #     The start time of the schedule. The timestamp is an RFC3339 string.
+        class NodeGroupsPerformMaintenanceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -22535,7 +22568,7 @@ module Google
         #     Check the Enable enum for the list of possible values.
         # @!attribute [rw] filter
         #   @return [::Google::Cloud::Compute::V1::PacketMirroringFilter]
-        #     Filter for mirrored traffic. If unspecified, all traffic is mirrored.
+        #     Filter for mirrored traffic. If unspecified, all IPv4 traffic is mirrored.
         # @!attribute [rw] id
         #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
@@ -22616,7 +22649,7 @@ module Google
         #     Protocols that apply as filter on mirrored traffic. If no protocols are specified, all traffic that matches the specified CIDR ranges is mirrored. If neither cidrRanges nor IPProtocols is specified, all IPv4 traffic is mirrored.
         # @!attribute [rw] cidr_ranges
         #   @return [::Array<::String>]
-        #     One or more IPv4 or IPv6 CIDR ranges that apply as filter on the source (ingress) or destination (egress) IP in the IP header. If no ranges are specified, all IPv4 traffic that matches the specified IPProtocols is mirrored. If neither cidrRanges nor IPProtocols is specified, all IPv4 traffic is mirrored. To mirror all IPv4 and IPv6 traffic, use "0.0.0.0/0,::/0".
+        #     One or more IPv4 or IPv6 CIDR ranges that apply as filters on the source (ingress) or destination (egress) IP in the IP header. If no ranges are specified, all IPv4 traffic that matches the specified IPProtocols is mirrored. If neither cidrRanges nor IPProtocols is specified, all IPv4 traffic is mirrored. To mirror all IPv4 and IPv6 traffic, use "0.0.0.0/0,::/0".
         # @!attribute [rw] direction
         #   @return [::String]
         #     Direction of traffic to mirror, either INGRESS, EGRESS, or BOTH. The default is BOTH.
@@ -23858,6 +23891,27 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for NodeGroups.PerformMaintenance. See the method description for details.
+        # @!attribute [rw] node_group
+        #   @return [::String]
+        #     Name of the node group scoping this request.
+        # @!attribute [rw] node_groups_perform_maintenance_request_resource
+        #   @return [::Google::Cloud::Compute::V1::NodeGroupsPerformMaintenanceRequest]
+        #     The body resource for this request
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     The name of the zone for this request.
+        class PerformMaintenanceNodeGroupRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A `Policy` is a collection of `bindings`. A `binding` binds one or more `members`, or principals, to a single `role`. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A `role` is a named list of permissions; each `role` can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a `binding` can also specify a `condition`, which is a logical expression that allows access to a resource only if the expression evaluates to `true`. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies). **JSON example:** ``` { "bindings": [ { "role": "roles/resourcemanager.organizationAdmin", "members": [ "user:mike@example.com", "group:admins@example.com", "domain:google.com", "serviceAccount:my-project-id@appspot.gserviceaccount.com" ] }, { "role": "roles/resourcemanager.organizationViewer", "members": [ "user:eve@example.com" ], "condition": { "title": "expirable access", "description": "Does not grant access after Sep 2020", "expression": "request.time < timestamp('2020-10-01T00:00:00.000Z')", } } ], "etag": "BwWWja0YfJA=", "version": 3 } ``` **YAML example:** ``` bindings: - members: - user:mike@example.com - group:admins@example.com - domain:google.com - serviceAccount:my-project-id@appspot.gserviceaccount.com role: roles/resourcemanager.organizationAdmin - members: - user:eve@example.com role: roles/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time < timestamp('2020-10-01T00:00:00.000Z') etag: BwWWja0YfJA= version: 3 ``` For a description of IAM and its features, see the [IAM documentation](https://cloud.google.com/iam/docs/).
         # @!attribute [rw] audit_configs
         #   @return [::Array<::Google::Cloud::Compute::V1::AuditConfig>]
@@ -24389,6 +24443,9 @@ module Google
         end
 
         # A PublicDelegatedPrefix resource represents an IP block within a PublicAdvertisedPrefix that is configured within a single cloud scope (global or region). IPs in the block can be allocated to resources within that scope. Public delegated prefixes may be further broken up into smaller IP blocks in the same scope as the parent block.
+        # @!attribute [rw] allocatable_prefix_length
+        #   @return [::Integer]
+        #     The allocatable prefix length supported by this public delegated prefix. This field is optional and cannot be set for prefixes in DELEGATION mode. It cannot be set for IPv4 prefixes either, and it always defaults to 32.
         # @!attribute [rw] byoip_api_version
         #   @return [::String]
         #     [Output Only] The version of BYOIP API.
@@ -24414,6 +24471,10 @@ module Google
         # @!attribute [rw] kind
         #   @return [::String]
         #     [Output Only] Type of the resource. Always compute#publicDelegatedPrefix for public delegated prefixes.
+        # @!attribute [rw] mode
+        #   @return [::String]
+        #     The public delegated prefix mode for IPv6 only.
+        #     Check the Mode enum for the list of possible values.
         # @!attribute [rw] name
         #   @return [::String]
         #     Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
@@ -24447,6 +24508,18 @@ module Google
 
             # This public delegated prefix takes minutes to delete. Announce and Withdraw APIs can be used on this prefix to change the BGP status.
             V2 = 2716
+          end
+
+          # The public delegated prefix mode for IPv6 only.
+          module Mode
+            # A value indicating that the enum field is not set.
+            UNDEFINED_MODE = 0
+
+            # The public delegated prefix is used for further sub-delegation only. Such prefixes cannot set allocatablePrefixLength.
+            DELEGATION = 264_149_288
+
+            # The public delegated prefix is used for creating forwarding rules only. Such prefixes cannot set publicDelegatedSubPrefixes.
+            EXTERNAL_IPV6_FORWARDING_RULE_CREATION = 398_684_356
           end
 
           # [Output Only] The status of the public delegated prefix, which can be one of following values: - `INITIALIZING` The public delegated prefix is being initialized and addresses cannot be created yet. - `READY_TO_ANNOUNCE` The public delegated prefix is a live migration prefix and is active. - `ANNOUNCED` The public delegated prefix is active. - `DELETING` The public delegated prefix is being deprovsioned.
@@ -24533,6 +24606,9 @@ module Google
         end
 
         # Represents a sub PublicDelegatedPrefix.
+        # @!attribute [rw] allocatable_prefix_length
+        #   @return [::Integer]
+        #     The allocatable prefix length supported by this PublicDelegatedSubPrefix.
         # @!attribute [rw] delegatee_project
         #   @return [::String]
         #     Name of the project scoping this PublicDelegatedSubPrefix.
@@ -24545,6 +24621,10 @@ module Google
         # @!attribute [rw] is_address
         #   @return [::Boolean]
         #     Whether the sub prefix is delegated to create Address resources in the delegatee project.
+        # @!attribute [rw] mode
+        #   @return [::String]
+        #     The PublicDelegatedSubPrefix mode for IPv6 only.
+        #     Check the Mode enum for the list of possible values.
         # @!attribute [rw] name
         #   @return [::String]
         #     The name of the sub public delegated prefix.
@@ -24558,6 +24638,18 @@ module Google
         class PublicDelegatedPrefixPublicDelegatedSubPrefix
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The PublicDelegatedSubPrefix mode for IPv6 only.
+          module Mode
+            # A value indicating that the enum field is not set.
+            UNDEFINED_MODE = 0
+
+            # The public delegated prefix is used for further sub-delegation only. Such prefixes cannot set allocatablePrefixLength.
+            DELEGATION = 264_149_288
+
+            # The public delegated prefix is used for creating forwarding rules only. Such prefixes cannot set publicDelegatedSubPrefixes.
+            EXTERNAL_IPV6_FORWARDING_RULE_CREATION = 398_684_356
+          end
 
           # [Output Only] The status of the sub public delegated prefix.
           module Status
@@ -24889,6 +24981,8 @@ module Google
             SSD_TOTAL_GB = 161_732_561
 
             SSL_CERTIFICATES = 378_372_399
+
+            SSL_POLICIES = 523_254_339
 
             STATIC_ADDRESSES = 93_624_049
 
@@ -27032,6 +27126,9 @@ module Google
         # @!attribute [rw] asn
         #   @return [::Integer]
         #     Local BGP Autonomous System Number (ASN). Must be an RFC6996 private ASN, either 16-bit or 32-bit. The value will be fixed for this router resource. All VPN tunnels that link to this router will have the same local ASN.
+        # @!attribute [rw] identifier_range
+        #   @return [::String]
+        #     Explicitly specifies a range of valid BGP Identifiers for this Router. It is provided as a link-local IPv4 range (from 169.254.0.0/16), of size at least /30, even if the BGP sessions are over IPv6. It must not overlap with any IPv4 BGP session ranges. Other vendors commonly call this "router ID".
         # @!attribute [rw] keepalive_interval
         #   @return [::Integer]
         #     The interval in seconds between BGP keepalive messages that are sent to the peer. Hold time is three times the interval at which keepalive messages are sent, and the hold time is the maximum number of seconds allowed to elapse between successive keepalive messages that BGP receives from a peer. BGP will use the smaller of either the local hold time value or the peer's hold time value as the hold time for the BGP connection between the two peers. If set, this value must be between 20 and 60. The default is 20.
@@ -27085,15 +27182,27 @@ module Google
         #   @return [::String]
         #     The status of the BGP peer connection. If set to FALSE, any active session with the peer is terminated and all associated routing information is removed. If set to TRUE, the peer connection can be established with routing information. The default is TRUE.
         #     Check the Enable enum for the list of possible values.
+        # @!attribute [rw] enable_ipv4
+        #   @return [::Boolean]
+        #     Enable IPv4 traffic over BGP Peer. It is enabled by default if the peerIpAddress is version 4.
         # @!attribute [rw] enable_ipv6
         #   @return [::Boolean]
-        #     Enable IPv6 traffic over BGP Peer. If not specified, it is disabled by default.
+        #     Enable IPv6 traffic over BGP Peer. It is enabled by default if the peerIpAddress is version 6.
+        # @!attribute [rw] export_policies
+        #   @return [::Array<::String>]
+        #     List of export policies applied to this peer, in the order they must be evaluated. The name must correspond to an existing policy that has ROUTE_POLICY_TYPE_EXPORT type. Note that Route Policies are currently available in preview. Please use Beta API to use Route Policies.
+        # @!attribute [rw] import_policies
+        #   @return [::Array<::String>]
+        #     List of import policies applied to this peer, in the order they must be evaluated. The name must correspond to an existing policy that has ROUTE_POLICY_TYPE_IMPORT type. Note that Route Policies are currently available in preview. Please use Beta API to use Route Policies.
         # @!attribute [rw] interface_name
         #   @return [::String]
         #     Name of the interface the BGP peer is associated with.
         # @!attribute [rw] ip_address
         #   @return [::String]
-        #     IP address of the interface inside Google Cloud Platform. Only IPv4 is supported.
+        #     IP address of the interface inside Google Cloud Platform.
+        # @!attribute [rw] ipv4_nexthop_address
+        #   @return [::String]
+        #     IPv4 address of the interface inside Google Cloud Platform.
         # @!attribute [rw] ipv6_nexthop_address
         #   @return [::String]
         #     IPv6 address of the interface inside Google Cloud Platform.
@@ -27112,7 +27221,10 @@ module Google
         #     Peer BGP Autonomous System Number (ASN). Each BGP interface may use a different value.
         # @!attribute [rw] peer_ip_address
         #   @return [::String]
-        #     IP address of the BGP interface outside Google Cloud Platform. Only IPv4 is supported.
+        #     IP address of the BGP interface outside Google Cloud Platform.
+        # @!attribute [rw] peer_ipv4_nexthop_address
+        #   @return [::String]
+        #     IPv4 address of the BGP interface outside Google Cloud Platform.
         # @!attribute [rw] peer_ipv6_nexthop_address
         #   @return [::String]
         #     IPv6 address of the BGP interface outside Google Cloud Platform.
@@ -27204,7 +27316,11 @@ module Google
 
         # @!attribute [rw] ip_range
         #   @return [::String]
-        #     IP address and range of the interface. The IP range must be in the RFC3927 link-local IP address space. The value must be a CIDR-formatted string, for example: 169.254.0.1/30. NOTE: Do not truncate the address as it represents the IP address of the interface.
+        #     IP address and range of the interface. - For Internet Protocol version 4 (IPv4), the IP range must be in the RFC3927 link-local IP address space. The value must be a CIDR-formatted string, for example, 169.254.0.1/30. Note: Do not truncate the IP address, as it represents the IP address of the interface. - For Internet Protocol version 6 (IPv6), the value must be a unique local address (ULA) range from fdff:1::/64 with a mask length of 126 or less. This value should be a CIDR-formatted string, for example, fc00:0:1:1::1/112. Within the router's VPC, this IPv6 prefix will be reserved exclusively for this connection and cannot be used for any other purpose.
+        # @!attribute [rw] ip_version
+        #   @return [::String]
+        #     IP version of this interface.
+        #     Check the IpVersion enum for the list of possible values.
         # @!attribute [rw] linked_interconnect_attachment
         #   @return [::String]
         #     URI of the linked Interconnect attachment. It must be in the same region as the router. Each interface can have one linked resource, which can be a VPN tunnel, an Interconnect attachment, or a subnetwork.
@@ -27230,6 +27346,16 @@ module Google
         class RouterInterface
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # IP version of this interface.
+          module IpVersion
+            # A value indicating that the enum field is not set.
+            UNDEFINED_IP_VERSION = 0
+
+            IPV4 = 2_254_341
+
+            IPV6 = 2_254_343
+          end
 
           # [Output Only] The resource that configures and manages this interface. - MANAGED_BY_USER is the default value and can be managed directly by users. - MANAGED_BY_ATTACHMENT is an interface that is configured and managed by Cloud Interconnect, specifically, by an InterconnectAttachment of type PARTNER. Google automatically creates, updates, and deletes this type of interface when the PARTNER InterconnectAttachment is created, updated, or deleted.
           module ManagementType
@@ -27536,12 +27662,18 @@ module Google
         #     Routes that were advertised to the remote BGP peer
         # @!attribute [rw] bfd_status
         #   @return [::Google::Cloud::Compute::V1::BfdStatus]
+        # @!attribute [rw] enable_ipv4
+        #   @return [::Boolean]
+        #     Enable IPv4 traffic over BGP Peer. It is enabled by default if the peerIpAddress is version 4.
         # @!attribute [rw] enable_ipv6
         #   @return [::Boolean]
-        #     Enable IPv6 traffic over BGP Peer. If not specified, it is disabled by default.
+        #     Enable IPv6 traffic over BGP Peer. It is enabled by default if the peerIpAddress is version 6.
         # @!attribute [rw] ip_address
         #   @return [::String]
         #     IP address of the local BGP interface.
+        # @!attribute [rw] ipv4_nexthop_address
+        #   @return [::String]
+        #     IPv4 address of the local BGP interface.
         # @!attribute [rw] ipv6_nexthop_address
         #   @return [::String]
         #     IPv6 address of the local BGP interface.
@@ -27560,6 +27692,9 @@ module Google
         # @!attribute [rw] peer_ip_address
         #   @return [::String]
         #     IP address of the remote BGP interface.
+        # @!attribute [rw] peer_ipv4_nexthop_address
+        #   @return [::String]
+        #     IPv4 address of the remote BGP interface.
         # @!attribute [rw] peer_ipv6_nexthop_address
         #   @return [::String]
         #     IPv6 address of the remote BGP interface.
@@ -27603,6 +27738,12 @@ module Google
           module StatusReason
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS_REASON = 0
+
+            # BGP peer disabled because it requires IPv4 but the underlying connection is IPv6-only.
+            IPV4_PEER_ON_IPV6_ONLY_CONNECTION = 435_936_662
+
+            # BGP peer disabled because it requires IPv6 but the underlying connection is IPv4-only.
+            IPV6_PEER_ON_IPV4_ONLY_CONNECTION = 436_304_082
 
             # Indicates internal problems with configuration of MD5 authentication. This particular reason can only be returned when md5AuthEnabled is true and status is DOWN.
             MD5_AUTH_INTERNAL_PROBLEM = 140_462_259
