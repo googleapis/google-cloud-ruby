@@ -25,6 +25,7 @@ require "google/cloud/ai_platform/v1/version"
 require "google/cloud/ai_platform/v1/gen_ai_tuning_service/credentials"
 require "google/cloud/ai_platform/v1/gen_ai_tuning_service/paths"
 require "google/cloud/ai_platform/v1/gen_ai_tuning_service/client"
+require "google/cloud/ai_platform/v1/gen_ai_tuning_service/rest"
 
 module Google
   module Cloud
@@ -37,6 +38,11 @@ module Google
         #
         #     require "google/cloud/ai_platform/v1/gen_ai_tuning_service"
         #     client = ::Google::Cloud::AIPlatform::V1::GenAiTuningService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/ai_platform/v1/gen_ai_tuning_service/rest"
+        #     client = ::Google::Cloud::AIPlatform::V1::GenAiTuningService::Rest::Client.new
         #
         module GenAiTuningService
         end

@@ -27,7 +27,7 @@ module Google
         #   @return [::String]
         #     Required. The resource name of the Location to create FeatureGroups.
         #     Format:
-        #     `projects/{project}/locations/{location}'`
+        #     `projects/{project}/locations/{location}`
         # @!attribute [rw] feature_group
         #   @return [::Google::Cloud::AIPlatform::V1::FeatureGroup]
         #     Required. The FeatureGroup to create.

@@ -226,7 +226,7 @@ module Google
             #   @param parent [::String]
             #     Required. The resource name of the Location to create FeatureGroups.
             #     Format:
-            #     `projects/{project}/locations/{location}'`
+            #     `projects/{project}/locations/{location}`
             #   @param feature_group [::Google::Cloud::AIPlatform::V1::FeatureGroup, ::Hash]
             #     Required. The FeatureGroup to create.
             #   @param feature_group_id [::String]

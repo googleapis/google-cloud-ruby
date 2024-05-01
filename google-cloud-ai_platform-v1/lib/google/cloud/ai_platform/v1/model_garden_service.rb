@@ -25,6 +25,7 @@ require "google/cloud/ai_platform/v1/version"
 require "google/cloud/ai_platform/v1/model_garden_service/credentials"
 require "google/cloud/ai_platform/v1/model_garden_service/paths"
 require "google/cloud/ai_platform/v1/model_garden_service/client"
+require "google/cloud/ai_platform/v1/model_garden_service/rest"
 
 module Google
   module Cloud
@@ -37,6 +38,11 @@ module Google
         #
         #     require "google/cloud/ai_platform/v1/model_garden_service"
         #     client = ::Google::Cloud::AIPlatform::V1::ModelGardenService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/ai_platform/v1/model_garden_service/rest"
+        #     client = ::Google::Cloud::AIPlatform::V1::ModelGardenService::Rest::Client.new
         #
         module ModelGardenService
         end

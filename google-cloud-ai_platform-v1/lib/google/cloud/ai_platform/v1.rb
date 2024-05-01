@@ -33,8 +33,8 @@ require "google/cloud/ai_platform/v1/llm_utility_service"
 require "google/cloud/ai_platform/v1/match_service"
 require "google/cloud/ai_platform/v1/metadata_service"
 require "google/cloud/ai_platform/v1/migration_service"
-require "google/cloud/ai_platform/v1/model_service"
 require "google/cloud/ai_platform/v1/model_garden_service"
+require "google/cloud/ai_platform/v1/model_service"
 require "google/cloud/ai_platform/v1/notebook_service"
 require "google/cloud/ai_platform/v1/persistent_resource_service"
 require "google/cloud/ai_platform/v1/pipeline_service"
@@ -54,6 +54,11 @@ module Google
       #
       #     require "google/cloud/ai_platform/v1"
       #     client = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new
+      #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/ai_platform/v1"
+      #     client = ::Google::Cloud::AIPlatform::V1::DatasetService::Rest::Client.new
       #
       module V1
       end
