@@ -97,7 +97,9 @@ You can use a versioned client if you are content with a possibly lower-level
 class interface, you explicitly want to avoid features provided by the main
 client, or you want to access a specific service version not be covered by the
 main client. You can identify versioned client gems because the service version
-is part of the name, e.g. `google-cloud-translate-v2`.
+is part of the name, e.g. `google-cloud-translate-v2`. The v2 gem has a dependency on
+`faraday (< 2.0, >= 0.17.3)` which locks it to the 0.20.0 version of google-cloud-translate from 2016
+in an application which requires `faraday (>= 2)`.
 
 ### What about the google-apis-<name> clients?
 
