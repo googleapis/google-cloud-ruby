@@ -26,6 +26,7 @@ require "google/cloud/ai_platform/v1/specialist_pool_service/credentials"
 require "google/cloud/ai_platform/v1/specialist_pool_service/paths"
 require "google/cloud/ai_platform/v1/specialist_pool_service/operations"
 require "google/cloud/ai_platform/v1/specialist_pool_service/client"
+require "google/cloud/ai_platform/v1/specialist_pool_service/rest"
 
 module Google
   module Cloud
@@ -43,6 +44,11 @@ module Google
         #
         #     require "google/cloud/ai_platform/v1/specialist_pool_service"
         #     client = ::Google::Cloud::AIPlatform::V1::SpecialistPoolService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/ai_platform/v1/specialist_pool_service/rest"
+        #     client = ::Google::Cloud::AIPlatform::V1::SpecialistPoolService::Rest::Client.new
         #
         module SpecialistPoolService
         end

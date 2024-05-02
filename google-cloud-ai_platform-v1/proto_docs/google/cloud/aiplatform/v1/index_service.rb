@@ -278,6 +278,9 @@ module Google
 
               # File is not in UTF_8 format.
               INVALID_ENCODING = 13
+
+              # Token restrict value is invalid.
+              INVALID_TOKEN_VALUE = 15
             end
           end
 

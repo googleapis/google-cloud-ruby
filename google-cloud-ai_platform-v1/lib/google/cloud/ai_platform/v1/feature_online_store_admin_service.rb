@@ -26,6 +26,7 @@ require "google/cloud/ai_platform/v1/feature_online_store_admin_service/credenti
 require "google/cloud/ai_platform/v1/feature_online_store_admin_service/paths"
 require "google/cloud/ai_platform/v1/feature_online_store_admin_service/operations"
 require "google/cloud/ai_platform/v1/feature_online_store_admin_service/client"
+require "google/cloud/ai_platform/v1/feature_online_store_admin_service/rest"
 
 module Google
   module Cloud
@@ -39,6 +40,11 @@ module Google
         #
         #     require "google/cloud/ai_platform/v1/feature_online_store_admin_service"
         #     client = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/ai_platform/v1/feature_online_store_admin_service/rest"
+        #     client = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::Client.new
         #
         module FeatureOnlineStoreAdminService
         end

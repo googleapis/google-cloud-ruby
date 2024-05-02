@@ -24,7 +24,7 @@ module Google
         # Represents a TuningJob that runs with Google owned models.
         # @!attribute [rw] base_model
         #   @return [::String]
-        #     Model name for tuning, e.g., "gemini-1.0-pro-002".
+        #     The base model that is being tuned, e.g., "gemini-1.0-pro-002".
         # @!attribute [rw] supervised_tuning_spec
         #   @return [::Google::Cloud::AIPlatform::V1::SupervisedTuningSpec]
         #     Tuning Spec for Supervised Fine Tuning.
@@ -35,8 +35,8 @@ module Google
         # @!attribute [rw] tuned_model_display_name
         #   @return [::String]
         #     Optional. The display name of the
-        #     {::Google::Cloud::AIPlatform::V1::Model TunedModel}. The name can be up to
-        #     128 characters long and can consist of any UTF-8 characters.
+        #     {::Google::Cloud::AIPlatform::V1::Model TunedModel}. The name can be up to 128
+        #     characters long and can consist of any UTF-8 characters.
         # @!attribute [rw] description
         #   @return [::String]
         #     Optional. The description of the
@@ -209,10 +209,11 @@ module Google
         # Hyperparameters for SFT.
         # @!attribute [rw] epoch_count
         #   @return [::Integer]
-        #     Optional. Number of training epoches for this tuning job.
+        #     Optional. Number of complete passes the model makes over the entire
+        #     training dataset during training.
         # @!attribute [rw] learning_rate_multiplier
         #   @return [::Float]
-        #     Optional. Learning rate multiplier for tuning.
+        #     Optional. Multiplier for adjusting the default learning rate.
         # @!attribute [rw] adapter_size
         #   @return [::Google::Cloud::AIPlatform::V1::SupervisedHyperParameters::AdapterSize]
         #     Optional. Adapter size for tuning.
@@ -243,11 +244,11 @@ module Google
         # @!attribute [rw] training_dataset_uri
         #   @return [::String]
         #     Required. Cloud Storage path to file containing training dataset for
-        #     tuning.
+        #     tuning. The dataset must be formatted as a JSONL file.
         # @!attribute [rw] validation_dataset_uri
         #   @return [::String]
         #     Optional. Cloud Storage path to file containing validation dataset for
-        #     tuning.
+        #     tuning. The dataset must be formatted as a JSONL file.
         # @!attribute [rw] hyper_parameters
         #   @return [::Google::Cloud::AIPlatform::V1::SupervisedHyperParameters]
         #     Optional. Hyperparameters for SFT.

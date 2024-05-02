@@ -24,9 +24,9 @@ module Google
         # A template that specifies runtime configurations such as machine type,
         # runtime version, network configurations, etc.
         # Multiple runtimes can be created from a runtime template.
-        # @!attribute [r] name
+        # @!attribute [rw] name
         #   @return [::String]
-        #     Output only. The resource name of the NotebookRuntimeTemplate.
+        #     The resource name of the NotebookRuntimeTemplate.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Required. The display name of the NotebookRuntimeTemplate.

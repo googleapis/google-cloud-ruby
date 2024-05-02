@@ -415,7 +415,24 @@ module Google
         # @!attribute [rw] grounding_attributions
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::GroundingAttribution>]
         #     Optional. List of grounding attributions.
+        # @!attribute [rw] search_entry_point
+        #   @return [::Google::Cloud::AIPlatform::V1::SearchEntryPoint]
+        #     Optional. Google search entry for the following-up web searches.
         class GroundingMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Google search entry point.
+        # @!attribute [rw] rendered_content
+        #   @return [::String]
+        #     Optional. Web content snippet that can be embedded in a web page or an app
+        #     webview.
+        # @!attribute [rw] sdk_blob
+        #   @return [::String]
+        #     Optional. Base64 encoded JSON representing array of <search term, search
+        #     url> tuple.
+        class SearchEntryPoint
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

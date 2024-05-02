@@ -1083,6 +1083,20 @@
         }
       }
     },
+    "ModelGardenService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::AIPlatform::V1::ModelGardenService::Client",
+          "rpcs": {
+            "GetPublisherModel": {
+              "methods": [
+                "get_publisher_model"
+              ]
+            }
+          }
+        }
+      }
+    },
     "ModelService": {
       "clients": {
         "grpc": {
@@ -1176,20 +1190,6 @@
             "ListModelEvaluationSlices": {
               "methods": [
                 "list_model_evaluation_slices"
-              ]
-            }
-          }
-        }
-      }
-    },
-    "ModelGardenService": {
-      "clients": {
-        "grpc": {
-          "libraryClient": "::Google::Cloud::AIPlatform::V1::ModelGardenService::Client",
-          "rpcs": {
-            "GetPublisherModel": {
-              "methods": [
-                "get_publisher_model"
               ]
             }
           }
