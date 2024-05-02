@@ -1587,6 +1587,10 @@
       "component": "google-identity-access_context_manager-v1",
       "version_file": "lib/google/identity/access_context_manager/v1/version.rb"
     },
+    "google-maps-fleet_engine-delivery-v1": {
+      "component": "google-maps-fleet_engine-delivery-v1",
+      "version_file": "lib/google/maps/fleet_engine/delivery/v1/version.rb"
+    },
     "google-maps-fleet_engine-v1": {
       "component": "google-maps-fleet_engine-v1",
       "version_file": "lib/google/maps/fleet_engine/v1/version.rb"
