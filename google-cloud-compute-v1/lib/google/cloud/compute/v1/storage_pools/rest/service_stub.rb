@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,10 +22,10 @@ module Google
   module Cloud
     module Compute
       module V1
-        module NodeGroups
+        module StoragePools
           module Rest
             ##
-            # REST service stub for the NodeGroups service.
+            # REST service stub for the StoragePools service.
             # Service stub contains baseline method implementations
             # including transcoding, making the REST call, and deserialing the response.
             #
@@ -62,56 +62,18 @@ module Google
               end
 
               ##
-              # Baseline implementation for the add_nodes REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::AddNodesNodeGroupRequest]
-              #   A request object representing the call parameters. Required.
-              # @param options [::Gapic::CallOptions]
-              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Google::Cloud::Compute::V1::Operation]
-              #   A result object deserialized from the server's reply
-              def add_nodes request_pb, options = nil
-                raise ::ArgumentError, "request must be provided" if request_pb.nil?
-
-                verb, uri, query_string_params, body = ServiceStub.transcode_add_nodes_request request_pb
-                query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split "=", 2 }
-                                      else
-                                        {}
-                                      end
-
-                response = @client_stub.make_http_request(
-                  verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
-                  options: options
-                )
-                operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
-              end
-
-              ##
               # Baseline implementation for the aggregated_list REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::AggregatedListNodeGroupsRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::AggregatedListStoragePoolsRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Compute::V1::NodeGroupAggregatedList]
+              # @yieldparam result [::Google::Cloud::Compute::V1::StoragePoolAggregatedList]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Compute::V1::NodeGroupAggregatedList]
+              # @return [::Google::Cloud::Compute::V1::StoragePoolAggregatedList]
               #   A result object deserialized from the server's reply
               def aggregated_list request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
@@ -131,7 +93,7 @@ module Google
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Cloud::Compute::V1::NodeGroupAggregatedList.decode_json response.body, ignore_unknown_fields: true
+                result = ::Google::Cloud::Compute::V1::StoragePoolAggregatedList.decode_json response.body, ignore_unknown_fields: true
 
                 yield result, operation if block_given?
                 result
@@ -140,7 +102,7 @@ module Google
               ##
               # Baseline implementation for the delete REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::DeleteNodeGroupRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::DeleteStoragePoolRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
@@ -176,56 +138,18 @@ module Google
               end
 
               ##
-              # Baseline implementation for the delete_nodes REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::DeleteNodesNodeGroupRequest]
-              #   A request object representing the call parameters. Required.
-              # @param options [::Gapic::CallOptions]
-              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Google::Cloud::Compute::V1::Operation]
-              #   A result object deserialized from the server's reply
-              def delete_nodes request_pb, options = nil
-                raise ::ArgumentError, "request must be provided" if request_pb.nil?
-
-                verb, uri, query_string_params, body = ServiceStub.transcode_delete_nodes_request request_pb
-                query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split "=", 2 }
-                                      else
-                                        {}
-                                      end
-
-                response = @client_stub.make_http_request(
-                  verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
-                  options: options
-                )
-                operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
-              end
-
-              ##
               # Baseline implementation for the get REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::GetNodeGroupRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::GetStoragePoolRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Compute::V1::NodeGroup]
+              # @yieldparam result [::Google::Cloud::Compute::V1::StoragePool]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Compute::V1::NodeGroup]
+              # @return [::Google::Cloud::Compute::V1::StoragePool]
               #   A result object deserialized from the server's reply
               def get request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
@@ -245,7 +169,7 @@ module Google
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Cloud::Compute::V1::NodeGroup.decode_json response.body, ignore_unknown_fields: true
+                result = ::Google::Cloud::Compute::V1::StoragePool.decode_json response.body, ignore_unknown_fields: true
 
                 yield result, operation if block_given?
                 result
@@ -254,7 +178,7 @@ module Google
               ##
               # Baseline implementation for the get_iam_policy REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::GetIamPolicyNodeGroupRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::GetIamPolicyStoragePoolRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
@@ -292,7 +216,7 @@ module Google
               ##
               # Baseline implementation for the insert REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::InsertNodeGroupRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::InsertStoragePoolRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
@@ -330,16 +254,16 @@ module Google
               ##
               # Baseline implementation for the list REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::ListNodeGroupsRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::ListStoragePoolsRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Compute::V1::NodeGroupList]
+              # @yieldparam result [::Google::Cloud::Compute::V1::StoragePoolList]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Compute::V1::NodeGroupList]
+              # @return [::Google::Cloud::Compute::V1::StoragePoolList]
               #   A result object deserialized from the server's reply
               def list request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
@@ -359,30 +283,30 @@ module Google
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Cloud::Compute::V1::NodeGroupList.decode_json response.body, ignore_unknown_fields: true
+                result = ::Google::Cloud::Compute::V1::StoragePoolList.decode_json response.body, ignore_unknown_fields: true
 
                 yield result, operation if block_given?
                 result
               end
 
               ##
-              # Baseline implementation for the list_nodes REST call
+              # Baseline implementation for the list_disks REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::ListNodesNodeGroupsRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::ListDisksStoragePoolsRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Compute::V1::NodeGroupsListNodes]
+              # @yieldparam result [::Google::Cloud::Compute::V1::StoragePoolListDisks]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Compute::V1::NodeGroupsListNodes]
+              # @return [::Google::Cloud::Compute::V1::StoragePoolListDisks]
               #   A result object deserialized from the server's reply
-              def list_nodes request_pb, options = nil
+              def list_disks request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = ServiceStub.transcode_list_nodes_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_list_disks_request request_pb
                 query_string_params = if query_string_params.any?
                                         query_string_params.to_h { |p| p.split "=", 2 }
                                       else
@@ -397,83 +321,7 @@ module Google
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Cloud::Compute::V1::NodeGroupsListNodes.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
-              end
-
-              ##
-              # Baseline implementation for the patch REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::PatchNodeGroupRequest]
-              #   A request object representing the call parameters. Required.
-              # @param options [::Gapic::CallOptions]
-              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Google::Cloud::Compute::V1::Operation]
-              #   A result object deserialized from the server's reply
-              def patch request_pb, options = nil
-                raise ::ArgumentError, "request must be provided" if request_pb.nil?
-
-                verb, uri, query_string_params, body = ServiceStub.transcode_patch_request request_pb
-                query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split "=", 2 }
-                                      else
-                                        {}
-                                      end
-
-                response = @client_stub.make_http_request(
-                  verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
-                  options: options
-                )
-                operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
-              end
-
-              ##
-              # Baseline implementation for the perform_maintenance REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::PerformMaintenanceNodeGroupRequest]
-              #   A request object representing the call parameters. Required.
-              # @param options [::Gapic::CallOptions]
-              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Google::Cloud::Compute::V1::Operation]
-              #   A result object deserialized from the server's reply
-              def perform_maintenance request_pb, options = nil
-                raise ::ArgumentError, "request must be provided" if request_pb.nil?
-
-                verb, uri, query_string_params, body = ServiceStub.transcode_perform_maintenance_request request_pb
-                query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split "=", 2 }
-                                      else
-                                        {}
-                                      end
-
-                response = @client_stub.make_http_request(
-                  verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
-                  options: options
-                )
-                operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
+                result = ::Google::Cloud::Compute::V1::StoragePoolListDisks.decode_json response.body, ignore_unknown_fields: true
 
                 yield result, operation if block_given?
                 result
@@ -482,7 +330,7 @@ module Google
               ##
               # Baseline implementation for the set_iam_policy REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::SetIamPolicyNodeGroupRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::SetIamPolicyStoragePoolRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
@@ -518,85 +366,9 @@ module Google
               end
 
               ##
-              # Baseline implementation for the set_node_template REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::SetNodeTemplateNodeGroupRequest]
-              #   A request object representing the call parameters. Required.
-              # @param options [::Gapic::CallOptions]
-              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Google::Cloud::Compute::V1::Operation]
-              #   A result object deserialized from the server's reply
-              def set_node_template request_pb, options = nil
-                raise ::ArgumentError, "request must be provided" if request_pb.nil?
-
-                verb, uri, query_string_params, body = ServiceStub.transcode_set_node_template_request request_pb
-                query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split "=", 2 }
-                                      else
-                                        {}
-                                      end
-
-                response = @client_stub.make_http_request(
-                  verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
-                  options: options
-                )
-                operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
-              end
-
-              ##
-              # Baseline implementation for the simulate_maintenance_event REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::SimulateMaintenanceEventNodeGroupRequest]
-              #   A request object representing the call parameters. Required.
-              # @param options [::Gapic::CallOptions]
-              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Google::Cloud::Compute::V1::Operation]
-              #   A result object deserialized from the server's reply
-              def simulate_maintenance_event request_pb, options = nil
-                raise ::ArgumentError, "request must be provided" if request_pb.nil?
-
-                verb, uri, query_string_params, body = ServiceStub.transcode_simulate_maintenance_event_request request_pb
-                query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split "=", 2 }
-                                      else
-                                        {}
-                                      end
-
-                response = @client_stub.make_http_request(
-                  verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
-                  options: options
-                )
-                operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
-              end
-
-              ##
               # Baseline implementation for the test_iam_permissions REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::TestIamPermissionsNodeGroupRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::TestIamPermissionsStoragePoolRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
@@ -632,27 +404,41 @@ module Google
               end
 
               ##
-              # @private
+              # Baseline implementation for the update REST call
               #
-              # GRPC transcoding helper method for the add_nodes REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::AddNodesNodeGroupRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::UpdateStoragePoolRequest]
               #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def self.transcode_add_nodes_request request_pb
-                transcoder = Gapic::Rest::GrpcTranscoder.new
-                                                        .with_bindings(
-                                                          uri_method: :post,
-                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/nodeGroups/{node_group}/addNodes",
-                                                          body: "node_groups_add_nodes_request_resource",
-                                                          matches: [
-                                                            ["project", %r{^[^/]+/?$}, false],
-                                                            ["zone", %r{^[^/]+/?$}, false],
-                                                            ["node_group", %r{^[^/]+/?$}, false]
-                                                          ]
-                                                        )
-                transcoder.transcode request_pb
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Compute::V1::Operation]
+              #   A result object deserialized from the server's reply
+              def update request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_update_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
               end
 
               ##
@@ -660,7 +446,7 @@ module Google
               #
               # GRPC transcoding helper method for the aggregated_list REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::AggregatedListNodeGroupsRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::AggregatedListStoragePoolsRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
@@ -668,7 +454,7 @@ module Google
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :get,
-                                                          uri_template: "/compute/v1/projects/{project}/aggregated/nodeGroups",
+                                                          uri_template: "/compute/v1/projects/{project}/aggregated/storagePools",
                                                           matches: [
                                                             ["project", %r{^[^/]+/?$}, false]
                                                           ]
@@ -681,7 +467,7 @@ module Google
               #
               # GRPC transcoding helper method for the delete REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::DeleteNodeGroupRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::DeleteStoragePoolRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
@@ -689,35 +475,11 @@ module Google
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :delete,
-                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/nodeGroups/{node_group}",
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/storagePools/{storage_pool}",
                                                           matches: [
                                                             ["project", %r{^[^/]+/?$}, false],
                                                             ["zone", %r{^[^/]+/?$}, false],
-                                                            ["node_group", %r{^[^/]+/?$}, false]
-                                                          ]
-                                                        )
-                transcoder.transcode request_pb
-              end
-
-              ##
-              # @private
-              #
-              # GRPC transcoding helper method for the delete_nodes REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::DeleteNodesNodeGroupRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def self.transcode_delete_nodes_request request_pb
-                transcoder = Gapic::Rest::GrpcTranscoder.new
-                                                        .with_bindings(
-                                                          uri_method: :post,
-                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/nodeGroups/{node_group}/deleteNodes",
-                                                          body: "node_groups_delete_nodes_request_resource",
-                                                          matches: [
-                                                            ["project", %r{^[^/]+/?$}, false],
-                                                            ["zone", %r{^[^/]+/?$}, false],
-                                                            ["node_group", %r{^[^/]+/?$}, false]
+                                                            ["storage_pool", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -728,7 +490,7 @@ module Google
               #
               # GRPC transcoding helper method for the get REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::GetNodeGroupRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::GetStoragePoolRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
@@ -736,11 +498,11 @@ module Google
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :get,
-                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/nodeGroups/{node_group}",
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/storagePools/{storage_pool}",
                                                           matches: [
                                                             ["project", %r{^[^/]+/?$}, false],
                                                             ["zone", %r{^[^/]+/?$}, false],
-                                                            ["node_group", %r{^[^/]+/?$}, false]
+                                                            ["storage_pool", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -751,7 +513,7 @@ module Google
               #
               # GRPC transcoding helper method for the get_iam_policy REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::GetIamPolicyNodeGroupRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::GetIamPolicyStoragePoolRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
@@ -759,7 +521,7 @@ module Google
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :get,
-                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/nodeGroups/{resource}/getIamPolicy",
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/storagePools/{resource}/getIamPolicy",
                                                           matches: [
                                                             ["project", %r{^[^/]+/?$}, false],
                                                             ["zone", %r{^[^/]+/?$}, false],
@@ -774,7 +536,7 @@ module Google
               #
               # GRPC transcoding helper method for the insert REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::InsertNodeGroupRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::InsertStoragePoolRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
@@ -782,8 +544,8 @@ module Google
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :post,
-                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/nodeGroups",
-                                                          body: "node_group_resource",
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/storagePools",
+                                                          body: "storage_pool_resource",
                                                           matches: [
                                                             ["project", %r{^[^/]+/?$}, false],
                                                             ["zone", %r{^[^/]+/?$}, false]
@@ -797,7 +559,7 @@ module Google
               #
               # GRPC transcoding helper method for the list REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::ListNodeGroupsRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::ListStoragePoolsRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
@@ -805,7 +567,7 @@ module Google
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :get,
-                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/nodeGroups",
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/storagePools",
                                                           matches: [
                                                             ["project", %r{^[^/]+/?$}, false],
                                                             ["zone", %r{^[^/]+/?$}, false]
@@ -817,69 +579,21 @@ module Google
               ##
               # @private
               #
-              # GRPC transcoding helper method for the list_nodes REST call
+              # GRPC transcoding helper method for the list_disks REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::ListNodesNodeGroupsRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::ListDisksStoragePoolsRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def self.transcode_list_nodes_request request_pb
+              def self.transcode_list_disks_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
-                                                          uri_method: :post,
-                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/nodeGroups/{node_group}/listNodes",
+                                                          uri_method: :get,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/storagePools/{storage_pool}/listDisks",
                                                           matches: [
                                                             ["project", %r{^[^/]+/?$}, false],
                                                             ["zone", %r{^[^/]+/?$}, false],
-                                                            ["node_group", %r{^[^/]+/?$}, false]
-                                                          ]
-                                                        )
-                transcoder.transcode request_pb
-              end
-
-              ##
-              # @private
-              #
-              # GRPC transcoding helper method for the patch REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::PatchNodeGroupRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def self.transcode_patch_request request_pb
-                transcoder = Gapic::Rest::GrpcTranscoder.new
-                                                        .with_bindings(
-                                                          uri_method: :patch,
-                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/nodeGroups/{node_group}",
-                                                          body: "node_group_resource",
-                                                          matches: [
-                                                            ["project", %r{^[^/]+/?$}, false],
-                                                            ["zone", %r{^[^/]+/?$}, false],
-                                                            ["node_group", %r{^[^/]+/?$}, false]
-                                                          ]
-                                                        )
-                transcoder.transcode request_pb
-              end
-
-              ##
-              # @private
-              #
-              # GRPC transcoding helper method for the perform_maintenance REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::PerformMaintenanceNodeGroupRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def self.transcode_perform_maintenance_request request_pb
-                transcoder = Gapic::Rest::GrpcTranscoder.new
-                                                        .with_bindings(
-                                                          uri_method: :post,
-                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/nodeGroups/{node_group}/performMaintenance",
-                                                          body: "node_groups_perform_maintenance_request_resource",
-                                                          matches: [
-                                                            ["project", %r{^[^/]+/?$}, false],
-                                                            ["zone", %r{^[^/]+/?$}, false],
-                                                            ["node_group", %r{^[^/]+/?$}, false]
+                                                            ["storage_pool", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -890,7 +604,7 @@ module Google
               #
               # GRPC transcoding helper method for the set_iam_policy REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::SetIamPolicyNodeGroupRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::SetIamPolicyStoragePoolRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
@@ -898,7 +612,7 @@ module Google
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :post,
-                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/nodeGroups/{resource}/setIamPolicy",
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/storagePools/{resource}/setIamPolicy",
                                                           body: "zone_set_policy_request_resource",
                                                           matches: [
                                                             ["project", %r{^[^/]+/?$}, false],
@@ -912,57 +626,9 @@ module Google
               ##
               # @private
               #
-              # GRPC transcoding helper method for the set_node_template REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::SetNodeTemplateNodeGroupRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def self.transcode_set_node_template_request request_pb
-                transcoder = Gapic::Rest::GrpcTranscoder.new
-                                                        .with_bindings(
-                                                          uri_method: :post,
-                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/nodeGroups/{node_group}/setNodeTemplate",
-                                                          body: "node_groups_set_node_template_request_resource",
-                                                          matches: [
-                                                            ["project", %r{^[^/]+/?$}, false],
-                                                            ["zone", %r{^[^/]+/?$}, false],
-                                                            ["node_group", %r{^[^/]+/?$}, false]
-                                                          ]
-                                                        )
-                transcoder.transcode request_pb
-              end
-
-              ##
-              # @private
-              #
-              # GRPC transcoding helper method for the simulate_maintenance_event REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::SimulateMaintenanceEventNodeGroupRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def self.transcode_simulate_maintenance_event_request request_pb
-                transcoder = Gapic::Rest::GrpcTranscoder.new
-                                                        .with_bindings(
-                                                          uri_method: :post,
-                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/nodeGroups/{node_group}/simulateMaintenanceEvent",
-                                                          body: "node_groups_simulate_maintenance_event_request_resource",
-                                                          matches: [
-                                                            ["project", %r{^[^/]+/?$}, false],
-                                                            ["zone", %r{^[^/]+/?$}, false],
-                                                            ["node_group", %r{^[^/]+/?$}, false]
-                                                          ]
-                                                        )
-                transcoder.transcode request_pb
-              end
-
-              ##
-              # @private
-              #
               # GRPC transcoding helper method for the test_iam_permissions REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::TestIamPermissionsNodeGroupRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::TestIamPermissionsStoragePoolRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
@@ -970,12 +636,36 @@ module Google
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :post,
-                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/nodeGroups/{resource}/testIamPermissions",
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/storagePools/{resource}/testIamPermissions",
                                                           body: "test_permissions_request_resource",
                                                           matches: [
                                                             ["project", %r{^[^/]+/?$}, false],
                                                             ["zone", %r{^[^/]+/?$}, false],
                                                             ["resource", %r{^[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the update REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::UpdateStoragePoolRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_update_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/storagePools/{storage_pool}",
+                                                          body: "storage_pool_resource",
+                                                          matches: [
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["zone", %r{^[^/]+/?$}, false],
+                                                            ["storage_pool", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

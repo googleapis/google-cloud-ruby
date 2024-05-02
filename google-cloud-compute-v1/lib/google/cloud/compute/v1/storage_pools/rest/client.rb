@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,37 +18,37 @@
 
 require "google/cloud/errors"
 require "google/cloud/compute/v1/compute_pb"
-require "google/cloud/compute/v1/node_groups/rest/service_stub"
+require "google/cloud/compute/v1/storage_pools/rest/service_stub"
 require "google/cloud/compute/v1/zone_operations/rest"
 
 module Google
   module Cloud
     module Compute
       module V1
-        module NodeGroups
+        module StoragePools
           module Rest
             ##
-            # REST client for the NodeGroups service.
+            # REST client for the StoragePools service.
             #
-            # The NodeGroups API.
+            # The StoragePools API.
             #
             class Client
               # @private
               DEFAULT_ENDPOINT_TEMPLATE = "compute.$UNIVERSE_DOMAIN$"
 
               # @private
-              attr_reader :node_groups_stub
+              attr_reader :storage_pools_stub
 
               ##
-              # Configure the NodeGroups Client class.
+              # Configure the StoragePools Client class.
               #
-              # See {::Google::Cloud::Compute::V1::NodeGroups::Rest::Client::Configuration}
+              # See {::Google::Cloud::Compute::V1::StoragePools::Rest::Client::Configuration}
               # for a description of the configuration fields.
               #
               # @example
               #
-              #   # Modify the configuration for all NodeGroups clients
-              #   ::Google::Cloud::Compute::V1::NodeGroups::Rest::Client.configure do |config|
+              #   # Modify the configuration for all StoragePools clients
+              #   ::Google::Cloud::Compute::V1::StoragePools::Rest::Client.configure do |config|
               #     config.timeout = 10.0
               #   end
               #
@@ -68,16 +68,12 @@ module Google
                                   end
                   default_config = Client::Configuration.new parent_config
 
-                  default_config.rpcs.add_nodes.timeout = 600.0
-
                   default_config.rpcs.aggregated_list.timeout = 600.0
                   default_config.rpcs.aggregated_list.retry_policy = {
                     initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
                   default_config.rpcs.delete.timeout = 600.0
-
-                  default_config.rpcs.delete_nodes.timeout = 600.0
 
                   default_config.rpcs.get.timeout = 600.0
                   default_config.rpcs.get.retry_policy = {
@@ -96,19 +92,16 @@ module Google
                     initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.list_nodes.timeout = 600.0
-
-                  default_config.rpcs.patch.timeout = 600.0
-
-                  default_config.rpcs.perform_maintenance.timeout = 600.0
+                  default_config.rpcs.list_disks.timeout = 600.0
+                  default_config.rpcs.list_disks.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                  }
 
                   default_config.rpcs.set_iam_policy.timeout = 600.0
 
-                  default_config.rpcs.set_node_template.timeout = 600.0
-
-                  default_config.rpcs.simulate_maintenance_event.timeout = 600.0
-
                   default_config.rpcs.test_iam_permissions.timeout = 600.0
+
+                  default_config.rpcs.update.timeout = 600.0
 
                   default_config
                 end
@@ -117,13 +110,13 @@ module Google
               end
 
               ##
-              # Configure the NodeGroups Client instance.
+              # Configure the StoragePools Client instance.
               #
               # The configuration is set to the derived mode, meaning that values can be changed,
               # but structural changes (adding new fields, etc.) are not allowed. Structural changes
               # should be made on {Client.configure}.
               #
-              # See {::Google::Cloud::Compute::V1::NodeGroups::Rest::Client::Configuration}
+              # See {::Google::Cloud::Compute::V1::StoragePools::Rest::Client::Configuration}
               # for a description of the configuration fields.
               #
               # @yield [config] Configure the Client client.
@@ -142,23 +135,23 @@ module Google
               # @return [String]
               #
               def universe_domain
-                @node_groups_stub.universe_domain
+                @storage_pools_stub.universe_domain
               end
 
               ##
-              # Create a new NodeGroups REST client object.
+              # Create a new StoragePools REST client object.
               #
               # @example
               #
               #   # Create a client using the default configuration
-              #   client = ::Google::Cloud::Compute::V1::NodeGroups::Rest::Client.new
+              #   client = ::Google::Cloud::Compute::V1::StoragePools::Rest::Client.new
               #
               #   # Create a client using a custom configuration
-              #   client = ::Google::Cloud::Compute::V1::NodeGroups::Rest::Client.new do |config|
+              #   client = ::Google::Cloud::Compute::V1::StoragePools::Rest::Client.new do |config|
               #     config.timeout = 10.0
               #   end
               #
-              # @yield [config] Configure the NodeGroups client.
+              # @yield [config] Configure the StoragePools client.
               # @yieldparam config [Client::Configuration]
               #
               def initialize
@@ -191,7 +184,7 @@ module Google
                   config.universe_domain = @config.universe_domain
                 end
 
-                @node_groups_stub = ::Google::Cloud::Compute::V1::NodeGroups::Rest::ServiceStub.new(
+                @storage_pools_stub = ::Google::Cloud::Compute::V1::StoragePools::Rest::ServiceStub.new(
                   endpoint: @config.endpoint,
                   endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
                   universe_domain: @config.universe_domain,
@@ -209,108 +202,13 @@ module Google
               # Service calls
 
               ##
-              # Adds specified number of nodes to the node group.
-              #
-              # @overload add_nodes(request, options = nil)
-              #   Pass arguments to `add_nodes` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::AddNodesNodeGroupRequest} or an equivalent Hash.
-              #
-              #   @param request [::Google::Cloud::Compute::V1::AddNodesNodeGroupRequest, ::Hash]
-              #     A request object representing the call parameters. Required. To specify no
-              #     parameters, or to keep all the default parameter values, pass an empty Hash.
-              #   @param options [::Gapic::CallOptions, ::Hash]
-              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @overload add_nodes(node_group: nil, node_groups_add_nodes_request_resource: nil, project: nil, request_id: nil, zone: nil)
-              #   Pass arguments to `add_nodes` via keyword arguments. Note that at
-              #   least one keyword argument is required. To specify no parameters, or to keep all
-              #   the default parameter values, pass an empty Hash as a request object (see above).
-              #
-              #   @param node_group [::String]
-              #     Name of the NodeGroup resource.
-              #   @param node_groups_add_nodes_request_resource [::Google::Cloud::Compute::V1::NodeGroupsAddNodesRequest, ::Hash]
-              #     The body resource for this request
-              #   @param project [::String]
-              #     Project ID for this request.
-              #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-              #   @param zone [::String]
-              #     The name of the zone for this request.
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Gapic::GenericLRO::Operation]
-              #
-              # @raise [::Google::Cloud::Error] if the REST call is aborted.
-              #
-              # @example Basic example
-              #   require "google/cloud/compute/v1"
-              #
-              #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::NodeGroups::Rest::Client.new
-              #
-              #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::AddNodesNodeGroupRequest.new
-              #
-              #   # Call the add_nodes method.
-              #   result = client.add_nodes request
-              #
-              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
-              #   p result
-              #
-              def add_nodes request, options = nil
-                raise ::ArgumentError, "request must be provided" if request.nil?
-
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::AddNodesNodeGroupRequest
-
-                # Converts hash and nil to an options object
-                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-                # Customize the options with defaults
-                call_metadata = @config.rpcs.add_nodes.metadata.to_h
-
-                # Set x-goog-api-client and x-goog-user-project headers
-                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                  lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
-                  transports_version_send: [:rest]
-
-                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-                options.apply_defaults timeout:      @config.rpcs.add_nodes.timeout,
-                                       metadata:     call_metadata,
-                                       retry_policy: @config.rpcs.add_nodes.retry_policy
-
-                options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata,
-                                       retry_policy: @config.retry_policy
-
-                @node_groups_stub.add_nodes request, options do |result, response|
-                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
-                    operation: result,
-                    client: zone_operations,
-                    request_values: {
-                      "project" => request.project,
-                      "zone" => request.zone
-                    },
-                    options: options
-                  )
-                  yield result, response if block_given?
-                  return result
-                end
-              rescue ::Gapic::Rest::Error => e
-                raise ::Google::Cloud::Error.from_error(e)
-              end
-
-              ##
-              # Retrieves an aggregated list of node groups. Note: use nodeGroups.listNodes for more details about each group. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.
+              # Retrieves an aggregated list of storage pools. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.
               #
               # @overload aggregated_list(request, options = nil)
               #   Pass arguments to `aggregated_list` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::AggregatedListNodeGroupsRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Compute::V1::AggregatedListStoragePoolsRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::AggregatedListNodeGroupsRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::AggregatedListStoragePoolsRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
@@ -338,10 +236,10 @@ module Google
               #   @param service_project_number [::Integer]
               #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::String, ::Google::Cloud::Compute::V1::NodeGroupsScopedList>]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::String, ::Google::Cloud::Compute::V1::StoragePoolsScopedList>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Gapic::Rest::PagedEnumerable<::String, ::Google::Cloud::Compute::V1::NodeGroupsScopedList>]
+              # @return [::Gapic::Rest::PagedEnumerable<::String, ::Google::Cloud::Compute::V1::StoragePoolsScopedList>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -349,21 +247,21 @@ module Google
               #   require "google/cloud/compute/v1"
               #
               #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::NodeGroups::Rest::Client.new
+              #   client = Google::Cloud::Compute::V1::StoragePools::Rest::Client.new
               #
               #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::AggregatedListNodeGroupsRequest.new
+              #   request = Google::Cloud::Compute::V1::AggregatedListStoragePoolsRequest.new
               #
               #   # Call the aggregated_list method.
               #   result = client.aggregated_list request
               #
-              #   # The returned object is of type Google::Cloud::Compute::V1::NodeGroupAggregatedList.
+              #   # The returned object is of type Google::Cloud::Compute::V1::StoragePoolAggregatedList.
               #   p result
               #
               def aggregated_list request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::AggregatedListNodeGroupsRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::AggregatedListStoragePoolsRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -387,8 +285,8 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @node_groups_stub.aggregated_list request, options do |result, operation|
-                  result = ::Gapic::Rest::PagedEnumerable.new @node_groups_stub, :aggregated_list, "items", request, result, options
+                @storage_pools_stub.aggregated_list request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @storage_pools_stub, :aggregated_list, "items", request, result, options
                   yield result, operation if block_given?
                   return result
                 end
@@ -397,29 +295,29 @@ module Google
               end
 
               ##
-              # Deletes the specified NodeGroup resource.
+              # Deletes the specified storage pool. Deleting a storagePool removes its data permanently and is irreversible. However, deleting a storagePool does not delete any snapshots previously made from the storagePool. You must separately delete snapshots.
               #
               # @overload delete(request, options = nil)
               #   Pass arguments to `delete` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::DeleteNodeGroupRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Compute::V1::DeleteStoragePoolRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::DeleteNodeGroupRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::DeleteStoragePoolRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload delete(node_group: nil, project: nil, request_id: nil, zone: nil)
+              # @overload delete(project: nil, request_id: nil, storage_pool: nil, zone: nil)
               #   Pass arguments to `delete` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
-              #   @param node_group [::String]
-              #     Name of the NodeGroup resource to delete.
               #   @param project [::String]
               #     Project ID for this request.
               #   @param request_id [::String]
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #   @param storage_pool [::String]
+              #     Name of the storage pool to delete.
               #   @param zone [::String]
               #     The name of the zone for this request.
               # @yield [result, operation] Access the result along with the TransportOperation object
@@ -434,10 +332,10 @@ module Google
               #   require "google/cloud/compute/v1"
               #
               #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::NodeGroups::Rest::Client.new
+              #   client = Google::Cloud::Compute::V1::StoragePools::Rest::Client.new
               #
               #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::DeleteNodeGroupRequest.new
+              #   request = Google::Cloud::Compute::V1::DeleteStoragePoolRequest.new
               #
               #   # Call the delete method.
               #   result = client.delete request
@@ -448,7 +346,7 @@ module Google
               def delete request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::DeleteNodeGroupRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::DeleteStoragePoolRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -472,7 +370,7 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @node_groups_stub.delete request, options do |result, response|
+                @storage_pools_stub.delete request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
                     operation: result,
                     client: zone_operations,
@@ -490,129 +388,34 @@ module Google
               end
 
               ##
-              # Deletes specified nodes from the node group.
-              #
-              # @overload delete_nodes(request, options = nil)
-              #   Pass arguments to `delete_nodes` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::DeleteNodesNodeGroupRequest} or an equivalent Hash.
-              #
-              #   @param request [::Google::Cloud::Compute::V1::DeleteNodesNodeGroupRequest, ::Hash]
-              #     A request object representing the call parameters. Required. To specify no
-              #     parameters, or to keep all the default parameter values, pass an empty Hash.
-              #   @param options [::Gapic::CallOptions, ::Hash]
-              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @overload delete_nodes(node_group: nil, node_groups_delete_nodes_request_resource: nil, project: nil, request_id: nil, zone: nil)
-              #   Pass arguments to `delete_nodes` via keyword arguments. Note that at
-              #   least one keyword argument is required. To specify no parameters, or to keep all
-              #   the default parameter values, pass an empty Hash as a request object (see above).
-              #
-              #   @param node_group [::String]
-              #     Name of the NodeGroup resource whose nodes will be deleted.
-              #   @param node_groups_delete_nodes_request_resource [::Google::Cloud::Compute::V1::NodeGroupsDeleteNodesRequest, ::Hash]
-              #     The body resource for this request
-              #   @param project [::String]
-              #     Project ID for this request.
-              #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-              #   @param zone [::String]
-              #     The name of the zone for this request.
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Gapic::GenericLRO::Operation]
-              #
-              # @raise [::Google::Cloud::Error] if the REST call is aborted.
-              #
-              # @example Basic example
-              #   require "google/cloud/compute/v1"
-              #
-              #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::NodeGroups::Rest::Client.new
-              #
-              #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::DeleteNodesNodeGroupRequest.new
-              #
-              #   # Call the delete_nodes method.
-              #   result = client.delete_nodes request
-              #
-              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
-              #   p result
-              #
-              def delete_nodes request, options = nil
-                raise ::ArgumentError, "request must be provided" if request.nil?
-
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::DeleteNodesNodeGroupRequest
-
-                # Converts hash and nil to an options object
-                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-                # Customize the options with defaults
-                call_metadata = @config.rpcs.delete_nodes.metadata.to_h
-
-                # Set x-goog-api-client and x-goog-user-project headers
-                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                  lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
-                  transports_version_send: [:rest]
-
-                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-                options.apply_defaults timeout:      @config.rpcs.delete_nodes.timeout,
-                                       metadata:     call_metadata,
-                                       retry_policy: @config.rpcs.delete_nodes.retry_policy
-
-                options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata,
-                                       retry_policy: @config.retry_policy
-
-                @node_groups_stub.delete_nodes request, options do |result, response|
-                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
-                    operation: result,
-                    client: zone_operations,
-                    request_values: {
-                      "project" => request.project,
-                      "zone" => request.zone
-                    },
-                    options: options
-                  )
-                  yield result, response if block_given?
-                  return result
-                end
-              rescue ::Gapic::Rest::Error => e
-                raise ::Google::Cloud::Error.from_error(e)
-              end
-
-              ##
-              # Returns the specified NodeGroup. Get a list of available NodeGroups by making a list() request. Note: the "nodes" field should not be used. Use nodeGroups.listNodes instead.
+              # Returns a specified storage pool. Gets a list of available storage pools by making a list() request.
               #
               # @overload get(request, options = nil)
               #   Pass arguments to `get` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::GetNodeGroupRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Compute::V1::GetStoragePoolRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::GetNodeGroupRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::GetStoragePoolRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload get(node_group: nil, project: nil, zone: nil)
+              # @overload get(project: nil, storage_pool: nil, zone: nil)
               #   Pass arguments to `get` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
-              #   @param node_group [::String]
-              #     Name of the node group to return.
               #   @param project [::String]
               #     Project ID for this request.
+              #   @param storage_pool [::String]
+              #     Name of the storage pool to return.
               #   @param zone [::String]
               #     The name of the zone for this request.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Compute::V1::NodeGroup]
+              # @yieldparam result [::Google::Cloud::Compute::V1::StoragePool]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Compute::V1::NodeGroup]
+              # @return [::Google::Cloud::Compute::V1::StoragePool]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -620,21 +423,21 @@ module Google
               #   require "google/cloud/compute/v1"
               #
               #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::NodeGroups::Rest::Client.new
+              #   client = Google::Cloud::Compute::V1::StoragePools::Rest::Client.new
               #
               #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::GetNodeGroupRequest.new
+              #   request = Google::Cloud::Compute::V1::GetStoragePoolRequest.new
               #
               #   # Call the get method.
               #   result = client.get request
               #
-              #   # The returned object is of type Google::Cloud::Compute::V1::NodeGroup.
+              #   # The returned object is of type Google::Cloud::Compute::V1::StoragePool.
               #   p result
               #
               def get request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::GetNodeGroupRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::GetStoragePoolRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -658,7 +461,7 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @node_groups_stub.get request, options do |result, operation|
+                @storage_pools_stub.get request, options do |result, operation|
                   yield result, operation if block_given?
                   return result
                 end
@@ -671,9 +474,9 @@ module Google
               #
               # @overload get_iam_policy(request, options = nil)
               #   Pass arguments to `get_iam_policy` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::GetIamPolicyNodeGroupRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Compute::V1::GetIamPolicyStoragePoolRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::GetIamPolicyNodeGroupRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::GetIamPolicyStoragePoolRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
@@ -704,10 +507,10 @@ module Google
               #   require "google/cloud/compute/v1"
               #
               #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::NodeGroups::Rest::Client.new
+              #   client = Google::Cloud::Compute::V1::StoragePools::Rest::Client.new
               #
               #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::GetIamPolicyNodeGroupRequest.new
+              #   request = Google::Cloud::Compute::V1::GetIamPolicyStoragePoolRequest.new
               #
               #   # Call the get_iam_policy method.
               #   result = client.get_iam_policy request
@@ -718,7 +521,7 @@ module Google
               def get_iam_policy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::GetIamPolicyNodeGroupRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::GetIamPolicyStoragePoolRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -742,7 +545,7 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @node_groups_stub.get_iam_policy request, options do |result, operation|
+                @storage_pools_stub.get_iam_policy request, options do |result, operation|
                   yield result, operation if block_given?
                   return result
                 end
@@ -751,31 +554,29 @@ module Google
               end
 
               ##
-              # Creates a NodeGroup resource in the specified project using the data included in the request.
+              # Creates a storage pool in the specified project using the data in the request.
               #
               # @overload insert(request, options = nil)
               #   Pass arguments to `insert` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::InsertNodeGroupRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Compute::V1::InsertStoragePoolRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::InsertNodeGroupRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::InsertStoragePoolRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload insert(initial_node_count: nil, node_group_resource: nil, project: nil, request_id: nil, zone: nil)
+              # @overload insert(project: nil, request_id: nil, storage_pool_resource: nil, zone: nil)
               #   Pass arguments to `insert` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
-              #   @param initial_node_count [::Integer]
-              #     Initial count of nodes in the node group.
-              #   @param node_group_resource [::Google::Cloud::Compute::V1::NodeGroup, ::Hash]
-              #     The body resource for this request
               #   @param project [::String]
               #     Project ID for this request.
               #   @param request_id [::String]
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #   @param storage_pool_resource [::Google::Cloud::Compute::V1::StoragePool, ::Hash]
+              #     The body resource for this request
               #   @param zone [::String]
               #     The name of the zone for this request.
               # @yield [result, operation] Access the result along with the TransportOperation object
@@ -790,10 +591,10 @@ module Google
               #   require "google/cloud/compute/v1"
               #
               #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::NodeGroups::Rest::Client.new
+              #   client = Google::Cloud::Compute::V1::StoragePools::Rest::Client.new
               #
               #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::InsertNodeGroupRequest.new
+              #   request = Google::Cloud::Compute::V1::InsertStoragePoolRequest.new
               #
               #   # Call the insert method.
               #   result = client.insert request
@@ -804,7 +605,7 @@ module Google
               def insert request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::InsertNodeGroupRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::InsertStoragePoolRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -828,7 +629,7 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @node_groups_stub.insert request, options do |result, response|
+                @storage_pools_stub.insert request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
                     operation: result,
                     client: zone_operations,
@@ -846,13 +647,13 @@ module Google
               end
 
               ##
-              # Retrieves a list of node groups available to the specified project. Note: use nodeGroups.listNodes for more details about each group.
+              # Retrieves a list of storage pools contained within the specified zone.
               #
               # @overload list(request, options = nil)
               #   Pass arguments to `list` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::ListNodeGroupsRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Compute::V1::ListStoragePoolsRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::ListNodeGroupsRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::ListStoragePoolsRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
@@ -878,10 +679,10 @@ module Google
               #   @param zone [::String]
               #     The name of the zone for this request.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::NodeGroup>]
+              # @yieldparam result [::Google::Cloud::Compute::V1::StoragePoolList]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::NodeGroup>]
+              # @return [::Google::Cloud::Compute::V1::StoragePoolList]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -889,21 +690,21 @@ module Google
               #   require "google/cloud/compute/v1"
               #
               #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::NodeGroups::Rest::Client.new
+              #   client = Google::Cloud::Compute::V1::StoragePools::Rest::Client.new
               #
               #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::ListNodeGroupsRequest.new
+              #   request = Google::Cloud::Compute::V1::ListStoragePoolsRequest.new
               #
               #   # Call the list method.
               #   result = client.list request
               #
-              #   # The returned object is of type Google::Cloud::Compute::V1::NodeGroupList.
+              #   # The returned object is of type Google::Cloud::Compute::V1::StoragePoolList.
               #   p result
               #
               def list request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::ListNodeGroupsRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::ListStoragePoolsRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -927,8 +728,7 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @node_groups_stub.list request, options do |result, operation|
-                  result = ::Gapic::Rest::PagedEnumerable.new @node_groups_stub, :list, "items", request, result, options
+                @storage_pools_stub.list request, options do |result, operation|
                   yield result, operation if block_given?
                   return result
                 end
@@ -937,20 +737,20 @@ module Google
               end
 
               ##
-              # Lists nodes in the node group.
+              # Lists the disks in a specified storage pool.
               #
-              # @overload list_nodes(request, options = nil)
-              #   Pass arguments to `list_nodes` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::ListNodesNodeGroupsRequest} or an equivalent Hash.
+              # @overload list_disks(request, options = nil)
+              #   Pass arguments to `list_disks` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::ListDisksStoragePoolsRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::ListNodesNodeGroupsRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::ListDisksStoragePoolsRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload list_nodes(filter: nil, max_results: nil, node_group: nil, order_by: nil, page_token: nil, project: nil, return_partial_success: nil, zone: nil)
-              #   Pass arguments to `list_nodes` via keyword arguments. Note that at
+              # @overload list_disks(filter: nil, max_results: nil, order_by: nil, page_token: nil, project: nil, return_partial_success: nil, storage_pool: nil, zone: nil)
+              #   Pass arguments to `list_disks` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
@@ -958,8 +758,6 @@ module Google
               #     A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
               #   @param max_results [::Integer]
               #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-              #   @param node_group [::String]
-              #     Name of the NodeGroup resource whose nodes you want to list.
               #   @param order_by [::String]
               #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
               #   @param page_token [::String]
@@ -968,13 +766,15 @@ module Google
               #     Project ID for this request.
               #   @param return_partial_success [::Boolean]
               #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+              #   @param storage_pool [::String]
+              #     Name of the storage pool to list disks of.
               #   @param zone [::String]
               #     The name of the zone for this request.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::NodeGroupNode>]
+              # @yieldparam result [::Google::Cloud::Compute::V1::StoragePoolListDisks]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::NodeGroupNode>]
+              # @return [::Google::Cloud::Compute::V1::StoragePoolListDisks]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -982,27 +782,27 @@ module Google
               #   require "google/cloud/compute/v1"
               #
               #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::NodeGroups::Rest::Client.new
+              #   client = Google::Cloud::Compute::V1::StoragePools::Rest::Client.new
               #
               #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::ListNodesNodeGroupsRequest.new
+              #   request = Google::Cloud::Compute::V1::ListDisksStoragePoolsRequest.new
               #
-              #   # Call the list_nodes method.
-              #   result = client.list_nodes request
+              #   # Call the list_disks method.
+              #   result = client.list_disks request
               #
-              #   # The returned object is of type Google::Cloud::Compute::V1::NodeGroupsListNodes.
+              #   # The returned object is of type Google::Cloud::Compute::V1::StoragePoolListDisks.
               #   p result
               #
-              def list_nodes request, options = nil
+              def list_disks request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::ListNodesNodeGroupsRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::ListDisksStoragePoolsRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = @config.rpcs.list_nodes.metadata.to_h
+                call_metadata = @config.rpcs.list_disks.metadata.to_h
 
                 # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
@@ -1012,207 +812,16 @@ module Google
 
                 call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                options.apply_defaults timeout:      @config.rpcs.list_nodes.timeout,
+                options.apply_defaults timeout:      @config.rpcs.list_disks.timeout,
                                        metadata:     call_metadata,
-                                       retry_policy: @config.rpcs.list_nodes.retry_policy
+                                       retry_policy: @config.rpcs.list_disks.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @node_groups_stub.list_nodes request, options do |result, operation|
-                  result = ::Gapic::Rest::PagedEnumerable.new @node_groups_stub, :list_nodes, "items", request, result, options
+                @storage_pools_stub.list_disks request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
-                end
-              rescue ::Gapic::Rest::Error => e
-                raise ::Google::Cloud::Error.from_error(e)
-              end
-
-              ##
-              # Updates the specified node group.
-              #
-              # @overload patch(request, options = nil)
-              #   Pass arguments to `patch` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::PatchNodeGroupRequest} or an equivalent Hash.
-              #
-              #   @param request [::Google::Cloud::Compute::V1::PatchNodeGroupRequest, ::Hash]
-              #     A request object representing the call parameters. Required. To specify no
-              #     parameters, or to keep all the default parameter values, pass an empty Hash.
-              #   @param options [::Gapic::CallOptions, ::Hash]
-              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @overload patch(node_group: nil, node_group_resource: nil, project: nil, request_id: nil, zone: nil)
-              #   Pass arguments to `patch` via keyword arguments. Note that at
-              #   least one keyword argument is required. To specify no parameters, or to keep all
-              #   the default parameter values, pass an empty Hash as a request object (see above).
-              #
-              #   @param node_group [::String]
-              #     Name of the NodeGroup resource to update.
-              #   @param node_group_resource [::Google::Cloud::Compute::V1::NodeGroup, ::Hash]
-              #     The body resource for this request
-              #   @param project [::String]
-              #     Project ID for this request.
-              #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-              #   @param zone [::String]
-              #     The name of the zone for this request.
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Gapic::GenericLRO::Operation]
-              #
-              # @raise [::Google::Cloud::Error] if the REST call is aborted.
-              #
-              # @example Basic example
-              #   require "google/cloud/compute/v1"
-              #
-              #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::NodeGroups::Rest::Client.new
-              #
-              #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::PatchNodeGroupRequest.new
-              #
-              #   # Call the patch method.
-              #   result = client.patch request
-              #
-              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
-              #   p result
-              #
-              def patch request, options = nil
-                raise ::ArgumentError, "request must be provided" if request.nil?
-
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::PatchNodeGroupRequest
-
-                # Converts hash and nil to an options object
-                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-                # Customize the options with defaults
-                call_metadata = @config.rpcs.patch.metadata.to_h
-
-                # Set x-goog-api-client and x-goog-user-project headers
-                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                  lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
-                  transports_version_send: [:rest]
-
-                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-                options.apply_defaults timeout:      @config.rpcs.patch.timeout,
-                                       metadata:     call_metadata,
-                                       retry_policy: @config.rpcs.patch.retry_policy
-
-                options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata,
-                                       retry_policy: @config.retry_policy
-
-                @node_groups_stub.patch request, options do |result, response|
-                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
-                    operation: result,
-                    client: zone_operations,
-                    request_values: {
-                      "project" => request.project,
-                      "zone" => request.zone
-                    },
-                    options: options
-                  )
-                  yield result, response if block_given?
-                  return result
-                end
-              rescue ::Gapic::Rest::Error => e
-                raise ::Google::Cloud::Error.from_error(e)
-              end
-
-              ##
-              # Perform maintenance on a subset of nodes in the node group.
-              #
-              # @overload perform_maintenance(request, options = nil)
-              #   Pass arguments to `perform_maintenance` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::PerformMaintenanceNodeGroupRequest} or an equivalent Hash.
-              #
-              #   @param request [::Google::Cloud::Compute::V1::PerformMaintenanceNodeGroupRequest, ::Hash]
-              #     A request object representing the call parameters. Required. To specify no
-              #     parameters, or to keep all the default parameter values, pass an empty Hash.
-              #   @param options [::Gapic::CallOptions, ::Hash]
-              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @overload perform_maintenance(node_group: nil, node_groups_perform_maintenance_request_resource: nil, project: nil, request_id: nil, zone: nil)
-              #   Pass arguments to `perform_maintenance` via keyword arguments. Note that at
-              #   least one keyword argument is required. To specify no parameters, or to keep all
-              #   the default parameter values, pass an empty Hash as a request object (see above).
-              #
-              #   @param node_group [::String]
-              #     Name of the node group scoping this request.
-              #   @param node_groups_perform_maintenance_request_resource [::Google::Cloud::Compute::V1::NodeGroupsPerformMaintenanceRequest, ::Hash]
-              #     The body resource for this request
-              #   @param project [::String]
-              #     Project ID for this request.
-              #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-              #   @param zone [::String]
-              #     The name of the zone for this request.
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Gapic::GenericLRO::Operation]
-              #
-              # @raise [::Google::Cloud::Error] if the REST call is aborted.
-              #
-              # @example Basic example
-              #   require "google/cloud/compute/v1"
-              #
-              #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::NodeGroups::Rest::Client.new
-              #
-              #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::PerformMaintenanceNodeGroupRequest.new
-              #
-              #   # Call the perform_maintenance method.
-              #   result = client.perform_maintenance request
-              #
-              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
-              #   p result
-              #
-              def perform_maintenance request, options = nil
-                raise ::ArgumentError, "request must be provided" if request.nil?
-
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::PerformMaintenanceNodeGroupRequest
-
-                # Converts hash and nil to an options object
-                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-                # Customize the options with defaults
-                call_metadata = @config.rpcs.perform_maintenance.metadata.to_h
-
-                # Set x-goog-api-client and x-goog-user-project headers
-                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                  lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
-                  transports_version_send: [:rest]
-
-                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-                options.apply_defaults timeout:      @config.rpcs.perform_maintenance.timeout,
-                                       metadata:     call_metadata,
-                                       retry_policy: @config.rpcs.perform_maintenance.retry_policy
-
-                options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata,
-                                       retry_policy: @config.retry_policy
-
-                @node_groups_stub.perform_maintenance request, options do |result, response|
-                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
-                    operation: result,
-                    client: zone_operations,
-                    request_values: {
-                      "project" => request.project,
-                      "zone" => request.zone
-                    },
-                    options: options
-                  )
-                  yield result, response if block_given?
                   return result
                 end
               rescue ::Gapic::Rest::Error => e
@@ -1224,9 +833,9 @@ module Google
               #
               # @overload set_iam_policy(request, options = nil)
               #   Pass arguments to `set_iam_policy` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::SetIamPolicyNodeGroupRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Compute::V1::SetIamPolicyStoragePoolRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::SetIamPolicyNodeGroupRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::SetIamPolicyStoragePoolRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
@@ -1257,10 +866,10 @@ module Google
               #   require "google/cloud/compute/v1"
               #
               #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::NodeGroups::Rest::Client.new
+              #   client = Google::Cloud::Compute::V1::StoragePools::Rest::Client.new
               #
               #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::SetIamPolicyNodeGroupRequest.new
+              #   request = Google::Cloud::Compute::V1::SetIamPolicyStoragePoolRequest.new
               #
               #   # Call the set_iam_policy method.
               #   result = client.set_iam_policy request
@@ -1271,7 +880,7 @@ module Google
               def set_iam_policy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::SetIamPolicyNodeGroupRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::SetIamPolicyStoragePoolRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -1295,198 +904,8 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @node_groups_stub.set_iam_policy request, options do |result, operation|
+                @storage_pools_stub.set_iam_policy request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
-                end
-              rescue ::Gapic::Rest::Error => e
-                raise ::Google::Cloud::Error.from_error(e)
-              end
-
-              ##
-              # Updates the node template of the node group.
-              #
-              # @overload set_node_template(request, options = nil)
-              #   Pass arguments to `set_node_template` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::SetNodeTemplateNodeGroupRequest} or an equivalent Hash.
-              #
-              #   @param request [::Google::Cloud::Compute::V1::SetNodeTemplateNodeGroupRequest, ::Hash]
-              #     A request object representing the call parameters. Required. To specify no
-              #     parameters, or to keep all the default parameter values, pass an empty Hash.
-              #   @param options [::Gapic::CallOptions, ::Hash]
-              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @overload set_node_template(node_group: nil, node_groups_set_node_template_request_resource: nil, project: nil, request_id: nil, zone: nil)
-              #   Pass arguments to `set_node_template` via keyword arguments. Note that at
-              #   least one keyword argument is required. To specify no parameters, or to keep all
-              #   the default parameter values, pass an empty Hash as a request object (see above).
-              #
-              #   @param node_group [::String]
-              #     Name of the NodeGroup resource to update.
-              #   @param node_groups_set_node_template_request_resource [::Google::Cloud::Compute::V1::NodeGroupsSetNodeTemplateRequest, ::Hash]
-              #     The body resource for this request
-              #   @param project [::String]
-              #     Project ID for this request.
-              #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-              #   @param zone [::String]
-              #     The name of the zone for this request.
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Gapic::GenericLRO::Operation]
-              #
-              # @raise [::Google::Cloud::Error] if the REST call is aborted.
-              #
-              # @example Basic example
-              #   require "google/cloud/compute/v1"
-              #
-              #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::NodeGroups::Rest::Client.new
-              #
-              #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::SetNodeTemplateNodeGroupRequest.new
-              #
-              #   # Call the set_node_template method.
-              #   result = client.set_node_template request
-              #
-              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
-              #   p result
-              #
-              def set_node_template request, options = nil
-                raise ::ArgumentError, "request must be provided" if request.nil?
-
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::SetNodeTemplateNodeGroupRequest
-
-                # Converts hash and nil to an options object
-                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-                # Customize the options with defaults
-                call_metadata = @config.rpcs.set_node_template.metadata.to_h
-
-                # Set x-goog-api-client and x-goog-user-project headers
-                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                  lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
-                  transports_version_send: [:rest]
-
-                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-                options.apply_defaults timeout:      @config.rpcs.set_node_template.timeout,
-                                       metadata:     call_metadata,
-                                       retry_policy: @config.rpcs.set_node_template.retry_policy
-
-                options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata,
-                                       retry_policy: @config.retry_policy
-
-                @node_groups_stub.set_node_template request, options do |result, response|
-                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
-                    operation: result,
-                    client: zone_operations,
-                    request_values: {
-                      "project" => request.project,
-                      "zone" => request.zone
-                    },
-                    options: options
-                  )
-                  yield result, response if block_given?
-                  return result
-                end
-              rescue ::Gapic::Rest::Error => e
-                raise ::Google::Cloud::Error.from_error(e)
-              end
-
-              ##
-              # Simulates maintenance event on specified nodes from the node group.
-              #
-              # @overload simulate_maintenance_event(request, options = nil)
-              #   Pass arguments to `simulate_maintenance_event` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::SimulateMaintenanceEventNodeGroupRequest} or an equivalent Hash.
-              #
-              #   @param request [::Google::Cloud::Compute::V1::SimulateMaintenanceEventNodeGroupRequest, ::Hash]
-              #     A request object representing the call parameters. Required. To specify no
-              #     parameters, or to keep all the default parameter values, pass an empty Hash.
-              #   @param options [::Gapic::CallOptions, ::Hash]
-              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @overload simulate_maintenance_event(node_group: nil, node_groups_simulate_maintenance_event_request_resource: nil, project: nil, request_id: nil, zone: nil)
-              #   Pass arguments to `simulate_maintenance_event` via keyword arguments. Note that at
-              #   least one keyword argument is required. To specify no parameters, or to keep all
-              #   the default parameter values, pass an empty Hash as a request object (see above).
-              #
-              #   @param node_group [::String]
-              #     Name of the NodeGroup resource whose nodes will go under maintenance simulation.
-              #   @param node_groups_simulate_maintenance_event_request_resource [::Google::Cloud::Compute::V1::NodeGroupsSimulateMaintenanceEventRequest, ::Hash]
-              #     The body resource for this request
-              #   @param project [::String]
-              #     Project ID for this request.
-              #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-              #   @param zone [::String]
-              #     The name of the zone for this request.
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Gapic::GenericLRO::Operation]
-              #
-              # @raise [::Google::Cloud::Error] if the REST call is aborted.
-              #
-              # @example Basic example
-              #   require "google/cloud/compute/v1"
-              #
-              #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::NodeGroups::Rest::Client.new
-              #
-              #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::SimulateMaintenanceEventNodeGroupRequest.new
-              #
-              #   # Call the simulate_maintenance_event method.
-              #   result = client.simulate_maintenance_event request
-              #
-              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
-              #   p result
-              #
-              def simulate_maintenance_event request, options = nil
-                raise ::ArgumentError, "request must be provided" if request.nil?
-
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::SimulateMaintenanceEventNodeGroupRequest
-
-                # Converts hash and nil to an options object
-                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-                # Customize the options with defaults
-                call_metadata = @config.rpcs.simulate_maintenance_event.metadata.to_h
-
-                # Set x-goog-api-client and x-goog-user-project headers
-                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                  lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
-                  transports_version_send: [:rest]
-
-                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-                options.apply_defaults timeout:      @config.rpcs.simulate_maintenance_event.timeout,
-                                       metadata:     call_metadata,
-                                       retry_policy: @config.rpcs.simulate_maintenance_event.retry_policy
-
-                options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata,
-                                       retry_policy: @config.retry_policy
-
-                @node_groups_stub.simulate_maintenance_event request, options do |result, response|
-                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
-                    operation: result,
-                    client: zone_operations,
-                    request_values: {
-                      "project" => request.project,
-                      "zone" => request.zone
-                    },
-                    options: options
-                  )
-                  yield result, response if block_given?
                   return result
                 end
               rescue ::Gapic::Rest::Error => e
@@ -1498,9 +917,9 @@ module Google
               #
               # @overload test_iam_permissions(request, options = nil)
               #   Pass arguments to `test_iam_permissions` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::TestIamPermissionsNodeGroupRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Compute::V1::TestIamPermissionsStoragePoolRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::TestIamPermissionsNodeGroupRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::TestIamPermissionsStoragePoolRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
@@ -1531,10 +950,10 @@ module Google
               #   require "google/cloud/compute/v1"
               #
               #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::NodeGroups::Rest::Client.new
+              #   client = Google::Cloud::Compute::V1::StoragePools::Rest::Client.new
               #
               #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::TestIamPermissionsNodeGroupRequest.new
+              #   request = Google::Cloud::Compute::V1::TestIamPermissionsStoragePoolRequest.new
               #
               #   # Call the test_iam_permissions method.
               #   result = client.test_iam_permissions request
@@ -1545,7 +964,7 @@ module Google
               def test_iam_permissions request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::TestIamPermissionsNodeGroupRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::TestIamPermissionsStoragePoolRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -1569,7 +988,7 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @node_groups_stub.test_iam_permissions request, options do |result, operation|
+                @storage_pools_stub.test_iam_permissions request, options do |result, operation|
                   yield result, operation if block_given?
                   return result
                 end
@@ -1578,13 +997,110 @@ module Google
               end
 
               ##
-              # Configuration class for the NodeGroups REST API.
+              # Updates the specified storagePool with the data included in the request. The update is performed only on selected fields included as part of update-mask. Only the following fields can be modified: size_tb and provisioned_iops.
               #
-              # This class represents the configuration for NodeGroups REST,
+              # @overload update(request, options = nil)
+              #   Pass arguments to `update` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::UpdateStoragePoolRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::UpdateStoragePoolRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update(project: nil, request_id: nil, storage_pool: nil, storage_pool_resource: nil, update_mask: nil, zone: nil)
+              #   Pass arguments to `update` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param request_id [::String]
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #   @param storage_pool [::String]
+              #     The storagePool name for this request.
+              #   @param storage_pool_resource [::Google::Cloud::Compute::V1::StoragePool, ::Hash]
+              #     The body resource for this request
+              #   @param update_mask [::String]
+              #     update_mask indicates fields to be updated as part of this request.
+              #   @param zone [::String]
+              #     The name of the zone for this request.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::GenericLRO::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::StoragePools::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::UpdateStoragePoolRequest.new
+              #
+              #   # Call the update method.
+              #   result = client.update request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
+              def update request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::UpdateStoragePoolRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @storage_pools_stub.update request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: zone_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "zone" => request.zone
+                    },
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Configuration class for the StoragePools REST API.
+              #
+              # This class represents the configuration for StoragePools REST,
               # providing control over timeouts, retry behavior, logging, transport
               # parameters, and other low-level controls. Certain parameters can also be
               # applied individually to specific RPCs. See
-              # {::Google::Cloud::Compute::V1::NodeGroups::Rest::Client::Configuration::Rpcs}
+              # {::Google::Cloud::Compute::V1::StoragePools::Rest::Client::Configuration::Rpcs}
               # for a list of RPCs that can be configured independently.
               #
               # Configuration can be applied globally to all clients, or to a single client
@@ -1593,17 +1109,17 @@ module Google
               # @example
               #
               #   # Modify the global config, setting the timeout for
-              #   # add_nodes to 20 seconds,
+              #   # aggregated_list to 20 seconds,
               #   # and all remaining timeouts to 10 seconds.
-              #   ::Google::Cloud::Compute::V1::NodeGroups::Rest::Client.configure do |config|
+              #   ::Google::Cloud::Compute::V1::StoragePools::Rest::Client.configure do |config|
               #     config.timeout = 10.0
-              #     config.rpcs.add_nodes.timeout = 20.0
+              #     config.rpcs.aggregated_list.timeout = 20.0
               #   end
               #
               #   # Apply the above configuration only to a new client.
-              #   client = ::Google::Cloud::Compute::V1::NodeGroups::Rest::Client.new do |config|
+              #   client = ::Google::Cloud::Compute::V1::StoragePools::Rest::Client.new do |config|
               #     config.timeout = 10.0
-              #     config.rpcs.add_nodes.timeout = 20.0
+              #     config.rpcs.aggregated_list.timeout = 20.0
               #   end
               #
               # @!attribute [rw] endpoint
@@ -1693,7 +1209,7 @@ module Google
                 end
 
                 ##
-                # Configuration RPC class for the NodeGroups API.
+                # Configuration RPC class for the StoragePools API.
                 #
                 # Includes fields providing the configuration for each RPC in this service.
                 # Each configuration object is of type `Gapic::Config::Method` and includes
@@ -1711,11 +1227,6 @@ module Google
                 #
                 class Rpcs
                   ##
-                  # RPC-specific configuration for `add_nodes`
-                  # @return [::Gapic::Config::Method]
-                  #
-                  attr_reader :add_nodes
-                  ##
                   # RPC-specific configuration for `aggregated_list`
                   # @return [::Gapic::Config::Method]
                   #
@@ -1725,11 +1236,6 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :delete
-                  ##
-                  # RPC-specific configuration for `delete_nodes`
-                  # @return [::Gapic::Config::Method]
-                  #
-                  attr_reader :delete_nodes
                   ##
                   # RPC-specific configuration for `get`
                   # @return [::Gapic::Config::Method]
@@ -1751,51 +1257,32 @@ module Google
                   #
                   attr_reader :list
                   ##
-                  # RPC-specific configuration for `list_nodes`
+                  # RPC-specific configuration for `list_disks`
                   # @return [::Gapic::Config::Method]
                   #
-                  attr_reader :list_nodes
-                  ##
-                  # RPC-specific configuration for `patch`
-                  # @return [::Gapic::Config::Method]
-                  #
-                  attr_reader :patch
-                  ##
-                  # RPC-specific configuration for `perform_maintenance`
-                  # @return [::Gapic::Config::Method]
-                  #
-                  attr_reader :perform_maintenance
+                  attr_reader :list_disks
                   ##
                   # RPC-specific configuration for `set_iam_policy`
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :set_iam_policy
                   ##
-                  # RPC-specific configuration for `set_node_template`
-                  # @return [::Gapic::Config::Method]
-                  #
-                  attr_reader :set_node_template
-                  ##
-                  # RPC-specific configuration for `simulate_maintenance_event`
-                  # @return [::Gapic::Config::Method]
-                  #
-                  attr_reader :simulate_maintenance_event
-                  ##
                   # RPC-specific configuration for `test_iam_permissions`
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :test_iam_permissions
+                  ##
+                  # RPC-specific configuration for `update`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update
 
                   # @private
                   def initialize parent_rpcs = nil
-                    add_nodes_config = parent_rpcs.add_nodes if parent_rpcs.respond_to? :add_nodes
-                    @add_nodes = ::Gapic::Config::Method.new add_nodes_config
                     aggregated_list_config = parent_rpcs.aggregated_list if parent_rpcs.respond_to? :aggregated_list
                     @aggregated_list = ::Gapic::Config::Method.new aggregated_list_config
                     delete_config = parent_rpcs.delete if parent_rpcs.respond_to? :delete
                     @delete = ::Gapic::Config::Method.new delete_config
-                    delete_nodes_config = parent_rpcs.delete_nodes if parent_rpcs.respond_to? :delete_nodes
-                    @delete_nodes = ::Gapic::Config::Method.new delete_nodes_config
                     get_config = parent_rpcs.get if parent_rpcs.respond_to? :get
                     @get = ::Gapic::Config::Method.new get_config
                     get_iam_policy_config = parent_rpcs.get_iam_policy if parent_rpcs.respond_to? :get_iam_policy
@@ -1804,20 +1291,14 @@ module Google
                     @insert = ::Gapic::Config::Method.new insert_config
                     list_config = parent_rpcs.list if parent_rpcs.respond_to? :list
                     @list = ::Gapic::Config::Method.new list_config
-                    list_nodes_config = parent_rpcs.list_nodes if parent_rpcs.respond_to? :list_nodes
-                    @list_nodes = ::Gapic::Config::Method.new list_nodes_config
-                    patch_config = parent_rpcs.patch if parent_rpcs.respond_to? :patch
-                    @patch = ::Gapic::Config::Method.new patch_config
-                    perform_maintenance_config = parent_rpcs.perform_maintenance if parent_rpcs.respond_to? :perform_maintenance
-                    @perform_maintenance = ::Gapic::Config::Method.new perform_maintenance_config
+                    list_disks_config = parent_rpcs.list_disks if parent_rpcs.respond_to? :list_disks
+                    @list_disks = ::Gapic::Config::Method.new list_disks_config
                     set_iam_policy_config = parent_rpcs.set_iam_policy if parent_rpcs.respond_to? :set_iam_policy
                     @set_iam_policy = ::Gapic::Config::Method.new set_iam_policy_config
-                    set_node_template_config = parent_rpcs.set_node_template if parent_rpcs.respond_to? :set_node_template
-                    @set_node_template = ::Gapic::Config::Method.new set_node_template_config
-                    simulate_maintenance_event_config = parent_rpcs.simulate_maintenance_event if parent_rpcs.respond_to? :simulate_maintenance_event
-                    @simulate_maintenance_event = ::Gapic::Config::Method.new simulate_maintenance_event_config
                     test_iam_permissions_config = parent_rpcs.test_iam_permissions if parent_rpcs.respond_to? :test_iam_permissions
                     @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
+                    update_config = parent_rpcs.update if parent_rpcs.respond_to? :update
+                    @update = ::Gapic::Config::Method.new update_config
 
                     yield self if block_given?
                   end
