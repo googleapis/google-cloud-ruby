@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/maps/fleetengine/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-maps-fleet_engine/$1
