@@ -26,10 +26,10 @@ module Google
             # A backup of a Cloud Spanner database.
             # @!attribute [rw] database
             #   @return [::String]
-            #     Required for the {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#create_backup CreateBackup} operation.
-            #     Name of the database from which this backup was
-            #     created. This needs to be in the same instance as the backup.
-            #     Values are of the form
+            #     Required for the
+            #     {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#create_backup CreateBackup}
+            #     operation. Name of the database from which this backup was created. This
+            #     needs to be in the same instance as the backup. Values are of the form
             #     `projects/<project>/instances/<instance>/databases/<database>`.
             # @!attribute [rw] version_time
             #   @return [::Google::Protobuf::Timestamp]
@@ -39,7 +39,8 @@ module Google
             #     backup.
             # @!attribute [rw] expire_time
             #   @return [::Google::Protobuf::Timestamp]
-            #     Required for the {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#create_backup CreateBackup}
+            #     Required for the
+            #     {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#create_backup CreateBackup}
             #     operation. The expiration time of the backup, with microseconds
             #     granularity that must be at least 6 hours and at most 366 days
             #     from the time the CreateBackup request is processed. Once the `expire_time`
@@ -47,8 +48,11 @@ module Google
             #     Spanner to free the resources used by the backup.
             # @!attribute [rw] name
             #   @return [::String]
-            #     Output only for the {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#create_backup CreateBackup} operation.
-            #     Required for the {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#update_backup UpdateBackup} operation.
+            #     Output only for the
+            #     {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#create_backup CreateBackup}
+            #     operation. Required for the
+            #     {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#update_backup UpdateBackup}
+            #     operation.
             #
             #     A globally unique identifier for the backup which cannot be
             #     changed. Values are of the form
@@ -62,7 +66,8 @@ module Google
             #     `projects/<project>/instances/<instance>`.
             # @!attribute [r] create_time
             #   @return [::Google::Protobuf::Timestamp]
-            #     Output only. The time the {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#create_backup CreateBackup}
+            #     Output only. The time the
+            #     {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#create_backup CreateBackup}
             #     request is received. If the request does not specify `version_time`, the
             #     `version_time` of the backup will be equivalent to the `create_time`.
             # @!attribute [r] size_bytes
@@ -83,6 +88,14 @@ module Google
             # @!attribute [r] encryption_info
             #   @return [::Google::Cloud::Spanner::Admin::Database::V1::EncryptionInfo]
             #     Output only. The encryption information for the backup.
+            # @!attribute [r] encryption_information
+            #   @return [::Array<::Google::Cloud::Spanner::Admin::Database::V1::EncryptionInfo>]
+            #     Output only. The encryption information for the backup, whether it is
+            #     protected by one or more KMS keys. The information includes all Cloud
+            #     KMS key versions used to encrypt the backup. The `encryption_status' field
+            #     inside of each `EncryptionInfo` is not populated. At least one of the key
+            #     versions must be available for the backup to be restored. If a key version
+            #     is revoked in the middle of a restore, the restore behavior is undefined.
             # @!attribute [r] database_dialect
             #   @return [::Google::Cloud::Spanner::Admin::Database::V1::DatabaseDialect]
             #     Output only. The database dialect information for the backup.
@@ -120,7 +133,8 @@ module Google
               end
             end
 
-            # The request for {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#create_backup CreateBackup}.
+            # The request for
+            # {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#create_backup CreateBackup}.
             # @!attribute [rw] parent
             #   @return [::String]
             #     Required. The name of the instance in which the backup will be
@@ -139,11 +153,11 @@ module Google
             #     Required. The backup to create.
             # @!attribute [rw] encryption_config
             #   @return [::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupEncryptionConfig]
-            #     Optional. The encryption configuration used to encrypt the backup. If this field is
-            #     not specified, the backup will use the same
-            #     encryption configuration as the database by default, namely
-            #     {::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupEncryptionConfig#encryption_type encryption_type} =
-            #     `USE_DATABASE_ENCRYPTION`.
+            #     Optional. The encryption configuration used to encrypt the backup. If this
+            #     field is not specified, the backup will use the same encryption
+            #     configuration as the database by default, namely
+            #     {::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupEncryptionConfig#encryption_type encryption_type}
+            #     = `USE_DATABASE_ENCRYPTION`.
             class CreateBackupRequest
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -160,7 +174,8 @@ module Google
             # @!attribute [rw] progress
             #   @return [::Google::Cloud::Spanner::Admin::Database::V1::OperationProgress]
             #     The progress of the
-            #     {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#create_backup CreateBackup} operation.
+            #     {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#create_backup CreateBackup}
+            #     operation.
             # @!attribute [rw] cancel_time
             #   @return [::Google::Protobuf::Timestamp]
             #     The time at which cancellation of this operation was received.
@@ -180,11 +195,12 @@ module Google
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
-            # The request for {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#copy_backup CopyBackup}.
+            # The request for
+            # {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#copy_backup CopyBackup}.
             # @!attribute [rw] parent
             #   @return [::String]
-            #     Required. The name of the destination instance that will contain the backup copy.
-            #     Values are of the form: `projects/<project>/instances/<instance>`.
+            #     Required. The name of the destination instance that will contain the backup
+            #     copy. Values are of the form: `projects/<project>/instances/<instance>`.
             # @!attribute [rw] backup_id
             #   @return [::String]
             #     Required. The id of the backup copy.
@@ -207,17 +223,17 @@ module Google
             #     to free the resources used by the backup.
             # @!attribute [rw] encryption_config
             #   @return [::Google::Cloud::Spanner::Admin::Database::V1::CopyBackupEncryptionConfig]
-            #     Optional. The encryption configuration used to encrypt the backup. If this field is
-            #     not specified, the backup will use the same
-            #     encryption configuration as the source backup by default, namely
-            #     {::Google::Cloud::Spanner::Admin::Database::V1::CopyBackupEncryptionConfig#encryption_type encryption_type} =
-            #     `USE_CONFIG_DEFAULT_OR_BACKUP_ENCRYPTION`.
+            #     Optional. The encryption configuration used to encrypt the backup. If this
+            #     field is not specified, the backup will use the same encryption
+            #     configuration as the source backup by default, namely
+            #     {::Google::Cloud::Spanner::Admin::Database::V1::CopyBackupEncryptionConfig#encryption_type encryption_type}
+            #     = `USE_CONFIG_DEFAULT_OR_BACKUP_ENCRYPTION`.
             class CopyBackupRequest
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
-            # Metadata type for the google.longrunning.Operation returned by
+            # Metadata type for the operation returned by
             # {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#copy_backup CopyBackup}.
             # @!attribute [rw] name
             #   @return [::String]
@@ -232,7 +248,8 @@ module Google
             # @!attribute [rw] progress
             #   @return [::Google::Cloud::Spanner::Admin::Database::V1::OperationProgress]
             #     The progress of the
-            #     {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#copy_backup CopyBackup} operation.
+            #     {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#copy_backup CopyBackup}
+            #     operation.
             # @!attribute [rw] cancel_time
             #   @return [::Google::Protobuf::Timestamp]
             #     The time at which cancellation of CopyBackup operation was received.
@@ -252,7 +269,8 @@ module Google
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
-            # The request for {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#update_backup UpdateBackup}.
+            # The request for
+            # {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#update_backup UpdateBackup}.
             # @!attribute [rw] backup
             #   @return [::Google::Cloud::Spanner::Admin::Database::V1::Backup]
             #     Required. The backup to update. `backup.name`, and the fields to be updated
@@ -271,7 +289,8 @@ module Google
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
-            # The request for {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#get_backup GetBackup}.
+            # The request for
+            # {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#get_backup GetBackup}.
             # @!attribute [rw] name
             #   @return [::String]
             #     Required. Name of the backup.
@@ -282,7 +301,8 @@ module Google
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
-            # The request for {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#delete_backup DeleteBackup}.
+            # The request for
+            # {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#delete_backup DeleteBackup}.
             # @!attribute [rw] name
             #   @return [::String]
             #     Required. Name of the backup to delete.
@@ -293,7 +313,8 @@ module Google
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
-            # The request for {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#list_backups ListBackups}.
+            # The request for
+            # {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#list_backups ListBackups}.
             # @!attribute [rw] parent
             #   @return [::String]
             #     Required. The instance to list backups from.  Values are of the
@@ -308,7 +329,9 @@ module Google
             #     must be one of: `<`, `>`, `<=`, `>=`, `!=`, `=`, or `:`.
             #     Colon `:` is the contains operator. Filter rules are not case sensitive.
             #
-            #     The following fields in the {::Google::Cloud::Spanner::Admin::Database::V1::Backup Backup} are eligible for filtering:
+            #     The following fields in the
+            #     {::Google::Cloud::Spanner::Admin::Database::V1::Backup Backup} are eligible for
+            #     filtering:
             #
             #       * `name`
             #       * `database`
@@ -342,15 +365,17 @@ module Google
             # @!attribute [rw] page_token
             #   @return [::String]
             #     If non-empty, `page_token` should contain a
-            #     {::Google::Cloud::Spanner::Admin::Database::V1::ListBackupsResponse#next_page_token next_page_token} from a
-            #     previous {::Google::Cloud::Spanner::Admin::Database::V1::ListBackupsResponse ListBackupsResponse} to the same `parent` and with the same
-            #     `filter`.
+            #     {::Google::Cloud::Spanner::Admin::Database::V1::ListBackupsResponse#next_page_token next_page_token}
+            #     from a previous
+            #     {::Google::Cloud::Spanner::Admin::Database::V1::ListBackupsResponse ListBackupsResponse}
+            #     to the same `parent` and with the same `filter`.
             class ListBackupsRequest
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
-            # The response for {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#list_backups ListBackups}.
+            # The response for
+            # {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#list_backups ListBackups}.
             # @!attribute [rw] backups
             #   @return [::Array<::Google::Cloud::Spanner::Admin::Database::V1::Backup>]
             #     The list of matching backups. Backups returned are ordered by `create_time`
@@ -358,8 +383,8 @@ module Google
             # @!attribute [rw] next_page_token
             #   @return [::String]
             #     `next_page_token` can be sent in a subsequent
-            #     {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#list_backups ListBackups} call to fetch more
-            #     of the matching backups.
+            #     {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#list_backups ListBackups}
+            #     call to fetch more of the matching backups.
             class ListBackupsResponse
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -387,7 +412,9 @@ module Google
             #       * `name` - The name of the long-running operation
             #       * `done` - False if the operation is in progress, else true.
             #       * `metadata.@type` - the type of metadata. For example, the type string
-            #          for {::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupMetadata CreateBackupMetadata} is
+            #          for
+            #          {::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupMetadata CreateBackupMetadata}
+            #          is
             #          `type.googleapis.com/google.spanner.admin.database.v1.CreateBackupMetadata`.
             #       * `metadata.<field_name>` - any field in metadata.value.
             #          `metadata.@type` must be specified first if filtering on metadata
@@ -405,14 +432,15 @@ module Google
             #       * `done:true` - The operation is complete.
             #       * `(metadata.@type=type.googleapis.com/google.spanner.admin.database.v1.CreateBackupMetadata) AND` \
             #          `metadata.database:prod` - Returns operations where:
-            #          * The operation's metadata type is {::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupMetadata CreateBackupMetadata}.
-            #          * The database the backup was taken from has a name containing the
-            #          string "prod".
+            #          * The operation's metadata type is
+            #          {::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupMetadata CreateBackupMetadata}.
+            #          * The source database name of backup contains the string "prod".
             #       * `(metadata.@type=type.googleapis.com/google.spanner.admin.database.v1.CreateBackupMetadata) AND` \
             #         `(metadata.name:howl) AND` \
             #         `(metadata.progress.start_time < \"2018-03-28T14:50:00Z\") AND` \
             #         `(error:*)` - Returns operations where:
-            #         * The operation's metadata type is {::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupMetadata CreateBackupMetadata}.
+            #         * The operation's metadata type is
+            #         {::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupMetadata CreateBackupMetadata}.
             #         * The backup name contains the string "howl".
             #         * The operation started before 2018-03-28T14:50:00Z.
             #         * The operation resulted in an error.
@@ -420,9 +448,9 @@ module Google
             #         `(metadata.source_backup:test) AND` \
             #         `(metadata.progress.start_time < \"2022-01-18T14:50:00Z\") AND` \
             #         `(error:*)` - Returns operations where:
-            #         * The operation's metadata type is {::Google::Cloud::Spanner::Admin::Database::V1::CopyBackupMetadata CopyBackupMetadata}.
-            #         * The source backup of the copied backup name contains the string
-            #         "test".
+            #         * The operation's metadata type is
+            #         {::Google::Cloud::Spanner::Admin::Database::V1::CopyBackupMetadata CopyBackupMetadata}.
+            #         * The source backup name contains the string "test".
             #         * The operation started before 2022-01-18T14:50:00Z.
             #         * The operation resulted in an error.
             #       * `((metadata.@type=type.googleapis.com/google.spanner.admin.database.v1.CreateBackupMetadata) AND` \
@@ -432,12 +460,13 @@ module Google
             #         `(metadata.source_backup:test_bkp)) AND` \
             #         `(error:*)` - Returns operations where:
             #         * The operation's metadata matches either of criteria:
-            #           * The operation's metadata type is {::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupMetadata CreateBackupMetadata} AND the
-            #           database the backup was taken from has name containing string
+            #           * The operation's metadata type is
+            #           {::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupMetadata CreateBackupMetadata}
+            #           AND the source database name of the backup contains the string
             #           "test_db"
-            #           * The operation's metadata type is {::Google::Cloud::Spanner::Admin::Database::V1::CopyBackupMetadata CopyBackupMetadata} AND the
-            #           backup the backup was copied from has name containing string
-            #           "test_bkp"
+            #           * The operation's metadata type is
+            #           {::Google::Cloud::Spanner::Admin::Database::V1::CopyBackupMetadata CopyBackupMetadata}
+            #           AND the source backup name contains the string "test_bkp"
             #         * The operation resulted in an error.
             # @!attribute [rw] page_size
             #   @return [::Integer]
@@ -447,8 +476,9 @@ module Google
             #   @return [::String]
             #     If non-empty, `page_token` should contain a
             #     {::Google::Cloud::Spanner::Admin::Database::V1::ListBackupOperationsResponse#next_page_token next_page_token}
-            #     from a previous {::Google::Cloud::Spanner::Admin::Database::V1::ListBackupOperationsResponse ListBackupOperationsResponse} to the
-            #     same `parent` and with the same `filter`.
+            #     from a previous
+            #     {::Google::Cloud::Spanner::Admin::Database::V1::ListBackupOperationsResponse ListBackupOperationsResponse}
+            #     to the same `parent` and with the same `filter`.
             class ListBackupOperationsRequest
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -485,13 +515,14 @@ module Google
             #   @return [::Google::Protobuf::Timestamp]
             #     The backup contains an externally consistent copy of `source_database` at
             #     the timestamp specified by `version_time`. If the
-            #     {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#create_backup CreateBackup} request did not specify
-            #     `version_time`, the `version_time` of the backup is equivalent to the
-            #     `create_time`.
+            #     {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#create_backup CreateBackup}
+            #     request did not specify `version_time`, the `version_time` of the backup is
+            #     equivalent to the `create_time`.
             # @!attribute [rw] create_time
             #   @return [::Google::Protobuf::Timestamp]
-            #     The time the {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#create_backup CreateBackup} request was
-            #     received.
+            #     The time the
+            #     {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#create_backup CreateBackup}
+            #     request was received.
             # @!attribute [rw] source_database
             #   @return [::String]
             #     Name of the database the backup was created from.
@@ -508,9 +539,26 @@ module Google
             #   @return [::String]
             #     Optional. The Cloud KMS key that will be used to protect the backup.
             #     This field should be set only when
-            #     {::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupEncryptionConfig#encryption_type encryption_type} is
-            #     `CUSTOMER_MANAGED_ENCRYPTION`. Values are of the form
+            #     {::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupEncryptionConfig#encryption_type encryption_type}
+            #     is `CUSTOMER_MANAGED_ENCRYPTION`. Values are of the form
             #     `projects/<project>/locations/<location>/keyRings/<key_ring>/cryptoKeys/<kms_key_name>`.
+            # @!attribute [rw] kms_key_names
+            #   @return [::Array<::String>]
+            #     Optional. Specifies the KMS configuration for the one or more keys used to
+            #     protect the backup. Values are of the form
+            #     `projects/<project>/locations/<location>/keyRings/<key_ring>/cryptoKeys/<kms_key_name>`.
+            #
+            #     The keys referenced by kms_key_names must fully cover all
+            #     regions of the backup's instance configuration. Some examples:
+            #     * For single region instance configs, specify a single regional
+            #     location KMS key.
+            #     * For multi-regional instance configs of type GOOGLE_MANAGED,
+            #     either specify a multi-regional location KMS key or multiple regional
+            #     location KMS keys that cover all regions in the instance config.
+            #     * For an instance config of type USER_MANAGED, please specify only
+            #     regional location KMS keys to cover each region in the instance config.
+            #     Multi-regional location KMS keys are not supported for USER_MANAGED
+            #     instance configs.
             class CreateBackupEncryptionConfig
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -522,9 +570,10 @@ module Google
 
                 # Use the same encryption configuration as the database. This is the
                 # default option when
-                # {::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupEncryptionConfig encryption_config} is empty.
-                # For example, if the database is using `Customer_Managed_Encryption`, the
-                # backup will be using the same Cloud KMS key as the database.
+                # {::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupEncryptionConfig encryption_config}
+                # is empty. For example, if the database is using
+                # `Customer_Managed_Encryption`, the backup will be using the same Cloud
+                # KMS key as the database.
                 USE_DATABASE_ENCRYPTION = 1
 
                 # Use Google default encryption.
@@ -544,9 +593,27 @@ module Google
             #   @return [::String]
             #     Optional. The Cloud KMS key that will be used to protect the backup.
             #     This field should be set only when
-            #     {::Google::Cloud::Spanner::Admin::Database::V1::CopyBackupEncryptionConfig#encryption_type encryption_type} is
-            #     `CUSTOMER_MANAGED_ENCRYPTION`. Values are of the form
+            #     {::Google::Cloud::Spanner::Admin::Database::V1::CopyBackupEncryptionConfig#encryption_type encryption_type}
+            #     is `CUSTOMER_MANAGED_ENCRYPTION`. Values are of the form
             #     `projects/<project>/locations/<location>/keyRings/<key_ring>/cryptoKeys/<kms_key_name>`.
+            # @!attribute [rw] kms_key_names
+            #   @return [::Array<::String>]
+            #     Optional. Specifies the KMS configuration for the one or more keys used to
+            #     protect the backup. Values are of the form
+            #     `projects/<project>/locations/<location>/keyRings/<key_ring>/cryptoKeys/<kms_key_name>`.
+            #     Kms keys specified can be in any order.
+            #
+            #     The keys referenced by kms_key_names must fully cover all
+            #     regions of the backup's instance configuration. Some examples:
+            #     * For single region instance configs, specify a single regional
+            #     location KMS key.
+            #     * For multi-regional instance configs of type GOOGLE_MANAGED,
+            #     either specify a multi-regional location KMS key or multiple regional
+            #     location KMS keys that cover all regions in the instance config.
+            #     * For an instance config of type USER_MANAGED, please specify only
+            #     regional location KMS keys to cover each region in the instance config.
+            #     Multi-regional location KMS keys are not supported for USER_MANAGED
+            #     instance configs.
             class CopyBackupEncryptionConfig
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -556,17 +623,20 @@ module Google
                 # Unspecified. Do not use.
                 ENCRYPTION_TYPE_UNSPECIFIED = 0
 
-                # This is the default option for {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#copy_backup CopyBackup}
-                # when {::Google::Cloud::Spanner::Admin::Database::V1::CopyBackupEncryptionConfig encryption_config} is not specified.
-                # For example, if the source backup is using `Customer_Managed_Encryption`,
-                # the backup will be using the same Cloud KMS key as the source backup.
+                # This is the default option for
+                # {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#copy_backup CopyBackup}
+                # when
+                # {::Google::Cloud::Spanner::Admin::Database::V1::CopyBackupEncryptionConfig encryption_config}
+                # is not specified. For example, if the source backup is using
+                # `Customer_Managed_Encryption`, the backup will be using the same Cloud
+                # KMS key as the source backup.
                 USE_CONFIG_DEFAULT_OR_BACKUP_ENCRYPTION = 1
 
                 # Use Google default encryption.
                 GOOGLE_DEFAULT_ENCRYPTION = 2
 
-                # Use customer managed encryption. If specified, `kms_key_name`
-                # must contain a valid Cloud KMS key.
+                # Use customer managed encryption. If specified, either `kms_key_name` or
+                # `kms_key_names` must contain valid Cloud KMS key(s).
                 CUSTOMER_MANAGED_ENCRYPTION = 3
               end
             end

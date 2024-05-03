@@ -47,6 +47,23 @@ module Google
             #     The Cloud KMS key to be used for encrypting and decrypting
             #     the database. Values are of the form
             #     `projects/<project>/locations/<location>/keyRings/<key_ring>/cryptoKeys/<kms_key_name>`.
+            # @!attribute [rw] kms_key_names
+            #   @return [::Array<::String>]
+            #     Specifies the KMS configuration for the one or more keys used to encrypt
+            #     the database. Values are of the form
+            #     `projects/<project>/locations/<location>/keyRings/<key_ring>/cryptoKeys/<kms_key_name>`.
+            #
+            #     The keys referenced by kms_key_names must fully cover all
+            #     regions of the database instance configuration. Some examples:
+            #     * For single region database instance configs, specify a single regional
+            #     location KMS key.
+            #     * For multi-regional database instance configs of type GOOGLE_MANAGED,
+            #     either specify a multi-regional location KMS key or multiple regional
+            #     location KMS keys that cover all regions in the instance config.
+            #     * For a database instance config of type USER_MANAGED, please specify only
+            #     regional location KMS keys to cover each region in the instance config.
+            #     Multi-regional location KMS keys are not supported for USER_MANAGED
+            #     instance configs.
             class EncryptionConfig
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -58,13 +75,13 @@ module Google
             #     Output only. The type of encryption.
             # @!attribute [r] encryption_status
             #   @return [::Google::Rpc::Status]
-            #     Output only. If present, the status of a recent encrypt/decrypt call on underlying data
-            #     for this database or backup. Regardless of status, data is always encrypted
-            #     at rest.
+            #     Output only. If present, the status of a recent encrypt/decrypt call on
+            #     underlying data for this database or backup. Regardless of status, data is
+            #     always encrypted at rest.
             # @!attribute [r] kms_key_version
             #   @return [::String]
-            #     Output only. A Cloud KMS key version that is being used to protect the database or
-            #     backup.
+            #     Output only. A Cloud KMS key version that is being used to protect the
+            #     database or backup.
             class EncryptionInfo
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -92,7 +109,7 @@ module Google
               # GOOGLE_STANDARD_SQL dialect.
               DATABASE_DIALECT_UNSPECIFIED = 0
 
-              # Google standard SQL.
+              # GoogleSQL supported SQL.
               GOOGLE_STANDARD_SQL = 1
 
               # PostgreSQL supported SQL.
