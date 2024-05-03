@@ -26,6 +26,7 @@ require "google/cloud/ai_platform/v1/migration_service/credentials"
 require "google/cloud/ai_platform/v1/migration_service/paths"
 require "google/cloud/ai_platform/v1/migration_service/operations"
 require "google/cloud/ai_platform/v1/migration_service/client"
+require "google/cloud/ai_platform/v1/migration_service/rest"
 
 module Google
   module Cloud
@@ -39,6 +40,11 @@ module Google
         #
         #     require "google/cloud/ai_platform/v1/migration_service"
         #     client = ::Google::Cloud::AIPlatform::V1::MigrationService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/ai_platform/v1/migration_service/rest"
+        #     client = ::Google::Cloud::AIPlatform::V1::MigrationService::Rest::Client.new
         #
         module MigrationService
         end

@@ -26,6 +26,7 @@ require "google/cloud/ai_platform/v1/index_service/credentials"
 require "google/cloud/ai_platform/v1/index_service/paths"
 require "google/cloud/ai_platform/v1/index_service/operations"
 require "google/cloud/ai_platform/v1/index_service/client"
+require "google/cloud/ai_platform/v1/index_service/rest"
 
 module Google
   module Cloud
@@ -38,6 +39,11 @@ module Google
         #
         #     require "google/cloud/ai_platform/v1/index_service"
         #     client = ::Google::Cloud::AIPlatform::V1::IndexService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/ai_platform/v1/index_service/rest"
+        #     client = ::Google::Cloud::AIPlatform::V1::IndexService::Rest::Client.new
         #
         module IndexService
         end

@@ -103,6 +103,13 @@ module Google
         #     {::Google::Cloud::AIPlatform::V1::Endpoint#network network} or
         #     {::Google::Cloud::AIPlatform::V1::Endpoint#enable_private_service_connect enable_private_service_connect},
         #     can be set.
+        # @!attribute [rw] private_service_connect_config
+        #   @return [::Google::Cloud::AIPlatform::V1::PrivateServiceConnectConfig]
+        #     Optional. Configuration for private service connect.
+        #
+        #     {::Google::Cloud::AIPlatform::V1::Endpoint#network network} and
+        #     {::Google::Cloud::AIPlatform::V1::Endpoint#private_service_connect_config private_service_connect_config}
+        #     are mutually exclusive.
         # @!attribute [r] model_deployment_monitoring_job
         #   @return [::String]
         #     Output only. Resource name of the Model Monitoring job associated with this

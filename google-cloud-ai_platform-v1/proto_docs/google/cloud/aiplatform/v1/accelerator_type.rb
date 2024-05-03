@@ -61,6 +61,9 @@ module Google
 
           # TPU v4.
           TPU_V4_POD = 10
+
+          # TPU v5.
+          TPU_V5_LITEPOD = 12
         end
       end
     end

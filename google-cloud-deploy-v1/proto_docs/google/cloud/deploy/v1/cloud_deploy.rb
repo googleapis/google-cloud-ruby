@@ -28,7 +28,9 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Optional. Name of the `DeliveryPipeline`. Format is
-        #     `projects/{project}/locations/{location}/deliveryPipelines/[a-z][a-z0-9\-]{0,62}`.
+        #     `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}`.
+        #     The `deliveryPipeline` component must match
+        #     `[a-z]([a-z0-9-]{0,61}[a-z0-9])?`
         # @!attribute [r] uid
         #   @return [::String]
         #     Output only. Unique identifier of the `DeliveryPipeline`.
@@ -694,7 +696,8 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Optional. Name of the `Target`. Format is
-        #     `projects/{project}/locations/{location}/targets/[a-z][a-z0-9\-]{0,62}`.
+        #     `projects/{project}/locations/{location}/targets/{target}`.
+        #     The `target` component must match `[a-z]([a-z0-9-]{0,61}[a-z0-9])?`
         # @!attribute [r] target_id
         #   @return [::String]
         #     Output only. Resource id of the `Target`.
@@ -895,7 +898,7 @@ module Google
         # Information specifying a GKE Cluster.
         # @!attribute [rw] cluster
         #   @return [::String]
-        #     Information specifying a GKE Cluster. Format is
+        #     Optional. Information specifying a GKE Cluster. Format is
         #     `projects/{project_id}/locations/{location_id}/clusters/{cluster_id}`.
         # @!attribute [rw] internal_ip
         #   @return [::Boolean]
@@ -915,8 +918,8 @@ module Google
         # Information specifying an Anthos Cluster.
         # @!attribute [rw] membership
         #   @return [::String]
-        #     Membership of the GKE Hub-registered cluster to which to apply the Skaffold
-        #     configuration. Format is
+        #     Optional. Membership of the GKE Hub-registered cluster to which to apply
+        #     the Skaffold configuration. Format is
         #     `projects/{project}/locations/{location}/memberships/{membership_name}`.
         class AnthosCluster
           include ::Google::Protobuf::MessageExts
@@ -1130,7 +1133,9 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Optional. Name of the `CustomTargetType`. Format is
-        #     `projects/{project}/locations/{location}/customTargetTypes/[a-z][a-z0-9\-]{0,62}`.
+        #     `projects/{project}/locations/{location}/customTargetTypes/{customTargetType}`.
+        #     The `customTargetType` component must match
+        #     `[a-z]([a-z0-9-]{0,61}[a-z0-9])?`
         # @!attribute [r] custom_target_type_id
         #   @return [::String]
         #     Output only. Resource id of the `CustomTargetType`.
@@ -1484,7 +1489,8 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Optional. Name of the `Release`. Format is
-        #     `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/[a-z][a-z0-9\-]{0,62}`.
+        #     `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{release}`.
+        #     The `release` component must match `[a-z]([a-z0-9-]{0,61}[a-z0-9])?`
         # @!attribute [r] uid
         #   @return [::String]
         #     Output only. Unique identifier of the `Release`.
@@ -1956,7 +1962,8 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Optional. Name of the `Rollout`. Format is
-        #     `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{release}/rollouts/[a-z][a-z0-9\-]{0,62}`.
+        #     `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{release}/rollouts/{rollout}`.
+        #     The `rollout` component must match `[a-z]([a-z0-9-]{0,61}[a-z0-9])?`
         # @!attribute [r] uid
         #   @return [::String]
         #     Output only. Unique identifier of the `Rollout`.
@@ -2033,7 +2040,7 @@ module Google
         # @!attribute [r] controller_rollout
         #   @return [::String]
         #     Output only. Name of the `ControllerRollout`. Format is
-        #     `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{release}/rollouts/[a-z][a-z0-9\-]{0,62}`.
+        #     `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{release}/rollouts/{rollout}`.
         # @!attribute [r] rollback_of_rollout
         #   @return [::String]
         #     Output only. Name of the `Rollout` that is rolled back by this `Rollout`.
@@ -2954,7 +2961,7 @@ module Google
         # @!attribute [r] rollout
         #   @return [::String]
         #     Output only. Name of the `ChildRollout`. Format is
-        #     `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{release}/rollouts/[a-z][a-z0-9\-]{0,62}`.
+        #     `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{release}/rollouts/{rollout}`.
         # @!attribute [r] rollout_phase_id
         #   @return [::String]
         #     Output only. The ID of the childRollout Phase initiated by this JobRun.
@@ -2968,7 +2975,7 @@ module Google
         # @!attribute [r] rollout
         #   @return [::String]
         #     Output only. Name of the `ChildRollout`. Format is
-        #     `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{release}/rollouts/[a-z][a-z0-9\-]{0,62}`.
+        #     `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{release}/rollouts/{rollout}`.
         # @!attribute [r] rollout_phase_id
         #   @return [::String]
         #     Output only. the ID of the ChildRollout's Phase.
@@ -3225,7 +3232,8 @@ module Google
         # @!attribute [rw] id
         #   @return [::String]
         #     Required. ID of the rule. This id must be unique in the `Automation`
-        #     resource to which this rule belongs. The format is `[a-z][a-z0-9\-]{0,62}`.
+        #     resource to which this rule belongs. The format is
+        #     `[a-z]([a-z0-9-]{0,61}[a-z0-9])?`.
         # @!attribute [rw] wait
         #   @return [::Google::Protobuf::Duration]
         #     Optional. How long the release need to be paused until being promoted to
@@ -3257,7 +3265,8 @@ module Google
         # @!attribute [rw] id
         #   @return [::String]
         #     Required. ID of the rule. This id must be unique in the `Automation`
-        #     resource to which this rule belongs. The format is `[a-z][a-z0-9\-]{0,62}`.
+        #     resource to which this rule belongs. The format is
+        #     `[a-z]([a-z0-9-]{0,61}[a-z0-9])?`.
         # @!attribute [rw] source_phases
         #   @return [::Array<::String>]
         #     Optional. Proceeds only after phase name matched any one in the list.
@@ -3281,7 +3290,8 @@ module Google
         # @!attribute [rw] id
         #   @return [::String]
         #     Required. ID of the rule. This id must be unique in the `Automation`
-        #     resource to which this rule belongs. The format is `[a-z][a-z0-9\-]{0,62}`.
+        #     resource to which this rule belongs. The format is
+        #     `[a-z]([a-z0-9-]{0,61}[a-z0-9])?`.
         # @!attribute [rw] source_phases
         #   @return [::Array<::String>]
         #     Optional. Phases within which jobs are subject to automatic repair actions

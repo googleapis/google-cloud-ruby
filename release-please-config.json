@@ -1591,6 +1591,10 @@
       "component": "google-maps-fleet_engine",
       "version_file": "lib/google/maps/fleet_engine/version.rb"
     },
+    "google-maps-fleet_engine-delivery": {
+      "component": "google-maps-fleet_engine-delivery",
+      "version_file": "lib/google/maps/fleet_engine/delivery/version.rb"
+    },
     "google-maps-fleet_engine-delivery-v1": {
       "component": "google-maps-fleet_engine-delivery-v1",
       "version_file": "lib/google/maps/fleet_engine/delivery/v1/version.rb"

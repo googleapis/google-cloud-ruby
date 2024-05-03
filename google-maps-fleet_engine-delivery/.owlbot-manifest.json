@@ -1,0 +1,25 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".toys.rb",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-maps-fleet_engine-delivery.gemspec",
+    "lib/google-maps-fleet_engine-delivery.rb",
+    "lib/google/maps/fleet_engine/delivery.rb",
+    "lib/google/maps/fleet_engine/delivery/version.rb",
+    "test/google/maps/fleet_engine/delivery/client_test.rb",
+    "test/google/maps/fleet_engine/delivery/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml"
+  ]
+}

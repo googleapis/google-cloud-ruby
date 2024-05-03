@@ -228,6 +228,10 @@ module Google
             #   @return [::String]
             #     Optional. The path to the directory containing the Model artifact and
             #     any of its supporting files.
+            # @!attribute [rw] deploy_task_name
+            #   @return [::String]
+            #     Optional. The name of the deploy task (e.g., "text to image
+            #     generation").
             # @!attribute [rw] title
             #   @return [::String]
             #     Required. The title of the regional resource reference.
