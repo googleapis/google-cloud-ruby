@@ -1,5 +1,15 @@
 # Release History
 
+### 2.11.0 (2024-05-03)
+
+#### Features
+
+* Support for the InstanceGroupManagerResizeRequests API 
+* Support for the InstanceSettingsService API 
+* Support for the perform_maintenance RPC in the NodeGroups API 
+* Support for the StoragePools API 
+* Support for the StoragePoolTypes API 
+
 ### 2.10.0 (2024-03-04)
 
 #### Features
