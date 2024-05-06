@@ -247,11 +247,11 @@ module Google
             # https://cloud.google.com/sensitive-data-protection/docs/creating-stored-infotypes
             # to learn more.
             rpc :DeleteStoredInfoType, ::Google::Cloud::Dlp::V2::DeleteStoredInfoTypeRequest, ::Google::Protobuf::Empty
-            # Lists data profiles for an organization.
+            # Lists project data profiles for an organization.
             rpc :ListProjectDataProfiles, ::Google::Cloud::Dlp::V2::ListProjectDataProfilesRequest, ::Google::Cloud::Dlp::V2::ListProjectDataProfilesResponse
-            # Lists data profiles for an organization.
+            # Lists table data profiles for an organization.
             rpc :ListTableDataProfiles, ::Google::Cloud::Dlp::V2::ListTableDataProfilesRequest, ::Google::Cloud::Dlp::V2::ListTableDataProfilesResponse
-            # Lists data profiles for an organization.
+            # Lists column data profiles for an organization.
             rpc :ListColumnDataProfiles, ::Google::Cloud::Dlp::V2::ListColumnDataProfilesRequest, ::Google::Cloud::Dlp::V2::ListColumnDataProfilesResponse
             # Gets a project data profile.
             rpc :GetProjectDataProfile, ::Google::Cloud::Dlp::V2::GetProjectDataProfileRequest, ::Google::Cloud::Dlp::V2::ProjectDataProfile
@@ -259,6 +259,9 @@ module Google
             rpc :GetTableDataProfile, ::Google::Cloud::Dlp::V2::GetTableDataProfileRequest, ::Google::Cloud::Dlp::V2::TableDataProfile
             # Gets a column data profile.
             rpc :GetColumnDataProfile, ::Google::Cloud::Dlp::V2::GetColumnDataProfileRequest, ::Google::Cloud::Dlp::V2::ColumnDataProfile
+            # Delete a TableDataProfile. Will not prevent the profile from being
+            # regenerated if the table is still included in a discovery configuration.
+            rpc :DeleteTableDataProfile, ::Google::Cloud::Dlp::V2::DeleteTableDataProfileRequest, ::Google::Protobuf::Empty
             # Inspect hybrid content and store findings to a job.
             # To review the findings, inspect the job. Inspection will occur
             # asynchronously.
@@ -266,6 +269,18 @@ module Google
             # Finish a running hybrid DlpJob. Triggers the finalization steps and running
             # of any enabled actions that have not yet run.
             rpc :FinishDlpJob, ::Google::Cloud::Dlp::V2::FinishDlpJobRequest, ::Google::Protobuf::Empty
+            # Create a Connection to an external data source.
+            rpc :CreateConnection, ::Google::Cloud::Dlp::V2::CreateConnectionRequest, ::Google::Cloud::Dlp::V2::Connection
+            # Get a Connection by name.
+            rpc :GetConnection, ::Google::Cloud::Dlp::V2::GetConnectionRequest, ::Google::Cloud::Dlp::V2::Connection
+            # Lists Connections in a parent.
+            rpc :ListConnections, ::Google::Cloud::Dlp::V2::ListConnectionsRequest, ::Google::Cloud::Dlp::V2::ListConnectionsResponse
+            # Searches for Connections in a parent.
+            rpc :SearchConnections, ::Google::Cloud::Dlp::V2::SearchConnectionsRequest, ::Google::Cloud::Dlp::V2::SearchConnectionsResponse
+            # Delete a Connection.
+            rpc :DeleteConnection, ::Google::Cloud::Dlp::V2::DeleteConnectionRequest, ::Google::Protobuf::Empty
+            # Update a Connection.
+            rpc :UpdateConnection, ::Google::Cloud::Dlp::V2::UpdateConnectionRequest, ::Google::Cloud::Dlp::V2::Connection
           end
 
           Stub = Service.rpc_stub_class
