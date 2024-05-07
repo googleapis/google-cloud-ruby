@@ -231,7 +231,7 @@ module Google
         #     Check the NetworkTier enum for the list of possible values.
         # @!attribute [rw] public_ptr_domain_name
         #   @return [::String]
-        #     The DNS domain name for the public PTR record. You can set this field only if the `setPublicPtr` field is enabled in accessConfig. If this field is unspecified in ipv6AccessConfig, a default PTR record will be createc for first IP in associated external IPv6 range.
+        #     The DNS domain name for the public PTR record. You can set this field only if the `setPublicPtr` field is enabled in accessConfig. If this field is unspecified in ipv6AccessConfig, a default PTR record will be created for first IP in associated external IPv6 range.
         # @!attribute [rw] security_policy
         #   @return [::String]
         #     [Output Only] The resource URL for the security policy associated with this access config.
@@ -4832,6 +4832,8 @@ module Google
             ACCELERATOR_OPTIMIZED = 280_848_403
 
             ACCELERATOR_OPTIMIZED_A3 = 158_574_526
+
+            ACCELERATOR_OPTIMIZED_A3_MEGA = 156_517_459
 
             COMPUTE_OPTIMIZED = 158_349_023
 
@@ -10923,7 +10925,7 @@ module Google
         #     Check the ProxyHeader enum for the list of possible values.
         # @!attribute [rw] request_path
         #   @return [::String]
-        #     The request path of the HTTP/2 health check request. The default value is /.
+        #     The request path of the HTTP/2 health check request. The default value is /. Must comply with RFC3986.
         # @!attribute [rw] response
         #   @return [::String]
         #     Creates a content-based HTTP/2 health check. In addition to the required HTTP 200 (OK) status code, you can configure the health check to pass only when the backend sends this specific ASCII response string within the first 1024 bytes of the HTTP response body. For details, see: https://cloud.google.com/load-balancing/docs/health-check-concepts#criteria-protocol-http
@@ -10976,7 +10978,7 @@ module Google
         #     Check the ProxyHeader enum for the list of possible values.
         # @!attribute [rw] request_path
         #   @return [::String]
-        #     The request path of the HTTP health check request. The default value is /.
+        #     The request path of the HTTP health check request. The default value is /. Must comply with RFC3986.
         # @!attribute [rw] response
         #   @return [::String]
         #     Creates a content-based HTTP health check. In addition to the required HTTP 200 (OK) status code, you can configure the health check to pass only when the backend sends this specific ASCII response string within the first 1024 bytes of the HTTP response body. For details, see: https://cloud.google.com/load-balancing/docs/health-check-concepts#criteria-protocol-http
@@ -11029,7 +11031,7 @@ module Google
         #     Check the ProxyHeader enum for the list of possible values.
         # @!attribute [rw] request_path
         #   @return [::String]
-        #     The request path of the HTTPS health check request. The default value is /.
+        #     The request path of the HTTPS health check request. The default value is /. Must comply with RFC3986.
         # @!attribute [rw] response
         #   @return [::String]
         #     Creates a content-based HTTPS health check. In addition to the required HTTP 200 (OK) status code, you can configure the health check to pass only when the backend sends this specific ASCII response string within the first 1024 bytes of the HTTP response body. For details, see: https://cloud.google.com/load-balancing/docs/health-check-concepts#criteria-protocol-http
@@ -25018,6 +25020,8 @@ module Google
 
             URL_MAPS = 378_660_743
 
+            VARIABLE_IPV6_PUBLIC_DELEGATED_PREFIXES = 128_400_161
+
             VPN_GATEWAYS = 35_620_282
 
             VPN_TUNNELS = 104_327_296
@@ -31330,7 +31334,7 @@ module Google
 
         # @!attribute [rw] locations
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Compute::V1::SnapshotSettingsStorageLocationSettingsStorageLocationPreference}]
-        #     When the policy is SPECIFIC_LOCATIONS, snapshots will be stored in the locations listed in this field. Keys are GCS bucket locations.
+        #     When the policy is SPECIFIC_LOCATIONS, snapshots will be stored in the locations listed in this field. Keys are Cloud Storage bucket locations. Only one location can be specified.
         # @!attribute [rw] policy
         #   @return [::String]
         #     The chosen location policy.
@@ -31356,7 +31360,7 @@ module Google
             # Store snapshot in the same region as with the originating disk. No additional parameters are needed.
             LOCAL_REGION = 403_535_464
 
-            # Store snapshot to the nearest multi region GCS bucket, relative to the originating disk. No additional parameters are needed.
+            # Store snapshot in the nearest multi region Cloud Storage bucket, relative to the originating disk. No additional parameters are needed.
             NEAREST_MULTI_REGION = 212_467_515
 
             # Store snapshot in the specific locations, as specified by the user. The list of regions to store must be defined under the `locations` field.
@@ -31369,7 +31373,7 @@ module Google
         # A structure for specifying storage locations.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Name of the location. It should be one of the GCS buckets.
+        #     Name of the location. It should be one of the Cloud Storage buckets. Only one location can be specified.
         class SnapshotSettingsStorageLocationSettingsStorageLocationPreference
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
