@@ -32,9 +32,9 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/kms/v1"
 
-client = ::Google::Cloud::Kms::V1::EkmService::Client.new
-request = ::Google::Cloud::Kms::V1::ListEkmConnectionsRequest.new # (request fields as keyword arguments...)
-response = client.list_ekm_connections request
+client = ::Google::Cloud::Kms::V1::Autokey::Client.new
+request = ::Google::Cloud::Kms::V1::CreateKeyHandleRequest.new # (request fields as keyword arguments...)
+response = client.create_key_handle request
 ```
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-kms-v1/latest)
