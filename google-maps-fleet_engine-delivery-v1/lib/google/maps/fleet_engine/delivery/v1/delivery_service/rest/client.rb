@@ -100,11 +100,6 @@ module Google
                       initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                     }
 
-                    default_config.rpcs.search_tasks.timeout = 60.0
-                    default_config.rpcs.search_tasks.retry_policy = {
-                      initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
-                    }
-
                     default_config.rpcs.update_task.timeout = 60.0
                     default_config.rpcs.update_task.retry_policy = {
                       initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
@@ -764,113 +759,6 @@ module Google
                 end
 
                 ##
-                # Deprecated: Use `GetTaskTrackingInfo` instead.
-                #
-                # @overload search_tasks(request, options = nil)
-                #   Pass arguments to `search_tasks` via a request object, either of type
-                #   {::Google::Maps::FleetEngine::Delivery::V1::SearchTasksRequest} or an equivalent Hash.
-                #
-                #   @param request [::Google::Maps::FleetEngine::Delivery::V1::SearchTasksRequest, ::Hash]
-                #     A request object representing the call parameters. Required. To specify no
-                #     parameters, or to keep all the default parameter values, pass an empty Hash.
-                #   @param options [::Gapic::CallOptions, ::Hash]
-                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-                #
-                # @overload search_tasks(header: nil, parent: nil, tracking_id: nil, page_size: nil, page_token: nil)
-                #   Pass arguments to `search_tasks` via keyword arguments. Note that at
-                #   least one keyword argument is required. To specify no parameters, or to keep all
-                #   the default parameter values, pass an empty Hash as a request object (see above).
-                #
-                #   @param header [::Google::Maps::FleetEngine::Delivery::V1::DeliveryRequestHeader, ::Hash]
-                #     Optional. The standard Delivery API request header.
-                #   @param parent [::String]
-                #     Required. Must be in the format `providers/{provider}`.
-                #     The provider must be the Google Cloud Project ID. For example,
-                #     `sample-cloud-project`.
-                #   @param tracking_id [::String]
-                #     Required. The identifier of the set of related Tasks being requested.
-                #     Tracking IDs are subject to the following restrictions:
-                #
-                #     * Must be a valid Unicode string.
-                #     * Limited to a maximum length of 64 characters.
-                #     * Normalized according to [Unicode Normalization Form C]
-                #     (http://www.unicode.org/reports/tr15/).
-                #     * May not contain any of the following ASCII characters: '/', ':', '?',
-                #     ',', or '#'.
-                #   @param page_size [::Integer]
-                #     Optional. The maximum number of Tasks to return. The service may return
-                #     fewer than this value. If you don't specify this value, then the server
-                #     determines the number of results to return.
-                #   @param page_token [::String]
-                #     Optional. A page token, received from a previous `SearchTasks` call. You
-                #     must provide this value to retrieve the subsequent page.
-                #
-                #     When paginating, all other parameters provided to `SearchTasks` must match
-                #     the call that provided the page token.
-                # @yield [result, operation] Access the result along with the TransportOperation object
-                # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Maps::FleetEngine::Delivery::V1::Task>]
-                # @yieldparam operation [::Gapic::Rest::TransportOperation]
-                #
-                # @return [::Gapic::Rest::PagedEnumerable<::Google::Maps::FleetEngine::Delivery::V1::Task>]
-                #
-                # @raise [::Google::Cloud::Error] if the REST call is aborted.
-                #
-                # @example Basic example
-                #   require "google/maps/fleet_engine/delivery/v1"
-                #
-                #   # Create a client object. The client can be reused for multiple calls.
-                #   client = Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::Client.new
-                #
-                #   # Create a request. To set request fields, pass in keyword arguments.
-                #   request = Google::Maps::FleetEngine::Delivery::V1::SearchTasksRequest.new
-                #
-                #   # Call the search_tasks method.
-                #   result = client.search_tasks request
-                #
-                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
-                #   # over elements, and API calls will be issued to fetch pages as needed.
-                #   result.each do |item|
-                #     # Each element is of type ::Google::Maps::FleetEngine::Delivery::V1::Task.
-                #     p item
-                #   end
-                #
-                def search_tasks request, options = nil
-                  raise ::ArgumentError, "request must be provided" if request.nil?
-
-                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Maps::FleetEngine::Delivery::V1::SearchTasksRequest
-
-                  # Converts hash and nil to an options object
-                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-                  # Customize the options with defaults
-                  call_metadata = @config.rpcs.search_tasks.metadata.to_h
-
-                  # Set x-goog-api-client and x-goog-user-project headers
-                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                    lib_name: @config.lib_name, lib_version: @config.lib_version,
-                    gapic_version: ::Google::Maps::FleetEngine::Delivery::V1::VERSION,
-                    transports_version_send: [:rest]
-
-                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-                  options.apply_defaults timeout:      @config.rpcs.search_tasks.timeout,
-                                         metadata:     call_metadata,
-                                         retry_policy: @config.rpcs.search_tasks.retry_policy
-
-                  options.apply_defaults timeout:      @config.timeout,
-                                         metadata:     @config.metadata,
-                                         retry_policy: @config.retry_policy
-
-                  @delivery_service_stub.search_tasks request, options do |result, operation|
-                    result = ::Gapic::Rest::PagedEnumerable.new @delivery_service_stub, :search_tasks, "tasks", request, result, options
-                    yield result, operation if block_given?
-                    return result
-                  end
-                rescue ::Gapic::Rest::Error => e
-                  raise ::Google::Cloud::Error.from_error(e)
-                end
-
-                ##
                 # Updates `Task` data.
                 #
                 # @overload update_task(request, options = nil)
@@ -1441,11 +1329,6 @@ module Google
                     #
                     attr_reader :get_task
                     ##
-                    # RPC-specific configuration for `search_tasks`
-                    # @return [::Gapic::Config::Method]
-                    #
-                    attr_reader :search_tasks
-                    ##
                     # RPC-specific configuration for `update_task`
                     # @return [::Gapic::Config::Method]
                     #
@@ -1480,8 +1363,6 @@ module Google
                       @create_task = ::Gapic::Config::Method.new create_task_config
                       get_task_config = parent_rpcs.get_task if parent_rpcs.respond_to? :get_task
                       @get_task = ::Gapic::Config::Method.new get_task_config
-                      search_tasks_config = parent_rpcs.search_tasks if parent_rpcs.respond_to? :search_tasks
-                      @search_tasks = ::Gapic::Config::Method.new search_tasks_config
                       update_task_config = parent_rpcs.update_task if parent_rpcs.respond_to? :update_task
                       @update_task = ::Gapic::Config::Method.new update_task_config
                       list_tasks_config = parent_rpcs.list_tasks if parent_rpcs.respond_to? :list_tasks

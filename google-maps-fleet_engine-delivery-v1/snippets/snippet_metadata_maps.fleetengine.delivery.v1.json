@@ -252,46 +252,6 @@
       ]
     },
     {
-      "region_tag": "fleetenginedelivery_v1_generated_DeliveryService_SearchTasks_sync",
-      "title": "Snippet for the search_tasks call in the DeliveryService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Client#search_tasks.",
-      "file": "delivery_service/search_tasks.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "search_tasks",
-        "full_name": "::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Client#search_tasks",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Maps::FleetEngine::Delivery::V1::SearchTasksRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Maps::FleetEngine::Delivery::V1::SearchTasksResponse",
-        "client": {
-          "short_name": "DeliveryService::Client",
-          "full_name": "::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Client"
-        },
-        "method": {
-          "short_name": "SearchTasks",
-          "full_name": "maps.fleetengine.delivery.v1.DeliveryService.SearchTasks",
-          "service": {
-            "short_name": "DeliveryService",
-            "full_name": "maps.fleetengine.delivery.v1.DeliveryService"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 50,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
       "region_tag": "fleetenginedelivery_v1_generated_DeliveryService_UpdateTask_sync",
       "title": "Snippet for the update_task call in the DeliveryService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Client#update_task.",

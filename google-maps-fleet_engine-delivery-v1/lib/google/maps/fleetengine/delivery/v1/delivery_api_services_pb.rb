@@ -52,8 +52,6 @@ module Google
               rpc :CreateTask, ::Google::Maps::FleetEngine::Delivery::V1::CreateTaskRequest, ::Google::Maps::FleetEngine::Delivery::V1::Task
               # Gets information about a `Task`.
               rpc :GetTask, ::Google::Maps::FleetEngine::Delivery::V1::GetTaskRequest, ::Google::Maps::FleetEngine::Delivery::V1::Task
-              # Deprecated: Use `GetTaskTrackingInfo` instead.
-              rpc :SearchTasks, ::Google::Maps::FleetEngine::Delivery::V1::SearchTasksRequest, ::Google::Maps::FleetEngine::Delivery::V1::SearchTasksResponse
               # Updates `Task` data.
               rpc :UpdateTask, ::Google::Maps::FleetEngine::Delivery::V1::UpdateTaskRequest, ::Google::Maps::FleetEngine::Delivery::V1::Task
               # Gets all `Task`s that meet the specified filtering criteria.
