@@ -1154,7 +1154,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload delete_azure_cluster(name: nil, allow_missing: nil, validate_only: nil, etag: nil)
+            # @overload delete_azure_cluster(name: nil, allow_missing: nil, validate_only: nil, etag: nil, ignore_errors: nil)
             #   Pass arguments to `delete_azure_cluster` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1185,6 +1185,11 @@ module Google
             #
             #     If the provided etag does not match the current etag of the cluster,
             #     the request will fail and an ABORTED error will be returned.
+            #   @param ignore_errors [::Boolean]
+            #     Optional. If set to true, the deletion of
+            #     {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster} resource will
+            #     succeed even if errors occur during deleting in cluster resources. Using
+            #     this parameter may result in orphaned resources in the cluster.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -1908,7 +1913,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload delete_azure_node_pool(name: nil, validate_only: nil, allow_missing: nil, etag: nil)
+            # @overload delete_azure_node_pool(name: nil, validate_only: nil, allow_missing: nil, etag: nil, ignore_errors: nil)
             #   Pass arguments to `delete_azure_node_pool` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1941,6 +1946,11 @@ module Google
             #
             #     If the provided ETag does not match the current etag of the node pool,
             #     the request will fail and an ABORTED error will be returned.
+            #   @param ignore_errors [::Boolean]
+            #     Optional. If set to true, the deletion of
+            #     {::Google::Cloud::GkeMultiCloud::V1::AzureNodePool AzureNodePool} resource will
+            #     succeed even if errors occur during deleting in node pool resources. Using
+            #     this parameter may result in orphaned resources in the node pool.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -2127,7 +2137,7 @@ module Google
             #   @param azure_cluster [::String]
             #     Required. The AzureCluster, which owns the JsonWebKeys.
             #     Format:
-            #     projects/<project-id>/locations/<region>/azureClusters/<cluster-id>
+            #     `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::GkeMultiCloud::V1::AzureJsonWebKeys]

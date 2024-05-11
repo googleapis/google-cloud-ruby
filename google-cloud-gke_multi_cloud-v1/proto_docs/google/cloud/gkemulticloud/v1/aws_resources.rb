@@ -590,8 +590,8 @@ module Google
         #     255 Unicode characters.
         # @!attribute [rw] iam_instance_profile
         #   @return [::String]
-        #     Required. The name or ARN of the AWS IAM role assigned to nodes in the
-        #     pool.
+        #     Required. The name or ARN of the AWS IAM instance profile to assign to
+        #     nodes in the pool.
         # @!attribute [rw] image_type
         #   @return [::String]
         #     Optional. The OS image type to use on node pool instances.
