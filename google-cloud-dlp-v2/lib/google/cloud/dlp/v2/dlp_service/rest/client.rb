@@ -4044,7 +4044,7 @@ module Google
               end
 
               ##
-              # Lists data profiles for an organization.
+              # Lists project data profiles for an organization.
               #
               # @overload list_project_data_profiles(request, options = nil)
               #   Pass arguments to `list_project_data_profiles` via a request object, either of type
@@ -4080,7 +4080,7 @@ module Google
               #
               #     Supported fields are:
               #
-              #     - `project_id`: GCP project ID
+              #     - `project_id`: Google Cloud project ID
               #     - `sensitivity_level`: How sensitive the data in a project is, at most.
               #     - `data_risk_level`: How much risk is associated with this data.
               #     - `profile_last_generated`: When the profile was last updated in epoch
@@ -4171,7 +4171,7 @@ module Google
               end
 
               ##
-              # Lists data profiles for an organization.
+              # Lists table data profiles for an organization.
               #
               # @overload list_table_data_profiles(request, options = nil)
               #   Pass arguments to `list_table_data_profiles` via a request object, either of type
@@ -4210,7 +4210,7 @@ module Google
               #
               #     Supported fields are:
               #
-              #     - `project_id`: The GCP project ID.
+              #     - `project_id`: The Google Cloud project ID.
               #     - `dataset_id`: The ID of a BigQuery dataset.
               #     - `table_id`: The ID of a BigQuery table.
               #     - `sensitivity_level`: How sensitive the data in a table is, at most.
@@ -4230,7 +4230,7 @@ module Google
               #     sequence of restrictions implicitly uses `AND`.
               #     * A restriction has the form of `{field} {operator} {value}`.
               #     * Supported fields/values:
-              #         - `project_id` - The GCP project ID.
+              #         - `project_id` - The Google Cloud project ID.
               #         - `dataset_id` - The BigQuery dataset ID.
               #         - `table_id` - The ID of the BigQuery table.
               #         - `sensitivity_level` - HIGH|MODERATE|LOW
@@ -4311,7 +4311,7 @@ module Google
               end
 
               ##
-              # Lists data profiles for an organization.
+              # Lists column data profiles for an organization.
               #
               # @overload list_column_data_profiles(request, options = nil)
               #   Pass arguments to `list_column_data_profiles` via a request object, either of type
@@ -4689,6 +4689,85 @@ module Google
               end
 
               ##
+              # Delete a TableDataProfile. Will not prevent the profile from being
+              # regenerated if the table is still included in a discovery configuration.
+              #
+              # @overload delete_table_data_profile(request, options = nil)
+              #   Pass arguments to `delete_table_data_profile` via a request object, either of type
+              #   {::Google::Cloud::Dlp::V2::DeleteTableDataProfileRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Dlp::V2::DeleteTableDataProfileRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_table_data_profile(name: nil)
+              #   Pass arguments to `delete_table_data_profile` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Resource name of the table data profile.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dlp/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dlp::V2::DlpService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dlp::V2::DeleteTableDataProfileRequest.new
+              #
+              #   # Call the delete_table_data_profile method.
+              #   result = client.delete_table_data_profile request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
+              def delete_table_data_profile request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::DeleteTableDataProfileRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_table_data_profile.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Dlp::V2::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_table_data_profile.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_table_data_profile.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @dlp_service_stub.delete_table_data_profile request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Inspect hybrid content and store findings to a job.
               # To review the findings, inspect the job. Inspection will occur
               # asynchronously.
@@ -4843,6 +4922,512 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @dlp_service_stub.finish_dlp_job request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Create a Connection to an external data source.
+              #
+              # @overload create_connection(request, options = nil)
+              #   Pass arguments to `create_connection` via a request object, either of type
+              #   {::Google::Cloud::Dlp::V2::CreateConnectionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Dlp::V2::CreateConnectionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_connection(parent: nil, connection: nil)
+              #   Pass arguments to `create_connection` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Parent resource name in the format:
+              #     `projects/{project}/locations/{location}`.
+              #   @param connection [::Google::Cloud::Dlp::V2::Connection, ::Hash]
+              #     Required. The connection resource.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Dlp::V2::Connection]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Dlp::V2::Connection]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dlp/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dlp::V2::DlpService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dlp::V2::CreateConnectionRequest.new
+              #
+              #   # Call the create_connection method.
+              #   result = client.create_connection request
+              #
+              #   # The returned object is of type Google::Cloud::Dlp::V2::Connection.
+              #   p result
+              #
+              def create_connection request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::CreateConnectionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_connection.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Dlp::V2::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_connection.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_connection.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @dlp_service_stub.create_connection request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Get a Connection by name.
+              #
+              # @overload get_connection(request, options = nil)
+              #   Pass arguments to `get_connection` via a request object, either of type
+              #   {::Google::Cloud::Dlp::V2::GetConnectionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Dlp::V2::GetConnectionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_connection(name: nil)
+              #   Pass arguments to `get_connection` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Resource name in the format:
+              #     `projects/{project}/locations/{location}/connections/{connection}`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Dlp::V2::Connection]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Dlp::V2::Connection]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dlp/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dlp::V2::DlpService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dlp::V2::GetConnectionRequest.new
+              #
+              #   # Call the get_connection method.
+              #   result = client.get_connection request
+              #
+              #   # The returned object is of type Google::Cloud::Dlp::V2::Connection.
+              #   p result
+              #
+              def get_connection request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::GetConnectionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_connection.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Dlp::V2::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_connection.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_connection.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @dlp_service_stub.get_connection request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists Connections in a parent.
+              #
+              # @overload list_connections(request, options = nil)
+              #   Pass arguments to `list_connections` via a request object, either of type
+              #   {::Google::Cloud::Dlp::V2::ListConnectionsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Dlp::V2::ListConnectionsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_connections(parent: nil, page_size: nil, page_token: nil, filter: nil)
+              #   Pass arguments to `list_connections` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Parent name, for example:
+              #     `projects/project-id/locations/global`.
+              #   @param page_size [::Integer]
+              #     Optional. Number of results per page, max 1000.
+              #   @param page_token [::String]
+              #     Optional. Page token from a previous page to return the next set of
+              #     results. If set, all other request fields must match the original request.
+              #   @param filter [::String]
+              #     Optional. * Supported fields/values
+              #         - `state` - MISSING|AVAILABLE|ERROR
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dlp::V2::Connection>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dlp::V2::Connection>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dlp/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dlp::V2::DlpService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dlp::V2::ListConnectionsRequest.new
+              #
+              #   # Call the list_connections method.
+              #   result = client.list_connections request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Dlp::V2::Connection.
+              #     p item
+              #   end
+              #
+              def list_connections request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::ListConnectionsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_connections.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Dlp::V2::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_connections.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_connections.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @dlp_service_stub.list_connections request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @dlp_service_stub, :list_connections, "connections", request, result, options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Searches for Connections in a parent.
+              #
+              # @overload search_connections(request, options = nil)
+              #   Pass arguments to `search_connections` via a request object, either of type
+              #   {::Google::Cloud::Dlp::V2::SearchConnectionsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Dlp::V2::SearchConnectionsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload search_connections(parent: nil, page_size: nil, page_token: nil, filter: nil)
+              #   Pass arguments to `search_connections` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Parent name, typically an organization, without location.
+              #     For example: `organizations/12345678`.
+              #   @param page_size [::Integer]
+              #     Optional. Number of results per page, max 1000.
+              #   @param page_token [::String]
+              #     Optional. Page token from a previous page to return the next set of
+              #     results. If set, all other request fields must match the original request.
+              #   @param filter [::String]
+              #     Optional. * Supported fields/values
+              #         - `state` - MISSING|AVAILABLE|ERROR
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dlp::V2::Connection>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dlp::V2::Connection>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dlp/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dlp::V2::DlpService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dlp::V2::SearchConnectionsRequest.new
+              #
+              #   # Call the search_connections method.
+              #   result = client.search_connections request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Dlp::V2::Connection.
+              #     p item
+              #   end
+              #
+              def search_connections request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::SearchConnectionsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.search_connections.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Dlp::V2::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.search_connections.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.search_connections.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @dlp_service_stub.search_connections request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @dlp_service_stub, :search_connections, "connections", request, result, options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Delete a Connection.
+              #
+              # @overload delete_connection(request, options = nil)
+              #   Pass arguments to `delete_connection` via a request object, either of type
+              #   {::Google::Cloud::Dlp::V2::DeleteConnectionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Dlp::V2::DeleteConnectionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_connection(name: nil)
+              #   Pass arguments to `delete_connection` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Resource name of the Connection to be deleted, in the format:
+              #     `projects/{project}/locations/{location}/connections/{connection}`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dlp/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dlp::V2::DlpService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dlp::V2::DeleteConnectionRequest.new
+              #
+              #   # Call the delete_connection method.
+              #   result = client.delete_connection request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
+              def delete_connection request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::DeleteConnectionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_connection.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Dlp::V2::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_connection.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_connection.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @dlp_service_stub.delete_connection request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Update a Connection.
+              #
+              # @overload update_connection(request, options = nil)
+              #   Pass arguments to `update_connection` via a request object, either of type
+              #   {::Google::Cloud::Dlp::V2::UpdateConnectionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Dlp::V2::UpdateConnectionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_connection(name: nil, connection: nil, update_mask: nil)
+              #   Pass arguments to `update_connection` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Resource name in the format:
+              #     `projects/{project}/locations/{location}/connections/{connection}`.
+              #   @param connection [::Google::Cloud::Dlp::V2::Connection, ::Hash]
+              #     Required. The connection with new values for the relevant fields.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. Mask to control which fields get updated.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Dlp::V2::Connection]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Dlp::V2::Connection]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dlp/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dlp::V2::DlpService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dlp::V2::UpdateConnectionRequest.new
+              #
+              #   # Call the update_connection method.
+              #   result = client.update_connection request
+              #
+              #   # The returned object is of type Google::Cloud::Dlp::V2::Connection.
+              #   p result
+              #
+              def update_connection request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::UpdateConnectionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_connection.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Dlp::V2::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_connection.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_connection.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @dlp_service_stub.update_connection request, options do |result, operation|
                   yield result, operation if block_given?
                   return result
                 end
@@ -5199,6 +5784,11 @@ module Google
                   #
                   attr_reader :get_column_data_profile
                   ##
+                  # RPC-specific configuration for `delete_table_data_profile`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_table_data_profile
+                  ##
                   # RPC-specific configuration for `hybrid_inspect_dlp_job`
                   # @return [::Gapic::Config::Method]
                   #
@@ -5208,6 +5798,36 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :finish_dlp_job
+                  ##
+                  # RPC-specific configuration for `create_connection`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_connection
+                  ##
+                  # RPC-specific configuration for `get_connection`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_connection
+                  ##
+                  # RPC-specific configuration for `list_connections`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_connections
+                  ##
+                  # RPC-specific configuration for `search_connections`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :search_connections
+                  ##
+                  # RPC-specific configuration for `delete_connection`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_connection
+                  ##
+                  # RPC-specific configuration for `update_connection`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_connection
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -5297,10 +5917,24 @@ module Google
                     @get_table_data_profile = ::Gapic::Config::Method.new get_table_data_profile_config
                     get_column_data_profile_config = parent_rpcs.get_column_data_profile if parent_rpcs.respond_to? :get_column_data_profile
                     @get_column_data_profile = ::Gapic::Config::Method.new get_column_data_profile_config
+                    delete_table_data_profile_config = parent_rpcs.delete_table_data_profile if parent_rpcs.respond_to? :delete_table_data_profile
+                    @delete_table_data_profile = ::Gapic::Config::Method.new delete_table_data_profile_config
                     hybrid_inspect_dlp_job_config = parent_rpcs.hybrid_inspect_dlp_job if parent_rpcs.respond_to? :hybrid_inspect_dlp_job
                     @hybrid_inspect_dlp_job = ::Gapic::Config::Method.new hybrid_inspect_dlp_job_config
                     finish_dlp_job_config = parent_rpcs.finish_dlp_job if parent_rpcs.respond_to? :finish_dlp_job
                     @finish_dlp_job = ::Gapic::Config::Method.new finish_dlp_job_config
+                    create_connection_config = parent_rpcs.create_connection if parent_rpcs.respond_to? :create_connection
+                    @create_connection = ::Gapic::Config::Method.new create_connection_config
+                    get_connection_config = parent_rpcs.get_connection if parent_rpcs.respond_to? :get_connection
+                    @get_connection = ::Gapic::Config::Method.new get_connection_config
+                    list_connections_config = parent_rpcs.list_connections if parent_rpcs.respond_to? :list_connections
+                    @list_connections = ::Gapic::Config::Method.new list_connections_config
+                    search_connections_config = parent_rpcs.search_connections if parent_rpcs.respond_to? :search_connections
+                    @search_connections = ::Gapic::Config::Method.new search_connections_config
+                    delete_connection_config = parent_rpcs.delete_connection if parent_rpcs.respond_to? :delete_connection
+                    @delete_connection = ::Gapic::Config::Method.new delete_connection_config
+                    update_connection_config = parent_rpcs.update_connection if parent_rpcs.respond_to? :update_connection
+                    @update_connection = ::Gapic::Config::Method.new update_connection_config
 
                     yield self if block_given?
                   end

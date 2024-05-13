@@ -1053,6 +1053,10 @@ module Google
           #   @return [::Array<::Google::Cloud::Dlp::V2::InfoTypeStats>]
           #     Statistics of how many instances of each info type were found during
           #     inspect job.
+          # @!attribute [rw] num_rows_processed
+          #   @return [::Integer]
+          #     Number of rows scanned post sampling and time filtering (Applicable for
+          #     row based stores such as BigQuery).
           # @!attribute [rw] hybrid_stats
           #   @return [::Google::Cloud::Dlp::V2::HybridInspectStatistics]
           #     Statistics related to the processing of hybrid inspect.
@@ -1265,6 +1269,9 @@ module Google
             # The infoType is typically used in Japan.
             JAPAN = 20
 
+            # The infoType is typically used in Kazakhstan.
+            KAZAKHSTAN = 47
+
             # The infoType is typically used in Korea.
             KOREA = 21
 
@@ -1292,6 +1299,9 @@ module Google
             # The infoType is typically used in Portugal.
             PORTUGAL = 28
 
+            # The infoType is typically used in Russia.
+            RUSSIA = 44
+
             # The infoType is typically used in Singapore.
             SINGAPORE = 29
 
@@ -1316,6 +1326,9 @@ module Google
             # The infoType is typically used in Turkey.
             TURKEY = 35
 
+            # The infoType is typically used in Ukraine.
+            UKRAINE = 45
+
             # The infoType is typically used in the United Kingdom.
             UNITED_KINGDOM = 36
 
@@ -1324,6 +1337,9 @@ module Google
 
             # The infoType is typically used in Uruguay.
             URUGUAY = 38
+
+            # The infoType is typically used in Uzbekistan.
+            UZBEKISTAN = 46
 
             # The infoType is typically used in Venezuela.
             VENEZUELA = 39
@@ -3223,7 +3239,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Contains a configuration to make dlp api calls on a repeating basis.
+        # Contains a configuration to make api calls on a repeating basis.
         # See
         # https://cloud.google.com/sensitive-data-protection/docs/concepts-job-triggers
         # to learn more.
@@ -4008,8 +4024,14 @@ module Google
           # @!attribute [rw] profile_table
           #   @return [::Google::Cloud::Dlp::V2::BigQueryTable]
           #     Store all table and column profiles in an existing table or a new table
-          #     in an existing dataset. Each re-generation will result in a new row in
-          #     BigQuery.
+          #     in an existing dataset. Each re-generation will result in new rows in
+          #     BigQuery. Data is inserted using [streaming
+          #     insert](https://cloud.google.com/blog/products/bigquery/life-of-a-bigquery-streaming-insert)
+          #     and so data may be in the buffer for a period of time after the profile
+          #     has finished. The Pub/Sub notification is sent before the streaming
+          #     buffer is guaranteed to be written, so data may not be instantly
+          #     visible to queries by the time your topic receives the Pub/Sub
+          #     notification.
           class Export
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -4047,7 +4069,7 @@ module Google
               # The full table data profile.
               TABLE_PROFILE = 1
 
-              # The resource name of the table.
+              # The name of the profiled resource.
               RESOURCE_NAME = 2
             end
           end
@@ -4061,12 +4083,12 @@ module Google
             NEW_PROFILE = 1
 
             # Changed one of the following profile metrics:
-            # * Table data risk score
-            # * Table sensitivity score
-            # * Table resource visibility
-            # * Table encryption type
-            # * Table predicted infoTypes
-            # * Table other infoTypes
+            # * Data risk score
+            # * Sensitivity score
+            # * Resource visibility
+            # * Encryption type
+            # * Predicted infoTypes
+            # * Other infoTypes
             CHANGED_PROFILE = 2
 
             # Table data risk score or sensitivity score increased.
@@ -4273,6 +4295,10 @@ module Google
         #   @return [::Google::Cloud::Dlp::V2::BigQueryDiscoveryTarget]
         #     BigQuery target for Discovery. The first target to match a table will be
         #     the one applied.
+        # @!attribute [rw] cloud_sql_target
+        #   @return [::Google::Cloud::Dlp::V2::CloudSqlDiscoveryTarget]
+        #     Cloud SQL target for Discovery. The first target to match a table will be
+        #     the one applied.
         class DiscoveryTarget
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -4418,6 +4444,203 @@ module Google
         class DiscoverySchemaModifiedCadence
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Target used to match against for discovery with Cloud SQL tables.
+        # @!attribute [rw] filter
+        #   @return [::Google::Cloud::Dlp::V2::DiscoveryCloudSqlFilter]
+        #     Required. The tables the discovery cadence applies to. The first target
+        #     with a matching filter will be the one to apply to a table.
+        # @!attribute [rw] conditions
+        #   @return [::Google::Cloud::Dlp::V2::DiscoveryCloudSqlConditions]
+        #     In addition to matching the filter, these conditions must be true
+        #     before a profile is generated.
+        # @!attribute [rw] generation_cadence
+        #   @return [::Google::Cloud::Dlp::V2::DiscoveryCloudSqlGenerationCadence]
+        #     How often and when to update profiles. New tables that match both the
+        #     filter and conditions are scanned as quickly as possible depending on
+        #     system capacity.
+        # @!attribute [rw] disabled
+        #   @return [::Google::Cloud::Dlp::V2::Disabled]
+        #     Disable profiling for database resources that match this filter.
+        class CloudSqlDiscoveryTarget
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Determines what tables will have profiles generated within an organization
+        # or project. Includes the ability to filter by regular expression patterns
+        # on project ID, location, instance, database, and database resource name.
+        # @!attribute [rw] collection
+        #   @return [::Google::Cloud::Dlp::V2::DatabaseResourceCollection]
+        #     A specific set of database resources for this filter to apply to.
+        # @!attribute [rw] others
+        #   @return [::Google::Cloud::Dlp::V2::AllOtherDatabaseResources]
+        #     Catch-all. This should always be the last target in the list because
+        #     anything above it will apply first. Should only appear once in a
+        #     configuration. If none is specified, a default one will be added
+        #     automatically.
+        # @!attribute [rw] database_resource_reference
+        #   @return [::Google::Cloud::Dlp::V2::DatabaseResourceReference]
+        #     The database resource to scan. Targets including this can only include
+        #     one target (the target with this database resource reference).
+        class DiscoveryCloudSqlFilter
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Match database resources using regex filters. Examples of database
+        # resources are tables, views, and stored procedures.
+        # @!attribute [rw] include_regexes
+        #   @return [::Google::Cloud::Dlp::V2::DatabaseResourceRegexes]
+        #     A collection of regular expressions to match a database resource against.
+        class DatabaseResourceCollection
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A collection of regular expressions to determine what database resources to
+        # match against.
+        # @!attribute [rw] patterns
+        #   @return [::Array<::Google::Cloud::Dlp::V2::DatabaseResourceRegex>]
+        #     A group of regular expression patterns to match against one or more
+        #     database resources.
+        #     Maximum of 100 entries. The sum of all regular expression's length can't
+        #     exceed 10 KiB.
+        class DatabaseResourceRegexes
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A pattern to match against one or more database resources. At least one
+        # pattern must be specified. Regular expressions use RE2
+        # [syntax](https://github.com/google/re2/wiki/Syntax); a guide can be found
+        # under the google/re2 repository on GitHub.
+        # @!attribute [rw] project_id_regex
+        #   @return [::String]
+        #     For organizations, if unset, will match all projects. Has no effect
+        #     for Data Profile configurations created within a project.
+        # @!attribute [rw] instance_regex
+        #   @return [::String]
+        #     Regex to test the instance name against. If empty, all instances match.
+        # @!attribute [rw] database_regex
+        #   @return [::String]
+        #     Regex to test the database name against. If empty, all databases match.
+        # @!attribute [rw] database_resource_name_regex
+        #   @return [::String]
+        #     Regex to test the database resource's name against. An example of a
+        #     database resource name is a table's name. Other database resource names
+        #     like view names could be included in the future. If empty, all database
+        #     resources match.
+        class DatabaseResourceRegex
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Match database resources not covered by any other filter.
+        class AllOtherDatabaseResources
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Identifies a single database resource, like a table within a database.
+        # @!attribute [rw] project_id
+        #   @return [::String]
+        #     Required. If within a project-level config, then this must match the
+        #     config's project id.
+        # @!attribute [rw] instance
+        #   @return [::String]
+        #     Required. The instance where this resource is located. For example: Cloud
+        #     SQL's instance id.
+        class DatabaseResourceReference
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Requirements that must be true before a table is profiled for the
+        # first time.
+        # @!attribute [rw] database_engines
+        #   @return [::Array<::Google::Cloud::Dlp::V2::DiscoveryCloudSqlConditions::DatabaseEngine>]
+        #     Optional. Database engines that should be profiled.
+        #     Optional. Defaults to ALL_SUPPORTED_DATABASE_ENGINES if unspecified.
+        # @!attribute [rw] types
+        #   @return [::Array<::Google::Cloud::Dlp::V2::DiscoveryCloudSqlConditions::DatabaseResourceType>]
+        #     Data profiles will only be generated for the database resource types
+        #     specified in this field.
+        #     If not specified, defaults to [DATABASE_RESOURCE_TYPE_ALL_SUPPORTED_TYPES].
+        class DiscoveryCloudSqlConditions
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The database engines that should be profiled.
+          module DatabaseEngine
+            # Unused.
+            DATABASE_ENGINE_UNSPECIFIED = 0
+
+            # Include all supported database engines.
+            ALL_SUPPORTED_DATABASE_ENGINES = 1
+
+            # MySql database.
+            MYSQL = 2
+
+            # PostGres database.
+            POSTGRES = 3
+          end
+
+          # Cloud SQL database resource types. New values can be added at a later time.
+          module DatabaseResourceType
+            # Unused.
+            DATABASE_RESOURCE_TYPE_UNSPECIFIED = 0
+
+            # Includes database resource types that become supported at a later time.
+            DATABASE_RESOURCE_TYPE_ALL_SUPPORTED_TYPES = 1
+
+            # Tables.
+            DATABASE_RESOURCE_TYPE_TABLE = 2
+          end
+        end
+
+        # How often existing tables should have their profiles refreshed.
+        # New tables are scanned as quickly as possible depending on system
+        # capacity.
+        # @!attribute [rw] schema_modified_cadence
+        #   @return [::Google::Cloud::Dlp::V2::DiscoveryCloudSqlGenerationCadence::SchemaModifiedCadence]
+        #     When to reprofile if the schema has changed.
+        # @!attribute [rw] refresh_frequency
+        #   @return [::Google::Cloud::Dlp::V2::DataProfileUpdateFrequency]
+        #     Data changes (non-schema changes) in Cloud SQL tables can't trigger
+        #     reprofiling. If you set this field, profiles are refreshed at this
+        #     frequency regardless of whether the underlying tables have changes.
+        #     Defaults to never.
+        class DiscoveryCloudSqlGenerationCadence
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # How frequency to modify the profile when the table's schema is modified.
+          # @!attribute [rw] types
+          #   @return [::Array<::Google::Cloud::Dlp::V2::DiscoveryCloudSqlGenerationCadence::SchemaModifiedCadence::CloudSqlSchemaModification>]
+          #     The types of schema modifications to consider.
+          #     Defaults to NEW_COLUMNS.
+          # @!attribute [rw] frequency
+          #   @return [::Google::Cloud::Dlp::V2::DataProfileUpdateFrequency]
+          #     Frequency to regenerate data profiles when the schema is modified.
+          #     Defaults to monthly.
+          class SchemaModifiedCadence
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The type of modification that causes a profile update.
+            module CloudSqlSchemaModification
+              # Unused.
+              SQL_SCHEMA_MODIFICATION_UNSPECIFIED = 0
+
+              # New columns has appeared.
+              NEW_COLUMNS = 1
+
+              # Columns have been removed from the table.
+              REMOVED_COLUMNS = 2
+            end
+          end
         end
 
         # The location to begin a discovery scan. Denotes an organization ID or folder
@@ -5167,7 +5390,7 @@ module Google
         #
         #     Supported fields are:
         #
-        #     - `project_id`: GCP project ID
+        #     - `project_id`: Google Cloud project ID
         #     - `sensitivity_level`: How sensitive the data in a project is, at most.
         #     - `data_risk_level`: How much risk is associated with this data.
         #     - `profile_last_generated`: When the profile was last updated in epoch
@@ -5239,7 +5462,7 @@ module Google
         #
         #     Supported fields are:
         #
-        #     - `project_id`: The GCP project ID.
+        #     - `project_id`: The Google Cloud project ID.
         #     - `dataset_id`: The ID of a BigQuery dataset.
         #     - `table_id`: The ID of a BigQuery table.
         #     - `sensitivity_level`: How sensitive the data in a table is, at most.
@@ -5260,7 +5483,7 @@ module Google
         #     sequence of restrictions implicitly uses `AND`.
         #     * A restriction has the form of `{field} {operator} {value}`.
         #     * Supported fields/values:
-        #         - `project_id` - The GCP project ID.
+        #         - `project_id` - The Google Cloud project ID.
         #         - `dataset_id` - The BigQuery dataset ID.
         #         - `table_id` - The ID of the BigQuery table.
         #         - `sensitivity_level` - HIGH|MODERATE|LOW
@@ -5751,6 +5974,18 @@ module Google
 
             # Json type.
             TYPE_JSON = 14
+
+            # Interval type.
+            TYPE_INTERVAL = 15
+
+            # `Range<Date>` type.
+            TYPE_RANGE_DATE = 16
+
+            # `Range<Datetime>` type.
+            TYPE_RANGE_DATETIME = 17
+
+            # `Range<Timestamp>` type.
+            TYPE_RANGE_TIMESTAMP = 18
           end
 
           # The possible policy states for a column.
@@ -5862,6 +6097,225 @@ module Google
         #   @return [::Google::Cloud::Dlp::V2::DataProfileAction::EventType]
         #     The event that caused the Pub/Sub message to be sent.
         class DataProfilePubSubMessage
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for CreateConnection.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Parent resource name in the format:
+        #     `projects/{project}/locations/{location}`.
+        # @!attribute [rw] connection
+        #   @return [::Google::Cloud::Dlp::V2::Connection]
+        #     Required. The connection resource.
+        class CreateConnectionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for GetConnection.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Resource name in the format:
+        #     `projects/{project}/locations/{location}/connections/{connection}`.
+        class GetConnectionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ListConnections.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Parent name, for example:
+        #     `projects/project-id/locations/global`.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. Number of results per page, max 1000.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. Page token from a previous page to return the next set of
+        #     results. If set, all other request fields must match the original request.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. * Supported fields/values
+        #         - `state` - MISSING|AVAILABLE|ERROR
+        class ListConnectionsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for SearchConnections.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Parent name, typically an organization, without location.
+        #     For example: `organizations/12345678`.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. Number of results per page, max 1000.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. Page token from a previous page to return the next set of
+        #     results. If set, all other request fields must match the original request.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. * Supported fields/values
+        #         - `state` - MISSING|AVAILABLE|ERROR
+        class SearchConnectionsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ListConnections.
+        # @!attribute [rw] connections
+        #   @return [::Array<::Google::Cloud::Dlp::V2::Connection>]
+        #     List of connections.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     Token to retrieve the next page of results. An empty value means there are
+        #     no more results.
+        class ListConnectionsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for SearchConnections.
+        # @!attribute [rw] connections
+        #   @return [::Array<::Google::Cloud::Dlp::V2::Connection>]
+        #     List of connections that match the search query. Note that only a subset
+        #     of the fields will be populated, and only "name" is guaranteed to be set.
+        #     For full details of a Connection, call GetConnection with the name.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     Token to retrieve the next page of results. An empty value means there are
+        #     no more results.
+        class SearchConnectionsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for UpdateConnection.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Resource name in the format:
+        #     `projects/{project}/locations/{location}/connections/{connection}`.
+        # @!attribute [rw] connection
+        #   @return [::Google::Cloud::Dlp::V2::Connection]
+        #     Required. The connection with new values for the relevant fields.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. Mask to control which fields get updated.
+        class UpdateConnectionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for DeleteConnection.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Resource name of the Connection to be deleted, in the format:
+        #     `projects/{project}/locations/{location}/connections/{connection}`.
+        class DeleteConnectionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A data connection to allow DLP to profile data in locations that require
+        # additional configuration.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. Name of the connection:
+        #     `projects/{project}/locations/{location}/connections/{name}`.
+        # @!attribute [rw] state
+        #   @return [::Google::Cloud::Dlp::V2::ConnectionState]
+        #     Required. The connection's state in its lifecycle.
+        # @!attribute [r] errors
+        #   @return [::Array<::Google::Cloud::Dlp::V2::Error>]
+        #     Output only. Set if status == ERROR, to provide additional details. Will
+        #     store the last 10 errors sorted with the most recent first.
+        # @!attribute [rw] cloud_sql
+        #   @return [::Google::Cloud::Dlp::V2::CloudSqlProperties]
+        #     Connect to a Cloud SQL instance.
+        class Connection
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A credential consisting of a username and password, where the password is
+        # stored in a Secret Manager resource.
+        # Note: Secret Manager [charges
+        # apply](https://cloud.google.com/secret-manager/pricing).
+        # @!attribute [rw] username
+        #   @return [::String]
+        #     Required. The username.
+        # @!attribute [rw] password_secret_version_name
+        #   @return [::String]
+        #     Required. The name of the Secret Manager resource that stores the password,
+        #     in the form `projects/project-id/secrets/secret-name/versions/version`.
+        class SecretManagerCredential
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Use IAM auth to connect. This requires the Cloud SQL IAM feature to be
+        # enabled on the instance, which is not the default for Cloud SQL.
+        # See https://cloud.google.com/sql/docs/postgres/authentication and
+        # https://cloud.google.com/sql/docs/mysql/authentication.
+        class CloudSqlIamCredential
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Cloud SQL connection properties.
+        # @!attribute [rw] connection_name
+        #   @return [::String]
+        #     Optional. Immutable. The Cloud SQL instance for which the connection is
+        #     defined. Only one connection per instance is allowed. This can only be set
+        #     at creation time, and cannot be updated.
+        #
+        #     It is an error to use a connection_name from different project or region
+        #     than the one that holds the connection.
+        #     For example, a Connection resource for Cloud SQL connection_name
+        #     `project-id:us-central1:sql-instance`
+        #     must be created under the parent
+        #     `projects/project-id/locations/us-central1`
+        # @!attribute [rw] username_password
+        #   @return [::Google::Cloud::Dlp::V2::SecretManagerCredential]
+        #     A username and password stored in Secret Manager.
+        # @!attribute [rw] cloud_sql_iam
+        #   @return [::Google::Cloud::Dlp::V2::CloudSqlIamCredential]
+        #     Built-in IAM authentication (must be configured in Cloud SQL).
+        # @!attribute [rw] max_connections
+        #   @return [::Integer]
+        #     Required. DLP will limit its connections to max_connections.
+        #     Must be 2 or greater.
+        # @!attribute [rw] database_engine
+        #   @return [::Google::Cloud::Dlp::V2::CloudSqlProperties::DatabaseEngine]
+        #     Required. The database engine used by the Cloud SQL instance that this
+        #     connection configures.
+        class CloudSqlProperties
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Database engine of a Cloud SQL instance.
+          # New values may be added over time.
+          module DatabaseEngine
+            # An engine that is not currently supported by SDP.
+            DATABASE_ENGINE_UNKNOWN = 0
+
+            # Cloud SQL for MySQL instance.
+            DATABASE_ENGINE_MYSQL = 1
+
+            # Cloud SQL for Postgres instance.
+            DATABASE_ENGINE_POSTGRES = 2
+          end
+        end
+
+        # Request message for DeleteTableProfile.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Resource name of the table data profile.
+        class DeleteTableDataProfileRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -6170,6 +6624,11 @@ module Google
           # Visible to any user.
           RESOURCE_VISIBILITY_PUBLIC = 10
 
+          # May contain public items.
+          # For example, if a GCS bucket has uniform bucket level access disabled, some
+          # objects inside it may be public.
+          RESOURCE_VISIBILITY_INCONCLUSIVE = 15
+
           # Visible only to specific users.
           RESOURCE_VISIBILITY_RESTRICTED = 20
         end
@@ -6222,6 +6681,29 @@ module Google
 
           # High uniqueness, possibly a column of free text or unique identifiers.
           UNIQUENESS_SCORE_HIGH = 3
+        end
+
+        # State of the connection.
+        # New values may be added over time.
+        module ConnectionState
+          # Unused
+          CONNECTION_STATE_UNSPECIFIED = 0
+
+          # DLP automatically created this connection during an initial scan, and it is
+          # awaiting full configuration by a user.
+          MISSING_CREDENTIALS = 1
+
+          # A configured connection that has not encountered any errors.
+          AVAILABLE = 2
+
+          # A configured connection that encountered errors during its last use. It
+          # will not be used again until it is set to AVAILABLE.
+          #
+          # If the resolution requires external action, then a request to set the
+          # status to AVAILABLE will mark this connection for use. Otherwise, any
+          # changes to the connection properties will automatically mark it as
+          # AVAILABLE.
+          ERROR = 3
         end
       end
     end

@@ -68,6 +68,25 @@ module Google
             end
 
             ##
+            # Create a fully-qualified Connection resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/connections/{connection}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param connection [String]
+            #
+            # @return [::String]
+            def connection_path project:, location:, connection:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/connections/#{connection}"
+            end
+
+            ##
             # Create a fully-qualified DeidentifyTemplate resource string.
             #
             # @overload deidentify_template_path(organization:, deidentify_template:)
