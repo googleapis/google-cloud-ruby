@@ -248,63 +248,6 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Deprecated: Issue `GetTaskTrackingInfoRequest`s to `GetTaskTrackingInfo`
-          # instead.
-          # @deprecated This message is deprecated and may be removed in the next major version update.
-          # @!attribute [rw] header
-          #   @return [::Google::Maps::FleetEngine::Delivery::V1::DeliveryRequestHeader]
-          #     Optional. The standard Delivery API request header.
-          # @!attribute [rw] parent
-          #   @return [::String]
-          #     Required. Must be in the format `providers/{provider}`.
-          #     The provider must be the Google Cloud Project ID. For example,
-          #     `sample-cloud-project`.
-          # @!attribute [rw] tracking_id
-          #   @return [::String]
-          #     Required. The identifier of the set of related Tasks being requested.
-          #     Tracking IDs are subject to the following restrictions:
-          #
-          #     * Must be a valid Unicode string.
-          #     * Limited to a maximum length of 64 characters.
-          #     * Normalized according to [Unicode Normalization Form C]
-          #     (http://www.unicode.org/reports/tr15/).
-          #     * May not contain any of the following ASCII characters: '/', ':', '?',
-          #     ',', or '#'.
-          # @!attribute [rw] page_size
-          #   @return [::Integer]
-          #     Optional. The maximum number of Tasks to return. The service may return
-          #     fewer than this value. If you don't specify this value, then the server
-          #     determines the number of results to return.
-          # @!attribute [rw] page_token
-          #   @return [::String]
-          #     Optional. A page token, received from a previous `SearchTasks` call. You
-          #     must provide this value to retrieve the subsequent page.
-          #
-          #     When paginating, all other parameters provided to `SearchTasks` must match
-          #     the call that provided the page token.
-          class SearchTasksRequest
-            include ::Google::Protobuf::MessageExts
-            extend ::Google::Protobuf::MessageExts::ClassMethods
-          end
-
-          # The `SearchTasks` response. It contains the set of Tasks that meet the search
-          # criteria in the `SearchTasksRequest`.
-          # @deprecated This message is deprecated and may be removed in the next major version update.
-          # @!attribute [rw] tasks
-          #   @return [::Array<::Google::Maps::FleetEngine::Delivery::V1::Task>]
-          #     The set of Tasks for the requested `tracking_id`. A successful response can
-          #     also be empty. An empty response indicates that no Tasks are associated
-          #     with the supplied `tracking_id`.
-          # @!attribute [rw] next_page_token
-          #   @return [::String]
-          #     Pass this token in the `SearchTasksRequest` to continue to
-          #     list results. If all results have been returned, then this field is either
-          #     an empty string, or it doesn't appear in the response.
-          class SearchTasksResponse
-            include ::Google::Protobuf::MessageExts
-            extend ::Google::Protobuf::MessageExts::ClassMethods
-          end
-
           # The `UpdateTask` request message.
           # @!attribute [rw] header
           #   @return [::Google::Maps::FleetEngine::Delivery::V1::DeliveryRequestHeader]

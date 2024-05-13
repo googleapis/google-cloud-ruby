@@ -40,11 +40,6 @@
                 "get_task"
               ]
             },
-            "SearchTasks": {
-              "methods": [
-                "search_tasks"
-              ]
-            },
             "UpdateTask": {
               "methods": [
                 "update_task"

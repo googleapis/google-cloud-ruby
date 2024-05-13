@@ -209,16 +209,15 @@ module Google
           #   @return [::Google::Maps::FleetEngine::Delivery::V1::LocationInfo]
           #     Required. The location of the stop. Note that the locations in the `Task`s
           #     might not exactly match this location, but will be within a short distance
-          #     of it. This field won't be populated in the response of either a `GetTask`,
-          #     or a `SearchTasks` call.
+          #     of it. This field won't be populated in the response of a `GetTask` call.
           # @!attribute [rw] tasks
           #   @return [::Array<::Google::Maps::FleetEngine::Delivery::V1::VehicleStop::TaskInfo>]
           #     The list of `Task`s to be performed at this stop. This field won't be
-          #     populated in the response of either a `GetTask` or `SearchTasks` call.
+          #     populated in the response of a `GetTask` call.
           # @!attribute [rw] state
           #   @return [::Google::Maps::FleetEngine::Delivery::V1::VehicleStop::State]
           #     The state of the `VehicleStop`. This field won't be populated in the
-          #     response of either a `GetTask`, or a `SearchTasks` call.
+          #     response of a `GetTask` call.
           class VehicleStop
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -226,9 +225,8 @@ module Google
             # Additional information about the Task performed at this stop.
             # @!attribute [rw] task_id
             #   @return [::String]
-            #     The Task ID. This field won't be populated in the response of either a
-            #     `GetTask`, or a `SearchTasks` call. Task IDs are subject to the following
-            #     restrictions:
+            #     The Task ID. This field won't be populated in the response of a `GetTask`
+            #     call. Task IDs are subject to the following restrictions:
             #
             #     * Must be a valid Unicode string.
             #     * Limited to a maximum length of 64 characters.

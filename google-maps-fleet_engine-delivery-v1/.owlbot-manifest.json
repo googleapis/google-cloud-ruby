@@ -58,7 +58,6 @@
     "snippets/delivery_service/get_task_tracking_info.rb",
     "snippets/delivery_service/list_delivery_vehicles.rb",
     "snippets/delivery_service/list_tasks.rb",
-    "snippets/delivery_service/search_tasks.rb",
     "snippets/delivery_service/update_delivery_vehicle.rb",
     "snippets/delivery_service/update_task.rb",
     "snippets/snippet_metadata_maps.fleetengine.delivery.v1.json",
