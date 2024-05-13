@@ -390,9 +390,12 @@ module Google
         #     Output only. The time when the Entry was last updated.
         # @!attribute [rw] aspects
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Dataplex::V1::Aspect}]
-        #     Optional. The Aspects attached to the Entry. The key is either the resource
-        #     name of the aspect type (if the aspect is attached directly to the entry)
-        #     or "aspectType@path" if the aspect is attached to an entry's path.
+        #     Optional. The Aspects attached to the Entry.
+        #     The format for the key can be one of the following:
+        #     1. \\{projectId}.\\{locationId}.\\{aspectTypeId} (if the aspect is attached
+        #     directly to the entry)
+        #     2. \\{projectId}.\\{locationId}.\\{aspectTypeId}@\\{path} (if the aspect is
+        #     attached to an entry's path)
         # @!attribute [rw] parent_entry
         #   @return [::String]
         #     Optional. Immutable. The resource name of the parent entry.
@@ -905,15 +908,17 @@ module Google
         #     Optional. A filter on the entries to return.
         #     Filters are case-sensitive.
         #     The request can be filtered by the following fields:
-        #     entry_type, display_name.
+        #     entry_type, entry_source.display_name.
         #     The comparison operators are =, !=, <, >, <=, >= (strings are compared
         #     according to lexical order)
         #     The logical operators AND, OR, NOT can be used
-        #     in the filter. Example filter expressions:
-        #     "display_name=AnExampleDisplayName"
+        #     in the filter. Wildcard "*" can be used, but for entry_type the full
+        #     project id or number needs to be provided. Example filter expressions:
+        #     "entry_source.display_name=AnExampleDisplayName"
         #     "entry_type=projects/example-project/locations/global/entryTypes/example-entry_type"
-        #     "entry_type=projects/a* OR "entry_type=projects/k*"
-        #     "NOT display_name=AnotherExampleDisplayName"
+        #     "entry_type=projects/example-project/locations/us/entryTypes/a* OR
+        #      entry_type=projects/another-project/locations/*"
+        #     "NOT entry_source.display_name=AnotherExampleDisplayName"
         class ListEntriesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1001,34 +1006,6 @@ module Google
         end
 
         # A single result of a SearchEntries request.
-        # @!attribute [rw] entry
-        #   @deprecated This field is deprecated and may be removed in the next major version update.
-        #   @return [::String]
-        #     Resource name of the entry.
-        # @!attribute [rw] display_name
-        #   @deprecated This field is deprecated and may be removed in the next major version update.
-        #   @return [::String]
-        #     Display name.
-        # @!attribute [rw] entry_type
-        #   @deprecated This field is deprecated and may be removed in the next major version update.
-        #   @return [::String]
-        #     The entry type.
-        # @!attribute [rw] modify_time
-        #   @deprecated This field is deprecated and may be removed in the next major version update.
-        #   @return [::Google::Protobuf::Timestamp]
-        #     The last modification timestamp.
-        # @!attribute [rw] fully_qualified_name
-        #   @deprecated This field is deprecated and may be removed in the next major version update.
-        #   @return [::String]
-        #     Fully qualified name.
-        # @!attribute [rw] description
-        #   @deprecated This field is deprecated and may be removed in the next major version update.
-        #   @return [::String]
-        #     Entry description.
-        # @!attribute [rw] relative_resource
-        #   @deprecated This field is deprecated and may be removed in the next major version update.
-        #   @return [::String]
-        #     Relative resource name.
         # @!attribute [rw] linked_resource
         #   @return [::String]
         #     Linked resource name.

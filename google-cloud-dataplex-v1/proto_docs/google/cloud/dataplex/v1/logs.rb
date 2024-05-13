@@ -734,6 +734,10 @@ module Google
         # @!attribute [rw] null_row_count
         #   @return [::Integer]
         #     The number of rows with null values in the specified column.
+        # @!attribute [rw] assertion_row_count
+        #   @return [::Integer]
+        #     The number of rows returned by the sql statement in the SqlAssertion rule.
+        #     This field is only valid for SqlAssertion rules.
         class DataQualityScanRuleResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -774,6 +778,10 @@ module Google
             # Please see
             # https://cloud.google.com/dataplex/docs/reference/rest/v1/DataQualityRule#uniquenessexpectation.
             UNIQUENESS_EXPECTATION = 8
+
+            # Please see
+            # https://cloud.google.com/dataplex/docs/reference/rest/v1/DataQualityRule#sqlAssertion.
+            SQL_ASSERTION = 9
           end
 
           # The evaluation type of the data quality rule.

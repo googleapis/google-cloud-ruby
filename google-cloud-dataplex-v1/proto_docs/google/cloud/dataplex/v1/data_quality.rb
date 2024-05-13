@@ -239,6 +239,12 @@ module Google
         #     The query to find rows that did not pass this rule.
         #
         #     This field is only valid for row-level type rules.
+        # @!attribute [r] assertion_row_count
+        #   @return [::Integer]
+        #     Output only. The number of rows returned by the sql statement in the
+        #     SqlAssertion rule.
+        #
+        #     This field is only valid for SqlAssertion rules.
         class DataQualityRuleResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -307,6 +313,10 @@ module Google
         #   @return [::Google::Cloud::Dataplex::V1::DataQualityRule::TableConditionExpectation]
         #     Aggregate rule which evaluates whether the provided expression is true
         #     for a table.
+        # @!attribute [rw] sql_assertion
+        #   @return [::Google::Cloud::Dataplex::V1::DataQualityRule::SqlAssertion]
+        #     Aggregate rule which evaluates the number of rows returned for the
+        #     provided statement.
         # @!attribute [rw] column
         #   @return [::String]
         #     Optional. The unnested column which this rule is evaluated against.
@@ -484,6 +494,25 @@ module Google
           #   @return [::String]
           #     Optional. The SQL expression.
           class TableConditionExpectation
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Queries for rows returned by the provided SQL statement. If any rows are
+          # are returned, this rule fails.
+          #
+          # The SQL statement needs to use BigQuery standard SQL syntax, and must not
+          # contain any semicolons.
+          #
+          # $\\{data()} can be used to reference the rows being evaluated, i.e. the table
+          # after all additional filters (row filters, incremental data filters,
+          # sampling) are applied.
+          #
+          # Example: SELECT * FROM $\\{data()} WHERE price < 0
+          # @!attribute [rw] sql_statement
+          #   @return [::String]
+          #     Optional. The SQL statement.
+          class SqlAssertion
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

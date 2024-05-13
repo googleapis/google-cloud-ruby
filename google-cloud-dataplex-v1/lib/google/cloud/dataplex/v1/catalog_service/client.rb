@@ -2099,15 +2099,17 @@ module Google
             #     Optional. A filter on the entries to return.
             #     Filters are case-sensitive.
             #     The request can be filtered by the following fields:
-            #     entry_type, display_name.
+            #     entry_type, entry_source.display_name.
             #     The comparison operators are =, !=, <, >, <=, >= (strings are compared
             #     according to lexical order)
             #     The logical operators AND, OR, NOT can be used
-            #     in the filter. Example filter expressions:
-            #     "display_name=AnExampleDisplayName"
+            #     in the filter. Wildcard "*" can be used, but for entry_type the full
+            #     project id or number needs to be provided. Example filter expressions:
+            #     "entry_source.display_name=AnExampleDisplayName"
             #     "entry_type=projects/example-project/locations/global/entryTypes/example-entry_type"
-            #     "entry_type=projects/a* OR "entry_type=projects/k*"
-            #     "NOT display_name=AnotherExampleDisplayName"
+            #     "entry_type=projects/example-project/locations/us/entryTypes/a* OR
+            #      entry_type=projects/another-project/locations/*"
+            #     "NOT entry_source.display_name=AnotherExampleDisplayName"
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Dataplex::V1::Entry>]
