@@ -528,6 +528,7 @@ class ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Rest::ClientTest < Mini
     allow_missing = true
     validate_only = true
     etag = "hello world"
+    ignore_errors = true
 
     delete_azure_cluster_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -543,27 +544,27 @@ class ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Rest::ClientTest < Mini
         end
 
         # Use hash object
-        client.delete_azure_cluster({ name: name, allow_missing: allow_missing, validate_only: validate_only, etag: etag }) do |_result, response|
+        client.delete_azure_cluster({ name: name, allow_missing: allow_missing, validate_only: validate_only, etag: etag, ignore_errors: ignore_errors }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_azure_cluster name: name, allow_missing: allow_missing, validate_only: validate_only, etag: etag do |_result, response|
+        client.delete_azure_cluster name: name, allow_missing: allow_missing, validate_only: validate_only, etag: etag, ignore_errors: ignore_errors do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_azure_cluster ::Google::Cloud::GkeMultiCloud::V1::DeleteAzureClusterRequest.new(name: name, allow_missing: allow_missing, validate_only: validate_only, etag: etag) do |_result, response|
+        client.delete_azure_cluster ::Google::Cloud::GkeMultiCloud::V1::DeleteAzureClusterRequest.new(name: name, allow_missing: allow_missing, validate_only: validate_only, etag: etag, ignore_errors: ignore_errors) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_azure_cluster({ name: name, allow_missing: allow_missing, validate_only: validate_only, etag: etag }, call_options) do |_result, response|
+        client.delete_azure_cluster({ name: name, allow_missing: allow_missing, validate_only: validate_only, etag: etag, ignore_errors: ignore_errors }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_azure_cluster(::Google::Cloud::GkeMultiCloud::V1::DeleteAzureClusterRequest.new(name: name, allow_missing: allow_missing, validate_only: validate_only, etag: etag), call_options) do |_result, response|
+        client.delete_azure_cluster(::Google::Cloud::GkeMultiCloud::V1::DeleteAzureClusterRequest.new(name: name, allow_missing: allow_missing, validate_only: validate_only, etag: etag, ignore_errors: ignore_errors), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -925,6 +926,7 @@ class ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Rest::ClientTest < Mini
     validate_only = true
     allow_missing = true
     etag = "hello world"
+    ignore_errors = true
 
     delete_azure_node_pool_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -940,27 +942,27 @@ class ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Rest::ClientTest < Mini
         end
 
         # Use hash object
-        client.delete_azure_node_pool({ name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag }) do |_result, response|
+        client.delete_azure_node_pool({ name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag, ignore_errors: ignore_errors }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_azure_node_pool name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag do |_result, response|
+        client.delete_azure_node_pool name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag, ignore_errors: ignore_errors do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_azure_node_pool ::Google::Cloud::GkeMultiCloud::V1::DeleteAzureNodePoolRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag) do |_result, response|
+        client.delete_azure_node_pool ::Google::Cloud::GkeMultiCloud::V1::DeleteAzureNodePoolRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag, ignore_errors: ignore_errors) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_azure_node_pool({ name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag }, call_options) do |_result, response|
+        client.delete_azure_node_pool({ name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag, ignore_errors: ignore_errors }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_azure_node_pool(::Google::Cloud::GkeMultiCloud::V1::DeleteAzureNodePoolRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag), call_options) do |_result, response|
+        client.delete_azure_node_pool(::Google::Cloud::GkeMultiCloud::V1::DeleteAzureNodePoolRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag, ignore_errors: ignore_errors), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

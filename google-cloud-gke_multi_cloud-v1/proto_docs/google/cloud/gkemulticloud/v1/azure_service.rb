@@ -182,6 +182,12 @@ module Google
         #
         #     If the provided etag does not match the current etag of the cluster,
         #     the request will fail and an ABORTED error will be returned.
+        # @!attribute [rw] ignore_errors
+        #   @return [::Boolean]
+        #     Optional. If set to true, the deletion of
+        #     {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster} resource will
+        #     succeed even if errors occur during deleting in cluster resources. Using
+        #     this parameter may result in orphaned resources in the cluster.
         class DeleteAzureClusterRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -342,6 +348,12 @@ module Google
         #
         #     If the provided ETag does not match the current etag of the node pool,
         #     the request will fail and an ABORTED error will be returned.
+        # @!attribute [rw] ignore_errors
+        #   @return [::Boolean]
+        #     Optional. If set to true, the deletion of
+        #     {::Google::Cloud::GkeMultiCloud::V1::AzureNodePool AzureNodePool} resource will
+        #     succeed even if errors occur during deleting in node pool resources. Using
+        #     this parameter may result in orphaned resources in the node pool.
         class DeleteAzureNodePoolRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -367,7 +379,7 @@ module Google
         #   @return [::String]
         #     Required. The AzureCluster, which owns the JsonWebKeys.
         #     Format:
-        #     projects/<project-id>/locations/<region>/azureClusters/<cluster-id>
+        #     `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>`
         class GetAzureJsonWebKeysRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

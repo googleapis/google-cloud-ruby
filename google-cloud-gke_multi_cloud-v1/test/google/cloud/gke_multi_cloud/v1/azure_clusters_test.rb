@@ -589,6 +589,7 @@ class ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::ClientTest < Minitest::
     allow_missing = true
     validate_only = true
     etag = "hello world"
+    ignore_errors = true
 
     delete_azure_cluster_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_azure_cluster, name
@@ -597,6 +598,7 @@ class ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::ClientTest < Minitest::
       assert_equal true, request["allow_missing"]
       assert_equal true, request["validate_only"]
       assert_equal "hello world", request["etag"]
+      assert_equal true, request["ignore_errors"]
       refute_nil options
     end
 
@@ -607,35 +609,35 @@ class ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::ClientTest < Minitest::
       end
 
       # Use hash object
-      client.delete_azure_cluster({ name: name, allow_missing: allow_missing, validate_only: validate_only, etag: etag }) do |response, operation|
+      client.delete_azure_cluster({ name: name, allow_missing: allow_missing, validate_only: validate_only, etag: etag, ignore_errors: ignore_errors }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_azure_cluster name: name, allow_missing: allow_missing, validate_only: validate_only, etag: etag do |response, operation|
+      client.delete_azure_cluster name: name, allow_missing: allow_missing, validate_only: validate_only, etag: etag, ignore_errors: ignore_errors do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_azure_cluster ::Google::Cloud::GkeMultiCloud::V1::DeleteAzureClusterRequest.new(name: name, allow_missing: allow_missing, validate_only: validate_only, etag: etag) do |response, operation|
+      client.delete_azure_cluster ::Google::Cloud::GkeMultiCloud::V1::DeleteAzureClusterRequest.new(name: name, allow_missing: allow_missing, validate_only: validate_only, etag: etag, ignore_errors: ignore_errors) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_azure_cluster({ name: name, allow_missing: allow_missing, validate_only: validate_only, etag: etag }, grpc_options) do |response, operation|
+      client.delete_azure_cluster({ name: name, allow_missing: allow_missing, validate_only: validate_only, etag: etag, ignore_errors: ignore_errors }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_azure_cluster(::Google::Cloud::GkeMultiCloud::V1::DeleteAzureClusterRequest.new(name: name, allow_missing: allow_missing, validate_only: validate_only, etag: etag), grpc_options) do |response, operation|
+      client.delete_azure_cluster(::Google::Cloud::GkeMultiCloud::V1::DeleteAzureClusterRequest.new(name: name, allow_missing: allow_missing, validate_only: validate_only, etag: etag, ignore_errors: ignore_errors), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1053,6 +1055,7 @@ class ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::ClientTest < Minitest::
     validate_only = true
     allow_missing = true
     etag = "hello world"
+    ignore_errors = true
 
     delete_azure_node_pool_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_azure_node_pool, name
@@ -1061,6 +1064,7 @@ class ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::ClientTest < Minitest::
       assert_equal true, request["validate_only"]
       assert_equal true, request["allow_missing"]
       assert_equal "hello world", request["etag"]
+      assert_equal true, request["ignore_errors"]
       refute_nil options
     end
 
@@ -1071,35 +1075,35 @@ class ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::ClientTest < Minitest::
       end
 
       # Use hash object
-      client.delete_azure_node_pool({ name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag }) do |response, operation|
+      client.delete_azure_node_pool({ name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag, ignore_errors: ignore_errors }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_azure_node_pool name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag do |response, operation|
+      client.delete_azure_node_pool name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag, ignore_errors: ignore_errors do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_azure_node_pool ::Google::Cloud::GkeMultiCloud::V1::DeleteAzureNodePoolRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag) do |response, operation|
+      client.delete_azure_node_pool ::Google::Cloud::GkeMultiCloud::V1::DeleteAzureNodePoolRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag, ignore_errors: ignore_errors) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_azure_node_pool({ name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag }, grpc_options) do |response, operation|
+      client.delete_azure_node_pool({ name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag, ignore_errors: ignore_errors }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_azure_node_pool(::Google::Cloud::GkeMultiCloud::V1::DeleteAzureNodePoolRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag), grpc_options) do |response, operation|
+      client.delete_azure_node_pool(::Google::Cloud::GkeMultiCloud::V1::DeleteAzureNodePoolRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag, ignore_errors: ignore_errors), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
