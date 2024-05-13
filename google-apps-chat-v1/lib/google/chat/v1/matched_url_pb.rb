@@ -7,7 +7,7 @@ require 'google/protobuf'
 require 'google/api/field_behavior_pb'
 
 
-descriptor_data = "\n google/chat/v1/matched_url.proto\x12\x0egoogle.chat.v1\x1a\x1fgoogle/api/field_behavior.proto\"\x1e\n\nMatchedUrl\x12\x10\n\x03url\x18\x02 \x01(\tB\x03\xe0\x41\x03\x42\x9a\x01\n\x12\x63om.google.chat.v1B\x0fMatchedUrlProtoP\x01Z,cloud.google.com/go/chat/apiv1/chatpb;chatpb\xaa\x02\x13Google.Apps.Chat.V1\xca\x02\x13Google\\Apps\\Chat\\V1\xea\x02\x16Google::Apps::Chat::V1b\x06proto3"
+descriptor_data = "\n google/chat/v1/matched_url.proto\x12\x0egoogle.chat.v1\x1a\x1fgoogle/api/field_behavior.proto\"\x1e\n\nMatchedUrl\x12\x10\n\x03url\x18\x02 \x01(\tB\x03\xe0\x41\x03\x42\xa8\x01\n\x12\x63om.google.chat.v1B\x0fMatchedUrlProtoP\x01Z,cloud.google.com/go/chat/apiv1/chatpb;chatpb\xa2\x02\x0b\x44YNAPIProto\xaa\x02\x13Google.Apps.Chat.V1\xca\x02\x13Google\\Apps\\Chat\\V1\xea\x02\x16Google::Apps::Chat::V1b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 

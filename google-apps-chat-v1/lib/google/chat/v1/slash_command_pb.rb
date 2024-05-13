@@ -5,7 +5,7 @@
 require 'google/protobuf'
 
 
-descriptor_data = "\n\"google/chat/v1/slash_command.proto\x12\x0egoogle.chat.v1\"\"\n\x0cSlashCommand\x12\x12\n\ncommand_id\x18\x01 \x01(\x03\x42\x9c\x01\n\x12\x63om.google.chat.v1B\x11SlashCommandProtoP\x01Z,cloud.google.com/go/chat/apiv1/chatpb;chatpb\xaa\x02\x13Google.Apps.Chat.V1\xca\x02\x13Google\\Apps\\Chat\\V1\xea\x02\x16Google::Apps::Chat::V1b\x06proto3"
+descriptor_data = "\n\"google/chat/v1/slash_command.proto\x12\x0egoogle.chat.v1\"\"\n\x0cSlashCommand\x12\x12\n\ncommand_id\x18\x01 \x01(\x03\x42\xaa\x01\n\x12\x63om.google.chat.v1B\x11SlashCommandProtoP\x01Z,cloud.google.com/go/chat/apiv1/chatpb;chatpb\xa2\x02\x0b\x44YNAPIProto\xaa\x02\x13Google.Apps.Chat.V1\xca\x02\x13Google\\Apps\\Chat\\V1\xea\x02\x16Google::Apps::Chat::V1b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 

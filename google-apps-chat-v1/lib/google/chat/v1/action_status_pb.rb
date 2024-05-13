@@ -7,7 +7,7 @@ require 'google/protobuf'
 require 'google/rpc/code_pb'
 
 
-descriptor_data = "\n\"google/chat/v1/action_status.proto\x12\x0egoogle.chat.v1\x1a\x15google/rpc/code.proto\"R\n\x0c\x41\x63tionStatus\x12%\n\x0bstatus_code\x18\x01 \x01(\x0e\x32\x10.google.rpc.Code\x12\x1b\n\x13user_facing_message\x18\x02 \x01(\tB\x9c\x01\n\x12\x63om.google.chat.v1B\x11\x41\x63tionStatusProtoP\x01Z,cloud.google.com/go/chat/apiv1/chatpb;chatpb\xaa\x02\x13Google.Apps.Chat.V1\xca\x02\x13Google\\Apps\\Chat\\V1\xea\x02\x16Google::Apps::Chat::V1b\x06proto3"
+descriptor_data = "\n\"google/chat/v1/action_status.proto\x12\x0egoogle.chat.v1\x1a\x15google/rpc/code.proto\"R\n\x0c\x41\x63tionStatus\x12%\n\x0bstatus_code\x18\x01 \x01(\x0e\x32\x10.google.rpc.Code\x12\x1b\n\x13user_facing_message\x18\x02 \x01(\tB\xaa\x01\n\x12\x63om.google.chat.v1B\x11\x41\x63tionStatusProtoP\x01Z,cloud.google.com/go/chat/apiv1/chatpb;chatpb\xa2\x02\x0b\x44YNAPIProto\xaa\x02\x13Google.Apps.Chat.V1\xca\x02\x13Google\\Apps\\Chat\\V1\xea\x02\x16Google::Apps::Chat::V1b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 

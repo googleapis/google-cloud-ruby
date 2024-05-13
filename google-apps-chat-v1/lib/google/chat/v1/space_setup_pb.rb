@@ -9,7 +9,7 @@ require 'google/chat/v1/membership_pb'
 require 'google/chat/v1/space_pb'
 
 
-descriptor_data = "\n google/chat/v1/space_setup.proto\x12\x0egoogle.chat.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1fgoogle/chat/v1/membership.proto\x1a\x1agoogle/chat/v1/space.proto\"\x8d\x01\n\x11SetUpSpaceRequest\x12)\n\x05space\x18\x01 \x01(\x0b\x32\x15.google.chat.v1.SpaceB\x03\xe0\x41\x02\x12\x17\n\nrequest_id\x18\x02 \x01(\tB\x03\xe0\x41\x01\x12\x34\n\x0bmemberships\x18\x04 \x03(\x0b\x32\x1a.google.chat.v1.MembershipB\x03\xe0\x41\x01\x42\x9a\x01\n\x12\x63om.google.chat.v1B\x0fSpaceSetupProtoP\x01Z,cloud.google.com/go/chat/apiv1/chatpb;chatpb\xaa\x02\x13Google.Apps.Chat.V1\xca\x02\x13Google\\Apps\\Chat\\V1\xea\x02\x16Google::Apps::Chat::V1b\x06proto3"
+descriptor_data = "\n google/chat/v1/space_setup.proto\x12\x0egoogle.chat.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1fgoogle/chat/v1/membership.proto\x1a\x1agoogle/chat/v1/space.proto\"\x8d\x01\n\x11SetUpSpaceRequest\x12)\n\x05space\x18\x01 \x01(\x0b\x32\x15.google.chat.v1.SpaceB\x03\xe0\x41\x02\x12\x17\n\nrequest_id\x18\x02 \x01(\tB\x03\xe0\x41\x01\x12\x34\n\x0bmemberships\x18\x04 \x03(\x0b\x32\x1a.google.chat.v1.MembershipB\x03\xe0\x41\x01\x42\xa8\x01\n\x12\x63om.google.chat.v1B\x0fSpaceSetupProtoP\x01Z,cloud.google.com/go/chat/apiv1/chatpb;chatpb\xa2\x02\x0b\x44YNAPIProto\xaa\x02\x13Google.Apps.Chat.V1\xca\x02\x13Google\\Apps\\Chat\\V1\xea\x02\x16Google::Apps::Chat::V1b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
