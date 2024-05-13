@@ -51,9 +51,9 @@ module Google
         end
 
         # Represents a custom emoji.
-        # @!attribute [rw] uid
+        # @!attribute [r] uid
         #   @return [::String]
-        #     Unique key for the custom emoji resource.
+        #     Output only. Unique key for the custom emoji resource.
         class CustomEmoji
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

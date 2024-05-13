@@ -5,7 +5,7 @@
 require 'google/protobuf'
 
 
-descriptor_data = "\n\"google/chat/v1/history_state.proto\x12\x0egoogle.chat.v1*N\n\x0cHistoryState\x12\x1d\n\x19HISTORY_STATE_UNSPECIFIED\x10\x00\x12\x0f\n\x0bHISTORY_OFF\x10\x01\x12\x0e\n\nHISTORY_ON\x10\x02\x42\x9c\x01\n\x12\x63om.google.chat.v1B\x11HistoryStateProtoP\x01Z,cloud.google.com/go/chat/apiv1/chatpb;chatpb\xaa\x02\x13Google.Apps.Chat.V1\xca\x02\x13Google\\Apps\\Chat\\V1\xea\x02\x16Google::Apps::Chat::V1b\x06proto3"
+descriptor_data = "\n\"google/chat/v1/history_state.proto\x12\x0egoogle.chat.v1*N\n\x0cHistoryState\x12\x1d\n\x19HISTORY_STATE_UNSPECIFIED\x10\x00\x12\x0f\n\x0bHISTORY_OFF\x10\x01\x12\x0e\n\nHISTORY_ON\x10\x02\x42\xaa\x01\n\x12\x63om.google.chat.v1B\x11HistoryStateProtoP\x01Z,cloud.google.com/go/chat/apiv1/chatpb;chatpb\xa2\x02\x0b\x44YNAPIProto\xaa\x02\x13Google.Apps.Chat.V1\xca\x02\x13Google\\Apps\\Chat\\V1\xea\x02\x16Google::Apps::Chat::V1b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
