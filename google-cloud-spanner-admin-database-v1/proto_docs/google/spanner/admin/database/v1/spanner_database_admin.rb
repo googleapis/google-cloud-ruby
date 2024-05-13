@@ -64,7 +64,8 @@ module Google
             #   @return [::Array<::Google::Cloud::Spanner::Admin::Database::V1::EncryptionInfo>]
             #     Output only. For databases that are using customer managed encryption, this
             #     field contains the encryption information for the database, such as
-            #     encryption state and the Cloud KMS key versions that are in use.
+            #     all Cloud KMS key versions that are in use. The `encryption_status' field
+            #     inside of each `EncryptionInfo` is not populated.
             #
             #     For databases that are using Google default or other types of encryption,
             #     this field is empty.
@@ -76,8 +77,8 @@ module Google
             #     Output only. The period in which Cloud Spanner retains all versions of data
             #     for the database. This is the same as the value of version_retention_period
             #     database option set using
-            #     {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#update_database_ddl UpdateDatabaseDdl}. Defaults to 1 hour,
-            #     if not set.
+            #     {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#update_database_ddl UpdateDatabaseDdl}.
+            #     Defaults to 1 hour, if not set.
             # @!attribute [r] earliest_version_time
             #   @return [::Google::Protobuf::Timestamp]
             #     Output only. Earliest timestamp at which older versions of the data can be
@@ -99,7 +100,9 @@ module Google
             # @!attribute [rw] enable_drop_protection
             #   @return [::Boolean]
             #     Whether drop protection is enabled for this database. Defaults to false,
-            #     if not set.
+            #     if not set. For more details, please see how to [prevent accidental
+            #     database
+            #     deletion](https://cloud.google.com/spanner/docs/prevent-database-deletion).
             # @!attribute [r] reconciling
             #   @return [::Boolean]
             #     Output only. If true, the database is being updated. If false, there are no
@@ -132,7 +135,8 @@ module Google
               end
             end
 
-            # The request for {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#list_databases ListDatabases}.
+            # The request for
+            # {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#list_databases ListDatabases}.
             # @!attribute [rw] parent
             #   @return [::String]
             #     Required. The instance whose databases should be listed.
@@ -144,28 +148,31 @@ module Google
             # @!attribute [rw] page_token
             #   @return [::String]
             #     If non-empty, `page_token` should contain a
-            #     {::Google::Cloud::Spanner::Admin::Database::V1::ListDatabasesResponse#next_page_token next_page_token} from a
-            #     previous {::Google::Cloud::Spanner::Admin::Database::V1::ListDatabasesResponse ListDatabasesResponse}.
+            #     {::Google::Cloud::Spanner::Admin::Database::V1::ListDatabasesResponse#next_page_token next_page_token}
+            #     from a previous
+            #     {::Google::Cloud::Spanner::Admin::Database::V1::ListDatabasesResponse ListDatabasesResponse}.
             class ListDatabasesRequest
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
-            # The response for {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#list_databases ListDatabases}.
+            # The response for
+            # {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#list_databases ListDatabases}.
             # @!attribute [rw] databases
             #   @return [::Array<::Google::Cloud::Spanner::Admin::Database::V1::Database>]
             #     Databases that matched the request.
             # @!attribute [rw] next_page_token
             #   @return [::String]
             #     `next_page_token` can be sent in a subsequent
-            #     {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#list_databases ListDatabases} call to fetch more
-            #     of the matching databases.
+            #     {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#list_databases ListDatabases}
+            #     call to fetch more of the matching databases.
             class ListDatabasesResponse
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
-            # The request for {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#create_database CreateDatabase}.
+            # The request for
+            # {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#create_database CreateDatabase}.
             # @!attribute [rw] parent
             #   @return [::String]
             #     Required. The name of the instance that will serve the new database.
@@ -185,8 +192,8 @@ module Google
             #     if there is an error in any statement, the database is not created.
             # @!attribute [rw] encryption_config
             #   @return [::Google::Cloud::Spanner::Admin::Database::V1::EncryptionConfig]
-            #     Optional. The encryption configuration for the database. If this field is not
-            #     specified, Cloud Spanner will encrypt/decrypt all data at rest using
+            #     Optional. The encryption configuration for the database. If this field is
+            #     not specified, Cloud Spanner will encrypt/decrypt all data at rest using
             #     Google default encryption.
             # @!attribute [rw] database_dialect
             #   @return [::Google::Cloud::Spanner::Admin::Database::V1::DatabaseDialect]
@@ -223,7 +230,8 @@ module Google
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
-            # The request for {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#get_database GetDatabase}.
+            # The request for
+            # {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#get_database GetDatabase}.
             # @!attribute [rw] name
             #   @return [::String]
             #     Required. The name of the requested database. Values are of the form
@@ -283,8 +291,8 @@ module Google
             # Each batch of statements is assigned a name which can be used with
             # the Operations API to monitor
             # progress. See the
-            # {::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseDdlRequest#operation_id operation_id} field for more
-            # details.
+            # {::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseDdlRequest#operation_id operation_id}
+            # field for more details.
             # @!attribute [rw] database
             #   @return [::String]
             #     Required. The database to update.
@@ -300,18 +308,20 @@ module Google
             #
             #     Specifying an explicit operation ID simplifies determining
             #     whether the statements were executed in the event that the
-            #     {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#update_database_ddl UpdateDatabaseDdl} call is replayed,
-            #     or the return value is otherwise lost: the {::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseDdlRequest#database database} and
-            #     `operation_id` fields can be combined to form the
+            #     {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#update_database_ddl UpdateDatabaseDdl}
+            #     call is replayed, or the return value is otherwise lost: the
+            #     {::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseDdlRequest#database database}
+            #     and `operation_id` fields can be combined to form the
             #     {::Google::Longrunning::Operation#name name} of the resulting
-            #     {::Google::Longrunning::Operation longrunning.Operation}: `<database>/operations/<operation_id>`.
+            #     {::Google::Longrunning::Operation longrunning.Operation}:
+            #     `<database>/operations/<operation_id>`.
             #
             #     `operation_id` should be unique within the database, and must be
             #     a valid identifier: `[a-z][a-z0-9_]*`. Note that
             #     automatically-generated operation IDs always begin with an
             #     underscore. If the named operation already exists,
-            #     {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#update_database_ddl UpdateDatabaseDdl} returns
-            #     `ALREADY_EXISTS`.
+            #     {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#update_database_ddl UpdateDatabaseDdl}
+            #     returns `ALREADY_EXISTS`.
             # @!attribute [rw] proto_descriptors
             #   @return [::String]
             #     Optional. Proto descriptors used by CREATE/ALTER PROTO BUNDLE statements.
@@ -394,7 +404,8 @@ module Google
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
-            # The request for {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#drop_database DropDatabase}.
+            # The request for
+            # {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#drop_database DropDatabase}.
             # @!attribute [rw] database
             #   @return [::String]
             #     Required. The database to be dropped.
@@ -403,7 +414,8 @@ module Google
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
-            # The request for {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#get_database_ddl GetDatabaseDdl}.
+            # The request for
+            # {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#get_database_ddl GetDatabaseDdl}.
             # @!attribute [rw] database
             #   @return [::String]
             #     Required. The database whose schema we wish to get.
@@ -414,7 +426,8 @@ module Google
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
-            # The response for {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#get_database_ddl GetDatabaseDdl}.
+            # The response for
+            # {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#get_database_ddl GetDatabaseDdl}.
             # @!attribute [rw] statements
             #   @return [::Array<::String>]
             #     A list of formatted DDL statements defining the schema of the database
@@ -453,7 +466,9 @@ module Google
             #       * `name` - The name of the long-running operation
             #       * `done` - False if the operation is in progress, else true.
             #       * `metadata.@type` - the type of metadata. For example, the type string
-            #          for {::Google::Cloud::Spanner::Admin::Database::V1::RestoreDatabaseMetadata RestoreDatabaseMetadata} is
+            #          for
+            #          {::Google::Cloud::Spanner::Admin::Database::V1::RestoreDatabaseMetadata RestoreDatabaseMetadata}
+            #          is
             #          `type.googleapis.com/google.spanner.admin.database.v1.RestoreDatabaseMetadata`.
             #       * `metadata.<field_name>` - any field in metadata.value.
             #          `metadata.@type` must be specified first, if filtering on metadata
@@ -475,7 +490,8 @@ module Google
             #         `(metadata.name:restored_howl) AND` \
             #         `(metadata.progress.start_time < \"2018-03-28T14:50:00Z\") AND` \
             #         `(error:*)` - Return operations where:
-            #         * The operation's metadata type is {::Google::Cloud::Spanner::Admin::Database::V1::RestoreDatabaseMetadata RestoreDatabaseMetadata}.
+            #         * The operation's metadata type is
+            #         {::Google::Cloud::Spanner::Admin::Database::V1::RestoreDatabaseMetadata RestoreDatabaseMetadata}.
             #         * The database is restored from a backup.
             #         * The backup name contains "backup_howl".
             #         * The restored database's name contains "restored_howl".
@@ -489,8 +505,9 @@ module Google
             #   @return [::String]
             #     If non-empty, `page_token` should contain a
             #     {::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseOperationsResponse#next_page_token next_page_token}
-            #     from a previous {::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseOperationsResponse ListDatabaseOperationsResponse} to the
-            #     same `parent` and with the same `filter`.
+            #     from a previous
+            #     {::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseOperationsResponse ListDatabaseOperationsResponse}
+            #     to the same `parent` and with the same `filter`.
             class ListDatabaseOperationsRequest
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -536,12 +553,12 @@ module Google
             #     `projects/<project>/instances/<instance>/backups/<backup>`.
             # @!attribute [rw] encryption_config
             #   @return [::Google::Cloud::Spanner::Admin::Database::V1::RestoreDatabaseEncryptionConfig]
-            #     Optional. An encryption configuration describing the encryption type and key
-            #     resources in Cloud KMS used to encrypt/decrypt the database to restore to.
-            #     If this field is not specified, the restored database will use
-            #     the same encryption configuration as the backup by default, namely
-            #     {::Google::Cloud::Spanner::Admin::Database::V1::RestoreDatabaseEncryptionConfig#encryption_type encryption_type} =
-            #     `USE_CONFIG_DEFAULT_OR_BACKUP_ENCRYPTION`.
+            #     Optional. An encryption configuration describing the encryption type and
+            #     key resources in Cloud KMS used to encrypt/decrypt the database to restore
+            #     to. If this field is not specified, the restored database will use the same
+            #     encryption configuration as the backup by default, namely
+            #     {::Google::Cloud::Spanner::Admin::Database::V1::RestoreDatabaseEncryptionConfig#encryption_type encryption_type}
+            #     = `USE_CONFIG_DEFAULT_OR_BACKUP_ENCRYPTION`.
             class RestoreDatabaseRequest
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -553,11 +570,28 @@ module Google
             #     Required. The encryption type of the restored database.
             # @!attribute [rw] kms_key_name
             #   @return [::String]
-            #     Optional. The Cloud KMS key that will be used to encrypt/decrypt the restored
-            #     database. This field should be set only when
-            #     {::Google::Cloud::Spanner::Admin::Database::V1::RestoreDatabaseEncryptionConfig#encryption_type encryption_type} is
-            #     `CUSTOMER_MANAGED_ENCRYPTION`. Values are of the form
+            #     Optional. The Cloud KMS key that will be used to encrypt/decrypt the
+            #     restored database. This field should be set only when
+            #     {::Google::Cloud::Spanner::Admin::Database::V1::RestoreDatabaseEncryptionConfig#encryption_type encryption_type}
+            #     is `CUSTOMER_MANAGED_ENCRYPTION`. Values are of the form
             #     `projects/<project>/locations/<location>/keyRings/<key_ring>/cryptoKeys/<kms_key_name>`.
+            # @!attribute [rw] kms_key_names
+            #   @return [::Array<::String>]
+            #     Optional. Specifies the KMS configuration for the one or more keys used to
+            #     encrypt the database. Values are of the form
+            #     `projects/<project>/locations/<location>/keyRings/<key_ring>/cryptoKeys/<kms_key_name>`.
+            #
+            #     The keys referenced by kms_key_names must fully cover all
+            #     regions of the database instance configuration. Some examples:
+            #     * For single region database instance configs, specify a single regional
+            #     location KMS key.
+            #     * For multi-regional database instance configs of type GOOGLE_MANAGED,
+            #     either specify a multi-regional location KMS key or multiple regional
+            #     location KMS keys that cover all regions in the instance config.
+            #     * For a database instance config of type USER_MANAGED, please specify only
+            #     regional location KMS keys to cover each region in the instance config.
+            #     Multi-regional location KMS keys are not supported for USER_MANAGED
+            #     instance configs.
             class RestoreDatabaseEncryptionConfig
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -568,7 +602,8 @@ module Google
                 ENCRYPTION_TYPE_UNSPECIFIED = 0
 
                 # This is the default option when
-                # {::Google::Cloud::Spanner::Admin::Database::V1::RestoreDatabaseEncryptionConfig encryption_config} is not specified.
+                # {::Google::Cloud::Spanner::Admin::Database::V1::RestoreDatabaseEncryptionConfig encryption_config}
+                # is not specified.
                 USE_CONFIG_DEFAULT_OR_BACKUP_ENCRYPTION = 1
 
                 # Use Google default encryption.
@@ -608,7 +643,8 @@ module Google
             #     operation completed despite cancellation. On successful cancellation,
             #     the operation is not deleted; instead, it becomes an operation with
             #     an {::Google::Longrunning::Operation#error Operation.error} value with a
-            #     {::Google::Rpc::Status#code google.rpc.Status.code} of 1, corresponding to `Code.CANCELLED`.
+            #     {::Google::Rpc::Status#code google.rpc.Status.code} of 1, corresponding to
+            #     `Code.CANCELLED`.
             # @!attribute [rw] optimize_database_operation_name
             #   @return [::String]
             #     If exists, the name of the long-running operation that will be used to
@@ -618,10 +654,10 @@ module Google
             #     `projects/<project>/instances/<instance>/databases/<database>/operations/<operation>`
             #     where the <database> is the name of database being created and restored to.
             #     The metadata type of the  long-running operation is
-            #     {::Google::Cloud::Spanner::Admin::Database::V1::OptimizeRestoredDatabaseMetadata OptimizeRestoredDatabaseMetadata}. This long-running operation will be
-            #     automatically created by the system after the RestoreDatabase long-running
-            #     operation completes successfully. This operation will not be created if the
-            #     restore was not successful.
+            #     {::Google::Cloud::Spanner::Admin::Database::V1::OptimizeRestoredDatabaseMetadata OptimizeRestoredDatabaseMetadata}.
+            #     This long-running operation will be automatically created by the system
+            #     after the RestoreDatabase long-running operation completes successfully.
+            #     This operation will not be created if the restore was not successful.
             class RestoreDatabaseMetadata
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -646,21 +682,20 @@ module Google
             # @!attribute [rw] name
             #   @return [::String]
             #     Required. The name of the database role. Values are of the form
-            #     `projects/<project>/instances/<instance>/databases/<database>/databaseRoles/
-            #     \\{role}`, where `<role>` is as specified in the `CREATE ROLE`
-            #     DDL statement. This name can be passed to Get/Set IAMPolicy methods to
-            #     identify the database role.
+            #     `projects/<project>/instances/<instance>/databases/<database>/databaseRoles/<role>`
+            #     where `<role>` is as specified in the `CREATE ROLE` DDL statement.
             class DatabaseRole
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
-            # The request for {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#list_database_roles ListDatabaseRoles}.
+            # The request for
+            # {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#list_database_roles ListDatabaseRoles}.
             # @!attribute [rw] parent
             #   @return [::String]
             #     Required. The database whose roles should be listed.
             #     Values are of the form
-            #     `projects/<project>/instances/<instance>/databases/<database>/databaseRoles`.
+            #     `projects/<project>/instances/<instance>/databases/<database>`.
             # @!attribute [rw] page_size
             #   @return [::Integer]
             #     Number of database roles to be returned in the response. If 0 or less,
@@ -668,14 +703,16 @@ module Google
             # @!attribute [rw] page_token
             #   @return [::String]
             #     If non-empty, `page_token` should contain a
-            #     {::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseRolesResponse#next_page_token next_page_token} from a
-            #     previous {::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseRolesResponse ListDatabaseRolesResponse}.
+            #     {::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseRolesResponse#next_page_token next_page_token}
+            #     from a previous
+            #     {::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseRolesResponse ListDatabaseRolesResponse}.
             class ListDatabaseRolesRequest
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
-            # The response for {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#list_database_roles ListDatabaseRoles}.
+            # The response for
+            # {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#list_database_roles ListDatabaseRoles}.
             # @!attribute [rw] database_roles
             #   @return [::Array<::Google::Cloud::Spanner::Admin::Database::V1::DatabaseRole>]
             #     Database roles that matched the request.
