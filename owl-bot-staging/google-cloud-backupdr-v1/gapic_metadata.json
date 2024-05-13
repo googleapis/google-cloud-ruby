@@ -1,0 +1,38 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.backupdr.v1",
+  "libraryPackage": "::Google::Cloud::BackupDR::V1",
+  "services": {
+    "BackupDR": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::BackupDR::V1::BackupDR::Client",
+          "rpcs": {
+            "ListManagementServers": {
+              "methods": [
+                "list_management_servers"
+              ]
+            },
+            "GetManagementServer": {
+              "methods": [
+                "get_management_server"
+              ]
+            },
+            "CreateManagementServer": {
+              "methods": [
+                "create_management_server"
+              ]
+            },
+            "DeleteManagementServer": {
+              "methods": [
+                "delete_management_server"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
