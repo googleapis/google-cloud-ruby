@@ -332,46 +332,6 @@
       ]
     },
     {
-      "region_tag": "fleetengine_v1_generated_VehicleService_UpdateVehicleLocation_sync",
-      "title": "Snippet for the update_vehicle_location call in the VehicleService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Maps::FleetEngine::V1::VehicleService::Client#update_vehicle_location.",
-      "file": "vehicle_service/update_vehicle_location.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "update_vehicle_location",
-        "full_name": "::Google::Maps::FleetEngine::V1::VehicleService::Client#update_vehicle_location",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Maps::FleetEngine::V1::UpdateVehicleLocationRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Maps::FleetEngine::V1::VehicleLocation",
-        "client": {
-          "short_name": "VehicleService::Client",
-          "full_name": "::Google::Maps::FleetEngine::V1::VehicleService::Client"
-        },
-        "method": {
-          "short_name": "UpdateVehicleLocation",
-          "full_name": "maps.fleetengine.v1.VehicleService.UpdateVehicleLocation",
-          "service": {
-            "short_name": "VehicleService",
-            "full_name": "maps.fleetengine.v1.VehicleService"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 46,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
       "region_tag": "fleetengine_v1_generated_VehicleService_UpdateVehicleAttributes_sync",
       "title": "Snippet for the update_vehicle_attributes call in the VehicleService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Maps::FleetEngine::V1::VehicleService::Client#update_vehicle_attributes.",
@@ -475,46 +435,6 @@
         "method": {
           "short_name": "SearchVehicles",
           "full_name": "maps.fleetengine.v1.VehicleService.SearchVehicles",
-          "service": {
-            "short_name": "VehicleService",
-            "full_name": "maps.fleetengine.v1.VehicleService"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 46,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "fleetengine_v1_generated_VehicleService_SearchFuzzedVehicles_sync",
-      "title": "Snippet for the search_fuzzed_vehicles call in the VehicleService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Maps::FleetEngine::V1::VehicleService::Client#search_fuzzed_vehicles.",
-      "file": "vehicle_service/search_fuzzed_vehicles.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "search_fuzzed_vehicles",
-        "full_name": "::Google::Maps::FleetEngine::V1::VehicleService::Client#search_fuzzed_vehicles",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Maps::FleetEngine::V1::SearchVehiclesRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Maps::FleetEngine::V1::SearchVehiclesResponse",
-        "client": {
-          "short_name": "VehicleService::Client",
-          "full_name": "::Google::Maps::FleetEngine::V1::VehicleService::Client"
-        },
-        "method": {
-          "short_name": "SearchFuzzedVehicles",
-          "full_name": "maps.fleetengine.v1.VehicleService.SearchFuzzedVehicles",
           "service": {
             "short_name": "VehicleService",
             "full_name": "maps.fleetengine.v1.VehicleService"

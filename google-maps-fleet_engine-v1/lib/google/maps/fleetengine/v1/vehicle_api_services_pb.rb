@@ -82,9 +82,6 @@ module Google
             # the `waypoints` field can be updated, but must contain all the waypoints
             # currently on the vehicle, and no other waypoints.
             rpc :UpdateVehicle, ::Google::Maps::FleetEngine::V1::UpdateVehicleRequest, ::Google::Maps::FleetEngine::V1::Vehicle
-            # Deprecated: Use the `UpdateVehicle` method instead.
-            # UpdateVehicleLocation updates the location of the vehicle.
-            rpc :UpdateVehicleLocation, ::Google::Maps::FleetEngine::V1::UpdateVehicleLocationRequest, ::Google::Maps::FleetEngine::V1::VehicleLocation
             # Partially updates a vehicle's attributes.
             # Only the attributes mentioned in the request will be updated, other
             # attributes will NOT be altered. Note: this is different in `UpdateVehicle`,
@@ -96,8 +93,6 @@ module Google
             rpc :ListVehicles, ::Google::Maps::FleetEngine::V1::ListVehiclesRequest, ::Google::Maps::FleetEngine::V1::ListVehiclesResponse
             # Returns a list of vehicles that match the request options.
             rpc :SearchVehicles, ::Google::Maps::FleetEngine::V1::SearchVehiclesRequest, ::Google::Maps::FleetEngine::V1::SearchVehiclesResponse
-            # Deprecated: Use `SearchVehicles` instead.
-            rpc :SearchFuzzedVehicles, ::Google::Maps::FleetEngine::V1::SearchVehiclesRequest, ::Google::Maps::FleetEngine::V1::SearchVehiclesResponse
           end
 
           Stub = Service.rpc_stub_class
