@@ -12,6 +12,246 @@
   },
   "snippets": [
     {
+      "region_tag": "cloudkms_v1_generated_Autokey_CreateKeyHandle_sync",
+      "title": "Snippet for the create_key_handle call in the Autokey service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::Autokey::Client#create_key_handle.",
+      "file": "autokey/create_key_handle.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_key_handle",
+        "full_name": "::Google::Cloud::Kms::V1::Autokey::Client#create_key_handle",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Kms::V1::CreateKeyHandleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Autokey::Client",
+          "full_name": "::Google::Cloud::Kms::V1::Autokey::Client"
+        },
+        "method": {
+          "short_name": "CreateKeyHandle",
+          "full_name": "google.cloud.kms.v1.Autokey.CreateKeyHandle",
+          "service": {
+            "short_name": "Autokey",
+            "full_name": "google.cloud.kms.v1.Autokey"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudkms_v1_generated_Autokey_GetKeyHandle_sync",
+      "title": "Snippet for the get_key_handle call in the Autokey service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::Autokey::Client#get_key_handle.",
+      "file": "autokey/get_key_handle.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_key_handle",
+        "full_name": "::Google::Cloud::Kms::V1::Autokey::Client#get_key_handle",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Kms::V1::GetKeyHandleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Kms::V1::KeyHandle",
+        "client": {
+          "short_name": "Autokey::Client",
+          "full_name": "::Google::Cloud::Kms::V1::Autokey::Client"
+        },
+        "method": {
+          "short_name": "GetKeyHandle",
+          "full_name": "google.cloud.kms.v1.Autokey.GetKeyHandle",
+          "service": {
+            "short_name": "Autokey",
+            "full_name": "google.cloud.kms.v1.Autokey"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudkms_v1_generated_Autokey_ListKeyHandles_sync",
+      "title": "Snippet for the list_key_handles call in the Autokey service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::Autokey::Client#list_key_handles.",
+      "file": "autokey/list_key_handles.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_key_handles",
+        "full_name": "::Google::Cloud::Kms::V1::Autokey::Client#list_key_handles",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Kms::V1::ListKeyHandlesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Kms::V1::ListKeyHandlesResponse",
+        "client": {
+          "short_name": "Autokey::Client",
+          "full_name": "::Google::Cloud::Kms::V1::Autokey::Client"
+        },
+        "method": {
+          "short_name": "ListKeyHandles",
+          "full_name": "google.cloud.kms.v1.Autokey.ListKeyHandles",
+          "service": {
+            "short_name": "Autokey",
+            "full_name": "google.cloud.kms.v1.Autokey"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudkms_v1_generated_AutokeyAdmin_UpdateAutokeyConfig_sync",
+      "title": "Snippet for the update_autokey_config call in the AutokeyAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::AutokeyAdmin::Client#update_autokey_config.",
+      "file": "autokey_admin/update_autokey_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_autokey_config",
+        "full_name": "::Google::Cloud::Kms::V1::AutokeyAdmin::Client#update_autokey_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Kms::V1::UpdateAutokeyConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Kms::V1::AutokeyConfig",
+        "client": {
+          "short_name": "AutokeyAdmin::Client",
+          "full_name": "::Google::Cloud::Kms::V1::AutokeyAdmin::Client"
+        },
+        "method": {
+          "short_name": "UpdateAutokeyConfig",
+          "full_name": "google.cloud.kms.v1.AutokeyAdmin.UpdateAutokeyConfig",
+          "service": {
+            "short_name": "AutokeyAdmin",
+            "full_name": "google.cloud.kms.v1.AutokeyAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudkms_v1_generated_AutokeyAdmin_GetAutokeyConfig_sync",
+      "title": "Snippet for the get_autokey_config call in the AutokeyAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::AutokeyAdmin::Client#get_autokey_config.",
+      "file": "autokey_admin/get_autokey_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_autokey_config",
+        "full_name": "::Google::Cloud::Kms::V1::AutokeyAdmin::Client#get_autokey_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Kms::V1::GetAutokeyConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Kms::V1::AutokeyConfig",
+        "client": {
+          "short_name": "AutokeyAdmin::Client",
+          "full_name": "::Google::Cloud::Kms::V1::AutokeyAdmin::Client"
+        },
+        "method": {
+          "short_name": "GetAutokeyConfig",
+          "full_name": "google.cloud.kms.v1.AutokeyAdmin.GetAutokeyConfig",
+          "service": {
+            "short_name": "AutokeyAdmin",
+            "full_name": "google.cloud.kms.v1.AutokeyAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudkms_v1_generated_AutokeyAdmin_ShowEffectiveAutokeyConfig_sync",
+      "title": "Snippet for the show_effective_autokey_config call in the AutokeyAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::AutokeyAdmin::Client#show_effective_autokey_config.",
+      "file": "autokey_admin/show_effective_autokey_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "show_effective_autokey_config",
+        "full_name": "::Google::Cloud::Kms::V1::AutokeyAdmin::Client#show_effective_autokey_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Kms::V1::ShowEffectiveAutokeyConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Kms::V1::ShowEffectiveAutokeyConfigResponse",
+        "client": {
+          "short_name": "AutokeyAdmin::Client",
+          "full_name": "::Google::Cloud::Kms::V1::AutokeyAdmin::Client"
+        },
+        "method": {
+          "short_name": "ShowEffectiveAutokeyConfig",
+          "full_name": "google.cloud.kms.v1.AutokeyAdmin.ShowEffectiveAutokeyConfig",
+          "service": {
+            "short_name": "AutokeyAdmin",
+            "full_name": "google.cloud.kms.v1.AutokeyAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "cloudkms_v1_generated_EkmService_ListEkmConnections_sync",
       "title": "Snippet for the list_ekm_connections call in the EkmService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::EkmService::Client#list_ekm_connections.",

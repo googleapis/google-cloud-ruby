@@ -25,7 +25,7 @@ module Google
       # @example Loading just the REST part of this package, including all its services, and instantiating a REST client
       #
       #     require "google/cloud/kms/v1/rest"
-      #     client = ::Google::Cloud::Kms::V1::EkmService::Rest::Client.new
+      #     client = ::Google::Cloud::Kms::V1::Autokey::Rest::Client.new
       #
       module V1
         ##

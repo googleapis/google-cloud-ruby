@@ -5,6 +5,54 @@
   "protoPackage": "google.cloud.kms.v1",
   "libraryPackage": "::Google::Cloud::Kms::V1",
   "services": {
+    "Autokey": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Kms::V1::Autokey::Client",
+          "rpcs": {
+            "CreateKeyHandle": {
+              "methods": [
+                "create_key_handle"
+              ]
+            },
+            "GetKeyHandle": {
+              "methods": [
+                "get_key_handle"
+              ]
+            },
+            "ListKeyHandles": {
+              "methods": [
+                "list_key_handles"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "AutokeyAdmin": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Kms::V1::AutokeyAdmin::Client",
+          "rpcs": {
+            "UpdateAutokeyConfig": {
+              "methods": [
+                "update_autokey_config"
+              ]
+            },
+            "GetAutokeyConfig": {
+              "methods": [
+                "get_autokey_config"
+              ]
+            },
+            "ShowEffectiveAutokeyConfig": {
+              "methods": [
+                "show_effective_autokey_config"
+              ]
+            }
+          }
+        }
+      }
+    },
     "EkmService": {
       "clients": {
         "grpc": {
