@@ -572,107 +572,6 @@ module Google
             end
 
             ##
-            # Deprecated: Use the `UpdateVehicle` method instead.
-            # UpdateVehicleLocation updates the location of the vehicle.
-            #
-            # @deprecated This method is deprecated and may be removed in the next major version update.
-            #
-            # @overload update_vehicle_location(request, options = nil)
-            #   Pass arguments to `update_vehicle_location` via a request object, either of type
-            #   {::Google::Maps::FleetEngine::V1::UpdateVehicleLocationRequest} or an equivalent Hash.
-            #
-            #   @param request [::Google::Maps::FleetEngine::V1::UpdateVehicleLocationRequest, ::Hash]
-            #     A request object representing the call parameters. Required. To specify no
-            #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [::Gapic::CallOptions, ::Hash]
-            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
-            #
-            # @overload update_vehicle_location(header: nil, name: nil, current_location: nil, current_state: nil)
-            #   Pass arguments to `update_vehicle_location` via keyword arguments. Note that at
-            #   least one keyword argument is required. To specify no parameters, or to keep all
-            #   the default parameter values, pass an empty Hash as a request object (see above).
-            #
-            #   @param header [::Google::Maps::FleetEngine::V1::RequestHeader, ::Hash]
-            #     The standard Fleet Engine request header.
-            #   @param name [::String]
-            #     Required. Must be in the format
-            #     `providers/{provider}/vehicles/{vehicle}`.
-            #     The \\{provider} must be the Project ID (for example, `sample-cloud-project`)
-            #     of the Google Cloud Project of which the service account making
-            #     this call is a member.
-            #   @param current_location [::Google::Maps::FleetEngine::V1::VehicleLocation, ::Hash]
-            #     Required. The vehicle's most recent location.  The `location` and
-            #     `update_time` subfields are required.
-            #   @param current_state [::Google::Maps::FleetEngine::V1::VehicleState]
-            #     Set the vehicle's state to either `ONLINE` or `OFFLINE`.
-            #     If set to `UNKNOWN_VEHICLE_STATE`, the vehicle's state will not be altered.
-            #
-            # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [::Google::Maps::FleetEngine::V1::VehicleLocation]
-            # @yieldparam operation [::GRPC::ActiveCall::Operation]
-            #
-            # @return [::Google::Maps::FleetEngine::V1::VehicleLocation]
-            #
-            # @raise [::Google::Cloud::Error] if the RPC is aborted.
-            #
-            # @example Basic example
-            #   require "google/maps/fleet_engine/v1"
-            #
-            #   # Create a client object. The client can be reused for multiple calls.
-            #   client = Google::Maps::FleetEngine::V1::VehicleService::Client.new
-            #
-            #   # Create a request. To set request fields, pass in keyword arguments.
-            #   request = Google::Maps::FleetEngine::V1::UpdateVehicleLocationRequest.new
-            #
-            #   # Call the update_vehicle_location method.
-            #   result = client.update_vehicle_location request
-            #
-            #   # The returned object is of type Google::Maps::FleetEngine::V1::VehicleLocation.
-            #   p result
-            #
-            def update_vehicle_location request, options = nil
-              raise ::ArgumentError, "request must be provided" if request.nil?
-
-              request = ::Gapic::Protobuf.coerce request, to: ::Google::Maps::FleetEngine::V1::UpdateVehicleLocationRequest
-
-              # Converts hash and nil to an options object
-              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-              # Customize the options with defaults
-              metadata = @config.rpcs.update_vehicle_location.metadata.to_h
-
-              # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Maps::FleetEngine::V1::VERSION
-              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-              header_params = {}
-              if request.name &&
-                 %r{^providers/[^/]+/?$}.match?(request.name)
-                header_params["provider_id"] = request.name
-              end
-
-              request_params_header = URI.encode_www_form header_params
-              metadata[:"x-goog-request-params"] ||= request_params_header
-
-              options.apply_defaults timeout:      @config.rpcs.update_vehicle_location.timeout,
-                                     metadata:     metadata,
-                                     retry_policy: @config.rpcs.update_vehicle_location.retry_policy
-
-              options.apply_defaults timeout:      @config.timeout,
-                                     metadata:     @config.metadata,
-                                     retry_policy: @config.retry_policy
-
-              @vehicle_service_stub.call_rpc :update_vehicle_location, request, options: options do |response, operation|
-                yield response, operation if block_given?
-                return response
-              end
-            rescue ::GRPC::BadStatus => e
-              raise ::Google::Cloud::Error.from_error(e)
-            end
-
-            ##
             # Partially updates a vehicle's attributes.
             # Only the attributes mentioned in the request will be updated, other
             # attributes will NOT be altered. Note: this is different in `UpdateVehicle`,
@@ -1196,225 +1095,6 @@ module Google
             end
 
             ##
-            # Deprecated: Use `SearchVehicles` instead.
-            #
-            # @deprecated This method is deprecated and may be removed in the next major version update.
-            #
-            # @overload search_fuzzed_vehicles(request, options = nil)
-            #   Pass arguments to `search_fuzzed_vehicles` via a request object, either of type
-            #   {::Google::Maps::FleetEngine::V1::SearchVehiclesRequest} or an equivalent Hash.
-            #
-            #   @param request [::Google::Maps::FleetEngine::V1::SearchVehiclesRequest, ::Hash]
-            #     A request object representing the call parameters. Required. To specify no
-            #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [::Gapic::CallOptions, ::Hash]
-            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
-            #
-            # @overload search_fuzzed_vehicles(header: nil, parent: nil, pickup_point: nil, dropoff_point: nil, pickup_radius_meters: nil, count: nil, minimum_capacity: nil, trip_types: nil, maximum_staleness: nil, vehicle_types: nil, required_attributes: nil, required_one_of_attributes: nil, required_one_of_attribute_sets: nil, order_by: nil, include_back_to_back: nil, trip_id: nil, current_trips_present: nil, filter: nil)
-            #   Pass arguments to `search_fuzzed_vehicles` via keyword arguments. Note that at
-            #   least one keyword argument is required. To specify no parameters, or to keep all
-            #   the default parameter values, pass an empty Hash as a request object (see above).
-            #
-            #   @param header [::Google::Maps::FleetEngine::V1::RequestHeader, ::Hash]
-            #     The standard Fleet Engine request header.
-            #   @param parent [::String]
-            #     Required. Must be in the format `providers/{provider}`.
-            #     The provider must be the Project ID (for example, `sample-cloud-project`)
-            #     of the Google Cloud Project of which the service account making
-            #     this call is a member.
-            #   @param pickup_point [::Google::Maps::FleetEngine::V1::TerminalLocation, ::Hash]
-            #     Required. The pickup point to search near.
-            #   @param dropoff_point [::Google::Maps::FleetEngine::V1::TerminalLocation, ::Hash]
-            #     The customer's intended dropoff location. The field is required if
-            #     `trip_types` contains `TripType.SHARED`.
-            #   @param pickup_radius_meters [::Integer]
-            #     Required. Defines the vehicle search radius around the pickup point. Only
-            #     vehicles within the search radius will be returned. Value must be between
-            #     400 and 10000 meters (inclusive).
-            #   @param count [::Integer]
-            #     Required. Specifies the maximum number of vehicles to return. The value
-            #     must be between 1 and 50 (inclusive).
-            #   @param minimum_capacity [::Integer]
-            #     Required. Specifies the number of passengers being considered for a trip.
-            #     The value must be greater than or equal to one. The driver is not
-            #     considered in the capacity value.
-            #   @param trip_types [::Array<::Google::Maps::FleetEngine::V1::TripType>]
-            #     Required. Represents the type of proposed trip. Must include exactly one
-            #     type. `UNKNOWN_TRIP_TYPE` is not allowed. Restricts the search to only
-            #     those vehicles that can support that trip type.
-            #   @param maximum_staleness [::Google::Protobuf::Duration, ::Hash]
-            #     Restricts the search to only those vehicles that have sent location updates
-            #     to Fleet Engine within the specified duration. Stationary vehicles still
-            #     transmitting their locations are not considered stale. If this field is not
-            #     set, the server uses five minutes as the default value.
-            #   @param vehicle_types [::Array<::Google::Maps::FleetEngine::V1::Vehicle::VehicleType, ::Hash>]
-            #     Required. Restricts the search to vehicles with one of the specified types.
-            #     At least one vehicle type must be specified. VehicleTypes with a category
-            #     of `UNKNOWN` are not allowed.
-            #   @param required_attributes [::Array<::Google::Maps::FleetEngine::V1::VehicleAttribute, ::Hash>]
-            #     Callers can form complex logical operations using any combination of the
-            #     `required_attributes`, `required_one_of_attributes`, and
-            #     `required_one_of_attribute_sets` fields.
-            #
-            #     `required_attributes` is a list; `required_one_of_attributes` uses a
-            #     message which allows a list of lists. In combination, the two fields allow
-            #     the composition of this expression:
-            #
-            #     ```
-            #     (required_attributes[0] AND required_attributes[1] AND ...)
-            #     AND
-            #     (required_one_of_attributes[0][0] OR required_one_of_attributes[0][1] OR
-            #     ...)
-            #     AND
-            #     (required_one_of_attributes[1][0] OR required_one_of_attributes[1][1] OR
-            #     ...)
-            #     ```
-            #
-            #     Restricts the search to only those vehicles with the specified attributes.
-            #     This field is a conjunction/AND operation. A max of 50 required_attributes
-            #     is allowed. This matches the maximum number of attributes allowed on a
-            #     vehicle.
-            #   @param required_one_of_attributes [::Array<::Google::Maps::FleetEngine::V1::VehicleAttributeList, ::Hash>]
-            #     Restricts the search to only those vehicles with at least one of
-            #     the specified attributes in each `VehicleAttributeList`. Within each
-            #     list, a vehicle must match at least one of the attributes. This field is an
-            #     inclusive disjunction/OR operation in each `VehicleAttributeList` and a
-            #     conjunction/AND operation across the collection of `VehicleAttributeList`.
-            #   @param required_one_of_attribute_sets [::Array<::Google::Maps::FleetEngine::V1::VehicleAttributeList, ::Hash>]
-            #     `required_one_of_attribute_sets` provides additional functionality.
-            #
-            #     Similar to `required_one_of_attributes`, `required_one_of_attribute_sets`
-            #     uses a message which allows a list of lists, allowing expressions such as
-            #     this one:
-            #
-            #     ```
-            #     (required_attributes[0] AND required_attributes[1] AND ...)
-            #     AND
-            #     (
-            #       (required_one_of_attribute_sets[0][0] AND
-            #       required_one_of_attribute_sets[0][1] AND
-            #       ...)
-            #       OR
-            #       (required_one_of_attribute_sets[1][0] AND
-            #       required_one_of_attribute_sets[1][1] AND
-            #       ...)
-            #     )
-            #     ```
-            #
-            #     Restricts the search to only those vehicles with all the attributes in a
-            #     `VehicleAttributeList`. Within each list, a
-            #     vehicle must match all of the attributes. This field is a conjunction/AND
-            #     operation in each `VehicleAttributeList` and inclusive disjunction/OR
-            #     operation across the collection of `VehicleAttributeList`.
-            #   @param order_by [::Google::Maps::FleetEngine::V1::SearchVehiclesRequest::VehicleMatchOrder]
-            #     Required. Specifies the desired ordering criterion for results.
-            #   @param include_back_to_back [::Boolean]
-            #     This indicates if vehicles with a single active trip are eligible for this
-            #     search. This field is only used when `current_trips_present` is
-            #     unspecified. When `current_trips_present` is unspecified  and  this field
-            #     is `false`, vehicles with assigned trips are excluded from the search
-            #     results. When `current_trips_present` is unspecified and this field is
-            #     `true`, search results can include vehicles with one active trip that has a
-            #     status of `ENROUTE_TO_DROPOFF`. When `current_trips_present` is specified,
-            #     this field cannot be set to true.
-            #
-            #     The default value is `false`.
-            #   @param trip_id [::String]
-            #     Indicates the trip associated with this `SearchVehicleRequest`.
-            #   @param current_trips_present [::Google::Maps::FleetEngine::V1::SearchVehiclesRequest::CurrentTripsPresent]
-            #     This indicates if vehicles with active trips are eligible for this search.
-            #     This must be set to something other than
-            #     `CURRENT_TRIPS_PRESENT_UNSPECIFIED` if `trip_type` includes `SHARED`.
-            #   @param filter [::String]
-            #     Optional. A filter query to apply when searching vehicles. See
-            #     http://aip.dev/160 for examples of the filter syntax.
-            #
-            #     This field is designed to replace the `required_attributes`,
-            #     `required_one_of_attributes`, and `required_one_of_attributes_sets` fields.
-            #     If a non-empty value is specified here, the following fields must be empty:
-            #     `required_attributes`, `required_one_of_attributes`, and
-            #     `required_one_of_attributes_sets`.
-            #
-            #     This filter functions as an AND clause with other constraints,
-            #     such as `minimum_capacity` or `vehicle_types`.
-            #
-            #     Note that the only queries supported are on vehicle attributes (for
-            #     example, `attributes.<key> = <value>` or `attributes.<key1> = <value1> AND
-            #     attributes.<key2> = <value2>`). The maximum number of restrictions allowed
-            #     in a filter query is 50.
-            #
-            #     Also, all attributes are stored as strings, so the only supported
-            #     comparisons against attributes are string comparisons. In order to compare
-            #     against number or boolean values, the values must be explicitly quoted to
-            #     be treated as strings (for example, `attributes.<key> = "10"` or
-            #     `attributes.<key> = "true"`).
-            #
-            # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [::Google::Maps::FleetEngine::V1::SearchVehiclesResponse]
-            # @yieldparam operation [::GRPC::ActiveCall::Operation]
-            #
-            # @return [::Google::Maps::FleetEngine::V1::SearchVehiclesResponse]
-            #
-            # @raise [::Google::Cloud::Error] if the RPC is aborted.
-            #
-            # @example Basic example
-            #   require "google/maps/fleet_engine/v1"
-            #
-            #   # Create a client object. The client can be reused for multiple calls.
-            #   client = Google::Maps::FleetEngine::V1::VehicleService::Client.new
-            #
-            #   # Create a request. To set request fields, pass in keyword arguments.
-            #   request = Google::Maps::FleetEngine::V1::SearchVehiclesRequest.new
-            #
-            #   # Call the search_fuzzed_vehicles method.
-            #   result = client.search_fuzzed_vehicles request
-            #
-            #   # The returned object is of type Google::Maps::FleetEngine::V1::SearchVehiclesResponse.
-            #   p result
-            #
-            def search_fuzzed_vehicles request, options = nil
-              raise ::ArgumentError, "request must be provided" if request.nil?
-
-              request = ::Gapic::Protobuf.coerce request, to: ::Google::Maps::FleetEngine::V1::SearchVehiclesRequest
-
-              # Converts hash and nil to an options object
-              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-              # Customize the options with defaults
-              metadata = @config.rpcs.search_fuzzed_vehicles.metadata.to_h
-
-              # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Maps::FleetEngine::V1::VERSION
-              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-              header_params = {}
-              if request.parent &&
-                 %r{^providers/[^/]+/?$}.match?(request.parent)
-                header_params["provider_id"] = request.parent
-              end
-
-              request_params_header = URI.encode_www_form header_params
-              metadata[:"x-goog-request-params"] ||= request_params_header
-
-              options.apply_defaults timeout:      @config.rpcs.search_fuzzed_vehicles.timeout,
-                                     metadata:     metadata,
-                                     retry_policy: @config.rpcs.search_fuzzed_vehicles.retry_policy
-
-              options.apply_defaults timeout:      @config.timeout,
-                                     metadata:     @config.metadata,
-                                     retry_policy: @config.retry_policy
-
-              @vehicle_service_stub.call_rpc :search_fuzzed_vehicles, request, options: options do |response, operation|
-                yield response, operation if block_given?
-                return response
-              end
-            rescue ::GRPC::BadStatus => e
-              raise ::Google::Cloud::Error.from_error(e)
-            end
-
-            ##
             # Configuration class for the VehicleService API.
             #
             # This class represents the configuration for VehicleService,
@@ -1583,11 +1263,6 @@ module Google
                 #
                 attr_reader :update_vehicle
                 ##
-                # RPC-specific configuration for `update_vehicle_location`
-                # @return [::Gapic::Config::Method]
-                #
-                attr_reader :update_vehicle_location
-                ##
                 # RPC-specific configuration for `update_vehicle_attributes`
                 # @return [::Gapic::Config::Method]
                 #
@@ -1602,11 +1277,6 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :search_vehicles
-                ##
-                # RPC-specific configuration for `search_fuzzed_vehicles`
-                # @return [::Gapic::Config::Method]
-                #
-                attr_reader :search_fuzzed_vehicles
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -1616,16 +1286,12 @@ module Google
                   @get_vehicle = ::Gapic::Config::Method.new get_vehicle_config
                   update_vehicle_config = parent_rpcs.update_vehicle if parent_rpcs.respond_to? :update_vehicle
                   @update_vehicle = ::Gapic::Config::Method.new update_vehicle_config
-                  update_vehicle_location_config = parent_rpcs.update_vehicle_location if parent_rpcs.respond_to? :update_vehicle_location
-                  @update_vehicle_location = ::Gapic::Config::Method.new update_vehicle_location_config
                   update_vehicle_attributes_config = parent_rpcs.update_vehicle_attributes if parent_rpcs.respond_to? :update_vehicle_attributes
                   @update_vehicle_attributes = ::Gapic::Config::Method.new update_vehicle_attributes_config
                   list_vehicles_config = parent_rpcs.list_vehicles if parent_rpcs.respond_to? :list_vehicles
                   @list_vehicles = ::Gapic::Config::Method.new list_vehicles_config
                   search_vehicles_config = parent_rpcs.search_vehicles if parent_rpcs.respond_to? :search_vehicles
                   @search_vehicles = ::Gapic::Config::Method.new search_vehicles_config
-                  search_fuzzed_vehicles_config = parent_rpcs.search_fuzzed_vehicles if parent_rpcs.respond_to? :search_fuzzed_vehicles
-                  @search_fuzzed_vehicles = ::Gapic::Config::Method.new search_fuzzed_vehicles_config
 
                   yield self if block_given?
                 end

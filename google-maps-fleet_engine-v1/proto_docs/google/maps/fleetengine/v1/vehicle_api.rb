@@ -142,31 +142,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # `UpdateVehicleLocation` request message.
-        # @deprecated This message is deprecated and may be removed in the next major version update.
-        # @!attribute [rw] header
-        #   @return [::Google::Maps::FleetEngine::V1::RequestHeader]
-        #     The standard Fleet Engine request header.
-        # @!attribute [rw] name
-        #   @return [::String]
-        #     Required. Must be in the format
-        #     `providers/{provider}/vehicles/{vehicle}`.
-        #     The \\{provider} must be the Project ID (for example, `sample-cloud-project`)
-        #     of the Google Cloud Project of which the service account making
-        #     this call is a member.
-        # @!attribute [rw] current_location
-        #   @return [::Google::Maps::FleetEngine::V1::VehicleLocation]
-        #     Required. The vehicle's most recent location.  The `location` and
-        #     `update_time` subfields are required.
-        # @!attribute [rw] current_state
-        #   @return [::Google::Maps::FleetEngine::V1::VehicleState]
-        #     Set the vehicle's state to either `ONLINE` or `OFFLINE`.
-        #     If set to `UNKNOWN_VEHICLE_STATE`, the vehicle's state will not be altered.
-        class UpdateVehicleLocationRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
         # `UpdateVehicleAttributes` request message.
         # @!attribute [rw] header
         #   @return [::Google::Maps::FleetEngine::V1::RequestHeader]
