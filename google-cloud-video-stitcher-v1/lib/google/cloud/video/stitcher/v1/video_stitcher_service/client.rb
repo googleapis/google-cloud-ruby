@@ -36,6 +36,9 @@ module Google
             #
             class Client
               # @private
+              API_VERSION = ""
+
+              # @private
               DEFAULT_ENDPOINT_TEMPLATE = "videostitcher.$UNIVERSE_DOMAIN$"
 
               include Paths
@@ -304,10 +307,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.create_cdn_key.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Video::Stitcher::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -404,10 +408,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.list_cdn_keys.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Video::Stitcher::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -491,10 +496,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.get_cdn_key.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Video::Stitcher::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -584,10 +590,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.delete_cdn_key.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Video::Stitcher::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -682,10 +689,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.update_cdn_key.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Video::Stitcher::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -772,10 +780,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.create_vod_session.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Video::Stitcher::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -859,10 +868,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.get_vod_session.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Video::Stitcher::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -954,10 +964,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.list_vod_stitch_details.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Video::Stitcher::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -1042,10 +1053,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.get_vod_stitch_detail.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Video::Stitcher::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -1136,10 +1148,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.list_vod_ad_tag_details.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Video::Stitcher::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -1224,10 +1237,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.get_vod_ad_tag_detail.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Video::Stitcher::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -1318,10 +1332,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.list_live_ad_tag_details.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Video::Stitcher::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -1405,10 +1420,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.get_live_ad_tag_detail.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Video::Stitcher::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -1519,10 +1535,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.create_slate.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Video::Stitcher::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -1619,10 +1636,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.list_slates.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Video::Stitcher::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -1706,10 +1724,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.get_slate.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Video::Stitcher::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -1800,10 +1819,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.update_slate.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Video::Stitcher::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -1894,10 +1914,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.delete_slate.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Video::Stitcher::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -1983,10 +2004,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.create_live_session.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Video::Stitcher::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -2069,10 +2091,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.get_live_session.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Video::Stitcher::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -2181,10 +2204,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.create_live_config.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Video::Stitcher::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -2284,10 +2308,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.list_live_configs.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Video::Stitcher::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -2373,10 +2398,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.get_live_config.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Video::Stitcher::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -2466,10 +2492,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.delete_live_config.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Video::Stitcher::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
