@@ -1,0 +1,359 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.retail.v2",
+  "libraryPackage": "::Google::Cloud::Retail::V2",
+  "services": {
+    "AnalyticsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Retail::V2::AnalyticsService::Client",
+          "rpcs": {
+            "ExportAnalyticsMetrics": {
+              "methods": [
+                "export_analytics_metrics"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "CatalogService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Retail::V2::CatalogService::Client",
+          "rpcs": {
+            "ListCatalogs": {
+              "methods": [
+                "list_catalogs"
+              ]
+            },
+            "UpdateCatalog": {
+              "methods": [
+                "update_catalog"
+              ]
+            },
+            "SetDefaultBranch": {
+              "methods": [
+                "set_default_branch"
+              ]
+            },
+            "GetDefaultBranch": {
+              "methods": [
+                "get_default_branch"
+              ]
+            },
+            "GetCompletionConfig": {
+              "methods": [
+                "get_completion_config"
+              ]
+            },
+            "UpdateCompletionConfig": {
+              "methods": [
+                "update_completion_config"
+              ]
+            },
+            "GetAttributesConfig": {
+              "methods": [
+                "get_attributes_config"
+              ]
+            },
+            "UpdateAttributesConfig": {
+              "methods": [
+                "update_attributes_config"
+              ]
+            },
+            "AddCatalogAttribute": {
+              "methods": [
+                "add_catalog_attribute"
+              ]
+            },
+            "RemoveCatalogAttribute": {
+              "methods": [
+                "remove_catalog_attribute"
+              ]
+            },
+            "ReplaceCatalogAttribute": {
+              "methods": [
+                "replace_catalog_attribute"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "CompletionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Retail::V2::CompletionService::Client",
+          "rpcs": {
+            "CompleteQuery": {
+              "methods": [
+                "complete_query"
+              ]
+            },
+            "ImportCompletionData": {
+              "methods": [
+                "import_completion_data"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ControlService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Retail::V2::ControlService::Client",
+          "rpcs": {
+            "CreateControl": {
+              "methods": [
+                "create_control"
+              ]
+            },
+            "DeleteControl": {
+              "methods": [
+                "delete_control"
+              ]
+            },
+            "UpdateControl": {
+              "methods": [
+                "update_control"
+              ]
+            },
+            "GetControl": {
+              "methods": [
+                "get_control"
+              ]
+            },
+            "ListControls": {
+              "methods": [
+                "list_controls"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ModelService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Retail::V2::ModelService::Client",
+          "rpcs": {
+            "CreateModel": {
+              "methods": [
+                "create_model"
+              ]
+            },
+            "GetModel": {
+              "methods": [
+                "get_model"
+              ]
+            },
+            "PauseModel": {
+              "methods": [
+                "pause_model"
+              ]
+            },
+            "ResumeModel": {
+              "methods": [
+                "resume_model"
+              ]
+            },
+            "DeleteModel": {
+              "methods": [
+                "delete_model"
+              ]
+            },
+            "ListModels": {
+              "methods": [
+                "list_models"
+              ]
+            },
+            "UpdateModel": {
+              "methods": [
+                "update_model"
+              ]
+            },
+            "TuneModel": {
+              "methods": [
+                "tune_model"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "PredictionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Retail::V2::PredictionService::Client",
+          "rpcs": {
+            "Predict": {
+              "methods": [
+                "predict"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ProductService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Retail::V2::ProductService::Client",
+          "rpcs": {
+            "CreateProduct": {
+              "methods": [
+                "create_product"
+              ]
+            },
+            "GetProduct": {
+              "methods": [
+                "get_product"
+              ]
+            },
+            "ListProducts": {
+              "methods": [
+                "list_products"
+              ]
+            },
+            "UpdateProduct": {
+              "methods": [
+                "update_product"
+              ]
+            },
+            "DeleteProduct": {
+              "methods": [
+                "delete_product"
+              ]
+            },
+            "ImportProducts": {
+              "methods": [
+                "import_products"
+              ]
+            },
+            "SetInventory": {
+              "methods": [
+                "set_inventory"
+              ]
+            },
+            "AddFulfillmentPlaces": {
+              "methods": [
+                "add_fulfillment_places"
+              ]
+            },
+            "RemoveFulfillmentPlaces": {
+              "methods": [
+                "remove_fulfillment_places"
+              ]
+            },
+            "AddLocalInventories": {
+              "methods": [
+                "add_local_inventories"
+              ]
+            },
+            "RemoveLocalInventories": {
+              "methods": [
+                "remove_local_inventories"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SearchService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Retail::V2::SearchService::Client",
+          "rpcs": {
+            "Search": {
+              "methods": [
+                "search"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ServingConfigService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Retail::V2::ServingConfigService::Client",
+          "rpcs": {
+            "CreateServingConfig": {
+              "methods": [
+                "create_serving_config"
+              ]
+            },
+            "DeleteServingConfig": {
+              "methods": [
+                "delete_serving_config"
+              ]
+            },
+            "UpdateServingConfig": {
+              "methods": [
+                "update_serving_config"
+              ]
+            },
+            "GetServingConfig": {
+              "methods": [
+                "get_serving_config"
+              ]
+            },
+            "ListServingConfigs": {
+              "methods": [
+                "list_serving_configs"
+              ]
+            },
+            "AddControl": {
+              "methods": [
+                "add_control"
+              ]
+            },
+            "RemoveControl": {
+              "methods": [
+                "remove_control"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "UserEventService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Retail::V2::UserEventService::Client",
+          "rpcs": {
+            "WriteUserEvent": {
+              "methods": [
+                "write_user_event"
+              ]
+            },
+            "CollectUserEvent": {
+              "methods": [
+                "collect_user_event"
+              ]
+            },
+            "PurgeUserEvents": {
+              "methods": [
+                "purge_user_events"
+              ]
+            },
+            "ImportUserEvents": {
+              "methods": [
+                "import_user_events"
+              ]
+            },
+            "RejoinUserEvents": {
+              "methods": [
+                "rejoin_user_events"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
