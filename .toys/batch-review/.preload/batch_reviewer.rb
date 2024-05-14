@@ -159,7 +159,7 @@ module Yoshi
           raise "Unknown prefix code #{prefix.inspect} when parsing expect-diffs"
         end
       end
-      {path_exprs: path_exprs, additions: additions, removals: removals, desc: desc}
+      {path_patterns: path_exprs, additions: additions, removals: removals, desc: desc}
     end
 
     def validate_config
@@ -516,13 +516,16 @@ module Yoshi
         @expected << Expectation.new(desc) do |file|
           (path_patterns.empty? || path_patterns.any? { |pattern| pattern === file.path }) &&
             file.reduce_hunks(true) do |val, hunk|
-              line_without_mark = line[1..]
-              if line.start_with? "+"
-                additions.any? { |regex| regex.match? line_without_mark }
-              elsif line.start_with? "-"
-                removals.any? { |regex| regex.match? line_without_mark }
-              else
-                true
+              next false unless val
+              hunk.all? do |line|
+                line_without_mark = line[1..]
+                if line.start_with? "+"
+                  additions.any? { |regex| regex.match? line_without_mark }
+                elsif line.start_with? "-"
+                  removals.any? { |regex| regex.match? line_without_mark }
+                else
+                  true
+                end
               end
             end
         end
