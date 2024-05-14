@@ -38,6 +38,9 @@ module Google
             #
             class Client
               # @private
+              API_VERSION = ""
+
+              # @private
               DEFAULT_ENDPOINT_TEMPLATE = "analyticshub.$UNIVERSE_DOMAIN$"
 
               include Paths
@@ -252,10 +255,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.list_data_exchanges.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigquery::DataExchange::V1beta1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -350,10 +354,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.list_org_data_exchanges.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigquery::DataExchange::V1beta1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -437,10 +442,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.get_data_exchange.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigquery::DataExchange::V1beta1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -531,10 +537,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.create_data_exchange.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigquery::DataExchange::V1beta1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -620,10 +627,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.update_data_exchange.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigquery::DataExchange::V1beta1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -706,10 +714,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.delete_data_exchange.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigquery::DataExchange::V1beta1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -802,10 +811,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.list_listings.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigquery::DataExchange::V1beta1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -889,10 +899,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.get_listing.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigquery::DataExchange::V1beta1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -983,10 +994,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.create_listing.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigquery::DataExchange::V1beta1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -1072,10 +1084,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.update_listing.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigquery::DataExchange::V1beta1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -1158,10 +1171,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.delete_listing.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigquery::DataExchange::V1beta1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -1251,10 +1265,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.subscribe_listing.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigquery::DataExchange::V1beta1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -1340,10 +1355,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.get_iam_policy.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigquery::DataExchange::V1beta1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -1437,10 +1453,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.set_iam_policy.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigquery::DataExchange::V1beta1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -1528,10 +1545,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.test_iam_permissions.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigquery::DataExchange::V1beta1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
