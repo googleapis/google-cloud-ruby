@@ -62,6 +62,9 @@ module Google
               #
               class Client
                 # @private
+                API_VERSION = ""
+
+                # @private
                 DEFAULT_ENDPOINT_TEMPLATE = "firestore.$UNIVERSE_DOMAIN$"
 
                 include Paths
@@ -311,12 +314,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.create_index.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Firestore::Admin::V1::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.create_index.timeout,
@@ -403,12 +407,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.list_indexes.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Firestore::Admin::V1::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.list_indexes.timeout,
@@ -483,12 +488,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.get_index.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Firestore::Admin::V1::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.get_index.timeout,
@@ -562,12 +568,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.delete_index.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Firestore::Admin::V1::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.delete_index.timeout,
@@ -641,12 +648,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.get_field.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Firestore::Admin::V1::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.get_field.timeout,
@@ -744,12 +752,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.update_field.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Firestore::Admin::V1::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.update_field.timeout,
@@ -849,12 +858,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.list_fields.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Firestore::Admin::V1::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.list_fields.timeout,
@@ -972,12 +982,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.export_documents.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Firestore::Admin::V1::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.export_documents.timeout,
@@ -1079,12 +1090,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.import_documents.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Firestore::Admin::V1::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.import_documents.timeout,
@@ -1177,12 +1189,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.create_database.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Firestore::Admin::V1::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.create_database.timeout,
@@ -1257,12 +1270,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.get_database.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Firestore::Admin::V1::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.get_database.timeout,
@@ -1336,12 +1350,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.list_databases.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Firestore::Admin::V1::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.list_databases.timeout,
@@ -1423,12 +1438,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.update_database.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Firestore::Admin::V1::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.update_database.timeout,
@@ -1514,12 +1530,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.delete_database.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Firestore::Admin::V1::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.delete_database.timeout,
@@ -1595,12 +1612,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.get_backup.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Firestore::Admin::V1::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.get_backup.timeout,
@@ -1678,12 +1696,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.list_backups.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Firestore::Admin::V1::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.list_backups.timeout,
@@ -1758,12 +1777,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.delete_backup.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Firestore::Admin::V1::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.delete_backup.timeout,
@@ -1875,12 +1895,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.restore_database.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Firestore::Admin::V1::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.restore_database.timeout,
@@ -1960,12 +1981,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.create_backup_schedule.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Firestore::Admin::V1::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.create_backup_schedule.timeout,
@@ -2041,12 +2063,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.get_backup_schedule.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Firestore::Admin::V1::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.get_backup_schedule.timeout,
@@ -2121,12 +2144,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.list_backup_schedules.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Firestore::Admin::V1::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.list_backup_schedules.timeout,
@@ -2201,12 +2225,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.update_backup_schedule.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Firestore::Admin::V1::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.update_backup_schedule.timeout,
@@ -2282,12 +2307,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.delete_backup_schedule.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Firestore::Admin::V1::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.delete_backup_schedule.timeout,
