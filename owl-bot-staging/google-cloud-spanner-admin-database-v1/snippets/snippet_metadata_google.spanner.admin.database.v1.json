@@ -1,0 +1,815 @@
+{
+  "client_library": {
+    "name": "google-cloud-spanner-admin-database-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.spanner.admin.database.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "spanner_v1_generated_DatabaseAdmin_ListDatabases_sync",
+      "title": "Snippet for the list_databases call in the DatabaseAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#list_databases.",
+      "file": "database_admin/list_databases.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_databases",
+        "full_name": "::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#list_databases",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Spanner::Admin::Database::V1::ListDatabasesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Spanner::Admin::Database::V1::ListDatabasesResponse",
+        "client": {
+          "short_name": "DatabaseAdmin::Client",
+          "full_name": "::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client"
+        },
+        "method": {
+          "short_name": "ListDatabases",
+          "full_name": "google.spanner.admin.database.v1.DatabaseAdmin.ListDatabases",
+          "service": {
+            "short_name": "DatabaseAdmin",
+            "full_name": "google.spanner.admin.database.v1.DatabaseAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "spanner_v1_generated_DatabaseAdmin_CreateDatabase_sync",
+      "title": "Snippet for the create_database call in the DatabaseAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#create_database.",
+      "file": "database_admin/create_database.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_database",
+        "full_name": "::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#create_database",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Spanner::Admin::Database::V1::CreateDatabaseRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DatabaseAdmin::Client",
+          "full_name": "::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client"
+        },
+        "method": {
+          "short_name": "CreateDatabase",
+          "full_name": "google.spanner.admin.database.v1.DatabaseAdmin.CreateDatabase",
+          "service": {
+            "short_name": "DatabaseAdmin",
+            "full_name": "google.spanner.admin.database.v1.DatabaseAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "spanner_v1_generated_DatabaseAdmin_GetDatabase_sync",
+      "title": "Snippet for the get_database call in the DatabaseAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#get_database.",
+      "file": "database_admin/get_database.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_database",
+        "full_name": "::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#get_database",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Spanner::Admin::Database::V1::GetDatabaseRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Spanner::Admin::Database::V1::Database",
+        "client": {
+          "short_name": "DatabaseAdmin::Client",
+          "full_name": "::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client"
+        },
+        "method": {
+          "short_name": "GetDatabase",
+          "full_name": "google.spanner.admin.database.v1.DatabaseAdmin.GetDatabase",
+          "service": {
+            "short_name": "DatabaseAdmin",
+            "full_name": "google.spanner.admin.database.v1.DatabaseAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "spanner_v1_generated_DatabaseAdmin_UpdateDatabase_sync",
+      "title": "Snippet for the update_database call in the DatabaseAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#update_database.",
+      "file": "database_admin/update_database.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_database",
+        "full_name": "::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#update_database",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DatabaseAdmin::Client",
+          "full_name": "::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client"
+        },
+        "method": {
+          "short_name": "UpdateDatabase",
+          "full_name": "google.spanner.admin.database.v1.DatabaseAdmin.UpdateDatabase",
+          "service": {
+            "short_name": "DatabaseAdmin",
+            "full_name": "google.spanner.admin.database.v1.DatabaseAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "spanner_v1_generated_DatabaseAdmin_UpdateDatabaseDdl_sync",
+      "title": "Snippet for the update_database_ddl call in the DatabaseAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#update_database_ddl.",
+      "file": "database_admin/update_database_ddl.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_database_ddl",
+        "full_name": "::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#update_database_ddl",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseDdlRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DatabaseAdmin::Client",
+          "full_name": "::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client"
+        },
+        "method": {
+          "short_name": "UpdateDatabaseDdl",
+          "full_name": "google.spanner.admin.database.v1.DatabaseAdmin.UpdateDatabaseDdl",
+          "service": {
+            "short_name": "DatabaseAdmin",
+            "full_name": "google.spanner.admin.database.v1.DatabaseAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "spanner_v1_generated_DatabaseAdmin_DropDatabase_sync",
+      "title": "Snippet for the drop_database call in the DatabaseAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#drop_database.",
+      "file": "database_admin/drop_database.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "drop_database",
+        "full_name": "::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#drop_database",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Spanner::Admin::Database::V1::DropDatabaseRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "DatabaseAdmin::Client",
+          "full_name": "::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client"
+        },
+        "method": {
+          "short_name": "DropDatabase",
+          "full_name": "google.spanner.admin.database.v1.DatabaseAdmin.DropDatabase",
+          "service": {
+            "short_name": "DatabaseAdmin",
+            "full_name": "google.spanner.admin.database.v1.DatabaseAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "spanner_v1_generated_DatabaseAdmin_GetDatabaseDdl_sync",
+      "title": "Snippet for the get_database_ddl call in the DatabaseAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#get_database_ddl.",
+      "file": "database_admin/get_database_ddl.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_database_ddl",
+        "full_name": "::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#get_database_ddl",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Spanner::Admin::Database::V1::GetDatabaseDdlRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Spanner::Admin::Database::V1::GetDatabaseDdlResponse",
+        "client": {
+          "short_name": "DatabaseAdmin::Client",
+          "full_name": "::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client"
+        },
+        "method": {
+          "short_name": "GetDatabaseDdl",
+          "full_name": "google.spanner.admin.database.v1.DatabaseAdmin.GetDatabaseDdl",
+          "service": {
+            "short_name": "DatabaseAdmin",
+            "full_name": "google.spanner.admin.database.v1.DatabaseAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "spanner_v1_generated_DatabaseAdmin_SetIamPolicy_sync",
+      "title": "Snippet for the set_iam_policy call in the DatabaseAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#set_iam_policy.",
+      "file": "database_admin/set_iam_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "set_iam_policy",
+        "full_name": "::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#set_iam_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::SetIamPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::Policy",
+        "client": {
+          "short_name": "DatabaseAdmin::Client",
+          "full_name": "::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client"
+        },
+        "method": {
+          "short_name": "SetIamPolicy",
+          "full_name": "google.spanner.admin.database.v1.DatabaseAdmin.SetIamPolicy",
+          "service": {
+            "short_name": "DatabaseAdmin",
+            "full_name": "google.spanner.admin.database.v1.DatabaseAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "spanner_v1_generated_DatabaseAdmin_GetIamPolicy_sync",
+      "title": "Snippet for the get_iam_policy call in the DatabaseAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#get_iam_policy.",
+      "file": "database_admin/get_iam_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_iam_policy",
+        "full_name": "::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#get_iam_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::GetIamPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::Policy",
+        "client": {
+          "short_name": "DatabaseAdmin::Client",
+          "full_name": "::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client"
+        },
+        "method": {
+          "short_name": "GetIamPolicy",
+          "full_name": "google.spanner.admin.database.v1.DatabaseAdmin.GetIamPolicy",
+          "service": {
+            "short_name": "DatabaseAdmin",
+            "full_name": "google.spanner.admin.database.v1.DatabaseAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "spanner_v1_generated_DatabaseAdmin_TestIamPermissions_sync",
+      "title": "Snippet for the test_iam_permissions call in the DatabaseAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#test_iam_permissions.",
+      "file": "database_admin/test_iam_permissions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "test_iam_permissions",
+        "full_name": "::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#test_iam_permissions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::TestIamPermissionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::TestIamPermissionsResponse",
+        "client": {
+          "short_name": "DatabaseAdmin::Client",
+          "full_name": "::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client"
+        },
+        "method": {
+          "short_name": "TestIamPermissions",
+          "full_name": "google.spanner.admin.database.v1.DatabaseAdmin.TestIamPermissions",
+          "service": {
+            "short_name": "DatabaseAdmin",
+            "full_name": "google.spanner.admin.database.v1.DatabaseAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "spanner_v1_generated_DatabaseAdmin_CreateBackup_sync",
+      "title": "Snippet for the create_backup call in the DatabaseAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#create_backup.",
+      "file": "database_admin/create_backup.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_backup",
+        "full_name": "::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#create_backup",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DatabaseAdmin::Client",
+          "full_name": "::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client"
+        },
+        "method": {
+          "short_name": "CreateBackup",
+          "full_name": "google.spanner.admin.database.v1.DatabaseAdmin.CreateBackup",
+          "service": {
+            "short_name": "DatabaseAdmin",
+            "full_name": "google.spanner.admin.database.v1.DatabaseAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "spanner_v1_generated_DatabaseAdmin_CopyBackup_sync",
+      "title": "Snippet for the copy_backup call in the DatabaseAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#copy_backup.",
+      "file": "database_admin/copy_backup.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "copy_backup",
+        "full_name": "::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#copy_backup",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Spanner::Admin::Database::V1::CopyBackupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DatabaseAdmin::Client",
+          "full_name": "::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client"
+        },
+        "method": {
+          "short_name": "CopyBackup",
+          "full_name": "google.spanner.admin.database.v1.DatabaseAdmin.CopyBackup",
+          "service": {
+            "short_name": "DatabaseAdmin",
+            "full_name": "google.spanner.admin.database.v1.DatabaseAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "spanner_v1_generated_DatabaseAdmin_GetBackup_sync",
+      "title": "Snippet for the get_backup call in the DatabaseAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#get_backup.",
+      "file": "database_admin/get_backup.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_backup",
+        "full_name": "::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#get_backup",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Spanner::Admin::Database::V1::GetBackupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Spanner::Admin::Database::V1::Backup",
+        "client": {
+          "short_name": "DatabaseAdmin::Client",
+          "full_name": "::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client"
+        },
+        "method": {
+          "short_name": "GetBackup",
+          "full_name": "google.spanner.admin.database.v1.DatabaseAdmin.GetBackup",
+          "service": {
+            "short_name": "DatabaseAdmin",
+            "full_name": "google.spanner.admin.database.v1.DatabaseAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "spanner_v1_generated_DatabaseAdmin_UpdateBackup_sync",
+      "title": "Snippet for the update_backup call in the DatabaseAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#update_backup.",
+      "file": "database_admin/update_backup.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_backup",
+        "full_name": "::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#update_backup",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Spanner::Admin::Database::V1::UpdateBackupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Spanner::Admin::Database::V1::Backup",
+        "client": {
+          "short_name": "DatabaseAdmin::Client",
+          "full_name": "::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client"
+        },
+        "method": {
+          "short_name": "UpdateBackup",
+          "full_name": "google.spanner.admin.database.v1.DatabaseAdmin.UpdateBackup",
+          "service": {
+            "short_name": "DatabaseAdmin",
+            "full_name": "google.spanner.admin.database.v1.DatabaseAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "spanner_v1_generated_DatabaseAdmin_DeleteBackup_sync",
+      "title": "Snippet for the delete_backup call in the DatabaseAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#delete_backup.",
+      "file": "database_admin/delete_backup.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_backup",
+        "full_name": "::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#delete_backup",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Spanner::Admin::Database::V1::DeleteBackupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "DatabaseAdmin::Client",
+          "full_name": "::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client"
+        },
+        "method": {
+          "short_name": "DeleteBackup",
+          "full_name": "google.spanner.admin.database.v1.DatabaseAdmin.DeleteBackup",
+          "service": {
+            "short_name": "DatabaseAdmin",
+            "full_name": "google.spanner.admin.database.v1.DatabaseAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "spanner_v1_generated_DatabaseAdmin_ListBackups_sync",
+      "title": "Snippet for the list_backups call in the DatabaseAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#list_backups.",
+      "file": "database_admin/list_backups.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_backups",
+        "full_name": "::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#list_backups",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Spanner::Admin::Database::V1::ListBackupsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Spanner::Admin::Database::V1::ListBackupsResponse",
+        "client": {
+          "short_name": "DatabaseAdmin::Client",
+          "full_name": "::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client"
+        },
+        "method": {
+          "short_name": "ListBackups",
+          "full_name": "google.spanner.admin.database.v1.DatabaseAdmin.ListBackups",
+          "service": {
+            "short_name": "DatabaseAdmin",
+            "full_name": "google.spanner.admin.database.v1.DatabaseAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "spanner_v1_generated_DatabaseAdmin_RestoreDatabase_sync",
+      "title": "Snippet for the restore_database call in the DatabaseAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#restore_database.",
+      "file": "database_admin/restore_database.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "restore_database",
+        "full_name": "::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#restore_database",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Spanner::Admin::Database::V1::RestoreDatabaseRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DatabaseAdmin::Client",
+          "full_name": "::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client"
+        },
+        "method": {
+          "short_name": "RestoreDatabase",
+          "full_name": "google.spanner.admin.database.v1.DatabaseAdmin.RestoreDatabase",
+          "service": {
+            "short_name": "DatabaseAdmin",
+            "full_name": "google.spanner.admin.database.v1.DatabaseAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "spanner_v1_generated_DatabaseAdmin_ListDatabaseOperations_sync",
+      "title": "Snippet for the list_database_operations call in the DatabaseAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#list_database_operations.",
+      "file": "database_admin/list_database_operations.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_database_operations",
+        "full_name": "::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#list_database_operations",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseOperationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseOperationsResponse",
+        "client": {
+          "short_name": "DatabaseAdmin::Client",
+          "full_name": "::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client"
+        },
+        "method": {
+          "short_name": "ListDatabaseOperations",
+          "full_name": "google.spanner.admin.database.v1.DatabaseAdmin.ListDatabaseOperations",
+          "service": {
+            "short_name": "DatabaseAdmin",
+            "full_name": "google.spanner.admin.database.v1.DatabaseAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "spanner_v1_generated_DatabaseAdmin_ListBackupOperations_sync",
+      "title": "Snippet for the list_backup_operations call in the DatabaseAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#list_backup_operations.",
+      "file": "database_admin/list_backup_operations.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_backup_operations",
+        "full_name": "::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#list_backup_operations",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Spanner::Admin::Database::V1::ListBackupOperationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Spanner::Admin::Database::V1::ListBackupOperationsResponse",
+        "client": {
+          "short_name": "DatabaseAdmin::Client",
+          "full_name": "::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client"
+        },
+        "method": {
+          "short_name": "ListBackupOperations",
+          "full_name": "google.spanner.admin.database.v1.DatabaseAdmin.ListBackupOperations",
+          "service": {
+            "short_name": "DatabaseAdmin",
+            "full_name": "google.spanner.admin.database.v1.DatabaseAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "spanner_v1_generated_DatabaseAdmin_ListDatabaseRoles_sync",
+      "title": "Snippet for the list_database_roles call in the DatabaseAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#list_database_roles.",
+      "file": "database_admin/list_database_roles.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_database_roles",
+        "full_name": "::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#list_database_roles",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseRolesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseRolesResponse",
+        "client": {
+          "short_name": "DatabaseAdmin::Client",
+          "full_name": "::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client"
+        },
+        "method": {
+          "short_name": "ListDatabaseRoles",
+          "full_name": "google.spanner.admin.database.v1.DatabaseAdmin.ListDatabaseRoles",
+          "service": {
+            "short_name": "DatabaseAdmin",
+            "full_name": "google.spanner.admin.database.v1.DatabaseAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
