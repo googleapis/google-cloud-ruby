@@ -37,6 +37,9 @@ module Google
           #
           class Client
             # @private
+            API_VERSION = ""
+
+            # @private
             DEFAULT_ENDPOINT_TEMPLATE = "dataplex.$UNIVERSE_DOMAIN$"
 
             include Paths
@@ -393,10 +396,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.create_lake.metadata.to_h
 
-              # Set x-goog-api-client and x-goog-user-project headers
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
@@ -492,10 +496,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.update_lake.metadata.to_h
 
-              # Set x-goog-api-client and x-goog-user-project headers
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
@@ -587,10 +592,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.delete_lake.metadata.to_h
 
-              # Set x-goog-api-client and x-goog-user-project headers
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
@@ -691,10 +697,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.list_lakes.metadata.to_h
 
-              # Set x-goog-api-client and x-goog-user-project headers
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
@@ -778,10 +785,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.get_lake.metadata.to_h
 
-              # Set x-goog-api-client and x-goog-user-project headers
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
@@ -877,10 +885,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.list_lake_actions.metadata.to_h
 
-              # Set x-goog-api-client and x-goog-user-project headers
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
@@ -986,10 +995,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.create_zone.metadata.to_h
 
-              # Set x-goog-api-client and x-goog-user-project headers
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
@@ -1085,10 +1095,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.update_zone.metadata.to_h
 
-              # Set x-goog-api-client and x-goog-user-project headers
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
@@ -1180,10 +1191,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.delete_zone.metadata.to_h
 
-              # Set x-goog-api-client and x-goog-user-project headers
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
@@ -1283,10 +1295,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.list_zones.metadata.to_h
 
-              # Set x-goog-api-client and x-goog-user-project headers
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
@@ -1370,10 +1383,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.get_zone.metadata.to_h
 
-              # Set x-goog-api-client and x-goog-user-project headers
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
@@ -1469,10 +1483,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.list_zone_actions.metadata.to_h
 
-              # Set x-goog-api-client and x-goog-user-project headers
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
@@ -1577,10 +1592,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.create_asset.metadata.to_h
 
-              # Set x-goog-api-client and x-goog-user-project headers
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
@@ -1676,10 +1692,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.update_asset.metadata.to_h
 
-              # Set x-goog-api-client and x-goog-user-project headers
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
@@ -1771,10 +1788,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.delete_asset.metadata.to_h
 
-              # Set x-goog-api-client and x-goog-user-project headers
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
@@ -1875,10 +1893,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.list_assets.metadata.to_h
 
-              # Set x-goog-api-client and x-goog-user-project headers
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
@@ -1962,10 +1981,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.get_asset.metadata.to_h
 
-              # Set x-goog-api-client and x-goog-user-project headers
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
@@ -2061,10 +2081,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.list_asset_actions.metadata.to_h
 
-              # Set x-goog-api-client and x-goog-user-project headers
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
@@ -2162,10 +2183,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.create_task.metadata.to_h
 
-              # Set x-goog-api-client and x-goog-user-project headers
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
@@ -2261,10 +2283,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.update_task.metadata.to_h
 
-              # Set x-goog-api-client and x-goog-user-project headers
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
@@ -2355,10 +2378,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.delete_task.metadata.to_h
 
-              # Set x-goog-api-client and x-goog-user-project headers
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
@@ -2458,10 +2482,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.list_tasks.metadata.to_h
 
-              # Set x-goog-api-client and x-goog-user-project headers
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
@@ -2545,10 +2570,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.get_task.metadata.to_h
 
-              # Set x-goog-api-client and x-goog-user-project headers
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
@@ -2644,10 +2670,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.list_jobs.metadata.to_h
 
-              # Set x-goog-api-client and x-goog-user-project headers
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
@@ -2747,10 +2774,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.run_task.metadata.to_h
 
-              # Set x-goog-api-client and x-goog-user-project headers
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
@@ -2833,10 +2861,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.get_job.metadata.to_h
 
-              # Set x-goog-api-client and x-goog-user-project headers
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
@@ -2919,10 +2948,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.cancel_job.metadata.to_h
 
-              # Set x-goog-api-client and x-goog-user-project headers
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
@@ -3024,10 +3054,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.create_environment.metadata.to_h
 
-              # Set x-goog-api-client and x-goog-user-project headers
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
@@ -3123,10 +3154,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.update_environment.metadata.to_h
 
-              # Set x-goog-api-client and x-goog-user-project headers
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
@@ -3218,10 +3250,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.delete_environment.metadata.to_h
 
-              # Set x-goog-api-client and x-goog-user-project headers
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
@@ -3323,10 +3356,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.list_environments.metadata.to_h
 
-              # Set x-goog-api-client and x-goog-user-project headers
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
@@ -3410,10 +3444,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.get_environment.metadata.to_h
 
-              # Set x-goog-api-client and x-goog-user-project headers
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
@@ -3519,10 +3554,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.list_sessions.metadata.to_h
 
-              # Set x-goog-api-client and x-goog-user-project headers
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
