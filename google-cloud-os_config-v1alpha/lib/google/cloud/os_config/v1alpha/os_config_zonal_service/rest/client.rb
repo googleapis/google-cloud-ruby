@@ -36,6 +36,9 @@ module Google
             #
             class Client
               # @private
+              API_VERSION = ""
+
+              # @private
               DEFAULT_ENDPOINT_TEMPLATE = "osconfig.$UNIVERSE_DOMAIN$"
 
               include Paths
@@ -256,12 +259,13 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.create_os_policy_assignment.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::OsConfig::V1alpha::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 options.apply_defaults timeout:      @config.rpcs.create_os_policy_assignment.timeout,
@@ -352,12 +356,13 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.update_os_policy_assignment.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::OsConfig::V1alpha::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 options.apply_defaults timeout:      @config.rpcs.update_os_policy_assignment.timeout,
@@ -438,12 +443,13 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.get_os_policy_assignment.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::OsConfig::V1alpha::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 options.apply_defaults timeout:      @config.rpcs.get_os_policy_assignment.timeout,
@@ -528,12 +534,13 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.list_os_policy_assignments.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::OsConfig::V1alpha::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 options.apply_defaults timeout:      @config.rpcs.list_os_policy_assignments.timeout,
@@ -617,12 +624,13 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.list_os_policy_assignment_revisions.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::OsConfig::V1alpha::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 options.apply_defaults timeout:      @config.rpcs.list_os_policy_assignment_revisions.timeout,
@@ -714,12 +722,13 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.delete_os_policy_assignment.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::OsConfig::V1alpha::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 options.apply_defaults timeout:      @config.rpcs.delete_os_policy_assignment.timeout,
@@ -802,12 +811,13 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.get_instance_os_policies_compliance.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::OsConfig::V1alpha::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 options.apply_defaults timeout:      @config.rpcs.get_instance_os_policies_compliance.timeout,
@@ -899,12 +909,13 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.list_instance_os_policies_compliances.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::OsConfig::V1alpha::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 options.apply_defaults timeout:      @config.rpcs.list_instance_os_policies_compliances.timeout,
@@ -987,12 +998,13 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.get_os_policy_assignment_report.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::OsConfig::V1alpha::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 options.apply_defaults timeout:      @config.rpcs.get_os_policy_assignment_report.timeout,
@@ -1099,12 +1111,13 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.list_os_policy_assignment_reports.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::OsConfig::V1alpha::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 options.apply_defaults timeout:      @config.rpcs.list_os_policy_assignment_reports.timeout,
@@ -1189,12 +1202,13 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.get_inventory.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::OsConfig::V1alpha::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 options.apply_defaults timeout:      @config.rpcs.get_inventory.timeout,
@@ -1287,12 +1301,13 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.list_inventories.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::OsConfig::V1alpha::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 options.apply_defaults timeout:      @config.rpcs.list_inventories.timeout,
@@ -1374,12 +1389,13 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.get_vulnerability_report.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::OsConfig::V1alpha::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 options.apply_defaults timeout:      @config.rpcs.get_vulnerability_report.timeout,
@@ -1469,12 +1485,13 @@ module Google
                 # Customize the options with defaults
                 call_metadata = @config.rpcs.list_vulnerability_reports.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::OsConfig::V1alpha::VERSION,
                   transports_version_send: [:rest]
 
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 options.apply_defaults timeout:      @config.rpcs.list_vulnerability_reports.timeout,
