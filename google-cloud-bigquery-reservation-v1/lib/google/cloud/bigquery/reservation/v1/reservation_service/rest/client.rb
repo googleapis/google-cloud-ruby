@@ -48,6 +48,9 @@ module Google
               #
               class Client
                 # @private
+                API_VERSION = ""
+
+                # @private
                 DEFAULT_ENDPOINT_TEMPLATE = "bigqueryreservation.$UNIVERSE_DOMAIN$"
 
                 include Paths
@@ -297,12 +300,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.create_reservation.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.create_reservation.timeout,
@@ -384,12 +388,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.list_reservations.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.list_reservations.timeout,
@@ -464,12 +469,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.get_reservation.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.get_reservation.timeout,
@@ -545,12 +551,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.delete_reservation.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.delete_reservation.timeout,
@@ -625,12 +632,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.update_reservation.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.update_reservation.timeout,
@@ -715,12 +723,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.create_capacity_commitment.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.create_capacity_commitment.timeout,
@@ -802,12 +811,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.list_capacity_commitments.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.list_capacity_commitments.timeout,
@@ -882,12 +892,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.get_capacity_commitment.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.get_capacity_commitment.timeout,
@@ -967,12 +978,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.delete_capacity_commitment.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.delete_capacity_commitment.timeout,
@@ -1053,12 +1065,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.update_capacity_commitment.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.update_capacity_commitment.timeout,
@@ -1141,12 +1154,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.split_capacity_commitment.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.split_capacity_commitment.timeout,
@@ -1232,12 +1246,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.merge_capacity_commitments.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.merge_capacity_commitments.timeout,
@@ -1352,12 +1367,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.create_assignment.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.create_assignment.timeout,
@@ -1464,12 +1480,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.list_assignments.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.list_assignments.timeout,
@@ -1558,12 +1575,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.delete_assignment.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.delete_assignment.timeout,
@@ -1676,12 +1694,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.search_assignments.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.search_assignments.timeout,
@@ -1792,12 +1811,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.search_all_assignments.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.search_all_assignments.timeout,
@@ -1886,12 +1906,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.move_assignment.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.move_assignment.timeout,
@@ -1968,12 +1989,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.update_assignment.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.update_assignment.timeout,
@@ -2047,12 +2069,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.get_bi_reservation.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.get_bi_reservation.timeout,
@@ -2134,12 +2157,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.update_bi_reservation.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.update_bi_reservation.timeout,
