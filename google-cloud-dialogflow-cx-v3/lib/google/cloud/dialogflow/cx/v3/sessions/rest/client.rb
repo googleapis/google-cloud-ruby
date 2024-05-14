@@ -38,6 +38,9 @@ module Google
               #
               class Client
                 # @private
+                API_VERSION = ""
+
+                # @private
                 DEFAULT_ENDPOINT_TEMPLATE = "dialogflow.$UNIVERSE_DOMAIN$"
 
                 include Paths
@@ -267,12 +270,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.detect_intent.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Dialogflow::CX::V3::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.detect_intent.timeout,
@@ -369,12 +373,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.server_streaming_detect_intent.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Dialogflow::CX::V3::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.server_streaming_detect_intent.timeout,
@@ -470,12 +475,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.match_intent.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Dialogflow::CX::V3::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.match_intent.timeout,
@@ -559,12 +565,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.fulfill_intent.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Dialogflow::CX::V3::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.fulfill_intent.timeout,
@@ -646,12 +653,13 @@ module Google
                   # Customize the options with defaults
                   call_metadata = @config.rpcs.submit_answer_feedback.metadata.to_h
 
-                  # Set x-goog-api-client and x-goog-user-project headers
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                   call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                     lib_name: @config.lib_name, lib_version: @config.lib_version,
                     gapic_version: ::Google::Cloud::Dialogflow::CX::V3::VERSION,
                     transports_version_send: [:rest]
 
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                   call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                   options.apply_defaults timeout:      @config.rpcs.submit_answer_feedback.timeout,
