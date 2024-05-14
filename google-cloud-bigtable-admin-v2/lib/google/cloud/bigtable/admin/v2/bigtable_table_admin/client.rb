@@ -36,6 +36,9 @@ module Google
             #
             class Client
               # @private
+              API_VERSION = ""
+
+              # @private
               DEFAULT_ENDPOINT_TEMPLATE = "bigtableadmin.$UNIVERSE_DOMAIN$"
 
               include Paths
@@ -330,10 +333,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.create_table.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -438,10 +442,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.create_table_from_snapshot.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -544,10 +549,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.list_tables.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -635,10 +641,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.get_table.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -741,10 +748,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.update_table.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -829,10 +837,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.delete_table.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -923,10 +932,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.undelete_table.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -1025,10 +1035,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.create_authorized_view.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -1132,10 +1143,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.list_authorized_views.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -1223,10 +1235,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.get_authorized_view.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -1329,10 +1342,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.update_authorized_view.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -1422,10 +1436,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.delete_authorized_view.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -1519,10 +1534,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.modify_column_families.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -1613,10 +1629,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.drop_row_range.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -1703,10 +1720,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.generate_consistency_token.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -1802,10 +1820,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.check_consistency.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -1919,10 +1938,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.snapshot_table.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -2013,10 +2033,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.get_snapshot.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -2117,10 +2138,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.list_snapshots.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -2211,10 +2233,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.delete_snapshot.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -2321,10 +2344,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.create_backup.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -2409,10 +2433,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.get_backup.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -2504,10 +2529,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.update_backup.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -2591,10 +2617,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.delete_backup.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -2750,10 +2777,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.list_backups.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -2858,10 +2886,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.restore_table.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -2975,10 +3004,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.copy_backup.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -3067,10 +3097,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.get_iam_policy.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -3165,10 +3196,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.set_iam_policy.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
@@ -3257,10 +3289,11 @@ module Google
                 # Customize the options with defaults
                 metadata = @config.rpcs.test_iam_permissions.metadata.to_h
 
-                # Set x-goog-api-client and x-goog-user-project headers
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
