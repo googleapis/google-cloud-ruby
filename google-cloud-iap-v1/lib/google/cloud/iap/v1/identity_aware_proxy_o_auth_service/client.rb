@@ -33,6 +33,9 @@ module Google
           #
           class Client
             # @private
+            API_VERSION = ""
+
+            # @private
             DEFAULT_ENDPOINT_TEMPLATE = "iap.$UNIVERSE_DOMAIN$"
 
             # @private
@@ -218,10 +221,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.list_brands.metadata.to_h
 
-              # Set x-goog-api-client and x-goog-user-project headers
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Iap::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
@@ -313,10 +317,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.create_brand.metadata.to_h
 
-              # Set x-goog-api-client and x-goog-user-project headers
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Iap::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
@@ -399,10 +404,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.get_brand.metadata.to_h
 
-              # Set x-goog-api-client and x-goog-user-project headers
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Iap::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
@@ -491,10 +497,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.create_identity_aware_proxy_client.metadata.to_h
 
-              # Set x-goog-api-client and x-goog-user-project headers
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Iap::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
@@ -593,10 +600,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.list_identity_aware_proxy_clients.metadata.to_h
 
-              # Set x-goog-api-client and x-goog-user-project headers
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Iap::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
@@ -682,10 +690,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.get_identity_aware_proxy_client.metadata.to_h
 
-              # Set x-goog-api-client and x-goog-user-project headers
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Iap::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
@@ -770,10 +779,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.reset_identity_aware_proxy_client_secret.metadata.to_h
 
-              # Set x-goog-api-client and x-goog-user-project headers
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Iap::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
@@ -859,10 +869,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.delete_identity_aware_proxy_client.metadata.to_h
 
-              # Set x-goog-api-client and x-goog-user-project headers
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Iap::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
