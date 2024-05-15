@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.10.0 (2024-05-15)
+
+#### Features
+
+* Support ignore_errors option to delete_azure_cluster and delete_azure_node_pool ([#25880](https://github.com/googleapis/google-cloud-ruby/issues/25880)) 
+
 ### 0.9.0 (2024-02-26)
 
 #### Features
