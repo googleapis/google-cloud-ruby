@@ -831,6 +831,10 @@ module Google
         #     Optional. Execution timeout for a Cloud Build Execution. This must be
         #     between 10m and 24h in seconds format. If unspecified, a default timeout of
         #     1h is used.
+        # @!attribute [rw] verbose
+        #   @return [::Boolean]
+        #     Optional. If true, additional logging will be enabled when running builds
+        #     in this execution environment.
         class ExecutionConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
