@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.10.0 (2024-05-15)
+
+#### Features
+
+* support the ED25519 asymmetric signing algorithm ([#25857](https://github.com/googleapis/google-cloud-ruby/issues/25857)) 
+
 ### 0.9.1 (2024-04-19)
 
 #### Documentation
