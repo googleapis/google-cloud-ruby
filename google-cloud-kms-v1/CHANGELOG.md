@@ -1,5 +1,11 @@
 # Release History
 
+### 0.26.0 (2024-05-15)
+
+#### Features
+
+* Support new Autokey ad AutokeyAdmin services ([#25856](https://github.com/googleapis/google-cloud-ruby/issues/25856)) 
+
 ### 0.25.1 (2024-04-19)
 
 #### Documentation
