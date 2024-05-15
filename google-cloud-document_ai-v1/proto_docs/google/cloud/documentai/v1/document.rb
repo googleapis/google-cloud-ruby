@@ -450,16 +450,16 @@ module Google
               #     Whether the text is underlined.
               # @!attribute [rw] strikeout
               #   @return [::Boolean]
-              #     Whether the text is strikethrough.
+              #     Whether the text is strikethrough. This feature is not supported yet.
               # @!attribute [rw] subscript
               #   @return [::Boolean]
-              #     Whether the text is a subscript.
+              #     Whether the text is a subscript. This feature is not supported yet.
               # @!attribute [rw] superscript
               #   @return [::Boolean]
-              #     Whether the text is a superscript.
+              #     Whether the text is a superscript. This feature is not supported yet.
               # @!attribute [rw] smallcaps
               #   @return [::Boolean]
-              #     Whether the text is in small caps.
+              #     Whether the text is in small caps. This feature is not supported yet.
               # @!attribute [rw] font_weight
               #   @return [::Integer]
               #     TrueType weight on a scale `100` (thin) to `1000` (ultra-heavy).
