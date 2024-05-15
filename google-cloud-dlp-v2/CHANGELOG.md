@@ -1,5 +1,14 @@
 # Release History
 
+### 0.23.0 (2024-05-15)
+
+#### Features
+
+* Add field to InspectJobs num_rows_processed for BigQuery inspect jobs 
+* Add new countries for supported detectors 
+* Support for connection management ([#25859](https://github.com/googleapis/google-cloud-ruby/issues/25859)) 
+* Support for deleting TableDataProfiles 
+
 ### 0.22.0 (2024-03-07)
 
 #### Features
