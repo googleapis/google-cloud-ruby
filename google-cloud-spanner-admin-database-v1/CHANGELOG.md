@@ -1,5 +1,11 @@
 # Release History
 
+### 0.19.0 (2024-05-15)
+
+#### Features
+
+* Support kms key names and encryption information in backup configuration ([#25854](https://github.com/googleapis/google-cloud-ruby/issues/25854)) 
+
 ### 0.18.0 (2024-02-26)
 
 #### Features
