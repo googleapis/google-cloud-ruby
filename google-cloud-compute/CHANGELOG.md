@@ -1,5 +1,14 @@
 # Changelog
 
+### 1.8.0 (2024-05-16)
+
+#### Features
+
+* Support for the InstanceGroupManagerResizeRequests service 
+* Support for the InstanceSettingsService 
+* Support for the StoragePools service 
+* Support for the StoragePoolTypes service 
+
 ### 1.7.0 (2024-03-06)
 
 #### Features
