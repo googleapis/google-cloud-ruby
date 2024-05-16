@@ -21,7 +21,9 @@ module Google
   module Maps
     module FleetEngine
       module V1
-        # Identifies a terminal point.
+        # Deprecated: TerminalPoints are no longer supported in Fleet Engine. Use
+        # `TerminalLocation.point` instead.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] place_id
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
@@ -31,8 +33,9 @@ module Google
         #   @return [::String]
         #     Deprecated.
         # @!attribute [rw] value
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
-        #     Unique ID of the terminal point.
+        #     Deprecated.
         class TerminalPointId
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -43,12 +46,13 @@ module Google
         #   @return [::Google::Type::LatLng]
         #     Required. Denotes the location of a trip waypoint.
         # @!attribute [rw] terminal_point_id
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Maps::FleetEngine::V1::TerminalPointId]
-        #     ID of the terminal point.
+        #     Deprecated: Specify the `point` field instead.
         # @!attribute [rw] access_point_id
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
-        #     Deprecated.
+        #     Deprecated: Specify the `point` field instead.
         # @!attribute [rw] trip_id
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
