@@ -4,7 +4,7 @@
 
 #### Documentation
 
-* Minor documentation updates ([#25878](https://github.com/googleapis/google-cloud-ruby/issues/25878)) 
+* Update comment formatting/wrapping ([#25878](https://github.com/googleapis/google-cloud-ruby/issues/25878)) 
 
 ### 0.21.0 (2024-04-19)
 
