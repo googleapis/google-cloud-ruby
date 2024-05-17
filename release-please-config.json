@@ -1199,6 +1199,10 @@
       "component": "google-cloud-security-public_ca",
       "version_file": "lib/google/cloud/security/public_ca/version.rb"
     },
+    "google-cloud-security-public_ca-v1": {
+      "component": "google-cloud-security-public_ca-v1",
+      "version_file": "lib/google/cloud/security/public_ca/v1/version.rb"
+    },
     "google-cloud-security-public_ca-v1beta1": {
       "component": "google-cloud-security-public_ca-v1beta1",
       "version_file": "lib/google/cloud/security/public_ca/v1beta1/version.rb"
