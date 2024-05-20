@@ -157,6 +157,15 @@ module Google
         # @!attribute [r] config_backup_size_bytes
         #   @return [::Integer]
         #     Output only. The size of the config backup in bytes.
+        # @!attribute [r] permissive_mode
+        #   @return [::Boolean]
+        #     Output only. If false, Backup will fail when Backup for GKE detects
+        #     Kubernetes configuration that is non-standard or
+        #     requires additional setup to restore.
+        #
+        #     Inherited from the parent BackupPlan's
+        #     {::Google::Cloud::GkeBackup::V1::BackupPlan::BackupConfig#permissive_mode permissive_mode}
+        #     value.
         class Backup
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
