@@ -70,6 +70,9 @@ module Google
           # @!attribute [rw] product_performance_view
           #   @return [::Google::Shopping::Merchant::Reports::V1beta::ProductPerformanceView]
           #     Fields available for query in `product_performance_view` table.
+          # @!attribute [rw] non_product_performance_view
+          #   @return [::Google::Shopping::Merchant::Reports::V1beta::NonProductPerformanceView]
+          #     Fields available for query in `non_product_performance_view` table.
           # @!attribute [rw] product_view
           #   @return [::Google::Shopping::Merchant::Reports::V1beta::ProductView]
           #     Fields available for query in `product_view` table.
@@ -903,6 +906,45 @@ module Google
           #   @return [::Google::Shopping::Merchant::Reports::V1beta::RelativeDemandChangeType::RelativeDemandChangeTypeEnum]
           #     Change in the estimated demand. Whether it rose, sank or remained flat.
           class BestSellersBrandView
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Fields available for query in `non_product_performance_view` table.
+          #
+          # Performance data on images and online store links leading to your non-product
+          # pages. This includes performance metrics (for example, `clicks`)
+          # and dimensions according to which performance metrics are segmented (for
+          # example, `date`).
+          #
+          # Segment fields cannot be selected in queries without also selecting at least
+          # one metric field.
+          #
+          # Values are only set for fields requested explicitly in the request's search
+          # query.
+          # @!attribute [rw] date
+          #   @return [::Google::Type::Date]
+          #     Date in the merchant timezone to which metrics apply. Segment.
+          #
+          #     Condition on `date` is required in the `WHERE` clause.
+          # @!attribute [rw] week
+          #   @return [::Google::Type::Date]
+          #     First day of the week (Monday) of the metrics date in the merchant
+          #     timezone. Segment.
+          # @!attribute [rw] clicks
+          #   @return [::Integer]
+          #     Number of clicks on images and online store links leading to your
+          #     non-product pages. Metric.
+          # @!attribute [rw] impressions
+          #   @return [::Integer]
+          #     Number of times images and online store links leading to your non-product
+          #     pages were shown. Metric.
+          # @!attribute [rw] click_through_rate
+          #   @return [::Float]
+          #     Click-through rate - the number of clicks (`clicks`) divided by the number
+          #     of impressions (`impressions`) of images and online store links leading to
+          #     your non-product pages. Metric.
+          class NonProductPerformanceView
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
