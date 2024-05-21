@@ -26,7 +26,7 @@ module Google
           # information like price and availability for a given product in a specific
           # {::Google::Shopping::Merchant::Inventories::V1beta::RegionalInventory#region `region`}.
           # For a list of all accepted attribute values, see the [regional product
-          # inventory feed
+          # inventory data
           # specification](https://support.google.com/merchants/answer/9698880).
           # @!attribute [r] name
           #   @return [::String]
@@ -58,12 +58,12 @@ module Google
           # @!attribute [rw] availability
           #   @return [::String]
           #     Availability of the product in this region.
-          #     For accepted attribute values, see the [regional product inventory feed
+          #     For accepted attribute values, see the [regional product inventory data
           #     specification](https://support.google.com/merchants/answer/3061342)
           # @!attribute [rw] custom_attributes
           #   @return [::Array<::Google::Shopping::Type::CustomAttribute>]
           #     A list of custom (merchant-provided) attributes. You can also use
-          #     `CustomAttribute` to submit any attribute of the feed specification in its
+          #     `CustomAttribute` to submit any attribute of the data specification in its
           #     generic form.
           class RegionalInventory
             include ::Google::Protobuf::MessageExts

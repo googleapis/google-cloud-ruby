@@ -26,7 +26,7 @@ module Google
           # for a specific product at the store specified by
           # {::Google::Shopping::Merchant::Inventories::V1beta::LocalInventory#store_code `storeCode`}.
           # For a list of all accepted attribute values, see the [local product inventory
-          # feed specification](https://support.google.com/merchants/answer/3061342).
+          # data specification](https://support.google.com/merchants/answer/3061342).
           # @!attribute [r] name
           #   @return [::String]
           #     Output only. The name of the `LocalInventory` resource.
@@ -40,7 +40,7 @@ module Google
           #   @return [::String]
           #     Required. Immutable. Store code (the store ID from your Business Profile)
           #     of the physical store the product is sold in. See the [Local product
-          #     inventory feed
+          #     inventory data
           #     specification](https://support.google.com/merchants/answer/3061342) for
           #     more information.
           # @!attribute [rw] price
@@ -58,7 +58,7 @@ module Google
           # @!attribute [rw] availability
           #   @return [::String]
           #     Availability of the product at this store.
-          #     For accepted attribute values, see the [local product inventory feed
+          #     For accepted attribute values, see the [local product inventory data
           #     specification](https://support.google.com/merchants/answer/3061342)
           # @!attribute [rw] quantity
           #   @return [::Integer]
@@ -69,14 +69,14 @@ module Google
           #     Supported pickup method for this product. Unless the value is `"not
           #     supported"`, this field must be submitted together with
           #     `pickupSla`.
-          #     For accepted attribute values, see the [local product inventory feed
+          #     For accepted attribute values, see the [local product inventory data
           #     specification](https://support.google.com/merchants/answer/3061342)
           # @!attribute [rw] pickup_sla
           #   @return [::String]
           #     Relative time period from the order date for an order for this product,
           #     from this store, to be ready for pickup. Must be submitted with
           #     `pickupMethod`.
-          #     For accepted attribute values, see the [local product inventory feed
+          #     For accepted attribute values, see the [local product inventory data
           #     specification](https://support.google.com/merchants/answer/3061342)
           # @!attribute [rw] instore_product_location
           #   @return [::String]
@@ -84,7 +84,7 @@ module Google
           # @!attribute [rw] custom_attributes
           #   @return [::Array<::Google::Shopping::Type::CustomAttribute>]
           #     A list of custom (merchant-provided) attributes. You can also use
-          #     `CustomAttribute` to submit any attribute of the feed specification in its
+          #     `CustomAttribute` to submit any attribute of the data specification in its
           #     generic form.
           class LocalInventory
             include ::Google::Protobuf::MessageExts
