@@ -335,7 +335,7 @@ module Google
           #   @return [::String]
           #     Normalized [shipping
           #     label](https://support.google.com/merchants/answer/6324504) specified in
-          #     the feed.
+          #     the data source.
           # @!attribute [rw] gtin
           #   @return [::Array<::String>]
           #     List of Global Trade Item Numbers (GTINs) of the product.
@@ -469,7 +469,7 @@ module Google
             #
             # Here's an example of how the aggregated status is computed:
             #
-            # Free listings | Shopping Ads | Status
+            # Free listings | Shopping ads | Status
             # --------------|--------------|------------------------------
             # Approved      | Approved     | ELIGIBLE
             # Approved      | Pending      | ELIGIBLE
@@ -681,9 +681,33 @@ module Google
           #     Predicted change in conversions as a fraction after introducing the
           #     suggested price compared to current active price. For example, 0.05 is a 5%
           #     predicted increase in conversions).
+          # @!attribute [rw] effectiveness
+          #   @return [::Google::Shopping::Merchant::Reports::V1beta::PriceInsightsProductView::Effectiveness]
+          #     The predicted effectiveness of applying the price suggestion, bucketed.
           class PriceInsightsProductView
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Predicted effectiveness bucket.
+            #
+            # Effectiveness indicates which products would benefit most from price
+            # changes. This rating takes into consideration the performance boost
+            # predicted by adjusting the sale price and the difference between your
+            # current price and the suggested price. Price suggestions with `HIGH`
+            # effectiveness are predicted to drive the largest increase in performance.
+            module Effectiveness
+              # Effectiveness is unknown.
+              EFFECTIVENESS_UNSPECIFIED = 0
+
+              # Effectiveness is low.
+              LOW = 1
+
+              # Effectiveness is medium.
+              MEDIUM = 2
+
+              # Effectiveness is high.
+              HIGH = 3
+            end
           end
 
           # Fields available for query in `best_sellers_product_cluster_view` table.
@@ -764,16 +788,16 @@ module Google
           #     GTINs of example variants of the product cluster.
           # @!attribute [rw] inventory_status
           #   @return [::Google::Shopping::Merchant::Reports::V1beta::BestSellersProductClusterView::InventoryStatus]
-          #     Whether the product cluster is `IN_STOCK` in your product feed in at least
-          #     one of the countries, `OUT_OF_STOCK` in your product feed in all countries,
-          #     or `NOT_IN_INVENTORY` at all.
+          #     Whether the product cluster is `IN_STOCK` in your product data source in at
+          #     least one of the countries, `OUT_OF_STOCK` in your product data source in
+          #     all countries, or `NOT_IN_INVENTORY` at all.
           #
           #     The field doesn't take the Best sellers report country filter into account.
           # @!attribute [rw] brand_inventory_status
           #   @return [::Google::Shopping::Merchant::Reports::V1beta::BestSellersProductClusterView::InventoryStatus]
           #     Whether there is at least one product of the brand currently `IN_STOCK` in
-          #     your product feed in at least one of the countries, all products are
-          #     `OUT_OF_STOCK` in your product feed in all countries, or
+          #     your product data source in at least one of the countries, all products are
+          #     `OUT_OF_STOCK` in your product data source in all countries, or
           #     `NOT_IN_INVENTORY`.
           #
           #     The field doesn't take the Best sellers report country filter into account.
