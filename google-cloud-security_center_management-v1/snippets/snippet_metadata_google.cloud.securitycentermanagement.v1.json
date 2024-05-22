@@ -730,6 +730,126 @@
           "type": "FULL"
         }
       ]
+    },
+    {
+      "region_tag": "securitycentermanagement_v1_generated_SecurityCenterManagement_GetSecurityCenterService_sync",
+      "title": "Snippet for the get_security_center_service call in the SecurityCenterManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#get_security_center_service.",
+      "file": "security_center_management/get_security_center_service.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_security_center_service",
+        "full_name": "::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#get_security_center_service",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenterManagement::V1::GetSecurityCenterServiceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterService",
+        "client": {
+          "short_name": "SecurityCenterManagement::Client",
+          "full_name": "::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client"
+        },
+        "method": {
+          "short_name": "GetSecurityCenterService",
+          "full_name": "google.cloud.securitycentermanagement.v1.SecurityCenterManagement.GetSecurityCenterService",
+          "service": {
+            "short_name": "SecurityCenterManagement",
+            "full_name": "google.cloud.securitycentermanagement.v1.SecurityCenterManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycentermanagement_v1_generated_SecurityCenterManagement_ListSecurityCenterServices_sync",
+      "title": "Snippet for the list_security_center_services call in the SecurityCenterManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#list_security_center_services.",
+      "file": "security_center_management/list_security_center_services.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_security_center_services",
+        "full_name": "::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#list_security_center_services",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenterManagement::V1::ListSecurityCenterServicesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenterManagement::V1::ListSecurityCenterServicesResponse",
+        "client": {
+          "short_name": "SecurityCenterManagement::Client",
+          "full_name": "::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client"
+        },
+        "method": {
+          "short_name": "ListSecurityCenterServices",
+          "full_name": "google.cloud.securitycentermanagement.v1.SecurityCenterManagement.ListSecurityCenterServices",
+          "service": {
+            "short_name": "SecurityCenterManagement",
+            "full_name": "google.cloud.securitycentermanagement.v1.SecurityCenterManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycentermanagement_v1_generated_SecurityCenterManagement_UpdateSecurityCenterService_sync",
+      "title": "Snippet for the update_security_center_service call in the SecurityCenterManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#update_security_center_service.",
+      "file": "security_center_management/update_security_center_service.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_security_center_service",
+        "full_name": "::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#update_security_center_service",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenterManagement::V1::UpdateSecurityCenterServiceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterService",
+        "client": {
+          "short_name": "SecurityCenterManagement::Client",
+          "full_name": "::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client"
+        },
+        "method": {
+          "short_name": "UpdateSecurityCenterService",
+          "full_name": "google.cloud.securitycentermanagement.v1.SecurityCenterManagement.UpdateSecurityCenterService",
+          "service": {
+            "short_name": "SecurityCenterManagement",
+            "full_name": "google.cloud.securitycentermanagement.v1.SecurityCenterManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
     }
   ]
 }

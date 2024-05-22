@@ -1068,6 +1068,172 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
     end
   end
 
+  def test_get_security_center_service
+    # Create test objects.
+    client_result = ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterService.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_security_center_service_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::ServiceStub.stub :transcode_get_security_center_service_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_security_center_service_client_stub do
+        # Create client
+        client = ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_security_center_service({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_security_center_service name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_security_center_service ::Google::Cloud::SecurityCenterManagement::V1::GetSecurityCenterServiceRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_security_center_service({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_security_center_service(::Google::Cloud::SecurityCenterManagement::V1::GetSecurityCenterServiceRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_security_center_service_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_security_center_services
+    # Create test objects.
+    client_result = ::Google::Cloud::SecurityCenterManagement::V1::ListSecurityCenterServicesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_security_center_services_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::ServiceStub.stub :transcode_list_security_center_services_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_security_center_services_client_stub do
+        # Create client
+        client = ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_security_center_services({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_security_center_services parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_security_center_services ::Google::Cloud::SecurityCenterManagement::V1::ListSecurityCenterServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_security_center_services({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_security_center_services(::Google::Cloud::SecurityCenterManagement::V1::ListSecurityCenterServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_security_center_services_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_security_center_service
+    # Create test objects.
+    client_result = ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterService.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    security_center_service = {}
+    update_mask = {}
+    validate_only = true
+
+    update_security_center_service_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::ServiceStub.stub :transcode_update_security_center_service_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_security_center_service_client_stub do
+        # Create client
+        client = ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_security_center_service({ security_center_service: security_center_service, update_mask: update_mask, validate_only: validate_only }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_security_center_service security_center_service: security_center_service, update_mask: update_mask, validate_only: validate_only do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_security_center_service ::Google::Cloud::SecurityCenterManagement::V1::UpdateSecurityCenterServiceRequest.new(security_center_service: security_center_service, update_mask: update_mask, validate_only: validate_only) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_security_center_service({ security_center_service: security_center_service, update_mask: update_mask, validate_only: validate_only }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_security_center_service(::Google::Cloud::SecurityCenterManagement::V1::UpdateSecurityCenterServiceRequest.new(security_center_service: security_center_service, update_mask: update_mask, validate_only: validate_only), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_security_center_service_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

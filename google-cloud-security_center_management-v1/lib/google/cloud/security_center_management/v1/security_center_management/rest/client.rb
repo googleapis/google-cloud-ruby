@@ -266,11 +266,12 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. Name of parent to list effective custom modules. Its format is
-              #     "organizations/\\{organization}/locations/\\{location}",
-              #     "folders/\\{folder}/locations/\\{location}",
+              #     Required. Name of parent to list effective custom modules. specified in one
+              #     of the following formats:
+              #     * `organizations/{organization}/locations/{location}`
+              #     * `folders/{folder}/locations/{location}`
               #     or
-              #     "projects/\\{project}/locations/\\{location}"
+              #     `projects/{project}/locations/{location}`
               #   @param page_size [::Integer]
               #     Optional. The maximum number of results to return in a single response.
               #     Default is 10, minimum is 1, maximum is 1000.
@@ -359,13 +360,12 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The resource name of the SHA custom module.
+              #     Required. The full resource name of the custom module, specified in one of
+              #     the following formats:
               #
-              #     Its format is:
-              #
-              #       * "organizations/\\{organization}/locations/\\{location}/effectiveSecurityHealthAnalyticsCustomModules/\\{module_id}".
-              #       * "folders/\\{folder}/locations/\\{location}/effectiveSecurityHealthAnalyticsCustomModules/\\{module_id}".
-              #       * "projects/\\{project}/locations/\\{location}/effectiveSecurityHealthAnalyticsCustomModules/\\{module_id}".
+              #     * `organizations/organization/{location}/effectiveSecurityHealthAnalyticsCustomModules/{effective_security_health_analytics_custom_module}`
+              #     * `folders/folder/{location}/effectiveSecurityHealthAnalyticsCustomModules/{effective_security_health_analytics_custom_module}`
+              #     * `projects/project/{location}/effectiveSecurityHealthAnalyticsCustomModules/{effective_security_health_analytics_custom_module}`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::SecurityCenterManagement::V1::EffectiveSecurityHealthAnalyticsCustomModule]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -446,11 +446,12 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. Name of parent to list custom modules. Its format is
-              #     "organizations/\\{organization}/locations/\\{location}",
-              #     "folders/\\{folder}/locations/\\{location}",
-              #     or
-              #     "projects/\\{project}/locations/\\{location}"
+              #     Required. Name of parent organization, folder, or project in which to list
+              #     custom modules, specified in one of the following formats:
+              #
+              #     * `organizations/{organization}/locations/{location}`
+              #     * `folders/{folder}/locations/{location}`
+              #     * `projects/{project}/locations/{location}`
               #   @param page_size [::Integer]
               #     Optional. The maximum number of results to return in a single response.
               #     Default is 10, minimum is 1, maximum is 1000.
@@ -540,11 +541,12 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. Name of parent to list custom modules. Its format is
-              #     "organizations/\\{organization}/locations/\\{location}",
-              #     "folders/\\{folder}/locations/\\{location}",
-              #     or
-              #     "projects/\\{project}/locations/\\{location}"
+              #     Required. Name of the parent organization, folder, or project in which to
+              #     list custom modules, specified in one of the following formats:
+              #
+              #     * `organizations/{organization}/locations/{location}`
+              #     * `folders/{folder}/locations/{location}`
+              #     * `projects/{project}/locations/{location}`
               #   @param page_size [::Integer]
               #     Optional. The maximum number of results to return in a single response.
               #     Default is 10, minimum is 1, maximum is 1000.
@@ -715,11 +717,12 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. Name of the parent for the module. Its format is
-              #     "organizations/\\{organization}/locations/\\{location}",
-              #     "folders/\\{folder}/locations/\\{location}",
-              #     or
-              #     "projects/\\{project}/locations/\\{location}"
+              #     Required. Name of the parent organization, folder, or project of the
+              #     module, specified in one of the following formats:
+              #
+              #     * `organizations/{organization}/locations/{location}`
+              #     * `folders/{folder}/locations/{location}`
+              #     * `projects/{project}/locations/{location}`
               #   @param security_health_analytics_custom_module [::Google::Cloud::SecurityCenterManagement::V1::SecurityHealthAnalyticsCustomModule, ::Hash]
               #     Required. The resource being created
               #   @param validate_only [::Boolean]
@@ -911,9 +914,9 @@ module Google
               #
               #     Its format is:
               #
-              #       * "organizations/\\{organization}/locations/\\{location}/securityHealthAnalyticsCustomModules/\\{security_health_analytics_custom_module}".
-              #       * "folders/\\{folder}/locations/\\{location}/securityHealthAnalyticsCustomModules/\\{security_health_analytics_custom_module}".
-              #       * "projects/\\{project}/locations/\\{location}/securityHealthAnalyticsCustomModules/\\{security_health_analytics_custom_module}".
+              #       * `organizations/{organization}/locations/{location}/securityHealthAnalyticsCustomModules/{security_health_analytics_custom_module}`.
+              #       * `folders/{folder}/locations/{location}/securityHealthAnalyticsCustomModules/{security_health_analytics_custom_module}`.
+              #       * `projects/{project}/locations/{location}/securityHealthAnalyticsCustomModules/{security_health_analytics_custom_module}`.
               #   @param validate_only [::Boolean]
               #     Optional. When set to true, only validations (including IAM checks) will
               #     done for the request (module will not be deleted). An OK response indicates
@@ -1090,10 +1093,10 @@ module Google
               #
               #   @param parent [::String]
               #     Required. Name of parent to list effective custom modules. Its format is
-              #     "organizations/\\{organization}/locations/\\{location}",
-              #     "folders/\\{folder}/locations/\\{location}",
+              #     `organizations/{organization}/locations/{location}`,
+              #     `folders/{folder}/locations/{location}`,
               #     or
-              #     "projects/\\{project}/locations/\\{location}"
+              #     `projects/{project}/locations/{location}`
               #   @param page_size [::Integer]
               #     Optional. The maximum number of results to return in a single response.
               #     Default is 10, minimum is 1, maximum is 1000.
@@ -1192,9 +1195,9 @@ module Google
               #
               #     Its format is:
               #
-              #       * "organizations/\\{organization}/locations/\\{location}/effectiveEventThreatDetectionCustomModules/\\{effective_event_threat_detection_custom_module}".
-              #       * "folders/\\{folder}/locations/\\{location}/effectiveEventThreatDetectionCustomModules/\\{effective_event_threat_detection_custom_module}".
-              #       * "projects/\\{project}/locations/\\{location}/effectiveEventThreatDetectionCustomModules/\\{effective_event_threat_detection_custom_module}".
+              #       * `organizations/{organization}/locations/{location}/effectiveEventThreatDetectionCustomModules/{effective_event_threat_detection_custom_module}`.
+              #       * `folders/{folder}/locations/{location}/effectiveEventThreatDetectionCustomModules/{effective_event_threat_detection_custom_module}`.
+              #       * `projects/{project}/locations/{location}/effectiveEventThreatDetectionCustomModules/{effective_event_threat_detection_custom_module}`.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::SecurityCenterManagement::V1::EffectiveEventThreatDetectionCustomModule]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1276,10 +1279,10 @@ module Google
               #
               #   @param parent [::String]
               #     Required. Name of parent to list custom modules. Its format is
-              #     "organizations/\\{organization}/locations/\\{location}",
-              #     "folders/\\{folder}/locations/\\{location}",
+              #     `organizations/{organization}/locations/{location}`,
+              #     `folders/{folder}/locations/{location}`,
               #     or
-              #     "projects/\\{project}/locations/\\{location}"
+              #     `projects/{project}/locations/{location}`
               #   @param page_size [::Integer]
               #     Optional. The maximum number of modules to return. The service may return
               #     fewer than this value. If unspecified, at most 10 configs will be returned.
@@ -1377,10 +1380,10 @@ module Google
               #
               #   @param parent [::String]
               #     Required. Name of parent to list custom modules. Its format is
-              #     "organizations/\\{organization}/locations/\\{location}",
-              #     "folders/\\{folder}/locations/\\{location}",
+              #     `organizations/{organization}/locations/{location}`,
+              #     `folders/{folder}/locations/{location}`,
               #     or
-              #     "projects/\\{project}/locations/\\{location}"
+              #     `projects/{project}/locations/{location}`
               #   @param page_size [::Integer]
               #     Optional. The maximum number of modules to return. The service may return
               #     fewer than this value. If unspecified, at most 10 configs will be returned.
@@ -1474,9 +1477,9 @@ module Google
               #
               #     Its format is:
               #
-              #       * "organizations/\\{organization}/locations/\\{location}/eventThreatDetectionCustomModules/\\{event_threat_detection_custom_module}".
-              #       * "folders/\\{folder}/locations/\\{location}/eventThreatDetectionCustomModules/\\{event_threat_detection_custom_module}".
-              #       * "projects/\\{project}/locations/\\{location}/eventThreatDetectionCustomModules/\\{event_threat_detection_custom_module}".
+              #       * `organizations/{organization}/locations/{location}/eventThreatDetectionCustomModules/{event_threat_detection_custom_module}`.
+              #       * `folders/{folder}/locations/{location}/eventThreatDetectionCustomModules/{event_threat_detection_custom_module}`.
+              #       * `projects/{project}/locations/{location}/eventThreatDetectionCustomModules/{event_threat_detection_custom_module}`.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::SecurityCenterManagement::V1::EventThreatDetectionCustomModule]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1559,10 +1562,10 @@ module Google
               #
               #   @param parent [::String]
               #     Required. Name of parent for the module. Its format is
-              #     "organizations/\\{organization}/locations/\\{location}",
-              #     "folders/\\{folder}/locations/\\{location}",
+              #     `organizations/{organization}/locations/{location}`,
+              #     `folders/{folder}/locations/{location}`,
               #     or
-              #     "projects/\\{project}/locations/\\{location}"
+              #     `projects/{project}/locations/{location}`
               #   @param event_threat_detection_custom_module [::Google::Cloud::SecurityCenterManagement::V1::EventThreatDetectionCustomModule, ::Hash]
               #     Required. The module to create. The
               #     event_threat_detection_custom_module.name will be ignored and server
@@ -1757,9 +1760,9 @@ module Google
               #
               #     Its format is:
               #
-              #       * "organizations/\\{organization}/locations/\\{location}/eventThreatDetectionCustomModules/\\{event_threat_detection_custom_module}".
-              #       * "folders/\\{folder}/locations/\\{location}/eventThreatDetectionCustomModules/\\{event_threat_detection_custom_module}".
-              #       * "projects/\\{project}/locations/\\{location}/eventThreatDetectionCustomModules/\\{event_threat_detection_custom_module}".
+              #       * `organizations/{organization}/locations/{location}/eventThreatDetectionCustomModules/{event_threat_detection_custom_module}`.
+              #       * `folders/{folder}/locations/{location}/eventThreatDetectionCustomModules/{event_threat_detection_custom_module}`.
+              #       * `projects/{project}/locations/{location}/eventThreatDetectionCustomModules/{event_threat_detection_custom_module}`.
               #   @param validate_only [::Boolean]
               #     Optional. When set to true, only validations (including IAM checks) will
               #     done for the request (module will not be deleted). An OK response indicates
@@ -1850,7 +1853,7 @@ module Google
               #
               #     Its format is:
               #
-              #       * "organizations/\\{organization}/locations/\\{location}".
+              #       * `organizations/{organization}/locations/{location}`.
               #   @param raw_text [::String]
               #     Required. The raw text of the module's contents. Used to generate error
               #     messages.
@@ -1908,6 +1911,287 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @security_center_management_stub.validate_event_threat_detection_custom_module request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets service settings for the specified Security Command Center service.
+              #
+              # @overload get_security_center_service(request, options = nil)
+              #   Pass arguments to `get_security_center_service` via a request object, either of type
+              #   {::Google::Cloud::SecurityCenterManagement::V1::GetSecurityCenterServiceRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::SecurityCenterManagement::V1::GetSecurityCenterServiceRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_security_center_service(name: nil)
+              #   Pass arguments to `get_security_center_service` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The Security Command Center service to retrieve.
+              #
+              #     Formats:
+              #
+              #       * organizations/\\{organization}/locations/\\{location}/securityCenterServices/\\{service}
+              #       * folders/\\{folder}/locations/\\{location}/securityCenterServices/\\{service}
+              #       * projects/\\{project}/locations/\\{location}/securityCenterServices/\\{service}
+              #
+              #     The possible values for id \\{service} are:
+              #
+              #       * container-threat-detection
+              #       * event-threat-detection
+              #       * security-health-analytics
+              #       * vm-threat-detection
+              #       * web-security-scanner
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterService]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterService]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/security_center_management/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecurityCenterManagement::V1::GetSecurityCenterServiceRequest.new
+              #
+              #   # Call the get_security_center_service method.
+              #   result = client.get_security_center_service request
+              #
+              #   # The returned object is of type Google::Cloud::SecurityCenterManagement::V1::SecurityCenterService.
+              #   p result
+              #
+              def get_security_center_service request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecurityCenterManagement::V1::GetSecurityCenterServiceRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_security_center_service.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::SecurityCenterManagement::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_security_center_service.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_security_center_service.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @security_center_management_stub.get_security_center_service request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Returns a list of all Security Command Center services for the given
+              # parent.
+              #
+              # @overload list_security_center_services(request, options = nil)
+              #   Pass arguments to `list_security_center_services` via a request object, either of type
+              #   {::Google::Cloud::SecurityCenterManagement::V1::ListSecurityCenterServicesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::SecurityCenterManagement::V1::ListSecurityCenterServicesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_security_center_services(parent: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_security_center_services` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The name of the parent to list Security Command Center services.
+              #
+              #     Formats:
+              #
+              #       * organizations/\\{organization}/locations/\\{location}
+              #       * folders/\\{folder}/locations/\\{location}
+              #       * projects/\\{project}/locations/\\{location}
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of results to return in a single response.
+              #     Default is 10, minimum is 1, maximum is 1000.
+              #   @param page_token [::String]
+              #     Optional. The value returned by the last call indicating a continuation.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterService>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterService>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/security_center_management/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecurityCenterManagement::V1::ListSecurityCenterServicesRequest.new
+              #
+              #   # Call the list_security_center_services method.
+              #   result = client.list_security_center_services request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterService.
+              #     p item
+              #   end
+              #
+              def list_security_center_services request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecurityCenterManagement::V1::ListSecurityCenterServicesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_security_center_services.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::SecurityCenterManagement::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_security_center_services.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_security_center_services.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @security_center_management_stub.list_security_center_services request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @security_center_management_stub, :list_security_center_services, "security_center_services", request, result, options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates a Security Command Center service using the given update mask.
+              #
+              # @overload update_security_center_service(request, options = nil)
+              #   Pass arguments to `update_security_center_service` via a request object, either of type
+              #   {::Google::Cloud::SecurityCenterManagement::V1::UpdateSecurityCenterServiceRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::SecurityCenterManagement::V1::UpdateSecurityCenterServiceRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_security_center_service(security_center_service: nil, update_mask: nil, validate_only: nil)
+              #   Pass arguments to `update_security_center_service` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param security_center_service [::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterService, ::Hash]
+              #     Required. The updated service.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Required. The list of fields to be updated. Possible values:
+              #
+              #       * "intended_enablement_state"
+              #       * "modules"
+              #   @param validate_only [::Boolean]
+              #     Optional. When set to true, only validations (including IAM checks) will
+              #     done for the request (service will not be updated). An OK response
+              #     indicates the request is valid while an error response indicates the
+              #     request is invalid. Note that a subsequent request to actually update the
+              #     service could still fail because 1. the state could have changed (e.g. IAM
+              #     permission lost) or
+              #     2. A failure occurred while trying to delete the module.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterService]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterService]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/security_center_management/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecurityCenterManagement::V1::UpdateSecurityCenterServiceRequest.new
+              #
+              #   # Call the update_security_center_service method.
+              #   result = client.update_security_center_service request
+              #
+              #   # The returned object is of type Google::Cloud::SecurityCenterManagement::V1::SecurityCenterService.
+              #   p result
+              #
+              def update_security_center_service request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecurityCenterManagement::V1::UpdateSecurityCenterServiceRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_security_center_service.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::SecurityCenterManagement::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_security_center_service.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_security_center_service.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @security_center_management_stub.update_security_center_service request, options do |result, operation|
                   yield result, operation if block_given?
                   return result
                 end
@@ -2145,6 +2429,21 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :validate_event_threat_detection_custom_module
+                  ##
+                  # RPC-specific configuration for `get_security_center_service`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_security_center_service
+                  ##
+                  # RPC-specific configuration for `list_security_center_services`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_security_center_services
+                  ##
+                  # RPC-specific configuration for `update_security_center_service`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_security_center_service
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -2184,6 +2483,12 @@ module Google
                     @delete_event_threat_detection_custom_module = ::Gapic::Config::Method.new delete_event_threat_detection_custom_module_config
                     validate_event_threat_detection_custom_module_config = parent_rpcs.validate_event_threat_detection_custom_module if parent_rpcs.respond_to? :validate_event_threat_detection_custom_module
                     @validate_event_threat_detection_custom_module = ::Gapic::Config::Method.new validate_event_threat_detection_custom_module_config
+                    get_security_center_service_config = parent_rpcs.get_security_center_service if parent_rpcs.respond_to? :get_security_center_service
+                    @get_security_center_service = ::Gapic::Config::Method.new get_security_center_service_config
+                    list_security_center_services_config = parent_rpcs.list_security_center_services if parent_rpcs.respond_to? :list_security_center_services
+                    @list_security_center_services = ::Gapic::Config::Method.new list_security_center_services_config
+                    update_security_center_service_config = parent_rpcs.update_security_center_service if parent_rpcs.respond_to? :update_security_center_service
+                    @update_security_center_service = ::Gapic::Config::Method.new update_security_center_service_config
 
                     yield self if block_given?
                   end

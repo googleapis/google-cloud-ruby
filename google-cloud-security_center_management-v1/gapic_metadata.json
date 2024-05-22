@@ -99,6 +99,21 @@
               "methods": [
                 "validate_event_threat_detection_custom_module"
               ]
+            },
+            "GetSecurityCenterService": {
+              "methods": [
+                "get_security_center_service"
+              ]
+            },
+            "ListSecurityCenterServices": {
+              "methods": [
+                "list_security_center_services"
+              ]
+            },
+            "UpdateSecurityCenterService": {
+              "methods": [
+                "update_security_center_service"
+              ]
             }
           }
         }

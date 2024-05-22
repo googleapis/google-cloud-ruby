@@ -250,6 +250,64 @@ module Google
             end
 
             ##
+            # Create a fully-qualified SecurityCenterService resource string.
+            #
+            # @overload security_center_service_path(project:, location:, service:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/securityCenterServices/{service}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param service [String]
+            #
+            # @overload security_center_service_path(folder:, location:, service:)
+            #   The resource will be in the following format:
+            #
+            #   `folders/{folder}/locations/{location}/securityCenterServices/{service}`
+            #
+            #   @param folder [String]
+            #   @param location [String]
+            #   @param service [String]
+            #
+            # @overload security_center_service_path(organization:, location:, service:)
+            #   The resource will be in the following format:
+            #
+            #   `organizations/{organization}/locations/{location}/securityCenterServices/{service}`
+            #
+            #   @param organization [String]
+            #   @param location [String]
+            #   @param service [String]
+            #
+            # @return [::String]
+            def security_center_service_path **args
+              resources = {
+                "location:project:service" => (proc do |project:, location:, service:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/securityCenterServices/#{service}"
+                end),
+                "folder:location:service" => (proc do |folder:, location:, service:|
+                  raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                  "folders/#{folder}/locations/#{location}/securityCenterServices/#{service}"
+                end),
+                "location:organization:service" => (proc do |organization:, location:, service:|
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                  "organizations/#{organization}/locations/#{location}/securityCenterServices/#{service}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
+            end
+
+            ##
             # Create a fully-qualified SecurityHealthAnalyticsCustomModule resource string.
             #
             # @overload security_health_analytics_custom_module_path(organization:, location:, security_health_analytics_custom_module:)
