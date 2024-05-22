@@ -29,10 +29,10 @@ describe Google::Cloud::Error, :cause do
   # These tests show Google::Cloud::Error#cause is available, even on ruby 2.0
 
   it "always has a cause" do
-    error = wrapped_std_error "yo"
+    error = wrapped_std_error "cause_message"
 
     _(error).must_be_kind_of Google::Cloud::Error
-    _(error.message).must_equal "yo"
+    _(error.message).must_equal "cause_message"
 
     _(error.status_code).must_be :nil?
     _(error.body).must_be :nil?
@@ -44,14 +44,14 @@ describe Google::Cloud::Error, :cause do
 
     _(error.cause).wont_be :nil?
     _(error.cause).must_be_kind_of StandardError
-    _(error.cause.message).must_equal "yo"
+    _(error.cause.message).must_equal "cause_message"
   end
 
   it "can have a nil cause" do
-    error = Google::Cloud::Error.new "sup"
+    error = Google::Cloud::Error.new "nil_cause_message"
 
     _(error).must_be_kind_of Google::Cloud::Error
-    _(error.message).must_equal "sup"
+    _(error.message).must_equal "nil_cause_message"
 
     _(error.status_code).must_be :nil?
     _(error.body).must_be :nil?
