@@ -232,6 +232,9 @@ module Google
         # @!attribute [rw] restricted_actions
         #   @return [::Array<::Google::Cloud::NetApp::V1::RestrictedAction>]
         #     Optional. List of actions that are restricted on this volume.
+        # @!attribute [rw] tiering_policy
+        #   @return [::Google::Cloud::NetApp::V1::TieringPolicy]
+        #     Tiering policy for the volume.
         class Volume
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -476,9 +479,40 @@ module Google
         #   @return [::Boolean]
         #     Optional. When set to true, scheduled backup is enabled on the volume.
         #     This field should be nil when there's no backup policy attached.
+        # @!attribute [r] backup_chain_bytes
+        #   @return [::Integer]
+        #     Output only. Total size of all backups in a chain in bytes = baseline
+        #     backup size + sum(incremental backup size).
         class BackupConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Defines tiering policy for the volume.
+        # @!attribute [rw] tier_action
+        #   @return [::Google::Cloud::NetApp::V1::TieringPolicy::TierAction]
+        #     Optional. Flag indicating if the volume has tiering policy enable/pause.
+        #     Default is PAUSED.
+        # @!attribute [rw] cooling_threshold_days
+        #   @return [::Integer]
+        #     Optional. Time in days to mark the volume's data block as cold and make it
+        #     eligible for tiering, can be range from 7-183. Default is 31.
+        class TieringPolicy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Tier action for the volume.
+          module TierAction
+            # Unspecified.
+            TIER_ACTION_UNSPECIFIED = 0
+
+            # When tiering is enabled, new cold data will be tiered.
+            ENABLED = 1
+
+            # When paused, tiering won't be performed on new data. Existing data stays
+            # tiered until accessed.
+            PAUSED = 2
+          end
         end
 
         # Protocols is an enum of all the supported network protocols for a volume.

@@ -21,6 +21,16 @@ module Google
   module Cloud
     module NetApp
       module V1
+        # Metadata for a given
+        # Location.
+        # @!attribute [r] supported_service_levels
+        #   @return [::Array<::Google::Cloud::NetApp::V1::ServiceLevel>]
+        #     Output only. Supported service levels in a location.
+        class LocationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The service level of a storage pool and its volumes.
         module ServiceLevel
           # Unspecified service level.
@@ -34,6 +44,9 @@ module Google
 
           # Standard service level.
           STANDARD = 3
+
+          # Flex service level.
+          FLEX = 4
         end
 
         # The volume encryption key source.
