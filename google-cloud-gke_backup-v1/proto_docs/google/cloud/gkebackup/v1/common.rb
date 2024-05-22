@@ -61,6 +61,21 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
+        # Message to encapsulate VolumeType enum.
+        class VolumeTypeEnum
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Supported volume types.
+          module VolumeType
+            # Default
+            VOLUME_TYPE_UNSPECIFIED = 0
+
+            # Compute Engine Persistent Disk volume
+            GCE_PERSISTENT_DISK = 1
+          end
+        end
       end
     end
   end

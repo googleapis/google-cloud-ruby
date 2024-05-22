@@ -8,7 +8,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 
 
-descriptor_data = "\n&google/cloud/gkebackup/v1/common.proto\x12\x19google.cloud.gkebackup.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"%\n\nNamespaces\x12\x17\n\nnamespaces\x18\x01 \x03(\tB\x03\xe0\x41\x01\";\n\x0eNamespacedName\x12\x16\n\tnamespace\x18\x01 \x01(\tB\x03\xe0\x41\x01\x12\x11\n\x04name\x18\x02 \x01(\tB\x03\xe0\x41\x01\"[\n\x0fNamespacedNames\x12H\n\x10namespaced_names\x18\x01 \x03(\x0b\x32).google.cloud.gkebackup.v1.NamespacedNameB\x03\xe0\x41\x01\"Z\n\rEncryptionKey\x12I\n\x16gcp_kms_encryption_key\x18\x01 \x01(\tB)\xe0\x41\x01\xfa\x41#\n!cloudkms.googleapis.com/CryptoKeyB\xc2\x01\n\x1d\x63om.google.cloud.gkebackup.v1B\x0b\x43ommonProtoP\x01Z;cloud.google.com/go/gkebackup/apiv1/gkebackuppb;gkebackuppb\xaa\x02\x19Google.Cloud.GkeBackup.V1\xca\x02\x19Google\\Cloud\\GkeBackup\\V1\xea\x02\x1cGoogle::Cloud::GkeBackup::V1b\x06proto3"
+descriptor_data = "\n&google/cloud/gkebackup/v1/common.proto\x12\x19google.cloud.gkebackup.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"%\n\nNamespaces\x12\x17\n\nnamespaces\x18\x01 \x03(\tB\x03\xe0\x41\x01\";\n\x0eNamespacedName\x12\x16\n\tnamespace\x18\x01 \x01(\tB\x03\xe0\x41\x01\x12\x11\n\x04name\x18\x02 \x01(\tB\x03\xe0\x41\x01\"[\n\x0fNamespacedNames\x12H\n\x10namespaced_names\x18\x01 \x03(\x0b\x32).google.cloud.gkebackup.v1.NamespacedNameB\x03\xe0\x41\x01\"Z\n\rEncryptionKey\x12I\n\x16gcp_kms_encryption_key\x18\x01 \x01(\tB)\xe0\x41\x01\xfa\x41#\n!cloudkms.googleapis.com/CryptoKey\"T\n\x0eVolumeTypeEnum\"B\n\nVolumeType\x12\x1b\n\x17VOLUME_TYPE_UNSPECIFIED\x10\x00\x12\x17\n\x13GCE_PERSISTENT_DISK\x10\x01\x42\xc2\x01\n\x1d\x63om.google.cloud.gkebackup.v1B\x0b\x43ommonProtoP\x01Z;cloud.google.com/go/gkebackup/apiv1/gkebackuppb;gkebackuppb\xaa\x02\x19Google.Cloud.GkeBackup.V1\xca\x02\x19Google\\Cloud\\GkeBackup\\V1\xea\x02\x1cGoogle::Cloud::GkeBackup::V1b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
@@ -42,6 +42,8 @@ module Google
         NamespacedName = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkebackup.v1.NamespacedName").msgclass
         NamespacedNames = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkebackup.v1.NamespacedNames").msgclass
         EncryptionKey = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkebackup.v1.EncryptionKey").msgclass
+        VolumeTypeEnum = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkebackup.v1.VolumeTypeEnum").msgclass
+        VolumeTypeEnum::VolumeType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkebackup.v1.VolumeTypeEnum.VolumeType").enummodule
       end
     end
   end

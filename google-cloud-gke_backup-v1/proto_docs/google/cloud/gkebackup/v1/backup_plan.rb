@@ -223,6 +223,13 @@ module Google
           #     Backups created via this plan.
           #
           #     Default (empty): Config backup artifacts will not be encrypted.
+          # @!attribute [rw] permissive_mode
+          #   @return [::Boolean]
+          #     Optional. If false, Backups will fail when Backup for GKE detects
+          #     Kubernetes configuration that is non-standard or
+          #     requires additional setup to restore.
+          #
+          #     Default: False
           class BackupConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -295,8 +302,10 @@ module Google
         #     UTC.
         # @!attribute [rw] duration
         #   @return [::Google::Protobuf::Duration]
-        #     Required. Specifies duration of the window. Restrictions for duration based
-        #     on the recurrence type to allow some time for backup to happen:
+        #     Required. Specifies duration of the window.
+        #     Duration must be >= 5 minutes and < (target RPO - 20 minutes).
+        #     Additional restrictions based on the recurrence type to allow some time for
+        #     backup to happen:
         #     - single_occurrence_date:  no restriction, but UI may warn about this when
         #     duration >= target RPO
         #     - daily window: duration < 24 hours
