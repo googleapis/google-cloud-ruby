@@ -33,6 +33,44 @@ class Google::Cloud::Kms::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_autokey_grpc
+    Gapic::ServiceStub.stub :new, DummyStub.new do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Kms.autokey transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Kms::V1::Autokey::Client, client
+    end
+  end
+
+  def test_autokey_rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Kms.autokey transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Kms::V1::Autokey::Rest::Client, client
+    end
+  end
+
+  def test_autokey_admin_grpc
+    Gapic::ServiceStub.stub :new, DummyStub.new do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Kms.autokey_admin transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Kms::V1::AutokeyAdmin::Client, client
+    end
+  end
+
+  def test_autokey_admin_rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Kms.autokey_admin transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Kms::V1::AutokeyAdmin::Rest::Client, client
+    end
+  end
+
   def test_ekm_service_grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure

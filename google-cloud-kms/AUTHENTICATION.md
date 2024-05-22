@@ -56,7 +56,7 @@ To configure a credentials file for an individual client initialization:
 ```ruby
 require "google/cloud/kms"
 
-client = Google::Cloud::Kms.ekm_service do |config|
+client = Google::Cloud::Kms.autokey do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 ```
@@ -70,7 +70,7 @@ Google::Cloud::Kms.configure do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 
-client = Google::Cloud::Kms.ekm_service
+client = Google::Cloud::Kms.autokey
 ```
 
 ### Environment Variables
@@ -100,7 +100,7 @@ require "google/cloud/kms"
 
 ENV["GOOGLE_APPLICATION_CREDENTIALS"] = "path/to/credentialfile.json"
 
-client = Google::Cloud::Kms.ekm_service
+client = Google::Cloud::Kms.autokey
 ```
 
 ### Local ADC file
