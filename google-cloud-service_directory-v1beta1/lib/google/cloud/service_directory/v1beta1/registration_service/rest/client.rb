@@ -303,7 +303,7 @@ module Google
               #     Required. The resource name of the project and location whose namespaces
               #     you'd like to list.
               #   @param page_size [::Integer]
-              #     Optional. The maximum number of items to return.
+              #     Optional. The maximum number of items to return. The default value is 100.
               #   @param page_token [::String]
               #     Optional. The next_page_token value returned from a previous List request,
               #     if any.
@@ -764,7 +764,7 @@ module Google
               #     Required. The resource name of the namespace whose services you'd
               #     like to list.
               #   @param page_size [::Integer]
-              #     Optional. The maximum number of items to return.
+              #     Optional. The maximum number of items to return. The default value is 100.
               #   @param page_token [::String]
               #     Optional. The next_page_token value returned from a previous List request,
               #     if any.
@@ -1228,7 +1228,7 @@ module Google
               #     Required. The resource name of the service whose endpoints you'd like to
               #     list.
               #   @param page_size [::Integer]
-              #     Optional. The maximum number of items to return.
+              #     Optional. The maximum number of items to return. The default value is 100.
               #   @param page_token [::String]
               #     Optional. The next_page_token value returned from a previous List request,
               #     if any.

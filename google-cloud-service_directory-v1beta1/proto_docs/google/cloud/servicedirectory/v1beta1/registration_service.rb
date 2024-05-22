@@ -52,7 +52,7 @@ module Google
         #     you'd like to list.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. The maximum number of items to return.
+        #     Optional. The maximum number of items to return. The default value is 100.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. The next_page_token value returned from a previous List request,
@@ -183,7 +183,7 @@ module Google
         #     like to list.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. The maximum number of items to return.
+        #     Optional. The maximum number of items to return. The default value is 100.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. The next_page_token value returned from a previous List request,
@@ -319,7 +319,7 @@ module Google
         #     list.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. The maximum number of items to return.
+        #     Optional. The maximum number of items to return. The default value is 100.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. The next_page_token value returned from a previous List request,
