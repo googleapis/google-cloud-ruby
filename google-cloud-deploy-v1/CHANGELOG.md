@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.20.0 (2024-05-23)
+
+#### Features
+
+* add Skaffold verbose support to Execution Environment properties ([#25912](https://github.com/googleapis/google-cloud-ruby/issues/25912)) 
+
 ### 0.19.1 (2024-05-15)
 
 #### Documentation
