@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.21.0 (2024-05-23)
+
+#### Features
+
+* Support SQL Assertion data quality rules ([#25838](https://github.com/googleapis/google-cloud-ruby/issues/25838)) 
+
 ### 0.20.0 (2024-04-19)
 
 #### Features
