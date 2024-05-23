@@ -1,5 +1,11 @@
 # Release History
 
+### 2.8.0 (2024-05-23)
+
+#### Features
+
+* Support for the autokey service ([#25877](https://github.com/googleapis/google-cloud-ruby/issues/25877)) 
+
 ### 2.7.0 (2024-02-26)
 
 #### Features
