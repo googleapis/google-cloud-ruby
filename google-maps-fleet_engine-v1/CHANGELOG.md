@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.2.1 (2024-05-23)
+
+#### Documentation
+
+* Mark TerminalPointId as deprecated ([#25910](https://github.com/googleapis/google-cloud-ruby/issues/25910)) 
+
 ### 0.2.0 (2024-05-16)
 
 ### ⚠ BREAKING CHANGES
