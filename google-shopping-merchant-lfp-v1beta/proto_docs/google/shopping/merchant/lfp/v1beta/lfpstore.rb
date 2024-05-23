@@ -22,8 +22,8 @@ module Google
     module Merchant
       module Lfp
         module V1beta
-          # A store for the merchant. This will be used to match to a Google Business
-          # Profile listing for the target merchant. If a matching listing can't be
+          # A store for the merchant. This will be used to match to a store under the
+          # Google Business Profile of the target merchant. If a matching store can't be
           # found, the inventories or sales submitted with the store code will not be
           # used.
           # @!attribute [r] name
@@ -63,8 +63,8 @@ module Google
           #     of the store location.
           # @!attribute [r] matching_state
           #   @return [::Google::Shopping::Merchant::Lfp::V1beta::LfpStore::StoreMatchingState]
-          #     Optional. Output only. The state of matching to a Google Business Profile
-          #     listing. See
+          #     Optional. Output only. The state of matching to a Google Business Profile.
+          #     See
           #     {::Google::Shopping::Merchant::Lfp::V1beta::LfpStore#matching_state_hint matchingStateHint}
           #     for further details if no match is found.
           # @!attribute [r] matching_state_hint
@@ -91,7 +91,7 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
-            # The state of matching `LfpStore` to a Google Business Profile listing.
+            # The state of matching `LfpStore` to a Google Business Profile.
             module StoreMatchingState
               # Store matching state unspecified.
               STORE_MATCHING_STATE_UNSPECIFIED = 0
