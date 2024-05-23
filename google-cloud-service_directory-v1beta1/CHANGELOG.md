@@ -1,5 +1,11 @@
 # Release History
 
+### 0.15.1 (2024-05-23)
+
+#### Documentation
+
+* Document default page sizes ([#25913](https://github.com/googleapis/google-cloud-ruby/issues/25913)) 
+
 ### 0.15.0 (2024-02-26)
 
 #### Features
