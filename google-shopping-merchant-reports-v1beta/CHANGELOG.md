@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.6.0 (2024-05-23)
+
+#### Features
+
+* Added non_product_performance_view table fields to ReportRow 
+* Support predicted effectiveness of applying a price suggestion 
+
 ### 0.5.0 (2024-04-19)
 
 #### Features
