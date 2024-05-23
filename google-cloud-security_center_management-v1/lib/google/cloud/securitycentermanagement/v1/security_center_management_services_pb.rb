@@ -105,6 +105,13 @@ module Google
             rpc :DeleteEventThreatDetectionCustomModule, ::Google::Cloud::SecurityCenterManagement::V1::DeleteEventThreatDetectionCustomModuleRequest, ::Google::Protobuf::Empty
             # Validates the given Event Threat Detection custom module.
             rpc :ValidateEventThreatDetectionCustomModule, ::Google::Cloud::SecurityCenterManagement::V1::ValidateEventThreatDetectionCustomModuleRequest, ::Google::Cloud::SecurityCenterManagement::V1::ValidateEventThreatDetectionCustomModuleResponse
+            # Gets service settings for the specified Security Command Center service.
+            rpc :GetSecurityCenterService, ::Google::Cloud::SecurityCenterManagement::V1::GetSecurityCenterServiceRequest, ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterService
+            # Returns a list of all Security Command Center services for the given
+            # parent.
+            rpc :ListSecurityCenterServices, ::Google::Cloud::SecurityCenterManagement::V1::ListSecurityCenterServicesRequest, ::Google::Cloud::SecurityCenterManagement::V1::ListSecurityCenterServicesResponse
+            # Updates a Security Command Center service using the given update mask.
+            rpc :UpdateSecurityCenterService, ::Google::Cloud::SecurityCenterManagement::V1::UpdateSecurityCenterServiceRequest, ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterService
           end
 
           Stub = Service.rpc_stub_class
