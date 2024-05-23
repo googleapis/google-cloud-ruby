@@ -1559,6 +1559,10 @@
       "component": "google-cloud-workflows-v1beta",
       "version_file": "lib/google/cloud/workflows/v1beta/version.rb"
     },
+    "google-cloud-workstations-v1": {
+      "component": "google-cloud-workstations-v1",
+      "version_file": "lib/google/cloud/workstations/v1/version.rb"
+    },
     "google-cloud-workstations-v1beta": {
       "component": "google-cloud-workstations-v1beta",
       "version_file": "lib/google/cloud/workstations/v1beta/version.rb"
