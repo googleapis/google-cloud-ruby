@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.1.1 (2024-05-23)
+
+#### Documentation
+
+* Fix the terminology around inventory data specification ([#25926](https://github.com/googleapis/google-cloud-ruby/issues/25926)) 
+
 ### 0.1.0 (2024-04-25)
 
 #### Features
