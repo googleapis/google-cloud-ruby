@@ -1,5 +1,13 @@
 # Changelog
 
+### 0.6.0 (2024-05-23)
+
+#### Features
+
+* BackupConfig reports the total byte size of a backup chain 
+* Support for the Flex service level 
+* Support for volume tiering policy 
+
 ### 0.5.2 (2024-04-15)
 
 #### Documentation
