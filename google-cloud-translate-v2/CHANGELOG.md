@@ -1,5 +1,11 @@
 # Release History
 
+### 0.5.1 (2024-05-23)
+
+#### Bug Fixes
+
+* Update gemspec to work with Faraday 2.x ([#25907](https://github.com/googleapis/google-cloud-ruby/issues/25907)) 
+
 ### 0.5.0 (2024-03-10)
 
 #### Features
