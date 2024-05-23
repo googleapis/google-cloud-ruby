@@ -1,5 +1,16 @@
 # Changelog
 
+### 0.40.0 (2024-05-23)
+
+#### Features
+
+* Add REST transport clients for all calls ([#25829](https://github.com/googleapis/google-cloud-ruby/issues/25829)) 
+* Added follow-up Google search entry point to GroundingMetadata 
+* Added private service connect configuration to Endpoint 
+* Added the TPU_V5_LITEPOD accelerator type 
+* Support for deploy task name in model metadata 
+* Support for the INVALID_TOKEN_VALUE record error 
+
 ### 0.39.0 (2024-04-18)
 
 #### Features
