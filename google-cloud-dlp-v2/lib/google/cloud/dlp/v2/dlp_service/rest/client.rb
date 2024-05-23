@@ -5167,8 +5167,7 @@ module Google
               #     Optional. Page token from a previous page to return the next set of
               #     results. If set, all other request fields must match the original request.
               #   @param filter [::String]
-              #     Optional. * Supported fields/values
-              #         - `state` - MISSING|AVAILABLE|ERROR
+              #     Optional. Supported field/value: `state` - MISSING|AVAILABLE|ERROR
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dlp::V2::Connection>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -5260,8 +5259,7 @@ module Google
               #     Optional. Page token from a previous page to return the next set of
               #     results. If set, all other request fields must match the original request.
               #   @param filter [::String]
-              #     Optional. * Supported fields/values
-              #         - `state` - MISSING|AVAILABLE|ERROR
+              #     Optional. Supported field/value: - `state` - MISSING|AVAILABLE|ERROR
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dlp::V2::Connection>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
