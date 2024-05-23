@@ -129,6 +129,36 @@
               "methods": [
                 "delete_live_config"
               ]
+            },
+            "UpdateLiveConfig": {
+              "methods": [
+                "update_live_config"
+              ]
+            },
+            "CreateVodConfig": {
+              "methods": [
+                "create_vod_config"
+              ]
+            },
+            "ListVodConfigs": {
+              "methods": [
+                "list_vod_configs"
+              ]
+            },
+            "GetVodConfig": {
+              "methods": [
+                "get_vod_config"
+              ]
+            },
+            "DeleteVodConfig": {
+              "methods": [
+                "delete_vod_config"
+              ]
+            },
+            "UpdateVodConfig": {
+              "methods": [
+                "update_vod_config"
+              ]
             }
           }
         }

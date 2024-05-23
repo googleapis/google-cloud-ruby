@@ -42,9 +42,7 @@ module Google
           #     Output only. State of the live config.
           # @!attribute [rw] ad_tracking
           #   @return [::Google::Cloud::Video::Stitcher::V1::AdTracking]
-          #     Required. Determines how the ads are tracked. If
-          #     {::Google::Cloud::Video::Stitcher::V1::LiveConfig#gam_live_config gam_live_config}
-          #     is set, the value must be `CLIENT` because the IMA SDK handles ad tracking.
+          #     Required. Determines how the ads are tracked.
           # @!attribute [rw] default_slate
           #   @return [::String]
           #     This must refer to a slate in the same
@@ -58,6 +56,9 @@ module Google
           # @!attribute [rw] prefetch_config
           #   @return [::Google::Cloud::Video::Stitcher::V1::PrefetchConfig]
           #     The configuration for prefetching ads.
+          # @!attribute [rw] source_fetch_options
+          #   @return [::Google::Cloud::Video::Stitcher::V1::FetchOptions]
+          #     Options for fetching source manifests and segments.
           class LiveConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
