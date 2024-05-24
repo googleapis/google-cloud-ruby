@@ -8,7 +8,7 @@
     "name": "workstations",
     "name_pretty": "Cloud Workstations V1BETA API",
     "product_documentation": "https://cloud.google.com/workstations/docs",
-    "release_level": "unreleased",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "Allows administrators to create managed developer environments in the cloud. Note that google-cloud-workstations-v1beta is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-workstations instead. See the readme for more details.",
