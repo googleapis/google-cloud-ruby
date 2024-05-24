@@ -26,6 +26,7 @@ require "google/cloud/workstations/v1/workstations/credentials"
 require "google/cloud/workstations/v1/workstations/paths"
 require "google/cloud/workstations/v1/workstations/operations"
 require "google/cloud/workstations/v1/workstations/client"
+require "google/cloud/workstations/v1/workstations/rest"
 
 module Google
   module Cloud
@@ -38,6 +39,11 @@ module Google
         #
         #     require "google/cloud/workstations/v1/workstations"
         #     client = ::Google::Cloud::Workstations::V1::Workstations::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/workstations/v1/workstations/rest"
+        #     client = ::Google::Cloud::Workstations::V1::Workstations::Rest::Client.new
         #
         module Workstations
         end

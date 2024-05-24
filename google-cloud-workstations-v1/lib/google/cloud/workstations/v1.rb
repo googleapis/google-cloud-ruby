@@ -30,6 +30,11 @@ module Google
       #     require "google/cloud/workstations/v1"
       #     client = ::Google::Cloud::Workstations::V1::Workstations::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/workstations/v1"
+      #     client = ::Google::Cloud::Workstations::V1::Workstations::Rest::Client.new
+      #
       module V1
       end
     end
