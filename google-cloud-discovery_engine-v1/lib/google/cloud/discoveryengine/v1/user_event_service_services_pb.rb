@@ -41,7 +41,7 @@ module Google
             # This method is used only by the Discovery Engine API JavaScript pixel and
             # Google Tag Manager. Users should not call this method directly.
             rpc :CollectUserEvent, ::Google::Cloud::DiscoveryEngine::V1::CollectUserEventRequest, ::Google::Api::HttpBody
-            # Bulk import of User events. Request processing might be
+            # Bulk import of user events. Request processing might be
             # synchronous. Events that already exist are skipped.
             # Use this method for backfilling historical user events.
             #

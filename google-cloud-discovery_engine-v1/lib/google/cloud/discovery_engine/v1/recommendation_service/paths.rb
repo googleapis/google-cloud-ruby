@@ -25,6 +25,51 @@ module Google
           # Path helper methods for the RecommendationService API.
           module Paths
             ##
+            # Create a fully-qualified DataStore resource string.
+            #
+            # @overload data_store_path(project:, location:, data_store:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/dataStores/{data_store}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param data_store [String]
+            #
+            # @overload data_store_path(project:, location:, collection:, data_store:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param collection [String]
+            #   @param data_store [String]
+            #
+            # @return [::String]
+            def data_store_path **args
+              resources = {
+                "data_store:location:project" => (proc do |project:, location:, data_store:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/dataStores/#{data_store}"
+                end),
+                "collection:data_store:location:project" => (proc do |project:, location:, collection:, data_store:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "collection cannot contain /" if collection.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/collections/#{collection}/dataStores/#{data_store}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
+            end
+
+            ##
             # Create a fully-qualified Document resource string.
             #
             # @overload document_path(project:, location:, data_store:, branch:, document:)
@@ -75,6 +120,27 @@ module Google
               resource = resources[args.keys.sort.join(":")]
               raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
               resource.call(**args)
+            end
+
+            ##
+            # Create a fully-qualified Engine resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param collection [String]
+            # @param engine [String]
+            #
+            # @return [::String]
+            def engine_path project:, location:, collection:, engine:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "collection cannot contain /" if collection.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/collections/#{collection}/engines/#{engine}"
             end
 
             ##

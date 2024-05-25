@@ -29,6 +29,40 @@
         }
       }
     },
+    "ControlService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DiscoveryEngine::V1::ControlService::Client",
+          "rpcs": {
+            "CreateControl": {
+              "methods": [
+                "create_control"
+              ]
+            },
+            "DeleteControl": {
+              "methods": [
+                "delete_control"
+              ]
+            },
+            "UpdateControl": {
+              "methods": [
+                "update_control"
+              ]
+            },
+            "GetControl": {
+              "methods": [
+                "get_control"
+              ]
+            },
+            "ListControls": {
+              "methods": [
+                "list_controls"
+              ]
+            }
+          }
+        }
+      }
+    },
     "SearchService": {
       "clients": {
         "grpc": {
@@ -76,6 +110,41 @@
             "ListConversations": {
               "methods": [
                 "list_conversations"
+              ]
+            },
+            "AnswerQuery": {
+              "methods": [
+                "answer_query"
+              ]
+            },
+            "GetAnswer": {
+              "methods": [
+                "get_answer"
+              ]
+            },
+            "CreateSession": {
+              "methods": [
+                "create_session"
+              ]
+            },
+            "DeleteSession": {
+              "methods": [
+                "delete_session"
+              ]
+            },
+            "UpdateSession": {
+              "methods": [
+                "update_session"
+              ]
+            },
+            "GetSession": {
+              "methods": [
+                "get_session"
+              ]
+            },
+            "ListSessions": {
+              "methods": [
+                "list_sessions"
               ]
             }
           }
@@ -188,6 +257,48 @@
             "ListEngines": {
               "methods": [
                 "list_engines"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "GroundedGenerationService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DiscoveryEngine::V1::GroundedGenerationService::Client",
+          "rpcs": {
+            "CheckGrounding": {
+              "methods": [
+                "check_grounding"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ProjectService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DiscoveryEngine::V1::ProjectService::Client",
+          "rpcs": {
+            "ProvisionProject": {
+              "methods": [
+                "provision_project"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RankService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DiscoveryEngine::V1::RankService::Client",
+          "rpcs": {
+            "Rank": {
+              "methods": [
+                "rank"
               ]
             }
           }

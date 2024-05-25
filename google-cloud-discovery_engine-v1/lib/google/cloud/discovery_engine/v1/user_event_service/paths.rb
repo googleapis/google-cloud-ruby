@@ -122,6 +122,27 @@ module Google
               resource.call(**args)
             end
 
+            ##
+            # Create a fully-qualified Engine resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param collection [String]
+            # @param engine [String]
+            #
+            # @return [::String]
+            def engine_path project:, location:, collection:, engine:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "collection cannot contain /" if collection.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/collections/#{collection}/engines/#{engine}"
+            end
+
             extend self
           end
         end

@@ -57,6 +57,9 @@ module Google
         # @!attribute [r] generated_uri_pattern
         #   @return [::String]
         #     Output only. This is system-generated based on the provided_uri_pattern.
+        # @!attribute [r] root_domain_uri
+        #   @return [::String]
+        #     Output only. Root domain of the provided_uri_pattern.
         # @!attribute [r] site_verification_info
         #   @return [::Google::Cloud::DiscoveryEngine::V1::SiteVerificationInfo]
         #     Output only. Site ownership and validity verification status.

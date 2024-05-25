@@ -22,7 +22,7 @@ module Google
     module DiscoveryEngine
       module V1
         # UserEvent captures all metadata information Discovery Engine API needs to
-        # know about how end users interact with customers' website.
+        # know about how end users interact with your website.
         # @!attribute [rw] event_type
         #   @return [::String]
         #     Required. User event type. Allowed values are:
@@ -63,6 +63,27 @@ module Google
         #     Analytics [Client
         #     ID](https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference#clientId)
         #     for this field.
+        # @!attribute [rw] engine
+        #   @return [::String]
+        #     The {::Google::Cloud::DiscoveryEngine::V1::Engine Engine} resource name, in the
+        #     form of
+        #     `projects/{project}/locations/{location}/collections/{collection_id}/engines/{engine_id}`.
+        #
+        #     Optional. Only required for
+        #     {::Google::Cloud::DiscoveryEngine::V1::Engine Engine} produced user events. For
+        #     example, user events from blended search.
+        # @!attribute [rw] data_store
+        #   @return [::String]
+        #     The {::Google::Cloud::DiscoveryEngine::V1::DataStore DataStore} resource full
+        #     name, of the form
+        #     `projects/{project}/locations/{location}/collections/{collection_id}/dataStores/{data_store_id}`.
+        #
+        #     Optional. Only required for user events whose data store can't by
+        #     determined by
+        #     {::Google::Cloud::DiscoveryEngine::V1::UserEvent#engine UserEvent.engine} or
+        #     {::Google::Cloud::DiscoveryEngine::V1::UserEvent#documents UserEvent.documents}.
+        #     If data store is set in the parent of write/import/collect user event
+        #     requests, this field can be omitted.
         # @!attribute [rw] event_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Only required for
@@ -187,7 +208,7 @@ module Google
         #   @return [::Array<::String>]
         #     A list of identifiers for the independent experiment groups this user event
         #     belongs to. This is used to distinguish between user events associated with
-        #     different experiment setups on the customer end.
+        #     different experiment setups.
         # @!attribute [rw] promotion_ids
         #   @return [::Array<::String>]
         #     The promotion IDs if this is an event associated with promotions.
@@ -415,7 +436,7 @@ module Google
         #   @return [::Integer]
         #     Quantity of the Document associated with the user event. Defaults to 1.
         #
-        #     For example, this field will be 2 if two quantities of the same Document
+        #     For example, this field is 2 if two quantities of the same Document
         #     are involved in a `add-to-cart` event.
         #
         #     Required for events of the following event types:

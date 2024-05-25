@@ -89,7 +89,7 @@ module Google
         #     The restriction of the Engine industry vertical is based on
         #     {::Google::Cloud::DiscoveryEngine::V1::DataStore DataStore}: If unspecified,
         #     default to `GENERIC`. Vertical on Engine has to match vertical of the
-        #     DataStore liniked to the engine.
+        #     DataStore linked to the engine.
         # @!attribute [rw] common_config
         #   @return [::Google::Cloud::DiscoveryEngine::V1::Engine::CommonConfig]
         #     Common config spec that specifies the metadata of the engine.
@@ -187,8 +187,8 @@ module Google
           # Common configurations for an Engine.
           # @!attribute [rw] company_name
           #   @return [::String]
-          #     Immutable. The name of the company, business or entity that is associated
-          #     with the engine. Setting this may help improve LLM related features.
+          #     The name of the company, business or entity that is associated with the
+          #     engine. Setting this may help improve LLM related features.
           class CommonConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -65,6 +65,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::UserEventService::ClientTest < Minit
     # Create request parameters for a unary method.
     parent = "hello world"
     user_event = {}
+    write_async = true
 
     write_user_event_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :write_user_event, name
@@ -72,6 +73,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::UserEventService::ClientTest < Minit
       assert_equal "hello world", request["parent"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DiscoveryEngine::V1::UserEvent), request["user_event"]
       assert request.has_user_event?
+      assert_equal true, request["write_async"]
       refute_nil options
     end
 
@@ -82,31 +84,31 @@ class ::Google::Cloud::DiscoveryEngine::V1::UserEventService::ClientTest < Minit
       end
 
       # Use hash object
-      client.write_user_event({ parent: parent, user_event: user_event }) do |response, operation|
+      client.write_user_event({ parent: parent, user_event: user_event, write_async: write_async }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.write_user_event parent: parent, user_event: user_event do |response, operation|
+      client.write_user_event parent: parent, user_event: user_event, write_async: write_async do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.write_user_event ::Google::Cloud::DiscoveryEngine::V1::WriteUserEventRequest.new(parent: parent, user_event: user_event) do |response, operation|
+      client.write_user_event ::Google::Cloud::DiscoveryEngine::V1::WriteUserEventRequest.new(parent: parent, user_event: user_event, write_async: write_async) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.write_user_event({ parent: parent, user_event: user_event }, grpc_options) do |response, operation|
+      client.write_user_event({ parent: parent, user_event: user_event, write_async: write_async }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.write_user_event(::Google::Cloud::DiscoveryEngine::V1::WriteUserEventRequest.new(parent: parent, user_event: user_event), grpc_options) do |response, operation|
+      client.write_user_event(::Google::Cloud::DiscoveryEngine::V1::WriteUserEventRequest.new(parent: parent, user_event: user_event, write_async: write_async), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
