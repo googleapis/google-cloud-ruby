@@ -14,7 +14,7 @@
 
 require "storage_helper"
 
-describe Google::Cloud::Storage::Bucket, :soft_delete, :storage do
+describe Google::Cloud::Storage::Bucket, :hierarchical_namespace, :storage do
   let(:bucket_name) { $bucket_names[0] }
   let :bucket do
     storage.bucket(bucket_name) ||
