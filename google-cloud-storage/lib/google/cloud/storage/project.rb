@@ -421,6 +421,7 @@ module Google
         #     b.lifecycle.add_set_storage_class_rule "COLDLINE", age: 10
         #   end
         #
+        # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
         def create_bucket bucket_name,
                           acl: nil,
                           default_acl: nil,
@@ -435,11 +436,13 @@ module Google
                           requester_pays: nil,
                           user_project: nil,
                           autoclass_enabled: false,
-                          enable_object_retention: nil
+                          enable_object_retention: nil,
+                          hierarchical_namespace: nil
           params = {
             name: bucket_name,
             location: location,
-            custom_placement_config: custom_placement_config
+            custom_placement_config: custom_placement_config,
+            hierarchical_namespace: hierarchical_namespace
           }.delete_if { |_, v| v.nil? }
           new_bucket = Google::Apis::StorageV1::Bucket.new(**params)
           storage_class = storage_class_for storage_class
@@ -452,6 +455,7 @@ module Google
             b.website_404 = website_404 unless website_404.nil?
             b.versioning = versioning unless versioning.nil?
             b.requester_pays = requester_pays unless requester_pays.nil?
+            b.hierarchical_namespace = hierarchical_namespace unless hierarchical_namespace.nil?
           end
           yield updater if block_given?
           updater.check_for_changed_labels!
@@ -463,6 +467,7 @@ module Google
                         enable_object_retention: enable_object_retention
           Bucket.from_gapi gapi, service, user_project: user_project
         end
+        # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
         ##
         # Creates a new HMAC key.
