@@ -371,7 +371,12 @@ describe Google::Cloud::Storage::Bucket, :storage do
 
     _(storage.bucket(single_use_bucket_name)).must_be_nil
 
-    single_use_bucket = safe_gcs_execute { storage.create_bucket single_use_bucket_name, hierarchical_namespace: hierarchical_namespace }
+    single_use_bucket = safe_gcs_execute {
+      storage.create_bucket single_use_bucket_name do |b|
+        b.uniform_bucket_level_access = true
+        b.hierarchical_namespace = hierarchical_namespace
+      end
+    }
 
     _(single_use_bucket.hierarchical_namespace).wont_be_nil
     _(single_use_bucket.hierarchical_namespace.enabled).must_equal true
