@@ -1223,7 +1223,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload read(session: nil, transaction: nil, table: nil, index: nil, columns: nil, key_set: nil, limit: nil, resume_token: nil, partition_token: nil, request_options: nil, directed_read_options: nil, data_boost_enabled: nil)
+            # @overload read(session: nil, transaction: nil, table: nil, index: nil, columns: nil, key_set: nil, limit: nil, resume_token: nil, partition_token: nil, request_options: nil, directed_read_options: nil, data_boost_enabled: nil, order_by: nil, lock_hint: nil)
             #   Pass arguments to `read` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1288,6 +1288,17 @@ module Google
             #
             #     If the field is set to `true` but the request does not set
             #     `partition_token`, the API returns an `INVALID_ARGUMENT` error.
+            #   @param order_by [::Google::Cloud::Spanner::V1::ReadRequest::OrderBy]
+            #     Optional. Order for the returned rows.
+            #
+            #     By default, Spanner will return result rows in primary key order except for
+            #     PartitionRead requests. For applications that do not require rows to be
+            #     returned in primary key (`ORDER_BY_PRIMARY_KEY`) order, setting
+            #     `ORDER_BY_NO_ORDER` option allows Spanner to optimize row retrieval,
+            #     resulting in lower latencies in certain cases (e.g. bulk point lookups).
+            #   @param lock_hint [::Google::Cloud::Spanner::V1::ReadRequest::LockHint]
+            #     Optional. Lock Hint for the request, it can only be used with read-write
+            #     transactions.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Spanner::V1::ResultSet]
@@ -1371,7 +1382,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload streaming_read(session: nil, transaction: nil, table: nil, index: nil, columns: nil, key_set: nil, limit: nil, resume_token: nil, partition_token: nil, request_options: nil, directed_read_options: nil, data_boost_enabled: nil)
+            # @overload streaming_read(session: nil, transaction: nil, table: nil, index: nil, columns: nil, key_set: nil, limit: nil, resume_token: nil, partition_token: nil, request_options: nil, directed_read_options: nil, data_boost_enabled: nil, order_by: nil, lock_hint: nil)
             #   Pass arguments to `streaming_read` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1436,6 +1447,17 @@ module Google
             #
             #     If the field is set to `true` but the request does not set
             #     `partition_token`, the API returns an `INVALID_ARGUMENT` error.
+            #   @param order_by [::Google::Cloud::Spanner::V1::ReadRequest::OrderBy]
+            #     Optional. Order for the returned rows.
+            #
+            #     By default, Spanner will return result rows in primary key order except for
+            #     PartitionRead requests. For applications that do not require rows to be
+            #     returned in primary key (`ORDER_BY_PRIMARY_KEY`) order, setting
+            #     `ORDER_BY_NO_ORDER` option allows Spanner to optimize row retrieval,
+            #     resulting in lower latencies in certain cases (e.g. bulk point lookups).
+            #   @param lock_hint [::Google::Cloud::Spanner::V1::ReadRequest::LockHint]
+            #     Optional. Lock Hint for the request, it can only be used with read-write
+            #     transactions.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Enumerable<::Google::Cloud::Spanner::V1::PartialResultSet>]
