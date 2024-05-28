@@ -93,6 +93,23 @@ module Google
               rpc :GetLiveConfig, ::Google::Cloud::Video::Stitcher::V1::GetLiveConfigRequest, ::Google::Cloud::Video::Stitcher::V1::LiveConfig
               # Deletes the specified live config.
               rpc :DeleteLiveConfig, ::Google::Cloud::Video::Stitcher::V1::DeleteLiveConfigRequest, ::Google::Longrunning::Operation
+              # Updates the specified LiveConfig. Only update fields specified
+              # in the call method body.
+              rpc :UpdateLiveConfig, ::Google::Cloud::Video::Stitcher::V1::UpdateLiveConfigRequest, ::Google::Longrunning::Operation
+              # Registers the VOD config with the provided unique ID in
+              # the specified region.
+              rpc :CreateVodConfig, ::Google::Cloud::Video::Stitcher::V1::CreateVodConfigRequest, ::Google::Longrunning::Operation
+              # Lists all VOD configs managed by the Video Stitcher API that
+              # belong to the specified project and region.
+              rpc :ListVodConfigs, ::Google::Cloud::Video::Stitcher::V1::ListVodConfigsRequest, ::Google::Cloud::Video::Stitcher::V1::ListVodConfigsResponse
+              # Returns the specified VOD config managed by the Video
+              # Stitcher API service.
+              rpc :GetVodConfig, ::Google::Cloud::Video::Stitcher::V1::GetVodConfigRequest, ::Google::Cloud::Video::Stitcher::V1::VodConfig
+              # Deletes the specified VOD config.
+              rpc :DeleteVodConfig, ::Google::Cloud::Video::Stitcher::V1::DeleteVodConfigRequest, ::Google::Longrunning::Operation
+              # Updates the specified VOD config. Only update fields specified
+              # in the call method body.
+              rpc :UpdateVodConfig, ::Google::Cloud::Video::Stitcher::V1::UpdateVodConfigRequest, ::Google::Longrunning::Operation
             end
 
             Stub = Service.rpc_stub_class

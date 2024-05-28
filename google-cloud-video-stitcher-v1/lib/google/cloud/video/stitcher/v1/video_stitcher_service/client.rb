@@ -2525,6 +2525,608 @@ module Google
               end
 
               ##
+              # Updates the specified LiveConfig. Only update fields specified
+              # in the call method body.
+              #
+              # @overload update_live_config(request, options = nil)
+              #   Pass arguments to `update_live_config` via a request object, either of type
+              #   {::Google::Cloud::Video::Stitcher::V1::UpdateLiveConfigRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Video::Stitcher::V1::UpdateLiveConfigRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload update_live_config(live_config: nil, update_mask: nil)
+              #   Pass arguments to `update_live_config` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param live_config [::Google::Cloud::Video::Stitcher::V1::LiveConfig, ::Hash]
+              #     Required. The LiveConfig resource which replaces the resource on the
+              #     server.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Required. The update mask applies to the resource.
+              #     For the `FieldMask` definition, see
+              #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::Operation]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/video/stitcher/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Video::Stitcher::V1::UpdateLiveConfigRequest.new
+              #
+              #   # Call the update_live_config method.
+              #   result = client.update_live_config request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def update_live_config request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Video::Stitcher::V1::UpdateLiveConfigRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.update_live_config.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Video::Stitcher::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.live_config&.name
+                  header_params["live_config.name"] = request.live_config.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.update_live_config.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.update_live_config.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @video_stitcher_service_stub.call_rpc :update_live_config, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
+                  yield response, operation if block_given?
+                  return response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Registers the VOD config with the provided unique ID in
+              # the specified region.
+              #
+              # @overload create_vod_config(request, options = nil)
+              #   Pass arguments to `create_vod_config` via a request object, either of type
+              #   {::Google::Cloud::Video::Stitcher::V1::CreateVodConfigRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Video::Stitcher::V1::CreateVodConfigRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload create_vod_config(parent: nil, vod_config_id: nil, vod_config: nil, request_id: nil)
+              #   Pass arguments to `create_vod_config` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The project in which the VOD config should be created, in
+              #     the form of `projects/{project_number}/locations/{location}`.
+              #   @param vod_config_id [::String]
+              #     Required. The unique identifier ID to use for the VOD config.
+              #   @param vod_config [::Google::Cloud::Video::Stitcher::V1::VodConfig, ::Hash]
+              #     Required. The VOD config resource to create.
+              #   @param request_id [::String]
+              #     Optional. A request ID to identify requests. Specify a unique request ID
+              #     so that if you must retry your request, the server will know to ignore
+              #     the request if it has already been completed. The server will guarantee
+              #     that for at least 60 minutes since the first request.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request ID,
+              #     the server can check if original operation with the same request ID was
+              #     received, and if so, will ignore the second request. This prevents clients
+              #     from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported `(00000000-0000-0000-0000-000000000000)`.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::Operation]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/video/stitcher/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Video::Stitcher::V1::CreateVodConfigRequest.new
+              #
+              #   # Call the create_vod_config method.
+              #   result = client.create_vod_config request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def create_vod_config request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Video::Stitcher::V1::CreateVodConfigRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.create_vod_config.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Video::Stitcher::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.create_vod_config.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.create_vod_config.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @video_stitcher_service_stub.call_rpc :create_vod_config, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
+                  yield response, operation if block_given?
+                  return response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists all VOD configs managed by the Video Stitcher API that
+              # belong to the specified project and region.
+              #
+              # @overload list_vod_configs(request, options = nil)
+              #   Pass arguments to `list_vod_configs` via a request object, either of type
+              #   {::Google::Cloud::Video::Stitcher::V1::ListVodConfigsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Video::Stitcher::V1::ListVodConfigsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload list_vod_configs(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+              #   Pass arguments to `list_vod_configs` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The project that contains the list of VOD configs, in the
+              #     form of `projects/{project_number}/locations/{location}`.
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of items to return.
+              #   @param page_token [::String]
+              #     Optional. The next_page_token value returned from a previous List request,
+              #     if any.
+              #   @param filter [::String]
+              #     Optional. The filter to apply to list results (see
+              #     [Filtering](https://google.aip.dev/160)).
+              #   @param order_by [::String]
+              #     Optional. Specifies the ordering of results following
+              #     [Cloud API
+              #     syntax](https://cloud.google.com/apis/design/design_patterns#sorting_order).
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Video::Stitcher::V1::VodConfig>]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::PagedEnumerable<::Google::Cloud::Video::Stitcher::V1::VodConfig>]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/video/stitcher/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Video::Stitcher::V1::ListVodConfigsRequest.new
+              #
+              #   # Call the list_vod_configs method.
+              #   result = client.list_vod_configs request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Video::Stitcher::V1::VodConfig.
+              #     p item
+              #   end
+              #
+              def list_vod_configs request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Video::Stitcher::V1::ListVodConfigsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.list_vod_configs.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Video::Stitcher::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.list_vod_configs.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.list_vod_configs.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @video_stitcher_service_stub.call_rpc :list_vod_configs, request, options: options do |response, operation|
+                  response = ::Gapic::PagedEnumerable.new @video_stitcher_service_stub, :list_vod_configs, request, response, operation, options
+                  yield response, operation if block_given?
+                  return response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Returns the specified VOD config managed by the Video
+              # Stitcher API service.
+              #
+              # @overload get_vod_config(request, options = nil)
+              #   Pass arguments to `get_vod_config` via a request object, either of type
+              #   {::Google::Cloud::Video::Stitcher::V1::GetVodConfigRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Video::Stitcher::V1::GetVodConfigRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload get_vod_config(name: nil)
+              #   Pass arguments to `get_vod_config` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the VOD config to be retrieved, in the form
+              #     of `projects/{project_number}/locations/{location}/vodConfigs/{id}`.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Cloud::Video::Stitcher::V1::VodConfig]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Cloud::Video::Stitcher::V1::VodConfig]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/video/stitcher/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Video::Stitcher::V1::GetVodConfigRequest.new
+              #
+              #   # Call the get_vod_config method.
+              #   result = client.get_vod_config request
+              #
+              #   # The returned object is of type Google::Cloud::Video::Stitcher::V1::VodConfig.
+              #   p result
+              #
+              def get_vod_config request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Video::Stitcher::V1::GetVodConfigRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.get_vod_config.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Video::Stitcher::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.get_vod_config.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.get_vod_config.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @video_stitcher_service_stub.call_rpc :get_vod_config, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                  return response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes the specified VOD config.
+              #
+              # @overload delete_vod_config(request, options = nil)
+              #   Pass arguments to `delete_vod_config` via a request object, either of type
+              #   {::Google::Cloud::Video::Stitcher::V1::DeleteVodConfigRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Video::Stitcher::V1::DeleteVodConfigRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload delete_vod_config(name: nil)
+              #   Pass arguments to `delete_vod_config` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the VOD config to be deleted, in the form of
+              #     `projects/{project_number}/locations/{location}/vodConfigs/{id}`.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::Operation]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/video/stitcher/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Video::Stitcher::V1::DeleteVodConfigRequest.new
+              #
+              #   # Call the delete_vod_config method.
+              #   result = client.delete_vod_config request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_vod_config request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Video::Stitcher::V1::DeleteVodConfigRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.delete_vod_config.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Video::Stitcher::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.delete_vod_config.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.delete_vod_config.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @video_stitcher_service_stub.call_rpc :delete_vod_config, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
+                  yield response, operation if block_given?
+                  return response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates the specified VOD config. Only update fields specified
+              # in the call method body.
+              #
+              # @overload update_vod_config(request, options = nil)
+              #   Pass arguments to `update_vod_config` via a request object, either of type
+              #   {::Google::Cloud::Video::Stitcher::V1::UpdateVodConfigRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Video::Stitcher::V1::UpdateVodConfigRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload update_vod_config(vod_config: nil, update_mask: nil)
+              #   Pass arguments to `update_vod_config` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param vod_config [::Google::Cloud::Video::Stitcher::V1::VodConfig, ::Hash]
+              #     Required. The VOD config resource which replaces the resource on the
+              #     server.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Required. The update mask applies to the resource.
+              #     For the `FieldMask` definition, see
+              #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::Operation]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/video/stitcher/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Video::Stitcher::V1::UpdateVodConfigRequest.new
+              #
+              #   # Call the update_vod_config method.
+              #   result = client.update_vod_config request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def update_vod_config request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Video::Stitcher::V1::UpdateVodConfigRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.update_vod_config.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Video::Stitcher::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.vod_config&.name
+                  header_params["vod_config.name"] = request.vod_config.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.update_vod_config.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.update_vod_config.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @video_stitcher_service_stub.call_rpc :update_vod_config, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
+                  yield response, operation if block_given?
+                  return response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the VideoStitcherService API.
               #
               # This class represents the configuration for VideoStitcherService,
@@ -2797,6 +3399,36 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :delete_live_config
+                  ##
+                  # RPC-specific configuration for `update_live_config`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_live_config
+                  ##
+                  # RPC-specific configuration for `create_vod_config`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_vod_config
+                  ##
+                  # RPC-specific configuration for `list_vod_configs`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_vod_configs
+                  ##
+                  # RPC-specific configuration for `get_vod_config`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_vod_config
+                  ##
+                  # RPC-specific configuration for `delete_vod_config`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_vod_config
+                  ##
+                  # RPC-specific configuration for `update_vod_config`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_vod_config
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -2848,6 +3480,18 @@ module Google
                     @get_live_config = ::Gapic::Config::Method.new get_live_config_config
                     delete_live_config_config = parent_rpcs.delete_live_config if parent_rpcs.respond_to? :delete_live_config
                     @delete_live_config = ::Gapic::Config::Method.new delete_live_config_config
+                    update_live_config_config = parent_rpcs.update_live_config if parent_rpcs.respond_to? :update_live_config
+                    @update_live_config = ::Gapic::Config::Method.new update_live_config_config
+                    create_vod_config_config = parent_rpcs.create_vod_config if parent_rpcs.respond_to? :create_vod_config
+                    @create_vod_config = ::Gapic::Config::Method.new create_vod_config_config
+                    list_vod_configs_config = parent_rpcs.list_vod_configs if parent_rpcs.respond_to? :list_vod_configs
+                    @list_vod_configs = ::Gapic::Config::Method.new list_vod_configs_config
+                    get_vod_config_config = parent_rpcs.get_vod_config if parent_rpcs.respond_to? :get_vod_config
+                    @get_vod_config = ::Gapic::Config::Method.new get_vod_config_config
+                    delete_vod_config_config = parent_rpcs.delete_vod_config if parent_rpcs.respond_to? :delete_vod_config
+                    @delete_vod_config = ::Gapic::Config::Method.new delete_vod_config_config
+                    update_vod_config_config = parent_rpcs.update_vod_config if parent_rpcs.respond_to? :update_vod_config
+                    @update_vod_config = ::Gapic::Config::Method.new update_vod_config_config
 
                     yield self if block_given?
                   end

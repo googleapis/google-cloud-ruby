@@ -473,6 +473,128 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Request message for VideoStitcherService.updateLiveConfig.
+          # @!attribute [rw] live_config
+          #   @return [::Google::Cloud::Video::Stitcher::V1::LiveConfig]
+          #     Required. The LiveConfig resource which replaces the resource on the
+          #     server.
+          # @!attribute [rw] update_mask
+          #   @return [::Google::Protobuf::FieldMask]
+          #     Required. The update mask applies to the resource.
+          #     For the `FieldMask` definition, see
+          #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+          class UpdateLiveConfigRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for VideoStitcherService.createVodConfig
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The project in which the VOD config should be created, in
+          #     the form of `projects/{project_number}/locations/{location}`.
+          # @!attribute [rw] vod_config_id
+          #   @return [::String]
+          #     Required. The unique identifier ID to use for the VOD config.
+          # @!attribute [rw] vod_config
+          #   @return [::Google::Cloud::Video::Stitcher::V1::VodConfig]
+          #     Required. The VOD config resource to create.
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     Optional. A request ID to identify requests. Specify a unique request ID
+          #     so that if you must retry your request, the server will know to ignore
+          #     the request if it has already been completed. The server will guarantee
+          #     that for at least 60 minutes since the first request.
+          #
+          #     For example, consider a situation where you make an initial request and the
+          #     request times out. If you make the request again with the same request ID,
+          #     the server can check if original operation with the same request ID was
+          #     received, and if so, will ignore the second request. This prevents clients
+          #     from accidentally creating duplicate commitments.
+          #
+          #     The request ID must be a valid UUID with the exception that zero UUID is
+          #     not supported `(00000000-0000-0000-0000-000000000000)`.
+          class CreateVodConfigRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for VideoStitcherService.listVodConfig.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The project that contains the list of VOD configs, in the
+          #     form of `projects/{project_number}/locations/{location}`.
+          # @!attribute [rw] page_size
+          #   @return [::Integer]
+          #     Optional. The maximum number of items to return.
+          # @!attribute [rw] page_token
+          #   @return [::String]
+          #     Optional. The next_page_token value returned from a previous List request,
+          #     if any.
+          # @!attribute [rw] filter
+          #   @return [::String]
+          #     Optional. The filter to apply to list results (see
+          #     [Filtering](https://google.aip.dev/160)).
+          # @!attribute [rw] order_by
+          #   @return [::String]
+          #     Optional. Specifies the ordering of results following
+          #     [Cloud API
+          #     syntax](https://cloud.google.com/apis/design/design_patterns#sorting_order).
+          class ListVodConfigsRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Response message for VideoStitcher.ListVodConfig.
+          # @!attribute [rw] vod_configs
+          #   @return [::Array<::Google::Cloud::Video::Stitcher::V1::VodConfig>]
+          #     List of VOD configs.
+          # @!attribute [rw] next_page_token
+          #   @return [::String]
+          #     The pagination token.
+          # @!attribute [rw] unreachable
+          #   @return [::Array<::String>]
+          #     Locations that could not be reached.
+          class ListVodConfigsResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for VideoStitcherService.getVodConfig.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The name of the VOD config to be retrieved, in the form
+          #     of `projects/{project_number}/locations/{location}/vodConfigs/{id}`.
+          class GetVodConfigRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for VideoStitcherService.deleteVodConfig.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The name of the VOD config to be deleted, in the form of
+          #     `projects/{project_number}/locations/{location}/vodConfigs/{id}`.
+          class DeleteVodConfigRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for VideoStitcherService.updateVodConfig.
+          # @!attribute [rw] vod_config
+          #   @return [::Google::Cloud::Video::Stitcher::V1::VodConfig]
+          #     Required. The VOD config resource which replaces the resource on the
+          #     server.
+          # @!attribute [rw] update_mask
+          #   @return [::Google::Protobuf::FieldMask]
+          #     Required. The update mask applies to the resource.
+          #     For the `FieldMask` definition, see
+          #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+          class UpdateVodConfigRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Represents the metadata of the long-running operation.
           # @!attribute [rw] create_time
           #   @return [::Google::Protobuf::Timestamp]

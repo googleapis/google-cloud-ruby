@@ -1577,6 +1577,397 @@ class ::Google::Cloud::Video::Stitcher::V1::VideoStitcherService::ClientTest < M
     end
   end
 
+  def test_update_live_config
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    live_config = {}
+    update_mask = {}
+
+    update_live_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_live_config, name
+      assert_kind_of ::Google::Cloud::Video::Stitcher::V1::UpdateLiveConfigRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Video::Stitcher::V1::LiveConfig), request["live_config"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_live_config_client_stub do
+      # Create client
+      client = ::Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_live_config({ live_config: live_config, update_mask: update_mask }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_live_config live_config: live_config, update_mask: update_mask do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_live_config ::Google::Cloud::Video::Stitcher::V1::UpdateLiveConfigRequest.new(live_config: live_config, update_mask: update_mask) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_live_config({ live_config: live_config, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_live_config(::Google::Cloud::Video::Stitcher::V1::UpdateLiveConfigRequest.new(live_config: live_config, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_live_config_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_vod_config
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    vod_config_id = "hello world"
+    vod_config = {}
+    request_id = "hello world"
+
+    create_vod_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_vod_config, name
+      assert_kind_of ::Google::Cloud::Video::Stitcher::V1::CreateVodConfigRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["vod_config_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Video::Stitcher::V1::VodConfig), request["vod_config"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_vod_config_client_stub do
+      # Create client
+      client = ::Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_vod_config({ parent: parent, vod_config_id: vod_config_id, vod_config: vod_config, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_vod_config parent: parent, vod_config_id: vod_config_id, vod_config: vod_config, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_vod_config ::Google::Cloud::Video::Stitcher::V1::CreateVodConfigRequest.new(parent: parent, vod_config_id: vod_config_id, vod_config: vod_config, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_vod_config({ parent: parent, vod_config_id: vod_config_id, vod_config: vod_config, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_vod_config(::Google::Cloud::Video::Stitcher::V1::CreateVodConfigRequest.new(parent: parent, vod_config_id: vod_config_id, vod_config: vod_config, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_vod_config_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_vod_configs
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Video::Stitcher::V1::ListVodConfigsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_vod_configs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_vod_configs, name
+      assert_kind_of ::Google::Cloud::Video::Stitcher::V1::ListVodConfigsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_vod_configs_client_stub do
+      # Create client
+      client = ::Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_vod_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_vod_configs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_vod_configs ::Google::Cloud::Video::Stitcher::V1::ListVodConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_vod_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_vod_configs(::Google::Cloud::Video::Stitcher::V1::ListVodConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_vod_configs_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_vod_config
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Video::Stitcher::V1::VodConfig.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_vod_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_vod_config, name
+      assert_kind_of ::Google::Cloud::Video::Stitcher::V1::GetVodConfigRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_vod_config_client_stub do
+      # Create client
+      client = ::Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_vod_config({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_vod_config name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_vod_config ::Google::Cloud::Video::Stitcher::V1::GetVodConfigRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_vod_config({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_vod_config(::Google::Cloud::Video::Stitcher::V1::GetVodConfigRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_vod_config_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_vod_config
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_vod_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_vod_config, name
+      assert_kind_of ::Google::Cloud::Video::Stitcher::V1::DeleteVodConfigRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_vod_config_client_stub do
+      # Create client
+      client = ::Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_vod_config({ name: name }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_vod_config name: name do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_vod_config ::Google::Cloud::Video::Stitcher::V1::DeleteVodConfigRequest.new(name: name) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_vod_config({ name: name }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_vod_config(::Google::Cloud::Video::Stitcher::V1::DeleteVodConfigRequest.new(name: name), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_vod_config_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_vod_config
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    vod_config = {}
+    update_mask = {}
+
+    update_vod_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_vod_config, name
+      assert_kind_of ::Google::Cloud::Video::Stitcher::V1::UpdateVodConfigRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Video::Stitcher::V1::VodConfig), request["vod_config"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_vod_config_client_stub do
+      # Create client
+      client = ::Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_vod_config({ vod_config: vod_config, update_mask: update_mask }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_vod_config vod_config: vod_config, update_mask: update_mask do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_vod_config ::Google::Cloud::Video::Stitcher::V1::UpdateVodConfigRequest.new(vod_config: vod_config, update_mask: update_mask) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_vod_config({ vod_config: vod_config, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_vod_config(::Google::Cloud::Video::Stitcher::V1::UpdateVodConfigRequest.new(vod_config: vod_config, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_vod_config_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

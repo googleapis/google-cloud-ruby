@@ -161,6 +161,25 @@ module Google
               end
 
               ##
+              # Create a fully-qualified VodConfig resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/locations/{location}/vodConfigs/{vod_config}`
+              #
+              # @param project [String]
+              # @param location [String]
+              # @param vod_config [String]
+              #
+              # @return [::String]
+              def vod_config_path project:, location:, vod_config:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                "projects/#{project}/locations/#{location}/vodConfigs/#{vod_config}"
+              end
+
+              ##
               # Create a fully-qualified VodSession resource string.
               #
               # The resource will be in the following format:
