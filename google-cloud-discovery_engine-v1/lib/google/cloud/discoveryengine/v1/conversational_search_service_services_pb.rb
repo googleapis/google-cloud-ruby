@@ -57,6 +57,31 @@ module Google
             # Lists all Conversations by their parent
             # [DataStore][google.cloud.discoveryengine.v1.DataStore].
             rpc :ListConversations, ::Google::Cloud::DiscoveryEngine::V1::ListConversationsRequest, ::Google::Cloud::DiscoveryEngine::V1::ListConversationsResponse
+            # Answer query method.
+            rpc :AnswerQuery, ::Google::Cloud::DiscoveryEngine::V1::AnswerQueryRequest, ::Google::Cloud::DiscoveryEngine::V1::AnswerQueryResponse
+            # Gets a Answer.
+            rpc :GetAnswer, ::Google::Cloud::DiscoveryEngine::V1::GetAnswerRequest, ::Google::Cloud::DiscoveryEngine::V1::Answer
+            # Creates a Session.
+            #
+            # If the [Session][google.cloud.discoveryengine.v1.Session] to create already
+            # exists, an ALREADY_EXISTS error is returned.
+            rpc :CreateSession, ::Google::Cloud::DiscoveryEngine::V1::CreateSessionRequest, ::Google::Cloud::DiscoveryEngine::V1::Session
+            # Deletes a Session.
+            #
+            # If the [Session][google.cloud.discoveryengine.v1.Session] to delete does
+            # not exist, a NOT_FOUND error is returned.
+            rpc :DeleteSession, ::Google::Cloud::DiscoveryEngine::V1::DeleteSessionRequest, ::Google::Protobuf::Empty
+            # Updates a Session.
+            #
+            # [Session][google.cloud.discoveryengine.v1.Session] action type cannot be
+            # changed. If the [Session][google.cloud.discoveryengine.v1.Session] to
+            # update does not exist, a NOT_FOUND error is returned.
+            rpc :UpdateSession, ::Google::Cloud::DiscoveryEngine::V1::UpdateSessionRequest, ::Google::Cloud::DiscoveryEngine::V1::Session
+            # Gets a Session.
+            rpc :GetSession, ::Google::Cloud::DiscoveryEngine::V1::GetSessionRequest, ::Google::Cloud::DiscoveryEngine::V1::Session
+            # Lists all Sessions by their parent
+            # [DataStore][google.cloud.discoveryengine.v1.DataStore].
+            rpc :ListSessions, ::Google::Cloud::DiscoveryEngine::V1::ListSessionsRequest, ::Google::Cloud::DiscoveryEngine::V1::ListSessionsResponse
           end
 
           Stub = Service.rpc_stub_class

@@ -80,6 +80,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::UserEventService::Rest::ClientTest <
     # Create request parameters for a unary method.
     parent = "hello world"
     user_event = {}
+    write_async = true
 
     write_user_event_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -95,27 +96,27 @@ class ::Google::Cloud::DiscoveryEngine::V1::UserEventService::Rest::ClientTest <
         end
 
         # Use hash object
-        client.write_user_event({ parent: parent, user_event: user_event }) do |_result, response|
+        client.write_user_event({ parent: parent, user_event: user_event, write_async: write_async }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.write_user_event parent: parent, user_event: user_event do |_result, response|
+        client.write_user_event parent: parent, user_event: user_event, write_async: write_async do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.write_user_event ::Google::Cloud::DiscoveryEngine::V1::WriteUserEventRequest.new(parent: parent, user_event: user_event) do |_result, response|
+        client.write_user_event ::Google::Cloud::DiscoveryEngine::V1::WriteUserEventRequest.new(parent: parent, user_event: user_event, write_async: write_async) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.write_user_event({ parent: parent, user_event: user_event }, call_options) do |_result, response|
+        client.write_user_event({ parent: parent, user_event: user_event, write_async: write_async }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.write_user_event(::Google::Cloud::DiscoveryEngine::V1::WriteUserEventRequest.new(parent: parent, user_event: user_event), call_options) do |_result, response|
+        client.write_user_event(::Google::Cloud::DiscoveryEngine::V1::WriteUserEventRequest.new(parent: parent, user_event: user_event, write_async: write_async), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

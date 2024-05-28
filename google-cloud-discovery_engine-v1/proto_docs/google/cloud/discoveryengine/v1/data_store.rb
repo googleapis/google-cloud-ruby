@@ -61,6 +61,9 @@ module Google
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Timestamp the
         #     {::Google::Cloud::DiscoveryEngine::V1::DataStore DataStore} was created at.
+        # @!attribute [rw] document_processing_config
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::DocumentProcessingConfig]
+        #     Configuration for Document understanding and enrichment.
         # @!attribute [rw] starting_schema
         #   @return [::Google::Cloud::DiscoveryEngine::V1::Schema]
         #     The start schema to use for this

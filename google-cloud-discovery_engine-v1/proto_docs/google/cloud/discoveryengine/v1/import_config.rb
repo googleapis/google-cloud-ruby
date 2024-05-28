@@ -24,7 +24,7 @@ module Google
         # Cloud Storage location for input content.
         # @!attribute [rw] input_uris
         #   @return [::Array<::String>]
-        #     Required. Cloud Storage URIs to input files. URI can be up to
+        #     Required. Cloud Storage URIs to input files. Each URI can be up to
         #     2000 characters long. URIs can match the full object path (for example,
         #     `gs://bucket/directory/object.json`) or a pattern matching one or more
         #     files, such as `gs://bucket/directory/*.json`.
@@ -53,7 +53,7 @@ module Google
         #       data store. Each entry after the header is imported as a Document.
         #       This can only be used by the GENERIC Data Store vertical.
         #
-        #     Supported values for user even imports:
+        #     Supported values for user event imports:
         #
         #     * `user_event` (default): One JSON
         #     {::Google::Cloud::DiscoveryEngine::V1::UserEvent UserEvent} per line.
@@ -350,8 +350,8 @@ module Google
         #     of 256 characters.
         # @!attribute [rw] collection_id
         #   @return [::String]
-        #     Required. The Firestore collection to copy the data from with a length
-        #     limit of 1,500 characters.
+        #     Required. The Firestore collection (or entity) to copy the data from with a
+        #     length limit of 1,500 characters.
         # @!attribute [rw] gcs_staging_dir
         #   @return [::String]
         #     Intermediate Cloud Storage directory used for the import with a length
