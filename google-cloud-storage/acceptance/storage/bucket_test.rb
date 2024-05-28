@@ -366,28 +366,28 @@ describe Google::Cloud::Storage::Bucket, :storage do
   end
 
   it "creates new bucket with hierarchical namespace enabled then disables it" do
-    single_use_bucket_name = "single_use_#{bucket_name}"
+    hns_bucket_name = "hns_#{bucket_name}"
     hierarchical_namespace = Google::Apis::StorageV1::Bucket::HierarchicalNamespace.new(enabled: true)
 
-    _(storage.bucket(single_use_bucket_name)).must_be_nil
+    _(storage.bucket(hns_bucket_name)).must_be_nil
 
-    single_use_bucket = safe_gcs_execute {
-      storage.create_bucket single_use_bucket_name do |b|
+    hns_bucket = safe_gcs_execute {
+      storage.create_bucket hns_bucket_name do |b|
         b.uniform_bucket_level_access = true
         b.hierarchical_namespace = hierarchical_namespace
       end
     }
 
-    _(single_use_bucket.hierarchical_namespace).wont_be_nil
-    _(single_use_bucket.hierarchical_namespace.enabled).must_equal true
+    _(hns_bucket.hierarchical_namespace).wont_be_nil
+    _(hns_bucket.hierarchical_namespace.enabled).must_equal true
 
-    single_use_bucket.update do |b|
+    hns_bucket.update do |b|
       b.hierarchical_namespace = Google::Apis::StorageV1::Bucket::HierarchicalNamespace.new(enabled: false)
     end
 
-    _(single_use_bucket.hierarchical_namespace.enabled).must_equal false
+    _(hns_bucket.hierarchical_namespace.enabled).must_equal false
 
-    safe_gcs_execute { single_use_bucket.delete }
-    _(storage.bucket(single_use_bucket_name)).must_be_nil
+    safe_gcs_execute { hns_bucket.delete }
+    _(storage.bucket(hns_bucket_name)).must_be_nil
   end
 end
