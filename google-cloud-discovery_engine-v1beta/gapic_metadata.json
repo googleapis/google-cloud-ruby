@@ -29,6 +29,40 @@
         }
       }
     },
+    "ControlService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DiscoveryEngine::V1beta::ControlService::Client",
+          "rpcs": {
+            "CreateControl": {
+              "methods": [
+                "create_control"
+              ]
+            },
+            "DeleteControl": {
+              "methods": [
+                "delete_control"
+              ]
+            },
+            "UpdateControl": {
+              "methods": [
+                "update_control"
+              ]
+            },
+            "GetControl": {
+              "methods": [
+                "get_control"
+              ]
+            },
+            "ListControls": {
+              "methods": [
+                "list_controls"
+              ]
+            }
+          }
+        }
+      }
+    },
     "SearchService": {
       "clients": {
         "grpc": {
@@ -258,6 +292,20 @@
         }
       }
     },
+    "ProjectService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DiscoveryEngine::V1beta::ProjectService::Client",
+          "rpcs": {
+            "ProvisionProject": {
+              "methods": [
+                "provision_project"
+              ]
+            }
+          }
+        }
+      }
+    },
     "RankService": {
       "clients": {
         "grpc": {
@@ -328,6 +376,11 @@
             "TrainCustomModel": {
               "methods": [
                 "train_custom_model"
+              ]
+            },
+            "ListCustomModels": {
+              "methods": [
+                "list_custom_models"
               ]
             }
           }

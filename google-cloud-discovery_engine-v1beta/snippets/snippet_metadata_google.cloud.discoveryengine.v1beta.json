@@ -132,6 +132,206 @@
       ]
     },
     {
+      "region_tag": "discoveryengine_v1beta_generated_ControlService_CreateControl_sync",
+      "title": "Snippet for the create_control call in the ControlService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::ControlService::Client#create_control.",
+      "file": "control_service/create_control.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_control",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ControlService::Client#create_control",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::CreateControlRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::Control",
+        "client": {
+          "short_name": "ControlService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ControlService::Client"
+        },
+        "method": {
+          "short_name": "CreateControl",
+          "full_name": "google.cloud.discoveryengine.v1beta.ControlService.CreateControl",
+          "service": {
+            "short_name": "ControlService",
+            "full_name": "google.cloud.discoveryengine.v1beta.ControlService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_ControlService_DeleteControl_sync",
+      "title": "Snippet for the delete_control call in the ControlService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::ControlService::Client#delete_control.",
+      "file": "control_service/delete_control.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_control",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ControlService::Client#delete_control",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::DeleteControlRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "ControlService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ControlService::Client"
+        },
+        "method": {
+          "short_name": "DeleteControl",
+          "full_name": "google.cloud.discoveryengine.v1beta.ControlService.DeleteControl",
+          "service": {
+            "short_name": "ControlService",
+            "full_name": "google.cloud.discoveryengine.v1beta.ControlService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_ControlService_UpdateControl_sync",
+      "title": "Snippet for the update_control call in the ControlService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::ControlService::Client#update_control.",
+      "file": "control_service/update_control.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_control",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ControlService::Client#update_control",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::UpdateControlRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::Control",
+        "client": {
+          "short_name": "ControlService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ControlService::Client"
+        },
+        "method": {
+          "short_name": "UpdateControl",
+          "full_name": "google.cloud.discoveryengine.v1beta.ControlService.UpdateControl",
+          "service": {
+            "short_name": "ControlService",
+            "full_name": "google.cloud.discoveryengine.v1beta.ControlService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_ControlService_GetControl_sync",
+      "title": "Snippet for the get_control call in the ControlService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::ControlService::Client#get_control.",
+      "file": "control_service/get_control.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_control",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ControlService::Client#get_control",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::GetControlRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::Control",
+        "client": {
+          "short_name": "ControlService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ControlService::Client"
+        },
+        "method": {
+          "short_name": "GetControl",
+          "full_name": "google.cloud.discoveryengine.v1beta.ControlService.GetControl",
+          "service": {
+            "short_name": "ControlService",
+            "full_name": "google.cloud.discoveryengine.v1beta.ControlService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_ControlService_ListControls_sync",
+      "title": "Snippet for the list_controls call in the ControlService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::ControlService::Client#list_controls.",
+      "file": "control_service/list_controls.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_controls",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ControlService::Client#list_controls",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::ListControlsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::ListControlsResponse",
+        "client": {
+          "short_name": "ControlService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ControlService::Client"
+        },
+        "method": {
+          "short_name": "ListControls",
+          "full_name": "google.cloud.discoveryengine.v1beta.ControlService.ListControls",
+          "service": {
+            "short_name": "ControlService",
+            "full_name": "google.cloud.discoveryengine.v1beta.ControlService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "discoveryengine_v1beta_generated_SearchService_Search_sync",
       "title": "Snippet for the search call in the SearchService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SearchService::Client#search.",
@@ -1532,6 +1732,46 @@
       ]
     },
     {
+      "region_tag": "discoveryengine_v1beta_generated_ProjectService_ProvisionProject_sync",
+      "title": "Snippet for the provision_project call in the ProjectService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::ProjectService::Client#provision_project.",
+      "file": "project_service/provision_project.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "provision_project",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ProjectService::Client#provision_project",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::ProvisionProjectRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ProjectService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ProjectService::Client"
+        },
+        "method": {
+          "short_name": "ProvisionProject",
+          "full_name": "google.cloud.discoveryengine.v1beta.ProjectService.ProvisionProject",
+          "service": {
+            "short_name": "ProjectService",
+            "full_name": "google.cloud.discoveryengine.v1beta.ProjectService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "discoveryengine_v1beta_generated_RankService_Rank_sync",
       "title": "Snippet for the rank call in the RankService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::RankService::Client#rank.",
@@ -1847,6 +2087,46 @@
         {
           "start": 20,
           "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SearchTuningService_ListCustomModels_sync",
+      "title": "Snippet for the list_custom_models call in the SearchTuningService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SearchTuningService::Client#list_custom_models.",
+      "file": "search_tuning_service/list_custom_models.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_custom_models",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SearchTuningService::Client#list_custom_models",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::ListCustomModelsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::ListCustomModelsResponse",
+        "client": {
+          "short_name": "SearchTuningService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SearchTuningService::Client"
+        },
+        "method": {
+          "short_name": "ListCustomModels",
+          "full_name": "google.cloud.discoveryengine.v1beta.SearchTuningService.ListCustomModels",
+          "service": {
+            "short_name": "SearchTuningService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SearchTuningService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
           "type": "FULL"
         }
       ]

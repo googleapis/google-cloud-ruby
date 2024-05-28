@@ -25,7 +25,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Immutable. Fully qualified name
-        #     `project/*/locations/global/collections/{collection}/engines/{engine}/sessions/*/answers/*`
+        #     `projects/{project}/locations/global/collections/{collection}/engines/{engine}/sessions/*/answers/*`
         # @!attribute [rw] state
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Answer::State]
         #     The state of the answer generation.
@@ -110,6 +110,10 @@ module Google
             # @!attribute [rw] chunk_contents
             #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::Answer::Reference::UnstructuredDocumentInfo::ChunkContent>]
             #     List of cited chunk contents derived from document content.
+            # @!attribute [rw] struct_data
+            #   @return [::Google::Protobuf::Struct]
+            #     The structured JSON metadata for the document.
+            #     It is populated from the struct data from the Chunk in search result.
             class UnstructuredDocumentInfo
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -157,6 +161,10 @@ module Google
               # @!attribute [rw] page_identifier
               #   @return [::String]
               #     Page identifier.
+              # @!attribute [rw] struct_data
+              #   @return [::Google::Protobuf::Struct]
+              #     The structured JSON metadata for the document.
+              #     It is populated from the struct data from the Chunk in search result.
               class DocumentMetadata
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods

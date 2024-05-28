@@ -59,7 +59,7 @@ module Google
         #   @return [::Integer]
         #     Maximum number of {::Google::Cloud::DiscoveryEngine::V1beta::Document Document}s
         #     to return. If unspecified, defaults to 100. The maximum allowed value is
-        #     1000. Values above 1000 will be coerced to 1000.
+        #     1000. Values above 1000 are set to 1000.
         #
         #     If this field is negative, an `INVALID_ARGUMENT` error is returned.
         # @!attribute [rw] page_token
@@ -110,8 +110,8 @@ module Google
         # @!attribute [rw] document_id
         #   @return [::String]
         #     Required. The ID to use for the
-        #     {::Google::Cloud::DiscoveryEngine::V1beta::Document Document}, which will become
-        #     the final component of the
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::Document Document}, which becomes the
+        #     final component of the
         #     {::Google::Cloud::DiscoveryEngine::V1beta::Document#name Document.name}.
         #
         #     If the caller does not have permission to create the
@@ -148,14 +148,13 @@ module Google
         #     is not set, a `NOT_FOUND` error is returned.
         # @!attribute [rw] allow_missing
         #   @return [::Boolean]
-        #     If set to true, and the
+        #     If set to `true` and the
         #     {::Google::Cloud::DiscoveryEngine::V1beta::Document Document} is not found, a
-        #     new {::Google::Cloud::DiscoveryEngine::V1beta::Document Document} will be
-        #     created.
+        #     new {::Google::Cloud::DiscoveryEngine::V1beta::Document Document} is be created.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Indicates which fields in the provided imported 'document' to update. If
-        #     not set, will by default update all fields.
+        #     not set, by default updates all fields.
         class UpdateDocumentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

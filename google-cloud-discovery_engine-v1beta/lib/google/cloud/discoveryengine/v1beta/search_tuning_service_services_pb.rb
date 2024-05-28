@@ -35,6 +35,8 @@ module Google
 
             # Trains a custom model.
             rpc :TrainCustomModel, ::Google::Cloud::DiscoveryEngine::V1beta::TrainCustomModelRequest, ::Google::Longrunning::Operation
+            # Gets a list of all the custom models.
+            rpc :ListCustomModels, ::Google::Cloud::DiscoveryEngine::V1beta::ListCustomModelsRequest, ::Google::Cloud::DiscoveryEngine::V1beta::ListCustomModelsResponse
           end
 
           Stub = Service.rpc_stub_class

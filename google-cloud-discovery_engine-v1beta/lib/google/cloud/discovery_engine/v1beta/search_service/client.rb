@@ -247,7 +247,10 @@ module Google
             #
             #     If this field is negative, an  `INVALID_ARGUMENT`  is returned.
             #   @param data_store_specs [::Array<::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::DataStoreSpec, ::Hash>]
-            #     A list of data store specs to apply on a search call.
+            #     Specs defining dataStores to filter on in a search call and configurations
+            #     for those dataStores. This is only considered for engines with multiple
+            #     dataStores use case. For single dataStore within an engine, they should
+            #     use the specs at the top level.
             #   @param filter [::String]
             #     The filter syntax consists of an expression language for constructing a
             #     predicate from one or more fields of the documents being filtered. Filter
@@ -281,7 +284,9 @@ module Google
             #     The order in which documents are returned. Documents can be ordered by
             #     a field in an {::Google::Cloud::DiscoveryEngine::V1beta::Document Document}
             #     object. Leave it unset if ordered by relevance. `order_by` expression is
-            #     case-sensitive. For more information on ordering, see
+            #     case-sensitive.
+            #
+            #     For more information on ordering for retail search, see
             #     [Ordering](https://cloud.google.com/retail/docs/filter-and-order#order)
             #
             #     If this field is unrecognizable, an `INVALID_ARGUMENT` is returned.
@@ -298,7 +303,7 @@ module Google
             #   @param boost_spec [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::BoostSpec, ::Hash]
             #     Boost specification to boost certain documents.
             #     For more information on boosting, see
-            #     [Boosting](https://cloud.google.com/retail/docs/boosting#boost)
+            #     [Boosting](https://cloud.google.com/generative-ai-app-builder/docs/boost-search-results)
             #   @param params [::Hash{::String => ::Google::Protobuf::Value, ::Hash}]
             #     Additional search parameters.
             #
@@ -306,8 +311,7 @@ module Google
             #
             #     * `user_country_code`: string. Default empty. If set to non-empty, results
             #        are restricted or boosted based on the location provided.
-            #        Example:
-            #        user_country_code: "au"
+            #        For example, `user_country_code: "au"`
             #
             #        For available codes see [Country
             #        Codes](https://developers.google.com/custom-search/docs/json_api_reference#countryCodes)
@@ -315,8 +319,7 @@ module Google
             #     * `search_type`: double. Default empty. Enables non-webpage searching
             #        depending on the value. The only valid non-default value is 1,
             #        which enables image searching.
-            #        Example:
-            #        search_type: 1
+            #        For example, `search_type: 1`
             #   @param query_expansion_spec [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::QueryExpansionSpec, ::Hash]
             #     The query expansion specification that specifies the conditions under which
             #     query expansion occurs.

@@ -330,7 +330,7 @@ module Google
             #   @param page_size [::Integer]
             #     Maximum number of {::Google::Cloud::DiscoveryEngine::V1beta::Document Document}s
             #     to return. If unspecified, defaults to 100. The maximum allowed value is
-            #     1000. Values above 1000 will be coerced to 1000.
+            #     1000. Values above 1000 are set to 1000.
             #
             #     If this field is negative, an `INVALID_ARGUMENT` error is returned.
             #   @param page_token [::String]
@@ -441,8 +441,8 @@ module Google
             #     create.
             #   @param document_id [::String]
             #     Required. The ID to use for the
-            #     {::Google::Cloud::DiscoveryEngine::V1beta::Document Document}, which will become
-            #     the final component of the
+            #     {::Google::Cloud::DiscoveryEngine::V1beta::Document Document}, which becomes the
+            #     final component of the
             #     {::Google::Cloud::DiscoveryEngine::V1beta::Document#name Document.name}.
             #
             #     If the caller does not have permission to create the
@@ -553,13 +553,12 @@ module Google
             #     {::Google::Cloud::DiscoveryEngine::V1beta::UpdateDocumentRequest#allow_missing allow_missing}
             #     is not set, a `NOT_FOUND` error is returned.
             #   @param allow_missing [::Boolean]
-            #     If set to true, and the
+            #     If set to `true` and the
             #     {::Google::Cloud::DiscoveryEngine::V1beta::Document Document} is not found, a
-            #     new {::Google::Cloud::DiscoveryEngine::V1beta::Document Document} will be
-            #     created.
+            #     new {::Google::Cloud::DiscoveryEngine::V1beta::Document Document} is be created.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Indicates which fields in the provided imported 'document' to update. If
-            #     not set, will by default update all fields.
+            #     not set, by default updates all fields.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DiscoveryEngine::V1beta::Document]
@@ -724,7 +723,7 @@ module Google
             ##
             # Bulk import of multiple
             # {::Google::Cloud::DiscoveryEngine::V1beta::Document Document}s. Request
-            # processing may be synchronous. Non-existing items will be created.
+            # processing may be synchronous. Non-existing items are created.
             #
             # Note: It is possible for a subset of the
             # {::Google::Cloud::DiscoveryEngine::V1beta::Document Document}s to be

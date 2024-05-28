@@ -22,6 +22,31 @@ module Google
     module DiscoveryEngine
       module V1beta
         # Request message for
+        # {::Google::Cloud::DiscoveryEngine::V1beta::SearchTuningService::Client#list_custom_models SearchTuningService.ListCustomModels}
+        # method.
+        # @!attribute [rw] data_store
+        #   @return [::String]
+        #     Required. The resource name of the parent Data Store, such as
+        #     `projects/*/locations/global/collections/default_collection/dataStores/default_data_store`.
+        #     This field is used to identify the data store where to fetch the models
+        #     from.
+        class ListCustomModelsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::DiscoveryEngine::V1beta::SearchTuningService::Client#list_custom_models SearchTuningService.ListCustomModels}
+        # method.
+        # @!attribute [rw] models
+        #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::CustomTuningModel>]
+        #     List of custom tuning models.
+        class ListCustomModelsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
         # {::Google::Cloud::DiscoveryEngine::V1beta::SearchTuningService::Client#train_custom_model SearchTuningService.TrainCustomModel}
         # method.
         # @!attribute [rw] gcs_training_input
@@ -41,6 +66,9 @@ module Google
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::ImportErrorConfig]
         #     The desired location of errors incurred during the data ingestion and
         #     training.
+        # @!attribute [rw] model_id
+        #   @return [::String]
+        #     If not provided, a UUID will be generated.
         class TrainCustomModelRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -108,6 +136,9 @@ module Google
         # @!attribute [rw] metrics
         #   @return [::Google::Protobuf::Map{::String => ::Float}]
         #     The metrics of the trained model.
+        # @!attribute [rw] model_name
+        #   @return [::String]
+        #     Fully qualified name of the CustomTuningModel.
         class TrainCustomModelResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -78,7 +78,10 @@ module Google
         #     If this field is negative, an  `INVALID_ARGUMENT`  is returned.
         # @!attribute [rw] data_store_specs
         #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::DataStoreSpec>]
-        #     A list of data store specs to apply on a search call.
+        #     Specs defining dataStores to filter on in a search call and configurations
+        #     for those dataStores. This is only considered for engines with multiple
+        #     dataStores use case. For single dataStore within an engine, they should
+        #     use the specs at the top level.
         # @!attribute [rw] filter
         #   @return [::String]
         #     The filter syntax consists of an expression language for constructing a
@@ -115,7 +118,9 @@ module Google
         #     The order in which documents are returned. Documents can be ordered by
         #     a field in an {::Google::Cloud::DiscoveryEngine::V1beta::Document Document}
         #     object. Leave it unset if ordered by relevance. `order_by` expression is
-        #     case-sensitive. For more information on ordering, see
+        #     case-sensitive.
+        #
+        #     For more information on ordering for retail search, see
         #     [Ordering](https://cloud.google.com/retail/docs/filter-and-order#order)
         #
         #     If this field is unrecognizable, an `INVALID_ARGUMENT` is returned.
@@ -135,7 +140,7 @@ module Google
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::BoostSpec]
         #     Boost specification to boost certain documents.
         #     For more information on boosting, see
-        #     [Boosting](https://cloud.google.com/retail/docs/boosting#boost)
+        #     [Boosting](https://cloud.google.com/generative-ai-app-builder/docs/boost-search-results)
         # @!attribute [rw] params
         #   @return [::Google::Protobuf::Map{::String => ::Google::Protobuf::Value}]
         #     Additional search parameters.
@@ -144,8 +149,7 @@ module Google
         #
         #     * `user_country_code`: string. Default empty. If set to non-empty, results
         #        are restricted or boosted based on the location provided.
-        #        Example:
-        #        user_country_code: "au"
+        #        For example, `user_country_code: "au"`
         #
         #        For available codes see [Country
         #        Codes](https://developers.google.com/custom-search/docs/json_api_reference#countryCodes)
@@ -153,8 +157,7 @@ module Google
         #     * `search_type`: double. Default empty. Enables non-webpage searching
         #        depending on the value. The only valid non-default value is 1,
         #        which enables image searching.
-        #        Example:
-        #        search_type: 1
+        #        For example, `search_type: 1`
         # @!attribute [rw] query_expansion_spec
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::QueryExpansionSpec]
         #     The query expansion specification that specifies the conditions under which
@@ -253,7 +256,9 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # A struct to define data stores to filter on in a search call.
+          # A struct to define data stores to filter on in a search call and
+          # configurations for those data stores. A maximum of 1 DataStoreSpec per
+          # data_store is allowed. Otherwise, an `INVALID_ARGUMENT` error is returned.
           # @!attribute [rw] data_store
           #   @return [::String]
           #     Required. Full resource name of
@@ -270,7 +275,7 @@ module Google
           #     Required. The facet key specification.
           # @!attribute [rw] limit
           #   @return [::Integer]
-          #     Maximum of facet values that should be returned for this facet. If
+          #     Maximum facet values that are returned for this facet. If
           #     unspecified, defaults to 20. The maximum allowed value is 300. Values
           #     above 300 are coerced to 300.
           #
@@ -367,7 +372,7 @@ module Google
             #     Only supported on textual fields. Maximum is 10.
             # @!attribute [rw] contains
             #   @return [::Array<::String>]
-            #     Only get facet values that contains the given strings. For example,
+            #     Only get facet values that contain the given strings. For example,
             #     suppose "category" has three values "Action > 2022",
             #     "Action > 2021" and "Sci-Fi > 2022". If set "contains" to "2022", the
             #     "category" facet only contains "Action > 2022" and "Sci-Fi > 2022".
@@ -518,7 +523,7 @@ module Google
                   # specified. The value must be formatted as an XSD `dayTimeDuration`
                   # value (a restricted subset of an ISO 8601 duration value). The
                   # pattern for this is: `[nD][T[nH][nM][nS]]`.
-                  # E.g. `5D`, `3DT12H30M`, `T24H`.
+                  # For example, `5D`, `3DT12H30M`, `T24H`.
                   FRESHNESS = 2
                 end
 
@@ -571,8 +576,8 @@ module Google
           # The specification for query spell correction.
           # @!attribute [rw] mode
           #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::SpellCorrectionSpec::Mode]
-          #     The mode under which spell correction should take effect to
-          #     replace the original search query. Default to
+          #     The mode under which spell correction
+          #     replaces the original search query. Defaults to
           #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::SpellCorrectionSpec::Mode::AUTO Mode.AUTO}.
           class SpellCorrectionSpec
             include ::Google::Protobuf::MessageExts
@@ -585,10 +590,10 @@ module Google
               # {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::SpellCorrectionSpec::Mode::AUTO Mode.AUTO}.
               MODE_UNSPECIFIED = 0
 
-              # Search API will try to find a spell suggestion if there
-              # is any and put in the
+              # Search API tries to find a spelling suggestion. If a suggestion is
+              # found, it is put in the
               # {::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse#corrected_query SearchResponse.corrected_query}.
-              # The spell suggestion will not be used as the search query.
+              # The spelling suggestion won't be used as the search query.
               SUGGESTION_ONLY = 1
 
               # Automatic spell correction built by the Search API. Search will
@@ -644,7 +649,10 @@ module Google
             #     of results returned is less than `summaryResultCount`, the summary is
             #     generated from all of the results.
             #
-            #     At most 10 results can be used to generate a summary.
+            #     At most 10 results for documents mode, or 50 for chunks mode, can be
+            #     used to generate a summary. The chunks mode is used when
+            #     [SearchRequest.ContentSearchSpec.search_result_mode][] is set to
+            #     [CHUNKS][SearchRequest.ContentSearchSpec.SearchResultMode.CHUNKS].
             # @!attribute [rw] include_citations
             #   @return [::Boolean]
             #     Specifies whether to include citations in the summary. The default
@@ -900,8 +908,6 @@ module Google
         #     Controls applied as part of the Control service.
         # @!attribute [rw] geo_search_debug_info
         #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::GeoSearchDebugInfo>]
-        #     Debug information specifically related to forward geocoding issues arising
-        #     from Geolocation Search.
         # @!attribute [rw] query_expansion_info
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::QueryExpansionInfo]
         #     Query expansion information for the returned results.
@@ -917,7 +923,7 @@ module Google
           # @!attribute [rw] document
           #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Document]
           #     The document data snippet in the search response. Only fields that are
-          #     marked as retrievable are populated.
+          #     marked as `retrievable` are populated.
           # @!attribute [rw] model_scores
           #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::DiscoveryEngine::V1beta::DoubleList}]
           #     Google provided available scores.
@@ -938,7 +944,7 @@ module Google
           # A facet result.
           # @!attribute [rw] key
           #   @return [::String]
-          #     The key for this facet. E.g., "colors" or "price". It matches
+          #     The key for this facet. For example, `"colors"` or `"price"`. It matches
           #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::FacetSpec::FacetKey#key SearchRequest.FacetSpec.FacetKey.key}.
           # @!attribute [rw] values
           #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::Facet::FacetValue>]
@@ -983,17 +989,17 @@ module Google
             # Useful attribute for search result refinements.
             # @!attribute [rw] attribute_key
             #   @return [::String]
-            #     Attribute key used to refine the results e.g. 'movie_type'.
+            #     Attribute key used to refine the results. For example, `"movie_type"`.
             # @!attribute [rw] attribute_value
             #   @return [::String]
-            #     Attribute value used to refine the results e.g. 'drama'.
+            #     Attribute value used to refine the results. For example, `"drama"`.
             class RefinementAttribute
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
           end
 
-          # Summary of the top N search result specified by the summary spec.
+          # Summary of the top N search results specified by the summary spec.
           # @!attribute [rw] summary_text
           #   @return [::String]
           #     The summary content.

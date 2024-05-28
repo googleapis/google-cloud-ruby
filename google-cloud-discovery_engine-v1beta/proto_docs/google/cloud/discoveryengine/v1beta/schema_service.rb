@@ -46,9 +46,9 @@ module Google
         #     to return. The service may return fewer than this value.
         #
         #     If unspecified, at most 100
-        #     {::Google::Cloud::DiscoveryEngine::V1beta::Schema Schema}s will be returned.
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::Schema Schema}s are returned.
         #
-        #     The maximum value is 1000; values above 1000 will be coerced to 1000.
+        #     The maximum value is 1000; values above 1000 are set to 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     A page token, received from a previous
@@ -94,7 +94,7 @@ module Google
         # @!attribute [rw] schema_id
         #   @return [::String]
         #     Required. The ID to use for the
-        #     {::Google::Cloud::DiscoveryEngine::V1beta::Schema Schema}, which will become the
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::Schema Schema}, which becomes the
         #     final component of the
         #     {::Google::Cloud::DiscoveryEngine::V1beta::Schema#name Schema.name}.
         #
@@ -117,8 +117,8 @@ module Google
         #   @return [::Boolean]
         #     If set to true, and the
         #     {::Google::Cloud::DiscoveryEngine::V1beta::Schema Schema} is not found, a new
-        #     {::Google::Cloud::DiscoveryEngine::V1beta::Schema Schema} will be created. In
-        #     this situation, `update_mask` is ignored.
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::Schema Schema} is created. In this
+        #     situation, `update_mask` is ignored.
         class UpdateSchemaRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -156,6 +156,22 @@ module Google
           SOLUTION_TYPE_GENERATIVE_CHAT = 4
         end
 
+        # Defines a further subdivision of `SolutionType`.
+        # Specifically applies to
+        # {::Google::Cloud::DiscoveryEngine::V1beta::SolutionType::SOLUTION_TYPE_SEARCH SOLUTION_TYPE_SEARCH}.
+        module SearchUseCase
+          # Value used when unset. Will not occur in CSS.
+          SEARCH_USE_CASE_UNSPECIFIED = 0
+
+          # Search use case. Expects the traffic has a non-empty
+          # {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest#query query}.
+          SEARCH_USE_CASE_SEARCH = 1
+
+          # Browse use case. Expects the traffic has an empty
+          # {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest#query query}.
+          SEARCH_USE_CASE_BROWSE = 2
+        end
+
         # Tiers of search features. Different tiers might have different
         # pricing. To learn more, check the pricing documentation.
         module SearchTier
