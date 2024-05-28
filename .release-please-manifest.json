@@ -215,6 +215,8 @@
   "google-cloud-config_service+FILLER": "0.0.0",
   "google-cloud-config_service-v1": "0.6.0",
   "google-cloud-config_service-v1+FILLER": "0.0.0",
+  "google-cloud-connectors": "0.0.1",
+  "google-cloud-connectors+FILLER": "0.0.0",
   "google-cloud-connectors-v1": "0.0.1",
   "google-cloud-connectors-v1+FILLER": "0.0.0",
   "google-cloud-contact_center_insights": "1.4.0",
