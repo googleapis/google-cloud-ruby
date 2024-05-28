@@ -25,7 +25,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Immutable. Fully qualified name
-        #     `project/*/locations/global/collections/{collection}/engines/{engine}/sessions/*`
+        #     `projects/{project}/locations/global/collections/{collection}/engines/{engine}/sessions/*`
         # @!attribute [rw] state
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Session::State]
         #     The state of the session.
@@ -53,6 +53,9 @@ module Google
           # @!attribute [rw] answer
           #   @return [::String]
           #     The resource name of the answer to the user query.
+          #
+          #     Only set if the answer generation (/answer API call) happened in this
+          #     turn.
           class Turn
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

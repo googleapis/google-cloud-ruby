@@ -453,8 +453,8 @@ module Google
             #     must match the call that provided the page token. Otherwise, an
             #     INVALID_ARGUMENT error is returned.
             #   @param filter [::String]
-            #     Filter by solution type. For example: filter =
-            #     'solution_type:SOLUTION_TYPE_SEARCH'
+            #     Filter by solution type .
+            #     For example: `filter = 'solution_type:SOLUTION_TYPE_SEARCH'`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::DiscoveryEngine::V1beta::DataStore>]

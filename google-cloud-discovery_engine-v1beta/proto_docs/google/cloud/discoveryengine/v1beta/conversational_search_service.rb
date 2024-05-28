@@ -247,8 +247,8 @@ module Google
         #
         #     When session field is not set, the API is in sessionless mode.
         #
-        #     We support auto session mode: users can use the wildcard symbol “-” as
-        #     session id.  A new id will be automatically generated and assigned.
+        #     We support auto session mode: users can use the wildcard symbol `-` as
+        #     session ID.  A new ID will be automatically generated and assigned.
         # @!attribute [rw] safety_spec
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryRequest::SafetySpec]
         #     Model specification.
@@ -347,6 +347,13 @@ module Google
           #     non-answer seeking query. If this field is set to `true`, we skip
           #     generating answers for non-answer seeking queries and return
           #     fallback messages instead.
+          # @!attribute [rw] ignore_low_relevant_content
+          #   @return [::Boolean]
+          #     Specifies whether to filter out queries that have low relevance.
+          #
+          #     If this field is set to `false`, all search results are used regardless
+          #     of relevance to generate answers. If set to `true` or unset, the behavior
+          #     will be determined automatically by the service.
           class AnswerGenerationSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -421,6 +428,12 @@ module Google
             #     [Ordering](https://cloud.google.com/retail/docs/filter-and-order#order)
             #
             #     If this field is unrecognizable, an `INVALID_ARGUMENT` is returned.
+            # @!attribute [rw] data_store_specs
+            #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::DataStoreSpec>]
+            #     Specs defining dataStores to filter on in a search call and
+            #     configurations for those dataStores. This is only considered for
+            #     engines with multiple dataStores use case. For single dataStore within
+            #     an engine, they should use the specs at the top level.
             class SearchParams
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -561,7 +574,7 @@ module Google
             # @!attribute [rw] max_rephrase_steps
             #   @return [::Integer]
             #     Max rephrase steps.
-            #     The max number is 10 steps.
+            #     The max number is 5 steps.
             #     If not set or set to < 1, it will be set to 1 by default.
             class QueryRephraserSpec
               include ::Google::Protobuf::MessageExts
@@ -587,6 +600,9 @@ module Google
         #     It will be only available when session field is set and valid in the
         #     {::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryRequest AnswerQueryRequest}
         #     request.
+        # @!attribute [rw] answer_query_token
+        #   @return [::String]
+        #     A global unique ID used for logging.
         class AnswerQueryResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

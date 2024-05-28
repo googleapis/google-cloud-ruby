@@ -196,7 +196,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload rank(ranking_config: nil, model: nil, top_n: nil, query: nil, records: nil, ignore_record_details_in_response: nil)
+            # @overload rank(ranking_config: nil, model: nil, top_n: nil, query: nil, records: nil, ignore_record_details_in_response: nil, user_labels: nil)
             #   Pass arguments to `rank` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -221,6 +221,24 @@ module Google
             #   @param ignore_record_details_in_response [::Boolean]
             #     If true, the response will contain only record ID and score. By default, it
             #     is false, the response will contain record details.
+            #   @param user_labels [::Hash{::String => ::String}]
+            #     The user labels applied to a resource must meet the following requirements:
+            #
+            #     * Each resource can have multiple labels, up to a maximum of 64.
+            #     * Each label must be a key-value pair.
+            #     * Keys have a minimum length of 1 character and a maximum length of 63
+            #       characters and cannot be empty. Values can be empty and have a maximum
+            #       length of 63 characters.
+            #     * Keys and values can contain only lowercase letters, numeric characters,
+            #       underscores, and dashes. All characters must use UTF-8 encoding, and
+            #       international characters are allowed.
+            #     * The key portion of a label must be unique. However, you can use the same
+            #       key with multiple resources.
+            #     * Keys must start with a lowercase letter or international character.
+            #
+            #     See [Google Cloud
+            #     Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
+            #     for more details.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DiscoveryEngine::V1beta::RankResponse]

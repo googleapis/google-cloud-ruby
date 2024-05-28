@@ -208,16 +208,27 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload write_user_event(parent: nil, user_event: nil)
+              # @overload write_user_event(parent: nil, user_event: nil, write_async: nil)
               #   Pass arguments to `write_user_event` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The parent DataStore resource name, such as
+              #     Required. The parent resource name.
+              #     If the write user event action is applied in
+              #     {::Google::Cloud::DiscoveryEngine::V1beta::DataStore DataStore} level, the
+              #     format is:
               #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
+              #     If the write user event action is applied in [Location][] level, for
+              #     example, the event with
+              #     {::Google::Cloud::DiscoveryEngine::V1beta::Document Document} across multiple
+              #     {::Google::Cloud::DiscoveryEngine::V1beta::DataStore DataStore}, the format is:
+              #     `projects/{project}/locations/{location}`.
               #   @param user_event [::Google::Cloud::DiscoveryEngine::V1beta::UserEvent, ::Hash]
               #     Required. User event to write.
+              #   @param write_async [::Boolean]
+              #     If set to true, the user event is written asynchronously after
+              #     validation, and the API responds without waiting for the write.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::DiscoveryEngine::V1beta::UserEvent]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -374,7 +385,7 @@ module Google
               end
 
               ##
-              # Bulk import of User events. Request processing might be
+              # Bulk import of user events. Request processing might be
               # synchronous. Events that already exist are skipped.
               # Use this method for backfilling historical user events.
               #

@@ -43,7 +43,7 @@ module Google
         #     `projects/*/locations/global/groundingConfigs/default_grounding_config`.
         # @!attribute [rw] answer_candidate
         #   @return [::String]
-        #     Answer candidate to check.
+        #     Answer candidate to check. Can have a maximum length of 1024 characters.
         # @!attribute [rw] facts
         #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::GroundingFact>]
         #     List of facts for the grounding check.
@@ -51,9 +51,37 @@ module Google
         # @!attribute [rw] grounding_spec
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::CheckGroundingSpec]
         #     Configuration of the grounding check.
+        # @!attribute [rw] user_labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     The user labels applied to a resource must meet the following requirements:
+        #
+        #     * Each resource can have multiple labels, up to a maximum of 64.
+        #     * Each label must be a key-value pair.
+        #     * Keys have a minimum length of 1 character and a maximum length of 63
+        #       characters and cannot be empty. Values can be empty and have a maximum
+        #       length of 63 characters.
+        #     * Keys and values can contain only lowercase letters, numeric characters,
+        #       underscores, and dashes. All characters must use UTF-8 encoding, and
+        #       international characters are allowed.
+        #     * The key portion of a label must be unique. However, you can use the same
+        #       key with multiple resources.
+        #     * Keys must start with a lowercase letter or international character.
+        #
+        #     See [Google Cloud
+        #     Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
+        #     for more details.
         class CheckGroundingRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class UserLabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Response message for the
@@ -95,6 +123,16 @@ module Google
           #     cited_chunks[1], cited_chunks[3], cited_chunks[4] are the facts cited
           #     supporting for the claim. A citation to a fact indicates that the claim
           #     is supported by the fact.
+          # @!attribute [rw] grounding_check_required
+          #   @return [::Boolean]
+          #     Indicates that this claim required grounding check. When the system
+          #     decided this claim doesn't require attribution/grounding check, this
+          #     field will be set to false. In that case, no grounding check was done for
+          #     the claim and therefore
+          #     {::Google::Cloud::DiscoveryEngine::V1beta::CheckGroundingResponse::Claim#citation_indices citation_indices},
+          #     and
+          #     [anti_citation_indices][google.cloud.discoveryengine.v1beta.CheckGroundingResponse.Claim.anti_citation_indices]
+          #     should not be returned.
           class Claim
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

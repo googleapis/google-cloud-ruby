@@ -310,9 +310,9 @@ module Google
             #     to return. The service may return fewer than this value.
             #
             #     If unspecified, at most 100
-            #     {::Google::Cloud::DiscoveryEngine::V1beta::Schema Schema}s will be returned.
+            #     {::Google::Cloud::DiscoveryEngine::V1beta::Schema Schema}s are returned.
             #
-            #     The maximum value is 1000; values above 1000 will be coerced to 1000.
+            #     The maximum value is 1000; values above 1000 are set to 1000.
             #   @param page_token [::String]
             #     A page token, received from a previous
             #     {::Google::Cloud::DiscoveryEngine::V1beta::SchemaService::Client#list_schemas SchemaService.ListSchemas}
@@ -418,7 +418,7 @@ module Google
             #     create.
             #   @param schema_id [::String]
             #     Required. The ID to use for the
-            #     {::Google::Cloud::DiscoveryEngine::V1beta::Schema Schema}, which will become the
+            #     {::Google::Cloud::DiscoveryEngine::V1beta::Schema Schema}, which becomes the
             #     final component of the
             #     {::Google::Cloud::DiscoveryEngine::V1beta::Schema#name Schema.name}.
             #
@@ -523,8 +523,8 @@ module Google
             #   @param allow_missing [::Boolean]
             #     If set to true, and the
             #     {::Google::Cloud::DiscoveryEngine::V1beta::Schema Schema} is not found, a new
-            #     {::Google::Cloud::DiscoveryEngine::V1beta::Schema Schema} will be created. In
-            #     this situation, `update_mask` is ignored.
+            #     {::Google::Cloud::DiscoveryEngine::V1beta::Schema Schema} is created. In this
+            #     situation, `update_mask` is ignored.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]

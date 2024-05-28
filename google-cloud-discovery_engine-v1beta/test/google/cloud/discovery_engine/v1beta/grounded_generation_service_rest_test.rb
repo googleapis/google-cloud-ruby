@@ -82,6 +82,7 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::GroundedGenerationService::Rest:
     answer_candidate = "hello world"
     facts = [{}]
     grounding_spec = {}
+    user_labels = {}
 
     check_grounding_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -97,27 +98,27 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::GroundedGenerationService::Rest:
         end
 
         # Use hash object
-        client.check_grounding({ grounding_config: grounding_config, answer_candidate: answer_candidate, facts: facts, grounding_spec: grounding_spec }) do |_result, response|
+        client.check_grounding({ grounding_config: grounding_config, answer_candidate: answer_candidate, facts: facts, grounding_spec: grounding_spec, user_labels: user_labels }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.check_grounding grounding_config: grounding_config, answer_candidate: answer_candidate, facts: facts, grounding_spec: grounding_spec do |_result, response|
+        client.check_grounding grounding_config: grounding_config, answer_candidate: answer_candidate, facts: facts, grounding_spec: grounding_spec, user_labels: user_labels do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.check_grounding ::Google::Cloud::DiscoveryEngine::V1beta::CheckGroundingRequest.new(grounding_config: grounding_config, answer_candidate: answer_candidate, facts: facts, grounding_spec: grounding_spec) do |_result, response|
+        client.check_grounding ::Google::Cloud::DiscoveryEngine::V1beta::CheckGroundingRequest.new(grounding_config: grounding_config, answer_candidate: answer_candidate, facts: facts, grounding_spec: grounding_spec, user_labels: user_labels) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.check_grounding({ grounding_config: grounding_config, answer_candidate: answer_candidate, facts: facts, grounding_spec: grounding_spec }, call_options) do |_result, response|
+        client.check_grounding({ grounding_config: grounding_config, answer_candidate: answer_candidate, facts: facts, grounding_spec: grounding_spec, user_labels: user_labels }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.check_grounding(::Google::Cloud::DiscoveryEngine::V1beta::CheckGroundingRequest.new(grounding_config: grounding_config, answer_candidate: answer_candidate, facts: facts, grounding_spec: grounding_spec), call_options) do |_result, response|
+        client.check_grounding(::Google::Cloud::DiscoveryEngine::V1beta::CheckGroundingRequest.new(grounding_config: grounding_config, answer_candidate: answer_candidate, facts: facts, grounding_spec: grounding_spec, user_labels: user_labels), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

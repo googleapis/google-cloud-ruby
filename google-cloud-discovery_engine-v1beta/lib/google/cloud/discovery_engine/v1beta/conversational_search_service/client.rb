@@ -843,8 +843,8 @@ module Google
             #
             #     When session field is not set, the API is in sessionless mode.
             #
-            #     We support auto session mode: users can use the wildcard symbol “-” as
-            #     session id.  A new id will be automatically generated and assigned.
+            #     We support auto session mode: users can use the wildcard symbol `-` as
+            #     session ID.  A new ID will be automatically generated and assigned.
             #   @param safety_spec [::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryRequest::SafetySpec, ::Hash]
             #     Model specification.
             #   @param related_questions_spec [::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryRequest::RelatedQuestionsSpec, ::Hash]

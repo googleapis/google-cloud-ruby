@@ -124,8 +124,8 @@ module Google
         #     INVALID_ARGUMENT error is returned.
         # @!attribute [rw] filter
         #   @return [::String]
-        #     Filter by solution type. For example: filter =
-        #     'solution_type:SOLUTION_TYPE_SEARCH'
+        #     Filter by solution type .
+        #     For example: `filter = 'solution_type:SOLUTION_TYPE_SEARCH'`
         class ListDataStoresRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

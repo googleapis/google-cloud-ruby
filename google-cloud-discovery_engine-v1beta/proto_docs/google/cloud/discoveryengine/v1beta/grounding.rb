@@ -54,6 +54,9 @@ module Google
         #     from the GroundingFacts provided in the request then this field will
         #     contain the index of the specific fact from which this chunk was
         #     retrieved.
+        # @!attribute [rw] index
+        #   @return [::Integer]
+        #     The index of this chunk. Currently, only used for the streaming mode.
         # @!attribute [rw] source_metadata
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     More fine-grained information for the source reference.

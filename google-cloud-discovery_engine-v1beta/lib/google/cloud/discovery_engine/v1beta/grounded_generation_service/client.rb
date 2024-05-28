@@ -196,7 +196,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload check_grounding(grounding_config: nil, answer_candidate: nil, facts: nil, grounding_spec: nil)
+            # @overload check_grounding(grounding_config: nil, answer_candidate: nil, facts: nil, grounding_spec: nil, user_labels: nil)
             #   Pass arguments to `check_grounding` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -205,12 +205,30 @@ module Google
             #     Required. The resource name of the grounding config, such as
             #     `projects/*/locations/global/groundingConfigs/default_grounding_config`.
             #   @param answer_candidate [::String]
-            #     Answer candidate to check.
+            #     Answer candidate to check. Can have a maximum length of 1024 characters.
             #   @param facts [::Array<::Google::Cloud::DiscoveryEngine::V1beta::GroundingFact, ::Hash>]
             #     List of facts for the grounding check.
             #     We support up to 200 facts.
             #   @param grounding_spec [::Google::Cloud::DiscoveryEngine::V1beta::CheckGroundingSpec, ::Hash]
             #     Configuration of the grounding check.
+            #   @param user_labels [::Hash{::String => ::String}]
+            #     The user labels applied to a resource must meet the following requirements:
+            #
+            #     * Each resource can have multiple labels, up to a maximum of 64.
+            #     * Each label must be a key-value pair.
+            #     * Keys have a minimum length of 1 character and a maximum length of 63
+            #       characters and cannot be empty. Values can be empty and have a maximum
+            #       length of 63 characters.
+            #     * Keys and values can contain only lowercase letters, numeric characters,
+            #       underscores, and dashes. All characters must use UTF-8 encoding, and
+            #       international characters are allowed.
+            #     * The key portion of a label must be unique. However, you can use the same
+            #       key with multiple resources.
+            #     * Keys must start with a lowercase letter or international character.
+            #
+            #     See [Google Cloud
+            #     Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
+            #     for more details.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DiscoveryEngine::V1beta::CheckGroundingResponse]
