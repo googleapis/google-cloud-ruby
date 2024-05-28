@@ -37,23 +37,26 @@ module Google
           #  * Natural sort: Does the encoded value sort consistently with the original
           #    typed value? Note that Bigtable will always sort data based on the raw
           #    encoded value, *not* the decoded type.
-          #     - Example: STRING values sort in the same order as their UTF-8 encodings.
+          #     - Example: BYTES values sort in the same order as their raw encodings.
           #     - Counterexample: Encoding INT64 to a fixed-width STRING does *not*
           #       preserve sort order when dealing with negative numbers.
           #       INT64(1) > INT64(-1), but STRING("-00001") > STRING("00001).
-          #     - The overall encoding chain sorts naturally if *every* link does.
+          #     - The overall encoding chain has this property if *every* link does.
           #  * Self-delimiting: If we concatenate two encoded values, can we always tell
           #    where the first one ends and the second one begins?
           #     - Example: If we encode INT64s to fixed-width STRINGs, the first value
           #       will always contain exactly N digits, possibly preceded by a sign.
           #     - Counterexample: If we concatenate two UTF-8 encoded STRINGs, we have
           #       no way to tell where the first one ends.
-          #     - The overall encoding chain is self-delimiting if *any* link is.
+          #     - The overall encoding chain has this property if *any* link does.
           #  * Compatibility: Which other systems have matching encoding schemes? For
           #    example, does this encoding have a GoogleSQL equivalent? HBase? Java?
           # @!attribute [rw] bytes_type
           #   @return [::Google::Cloud::Bigtable::Admin::V2::Type::Bytes]
           #     Bytes
+          # @!attribute [rw] string_type
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::Type::String]
+          #     String
           # @!attribute [rw] int64_type
           #   @return [::Google::Cloud::Bigtable::Admin::V2::Type::Int64]
           #     Int64
@@ -86,6 +89,37 @@ module Google
                 # * Self-delimiting? No
                 # * Compatibility? N/A
                 class Raw
+                  include ::Google::Protobuf::MessageExts
+                  extend ::Google::Protobuf::MessageExts::ClassMethods
+                end
+              end
+            end
+
+            # String
+            # Values of type `String` are stored in `Value.string_value`.
+            # @!attribute [rw] encoding
+            #   @return [::Google::Cloud::Bigtable::Admin::V2::Type::String::Encoding]
+            #     The encoding to use when converting to/from lower level types.
+            class String
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Rules used to convert to/from lower level types.
+              # @!attribute [rw] utf8_raw
+              #   @return [::Google::Cloud::Bigtable::Admin::V2::Type::String::Encoding::Utf8Raw]
+              #     Use `Utf8Raw` encoding.
+              class Encoding
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+
+                # UTF-8 encoding
+                # * Natural sort? No (ASCII characters only)
+                # * Self-delimiting? No
+                # * Compatibility?
+                #    - BigQuery Federation `TEXT` encoding
+                #    - HBase `Bytes.toBytes`
+                #    - Java `String#getBytes(StandardCharsets.UTF_8)`
+                class Utf8Raw
                   include ::Google::Protobuf::MessageExts
                   extend ::Google::Protobuf::MessageExts::ClassMethods
                 end
