@@ -830,6 +830,19 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Message defining the location of a BigQuery table with the projectId inferred
+        # from the parent project.
+        # @!attribute [rw] dataset_id
+        #   @return [::String]
+        #     Dataset ID of the table.
+        # @!attribute [rw] table_id
+        #   @return [::String]
+        #     Name of the table.
+        class TableReference
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Message defining a field of a BigQuery table.
         # @!attribute [rw] table
         #   @return [::Google::Cloud::Dlp::V2::BigQueryTable]

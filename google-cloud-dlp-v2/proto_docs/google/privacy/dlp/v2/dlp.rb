@@ -1055,7 +1055,7 @@ module Google
           #     inspect job.
           # @!attribute [rw] num_rows_processed
           #   @return [::Integer]
-          #     Number of rows scanned post sampling and time filtering (Applicable for
+          #     Number of rows scanned after sampling and time filtering (applicable for
           #     row based stores such as BigQuery).
           # @!attribute [rw] hybrid_stats
           #   @return [::Google::Cloud::Dlp::V2::HybridInspectStatistics]
@@ -1214,6 +1214,9 @@ module Google
 
             # The infoType is typically used in Australia.
             AUSTRALIA = 3
+
+            # The infoType is typically used in Azerbaijan.
+            AZERBAIJAN = 48
 
             # The infoType is typically used in Belgium.
             BELGIUM = 4
@@ -3239,7 +3242,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Contains a configuration to make api calls on a repeating basis.
+        # Contains a configuration to make API calls on a repeating basis.
         # See
         # https://cloud.google.com/sensitive-data-protection/docs/concepts-job-triggers
         # to learn more.
@@ -4082,13 +4085,9 @@ module Google
             # New profile (not a re-profile).
             NEW_PROFILE = 1
 
-            # Changed one of the following profile metrics:
-            # * Data risk score
-            # * Sensitivity score
-            # * Resource visibility
-            # * Encryption type
-            # * Predicted infoTypes
-            # * Other infoTypes
+            # One of the following profile metrics changed: Data risk score,
+            # Sensitivity score, Resource visibility, Encryption type, Predicted
+            # infoTypes, Other infoTypes
             CHANGED_PROFILE = 2
 
             # Table data risk score or sensitivity score increased.
@@ -4299,6 +4298,11 @@ module Google
         #   @return [::Google::Cloud::Dlp::V2::CloudSqlDiscoveryTarget]
         #     Cloud SQL target for Discovery. The first target to match a table will be
         #     the one applied.
+        # @!attribute [rw] secrets_target
+        #   @return [::Google::Cloud::Dlp::V2::SecretsDiscoveryTarget]
+        #     Discovery target that looks for credentials and secrets stored in cloud
+        #     resource metadata and reports them as vulnerabilities to Security Command
+        #     Center. Only one target of this type is allowed.
         class DiscoveryTarget
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -4341,6 +4345,11 @@ module Google
         #     anything above it will apply first. Should only appear once in a
         #     configuration. If none is specified, a default one will be added
         #     automatically.
+        # @!attribute [rw] table_reference
+        #   @return [::Google::Cloud::Dlp::V2::TableReference]
+        #     The table to scan. Discovery configurations including this can only
+        #     include one DiscoveryTarget (the DiscoveryTarget with this
+        #     TableReference).
         class DiscoveryBigQueryFilter
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -4519,7 +4528,7 @@ module Google
         # @!attribute [rw] project_id_regex
         #   @return [::String]
         #     For organizations, if unset, will match all projects. Has no effect
-        #     for Data Profile configurations created within a project.
+        #     for configurations created within a project.
         # @!attribute [rw] instance_regex
         #   @return [::String]
         #     Regex to test the instance name against. If empty, all instances match.
@@ -4547,11 +4556,18 @@ module Google
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Required. If within a project-level config, then this must match the
-        #     config's project id.
+        #     config's project ID.
         # @!attribute [rw] instance
         #   @return [::String]
         #     Required. The instance where this resource is located. For example: Cloud
-        #     SQL's instance id.
+        #     SQL instance ID.
+        # @!attribute [rw] database
+        #   @return [::String]
+        #     Required. Name of a database within the instance.
+        # @!attribute [rw] database_resource
+        #   @return [::String]
+        #     Required. Name of a database resource, for example, a table within the
+        #     database.
         class DatabaseResourceReference
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -4580,10 +4596,10 @@ module Google
             # Include all supported database engines.
             ALL_SUPPORTED_DATABASE_ENGINES = 1
 
-            # MySql database.
+            # MySQL database.
             MYSQL = 2
 
-            # PostGres database.
+            # PostgreSQL database.
             POSTGRES = 3
           end
 
@@ -4610,13 +4626,13 @@ module Google
         #   @return [::Google::Cloud::Dlp::V2::DataProfileUpdateFrequency]
         #     Data changes (non-schema changes) in Cloud SQL tables can't trigger
         #     reprofiling. If you set this field, profiles are refreshed at this
-        #     frequency regardless of whether the underlying tables have changes.
+        #     frequency regardless of whether the underlying tables have changed.
         #     Defaults to never.
         class DiscoveryCloudSqlGenerationCadence
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # How frequency to modify the profile when the table's schema is modified.
+          # How frequently to modify the profile when the table's schema is modified.
           # @!attribute [rw] types
           #   @return [::Array<::Google::Cloud::Dlp::V2::DiscoveryCloudSqlGenerationCadence::SchemaModifiedCadence::CloudSqlSchemaModification>]
           #     The types of schema modifications to consider.
@@ -4634,13 +4650,30 @@ module Google
               # Unused.
               SQL_SCHEMA_MODIFICATION_UNSPECIFIED = 0
 
-              # New columns has appeared.
+              # New columns have appeared.
               NEW_COLUMNS = 1
 
               # Columns have been removed from the table.
               REMOVED_COLUMNS = 2
             end
           end
+        end
+
+        # Discovery target for credentials and secrets in cloud resource metadata.
+        #
+        # This target does not include any filtering or frequency controls. Cloud
+        # DLP will scan cloud resource metadata for secrets daily.
+        #
+        # No inspect template should be included in the discovery config for a
+        # security benchmarks scan. Instead, the built-in list of secrets and
+        # credentials infoTypes will be used (see
+        # https://cloud.google.com/sensitive-data-protection/docs/infotypes-reference#credentials_and_secrets).
+        #
+        # Credentials and secrets discovered will be reported as vulnerabilities to
+        # Security Command Center.
+        class SecretsDiscoveryTarget
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The location to begin a discovery scan. Denotes an organization ID or folder
@@ -6138,8 +6171,7 @@ module Google
         #     results. If set, all other request fields must match the original request.
         # @!attribute [rw] filter
         #   @return [::String]
-        #     Optional. * Supported fields/values
-        #         - `state` - MISSING|AVAILABLE|ERROR
+        #     Optional. Supported field/value: `state` - MISSING|AVAILABLE|ERROR
         class ListConnectionsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -6159,8 +6191,7 @@ module Google
         #     results. If set, all other request fields must match the original request.
         # @!attribute [rw] filter
         #   @return [::String]
-        #     Optional. * Supported fields/values
-        #         - `state` - MISSING|AVAILABLE|ERROR
+        #     Optional. Supported field/value: - `state` - MISSING|AVAILABLE|ERROR
         class SearchConnectionsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -6257,8 +6288,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Use IAM auth to connect. This requires the Cloud SQL IAM feature to be
-        # enabled on the instance, which is not the default for Cloud SQL.
+        # Use IAM authentication to connect. This requires the Cloud SQL IAM feature
+        # to be enabled on the instance, which is not the default for Cloud SQL.
         # See https://cloud.google.com/sql/docs/postgres/authentication and
         # https://cloud.google.com/sql/docs/mysql/authentication.
         class CloudSqlIamCredential
@@ -6300,13 +6331,13 @@ module Google
           # Database engine of a Cloud SQL instance.
           # New values may be added over time.
           module DatabaseEngine
-            # An engine that is not currently supported by SDP.
+            # An engine that is not currently supported by Sensitive Data Protection.
             DATABASE_ENGINE_UNKNOWN = 0
 
             # Cloud SQL for MySQL instance.
             DATABASE_ENGINE_MYSQL = 1
 
-            # Cloud SQL for Postgres instance.
+            # Cloud SQL for PostgreSQL instance.
             DATABASE_ENGINE_POSTGRES = 2
           end
         end
@@ -6625,8 +6656,8 @@ module Google
           RESOURCE_VISIBILITY_PUBLIC = 10
 
           # May contain public items.
-          # For example, if a GCS bucket has uniform bucket level access disabled, some
-          # objects inside it may be public.
+          # For example, if a Cloud Storage bucket has uniform bucket level access
+          # disabled, some objects inside it may be public.
           RESOURCE_VISIBILITY_INCONCLUSIVE = 15
 
           # Visible only to specific users.
@@ -6699,10 +6730,10 @@ module Google
           # A configured connection that encountered errors during its last use. It
           # will not be used again until it is set to AVAILABLE.
           #
-          # If the resolution requires external action, then a request to set the
-          # status to AVAILABLE will mark this connection for use. Otherwise, any
-          # changes to the connection properties will automatically mark it as
-          # AVAILABLE.
+          # If the resolution requires external action, then the client must send a
+          # request to set the status to AVAILABLE when the connection is ready for
+          # use. If the resolution doesn't require external action, then any changes to
+          # the connection properties will automatically mark it as AVAILABLE.
           ERROR = 3
         end
       end
