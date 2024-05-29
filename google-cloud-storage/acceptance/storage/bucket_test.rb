@@ -365,7 +365,7 @@ describe Google::Cloud::Storage::Bucket, :storage do
     _(storage.bucket(one_off_bucket_name)).must_be :nil?
   end
 
-  it "creates new bucket with hierarchical namespace enabled then disables it" do
+  it "creates new bucket with hierarchical namespace enabled" do
     hns_bucket_name = "hns_#{bucket_name}"
     hierarchical_namespace = Google::Apis::StorageV1::Bucket::HierarchicalNamespace.new(enabled: true)
 
