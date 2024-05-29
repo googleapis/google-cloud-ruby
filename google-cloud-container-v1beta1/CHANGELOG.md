@@ -1,5 +1,11 @@
 # Release History
 
+### 0.40.0 (2024-05-29)
+
+#### Features
+
+* Various changes to cluster service ([#25969](https://github.com/googleapis/google-cloud-ruby/issues/25969)) 
+
 ### 0.39.0 (2024-04-15)
 
 #### Features
