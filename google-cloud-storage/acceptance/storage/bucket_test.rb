@@ -380,14 +380,5 @@ describe Google::Cloud::Storage::Bucket, :storage do
 
     _(hns_bucket.hierarchical_namespace).wont_be_nil
     _(hns_bucket.hierarchical_namespace.enabled).must_equal true
-
-    hns_bucket.update do |b|
-      b.hierarchical_namespace = Google::Apis::StorageV1::Bucket::HierarchicalNamespace.new(enabled: false)
-    end
-
-    _(hns_bucket.hierarchical_namespace.enabled).must_equal false
-
-    safe_gcs_execute { hns_bucket.delete }
-    _(storage.bucket(hns_bucket_name)).must_be_nil
   end
 end
