@@ -1,5 +1,11 @@
 # Release History
 
+### 0.27.0 (2024-05-29)
+
+#### Features
+
+* Add String type with Utf8Raw encoding to Bigtable API ([#25947](https://github.com/googleapis/google-cloud-ruby/issues/25947)) 
+
 ### 0.26.0 (2024-04-19)
 
 #### Features
