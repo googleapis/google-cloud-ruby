@@ -1,5 +1,15 @@
 # Changelog
 
+### 0.12.0 (2024-05-29)
+
+#### Features
+
+* Add control service APIs ([#25970](https://github.com/googleapis/google-cloud-ruby/issues/25970)) 
+* Add custom model list API 
+* Add provision project API 
+* Support cancelling import operations 
+* Support writing user events for blended engines 
+
 ### 0.11.0 (2024-04-19)
 
 #### Features
