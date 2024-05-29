@@ -293,6 +293,61 @@ class ::Google::Cloud::AIPlatform::V1::NotebookService::Rest::ClientTest < Minit
     end
   end
 
+  def test_update_notebook_runtime_template
+    # Create test objects.
+    client_result = ::Google::Cloud::AIPlatform::V1::NotebookRuntimeTemplate.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    notebook_runtime_template = {}
+    update_mask = {}
+
+    update_notebook_runtime_template_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::AIPlatform::V1::NotebookService::Rest::ServiceStub.stub :transcode_update_notebook_runtime_template_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_notebook_runtime_template_client_stub do
+        # Create client
+        client = ::Google::Cloud::AIPlatform::V1::NotebookService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_notebook_runtime_template({ notebook_runtime_template: notebook_runtime_template, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_notebook_runtime_template notebook_runtime_template: notebook_runtime_template, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_notebook_runtime_template ::Google::Cloud::AIPlatform::V1::UpdateNotebookRuntimeTemplateRequest.new(notebook_runtime_template: notebook_runtime_template, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_notebook_runtime_template({ notebook_runtime_template: notebook_runtime_template, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_notebook_runtime_template(::Google::Cloud::AIPlatform::V1::UpdateNotebookRuntimeTemplateRequest.new(notebook_runtime_template: notebook_runtime_template, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_notebook_runtime_template_client_stub.call_count
+      end
+    end
+  end
+
   def test_assign_notebook_runtime
     # Create test objects.
     client_result = ::Google::Longrunning::Operation.new

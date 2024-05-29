@@ -253,8 +253,8 @@ module Google
               # The embedding id is not valid.
               INVALID_EMBEDDING_ID = 5
 
-              # The size of the embedding vectors does not match with the specified
-              # dimension.
+              # The size of the dense embedding vectors does not match with the
+              # specified dimension.
               EMBEDDING_SIZE_MISMATCH = 6
 
               # The `namespace` field is missing.
@@ -279,8 +279,17 @@ module Google
               # File is not in UTF_8 format.
               INVALID_ENCODING = 13
 
+              # Error parsing sparse dimensions field.
+              INVALID_SPARSE_DIMENSIONS = 14
+
               # Token restrict value is invalid.
               INVALID_TOKEN_VALUE = 15
+
+              # Invalid sparse embedding.
+              INVALID_SPARSE_EMBEDDING = 16
+
+              # Invalid dense embedding.
+              INVALID_EMBEDDING = 17
             end
           end
 
@@ -298,6 +307,12 @@ module Google
           #     The detail information of the partial failures encountered for those
           #     invalid records that couldn't be parsed.
           #     Up to 50 partial errors will be reported.
+          # @!attribute [rw] valid_sparse_record_count
+          #   @return [::Integer]
+          #     Number of sparse records in this file that were successfully processed.
+          # @!attribute [rw] invalid_sparse_record_count
+          #   @return [::Integer]
+          #     Number of sparse records in this file we skipped due to validate errors.
           class ContentValidationStats
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

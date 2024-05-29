@@ -50,6 +50,11 @@
                 "create_dataset_version"
               ]
             },
+            "UpdateDatasetVersion": {
+              "methods": [
+                "update_dataset_version"
+              ]
+            },
             "DeleteDatasetVersion": {
               "methods": [
                 "delete_dataset_version"
@@ -1219,6 +1224,11 @@
             "DeleteNotebookRuntimeTemplate": {
               "methods": [
                 "delete_notebook_runtime_template"
+              ]
+            },
+            "UpdateNotebookRuntimeTemplate": {
+              "methods": [
+                "update_notebook_runtime_template"
               ]
             },
             "AssignNotebookRuntime": {

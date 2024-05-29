@@ -41,6 +41,8 @@ module Google
             rpc :ListNotebookRuntimeTemplates, ::Google::Cloud::AIPlatform::V1::ListNotebookRuntimeTemplatesRequest, ::Google::Cloud::AIPlatform::V1::ListNotebookRuntimeTemplatesResponse
             # Deletes a NotebookRuntimeTemplate.
             rpc :DeleteNotebookRuntimeTemplate, ::Google::Cloud::AIPlatform::V1::DeleteNotebookRuntimeTemplateRequest, ::Google::Longrunning::Operation
+            # Updates a NotebookRuntimeTemplate.
+            rpc :UpdateNotebookRuntimeTemplate, ::Google::Cloud::AIPlatform::V1::UpdateNotebookRuntimeTemplateRequest, ::Google::Cloud::AIPlatform::V1::NotebookRuntimeTemplate
             # Assigns a NotebookRuntime to a user for a particular Notebook file. This
             # method will either returns an existing assignment or generates a new one.
             rpc :AssignNotebookRuntime, ::Google::Cloud::AIPlatform::V1::AssignNotebookRuntimeRequest, ::Google::Longrunning::Operation

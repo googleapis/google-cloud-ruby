@@ -78,6 +78,23 @@ module Google
         end
 
         # Request message for
+        # {::Google::Cloud::AIPlatform::V1::DatasetService::Client#update_dataset_version DatasetService.UpdateDatasetVersion}.
+        # @!attribute [rw] dataset_version
+        #   @return [::Google::Cloud::AIPlatform::V1::DatasetVersion]
+        #     Required. The DatasetVersion which replaces the resource on the server.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The update mask applies to the resource.
+        #     For the `FieldMask` definition, see
+        #     {::Google::Protobuf::FieldMask google.protobuf.FieldMask}. Updatable fields:
+        #
+        #       * `display_name`
+        class UpdateDatasetVersionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
         # {::Google::Cloud::AIPlatform::V1::DatasetService::Client#list_datasets DatasetService.ListDatasets}.
         # @!attribute [rw] parent
         #   @return [::String]

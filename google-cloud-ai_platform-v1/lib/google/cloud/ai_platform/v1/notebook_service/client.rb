@@ -626,6 +626,99 @@ module Google
             end
 
             ##
+            # Updates a NotebookRuntimeTemplate.
+            #
+            # @overload update_notebook_runtime_template(request, options = nil)
+            #   Pass arguments to `update_notebook_runtime_template` via a request object, either of type
+            #   {::Google::Cloud::AIPlatform::V1::UpdateNotebookRuntimeTemplateRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AIPlatform::V1::UpdateNotebookRuntimeTemplateRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_notebook_runtime_template(notebook_runtime_template: nil, update_mask: nil)
+            #   Pass arguments to `update_notebook_runtime_template` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param notebook_runtime_template [::Google::Cloud::AIPlatform::V1::NotebookRuntimeTemplate, ::Hash]
+            #     Required. The NotebookRuntimeTemplate to update.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Required. The update mask applies to the resource.
+            #     For the `FieldMask` definition, see
+            #     {::Google::Protobuf::FieldMask google.protobuf.FieldMask}. Input format:
+            #     `{paths: "${updated_filed}"}` Updatable fields:
+            #
+            #       * `encryption_spec.kms_key_name`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::AIPlatform::V1::NotebookRuntimeTemplate]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::AIPlatform::V1::NotebookRuntimeTemplate]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::NotebookService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AIPlatform::V1::UpdateNotebookRuntimeTemplateRequest.new
+            #
+            #   # Call the update_notebook_runtime_template method.
+            #   result = client.update_notebook_runtime_template request
+            #
+            #   # The returned object is of type Google::Cloud::AIPlatform::V1::NotebookRuntimeTemplate.
+            #   p result
+            #
+            def update_notebook_runtime_template request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::UpdateNotebookRuntimeTemplateRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_notebook_runtime_template.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.notebook_runtime_template&.name
+                header_params["notebook_runtime_template.name"] = request.notebook_runtime_template.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_notebook_runtime_template.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_notebook_runtime_template.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @notebook_service_stub.call_rpc :update_notebook_runtime_template, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Assigns a NotebookRuntime to a user for a particular Notebook file. This
             # method will either returns an existing assignment or generates a new one.
             #
@@ -1432,6 +1525,11 @@ module Google
                 #
                 attr_reader :delete_notebook_runtime_template
                 ##
+                # RPC-specific configuration for `update_notebook_runtime_template`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_notebook_runtime_template
+                ##
                 # RPC-specific configuration for `assign_notebook_runtime`
                 # @return [::Gapic::Config::Method]
                 #
@@ -1472,6 +1570,8 @@ module Google
                   @list_notebook_runtime_templates = ::Gapic::Config::Method.new list_notebook_runtime_templates_config
                   delete_notebook_runtime_template_config = parent_rpcs.delete_notebook_runtime_template if parent_rpcs.respond_to? :delete_notebook_runtime_template
                   @delete_notebook_runtime_template = ::Gapic::Config::Method.new delete_notebook_runtime_template_config
+                  update_notebook_runtime_template_config = parent_rpcs.update_notebook_runtime_template if parent_rpcs.respond_to? :update_notebook_runtime_template
+                  @update_notebook_runtime_template = ::Gapic::Config::Method.new update_notebook_runtime_template_config
                   assign_notebook_runtime_config = parent_rpcs.assign_notebook_runtime if parent_rpcs.respond_to? :assign_notebook_runtime
                   @assign_notebook_runtime = ::Gapic::Config::Method.new assign_notebook_runtime_config
                   get_notebook_runtime_config = parent_rpcs.get_notebook_runtime if parent_rpcs.respond_to? :get_notebook_runtime

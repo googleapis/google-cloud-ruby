@@ -51,6 +51,9 @@ module Google
 
           # A query to find a number of the nearest neighbors (most similar vectors)
           # of a vector.
+          # @!attribute [rw] rrf
+          #   @return [::Google::Cloud::AIPlatform::V1::FindNeighborsRequest::Query::RRF]
+          #     Optional. Represents RRF algorithm that combines search results.
           # @!attribute [rw] datapoint
           #   @return [::Google::Cloud::AIPlatform::V1::IndexDatapoint]
           #     Required. The datapoint/vector whose nearest neighbors should be searched
@@ -83,6 +86,17 @@ module Google
           class Query
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Parameters for RRF algorithm that combines search results.
+            # @!attribute [rw] alpha
+            #   @return [::Float]
+            #     Required. Users can provide an alpha value to give more weight to dense
+            #     vs sparse results. For example, if the alpha is 0, we only return
+            #     sparse and if the alpha is 1, we only return dense.
+            class RRF
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
         end
 
@@ -104,7 +118,10 @@ module Google
           #     fields are populated.
           # @!attribute [rw] distance
           #   @return [::Float]
-          #     The distance between the neighbor and the query vector.
+          #     The distance between the neighbor and the dense embedding query.
+          # @!attribute [rw] sparse_distance
+          #   @return [::Float]
+          #     The distance between the neighbor and the query sparse_embedding.
           class Neighbor
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

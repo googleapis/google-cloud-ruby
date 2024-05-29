@@ -497,6 +497,14 @@ module Google
                                                             ["endpoint", %r{^projects/[^/]+/locations/[^/]+/endpoints/[^/]+/?$}, false]
                                                           ]
                                                         )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{endpoint}:directPredict",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["endpoint", %r{^projects/[^/]+/locations/[^/]+/publishers/[^/]+/models/[^/]+/?$}, false]
+                                                          ]
+                                                        )
                 transcoder.transcode request_pb
               end
 
@@ -517,6 +525,14 @@ module Google
                                                           body: "*",
                                                           matches: [
                                                             ["endpoint", %r{^projects/[^/]+/locations/[^/]+/endpoints/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{endpoint}:directRawPredict",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["endpoint", %r{^projects/[^/]+/locations/[^/]+/publishers/[^/]+/models/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

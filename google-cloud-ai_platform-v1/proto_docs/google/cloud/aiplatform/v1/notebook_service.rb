@@ -148,6 +148,24 @@ module Google
         end
 
         # Request message for
+        # {::Google::Cloud::AIPlatform::V1::NotebookService::Client#update_notebook_runtime_template NotebookService.UpdateNotebookRuntimeTemplate}.
+        # @!attribute [rw] notebook_runtime_template
+        #   @return [::Google::Cloud::AIPlatform::V1::NotebookRuntimeTemplate]
+        #     Required. The NotebookRuntimeTemplate to update.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The update mask applies to the resource.
+        #     For the `FieldMask` definition, see
+        #     {::Google::Protobuf::FieldMask google.protobuf.FieldMask}. Input format:
+        #     `{paths: "${updated_filed}"}` Updatable fields:
+        #
+        #       * `encryption_spec.kms_key_name`
+        class UpdateNotebookRuntimeTemplateRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
         # {::Google::Cloud::AIPlatform::V1::NotebookService::Client#assign_notebook_runtime NotebookService.AssignNotebookRuntime}.
         # @!attribute [rw] parent
         #   @return [::String]

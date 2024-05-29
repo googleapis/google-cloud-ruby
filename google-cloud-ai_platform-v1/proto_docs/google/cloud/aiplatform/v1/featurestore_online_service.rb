@@ -221,6 +221,9 @@ module Google
         # @!attribute [rw] bytes_value
         #   @return [::String]
         #     Bytes feature value.
+        # @!attribute [rw] struct_value
+        #   @return [::Google::Cloud::AIPlatform::V1::StructValue]
+        #     A struct type feature value.
         # @!attribute [rw] metadata
         #   @return [::Google::Cloud::AIPlatform::V1::FeatureValue::Metadata]
         #     Metadata of feature value.
@@ -241,6 +244,27 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # Struct (or object) type feature value.
+        # @!attribute [rw] values
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::StructFieldValue>]
+        #     A list of field values.
+        class StructValue
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # One field of a Struct (or object) type feature value.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Name of the field in the struct feature.
+        # @!attribute [rw] value
+        #   @return [::Google::Cloud::AIPlatform::V1::FeatureValue]
+        #     The value for this field.
+        class StructFieldValue
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Container for list of values.

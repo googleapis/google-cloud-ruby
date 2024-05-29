@@ -93,6 +93,10 @@ module Google
         #     MetadataStore when creating the Dataset. The Artifact resource name pattern
         #     is
         #     `projects/{project}/locations/{location}/metadataStores/{metadata_store}/artifacts/{artifact}`.
+        # @!attribute [rw] model_reference
+        #   @return [::String]
+        #     Optional. Reference to the public base model last used by the dataset. Only
+        #     set for prompt datasets.
         class Dataset
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

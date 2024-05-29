@@ -485,6 +485,10 @@ module Google
         #     A `Tool` is a piece of code that enables the system to interact with
         #     external systems to perform an action, or set of actions, outside of
         #     knowledge and scope of the model.
+        # @!attribute [rw] tool_config
+        #   @return [::Google::Cloud::AIPlatform::V1::ToolConfig]
+        #     Optional. Tool config. This config is shared for all tools provided in the
+        #     request.
         # @!attribute [rw] safety_settings
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::SafetySetting>]
         #     Optional. Per request settings for blocking unsafe content.

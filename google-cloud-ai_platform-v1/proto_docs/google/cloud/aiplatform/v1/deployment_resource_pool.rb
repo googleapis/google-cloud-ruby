@@ -32,6 +32,29 @@ module Google
         #   @return [::Google::Cloud::AIPlatform::V1::DedicatedResources]
         #     Required. The underlying DedicatedResources that the DeploymentResourcePool
         #     uses.
+        # @!attribute [rw] encryption_spec
+        #   @return [::Google::Cloud::AIPlatform::V1::EncryptionSpec]
+        #     Customer-managed encryption key spec for a DeploymentResourcePool. If set,
+        #     this DeploymentResourcePool will be secured by this key. Endpoints and the
+        #     DeploymentResourcePool they deploy in need to have the same EncryptionSpec.
+        # @!attribute [rw] service_account
+        #   @return [::String]
+        #     The service account that the DeploymentResourcePool's container(s) run as.
+        #     Specify the email address of the service account. If this service account
+        #     is not specified, the container(s) run as a service account that doesn't
+        #     have access to the resource project.
+        #
+        #     Users deploying the Models to this DeploymentResourcePool must have the
+        #     `iam.serviceAccounts.actAs` permission on this service account.
+        # @!attribute [rw] disable_container_logging
+        #   @return [::Boolean]
+        #     If the DeploymentResourcePool is deployed with custom-trained Models or
+        #     AutoML Tabular Models, the container(s) of the DeploymentResourcePool will
+        #     send `stderr` and `stdout` streams to Cloud Logging by default.
+        #     Please note that the logs incur cost, which are subject to [Cloud Logging
+        #     pricing](https://cloud.google.com/logging/pricing).
+        #
+        #     User can disable container logging by setting this flag to true.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Timestamp when this DeploymentResourcePool was created.

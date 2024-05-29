@@ -366,6 +366,44 @@ module Google
               end
 
               ##
+              # Baseline implementation for the update_dataset_version REST call
+              #
+              # @param request_pb [::Google::Cloud::AIPlatform::V1::UpdateDatasetVersionRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::AIPlatform::V1::DatasetVersion]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::AIPlatform::V1::DatasetVersion]
+              #   A result object deserialized from the server's reply
+              def update_dataset_version request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_update_dataset_version_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::AIPlatform::V1::DatasetVersion.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
               # Baseline implementation for the delete_dataset_version REST call
               #
               # @param request_pb [::Google::Cloud::AIPlatform::V1::DeleteDatasetVersionRequest]
@@ -913,6 +951,28 @@ module Google
                                                           body: "dataset_version",
                                                           matches: [
                                                             ["parent", %r{^projects/[^/]+/locations/[^/]+/datasets/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the update_dataset_version REST call
+              #
+              # @param request_pb [::Google::Cloud::AIPlatform::V1::UpdateDatasetVersionRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_update_dataset_version_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v1/{dataset_version.name}",
+                                                          body: "dataset_version",
+                                                          matches: [
+                                                            ["dataset_version.name", %r{^projects/[^/]+/locations/[^/]+/datasets/[^/]+/datasetVersions/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
