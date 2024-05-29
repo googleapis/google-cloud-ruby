@@ -1,5 +1,11 @@
 # Release History
 
+### 0.14.2 (2024-05-29)
+
+#### Documentation
+
+* update OAuth links in `CreateTransferConfigRequest` and `UpdateTransferConfigRequest` ([#25968](https://github.com/googleapis/google-cloud-ruby/issues/25968)) 
+
 ### 0.14.1 (2024-04-25)
 
 #### Documentation
