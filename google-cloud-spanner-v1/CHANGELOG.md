@@ -1,5 +1,12 @@
 # Release History
 
+### 0.27.0 (2024-05-29)
+
+#### Features
+
+* add field lock_hint in spanner.proto 
+* add field order_by in spanner.proto ([#25950](https://github.com/googleapis/google-cloud-ruby/issues/25950)) 
+
 ### 0.26.0 (2024-04-29)
 
 #### Features
