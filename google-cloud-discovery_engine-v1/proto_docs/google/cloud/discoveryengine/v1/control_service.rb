@@ -26,6 +26,8 @@ module Google
         #   @return [::String]
         #     Required. Full resource name of parent data store. Format:
         #     `projects/{project_number}/locations/{location_id}/collections/{collection_id}/dataStores/{data_store_id}`
+        #     or
+        #     `projects/{project_number}/locations/{location_id}/collections/{collection_id}/engines/{engine_id}`.
         # @!attribute [rw] control
         #   @return [::Google::Cloud::DiscoveryEngine::V1::Control]
         #     Required. The Control to create.
@@ -85,6 +87,8 @@ module Google
         #   @return [::String]
         #     Required. The data store resource name. Format:
         #     `projects/{project_number}/locations/{location_id}/collections/{collection_id}/dataStores/{data_store_id}`
+        #     or
+        #     `projects/{project_number}/locations/{location_id}/collections/{collection_id}/engines/{engine_id}`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. Maximum number of results to return. If unspecified, defaults

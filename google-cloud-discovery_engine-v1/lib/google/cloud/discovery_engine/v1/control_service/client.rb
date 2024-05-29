@@ -212,6 +212,8 @@ module Google
             #   @param parent [::String]
             #     Required. Full resource name of parent data store. Format:
             #     `projects/{project_number}/locations/{location_id}/collections/{collection_id}/dataStores/{data_store_id}`
+            #     or
+            #     `projects/{project_number}/locations/{location_id}/collections/{collection_id}/engines/{engine_id}`.
             #   @param control [::Google::Cloud::DiscoveryEngine::V1::Control, ::Hash]
             #     Required. The Control to create.
             #   @param control_id [::String]
@@ -584,6 +586,8 @@ module Google
             #   @param parent [::String]
             #     Required. The data store resource name. Format:
             #     `projects/{project_number}/locations/{location_id}/collections/{collection_id}/dataStores/{data_store_id}`
+            #     or
+            #     `projects/{project_number}/locations/{location_id}/collections/{collection_id}/engines/{engine_id}`.
             #   @param page_size [::Integer]
             #     Optional. Maximum number of results to return. If unspecified, defaults
             #     to 50. Max allowed value is 1000.
