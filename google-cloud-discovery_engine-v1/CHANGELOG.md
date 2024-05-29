@@ -1,5 +1,21 @@
 # Changelog
 
+### 0.8.0 (2024-05-29)
+
+#### Features
+
+* add control service APIs 
+* promote answer APIs to v1 GA 
+* promote grounding check APIs to v1 GA 
+* promote grounding check APIs to v1 GA ([#25966](https://github.com/googleapis/google-cloud-ruby/issues/25966)) 
+* promote ranking APIs to v1 GA 
+* support cancelling import operations 
+* Support multiple parent patterns for controls ([#25973](https://github.com/googleapis/google-cloud-ruby/issues/25973)) 
+* support writing user events for blended engines 
+#### Documentation
+
+* keep the API doc up-to-date with recent changes 
+
 ### 0.7.0 (2024-04-19)
 
 #### Features
