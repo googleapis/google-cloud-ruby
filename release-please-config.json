@@ -1023,6 +1023,10 @@
       "component": "google-cloud-os_login-v1beta",
       "version_file": "lib/google/cloud/os_login/v1beta/version.rb"
     },
+    "google-cloud-parallelstore": {
+      "component": "google-cloud-parallelstore",
+      "version_file": "lib/google/cloud/parallelstore/version.rb"
+    },
     "google-cloud-parallelstore-v1beta": {
       "component": "google-cloud-parallelstore-v1beta",
       "version_file": "lib/google/cloud/parallelstore/v1beta/version.rb"
