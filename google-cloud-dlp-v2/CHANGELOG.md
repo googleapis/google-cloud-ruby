@@ -1,5 +1,11 @@
 # Release History
 
+### 0.24.0 (2024-05-29)
+
+#### Features
+
+* Supports secrets discovery ([#25944](https://github.com/googleapis/google-cloud-ruby/issues/25944)) 
+
 ### 0.23.0 (2024-05-15)
 
 #### Features
