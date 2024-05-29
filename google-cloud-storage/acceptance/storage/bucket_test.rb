@@ -380,5 +380,9 @@ describe Google::Cloud::Storage::Bucket, :storage do
 
     _(hns_bucket.hierarchical_namespace).wont_be_nil
     _(hns_bucket.hierarchical_namespace.enabled).must_equal true
+
+    safe_gcs_execute { hns_bucket.delete }
+
+    _(storage.bucket(hns_bucket_name)).must_be :nil?
   end
 end

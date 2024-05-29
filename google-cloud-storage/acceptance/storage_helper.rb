@@ -228,8 +228,7 @@ Minitest.after_run do
     "gcloud-ruby-acceptance-",
     "single_use_gcloud-ruby-acceptance-",
     "ruby-storage-samples-test-",
-    "ruby-transcoder-samples-test-",
-    "hns-"
+    "ruby-transcoder-samples-test-"
   ].each do |prefix|
     $storage.buckets(prefix: prefix, max: 100).each do |bucket|
       if bucket.name =~ /#{prefix}(\d+-\d+-\d+)t(\d+)-(\d+)-(\d+)z/
