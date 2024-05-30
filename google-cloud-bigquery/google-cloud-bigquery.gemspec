@@ -18,6 +18,7 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 2.7"
 
+  gem.add_dependency "bigdecimal", "~> 3.0"
   gem.add_dependency "concurrent-ruby", "~> 1.0"
   gem.add_dependency "google-apis-bigquery_v2", "~> 0.62"
   gem.add_dependency "google-apis-core", "~> 0.13"
