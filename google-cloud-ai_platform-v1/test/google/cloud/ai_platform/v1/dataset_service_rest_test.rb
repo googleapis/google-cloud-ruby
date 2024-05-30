@@ -513,6 +513,61 @@ class ::Google::Cloud::AIPlatform::V1::DatasetService::Rest::ClientTest < Minite
     end
   end
 
+  def test_update_dataset_version
+    # Create test objects.
+    client_result = ::Google::Cloud::AIPlatform::V1::DatasetVersion.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    dataset_version = {}
+    update_mask = {}
+
+    update_dataset_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::AIPlatform::V1::DatasetService::Rest::ServiceStub.stub :transcode_update_dataset_version_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_dataset_version_client_stub do
+        # Create client
+        client = ::Google::Cloud::AIPlatform::V1::DatasetService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_dataset_version({ dataset_version: dataset_version, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_dataset_version dataset_version: dataset_version, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_dataset_version ::Google::Cloud::AIPlatform::V1::UpdateDatasetVersionRequest.new(dataset_version: dataset_version, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_dataset_version({ dataset_version: dataset_version, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_dataset_version(::Google::Cloud::AIPlatform::V1::UpdateDatasetVersionRequest.new(dataset_version: dataset_version, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_dataset_version_client_stub.call_count
+      end
+    end
+  end
+
   def test_delete_dataset_version
     # Create test objects.
     client_result = ::Google::Longrunning::Operation.new

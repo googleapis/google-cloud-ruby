@@ -46,6 +46,10 @@ module Google
         # @!attribute [r] metadata
         #   @return [::Google::Protobuf::Value]
         #     Required. Output only. Additional information about the DatasetVersion.
+        # @!attribute [r] model_reference
+        #   @return [::String]
+        #     Output only. Reference to the public base model last used by the dataset
+        #     version. Only set for prompt dataset versions.
         class DatasetVersion
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

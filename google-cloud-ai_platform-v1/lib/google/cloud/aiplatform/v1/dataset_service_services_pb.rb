@@ -49,6 +49,8 @@ module Google
             rpc :ExportData, ::Google::Cloud::AIPlatform::V1::ExportDataRequest, ::Google::Longrunning::Operation
             # Create a version from a Dataset.
             rpc :CreateDatasetVersion, ::Google::Cloud::AIPlatform::V1::CreateDatasetVersionRequest, ::Google::Longrunning::Operation
+            # Updates a DatasetVersion.
+            rpc :UpdateDatasetVersion, ::Google::Cloud::AIPlatform::V1::UpdateDatasetVersionRequest, ::Google::Cloud::AIPlatform::V1::DatasetVersion
             # Deletes a Dataset version.
             rpc :DeleteDatasetVersion, ::Google::Cloud::AIPlatform::V1::DeleteDatasetVersionRequest, ::Google::Longrunning::Operation
             # Gets a Dataset version.

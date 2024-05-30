@@ -43,6 +43,9 @@ module Google
         # @!attribute [r] state
         #   @return [::Google::Cloud::AIPlatform::V1::MetadataStore::MetadataStoreState]
         #     Output only. State information of the MetadataStore.
+        # @!attribute [rw] dataplex_config
+        #   @return [::Google::Cloud::AIPlatform::V1::MetadataStore::DataplexConfig]
+        #     Optional. Dataplex integration settings.
         class MetadataStore
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -52,6 +55,16 @@ module Google
           #   @return [::Integer]
           #     The disk utilization of the MetadataStore in bytes.
           class MetadataStoreState
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Represents Dataplex integration settings.
+          # @!attribute [rw] enabled_pipelines_lineage
+          #   @return [::Boolean]
+          #     Optional. Whether or not Data Lineage synchronization is enabled for
+          #     Vertex Pipelines.
+          class DataplexConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

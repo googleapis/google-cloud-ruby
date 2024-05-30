@@ -1001,6 +1001,98 @@ module Google
             end
 
             ##
+            # Updates a DatasetVersion.
+            #
+            # @overload update_dataset_version(request, options = nil)
+            #   Pass arguments to `update_dataset_version` via a request object, either of type
+            #   {::Google::Cloud::AIPlatform::V1::UpdateDatasetVersionRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AIPlatform::V1::UpdateDatasetVersionRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_dataset_version(dataset_version: nil, update_mask: nil)
+            #   Pass arguments to `update_dataset_version` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param dataset_version [::Google::Cloud::AIPlatform::V1::DatasetVersion, ::Hash]
+            #     Required. The DatasetVersion which replaces the resource on the server.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Required. The update mask applies to the resource.
+            #     For the `FieldMask` definition, see
+            #     {::Google::Protobuf::FieldMask google.protobuf.FieldMask}. Updatable fields:
+            #
+            #       * `display_name`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::AIPlatform::V1::DatasetVersion]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::AIPlatform::V1::DatasetVersion]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::DatasetService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AIPlatform::V1::UpdateDatasetVersionRequest.new
+            #
+            #   # Call the update_dataset_version method.
+            #   result = client.update_dataset_version request
+            #
+            #   # The returned object is of type Google::Cloud::AIPlatform::V1::DatasetVersion.
+            #   p result
+            #
+            def update_dataset_version request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::UpdateDatasetVersionRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_dataset_version.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.dataset_version&.name
+                header_params["dataset_version.name"] = request.dataset_version.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_dataset_version.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_dataset_version.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dataset_service_stub.call_rpc :update_dataset_version, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Deletes a Dataset version.
             #
             # @overload delete_dataset_version(request, options = nil)
@@ -2230,6 +2322,11 @@ module Google
                 #
                 attr_reader :create_dataset_version
                 ##
+                # RPC-specific configuration for `update_dataset_version`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_dataset_version
+                ##
                 # RPC-specific configuration for `delete_dataset_version`
                 # @return [::Gapic::Config::Method]
                 #
@@ -2298,6 +2395,8 @@ module Google
                   @export_data = ::Gapic::Config::Method.new export_data_config
                   create_dataset_version_config = parent_rpcs.create_dataset_version if parent_rpcs.respond_to? :create_dataset_version
                   @create_dataset_version = ::Gapic::Config::Method.new create_dataset_version_config
+                  update_dataset_version_config = parent_rpcs.update_dataset_version if parent_rpcs.respond_to? :update_dataset_version
+                  @update_dataset_version = ::Gapic::Config::Method.new update_dataset_version_config
                   delete_dataset_version_config = parent_rpcs.delete_dataset_version if parent_rpcs.respond_to? :delete_dataset_version
                   @delete_dataset_version = ::Gapic::Config::Method.new delete_dataset_version_config
                   get_dataset_version_config = parent_rpcs.get_dataset_version if parent_rpcs.respond_to? :get_dataset_version

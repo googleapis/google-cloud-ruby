@@ -6,11 +6,12 @@ require 'google/protobuf'
 
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
+require 'google/cloud/aiplatform/v1/encryption_spec_pb'
 require 'google/cloud/aiplatform/v1/machine_resources_pb'
 require 'google/protobuf/timestamp_pb'
 
 
-descriptor_data = "\n9google/cloud/aiplatform/v1/deployment_resource_pool.proto\x12\x1agoogle.cloud.aiplatform.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x32google/cloud/aiplatform/v1/machine_resources.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xc8\x02\n\x16\x44\x65ploymentResourcePool\x12\x11\n\x04name\x18\x01 \x01(\tB\x03\xe0\x41\x05\x12P\n\x13\x64\x65\x64icated_resources\x18\x02 \x01(\x0b\x32..google.cloud.aiplatform.v1.DedicatedResourcesB\x03\xe0\x41\x02\x12\x34\n\x0b\x63reate_time\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x03\xe0\x41\x03:\x92\x01\xea\x41\x8e\x01\n0aiplatform.googleapis.com/DeploymentResourcePool\x12Zprojects/{project}/locations/{location}/deploymentResourcePools/{deployment_resource_pool}B\xd9\x01\n\x1e\x63om.google.cloud.aiplatform.v1B\x1b\x44\x65ploymentResourcePoolProtoP\x01Z>cloud.google.com/go/aiplatform/apiv1/aiplatformpb;aiplatformpb\xaa\x02\x1aGoogle.Cloud.AIPlatform.V1\xca\x02\x1aGoogle\\Cloud\\AIPlatform\\V1\xea\x02\x1dGoogle::Cloud::AIPlatform::V1b\x06proto3"
+descriptor_data = "\n9google/cloud/aiplatform/v1/deployment_resource_pool.proto\x12\x1agoogle.cloud.aiplatform.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x30google/cloud/aiplatform/v1/encryption_spec.proto\x1a\x32google/cloud/aiplatform/v1/machine_resources.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xc9\x03\n\x16\x44\x65ploymentResourcePool\x12\x11\n\x04name\x18\x01 \x01(\tB\x03\xe0\x41\x05\x12P\n\x13\x64\x65\x64icated_resources\x18\x02 \x01(\x0b\x32..google.cloud.aiplatform.v1.DedicatedResourcesB\x03\xe0\x41\x02\x12\x43\n\x0f\x65ncryption_spec\x18\x05 \x01(\x0b\x32*.google.cloud.aiplatform.v1.EncryptionSpec\x12\x17\n\x0fservice_account\x18\x06 \x01(\t\x12!\n\x19\x64isable_container_logging\x18\x07 \x01(\x08\x12\x34\n\x0b\x63reate_time\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x03\xe0\x41\x03:\x92\x01\xea\x41\x8e\x01\n0aiplatform.googleapis.com/DeploymentResourcePool\x12Zprojects/{project}/locations/{location}/deploymentResourcePools/{deployment_resource_pool}B\xd9\x01\n\x1e\x63om.google.cloud.aiplatform.v1B\x1b\x44\x65ploymentResourcePoolProtoP\x01Z>cloud.google.com/go/aiplatform/apiv1/aiplatformpb;aiplatformpb\xaa\x02\x1aGoogle.Cloud.AIPlatform.V1\xca\x02\x1aGoogle\\Cloud\\AIPlatform\\V1\xea\x02\x1dGoogle::Cloud::AIPlatform::V1b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
@@ -26,6 +27,7 @@ rescue TypeError
   warn "Warning: Protobuf detected an import path issue while loading generated file #{__FILE__}"
   imports = [
     ["google.cloud.aiplatform.v1.DedicatedResources", "google/cloud/aiplatform/v1/machine_resources.proto"],
+    ["google.cloud.aiplatform.v1.EncryptionSpec", "google/cloud/aiplatform/v1/encryption_spec.proto"],
     ["google.protobuf.Timestamp", "google/protobuf/timestamp.proto"],
   ]
   imports.each do |type_name, expected_filename|

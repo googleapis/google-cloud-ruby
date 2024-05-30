@@ -207,15 +207,69 @@ module Google
         # For experimental launch, Ray cluster creation and Persistent
         # cluster creation are 1:1 mapping: We will provision all the nodes within the
         # Persistent cluster as Ray nodes.
+        # @!attribute [rw] image_uri
+        #   @return [::String]
+        #     Optional. Default image for user to choose a preferred ML framework
+        #     (for example, TensorFlow or Pytorch) by choosing from [Vertex prebuilt
+        #     images](https://cloud.google.com/vertex-ai/docs/training/pre-built-containers).
+        #     Either this or the resource_pool_images is required. Use this field if
+        #     you need all the resource pools to have the same Ray image. Otherwise, use
+        #     the \\{@code resource_pool_images} field.
+        # @!attribute [rw] resource_pool_images
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Required if image_uri isn't set. A map of resource_pool_id to
+        #     prebuild Ray image if user need to use different images for different
+        #     head/worker pools. This map needs to cover all the resource pool ids.
+        #     Example:
+        #     {
+        #       "ray_head_node_pool": "head image"
+        #       "ray_worker_node_pool1": "worker image"
+        #       "ray_worker_node_pool2": "another worker image"
+        #     }
+        # @!attribute [rw] head_node_resource_pool_id
+        #   @return [::String]
+        #     Optional. This will be used to indicate which resource pool will serve as
+        #     the Ray head node(the first node within that pool). Will use the machine
+        #     from the first workerpool as the head node by default if this field isn't
+        #     set.
+        # @!attribute [rw] ray_metric_spec
+        #   @return [::Google::Cloud::AIPlatform::V1::RayMetricSpec]
+        #     Optional. Ray metrics configurations.
         class RaySpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class ResourcePoolImagesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Persistent Cluster runtime information as output
+        # @!attribute [r] access_uris
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Output only. URIs for user to connect to the Cluster.
+        #     Example:
+        #     {
+        #       "RAY_HEAD_NODE_INTERNAL_IP": "head-node-IP:10001"
+        #       "RAY_DASHBOARD_URI": "ray-dashboard-address:8888"
+        #     }
         class ResourceRuntime
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class AccessUrisEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Configuration for the use of custom service account to run the workloads.
@@ -239,6 +293,15 @@ module Google
         #     account to this PersistentResource after creation, but only specify the
         #     `service_account` inside the job.
         class ServiceAccountSpec
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration for the Ray metrics.
+        # @!attribute [rw] disabled
+        #   @return [::Boolean]
+        #     Optional. Flag to disable the Ray metrics collection.
+        class RayMetricSpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

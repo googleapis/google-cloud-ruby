@@ -97,6 +97,9 @@ module Google
         #   @return [::Array<::String>]
         #     Optional. The Compute Engine tags to add to runtime (see [Tagging
         #     instances](https://cloud.google.com/vpc/docs/add-remove-network-tags)).
+        # @!attribute [rw] encryption_spec
+        #   @return [::Google::Cloud::AIPlatform::V1::EncryptionSpec]
+        #     Customer-managed encryption key spec for the notebook runtime.
         class NotebookRuntimeTemplate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -186,10 +189,22 @@ module Google
         # @!attribute [r] notebook_runtime_type
         #   @return [::Google::Cloud::AIPlatform::V1::NotebookRuntimeType]
         #     Output only. The type of the notebook runtime.
+        # @!attribute [r] idle_shutdown_config
+        #   @return [::Google::Cloud::AIPlatform::V1::NotebookIdleShutdownConfig]
+        #     Output only. The idle shutdown configuration of the notebook runtime.
         # @!attribute [rw] network_tags
         #   @return [::Array<::String>]
         #     Optional. The Compute Engine tags to add to runtime (see [Tagging
         #     instances](https://cloud.google.com/vpc/docs/add-remove-network-tags)).
+        # @!attribute [r] encryption_spec
+        #   @return [::Google::Cloud::AIPlatform::V1::EncryptionSpec]
+        #     Output only. Customer-managed encryption key spec for the notebook runtime.
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
+        # @!attribute [r] satisfies_pzi
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
         class NotebookRuntime
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

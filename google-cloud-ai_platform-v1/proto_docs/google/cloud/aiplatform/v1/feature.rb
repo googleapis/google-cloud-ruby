@@ -168,6 +168,9 @@ module Google
 
             # Used for Feature that is bytes.
             BYTES = 13
+
+            # Used for Feature that is struct.
+            STRUCT = 14
           end
         end
       end

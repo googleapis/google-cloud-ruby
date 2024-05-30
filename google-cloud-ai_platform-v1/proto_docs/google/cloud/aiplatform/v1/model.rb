@@ -830,7 +830,7 @@ module Google
         # determine whether it is alive or ready to receive traffic.
         # @!attribute [rw] exec
         #   @return [::Google::Cloud::AIPlatform::V1::Probe::ExecAction]
-        #     Exec specifies the action to take.
+        #     ExecAction probes the health of a container by executing a command.
         # @!attribute [rw] period_seconds
         #   @return [::Integer]
         #     How often (in seconds) to perform the probe. Default to 10 seconds.

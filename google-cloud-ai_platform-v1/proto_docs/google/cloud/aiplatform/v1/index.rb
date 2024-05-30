@@ -126,8 +126,11 @@ module Google
         #     Required. Unique identifier of the datapoint.
         # @!attribute [rw] feature_vector
         #   @return [::Array<::Float>]
-        #     Required. Feature embedding vector. An array of numbers with the length of
-        #     [NearestNeighborSearchConfig.dimensions].
+        #     Required. Feature embedding vector for dense index. An array of numbers
+        #     with the length of [NearestNeighborSearchConfig.dimensions].
+        # @!attribute [rw] sparse_embedding
+        #   @return [::Google::Cloud::AIPlatform::V1::IndexDatapoint::SparseEmbedding]
+        #     Optional. Feature embedding vector for sparse index.
         # @!attribute [rw] restricts
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::IndexDatapoint::Restriction>]
         #     Optional. List of Restrict of the datapoint, used to perform "restricted
@@ -146,6 +149,20 @@ module Google
         class IndexDatapoint
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Feature embedding vector for sparse index. An array of numbers whose values
+          # are located in the specified dimensions.
+          # @!attribute [rw] values
+          #   @return [::Array<::Float>]
+          #     Required. The list of embedding values of the sparse vector.
+          # @!attribute [rw] dimensions
+          #   @return [::Array<::Integer>]
+          #     Required. The list of indexes for the embedding values of the sparse
+          #     vector.
+          class SparseEmbedding
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # Restriction of a datapoint which describe its attributes(tokens) from each
           # of several attribute categories(namespaces).
@@ -233,7 +250,10 @@ module Google
         # Stats of the Index.
         # @!attribute [r] vectors_count
         #   @return [::Integer]
-        #     Output only. The number of vectors in the Index.
+        #     Output only. The number of dense vectors in the Index.
+        # @!attribute [r] sparse_vectors_count
+        #   @return [::Integer]
+        #     Output only. The number of sparse vectors in the Index.
         # @!attribute [r] shards_count
         #   @return [::Integer]
         #     Output only. The number of shards in the Index.

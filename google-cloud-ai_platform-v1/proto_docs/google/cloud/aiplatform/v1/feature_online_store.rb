@@ -70,6 +70,10 @@ module Google
         #   @return [::Google::Cloud::AIPlatform::V1::FeatureOnlineStore::DedicatedServingEndpoint]
         #     Optional. The dedicated serving endpoint for this FeatureOnlineStore, which
         #     is different from common Vertex service endpoint.
+        # @!attribute [rw] encryption_spec
+        #   @return [::Google::Cloud::AIPlatform::V1::EncryptionSpec]
+        #     Optional. Customer-managed encryption key spec for data storage. If set,
+        #     online store will be secured by this key.
         class FeatureOnlineStore
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
