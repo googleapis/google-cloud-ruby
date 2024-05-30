@@ -40,7 +40,7 @@ response = client.create_profile request
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-profiler-v2/latest)
 for class and method documentation.
 
-See also the [Product Documentation](https://cloud.google.com/profiler/)
+See also the [Product Documentation](https://cloud.google.com/profiler/docs)
 for general usage information.
 
 ## Enabling Logging
