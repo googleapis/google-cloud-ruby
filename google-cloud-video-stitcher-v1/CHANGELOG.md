@@ -1,5 +1,16 @@
 # Changelog
 
+### 0.10.0 (2024-05-30)
+
+#### Features
+
+* Add adtracking to Livesession 
+* add apis for Create, Read, Update, Delete for VODConfigs ([#25943](https://github.com/googleapis/google-cloud-ruby/issues/25943)) 
+* Add fetchoptions with custom headers for Live and VODConfigs 
+* Add targeting parameter support to Livesession 
+* Add token config for MediaCdnKey 
+* Allow usage for VODConfigs in VODSession 
+
 ### 0.9.0 (2024-02-26)
 
 #### Features
