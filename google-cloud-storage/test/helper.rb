@@ -70,7 +70,8 @@ class MockStorage < Minitest::Spec
                          autoclass_terminal_storage_class: nil,
                          enable_object_retention: nil,
                          effective_time: DateTime.now,
-                         retention_duration_seconds: 604800 # 7 days
+                         retention_duration_seconds: 604800, # 7 days
+                         hierarchical_namespace: nil
     versioning_config = { "enabled" => versioning } if versioning
     { "kind" => "storage#bucket",
       "id" => name,
@@ -93,7 +94,8 @@ class MockStorage < Minitest::Spec
       "etag" => "CAE=",
       "autoclass" => autoclass_config_hash(autoclass_enabled, autoclass_terminal_storage_class),
       "enableObjectRetention" => enable_object_retention,
-      "softDeletePolicy" => soft_delete_policy_object(retention_duration_seconds: retention_duration_seconds)
+      "softDeletePolicy" => soft_delete_policy_object(retention_duration_seconds: retention_duration_seconds),
+      "hierarchicalNamespace" => hierarchical_namespace
     }.delete_if { |_, v| v.nil? }
   end
 
@@ -101,6 +103,12 @@ class MockStorage < Minitest::Spec
     Google::Apis::StorageV1::Bucket::SoftDeletePolicy.new(
       effective_time: DateTime.now,
       retention_duration_seconds: retention_duration_seconds
+    )
+  end
+
+  def hierarchical_namespace_object enabled: true
+    Google::Apis::StorageV1::Bucket::HierarchicalNamespace.new(
+      enabled: enabled
     )
   end
 

@@ -1254,6 +1254,62 @@ module Google
         end
 
         ##
+        # The bucket's hierarchical namespace (Folders) configuration.
+        # This value can be modified by calling {#hierarchical_namespace=}.
+        #
+        # @return [Google::Apis::StorageV1::Bucket::HierarchicalNamespace]
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.hierarchical_namespace
+        #
+        def hierarchical_namespace
+          @gapi.hierarchical_namespace
+        end
+
+        ##
+        # Sets the value of Hierarchical Namespace (Folders) for the bucket.
+        # This can only be enabled at bucket create time. If this is enabled,
+        # Uniform Bucket-Level Access must also be enabled.
+        # This value can be queried by calling {#hierarchical_namespace}.
+        #
+        # @param [Google::Apis::StorageV1::Bucket::HierarchicalNamespace,
+        #         Hash(String => String)] new_hierarchical_namespace The
+        #         bucket's new Hierarchical Namespace Configuration.
+        #
+        # @example Enabled Hierarchical Namespace using HierarchicalNamespace class:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   hierarchical_namespace = Google::Apis::StorageV1::Bucket::HierarchicalNamespace.new
+        #   hierarchical_namespace.enabled = true
+        #
+        #   bucket.hierarchical_namespace = hierarchical_namespace
+        #
+        # @example Disable Hierarchical Namespace using Hash:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   hierarchical_namespace = { enabled: false }
+        #   bucket.hierarchical_namespace = hierarchical_namespace
+        #
+        def hierarchical_namespace= new_hierarchical_namespace
+          @gapi.hierarchical_namespace = new_hierarchical_namespace || {}
+          patch_gapi! :hierarchical_namespace
+        end
+
+        ##
         # Updates the bucket with changes made in the given block in a single
         # PATCH request. The following attributes may be set: {#cors},
         # {#logging_bucket=}, {#logging_prefix=}, {#versioning=},

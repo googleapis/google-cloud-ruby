@@ -48,6 +48,7 @@ describe Google::Cloud::Storage::Bucket, :storage do
     _(one_off_bucket.labels).must_equal({})
     _(one_off_bucket.location_type).must_equal "multi-region"
     _(one_off_bucket.user_project).must_equal true
+    _(one_off_bucket.hierarchical_namespace).must_be_nil
     one_off_bucket.update do |b|
       b.storage_class = :nearline
       b.website_main = "index.html"
@@ -362,5 +363,26 @@ describe Google::Cloud::Storage::Bucket, :storage do
     safe_gcs_execute { one_off_bucket.delete }
 
     _(storage.bucket(one_off_bucket_name)).must_be :nil?
+  end
+
+  it "creates new bucket with hierarchical namespace enabled" do
+    hns_bucket_name = "hns_#{bucket_name}"
+    hierarchical_namespace = Google::Apis::StorageV1::Bucket::HierarchicalNamespace.new(enabled: true)
+
+    _(storage.bucket(hns_bucket_name)).must_be_nil
+
+    hns_bucket = safe_gcs_execute {
+      storage.create_bucket hns_bucket_name do |b|
+        b.uniform_bucket_level_access = true
+        b.hierarchical_namespace = hierarchical_namespace
+      end
+    }
+
+    _(hns_bucket.hierarchical_namespace).wont_be_nil
+    _(hns_bucket.hierarchical_namespace.enabled).must_equal true
+
+    safe_gcs_execute { hns_bucket.delete }
+
+    _(storage.bucket(hns_bucket_name)).must_be :nil?
   end
 end

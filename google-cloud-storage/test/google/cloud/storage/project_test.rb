@@ -560,6 +560,43 @@ describe Google::Cloud::Storage::Project, :mock_storage do
     _(bucket.rpo).must_equal "ASYNC_TURBO"
   end
 
+  it "created a bucket with HNS enabled" do
+    mock = Minitest::Mock.new
+    created_bucket = create_bucket_gapi bucket_name
+    created_bucket.hierarchical_namespace = hierarchical_namespace_object
+    resp_bucket = bucket_with_location created_bucket
+
+    mock.expect :insert_bucket, resp_bucket, [project, created_bucket], predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil, enable_object_retention: nil, options: {}
+    storage.service.mocked_service = mock
+
+    bucket = storage.create_bucket bucket_name do |b|
+      b.hierarchical_namespace = { enabled: true }
+    end
+
+    mock.verify
+
+    _(bucket).must_be_kind_of Google::Cloud::Storage::Bucket
+    _(bucket.hierarchical_namespace).wont_be_nil
+    _(bucket.hierarchical_namespace.enabled).must_equal true
+  end
+
+  it "creates a bucket with HNS disabled" do
+    mock = Minitest::Mock.new
+    created_bucket = create_bucket_gapi bucket_name
+    created_bucket.hierarchical_namespace = { enabled: false }
+    resp_bucket = bucket_with_location created_bucket
+
+    mock.expect :insert_bucket, resp_bucket, [project, created_bucket], predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil, enable_object_retention: nil, options: {}
+    storage.service.mocked_service = mock
+
+    bucket = storage.create_bucket bucket_name, hierarchical_namespace: { enabled: false }
+    mock.verify
+
+    _(bucket).must_be_kind_of Google::Cloud::Storage::Bucket
+    _(bucket.hierarchical_namespace).wont_be_nil
+    _(bucket.hierarchical_namespace[:enabled]).must_equal false
+  end
+
   it "raises when creating a bucket with a blank name" do
     bucket_name = ""
 
