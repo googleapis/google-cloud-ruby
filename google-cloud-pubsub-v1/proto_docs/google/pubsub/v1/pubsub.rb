@@ -814,6 +814,14 @@ module Google
         #     Optional. When true, use the BigQuery table's schema as the columns to
         #     write to in BigQuery. `use_table_schema` and `use_topic_schema` cannot be
         #     enabled at the same time.
+        # @!attribute [rw] service_account_email
+        #   @return [::String]
+        #     Optional. The service account to use to write to BigQuery. The subscription
+        #     creator or updater that specifies this field must have
+        #     `iam.serviceAccounts.actAs` permission on the service account. If not
+        #     specified, the Pub/Sub [service
+        #     agent](https://cloud.google.com/iam/docs/service-agents),
+        #     service-\\{project_number}@gcp-sa-pubsub.iam.gserviceaccount.com, is used.
         class BigQueryConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -889,6 +897,14 @@ module Google
         #   @return [::Google::Cloud::PubSub::V1::CloudStorageConfig::State]
         #     Output only. An output-only field that indicates whether or not the
         #     subscription can receive messages.
+        # @!attribute [rw] service_account_email
+        #   @return [::String]
+        #     Optional. The service account to use to write to Cloud Storage. The
+        #     subscription creator or updater that specifies this field must have
+        #     `iam.serviceAccounts.actAs` permission on the service account. If not
+        #     specified, the Pub/Sub
+        #     [service agent](https://cloud.google.com/iam/docs/service-agents),
+        #     service-\\{project_number}@gcp-sa-pubsub.iam.gserviceaccount.com, is used.
         class CloudStorageConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
