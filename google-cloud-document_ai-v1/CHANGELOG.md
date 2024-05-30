@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.22.0 (2024-05-30)
+
+#### Features
+
+* Make Layout Parser generally available in V1 ([#25990](https://github.com/googleapis/google-cloud-ruby/issues/25990)) 
+
 ### 0.21.1 (2024-05-16)
 
 #### Documentation
