@@ -1,0 +1,272 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.networkservices.v1",
+  "libraryPackage": "::Google::Cloud::NetworkServices::V1",
+  "services": {
+    "DepService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::NetworkServices::V1::DepService::Client",
+          "rpcs": {
+            "ListLbTrafficExtensions": {
+              "methods": [
+                "list_lb_traffic_extensions"
+              ]
+            },
+            "GetLbTrafficExtension": {
+              "methods": [
+                "get_lb_traffic_extension"
+              ]
+            },
+            "CreateLbTrafficExtension": {
+              "methods": [
+                "create_lb_traffic_extension"
+              ]
+            },
+            "UpdateLbTrafficExtension": {
+              "methods": [
+                "update_lb_traffic_extension"
+              ]
+            },
+            "DeleteLbTrafficExtension": {
+              "methods": [
+                "delete_lb_traffic_extension"
+              ]
+            },
+            "ListLbRouteExtensions": {
+              "methods": [
+                "list_lb_route_extensions"
+              ]
+            },
+            "GetLbRouteExtension": {
+              "methods": [
+                "get_lb_route_extension"
+              ]
+            },
+            "CreateLbRouteExtension": {
+              "methods": [
+                "create_lb_route_extension"
+              ]
+            },
+            "UpdateLbRouteExtension": {
+              "methods": [
+                "update_lb_route_extension"
+              ]
+            },
+            "DeleteLbRouteExtension": {
+              "methods": [
+                "delete_lb_route_extension"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "NetworkServices": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client",
+          "rpcs": {
+            "ListEndpointPolicies": {
+              "methods": [
+                "list_endpoint_policies"
+              ]
+            },
+            "GetEndpointPolicy": {
+              "methods": [
+                "get_endpoint_policy"
+              ]
+            },
+            "CreateEndpointPolicy": {
+              "methods": [
+                "create_endpoint_policy"
+              ]
+            },
+            "UpdateEndpointPolicy": {
+              "methods": [
+                "update_endpoint_policy"
+              ]
+            },
+            "DeleteEndpointPolicy": {
+              "methods": [
+                "delete_endpoint_policy"
+              ]
+            },
+            "ListGateways": {
+              "methods": [
+                "list_gateways"
+              ]
+            },
+            "GetGateway": {
+              "methods": [
+                "get_gateway"
+              ]
+            },
+            "CreateGateway": {
+              "methods": [
+                "create_gateway"
+              ]
+            },
+            "UpdateGateway": {
+              "methods": [
+                "update_gateway"
+              ]
+            },
+            "DeleteGateway": {
+              "methods": [
+                "delete_gateway"
+              ]
+            },
+            "ListGrpcRoutes": {
+              "methods": [
+                "list_grpc_routes"
+              ]
+            },
+            "GetGrpcRoute": {
+              "methods": [
+                "get_grpc_route"
+              ]
+            },
+            "CreateGrpcRoute": {
+              "methods": [
+                "create_grpc_route"
+              ]
+            },
+            "UpdateGrpcRoute": {
+              "methods": [
+                "update_grpc_route"
+              ]
+            },
+            "DeleteGrpcRoute": {
+              "methods": [
+                "delete_grpc_route"
+              ]
+            },
+            "ListHttpRoutes": {
+              "methods": [
+                "list_http_routes"
+              ]
+            },
+            "GetHttpRoute": {
+              "methods": [
+                "get_http_route"
+              ]
+            },
+            "CreateHttpRoute": {
+              "methods": [
+                "create_http_route"
+              ]
+            },
+            "UpdateHttpRoute": {
+              "methods": [
+                "update_http_route"
+              ]
+            },
+            "DeleteHttpRoute": {
+              "methods": [
+                "delete_http_route"
+              ]
+            },
+            "ListTcpRoutes": {
+              "methods": [
+                "list_tcp_routes"
+              ]
+            },
+            "GetTcpRoute": {
+              "methods": [
+                "get_tcp_route"
+              ]
+            },
+            "CreateTcpRoute": {
+              "methods": [
+                "create_tcp_route"
+              ]
+            },
+            "UpdateTcpRoute": {
+              "methods": [
+                "update_tcp_route"
+              ]
+            },
+            "DeleteTcpRoute": {
+              "methods": [
+                "delete_tcp_route"
+              ]
+            },
+            "ListTlsRoutes": {
+              "methods": [
+                "list_tls_routes"
+              ]
+            },
+            "GetTlsRoute": {
+              "methods": [
+                "get_tls_route"
+              ]
+            },
+            "CreateTlsRoute": {
+              "methods": [
+                "create_tls_route"
+              ]
+            },
+            "UpdateTlsRoute": {
+              "methods": [
+                "update_tls_route"
+              ]
+            },
+            "DeleteTlsRoute": {
+              "methods": [
+                "delete_tls_route"
+              ]
+            },
+            "ListServiceBindings": {
+              "methods": [
+                "list_service_bindings"
+              ]
+            },
+            "GetServiceBinding": {
+              "methods": [
+                "get_service_binding"
+              ]
+            },
+            "CreateServiceBinding": {
+              "methods": [
+                "create_service_binding"
+              ]
+            },
+            "DeleteServiceBinding": {
+              "methods": [
+                "delete_service_binding"
+              ]
+            },
+            "ListMeshes": {
+              "methods": [
+                "list_meshes"
+              ]
+            },
+            "GetMesh": {
+              "methods": [
+                "get_mesh"
+              ]
+            },
+            "CreateMesh": {
+              "methods": [
+                "create_mesh"
+              ]
+            },
+            "UpdateMesh": {
+              "methods": [
+                "update_mesh"
+              ]
+            },
+            "DeleteMesh": {
+              "methods": [
+                "delete_mesh"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
