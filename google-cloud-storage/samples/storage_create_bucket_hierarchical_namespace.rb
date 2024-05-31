@@ -21,7 +21,7 @@ def create_bucket_hierarchical_namespace bucket_name:
 
   storage = Google::Cloud::Storage.new
 
-  hierarchical_namespace = Google::Apis::StorageV1::Bucket::HierarchicalNamespace.new(enabled: true)
+  hierarchical_namespace = Google::Apis::StorageV1::Bucket::HierarchicalNamespace.new enabled: true
 
   storage.create_bucket bucket_name do |b|
     b.uniform_bucket_level_access = true
