@@ -39,6 +39,9 @@ module Google
           # resource is not in a Cloud Organization.
           # For all requests, returns a `google.rpc.Status` with
           # `google.rpc.Code.INVALID_ARGUMENT` if the request is malformed.
+          # (== deprecation_description Resource Settings is deprecated. As of November
+          # 7, 2023, no organizations will be onboarded for any of the enabled settings,
+          # and the service will be shut down on October 1, 2024. ==)
           #
           class Client
             # @private
@@ -57,6 +60,8 @@ module Google
             #
             # See {::Google::Cloud::ResourceSettings::V1::ResourceSettingsService::Client::Configuration}
             # for a description of the configuration fields.
+            #
+            # @deprecated This service is deprecated and may be removed in the next major version update.
             #
             # @example
             #
@@ -208,8 +213,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The Cloud resource that parents the setting. Must be in one of the
-            #     following forms:
+            #     Required. The Cloud resource that parents the setting. Must be in one of
+            #     the following forms:
             #
             #     * `projects/{project_number}`
             #     * `projects/{project_id}`
@@ -314,7 +319,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the setting to get. See {::Google::Cloud::ResourceSettings::V1::Setting Setting} for naming
+            #     Required. The name of the setting to get. See
+            #     {::Google::Cloud::ResourceSettings::V1::Setting Setting} for naming
             #     requirements.
             #   @param view [::Google::Cloud::ResourceSettings::V1::SettingView]
             #     The SettingView for this request.
@@ -418,7 +424,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param setting [::Google::Cloud::ResourceSettings::V1::Setting, ::Hash]
-            #     Required. The setting to update. See {::Google::Cloud::ResourceSettings::V1::Setting Setting} for field requirements.
+            #     Required. The setting to update. See
+            #     {::Google::Cloud::ResourceSettings::V1::Setting Setting} for field requirements.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::ResourceSettings::V1::Setting]

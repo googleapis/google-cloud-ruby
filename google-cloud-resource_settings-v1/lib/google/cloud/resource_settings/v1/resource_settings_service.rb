@@ -44,6 +44,11 @@ module Google
         # resource is not in a Cloud Organization.
         # For all requests, returns a `google.rpc.Status` with
         # `google.rpc.Code.INVALID_ARGUMENT` if the request is malformed.
+        # (== deprecation_description Resource Settings is deprecated. As of November
+        # 7, 2023, no organizations will be onboarded for any of the enabled settings,
+        # and the service will be shut down on October 1, 2024. ==)
+        #
+        # @deprecated This service is deprecated and may be removed in the next major version update.
         #
         # @example Load this service and instantiate a gRPC client
         #

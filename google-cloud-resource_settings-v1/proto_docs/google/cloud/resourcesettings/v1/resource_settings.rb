@@ -33,33 +33,39 @@ module Google
         #     For example, "/projects/123/settings/gcp-enableMyFeature"
         # @!attribute [r] metadata
         #   @return [::Google::Cloud::ResourceSettings::V1::SettingMetadata]
-        #     Output only. Metadata about a setting which is not editable by the end user.
+        #     Output only. Metadata about a setting which is not editable by the end
+        #     user.
         # @!attribute [rw] local_value
         #   @return [::Google::Cloud::ResourceSettings::V1::Value]
         #     The configured value of the setting at the given parent resource (ignoring
-        #     the resource hierarchy). The data type of {::Google::Cloud::ResourceSettings::V1::Value Value} must always be
-        #     consistent with the data type defined in {::Google::Cloud::ResourceSettings::V1::Setting#metadata Setting.metadata}.
+        #     the resource hierarchy). The data type of
+        #     {::Google::Cloud::ResourceSettings::V1::Value Value} must always be consistent
+        #     with the data type defined in
+        #     {::Google::Cloud::ResourceSettings::V1::Setting#metadata Setting.metadata}.
         # @!attribute [r] effective_value
         #   @return [::Google::Cloud::ResourceSettings::V1::Value]
-        #     Output only. The computed effective value of the setting at the given parent resource
-        #     (based on the resource hierarchy).
+        #     Output only. The computed effective value of the setting at the given
+        #     parent resource (based on the resource hierarchy).
         #
         #     The effective value evaluates to one of the following options in the given
         #     order (the next option is used if the previous one does not exist):
         #
-        #     1. the local setting value on the given resource: {::Google::Cloud::ResourceSettings::V1::Setting#local_value Setting.local_value}
+        #     1. the local setting value on the given resource:
+        #     {::Google::Cloud::ResourceSettings::V1::Setting#local_value Setting.local_value}
         #     2. if one of the given resource's ancestors have a local setting value,
         #        the local value at the nearest such ancestor
-        #     3. the setting's default value: {::Google::Cloud::ResourceSettings::V1::SettingMetadata#default_value SettingMetadata.default_value}
+        #     3. the setting's default value:
+        #     {::Google::Cloud::ResourceSettings::V1::SettingMetadata#default_value SettingMetadata.default_value}
         #     4. an empty value (defined as a `Value` with all fields unset)
         #
-        #     The data type of {::Google::Cloud::ResourceSettings::V1::Value Value} must always be
-        #     consistent with the data type defined in {::Google::Cloud::ResourceSettings::V1::Setting#metadata Setting.metadata}.
+        #     The data type of {::Google::Cloud::ResourceSettings::V1::Value Value} must
+        #     always be consistent with the data type defined in
+        #     {::Google::Cloud::ResourceSettings::V1::Setting#metadata Setting.metadata}.
         # @!attribute [rw] etag
         #   @return [::String]
         #     A fingerprint used for optimistic concurrency. See
-        #     {::Google::Cloud::ResourceSettings::V1::ResourceSettingsService::Client#update_setting UpdateSetting} for more
-        #     details.
+        #     {::Google::Cloud::ResourceSettings::V1::ResourceSettingsService::Client#update_setting UpdateSetting}
+        #     for more details.
         class Setting
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -81,16 +87,18 @@ module Google
         #     The data type for this setting.
         # @!attribute [rw] default_value
         #   @return [::Google::Cloud::ResourceSettings::V1::Value]
-        #     The value provided by {::Google::Cloud::ResourceSettings::V1::Setting#effective_value Setting.effective_value} if no setting value is
-        #     explicitly set.
+        #     The value provided by
+        #     {::Google::Cloud::ResourceSettings::V1::Setting#effective_value Setting.effective_value}
+        #     if no setting value is explicitly set.
         #
         #     Note: not all settings have a default value.
         class SettingMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # The data type for setting values of this setting. See {::Google::Cloud::ResourceSettings::V1::Value Value} for more
-          # details on the available data types.
+          # The data type for setting values of this setting. See
+          # {::Google::Cloud::ResourceSettings::V1::Value Value} for more details on the
+          # available data types.
           module DataType
             # Unspecified data type.
             DATA_TYPE_UNSPECIFIED = 0
@@ -152,8 +160,8 @@ module Google
         # The request for ListSettings.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The Cloud resource that parents the setting. Must be in one of the
-        #     following forms:
+        #     Required. The Cloud resource that parents the setting. Must be in one of
+        #     the following forms:
         #
         #     * `projects/{project_number}`
         #     * `projects/{project_id}`
@@ -188,7 +196,8 @@ module Google
         # The request for GetSetting.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The name of the setting to get. See {::Google::Cloud::ResourceSettings::V1::Setting Setting} for naming
+        #     Required. The name of the setting to get. See
+        #     {::Google::Cloud::ResourceSettings::V1::Setting Setting} for naming
         #     requirements.
         # @!attribute [rw] view
         #   @return [::Google::Cloud::ResourceSettings::V1::SettingView]
@@ -201,7 +210,8 @@ module Google
         # The request for UpdateSetting.
         # @!attribute [rw] setting
         #   @return [::Google::Cloud::ResourceSettings::V1::Setting]
-        #     Required. The setting to update. See {::Google::Cloud::ResourceSettings::V1::Setting Setting} for field requirements.
+        #     Required. The setting to update. See
+        #     {::Google::Cloud::ResourceSettings::V1::Setting Setting} for field requirements.
         class UpdateSettingRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -213,14 +223,20 @@ module Google
           # The API will default to the SETTING_VIEW_BASIC view.
           SETTING_VIEW_UNSPECIFIED = 0
 
-          # Include {::Google::Cloud::ResourceSettings::V1::Setting#metadata Setting.metadata}, but nothing else.
-          # This is the default value (for both ListSettings and GetSetting).
+          # Include
+          # {::Google::Cloud::ResourceSettings::V1::Setting#metadata Setting.metadata}, but
+          # nothing else. This is the default value (for both ListSettings and
+          # GetSetting).
           SETTING_VIEW_BASIC = 1
 
-          # Include {::Google::Cloud::ResourceSettings::V1::Setting#effective_value Setting.effective_value}, but nothing else.
+          # Include
+          # {::Google::Cloud::ResourceSettings::V1::Setting#effective_value Setting.effective_value},
+          # but nothing else.
           SETTING_VIEW_EFFECTIVE_VALUE = 2
 
-          # Include {::Google::Cloud::ResourceSettings::V1::Setting#local_value Setting.local_value}, but nothing else.
+          # Include
+          # {::Google::Cloud::ResourceSettings::V1::Setting#local_value Setting.local_value},
+          # but nothing else.
           SETTING_VIEW_LOCAL_VALUE = 3
         end
       end
