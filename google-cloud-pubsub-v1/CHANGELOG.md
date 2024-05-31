@@ -1,5 +1,11 @@
 # Release History
 
+### 0.24.0 (2024-05-31)
+
+#### Features
+
+* Support service account email for export subscriptions ([#26009](https://github.com/googleapis/google-cloud-ruby/issues/26009)) 
+
 ### 0.23.0 (2024-04-15)
 
 #### Features
