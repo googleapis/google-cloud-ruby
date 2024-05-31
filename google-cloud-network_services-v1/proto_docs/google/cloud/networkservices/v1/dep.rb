@@ -51,8 +51,7 @@ module Google
           #     Required. A Common Expression Language (CEL) expression that is used to
           #     match requests for which the extension chain is executed.
           #
-          #     For more information, see
-          #     [CEL matcher language
+          #     For more information, see [CEL matcher language
           #     reference](https://cloud.google.com/service-extensions/docs/cel-matcher-language-reference).
           class MatchCondition
             include ::Google::Protobuf::MessageExts
@@ -91,7 +90,7 @@ module Google
           #   @return [::Array<::Google::Cloud::NetworkServices::V1::EventType>]
           #     Optional. A set of events during request or response processing for which
           #     this extension is called. This field is required for the
-          #     `LbTrafficExtension` resource. It's not relevant for the
+          #     `LbTrafficExtension` resource. It must not be set for the
           #     `LbRouteExtension` resource.
           # @!attribute [rw] timeout
           #   @return [::Google::Protobuf::Duration]
@@ -107,6 +106,7 @@ module Google
           #     error. Any subsequent extensions in the extension chain are also
           #     executed. When set to `FALSE` or the default setting of `FALSE` is used,
           #     one of the following happens:
+          #
           #     * If response headers have not been delivered to the downstream client,
           #     a generic 500 error is returned to the client. The error response can be
           #     tailored by configuring a custom error response in the load balancer.
@@ -147,8 +147,8 @@ module Google
         #     Optional. Set of labels associated with the `LbTrafficExtension` resource.
         #
         #     The format must comply with [the requirements for
-        #     labels](https://cloud.google.com/compute/docs/labeling-resources#requirements) for Google Cloud
-        #     resources.
+        #     labels](https://cloud.google.com/compute/docs/labeling-resources#requirements)
+        #     for Google Cloud resources.
         # @!attribute [rw] forwarding_rules
         #   @return [::Array<::String>]
         #     Required. A list of references to the forwarding rules to which this
@@ -169,6 +169,16 @@ module Google
         #     `INTERNAL_MANAGED`, `EXTERNAL_MANAGED`. For more information, refer to
         #     [Choosing a load
         #     balancer](https://cloud.google.com/load-balancing/docs/backend-service).
+        # @!attribute [rw] metadata
+        #   @return [::Google::Protobuf::Struct]
+        #     Optional. The metadata provided here is included in the
+        #     `ProcessingRequest.metadata_context.filter_metadata` map field. The
+        #     metadata is available under the key
+        #     `com.google.lb_traffic_extension.<resource_name>`.
+        #     The following variables are supported in the metadata:
+        #
+        #     `{forwarding_rule_id}` - substituted with the forwarding rule's fully
+        #       qualified resource name.
         class LbTrafficExtension
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -268,7 +278,7 @@ module Google
         # Message for updating a `LbTrafficExtension` resource.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. Used to specify the fields to be overwritten in the
+        #     Optional. Used to specify the fields to be overwritten in the
         #     `LbTrafficExtension` resource by the update.
         #     The fields specified in the update_mask are relative to the resource, not
         #     the full request. A field is overwritten if it is in the mask. If the
@@ -343,8 +353,8 @@ module Google
         #     Optional. Set of labels associated with the `LbRouteExtension` resource.
         #
         #     The format must comply with [the requirements for
-        #     labels](https://cloud.google.com/compute/docs/labeling-resources#requirements) for Google Cloud
-        #     resources.
+        #     labels](https://cloud.google.com/compute/docs/labeling-resources#requirements)
+        #     for Google Cloud resources.
         # @!attribute [rw] forwarding_rules
         #   @return [::Array<::String>]
         #     Required. A list of references to the forwarding rules to which this
@@ -365,6 +375,17 @@ module Google
         #     `INTERNAL_MANAGED`, `EXTERNAL_MANAGED`. For more information, refer to
         #     [Choosing a load
         #     balancer](https://cloud.google.com/load-balancing/docs/backend-service).
+        # @!attribute [rw] metadata
+        #   @return [::Google::Protobuf::Struct]
+        #     Optional. The metadata provided here is included as part of the
+        #     `metadata_context` (of type `google.protobuf.Struct`) in the
+        #     `ProcessingRequest` message sent to the extension
+        #     server. The metadata is available under the namespace
+        #     `com.google.lb_route_extension.<resource_name>`.
+        #     The following variables are supported in the metadata Struct:
+        #
+        #     `{forwarding_rule_id}` - substituted with the forwarding rule's fully
+        #       qualified resource name.
         class LbRouteExtension
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -464,7 +485,7 @@ module Google
         # Message for updating a `LbRouteExtension` resource.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. Used to specify the fields to be overwritten in the
+        #     Optional. Used to specify the fields to be overwritten in the
         #     `LbRouteExtension` resource by the update.
         #     The fields specified in the update_mask are relative to the resource, not
         #     the full request. A field is overwritten if it is in the mask. If the

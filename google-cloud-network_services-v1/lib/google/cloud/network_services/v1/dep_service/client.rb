@@ -72,6 +72,8 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
+                default_config.timeout = 60.0
+
                 default_config
               end
               yield @configure if block_given?
@@ -531,7 +533,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required. Used to specify the fields to be overwritten in the
+            #     Optional. Used to specify the fields to be overwritten in the
             #     `LbTrafficExtension` resource by the update.
             #     The fields specified in the update_mask are relative to the resource, not
             #     the full request. A field is overwritten if it is in the mask. If the
@@ -1059,7 +1061,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required. Used to specify the fields to be overwritten in the
+            #     Optional. Used to specify the fields to be overwritten in the
             #     `LbRouteExtension` resource by the update.
             #     The fields specified in the update_mask are relative to the resource, not
             #     the full request. A field is overwritten if it is in the mask. If the
