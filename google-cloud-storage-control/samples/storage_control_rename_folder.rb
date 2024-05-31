@@ -16,7 +16,7 @@
 def rename_folder bucket_name:, source_folder_id:, destination_folder_id:
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
-  # 
+  #
   # The source folder ID
   # source_folder_id = "current-folder-id"
   #
@@ -31,9 +31,10 @@ def rename_folder bucket_name:, source_folder_id:, destination_folder_id:
   # denotes this bucket exists in the global namespace.
   folder_path = storage_control.folder_path project: "_", bucket: bucket_name, folder: source_folder_id
 
-  request = Google::Cloud::Storage::Control::V2::RenameFolderRequest.new(name: folder_path, destination_folder_id: destination_folder_id)
+  request = Google::Cloud::Storage::Control::V2::RenameFolderRequest.new name: folder_path,
+                                                                         destination_folder_id: destination_folder_id
 
-  response = storage_control.rename_folder request
+  storage_control.rename_folder request
 
   puts "Renamed folder #{source_folder_id} to #{destination_folder_id}"
 end

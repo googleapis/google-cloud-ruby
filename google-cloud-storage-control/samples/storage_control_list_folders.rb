@@ -25,7 +25,7 @@ def list_folders bucket_name:
   # denotes this bucket exists in the global namespace.
   bucket_path = storage_control.bucket_path project: "_", bucket: bucket_name
 
-  request = Google::Cloud::Storage::Control::V2::ListFoldersRequest.new(parent: bucket_path)
+  request = Google::Cloud::Storage::Control::V2::ListFoldersRequest.new parent: bucket_path
 
   response = storage_control.list_folders request
 

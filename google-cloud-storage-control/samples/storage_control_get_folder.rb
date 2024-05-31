@@ -28,7 +28,7 @@ def get_folder bucket_name:, folder_name:
   # denotes this bucket exists in the global namespace.
   folder_path = storage_control.folder_path project: "_", bucket: bucket_name, folder: folder_name
 
-  request = Google::Cloud::Storage::Control::V2::GetFolderRequest.new(name: folder_path)
+  request = Google::Cloud::Storage::Control::V2::GetFolderRequest.new name: folder_path
 
   response = storage_control.get_folder request
 

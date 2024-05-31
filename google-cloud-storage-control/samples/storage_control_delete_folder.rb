@@ -16,7 +16,7 @@
 def delete_folder bucket_name:, folder_name:
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
-  # 
+  #
   # Name of the folder you want to delete
   # folder_name = "name-of-the-folder"
 
@@ -28,9 +28,9 @@ def delete_folder bucket_name:, folder_name:
   # denotes this bucket exists in the global namespace.
   folder_path = storage_control.folder_path project: "_", bucket: bucket_name, folder: folder_name
 
-  request = Google::Cloud::Storage::Control::V2::DeleteFolderRequest.new(name: folder_path)
+  request = Google::Cloud::Storage::Control::V2::DeleteFolderRequest.new name: folder_path
 
-  response = storage_control.delete_folder request
+  storage_control.delete_folder request
 
   puts "Deleted folder: #{folder_name}"
 end

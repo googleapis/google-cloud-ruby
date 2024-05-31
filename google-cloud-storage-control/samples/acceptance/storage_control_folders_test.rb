@@ -34,11 +34,11 @@ describe "Storage Control Folders" do
 
   it "create_folder, get_folder, list_folders, rename_folder, delete_folder" do
     # create_folder
-    retry_resource_exhaustion do
-      assert_output "Created folder: #{folder_name}\n" do
-        create_folder bucket_name: bucket_name, folder_name: folder_name
-      end
+    out, _err = capture_io do
+      create_folder bucket_name: bucket_name, folder_name: folder_name
     end
+
+    assert_includes out, folder_name
 
     # list_folders
     out, _err = capture_io do
@@ -55,7 +55,7 @@ describe "Storage Control Folders" do
     assert_includes out, folder_name
 
     # rename_folder
-    new_folder_name = folder_name + "_new"
+    new_folder_name = "#{folder_name}_new"
     assert_output "Renamed folder #{folder_name} to #{new_folder_name}\n" do
       rename_folder bucket_name: bucket_name, source_folder_id: folder_name, destination_folder_id: new_folder_name
     end

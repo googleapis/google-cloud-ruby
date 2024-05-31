@@ -28,11 +28,11 @@ def create_folder bucket_name:, folder_name:
   # denotes this bucket exists in the global namespace.
   bucket_path = storage_control.bucket_path project: "_", bucket: bucket_name
 
-  request = Google::Cloud::Storage::Control::V2::CreateFolderRequest.new(parent: bucket_path, folder_id: folder_name)
+  request = Google::Cloud::Storage::Control::V2::CreateFolderRequest.new parent: bucket_path, folder_id: folder_name
 
   response = storage_control.create_folder request
 
-  puts "Created folder: #{folder_name}"
+  puts "Created folder: #{response.name}"
 end
 # [END storage_control_create_folder]
 
