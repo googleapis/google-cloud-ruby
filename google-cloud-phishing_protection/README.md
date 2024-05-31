@@ -18,7 +18,7 @@ themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-phishing_protection-v1beta1](https://cloud.google.com/ruby/docs/reference/google-cloud-phishing_protection-v1beta1/latest).
 
-See also the [Product Documentation](https://cloud.google.com/phishing-protection)
+See also the [Product Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-phishing_protection)
 for more usage information.
 
 ## Quick Start
