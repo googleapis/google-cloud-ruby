@@ -1,5 +1,11 @@
 # Release History
 
+### 1.52.0 (2024-05-31)
+
+#### Features
+
+* support for hierarchical namespace (folders) ([#25967](https://github.com/googleapis/google-cloud-ruby/issues/25967)) 
+
 ### 1.51.0 (2024-04-25)
 
 #### Features
