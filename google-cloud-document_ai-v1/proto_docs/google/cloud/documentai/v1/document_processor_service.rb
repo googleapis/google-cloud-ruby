@@ -36,6 +36,10 @@ module Google
         #   @return [::Google::Cloud::DocumentAI::V1::OcrConfig]
         #     Only applicable to `OCR_PROCESSOR` and `FORM_PARSER_PROCESSOR`.
         #     Returns error if set on other processor types.
+        # @!attribute [rw] layout_config
+        #   @return [::Google::Cloud::DocumentAI::V1::ProcessOptions::LayoutConfig]
+        #     Optional. Only applicable to `LAYOUT_PARSER_PROCESSOR`.
+        #     Returns error if set on other processor types.
         # @!attribute [rw] schema_override
         #   @return [::Google::Cloud::DocumentAI::V1::DocumentSchema]
         #     Optional. Override the schema of the
@@ -46,6 +50,28 @@ module Google
         class ProcessOptions
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Serving config for layout parser processor.
+          # @!attribute [rw] chunking_config
+          #   @return [::Google::Cloud::DocumentAI::V1::ProcessOptions::LayoutConfig::ChunkingConfig]
+          #     Optional. Config for chunking in layout parser processor.
+          class LayoutConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Serving config for chunking.
+            # @!attribute [rw] chunk_size
+            #   @return [::Integer]
+            #     Optional. The chunk sizes to use when splitting documents, in order of
+            #     level.
+            # @!attribute [rw] include_ancestor_headings
+            #   @return [::Boolean]
+            #     Optional. Whether or not to include ancestor headings when splitting.
+            class ChunkingConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
 
           # A list of individual page numbers.
           # @!attribute [rw] pages
