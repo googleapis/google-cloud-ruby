@@ -20,6 +20,7 @@ require_relative "../storage_cors_configuration"
 require_relative "../storage_create_bucket"
 require_relative "../storage_create_bucket_class_location"
 require_relative "../storage_create_bucket_dual_region"
+require_relative "../storage_create_bucket_hierarchical_namespace"
 require_relative "../storage_define_bucket_website_configuration"
 require_relative "../storage_delete_bucket"
 require_relative "../storage_disable_bucket_lifecycle_management"
@@ -135,6 +136,26 @@ describe "Buckets Snippets" do
           StorageCreateBucketDualRegion.new.storage_create_bucket_dual_region bucket_name: bucket_name,
                                                                               region_1: region_1,
                                                                               region_2: region_2
+        end
+      end
+
+      refute_nil storage_client.bucket bucket_name
+
+      delete_bucket_helper bucket_name
+    end
+  end
+
+  describe "storage_create_bucket_hierarchical_namespace" do
+    focus
+    it "creates hierarchical namespace enabled bucket" do
+      bucket_name = random_bucket_name
+      refute storage_client.bucket bucket_name
+
+      expected = "Created bucket #{bucket_name} with Hierarchical Namespace enabled.\n"
+
+      retry_resource_exhaustion do
+        assert_output expected do
+          create_bucket_hierarchical_namespace bucket_name: bucket_name
         end
       end
 
