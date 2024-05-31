@@ -40,7 +40,7 @@ response = client.report_phishing request
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-phishing_protection-v1beta1/latest)
 for class and method documentation.
 
-See also the [Product Documentation](https://cloud.google.com/phishing-protection)
+See also the [Product Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-phishing_protection)
 for general usage information.
 
 ## Enabling Logging
