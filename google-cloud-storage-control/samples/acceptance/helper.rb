@@ -22,18 +22,10 @@ def random_bucket_name
   "ruby-storage-control-samples-test-#{t}-#{SecureRandom.hex 4}".downcase
 end
 
-def random_folder_name
-  t = Time.now.utc.iso8601.gsub ":", "-"
-  "ruby-storage-control-folder-samples-test-#{t}-#{SecureRandom.hex 4}".downcase
-end
-
-def create_bucket_helper bucket_name, uniform_bucket_level_access: nil, hierarchical_namespace: nil
+def create_bucket_helper bucket_name
   storage_client = Google::Cloud::Storage.new
   retry_resource_exhaustion do
-    storage_client.create_bucket bucket_name do |b|
-      b.uniform_bucket_level_access = uniform_bucket_level_access
-      b.hierarchical_namespace = hierarchical_namespace
-    end
+    storage_client.create_bucket bucket_name
   end
 end
 
