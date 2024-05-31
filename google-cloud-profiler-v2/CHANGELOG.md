@@ -1,5 +1,11 @@
 # Release History
 
+### 0.10.1 (2024-05-31)
+
+#### Documentation
+
+* Update URL for profiler docs ([#26011](https://github.com/googleapis/google-cloud-ruby/issues/26011)) 
+
 ### 0.10.0 (2024-02-26)
 
 #### Features
