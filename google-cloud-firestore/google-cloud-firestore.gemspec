@@ -19,8 +19,9 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 2.7"
 
+  gem.add_dependency "bigdecimal", "~> 3.0"
+  gem.add_dependency "concurrent-ruby", "~> 1.0"
   gem.add_dependency "google-cloud-core", "~> 1.5"
   gem.add_dependency "google-cloud-firestore-v1", "~> 0.10"
-  gem.add_dependency "concurrent-ruby", "~> 1.0"
   gem.add_dependency "rbtree", "~> 0.4.2"
 end
