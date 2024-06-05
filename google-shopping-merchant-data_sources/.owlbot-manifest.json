@@ -1,0 +1,25 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".toys.rb",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-shopping-merchant-data_sources.gemspec",
+    "lib/google-shopping-merchant-data_sources.rb",
+    "lib/google/shopping/merchant/data_sources.rb",
+    "lib/google/shopping/merchant/data_sources/version.rb",
+    "test/google/shopping/merchant/data_sources/client_test.rb",
+    "test/google/shopping/merchant/data_sources/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml"
+  ]
+}

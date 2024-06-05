@@ -1651,6 +1651,10 @@
       "component": "google-shopping-merchant-conversions-v1beta",
       "version_file": "lib/google/shopping/merchant/conversions/v1beta/version.rb"
     },
+    "google-shopping-merchant-data_sources": {
+      "component": "google-shopping-merchant-data_sources",
+      "version_file": "lib/google/shopping/merchant/data_sources/version.rb"
+    },
     "google-shopping-merchant-data_sources-v1beta": {
       "component": "google-shopping-merchant-data_sources-v1beta",
       "version_file": "lib/google/shopping/merchant/data_sources/v1beta/version.rb"
