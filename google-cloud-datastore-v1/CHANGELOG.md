@@ -1,5 +1,11 @@
 # Release History
 
+### 0.19.0 (2024-06-05)
+
+#### Features
+
+* Support property_mask parameter allowing partial commits, lookups and query results ([#25924](https://github.com/googleapis/google-cloud-ruby/issues/25924)) 
+
 ### 0.18.0 (2024-03-22)
 
 #### Features
