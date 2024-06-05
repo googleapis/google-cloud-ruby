@@ -200,7 +200,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload lookup(project_id: nil, database_id: nil, read_options: nil, keys: nil)
+              # @overload lookup(project_id: nil, database_id: nil, read_options: nil, keys: nil, property_mask: nil)
               #   Pass arguments to `lookup` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -216,6 +216,13 @@ module Google
               #     The options for this lookup request.
               #   @param keys [::Array<::Google::Cloud::Datastore::V1::Key, ::Hash>]
               #     Required. Keys of entities to look up.
+              #   @param property_mask [::Google::Cloud::Datastore::V1::PropertyMask, ::Hash]
+              #     The properties to return. Defaults to returning all properties.
+              #
+              #     If this field is set and an entity has a property not referenced in the
+              #     mask, it will be absent from [LookupResponse.found.entity.properties][].
+              #
+              #     The entity's key is always returned.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Datastore::V1::LookupResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -288,7 +295,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload run_query(project_id: nil, database_id: nil, partition_id: nil, read_options: nil, query: nil, gql_query: nil, explain_options: nil)
+              # @overload run_query(project_id: nil, database_id: nil, partition_id: nil, read_options: nil, query: nil, gql_query: nil, property_mask: nil, explain_options: nil)
               #   Pass arguments to `run_query` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -311,6 +318,12 @@ module Google
               #     The query to run.
               #   @param gql_query [::Google::Cloud::Datastore::V1::GqlQuery, ::Hash]
               #     The GQL query to run. This query must be a non-aggregation query.
+              #   @param property_mask [::Google::Cloud::Datastore::V1::PropertyMask, ::Hash]
+              #     The properties to return.
+              #     This field must not be set for a projection query.
+              #
+              #     See
+              #     {::Google::Cloud::Datastore::V1::LookupRequest#property_mask LookupRequest.property_mask}.
               #   @param explain_options [::Google::Cloud::Datastore::V1::ExplainOptions, ::Hash]
               #     Optional. Explain options for the query. If set, additional query
               #     statistics will be returned. If not, only query results will be returned.

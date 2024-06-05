@@ -37,6 +37,14 @@ module Google
         # @!attribute [rw] keys
         #   @return [::Array<::Google::Cloud::Datastore::V1::Key>]
         #     Required. Keys of entities to look up.
+        # @!attribute [rw] property_mask
+        #   @return [::Google::Cloud::Datastore::V1::PropertyMask]
+        #     The properties to return. Defaults to returning all properties.
+        #
+        #     If this field is set and an entity has a property not referenced in the
+        #     mask, it will be absent from [LookupResponse.found.entity.properties][].
+        #
+        #     The entity's key is always returned.
         class LookupRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -100,6 +108,13 @@ module Google
         # @!attribute [rw] gql_query
         #   @return [::Google::Cloud::Datastore::V1::GqlQuery]
         #     The GQL query to run. This query must be a non-aggregation query.
+        # @!attribute [rw] property_mask
+        #   @return [::Google::Cloud::Datastore::V1::PropertyMask]
+        #     The properties to return.
+        #     This field must not be set for a projection query.
+        #
+        #     See
+        #     {::Google::Cloud::Datastore::V1::LookupRequest#property_mask LookupRequest.property_mask}.
         # @!attribute [rw] explain_options
         #   @return [::Google::Cloud::Datastore::V1::ExplainOptions]
         #     Optional. Explain options for the query. If set, additional query
@@ -414,6 +429,16 @@ module Google
         #     The update time of the entity that this mutation is being applied
         #     to. If this does not match the current update time on the server, the
         #     mutation conflicts.
+        # @!attribute [rw] property_mask
+        #   @return [::Google::Cloud::Datastore::V1::PropertyMask]
+        #     The properties to write in this mutation.
+        #     None of the properties in the mask may have a reserved name, except for
+        #     `__key__`.
+        #     This field is ignored for `delete`.
+        #
+        #     If the entity already exists, only properties referenced in the mask are
+        #     updated, others are left untouched.
+        #     Properties referenced in the mask but not in the entity are deleted.
         class Mutation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -445,6 +470,26 @@ module Google
         #     Whether a conflict was detected for this mutation. Always false when a
         #     conflict detection strategy field is not set in the mutation.
         class MutationResult
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The set of arbitrarily nested property paths used to restrict an operation to
+        # only a subset of properties in an entity.
+        # @!attribute [rw] paths
+        #   @return [::Array<::String>]
+        #     The paths to the properties covered by this mask.
+        #
+        #     A path is a list of property names separated by dots (`.`), for example
+        #     `foo.bar` means the property `bar` inside the entity property `foo` inside
+        #     the entity associated with this path.
+        #
+        #     If a property name contains a dot `.` or a backslash `\`, then that
+        #     name must be escaped.
+        #
+        #     A path must not be empty, and may not reference a value inside an
+        #     {::Google::Cloud::Datastore::V1::Value#array_value array value}.
+        class PropertyMask
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
