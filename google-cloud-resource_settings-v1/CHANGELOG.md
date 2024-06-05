@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.7.1 (2024-06-05)
+
+#### Documentation
+
+* Resource Settings is deprecated. As of November 7, 2023, no organizations will be onboarded for any of the enabled settings, and the service will be shut down on October 1, 2024 ([#26023](https://github.com/googleapis/google-cloud-ruby/issues/26023)) 
+
 ### 0.7.0 (2024-02-26)
 
 #### Features
