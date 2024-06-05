@@ -18,7 +18,7 @@ themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-build-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-build-v1/latest).
 
-See also the [Product Documentation](https://cloud.google.com/cloud-build)
+See also the [Product Documentation](https://cloud.google.com/build/docs)
 for more usage information.
 
 ## Quick Start
