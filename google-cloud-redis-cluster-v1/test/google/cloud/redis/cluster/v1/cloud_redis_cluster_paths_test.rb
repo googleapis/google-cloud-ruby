@@ -33,6 +33,18 @@ class ::Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::ClientPathsTest < 
     end
   end
 
+  def test_certificate_authority_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.certificate_authority_path project: "value0", location: "value1", cluster: "value2"
+      assert_equal "projects/value0/locations/value1/clusters/value2/certificateAuthority", path
+    end
+  end
+
   def test_cluster_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
