@@ -204,10 +204,11 @@ def run_bazel gem_info
       exec ["bazel", "build", "//#{library_path}:#{bazel_target}"], chdir: bazel_base_dir
     end
   end
+  source_dir = capture(["bazel", "info", "bazel-bin"], chdir: bazel_base_dir).chomp
   temp_dir = Dir.mktmpdir
   at_exit { FileUtils.rm_rf temp_dir }
   results_dir = File.join temp_dir, "bazel-bin"
-  cp_r File.join(bazel_base_dir, "bazel-bin"), results_dir
+  cp_r source_dir, results_dir
   results_dir
 end
 
