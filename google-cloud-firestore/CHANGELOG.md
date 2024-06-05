@@ -1,5 +1,11 @@
 # Release History
 
+### 2.15.1 (2024-06-05)
+
+#### Bug Fixes
+
+* Added bigdecimal to the gem dependencies ([#26012](https://github.com/googleapis/google-cloud-ruby/issues/26012)) 
+
 ### 2.15.0 (2024-03-07)
 
 #### Features
