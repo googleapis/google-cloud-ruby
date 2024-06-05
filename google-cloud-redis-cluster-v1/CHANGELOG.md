@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.4.0 (2024-06-05)
+
+#### Features
+
+* Support for additional cluster configuration 
+* Support for the get_cluster_certificate_authority RPC 
+
 ### 0.3.0 (2024-02-26)
 
 #### Features
