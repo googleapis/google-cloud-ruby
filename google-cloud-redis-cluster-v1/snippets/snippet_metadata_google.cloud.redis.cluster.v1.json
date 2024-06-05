@@ -210,6 +210,46 @@
           "type": "FULL"
         }
       ]
+    },
+    {
+      "region_tag": "redis_v1_generated_CloudRedisCluster_GetClusterCertificateAuthority_sync",
+      "title": "Snippet for the get_cluster_certificate_authority call in the CloudRedisCluster service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Client#get_cluster_certificate_authority.",
+      "file": "cloud_redis_cluster/get_cluster_certificate_authority.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_cluster_certificate_authority",
+        "full_name": "::Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Client#get_cluster_certificate_authority",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Redis::Cluster::V1::GetClusterCertificateAuthorityRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Redis::Cluster::V1::CertificateAuthority",
+        "client": {
+          "short_name": "CloudRedisCluster::Client",
+          "full_name": "::Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Client"
+        },
+        "method": {
+          "short_name": "GetClusterCertificateAuthority",
+          "full_name": "google.cloud.redis.cluster.v1.CloudRedisCluster.GetClusterCertificateAuthority",
+          "service": {
+            "short_name": "CloudRedisCluster",
+            "full_name": "google.cloud.redis.cluster.v1.CloudRedisCluster"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
     }
   ]
 }

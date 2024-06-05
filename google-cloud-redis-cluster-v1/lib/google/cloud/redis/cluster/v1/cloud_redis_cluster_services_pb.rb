@@ -84,6 +84,8 @@ module Google
               # The returned operation is automatically deleted after a few hours, so there
               # is no need to call DeleteOperation.
               rpc :CreateCluster, ::Google::Cloud::Redis::Cluster::V1::CreateClusterRequest, ::Google::Longrunning::Operation
+              # Gets the details of certificate authority information for Redis cluster.
+              rpc :GetClusterCertificateAuthority, ::Google::Cloud::Redis::Cluster::V1::GetClusterCertificateAuthorityRequest, ::Google::Cloud::Redis::Cluster::V1::CertificateAuthority
             end
 
             Stub = Service.rpc_stub_class

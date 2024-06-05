@@ -145,6 +145,18 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Request for
+          # [GetClusterCertificateAuthorityRequest][CloudRedis.GetClusterCertificateAuthorityRequest].
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. Redis cluster certificate authority resource name using the form:
+          #         `projects/{project_id}/locations/{location_id}/clusters/{cluster_id}/certificateAuthority`
+          #     where `location_id` refers to a GCP region.
+          class GetClusterCertificateAuthorityRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # A cluster instance.
           # @!attribute [rw] name
           #   @return [::String]
@@ -174,7 +186,8 @@ module Google
           #     If not provided, encryption  is disabled for the cluster.
           # @!attribute [r] size_gb
           #   @return [::Integer]
-          #     Output only. Redis memory size in GB for the entire cluster.
+          #     Output only. Redis memory size in GB for the entire cluster rounded up to
+          #     the next integer.
           # @!attribute [rw] shard_count
           #   @return [::Integer]
           #     Required. Number of shards for the Redis cluster.
@@ -194,6 +207,27 @@ module Google
           # @!attribute [r] state_info
           #   @return [::Google::Cloud::Redis::Cluster::V1::Cluster::StateInfo]
           #     Output only. Additional information about the current state of the cluster.
+          # @!attribute [rw] node_type
+          #   @return [::Google::Cloud::Redis::Cluster::V1::NodeType]
+          #     Optional. The type of a redis node in the cluster. NodeType determines the
+          #     underlying machine-type of a redis node.
+          # @!attribute [rw] persistence_config
+          #   @return [::Google::Cloud::Redis::Cluster::V1::ClusterPersistenceConfig]
+          #     Optional. Persistence config (RDB, AOF) for the cluster.
+          # @!attribute [rw] redis_configs
+          #   @return [::Google::Protobuf::Map{::String => ::String}]
+          #     Optional. Key/Value pairs of customer overrides for mutable Redis Configs
+          # @!attribute [r] precise_size_gb
+          #   @return [::Float]
+          #     Output only. Precise value of redis memory size in GB for the entire
+          #     cluster.
+          # @!attribute [rw] zone_distribution_config
+          #   @return [::Google::Cloud::Redis::Cluster::V1::ZoneDistributionConfig]
+          #     Optional. This config will be used to determine how the customer wants us
+          #     to distribute cluster resources within the region.
+          # @!attribute [rw] deletion_protection_enabled
+          #   @return [::Boolean]
+          #     Optional. The delete operation will fail when the value is set to true.
           class Cluster
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -217,6 +251,15 @@ module Google
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
               end
+            end
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::String]
+            class RedisConfigsEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
             # Represents the different states of a Redis cluster.
@@ -323,6 +366,157 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Redis cluster certificate authority
+          # @!attribute [rw] managed_server_ca
+          #   @return [::Google::Cloud::Redis::Cluster::V1::CertificateAuthority::ManagedCertificateAuthority]
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Identifier. Unique name of the resource in this scope including project,
+          #     location and cluster using the form:
+          #         `projects/{project}/locations/{location}/clusters/{cluster}/certificateAuthority`
+          class CertificateAuthority
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # @!attribute [rw] ca_certs
+            #   @return [::Array<::Google::Cloud::Redis::Cluster::V1::CertificateAuthority::ManagedCertificateAuthority::CertChain>]
+            #     The PEM encoded CA certificate chains for redis managed
+            #     server authentication
+            class ManagedCertificateAuthority
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # @!attribute [rw] certificates
+              #   @return [::Array<::String>]
+              #     The certificates that form the CA chain, from leaf to root order.
+              class CertChain
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+            end
+          end
+
+          # Configuration of the persistence functionality.
+          # @!attribute [rw] mode
+          #   @return [::Google::Cloud::Redis::Cluster::V1::ClusterPersistenceConfig::PersistenceMode]
+          #     Optional. The mode of persistence.
+          # @!attribute [rw] rdb_config
+          #   @return [::Google::Cloud::Redis::Cluster::V1::ClusterPersistenceConfig::RDBConfig]
+          #     Optional. RDB configuration. This field will be ignored if mode is not RDB.
+          # @!attribute [rw] aof_config
+          #   @return [::Google::Cloud::Redis::Cluster::V1::ClusterPersistenceConfig::AOFConfig]
+          #     Optional. AOF configuration. This field will be ignored if mode is not AOF.
+          class ClusterPersistenceConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Configuration of the RDB based persistence.
+            # @!attribute [rw] rdb_snapshot_period
+            #   @return [::Google::Cloud::Redis::Cluster::V1::ClusterPersistenceConfig::RDBConfig::SnapshotPeriod]
+            #     Optional. Period between RDB snapshots.
+            # @!attribute [rw] rdb_snapshot_start_time
+            #   @return [::Google::Protobuf::Timestamp]
+            #     Optional. The time that the first snapshot was/will be attempted, and to
+            #     which future snapshots will be aligned. If not provided, the current time
+            #     will be used.
+            class RDBConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Available snapshot periods.
+              module SnapshotPeriod
+                # Not set.
+                SNAPSHOT_PERIOD_UNSPECIFIED = 0
+
+                # One hour.
+                ONE_HOUR = 1
+
+                # Six hours.
+                SIX_HOURS = 2
+
+                # Twelve hours.
+                TWELVE_HOURS = 3
+
+                # Twenty four hours.
+                TWENTY_FOUR_HOURS = 4
+              end
+            end
+
+            # Configuration of the AOF based persistence.
+            # @!attribute [rw] append_fsync
+            #   @return [::Google::Cloud::Redis::Cluster::V1::ClusterPersistenceConfig::AOFConfig::AppendFsync]
+            #     Optional. fsync configuration.
+            class AOFConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Available fsync modes.
+              module AppendFsync
+                # Not set. Default: EVERYSEC
+                APPEND_FSYNC_UNSPECIFIED = 0
+
+                # Never fsync. Normally Linux will flush data every 30 seconds with this
+                # configuration, but it's up to the kernel's exact tuning.
+                NO = 1
+
+                # fsync every second. Fast enough, and you may lose 1 second of data if
+                # there is a disaster
+                EVERYSEC = 2
+
+                # fsync every time new commands are appended to the AOF. It has the best
+                # data loss protection at the cost of performance
+                ALWAYS = 3
+              end
+            end
+
+            # Available persistence modes.
+            module PersistenceMode
+              # Not set.
+              PERSISTENCE_MODE_UNSPECIFIED = 0
+
+              # Persistence is disabled, and any snapshot data is deleted.
+              DISABLED = 1
+
+              # RDB based persistence is enabled.
+              RDB = 2
+
+              # AOF based persistence is enabled.
+              AOF = 3
+            end
+          end
+
+          # Zone distribution config for allocation of cluster resources.
+          # @!attribute [rw] mode
+          #   @return [::Google::Cloud::Redis::Cluster::V1::ZoneDistributionConfig::ZoneDistributionMode]
+          #     Optional. The mode of zone distribution. Defaults to MULTI_ZONE, when not
+          #     specified.
+          # @!attribute [rw] zone
+          #   @return [::String]
+          #     Optional. When SINGLE ZONE distribution is selected, zone field would be
+          #     used to allocate all resources in that zone. This is not applicable to
+          #     MULTI_ZONE, and would be ignored for MULTI_ZONE clusters.
+          class ZoneDistributionConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Defines various modes of zone distribution.
+            # Currently supports two modes, can be expanded in future to support more
+            # types of distribution modes.
+            # design doc: go/same-zone-cluster
+            module ZoneDistributionMode
+              # Not Set. Default: MULTI_ZONE
+              ZONE_DISTRIBUTION_MODE_UNSPECIFIED = 0
+
+              # Distribute all resources across 3 zones picked at random, within the
+              # region.
+              MULTI_ZONE = 1
+
+              # Distribute all resources in a single zone. The zone field must be
+              # specified, when this mode is selected.
+              SINGLE_ZONE = 2
+            end
+          end
+
           # Available authorization mode of a Redis cluster.
           module AuthorizationMode
             # Not set.
@@ -333,6 +527,23 @@ module Google
 
             # Authorization disabled mode
             AUTH_MODE_DISABLED = 2
+          end
+
+          # NodeType of a redis cluster node,
+          module NodeType
+            NODE_TYPE_UNSPECIFIED = 0
+
+            # Redis shared core nano node_type.
+            REDIS_SHARED_CORE_NANO = 1
+
+            # Redis highmem medium node_type.
+            REDIS_HIGHMEM_MEDIUM = 2
+
+            # Redis highmem xlarge node_type.
+            REDIS_HIGHMEM_XLARGE = 3
+
+            # Redis standard small node_type.
+            REDIS_STANDARD_SMALL = 4
           end
 
           # Available mode of in-transit encryption.
