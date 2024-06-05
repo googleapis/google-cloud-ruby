@@ -1687,6 +1687,10 @@
       "component": "google-shopping-merchant-products-v1beta",
       "version_file": "lib/google/shopping/merchant/products/v1beta/version.rb"
     },
+    "google-shopping-merchant-promotions-v1beta": {
+      "component": "google-shopping-merchant-promotions-v1beta",
+      "version_file": "lib/google/shopping/merchant/promotions/v1beta/version.rb"
+    },
     "google-shopping-merchant-quota": {
       "component": "google-shopping-merchant-quota",
       "version_file": "lib/google/shopping/merchant/quota/version.rb"
