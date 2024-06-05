@@ -45,7 +45,7 @@ describe Google::Cloud::Bigquery, :bigquery do
     CREATE MODEL #{dataset.dataset_id}.#{model_id}
     OPTIONS (
         model_type='linear_reg',
-        max_iteration=1,
+        max_iterations=1,
         learn_rate=0.4,
         learn_rate_strategy='constant'
     ) AS (
