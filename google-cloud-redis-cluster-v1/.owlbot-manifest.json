@@ -46,6 +46,7 @@
     "snippets/cloud_redis_cluster/create_cluster.rb",
     "snippets/cloud_redis_cluster/delete_cluster.rb",
     "snippets/cloud_redis_cluster/get_cluster.rb",
+    "snippets/cloud_redis_cluster/get_cluster_certificate_authority.rb",
     "snippets/cloud_redis_cluster/list_clusters.rb",
     "snippets/cloud_redis_cluster/update_cluster.rb",
     "snippets/snippet_metadata_google.cloud.redis.cluster.v1.json",

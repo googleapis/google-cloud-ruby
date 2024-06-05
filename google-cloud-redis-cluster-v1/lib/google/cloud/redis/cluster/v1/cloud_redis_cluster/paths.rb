@@ -26,6 +26,25 @@ module Google
             # Path helper methods for the CloudRedisCluster API.
             module Paths
               ##
+              # Create a fully-qualified CertificateAuthority resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/locations/{location}/clusters/{cluster}/certificateAuthority`
+              #
+              # @param project [String]
+              # @param location [String]
+              # @param cluster [String]
+              #
+              # @return [::String]
+              def certificate_authority_path project:, location:, cluster:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                "projects/#{project}/locations/#{location}/clusters/#{cluster}/certificateAuthority"
+              end
+
+              ##
               # Create a fully-qualified Cluster resource string.
               #
               # The resource will be in the following format:

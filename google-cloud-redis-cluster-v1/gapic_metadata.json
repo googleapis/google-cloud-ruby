@@ -34,6 +34,11 @@
               "methods": [
                 "create_cluster"
               ]
+            },
+            "GetClusterCertificateAuthority": {
+              "methods": [
+                "get_cluster_certificate_authority"
+              ]
             }
           }
         }

@@ -104,6 +104,8 @@ module Google
 
                     default_config.rpcs.create_cluster.timeout = 600.0
 
+                    default_config.rpcs.get_cluster_certificate_authority.timeout = 600.0
+
                     default_config
                   end
                   yield @configure if block_given?
@@ -705,6 +707,87 @@ module Google
                 end
 
                 ##
+                # Gets the details of certificate authority information for Redis cluster.
+                #
+                # @overload get_cluster_certificate_authority(request, options = nil)
+                #   Pass arguments to `get_cluster_certificate_authority` via a request object, either of type
+                #   {::Google::Cloud::Redis::Cluster::V1::GetClusterCertificateAuthorityRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Redis::Cluster::V1::GetClusterCertificateAuthorityRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload get_cluster_certificate_authority(name: nil)
+                #   Pass arguments to `get_cluster_certificate_authority` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param name [::String]
+                #     Required. Redis cluster certificate authority resource name using the form:
+                #         `projects/{project_id}/locations/{location_id}/clusters/{cluster_id}/certificateAuthority`
+                #     where `location_id` refers to a GCP region.
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Cloud::Redis::Cluster::V1::CertificateAuthority]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Cloud::Redis::Cluster::V1::CertificateAuthority]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/redis/cluster/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Redis::Cluster::V1::GetClusterCertificateAuthorityRequest.new
+                #
+                #   # Call the get_cluster_certificate_authority method.
+                #   result = client.get_cluster_certificate_authority request
+                #
+                #   # The returned object is of type Google::Cloud::Redis::Cluster::V1::CertificateAuthority.
+                #   p result
+                #
+                def get_cluster_certificate_authority request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Redis::Cluster::V1::GetClusterCertificateAuthorityRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.get_cluster_certificate_authority.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Redis::Cluster::V1::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.get_cluster_certificate_authority.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.get_cluster_certificate_authority.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @cloud_redis_cluster_stub.get_cluster_certificate_authority request, options do |result, operation|
+                    yield result, operation if block_given?
+                    return result
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
                 # Configuration class for the CloudRedisCluster REST API.
                 #
                 # This class represents the configuration for CloudRedisCluster REST,
@@ -869,6 +952,11 @@ module Google
                     # @return [::Gapic::Config::Method]
                     #
                     attr_reader :create_cluster
+                    ##
+                    # RPC-specific configuration for `get_cluster_certificate_authority`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :get_cluster_certificate_authority
 
                     # @private
                     def initialize parent_rpcs = nil
@@ -882,6 +970,8 @@ module Google
                       @delete_cluster = ::Gapic::Config::Method.new delete_cluster_config
                       create_cluster_config = parent_rpcs.create_cluster if parent_rpcs.respond_to? :create_cluster
                       @create_cluster = ::Gapic::Config::Method.new create_cluster_config
+                      get_cluster_certificate_authority_config = parent_rpcs.get_cluster_certificate_authority if parent_rpcs.respond_to? :get_cluster_certificate_authority
+                      @get_cluster_certificate_authority = ::Gapic::Config::Method.new get_cluster_certificate_authority_config
 
                       yield self if block_given?
                     end
