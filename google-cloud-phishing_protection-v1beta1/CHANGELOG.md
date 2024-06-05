@@ -1,5 +1,11 @@
 # Release History
 
+### 0.9.1 (2024-06-05)
+
+#### Documentation
+
+* Update reference documentation URL for phishing protection ([#26025](https://github.com/googleapis/google-cloud-ruby/issues/26025)) 
+
 ### 0.9.0 (2024-02-26)
 
 #### Features
