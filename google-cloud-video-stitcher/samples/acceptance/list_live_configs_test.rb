@@ -24,7 +24,7 @@ describe "#list_live_configs", :stitcher_snippet do
     refute_nil live_config
     @live_config_created = true
 
-    output, _ = capture_io do
+    output, = capture_io do
       sample.run project_id: project_id, location: location_id
     end
 

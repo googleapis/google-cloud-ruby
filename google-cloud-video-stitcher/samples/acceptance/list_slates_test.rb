@@ -21,7 +21,7 @@ describe "#list_slates", :stitcher_snippet do
     refute_nil slate
     @slate_created = true
 
-    output, _ = capture_io do
+    output, = capture_io do
       sample.run project_id: project_id, location: location_id
     end
 
