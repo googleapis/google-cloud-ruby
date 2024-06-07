@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.2.1 (2024-06-07)
+
+#### Documentation
+
+* Minor documentation updates 
+
 ### 0.2.0 (2024-05-23)
 
 #### Features
