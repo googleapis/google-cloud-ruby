@@ -146,7 +146,6 @@ describe "Buckets Snippets" do
   end
 
   describe "storage_create_bucket_hierarchical_namespace" do
-    focus
     it "creates hierarchical namespace enabled bucket" do
       bucket_name = random_bucket_name
       refute storage_client.bucket bucket_name
