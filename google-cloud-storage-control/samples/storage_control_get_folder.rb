@@ -32,7 +32,7 @@ def get_folder bucket_name:, folder_name:
 
   response = storage_control.get_folder request
 
-  puts response.name
+  puts "Got folder #{response.name}"
 end
 # [END storage_control_get_folder]
 
