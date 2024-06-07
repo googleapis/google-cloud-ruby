@@ -1,5 +1,16 @@
 # Release History
 
+### 0.21.0 (2024-06-07)
+
+#### Features
+
+* Support attribute suggestions in autocomplete 
+* Support frequently bought together model config 
+* Support merged facets 
+* Support page_categories in control condition 
+* Support product purge API 
+* Support skipping denylist postfiltering in recommendations 
+
 ### 0.20.0 (2024-02-26)
 
 #### Features
