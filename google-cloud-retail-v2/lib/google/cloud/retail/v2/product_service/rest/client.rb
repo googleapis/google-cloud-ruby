@@ -742,6 +742,155 @@ module Google
               end
 
               ##
+              # Permanently deletes all selected {::Google::Cloud::Retail::V2::Product Product}s
+              # under a branch.
+              #
+              # This process is asynchronous. If the request is valid, the removal will be
+              # enqueued and processed offline. Depending on the number of
+              # {::Google::Cloud::Retail::V2::Product Product}s, this operation could take hours
+              # to complete. Before the operation completes, some
+              # {::Google::Cloud::Retail::V2::Product Product}s may still be returned by
+              # {::Google::Cloud::Retail::V2::ProductService::Rest::Client#get_product ProductService.GetProduct}
+              # or
+              # {::Google::Cloud::Retail::V2::ProductService::Rest::Client#list_products ProductService.ListProducts}.
+              #
+              # Depending on the number of {::Google::Cloud::Retail::V2::Product Product}s, this
+              # operation could take hours to complete. To get a sample of
+              # {::Google::Cloud::Retail::V2::Product Product}s that would be deleted, set
+              # {::Google::Cloud::Retail::V2::PurgeProductsRequest#force PurgeProductsRequest.force}
+              # to false.
+              #
+              # @overload purge_products(request, options = nil)
+              #   Pass arguments to `purge_products` via a request object, either of type
+              #   {::Google::Cloud::Retail::V2::PurgeProductsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Retail::V2::PurgeProductsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload purge_products(parent: nil, filter: nil, force: nil)
+              #   Pass arguments to `purge_products` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The resource name of the branch under which the products are
+              #     created. The format is
+              #     `projects/${projectId}/locations/global/catalogs/${catalogId}/branches/${branchId}`
+              #   @param filter [::String]
+              #     Required. The filter string to specify the products to be deleted with a
+              #     length limit of 5,000 characters.
+              #
+              #     Empty string filter is not allowed. "*" implies delete all items in a
+              #     branch.
+              #
+              #     The eligible fields for filtering are:
+              #
+              #     * `availability`: Double quoted
+              #     {::Google::Cloud::Retail::V2::Product#availability Product.availability} string.
+              #     * `create_time` : in ISO 8601 "zulu" format.
+              #
+              #     Supported syntax:
+              #
+              #     * Comparators (">", "<", ">=", "<=", "=").
+              #       Examples:
+              #       * create_time <= "2015-02-13T17:05:46Z"
+              #       * availability = "IN_STOCK"
+              #
+              #     * Conjunctions ("AND")
+              #       Examples:
+              #       * create_time <= "2015-02-13T17:05:46Z" AND availability = "PREORDER"
+              #
+              #     * Disjunctions ("OR")
+              #       Examples:
+              #       * create_time <= "2015-02-13T17:05:46Z" OR availability = "IN_STOCK"
+              #
+              #     * Can support nested queries.
+              #       Examples:
+              #       * (create_time <= "2015-02-13T17:05:46Z" AND availability = "PREORDER")
+              #       OR (create_time >= "2015-02-14T13:03:32Z" AND availability = "IN_STOCK")
+              #
+              #     * Filter Limits:
+              #       * Filter should not contain more than 6 conditions.
+              #       * Max nesting depth should not exceed 2 levels.
+              #
+              #     Examples queries:
+              #     * Delete back order products created before a timestamp.
+              #       create_time <= "2015-02-13T17:05:46Z" OR availability = "BACKORDER"
+              #   @param force [::Boolean]
+              #     Actually perform the purge.
+              #     If `force` is set to false, the method will return the expected purge count
+              #     without deleting any products.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/retail/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Retail::V2::ProductService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Retail::V2::PurgeProductsRequest.new
+              #
+              #   # Call the purge_products method.
+              #   result = client.purge_products request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def purge_products request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Retail::V2::PurgeProductsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.purge_products.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Retail::V2::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.purge_products.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.purge_products.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @product_service_stub.purge_products request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Bulk import of multiple {::Google::Cloud::Retail::V2::Product Product}s.
               #
               # Request processing may be synchronous.
@@ -779,7 +928,8 @@ module Google
               #     The desired location of errors incurred during the Import.
               #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
               #     Indicates which fields in the provided imported `products` to update. If
-              #     not set, all fields are updated.
+              #     not set, all fields are updated. If provided, only the existing product
+              #     fields are updated. Missing products will not be created.
               #   @param reconciliation_mode [::Google::Cloud::Retail::V2::ImportProductsRequest::ReconciliationMode]
               #     The mode of reconciliation between existing products and the products to be
               #     imported. Defaults to
@@ -793,9 +943,14 @@ module Google
               #     Format of the Pub/Sub topic is `projects/{project}/topics/{topic}`. It has
               #     to be within the same project as
               #     {::Google::Cloud::Retail::V2::ImportProductsRequest#parent ImportProductsRequest.parent}.
-              #     Make sure that `service-<project
-              #     number>@gcp-sa-retail.iam.gserviceaccount.com` has the
-              #     `pubsub.topics.publish` IAM permission on the topic.
+              #     Make sure that both
+              #     `cloud-retail-customer-data-access@system.gserviceaccount.com` and
+              #     `service-<project number>@gcp-sa-retail.iam.gserviceaccount.com`
+              #     have the `pubsub.topics.publish` IAM permission on the topic.
+              #
+              #     Only supported when
+              #     {::Google::Cloud::Retail::V2::ImportProductsRequest#reconciliation_mode ImportProductsRequest.reconciliation_mode}
+              #     is set to `FULL`.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1075,10 +1230,11 @@ module Google
               end
 
               ##
-              # It is recommended to use the
+              # We recommend that you use the
               # {::Google::Cloud::Retail::V2::ProductService::Rest::Client#add_local_inventories ProductService.AddLocalInventories}
-              # method instead of
-              # {::Google::Cloud::Retail::V2::ProductService::Rest::Client#add_fulfillment_places ProductService.AddFulfillmentPlaces}.
+              # method instead of the
+              # {::Google::Cloud::Retail::V2::ProductService::Rest::Client#add_fulfillment_places ProductService.AddFulfillmentPlaces}
+              # method.
               # {::Google::Cloud::Retail::V2::ProductService::Rest::Client#add_local_inventories ProductService.AddLocalInventories}
               # achieves the same results but provides more fine-grained control over
               # ingesting local inventory data.
@@ -1244,10 +1400,11 @@ module Google
               end
 
               ##
-              # It is recommended to use the
+              # We recommend that you use the
               # {::Google::Cloud::Retail::V2::ProductService::Rest::Client#remove_local_inventories ProductService.RemoveLocalInventories}
-              # method instead of
-              # {::Google::Cloud::Retail::V2::ProductService::Rest::Client#remove_fulfillment_places ProductService.RemoveFulfillmentPlaces}.
+              # method instead of the
+              # {::Google::Cloud::Retail::V2::ProductService::Rest::Client#remove_fulfillment_places ProductService.RemoveFulfillmentPlaces}
+              # method.
               # {::Google::Cloud::Retail::V2::ProductService::Rest::Client#remove_local_inventories ProductService.RemoveLocalInventories}
               # achieves the same results but provides more fine-grained control over
               # ingesting local inventory data.
@@ -1848,6 +2005,11 @@ module Google
                   #
                   attr_reader :delete_product
                   ##
+                  # RPC-specific configuration for `purge_products`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :purge_products
+                  ##
                   # RPC-specific configuration for `import_products`
                   # @return [::Gapic::Config::Method]
                   #
@@ -1890,6 +2052,8 @@ module Google
                     @update_product = ::Gapic::Config::Method.new update_product_config
                     delete_product_config = parent_rpcs.delete_product if parent_rpcs.respond_to? :delete_product
                     @delete_product = ::Gapic::Config::Method.new delete_product_config
+                    purge_products_config = parent_rpcs.purge_products if parent_rpcs.respond_to? :purge_products
+                    @purge_products = ::Gapic::Config::Method.new purge_products_config
                     import_products_config = parent_rpcs.import_products if parent_rpcs.respond_to? :import_products
                     @import_products = ::Gapic::Config::Method.new import_products_config
                     set_inventory_config = parent_rpcs.set_inventory if parent_rpcs.respond_to? :set_inventory

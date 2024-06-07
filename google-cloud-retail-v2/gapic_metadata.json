@@ -229,6 +229,11 @@
                 "delete_product"
               ]
             },
+            "PurgeProducts": {
+              "methods": [
+                "purge_products"
+              ]
+            },
             "ImportProducts": {
               "methods": [
                 "import_products"

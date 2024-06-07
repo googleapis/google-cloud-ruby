@@ -37,6 +37,12 @@ module Google
         #   @return [::Array<::Google::Cloud::Retail::V2::Condition::TimeRange>]
         #     Range of time(s) specifying when Condition is active.
         #     Condition true if any time range matches.
+        # @!attribute [rw] page_categories
+        #   @return [::Array<::String>]
+        #     Used to support browse uses cases.
+        #     A list (up to 10 entries) of categories or departments.
+        #     The format should be the same as
+        #     {::Google::Cloud::Retail::V2::UserEvent#page_categories UserEvent.page_categories};
         class Condition
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -103,6 +109,12 @@ module Google
         # @!attribute [rw] twoway_synonyms_action
         #   @return [::Google::Cloud::Retail::V2::Rule::TwowaySynonymsAction]
         #     Treats a set of terms as synonyms of one another.
+        # @!attribute [rw] force_return_facet_action
+        #   @return [::Google::Cloud::Retail::V2::Rule::ForceReturnFacetAction]
+        #     Force returns an attribute as a facet in the request.
+        # @!attribute [rw] remove_facet_action
+        #   @return [::Google::Cloud::Retail::V2::Rule::RemoveFacetAction]
+        #     Remove an attribute as a facet in the request (if present).
         # @!attribute [rw] condition
         #   @return [::Google::Cloud::Retail::V2::Condition]
         #     Required. The condition that triggers the rule.
@@ -153,17 +165,19 @@ module Google
           end
 
           # * Rule Condition:
-          #   - No
-          #   {::Google::Cloud::Retail::V2::Condition#query_terms Condition.query_terms}
-          #   provided is a global match.
-          #   - 1 or more
-          #   {::Google::Cloud::Retail::V2::Condition#query_terms Condition.query_terms}
-          #   provided are combined with OR operator.
+          #     - No
+          #     {::Google::Cloud::Retail::V2::Condition#query_terms Condition.query_terms}
+          #     provided is a global match.
+          #     - 1 or more
+          #     {::Google::Cloud::Retail::V2::Condition#query_terms Condition.query_terms}
+          #     provided are combined with OR operator.
+          #
           # * Action Input: The request query and filter that are applied to the
           # retrieved products, in addition to any filters already provided with the
           # SearchRequest. The AND operator is used to combine the query's existing
           # filters with the filter rule(s). NOTE: May result in 0 results when
           # filters conflict.
+          #
           # * Action Result: Filters the returned objects to be ONLY those that passed
           # the filter.
           # @!attribute [rw] filter
@@ -172,10 +186,9 @@ module Google
           #
           #     * {::Google::Cloud::Retail::V2::Rule::FilterAction#filter filter} must be set.
           #     * Filter syntax is identical to
-          #     {::Google::Cloud::Retail::V2::SearchRequest#filter SearchRequest.filter}. See
+          #     {::Google::Cloud::Retail::V2::SearchRequest#filter SearchRequest.filter}. For
           #     more
-          #       details at the Retail Search
-          #       [user guide](/retail/search/docs/filter-and-order#filter).
+          #       information, see [Filter](/retail/docs/filter-and-order#filter).
           #     * To filter products with product ID "product_1" or "product_2", and
           #     color
           #       "Red" or "Blue":<br>
@@ -190,7 +203,7 @@ module Google
           # Redirects a shopper to a specific page.
           #
           # * Rule Condition:
-          #   - Must specify
+          #   Must specify
           #   {::Google::Cloud::Retail::V2::Condition#query_terms Condition.query_terms}.
           # * Action Input: Request Query
           # * Action Result: Redirects shopper to provided uri.
@@ -286,6 +299,87 @@ module Google
           #   @return [::Array<::String>]
           #     Terms to ignore in the search query.
           class IgnoreAction
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Force returns an attribute/facet in the request around a certain position
+          # or above.
+          #
+          # * Rule Condition:
+          #   Must specify non-empty
+          #   {::Google::Cloud::Retail::V2::Condition#query_terms Condition.query_terms}
+          #   (for search only) or
+          #   {::Google::Cloud::Retail::V2::Condition#page_categories Condition.page_categories}
+          #   (for browse only), but can't specify both.
+          #
+          # * Action Inputs: attribute name, position
+          #
+          # * Action Result: Will force return a facet key around a certain position
+          # or above if the condition is satisfied.
+          #
+          # Example: Suppose the query is "shoes", the
+          # {::Google::Cloud::Retail::V2::Condition#query_terms Condition.query_terms} is
+          # "shoes", the
+          # {::Google::Cloud::Retail::V2::Rule::ForceReturnFacetAction::FacetPositionAdjustment#attribute_name ForceReturnFacetAction.FacetPositionAdjustment.attribute_name}
+          # is "size" and the
+          # {::Google::Cloud::Retail::V2::Rule::ForceReturnFacetAction::FacetPositionAdjustment#position ForceReturnFacetAction.FacetPositionAdjustment.position}
+          # is 8.
+          #
+          # Two cases: a) The facet key "size" is not already in the top 8 slots, then
+          # the facet "size" will appear at a position close to 8. b) The facet key
+          # "size" in among the top 8 positions in the request, then it will stay at
+          # its current rank.
+          # @!attribute [rw] facet_position_adjustments
+          #   @return [::Array<::Google::Cloud::Retail::V2::Rule::ForceReturnFacetAction::FacetPositionAdjustment>]
+          #     Each instance corresponds to a force return attribute for the given
+          #     condition. There can't be more 3 instances here.
+          class ForceReturnFacetAction
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Each facet position adjustment consists of a single attribute name (i.e.
+            # facet key) along with a specified position.
+            # @!attribute [rw] attribute_name
+            #   @return [::String]
+            #     The attribute name to force return as a facet. Each attribute name
+            #     should be a valid attribute name, be non-empty and contain at most 80
+            #     characters long.
+            # @!attribute [rw] position
+            #   @return [::Integer]
+            #     This is the position in the request as explained above. It should be
+            #     strictly positive be at most 100.
+            class FacetPositionAdjustment
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+
+          # Removes an attribute/facet in the request if is present.
+          #
+          # * Rule Condition:
+          #   Must specify non-empty
+          #   {::Google::Cloud::Retail::V2::Condition#query_terms Condition.query_terms}
+          #   (for search only) or
+          #   {::Google::Cloud::Retail::V2::Condition#page_categories Condition.page_categories}
+          #   (for browse only), but can't specify both.
+          #
+          # * Action Input: attribute name
+          #
+          # * Action Result: Will remove the attribute (as a facet) from the request
+          # if it is present.
+          #
+          # Example: Suppose the query is "shoes", the
+          # {::Google::Cloud::Retail::V2::Condition#query_terms Condition.query_terms} is
+          # "shoes" and the attribute name "size", then facet key "size" will be
+          # removed from the request (if it is present).
+          # @!attribute [rw] attribute_names
+          #   @return [::Array<::String>]
+          #     The attribute names (i.e. facet keys) to remove from the dynamic facets
+          #     (if present in the request). There can't be more 3 attribute names.
+          #     Each attribute name should be a valid attribute name, be non-empty and
+          #     contain at most 80 characters.
+          class RemoveFacetAction
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

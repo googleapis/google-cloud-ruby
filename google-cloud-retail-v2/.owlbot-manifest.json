@@ -199,6 +199,7 @@
     "snippets/product_service/get_product.rb",
     "snippets/product_service/import_products.rb",
     "snippets/product_service/list_products.rb",
+    "snippets/product_service/purge_products.rb",
     "snippets/product_service/remove_fulfillment_places.rb",
     "snippets/product_service/remove_local_inventories.rb",
     "snippets/product_service/set_inventory.rb",

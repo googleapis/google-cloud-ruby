@@ -28,6 +28,99 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Metadata related to the progress of the PurgeProducts operation.
+        # This will be returned by the google.longrunning.Operation.metadata field.
+        # @!attribute [rw] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Operation create time.
+        # @!attribute [rw] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Operation last update time. If the operation is done, this is also the
+        #     finish time.
+        # @!attribute [rw] success_count
+        #   @return [::Integer]
+        #     Count of entries that were deleted successfully.
+        # @!attribute [rw] failure_count
+        #   @return [::Integer]
+        #     Count of entries that encountered errors while processing.
+        class PurgeProductsMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for PurgeProducts method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the branch under which the products are
+        #     created. The format is
+        #     `projects/${projectId}/locations/global/catalogs/${catalogId}/branches/${branchId}`
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Required. The filter string to specify the products to be deleted with a
+        #     length limit of 5,000 characters.
+        #
+        #     Empty string filter is not allowed. "*" implies delete all items in a
+        #     branch.
+        #
+        #     The eligible fields for filtering are:
+        #
+        #     * `availability`: Double quoted
+        #     {::Google::Cloud::Retail::V2::Product#availability Product.availability} string.
+        #     * `create_time` : in ISO 8601 "zulu" format.
+        #
+        #     Supported syntax:
+        #
+        #     * Comparators (">", "<", ">=", "<=", "=").
+        #       Examples:
+        #       * create_time <= "2015-02-13T17:05:46Z"
+        #       * availability = "IN_STOCK"
+        #
+        #     * Conjunctions ("AND")
+        #       Examples:
+        #       * create_time <= "2015-02-13T17:05:46Z" AND availability = "PREORDER"
+        #
+        #     * Disjunctions ("OR")
+        #       Examples:
+        #       * create_time <= "2015-02-13T17:05:46Z" OR availability = "IN_STOCK"
+        #
+        #     * Can support nested queries.
+        #       Examples:
+        #       * (create_time <= "2015-02-13T17:05:46Z" AND availability = "PREORDER")
+        #       OR (create_time >= "2015-02-14T13:03:32Z" AND availability = "IN_STOCK")
+        #
+        #     * Filter Limits:
+        #       * Filter should not contain more than 6 conditions.
+        #       * Max nesting depth should not exceed 2 levels.
+        #
+        #     Examples queries:
+        #     * Delete back order products created before a timestamp.
+        #       create_time <= "2015-02-13T17:05:46Z" OR availability = "BACKORDER"
+        # @!attribute [rw] force
+        #   @return [::Boolean]
+        #     Actually perform the purge.
+        #     If `force` is set to false, the method will return the expected purge count
+        #     without deleting any products.
+        class PurgeProductsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response of the PurgeProductsRequest. If the long running operation is
+        # successfully done, then this message is returned by the
+        # google.longrunning.Operations.response field.
+        # @!attribute [rw] purge_count
+        #   @return [::Integer]
+        #     The total count of products purged as a result of the operation.
+        # @!attribute [rw] purge_sample
+        #   @return [::Array<::String>]
+        #     A sample of the product names that will be deleted.
+        #     Only populated if `force` is set to false. A max of 100 names will be
+        #     returned and the names are chosen at random.
+        class PurgeProductsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for PurgeUserEvents method.
         # @!attribute [rw] parent
         #   @return [::String]

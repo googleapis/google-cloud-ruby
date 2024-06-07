@@ -44,6 +44,24 @@ module Google
             rpc :UpdateProduct, ::Google::Cloud::Retail::V2::UpdateProductRequest, ::Google::Cloud::Retail::V2::Product
             # Deletes a [Product][google.cloud.retail.v2.Product].
             rpc :DeleteProduct, ::Google::Cloud::Retail::V2::DeleteProductRequest, ::Google::Protobuf::Empty
+            # Permanently deletes all selected [Product][google.cloud.retail.v2.Product]s
+            # under a branch.
+            #
+            # This process is asynchronous. If the request is valid, the removal will be
+            # enqueued and processed offline. Depending on the number of
+            # [Product][google.cloud.retail.v2.Product]s, this operation could take hours
+            # to complete. Before the operation completes, some
+            # [Product][google.cloud.retail.v2.Product]s may still be returned by
+            # [ProductService.GetProduct][google.cloud.retail.v2.ProductService.GetProduct]
+            # or
+            # [ProductService.ListProducts][google.cloud.retail.v2.ProductService.ListProducts].
+            #
+            # Depending on the number of [Product][google.cloud.retail.v2.Product]s, this
+            # operation could take hours to complete. To get a sample of
+            # [Product][google.cloud.retail.v2.Product]s that would be deleted, set
+            # [PurgeProductsRequest.force][google.cloud.retail.v2.PurgeProductsRequest.force]
+            # to false.
+            rpc :PurgeProducts, ::Google::Cloud::Retail::V2::PurgeProductsRequest, ::Google::Longrunning::Operation
             # Bulk import of multiple [Product][google.cloud.retail.v2.Product]s.
             #
             # Request processing may be synchronous.
@@ -102,10 +120,11 @@ module Google
             # updates are not marked as [done][google.longrunning.Operation.done] until
             # they are obsolete.
             rpc :SetInventory, ::Google::Cloud::Retail::V2::SetInventoryRequest, ::Google::Longrunning::Operation
-            # It is recommended to use the
+            # We recommend that you use the
             # [ProductService.AddLocalInventories][google.cloud.retail.v2.ProductService.AddLocalInventories]
-            # method instead of
-            # [ProductService.AddFulfillmentPlaces][google.cloud.retail.v2.ProductService.AddFulfillmentPlaces].
+            # method instead of the
+            # [ProductService.AddFulfillmentPlaces][google.cloud.retail.v2.ProductService.AddFulfillmentPlaces]
+            # method.
             # [ProductService.AddLocalInventories][google.cloud.retail.v2.ProductService.AddLocalInventories]
             # achieves the same results but provides more fine-grained control over
             # ingesting local inventory data.
@@ -132,10 +151,11 @@ module Google
             # updates will not be marked as [done][google.longrunning.Operation.done]
             # until being obsolete.
             rpc :AddFulfillmentPlaces, ::Google::Cloud::Retail::V2::AddFulfillmentPlacesRequest, ::Google::Longrunning::Operation
-            # It is recommended to use the
+            # We recommend that you use the
             # [ProductService.RemoveLocalInventories][google.cloud.retail.v2.ProductService.RemoveLocalInventories]
-            # method instead of
-            # [ProductService.RemoveFulfillmentPlaces][google.cloud.retail.v2.ProductService.RemoveFulfillmentPlaces].
+            # method instead of the
+            # [ProductService.RemoveFulfillmentPlaces][google.cloud.retail.v2.ProductService.RemoveFulfillmentPlaces]
+            # method.
             # [ProductService.RemoveLocalInventories][google.cloud.retail.v2.ProductService.RemoveLocalInventories]
             # achieves the same results but provides more fine-grained control over
             # ingesting local inventory data.
