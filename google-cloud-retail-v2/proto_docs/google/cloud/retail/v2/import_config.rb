@@ -176,7 +176,8 @@ module Google
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Indicates which fields in the provided imported `products` to update. If
-        #     not set, all fields are updated.
+        #     not set, all fields are updated. If provided, only the existing product
+        #     fields are updated. Missing products will not be created.
         # @!attribute [rw] reconciliation_mode
         #   @return [::Google::Cloud::Retail::V2::ImportProductsRequest::ReconciliationMode]
         #     The mode of reconciliation between existing products and the products to be
@@ -192,9 +193,14 @@ module Google
         #     Format of the Pub/Sub topic is `projects/{project}/topics/{topic}`. It has
         #     to be within the same project as
         #     {::Google::Cloud::Retail::V2::ImportProductsRequest#parent ImportProductsRequest.parent}.
-        #     Make sure that `service-<project
-        #     number>@gcp-sa-retail.iam.gserviceaccount.com` has the
-        #     `pubsub.topics.publish` IAM permission on the topic.
+        #     Make sure that both
+        #     `cloud-retail-customer-data-access@system.gserviceaccount.com` and
+        #     `service-<project number>@gcp-sa-retail.iam.gserviceaccount.com`
+        #     have the `pubsub.topics.publish` IAM permission on the topic.
+        #
+        #     Only supported when
+        #     {::Google::Cloud::Retail::V2::ImportProductsRequest#reconciliation_mode ImportProductsRequest.reconciliation_mode}
+        #     is set to `FULL`.
         class ImportProductsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

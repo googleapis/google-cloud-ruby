@@ -213,6 +213,10 @@ module Google
         #     Can only be set if
         #     {::Google::Cloud::Retail::V2::ServingConfig#solution_types solution_types} is
         #     [SOLUTION_TYPE_RECOMMENDATION][google.cloud.retail.v2main.SolutionType.SOLUTION_TYPE_RECOMMENDATION].
+        # @!attribute [rw] ignore_recs_denylist
+        #   @return [::Boolean]
+        #     When the flag is enabled, the products in the denylist will not be filtered
+        #     out in the recommendation filtering results.
         # @!attribute [rw] personalization_spec
         #   @return [::Google::Cloud::Retail::V2::SearchRequest::PersonalizationSpec]
         #     The specification for personalization spec.

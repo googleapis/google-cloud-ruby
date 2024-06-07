@@ -25,23 +25,22 @@ module Google
         # searched.
         # @!attribute [rw] expire_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     The timestamp when this product becomes unavailable for
-        #     {::Google::Cloud::Retail::V2::SearchService::Client#search SearchService.Search}. Note
-        #     that this is only applicable to
-        #     {::Google::Cloud::Retail::V2::Product::Type::PRIMARY Type.PRIMARY} and
-        #     {::Google::Cloud::Retail::V2::Product::Type::COLLECTION Type.COLLECTION}, and
-        #     ignored for {::Google::Cloud::Retail::V2::Product::Type::VARIANT Type.VARIANT}.
-        #     In general, we suggest the users to delete the stale products explicitly,
-        #     instead of using this field to determine staleness.
+        #     Note that this field is applied in the following ways:
         #
-        #     If it is set, the {::Google::Cloud::Retail::V2::Product Product} is not
-        #     available for
-        #     {::Google::Cloud::Retail::V2::SearchService::Client#search SearchService.Search} after
-        #     {::Google::Cloud::Retail::V2::Product#expire_time expire_time}. However, the
-        #     product can still be retrieved by
-        #     {::Google::Cloud::Retail::V2::ProductService::Client#get_product ProductService.GetProduct}
-        #     and
-        #     {::Google::Cloud::Retail::V2::ProductService::Client#list_products ProductService.ListProducts}.
+        #     * If the {::Google::Cloud::Retail::V2::Product Product} is already expired
+        #     when it is uploaded, this product
+        #       is not indexed for search.
+        #
+        #     * If the {::Google::Cloud::Retail::V2::Product Product} is not expired when it
+        #     is uploaded, only the
+        #       {::Google::Cloud::Retail::V2::Product::Type::PRIMARY Type.PRIMARY}'s and
+        #       {::Google::Cloud::Retail::V2::Product::Type::COLLECTION Type.COLLECTION}'s
+        #       expireTime is respected, and
+        #       {::Google::Cloud::Retail::V2::Product::Type::VARIANT Type.VARIANT}'s
+        #       expireTime is not used.
+        #
+        #     In general, we suggest the users to delete the stale
+        #     products explicitly, instead of using this field to determine staleness.
         #
         #     {::Google::Cloud::Retail::V2::Product#expire_time expire_time} must be later
         #     than {::Google::Cloud::Retail::V2::Product#available_time available_time} and
@@ -176,9 +175,10 @@ module Google
         #     error is returned.
         #
         #     At most 250 values are allowed per
-        #     {::Google::Cloud::Retail::V2::Product Product}. Empty values are not allowed.
-        #     Each value must be a UTF-8 encoded string with a length limit of 5,000
-        #     characters. Otherwise, an INVALID_ARGUMENT error is returned.
+        #     {::Google::Cloud::Retail::V2::Product Product} unless overridden through the
+        #     Google Cloud console. Empty values are not allowed. Each value must be a
+        #     UTF-8 encoded string with a length limit of 5,000 characters. Otherwise, an
+        #     INVALID_ARGUMENT error is returned.
         #
         #     Corresponding properties: Google Merchant Center property
         #     [google_product_category][mc_google_product_category]. Schema.org property
@@ -200,9 +200,10 @@ module Google
         #   @return [::Array<::String>]
         #     The brands of the product.
         #
-        #     A maximum of 30 brands are allowed. Each brand must be a UTF-8 encoded
-        #     string with a length limit of 1,000 characters. Otherwise, an
-        #     INVALID_ARGUMENT error is returned.
+        #     A maximum of 30 brands are allowed unless overridden through the Google
+        #     Cloud console. Each
+        #     brand must be a UTF-8 encoded string with a length limit of 1,000
+        #     characters. Otherwise, an INVALID_ARGUMENT error is returned.
         #
         #     Corresponding properties: Google Merchant Center property
         #     [brand](https://support.google.com/merchants/answer/6324351). Schema.org

@@ -348,6 +348,62 @@ class ::Google::Cloud::Retail::V2::ProductService::Rest::ClientTest < Minitest::
     end
   end
 
+  def test_purge_products
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    filter = "hello world"
+    force = true
+
+    purge_products_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Retail::V2::ProductService::Rest::ServiceStub.stub :transcode_purge_products_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, purge_products_client_stub do
+        # Create client
+        client = ::Google::Cloud::Retail::V2::ProductService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.purge_products({ parent: parent, filter: filter, force: force }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.purge_products parent: parent, filter: filter, force: force do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.purge_products ::Google::Cloud::Retail::V2::PurgeProductsRequest.new(parent: parent, filter: filter, force: force) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.purge_products({ parent: parent, filter: filter, force: force }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.purge_products(::Google::Cloud::Retail::V2::PurgeProductsRequest.new(parent: parent, filter: filter, force: force), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, purge_products_client_stub.call_count
+      end
+    end
+  end
+
   def test_import_products
     # Create test objects.
     client_result = ::Google::Longrunning::Operation.new

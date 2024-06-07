@@ -139,6 +139,9 @@ module Google
         #   @return [::Array<::Google::Cloud::Retail::V2::Model::ServingConfigList>]
         #     Output only. The list of valid serving configs associated with the
         #     PageOptimizationConfig.
+        # @!attribute [rw] model_features_config
+        #   @return [::Google::Cloud::Retail::V2::Model::ModelFeaturesConfig]
+        #     Optional. Additional model features config.
         class Model
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -150,6 +153,27 @@ module Google
           #     Optional. A set of valid serving configs that may be used for
           #     `PAGE_OPTIMIZATION`.
           class ServingConfigList
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Additional configs for the frequently-bought-together model type.
+          # @!attribute [rw] context_products_type
+          #   @return [::Google::Cloud::Retail::V2::Model::ContextProductsType]
+          #     Optional. Specifies the context of the model when it is used in predict
+          #     requests. Can only be set for the `frequently-bought-together` type. If
+          #     it isn't specified, it defaults to
+          #     {::Google::Cloud::Retail::V2::Model::ContextProductsType::MULTIPLE_CONTEXT_PRODUCTS MULTIPLE_CONTEXT_PRODUCTS}.
+          class FrequentlyBoughtTogetherFeaturesConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Additional model features config.
+          # @!attribute [rw] frequently_bought_together_config
+          #   @return [::Google::Cloud::Retail::V2::Model::FrequentlyBoughtTogetherFeaturesConfig]
+          #     Additional configs for frequently-bought-together models.
+          class ModelFeaturesConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -220,6 +244,22 @@ module Google
             # The model does not have sufficient training data. Error
             # messages can be queried via Stackdriver.
             DATA_ERROR = 2
+          end
+
+          # Use single or multiple context products for recommendations.
+          module ContextProductsType
+            # Unspecified default value, should never be explicitly set.
+            # Defaults to
+            # {::Google::Cloud::Retail::V2::Model::ContextProductsType::MULTIPLE_CONTEXT_PRODUCTS MULTIPLE_CONTEXT_PRODUCTS}.
+            CONTEXT_PRODUCTS_TYPE_UNSPECIFIED = 0
+
+            # Use only a single product as context for the recommendation. Typically
+            # used on pages like add-to-cart or product details.
+            SINGLE_CONTEXT_PRODUCT = 1
+
+            # Use one or multiple products as context for the recommendation. Typically
+            # used on shopping cart pages.
+            MULTIPLE_CONTEXT_PRODUCTS = 2
           end
         end
       end

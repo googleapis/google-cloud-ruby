@@ -130,7 +130,9 @@ module Google
         #     are indexed so that it can be filtered, faceted, or boosted in
         #     {::Google::Cloud::Retail::V2::SearchService::Client#search SearchService.Search}.
         #
-        #     Must be specified, otherwise throws INVALID_FORMAT error.
+        #     Must be specified when
+        #     {::Google::Cloud::Retail::V2::AttributesConfig#attribute_config_level AttributesConfig.attribute_config_level}
+        #     is CATALOG_LEVEL_ATTRIBUTE_CONFIG, otherwise throws INVALID_FORMAT error.
         # @!attribute [rw] dynamic_facetable_option
         #   @return [::Google::Cloud::Retail::V2::CatalogAttribute::DynamicFacetableOption]
         #     If DYNAMIC_FACETABLE_ENABLED, attribute values are available for dynamic
@@ -152,7 +154,9 @@ module Google
         #     {::Google::Cloud::Retail::V2::SearchService::Client#search SearchService.Search}, as
         #     there are no text values associated to numerical attributes.
         #
-        #     Must be specified, otherwise throws INVALID_FORMAT error.
+        #     Must be specified, when
+        #     {::Google::Cloud::Retail::V2::AttributesConfig#attribute_config_level AttributesConfig.attribute_config_level}
+        #     is CATALOG_LEVEL_ATTRIBUTE_CONFIG, otherwise throws INVALID_FORMAT error.
         # @!attribute [rw] exact_searchable_option
         #   @return [::Google::Cloud::Retail::V2::CatalogAttribute::ExactSearchableOption]
         #     If EXACT_SEARCHABLE_ENABLED, attribute values will be exact searchable.
@@ -165,9 +169,144 @@ module Google
         #     If RETRIEVABLE_ENABLED, attribute values are retrievable in the search
         #     results. If unset, the server behavior defaults to
         #     {::Google::Cloud::Retail::V2::CatalogAttribute::RetrievableOption::RETRIEVABLE_DISABLED RETRIEVABLE_DISABLED}.
+        # @!attribute [rw] facet_config
+        #   @return [::Google::Cloud::Retail::V2::CatalogAttribute::FacetConfig]
+        #     Contains facet options.
         class CatalogAttribute
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Possible options for the facet that corresponds to the current attribute
+          # config.
+          # @!attribute [rw] facet_intervals
+          #   @return [::Array<::Google::Cloud::Retail::V2::Interval>]
+          #     If you don't set the facet
+          #     {::Google::Cloud::Retail::V2::SearchRequest::FacetSpec::FacetKey#intervals SearchRequest.FacetSpec.FacetKey.intervals}
+          #     in the request to a numerical attribute, then we use the computed
+          #     intervals with rounded bounds obtained from all its product numerical
+          #     attribute values. The computed intervals might not be ideal for some
+          #     attributes. Therefore, we give you the option to overwrite them with the
+          #     facet_intervals field. The maximum of facet intervals per
+          #     {::Google::Cloud::Retail::V2::CatalogAttribute CatalogAttribute} is 40. Each
+          #     interval must have a lower bound or an upper bound. If both bounds are
+          #     provided, then the lower bound must be smaller or equal than the upper
+          #     bound.
+          # @!attribute [rw] ignored_facet_values
+          #   @return [::Array<::Google::Cloud::Retail::V2::CatalogAttribute::FacetConfig::IgnoredFacetValues>]
+          #     Each instance represents a list of attribute values to ignore as facet
+          #     values for a specific time range. The maximum number of instances per
+          #     {::Google::Cloud::Retail::V2::CatalogAttribute CatalogAttribute} is 25.
+          # @!attribute [rw] merged_facet_values
+          #   @return [::Array<::Google::Cloud::Retail::V2::CatalogAttribute::FacetConfig::MergedFacetValue>]
+          #     Each instance replaces a list of facet values by a merged facet
+          #     value. If a facet value is not in any list, then it will stay the same.
+          #     To avoid conflicts, only paths of length 1 are accepted. In other words,
+          #     if "dark_blue" merged into "BLUE", then the latter can't merge into
+          #     "blues" because this would create a path of length 2. The maximum number
+          #     of instances of MergedFacetValue per
+          #     {::Google::Cloud::Retail::V2::CatalogAttribute CatalogAttribute} is 100. This
+          #     feature is available only for textual custom attributes.
+          # @!attribute [rw] merged_facet
+          #   @return [::Google::Cloud::Retail::V2::CatalogAttribute::FacetConfig::MergedFacet]
+          #     Use this field only if you want to merge a facet key into another facet
+          #     key.
+          # @!attribute [rw] rerank_config
+          #   @return [::Google::Cloud::Retail::V2::CatalogAttribute::FacetConfig::RerankConfig]
+          #     Set this field only if you want to rerank based on facet values engaged
+          #     by the user for the current key. This option is only possible for custom
+          #     facetable textual keys.
+          class FacetConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # {::Google::Cloud::Retail::V2::SearchResponse::Facet#values Facet values} to
+            # ignore on {::Google::Cloud::Retail::V2::SearchResponse::Facet facets} during
+            # the specified time range for the given
+            # {::Google::Cloud::Retail::V2::SearchResponse::Facet#key SearchResponse.Facet.key}
+            # attribute.
+            # @!attribute [rw] values
+            #   @return [::Array<::String>]
+            #     List of facet values to ignore for the following time range. The facet
+            #     values are the same as the attribute values. There is a limit of 10
+            #     values per instance of IgnoredFacetValues. Each value can have at most
+            #     128 characters.
+            # @!attribute [rw] start_time
+            #   @return [::Google::Protobuf::Timestamp]
+            #     Time range for the current list of facet values to ignore.
+            #     If multiple time ranges are specified for an facet value for the
+            #     current attribute, consider all of them. If both are empty, ignore
+            #     always. If start time and end time are set, then start time
+            #     must be before end time.
+            #     If start time is not empty and end time is empty, then will ignore
+            #     these facet values after the start time.
+            # @!attribute [rw] end_time
+            #   @return [::Google::Protobuf::Timestamp]
+            #     If start time is empty and end time is not empty, then ignore these
+            #     facet values before end time.
+            class IgnoredFacetValues
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Replaces a set of textual facet values by the same (possibly different)
+            # merged facet value. Each facet value should appear at most once as a
+            # value per {::Google::Cloud::Retail::V2::CatalogAttribute CatalogAttribute}.
+            # This feature is available only for textual custom attributes.
+            # @!attribute [rw] values
+            #   @return [::Array<::String>]
+            #     All the facet values that are replaces by the same
+            #     {::Google::Cloud::Retail::V2::CatalogAttribute::FacetConfig::MergedFacetValue#merged_value merged_value}
+            #     that follows. The maximum number of values per MergedFacetValue is 25.
+            #     Each value can have up to 128 characters.
+            # @!attribute [rw] merged_value
+            #   @return [::String]
+            #     All the previous values are replaced by this merged facet value.
+            #     This merged_value must be non-empty and can have up to 128 characters.
+            class MergedFacetValue
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The current facet key (i.e. attribute config) maps into the
+            # {::Google::Cloud::Retail::V2::CatalogAttribute::FacetConfig::MergedFacet#merged_facet_key merged_facet_key}.
+            # A facet key can have at most one child. The current facet key and the
+            # merged facet key need both to be textual custom attributes or both
+            # numerical custom attributes (same type).
+            # @!attribute [rw] merged_facet_key
+            #   @return [::String]
+            #     The merged facet key should be a valid facet key that is different than
+            #     the facet key of the current catalog attribute. We refer this is
+            #     merged facet key as the child of the current catalog attribute. This
+            #     merged facet key can't be a parent of another facet key (i.e. no
+            #     directed path of length 2). This merged facet key needs to be either a
+            #     textual custom attribute or a numerical custom attribute.
+            class MergedFacet
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Options to rerank based on facet values engaged by the user for the
+            # current key. That key needs to be a custom textual key and facetable.
+            # To use this control, you also need to pass all the facet keys engaged by
+            # the user in the request using the field [SearchRequest.FacetSpec]. In
+            # particular, if you don't pass the facet keys engaged that you want to
+            # rerank on, this control won't be effective. Moreover, to obtain better
+            # results, the facet values that you want to rerank on should be close to
+            # English (ideally made of words, underscores, and spaces).
+            # @!attribute [rw] rerank_facet
+            #   @return [::Boolean]
+            #     If set to true, then we also rerank the dynamic facets based on the
+            #     facet values engaged by the user for the current attribute key during
+            #     serving.
+            # @!attribute [rw] facet_values
+            #   @return [::Array<::String>]
+            #     If empty, rerank on all facet values for the current key. Otherwise,
+            #     will rerank on the facet values from this list only.
+            class RerankConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
 
           # The type of an attribute.
           module AttributeType
@@ -327,8 +466,8 @@ module Google
         #     Output only. Name of the LRO corresponding to the latest suggestion terms
         #     list import.
         #
-        #     Can use GetOperation API to
-        #     retrieve the latest state of the Long Running Operation.
+        #     Can use GetOperation API
+        #     method to retrieve the latest state of the Long Running Operation.
         # @!attribute [r] denylist_input_config
         #   @return [::Google::Cloud::Retail::V2::CompletionDataInputConfig]
         #     Output only. The source data for the latest import of the autocomplete

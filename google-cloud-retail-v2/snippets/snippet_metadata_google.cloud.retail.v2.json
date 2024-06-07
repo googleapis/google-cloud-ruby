@@ -1332,6 +1332,46 @@
       ]
     },
     {
+      "region_tag": "retail_v2_generated_ProductService_PurgeProducts_sync",
+      "title": "Snippet for the purge_products call in the ProductService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ProductService::Client#purge_products.",
+      "file": "product_service/purge_products.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "purge_products",
+        "full_name": "::Google::Cloud::Retail::V2::ProductService::Client#purge_products",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::PurgeProductsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ProductService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::ProductService::Client"
+        },
+        "method": {
+          "short_name": "PurgeProducts",
+          "full_name": "google.cloud.retail.v2.ProductService.PurgeProducts",
+          "service": {
+            "short_name": "ProductService",
+            "full_name": "google.cloud.retail.v2.ProductService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "retail_v2_generated_ProductService_ImportProducts_sync",
       "title": "Snippet for the import_products call in the ProductService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ProductService::Client#import_products.",

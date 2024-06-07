@@ -85,6 +85,7 @@ class ::Google::Cloud::Retail::V2::CompletionService::Rest::ClientTest < Minites
     device_type = "hello world"
     dataset = "hello world"
     max_suggestions = 42
+    enable_attribute_suggestions = true
     entity = "hello world"
 
     complete_query_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
@@ -101,27 +102,27 @@ class ::Google::Cloud::Retail::V2::CompletionService::Rest::ClientTest < Minites
         end
 
         # Use hash object
-        client.complete_query({ catalog: catalog, query: query, visitor_id: visitor_id, language_codes: language_codes, device_type: device_type, dataset: dataset, max_suggestions: max_suggestions, entity: entity }) do |_result, response|
+        client.complete_query({ catalog: catalog, query: query, visitor_id: visitor_id, language_codes: language_codes, device_type: device_type, dataset: dataset, max_suggestions: max_suggestions, enable_attribute_suggestions: enable_attribute_suggestions, entity: entity }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.complete_query catalog: catalog, query: query, visitor_id: visitor_id, language_codes: language_codes, device_type: device_type, dataset: dataset, max_suggestions: max_suggestions, entity: entity do |_result, response|
+        client.complete_query catalog: catalog, query: query, visitor_id: visitor_id, language_codes: language_codes, device_type: device_type, dataset: dataset, max_suggestions: max_suggestions, enable_attribute_suggestions: enable_attribute_suggestions, entity: entity do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.complete_query ::Google::Cloud::Retail::V2::CompleteQueryRequest.new(catalog: catalog, query: query, visitor_id: visitor_id, language_codes: language_codes, device_type: device_type, dataset: dataset, max_suggestions: max_suggestions, entity: entity) do |_result, response|
+        client.complete_query ::Google::Cloud::Retail::V2::CompleteQueryRequest.new(catalog: catalog, query: query, visitor_id: visitor_id, language_codes: language_codes, device_type: device_type, dataset: dataset, max_suggestions: max_suggestions, enable_attribute_suggestions: enable_attribute_suggestions, entity: entity) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.complete_query({ catalog: catalog, query: query, visitor_id: visitor_id, language_codes: language_codes, device_type: device_type, dataset: dataset, max_suggestions: max_suggestions, entity: entity }, call_options) do |_result, response|
+        client.complete_query({ catalog: catalog, query: query, visitor_id: visitor_id, language_codes: language_codes, device_type: device_type, dataset: dataset, max_suggestions: max_suggestions, enable_attribute_suggestions: enable_attribute_suggestions, entity: entity }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.complete_query(::Google::Cloud::Retail::V2::CompleteQueryRequest.new(catalog: catalog, query: query, visitor_id: visitor_id, language_codes: language_codes, device_type: device_type, dataset: dataset, max_suggestions: max_suggestions, entity: entity), call_options) do |_result, response|
+        client.complete_query(::Google::Cloud::Retail::V2::CompleteQueryRequest.new(catalog: catalog, query: query, visitor_id: visitor_id, language_codes: language_codes, device_type: device_type, dataset: dataset, max_suggestions: max_suggestions, enable_attribute_suggestions: enable_attribute_suggestions, entity: entity), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
