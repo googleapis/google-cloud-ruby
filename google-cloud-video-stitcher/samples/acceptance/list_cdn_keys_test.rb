@@ -26,6 +26,6 @@ describe "#list_cdn_keys", :stitcher_snippet do
     end
 
     assert output.start_with? "CDN keys:"
-    assert output.include? cloud_cdn_key_name
+    assert_includes output, cloud_cdn_key_name
   end
 end

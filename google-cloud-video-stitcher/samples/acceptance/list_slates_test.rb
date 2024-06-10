@@ -26,6 +26,6 @@ describe "#list_slates", :stitcher_snippet do
     end
 
     assert output.start_with? "Slates:"
-    assert output.include? slate_name
+    assert_includes output, slate_name
   end
 end

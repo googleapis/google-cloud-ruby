@@ -29,6 +29,6 @@ describe "#list_live_configs", :stitcher_snippet do
     end
 
     assert output.start_with? "Live configs:"
-    assert output.include? live_config_name
+    assert_includes output, live_config_name
   end
 end
