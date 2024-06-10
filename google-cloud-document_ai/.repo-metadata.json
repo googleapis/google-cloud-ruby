@@ -1,5 +1,5 @@
 {
-    "api_id": "us-documentai.googleapis.com",
+    "api_id": "documentai.googleapis.com",
     "api_shortname": "documentai",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-document_ai/latest",
     "distribution_name": "google-cloud-document_ai",
@@ -7,13 +7,13 @@
     "language": "ruby",
     "name": "documentai",
     "name_pretty": "Document AI API",
-    "product_documentation": "https://cloud.google.com/document-ai/",
+    "product_documentation": "https://cloud.google.com/document-ai/docs",
     "release_level": "stable",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "Document AI uses machine learning on a single cloud-based platform to automatically classify, extract, and enrich data within your documents to unlock insights.",
     "ruby-cloud-env-prefix": "DOCUMENT_AI",
-    "ruby-cloud-product-url": "https://cloud.google.com/document-ai/",
+    "ruby-cloud-product-url": "https://cloud.google.com/document-ai/docs",
     "ruby-cloud-namespace-override": "DocumentAi=DocumentAI",
     "library_type": "GAPIC_MANUAL"
 }
