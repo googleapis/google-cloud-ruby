@@ -1,5 +1,34 @@
 # Release History
 
+### 0.41.0 (2024-06-10)
+
+#### Features
+
+* A new field `accelerators` is added to message `.google.container.v1.UpdateNodePoolRequest` 
+* A new field `additive_vpc_scope_dns_domain` is added to message `.google.container.v1.DNSConfig` 
+* A new field `containerd_config` is added to message `.google.container.v1.NodeConfig` 
+* A new field `containerd_config` is added to message `.google.container.v1.NodeConfigDefaults` 
+* A new field `containerd_config` is added to message `.google.container.v1.UpdateNodePoolRequest` 
+* A new field `desired_containerd_config` is added to message `.google.container.v1.ClusterUpdate` 
+* A new field `desired_node_kubelet_config` is added to message `.google.container.v1.ClusterUpdate` 
+* A new field `desired_node_pool_auto_config_kubelet_config` is added to message `.google.container.v1.ClusterUpdate` 
+* A new field `enable_nested_virtualization` is added to message `.google.container.v1.AdvancedMachineFeatures` 
+* A new field `hugepages` is added to message `.google.container.v1.LinuxNodeConfig` 
+* A new field `node_kubelet_config` is added to message `.google.container.v1.NodeConfigDefaults` 
+* A new field `node_kubelet_config` is added to message `.google.container.v1.NodePoolAutoConfig` 
+* A new field `satisfies_pzi` is added to message `.google.container.v1.Cluster` 
+* A new field `satisfies_pzs` is added to message `.google.container.v1.Cluster` 
+* A new message `ContainerdConfig` is added 
+* A new message `HugepagesConfig` is added ([#26082](https://github.com/googleapis/google-cloud-ruby/issues/26082)) 
+* A new value `CADVISOR` is added to enum `Component` 
+* A new value `ENTERPRISE` is added to enum `Mode` 
+* A new value `KUBELET` is added to enum `Component` 
+* A new value `MPS` is added to enum `GPUSharingStrategy` 
+#### Documentation
+
+* A comment for field `desired_private_cluster_config` in message `.google.container.v1.ClusterUpdate` is changed 
+* A comment for field `in_transit_encryption_config` in message `.google.container.v1.NetworkConfig` is changed 
+
 ### 0.40.0 (2024-04-15)
 
 #### Features
