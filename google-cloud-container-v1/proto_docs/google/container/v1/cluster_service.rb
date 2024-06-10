@@ -43,9 +43,24 @@ module Google
         # @!attribute [rw] cgroup_mode
         #   @return [::Google::Cloud::Container::V1::LinuxNodeConfig::CgroupMode]
         #     cgroup_mode specifies the cgroup mode to be used on the node.
+        # @!attribute [rw] hugepages
+        #   @return [::Google::Cloud::Container::V1::LinuxNodeConfig::HugepagesConfig]
+        #     Optional. Amounts for 2M and 1G hugepages
         class LinuxNodeConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Hugepages amount in both 2m and 1g size
+          # @!attribute [rw] hugepage_size2m
+          #   @return [::Integer]
+          #     Optional. Amount of 2M hugepages
+          # @!attribute [rw] hugepage_size1g
+          #   @return [::Integer]
+          #     Optional. Amount of 1G hugepages
+          class HugepagesConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # @!attribute [rw] key
           #   @return [::String]
@@ -353,6 +368,9 @@ module Google
         # @!attribute [rw] sole_tenant_config
         #   @return [::Google::Cloud::Container::V1::SoleTenantConfig]
         #     Parameters for node pools to be backed by shared sole tenant node groups.
+        # @!attribute [rw] containerd_config
+        #   @return [::Google::Cloud::Container::V1::ContainerdConfig]
+        #     Parameters for containerd customization.
         # @!attribute [rw] resource_manager_tags
         #   @return [::Google::Cloud::Container::V1::ResourceManagerTags]
         #     A map of resource manager tag keys and values to be attached to the nodes.
@@ -403,6 +421,9 @@ module Google
         #     The number of threads per physical core. To disable simultaneous
         #     multithreading (SMT) set this to 1. If unset, the maximum number of threads
         #     supported per core by the underlying processor is assumed.
+        # @!attribute [rw] enable_nested_virtualization
+        #   @return [::Boolean]
+        #     Whether or not to enable nested virtualization (defaults to false).
         class AdvancedMachineFeatures
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -659,6 +680,59 @@ module Google
 
               # Anti-affinity operator.
               NOT_IN = 2
+            end
+          end
+        end
+
+        # ContainerdConfig contains configuration to customize containerd.
+        # @!attribute [rw] private_registry_access_config
+        #   @return [::Google::Cloud::Container::V1::ContainerdConfig::PrivateRegistryAccessConfig]
+        #     PrivateRegistryAccessConfig is used to configure access configuration
+        #     for private container registries.
+        class ContainerdConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # PrivateRegistryAccessConfig contains access configuration for
+          # private container registries.
+          # @!attribute [rw] enabled
+          #   @return [::Boolean]
+          #     Private registry access is enabled.
+          # @!attribute [rw] certificate_authority_domain_config
+          #   @return [::Array<::Google::Cloud::Container::V1::ContainerdConfig::PrivateRegistryAccessConfig::CertificateAuthorityDomainConfig>]
+          #     Private registry access configuration.
+          class PrivateRegistryAccessConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # CertificateAuthorityDomainConfig configures one or more fully qualified
+            # domain names (FQDN) to a specific certificate.
+            # @!attribute [rw] fqdns
+            #   @return [::Array<::String>]
+            #     List of fully qualified domain names (FQDN).
+            #     Specifying port is supported.
+            #     Wilcards are NOT supported.
+            #     Examples:
+            #     - my.customdomain.com
+            #     - 10.0.1.2:5000
+            # @!attribute [rw] gcp_secret_manager_certificate_config
+            #   @return [::Google::Cloud::Container::V1::ContainerdConfig::PrivateRegistryAccessConfig::CertificateAuthorityDomainConfig::GCPSecretManagerCertificateConfig]
+            #     Google Secret Manager (GCP) certificate configuration.
+            class CertificateAuthorityDomainConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # GCPSecretManagerCertificateConfig configures a secret from
+              # [Google Secret Manager](https://cloud.google.com/secret-manager).
+              # @!attribute [rw] secret_uri
+              #   @return [::String]
+              #     Secret URI, in the form
+              #     "projects/$PROJECT_ID/secrets/$SECRET_NAME/versions/$VERSION".
+              #     Version can be fixed (e.g. "2") or "latest"
+              class GCPSecretManagerCertificateConfig
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
             end
           end
         end
@@ -1669,6 +1743,12 @@ module Google
         # @!attribute [rw] enterprise_config
         #   @return [::Google::Cloud::Container::V1::EnterpriseConfig]
         #     GKE Enterprise Configuration.
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
+        # @!attribute [r] satisfies_pzi
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
         class Cluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1743,6 +1823,9 @@ module Google
 
             # Applies Security Posture features on the cluster.
             BASIC = 2
+
+            # Applies the Security Posture off cluster Enterprise level features.
+            ENTERPRISE = 3
           end
 
           # VulnerabilityMode defines enablement mode for vulnerability scanning.
@@ -1774,6 +1857,11 @@ module Google
         #   @return [::Google::Cloud::Container::V1::ResourceManagerTags]
         #     Resource manager tag keys and values to be attached to the nodes
         #     for managing Compute Engine firewalls using Network Firewall Policies.
+        # @!attribute [rw] node_kubelet_config
+        #   @return [::Google::Cloud::Container::V1::NodeKubeletConfig]
+        #     NodeKubeletConfig controls the defaults for autoprovisioned node-pools.
+        #
+        #     Currently only `insecure_kubelet_readonly_port_enabled` can be set here.
         class NodePoolAutoConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1795,6 +1883,14 @@ module Google
         # @!attribute [rw] logging_config
         #   @return [::Google::Cloud::Container::V1::NodePoolLoggingConfig]
         #     Logging configuration for node pools.
+        # @!attribute [rw] containerd_config
+        #   @return [::Google::Cloud::Container::V1::ContainerdConfig]
+        #     Parameters for containerd customization.
+        # @!attribute [rw] node_kubelet_config
+        #   @return [::Google::Cloud::Container::V1::NodeKubeletConfig]
+        #     NodeKubeletConfig controls the defaults for new node-pools.
+        #
+        #     Currently only `insecure_kubelet_readonly_port_enabled` can be set here.
         class NodeConfigDefaults
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1907,7 +2003,12 @@ module Google
         #     Cluster-level Vertical Pod Autoscaling configuration.
         # @!attribute [rw] desired_private_cluster_config
         #   @return [::Google::Cloud::Container::V1::PrivateClusterConfig]
-        #     The desired private cluster configuration.
+        #     The desired private cluster configuration. master_global_access_config is
+        #     the only field that can be changed via this field.
+        #     See also
+        #     {::Google::Cloud::Container::V1::ClusterUpdate#desired_enable_private_endpoint ClusterUpdate.desired_enable_private_endpoint}
+        #     for modifying other fields within
+        #     {::Google::Cloud::Container::V1::PrivateClusterConfig PrivateClusterConfig}.
         # @!attribute [rw] desired_intra_node_visibility_config
         #   @return [::Google::Cloud::Container::V1::IntraNodeVisibilityConfig]
         #     The desired config of Intra-node visibility.
@@ -2013,6 +2114,9 @@ module Google
         # @!attribute [rw] desired_k8s_beta_apis
         #   @return [::Google::Cloud::Container::V1::K8sBetaAPIConfig]
         #     Desired Beta APIs to be enabled for cluster.
+        # @!attribute [rw] desired_containerd_config
+        #   @return [::Google::Cloud::Container::V1::ContainerdConfig]
+        #     The desired containerd config for the cluster.
         # @!attribute [rw] desired_enable_multi_networking
         #   @return [::Boolean]
         #     Enable/Disable Multi-Networking for the cluster
@@ -2026,6 +2130,13 @@ module Google
         # @!attribute [rw] desired_enable_cilium_clusterwide_network_policy
         #   @return [::Boolean]
         #     Enable/Disable Cilium Clusterwide Network Policy for the cluster.
+        # @!attribute [rw] desired_node_kubelet_config
+        #   @return [::Google::Cloud::Container::V1::NodeKubeletConfig]
+        #     The desired node kubelet config for the cluster.
+        # @!attribute [rw] desired_node_pool_auto_config_kubelet_config
+        #   @return [::Google::Cloud::Container::V1::NodeKubeletConfig]
+        #     The desired node kubelet config for all auto-provisioned node pools
+        #     in autopilot clusters and node auto-provisioning enabled clusters.
         class ClusterUpdate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2522,6 +2633,11 @@ module Google
         # @!attribute [rw] windows_node_config
         #   @return [::Google::Cloud::Container::V1::WindowsNodeConfig]
         #     Parameters that can be configured on Windows nodes.
+        # @!attribute [rw] accelerators
+        #   @return [::Array<::Google::Cloud::Container::V1::AcceleratorConfig>]
+        #     A list of hardware accelerators to be attached to each node.
+        #     See https://cloud.google.com/compute/docs/gpus for more information about
+        #     support for GPUs.
         # @!attribute [rw] machine_type
         #   @return [::String]
         #     Optional. The desired [Google Compute Engine machine
@@ -2545,6 +2661,11 @@ module Google
         #     Desired resource manager tag keys and values to be attached to the nodes
         #     for managing Compute Engine firewalls using Network Firewall Policies.
         #     Existing tags will be replaced with new values.
+        # @!attribute [rw] containerd_config
+        #   @return [::Google::Cloud::Container::V1::ContainerdConfig]
+        #     The desired containerd config for nodes in the node pool.
+        #     Initiates an upgrade operation that recreates the nodes with the new
+        #     config.
         # @!attribute [rw] queued_provisioning
         #   @return [::Google::Cloud::Container::V1::NodePool::QueuedProvisioning]
         #     Specifies the configuration of queued provisioning.
@@ -4203,6 +4324,9 @@ module Google
 
             # GPUs are time-shared between containers.
             TIME_SHARING = 1
+
+            # GPUs are shared between containers with NVIDIA MPS.
+            MPS = 2
           end
         end
 
@@ -4420,6 +4544,7 @@ module Google
         # @!attribute [rw] in_transit_encryption_config
         #   @return [::Google::Cloud::Container::V1::InTransitEncryptionConfig]
         #     Specify the details of in-transit encryption.
+        #     Now named inter-node transparent encryption.
         # @!attribute [rw] enable_cilium_clusterwide_network_policy
         #   @return [::Boolean]
         #     Whether CiliumClusterwideNetworkPolicy is enabled on this cluster.
@@ -4718,6 +4843,9 @@ module Google
         # @!attribute [rw] cluster_dns_domain
         #   @return [::String]
         #     cluster_dns_domain is the suffix used for all cluster service records.
+        # @!attribute [rw] additive_vpc_scope_dns_domain
+        #   @return [::String]
+        #     Optional. The domain used in Additive VPC scope.
         class DNSConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -5409,6 +5537,12 @@ module Google
 
             # Statefulset
             STATEFULSET = 12
+
+            # CADVISOR
+            CADVISOR = 13
+
+            # KUBELET
+            KUBELET = 14
           end
         end
 
