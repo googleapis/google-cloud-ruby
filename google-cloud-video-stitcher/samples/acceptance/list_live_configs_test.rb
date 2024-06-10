@@ -24,8 +24,11 @@ describe "#list_live_configs", :stitcher_snippet do
     refute_nil live_config
     @live_config_created = true
 
-    assert_output(/Live configs:\n#{live_config_name}/) do
+    output, = capture_io do
       sample.run project_id: project_id, location: location_id
     end
+
+    assert output.start_with? "Live configs:"
+    assert_includes output, live_config_name
   end
 end

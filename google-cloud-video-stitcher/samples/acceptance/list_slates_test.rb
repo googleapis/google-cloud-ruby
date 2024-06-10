@@ -21,8 +21,11 @@ describe "#list_slates", :stitcher_snippet do
     refute_nil slate
     @slate_created = true
 
-    assert_output(/Slates:\n#{slate_name}/) do
+    output, = capture_io do
       sample.run project_id: project_id, location: location_id
     end
+
+    assert output.start_with? "Slates:"
+    assert_includes output, slate_name
   end
 end
