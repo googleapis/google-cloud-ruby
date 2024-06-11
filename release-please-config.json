@@ -1647,6 +1647,10 @@
       "component": "google-maps-fleet_engine-v1",
       "version_file": "lib/google/maps/fleet_engine/v1/version.rb"
     },
+    "google-shopping-css-v1": {
+      "component": "google-shopping-css-v1",
+      "version_file": "lib/google/shopping/css/v1/version.rb"
+    },
     "google-shopping-merchant-accounts": {
       "component": "google-shopping-merchant-accounts",
       "version_file": "lib/google/shopping/merchant/accounts/version.rb"
