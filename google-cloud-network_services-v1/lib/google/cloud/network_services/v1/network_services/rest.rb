@@ -33,6 +33,8 @@ module Google
     module NetworkServices
       module V1
         ##
+        # Service describing handlers for resources.
+        #
         # To load this service and instantiate a REST client:
         #
         #     require "google/cloud/network_services/v1/network_services/rest"
