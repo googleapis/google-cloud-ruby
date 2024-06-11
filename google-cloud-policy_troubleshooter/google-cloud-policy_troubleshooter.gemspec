@@ -24,4 +24,5 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency "google-cloud-core", "~> 1.6"
   gem.add_dependency "google-cloud-policy_troubleshooter-v1", ">= 0.10", "< 2.a"
+  gem.add_dependency "google-cloud-policy_troubleshooter-iam-v3", ">= 0.3", "< 2.a"
 end
