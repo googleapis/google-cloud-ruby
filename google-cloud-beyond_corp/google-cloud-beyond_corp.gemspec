@@ -24,4 +24,7 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency "google-cloud-beyond_corp-app_connections-v1", ">= 0.4", "< 2.a"
   gem.add_dependency "google-cloud-core", "~> 1.6"
+  gem.add_dependency "google-cloud-beyond_corp-app_connectors-v1", ">= 0.4", "< 2.a"
+  gem.add_dependency "google-cloud-beyond_corp-app_gateways-v1", ">= 0.4", "< 2.a"
+  gem.add_dependency "google-cloud-beyond_corp-client_gateways-v1", ">= 0.4", "< 2.a"
 end
