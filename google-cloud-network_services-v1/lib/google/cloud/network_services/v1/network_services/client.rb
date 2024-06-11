@@ -29,6 +29,8 @@ module Google
           ##
           # Client for the NetworkServices service.
           #
+          # Service describing handlers for resources.
+          #
           class Client
             # @private
             API_VERSION = ""

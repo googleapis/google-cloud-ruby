@@ -24,6 +24,7 @@ module Google
     module NetworkServices
       module V1
         module NetworkServices
+          # Service describing handlers for resources.
           class Service
 
             include ::GRPC::GenericService

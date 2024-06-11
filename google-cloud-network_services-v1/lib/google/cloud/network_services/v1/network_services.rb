@@ -33,6 +33,8 @@ module Google
     module NetworkServices
       module V1
         ##
+        # Service describing handlers for resources.
+        #
         # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/network_services/v1/network_services"
