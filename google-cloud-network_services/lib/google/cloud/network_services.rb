@@ -92,6 +92,10 @@ module Google
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
       #
+      # ## About NetworkServices
+      #
+      # Service describing handlers for resources.
+      #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
       # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
