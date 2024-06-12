@@ -1,5 +1,11 @@
 # Release History
 
+### 1.6.1 (2024-06-12)
+
+#### Bug Fixes
+
+* Restored gem dependency on the troubleshooter-iam versioned client ([#26100](https://github.com/googleapis/google-cloud-ruby/issues/26100)) 
+
 ### 1.6.0 (2024-02-26)
 
 #### Features
