@@ -1,0 +1,25 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".toys.rb",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-managed_kafka.gemspec",
+    "lib/google-cloud-managed_kafka.rb",
+    "lib/google/cloud/managed_kafka.rb",
+    "lib/google/cloud/managed_kafka/version.rb",
+    "test/google/cloud/managed_kafka/client_test.rb",
+    "test/google/cloud/managed_kafka/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml"
+  ]
+}

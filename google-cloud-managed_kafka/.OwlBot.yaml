@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/managedkafka/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-managed_kafka/$1
