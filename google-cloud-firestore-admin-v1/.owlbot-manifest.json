@@ -57,6 +57,7 @@
     "proto_docs/google/rpc/status.rb",
     "proto_docs/google/type/dayofweek.rb",
     "snippets/Gemfile",
+    "snippets/firestore_admin/bulk_delete_documents.rb",
     "snippets/firestore_admin/create_backup_schedule.rb",
     "snippets/firestore_admin/create_database.rb",
     "snippets/firestore_admin/create_index.rb",
