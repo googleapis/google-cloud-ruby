@@ -859,6 +859,10 @@
       "component": "google-cloud-managed_identities-v1",
       "version_file": "lib/google/cloud/managed_identities/v1/version.rb"
     },
+    "google-cloud-managed_kafka-v1": {
+      "component": "google-cloud-managed_kafka-v1",
+      "version_file": "lib/google/cloud/managed_kafka/v1/version.rb"
+    },
     "google-cloud-media_translation": {
       "component": "google-cloud-media_translation",
       "version_file": "lib/google/cloud/media_translation/version.rb"
