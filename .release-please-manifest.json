@@ -291,6 +291,8 @@
   "google-cloud-deploy+FILLER": "0.0.0",
   "google-cloud-deploy-v1": "0.20.0",
   "google-cloud-deploy-v1+FILLER": "0.0.0",
+  "google-cloud-developer_connect": "0.0.1",
+  "google-cloud-developer_connect+FILLER": "0.0.0",
   "google-cloud-developer_connect-v1": "0.0.1",
   "google-cloud-developer_connect-v1+FILLER": "0.0.0",
   "google-cloud-dialogflow": "1.8.0",
