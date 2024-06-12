@@ -27,6 +27,9 @@ module Google
           #   @return [::String]
           #     Required. A parent name of the form
           #     `projects/{project_id}`
+          # @!attribute [rw] show_deleted
+          #   @return [::Boolean]
+          #     If true, also returns deleted resources.
           class ListDatabasesRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -319,7 +322,8 @@ module Google
           #     only supports listing fields that have been explicitly overridden. To issue
           #     this query, call
           #     {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_fields FirestoreAdmin.ListFields}
-          #     with a filter that includes `indexConfig.usesAncestorConfig:false` .
+          #     with a filter that includes `indexConfig.usesAncestorConfig:false` or
+          #     `ttlConfig:*`.
           # @!attribute [rw] page_size
           #   @return [::Integer]
           #     The number of results to return.
@@ -355,7 +359,8 @@ module Google
           #     `projects/{project_id}/databases/{database_id}`.
           # @!attribute [rw] collection_ids
           #   @return [::Array<::String>]
-          #     Which collection ids to export. Unspecified means all collections.
+          #     Which collection ids to export. Unspecified means all collections. Each
+          #     collection id in this list must be unique.
           # @!attribute [rw] output_uri_prefix
           #   @return [::String]
           #     The output URI. Currently only supports Google Cloud Storage URIs of the
@@ -397,7 +402,7 @@ module Google
           # @!attribute [rw] collection_ids
           #   @return [::Array<::String>]
           #     Which collection ids to import. Unspecified means all collections included
-          #     in the import.
+          #     in the import. Each collection id in this list must be unique.
           # @!attribute [rw] input_uri_prefix
           #   @return [::String]
           #     Location of the exported files.
@@ -414,6 +419,50 @@ module Google
           #     used if the database has data in non-default namespaces, but doesn't want
           #     to include them. Each namespace in this list must be unique.
           class ImportDocumentsRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The request for
+          # {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#bulk_delete_documents FirestoreAdmin.BulkDeleteDocuments}.
+          #
+          # When both collection_ids and namespace_ids are set, only documents satisfying
+          # both conditions will be deleted.
+          #
+          # Requests with namespace_ids and collection_ids both empty will be rejected.
+          # Please use
+          # {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#delete_database FirestoreAdmin.DeleteDatabase}
+          # instead.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. Database to operate. Should be of the form:
+          #     `projects/{project_id}/databases/{database_id}`.
+          # @!attribute [rw] collection_ids
+          #   @return [::Array<::String>]
+          #     Optional. IDs of the collection groups to delete. Unspecified means all
+          #     collection groups.
+          #
+          #     Each collection group in this list must be unique.
+          # @!attribute [rw] namespace_ids
+          #   @return [::Array<::String>]
+          #     Optional. Namespaces to delete.
+          #
+          #     An empty list means all namespaces. This is the recommended
+          #     usage for databases that don't use namespaces.
+          #
+          #     An empty string element represents the default namespace. This should be
+          #     used if the database has data in non-default namespaces, but doesn't want
+          #     to delete from them.
+          #
+          #     Each namespace in this list must be unique.
+          class BulkDeleteDocumentsRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The response for
+          # {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#bulk_delete_documents FirestoreAdmin.BulkDeleteDocuments}.
+          class BulkDeleteDocumentsResponse
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

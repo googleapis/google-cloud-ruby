@@ -571,6 +571,62 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ClientTest < 
     end
   end
 
+  def test_bulk_delete_documents
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    collection_ids = ["hello world"]
+    namespace_ids = ["hello world"]
+
+    bulk_delete_documents_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ServiceStub.stub :transcode_bulk_delete_documents_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, bulk_delete_documents_client_stub do
+        # Create client
+        client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.bulk_delete_documents({ name: name, collection_ids: collection_ids, namespace_ids: namespace_ids }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.bulk_delete_documents name: name, collection_ids: collection_ids, namespace_ids: namespace_ids do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.bulk_delete_documents ::Google::Cloud::Firestore::Admin::V1::BulkDeleteDocumentsRequest.new(name: name, collection_ids: collection_ids, namespace_ids: namespace_ids) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.bulk_delete_documents({ name: name, collection_ids: collection_ids, namespace_ids: namespace_ids }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.bulk_delete_documents(::Google::Cloud::Firestore::Admin::V1::BulkDeleteDocumentsRequest.new(name: name, collection_ids: collection_ids, namespace_ids: namespace_ids), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, bulk_delete_documents_client_stub.call_count
+      end
+    end
+  end
+
   def test_create_database
     # Create test objects.
     client_result = ::Google::Longrunning::Operation.new
@@ -690,6 +746,7 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ClientTest < 
 
     # Create request parameters for a unary method.
     parent = "hello world"
+    show_deleted = true
 
     list_databases_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -705,27 +762,27 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ClientTest < 
         end
 
         # Use hash object
-        client.list_databases({ parent: parent }) do |_result, response|
+        client.list_databases({ parent: parent, show_deleted: show_deleted }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_databases parent: parent do |_result, response|
+        client.list_databases parent: parent, show_deleted: show_deleted do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_databases ::Google::Cloud::Firestore::Admin::V1::ListDatabasesRequest.new(parent: parent) do |_result, response|
+        client.list_databases ::Google::Cloud::Firestore::Admin::V1::ListDatabasesRequest.new(parent: parent, show_deleted: show_deleted) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_databases({ parent: parent }, call_options) do |_result, response|
+        client.list_databases({ parent: parent, show_deleted: show_deleted }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_databases(::Google::Cloud::Firestore::Admin::V1::ListDatabasesRequest.new(parent: parent), call_options) do |_result, response|
+        client.list_databases(::Google::Cloud::Firestore::Admin::V1::ListDatabasesRequest.new(parent: parent, show_deleted: show_deleted), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

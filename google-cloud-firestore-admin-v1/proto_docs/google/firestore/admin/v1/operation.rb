@@ -202,6 +202,42 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Metadata for {::Google::Longrunning::Operation google.longrunning.Operation}
+          # results from
+          # {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#bulk_delete_documents FirestoreAdmin.BulkDeleteDocuments}.
+          # @!attribute [rw] start_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The time this operation started.
+          # @!attribute [rw] end_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The time this operation completed. Will be unset if operation still in
+          #     progress.
+          # @!attribute [rw] operation_state
+          #   @return [::Google::Cloud::Firestore::Admin::V1::OperationState]
+          #     The state of the operation.
+          # @!attribute [rw] progress_documents
+          #   @return [::Google::Cloud::Firestore::Admin::V1::Progress]
+          #     The progress, in documents, of this operation.
+          # @!attribute [rw] progress_bytes
+          #   @return [::Google::Cloud::Firestore::Admin::V1::Progress]
+          #     The progress, in bytes, of this operation.
+          # @!attribute [rw] collection_ids
+          #   @return [::Array<::String>]
+          #     The ids of the collection groups that are being deleted.
+          # @!attribute [rw] namespace_ids
+          #   @return [::Array<::String>]
+          #     Which namespace ids are being deleted.
+          # @!attribute [rw] snapshot_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The timestamp that corresponds to the version of the database that is being
+          #     read to get the list of documents to delete. This time can also be used as
+          #     the timestamp of PITR in case of disaster recovery (subject to PITR window
+          #     limit).
+          class BulkDeleteDocumentsMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Returned in the {::Google::Longrunning::Operation google.longrunning.Operation}
           # response field.
           # @!attribute [rw] output_uri_prefix

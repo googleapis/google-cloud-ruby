@@ -55,6 +55,11 @@
                 "import_documents"
               ]
             },
+            "BulkDeleteDocuments": {
+              "methods": [
+                "bulk_delete_documents"
+              ]
+            },
             "CreateDatabase": {
               "methods": [
                 "create_database"

@@ -79,7 +79,7 @@ module Google
             #     Indicates that this field supports operations on `array_value`s.
             # @!attribute [rw] vector_config
             #   @return [::Google::Cloud::Firestore::Admin::V1::Index::IndexField::VectorConfig]
-            #     Indicates that this field supports nearest neighbors and distance
+            #     Indicates that this field supports nearest neighbor and distance
             #     operations on vector.
             class IndexField
               include ::Google::Protobuf::MessageExts
