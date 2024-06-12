@@ -595,6 +595,10 @@
       "component": "google-cloud-deploy-v1",
       "version_file": "lib/google/cloud/deploy/v1/version.rb"
     },
+    "google-cloud-developer_connect": {
+      "component": "google-cloud-developer_connect",
+      "version_file": "lib/google/cloud/developer_connect/version.rb"
+    },
     "google-cloud-developer_connect-v1": {
       "component": "google-cloud-developer_connect-v1",
       "version_file": "lib/google/cloud/developer_connect/v1/version.rb"
