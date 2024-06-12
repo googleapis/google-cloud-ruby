@@ -115,6 +115,11 @@ module Google
 
             # State is disabled.
             DISABLED = 3
+
+            # SCC is configured to ingest findings from this service but not enable
+            # this service. Not a valid intended_enablement_state (that is, this is a
+            # readonly state).
+            INGEST_ONLY = 4
           end
         end
 
