@@ -1,5 +1,11 @@
 # Release History
 
+### 2.5.1 (2024-06-12)
+
+#### Bug Fixes
+
+* Restored gem dependencies on the execution versioned clients ([#26101](https://github.com/googleapis/google-cloud-ruby/issues/26101)) 
+
 ### 2.5.0 (2024-02-26)
 
 #### Features
