@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.3.1 (2024-06-12)
+
+#### Bug Fixes
+
+* Restored gem dependencies on several underlying versioned clients ([#26098](https://github.com/googleapis/google-cloud-ruby/issues/26098)) 
+
 ### 1.3.0 (2024-02-26)
 
 #### Features
