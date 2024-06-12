@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/developerconnect/v1/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-developer_connect-v1/$1
