@@ -1007,12 +1007,13 @@ module Google
 
         # A single result of a SearchEntries request.
         # @!attribute [rw] linked_resource
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Linked resource name.
         # @!attribute [rw] dataplex_entry
         #   @return [::Google::Cloud::Dataplex::V1::Entry]
-        #     Entry format of the result.
         # @!attribute [rw] snippets
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::Dataplex::V1::SearchEntriesResult::Snippets]
         #     Snippets.
         class SearchEntriesResult
@@ -1021,7 +1022,9 @@ module Google
 
           # Snippets for the entry, contains HTML-style highlighting for
           # matched tokens, will be used in UI.
+          # @deprecated This message is deprecated and may be removed in the next major version update.
           # @!attribute [rw] dataplex_entry
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::Google::Cloud::Dataplex::V1::Entry]
           #     Entry
           class Snippets
