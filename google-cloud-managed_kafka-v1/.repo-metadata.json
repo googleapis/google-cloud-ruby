@@ -8,7 +8,7 @@
     "name": "managedkafka",
     "name_pretty": "Apache Kafka for BigQuery V1 API",
     "product_documentation": "https://cloud.google.com/managed-kafka",
-    "release_level": "unreleased",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "Manage Apache Kafka clusters and resources. Note that google-cloud-managed_kafka-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-managed_kafka instead. See the readme for more details.",
