@@ -1,5 +1,12 @@
 # Release History
 
+### 0.18.0 (2024-06-13)
+
+#### Features
+
+* Support for bulk delete API 
+* Support for including deleted resources in list_databases 
+
 ### 0.17.1 (2024-04-19)
 
 #### Documentation
