@@ -25,11 +25,8 @@ module Google
           # **Anthos Config Management**: State for a single cluster.
           # @!attribute [rw] cluster_name
           #   @return [::String]
-          #     The user-defined name for the cluster used by ClusterSelectors to group
-          #     clusters together. This should match Membership's membership_name,
-          #     unless the user installed ACM on the cluster manually prior to enabling
-          #     the ACM hub feature.
-          #     Unique within a Anthos Config Management installation.
+          #     This field is set to the `cluster_name` field of the Membership Spec if it
+          #     is not empty. Otherwise, it is set to the cluster's fleet membership name.
           # @!attribute [rw] membership_spec
           #   @return [::Google::Cloud::GkeHub::ConfigManagement::V1::MembershipSpec]
           #     Membership configuration in the cluster. This represents the actual state
@@ -66,9 +63,33 @@ module Google
           # @!attribute [rw] version
           #   @return [::String]
           #     Version of ACM installed.
+          # @!attribute [rw] cluster
+          #   @return [::String]
+          #     The user-specified cluster name used by Config Sync cluster-name-selector
+          #     annotation or ClusterSelector, for applying configs to only a subset
+          #     of clusters.
+          #     Omit this field if the cluster's fleet membership name is used by Config
+          #     Sync cluster-name-selector annotation or ClusterSelector.
+          #     Set this field if a name different from the cluster's fleet membership name
+          #     is used by Config Sync cluster-name-selector annotation or ClusterSelector.
+          # @!attribute [rw] management
+          #   @return [::Google::Cloud::GkeHub::ConfigManagement::V1::MembershipSpec::Management]
+          #     Enables automatic Feature management.
           class MembershipSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Whether to automatically manage the Feature.
+            module Management
+              # Unspecified
+              MANAGEMENT_UNSPECIFIED = 0
+
+              # Google will manage the Feature for the cluster.
+              MANAGEMENT_AUTOMATIC = 1
+
+              # User will manually manage the Feature for the cluster.
+              MANAGEMENT_MANUAL = 2
+            end
           end
 
           # Configuration for Config Sync
@@ -78,7 +99,32 @@ module Google
           # @!attribute [rw] source_format
           #   @return [::String]
           #     Specifies whether the Config Sync Repo is
-          #     in “hierarchical” or “unstructured” mode.
+          #     in "hierarchical" or "unstructured" mode.
+          # @!attribute [rw] enabled
+          #   @return [::Boolean]
+          #     Enables the installation of ConfigSync.
+          #     If set to true, ConfigSync resources will be created and the other
+          #     ConfigSync fields will be applied if exist.
+          #     If set to false, all other ConfigSync fields will be ignored, ConfigSync
+          #     resources will be deleted.
+          #     If omitted, ConfigSync resources will be managed depends on the presence
+          #     of the git or oci field.
+          # @!attribute [rw] prevent_drift
+          #   @return [::Boolean]
+          #     Set to true to enable the Config Sync admission webhook to prevent drifts.
+          #     If set to `false`, disables the Config Sync admission webhook and does not
+          #     prevent drifts.
+          # @!attribute [rw] oci
+          #   @return [::Google::Cloud::GkeHub::ConfigManagement::V1::OciConfig]
+          #     OCI repo configuration for the cluster
+          # @!attribute [rw] metrics_gcp_service_account_email
+          #   @return [::String]
+          #     The Email of the Google Cloud Service Account (GSA) used for exporting
+          #     Config Sync metrics to Cloud Monitoring when Workload Identity is enabled.
+          #     The GSA should have the Monitoring Metric Writer
+          #     (roles/monitoring.metricWriter) IAM role.
+          #     The Kubernetes ServiceAccount `default` in the namespace
+          #     `config-management-monitoring` should be bound to the GSA.
           class ConfigSync
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -103,15 +149,41 @@ module Google
           #     Git revision (tag or hash) to check out. Default HEAD.
           # @!attribute [rw] secret_type
           #   @return [::String]
-          #     Type of secret configured for access to the Git repo.
+          #     Type of secret configured for access to the Git repo. Must be one of ssh,
+          #     cookiefile, gcenode, token, gcpserviceaccount or none. The
+          #     validation of this is case-sensitive. Required.
           # @!attribute [rw] https_proxy
           #   @return [::String]
           #     URL for the HTTPS proxy to be used when communicating with the Git repo.
           # @!attribute [rw] gcp_service_account_email
           #   @return [::String]
-          #     The GCP Service Account Email used for auth when secret_type is
+          #     The Google Cloud Service Account Email used for auth when secret_type is
           #     gcpServiceAccount.
           class GitConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # OCI repo configuration for a single cluster
+          # @!attribute [rw] sync_repo
+          #   @return [::String]
+          #     The OCI image repository URL for the package to sync from.
+          #     e.g. `LOCATION-docker.pkg.dev/PROJECT_ID/REPOSITORY_NAME/PACKAGE_NAME`.
+          # @!attribute [rw] policy_dir
+          #   @return [::String]
+          #     The absolute path of the directory that contains
+          #     the local resources.  Default: the root directory of the image.
+          # @!attribute [rw] sync_wait_secs
+          #   @return [::Integer]
+          #     Period in seconds between consecutive syncs. Default: 15.
+          # @!attribute [rw] secret_type
+          #   @return [::String]
+          #     Type of secret configured for access to the Git repo.
+          # @!attribute [rw] gcp_service_account_email
+          #   @return [::String]
+          #     The Google Cloud Service Account Email used for auth when secret_type is
+          #     gcpServiceAccount.
+          class OciConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -231,7 +303,64 @@ module Google
           # @!attribute [rw] sync_state
           #   @return [::Google::Cloud::GkeHub::ConfigManagement::V1::SyncState]
           #     The state of ConfigSync's process to sync configs to a cluster
+          # @!attribute [rw] errors
+          #   @return [::Array<::Google::Cloud::GkeHub::ConfigManagement::V1::ConfigSyncError>]
+          #     Errors pertaining to the installation of Config Sync.
+          # @!attribute [rw] rootsync_crd
+          #   @return [::Google::Cloud::GkeHub::ConfigManagement::V1::ConfigSyncState::CRDState]
+          #     The state of the RootSync CRD
+          # @!attribute [rw] reposync_crd
+          #   @return [::Google::Cloud::GkeHub::ConfigManagement::V1::ConfigSyncState::CRDState]
+          #     The state of the Reposync CRD
+          # @!attribute [rw] state
+          #   @return [::Google::Cloud::GkeHub::ConfigManagement::V1::ConfigSyncState::State]
+          #     The state of CS
+          #     This field summarizes the other fields in this message.
           class ConfigSyncState
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # CRDState representing the state of a CRD
+            module CRDState
+              # CRD's state cannot be determined
+              CRD_STATE_UNSPECIFIED = 0
+
+              # CRD is not installed
+              NOT_INSTALLED = 1
+
+              # CRD is installed
+              INSTALLED = 2
+
+              # CRD is terminating (i.e., it has been deleted and is cleaning up)
+              TERMINATING = 3
+
+              # CRD is installing
+              INSTALLING = 4
+            end
+
+            module State
+              # CS's state cannot be determined.
+              STATE_UNSPECIFIED = 0
+
+              # CS is not installed.
+              CONFIG_SYNC_NOT_INSTALLED = 1
+
+              # The expected CS version is installed successfully.
+              CONFIG_SYNC_INSTALLED = 2
+
+              # CS encounters errors.
+              CONFIG_SYNC_ERROR = 3
+
+              # CS is installing or terminating.
+              CONFIG_SYNC_PENDING = 4
+            end
+          end
+
+          # Errors pertaining to the installation of Config Sync
+          # @!attribute [rw] error_message
+          #   @return [::String]
+          #     A string representing the user facing error message
+          class ConfigSyncError
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -255,6 +384,9 @@ module Google
           # @!attribute [rw] root_reconciler
           #   @return [::String]
           #     Version of the deployed reconciler container in root-reconciler pod
+          # @!attribute [rw] admission_webhook
+          #   @return [::String]
+          #     Version of the deployed admission_webhook pod
           class ConfigSyncVersion
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -279,6 +411,9 @@ module Google
           # @!attribute [rw] root_reconciler
           #   @return [::Google::Cloud::GkeHub::ConfigManagement::V1::DeploymentState]
           #     Deployment state of root-reconciler
+          # @!attribute [rw] admission_webhook
+          #   @return [::Google::Cloud::GkeHub::ConfigManagement::V1::DeploymentState]
+          #     Deployment state of admission-webhook
           class ConfigSyncDeploymentState
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -315,25 +450,24 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
-            # An enum representing an ACM's status syncing configs to a cluster
+            # An enum representing Config Sync's status of syncing configs to a cluster.
             module SyncCode
-              # ACM cannot determine a sync code
+              # Config Sync cannot determine a sync code
               SYNC_CODE_UNSPECIFIED = 0
 
-              # ACM successfully synced the git Repo with the cluster
+              # Config Sync successfully synced the git Repo with the cluster
               SYNCED = 1
 
-              # ACM is in the progress of syncing a new change
+              # Config Sync is in the progress of syncing a new change
               PENDING = 2
 
-              # Indicates an error configuring ACM, and user action is required
+              # Indicates an error configuring Config Sync, and user action is required
               ERROR = 3
 
-              # ACM has been installed (operator manifest deployed),
-              # but not configured.
+              # Config Sync has been installed but not configured
               NOT_CONFIGURED = 4
 
-              # ACM has not been installed (no operator pod found)
+              # Config Sync has not been installed
               NOT_INSTALLED = 5
 
               # Error authorizing with the cluster
@@ -439,6 +573,9 @@ module Google
 
             # Deployment was attempted to be installed, but has errors
             ERROR = 3
+
+            # Deployment is installing or terminating
+            PENDING = 4
           end
         end
       end
