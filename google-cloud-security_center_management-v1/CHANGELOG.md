@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.3.0 (2024-06-13)
+
+#### Features
+
+* Support for the INGEST_ONLY enablement state ([#26111](https://github.com/googleapis/google-cloud-ruby/issues/26111)) 
+
 ### 0.2.1 (2024-06-07)
 
 #### Documentation
