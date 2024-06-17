@@ -8,7 +8,7 @@
     "name": "managedkafka",
     "name_pretty": "Apache Kafka for BigQuery API",
     "product_documentation": "https://cloud.google.com/managed-kafka",
-    "release_level": "unreleased",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "Manage Apache Kafka clusters and resources.",
