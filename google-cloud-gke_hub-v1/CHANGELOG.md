@@ -1,5 +1,15 @@
 # Changelog
 
+### 0.10.0 (2024-06-18)
+
+#### Features
+
+* Support for automatic feature management under MembershipSpec 
+* Support for Config Sync admission webhook drift prevention 
+* Support for Config Sync installation 
+* Support for exporting metrics 
+* Support for support OCI repo configuration 
+
 ### 0.9.0 (2024-02-26)
 
 #### Features
