@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.21.1 (2024-06-18)
+
+#### Documentation
+
+* Marked linked_resource and snippets as deprecated in SearchEntriesResult ([#26126](https://github.com/googleapis/google-cloud-ruby/issues/26126)) 
+
 ### 0.21.0 (2024-05-23)
 
 #### Features
