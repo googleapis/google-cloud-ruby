@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.1.1 (2024-06-18)
+
+#### Documentation
+
+* Minor wording updates ([#26125](https://github.com/googleapis/google-cloud-ruby/issues/26125)) 
+
 ### 0.1.0 (2024-06-12)
 
 #### Features
