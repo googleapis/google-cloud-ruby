@@ -736,8 +736,8 @@ module Google
         #     The number of rows with null values in the specified column.
         # @!attribute [rw] assertion_row_count
         #   @return [::Integer]
-        #     The number of rows returned by the sql statement in the SqlAssertion rule.
-        #     This field is only valid for SqlAssertion rules.
+        #     The number of rows returned by the SQL statement in a SQL assertion rule.
+        #     This field is only valid for SQL assertion rules.
         class DataQualityScanRuleResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -747,40 +747,40 @@ module Google
             # An unspecified rule type.
             RULE_TYPE_UNSPECIFIED = 0
 
-            # Please see
-            # https://cloud.google.com/dataplex/docs/reference/rest/v1/DataQualityRule#nonnullexpectation.
+            # See
+            # {::Google::Cloud::Dataplex::V1::DataQualityRule::NonNullExpectation DataQualityRule.NonNullExpectation}.
             NON_NULL_EXPECTATION = 1
 
-            # Please see
-            # https://cloud.google.com/dataplex/docs/reference/rest/v1/DataQualityRule#rangeexpectation.
+            # See
+            # {::Google::Cloud::Dataplex::V1::DataQualityRule::RangeExpectation DataQualityRule.RangeExpectation}.
             RANGE_EXPECTATION = 2
 
-            # Please see
-            # https://cloud.google.com/dataplex/docs/reference/rest/v1/DataQualityRule#regexexpectation.
+            # See
+            # {::Google::Cloud::Dataplex::V1::DataQualityRule::RegexExpectation DataQualityRule.RegexExpectation}.
             REGEX_EXPECTATION = 3
 
-            # Please see
-            # https://cloud.google.com/dataplex/docs/reference/rest/v1/DataQualityRule#rowconditionexpectation.
+            # See
+            # {::Google::Cloud::Dataplex::V1::DataQualityRule::RowConditionExpectation DataQualityRule.RowConditionExpectation}.
             ROW_CONDITION_EXPECTATION = 4
 
-            # Please see
-            # https://cloud.google.com/dataplex/docs/reference/rest/v1/DataQualityRule#setexpectation.
+            # See
+            # {::Google::Cloud::Dataplex::V1::DataQualityRule::SetExpectation DataQualityRule.SetExpectation}.
             SET_EXPECTATION = 5
 
-            # Please see
-            # https://cloud.google.com/dataplex/docs/reference/rest/v1/DataQualityRule#statisticrangeexpectation.
+            # See
+            # {::Google::Cloud::Dataplex::V1::DataQualityRule::StatisticRangeExpectation DataQualityRule.StatisticRangeExpectation}.
             STATISTIC_RANGE_EXPECTATION = 6
 
-            # Please see
-            # https://cloud.google.com/dataplex/docs/reference/rest/v1/DataQualityRule#tableconditionexpectation.
+            # See
+            # {::Google::Cloud::Dataplex::V1::DataQualityRule::TableConditionExpectation DataQualityRule.TableConditionExpectation}.
             TABLE_CONDITION_EXPECTATION = 7
 
-            # Please see
-            # https://cloud.google.com/dataplex/docs/reference/rest/v1/DataQualityRule#uniquenessexpectation.
+            # See
+            # {::Google::Cloud::Dataplex::V1::DataQualityRule::UniquenessExpectation DataQualityRule.UniquenessExpectation}.
             UNIQUENESS_EXPECTATION = 8
 
-            # Please see
-            # https://cloud.google.com/dataplex/docs/reference/rest/v1/DataQualityRule#sqlAssertion.
+            # See
+            # {::Google::Cloud::Dataplex::V1::DataQualityRule::SqlAssertion DataQualityRule.SqlAssertion}.
             SQL_ASSERTION = 9
           end
 
