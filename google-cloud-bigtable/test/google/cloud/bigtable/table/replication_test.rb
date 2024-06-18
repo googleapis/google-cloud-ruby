@@ -16,6 +16,7 @@
 
 
 require "helper"
+require "table_patch"
 
 describe Google::Cloud::Bigtable::Table, :replication, :mock_bigtable do
   let(:instance_id) { "test-instance" }
@@ -64,52 +65,57 @@ describe Google::Cloud::Bigtable::Table, :replication, :mock_bigtable do
     mock.verify
   end
 
-  it "generate token and wait for replication" do
-    gen_token_res = Google::Cloud::Bigtable::Admin::V2::GenerateConsistencyTokenResponse.new(
-      consistency_token: token
-    )
-    check_consistency_res = Google::Cloud::Bigtable::Admin::V2::CheckConsistencyResponse.new(
-      consistent: true
-    )
+  [false, true].each do |use_polling_harness|
+    it "generate token and wait for replication" do
+        gen_token_res = Google::Cloud::Bigtable::Admin::V2::GenerateConsistencyTokenResponse.new(
+          consistency_token: token
+        )
+        check_consistency_res = Google::Cloud::Bigtable::Admin::V2::CheckConsistencyResponse.new(
+          consistent: true
+        )
 
-    mock = Minitest::Mock.new
-    mock.expect :generate_consistency_token, gen_token_res, name: table_path(instance_id, table_id)
-    mock.expect :check_consistency, check_consistency_res, name: table_path(instance_id, table_id), consistency_token: token
+        mock = Minitest::Mock.new
+        mock.expect :generate_consistency_token, gen_token_res, name: table_path(instance_id, table_id)
+        mock.expect :check_consistency, check_consistency_res, name: table_path(instance_id, table_id), consistency_token: token
 
-    bigtable.service.mocked_tables = mock
+        bigtable.service.mocked_tables = mock
 
-    result = table.wait_for_replication
-    _(result).must_equal true
-    mock.verify
-  end
+        result = table.wait_for_replication_test use_polling_harness: use_polling_harness
+        _(result).must_equal true
+        mock.verify
+      end
 
-  it "generate token and wait for replication timeout" do
-    gen_token_res = Google::Cloud::Bigtable::Admin::V2::GenerateConsistencyTokenResponse.new(
-      consistency_token: token
-    )
-    check_consistency_res = Google::Cloud::Bigtable::Admin::V2::CheckConsistencyResponse.new(
-      consistent: false
-    )
+      focus
+      it "generate token and wait for replication timeout" do
+        gen_token_res = Google::Cloud::Bigtable::Admin::V2::GenerateConsistencyTokenResponse.new(
+          consistency_token: token
+        )
+        check_consistency_res = Google::Cloud::Bigtable::Admin::V2::CheckConsistencyResponse.new(
+          consistent: false
+        )
 
-    mock = Minitest::Mock.new
-    mock.expect :generate_consistency_token, gen_token_res, name: table_path(instance_id, table_id)
-    3.times do
-      mock.expect :check_consistency, check_consistency_res, name: table_path(instance_id, table_id), consistency_token: token
-    end
+        mock = Minitest::Mock.new
+        mock.expect :generate_consistency_token, gen_token_res, name: table_path(instance_id, table_id)
+        3.times do
+          mock.expect :check_consistency, check_consistency_res, name: table_path(instance_id, table_id), consistency_token: token
+        end
 
-    bigtable.service.mocked_tables = mock
+        bigtable.service.mocked_tables = mock
 
-    time_now = Time.now
+        time_now = Time.now
 
-    result = table.wait_for_replication(timeout: 2, check_interval: 1)
-    _(result).must_equal false
-    _((Time.now - time_now)).must_be :>=, 2
-    mock.verify
-  end
+        result = table.wait_for_replication_test(timeout: 2, check_interval: 1, use_polling_harness: use_polling_harness)
 
-  it "wait for replication timeout can not be greater then check interval" do
-    assert_raises Google::Cloud::InvalidArgumentError do
-      table.wait_for_replication(timeout: 1, check_interval: 2)
-    end
+        _(result).must_equal false
+        _((Time.now - time_now)).must_be :>=, 2
+        mock.verify
+      end
+
+      it "wait for replication timeout can not be greater then check interval" do
+        assert_raises Google::Cloud::InvalidArgumentError do
+          table.wait_for_replication_test(timeout: 1, check_interval: 2, use_polling_harness: use_polling_harness)
+        end
+      end
+
   end
 end
