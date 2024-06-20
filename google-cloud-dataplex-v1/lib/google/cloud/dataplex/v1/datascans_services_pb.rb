@@ -51,7 +51,10 @@ module Google
             rpc :GetDataScanJob, ::Google::Cloud::Dataplex::V1::GetDataScanJobRequest, ::Google::Cloud::Dataplex::V1::DataScanJob
             # Lists DataScanJobs under the given DataScan.
             rpc :ListDataScanJobs, ::Google::Cloud::Dataplex::V1::ListDataScanJobsRequest, ::Google::Cloud::Dataplex::V1::ListDataScanJobsResponse
-            # Generates recommended DataQualityRule from a data profiling DataScan.
+            # Generates recommended data quality rules based on the results of a data
+            # profiling scan.
+            #
+            # Use the recommendations to build rules for a data quality scan.
             rpc :GenerateDataQualityRules, ::Google::Cloud::Dataplex::V1::GenerateDataQualityRulesRequest, ::Google::Cloud::Dataplex::V1::GenerateDataQualityRulesResponse
           end
 

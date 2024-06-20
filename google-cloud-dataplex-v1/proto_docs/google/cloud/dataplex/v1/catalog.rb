@@ -455,6 +455,12 @@ module Google
         # @!attribute [rw] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The update time of the resource in the source system.
+        # @!attribute [r] location
+        #   @return [::String]
+        #     Output only. Location of the resource in the source system. Entry will be
+        #     searchable by this location. By default, this should match the location of
+        #     the EntryGroup containing this entry. A different value allows capturing
+        #     source location for data external to GCP.
         class EntrySource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
