@@ -213,7 +213,6 @@ module Google
               ##
               # Creates a new folder. This operation is only applicable to a hierarchical
               # namespace enabled bucket.
-              # Hierarchical namespace buckets are in allowlist preview.
               #
               # @overload create_folder(request, options = nil)
               #   Pass arguments to `create_folder` via a request object, either of type
@@ -319,7 +318,6 @@ module Google
               ##
               # Permanently deletes an empty folder. This operation is only applicable to a
               # hierarchical namespace enabled bucket.
-              # Hierarchical namespace buckets are in allowlist preview.
               #
               # @overload delete_folder(request, options = nil)
               #   Pass arguments to `delete_folder` via a request object, either of type
@@ -420,7 +418,6 @@ module Google
               ##
               # Returns metadata for the specified folder. This operation is only
               # applicable to a hierarchical namespace enabled bucket.
-              # Hierarchical namespace buckets are in allowlist preview.
               #
               # @overload get_folder(request, options = nil)
               #   Pass arguments to `get_folder` via a request object, either of type
@@ -521,7 +518,6 @@ module Google
               ##
               # Retrieves a list of folders. This operation is only applicable to a
               # hierarchical namespace enabled bucket.
-              # Hierarchical namespace buckets are in allowlist preview.
               #
               # @overload list_folders(request, options = nil)
               #   Pass arguments to `list_folders` via a request object, either of type
@@ -643,7 +639,6 @@ module Google
               # applicable to a hierarchical namespace enabled bucket. During a rename, the
               # source and destination folders are locked until the long running operation
               # completes.
-              # Hierarchical namespace buckets are in allowlist preview.
               #
               # @overload rename_folder(request, options = nil)
               #   Pass arguments to `rename_folder` via a request object, either of type
