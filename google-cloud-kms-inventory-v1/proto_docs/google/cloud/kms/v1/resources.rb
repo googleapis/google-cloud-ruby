@@ -137,6 +137,16 @@ module Google
         #     resource name in the format `projects/*/locations/*/ekmConnections/*`.
         #     Note, this list is non-exhaustive and may apply to additional
         #     {::Google::Cloud::Kms::V1::ProtectionLevel ProtectionLevels} in the future.
+        # @!attribute [rw] key_access_justifications_policy
+        #   @return [::Google::Cloud::Kms::V1::KeyAccessJustificationsPolicy]
+        #     Optional. The policy used for Key Access Justifications Policy Enforcement.
+        #     If this field is present and this key is enrolled in Key Access
+        #     Justifications Policy Enforcement, the policy will be evaluated in encrypt,
+        #     decrypt, and sign operations, and the operation will fail if rejected by
+        #     the policy. The policy is defined by specifying zero or more allowed
+        #     justification codes.
+        #     https://cloud.google.com/assured-workloads/key-access-justifications/docs/justification-codes
+        #     By default, this field is absent, and all justification codes are allowed.
         class CryptoKey
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -876,6 +886,23 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A
+        # {::Google::Cloud::Kms::V1::KeyAccessJustificationsPolicy KeyAccessJustificationsPolicy}
+        # specifies zero or more allowed
+        # {::Google::Cloud::Kms::V1::AccessReason AccessReason} values for encrypt, decrypt,
+        # and sign operations on a {::Google::Cloud::Kms::V1::CryptoKey CryptoKey}.
+        # @!attribute [rw] allowed_access_reasons
+        #   @return [::Array<::Google::Cloud::Kms::V1::AccessReason>]
+        #     The list of allowed reasons for access to a
+        #     {::Google::Cloud::Kms::V1::CryptoKey CryptoKey}. Zero allowed access reasons
+        #     means all encrypt, decrypt, and sign operations for the
+        #     {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} associated with this policy will
+        #     fail.
+        class KeyAccessJustificationsPolicy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # {::Google::Cloud::Kms::V1::ProtectionLevel ProtectionLevel} specifies how
         # cryptographic operations are performed. For more information, see [Protection
         # levels] (https://cloud.google.com/kms/docs/algorithms#protection_levels).
@@ -894,6 +921,73 @@ module Google
 
           # Crypto operations are performed in an EKM-over-VPC backend.
           EXTERNAL_VPC = 4
+        end
+
+        # Describes the reason for a data access. Please refer to
+        # https://cloud.google.com/assured-workloads/key-access-justifications/docs/justification-codes
+        # for the detailed semantic meaning of justification reason codes.
+        module AccessReason
+          # Unspecified access reason.
+          REASON_UNSPECIFIED = 0
+
+          # Customer-initiated support.
+          CUSTOMER_INITIATED_SUPPORT = 1
+
+          # Google-initiated access for system management and troubleshooting.
+          GOOGLE_INITIATED_SERVICE = 2
+
+          # Google-initiated access in response to a legal request or legal process.
+          THIRD_PARTY_DATA_REQUEST = 3
+
+          # Google-initiated access for security, fraud, abuse, or compliance purposes.
+          GOOGLE_INITIATED_REVIEW = 4
+
+          # Customer uses their account to perform any access to their own data which
+          # their IAM policy authorizes.
+          CUSTOMER_INITIATED_ACCESS = 5
+
+          # Google systems access customer data to help optimize the structure of the
+          # data or quality for future uses by the customer.
+          GOOGLE_INITIATED_SYSTEM_OPERATION = 6
+
+          # No reason is expected for this key request.
+          REASON_NOT_EXPECTED = 7
+
+          # Customer uses their account to perform any access to their own data which
+          # their IAM policy authorizes, and one of the following is true:
+          #
+          # * A Google administrator has reset the root-access account associated with
+          #   the user's organization within the past 7 days.
+          # * A Google-initiated emergency access operation has interacted with a
+          #   resource in the same project or folder as the currently accessed resource
+          #   within the past 7 days.
+          MODIFIED_CUSTOMER_INITIATED_ACCESS = 8
+
+          # Google systems access customer data to help optimize the structure of the
+          # data or quality for future uses by the customer, and one of the following
+          # is true:
+          #
+          # * A Google administrator has reset the root-access account associated with
+          #   the user's organization within the past 7 days.
+          # * A Google-initiated emergency access operation has interacted with a
+          #   resource in the same project or folder as the currently accessed resource
+          #   within the past 7 days.
+          MODIFIED_GOOGLE_INITIATED_SYSTEM_OPERATION = 9
+
+          # Google-initiated access to maintain system reliability.
+          GOOGLE_RESPONSE_TO_PRODUCTION_ALERT = 10
+
+          # One of the following operations is being executed while simultaneously
+          # encountering an internal technical issue which prevented a more precise
+          # justification code from being generated:
+          #
+          # * Your account has been used to perform any access to your own data which
+          #   your IAM policy authorizes.
+          # * An automated Google system operates on encrypted customer data which your
+          #   IAM policy authorizes.
+          # * Customer-initiated Google support access.
+          # * Google-initiated support access to protect system reliability.
+          CUSTOMER_AUTHORIZED_WORKFLOW_SERVICING = 11
         end
       end
     end
