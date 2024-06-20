@@ -270,7 +270,7 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The name of the service.
-              #     Example: "services/DA34-426B-A397"
+              #     Example: "services/6F81-5844-456A"
               #   @param start_time [::Google::Protobuf::Timestamp, ::Hash]
               #     Optional inclusive start time of the time range for which the pricing
               #     versions will be returned. Timestamps in the future are not allowed.
