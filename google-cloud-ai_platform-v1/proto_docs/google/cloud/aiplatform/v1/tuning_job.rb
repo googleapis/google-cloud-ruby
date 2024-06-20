@@ -91,6 +91,11 @@ module Google
         #   @return [::Google::Cloud::AIPlatform::V1::TuningDataStats]
         #     Output only. The tuning data statistics associated with this
         #     {::Google::Cloud::AIPlatform::V1::TuningJob TuningJob}.
+        # @!attribute [rw] encryption_spec
+        #   @return [::Google::Cloud::AIPlatform::V1::EncryptionSpec]
+        #     Customer-managed encryption key options for a TuningJob. If this is set,
+        #     then all resources created by the TuningJob will be encrypted with the
+        #     provided encryption key.
         class TuningJob
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

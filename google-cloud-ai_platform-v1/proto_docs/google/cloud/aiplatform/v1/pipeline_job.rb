@@ -126,6 +126,9 @@ module Google
         #   @return [::String]
         #     Output only. The schedule resource name.
         #     Only returned if the Pipeline is created by Schedule API.
+        # @!attribute [rw] preflight_validations
+        #   @return [::Boolean]
+        #     Optional. Whether to do component level validations before job creation.
         class PipelineJob
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
