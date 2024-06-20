@@ -41,6 +41,7 @@
     "proto_docs/google/protobuf/empty.rb",
     "proto_docs/google/protobuf/field_mask.rb",
     "proto_docs/google/protobuf/timestamp.rb",
+    "proto_docs/google/protobuf/wrappers.rb",
     "proto_docs/google/rpc/status.rb",
     "proto_docs/google/type/expr.rb",
     "snippets/Gemfile",

@@ -95,14 +95,6 @@ module Google
                   ["resource", %r{^projects/[^/]+/locations/[^/]+/managementServers/[^/]+/?$}, false]
                 ],
                 body: "*"
-              ),
-              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
-                uri_method: :post,
-                uri_template: "/v1/{resource}:testIamPermissions",
-                matches: [
-                  ["resource", %r{^projects/[^/]+/locations/[^/]+/backupVaults/[^/]+/?$}, false]
-                ],
-                body: "*"
               )
             ]
             default_config
