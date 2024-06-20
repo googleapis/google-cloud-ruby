@@ -1728,6 +1728,24 @@ module Google
           end
 
           ##
+          # Sets the character map for column name conversion. The default value is `Default`.
+          #
+          # The following values are supported:
+          #
+          # * `Default`
+          # * `Strict`
+          # * `V1`
+          # * `V2`
+          #
+          # @param [String] new_character_map The new character map.
+          #
+          # @!group Attributes
+          #
+          def column_name_character_map= new_character_map
+            @gapi.configuration.load.update! column_name_character_map: new_character_map
+          end
+
+          ##
           # Sets the create disposition.
           #
           # This specifies whether the job is allowed to create new tables. The
