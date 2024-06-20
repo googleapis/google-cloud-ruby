@@ -927,6 +927,10 @@ module Google
           #     put in their own fields while all other message properties other than
           #     data (for example, an ordering_key, if present) are added as entries in
           #     the attributes map.
+          # @!attribute [rw] use_topic_schema
+          #   @return [::Boolean]
+          #     Optional. When true, the output Cloud Storage file will be serialized
+          #     using the topic schema, if it exists.
           class AvroConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -950,6 +954,10 @@ module Google
             # Cannot write to the destination because enforce_in_transit is set to true
             # and the destination locations are not in the allowed regions.
             IN_TRANSIT_LOCATION_RESTRICTION = 4
+
+            # Cannot write to the Cloud Storage bucket due to an incompatibility
+            # between the topic schema and subscription settings.
+            SCHEMA_MISMATCH = 5
           end
         end
 
