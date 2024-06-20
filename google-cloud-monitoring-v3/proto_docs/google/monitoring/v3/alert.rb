@@ -161,9 +161,30 @@ module Google
           #     variables](https://cloud.google.com/monitoring/alerts/doc-variables).
           #     If this field is missing or empty, a default subject line will be
           #     generated.
+          # @!attribute [rw] links
+          #   @return [::Array<::Google::Cloud::Monitoring::V3::AlertPolicy::Documentation::Link>]
+          #     Optional. Links to content such as playbooks, repositories, and other
+          #     resources. This field can contain up to 3 entries.
           class Documentation
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Links to content such as playbooks, repositories, and other resources.
+            # @!attribute [rw] display_name
+            #   @return [::String]
+            #     A short display name for the link. The display name must not be empty
+            #     or exceed 63 characters. Example: "playbook".
+            # @!attribute [rw] url
+            #   @return [::String]
+            #     The url of a webpage.
+            #     A url can be templatized by using variables
+            #     in the path or the query parameters. The total length of a URL should
+            #     not exceed 2083 characters before and after variable expansion.
+            #     Example: "https://my_domain.com/playbook?name=$\\{resource.name}"
+            class Link
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
 
           # A condition is a true/false test that determines when an alerting policy
