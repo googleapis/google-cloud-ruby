@@ -2063,7 +2063,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload get_security_center_service(name: nil)
+            # @overload get_security_center_service(name: nil, show_eligible_modules_only: nil)
             #   Pass arguments to `get_security_center_service` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -2084,6 +2084,9 @@ module Google
             #       * security-health-analytics
             #       * vm-threat-detection
             #       * web-security-scanner
+            #   @param show_eligible_modules_only [::Boolean]
+            #     Flag that, when set, will be used to filter the ModuleSettings that are
+            #     in scope. The default setting is that all modules will be shown.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterService]
@@ -2164,7 +2167,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_security_center_services(parent: nil, page_size: nil, page_token: nil)
+            # @overload list_security_center_services(parent: nil, page_size: nil, page_token: nil, show_eligible_modules_only: nil)
             #   Pass arguments to `list_security_center_services` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -2182,6 +2185,9 @@ module Google
             #     Default is 10, minimum is 1, maximum is 1000.
             #   @param page_token [::String]
             #     Optional. The value returned by the last call indicating a continuation.
+            #   @param show_eligible_modules_only [::Boolean]
+            #     Flag that, when set, will be used to filter the ModuleSettings that are
+            #     in scope. The default setting is that all modules will be shown.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterService>]
