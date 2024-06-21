@@ -25,7 +25,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. Format:
-        #     organizations/\\{organization}/locations/\\{location}/customers/\\{customer}/workloads/\\{workload}/violations/\\{violation}
+        #     `organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}/violations/{violation}`
         # @!attribute [r] description
         #   @return [::String]
         #     Output only. Description for the Violation.
@@ -51,9 +51,9 @@ module Google
         #   @return [::String]
         #     Output only. Immutable. Name of the OrgPolicy which was modified with
         #     non-compliant change and resulted this violation. Format:
-        #      projects/\\{project_number}/policies/\\{constraint_name}
-        #      folders/\\{folder_id}/policies/\\{constraint_name}
-        #      organizations/\\{organization_id}/policies/\\{constraint_name}
+        #      `projects/{project_number}/policies/{constraint_name}`
+        #      `folders/{folder_id}/policies/{constraint_name}`
+        #      `organizations/{organization_id}/policies/{constraint_name}`
         # @!attribute [rw] folder_id
         #   @return [::Integer]
         #     The folder_id of the violation
@@ -172,7 +172,7 @@ module Google
         #   @return [::String]
         #     Required. Parent resource
         #     Format
-        #     organizations/\\{organization}/locations/\\{location}/customers/\\{customer}/workloads/\\{workload}
+        #     `organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}`
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. The maximum number of customers row to return. The service may
@@ -218,7 +218,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Format:
-        #     organizations/\\{organization}/locations/\\{location}/customers/\\{customer}/workloads/\\{workload}/violations/\\{violation}
+        #     `organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}/violations/{violation}`
         class GetViolationRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

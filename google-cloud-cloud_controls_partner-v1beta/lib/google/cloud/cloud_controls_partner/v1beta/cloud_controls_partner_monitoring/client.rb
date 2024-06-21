@@ -200,7 +200,7 @@ module Google
             #   @param parent [::String]
             #     Required. Parent resource
             #     Format
-            #     organizations/\\{organization}/locations/\\{location}/customers/\\{customer}/workloads/\\{workload}
+            #     `organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}`
             #   @param page_size [::Integer]
             #     Optional. The maximum number of customers row to return. The service may
             #     return fewer than this value. If unspecified, at most 10 customers will be
@@ -306,7 +306,7 @@ module Google
             #
             #   @param name [::String]
             #     Required. Format:
-            #     organizations/\\{organization}/locations/\\{location}/customers/\\{customer}/workloads/\\{workload}/violations/\\{violation}
+            #     `organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}/violations/{violation}`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::CloudControlsPartner::V1beta::Violation]

@@ -218,7 +218,7 @@ module Google
             #
             #   @param name [::String]
             #     Required. Format:
-            #     organizations/\\{organization}/locations/\\{location}/customers/\\{customer}/workloads/\\{workload}
+            #     `organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::CloudControlsPartner::V1beta::Workload]
@@ -306,7 +306,7 @@ module Google
             #   @param parent [::String]
             #     Required. Parent resource
             #     Format:
-            #     organizations/\\{organization}/locations/\\{location}/customers/\\{customer}
+            #     `organizations/{organization}/locations/{location}/customers/{customer}`
             #   @param page_size [::Integer]
             #     The maximum number of workloads to return. The service may return fewer
             #     than this value. If unspecified, at most 500 workloads will be returned.
@@ -408,7 +408,7 @@ module Google
             #
             #   @param name [::String]
             #     Required. Format:
-            #     organizations/\\{organization}/locations/\\{location}/customers/\\{customer}
+            #     `organizations/{organization}/locations/{location}/customers/{customer}`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::CloudControlsPartner::V1beta::Customer]
@@ -495,7 +495,7 @@ module Google
             #
             #   @param parent [::String]
             #     Required. Parent resource
-            #     Format: organizations/\\{organization}/locations/\\{location}
+            #     Format: `organizations/{organization}/locations/{location}`
             #   @param page_size [::Integer]
             #     The maximum number of Customers to return. The service may return fewer
             #     than this value. If unspecified, at most 500 Customers will be returned.
@@ -597,7 +597,7 @@ module Google
             #
             #   @param name [::String]
             #     Required. Format:
-            #     organizations/\\{organization}/locations/\\{location}/customers/\\{customer}/workloads/\\{workload}/ekmConnections
+            #     `organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}/ekmConnections`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::CloudControlsPartner::V1beta::EkmConnections]
@@ -684,7 +684,7 @@ module Google
             #
             #   @param name [::String]
             #     Required. Name of the resource to get in the format:
-            #     organizations/\\{organization}/locations/\\{location}/customers/\\{customer}/workloads/\\{workload}/partnerPermissions
+            #     `organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}/partnerPermissions`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::CloudControlsPartner::V1beta::PartnerPermissions]
@@ -752,7 +752,10 @@ module Google
             end
 
             ##
-            # Lists access requests associated with a workload
+            # Deprecated: Only returns access approval requests directly associated with
+            # an assured workload folder.
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload list_access_approval_requests(request, options = nil)
             #   Pass arguments to `list_access_approval_requests` via a request object, either of type
@@ -772,7 +775,7 @@ module Google
             #   @param parent [::String]
             #     Required. Parent resource
             #     Format:
-            #     organizations/\\{organization}/locations/\\{location}/customers/\\{customer}/workloads/\\{workload}
+            #     `organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}`
             #   @param page_size [::Integer]
             #     Optional. The maximum number of access requests to return. The service may
             #     return fewer than this value. If unspecified, at most 500 access requests
@@ -875,7 +878,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. Format: organizations/\\{organization}/locations/\\{location}/partner
+            #     Required. Format:
+            #     `organizations/{organization}/locations/{location}/partner`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::CloudControlsPartner::V1beta::Partner]

@@ -27,7 +27,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. Format:
-        #     organizations/\\{organization}/locations/\\{location}/customers/\\{customer}/workloads/\\{workload}
+        #     `organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}`
         # @!attribute [r] folder_id
         #   @return [::Integer]
         #     Output only. Folder id this workload is associated with
@@ -87,7 +87,7 @@ module Google
         #   @return [::String]
         #     Required. Parent resource
         #     Format:
-        #     organizations/\\{organization}/locations/\\{location}/customers/\\{customer}
+        #     `organizations/{organization}/locations/{location}/customers/{customer}`
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of workloads to return. The service may return fewer
@@ -127,7 +127,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Format:
-        #     organizations/\\{organization}/locations/\\{location}/customers/\\{customer}/workloads/\\{workload}
+        #     `organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}`
         class GetWorkloadRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

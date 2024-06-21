@@ -211,7 +211,7 @@ module Google
               #
               #   @param name [::String]
               #     Required. Format:
-              #     organizations/\\{organization}/locations/\\{location}/customers/\\{customer}/workloads/\\{workload}
+              #     `organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::CloudControlsPartner::V1beta::Workload]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -292,7 +292,7 @@ module Google
               #   @param parent [::String]
               #     Required. Parent resource
               #     Format:
-              #     organizations/\\{organization}/locations/\\{location}/customers/\\{customer}
+              #     `organizations/{organization}/locations/{location}/customers/{customer}`
               #   @param page_size [::Integer]
               #     The maximum number of workloads to return. The service may return fewer
               #     than this value. If unspecified, at most 500 workloads will be returned.
@@ -386,7 +386,7 @@ module Google
               #
               #   @param name [::String]
               #     Required. Format:
-              #     organizations/\\{organization}/locations/\\{location}/customers/\\{customer}
+              #     `organizations/{organization}/locations/{location}/customers/{customer}`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::CloudControlsPartner::V1beta::Customer]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -466,7 +466,7 @@ module Google
               #
               #   @param parent [::String]
               #     Required. Parent resource
-              #     Format: organizations/\\{organization}/locations/\\{location}
+              #     Format: `organizations/{organization}/locations/{location}`
               #   @param page_size [::Integer]
               #     The maximum number of Customers to return. The service may return fewer
               #     than this value. If unspecified, at most 500 Customers will be returned.
@@ -560,7 +560,7 @@ module Google
               #
               #   @param name [::String]
               #     Required. Format:
-              #     organizations/\\{organization}/locations/\\{location}/customers/\\{customer}/workloads/\\{workload}/ekmConnections
+              #     `organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}/ekmConnections`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::CloudControlsPartner::V1beta::EkmConnections]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -640,7 +640,7 @@ module Google
               #
               #   @param name [::String]
               #     Required. Name of the resource to get in the format:
-              #     organizations/\\{organization}/locations/\\{location}/customers/\\{customer}/workloads/\\{workload}/partnerPermissions
+              #     `organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}/partnerPermissions`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::CloudControlsPartner::V1beta::PartnerPermissions]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -701,7 +701,8 @@ module Google
               end
 
               ##
-              # Lists access requests associated with a workload
+              # Deprecated: Only returns access approval requests directly associated with
+              # an assured workload folder.
               #
               # @overload list_access_approval_requests(request, options = nil)
               #   Pass arguments to `list_access_approval_requests` via a request object, either of type
@@ -721,7 +722,7 @@ module Google
               #   @param parent [::String]
               #     Required. Parent resource
               #     Format:
-              #     organizations/\\{organization}/locations/\\{location}/customers/\\{customer}/workloads/\\{workload}
+              #     `organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}`
               #   @param page_size [::Integer]
               #     Optional. The maximum number of access requests to return. The service may
               #     return fewer than this value. If unspecified, at most 500 access requests
@@ -816,7 +817,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. Format: organizations/\\{organization}/locations/\\{location}/partner
+              #     Required. Format:
+              #     `organizations/{organization}/locations/{location}/partner`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::CloudControlsPartner::V1beta::Partner]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

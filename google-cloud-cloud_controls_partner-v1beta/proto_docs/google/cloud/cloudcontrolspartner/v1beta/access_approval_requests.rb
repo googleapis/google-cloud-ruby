@@ -25,7 +25,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. Format:
-        #     organizations/\\{organization}/locations/\\{location}/customers/\\{customer}/workloads/\\{workload}/accessApprovalRequests/\\{access_approval_request}.
+        #     `organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}/accessApprovalRequests/{access_approval_request}`
         # @!attribute [rw] request_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The time at which approval was requested.
@@ -46,7 +46,7 @@ module Google
         #   @return [::String]
         #     Required. Parent resource
         #     Format:
-        #     organizations/\\{organization}/locations/\\{location}/customers/\\{customer}/workloads/\\{workload}
+        #     `organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}`
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. The maximum number of access requests to return. The service may
