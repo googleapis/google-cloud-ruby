@@ -45,7 +45,8 @@ module Google
             rpc :GetEkmConnections, ::Google::Cloud::CloudControlsPartner::V1::GetEkmConnectionsRequest, ::Google::Cloud::CloudControlsPartner::V1::EkmConnections
             # Gets the partner permissions granted for a workload
             rpc :GetPartnerPermissions, ::Google::Cloud::CloudControlsPartner::V1::GetPartnerPermissionsRequest, ::Google::Cloud::CloudControlsPartner::V1::PartnerPermissions
-            # Lists access requests associated with a workload
+            # Deprecated: Only returns access approval requests directly associated with
+            # an assured workload folder.
             rpc :ListAccessApprovalRequests, ::Google::Cloud::CloudControlsPartner::V1::ListAccessApprovalRequestsRequest, ::Google::Cloud::CloudControlsPartner::V1::ListAccessApprovalRequestsResponse
             # Get details of a Partner.
             rpc :GetPartner, ::Google::Cloud::CloudControlsPartner::V1::GetPartnerRequest, ::Google::Cloud::CloudControlsPartner::V1::Partner
