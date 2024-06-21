@@ -1394,7 +1394,11 @@ module Google
               ##
               # Creates a processor from the
               # {::Google::Cloud::DocumentAI::V1::ProcessorType ProcessorType} provided. The
-              # processor will be at `ENABLED` state by default after its creation.
+              # processor will be at `ENABLED` state by default after its creation. Note
+              # that this method requires the `documentai.processors.create` permission on
+              # the project, which is highly privileged. A user or service account with
+              # this permission can create new processors that can interact with any gcs
+              # bucket in your project.
               #
               # @overload create_processor(request, options = nil)
               #   Pass arguments to `create_processor` via a request object, either of type
