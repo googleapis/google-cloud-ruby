@@ -311,9 +311,9 @@ module Google
         end
 
         ##
-        # Converts source format strings to API values.
+        # Converts character map strings to API values.
         #
-        # @return [String] API representation of source format.
+        # @return [String] API representation of character map.
         def self.character_map mapping_version
           val = {
             "default" => "COLUMN_NAME_CHARACTER_MAP_UNSPECIFIED",
