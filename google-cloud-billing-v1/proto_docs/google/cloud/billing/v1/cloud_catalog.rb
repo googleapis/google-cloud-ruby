@@ -25,11 +25,11 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     The resource name for the service.
-        #     Example: "services/DA34-426B-A397"
+        #     Example: "services/6F81-5844-456A"
         # @!attribute [rw] service_id
         #   @return [::String]
         #     The identifier for the service.
-        #     Example: "DA34-426B-A397"
+        #     Example: "6F81-5844-456A"
         # @!attribute [rw] display_name
         #   @return [::String]
         #     A human readable display name for this service.
@@ -42,15 +42,15 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Encapsulates a single SKU in Google Cloud Platform
+        # Encapsulates a single SKU in Google Cloud
         # @!attribute [rw] name
         #   @return [::String]
         #     The resource name for the SKU.
-        #     Example: "services/DA34-426B-A397/skus/AA95-CD31-42FE"
+        #     Example: "services/6F81-5844-456A/skus/D041-B8A1-6E0B"
         # @!attribute [rw] sku_id
         #   @return [::String]
         #     The identifier for the SKU.
-        #     Example: "AA95-CD31-42FE"
+        #     Example: "D041-B8A1-6E0B"
         # @!attribute [rw] description
         #   @return [::String]
         #     A human readable description of the SKU, has a maximum length of 256
@@ -298,7 +298,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The name of the service.
-        #     Example: "services/DA34-426B-A397"
+        #     Example: "services/6F81-5844-456A"
         # @!attribute [rw] start_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Optional inclusive start time of the time range for which the pricing
