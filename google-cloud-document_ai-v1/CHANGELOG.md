@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.23.1 (2024-06-24)
+
+#### Documentation
+
+* Add a note about `documentai.processors.create` permission ([#26136](https://github.com/googleapis/google-cloud-ruby/issues/26136)) 
+
 ### 0.23.0 (2024-06-04)
 
 #### Features
