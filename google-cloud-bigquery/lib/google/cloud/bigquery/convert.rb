@@ -314,6 +314,21 @@ module Google
         # Converts source format strings to API values.
         #
         # @return [String] API representation of source format.
+        def self.character_map mapping_version
+          val = {
+            "default" => "COLUMN_NAME_CHARACTER_MAP_UNSPECIFIED",
+            "strict"  => "STRICT",
+            "v1"      => "V1",
+            "v2"      => "V2"
+          }[mapping_version.to_s.downcase]
+          return val unless val.nil?
+          mapping_version
+        end
+
+        ##
+        # Converts source format strings to API values.
+        #
+        # @return [String] API representation of source format.
         def self.source_format format
           val = {
             "csv"                    => "CSV",

@@ -1728,21 +1728,21 @@ module Google
           end
 
           ##
-          # Sets the character map for column name conversion. The default value is `Default`.
+          # Sets the character map for column name conversion. The default value is `default`.
           #
           # The following values are supported:
           #
-          # * `Default`
-          # * `Strict`
-          # * `V1`
-          # * `V2`
+          # * `default`
+          # * `strict`
+          # * `v1`
+          # * `v2`
           #
           # @param [String] new_character_map The new character map.
           #
           # @!group Attributes
           #
           def column_name_character_map= new_character_map
-            @gapi.configuration.load.update! column_name_character_map: new_character_map
+            @gapi.configuration.load.update! column_name_character_map: Convert.character_map(new_character_map)
           end
 
           ##
