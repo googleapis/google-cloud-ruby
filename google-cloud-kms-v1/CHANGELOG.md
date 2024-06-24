@@ -1,5 +1,11 @@
 # Release History
 
+### 0.27.0 (2024-06-24)
+
+#### Features
+
+* Support Key Access Justifications policy configuration ([#26137](https://github.com/googleapis/google-cloud-ruby/issues/26137)) 
+
 ### 0.26.0 (2024-05-15)
 
 #### Features
