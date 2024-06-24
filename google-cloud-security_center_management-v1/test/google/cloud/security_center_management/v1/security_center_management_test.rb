@@ -1190,11 +1190,13 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::C
 
     # Create request parameters for a unary method.
     name = "hello world"
+    show_eligible_modules_only = true
 
     get_security_center_service_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_security_center_service, name
       assert_kind_of ::Google::Cloud::SecurityCenterManagement::V1::GetSecurityCenterServiceRequest, request
       assert_equal "hello world", request["name"]
+      assert_equal true, request["show_eligible_modules_only"]
       refute_nil options
     end
 
@@ -1205,31 +1207,31 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::C
       end
 
       # Use hash object
-      client.get_security_center_service({ name: name }) do |response, operation|
+      client.get_security_center_service({ name: name, show_eligible_modules_only: show_eligible_modules_only }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_security_center_service name: name do |response, operation|
+      client.get_security_center_service name: name, show_eligible_modules_only: show_eligible_modules_only do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_security_center_service ::Google::Cloud::SecurityCenterManagement::V1::GetSecurityCenterServiceRequest.new(name: name) do |response, operation|
+      client.get_security_center_service ::Google::Cloud::SecurityCenterManagement::V1::GetSecurityCenterServiceRequest.new(name: name, show_eligible_modules_only: show_eligible_modules_only) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_security_center_service({ name: name }, grpc_options) do |response, operation|
+      client.get_security_center_service({ name: name, show_eligible_modules_only: show_eligible_modules_only }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_security_center_service(::Google::Cloud::SecurityCenterManagement::V1::GetSecurityCenterServiceRequest.new(name: name), grpc_options) do |response, operation|
+      client.get_security_center_service(::Google::Cloud::SecurityCenterManagement::V1::GetSecurityCenterServiceRequest.new(name: name, show_eligible_modules_only: show_eligible_modules_only), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1250,6 +1252,7 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::C
     parent = "hello world"
     page_size = 42
     page_token = "hello world"
+    show_eligible_modules_only = true
 
     list_security_center_services_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_security_center_services, name
@@ -1257,6 +1260,7 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::C
       assert_equal "hello world", request["parent"]
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
+      assert_equal true, request["show_eligible_modules_only"]
       refute_nil options
     end
 
@@ -1267,35 +1271,35 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::C
       end
 
       # Use hash object
-      client.list_security_center_services({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      client.list_security_center_services({ parent: parent, page_size: page_size, page_token: page_token, show_eligible_modules_only: show_eligible_modules_only }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_security_center_services parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      client.list_security_center_services parent: parent, page_size: page_size, page_token: page_token, show_eligible_modules_only: show_eligible_modules_only do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_security_center_services ::Google::Cloud::SecurityCenterManagement::V1::ListSecurityCenterServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      client.list_security_center_services ::Google::Cloud::SecurityCenterManagement::V1::ListSecurityCenterServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_eligible_modules_only: show_eligible_modules_only) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_security_center_services({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      client.list_security_center_services({ parent: parent, page_size: page_size, page_token: page_token, show_eligible_modules_only: show_eligible_modules_only }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_security_center_services(::Google::Cloud::SecurityCenterManagement::V1::ListSecurityCenterServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      client.list_security_center_services(::Google::Cloud::SecurityCenterManagement::V1::ListSecurityCenterServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_eligible_modules_only: show_eligible_modules_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

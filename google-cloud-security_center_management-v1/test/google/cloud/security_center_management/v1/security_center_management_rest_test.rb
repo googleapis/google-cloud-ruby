@@ -1077,6 +1077,7 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
 
     # Create request parameters for a unary method.
     name = "hello world"
+    show_eligible_modules_only = true
 
     get_security_center_service_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -1092,27 +1093,27 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
         end
 
         # Use hash object
-        client.get_security_center_service({ name: name }) do |_result, response|
+        client.get_security_center_service({ name: name, show_eligible_modules_only: show_eligible_modules_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_security_center_service name: name do |_result, response|
+        client.get_security_center_service name: name, show_eligible_modules_only: show_eligible_modules_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_security_center_service ::Google::Cloud::SecurityCenterManagement::V1::GetSecurityCenterServiceRequest.new(name: name) do |_result, response|
+        client.get_security_center_service ::Google::Cloud::SecurityCenterManagement::V1::GetSecurityCenterServiceRequest.new(name: name, show_eligible_modules_only: show_eligible_modules_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_security_center_service({ name: name }, call_options) do |_result, response|
+        client.get_security_center_service({ name: name, show_eligible_modules_only: show_eligible_modules_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_security_center_service(::Google::Cloud::SecurityCenterManagement::V1::GetSecurityCenterServiceRequest.new(name: name), call_options) do |_result, response|
+        client.get_security_center_service(::Google::Cloud::SecurityCenterManagement::V1::GetSecurityCenterServiceRequest.new(name: name, show_eligible_modules_only: show_eligible_modules_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1133,6 +1134,7 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
     parent = "hello world"
     page_size = 42
     page_token = "hello world"
+    show_eligible_modules_only = true
 
     list_security_center_services_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -1148,27 +1150,27 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
         end
 
         # Use hash object
-        client.list_security_center_services({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        client.list_security_center_services({ parent: parent, page_size: page_size, page_token: page_token, show_eligible_modules_only: show_eligible_modules_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_security_center_services parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        client.list_security_center_services parent: parent, page_size: page_size, page_token: page_token, show_eligible_modules_only: show_eligible_modules_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_security_center_services ::Google::Cloud::SecurityCenterManagement::V1::ListSecurityCenterServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        client.list_security_center_services ::Google::Cloud::SecurityCenterManagement::V1::ListSecurityCenterServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_eligible_modules_only: show_eligible_modules_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_security_center_services({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        client.list_security_center_services({ parent: parent, page_size: page_size, page_token: page_token, show_eligible_modules_only: show_eligible_modules_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_security_center_services(::Google::Cloud::SecurityCenterManagement::V1::ListSecurityCenterServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        client.list_security_center_services(::Google::Cloud::SecurityCenterManagement::V1::ListSecurityCenterServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_eligible_modules_only: show_eligible_modules_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

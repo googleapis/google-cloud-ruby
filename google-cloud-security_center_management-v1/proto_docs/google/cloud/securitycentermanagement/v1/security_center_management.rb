@@ -725,6 +725,10 @@ module Google
             # Describes a potential security risk due to a change in the security
             # posture.
             POSTURE_VIOLATION = 6
+
+            # Describes a combination of security issues that represent a more severe
+            # security problem when taken together.
+            TOXIC_COMBINATION = 7
           end
         end
 
@@ -1167,6 +1171,10 @@ module Google
         #       * security-health-analytics
         #       * vm-threat-detection
         #       * web-security-scanner
+        # @!attribute [rw] show_eligible_modules_only
+        #   @return [::Boolean]
+        #     Flag that, when set, will be used to filter the ModuleSettings that are
+        #     in scope. The default setting is that all modules will be shown.
         class GetSecurityCenterServiceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1189,6 +1197,10 @@ module Google
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. The value returned by the last call indicating a continuation.
+        # @!attribute [rw] show_eligible_modules_only
+        #   @return [::Boolean]
+        #     Flag that, when set, will be used to filter the ModuleSettings that are
+        #     in scope. The default setting is that all modules will be shown.
         class ListSecurityCenterServicesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
