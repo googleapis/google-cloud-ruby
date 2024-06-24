@@ -138,6 +138,12 @@ module Google
         #   @return [::Array<::String>]
         #     Output only. The hostname or ip address of the exposed AGM endpoints, used
         #     by BAs to connect to BA proxy.
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Google::Protobuf::BoolValue]
+        #     Output only. Reserved for future use.
+        # @!attribute [r] satisfies_pzi
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
         class ManagementServer
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
