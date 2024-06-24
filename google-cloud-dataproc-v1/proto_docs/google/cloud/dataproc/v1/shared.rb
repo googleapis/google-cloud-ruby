@@ -36,6 +36,13 @@ module Google
         # @!attribute [rw] repository_config
         #   @return [::Google::Cloud::Dataproc::V1::RepositoryConfig]
         #     Optional. Dependency repository configuration.
+        # @!attribute [rw] autotuning_config
+        #   @return [::Google::Cloud::Dataproc::V1::AutotuningConfig]
+        #     Optional. Autotuning configuration of the workload.
+        # @!attribute [rw] cohort
+        #   @return [::String]
+        #     Optional. Cohort identifier. Identifies families of the workloads having
+        #     the same shape, e.g. daily ETL jobs.
         class RuntimeConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -505,6 +512,31 @@ module Google
           class GkeNodePoolAutoscalingConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Autotuning configuration of the workload.
+        # @!attribute [rw] scenarios
+        #   @return [::Array<::Google::Cloud::Dataproc::V1::AutotuningConfig::Scenario>]
+        #     Optional. Scenarios for which tunings are applied.
+        class AutotuningConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Scenario represents a specific goal that autotuning will attempt to achieve
+          # by modifying workloads.
+          module Scenario
+            # Default value.
+            SCENARIO_UNSPECIFIED = 0
+
+            # Scaling recommendations such as initialExecutors.
+            SCALING = 2
+
+            # Adding hints for potential relation broadcasts.
+            BROADCAST_HASH_JOIN = 3
+
+            # Memory management for workloads.
+            MEMORY = 4
           end
         end
 
