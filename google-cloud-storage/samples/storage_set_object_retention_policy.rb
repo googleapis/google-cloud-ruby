@@ -31,17 +31,17 @@ def set_object_retention_policy bucket_name:, content:, destination_file_name:
   file = bucket.create_file file_content, destination_file_name
 
   # Set the retention policy for the file.
-  retention_params = { mode: 'Unlocked', retain_until_time: DateTime.now + 10 }
+  retention_params = { mode: "Unlocked", retain_until_time: DateTime.now + 10 }
   file.retention = retention_params
 
   puts "Retention policy for file #{destination_file_name} was set to: #{file.retention.mode}."
 
   # To modify an existing policy on an unlocked file object, pass in the override parameter.
   new_retention_date = DateTime.now + 9 # 9 days
-  new_retention_params = { retain_until_time: new_retention_date, override_unlocked_retention: true }
-  
-  puts "Retention policy for file #{destination_file_name} was updated to: #{file.retention.retain_until_time}."
+  new_retention_params = { mode: "Unlocked", retain_until_time: new_retention_date, override_unlocked_retention: true }
+  file.retention = new_retention_params
 
+  puts "Retention policy for file #{destination_file_name} was updated to: #{file.retention.retain_until_time}."
 end
 # [END storage_set_object_retention_policy]
 
