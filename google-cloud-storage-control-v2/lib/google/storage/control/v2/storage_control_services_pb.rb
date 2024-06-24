@@ -36,25 +36,20 @@ module Google
 
               # Creates a new folder. This operation is only applicable to a hierarchical
               # namespace enabled bucket.
-              # Hierarchical namespace buckets are in allowlist preview.
               rpc :CreateFolder, ::Google::Cloud::Storage::Control::V2::CreateFolderRequest, ::Google::Cloud::Storage::Control::V2::Folder
               # Permanently deletes an empty folder. This operation is only applicable to a
               # hierarchical namespace enabled bucket.
-              # Hierarchical namespace buckets are in allowlist preview.
               rpc :DeleteFolder, ::Google::Cloud::Storage::Control::V2::DeleteFolderRequest, ::Google::Protobuf::Empty
               # Returns metadata for the specified folder. This operation is only
               # applicable to a hierarchical namespace enabled bucket.
-              # Hierarchical namespace buckets are in allowlist preview.
               rpc :GetFolder, ::Google::Cloud::Storage::Control::V2::GetFolderRequest, ::Google::Cloud::Storage::Control::V2::Folder
               # Retrieves a list of folders. This operation is only applicable to a
               # hierarchical namespace enabled bucket.
-              # Hierarchical namespace buckets are in allowlist preview.
               rpc :ListFolders, ::Google::Cloud::Storage::Control::V2::ListFoldersRequest, ::Google::Cloud::Storage::Control::V2::ListFoldersResponse
               # Renames a source folder to a destination folder. This operation is only
               # applicable to a hierarchical namespace enabled bucket. During a rename, the
               # source and destination folders are locked until the long running operation
               # completes.
-              # Hierarchical namespace buckets are in allowlist preview.
               rpc :RenameFolder, ::Google::Cloud::Storage::Control::V2::RenameFolderRequest, ::Google::Longrunning::Operation
               # Returns the storage layout configuration for a given bucket.
               rpc :GetStorageLayout, ::Google::Cloud::Storage::Control::V2::GetStorageLayoutRequest, ::Google::Cloud::Storage::Control::V2::StorageLayout

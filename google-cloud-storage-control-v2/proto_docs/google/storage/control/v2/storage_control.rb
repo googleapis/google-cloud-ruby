@@ -33,7 +33,6 @@ module Google
 
           # A folder resource. This resource can only exist in a hierarchical namespace
           # enabled bucket.
-          # Hierarchical namespace buckets are in allowlist preview.
           # @!attribute [rw] name
           #   @return [::String]
           #     Identifier. The name of this folder.
@@ -62,7 +61,6 @@ module Google
 
           # Request message for GetFolder. This operation is only applicable to a
           # hierarchical namespace enabled bucket.
-          # Hierarchical namespace buckets are in allowlist preview.
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. Name of the folder.
@@ -86,7 +84,6 @@ module Google
 
           # Request message for CreateFolder. This operation is only applicable to a
           # hierarchical namespace enabled bucket.
-          # Hierarchical namespace buckets are in allowlist preview.
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. Name of the bucket in which the folder will reside. The bucket
@@ -119,7 +116,6 @@ module Google
 
           # Request message for DeleteFolder. This operation is only applicable to a
           # hierarchical namespace enabled bucket.
-          # Hierarchical namespace buckets are in allowlist preview.
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. Name of the folder.
@@ -143,7 +139,6 @@ module Google
 
           # Request message for ListFolders. This operation is only applicable to a
           # hierarchical namespace enabled bucket.
-          # Hierarchical namespace buckets are in allowlist preview.
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. Name of the bucket in which to look for folders. The bucket must
@@ -201,7 +196,6 @@ module Google
 
           # Request message for RenameFolder. This operation is only applicable to a
           # hierarchical namespace enabled bucket.
-          # Hierarchical namespace buckets are in allowlist preview.
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. Name of the source folder being renamed.
