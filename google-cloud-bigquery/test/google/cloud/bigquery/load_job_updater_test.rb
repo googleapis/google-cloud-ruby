@@ -26,6 +26,29 @@ describe Google::Cloud::Bigquery::LoadJob::Updater do
     Google::Cloud::Bigquery::LoadJob::Updater.new new_job
   end
 
+  it "can set the column name character map" do
+    updater = new_updater
+    updater.column_name_character_map = "default"
+    job_gapi = updater.to_gapi
+    _(job_gapi.configuration.load.column_name_character_map).must_equal "COLUMN_NAME_CHARACTER_MAP_UNSPECIFIED"
+
+    updater.column_name_character_map = "strict"
+    job_gapi = updater.to_gapi
+    _(job_gapi.configuration.load.column_name_character_map).must_equal "STRICT"
+
+    updater.column_name_character_map = "v1"
+    job_gapi = updater.to_gapi
+    _(job_gapi.configuration.load.column_name_character_map).must_equal "V1"
+
+    updater.column_name_character_map = "v2"
+    job_gapi = updater.to_gapi
+    _(job_gapi.configuration.load.column_name_character_map).must_equal "V2"
+
+    updater.column_name_character_map = "SOME_NEW_CHARACTER_MAP"
+    job_gapi = updater.to_gapi
+    _(job_gapi.configuration.load.column_name_character_map).must_equal "SOME_NEW_CHARACTER_MAP"
+  end
+
   it "can set the source format" do
     updater = new_updater
     updater.format = "csv"
