@@ -8,7 +8,7 @@
     "name": "videostitcher",
     "name_pretty": "Video Stitcher API",
     "product_documentation": "https://cloud.google.com/video-stitcher/",
-    "release_level": "preview",
+    "release_level": "stable",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "The Video Stitcher API allows you to manipulate video content to dynamically insert ads prior to delivery to client devices. Using the Video Stitcher API, you can monetize your video-on-demand (VOD) and livestreaming videos by inserting ads as described by metadata stored on ad servers.",
