@@ -1,5 +1,11 @@
 # Release History
 
+### 0.18.0 (2024-06-25)
+
+#### Features
+
+* Support links in AlertPolicy ([#26141](https://github.com/googleapis/google-cloud-ruby/issues/26141)) 
+
 ### 0.17.0 (2024-04-25)
 
 #### Features
