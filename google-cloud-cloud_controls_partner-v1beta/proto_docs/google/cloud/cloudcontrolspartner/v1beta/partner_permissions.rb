@@ -25,7 +25,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. Format:
-        #     organizations/\\{organization}/locations/\\{location}/customers/\\{customer}/workloads/\\{workload}/partnerPermissions
+        #     `organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}/partnerPermissions`
         # @!attribute [rw] partner_permissions
         #   @return [::Array<::Google::Cloud::CloudControlsPartner::V1beta::PartnerPermissions::Permission>]
         #     The partner permissions granted for the workload
@@ -55,7 +55,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Name of the resource to get in the format:
-        #     organizations/\\{organization}/locations/\\{location}/customers/\\{customer}/workloads/\\{workload}/partnerPermissions
+        #     `organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}/partnerPermissions`
         class GetPartnerPermissionsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

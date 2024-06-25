@@ -25,7 +25,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. Format:
-        #     organizations/\\{organization}/locations/\\{location}/customers/\\{customer}
+        #     `organizations/{organization}/locations/{location}/customers/{customer}`
         # @!attribute [rw] display_name
         #   @return [::String]
         #     The customer organization's display name. E.g. "google.com".
@@ -44,7 +44,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Parent resource
-        #     Format: organizations/\\{organization}/locations/\\{location}
+        #     Format: `organizations/{organization}/locations/{location}`
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of Customers to return. The service may return fewer
@@ -84,7 +84,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Format:
-        #     organizations/\\{organization}/locations/\\{location}/customers/\\{customer}
+        #     `organizations/{organization}/locations/{location}/customers/{customer}`
         class GetCustomerRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -25,7 +25,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. The resource name of the partner.
-        #     Format: organizations/\\{organization}/locations/\\{location}/partner
+        #     Format: `organizations/{organization}/locations/{location}/partner`
         #     Example: "organizations/123456/locations/us-central1/partner"
         # @!attribute [rw] skus
         #   @return [::Array<::Google::Cloud::CloudControlsPartner::V1beta::Sku>]
@@ -56,7 +56,8 @@ module Google
         # Message for getting a Partner
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. Format: organizations/\\{organization}/locations/\\{location}/partner
+        #     Required. Format:
+        #     `organizations/{organization}/locations/{location}/partner`
         class GetPartnerRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

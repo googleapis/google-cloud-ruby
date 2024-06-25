@@ -25,7 +25,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. Format:
-        #     organizations/\\{organization}/locations/\\{location}/customers/\\{customer}/workloads/\\{workload}/ekmConnections
+        #     `organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}/ekmConnections`
         # @!attribute [rw] ekm_connections
         #   @return [::Array<::Google::Cloud::CloudControlsPartner::V1beta::EkmConnection>]
         #     The EKM connections associated with the workload
@@ -38,7 +38,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Format:
-        #     organizations/\\{organization}/locations/\\{location}/customers/\\{customer}/workloads/\\{workload}/ekmConnections
+        #     `organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}/ekmConnections`
         class GetEkmConnectionsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
