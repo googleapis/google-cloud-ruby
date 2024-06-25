@@ -209,10 +209,7 @@ module Google
         #     The SSH public key to sign.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     The parent project and zone for the signing request. This is needed to
-        #     properly ensure per-organization ISS processing and potentially to provide
-        #     for the possibility of zone-specific certificates used in the signing
-        #     process.
+        #     The parent project and region for the signing request.
         class SignSshPublicKeyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
