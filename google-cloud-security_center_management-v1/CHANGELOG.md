@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.4.0 (2024-06-25)
+
+#### Features
+
+* Add `show_eligible_modules_only` field to `GetSecurityCenterServiceRequest` message 
+* Add `TOXIC_COMBINATION` to `FindingClass` enum ([#26148](https://github.com/googleapis/google-cloud-ruby/issues/26148)) 
+
 ### 0.3.0 (2024-06-13)
 
 #### Features
