@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.22.0 (2024-06-25)
+
+#### Features
+
+* Support resource location field in EntrySource ([#26142](https://github.com/googleapis/google-cloud-ruby/issues/26142)) 
+
 ### 0.21.1 (2024-06-18)
 
 #### Documentation
