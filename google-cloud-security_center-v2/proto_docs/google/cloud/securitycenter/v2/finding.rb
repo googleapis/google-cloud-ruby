@@ -259,6 +259,18 @@ module Google
         # @!attribute [rw] load_balancers
         #   @return [::Array<::Google::Cloud::SecurityCenter::V2::LoadBalancer>]
         #     The load balancers associated with the finding.
+        # @!attribute [rw] toxic_combination
+        #   @return [::Google::Cloud::SecurityCenter::V2::ToxicCombination]
+        #     Contains details about a group of security issues that, when the issues
+        #     occur together, represent a greater risk than when the issues occur
+        #     independently. A group of such issues is referred to as a toxic
+        #     combination.
+        #     This field cannot be updated. Its value is ignored in all update requests.
+        # @!attribute [rw] group_memberships
+        #   @return [::Array<::Google::Cloud::SecurityCenter::V2::GroupMembership>]
+        #     Contains details about groups of which this finding is a member. A group is
+        #     a collection of findings that are related in some way.
+        #     This field cannot be updated. Its value is ignored in all update requests.
         class Finding
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -403,6 +415,10 @@ module Google
             # Describes a potential security risk due to a change in the security
             # posture.
             POSTURE_VIOLATION = 6
+
+            # Describes a combination of security issues that represent a more severe
+            # security problem when taken together.
+            TOXIC_COMBINATION = 7
           end
         end
       end
