@@ -18,7 +18,7 @@ def set_object_retention_policy bucket_name:, content:, destination_file_name:
   # bucket_name = "your-unique-bucket-name"
 
   # The content to upload to the file
-  # content = "these are my content"
+  # content = "this is my content"
 
   # The ID of your GCS object
   # destination_file_name = "storage-object-name"
@@ -36,9 +36,14 @@ def set_object_retention_policy bucket_name:, content:, destination_file_name:
 
   puts "Retention policy for file #{destination_file_name} was set to: #{file.retention.mode}."
 
-  # To modify an existing policy on an unlocked file object, pass in the override parameter.
+  # To modify an existing policy on an unlocked file object, pass in the
+  # override parameter.
   new_retention_date = DateTime.now + 9 # 9 days
-  new_retention_params = { mode: "Unlocked", retain_until_time: new_retention_date, override_unlocked_retention: true }
+  new_retention_params = {
+    mode: "Unlocked",
+    retain_until_time: new_retention_date,
+    override_unlocked_retention: true
+  }
   file.retention = new_retention_params
 
   puts "Retention policy for file #{destination_file_name} was updated to: #{file.retention.retain_until_time}."

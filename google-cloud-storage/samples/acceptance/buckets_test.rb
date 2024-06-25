@@ -186,13 +186,19 @@ describe "Buckets Snippets" do
       bucket = storage_client.bucket bucket_name
 
       out, _err = capture_io do
-        set_object_retention_policy bucket_name: bucket.name, content: "hello world", destination_file_name: file_name
+        set_object_retention_policy bucket_name: bucket.name,
+                                    content: "hello world",
+                                    destination_file_name: file_name
       end
 
       assert_includes out, "Retention policy for file #{file_name}"
 
       file = bucket.file file_name
-      file.retention = { mode: nil, retain_until_time: nil, override_unlocked_retention: true }
+      file.retention = {
+        mode: nil,
+        retain_until_time: nil,
+        override_unlocked_retention: true
+      }
       delete_bucket_helper bucket_name
     end
   end
