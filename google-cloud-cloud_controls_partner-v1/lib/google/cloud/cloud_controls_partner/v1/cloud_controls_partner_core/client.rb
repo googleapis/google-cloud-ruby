@@ -752,7 +752,10 @@ module Google
             end
 
             ##
-            # Lists access requests associated with a workload
+            # Deprecated: Only returns access approval requests directly associated with
+            # an assured workload folder.
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload list_access_approval_requests(request, options = nil)
             #   Pass arguments to `list_access_approval_requests` via a request object, either of type
