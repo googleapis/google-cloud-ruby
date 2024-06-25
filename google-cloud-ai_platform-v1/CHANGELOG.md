@@ -1,5 +1,13 @@
 # Changelog
 
+### 0.42.0 (2024-06-25)
+
+#### Features
+
+* Add encryption_spec to TuningJob 
+* Add MALFORMED_FUNCTION_CALL to FinishReason ([#26140](https://github.com/googleapis/google-cloud-ruby/issues/26140)) 
+* Add preflight_validations to PipelineJob 
+
 ### 0.41.0 (2024-05-31)
 
 ### ⚠ BREAKING CHANGES
