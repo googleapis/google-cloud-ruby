@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.0.0 (2024-06-26)
+
+#### Features
+
+* Bump version to 1.0.0 
+
 ### 0.3.0 (2024-02-26)
 
 #### Features
@@ -19,4 +25,3 @@
 * Initial generation of google-cloud-edge_network ([#23735](https://github.com/googleapis/google-cloud-ruby/issues/23735)) 
 
 ## Release History
-
