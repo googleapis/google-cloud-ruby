@@ -1,5 +1,13 @@
 # Changelog
 
+### 0.1.2 (2024-06-26)
+
+#### Documentation
+
+* Update doc for `CreateMembership` in service `ChatService` to support group members 
+* Update doc for `SetUpSpace` in service `ChatService` to support group members ([#26184](https://github.com/googleapis/google-cloud-ruby/issues/26184)) 
+* Update doc for field `group_member` in message `google.chat.v1.Membership` 
+
 ### 0.1.1 (2024-05-14)
 
 #### Documentation
