@@ -121,6 +121,13 @@ module Google
         #   @return [::Integer]
         #     Optional. VLAN id provided by user. If not specified we assign one
         #     automatically.
+        # @!attribute [rw] bonding_type
+        #   @return [::Google::Cloud::EdgeNetwork::V1::Subnet::BondingType]
+        #     Optional. A bonding type in the subnet creation specifies whether a VLAN
+        #     being created will be present on Bonded or Non-Bonded or Both port types.
+        #     In addition, this flag is to be used to set the specific network
+        #     configuration which clusters can then use for their workloads based on the
+        #     bonding choice.
         # @!attribute [r] state
         #   @return [::Google::Cloud::EdgeNetwork::V1::ResourceState]
         #     Output only. Current stage of the resource to the device by config push.
@@ -135,6 +142,22 @@ module Google
           class LabelsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Bonding type in the subnet.
+          module BondingType
+            # Unspecified
+            # Bonding type will be unspecified by default and if the user chooses to
+            # not specify a bonding type at time of creating the VLAN. This will be
+            # treated as mixed bonding where the VLAN will have both bonded and
+            # non-bonded connectivity to machines.
+            BONDING_TYPE_UNSPECIFIED = 0
+
+            # Single homed.
+            BONDED = 1
+
+            # Multi homed.
+            NON_BONDED = 2
           end
         end
 
