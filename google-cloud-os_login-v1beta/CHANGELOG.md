@@ -1,5 +1,11 @@
 # Release History
 
+### 0.15.1 (2024-06-26)
+
+#### Documentation
+
+* Update comments for parent in SignSshPublicKeyRequest ([#26171](https://github.com/googleapis/google-cloud-ruby/issues/26171)) 
+
 ### 0.15.0 (2024-02-26)
 
 #### Features
