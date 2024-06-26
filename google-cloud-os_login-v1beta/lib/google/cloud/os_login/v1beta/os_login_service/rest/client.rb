@@ -797,10 +797,7 @@ module Google
               #   @param ssh_public_key [::String]
               #     The SSH public key to sign.
               #   @param parent [::String]
-              #     The parent project and zone for the signing request. This is needed to
-              #     properly ensure per-organization ISS processing and potentially to provide
-              #     for the possibility of zone-specific certificates used in the signing
-              #     process.
+              #     The parent project and region for the signing request.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::OsLogin::V1beta::SignSshPublicKeyResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
