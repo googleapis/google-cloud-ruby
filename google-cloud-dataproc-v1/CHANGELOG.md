@@ -1,5 +1,11 @@
 # Release History
 
+### 0.26.0 (2024-06-26)
+
+#### Features
+
+* Support cohort and auto tuning configuration in batch RuntimeConfig ([#26159](https://github.com/googleapis/google-cloud-ruby/issues/26159)) 
+
 ### 0.25.0 (2024-02-26)
 
 #### Features
