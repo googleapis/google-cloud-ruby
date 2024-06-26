@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.5.0 (2024-06-26)
+
+#### Features
+
+* Support bonding_type field in Subnet ([#26185](https://github.com/googleapis/google-cloud-ruby/issues/26185)) 
+
 ### 0.4.1 (2024-03-22)
 
 #### Bug Fixes
