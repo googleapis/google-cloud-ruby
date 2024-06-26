@@ -19,3 +19,4 @@
 * Initial generation of google-cloud-migration_center ([#23393](https://github.com/googleapis/google-cloud-ruby/issues/23393)) 
 
 ## Release History
+
