@@ -57,8 +57,8 @@ module Google
         #     authenticated user returns an error.
         # @!attribute [rw] memberships
         #   @return [::Array<::Google::Apps::Chat::V1::Membership>]
-        #     Optional. The Google Chat users to invite to join the space. Omit the
-        #     calling user, as they are added automatically.
+        #     Optional. The Google Chat users or groups to invite to join the space. Omit
+        #     the calling user, as they are added automatically.
         #
         #     The set currently allows up to 20 memberships (in addition to the caller).
         #
@@ -70,6 +70,10 @@ module Google
         #     for \\{user}. For example, the `user.name` can be `users/example@gmail.com`.
         #     To invite Gmail users or users from external Google Workspace domains,
         #     user's email must be used for `{user}`.
+        #
+        #     For Google group membership, the `Membership.group_member` field must
+        #     contain a `group` with `name` populated (format `groups/{group}`). You
+        #     can only add Google groups when setting `Space.spaceType` to `SPACE`.
         #
         #     Optional when setting `Space.spaceType` to `SPACE`.
         #
