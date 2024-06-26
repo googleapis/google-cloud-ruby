@@ -25,3 +25,4 @@
 * Initial generation of google-cloud-security-public_ca ([#19190](https://github.com/googleapis/google-cloud-ruby/issues/19190)) 
 
 ## Release History
+
