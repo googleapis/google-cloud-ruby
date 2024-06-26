@@ -48,8 +48,6 @@ module Google
         # @!attribute [rw] group_member
         #   @return [::Google::Apps::Chat::V1::Group]
         #     The Google Group the membership corresponds to.
-        #     Only supports read operations. Other operations, like
-        #     creating or updating a membership, aren't currently supported.
         # @!attribute [rw] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Optional. Immutable. The creation time of the membership, such as when a
