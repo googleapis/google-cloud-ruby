@@ -7,3 +7,4 @@
 * Initial generation of google-apps-events-subscriptions ([#25736](https://github.com/googleapis/google-cloud-ruby/issues/25736)) 
 
 ## Release History
+
