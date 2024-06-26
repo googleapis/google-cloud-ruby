@@ -431,6 +431,11 @@ module Google
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::FraudSignals]
         #     Output only. Fraud Signals specific to the users involved in a payment
         #     transaction.
+        # @!attribute [r] phone_fraud_assessment
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::PhoneFraudAssessment]
+        #     Output only. Assessment returned when a site key, a token, and a phone
+        #     number as `user_id` are provided. Account defender and SMS toll fraud
+        #     protection need to be enabled.
         class Assessment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -934,6 +939,37 @@ module Google
               UNEXPECTED_LOCATION = 3
             end
           end
+        end
+
+        # Information about SMS toll fraud.
+        # @!attribute [r] risk
+        #   @return [::Float]
+        #     Output only. Probability of an SMS event being fraudulent.
+        #     Values are from 0.0 (lowest) to 1.0 (highest).
+        # @!attribute [r] reasons
+        #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::SmsTollFraudVerdict::SmsTollFraudReason>]
+        #     Output only. Reasons contributing to the SMS toll fraud verdict.
+        class SmsTollFraudVerdict
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Reasons contributing to the SMS toll fraud verdict.
+          module SmsTollFraudReason
+            # Default unspecified reason
+            SMS_TOLL_FRAUD_REASON_UNSPECIFIED = 0
+
+            # The provided phone number was invalid
+            INVALID_PHONE_NUMBER = 1
+          end
+        end
+
+        # Assessment for Phone Fraud
+        # @!attribute [r] sms_toll_fraud_verdict
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::SmsTollFraudVerdict]
+        #     Output only. Assessment of this phone event for risk of SMS toll fraud.
+        class PhoneFraudAssessment
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Account defender risk assessment.
