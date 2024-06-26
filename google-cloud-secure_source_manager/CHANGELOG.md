@@ -19,3 +19,4 @@
 * Initial generation of google-cloud-secure_source_manager ([#23758](https://github.com/googleapis/google-cloud-ruby/issues/23758)) 
 
 ## Release History
+
