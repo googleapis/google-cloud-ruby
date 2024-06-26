@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.1.1 (2024-06-26)
+
+#### Documentation
+
+* Mark the accessApprovalRequests.list method as deprecated ([#26149](https://github.com/googleapis/google-cloud-ruby/issues/26149)) 
+
 ### 0.1.0 (2024-03-12)
 
 #### Features
