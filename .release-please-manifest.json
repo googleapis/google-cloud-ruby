@@ -303,7 +303,7 @@
   "google-cloud-dialogflow-cx-v3+FILLER": "0.0.0",
   "google-cloud-dialogflow-v2": "0.34.0",
   "google-cloud-dialogflow-v2+FILLER": "0.0.0",
-  "google-cloud-discovery_engine": "0.7.0",
+  "google-cloud-discovery_engine": "1.0.0",
   "google-cloud-discovery_engine+FILLER": "0.0.0",
   "google-cloud-discovery_engine-v1": "0.8.0",
   "google-cloud-discovery_engine-v1+FILLER": "0.0.0",
