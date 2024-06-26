@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.0.0 (2024-06-26)
+
+#### Features
+
+* Bump version to 1.0.0 
+
 ### 0.3.0 (2024-02-26)
 
 #### Features
@@ -19,4 +25,3 @@
 * Initial generation of google-cloud-commerce-consumer-procurement ([#22741](https://github.com/googleapis/google-cloud-ruby/issues/22741)) 
 
 ## Release History
-
