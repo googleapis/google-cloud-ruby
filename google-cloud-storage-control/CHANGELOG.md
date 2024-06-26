@@ -7,3 +7,4 @@
 * Initial generation of google-cloud-storage-control ([#25744](https://github.com/googleapis/google-cloud-ruby/issues/25744)) 
 
 ## Release History
+
