@@ -8,7 +8,7 @@
     "name": "workspaceevents",
     "name_pretty": "Google Workspace Events API",
     "product_documentation": "https://developers.google.com/workspace/events",
-    "release_level": "preview",
+    "release_level": "stable",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "The Google Workspace Events API lets you subscribe to events and manage change notifications across Google Workspace applications.",
