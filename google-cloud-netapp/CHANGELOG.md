@@ -19,3 +19,4 @@
 * Initial generation of google-cloud-netapp ([#22883](https://github.com/googleapis/google-cloud-ruby/issues/22883)) 
 
 ## Release History
+
