@@ -8,7 +8,7 @@
     "name": "datalineage",
     "name_pretty": "Data Lineage API",
     "product_documentation": "https://cloud.google.com/data-catalog/docs/reference/data-lineage/rpc",
-    "release_level": "preview",
+    "release_level": "stable",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "DataCatalog is a centralized and unified data catalog service for all your Cloud resources, where users and systems can discover data, explore and curate its semantics, understand how to act on it, and help govern its usage. Lineage is used to track data flows between assets over time. You can create Lineage Events to record lineage between multiple sources and a single target, for example, when table data is based on data from multiple tables.",
