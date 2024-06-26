@@ -1,5 +1,11 @@
 # Release History
 
+### 0.25.0 (2024-06-26)
+
+#### Features
+
+* Support use_topic_schema in Cloud Storage Subscriptions ([#26139](https://github.com/googleapis/google-cloud-ruby/issues/26139)) 
+
 ### 0.24.0 (2024-05-31)
 
 #### Features
