@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.8.1 (2024-06-26)
+
+#### Documentation
+
+* Modify example accelerator type ([#26183](https://github.com/googleapis/google-cloud-ruby/issues/26183)) 
+
 ### 0.8.0 (2024-02-26)
 
 #### Features
