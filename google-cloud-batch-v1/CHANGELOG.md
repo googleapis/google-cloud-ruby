@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.18.0 (2024-06-26)
+
+#### Features
+
+* Add install_ops_agent field to InstancePolicyOrTemplate for Ops Agent support ([#26180](https://github.com/googleapis/google-cloud-ruby/issues/26180)) 
+
 ### 0.17.4 (2024-06-05)
 
 #### Documentation
