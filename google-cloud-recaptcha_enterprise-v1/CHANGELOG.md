@@ -1,5 +1,11 @@
 # Release History
 
+### 0.22.0 (2024-06-26)
+
+#### Features
+
+* Support SMS Toll Fraud assessment ([#26179](https://github.com/googleapis/google-cloud-ruby/issues/26179)) 
+
 ### 0.21.0 (2024-04-25)
 
 #### Features
