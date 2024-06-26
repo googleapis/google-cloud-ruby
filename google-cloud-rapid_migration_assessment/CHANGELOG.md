@@ -25,3 +25,4 @@
 * Initial generation of google-cloud-rapid_migration_assessment ([#22240](https://github.com/googleapis/google-cloud-ruby/issues/22240)) 
 
 ## Release History
+
