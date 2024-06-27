@@ -33,6 +33,9 @@ module Google
         #   @return [::Array<::Google::Cloud::SecurityCenter::V2::ResourceValueConfigMetadata>]
         #     Resource value configurations' metadata used in this simulation. Maximum of
         #     100.
+        # @!attribute [rw] cloud_provider
+        #   @return [::Google::Cloud::SecurityCenter::V2::CloudProvider]
+        #     Indicates which cloud provider was used in this simulation.
         class Simulation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

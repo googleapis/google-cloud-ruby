@@ -1600,6 +1600,14 @@ module Google
                                                             ["parent", %r{^organizations/[^/]+/?$}, false]
                                                           ]
                                                         )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v2/{parent}/resourceValueConfigs:batchCreate",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["parent", %r{^organizations/[^/]+/locations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
                 transcoder.transcode request_pb
               end
 
@@ -1999,6 +2007,13 @@ module Google
                                                             ["name", %r{^organizations/[^/]+/resourceValueConfigs/[^/]+/?$}, false]
                                                           ]
                                                         )
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/v2/{name}",
+                                                          matches: [
+                                                            ["name", %r{^organizations/[^/]+/locations/[^/]+/resourceValueConfigs/[^/]+/?$}, false]
+                                                          ]
+                                                        )
                 transcoder.transcode request_pb
               end
 
@@ -2055,6 +2070,13 @@ module Google
                                                             ["name", %r{^organizations/[^/]+/simulations/[^/]+/?$}, false]
                                                           ]
                                                         )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v2/{name}",
+                                                          matches: [
+                                                            ["name", %r{^organizations/[^/]+/locations/[^/]+/simulations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
                 transcoder.transcode request_pb
               end
 
@@ -2074,6 +2096,13 @@ module Google
                                                           uri_template: "/v2/{name}",
                                                           matches: [
                                                             ["name", %r{^organizations/[^/]+/simulations/[^/]+/valuedResources/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v2/{name}",
+                                                          matches: [
+                                                            ["name", %r{^organizations/[^/]+/locations/[^/]+/simulations/[^/]+/valuedResources/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -2210,6 +2239,13 @@ module Google
                                                             ["name", %r{^organizations/[^/]+/resourceValueConfigs/[^/]+/?$}, false]
                                                           ]
                                                         )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v2/{name}",
+                                                          matches: [
+                                                            ["name", %r{^organizations/[^/]+/locations/[^/]+/resourceValueConfigs/[^/]+/?$}, false]
+                                                          ]
+                                                        )
                 transcoder.transcode request_pb
               end
 
@@ -2325,7 +2361,21 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/v2/{parent}/attackPaths",
                                                           matches: [
+                                                            ["parent", %r{^organizations/[^/]+/locations/[^/]+/simulations/[^/]+/valuedResources/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v2/{parent}/attackPaths",
+                                                          matches: [
                                                             ["parent", %r{^organizations/[^/]+/simulations/[^/]+/attackExposureResults/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v2/{parent}/attackPaths",
+                                                          matches: [
+                                                            ["parent", %r{^organizations/[^/]+/locations/[^/]+/simulations/[^/]+/attackExposureResults/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -2529,6 +2579,13 @@ module Google
                                                           uri_template: "/v2/{parent}/resourceValueConfigs",
                                                           matches: [
                                                             ["parent", %r{^organizations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v2/{parent}/resourceValueConfigs",
+                                                          matches: [
+                                                            ["parent", %r{^organizations/[^/]+/locations/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -3044,6 +3101,14 @@ module Google
                                                           body: "resource_value_config",
                                                           matches: [
                                                             ["resource_value_config.name", %r{^organizations/[^/]+/resourceValueConfigs/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v2/{resource_value_config.name}",
+                                                          body: "resource_value_config",
+                                                          matches: [
+                                                            ["resource_value_config.name", %r{^organizations/[^/]+/locations/[^/]+/resourceValueConfigs/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

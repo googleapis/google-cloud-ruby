@@ -259,6 +259,12 @@ module Google
         # @!attribute [rw] load_balancers
         #   @return [::Array<::Google::Cloud::SecurityCenter::V2::LoadBalancer>]
         #     The load balancers associated with the finding.
+        # @!attribute [rw] cloud_armor
+        #   @return [::Google::Cloud::SecurityCenter::V2::CloudArmor]
+        #     Fields related to Cloud Armor findings.
+        # @!attribute [rw] notebook
+        #   @return [::Google::Cloud::SecurityCenter::V2::Notebook]
+        #     Notebook associated with the finding.
         # @!attribute [rw] toxic_combination
         #   @return [::Google::Cloud::SecurityCenter::V2::ToxicCombination]
         #     Contains details about a group of security issues that, when the issues

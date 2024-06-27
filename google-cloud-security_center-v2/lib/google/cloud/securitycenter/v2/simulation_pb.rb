@@ -6,11 +6,12 @@ require 'google/protobuf'
 
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
+require 'google/cloud/securitycenter/v2/resource_pb'
 require 'google/cloud/securitycenter/v2/valued_resource_pb'
 require 'google/protobuf/timestamp_pb'
 
 
-descriptor_data = "\n/google/cloud/securitycenter/v2/simulation.proto\x12\x1egoogle.cloud.securitycenter.v2\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x34google/cloud/securitycenter/v2/valued_resource.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xb5\x02\n\nSimulation\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x34\n\x0b\x63reate_time\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x03\xe0\x41\x03\x12\x64\n\x1fresource_value_configs_metadata\x18\x03 \x03(\x0b\x32;.google.cloud.securitycenter.v2.ResourceValueConfigMetadata:}\xea\x41z\n(securitycenter.googleapis.com/Simulation\x12\x35organizations/{organization}/simulations/{simulation}*\x0bsimulations2\nsimulationB\xe9\x01\n\"com.google.cloud.securitycenter.v2B\x0fSimulationProtoP\x01ZJcloud.google.com/go/securitycenter/apiv2/securitycenterpb;securitycenterpb\xaa\x02\x1eGoogle.Cloud.SecurityCenter.V2\xca\x02\x1eGoogle\\Cloud\\SecurityCenter\\V2\xea\x02!Google::Cloud::SecurityCenter::V2b\x06proto3"
+descriptor_data = "\n/google/cloud/securitycenter/v2/simulation.proto\x12\x1egoogle.cloud.securitycenter.v2\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a-google/cloud/securitycenter/v2/resource.proto\x1a\x34google/cloud/securitycenter/v2/valued_resource.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xca\x03\n\nSimulation\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x34\n\x0b\x63reate_time\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x03\xe0\x41\x03\x12\x64\n\x1fresource_value_configs_metadata\x18\x03 \x03(\x0b\x32;.google.cloud.securitycenter.v2.ResourceValueConfigMetadata\x12\x45\n\x0e\x63loud_provider\x18\x04 \x01(\x0e\x32-.google.cloud.securitycenter.v2.CloudProvider:\xca\x01\xea\x41\xc6\x01\n(securitycenter.googleapis.com/Simulation\x12\x35organizations/{organization}/simulations/{simulation}\x12Jorganizations/{organization}/locations/{location}/simulations/{simluation}*\x0bsimulations2\nsimulationB\xe9\x01\n\"com.google.cloud.securitycenter.v2B\x0fSimulationProtoP\x01ZJcloud.google.com/go/securitycenter/apiv2/securitycenterpb;securitycenterpb\xaa\x02\x1eGoogle.Cloud.SecurityCenter.V2\xca\x02\x1eGoogle\\Cloud\\SecurityCenter\\V2\xea\x02!Google::Cloud::SecurityCenter::V2b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 

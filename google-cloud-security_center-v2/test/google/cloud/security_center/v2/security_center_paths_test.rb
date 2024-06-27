@@ -225,6 +225,18 @@ class ::Google::Cloud::SecurityCenter::V2::SecurityCenter::ClientPathsTest < Min
     end
   end
 
+  def test_organization_valued_resource_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::SecurityCenter::V2::SecurityCenter::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.organization_valued_resource_path organization: "value0", location: "value1", simulation: "value2", valued_resource: "value3"
+      assert_equal "organizations/value0/locations/value1/simulations/value2/valuedResources/value3", path
+    end
+  end
+
   def test_policy_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -264,6 +276,9 @@ class ::Google::Cloud::SecurityCenter::V2::SecurityCenter::ClientPathsTest < Min
 
       path = client.resource_value_config_path organization: "value0", resource_value_config: "value1"
       assert_equal "organizations/value0/resourceValueConfigs/value1", path
+
+      path = client.resource_value_config_path organization: "value0", location: "value1", resource_value_config: "value2"
+      assert_equal "organizations/value0/locations/value1/resourceValueConfigs/value2", path
     end
   end
 
@@ -312,6 +327,9 @@ class ::Google::Cloud::SecurityCenter::V2::SecurityCenter::ClientPathsTest < Min
 
       path = client.simulation_path organization: "value0", simulation: "value1"
       assert_equal "organizations/value0/simulations/value1", path
+
+      path = client.simulation_path organization: "value0", location: "value1", simluation: "value2"
+      assert_equal "organizations/value0/locations/value1/simulations/value2", path
     end
   end
 
@@ -369,6 +387,9 @@ class ::Google::Cloud::SecurityCenter::V2::SecurityCenter::ClientPathsTest < Min
 
       path = client.valued_resource_path organization: "value0", simulation: "value1", valued_resource: "value2"
       assert_equal "organizations/value0/simulations/value1/valuedResources/value2", path
+
+      path = client.valued_resource_path organization: "value0", location: "value1", simluation: "value2", valued_resource: "value3"
+      assert_equal "organizations/value0/locations/value1/simulations/value2/valuedResources/value3", path
     end
   end
 end

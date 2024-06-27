@@ -588,6 +588,27 @@ module Google
             end
 
             ##
+            # Create a fully-qualified OrganizationValuedResource resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `organizations/{organization}/locations/{location}/simulations/{simulation}/valuedResources/{valued_resource}`
+            #
+            # @param organization [String]
+            # @param location [String]
+            # @param simulation [String]
+            # @param valued_resource [String]
+            #
+            # @return [::String]
+            def organization_valued_resource_path organization:, location:, simulation:, valued_resource:
+              raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "simulation cannot contain /" if simulation.to_s.include? "/"
+
+              "organizations/#{organization}/locations/#{location}/simulations/#{simulation}/valuedResources/#{valued_resource}"
+            end
+
+            ##
             # Create a fully-qualified Policy resource string.
             #
             # @overload policy_path(organization:, constraint_name:)
@@ -656,18 +677,42 @@ module Google
             ##
             # Create a fully-qualified ResourceValueConfig resource string.
             #
-            # The resource will be in the following format:
+            # @overload resource_value_config_path(organization:, resource_value_config:)
+            #   The resource will be in the following format:
             #
-            # `organizations/{organization}/resourceValueConfigs/{resource_value_config}`
+            #   `organizations/{organization}/resourceValueConfigs/{resource_value_config}`
             #
-            # @param organization [String]
-            # @param resource_value_config [String]
+            #   @param organization [String]
+            #   @param resource_value_config [String]
+            #
+            # @overload resource_value_config_path(organization:, location:, resource_value_config:)
+            #   The resource will be in the following format:
+            #
+            #   `organizations/{organization}/locations/{location}/resourceValueConfigs/{resource_value_config}`
+            #
+            #   @param organization [String]
+            #   @param location [String]
+            #   @param resource_value_config [String]
             #
             # @return [::String]
-            def resource_value_config_path organization:, resource_value_config:
-              raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+            def resource_value_config_path **args
+              resources = {
+                "organization:resource_value_config" => (proc do |organization:, resource_value_config:|
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
 
-              "organizations/#{organization}/resourceValueConfigs/#{resource_value_config}"
+                  "organizations/#{organization}/resourceValueConfigs/#{resource_value_config}"
+                end),
+                "location:organization:resource_value_config" => (proc do |organization:, location:, resource_value_config:|
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                  "organizations/#{organization}/locations/#{location}/resourceValueConfigs/#{resource_value_config}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
             end
 
             ##
@@ -821,18 +866,42 @@ module Google
             ##
             # Create a fully-qualified Simulation resource string.
             #
-            # The resource will be in the following format:
+            # @overload simulation_path(organization:, simulation:)
+            #   The resource will be in the following format:
             #
-            # `organizations/{organization}/simulations/{simulation}`
+            #   `organizations/{organization}/simulations/{simulation}`
             #
-            # @param organization [String]
-            # @param simulation [String]
+            #   @param organization [String]
+            #   @param simulation [String]
+            #
+            # @overload simulation_path(organization:, location:, simluation:)
+            #   The resource will be in the following format:
+            #
+            #   `organizations/{organization}/locations/{location}/simulations/{simluation}`
+            #
+            #   @param organization [String]
+            #   @param location [String]
+            #   @param simluation [String]
             #
             # @return [::String]
-            def simulation_path organization:, simulation:
-              raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+            def simulation_path **args
+              resources = {
+                "organization:simulation" => (proc do |organization:, simulation:|
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
 
-              "organizations/#{organization}/simulations/#{simulation}"
+                  "organizations/#{organization}/simulations/#{simulation}"
+                end),
+                "location:organization:simluation" => (proc do |organization:, location:, simluation:|
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                  "organizations/#{organization}/locations/#{location}/simulations/#{simluation}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
             end
 
             ##
@@ -948,20 +1017,46 @@ module Google
             ##
             # Create a fully-qualified ValuedResource resource string.
             #
-            # The resource will be in the following format:
+            # @overload valued_resource_path(organization:, simulation:, valued_resource:)
+            #   The resource will be in the following format:
             #
-            # `organizations/{organization}/simulations/{simulation}/valuedResources/{valued_resource}`
+            #   `organizations/{organization}/simulations/{simulation}/valuedResources/{valued_resource}`
             #
-            # @param organization [String]
-            # @param simulation [String]
-            # @param valued_resource [String]
+            #   @param organization [String]
+            #   @param simulation [String]
+            #   @param valued_resource [String]
+            #
+            # @overload valued_resource_path(organization:, location:, simluation:, valued_resource:)
+            #   The resource will be in the following format:
+            #
+            #   `organizations/{organization}/locations/{location}/simulations/{simluation}/valuedResources/{valued_resource}`
+            #
+            #   @param organization [String]
+            #   @param location [String]
+            #   @param simluation [String]
+            #   @param valued_resource [String]
             #
             # @return [::String]
-            def valued_resource_path organization:, simulation:, valued_resource:
-              raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
-              raise ::ArgumentError, "simulation cannot contain /" if simulation.to_s.include? "/"
+            def valued_resource_path **args
+              resources = {
+                "organization:simulation:valued_resource" => (proc do |organization:, simulation:, valued_resource:|
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+                  raise ::ArgumentError, "simulation cannot contain /" if simulation.to_s.include? "/"
 
-              "organizations/#{organization}/simulations/#{simulation}/valuedResources/#{valued_resource}"
+                  "organizations/#{organization}/simulations/#{simulation}/valuedResources/#{valued_resource}"
+                end),
+                "location:organization:simluation:valued_resource" => (proc do |organization:, location:, simluation:, valued_resource:|
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "simluation cannot contain /" if simluation.to_s.include? "/"
+
+                  "organizations/#{organization}/locations/#{location}/simulations/#{simluation}/valuedResources/#{valued_resource}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
             end
 
             extend self
