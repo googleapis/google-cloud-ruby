@@ -21,22 +21,16 @@ module Google
   module Cloud
     module SecurityCenter
       module V2
-        # Attack path simulation
-        # @!attribute [rw] name
+        # Message that contains the resource name and display name of a folder
+        # resource.
+        # @!attribute [rw] resource_folder
         #   @return [::String]
-        #     Full resource name of the Simulation:
-        #     organizations/123/simulations/456
-        # @!attribute [r] create_time
-        #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. Time simulation was created
-        # @!attribute [rw] resource_value_configs_metadata
-        #   @return [::Array<::Google::Cloud::SecurityCenter::V2::ResourceValueConfigMetadata>]
-        #     Resource value configurations' metadata used in this simulation. Maximum of
-        #     100.
-        # @!attribute [rw] cloud_provider
-        #   @return [::Google::Cloud::SecurityCenter::V2::CloudProvider]
-        #     Indicates which cloud provider was used in this simulation.
-        class Simulation
+        #     Full resource name of this folder. See:
+        #     https://cloud.google.com/apis/design/resource_names#full_resource_name
+        # @!attribute [rw] resource_folder_display_name
+        #   @return [::String]
+        #     The user defined display name for this folder.
+        class Folder
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

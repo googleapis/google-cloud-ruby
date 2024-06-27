@@ -2118,14 +2118,6 @@ module Google
             #     Required. Expression that defines what assets fields to use for grouping.
             #     The string value should follow SQL syntax: comma separated list of fields.
             #     For example: "parent,resource_name".
-            #
-            #     The following fields are supported:
-            #
-            #     * resource_name
-            #     * category
-            #     * state
-            #     * parent
-            #     * severity
             #   @param page_token [::String]
             #     The value returned by the last `GroupFindingsResponse`; indicates
             #     that this is a continuation of a prior `GroupFindings` call, and
@@ -4072,6 +4064,10 @@ module Google
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     The list of fields to be updated.
             #     If empty all mutable fields will be updated.
+            #
+            #     To update nested fields, include the top level field in the mask
+            #     For example, to update gcp_metadata.resource_type, include the
+            #     "gcp_metadata" field mask
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::SecurityCenter::V2::ResourceValueConfig]

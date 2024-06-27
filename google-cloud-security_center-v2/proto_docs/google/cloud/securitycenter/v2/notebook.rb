@@ -21,22 +21,22 @@ module Google
   module Cloud
     module SecurityCenter
       module V2
-        # Attack path simulation
+        # Represents a Jupyter notebook IPYNB file, such as a [Colab Enterprise
+        # notebook](https://cloud.google.com/colab/docs/introduction) file, that is
+        # associated with a finding.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Full resource name of the Simulation:
-        #     organizations/123/simulations/456
-        # @!attribute [r] create_time
+        #     The name of the notebook.
+        # @!attribute [rw] service
+        #   @return [::String]
+        #     The source notebook service, for example, "Colab Enterprise".
+        # @!attribute [rw] last_author
+        #   @return [::String]
+        #     The user ID of the latest author to modify the notebook.
+        # @!attribute [rw] notebook_update_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. Time simulation was created
-        # @!attribute [rw] resource_value_configs_metadata
-        #   @return [::Array<::Google::Cloud::SecurityCenter::V2::ResourceValueConfigMetadata>]
-        #     Resource value configurations' metadata used in this simulation. Maximum of
-        #     100.
-        # @!attribute [rw] cloud_provider
-        #   @return [::Google::Cloud::SecurityCenter::V2::CloudProvider]
-        #     Indicates which cloud provider was used in this simulation.
-        class Simulation
+        #     The most recent time the notebook was updated.
+        class Notebook
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

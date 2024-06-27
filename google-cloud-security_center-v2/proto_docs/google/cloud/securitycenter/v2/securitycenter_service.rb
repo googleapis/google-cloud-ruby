@@ -418,14 +418,6 @@ module Google
         #     Required. Expression that defines what assets fields to use for grouping.
         #     The string value should follow SQL syntax: comma separated list of fields.
         #     For example: "parent,resource_name".
-        #
-        #     The following fields are supported:
-        #
-        #     * resource_name
-        #     * category
-        #     * state
-        #     * parent
-        #     * severity
         # @!attribute [rw] page_token
         #   @return [::String]
         #     The value returned by the last `GroupFindingsResponse`; indicates
@@ -738,6 +730,39 @@ module Google
             # @!attribute [rw] type
             #   @return [::String]
             #     The full resource type of the resource.
+            # @!attribute [rw] cloud_provider
+            #   @return [::Google::Cloud::SecurityCenter::V2::CloudProvider]
+            #     Indicates which cloud provider the finding is from.
+            # @!attribute [rw] service
+            #   @return [::String]
+            #     The service or resource provider associated with the resource.
+            # @!attribute [rw] location
+            #   @return [::String]
+            #     The region or location of the service (if applicable).
+            # @!attribute [rw] gcp_metadata
+            #   @return [::Google::Cloud::SecurityCenter::V2::GcpMetadata]
+            #     The GCP metadata associated with the finding.
+            # @!attribute [rw] aws_metadata
+            #   @return [::Google::Cloud::SecurityCenter::V2::AwsMetadata]
+            #     The AWS metadata associated with the finding.
+            # @!attribute [rw] azure_metadata
+            #   @return [::Google::Cloud::SecurityCenter::V2::AzureMetadata]
+            #     The Azure metadata associated with the finding.
+            # @!attribute [rw] resource_path
+            #   @return [::Google::Cloud::SecurityCenter::V2::ResourcePath]
+            #     Provides the path to the resource within the resource hierarchy.
+            # @!attribute [rw] resource_path_string
+            #   @return [::String]
+            #     A string representation of the resource path.
+            #     For Google Cloud, it has the format of
+            #     organizations/\\{organization_id}/folders/\\{folder_id}/folders/\\{folder_id}/projects/\\{project_id}
+            #     where there can be any number of folders.
+            #     For AWS, it has the format of
+            #     org/\\{organization_id}/ou/\\{organizational_unit_id}/ou/\\{organizational_unit_id}/account/\\{account_id}
+            #     where there can be any number of organizational units.
+            #     For Azure, it has the format of
+            #     mg/\\{management_group_id}/mg/\\{management_group_id}/subscription/\\{subscription_id}/rg/\\{resource_group_name}
+            #     where there can be any number of management groups.
             class Resource
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1096,6 +1121,10 @@ module Google
         #   @return [::Google::Protobuf::FieldMask]
         #     The list of fields to be updated.
         #     If empty all mutable fields will be updated.
+        #
+        #     To update nested fields, include the top level field in the mask
+        #     For example, to update gcp_metadata.resource_type, include the
+        #     "gcp_metadata" field mask
         class UpdateResourceValueConfigRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
