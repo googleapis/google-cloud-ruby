@@ -379,6 +379,9 @@ module Google
           # @!attribute [rw] latest_job_end_time
           #   @return [::Google::Protobuf::Timestamp]
           #     The time when the latest DataScanJob ended.
+          # @!attribute [rw] latest_job_create_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Optional. The time when the DataScanJob execution was created.
           class ExecutionStatus
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
