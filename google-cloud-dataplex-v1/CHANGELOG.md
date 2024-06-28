@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.23.0 (2024-06-28)
+
+#### Features
+
+* expose data scan execution create time to customers ([#26243](https://github.com/googleapis/google-cloud-ruby/issues/26243)) 
+
 ### 0.22.0 (2024-06-25)
 
 #### Features
