@@ -129,6 +129,11 @@
                 "list_deployment_resource_pools"
               ]
             },
+            "UpdateDeploymentResourcePool": {
+              "methods": [
+                "update_deployment_resource_pool"
+              ]
+            },
             "DeleteDeploymentResourcePool": {
               "methods": [
                 "delete_deployment_resource_pool"
