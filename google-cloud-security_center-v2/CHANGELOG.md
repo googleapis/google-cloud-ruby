@@ -1,5 +1,16 @@
 # Changelog
 
+### 0.3.0 (2024-06-28)
+
+#### Features
+
+* Added cloud provider field to list findings response ([#26242](https://github.com/googleapis/google-cloud-ruby/issues/26242)) 
+* Added http configuration rule to ResourceValueConfig and ValuedResource API methods 
+* Added toxic combination field to finding 
+#### Documentation
+
+* Updated comments for ResourceValueConfig 
+
 ### 0.2.0 (2024-06-26)
 
 #### Features
