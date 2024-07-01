@@ -166,7 +166,7 @@ module Google
         #     this resource pool. Will replace idle_replica_count.
         # @!attribute [rw] autoscaling_spec
         #   @return [::Google::Cloud::AIPlatform::V1::ResourcePool::AutoscalingSpec]
-        #     Optional. Optional spec to configure GKE autoscaling
+        #     Optional. Optional spec to configure GKE or Ray-on-Vertex autoscaling
         class ResourcePool
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -175,7 +175,13 @@ module Google
           # @!attribute [rw] min_replica_count
           #   @return [::Integer]
           #     Optional. min replicas in the node pool,
-          #     must be ≤ replica_count and < max_replica_count or will throw error
+          #     must be ≤ replica_count and < max_replica_count or will throw error.
+          #     For autoscaling enabled Ray-on-Vertex, we allow min_replica_count of a
+          #     resource_pool to be 0 to match the OSS Ray
+          #     behavior(https://docs.ray.io/en/latest/cluster/vms/user-guides/configuring-autoscaling.html#cluster-config-parameters).
+          #     As for Persistent Resource, the min_replica_count must be > 0, we added
+          #     a corresponding validation inside
+          #     CreatePersistentResourceRequestValidator.java.
           # @!attribute [rw] max_replica_count
           #   @return [::Integer]
           #     Optional. max replicas in the node pool,

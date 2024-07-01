@@ -892,6 +892,46 @@
       ]
     },
     {
+      "region_tag": "aiplatform_v1_generated_DeploymentResourcePoolService_UpdateDeploymentResourcePool_sync",
+      "title": "Snippet for the update_deployment_resource_pool call in the DeploymentResourcePoolService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Client#update_deployment_resource_pool.",
+      "file": "deployment_resource_pool_service/update_deployment_resource_pool.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_deployment_resource_pool",
+        "full_name": "::Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Client#update_deployment_resource_pool",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::UpdateDeploymentResourcePoolRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DeploymentResourcePoolService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Client"
+        },
+        "method": {
+          "short_name": "UpdateDeploymentResourcePool",
+          "full_name": "google.cloud.aiplatform.v1.DeploymentResourcePoolService.UpdateDeploymentResourcePool",
+          "service": {
+            "short_name": "DeploymentResourcePoolService",
+            "full_name": "google.cloud.aiplatform.v1.DeploymentResourcePoolService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "aiplatform_v1_generated_DeploymentResourcePoolService_DeleteDeploymentResourcePool_sync",
       "title": "Snippet for the delete_deployment_resource_pool call in the DeploymentResourcePoolService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Client#delete_deployment_resource_pool.",

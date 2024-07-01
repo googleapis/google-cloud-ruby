@@ -97,6 +97,23 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for UpdateDeploymentResourcePool method.
+        # @!attribute [rw] deployment_resource_pool
+        #   @return [::Google::Cloud::AIPlatform::V1::DeploymentResourcePool]
+        #     Required. The DeploymentResourcePool to update.
+        #
+        #     The DeploymentResourcePool's `name` field is used to identify the
+        #     DeploymentResourcePool to update.
+        #     Format:
+        #     `projects/{project}/locations/{location}/deploymentResourcePools/{deployment_resource_pool}`
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The list of fields to update.
+        class UpdateDeploymentResourcePoolRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Runtime operation information for UpdateDeploymentResourcePool method.
         # @!attribute [rw] generic_metadata
         #   @return [::Google::Cloud::AIPlatform::V1::GenericOperationMetadata]

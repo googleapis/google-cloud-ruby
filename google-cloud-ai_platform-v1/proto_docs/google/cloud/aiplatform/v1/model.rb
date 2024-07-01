@@ -299,6 +299,12 @@ module Google
         #   @return [::Google::Cloud::AIPlatform::V1::Model::BaseModelSource]
         #     Optional. User input field to specify the base model source. Currently it
         #     only supports specifing the Model Garden models and Genie models.
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
+        # @!attribute [r] satisfies_pzi
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
         class Model
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

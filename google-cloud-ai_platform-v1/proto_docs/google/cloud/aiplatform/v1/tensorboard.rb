@@ -77,6 +77,12 @@ module Google
         #     Creation of a default TensorBoard instance and updating an existing
         #     TensorBoard instance to be default will mark all other TensorBoard
         #     instances (if any) as non default.
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
+        # @!attribute [r] satisfies_pzi
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
         class Tensorboard
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

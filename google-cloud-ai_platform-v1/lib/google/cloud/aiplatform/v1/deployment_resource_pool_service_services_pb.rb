@@ -39,6 +39,8 @@ module Google
             rpc :GetDeploymentResourcePool, ::Google::Cloud::AIPlatform::V1::GetDeploymentResourcePoolRequest, ::Google::Cloud::AIPlatform::V1::DeploymentResourcePool
             # List DeploymentResourcePools in a location.
             rpc :ListDeploymentResourcePools, ::Google::Cloud::AIPlatform::V1::ListDeploymentResourcePoolsRequest, ::Google::Cloud::AIPlatform::V1::ListDeploymentResourcePoolsResponse
+            # Update a DeploymentResourcePool.
+            rpc :UpdateDeploymentResourcePool, ::Google::Cloud::AIPlatform::V1::UpdateDeploymentResourcePoolRequest, ::Google::Longrunning::Operation
             # Delete a DeploymentResourcePool.
             rpc :DeleteDeploymentResourcePool, ::Google::Cloud::AIPlatform::V1::DeleteDeploymentResourcePoolRequest, ::Google::Longrunning::Operation
             # List DeployedModels that have been deployed on this DeploymentResourcePool.

@@ -556,6 +556,7 @@
     "snippets/deployment_resource_pool_service/get_deployment_resource_pool.rb",
     "snippets/deployment_resource_pool_service/list_deployment_resource_pools.rb",
     "snippets/deployment_resource_pool_service/query_deployed_models.rb",
+    "snippets/deployment_resource_pool_service/update_deployment_resource_pool.rb",
     "snippets/endpoint_service/create_endpoint.rb",
     "snippets/endpoint_service/delete_endpoint.rb",
     "snippets/endpoint_service/deploy_model.rb",
