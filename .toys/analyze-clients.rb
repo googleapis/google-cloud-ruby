@@ -99,17 +99,43 @@ def gem_version gem_name
 end
 
 def gem_age gem_name
-  now = Time.now.to_i
   @gem_ages ||= {}
   @gem_ages[gem_name] ||= begin
     content = File.read File.join gem_name, "CHANGELOG.md"
-    date = content.scan(/### \d+\.\d+\.\d+ (?:\/ |\()(\d\d\d\d)-(\d\d)-(\d\d)/).last
+    date = content.scan(date_regexp).last
     if date
-      (now - Time.new(*date.map(&:to_i)).to_i) / 86_400
+      date_to_age date
     else
       0
     end
   end
+end
+
+def gem_last_breaking_change_age gem_name
+  @gem_breaking_change_ages ||= {}
+  @gem_breaking_change_ages[gem_name] ||= begin
+    date = nil
+    has_breaking_change = false
+    File.open(File.join(gem_name, "CHANGELOG.md")).each do |line|
+      if line =~ date_regexp
+        match = Regexp.last_match
+        date = [match[:year], match[:month], match[:day]]
+      end
+      if line =~ /BREAKING CHANGE/
+        has_breaking_change = true
+        break
+      end
+    end
+    date && has_breaking_change ? date_to_age(date) : 0
+  end
+end
+
+def date_regexp
+  %r{### \d+\.\d+\.\d+ (?:/ |\()(?<year>\d\d\d\d)-(?<month>\d\d)-(?<day>\d\d)}
+end
+
+def date_to_age date
+  (Time.now.to_i - Time.new(*date.map(&:to_i)).to_i) / 86_400
 end
 
 def unreleased_analysis
@@ -158,13 +184,18 @@ def generic_prerelease_analysis gem_names
     version = gem_version name
     next unless version.start_with? "0."
     age = gem_age name
-    results << [name, version, age] if age && age > 30
+    breaking_change_age = gem_last_breaking_change_age name
+    results << [name, version, age, breaking_change_age] if age && age > 30
   end
   results.sort_by! { |elem| elem[2] }
 
   puts "Results:", :cyan
-  results.reverse_each do |(name, version, age)|
-    puts "#{name} #{version} (#{age} days)"
+  results.reverse_each do |(name, version, age, breaking_change_age)|
+    result = "#{name} #{version} (#{age} days)"
+    if breaking_change_age.positive? && breaking_change_age < 90
+      result += " !!! LAST BREAKING CHANGE: #{breaking_change_age} days ago !!!"
+    end
+    puts result
   end
   puts "Total: #{results.size}", :cyan
 end
