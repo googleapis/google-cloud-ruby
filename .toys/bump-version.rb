@@ -84,7 +84,7 @@ def open_change_pr
   salt = format "%06d", rand(1_000_000)
   branch_name = "bump/#{timestamp}-#{salt}"
   message = "feat: #{changelog_entry}"
-  pr_body = "Trivial change via bump-version tool"
+  pr_body = "Release-As: #{gem_version}"
   result = yoshi_pr_generator.capture enabled: !git_remote.nil?,
                                       remote: git_remote,
                                       branch_name: branch_name,
