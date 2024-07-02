@@ -232,6 +232,9 @@ module Google
             #   @return [::String]
             #     Optional. The name of the deploy task (e.g., "text to image
             #     generation").
+            # @!attribute [rw] deploy_metadata
+            #   @return [::Google::Cloud::AIPlatform::V1::PublisherModel::CallToAction::Deploy::DeployMetadata]
+            #     Optional. Metadata information about this deployment config.
             # @!attribute [rw] title
             #   @return [::String]
             #     Required. The title of the regional resource reference.
@@ -242,6 +245,26 @@ module Google
             class Deploy
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Metadata information about the deployment for managing deployment
+              # config.
+              # @!attribute [rw] labels
+              #   @return [::Google::Protobuf::Map{::String => ::String}]
+              #     Optional. Labels for the deployment. For managing deployment config
+              #     like verifying, source of deployment config, etc.
+              class DeployMetadata
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+
+                # @!attribute [rw] key
+                #   @return [::String]
+                # @!attribute [rw] value
+                #   @return [::String]
+                class LabelsEntry
+                  include ::Google::Protobuf::MessageExts
+                  extend ::Google::Protobuf::MessageExts::ClassMethods
+                end
+              end
             end
 
             # Configurations for PublisherModel GKE deployment
