@@ -18,7 +18,7 @@ themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-parallelstore-v1beta](https://cloud.google.com/ruby/docs/reference/google-cloud-parallelstore-v1beta/latest).
 
-See also the [Product Documentation](https://cloud.google.com/parallelstore)
+See also the [Product Documentation](https://cloud.google.com/parallelstore?hl=en)
 for more usage information.
 
 ## Quick Start
