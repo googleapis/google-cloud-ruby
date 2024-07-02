@@ -711,7 +711,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload import_data(source_gcs_bucket: nil, destination_parallelstore: nil, name: nil, request_id: nil)
+              # @overload import_data(source_gcs_bucket: nil, destination_parallelstore: nil, name: nil, request_id: nil, service_account: nil)
               #   Pass arguments to `import_data` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -736,6 +736,12 @@ module Google
               #
               #     The request ID must be a valid UUID with the exception that zero UUID is
               #     not supported (00000000-0000-0000-0000-000000000000).
+              #   @param service_account [::String]
+              #     Optional. User-specified Service Account (SA) credentials to be used when
+              #     performing the transfer.
+              #     Format: `projects/{project_id}/serviceAccounts/{service_account}`
+              #     If unspecified, the Parallelstore service agent is used:
+              #     service-<PROJECT_NUMBER>@gcp-sa-parallelstore.iam.gserviceaccount.com)
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -816,7 +822,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload export_data(source_parallelstore: nil, destination_gcs_bucket: nil, name: nil, request_id: nil)
+              # @overload export_data(source_parallelstore: nil, destination_gcs_bucket: nil, name: nil, request_id: nil, service_account: nil)
               #   Pass arguments to `export_data` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -841,6 +847,12 @@ module Google
               #
               #     The request ID must be a valid UUID with the exception that zero UUID is
               #     not supported (00000000-0000-0000-0000-000000000000).
+              #   @param service_account [::String]
+              #     Optional. User-specified Service Account (SA) credentials to be used when
+              #     performing the transfer.
+              #     Format: `projects/{project_id}/serviceAccounts/{service_account}`
+              #     If unspecified, the Parallelstore service agent is used:
+              #     service-<PROJECT_NUMBER>@gcp-sa-parallelstore.iam.gserviceaccount.com)
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

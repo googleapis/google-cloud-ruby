@@ -80,4 +80,16 @@ class ::Google::Cloud::Parallelstore::V1beta::Parallelstore::ClientPathsTest < M
       assert_equal "projects/value0/global/networks/value1", path
     end
   end
+
+  def test_service_account_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Parallelstore::V1beta::Parallelstore::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.service_account_path project: "value0", service_account: "value1"
+      assert_equal "projects/value0/serviceAccounts/value1", path
+    end
+  end
 end
