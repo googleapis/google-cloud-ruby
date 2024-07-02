@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.0.0 (2024-07-01)
+
+#### Features
+
+* Bump version to 1.0.0 
+
 ### 0.1.1 (2024-06-25)
 
 #### Documentation
