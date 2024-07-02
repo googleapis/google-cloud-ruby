@@ -1,0 +1,17 @@
+{
+    "api_id": "parallelstore.googleapis.com",
+    "api_shortname": "parallelstore",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-parallelstore/latest",
+    "distribution_name": "google-cloud-parallelstore",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "parallelstore",
+    "name_pretty": "Parallelstore API",
+    "product_documentation": "https://cloud.google.com/parallelstore?hl=en",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "google-cloud-parallelstore is the official client library for the Parallelstore API.",
+    "ruby-cloud-product-url": "https://cloud.google.com/parallelstore?hl=en",
+    "library_type": "GAPIC_AUTO"
+}
