@@ -365,6 +365,13 @@ module Google
         #
         #     The request ID must be a valid UUID with the exception that zero UUID is
         #     not supported (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] service_account
+        #   @return [::String]
+        #     Optional. User-specified Service Account (SA) credentials to be used when
+        #     performing the transfer.
+        #     Format: `projects/{project_id}/serviceAccounts/{service_account}`
+        #     If unspecified, the Parallelstore service agent is used:
+        #     service-<PROJECT_NUMBER>@gcp-sa-parallelstore.iam.gserviceaccount.com)
         class ImportDataRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -396,6 +403,13 @@ module Google
         #
         #     The request ID must be a valid UUID with the exception that zero UUID is
         #     not supported (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] service_account
+        #   @return [::String]
+        #     Optional. User-specified Service Account (SA) credentials to be used when
+        #     performing the transfer.
+        #     Format: `projects/{project_id}/serviceAccounts/{service_account}`
+        #     If unspecified, the Parallelstore service agent is used:
+        #     service-<PROJECT_NUMBER>@gcp-sa-parallelstore.iam.gserviceaccount.com)
         class ExportDataRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

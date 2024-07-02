@@ -40,7 +40,7 @@ response = client.list_instances request
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-parallelstore-v1beta/latest)
 for class and method documentation.
 
-See also the [Product Documentation](https://cloud.google.com/parallelstore)
+See also the [Product Documentation](https://cloud.google.com/parallelstore?hl=en)
 for general usage information.
 
 ## Enabling Logging

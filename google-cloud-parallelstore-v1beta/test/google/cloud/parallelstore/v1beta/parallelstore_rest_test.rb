@@ -362,6 +362,7 @@ class ::Google::Cloud::Parallelstore::V1beta::Parallelstore::Rest::ClientTest < 
     destination_parallelstore = {}
     name = "hello world"
     request_id = "hello world"
+    service_account = "hello world"
 
     import_data_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -377,27 +378,27 @@ class ::Google::Cloud::Parallelstore::V1beta::Parallelstore::Rest::ClientTest < 
         end
 
         # Use hash object
-        client.import_data({ source_gcs_bucket: source_gcs_bucket, destination_parallelstore: destination_parallelstore, name: name, request_id: request_id }) do |_result, response|
+        client.import_data({ source_gcs_bucket: source_gcs_bucket, destination_parallelstore: destination_parallelstore, name: name, request_id: request_id, service_account: service_account }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.import_data source_gcs_bucket: source_gcs_bucket, destination_parallelstore: destination_parallelstore, name: name, request_id: request_id do |_result, response|
+        client.import_data source_gcs_bucket: source_gcs_bucket, destination_parallelstore: destination_parallelstore, name: name, request_id: request_id, service_account: service_account do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.import_data ::Google::Cloud::Parallelstore::V1beta::ImportDataRequest.new(source_gcs_bucket: source_gcs_bucket, destination_parallelstore: destination_parallelstore, name: name, request_id: request_id) do |_result, response|
+        client.import_data ::Google::Cloud::Parallelstore::V1beta::ImportDataRequest.new(source_gcs_bucket: source_gcs_bucket, destination_parallelstore: destination_parallelstore, name: name, request_id: request_id, service_account: service_account) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.import_data({ source_gcs_bucket: source_gcs_bucket, destination_parallelstore: destination_parallelstore, name: name, request_id: request_id }, call_options) do |_result, response|
+        client.import_data({ source_gcs_bucket: source_gcs_bucket, destination_parallelstore: destination_parallelstore, name: name, request_id: request_id, service_account: service_account }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.import_data(::Google::Cloud::Parallelstore::V1beta::ImportDataRequest.new(source_gcs_bucket: source_gcs_bucket, destination_parallelstore: destination_parallelstore, name: name, request_id: request_id), call_options) do |_result, response|
+        client.import_data(::Google::Cloud::Parallelstore::V1beta::ImportDataRequest.new(source_gcs_bucket: source_gcs_bucket, destination_parallelstore: destination_parallelstore, name: name, request_id: request_id, service_account: service_account), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -419,6 +420,7 @@ class ::Google::Cloud::Parallelstore::V1beta::Parallelstore::Rest::ClientTest < 
     destination_gcs_bucket = {}
     name = "hello world"
     request_id = "hello world"
+    service_account = "hello world"
 
     export_data_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -434,27 +436,27 @@ class ::Google::Cloud::Parallelstore::V1beta::Parallelstore::Rest::ClientTest < 
         end
 
         # Use hash object
-        client.export_data({ source_parallelstore: source_parallelstore, destination_gcs_bucket: destination_gcs_bucket, name: name, request_id: request_id }) do |_result, response|
+        client.export_data({ source_parallelstore: source_parallelstore, destination_gcs_bucket: destination_gcs_bucket, name: name, request_id: request_id, service_account: service_account }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.export_data source_parallelstore: source_parallelstore, destination_gcs_bucket: destination_gcs_bucket, name: name, request_id: request_id do |_result, response|
+        client.export_data source_parallelstore: source_parallelstore, destination_gcs_bucket: destination_gcs_bucket, name: name, request_id: request_id, service_account: service_account do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.export_data ::Google::Cloud::Parallelstore::V1beta::ExportDataRequest.new(source_parallelstore: source_parallelstore, destination_gcs_bucket: destination_gcs_bucket, name: name, request_id: request_id) do |_result, response|
+        client.export_data ::Google::Cloud::Parallelstore::V1beta::ExportDataRequest.new(source_parallelstore: source_parallelstore, destination_gcs_bucket: destination_gcs_bucket, name: name, request_id: request_id, service_account: service_account) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.export_data({ source_parallelstore: source_parallelstore, destination_gcs_bucket: destination_gcs_bucket, name: name, request_id: request_id }, call_options) do |_result, response|
+        client.export_data({ source_parallelstore: source_parallelstore, destination_gcs_bucket: destination_gcs_bucket, name: name, request_id: request_id, service_account: service_account }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.export_data(::Google::Cloud::Parallelstore::V1beta::ExportDataRequest.new(source_parallelstore: source_parallelstore, destination_gcs_bucket: destination_gcs_bucket, name: name, request_id: request_id), call_options) do |_result, response|
+        client.export_data(::Google::Cloud::Parallelstore::V1beta::ExportDataRequest.new(source_parallelstore: source_parallelstore, destination_gcs_bucket: destination_gcs_bucket, name: name, request_id: request_id, service_account: service_account), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

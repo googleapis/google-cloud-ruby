@@ -96,6 +96,23 @@ module Google
               "projects/#{project}/global/networks/#{network}"
             end
 
+            ##
+            # Create a fully-qualified ServiceAccount resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/serviceAccounts/{service_account}`
+            #
+            # @param project [String]
+            # @param service_account [String]
+            #
+            # @return [::String]
+            def service_account_path project:, service_account:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+              "projects/#{project}/serviceAccounts/#{service_account}"
+            end
+
             extend self
           end
         end
