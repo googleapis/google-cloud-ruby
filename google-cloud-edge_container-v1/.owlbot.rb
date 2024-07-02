@@ -13,6 +13,8 @@
 # limitations under the License.
 
 # OwlBot script for google-cloud-edge_container-v1
+# Remove a spurious link to a class in a different gem.
+# See https://github.com/googleapis/gapic-generator-ruby/issues/824
 OwlBot.modifier path: "proto_docs/google/cloud/edgecontainer/v1/resources.rb" do |content|
   content.gsub "{::Google::Cloud::Location::Location google.cloud.location.Location}",
                "`::Google::Cloud::Location::Location`"
