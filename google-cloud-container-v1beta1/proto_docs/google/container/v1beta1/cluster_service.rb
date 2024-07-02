@@ -5238,6 +5238,7 @@ module Google
             # Gateway API support is disabled
             CHANNEL_DISABLED = 1
 
+            # Deprecated: use CHANNEL_STANDARD instead.
             # Gateway API support is enabled, experimental CRDs are installed
             CHANNEL_EXPERIMENTAL = 3
 
