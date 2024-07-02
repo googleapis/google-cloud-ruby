@@ -667,6 +667,10 @@
       "component": "google-cloud-domains-v1beta1",
       "version_file": "lib/google/cloud/domains/v1beta1/version.rb"
     },
+    "google-cloud-edge_container": {
+      "component": "google-cloud-edge_container",
+      "version_file": "lib/google/cloud/edge_container/version.rb"
+    },
     "google-cloud-edge_container-v1": {
       "component": "google-cloud-edge_container-v1",
       "version_file": "lib/google/cloud/edge_container/v1/version.rb"
