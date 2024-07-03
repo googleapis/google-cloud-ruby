@@ -76,6 +76,9 @@ end
 flag :enable_tests, "--test" do
   desc "Run CI on each library"
 end
+flag :enable_bazelisk, "--bazelisk" do
+  desc "Enable running bazel commands with bazelisk"
+end
 
 OWLBOT_CONFIG_FILE_NAME = ".OwlBot.yaml"
 OWLBOT_CLI_IMAGE = "gcr.io/cloud-devrel-public-resources/owlbot-cli"
@@ -199,12 +202,13 @@ def determine_bazel_target library_path
 end
 
 def run_bazel gem_info
+  bazel_alias = enable_bazelisk ? "bazelisk" : "bazel"
   gem_info.each_value do |info|
     info[:bazel_targets].each do |library_path, bazel_target|
-      exec ["bazel", "build", "//#{library_path}:#{bazel_target}"], chdir: bazel_base_dir
+      exec [bazel_alias, "build", "//#{library_path}:#{bazel_target}"], chdir: bazel_base_dir
     end
   end
-  source_dir = capture(["bazel", "info", "bazel-bin"], chdir: bazel_base_dir).chomp
+  source_dir = capture([bazel_alias, "info", "bazel-bin"], chdir: bazel_base_dir).chomp
   temp_dir = Dir.mktmpdir
   at_exit { FileUtils.rm_rf temp_dir }
   results_dir = File.join temp_dir, "bazel-bin"
