@@ -129,12 +129,16 @@ class ::Google::Cloud::AIPlatform::V1::LlmUtilityService::ClientTest < Minitest:
     # Create request parameters for a unary method.
     endpoint = "hello world"
     instances = [{}]
+    model = "hello world"
+    contents = [{}]
 
     compute_tokens_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :compute_tokens, name
       assert_kind_of ::Google::Cloud::AIPlatform::V1::ComputeTokensRequest, request
       assert_equal "hello world", request["endpoint"]
       assert_kind_of ::Google::Protobuf::Value, request["instances"].first
+      assert_equal "hello world", request["model"]
+      assert_kind_of ::Google::Cloud::AIPlatform::V1::Content, request["contents"].first
       refute_nil options
     end
 
@@ -145,31 +149,31 @@ class ::Google::Cloud::AIPlatform::V1::LlmUtilityService::ClientTest < Minitest:
       end
 
       # Use hash object
-      client.compute_tokens({ endpoint: endpoint, instances: instances }) do |response, operation|
+      client.compute_tokens({ endpoint: endpoint, instances: instances, model: model, contents: contents }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.compute_tokens endpoint: endpoint, instances: instances do |response, operation|
+      client.compute_tokens endpoint: endpoint, instances: instances, model: model, contents: contents do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.compute_tokens ::Google::Cloud::AIPlatform::V1::ComputeTokensRequest.new(endpoint: endpoint, instances: instances) do |response, operation|
+      client.compute_tokens ::Google::Cloud::AIPlatform::V1::ComputeTokensRequest.new(endpoint: endpoint, instances: instances, model: model, contents: contents) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.compute_tokens({ endpoint: endpoint, instances: instances }, grpc_options) do |response, operation|
+      client.compute_tokens({ endpoint: endpoint, instances: instances, model: model, contents: contents }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.compute_tokens(::Google::Cloud::AIPlatform::V1::ComputeTokensRequest.new(endpoint: endpoint, instances: instances), grpc_options) do |response, operation|
+      client.compute_tokens(::Google::Cloud::AIPlatform::V1::ComputeTokensRequest.new(endpoint: endpoint, instances: instances, model: model, contents: contents), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

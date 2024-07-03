@@ -28,9 +28,17 @@ module Google
         #     token ids.
         # @!attribute [rw] instances
         #   @return [::Array<::Google::Protobuf::Value>]
-        #     Required. The instances that are the input to token computing API call.
+        #     Optional. The instances that are the input to token computing API call.
         #     Schema is identical to the prediction schema of the text model, even for
         #     the non-text models, like chat models, or Codey models.
+        # @!attribute [rw] model
+        #   @return [::String]
+        #     Optional. The name of the publisher model requested to serve the
+        #     prediction. Format:
+        #     projects/\\{project}/locations/\\{location}/publishers/*/models/*
+        # @!attribute [rw] contents
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::Content>]
+        #     Optional. Input content.
         class ComputeTokensRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -43,6 +51,9 @@ module Google
         # @!attribute [rw] token_ids
         #   @return [::Array<::Integer>]
         #     A list of token ids from the input.
+        # @!attribute [rw] role
+        #   @return [::String]
+        #     Optional. Optional fields for the role from the corresponding Content.
         class TokensInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
