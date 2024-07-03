@@ -62,6 +62,11 @@ module Google
           # @!attribute [rw] sharing_environment_config
           #   @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::SharingEnvironmentConfig]
           #     Optional. Configurable data sharing environment option for a data exchange.
+          # @!attribute [rw] discovery_type
+          #   @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::DiscoveryType]
+          #     Optional. Type of discovery on the discovery page for all the listings
+          #     under this exchange. Updating this field also updates (overwrites) the
+          #     discovery_type field for all the listings under this exchange.
           class DataExchange
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -242,6 +247,9 @@ module Google
           #   @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::Listing::RestrictedExportConfig]
           #     Optional. If set, restricted export configuration will be propagated and
           #     enforced on the linked dataset.
+          # @!attribute [rw] discovery_type
+          #   @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::DiscoveryType]
+          #     Optional. Type of discovery of the listing on the discovery page.
           class Listing
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -262,6 +270,10 @@ module Google
             #     Optional. Resources in this dataset that are selectively shared.
             #     If this field is empty, then the entire dataset (all resources) are
             #     shared. This field is only valid for data clean room exchanges.
+            # @!attribute [rw] restricted_export_policy
+            #   @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::Listing::BigQueryDatasetSource::RestrictedExportPolicy]
+            #     Optional. If set, restricted export policy will be propagated and
+            #     enforced on the linked dataset.
             class BigQueryDatasetSource
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -274,6 +286,24 @@ module Google
               #     `projects/{projectId}/datasets/{datasetId}/tables/{tableId}`
               #     Example:"projects/test_project/datasets/test_dataset/tables/test_table"
               class SelectedResource
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
+              # Restricted export policy used to configure restricted export on linked
+              # dataset.
+              # @!attribute [rw] enabled
+              #   @return [::Google::Protobuf::BoolValue]
+              #     Optional. If true, enable restricted export.
+              # @!attribute [rw] restrict_direct_table_access
+              #   @return [::Google::Protobuf::BoolValue]
+              #     Optional. If true, restrict direct table access (read
+              #     api/tabledata.list) on linked table.
+              # @!attribute [rw] restrict_query_result
+              #   @return [::Google::Protobuf::BoolValue]
+              #     Optional. If true, restrict export of query result derived from
+              #     restricted linked dataset table.
+              class RestrictedExportPolicy
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
               end
@@ -637,7 +667,7 @@ module Google
           # Message for subscribing to a listing.
           # @!attribute [rw] destination_dataset
           #   @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::DestinationDataset]
-          #     BigQuery destination dataset to create for the subscriber.
+          #     Input only. BigQuery destination dataset to create for the subscriber.
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. Resource name of the listing that you want to subscribe to.
@@ -722,7 +752,21 @@ module Google
           #     e.g. projects/myproject/locations/US
           # @!attribute [rw] filter
           #   @return [::String]
-          #     The filter expression may be used to filter by Data Exchange or Listing.
+          #     An expression for filtering the results of the request. Eligible
+          #     fields for filtering are:
+          #
+          #      * `listing`
+          #      * `data_exchange`
+          #
+          #     Alternatively, a literal wrapped in double quotes may be provided.
+          #     This will be checked for an exact match against both fields above.
+          #
+          #     In all cases, the full Data Exchange or Listing resource name must
+          #     be provided. Some example of using filters:
+          #
+          #      * data_exchange="projects/myproject/locations/us/dataExchanges/123"
+          #      * listing="projects/123/locations/us/dataExchanges/456/listings/789"
+          #      * "projects/myproject/locations/us/dataExchanges/123"
           # @!attribute [rw] page_size
           #   @return [::Integer]
           #     The maximum number of results to return in a single response page.
@@ -835,6 +879,22 @@ module Google
           class OperationMetadata
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Specifies the type of discovery on the discovery page. Note that
+          # this does not control the visibility of the exchange/listing which is
+          # defined by IAM permission.
+          module DiscoveryType
+            # Unspecified. Defaults to DISCOVERY_TYPE_PRIVATE.
+            DISCOVERY_TYPE_UNSPECIFIED = 0
+
+            # The Data exchange/listing can be discovered in the 'Private' results
+            # list.
+            DISCOVERY_TYPE_PRIVATE = 1
+
+            # The Data exchange/listing can be discovered in the 'Public' results
+            # list.
+            DISCOVERY_TYPE_PUBLIC = 2
           end
         end
       end
