@@ -165,6 +165,9 @@ module Google
             # Lists spaces visible to the caller or authenticated user. Group chats
             # and DMs aren't listed until the first message is sent.
             #
+            # To list all named spaces by Google Workspace organization, use the
+            # [`spaces.search()`](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces/search)
+            # method using Workspace administrator privileges instead.
             rpc :ListSpaces, ::Google::Apps::Chat::V1::ListSpacesRequest, ::Google::Apps::Chat::V1::ListSpacesResponse
             # Returns details about a space. For an example, see
             # [Get details about a

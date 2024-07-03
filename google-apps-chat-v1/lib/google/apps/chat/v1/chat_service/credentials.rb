@@ -26,6 +26,11 @@ module Google
           # Credentials for the ChatService API.
           class Credentials < ::Google::Auth::Credentials
             self.scope = [
+              "https://www.googleapis.com/auth/chat.admin.delete",
+              "https://www.googleapis.com/auth/chat.admin.memberships",
+              "https://www.googleapis.com/auth/chat.admin.memberships.readonly",
+              "https://www.googleapis.com/auth/chat.admin.spaces",
+              "https://www.googleapis.com/auth/chat.admin.spaces.readonly",
               "https://www.googleapis.com/auth/chat.bot",
               "https://www.googleapis.com/auth/chat.delete",
               "https://www.googleapis.com/auth/chat.import",

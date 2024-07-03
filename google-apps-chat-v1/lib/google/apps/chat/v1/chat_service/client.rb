@@ -662,16 +662,23 @@ module Google
             #
             #     To filter by role, set `role` to `ROLE_MEMBER` or `ROLE_MANAGER`.
             #
-            #     To filter by type, set `member.type` to `HUMAN` or `BOT`.
+            #     To filter by type, set `member.type` to `HUMAN` or `BOT`. Developer
+            #     Preview: You can also filter for `member.type` using the `!=` operator.
             #
             #     To filter by both role and type, use the `AND` operator. To filter by
             #     either role or type, use the `OR` operator.
+            #
+            #     Either `member.type = "HUMAN"` or `member.type != "BOT"` is required
+            #     when `use_admin_access` is set to true. Other member type filters will be
+            #     rejected.
             #
             #     For example, the following queries are valid:
             #
             #     ```
             #     role = "ROLE_MANAGER" OR role = "ROLE_MEMBER"
             #     member.type = "HUMAN" AND role = "ROLE_MANAGER"
+            #
+            #     member.type != "BOT"
             #     ```
             #
             #     The following queries are invalid:
@@ -680,7 +687,6 @@ module Google
             #     member.type = "HUMAN" AND member.type = "BOT"
             #     role = "ROLE_MANAGER" AND role = "ROLE_MEMBER"
             #     ```
-            #
             #
             #     Invalid queries are rejected by the server with an `INVALID_ARGUMENT`
             #     error.
@@ -1249,7 +1255,7 @@ module Google
             #
             #   @param name [::String]
             #     Required. Resource name of the attachment, in the form
-            #     `spaces/*/messages/*/attachments/*`.
+            #     `spaces/{space}/messages/{message}/attachments/{attachment}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Apps::Chat::V1::Attachment]
@@ -1430,6 +1436,10 @@ module Google
             # Lists spaces visible to the caller or authenticated user. Group chats
             # and DMs aren't listed until the first message is sent.
             #
+            # To list all named spaces by Google Workspace organization, use the
+            # [`spaces.search()`](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces/search)
+            # method using Workspace administrator privileges instead.
+            #
             # @overload list_spaces(request, options = nil)
             #   Pass arguments to `list_spaces` via a request object, either of type
             #   {::Google::Apps::Chat::V1::ListSpacesRequest} or an equivalent Hash.
@@ -1573,7 +1583,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. Resource name of the space, in the form "spaces/*".
+            #     Required. Resource name of the space, in the form `spaces/{space}`.
             #
             #     Format: `spaces/{space}`
             #
@@ -1985,6 +1995,7 @@ module Google
             #     the display name is optional if the existing space already has the `SPACE`
             #     type. Trying to update the space type in other ways results in an invalid
             #     argument error).
+            #     `space_type` is not supported with admin access.
             #
             #     - `space_details`
             #
@@ -1993,12 +2004,27 @@ module Google
             #     allows users to change their history
             #     setting](https://support.google.com/a/answer/7664184).
             #     Warning: mutually exclusive with all other field paths.)
+            #     `space_history_state` is not supported with admin access.
             #
-            #     - Developer Preview: `access_settings.audience` (Supports changing the
-            #     [access setting](https://support.google.com/chat/answer/11971020) of a
-            #     space. If no audience is specified in the access setting, the space's
-            #     access setting is updated to restricted. Warning: mutually exclusive with
-            #     all other field paths.)
+            #     - `access_settings.audience` (Supports changing the [access
+            #     setting](https://support.google.com/chat/answer/11971020) of who can
+            #     discover the space, join the space, and preview the messages in space. If
+            #     no audience is specified in the access setting, the space's access setting
+            #     is updated to private. Warning: mutually exclusive with all other field
+            #     paths.)
+            #     `access_settings.audience` is not supported with admin access.
+            #
+            #     - Developer Preview: Supports changing the [permission
+            #     settings](https://support.google.com/chat/answer/13340792) of a space,
+            #     supported field paths
+            #     include: `permission_settings.manage_members_and_groups`,
+            #     `permission_settings.modify_space_details`,
+            #     `permission_settings.toggle_history`,
+            #     `permission_settings.use_at_mention_all`,
+            #     `permission_settings.manage_apps`, `permission_settings.manage_webhooks`,
+            #     `permission_settings.reply_messages`
+            #      (Warning: mutually exclusive with all other non-permission settings field
+            #     paths). `permission_settings` is not supported with admin access.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Apps::Chat::V1::Space]
