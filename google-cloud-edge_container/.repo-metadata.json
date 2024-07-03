@@ -8,7 +8,7 @@
     "name": "edgecontainer",
     "name_pretty": "Distributed Cloud Edge Container API",
     "product_documentation": "https://cloud.google.com/distributed-cloud/edge/latest/docs/overview",
-    "release_level": "unreleased",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "google-cloud-edge_container is the official client library for the Distributed Cloud Edge Container API.",
