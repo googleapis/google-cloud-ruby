@@ -132,6 +132,86 @@
       ]
     },
     {
+      "region_tag": "discoveryengine_v1_generated_CompletionService_ImportCompletionSuggestions_sync",
+      "title": "Snippet for the import_completion_suggestions call in the CompletionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::CompletionService::Client#import_completion_suggestions.",
+      "file": "completion_service/import_completion_suggestions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "import_completion_suggestions",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1::CompletionService::Client#import_completion_suggestions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1::ImportCompletionSuggestionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CompletionService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1::CompletionService::Client"
+        },
+        "method": {
+          "short_name": "ImportCompletionSuggestions",
+          "full_name": "google.cloud.discoveryengine.v1.CompletionService.ImportCompletionSuggestions",
+          "service": {
+            "short_name": "CompletionService",
+            "full_name": "google.cloud.discoveryengine.v1.CompletionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1_generated_CompletionService_PurgeCompletionSuggestions_sync",
+      "title": "Snippet for the purge_completion_suggestions call in the CompletionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::CompletionService::Client#purge_completion_suggestions.",
+      "file": "completion_service/purge_completion_suggestions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "purge_completion_suggestions",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1::CompletionService::Client#purge_completion_suggestions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1::PurgeCompletionSuggestionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CompletionService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1::CompletionService::Client"
+        },
+        "method": {
+          "short_name": "PurgeCompletionSuggestions",
+          "full_name": "google.cloud.discoveryengine.v1.CompletionService.PurgeCompletionSuggestions",
+          "service": {
+            "short_name": "CompletionService",
+            "full_name": "google.cloud.discoveryengine.v1.CompletionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "discoveryengine_v1_generated_ControlService_CreateControl_sync",
       "title": "Snippet for the create_control call in the ControlService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::ControlService::Client#create_control.",

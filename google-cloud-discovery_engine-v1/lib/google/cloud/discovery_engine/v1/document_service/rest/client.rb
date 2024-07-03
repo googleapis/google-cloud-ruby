@@ -696,7 +696,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload import_documents(inline_source: nil, gcs_source: nil, bigquery_source: nil, fhir_store_source: nil, spanner_source: nil, cloud_sql_source: nil, firestore_source: nil, bigtable_source: nil, parent: nil, error_config: nil, reconciliation_mode: nil, update_mask: nil, auto_generate_ids: nil, id_field: nil)
+              # @overload import_documents(inline_source: nil, gcs_source: nil, bigquery_source: nil, fhir_store_source: nil, spanner_source: nil, cloud_sql_source: nil, firestore_source: nil, alloy_db_source: nil, bigtable_source: nil, parent: nil, error_config: nil, reconciliation_mode: nil, update_mask: nil, auto_generate_ids: nil, id_field: nil)
               #   Pass arguments to `import_documents` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -715,6 +715,8 @@ module Google
               #     Cloud SQL input source.
               #   @param firestore_source [::Google::Cloud::DiscoveryEngine::V1::FirestoreSource, ::Hash]
               #     Firestore input source.
+              #   @param alloy_db_source [::Google::Cloud::DiscoveryEngine::V1::AlloyDbSource, ::Hash]
+              #     AlloyDB input source.
               #   @param bigtable_source [::Google::Cloud::DiscoveryEngine::V1::BigtableSource, ::Hash]
               #     Cloud Bigtable input source.
               #   @param parent [::String]

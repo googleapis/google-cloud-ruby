@@ -122,6 +122,48 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
+        # Request message for
+        # {::Google::Cloud::DiscoveryEngine::V1::CompletionService::Client#purge_completion_suggestions CompletionService.PurgeCompletionSuggestions}
+        # method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent data store resource name for which to purge completion
+        #     suggestions. Follows pattern
+        #     projects/*/locations/*/collections/*/dataStores/*.
+        class PurgeCompletionSuggestionsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::DiscoveryEngine::V1::CompletionService::Client#purge_completion_suggestions CompletionService.PurgeCompletionSuggestions}
+        # method.
+        # @!attribute [rw] purge_succeeded
+        #   @return [::Boolean]
+        #     Whether the completion suggestions were successfully purged.
+        # @!attribute [rw] error_samples
+        #   @return [::Array<::Google::Rpc::Status>]
+        #     A sample of errors encountered while processing the request.
+        class PurgeCompletionSuggestionsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Metadata related to the progress of the PurgeCompletionSuggestions
+        # operation. This is returned by the google.longrunning.Operation.metadata
+        # field.
+        # @!attribute [rw] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Operation create time.
+        # @!attribute [rw] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Operation last update time. If the operation is done, this is also the
+        #     finish time.
+        class PurgeCompletionSuggestionsMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
       end
     end
   end

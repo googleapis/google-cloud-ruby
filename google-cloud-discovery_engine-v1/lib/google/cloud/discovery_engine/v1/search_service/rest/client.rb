@@ -189,7 +189,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload search(serving_config: nil, branch: nil, query: nil, image_query: nil, page_size: nil, page_token: nil, offset: nil, data_store_specs: nil, filter: nil, canonical_filter: nil, order_by: nil, user_info: nil, facet_specs: nil, boost_spec: nil, params: nil, query_expansion_spec: nil, spell_correction_spec: nil, user_pseudo_id: nil, content_search_spec: nil, safe_search: nil, user_labels: nil)
+              # @overload search(serving_config: nil, branch: nil, query: nil, image_query: nil, page_size: nil, page_token: nil, offset: nil, data_store_specs: nil, filter: nil, canonical_filter: nil, order_by: nil, user_info: nil, language_code: nil, facet_specs: nil, boost_spec: nil, params: nil, query_expansion_spec: nil, spell_correction_spec: nil, user_pseudo_id: nil, content_search_spec: nil, safe_search: nil, user_labels: nil, search_as_you_type_spec: nil, session: nil, session_spec: nil)
               #   Pass arguments to `search` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -288,6 +288,12 @@ module Google
               #     Highly recommended for analytics.
               #     {::Google::Cloud::DiscoveryEngine::V1::UserInfo#user_agent UserInfo.user_agent}
               #     is used to deduce `device_type` for analytics.
+              #   @param language_code [::String]
+              #     The BCP-47 language code, such as "en-US" or "sr-Latn". For more
+              #     information, see [Standard
+              #     fields](https://cloud.google.com/apis/design/standard_fields). This field
+              #     helps to better interpret the query. If a value isn't specified, the query
+              #     language code is automatically detected, which may not be accurate.
               #   @param facet_specs [::Array<::Google::Cloud::DiscoveryEngine::V1::SearchRequest::FacetSpec, ::Hash>]
               #     Facet specifications for faceted search. If empty, no facets are returned.
               #
@@ -357,6 +363,41 @@ module Google
               #     See [Google Cloud
               #     Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
               #     for more details.
+              #   @param search_as_you_type_spec [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::SearchAsYouTypeSpec, ::Hash]
+              #     Search as you type configuration. Only supported for the
+              #     {::Google::Cloud::DiscoveryEngine::V1::IndustryVertical::MEDIA IndustryVertical.MEDIA}
+              #     vertical.
+              #   @param session [::String]
+              #     The session resource name. Optional.
+              #
+              #     Session allows users to do multi-turn /search API calls or coordination
+              #     between /search API calls and /answer API calls.
+              #
+              #     Example #1 (multi-turn /search API calls):
+              #       1. Call /search API with the auto-session mode (see below).
+              #       2. Call /search API with the session ID generated in the first call.
+              #          Here, the previous search query gets considered in query
+              #          standing. I.e., if the first query is "How did Alphabet do in 2022?"
+              #          and the current query is "How about 2023?", the current query will
+              #          be interpreted as "How did Alphabet do in 2023?".
+              #
+              #     Example #2 (coordination between /search API calls and /answer API calls):
+              #       1. Call /search API with the auto-session mode (see below).
+              #       2. Call /answer API with the session ID generated in the first call.
+              #          Here, the answer generation happens in the context of the search
+              #          results from the first search call.
+              #
+              #     Auto-session mode: when `projects/.../sessions/-` is used, a new session
+              #     gets automatically created. Otherwise, users can use the create-session API
+              #     to create a session manually.
+              #
+              #     Multi-turn Search feature is currently at private GA stage. Please use
+              #     v1alpha or v1beta version instead before we launch this feature to public
+              #     GA. Or ask for allowlisting through Google Support team.
+              #   @param session_spec [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::SessionSpec, ::Hash]
+              #     Session specification.
+              #
+              #     Can be used only when `session` is set.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::DiscoveryEngine::V1::SearchResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

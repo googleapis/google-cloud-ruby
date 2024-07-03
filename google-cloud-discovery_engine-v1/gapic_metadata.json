@@ -24,6 +24,16 @@
               "methods": [
                 "purge_suggestion_deny_list_entries"
               ]
+            },
+            "ImportCompletionSuggestions": {
+              "methods": [
+                "import_completion_suggestions"
+              ]
+            },
+            "PurgeCompletionSuggestions": {
+              "methods": [
+                "purge_completion_suggestions"
+              ]
             }
           }
         }

@@ -47,6 +47,37 @@ module Google
             CONTAINS = 2
           end
         end
+
+        # Autocomplete suggestions that are imported from Customer.
+        # @!attribute [rw] global_score
+        #   @return [::Float]
+        #     Global score of this suggestion. Control how this suggestion would be
+        #     scored / ranked.
+        # @!attribute [rw] frequency
+        #   @return [::Integer]
+        #     Frequency of this suggestion. Will be used to rank suggestions when score
+        #     is not available.
+        # @!attribute [rw] suggestion
+        #   @return [::String]
+        #     Required. The suggestion text.
+        # @!attribute [rw] language_code
+        #   @return [::String]
+        #     BCP-47 language code of this suggestion.
+        # @!attribute [rw] group_id
+        #   @return [::String]
+        #     If two suggestions have the same groupId, they will not be
+        #     returned together. Instead the one ranked higher will be returned. This can
+        #     be used to deduplicate semantically identical suggestions.
+        # @!attribute [rw] group_score
+        #   @return [::Float]
+        #     The score of this suggestion within its group.
+        # @!attribute [rw] alternative_phrases
+        #   @return [::Array<::String>]
+        #     Alternative matching phrases for this suggestion.
+        class CompletionSuggestion
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
       end
     end
   end

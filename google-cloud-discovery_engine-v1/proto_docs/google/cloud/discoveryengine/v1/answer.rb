@@ -235,6 +235,13 @@ module Google
                 #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::Answer::Step::Action::Observation::SearchResult::ChunkInfo>]
                 #     If citation_type is CHUNK_LEVEL_CITATION and chunk mode is on,
                 #     populate chunk info.
+                # @!attribute [rw] struct_data
+                #   @return [::Google::Protobuf::Struct]
+                #     Data representation.
+                #     The structured JSON data for the document.
+                #     It's populated from the struct data from the Document (code
+                #     pointer: http://shortn/_objzAfIiHq), or the Chunk in search result
+                #     (code pointer: http://shortn/_Ipo6KFFGBL).
                 class SearchResult
                   include ::Google::Protobuf::MessageExts
                   extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -354,6 +361,12 @@ module Google
             # Google skips the answer if there is a potential policy violation
             # detected. This includes content that may be violent or toxic.
             POTENTIAL_POLICY_VIOLATION = 4
+
+            # The no relevant content case.
+            #
+            # Google skips the answer if there is no relevant content in the
+            # retrieved search results.
+            NO_RELEVANT_CONTENT = 5
           end
         end
       end

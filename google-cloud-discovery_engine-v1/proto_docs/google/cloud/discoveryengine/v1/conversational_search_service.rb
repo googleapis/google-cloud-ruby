@@ -283,6 +283,25 @@ module Google
         #
         #     The field must be a UTF-8 encoded string with a length limit of 128
         #     characters. Otherwise, an  `INVALID_ARGUMENT`  error is returned.
+        # @!attribute [rw] user_labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     The user labels applied to a resource must meet the following requirements:
+        #
+        #     * Each resource can have multiple labels, up to a maximum of 64.
+        #     * Each label must be a key-value pair.
+        #     * Keys have a minimum length of 1 character and a maximum length of 63
+        #       characters and cannot be empty. Values can be empty and have a maximum
+        #       length of 63 characters.
+        #     * Keys and values can contain only lowercase letters, numeric characters,
+        #       underscores, and dashes. All characters must use UTF-8 encoding, and
+        #       international characters are allowed.
+        #     * The key portion of a label must be unique. However, you can use the same
+        #       key with multiple resources.
+        #     * Keys must start with a lowercase letter or international character.
+        #
+        #     See [Google Cloud
+        #     Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
+        #     for more details.
         class AnswerQueryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -424,6 +443,17 @@ module Google
             #     [Ordering](https://cloud.google.com/retail/docs/filter-and-order#order)
             #
             #     If this field is unrecognizable, an `INVALID_ARGUMENT` is returned.
+            # @!attribute [rw] search_result_mode
+            #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::ContentSearchSpec::SearchResultMode]
+            #     Specifies the search result mode. If unspecified, the
+            #     search result mode is based on
+            #     [DataStore.DocumentProcessingConfig.chunking_config][]:
+            #     * If [DataStore.DocumentProcessingConfig.chunking_config][] is
+            #     specified,
+            #       it defaults to `CHUNKS`.
+            #     * Otherwise, it defaults to `DOCUMENTS`.
+            #     See [parse and chunk
+            #     documents](https://cloud.google.com/generative-ai-app-builder/docs/parse-chunk-documents)
             # @!attribute [rw] data_store_specs
             #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::SearchRequest::DataStoreSpec>]
             #     Specs defining dataStores to filter on in a search call and
@@ -567,10 +597,24 @@ module Google
             # @!attribute [rw] disable
             #   @return [::Boolean]
             #     Disable query rephraser.
+            # @!attribute [rw] max_rephrase_steps
+            #   @return [::Integer]
+            #     Max rephrase steps.
+            #     The max number is 5 steps.
+            #     If not set or set to < 1, it will be set to 1 by default.
             class QueryRephraserSpec
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class UserLabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
