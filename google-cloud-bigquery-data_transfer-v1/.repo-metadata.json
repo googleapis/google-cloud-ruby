@@ -8,7 +8,7 @@
     "name": "bigquerydatatransfer",
     "name_pretty": "BigQuery Data Transfer Service V1 API",
     "product_documentation": "https://cloud.google.com/bigquery/transfer",
-    "release_level": "preview",
+    "release_level": "stable",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "Schedules queries and transfers external data from SaaS applications to Google BigQuery on a regular basis. Note that google-cloud-bigquery-data_transfer-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-bigquery-data_transfer instead. See the readme for more details.",
