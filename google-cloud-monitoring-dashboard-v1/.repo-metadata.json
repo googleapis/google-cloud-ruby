@@ -8,7 +8,7 @@
     "name": "monitoring",
     "name_pretty": "Cloud Monitoring Dashboards V1 API",
     "product_documentation": "https://cloud.google.com/monitoring",
-    "release_level": "preview",
+    "release_level": "stable",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "Cloud Monitoring collects metrics, events, and metadata from Google Cloud, Amazon Web Services (AWS), hosted uptime probes, and application instrumentation. The Dashboards API manages arrangements of display widgets. Note that google-cloud-monitoring-dashboard-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-monitoring instead. See the readme for more details.",
