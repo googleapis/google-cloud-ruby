@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.2.0 (2024-07-08)
+
+#### Features
+
+* Add doc for Discoverable Space support for GA launch ([#26275](https://github.com/googleapis/google-cloud-ruby/issues/26275)) 
+#### Documentation
+
+* Update resource naming formats 
+
 ### 0.1.2 (2024-06-26)
 
 #### Documentation
