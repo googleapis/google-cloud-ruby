@@ -8,7 +8,7 @@
     "name": "automl",
     "name_pretty": "Cloud AutoML V1 API",
     "product_documentation": "https://cloud.google.com/automl",
-    "release_level": "preview",
+    "release_level": "stable",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "AutoML makes the power of machine learning available to you even if you have limited knowledge of machine learning. You can use AutoML to build on Google's machine learning capabilities to create your own custom machine learning models that are tailored to your business needs, and then integrate those models into your applications and web sites. Note that google-cloud-automl-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-automl instead. See the readme for more details.",
