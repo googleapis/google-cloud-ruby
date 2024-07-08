@@ -8,7 +8,7 @@
     "name": "bigqueryconnection",
     "name_pretty": "BigQuery Connection V1 API",
     "product_documentation": "https://cloud.google.com/bigquery/docs/reference/bigqueryconnection",
-    "release_level": "preview",
+    "release_level": "stable",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "The BigQuery Connection API allows users to manage BigQuery connections to external data sources. Note that google-cloud-bigquery-connection-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-bigquery-connection instead. See the readme for more details.",
