@@ -1,5 +1,11 @@
 # Release History
 
+### 0.40.1 (2024-07-08)
+
+#### Documentation
+
+* Deprecated the CHANNEL_EXPERIMENTAL option for the Gateway API ([#26259](https://github.com/googleapis/google-cloud-ruby/issues/26259)) 
+
 ### 0.40.0 (2024-05-29)
 
 #### Features
