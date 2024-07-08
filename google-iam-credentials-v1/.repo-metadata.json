@@ -8,7 +8,7 @@
     "name": "iamcredentials",
     "name_pretty": "IAM Service Account Credentials V1 API",
     "product_documentation": "https://cloud.google.com/iam",
-    "release_level": "preview",
+    "release_level": "stable",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "The Service Account Credentials API creates short-lived credentials for Identity and Access Management (IAM) service accounts. You can also use this API to sign JSON Web Tokens (JWTs), as well as blobs of binary data that contain other types of tokens. Note that google-iam-credentials-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-iam-credentials instead. See the readme for more details.",
