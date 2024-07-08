@@ -8,7 +8,7 @@
     "name": "bigquerystorage",
     "name_pretty": "BigQuery Storage V1 API",
     "product_documentation": "https://cloud.google.com/bigquery/docs/reference/storage",
-    "release_level": "preview",
+    "release_level": "stable",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "The BigQuery Storage API provides fast access to BigQuery managed storage. Note that google-cloud-bigquery-storage-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-bigquery-storage instead. See the readme for more details.",
