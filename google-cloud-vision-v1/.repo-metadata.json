@@ -8,7 +8,7 @@
     "name": "vision",
     "name_pretty": "Cloud Vision V1 API",
     "product_documentation": "https://cloud.google.com/vision",
-    "release_level": "preview",
+    "release_level": "stable",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "Cloud Vision API allows developers to easily integrate vision detection features within applications, including image labeling, face and landmark detection, optical character recognition (OCR), and tagging of explicit content. Note that google-cloud-vision-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-vision instead. See the readme for more details.",
