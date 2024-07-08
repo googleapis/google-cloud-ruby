@@ -43,6 +43,14 @@ module Google
             # [SuggestionDenyListEntry][google.cloud.discoveryengine.v1.SuggestionDenyListEntry]
             # for a DataStore.
             rpc :PurgeSuggestionDenyListEntries, ::Google::Cloud::DiscoveryEngine::V1::PurgeSuggestionDenyListEntriesRequest, ::Google::Longrunning::Operation
+            # Imports
+            # [CompletionSuggestion][google.cloud.discoveryengine.v1.CompletionSuggestion]s
+            # for a DataStore.
+            rpc :ImportCompletionSuggestions, ::Google::Cloud::DiscoveryEngine::V1::ImportCompletionSuggestionsRequest, ::Google::Longrunning::Operation
+            # Permanently deletes all
+            # [CompletionSuggestion][google.cloud.discoveryengine.v1.CompletionSuggestion]s
+            # for a DataStore.
+            rpc :PurgeCompletionSuggestions, ::Google::Cloud::DiscoveryEngine::V1::PurgeCompletionSuggestionsRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

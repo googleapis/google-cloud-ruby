@@ -238,6 +238,13 @@ module Google
                                                             ["parent", %r{^projects/[^/]+/locations/[^/]+/collections/[^/]+/dataStores/[^/]+/?$}, false]
                                                           ]
                                                         )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/userEvents:collect",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
                 transcoder.transcode request_pb
               end
 

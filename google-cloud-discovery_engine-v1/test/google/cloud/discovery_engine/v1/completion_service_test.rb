@@ -250,6 +250,137 @@ class ::Google::Cloud::DiscoveryEngine::V1::CompletionService::ClientTest < Mini
     end
   end
 
+  def test_import_completion_suggestions
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    inline_source = {}
+    parent = "hello world"
+    error_config = {}
+
+    import_completion_suggestions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :import_completion_suggestions, name
+      assert_kind_of ::Google::Cloud::DiscoveryEngine::V1::ImportCompletionSuggestionsRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DiscoveryEngine::V1::ImportCompletionSuggestionsRequest::InlineSource), request["inline_source"]
+      assert_equal :inline_source, request.source
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DiscoveryEngine::V1::ImportErrorConfig), request["error_config"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, import_completion_suggestions_client_stub do
+      # Create client
+      client = ::Google::Cloud::DiscoveryEngine::V1::CompletionService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.import_completion_suggestions({ inline_source: inline_source, parent: parent, error_config: error_config }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.import_completion_suggestions inline_source: inline_source, parent: parent, error_config: error_config do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.import_completion_suggestions ::Google::Cloud::DiscoveryEngine::V1::ImportCompletionSuggestionsRequest.new(inline_source: inline_source, parent: parent, error_config: error_config) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.import_completion_suggestions({ inline_source: inline_source, parent: parent, error_config: error_config }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.import_completion_suggestions(::Google::Cloud::DiscoveryEngine::V1::ImportCompletionSuggestionsRequest.new(inline_source: inline_source, parent: parent, error_config: error_config), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, import_completion_suggestions_client_stub.call_rpc_count
+    end
+  end
+
+  def test_purge_completion_suggestions
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+
+    purge_completion_suggestions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :purge_completion_suggestions, name
+      assert_kind_of ::Google::Cloud::DiscoveryEngine::V1::PurgeCompletionSuggestionsRequest, request
+      assert_equal "hello world", request["parent"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, purge_completion_suggestions_client_stub do
+      # Create client
+      client = ::Google::Cloud::DiscoveryEngine::V1::CompletionService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.purge_completion_suggestions({ parent: parent }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.purge_completion_suggestions parent: parent do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.purge_completion_suggestions ::Google::Cloud::DiscoveryEngine::V1::PurgeCompletionSuggestionsRequest.new(parent: parent) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.purge_completion_suggestions({ parent: parent }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.purge_completion_suggestions(::Google::Cloud::DiscoveryEngine::V1::PurgeCompletionSuggestionsRequest.new(parent: parent), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, purge_completion_suggestions_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

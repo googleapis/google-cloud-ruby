@@ -75,6 +75,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::SearchService::ClientTest < Minitest
     canonical_filter = "hello world"
     order_by = "hello world"
     user_info = {}
+    language_code = "hello world"
     facet_specs = [{}]
     boost_spec = {}
     params = {}
@@ -84,6 +85,9 @@ class ::Google::Cloud::DiscoveryEngine::V1::SearchService::ClientTest < Minitest
     content_search_spec = {}
     safe_search = true
     user_labels = {}
+    search_as_you_type_spec = {}
+    session = "hello world"
+    session_spec = {}
 
     search_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :search, name
@@ -100,6 +104,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::SearchService::ClientTest < Minitest
       assert_equal "hello world", request["canonical_filter"]
       assert_equal "hello world", request["order_by"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DiscoveryEngine::V1::UserInfo), request["user_info"]
+      assert_equal "hello world", request["language_code"]
       assert_kind_of ::Google::Cloud::DiscoveryEngine::V1::SearchRequest::FacetSpec, request["facet_specs"].first
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DiscoveryEngine::V1::SearchRequest::BoostSpec), request["boost_spec"]
       assert_equal({}, request["params"].to_h)
@@ -109,6 +114,9 @@ class ::Google::Cloud::DiscoveryEngine::V1::SearchService::ClientTest < Minitest
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DiscoveryEngine::V1::SearchRequest::ContentSearchSpec), request["content_search_spec"]
       assert_equal true, request["safe_search"]
       assert_equal({}, request["user_labels"].to_h)
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DiscoveryEngine::V1::SearchRequest::SearchAsYouTypeSpec), request["search_as_you_type_spec"]
+      assert_equal "hello world", request["session"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DiscoveryEngine::V1::SearchRequest::SessionSpec), request["session_spec"]
       refute_nil options
     end
 
@@ -119,35 +127,35 @@ class ::Google::Cloud::DiscoveryEngine::V1::SearchService::ClientTest < Minitest
       end
 
       # Use hash object
-      client.search({ serving_config: serving_config, branch: branch, query: query, image_query: image_query, page_size: page_size, page_token: page_token, offset: offset, data_store_specs: data_store_specs, filter: filter, canonical_filter: canonical_filter, order_by: order_by, user_info: user_info, facet_specs: facet_specs, boost_spec: boost_spec, params: params, query_expansion_spec: query_expansion_spec, spell_correction_spec: spell_correction_spec, user_pseudo_id: user_pseudo_id, content_search_spec: content_search_spec, safe_search: safe_search, user_labels: user_labels }) do |response, operation|
+      client.search({ serving_config: serving_config, branch: branch, query: query, image_query: image_query, page_size: page_size, page_token: page_token, offset: offset, data_store_specs: data_store_specs, filter: filter, canonical_filter: canonical_filter, order_by: order_by, user_info: user_info, language_code: language_code, facet_specs: facet_specs, boost_spec: boost_spec, params: params, query_expansion_spec: query_expansion_spec, spell_correction_spec: spell_correction_spec, user_pseudo_id: user_pseudo_id, content_search_spec: content_search_spec, safe_search: safe_search, user_labels: user_labels, search_as_you_type_spec: search_as_you_type_spec, session: session, session_spec: session_spec }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.search serving_config: serving_config, branch: branch, query: query, image_query: image_query, page_size: page_size, page_token: page_token, offset: offset, data_store_specs: data_store_specs, filter: filter, canonical_filter: canonical_filter, order_by: order_by, user_info: user_info, facet_specs: facet_specs, boost_spec: boost_spec, params: params, query_expansion_spec: query_expansion_spec, spell_correction_spec: spell_correction_spec, user_pseudo_id: user_pseudo_id, content_search_spec: content_search_spec, safe_search: safe_search, user_labels: user_labels do |response, operation|
+      client.search serving_config: serving_config, branch: branch, query: query, image_query: image_query, page_size: page_size, page_token: page_token, offset: offset, data_store_specs: data_store_specs, filter: filter, canonical_filter: canonical_filter, order_by: order_by, user_info: user_info, language_code: language_code, facet_specs: facet_specs, boost_spec: boost_spec, params: params, query_expansion_spec: query_expansion_spec, spell_correction_spec: spell_correction_spec, user_pseudo_id: user_pseudo_id, content_search_spec: content_search_spec, safe_search: safe_search, user_labels: user_labels, search_as_you_type_spec: search_as_you_type_spec, session: session, session_spec: session_spec do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.search ::Google::Cloud::DiscoveryEngine::V1::SearchRequest.new(serving_config: serving_config, branch: branch, query: query, image_query: image_query, page_size: page_size, page_token: page_token, offset: offset, data_store_specs: data_store_specs, filter: filter, canonical_filter: canonical_filter, order_by: order_by, user_info: user_info, facet_specs: facet_specs, boost_spec: boost_spec, params: params, query_expansion_spec: query_expansion_spec, spell_correction_spec: spell_correction_spec, user_pseudo_id: user_pseudo_id, content_search_spec: content_search_spec, safe_search: safe_search, user_labels: user_labels) do |response, operation|
+      client.search ::Google::Cloud::DiscoveryEngine::V1::SearchRequest.new(serving_config: serving_config, branch: branch, query: query, image_query: image_query, page_size: page_size, page_token: page_token, offset: offset, data_store_specs: data_store_specs, filter: filter, canonical_filter: canonical_filter, order_by: order_by, user_info: user_info, language_code: language_code, facet_specs: facet_specs, boost_spec: boost_spec, params: params, query_expansion_spec: query_expansion_spec, spell_correction_spec: spell_correction_spec, user_pseudo_id: user_pseudo_id, content_search_spec: content_search_spec, safe_search: safe_search, user_labels: user_labels, search_as_you_type_spec: search_as_you_type_spec, session: session, session_spec: session_spec) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.search({ serving_config: serving_config, branch: branch, query: query, image_query: image_query, page_size: page_size, page_token: page_token, offset: offset, data_store_specs: data_store_specs, filter: filter, canonical_filter: canonical_filter, order_by: order_by, user_info: user_info, facet_specs: facet_specs, boost_spec: boost_spec, params: params, query_expansion_spec: query_expansion_spec, spell_correction_spec: spell_correction_spec, user_pseudo_id: user_pseudo_id, content_search_spec: content_search_spec, safe_search: safe_search, user_labels: user_labels }, grpc_options) do |response, operation|
+      client.search({ serving_config: serving_config, branch: branch, query: query, image_query: image_query, page_size: page_size, page_token: page_token, offset: offset, data_store_specs: data_store_specs, filter: filter, canonical_filter: canonical_filter, order_by: order_by, user_info: user_info, language_code: language_code, facet_specs: facet_specs, boost_spec: boost_spec, params: params, query_expansion_spec: query_expansion_spec, spell_correction_spec: spell_correction_spec, user_pseudo_id: user_pseudo_id, content_search_spec: content_search_spec, safe_search: safe_search, user_labels: user_labels, search_as_you_type_spec: search_as_you_type_spec, session: session, session_spec: session_spec }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.search(::Google::Cloud::DiscoveryEngine::V1::SearchRequest.new(serving_config: serving_config, branch: branch, query: query, image_query: image_query, page_size: page_size, page_token: page_token, offset: offset, data_store_specs: data_store_specs, filter: filter, canonical_filter: canonical_filter, order_by: order_by, user_info: user_info, facet_specs: facet_specs, boost_spec: boost_spec, params: params, query_expansion_spec: query_expansion_spec, spell_correction_spec: spell_correction_spec, user_pseudo_id: user_pseudo_id, content_search_spec: content_search_spec, safe_search: safe_search, user_labels: user_labels), grpc_options) do |response, operation|
+      client.search(::Google::Cloud::DiscoveryEngine::V1::SearchRequest.new(serving_config: serving_config, branch: branch, query: query, image_query: image_query, page_size: page_size, page_token: page_token, offset: offset, data_store_specs: data_store_specs, filter: filter, canonical_filter: canonical_filter, order_by: order_by, user_info: user_info, language_code: language_code, facet_specs: facet_specs, boost_spec: boost_spec, params: params, query_expansion_spec: query_expansion_spec, spell_correction_spec: spell_correction_spec, user_pseudo_id: user_pseudo_id, content_search_spec: content_search_spec, safe_search: safe_search, user_labels: user_labels, search_as_you_type_spec: search_as_you_type_spec, session: session, session_spec: session_spec), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
