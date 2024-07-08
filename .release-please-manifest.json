@@ -361,7 +361,7 @@
   "google-cloud-firestore+FILLER": "0.0.0",
   "google-cloud-firestore-admin": "0.4.0",
   "google-cloud-firestore-admin+FILLER": "0.0.0",
-  "google-cloud-firestore-admin-v1": "0.18.0",
+  "google-cloud-firestore-admin-v1": "1.0.0",
   "google-cloud-firestore-admin-v1+FILLER": "0.0.0",
   "google-cloud-firestore-v1": "0.14.0",
   "google-cloud-firestore-v1+FILLER": "0.0.0",
