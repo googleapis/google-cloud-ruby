@@ -8,7 +8,7 @@
     "name": "videointelligence",
     "name_pretty": "Cloud Video Intelligence V1 API",
     "product_documentation": "https://cloud.google.com/video-intelligence",
-    "release_level": "preview",
+    "release_level": "stable",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "Detects objects, explicit content, and scene changes in videos. It also specifies the region for annotation and transcribes speech to text. Supports both asynchronous API and streaming API. Note that google-cloud-video_intelligence-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-video_intelligence instead. See the readme for more details.",
