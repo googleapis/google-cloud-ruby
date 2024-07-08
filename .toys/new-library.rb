@@ -52,6 +52,9 @@ end
 flag :bootstrap_releases, "--[no-]bootstrap-releases" do
   desc "Also add release-please configuration for the newly-created library"
 end
+flag :enable_bazelisk, "--bazelisk" do
+  desc "Enable running bazel commands with bazelisk"
+end
 
 static :config_name, "release-please-config.json"
 static :manifest_name, ".release-please-manifest.json"
@@ -127,6 +130,7 @@ def call_owlbot
   cmd << "--protos-path" << protos_path if protos_path
   cmd << "--source-path" << source_path if source_path
   cmd << "--piper-client" << piper_client if piper_client
+  cmd << "--bazelisk" if enable_bazelisk
   cmd += verbosity_flags
   exec_tool cmd
 end
