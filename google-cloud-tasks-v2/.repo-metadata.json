@@ -8,7 +8,7 @@
     "name": "cloudtasks",
     "name_pretty": "Cloud Tasks V2 API",
     "product_documentation": "https://cloud.google.com/tasks",
-    "release_level": "preview",
+    "release_level": "stable",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "Cloud Tasks is a fully managed service that allows you to manage the execution, dispatch and delivery of a large number of distributed tasks. You can asynchronously perform work outside of a user request. Your tasks can be executed on App Engine or any arbitrary HTTP endpoint. Note that google-cloud-tasks-v2 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-tasks instead. See the readme for more details.",
