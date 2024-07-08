@@ -1,5 +1,13 @@
 # Changelog
 
+### 0.43.0 (2024-07-08)
+
+#### Features
+
+* Support for metadata about a deployment config 
+* Support for private service connect 
+* Support the update_deployment_resource_pool call 
+
 ### 0.42.0 (2024-06-25)
 
 #### Features
