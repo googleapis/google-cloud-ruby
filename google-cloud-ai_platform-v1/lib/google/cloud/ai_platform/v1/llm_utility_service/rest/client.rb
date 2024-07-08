@@ -291,7 +291,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload compute_tokens(endpoint: nil, instances: nil)
+              # @overload compute_tokens(endpoint: nil, instances: nil, model: nil, contents: nil)
               #   Pass arguments to `compute_tokens` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -300,9 +300,15 @@ module Google
               #     Required. The name of the Endpoint requested to get lists of tokens and
               #     token ids.
               #   @param instances [::Array<::Google::Protobuf::Value, ::Hash>]
-              #     Required. The instances that are the input to token computing API call.
+              #     Optional. The instances that are the input to token computing API call.
               #     Schema is identical to the prediction schema of the text model, even for
               #     the non-text models, like chat models, or Codey models.
+              #   @param model [::String]
+              #     Optional. The name of the publisher model requested to serve the
+              #     prediction. Format:
+              #     projects/\\{project}/locations/\\{location}/publishers/*/models/*
+              #   @param contents [::Array<::Google::Cloud::AIPlatform::V1::Content, ::Hash>]
+              #     Optional. Input content.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::AIPlatform::V1::ComputeTokensResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

@@ -137,6 +137,8 @@ class ::Google::Cloud::AIPlatform::V1::LlmUtilityService::Rest::ClientTest < Min
     # Create request parameters for a unary method.
     endpoint = "hello world"
     instances = [{}]
+    model = "hello world"
+    contents = [{}]
 
     compute_tokens_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -152,27 +154,27 @@ class ::Google::Cloud::AIPlatform::V1::LlmUtilityService::Rest::ClientTest < Min
         end
 
         # Use hash object
-        client.compute_tokens({ endpoint: endpoint, instances: instances }) do |_result, response|
+        client.compute_tokens({ endpoint: endpoint, instances: instances, model: model, contents: contents }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.compute_tokens endpoint: endpoint, instances: instances do |_result, response|
+        client.compute_tokens endpoint: endpoint, instances: instances, model: model, contents: contents do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.compute_tokens ::Google::Cloud::AIPlatform::V1::ComputeTokensRequest.new(endpoint: endpoint, instances: instances) do |_result, response|
+        client.compute_tokens ::Google::Cloud::AIPlatform::V1::ComputeTokensRequest.new(endpoint: endpoint, instances: instances, model: model, contents: contents) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.compute_tokens({ endpoint: endpoint, instances: instances }, call_options) do |_result, response|
+        client.compute_tokens({ endpoint: endpoint, instances: instances, model: model, contents: contents }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.compute_tokens(::Google::Cloud::AIPlatform::V1::ComputeTokensRequest.new(endpoint: endpoint, instances: instances), call_options) do |_result, response|
+        client.compute_tokens(::Google::Cloud::AIPlatform::V1::ComputeTokensRequest.new(endpoint: endpoint, instances: instances, model: model, contents: contents), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
