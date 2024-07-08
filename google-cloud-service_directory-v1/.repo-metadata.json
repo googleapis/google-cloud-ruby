@@ -8,7 +8,7 @@
     "name": "servicedirectory",
     "name_pretty": "Service Directory V1 API",
     "product_documentation": "https://cloud.google.com/service-directory",
-    "release_level": "preview",
+    "release_level": "stable",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "Service Directory is the single place to register, browse, and resolve application services. Note that google-cloud-service_directory-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-service_directory instead. See the readme for more details.",
