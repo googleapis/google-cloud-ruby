@@ -1,5 +1,16 @@
 # Changelog
 
+### 0.9.0 (2024-07-08)
+
+#### Features
+
+* add Chunk resource in the search response ([#26276](https://github.com/googleapis/google-cloud-ruby/issues/26276)) 
+* add NO_RELEVANT_CONTENT to Answer API 
+* support AlloyDB Connector 
+#### Documentation
+
+* keep the API doc up-to-date with recent changes 
+
 ### 0.8.0 (2024-05-29)
 
 #### Features
