@@ -1,5 +1,16 @@
 # Changelog
 
+### 0.8.0 (2024-07-08)
+
+#### Features
+
+* support Direct Table Access Toggle (Egress GA) 
+* support public directory self service for Listings/Exchanges ([#26270](https://github.com/googleapis/google-cloud-ruby/issues/26270)) 
+#### Documentation
+
+* A comment for message `DataExchange` is changed 
+* A comment for message `Listing` is changed 
+
 ### 0.7.0 (2024-03-18)
 
 #### Features
