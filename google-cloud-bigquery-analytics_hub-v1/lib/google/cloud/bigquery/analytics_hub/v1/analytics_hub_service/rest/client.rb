@@ -1141,7 +1141,7 @@ module Google
                 #   the default parameter values, pass an empty Hash as a request object (see above).
                 #
                 #   @param destination_dataset [::Google::Cloud::Bigquery::AnalyticsHub::V1::DestinationDataset, ::Hash]
-                #     BigQuery destination dataset to create for the subscriber.
+                #     Input only. BigQuery destination dataset to create for the subscriber.
                 #   @param name [::String]
                 #     Required. Resource name of the listing that you want to subscribe to.
                 #     e.g. `projects/myproject/locations/US/dataExchanges/123/listings/456`.
@@ -1493,7 +1493,21 @@ module Google
                 #     Required. The parent resource path of the subscription.
                 #     e.g. projects/myproject/locations/US
                 #   @param filter [::String]
-                #     The filter expression may be used to filter by Data Exchange or Listing.
+                #     An expression for filtering the results of the request. Eligible
+                #     fields for filtering are:
+                #
+                #      * `listing`
+                #      * `data_exchange`
+                #
+                #     Alternatively, a literal wrapped in double quotes may be provided.
+                #     This will be checked for an exact match against both fields above.
+                #
+                #     In all cases, the full Data Exchange or Listing resource name must
+                #     be provided. Some example of using filters:
+                #
+                #      * data_exchange="projects/myproject/locations/us/dataExchanges/123"
+                #      * listing="projects/123/locations/us/dataExchanges/456/listings/789"
+                #      * "projects/myproject/locations/us/dataExchanges/123"
                 #   @param page_size [::Integer]
                 #     The maximum number of results to return in a single response page.
                 #   @param page_token [::String]
