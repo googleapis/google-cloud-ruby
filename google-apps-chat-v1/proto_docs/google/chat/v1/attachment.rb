@@ -25,7 +25,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Resource name of the attachment, in the form
-        #     `spaces/*/messages/*/attachments/*`.
+        #     `spaces/{space}/messages/{message}/attachments/{attachment}`.
         # @!attribute [r] content_name
         #   @return [::String]
         #     Output only. The original file name for the content, not the full path.
@@ -98,7 +98,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Resource name of the attachment, in the form
-        #     `spaces/*/messages/*/attachments/*`.
+        #     `spaces/{space}/messages/{message}/attachments/{attachment}`.
         class GetAttachmentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

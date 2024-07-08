@@ -110,6 +110,14 @@ module Google
         #     their organization.
         #
         #     To support admin install, your Chat app must feature direct messaging.
+        # @!attribute [rw] access_settings
+        #   @return [::Google::Apps::Chat::V1::Space::AccessSettings]
+        #     Optional. Specifies the [access
+        #     setting](https://support.google.com/chat/answer/11971020) of the space.
+        #     Only populated when the `space_type` is `SPACE`.
+        # @!attribute [r] space_uri
+        #   @return [::String]
+        #     Output only. The URI for a user to access the space.
         class Space
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -129,6 +137,42 @@ module Google
           class SpaceDetails
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Represents the [access
+          # setting](https://support.google.com/chat/answer/11971020) of the space.
+          # @!attribute [r] access_state
+          #   @return [::Google::Apps::Chat::V1::Space::AccessSettings::AccessState]
+          #     Output only. Indicates the access state of the space.
+          # @!attribute [rw] audience
+          #   @return [::String]
+          #     Optional. The resource name of the [target
+          #     audience](https://support.google.com/a/answer/9934697) who can discover
+          #     the space, join the space, and preview the messages in the space. For
+          #     details, see [Make a space discoverable to a target
+          #     audience](https://developers.google.com/workspace/chat/space-target-audience).
+          #
+          #     Format: `audiences/{audience}`
+          #
+          #     To use the default target audience for the Google Workspace organization,
+          #     set to `audiences/default`.
+          class AccessSettings
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Represents the access state of the space.
+            module AccessState
+              # Access state is unknown or not supported in this API.
+              ACCESS_STATE_UNSPECIFIED = 0
+
+              # Space is discoverable by added or invited members or groups.
+              PRIVATE = 1
+
+              # Space is discoverable by the selected [target
+              # audience](https://support.google.com/a/answer/9934697), as well as
+              # added or invited members or groups.
+              DISCOVERABLE = 2
+            end
           end
 
           # Deprecated: Use `SpaceType` instead.
@@ -268,7 +312,7 @@ module Google
         # A request to return a single space.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. Resource name of the space, in the form "spaces/*".
+        #     Required. Resource name of the space, in the form `spaces/{space}`.
         #
         #     Format: `spaces/{space}`
         class GetSpaceRequest
@@ -326,6 +370,7 @@ module Google
         #     the display name is optional if the existing space already has the `SPACE`
         #     type. Trying to update the space type in other ways results in an invalid
         #     argument error).
+        #     `space_type` is not supported with admin access.
         #
         #     - `space_details`
         #
@@ -334,12 +379,27 @@ module Google
         #     allows users to change their history
         #     setting](https://support.google.com/a/answer/7664184).
         #     Warning: mutually exclusive with all other field paths.)
+        #     `space_history_state` is not supported with admin access.
         #
-        #     - Developer Preview: `access_settings.audience` (Supports changing the
-        #     [access setting](https://support.google.com/chat/answer/11971020) of a
-        #     space. If no audience is specified in the access setting, the space's
-        #     access setting is updated to restricted. Warning: mutually exclusive with
-        #     all other field paths.)
+        #     - `access_settings.audience` (Supports changing the [access
+        #     setting](https://support.google.com/chat/answer/11971020) of who can
+        #     discover the space, join the space, and preview the messages in space. If
+        #     no audience is specified in the access setting, the space's access setting
+        #     is updated to private. Warning: mutually exclusive with all other field
+        #     paths.)
+        #     `access_settings.audience` is not supported with admin access.
+        #
+        #     - Developer Preview: Supports changing the [permission
+        #     settings](https://support.google.com/chat/answer/13340792) of a space,
+        #     supported field paths
+        #     include: `permission_settings.manage_members_and_groups`,
+        #     `permission_settings.modify_space_details`,
+        #     `permission_settings.toggle_history`,
+        #     `permission_settings.use_at_mention_all`,
+        #     `permission_settings.manage_apps`, `permission_settings.manage_webhooks`,
+        #     `permission_settings.reply_messages`
+        #      (Warning: mutually exclusive with all other non-permission settings field
+        #     paths). `permission_settings` is not supported with admin access.
         class UpdateSpaceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
