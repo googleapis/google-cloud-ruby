@@ -8,7 +8,7 @@
     "name": "bigqueryreservation",
     "name_pretty": "BigQuery Reservation V1 API",
     "product_documentation": "https://cloud.google.com/bigquery/docs/reference/reservations",
-    "release_level": "preview",
+    "release_level": "stable",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "The BigQuery Reservation API provides the mechanisms by which enterprise users can provision and manage dedicated resources such as slots and BigQuery BI Engine memory allocations. Note that google-cloud-bigquery-reservation-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-bigquery-reservation instead. See the readme for more details.",
