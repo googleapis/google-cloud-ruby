@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.44.0 (2024-07-08)
+
+#### Features
+
+* add model and contents fields to ComputeTokensRequest v1 ([#26277](https://github.com/googleapis/google-cloud-ruby/issues/26277)) 
+* add role field to TokensInfo v1 
+
 ### 0.43.0 (2024-07-08)
 
 #### Features
