@@ -1,5 +1,11 @@
 # Release History
 
+### 1.0.0 (2024-07-08)
+
+#### Features
+
+* Bump version to 1.0.0 
+
 ### 0.27.1 (2024-06-05)
 
 #### Documentation
@@ -270,4 +276,3 @@
 ### 0.1.0 / 2020-06-25
 
 Initial release.
-
