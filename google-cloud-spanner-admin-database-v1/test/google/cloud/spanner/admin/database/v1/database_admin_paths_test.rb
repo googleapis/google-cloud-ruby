@@ -45,6 +45,18 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientPathsT
     end
   end
 
+  def test_backup_schedule_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.backup_schedule_path project: "value0", instance: "value1", database: "value2", schedule: "value3"
+      assert_equal "projects/value0/instances/value1/databases/value2/backupSchedules/value3", path
+    end
+  end
+
   def test_crypto_key_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do

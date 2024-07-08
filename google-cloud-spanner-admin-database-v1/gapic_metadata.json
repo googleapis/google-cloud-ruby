@@ -109,6 +109,31 @@
               "methods": [
                 "list_database_roles"
               ]
+            },
+            "CreateBackupSchedule": {
+              "methods": [
+                "create_backup_schedule"
+              ]
+            },
+            "GetBackupSchedule": {
+              "methods": [
+                "get_backup_schedule"
+              ]
+            },
+            "UpdateBackupSchedule": {
+              "methods": [
+                "update_backup_schedule"
+              ]
+            },
+            "DeleteBackupSchedule": {
+              "methods": [
+                "delete_backup_schedule"
+              ]
+            },
+            "ListBackupSchedules": {
+              "methods": [
+                "list_backup_schedules"
+              ]
             }
           }
         }

@@ -1187,6 +1187,281 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client
     end
   end
 
+  def test_create_backup_schedule
+    # Create test objects.
+    client_result = ::Google::Cloud::Spanner::Admin::Database::V1::BackupSchedule.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    backup_schedule_id = "hello world"
+    backup_schedule = {}
+
+    create_backup_schedule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::ServiceStub.stub :transcode_create_backup_schedule_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_backup_schedule_client_stub do
+        # Create client
+        client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_backup_schedule({ parent: parent, backup_schedule_id: backup_schedule_id, backup_schedule: backup_schedule }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_backup_schedule parent: parent, backup_schedule_id: backup_schedule_id, backup_schedule: backup_schedule do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_backup_schedule ::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupScheduleRequest.new(parent: parent, backup_schedule_id: backup_schedule_id, backup_schedule: backup_schedule) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_backup_schedule({ parent: parent, backup_schedule_id: backup_schedule_id, backup_schedule: backup_schedule }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_backup_schedule(::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupScheduleRequest.new(parent: parent, backup_schedule_id: backup_schedule_id, backup_schedule: backup_schedule), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_backup_schedule_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_backup_schedule
+    # Create test objects.
+    client_result = ::Google::Cloud::Spanner::Admin::Database::V1::BackupSchedule.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_backup_schedule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::ServiceStub.stub :transcode_get_backup_schedule_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_backup_schedule_client_stub do
+        # Create client
+        client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_backup_schedule({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_backup_schedule name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_backup_schedule ::Google::Cloud::Spanner::Admin::Database::V1::GetBackupScheduleRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_backup_schedule({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_backup_schedule(::Google::Cloud::Spanner::Admin::Database::V1::GetBackupScheduleRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_backup_schedule_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_backup_schedule
+    # Create test objects.
+    client_result = ::Google::Cloud::Spanner::Admin::Database::V1::BackupSchedule.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    backup_schedule = {}
+    update_mask = {}
+
+    update_backup_schedule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::ServiceStub.stub :transcode_update_backup_schedule_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_backup_schedule_client_stub do
+        # Create client
+        client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_backup_schedule({ backup_schedule: backup_schedule, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_backup_schedule backup_schedule: backup_schedule, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_backup_schedule ::Google::Cloud::Spanner::Admin::Database::V1::UpdateBackupScheduleRequest.new(backup_schedule: backup_schedule, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_backup_schedule({ backup_schedule: backup_schedule, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_backup_schedule(::Google::Cloud::Spanner::Admin::Database::V1::UpdateBackupScheduleRequest.new(backup_schedule: backup_schedule, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_backup_schedule_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_backup_schedule
+    # Create test objects.
+    client_result = ::Google::Protobuf::Empty.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_backup_schedule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::ServiceStub.stub :transcode_delete_backup_schedule_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_backup_schedule_client_stub do
+        # Create client
+        client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_backup_schedule({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_backup_schedule name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_backup_schedule ::Google::Cloud::Spanner::Admin::Database::V1::DeleteBackupScheduleRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_backup_schedule({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_backup_schedule(::Google::Cloud::Spanner::Admin::Database::V1::DeleteBackupScheduleRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_backup_schedule_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_backup_schedules
+    # Create test objects.
+    client_result = ::Google::Cloud::Spanner::Admin::Database::V1::ListBackupSchedulesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_backup_schedules_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::ServiceStub.stub :transcode_list_backup_schedules_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_backup_schedules_client_stub do
+        # Create client
+        client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_backup_schedules({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_backup_schedules parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_backup_schedules ::Google::Cloud::Spanner::Admin::Database::V1::ListBackupSchedulesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_backup_schedules({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_backup_schedules(::Google::Cloud::Spanner::Admin::Database::V1::ListBackupSchedulesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_backup_schedules_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

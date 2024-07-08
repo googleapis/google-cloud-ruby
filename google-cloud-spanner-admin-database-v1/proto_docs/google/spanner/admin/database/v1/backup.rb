@@ -115,6 +115,17 @@ module Google
             #     multiple APIs: CreateBackup, UpdateBackup, CopyBackup. When updating or
             #     copying an existing backup, the expiration time specified must be
             #     less than `Backup.max_expire_time`.
+            # @!attribute [r] backup_schedules
+            #   @return [::Array<::String>]
+            #     Output only. List of backup schedule URIs that are associated with
+            #     creating this backup. This is only applicable for scheduled backups, and
+            #     is empty for on-demand backups.
+            #
+            #     To optimize for storage, whenever possible, multiple schedules are
+            #     collapsed together to create one backup. In such cases, this field captures
+            #     the list of all backup schedule URIs that are associated with creating
+            #     this backup. If collapsing is not done, then this field captures the
+            #     single backup schedule URI associated with creating this backup.
             class Backup
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -639,6 +650,14 @@ module Google
                 # `kms_key_names` must contain valid Cloud KMS key(s).
                 CUSTOMER_MANAGED_ENCRYPTION = 3
               end
+            end
+
+            # The specification for full backups.
+            # A full backup stores the entire contents of the database at a given
+            # version time.
+            class FullBackupSpec
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
             end
           end
         end

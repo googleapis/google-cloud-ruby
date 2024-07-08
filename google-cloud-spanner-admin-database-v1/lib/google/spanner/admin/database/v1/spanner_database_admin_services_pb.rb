@@ -218,6 +218,16 @@ module Google
                 rpc :ListBackupOperations, ::Google::Cloud::Spanner::Admin::Database::V1::ListBackupOperationsRequest, ::Google::Cloud::Spanner::Admin::Database::V1::ListBackupOperationsResponse
                 # Lists Cloud Spanner database roles.
                 rpc :ListDatabaseRoles, ::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseRolesRequest, ::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseRolesResponse
+                # Creates a new backup schedule.
+                rpc :CreateBackupSchedule, ::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupScheduleRequest, ::Google::Cloud::Spanner::Admin::Database::V1::BackupSchedule
+                # Gets backup schedule for the input schedule name.
+                rpc :GetBackupSchedule, ::Google::Cloud::Spanner::Admin::Database::V1::GetBackupScheduleRequest, ::Google::Cloud::Spanner::Admin::Database::V1::BackupSchedule
+                # Updates a backup schedule.
+                rpc :UpdateBackupSchedule, ::Google::Cloud::Spanner::Admin::Database::V1::UpdateBackupScheduleRequest, ::Google::Cloud::Spanner::Admin::Database::V1::BackupSchedule
+                # Deletes a backup schedule.
+                rpc :DeleteBackupSchedule, ::Google::Cloud::Spanner::Admin::Database::V1::DeleteBackupScheduleRequest, ::Google::Protobuf::Empty
+                # Lists all the backup schedules for the database.
+                rpc :ListBackupSchedules, ::Google::Cloud::Spanner::Admin::Database::V1::ListBackupSchedulesRequest, ::Google::Cloud::Spanner::Admin::Database::V1::ListBackupSchedulesResponse
               end
 
               Stub = Service.rpc_stub_class
