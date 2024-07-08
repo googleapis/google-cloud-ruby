@@ -1,5 +1,11 @@
 # Release History
 
+### 0.20.0 (2024-07-08)
+
+#### Features
+
+* Add support for Cloud Spanner Scheduled Backups ([#26279](https://github.com/googleapis/google-cloud-ruby/issues/26279)) 
+
 ### 0.19.0 (2024-05-15)
 
 #### Features
