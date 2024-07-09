@@ -1,5 +1,11 @@
 # Release History
 
+### 0.44.0 (2024-07-09)
+
+#### Features
+
+* compatibility with GA releases of underlying versioned clients ([#26361](https://github.com/googleapis/google-cloud-ruby/issues/26361)) 
+
 ### 0.43.0 (2024-03-07)
 
 #### Features
