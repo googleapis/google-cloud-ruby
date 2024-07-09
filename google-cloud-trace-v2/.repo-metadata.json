@@ -8,7 +8,7 @@
     "name": "cloudtrace",
     "name_pretty": "Cloud Trace V2 API",
     "product_documentation": "https://cloud.google.com/trace",
-    "release_level": "preview",
+    "release_level": "stable",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "The Cloud Trace API lets you send and retrieve latency data to and from Cloud Trace. This API provides low-level interfaces for interacting directly with the feature. For some languages, you can use OpenTelemetry, a set of open source tracing and stats instrumentation libraries that work with multiple backends. Note that google-cloud-trace-v2 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-trace instead. See the readme for more details.",
