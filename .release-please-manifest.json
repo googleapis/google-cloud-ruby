@@ -371,7 +371,7 @@
   "google-cloud-functions-v1+FILLER": "0.0.0",
   "google-cloud-functions-v2": "0.7.0",
   "google-cloud-functions-v2+FILLER": "0.0.0",
-  "google-cloud-gdc_hardware_management-v1alpha": "0.0.1",
+  "google-cloud-gdc_hardware_management-v1alpha": "0.1.0",
   "google-cloud-gdc_hardware_management-v1alpha+FILLER": "0.0.0",
   "google-cloud-gke_backup": "1.2.0",
   "google-cloud-gke_backup+FILLER": "0.0.0",
