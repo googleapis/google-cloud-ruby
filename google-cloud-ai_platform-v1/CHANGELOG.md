@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.45.0 (2024-07-09)
+
+#### Features
+
+* enable rest_numeric_enums for aiplatform v1 and v1beta1 ([#26360](https://github.com/googleapis/google-cloud-ruby/issues/26360)) 
+
 ### 0.44.0 (2024-07-08)
 
 #### Features
