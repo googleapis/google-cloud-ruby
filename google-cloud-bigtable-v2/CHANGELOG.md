@@ -1,5 +1,11 @@
 # Release History
 
+### 1.0.0 (2024-07-09)
+
+#### Features
+
+* Bump version to 1.0.0 
+
 ### 0.21.0 (2024-04-19)
 
 #### Features
@@ -205,4 +211,3 @@ This release fixes the RequestStats interfaces. The wrong version of those inter
 ### 0.1.0 / 2020-07-27
 
 Initial release.
-
