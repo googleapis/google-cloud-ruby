@@ -727,7 +727,7 @@
   "google-cloud-tpu-v1+FILLER": "0.0.0",
   "google-cloud-trace": "0.43.0",
   "google-cloud-trace+FILLER": "0.0.0",
-  "google-cloud-trace-v1": "0.9.0",
+  "google-cloud-trace-v1": "1.0.0",
   "google-cloud-trace-v1+FILLER": "0.0.0",
   "google-cloud-trace-v2": "0.9.0",
   "google-cloud-trace-v2+FILLER": "0.0.0",
