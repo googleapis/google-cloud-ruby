@@ -24,7 +24,7 @@ Gem::Specification.new do |gem|
   gem.required_ruby_version = ">= 2.7"
 
   gem.add_dependency "concurrent-ruby", "~> 1.0"
-  gem.add_dependency "google-cloud-bigtable-admin-v2", "~> 0.0"
-  gem.add_dependency "google-cloud-bigtable-v2", "~> 0.14"
+  gem.add_dependency "google-cloud-bigtable-admin-v2", "< 2.a"
+  gem.add_dependency "google-cloud-bigtable-v2", ">= 0.14", "< 2.a"
   gem.add_dependency "google-cloud-core", "~> 1.5"
 end

@@ -19,5 +19,5 @@ Gem::Specification.new do |gem|
   gem.required_ruby_version = ">= 2.7"
 
   gem.add_dependency "google-cloud-core", "~> 1.5"
-  gem.add_dependency "google-cloud-datastore-v1", "~> 0.0"
+  gem.add_dependency "google-cloud-datastore-v1", "< 2.a"
 end
