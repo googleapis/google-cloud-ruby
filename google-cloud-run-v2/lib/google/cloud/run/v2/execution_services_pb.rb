@@ -35,7 +35,8 @@ module Google
 
             # Gets information about an Execution.
             rpc :GetExecution, ::Google::Cloud::Run::V2::GetExecutionRequest, ::Google::Cloud::Run::V2::Execution
-            # Lists Executions from a Job.
+            # Lists Executions from a Job. Results are sorted by creation time,
+            # descending.
             rpc :ListExecutions, ::Google::Cloud::Run::V2::ListExecutionsRequest, ::Google::Cloud::Run::V2::ListExecutionsResponse
             # Deletes an Execution.
             rpc :DeleteExecution, ::Google::Cloud::Run::V2::DeleteExecutionRequest, ::Google::Longrunning::Operation

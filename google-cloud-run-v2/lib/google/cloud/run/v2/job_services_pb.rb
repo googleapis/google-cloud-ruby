@@ -37,7 +37,7 @@ module Google
             rpc :CreateJob, ::Google::Cloud::Run::V2::CreateJobRequest, ::Google::Longrunning::Operation
             # Gets information about a Job.
             rpc :GetJob, ::Google::Cloud::Run::V2::GetJobRequest, ::Google::Cloud::Run::V2::Job
-            # Lists Jobs.
+            # Lists Jobs. Results are sorted by creation time, descending.
             rpc :ListJobs, ::Google::Cloud::Run::V2::ListJobsRequest, ::Google::Cloud::Run::V2::ListJobsResponse
             # Updates a Job.
             rpc :UpdateJob, ::Google::Cloud::Run::V2::UpdateJobRequest, ::Google::Longrunning::Operation

@@ -354,19 +354,20 @@ module Google
         #     Path that is exported by the NFS server.
         # @!attribute [rw] read_only
         #   @return [::Boolean]
-        #     If true, mount the NFS volume as read only
+        #     If true, the volume will be mounted as read only for all mounts.
         class NFSVolumeSource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Represents a GCS Bucket mounted as a volume.
+        # Represents a volume backed by a Cloud Storage bucket using Cloud Storage
+        # FUSE.
         # @!attribute [rw] bucket
         #   @return [::String]
-        #     GCS Bucket name
+        #     Cloud Storage Bucket name.
         # @!attribute [rw] read_only
         #   @return [::Boolean]
-        #     If true, mount the GCS bucket as read-only
+        #     If true, the volume will be mounted as read only for all mounts.
         class GCSVolumeSource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -376,36 +377,35 @@ module Google
         # determine whether it is alive or ready to receive traffic.
         # @!attribute [rw] initial_delay_seconds
         #   @return [::Integer]
-        #     Number of seconds after the container has started before the probe is
-        #     initiated.
-        #     Defaults to 0 seconds. Minimum value is 0. Maximum value for liveness probe
-        #     is 3600. Maximum value for startup probe is 240.
+        #     Optional. Number of seconds after the container has started before the
+        #     probe is initiated. Defaults to 0 seconds. Minimum value is 0. Maximum
+        #     value for liveness probe is 3600. Maximum value for startup probe is 240.
         # @!attribute [rw] timeout_seconds
         #   @return [::Integer]
-        #     Number of seconds after which the probe times out.
+        #     Optional. Number of seconds after which the probe times out.
         #     Defaults to 1 second. Minimum value is 1. Maximum value is 3600.
         #     Must be smaller than period_seconds.
         # @!attribute [rw] period_seconds
         #   @return [::Integer]
-        #     How often (in seconds) to perform the probe.
+        #     Optional. How often (in seconds) to perform the probe.
         #     Default to 10 seconds. Minimum value is 1. Maximum value for liveness probe
         #     is 3600. Maximum value for startup probe is 240.
         #     Must be greater or equal than timeout_seconds.
         # @!attribute [rw] failure_threshold
         #   @return [::Integer]
-        #     Minimum consecutive failures for the probe to be considered failed after
-        #     having succeeded. Defaults to 3. Minimum value is 1.
+        #     Optional. Minimum consecutive failures for the probe to be considered
+        #     failed after having succeeded. Defaults to 3. Minimum value is 1.
         # @!attribute [rw] http_get
         #   @return [::Google::Cloud::Run::V2::HTTPGetAction]
-        #     HTTPGet specifies the http request to perform.
+        #     Optional. HTTPGet specifies the http request to perform.
         #     Exactly one of httpGet, tcpSocket, or grpc must be specified.
         # @!attribute [rw] tcp_socket
         #   @return [::Google::Cloud::Run::V2::TCPSocketAction]
-        #     TCPSocket specifies an action involving a TCP port.
+        #     Optional. TCPSocket specifies an action involving a TCP port.
         #     Exactly one of httpGet, tcpSocket, or grpc must be specified.
         # @!attribute [rw] grpc
         #   @return [::Google::Cloud::Run::V2::GRPCAction]
-        #     GRPC specifies an action involving a gRPC port.
+        #     Optional. GRPC specifies an action involving a gRPC port.
         #     Exactly one of httpGet, tcpSocket, or grpc must be specified.
         class Probe
           include ::Google::Protobuf::MessageExts
@@ -415,15 +415,16 @@ module Google
         # HTTPGetAction describes an action based on HTTP Get requests.
         # @!attribute [rw] path
         #   @return [::String]
-        #     Path to access on the HTTP server. Defaults to '/'.
+        #     Optional. Path to access on the HTTP server. Defaults to '/'.
         # @!attribute [rw] http_headers
         #   @return [::Array<::Google::Cloud::Run::V2::HTTPHeader>]
-        #     Custom headers to set in the request. HTTP allows repeated headers.
+        #     Optional. Custom headers to set in the request. HTTP allows repeated
+        #     headers.
         # @!attribute [rw] port
         #   @return [::Integer]
-        #     Port number to access on the container. Must be in the range 1 to 65535.
-        #     If not specified, defaults to the exposed port of the container, which is
-        #     the value of container.ports[0].containerPort.
+        #     Optional. Port number to access on the container. Must be in the range 1 to
+        #     65535. If not specified, defaults to the exposed port of the container,
+        #     which is the value of container.ports[0].containerPort.
         class HTTPGetAction
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -435,7 +436,7 @@ module Google
         #     Required. The header field name
         # @!attribute [rw] value
         #   @return [::String]
-        #     The header field value
+        #     Optional. The header field value
         class HTTPHeader
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -444,9 +445,9 @@ module Google
         # TCPSocketAction describes an action based on opening a socket
         # @!attribute [rw] port
         #   @return [::Integer]
-        #     Port number to access on the container. Must be in the range 1 to 65535.
-        #     If not specified, defaults to the exposed port of the container, which is
-        #     the value of container.ports[0].containerPort.
+        #     Optional. Port number to access on the container. Must be in the range 1 to
+        #     65535. If not specified, defaults to the exposed port of the container,
+        #     which is the value of container.ports[0].containerPort.
         class TCPSocketAction
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -455,14 +456,15 @@ module Google
         # GRPCAction describes an action involving a GRPC port.
         # @!attribute [rw] port
         #   @return [::Integer]
-        #     Port number of the gRPC service. Number must be in the range 1 to 65535.
-        #     If not specified, defaults to the exposed port of the container, which is
-        #     the value of container.ports[0].containerPort.
+        #     Optional. Port number of the gRPC service. Number must be in the range 1 to
+        #     65535. If not specified, defaults to the exposed port of the container,
+        #     which is the value of container.ports[0].containerPort.
         # @!attribute [rw] service
         #   @return [::String]
-        #     Service is the name of the service to place in the gRPC HealthCheckRequest
-        #     (see https://github.com/grpc/grpc/blob/master/doc/health-checking.md ). If
-        #     this is not specified, the default behavior is defined by gRPC.
+        #     Optional. Service is the name of the service to place in the gRPC
+        #     HealthCheckRequest (see
+        #     https://github.com/grpc/grpc/blob/master/doc/health-checking.md ). If this
+        #     is not specified, the default behavior is defined by gRPC.
         class GRPCAction
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

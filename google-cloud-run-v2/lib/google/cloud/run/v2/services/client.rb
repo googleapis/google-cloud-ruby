@@ -408,7 +408,7 @@ module Google
             end
 
             ##
-            # Lists Services.
+            # Lists Services. Results are sorted by creation time, descending.
             #
             # @overload list_services(request, options = nil)
             #   Pass arguments to `list_services` via a request object, either of type
@@ -524,20 +524,22 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload update_service(service: nil, validate_only: nil, allow_missing: nil)
+            # @overload update_service(update_mask: nil, service: nil, validate_only: nil, allow_missing: nil)
             #   Pass arguments to `update_service` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Optional. The list of fields to be updated.
             #   @param service [::Google::Cloud::Run::V2::Service, ::Hash]
             #     Required. The Service to be updated.
             #   @param validate_only [::Boolean]
             #     Indicates that the request should be validated and default values
             #     populated, without persisting the request or updating any resources.
             #   @param allow_missing [::Boolean]
-            #     If set to true, and if the Service does not exist, it will create a new
-            #     one. The caller must have 'run.services.create' permissions if this is set
-            #     to true and the Service does not exist.
+            #     Optional. If set to true, and if the Service does not exist, it will create
+            #     a new one. The caller must have 'run.services.create' permissions if this
+            #     is set to true and the Service does not exist.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]

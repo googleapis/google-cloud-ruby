@@ -41,15 +41,15 @@ module Google
         # @!attribute [rw] severity
         #   @return [::Google::Cloud::Run::V2::Condition::Severity]
         #     How to interpret failures of this condition, one of Error, Warning, Info
-        # @!attribute [rw] reason
+        # @!attribute [r] reason
         #   @return [::Google::Cloud::Run::V2::Condition::CommonReason]
-        #     A common (service-level) reason for this condition.
-        # @!attribute [rw] revision_reason
+        #     Output only. A common (service-level) reason for this condition.
+        # @!attribute [r] revision_reason
         #   @return [::Google::Cloud::Run::V2::Condition::RevisionReason]
-        #     A reason for the revision condition.
-        # @!attribute [rw] execution_reason
+        #     Output only. A reason for the revision condition.
+        # @!attribute [r] execution_reason
         #   @return [::Google::Cloud::Run::V2::Condition::ExecutionReason]
-        #     A reason for the execution condition.
+        #     Output only. A reason for the execution condition.
         class Condition
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
