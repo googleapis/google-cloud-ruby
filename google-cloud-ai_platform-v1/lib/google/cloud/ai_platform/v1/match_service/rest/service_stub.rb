@@ -39,7 +39,7 @@ module Google
                                                              endpoint_template: endpoint_template,
                                                              universe_domain: universe_domain,
                                                              credentials: credentials,
-                                                             numeric_enums: false,
+                                                             numeric_enums: true,
                                                              raise_faraday_errors: false
               end
 

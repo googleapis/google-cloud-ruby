@@ -1,0 +1,25 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".toys.rb",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-gdc_hardware_management.gemspec",
+    "lib/google-cloud-gdc_hardware_management.rb",
+    "lib/google/cloud/gdc_hardware_management.rb",
+    "lib/google/cloud/gdc_hardware_management/version.rb",
+    "test/google/cloud/gdc_hardware_management/client_test.rb",
+    "test/google/cloud/gdc_hardware_management/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml"
+  ]
+}
