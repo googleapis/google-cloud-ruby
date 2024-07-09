@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/gdchardwaremanagement/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-gdc_hardware_management/$1

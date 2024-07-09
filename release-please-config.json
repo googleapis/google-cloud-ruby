@@ -755,6 +755,10 @@
       "component": "google-cloud-functions-v2",
       "version_file": "lib/google/cloud/functions/v2/version.rb"
     },
+    "google-cloud-gdc_hardware_management": {
+      "component": "google-cloud-gdc_hardware_management",
+      "version_file": "lib/google/cloud/gdc_hardware_management/version.rb"
+    },
     "google-cloud-gdc_hardware_management-v1alpha": {
       "component": "google-cloud-gdc_hardware_management-v1alpha",
       "version_file": "lib/google/cloud/gdc_hardware_management/v1alpha/version.rb"
