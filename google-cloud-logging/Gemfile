@@ -12,7 +12,7 @@ gem "google-style", "~> 1.27.1"
 gem "minitest", "~> 5.16"
 gem "minitest-autotest", "~> 1.0"
 gem "minitest-focus", "~> 1.1"
-gem "minitest-reporters", "~> 1.5.0", require: false
+gem "minitest-reporters", ">= 1.5.0", "< 1.7.2", require: false
 gem "minitest-rg", "~> 5.2"
 gem "rack", ">= 0.1"
 gem "railties", ">= 5.0", "< 7.1.4"
