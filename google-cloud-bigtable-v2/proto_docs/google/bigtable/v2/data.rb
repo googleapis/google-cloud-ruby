@@ -98,6 +98,21 @@ module Google
         # The typed fields in `Value` are used as a transport encoding for the actual
         # value (which may be of a more complex type). See the documentation of the
         # `Type` message for more details.
+        # @!attribute [rw] type
+        #   @return [::Google::Cloud::Bigtable::V2::Type]
+        #     The verified `Type` of this `Value`, if it cannot be inferred.
+        #
+        #     Read results will never specify the encoding for `type` since the value
+        #     will already have been decoded by the server. Furthermore, the `type` will
+        #     be omitted entirely if it can be inferred from a previous response. The
+        #     exact semantics for inferring `type` will vary, and are therefore
+        #     documented separately for each read method.
+        #
+        #     When using composite types (Struct, Array, Map) only the outermost `Value`
+        #     will specify the `type`. This top-level `type` will define the types for
+        #     any nested `Struct' fields, `Array` elements, or `Map` key/value pairs.
+        #     If a nested `Value` provides a `type` on write, the request will be
+        #     rejected with INVALID_ARGUMENT.
         # @!attribute [rw] raw_value
         #   @return [::String]
         #     Represents a raw byte sequence with no type information.
@@ -106,11 +121,44 @@ module Google
         #   @return [::Integer]
         #     Represents a raw cell timestamp with no type information.
         #     The `type` field must be omitted.
+        # @!attribute [rw] bytes_value
+        #   @return [::String]
+        #     Represents a typed value transported as a byte sequence.
+        # @!attribute [rw] string_value
+        #   @return [::String]
+        #     Represents a typed value transported as a string.
         # @!attribute [rw] int_value
         #   @return [::Integer]
         #     Represents a typed value transported as an integer.
-        #     Default type for writes: `Int64`
+        # @!attribute [rw] bool_value
+        #   @return [::Boolean]
+        #     Represents a typed value transported as a boolean.
+        # @!attribute [rw] float_value
+        #   @return [::Float]
+        #     Represents a typed value transported as a floating point number.
+        # @!attribute [rw] timestamp_value
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Represents a typed value transported as a timestamp.
+        # @!attribute [rw] date_value
+        #   @return [::Google::Type::Date]
+        #     Represents a typed value transported as a date.
+        # @!attribute [rw] array_value
+        #   @return [::Google::Cloud::Bigtable::V2::ArrayValue]
+        #     Represents a typed value transported as a sequence of values.
+        #     To differentiate between `Struct`, `Array`, and `Map`, the outermost
+        #     `Value` must provide an explicit `type` on write. This `type` will
+        #     apply recursively to the nested `Struct` fields, `Array` elements,
+        #     or `Map` key/value pairs, which *must not* supply their own `type`.
         class Value
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # `ArrayValue` is an ordered list of `Value`.
+        # @!attribute [rw] values
+        #   @return [::Array<::Google::Cloud::Bigtable::V2::Value>]
+        #     The ordered elements in the array.
+        class ArrayValue
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -630,6 +678,94 @@ module Google
         #   @return [::String]
         #     An encoded position in the stream to restart reading from.
         class StreamContinuationToken
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Protocol buffers format descriptor, as described by Messages ProtoSchema and
+        # ProtoRows
+        class ProtoFormat
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Describes a column in a Bigtable Query Language result set.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     The name of the column.
+        # @!attribute [rw] type
+        #   @return [::Google::Cloud::Bigtable::V2::Type]
+        #     The type of the column.
+        class ColumnMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # ResultSet schema in proto format
+        # @!attribute [rw] columns
+        #   @return [::Array<::Google::Cloud::Bigtable::V2::ColumnMetadata>]
+        #     The columns in the result set.
+        class ProtoSchema
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Describes the structure of a Bigtable result set.
+        # @!attribute [rw] proto_schema
+        #   @return [::Google::Cloud::Bigtable::V2::ProtoSchema]
+        #     Schema in proto format
+        class ResultSetMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Batch of serialized ProtoRows.
+        # @!attribute [rw] batch_data
+        #   @return [::String]
+        #     Merge partial results by concatenating these bytes, then parsing the
+        #     overall value as a `ProtoRows` message.
+        class ProtoRowsBatch
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A partial result set from the streaming query API.
+        # CBT client will buffer partial_rows from result_sets until it gets a
+        # resumption_token.
+        # @!attribute [rw] proto_rows_batch
+        #   @return [::Google::Cloud::Bigtable::V2::ProtoRowsBatch]
+        #     Partial rows in serialized ProtoRows format.
+        # @!attribute [rw] resume_token
+        #   @return [::String]
+        #     An opaque token sent by the server to allow query resumption and signal
+        #     the client to accumulate `partial_rows` since the last non-empty
+        #     `resume_token`. On resumption, the resumed query will return the remaining
+        #     rows for this query.
+        #
+        #     If there is a batch in progress, a non-empty `resume_token`
+        #     means that that the batch of `partial_rows` will be complete after merging
+        #     the `partial_rows` from this response. The client must only yield
+        #     completed batches to the application, and must ensure that any future
+        #     retries send the latest token to avoid returning duplicate data.
+        #
+        #     The server may set 'resume_token' without a 'partial_rows'. If there is a
+        #     batch in progress the client should yield it.
+        #
+        #     The server will also send a sentinel `resume_token` when last batch of
+        #     `partial_rows` is sent. If the client retries the ExecuteQueryRequest with
+        #     the sentinel `resume_token`, the server will emit it again without any
+        #     `partial_rows`, then return OK.
+        # @!attribute [rw] estimated_batch_size
+        #   @return [::Integer]
+        #     Estimated size of a new batch. The server will always set this when
+        #     returning the first `partial_rows` of a batch, and will not set it at any
+        #     other time.
+        #
+        #     The client can use this estimate to allocate an initial buffer for the
+        #     batched results. This helps minimize the number of allocations required,
+        #     though the buffer size may still need to be increased if the estimate is
+        #     too low.
+        class PartialResultSet
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

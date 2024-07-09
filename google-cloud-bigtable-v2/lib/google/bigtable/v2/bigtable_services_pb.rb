@@ -72,6 +72,8 @@ module Google
             # reflect both user-initiated mutations and mutations that are caused by
             # garbage collection.
             rpc :ReadChangeStream, ::Google::Cloud::Bigtable::V2::ReadChangeStreamRequest, stream(::Google::Cloud::Bigtable::V2::ReadChangeStreamResponse)
+            # Executes a BTQL query against a particular Cloud Bigtable instance.
+            rpc :ExecuteQuery, ::Google::Cloud::Bigtable::V2::ExecuteQueryRequest, stream(::Google::Cloud::Bigtable::V2::ExecuteQueryResponse)
           end
 
           Stub = Service.rpc_stub_class

@@ -54,6 +54,11 @@
               "methods": [
                 "read_change_stream"
               ]
+            },
+            "ExecuteQuery": {
+              "methods": [
+                "execute_query"
+              ]
             }
           }
         }

@@ -370,6 +370,46 @@
           "type": "FULL"
         }
       ]
+    },
+    {
+      "region_tag": "bigtable_v2_generated_Bigtable_ExecuteQuery_sync",
+      "title": "Snippet for the execute_query call in the Bigtable service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::V2::Bigtable::Client#execute_query.",
+      "file": "bigtable/execute_query.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "execute_query",
+        "full_name": "::Google::Cloud::Bigtable::V2::Bigtable::Client#execute_query",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::V2::ExecuteQueryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigtable::V2::ExecuteQueryResponse",
+        "client": {
+          "short_name": "Bigtable::Client",
+          "full_name": "::Google::Cloud::Bigtable::V2::Bigtable::Client"
+        },
+        "method": {
+          "short_name": "ExecuteQuery",
+          "full_name": "google.bigtable.v2.Bigtable.ExecuteQuery",
+          "service": {
+            "short_name": "Bigtable",
+            "full_name": "google.bigtable.v2.Bigtable"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 49,
+          "type": "FULL"
+        }
+      ]
     }
   ]
 }
