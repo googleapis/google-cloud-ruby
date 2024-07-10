@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.0.0 (2024-07-10)
+
+#### Features
+
+* Bump version to 1.0.0 
+
 ### 0.3.3 (2024-04-19)
 
 #### Documentation
@@ -49,4 +55,3 @@
 * Initial generation of google-cloud-cloud_quotas-v1 ([#23759](https://github.com/googleapis/google-cloud-ruby/issues/23759)) 
 
 ## Release History
-
