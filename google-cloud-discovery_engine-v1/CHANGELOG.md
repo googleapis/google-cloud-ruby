@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.0.0 (2024-07-10)
+
+#### Features
+
+* Bump version to 1.0.0 
+
 ### 0.9.0 (2024-07-08)
 
 #### Features
@@ -87,4 +93,3 @@
 #### Features
 
 * Initial release of generated google-cloud-discovery_engine-v1 client ([#22239](https://github.com/googleapis/google-cloud-ruby/issues/22239))
-
