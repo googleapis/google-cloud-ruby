@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.0.0 (2024-07-10)
+
+#### Features
+
+* Bump version to 1.0.0 
+
 ### 0.10.0 (2024-05-30)
 
 #### Features
@@ -110,4 +116,3 @@
 #### Features
 
 * Initial generation of google-cloud-video-stitcher-v1
-
