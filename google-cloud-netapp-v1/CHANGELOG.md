@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.0.0 (2024-07-10)
+
+#### Features
+
+* Bump version to 1.0.0 
+
 ### 0.6.0 (2024-05-23)
 
 #### Features
@@ -71,4 +77,3 @@
 * Initial generation of google-cloud-netapp-v1 ([#22689](https://github.com/googleapis/google-cloud-ruby/issues/22689)) 
 
 ## Release History
-
