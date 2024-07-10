@@ -64,6 +64,27 @@ module Google
               end
 
               ##
+              # Create a fully-qualified Clip resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/locations/{location}/channels/{channel}/clips/{clip}`
+              #
+              # @param project [String]
+              # @param location [String]
+              # @param channel [String]
+              # @param clip [String]
+              #
+              # @return [::String]
+              def clip_path project:, location:, channel:, clip:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                raise ::ArgumentError, "channel cannot contain /" if channel.to_s.include? "/"
+
+                "projects/#{project}/locations/#{location}/channels/#{channel}/clips/#{clip}"
+              end
+
+              ##
               # Create a fully-qualified Event resource string.
               #
               # The resource will be in the following format:

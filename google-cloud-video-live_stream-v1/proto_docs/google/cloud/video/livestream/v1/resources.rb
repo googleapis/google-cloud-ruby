@@ -189,6 +189,13 @@ module Google
           #   @return [::Google::Cloud::Video::LiveStream::V1::InputConfig]
           #     The configuration for input sources defined in
           #     {::Google::Cloud::Video::LiveStream::V1::Channel#input_attachments input_attachments}.
+          # @!attribute [rw] retention_config
+          #   @return [::Google::Cloud::Video::LiveStream::V1::RetentionConfig]
+          #     Optional. Configuration for retention of output files for this channel.
+          # @!attribute [rw] static_overlays
+          #   @return [::Array<::Google::Cloud::Video::LiveStream::V1::StaticOverlay>]
+          #     Optional. List of static overlay images. Those images display over the
+          #     output content for the whole duration of the live stream.
           class Channel
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -242,6 +249,59 @@ module Google
               # Channel is stopping.
               STOPPING = 8
             end
+          end
+
+          # 2D normalized coordinates.
+          # @!attribute [rw] x
+          #   @return [::Float]
+          #     Optional. Normalized x coordinate. Valid range is [0.0, 1.0]. Default is 0.
+          # @!attribute [rw] y
+          #   @return [::Float]
+          #     Optional. Normalized y coordinate. Valid range is [0.0, 1.0]. Default is 0.
+          class NormalizedCoordinate
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Normalized resolution.
+          # @!attribute [rw] w
+          #   @return [::Float]
+          #     Optional. Normalized width. Valid range is [0.0, 1.0]. Default is 0.
+          # @!attribute [rw] h
+          #   @return [::Float]
+          #     Optional. Normalized height. Valid range is [0.0, 1.0]. Default is 0.
+          class NormalizedResolution
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Configuration for the static overlay.
+          # @!attribute [rw] asset
+          #   @return [::String]
+          #     Required. Asset to use for the overlaid image.
+          #     The asset must be represented in the form of:
+          #     `projects/{project}/locations/{location}/assets/{assetId}`.
+          #     The asset's resource type must be image.
+          # @!attribute [rw] resolution
+          #   @return [::Google::Cloud::Video::LiveStream::V1::NormalizedResolution]
+          #     Optional. Normalized image resolution, based on output video resolution.
+          #     Valid values are [0.0, 1.0]. To respect the original image aspect ratio,
+          #     set either `w` or `h` to 0. To use the original image resolution, set both
+          #     `w` and `h` to 0. The default is \\{0, 0}.
+          # @!attribute [rw] position
+          #   @return [::Google::Cloud::Video::LiveStream::V1::NormalizedCoordinate]
+          #     Optional. Position of the image in terms of normalized coordinates of the
+          #     upper-left corner of the image, based on output video resolution. For
+          #     example, use the x and y coordinates \\{0, 0} to position the top-left corner
+          #     of the overlay animation in the top-left corner of the output video.
+          # @!attribute [rw] opacity
+          #   @return [::Float]
+          #     Optional. Target image opacity. Valid values are from `1.0` (solid,
+          #     default) to `0.0` (transparent), exclusive. Set this to a value greater
+          #     than `0.0`.
+          class StaticOverlay
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Configuration for the input sources of a channel.
@@ -311,6 +371,31 @@ module Google
               # Logs with severity higher than or equal to ERROR are logged.
               ERROR = 500
             end
+          end
+
+          # Configuration for retention of output files.
+          # @!attribute [rw] retention_window_duration
+          #   @return [::Google::Protobuf::Duration]
+          #     The minimum duration for which the output files from the channel will
+          #     remain in the output bucket. After this duration, output files are
+          #     deleted asynchronously.
+          #
+          #     When the channel is deleted, all output files are deleted from the output
+          #     bucket asynchronously.
+          #
+          #     If omitted or set to zero, output files will remain in the output bucket
+          #     based on
+          #     {::Google::Cloud::Video::LiveStream::V1::Manifest#segment_keep_duration Manifest.segment_keep_duration},
+          #     which defaults to 60s.
+          #
+          #     If both retention_window_duration and
+          #     {::Google::Cloud::Video::LiveStream::V1::Manifest#segment_keep_duration Manifest.segment_keep_duration}
+          #     are set, retention_window_duration is used and
+          #     {::Google::Cloud::Video::LiveStream::V1::Manifest#segment_keep_duration Manifest.segment_keep_duration}
+          #     is ignored.
+          class RetentionConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Properties of the input stream.
@@ -389,7 +474,9 @@ module Google
           # A group of information for attaching an input resource to this channel.
           # @!attribute [rw] key
           #   @return [::String]
-          #     A unique key for this input attachment.
+          #     A unique key for this input attachment. The key must be 1-63
+          #     characters in length. The key must begin and end with a letter (regardless
+          #     of case) or a number, but can contain dashes or underscores in between.
           # @!attribute [rw] input
           #   @return [::String]
           #     The resource name of an existing input, in the form of:
@@ -502,7 +589,7 @@ module Google
             # @!attribute [rw] asset
             #   @return [::String]
             #     Slate asset to use for the duration. If its duration is less than the
-            #     duration of the SlateTask, then it will be looped. The slate must be
+            #     duration of the SlateTask, then the slate loops. The slate must be
             #     represented in the form of:
             #     `projects/{project}/locations/{location}/assets/{assetId}`.
             class SlateTask
@@ -527,8 +614,7 @@ module Google
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
-            # Unmutes the stream. The task will fail if the stream is not
-            # currently muted.
+            # Unmutes the stream. The task fails if the stream is not currently muted.
             class UnmuteTask
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -568,6 +654,130 @@ module Google
             end
           end
 
+          # Clip is a sub-resource under channel. Each clip represents a clipping
+          # operation that generates a VOD playlist from its channel given a set of
+          # timestamp ranges.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     The resource name of the clip, in the following format:
+          #     `projects/{project}/locations/{location}/channels/{c}/clips/{clipId}`.
+          #     `{clipId}` is a user-specified resource id that conforms to the following
+          #     criteria:
+          #
+          #     1. 1 character minimum, 63 characters maximum
+          #     2. Only contains letters, digits, underscores, and hyphens
+          # @!attribute [r] create_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The creation timestamp of the clip resource.
+          # @!attribute [r] start_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The timestamp when the clip request starts to be processed.
+          # @!attribute [r] update_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The update timestamp of the clip resource.
+          # @!attribute [rw] labels
+          #   @return [::Google::Protobuf::Map{::String => ::String}]
+          #     The labels associated with this resource. Each label is a key-value pair.
+          # @!attribute [r] state
+          #   @return [::Google::Cloud::Video::LiveStream::V1::Clip::State]
+          #     Output only. The state of the clip.
+          # @!attribute [rw] output_uri
+          #   @return [::String]
+          #     Specify the `output_uri` to determine where to place the clip segments and
+          #     clip manifest files in Cloud Storage. The manifests specified in
+          #     `clip_manifests` fields will be placed under this URI. The exact URI of the
+          #     generated manifests will be provided in `clip_manifests.output_uri` for
+          #     each manifest.
+          #     Example:
+          #     "output_uri": "gs://my-bucket/clip-outputs"
+          #     "clip_manifests.output_uri": "gs://my-bucket/clip-outputs/main.m3u8"
+          # @!attribute [r] error
+          #   @return [::Google::Rpc::Status]
+          #     Output only. An error object that describes the reason for the failure.
+          #     This property only presents when `state` is `FAILED`.
+          # @!attribute [rw] slices
+          #   @return [::Array<::Google::Cloud::Video::LiveStream::V1::Clip::Slice>]
+          #     The specified ranges of segments to generate a clip.
+          # @!attribute [rw] clip_manifests
+          #   @return [::Array<::Google::Cloud::Video::LiveStream::V1::Clip::ClipManifest>]
+          #     Required. A list of clip manifests. Currently only one clip manifest is
+          #     allowed.
+          class Clip
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # TimeSlice represents a tuple of Unix epoch timestamps that specifies a time
+            # range.
+            # @!attribute [rw] markin_time
+            #   @return [::Google::Protobuf::Timestamp]
+            #     The mark-in Unix epoch time in the original live stream manifest.
+            # @!attribute [rw] markout_time
+            #   @return [::Google::Protobuf::Timestamp]
+            #     The mark-out Unix epoch time in the original live stream manifest.
+            class TimeSlice
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Slice represents a slice of the requested clip.
+            # @!attribute [rw] time_slice
+            #   @return [::Google::Cloud::Video::LiveStream::V1::Clip::TimeSlice]
+            #     A slice in form of a tuple of Unix epoch time.
+            class Slice
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # ClipManifest identifies a source manifest for the generated clip manifest.
+            # @!attribute [rw] manifest_key
+            #   @return [::String]
+            #     Required. A unique key that identifies a manifest config in the parent
+            #     channel. This key is the same as `channel.manifests.key` for the selected
+            #     manifest.
+            # @!attribute [r] output_uri
+            #   @return [::String]
+            #     Output only. The output URI of the generated clip manifest. This field
+            #     will be populated when the CreateClip request is accepted. Current output
+            #     format is provided below but may change in the future. Please read this
+            #     field to get the uri to the generated clip manifest. Format:
+            #     \\{clip.output_uri}/\\{channel.manifest.fileName} Example:
+            #     gs://my-bucket/clip-outputs/main.m3u8
+            class ClipManifest
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::String]
+            class LabelsEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # State of clipping operation.
+            module State
+              # State is not specified.
+              STATE_UNSPECIFIED = 0
+
+              # The operation is pending to be picked up by the server.
+              PENDING = 1
+
+              # The server admitted this create clip request, and
+              # outputs are under processing.
+              CREATING = 2
+
+              # Outputs are available in the specified Cloud Storage bucket. For
+              # additional information, see the `outputs` field.
+              SUCCEEDED = 3
+
+              # The operation has failed. For additional information, see the `error`
+              # field.
+              FAILED = 4
+            end
+          end
+
           # An asset represents a video or an image.
           # @!attribute [rw] name
           #   @return [::String]
@@ -595,10 +805,12 @@ module Google
           #     resource](https://cloud.google.com/storage/docs/json_api/v1/objects).
           #     If crc32c is omitted or left empty when the asset is created, this field is
           #     filled by the crc32c checksum of the Cloud Storage object indicated by
-          #     [VideoAsset.uri] or [ImageAsset.uri].
-          #     If crc32c is set, the asset can't be created if the crc32c value does not
+          #     {::Google::Cloud::Video::LiveStream::V1::Asset::VideoAsset#uri VideoAsset.uri} or
+          #     {::Google::Cloud::Video::LiveStream::V1::Asset::ImageAsset#uri ImageAsset.uri}. If
+          #     crc32c is set, the asset can't be created if the crc32c value does not
           #     match with the crc32c checksum of the Cloud Storage object indicated by
-          #     [VideoAsset.uri] or [ImageAsset.uri].
+          #     {::Google::Cloud::Video::LiveStream::V1::Asset::VideoAsset#uri VideoAsset.uri} or
+          #     {::Google::Cloud::Video::LiveStream::V1::Asset::ImageAsset#uri ImageAsset.uri}.
           # @!attribute [r] state
           #   @return [::Google::Cloud::Video::LiveStream::V1::Asset::State]
           #     Output only. The state of the asset resource.
@@ -621,7 +833,7 @@ module Google
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
-            # Image represents an image. The supported format is JPEG.
+            # Image represents an image. The supported formats are JPEG, PNG.
             # @!attribute [rw] uri
             #   @return [::String]
             #     Cloud Storage URI of the image. The format is `gs://my-bucket/my-object`.
@@ -661,7 +873,10 @@ module Google
           # Encryption settings.
           # @!attribute [rw] id
           #   @return [::String]
-          #     Required. Identifier for this set of encryption options.
+          #     Required. Identifier for this set of encryption options. The ID must be
+          #     1-63 characters in length. The ID must begin and end with a letter
+          #     (regardless of case) or a number, but can contain dashes or underscores in
+          #     between.
           # @!attribute [rw] secret_manager_key_source
           #   @return [::Google::Cloud::Video::LiveStream::V1::Encryption::SecretManagerSource]
           #     For keys stored in Google Secret Manager.

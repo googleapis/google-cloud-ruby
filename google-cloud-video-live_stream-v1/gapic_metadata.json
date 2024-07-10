@@ -90,6 +90,26 @@
                 "delete_event"
               ]
             },
+            "ListClips": {
+              "methods": [
+                "list_clips"
+              ]
+            },
+            "GetClip": {
+              "methods": [
+                "get_clip"
+              ]
+            },
+            "CreateClip": {
+              "methods": [
+                "create_clip"
+              ]
+            },
+            "DeleteClip": {
+              "methods": [
+                "delete_clip"
+              ]
+            },
             "CreateAsset": {
               "methods": [
                 "create_asset"

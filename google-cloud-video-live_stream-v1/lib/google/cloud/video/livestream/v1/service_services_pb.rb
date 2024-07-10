@@ -73,6 +73,15 @@ module Google
               rpc :GetEvent, ::Google::Cloud::Video::LiveStream::V1::GetEventRequest, ::Google::Cloud::Video::LiveStream::V1::Event
               # Deletes the specified event.
               rpc :DeleteEvent, ::Google::Cloud::Video::LiveStream::V1::DeleteEventRequest, ::Google::Protobuf::Empty
+              # Returns a list of all clips in the specified channel.
+              rpc :ListClips, ::Google::Cloud::Video::LiveStream::V1::ListClipsRequest, ::Google::Cloud::Video::LiveStream::V1::ListClipsResponse
+              # Returns the specified clip.
+              rpc :GetClip, ::Google::Cloud::Video::LiveStream::V1::GetClipRequest, ::Google::Cloud::Video::LiveStream::V1::Clip
+              # Creates a clip with the provided clip ID in the specified channel.
+              rpc :CreateClip, ::Google::Cloud::Video::LiveStream::V1::CreateClipRequest, ::Google::Longrunning::Operation
+              # Deletes the specified clip job resource. This method only deletes the clip
+              # job and does not delete the VOD clip stored in the GCS.
+              rpc :DeleteClip, ::Google::Cloud::Video::LiveStream::V1::DeleteClipRequest, ::Google::Longrunning::Operation
               # Creates a Asset with the provided unique ID in the specified
               # region.
               rpc :CreateAsset, ::Google::Cloud::Video::LiveStream::V1::CreateAssetRequest, ::Google::Longrunning::Operation
