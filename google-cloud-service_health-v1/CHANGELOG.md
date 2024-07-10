@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.0.0 (2024-07-10)
+
+#### Features
+
+* Bump version to 1.0.0 
+
 ### 0.2.0 (2024-02-26)
 
 #### Features
@@ -25,4 +31,3 @@
 * Initial generation of google-cloud-service_health-v1 ([#24414](https://github.com/googleapis/google-cloud-ruby/issues/24414)) 
 
 ## Release History
-
