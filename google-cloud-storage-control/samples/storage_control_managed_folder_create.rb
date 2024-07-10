@@ -28,8 +28,8 @@ def create_managed_folder bucket_name:, managed_folder_id:
   # denotes this bucket exists in the global namespace.
   bucket_path = storage_control.bucket_path project: "_", bucket: bucket_name
 
-  request = Google::Cloud::Storage::Control::V2::CreateManagedFolderRequest.new 
-              parent: bucket_path, managed_folder_id: managed_folder_id
+  request = Google::Cloud::Storage::Control::V2::CreateManagedFolderRequest.new parent: bucket_path,
+                                                                                managed_folder_id: managed_folder_id
 
   response = storage_control.create_managed_folder request
 

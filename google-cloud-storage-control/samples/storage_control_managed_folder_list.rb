@@ -25,8 +25,7 @@ def list_managed_folders bucket_name:
   # denotes this bucket exists in the global namespace.
   bucket_path = storage_control.bucket_path project: "_", bucket: bucket_name
 
-  request = Google::Cloud::Storage::Control::V2::ListManagedFoldersRequest.new 
-              parent: bucket_path
+  request = Google::Cloud::Storage::Control::V2::ListManagedFoldersRequest.new parent: bucket_path
 
   managed_folders = storage_control.list_managed_folders request
   managed_folders.each do |managed_folder|

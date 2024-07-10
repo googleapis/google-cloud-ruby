@@ -26,11 +26,11 @@ def get_managed_folder bucket_name:, managed_folder_id:
 
   # The storage bucket path uses the global access pattern, in which the "_"
   # denotes this bucket exists in the global namespace.
-  folder_path = storage_control.managed_folder_path project: "_", bucket: bucket_name, 
-                                            managed_folder_id: managed_folder_id
+  folder_path = storage_control.managed_folder_path project: "_",
+                                                    bucket: bucket_name,
+                                                    managed_folder: managed_folder_id
 
-  request = Google::Cloud::Storage::Control::V2::GetManagedFolderRequest.new 
-              name: folder_path
+  request = Google::Cloud::Storage::Control::V2::GetManagedFolderRequest.new name: folder_path
 
   response = storage_control.get_managed_folder request
 

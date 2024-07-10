@@ -26,15 +26,15 @@ def delete_managed_folder bucket_name:, managed_folder_id:
 
   # The storage bucket path uses the global access pattern, in which the "_"
   # denotes this bucket exists in the global namespace.
-  bucket_path = storage_control.managed_folder_path project: "_", bucket: bucket_name, 
-                                            managed_folder_id: managed_folder_id
+  folder_path = storage_control.managed_folder_path project: "_",
+                                                    bucket: bucket_name,
+                                                    managed_folder_id: managed_folder_id
 
-  request = Google::Cloud::Storage::Control::V2::DeleteManagedFolderRequest.new 
-              name: folder_path
+  request = Google::Cloud::Storage::Control::V2::DeleteManagedFolderRequest.new name: folder_path
 
-  response = storage_control.delete_managed_folder request
+  storage_control.delete_managed_folder request
 
-  puts "Deleted managed folder: #{response.name}"
+  puts "Deleted managed folder: #{managed_folder_id}"
 end
 # [END storage_control_managed_folder_delete]
 
