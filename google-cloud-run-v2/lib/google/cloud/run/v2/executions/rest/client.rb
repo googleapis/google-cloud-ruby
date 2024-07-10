@@ -268,7 +268,8 @@ module Google
               end
 
               ##
-              # Lists Executions from a Job.
+              # Lists Executions from a Job. Results are sorted by creation time,
+              # descending.
               #
               # @overload list_executions(request, options = nil)
               #   Pass arguments to `list_executions` via a request object, either of type

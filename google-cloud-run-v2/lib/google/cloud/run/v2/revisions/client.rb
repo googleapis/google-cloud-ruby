@@ -284,7 +284,8 @@ module Google
             end
 
             ##
-            # Lists Revisions from a given Service, or from a given location.
+            # Lists Revisions from a given Service, or from a given location.  Results
+            # are sorted by creation time, descending.
             #
             # @overload list_revisions(request, options = nil)
             #   Pass arguments to `list_revisions` via a request object, either of type

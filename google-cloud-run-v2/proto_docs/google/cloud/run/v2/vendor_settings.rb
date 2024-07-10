@@ -32,12 +32,12 @@ module Google
         #     visit https://cloud.google.com/run/docs/configuring/vpc-connectors.
         # @!attribute [rw] egress
         #   @return [::Google::Cloud::Run::V2::VpcAccess::VpcEgress]
-        #     Traffic VPC egress settings. If not provided, it defaults to
+        #     Optional. Traffic VPC egress settings. If not provided, it defaults to
         #     PRIVATE_RANGES_ONLY.
         # @!attribute [rw] network_interfaces
         #   @return [::Array<::Google::Cloud::Run::V2::VpcAccess::NetworkInterface>]
-        #     Direct VPC egress settings. Currently only single network interface is
-        #     supported.
+        #     Optional. Direct VPC egress settings. Currently only single network
+        #     interface is supported.
         class VpcAccess
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -45,21 +45,21 @@ module Google
           # Direct VPC egress settings.
           # @!attribute [rw] network
           #   @return [::String]
-          #     The VPC network that the Cloud Run resource will be able to send traffic
-          #     to. At least one of network or subnetwork must be specified. If both
-          #     network and subnetwork are specified, the given VPC subnetwork must
-          #     belong to the given VPC network. If network is not specified, it will be
-          #     looked up from the subnetwork.
+          #     Optional. The VPC network that the Cloud Run resource will be able to
+          #     send traffic to. At least one of network or subnetwork must be specified.
+          #     If both network and subnetwork are specified, the given VPC subnetwork
+          #     must belong to the given VPC network. If network is not specified, it
+          #     will be looked up from the subnetwork.
           # @!attribute [rw] subnetwork
           #   @return [::String]
-          #     The VPC subnetwork that the Cloud Run resource will get IPs from. At
-          #     least one of network or subnetwork must be specified. If both
+          #     Optional. The VPC subnetwork that the Cloud Run resource will get IPs
+          #     from. At least one of network or subnetwork must be specified. If both
           #     network and subnetwork are specified, the given VPC subnetwork must
           #     belong to the given VPC network. If subnetwork is not specified, the
           #     subnetwork with the same name with the network will be used.
           # @!attribute [rw] tags
           #   @return [::Array<::String>]
-          #     Network tags applied to this Cloud Run resource.
+          #     Optional. Network tags applied to this Cloud Run resource.
           class NetworkInterface
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -81,11 +81,15 @@ module Google
         # Settings for Binary Authorization feature.
         # @!attribute [rw] use_default
         #   @return [::Boolean]
-        #     If True, indicates to use the default project's binary authorization
-        #     policy. If False, binary authorization will be disabled.
+        #     Optional. If True, indicates to use the default project's binary
+        #     authorization policy. If False, binary authorization will be disabled.
+        # @!attribute [rw] policy
+        #   @return [::String]
+        #     Optional. The path to a binary authorization policy.
+        #     Format: projects/\\{project}/platforms/cloudRun/\\{policy-name}
         # @!attribute [rw] breakglass_justification
         #   @return [::String]
-        #     If present, indicates to use Breakglass using this justification.
+        #     Optional. If present, indicates to use Breakglass using this justification.
         #     If use_default is False, then it must be empty.
         #     For more information on breakglass, see
         #     https://cloud.google.com/binary-authorization/docs/using-breakglass
@@ -97,10 +101,12 @@ module Google
         # Settings for revision-level scaling settings.
         # @!attribute [rw] min_instance_count
         #   @return [::Integer]
-        #     Minimum number of serving instances that this resource should have.
+        #     Optional. Minimum number of serving instances that this resource should
+        #     have.
         # @!attribute [rw] max_instance_count
         #   @return [::Integer]
-        #     Maximum number of serving instances that this resource should have.
+        #     Optional. Maximum number of serving instances that this resource should
+        #     have.
         class RevisionScaling
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -110,7 +116,7 @@ module Google
         # at the revision level.
         # @!attribute [rw] min_instance_count
         #   @return [::Integer]
-        #     total min instances for the service. This number of instances is
+        #     Optional. total min instances for the service. This number of instances is
         #     divided among all revisions with specified traffic based on the percent
         #     of traffic they are receiving. (BETA)
         class ServiceScaling

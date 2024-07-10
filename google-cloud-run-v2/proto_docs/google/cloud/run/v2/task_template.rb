@@ -29,26 +29,26 @@ module Google
         #     task.
         # @!attribute [rw] volumes
         #   @return [::Array<::Google::Cloud::Run::V2::Volume>]
-        #     A list of Volumes to make available to containers.
+        #     Optional. A list of Volumes to make available to containers.
         # @!attribute [rw] max_retries
         #   @return [::Integer]
         #     Number of retries allowed per Task, before marking this Task failed.
         #     Defaults to 3.
         # @!attribute [rw] timeout
         #   @return [::Google::Protobuf::Duration]
-        #     Max allowed time duration the Task may be active before the system will
-        #     actively try to mark it failed and kill associated containers. This applies
-        #     per attempt of a task, meaning each retry can run for the full timeout.
-        #     Defaults to 600 seconds.
+        #     Optional. Max allowed time duration the Task may be active before the
+        #     system will actively try to mark it failed and kill associated containers.
+        #     This applies per attempt of a task, meaning each retry can run for the full
+        #     timeout. Defaults to 600 seconds.
         # @!attribute [rw] service_account
         #   @return [::String]
-        #     Email address of the IAM service account associated with the Task of a
-        #     Job. The service account represents the identity of the
-        #     running task, and determines what permissions the task has. If
-        #     not provided, the task will use the project's default service account.
+        #     Optional. Email address of the IAM service account associated with the Task
+        #     of a Job. The service account represents the identity of the running task,
+        #     and determines what permissions the task has. If not provided, the task
+        #     will use the project's default service account.
         # @!attribute [rw] execution_environment
         #   @return [::Google::Cloud::Run::V2::ExecutionEnvironment]
-        #     The execution environment being used to host this Task.
+        #     Optional. The execution environment being used to host this Task.
         # @!attribute [rw] encryption_key
         #   @return [::String]
         #     A reference to a customer managed encryption key (CMEK) to use to encrypt
@@ -56,8 +56,9 @@ module Google
         #     https://cloud.google.com/run/docs/securing/using-cmek
         # @!attribute [rw] vpc_access
         #   @return [::Google::Cloud::Run::V2::VpcAccess]
-        #     VPC Access configuration to use for this Task. For more information,
-        #     visit https://cloud.google.com/run/docs/configuring/connecting-vpc.
+        #     Optional. VPC Access configuration to use for this Task. For more
+        #     information, visit
+        #     https://cloud.google.com/run/docs/configuring/connecting-vpc.
         class TaskTemplate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -37,7 +37,7 @@ module Google
             rpc :CreateService, ::Google::Cloud::Run::V2::CreateServiceRequest, ::Google::Longrunning::Operation
             # Gets information about a Service.
             rpc :GetService, ::Google::Cloud::Run::V2::GetServiceRequest, ::Google::Cloud::Run::V2::Service
-            # Lists Services.
+            # Lists Services. Results are sorted by creation time, descending.
             rpc :ListServices, ::Google::Cloud::Run::V2::ListServicesRequest, ::Google::Cloud::Run::V2::ListServicesResponse
             # Updates a Service.
             rpc :UpdateService, ::Google::Cloud::Run::V2::UpdateServiceRequest, ::Google::Longrunning::Operation

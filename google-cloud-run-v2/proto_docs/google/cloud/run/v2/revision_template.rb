@@ -25,15 +25,14 @@ module Google
         # a template.
         # @!attribute [rw] revision
         #   @return [::String]
-        #     The unique name for the revision. If this field is omitted, it will be
-        #     automatically generated based on the Service name.
+        #     Optional. The unique name for the revision. If this field is omitted, it
+        #     will be automatically generated based on the Service name.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Unstructured key value map that can be used to organize and categorize
-        #     objects.
-        #     User-provided labels are shared with Google's billing system, so they can
-        #     be used to filter, or break down billing charges by team, component,
-        #     environment, state, etc. For more information, visit
+        #     Optional. Unstructured key value map that can be used to organize and
+        #     categorize objects. User-provided labels are shared with Google's billing
+        #     system, so they can be used to filter, or break down billing charges by
+        #     team, component, environment, state, etc. For more information, visit
         #     https://cloud.google.com/resource-manager/docs/creating-managing-labels or
         #     https://cloud.google.com/run/docs/configuring/labels.
         #
@@ -43,9 +42,9 @@ module Google
         #     corresponding field in v2 RevisionTemplate.
         # @!attribute [rw] annotations
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Unstructured key value map that may be set by external tools to store and
-        #     arbitrary metadata. They are not queryable and should be preserved
-        #     when modifying objects.
+        #     Optional. Unstructured key value map that may be set by external tools to
+        #     store and arbitrary metadata. They are not queryable and should be
+        #     preserved when modifying objects.
         #
         #     <p>Cloud Run API v2 does not support annotations with `run.googleapis.com`,
         #     `cloud.googleapis.com`, `serving.knative.dev`, or `autoscaling.knative.dev`
@@ -56,19 +55,20 @@ module Google
         #     rules.
         # @!attribute [rw] scaling
         #   @return [::Google::Cloud::Run::V2::RevisionScaling]
-        #     Scaling settings for this Revision.
+        #     Optional. Scaling settings for this Revision.
         # @!attribute [rw] vpc_access
         #   @return [::Google::Cloud::Run::V2::VpcAccess]
-        #     VPC Access configuration to use for this Revision. For more information,
-        #     visit https://cloud.google.com/run/docs/configuring/connecting-vpc.
+        #     Optional. VPC Access configuration to use for this Revision. For more
+        #     information, visit
+        #     https://cloud.google.com/run/docs/configuring/connecting-vpc.
         # @!attribute [rw] timeout
         #   @return [::Google::Protobuf::Duration]
-        #     Max allowed time for an instance to respond to a request.
+        #     Optional. Max allowed time for an instance to respond to a request.
         # @!attribute [rw] service_account
         #   @return [::String]
-        #     Email address of the IAM service account associated with the revision of
-        #     the service. The service account represents the identity of the running
-        #     revision, and determines what permissions the revision has. If not
+        #     Optional. Email address of the IAM service account associated with the
+        #     revision of the service. The service account represents the identity of the
+        #     running revision, and determines what permissions the revision has. If not
         #     provided, the revision will use the project's default service account.
         # @!attribute [rw] containers
         #   @return [::Array<::Google::Cloud::Run::V2::Container>]
@@ -76,10 +76,10 @@ module Google
         #     Revision.
         # @!attribute [rw] volumes
         #   @return [::Array<::Google::Cloud::Run::V2::Volume>]
-        #     A list of Volumes to make available to containers.
+        #     Optional. A list of Volumes to make available to containers.
         # @!attribute [rw] execution_environment
         #   @return [::Google::Cloud::Run::V2::ExecutionEnvironment]
-        #     The sandbox environment to host this Revision.
+        #     Optional. The sandbox environment to host this Revision.
         # @!attribute [rw] encryption_key
         #   @return [::String]
         #     A reference to a customer managed encryption key (CMEK) to use to encrypt
@@ -87,7 +87,8 @@ module Google
         #     https://cloud.google.com/run/docs/securing/using-cmek
         # @!attribute [rw] max_instance_request_concurrency
         #   @return [::Integer]
-        #     Sets the maximum number of requests that each serving instance can receive.
+        #     Optional. Sets the maximum number of requests that each serving instance
+        #     can receive.
         # @!attribute [rw] session_affinity
         #   @return [::Boolean]
         #     Optional. Enable session affinity.

@@ -45,6 +45,9 @@ module Google
         end
 
         # Request message for updating a service.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. The list of fields to be updated.
         # @!attribute [rw] service
         #   @return [::Google::Cloud::Run::V2::Service]
         #     Required. The Service to be updated.
@@ -54,9 +57,9 @@ module Google
         #     populated, without persisting the request or updating any resources.
         # @!attribute [rw] allow_missing
         #   @return [::Boolean]
-        #     If set to true, and if the Service does not exist, it will create a new
-        #     one. The caller must have 'run.services.create' permissions if this is set
-        #     to true and the Service does not exist.
+        #     Optional. If set to true, and if the Service does not exist, it will create
+        #     a new one. The caller must have 'run.services.create' permissions if this
+        #     is set to true and the Service does not exist.
         class UpdateServiceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -189,7 +192,8 @@ module Google
         #     Output only. The last-modified time.
         # @!attribute [r] delete_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The deletion time.
+        #     Output only. The deletion time. It is only populated as a response to a
+        #     Delete request.
         # @!attribute [r] expire_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. For a deleted resource, the time after which it will be
@@ -208,12 +212,12 @@ module Google
         #     Arbitrary version identifier for the API client.
         # @!attribute [rw] ingress
         #   @return [::Google::Cloud::Run::V2::IngressTraffic]
-        #     Provides the ingress settings for this Service. On output, returns the
-        #     currently observed ingress settings, or INGRESS_TRAFFIC_UNSPECIFIED if no
-        #     revision is active.
+        #     Optional. Provides the ingress settings for this Service. On output,
+        #     returns the currently observed ingress settings, or
+        #     INGRESS_TRAFFIC_UNSPECIFIED if no revision is active.
         # @!attribute [rw] launch_stage
         #   @return [::Google::Api::LaunchStage]
-        #     The launch stage as defined by [Google Cloud Platform
+        #     Optional. The launch stage as defined by [Google Cloud Platform
         #     Launch Stages](https://cloud.google.com/terms/launch-stages).
         #     Cloud Run supports `ALPHA`, `BETA`, and `GA`. If no value is specified, GA
         #     is assumed.
@@ -225,15 +229,15 @@ module Google
         #     features are used, this field will be BETA on output.
         # @!attribute [rw] binary_authorization
         #   @return [::Google::Cloud::Run::V2::BinaryAuthorization]
-        #     Settings for the Binary Authorization feature.
+        #     Optional. Settings for the Binary Authorization feature.
         # @!attribute [rw] template
         #   @return [::Google::Cloud::Run::V2::RevisionTemplate]
         #     Required. The template used to create revisions for this Service.
         # @!attribute [rw] traffic
         #   @return [::Array<::Google::Cloud::Run::V2::TrafficTarget>]
-        #     Specifies how to distribute traffic over a collection of Revisions
-        #     belonging to the Service. If traffic is empty or not provided, defaults to
-        #     100% traffic to the latest `Ready` Revision.
+        #     Optional. Specifies how to distribute traffic over a collection of
+        #     Revisions belonging to the Service. If traffic is empty or not provided,
+        #     defaults to 100% traffic to the latest `Ready` Revision.
         # @!attribute [rw] scaling
         #   @return [::Google::Cloud::Run::V2::ServiceScaling]
         #     Optional. Specifies service-level scaling settings

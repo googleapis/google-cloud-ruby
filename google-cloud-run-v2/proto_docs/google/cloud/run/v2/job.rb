@@ -64,9 +64,9 @@ module Google
         #     populated, without persisting the request or updating any resources.
         # @!attribute [rw] allow_missing
         #   @return [::Boolean]
-        #     If set to true, and if the Job does not exist, it will create a new
-        #     one. Caller must have both create and update permissions for this call if
-        #     this is set to true.
+        #     Optional. If set to true, and if the Job does not exist, it will create a
+        #     new one. Caller must have both create and update permissions for this call
+        #     if this is set to true.
         class UpdateJobRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -239,7 +239,8 @@ module Google
         #     Output only. The last-modified time.
         # @!attribute [r] delete_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The deletion time.
+        #     Output only. The deletion time. It is only populated as a response to a
+        #     Delete request.
         # @!attribute [r] expire_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. For a deleted resource, the time after which it will be
@@ -320,6 +321,16 @@ module Google
         # @!attribute [r] satisfies_pzs
         #   @return [::Boolean]
         #     Output only. Reserved for future use.
+        # @!attribute [rw] start_execution_token
+        #   @return [::String]
+        #     A unique string used as a suffix creating a new execution. The Job will
+        #     become ready when the execution is successfully started.
+        #     The sum of job name and token length must be fewer than 63 characters.
+        # @!attribute [rw] run_execution_token
+        #   @return [::String]
+        #     A unique string used as a suffix for creating a new execution. The Job
+        #     will become ready when the execution is successfully completed.
+        #     The sum of job name and token length must be fewer than 63 characters.
         # @!attribute [r] etag
         #   @return [::String]
         #     Output only. A system-generated fingerprint for this version of the
@@ -358,9 +369,37 @@ module Google
         # @!attribute [rw] completion_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Creation timestamp of the execution.
+        # @!attribute [rw] delete_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The deletion time of the execution. It is only
+        #     populated as a response to a Delete request.
+        # @!attribute [rw] completion_status
+        #   @return [::Google::Cloud::Run::V2::ExecutionReference::CompletionStatus]
+        #     Status for the execution completion.
         class ExecutionReference
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Possible execution completion status.
+          module CompletionStatus
+            # The default value. This value is used if the state is omitted.
+            COMPLETION_STATUS_UNSPECIFIED = 0
+
+            # Job execution has succeeded.
+            EXECUTION_SUCCEEDED = 1
+
+            # Job execution has failed.
+            EXECUTION_FAILED = 2
+
+            # Job execution is running normally.
+            EXECUTION_RUNNING = 3
+
+            # Waiting for backing resources to be provisioned.
+            EXECUTION_PENDING = 4
+
+            # Job execution has been cancelled by the user.
+            EXECUTION_CANCELLED = 5
+          end
         end
       end
     end

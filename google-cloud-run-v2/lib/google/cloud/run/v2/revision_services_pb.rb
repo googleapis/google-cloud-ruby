@@ -35,7 +35,8 @@ module Google
 
             # Gets information about a Revision.
             rpc :GetRevision, ::Google::Cloud::Run::V2::GetRevisionRequest, ::Google::Cloud::Run::V2::Revision
-            # Lists Revisions from a given Service, or from a given location.
+            # Lists Revisions from a given Service, or from a given location.  Results
+            # are sorted by creation time, descending.
             rpc :ListRevisions, ::Google::Cloud::Run::V2::ListRevisionsRequest, ::Google::Cloud::Run::V2::ListRevisionsResponse
             # Deletes a Revision.
             rpc :DeleteRevision, ::Google::Cloud::Run::V2::DeleteRevisionRequest, ::Google::Longrunning::Operation
