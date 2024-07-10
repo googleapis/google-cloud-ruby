@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.0.0 (2024-07-10)
+
+#### Features
+
+* Bump version to 1.0.0 
+
 ### 0.1.1 (2024-06-26)
 
 #### Documentation
@@ -13,4 +19,3 @@
 * Initial generation of google-cloud-cloud_controls_partner-v1 ([#25363](https://github.com/googleapis/google-cloud-ruby/issues/25363)) 
 
 ## Release History
-
