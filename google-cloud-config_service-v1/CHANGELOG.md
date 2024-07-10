@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.0.0 (2024-07-10)
+
+#### Features
+
+* Bump version to 1.0.0 
+
 ### 0.6.0 (2024-04-25)
 
 #### Features
@@ -57,4 +63,3 @@
 * Initial generation of google-cloud-config_service-v1 ([#23354](https://github.com/googleapis/google-cloud-ruby/issues/23354)) 
 
 ## Release History
-
