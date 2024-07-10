@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.0.0 (2024-07-10)
+
+#### Features
+
+* Bump version to 1.0.0 
+
 ### 0.23.0 (2024-06-28)
 
 #### Features
@@ -203,4 +209,3 @@
 #### Features
 
 * Initial generation of google-cloud-dataplex-v1
-
