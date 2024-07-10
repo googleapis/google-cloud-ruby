@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.0.0 (2024-07-10)
+
+#### Features
+
+* Bump version to 1.0.0 
+
 ### 0.10.0 (2024-06-18)
 
 #### Features
@@ -101,4 +107,3 @@
 #### Features
 
 * Initial generation of google-cloud-gke_hub-v1
-
