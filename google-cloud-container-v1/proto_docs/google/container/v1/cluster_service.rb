@@ -4588,6 +4588,7 @@ module Google
             # Gateway API support is disabled
             CHANNEL_DISABLED = 1
 
+            # Deprecated: use CHANNEL_STANDARD instead.
             # Gateway API support is enabled, experimental CRDs are installed
             CHANNEL_EXPERIMENTAL = 3
 
@@ -5543,6 +5544,9 @@ module Google
 
             # KUBELET
             KUBELET = 14
+
+            # NVIDIA Data Center GPU Manager (DCGM)
+            DCGM = 15
           end
         end
 
