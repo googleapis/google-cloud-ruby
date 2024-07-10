@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.0.0 (2024-07-10)
+
+#### Features
+
+* Bump version to 1.0.0 
+
 ### 0.20.0 (2024-05-23)
 
 #### Features
@@ -195,4 +201,3 @@
 #### Features
 
 * Initial generation of google-cloud-deploy-v1
-
