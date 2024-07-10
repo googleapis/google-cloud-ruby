@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.0.0 (2024-07-10)
+
+#### Features
+
+* Bump version to 1.0.0 
+
 ### 0.4.0 (2024-06-25)
 
 #### Features
@@ -32,4 +38,3 @@
 * Initial generation of google-cloud-security_center_management-v1 ([#25772](https://github.com/googleapis/google-cloud-ruby/issues/25772)) 
 
 ## Release History
-
