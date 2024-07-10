@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.0.0 (2024-07-10)
+
+#### Features
+
+* Bump version to 1.0.0 
+
 ### 0.13.0 (2024-04-19)
 
 #### Features
@@ -144,4 +150,3 @@
 #### Features
 
 * Initial generation of google-cloud-security-private_ca-v1
-
