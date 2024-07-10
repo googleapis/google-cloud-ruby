@@ -1,5 +1,11 @@
 # Release History
 
+### 0.41.0 (2024-07-10)
+
+#### Features
+
+* add DCGM enum in monitoring config ([#26378](https://github.com/googleapis/google-cloud-ruby/issues/26378)) 
+
 ### 0.40.1 (2024-07-08)
 
 #### Documentation
