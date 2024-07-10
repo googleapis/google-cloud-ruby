@@ -6280,6 +6280,9 @@ module Google
 
             # KUBELET
             KUBELET = 14
+
+            # NVIDIA Data Center GPU Manager (DCGM)
+            DCGM = 15
           end
         end
 
