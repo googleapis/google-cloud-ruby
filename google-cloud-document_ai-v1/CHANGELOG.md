@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.0.0 (2024-07-10)
+
+#### Features
+
+* Bump version to 1.0.0 
+
 ### 0.23.1 (2024-06-24)
 
 #### Documentation
@@ -231,4 +237,3 @@
 #### Features
 
 * Initial generation of google-cloud-document_ai-v1
-
