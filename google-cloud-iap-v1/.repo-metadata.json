@@ -8,7 +8,7 @@
     "name": "iap",
     "name_pretty": "Identity-Aware Proxy V1 API",
     "product_documentation": "https://cloud.google.com/iap/",
-    "release_level": "preview",
+    "release_level": "stable",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "IAP lets you establish a central authorization layer for applications accessed by HTTPS, so you can use an application-level access control model instead of relying on network-level firewalls. Note that google-cloud-iap-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-iap instead. See the readme for more details.",
