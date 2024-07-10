@@ -746,6 +746,82 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
+
+        # Request message for Bigtable.ExecuteQuery
+        # @!attribute [rw] instance_name
+        #   @return [::String]
+        #     Required. The unique name of the instance against which the query should be
+        #     executed.
+        #     Values are of the form `projects/<project>/instances/<instance>`
+        # @!attribute [rw] app_profile_id
+        #   @return [::String]
+        #     Optional. This value specifies routing for replication. If not specified,
+        #     the `default` application profile will be used.
+        # @!attribute [rw] query
+        #   @return [::String]
+        #     Required. The query string.
+        # @!attribute [rw] proto_format
+        #   @return [::Google::Cloud::Bigtable::V2::ProtoFormat]
+        #     Protocol buffer format as described by ProtoSchema and ProtoRows
+        #     messages.
+        # @!attribute [rw] resume_token
+        #   @return [::String]
+        #     Optional. If this request is resuming a previously interrupted query
+        #     execution, `resume_token` should be copied from the last
+        #     PartialResultSet yielded before the interruption. Doing this
+        #     enables the query execution to resume where the last one left
+        #     off.
+        #     The rest of the request parameters must exactly match the
+        #     request that yielded this token. Otherwise the request will fail.
+        # @!attribute [rw] params
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Bigtable::V2::Value}]
+        #     Required. params contains string type keys and Bigtable type values that
+        #     bind to placeholders in the query string. In query string, a parameter
+        #     placeholder consists of the
+        #     `@` character followed by the parameter name (for example, `@firstName`) in
+        #     the query string.
+        #
+        #     For example, if
+        #     `params["firstName"] = bytes_value: "foo" type {bytes_type {}}`
+        #      then `@firstName` will be replaced with googlesql bytes value "foo" in the
+        #      query string during query evaluation.
+        #
+        #     In case of Value.kind is not set, it will be set to corresponding null
+        #     value in googlesql.
+        #      `params["firstName"] =  type {string_type {}}`
+        #      then `@firstName` will be replaced with googlesql null string.
+        #
+        #     Value.type should always be set and no inference of type will be made from
+        #     Value.kind. If Value.type is not set, we will return INVALID_ARGUMENT
+        #     error.
+        class ExecuteQueryRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Bigtable::V2::Value]
+          class ParamsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Response message for Bigtable.ExecuteQuery
+        # @!attribute [rw] metadata
+        #   @return [::Google::Cloud::Bigtable::V2::ResultSetMetadata]
+        #     Structure of rows in this response stream. The first (and only the first)
+        #     response streamed from the server will be of this type.
+        # @!attribute [rw] results
+        #   @return [::Google::Cloud::Bigtable::V2::PartialResultSet]
+        #     A partial result set with row data potentially including additional
+        #     instructions on how recent past and future partial responses should be
+        #     interpreted.
+        class ExecuteQueryResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
       end
     end
   end

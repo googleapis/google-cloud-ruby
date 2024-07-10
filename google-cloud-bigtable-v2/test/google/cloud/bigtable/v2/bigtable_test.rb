@@ -719,6 +719,90 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
     end
   end
 
+  def test_execute_query
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Bigtable::V2::ExecuteQueryResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a server streaming method.
+    instance_name = "hello world"
+    app_profile_id = "hello world"
+    query = "hello world"
+    proto_format = {}
+    resume_token = "hello world"
+    params = {}
+
+    execute_query_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
+      assert_equal :execute_query, name
+      assert_kind_of ::Google::Cloud::Bigtable::V2::ExecuteQueryRequest, request
+      assert_equal "hello world", request["instance_name"]
+      assert_equal "hello world", request["app_profile_id"]
+      assert_equal "hello world", request["query"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigtable::V2::ProtoFormat), request["proto_format"]
+      assert_equal :proto_format, request.data_format
+      assert_equal "hello world", request["resume_token"]
+      assert_equal({}, request["params"].to_h)
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, execute_query_client_stub do
+      # Create client
+      client = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.execute_query({ instance_name: instance_name, app_profile_id: app_profile_id, query: query, proto_format: proto_format, resume_token: resume_token, params: params }) do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Bigtable::V2::ExecuteQueryResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.execute_query instance_name: instance_name, app_profile_id: app_profile_id, query: query, proto_format: proto_format, resume_token: resume_token, params: params do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Bigtable::V2::ExecuteQueryResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.execute_query ::Google::Cloud::Bigtable::V2::ExecuteQueryRequest.new(instance_name: instance_name, app_profile_id: app_profile_id, query: query, proto_format: proto_format, resume_token: resume_token, params: params) do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Bigtable::V2::ExecuteQueryResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.execute_query({ instance_name: instance_name, app_profile_id: app_profile_id, query: query, proto_format: proto_format, resume_token: resume_token, params: params }, grpc_options) do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Bigtable::V2::ExecuteQueryResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.execute_query(::Google::Cloud::Bigtable::V2::ExecuteQueryRequest.new(instance_name: instance_name, app_profile_id: app_profile_id, query: query, proto_format: proto_format, resume_token: resume_token, params: params), grpc_options) do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Bigtable::V2::ExecuteQueryResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, execute_query_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
