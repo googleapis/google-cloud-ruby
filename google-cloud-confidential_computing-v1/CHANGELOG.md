@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.0.0 (2024-07-10)
+
+#### Features
+
+* Bump version to 1.0.0 
+
 ### 0.9.0 (2024-04-15)
 
 #### Features
@@ -71,4 +77,3 @@
 * Initial generation of google-cloud-confidential_computing-v1 ([#21489](https://github.com/googleapis/google-cloud-ruby/issues/21489)) 
 
 ## Release History
-
