@@ -1,5 +1,16 @@
 # Changelog
 
+### 0.16.0 (2024-07-10)
+
+#### Features
+
+* add Job ExecutionReference.completion_status to show status of the most recent execution 
+* add Job start_execution_token and run_execution_token to execute jobs immediately on creation 
+* support update_mask in Cloud Run UpdateService ([#26373](https://github.com/googleapis/google-cloud-ruby/issues/26373)) 
+#### Documentation
+
+* clarify optional fields in Cloud Run requests 
+
 ### 0.15.0 (2024-03-06)
 
 #### Features
