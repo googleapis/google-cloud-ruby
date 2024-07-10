@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.0.0 (2024-07-10)
+
+#### Features
+
+* Bump version to 1.0.0 
+
 ### 0.2.0 (2024-06-04)
 
 #### Features
@@ -13,4 +19,3 @@
 * Initial generation of google-cloud-network_services-v1 ([#25959](https://github.com/googleapis/google-cloud-ruby/issues/25959)) 
 
 ## Release History
-
