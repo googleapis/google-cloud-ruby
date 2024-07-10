@@ -79,3 +79,4 @@
 #### Features
 
 * Initial generation of google-cloud-monitoring-metrics_scope-v1
+

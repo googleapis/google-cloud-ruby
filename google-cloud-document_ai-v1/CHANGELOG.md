@@ -231,3 +231,4 @@
 #### Features
 
 * Initial generation of google-cloud-document_ai-v1
+

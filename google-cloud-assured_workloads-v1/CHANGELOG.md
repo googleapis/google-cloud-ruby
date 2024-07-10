@@ -98,3 +98,4 @@
 #### Features
 
 * Initial generation of google-cloud-assured_workloads-v1
+

@@ -68,3 +68,4 @@
 #### Features
 
 * Initial generation of google-cloud-eventarc-publishing-v1
+

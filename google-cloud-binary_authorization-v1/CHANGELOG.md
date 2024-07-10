@@ -82,3 +82,4 @@
 #### Features
 
 * Initial generation of google-cloud-binary_authorization-v1
+
