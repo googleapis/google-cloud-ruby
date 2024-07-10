@@ -110,3 +110,4 @@
 #### Features
 
 * Initial generation of google-cloud-video-stitcher-v1
+
