@@ -33,6 +33,18 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientPaths
     end
   end
 
+  def test_ca_pool_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.ca_pool_path project: "value0", location: "value1", ca_pool: "value2"
+      assert_equal "projects/value0/locations/value1/caPools/value2", path
+    end
+  end
+
   def test_crypto_key_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -78,6 +90,18 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientPaths
 
       path = client.repository_path project: "value0", location: "value1", repository: "value2"
       assert_equal "projects/value0/locations/value1/repositories/value2", path
+    end
+  end
+
+  def test_service_attachment_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.service_attachment_path project: "value0", region: "value1", service_attachment: "value2"
+      assert_equal "projects/value0/regions/value1/serviceAttachments/value2", path
     end
   end
 end
