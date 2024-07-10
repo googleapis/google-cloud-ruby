@@ -45,6 +45,9 @@ module Google
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. Labels as key value pairs.
+        # @!attribute [rw] private_config
+        #   @return [::Google::Cloud::SecureSourceManager::V1::Instance::PrivateConfig]
+        #     Optional. Private settings for private instance.
         # @!attribute [r] state
         #   @return [::Google::Cloud::SecureSourceManager::V1::Instance::State]
         #     Output only. Current state of the instance.
@@ -82,6 +85,27 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # PrivateConfig includes settings for private instance.
+          # @!attribute [rw] is_private
+          #   @return [::Boolean]
+          #     Required. Immutable. Indicate if it's private instance.
+          # @!attribute [rw] ca_pool
+          #   @return [::String]
+          #     Required. Immutable. CA pool resource, resource must in the format of
+          #     `projects/{project}/locations/{location}/caPools/{ca_pool}`.
+          # @!attribute [r] http_service_attachment
+          #   @return [::String]
+          #     Output only. Service Attachment for HTTP, resource is in the format of
+          #     `projects/{project}/regions/{region}/serviceAttachments/{service_attachment}`.
+          # @!attribute [r] ssh_service_attachment
+          #   @return [::String]
+          #     Output only. Service Attachment for SSH, resource is in the format of
+          #     `projects/{project}/regions/{region}/serviceAttachments/{service_attachment}`.
+          class PrivateConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # @!attribute [rw] key
           #   @return [::String]
           # @!attribute [rw] value
@@ -107,6 +131,9 @@ module Google
 
             # Instance is paused.
             PAUSED = 4
+
+            # Instance is unknown, we are not sure if it's functioning.
+            UNKNOWN = 6
           end
 
           # Provides information about the current instance state.
@@ -133,11 +160,13 @@ module Google
         #   @return [::String]
         #     Optional. Description of the repository, which cannot exceed 500
         #     characters.
-        # @!attribute [r] instance
+        # @!attribute [rw] instance
         #   @return [::String]
-        #     Output only. The name of the instance in which the repository is hosted,
+        #     Optional. The name of the instance in which the repository is hosted,
         #     formatted as
         #     `projects/{project_number}/locations/{location_id}/instances/{instance_id}`
+        #     For data plane CreateRepository requests, this field is output only.
+        #     For control plane CreateRepository requests, this field is used as input.
         # @!attribute [r] uid
         #   @return [::String]
         #     Output only. Unique identifier of the repository.
