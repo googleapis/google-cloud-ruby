@@ -49,3 +49,4 @@
 * Initial generation of google-cloud-edge_network-v1 ([#23677](https://github.com/googleapis/google-cloud-ruby/issues/23677)) 
 
 ## Release History
+

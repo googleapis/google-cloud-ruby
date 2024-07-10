@@ -35,3 +35,4 @@
 #### Features
 
 * Initial release of generated google-cloud-support-v2 client ([#21668](https://github.com/googleapis/google-cloud-ruby/issues/21668))
+

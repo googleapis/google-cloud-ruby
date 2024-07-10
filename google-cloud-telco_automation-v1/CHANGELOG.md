@@ -40,3 +40,4 @@
 * Initial generation of google-cloud-telco_automation-v1 ([#23675](https://github.com/googleapis/google-cloud-ruby/issues/23675)) 
 
 ## Release History
+

@@ -49,3 +49,4 @@
 * Initial generation of google-cloud-cloud_quotas-v1 ([#23759](https://github.com/googleapis/google-cloud-ruby/issues/23759)) 
 
 ## Release History
+
