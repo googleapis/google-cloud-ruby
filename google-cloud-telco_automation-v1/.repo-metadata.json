@@ -8,7 +8,7 @@
     "name": "telcoautomation",
     "name_pretty": "Telco Automation V1 API",
     "product_documentation": "https://cloud.google.com/telecom-network-automation",
-    "release_level": "preview",
+    "release_level": "stable",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "APIs to automate management of cloud infrastructure for network functions. Note that google-cloud-telco_automation-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-telco_automation instead. See the readme for more details.",
