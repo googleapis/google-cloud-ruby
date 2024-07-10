@@ -1,5 +1,15 @@
 # Changelog
 
+### 0.4.0 (2024-07-10)
+
+#### Features
+
+* add constant `UNKNOWN` to field `State` in message `.google.cloud.securesourcemanager.v1.Instance` 
+* add field `private_config` to message `.google.cloud.securesourcemanager.v1.Instance` ([#26374](https://github.com/googleapis/google-cloud-ruby/issues/26374)) 
+#### Documentation
+
+* A comment for field `instance` in message `.google.cloud.securesourcemanager.v1.Repository` is updated to include data plane vs control plane behavior. 
+
 ### 0.3.0 (2024-02-26)
 
 #### Features
