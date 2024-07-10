@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.0.0 (2024-07-10)
+
+#### Features
+
+* Bump version to 1.0.0 
+
 ### 0.9.0 (2024-02-26)
 
 #### Features
@@ -81,4 +87,3 @@
 #### Features
 
 * Initial generation of google-cloud-video-live_stream-v1
-
