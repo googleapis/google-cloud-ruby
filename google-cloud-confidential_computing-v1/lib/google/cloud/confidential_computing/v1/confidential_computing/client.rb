@@ -293,11 +293,15 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload verify_attestation(challenge: nil, gcp_credentials: nil, tpm_attestation: nil, confidential_space_info: nil, token_options: nil)
+            # @overload verify_attestation(td_ccel: nil, sev_snp_attestation: nil, challenge: nil, gcp_credentials: nil, tpm_attestation: nil, confidential_space_info: nil, token_options: nil)
             #   Pass arguments to `verify_attestation` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
+            #   @param td_ccel [::Google::Cloud::ConfidentialComputing::V1::TdxCcelAttestation, ::Hash]
+            #     Optional. A TDX with CCEL and RTMR Attestation Quote.
+            #   @param sev_snp_attestation [::Google::Cloud::ConfidentialComputing::V1::SevSnpAttestation, ::Hash]
+            #     Optional. An SEV-SNP Attestation Report.
             #   @param challenge [::String]
             #     Required. The name of the Challenge whose nonce was used to generate the
             #     attestation, in the format `projects/*/locations/*/challenges/*`. The

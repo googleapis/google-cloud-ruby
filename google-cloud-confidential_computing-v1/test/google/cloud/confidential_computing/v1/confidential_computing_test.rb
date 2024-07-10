@@ -123,6 +123,7 @@ class ::Google::Cloud::ConfidentialComputing::V1::ConfidentialComputing::ClientT
     grpc_options = {}
 
     # Create request parameters for a unary method.
+    td_ccel = {}
     challenge = "hello world"
     gcp_credentials = {}
     tpm_attestation = {}
@@ -132,6 +133,8 @@ class ::Google::Cloud::ConfidentialComputing::V1::ConfidentialComputing::ClientT
     verify_attestation_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :verify_attestation, name
       assert_kind_of ::Google::Cloud::ConfidentialComputing::V1::VerifyAttestationRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ConfidentialComputing::V1::TdxCcelAttestation), request["td_ccel"]
+      assert_equal :td_ccel, request.tee_attestation
       assert_equal "hello world", request["challenge"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ConfidentialComputing::V1::GcpCredentials), request["gcp_credentials"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ConfidentialComputing::V1::TpmAttestation), request["tpm_attestation"]
@@ -147,31 +150,31 @@ class ::Google::Cloud::ConfidentialComputing::V1::ConfidentialComputing::ClientT
       end
 
       # Use hash object
-      client.verify_attestation({ challenge: challenge, gcp_credentials: gcp_credentials, tpm_attestation: tpm_attestation, confidential_space_info: confidential_space_info, token_options: token_options }) do |response, operation|
+      client.verify_attestation({ td_ccel: td_ccel, challenge: challenge, gcp_credentials: gcp_credentials, tpm_attestation: tpm_attestation, confidential_space_info: confidential_space_info, token_options: token_options }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.verify_attestation challenge: challenge, gcp_credentials: gcp_credentials, tpm_attestation: tpm_attestation, confidential_space_info: confidential_space_info, token_options: token_options do |response, operation|
+      client.verify_attestation td_ccel: td_ccel, challenge: challenge, gcp_credentials: gcp_credentials, tpm_attestation: tpm_attestation, confidential_space_info: confidential_space_info, token_options: token_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.verify_attestation ::Google::Cloud::ConfidentialComputing::V1::VerifyAttestationRequest.new(challenge: challenge, gcp_credentials: gcp_credentials, tpm_attestation: tpm_attestation, confidential_space_info: confidential_space_info, token_options: token_options) do |response, operation|
+      client.verify_attestation ::Google::Cloud::ConfidentialComputing::V1::VerifyAttestationRequest.new(td_ccel: td_ccel, challenge: challenge, gcp_credentials: gcp_credentials, tpm_attestation: tpm_attestation, confidential_space_info: confidential_space_info, token_options: token_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.verify_attestation({ challenge: challenge, gcp_credentials: gcp_credentials, tpm_attestation: tpm_attestation, confidential_space_info: confidential_space_info, token_options: token_options }, grpc_options) do |response, operation|
+      client.verify_attestation({ td_ccel: td_ccel, challenge: challenge, gcp_credentials: gcp_credentials, tpm_attestation: tpm_attestation, confidential_space_info: confidential_space_info, token_options: token_options }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.verify_attestation(::Google::Cloud::ConfidentialComputing::V1::VerifyAttestationRequest.new(challenge: challenge, gcp_credentials: gcp_credentials, tpm_attestation: tpm_attestation, confidential_space_info: confidential_space_info, token_options: token_options), grpc_options) do |response, operation|
+      client.verify_attestation(::Google::Cloud::ConfidentialComputing::V1::VerifyAttestationRequest.new(td_ccel: td_ccel, challenge: challenge, gcp_credentials: gcp_credentials, tpm_attestation: tpm_attestation, confidential_space_info: confidential_space_info, token_options: token_options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
