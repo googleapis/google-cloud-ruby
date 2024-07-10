@@ -1,5 +1,11 @@
 # Release History
 
+### 1.1.0 (2024-07-10)
+
+#### Features
+
+* publish the Cloud Bigtable ExecuteQuery API ([#26362](https://github.com/googleapis/google-cloud-ruby/issues/26362)) 
+
 ### 1.0.0 (2024-07-09)
 
 #### Features
