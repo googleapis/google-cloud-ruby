@@ -133,6 +133,7 @@ class ::Google::Cloud::ConfidentialComputing::V1::ConfidentialComputing::Rest::C
     call_options = {}
 
     # Create request parameters for a unary method.
+    td_ccel = {}
     challenge = "hello world"
     gcp_credentials = {}
     tpm_attestation = {}
@@ -153,27 +154,27 @@ class ::Google::Cloud::ConfidentialComputing::V1::ConfidentialComputing::Rest::C
         end
 
         # Use hash object
-        client.verify_attestation({ challenge: challenge, gcp_credentials: gcp_credentials, tpm_attestation: tpm_attestation, confidential_space_info: confidential_space_info, token_options: token_options }) do |_result, response|
+        client.verify_attestation({ td_ccel: td_ccel, challenge: challenge, gcp_credentials: gcp_credentials, tpm_attestation: tpm_attestation, confidential_space_info: confidential_space_info, token_options: token_options }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.verify_attestation challenge: challenge, gcp_credentials: gcp_credentials, tpm_attestation: tpm_attestation, confidential_space_info: confidential_space_info, token_options: token_options do |_result, response|
+        client.verify_attestation td_ccel: td_ccel, challenge: challenge, gcp_credentials: gcp_credentials, tpm_attestation: tpm_attestation, confidential_space_info: confidential_space_info, token_options: token_options do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.verify_attestation ::Google::Cloud::ConfidentialComputing::V1::VerifyAttestationRequest.new(challenge: challenge, gcp_credentials: gcp_credentials, tpm_attestation: tpm_attestation, confidential_space_info: confidential_space_info, token_options: token_options) do |_result, response|
+        client.verify_attestation ::Google::Cloud::ConfidentialComputing::V1::VerifyAttestationRequest.new(td_ccel: td_ccel, challenge: challenge, gcp_credentials: gcp_credentials, tpm_attestation: tpm_attestation, confidential_space_info: confidential_space_info, token_options: token_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.verify_attestation({ challenge: challenge, gcp_credentials: gcp_credentials, tpm_attestation: tpm_attestation, confidential_space_info: confidential_space_info, token_options: token_options }, call_options) do |_result, response|
+        client.verify_attestation({ td_ccel: td_ccel, challenge: challenge, gcp_credentials: gcp_credentials, tpm_attestation: tpm_attestation, confidential_space_info: confidential_space_info, token_options: token_options }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.verify_attestation(::Google::Cloud::ConfidentialComputing::V1::VerifyAttestationRequest.new(challenge: challenge, gcp_credentials: gcp_credentials, tpm_attestation: tpm_attestation, confidential_space_info: confidential_space_info, token_options: token_options), call_options) do |_result, response|
+        client.verify_attestation(::Google::Cloud::ConfidentialComputing::V1::VerifyAttestationRequest.new(td_ccel: td_ccel, challenge: challenge, gcp_credentials: gcp_credentials, tpm_attestation: tpm_attestation, confidential_space_info: confidential_space_info, token_options: token_options), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

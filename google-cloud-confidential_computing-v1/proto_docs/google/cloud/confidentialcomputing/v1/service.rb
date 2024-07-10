@@ -60,6 +60,12 @@ module Google
 
         # A request for an OIDC token, providing all the necessary information needed
         # for this service to verify the plaform state of the requestor.
+        # @!attribute [rw] td_ccel
+        #   @return [::Google::Cloud::ConfidentialComputing::V1::TdxCcelAttestation]
+        #     Optional. A TDX with CCEL and RTMR Attestation Quote.
+        # @!attribute [rw] sev_snp_attestation
+        #   @return [::Google::Cloud::ConfidentialComputing::V1::SevSnpAttestation]
+        #     Optional. An SEV-SNP Attestation Report.
         # @!attribute [rw] challenge
         #   @return [::String]
         #     Required. The name of the Challenge whose nonce was used to generate the
@@ -81,6 +87,47 @@ module Google
         #     Optional. A collection of optional, workload-specified claims that modify
         #     the token output.
         class VerifyAttestationRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A TDX Attestation quote.
+        # @!attribute [rw] ccel_acpi_table
+        #   @return [::String]
+        #     Optional. The Confidential Computing Event Log (CCEL) ACPI table. Formatted
+        #     as described in the ACPI Specification 6.5.
+        # @!attribute [rw] ccel_data
+        #   @return [::String]
+        #     Optional. The CCEL event log. Formatted as described in the UEFI 2.10.
+        # @!attribute [rw] canonical_event_log
+        #   @return [::String]
+        #     Optional. An Event Log containing additional events measured into the RTMR
+        #     that are not already present in the CCEL.
+        # @!attribute [rw] td_quote
+        #   @return [::String]
+        #     Optional. The TDX attestation quote from the guest. It contains the RTMR
+        #     values.
+        class TdxCcelAttestation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # An SEV-SNP Attestation Report.
+        # Contains the attestation report and the certificate bundle that the client
+        # collects.
+        # @!attribute [rw] report
+        #   @return [::String]
+        #     Optional. The SEV-SNP Attestation Report
+        #     Format is in revision 1.55, §7.3 Attestation, Table 22. ATTESTATION_REPORT
+        #     Structure in this document:
+        #     https://www.amd.com/content/dam/amd/en/documents/epyc-technical-docs/specifications/56860.pdf
+        # @!attribute [rw] aux_blob
+        #   @return [::String]
+        #     Optional. Certificate bundle defined in the GHCB protocol definition
+        #     Format is documented in GHCB revision 2.03, section 4.1.8.1 struct
+        #     cert_table in this document:
+        #     https://www.amd.com/content/dam/amd/en/documents/epyc-technical-docs/specifications/56421.pdf
+        class SevSnpAttestation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
