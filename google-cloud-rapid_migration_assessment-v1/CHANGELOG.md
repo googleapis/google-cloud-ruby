@@ -41,3 +41,4 @@
 #### Features
 
 * Initial release of generated rapid_migration_assessment-v1 client ([#22238](https://github.com/googleapis/google-cloud-ruby/issues/22238))
+
