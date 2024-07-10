@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.0.0 (2024-07-10)
+
+#### Features
+
+* Bump version to 1.0.0 
+
 ### 0.8.0 (2024-03-18)
 
 #### Features
@@ -82,4 +88,3 @@
 #### Features
 
 * Initial generation of google-cloud-binary_authorization-v1
-
