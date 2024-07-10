@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.0.0 (2024-07-10)
+
+#### Features
+
+* Bump version to 1.0.0 
+
 ### 0.4.0 (2024-02-26)
 
 #### Features
@@ -43,4 +49,3 @@
 * Initial generation of google-cloud-policy_simulator-v1 ([#22674](https://github.com/googleapis/google-cloud-ruby/issues/22674)) 
 
 ## Release History
-
