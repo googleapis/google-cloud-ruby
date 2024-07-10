@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.0.0 (2024-07-10)
+
+#### Features
+
+* Bump version to 1.0.0 
+
 ### 0.4.0 (2024-07-10)
 
 #### Features
@@ -41,4 +47,3 @@
 * Initial generation of google-cloud-secure_source_manager-v1 ([#23734](https://github.com/googleapis/google-cloud-ruby/issues/23734)) 
 
 ## Release History
-
