@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.0.0 (2024-07-10)
+
+#### Features
+
+* Bump version to 1.0.0 
+
 ### 0.14.0 (2024-04-15)
 
 #### Features
@@ -150,4 +156,3 @@
 #### Features
 
 * Initial generation of google-cloud-network_management-v1
-
