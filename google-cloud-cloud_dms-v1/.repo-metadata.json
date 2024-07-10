@@ -8,7 +8,7 @@
     "name": "datamigration",
     "name_pretty": "Cloud Database Migration Service V1 API",
     "product_documentation": "https://cloud.google.com/database-migration/",
-    "release_level": "preview",
+    "release_level": "stable",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "Database Migration Service makes it easier for you to migrate your data to Google Cloud. Database Migration Service helps you lift and shift your MySQL and PostgreSQL workloads into Cloud SQL. Database Migration Service streamlines networking workflow, manages the initial snapshot and ongoing replication, and provides a status of the migration operation. Note that google-cloud-cloud_dms-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-cloud_dms instead. See the readme for more details.",
