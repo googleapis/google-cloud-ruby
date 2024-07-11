@@ -255,6 +255,13 @@ module Google
             rpc :ListColumnDataProfiles, ::Google::Cloud::Dlp::V2::ListColumnDataProfilesRequest, ::Google::Cloud::Dlp::V2::ListColumnDataProfilesResponse
             # Gets a project data profile.
             rpc :GetProjectDataProfile, ::Google::Cloud::Dlp::V2::GetProjectDataProfileRequest, ::Google::Cloud::Dlp::V2::ProjectDataProfile
+            # Lists file store data profiles for an organization.
+            rpc :ListFileStoreDataProfiles, ::Google::Cloud::Dlp::V2::ListFileStoreDataProfilesRequest, ::Google::Cloud::Dlp::V2::ListFileStoreDataProfilesResponse
+            # Gets a file store data profile.
+            rpc :GetFileStoreDataProfile, ::Google::Cloud::Dlp::V2::GetFileStoreDataProfileRequest, ::Google::Cloud::Dlp::V2::FileStoreDataProfile
+            # Delete a FileStoreDataProfile. Will not prevent the profile from being
+            # regenerated if the resource is still included in a discovery configuration.
+            rpc :DeleteFileStoreDataProfile, ::Google::Cloud::Dlp::V2::DeleteFileStoreDataProfileRequest, ::Google::Protobuf::Empty
             # Gets a table data profile.
             rpc :GetTableDataProfile, ::Google::Cloud::Dlp::V2::GetTableDataProfileRequest, ::Google::Cloud::Dlp::V2::TableDataProfile
             # Gets a column data profile.

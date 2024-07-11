@@ -2661,6 +2661,193 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
     end
   end
 
+  def test_list_file_store_data_profiles
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Dlp::V2::ListFileStoreDataProfilesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_token = "hello world"
+    page_size = 42
+    order_by = "hello world"
+    filter = "hello world"
+
+    list_file_store_data_profiles_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_file_store_data_profiles, name
+      assert_kind_of ::Google::Cloud::Dlp::V2::ListFileStoreDataProfilesRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["order_by"]
+      assert_equal "hello world", request["filter"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_file_store_data_profiles_client_stub do
+      # Create client
+      client = ::Google::Cloud::Dlp::V2::DlpService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_file_store_data_profiles({ parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_file_store_data_profiles parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_file_store_data_profiles ::Google::Cloud::Dlp::V2::ListFileStoreDataProfilesRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_file_store_data_profiles({ parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_file_store_data_profiles(::Google::Cloud::Dlp::V2::ListFileStoreDataProfilesRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_file_store_data_profiles_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_file_store_data_profile
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Dlp::V2::FileStoreDataProfile.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_file_store_data_profile_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_file_store_data_profile, name
+      assert_kind_of ::Google::Cloud::Dlp::V2::GetFileStoreDataProfileRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_file_store_data_profile_client_stub do
+      # Create client
+      client = ::Google::Cloud::Dlp::V2::DlpService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_file_store_data_profile({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_file_store_data_profile name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_file_store_data_profile ::Google::Cloud::Dlp::V2::GetFileStoreDataProfileRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_file_store_data_profile({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_file_store_data_profile(::Google::Cloud::Dlp::V2::GetFileStoreDataProfileRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_file_store_data_profile_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_file_store_data_profile
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_file_store_data_profile_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_file_store_data_profile, name
+      assert_kind_of ::Google::Cloud::Dlp::V2::DeleteFileStoreDataProfileRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_file_store_data_profile_client_stub do
+      # Create client
+      client = ::Google::Cloud::Dlp::V2::DlpService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_file_store_data_profile({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_file_store_data_profile name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_file_store_data_profile ::Google::Cloud::Dlp::V2::DeleteFileStoreDataProfileRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_file_store_data_profile({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_file_store_data_profile(::Google::Cloud::Dlp::V2::DeleteFileStoreDataProfileRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_file_store_data_profile_client_stub.call_rpc_count
+    end
+  end
+
   def test_get_table_data_profile
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::Dlp::V2::TableDataProfile.new

@@ -108,6 +108,21 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientPathsTest < Minitest::Test
     end
   end
 
+  def test_file_store_data_profile_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Dlp::V2::DlpService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.file_store_data_profile_path organization: "value0", location: "value1", file_store_data_profile: "value2"
+      assert_equal "organizations/value0/locations/value1/fileStoreDataProfiles/value2", path
+
+      path = client.file_store_data_profile_path project: "value0", location: "value1", file_store_data_profile: "value2"
+      assert_equal "projects/value0/locations/value1/fileStoreDataProfiles/value2", path
+    end
+  end
+
   def test_inspect_template_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do

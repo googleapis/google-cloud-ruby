@@ -215,6 +215,21 @@
                 "get_project_data_profile"
               ]
             },
+            "ListFileStoreDataProfiles": {
+              "methods": [
+                "list_file_store_data_profiles"
+              ]
+            },
+            "GetFileStoreDataProfile": {
+              "methods": [
+                "get_file_store_data_profile"
+              ]
+            },
+            "DeleteFileStoreDataProfile": {
+              "methods": [
+                "delete_file_store_data_profile"
+              ]
+            },
             "GetTableDataProfile": {
               "methods": [
                 "get_table_data_profile"
