@@ -719,6 +719,21 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Rows represented in proto format.
+        #
+        # This should be constructed by concatenating the `batch_data` from each
+        # of the relevant `ProtoRowsBatch` messages and parsing the result as a
+        # `ProtoRows` message.
+        # @!attribute [rw] values
+        #   @return [::Array<::Google::Cloud::Bigtable::V2::Value>]
+        #     A proto rows message consists of a list of values. Every N complete values
+        #     defines a row, where N is equal to the  number of entries in the
+        #     `metadata.proto_schema.columns` value received in the first response.
+        class ProtoRows
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Batch of serialized ProtoRows.
         # @!attribute [rw] batch_data
         #   @return [::String]
