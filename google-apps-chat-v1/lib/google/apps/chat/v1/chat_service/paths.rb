@@ -130,6 +130,23 @@ module Google
             end
 
             ##
+            # Create a fully-qualified SpaceEvent resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `spaces/{space}/spaceEvents/{space_event}`
+            #
+            # @param space [String]
+            # @param space_event [String]
+            #
+            # @return [::String]
+            def space_event_path space:, space_event:
+              raise ::ArgumentError, "space cannot contain /" if space.to_s.include? "/"
+
+              "spaces/#{space}/spaceEvents/#{space_event}"
+            end
+
+            ##
             # Create a fully-qualified SpaceReadState resource string.
             #
             # The resource will be in the following format:
