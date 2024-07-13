@@ -31,6 +31,11 @@ module Google
         #     require "google/cloud/bigquery/migration/v2"
         #     client = ::Google::Cloud::Bigquery::Migration::V2::MigrationService::Client.new
         #
+        # @example Load this package, including all its services, and instantiate a REST client
+        #
+        #     require "google/cloud/bigquery/migration/v2"
+        #     client = ::Google::Cloud::Bigquery::Migration::V2::MigrationService::Rest::Client.new
+        #
         module V2
         end
       end

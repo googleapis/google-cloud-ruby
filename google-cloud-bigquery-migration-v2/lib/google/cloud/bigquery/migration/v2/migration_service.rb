@@ -25,6 +25,7 @@ require "google/cloud/bigquery/migration/v2/version"
 require "google/cloud/bigquery/migration/v2/migration_service/credentials"
 require "google/cloud/bigquery/migration/v2/migration_service/paths"
 require "google/cloud/bigquery/migration/v2/migration_service/client"
+require "google/cloud/bigquery/migration/v2/migration_service/rest"
 
 module Google
   module Cloud
@@ -38,6 +39,11 @@ module Google
           #
           #     require "google/cloud/bigquery/migration/v2/migration_service"
           #     client = ::Google::Cloud::Bigquery::Migration::V2::MigrationService::Client.new
+          #
+          # @example Load this service and instantiate a REST client
+          #
+          #     require "google/cloud/bigquery/migration/v2/migration_service/rest"
+          #     client = ::Google::Cloud::Bigquery::Migration::V2::MigrationService::Rest::Client.new
           #
           module MigrationService
           end

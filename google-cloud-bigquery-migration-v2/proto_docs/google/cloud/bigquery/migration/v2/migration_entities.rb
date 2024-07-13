@@ -26,8 +26,8 @@ module Google
           # migration.
           # @!attribute [r] name
           #   @return [::String]
-          #     Output only. Immutable. The unique identifier for the migration workflow.
-          #     The ID is server-generated.
+          #     Output only. Immutable. Identifier. The unique identifier for the migration
+          #     workflow. The ID is server-generated.
           #
           #     Example: `projects/123/locations/us/workflows/345`
           # @!attribute [rw] display_name
@@ -88,7 +88,10 @@ module Google
           # the task.
           # @!attribute [rw] translation_config_details
           #   @return [::Google::Cloud::Bigquery::Migration::V2::TranslationConfigDetails]
-          #     Task configuration for Batch SQL Translation.
+          #     Task configuration for CW Batch/Offline SQL Translation.
+          # @!attribute [rw] translation_details
+          #   @return [::Google::Cloud::Bigquery::Migration::V2::TranslationDetails]
+          #     Task details for unified SQL Translation.
           # @!attribute [r] id
           #   @return [::String]
           #     Output only. Immutable. The unique identifier for the migration task. The
@@ -101,7 +104,7 @@ module Google
           #     Translation_Snowflake2BQ, Translation_Netezza2BQ,
           #     Translation_AzureSynapse2BQ, Translation_Vertica2BQ,
           #     Translation_SQLServer2BQ, Translation_Presto2BQ, Translation_MySQL2BQ,
-          #     Translation_Postgresql2BQ.
+          #     Translation_Postgresql2BQ, Translation_SQLite2BQ, Translation_Greenplum2BQ.
           # @!attribute [r] state
           #   @return [::Google::Cloud::Bigquery::Migration::V2::MigrationTask::State]
           #     Output only. The current state of the task.
@@ -115,6 +118,29 @@ module Google
           # @!attribute [rw] last_update_time
           #   @return [::Google::Protobuf::Timestamp]
           #     Time when the task was last updated.
+          # @!attribute [r] resource_error_details
+          #   @return [::Array<::Google::Cloud::Bigquery::Migration::V2::ResourceErrorDetail>]
+          #     Output only. Provides details to errors and issues encountered while
+          #     processing the task. Presence of error details does not mean that the task
+          #     failed.
+          # @!attribute [rw] resource_error_count
+          #   @return [::Integer]
+          #     The number or resources with errors. Note: This is not the total
+          #     number of errors as each resource can have more than one error.
+          #     This is used to indicate truncation by having a `resource_error_count`
+          #     that is higher than the size of `resource_error_details`.
+          # @!attribute [rw] metrics
+          #   @return [::Array<::Google::Cloud::Bigquery::Migration::V2::TimeSeries>]
+          #     The metrics for the task.
+          # @!attribute [r] task_result
+          #   @return [::Google::Cloud::Bigquery::Migration::V2::MigrationTaskResult]
+          #     Output only. The result of the task.
+          # @!attribute [rw] total_processing_error_count
+          #   @return [::Integer]
+          #     Count of all the processing errors in this task and its subtasks.
+          # @!attribute [rw] total_resource_error_count
+          #   @return [::Integer]
+          #     Count of all the resource errors in this task and its subtasks.
           class MigrationTask
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -219,6 +245,27 @@ module Google
               # dependencies are done.
               PENDING_DEPENDENCY = 6
             end
+          end
+
+          # The migration task result.
+          # @!attribute [rw] translation_task_result
+          #   @return [::Google::Cloud::Bigquery::Migration::V2::TranslationTaskResult]
+          #     Details specific to translation task types.
+          class MigrationTaskResult
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Translation specific result details from the migration task.
+          # @!attribute [rw] translated_literals
+          #   @return [::Array<::Google::Cloud::Bigquery::Migration::V2::Literal>]
+          #     The list of the translated literals.
+          # @!attribute [rw] report_log_messages
+          #   @return [::Array<::Google::Cloud::Bigquery::Migration::V2::GcsReportLogMessage>]
+          #     The records from the aggregate CSV report for a migration workflow.
+          class TranslationTaskResult
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
       end
