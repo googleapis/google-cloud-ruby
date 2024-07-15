@@ -160,6 +160,25 @@ module Google
             end
 
             ##
+            # Create a fully-qualified DeployPolicy resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/deployPolicies/{deploy_policy}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param deploy_policy [String]
+            #
+            # @return [::String]
+            def deploy_policy_path project:, location:, deploy_policy:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/deployPolicies/#{deploy_policy}"
+            end
+
+            ##
             # Create a fully-qualified Job resource string.
             #
             # The resource will be in the following format:

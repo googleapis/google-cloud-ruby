@@ -241,6 +241,8 @@ module Google
         #     Required. The percentage based deployments that will occur as a part of a
         #     `Rollout`. List is expected in ascending order and each integer n is
         #     0 <= n < 100.
+        #     If the GatewayServiceMesh is configured for Kubernetes, then the range for
+        #     n is 0 <= n <= 100.
         # @!attribute [rw] verify
         #   @return [::Boolean]
         #     Whether to run verify tests after each percentage deployment.
@@ -675,6 +677,10 @@ module Google
         #   @return [::Boolean]
         #     Optional. If set to true, the request is validated and the user is provided
         #     with a `RollbackTargetResponse`.
+        # @!attribute [rw] override_deploy_policy
+        #   @return [::Array<::String>]
+        #     Optional. Deploy policies to override. Format is
+        #     `projects/{project}/locations/{location}/deployPolicies/{deploy_policy}`.
         class RollbackTargetRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -914,6 +920,11 @@ module Google
         #
         #     Only specify this option when `cluster` is a [private GKE
         #     cluster](https://cloud.google.com/kubernetes-engine/docs/concepts/private-cluster-concept).
+        # @!attribute [rw] proxy_url
+        #   @return [::String]
+        #     Optional. If set, used to configure a
+        #     [proxy](https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/#proxy)
+        #     to the Kubernetes server.
         class GkeCluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1461,6 +1472,156 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A `DeployPolicy` resource in the Cloud Deploy API.
+        #
+        # A `DeployPolicy` inhibits manual or automation driven actions within a
+        # Delivery Pipeline or Target.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. Name of the `DeployPolicy`. Format is
+        #     `projects/{project}/locations/{location}/deployPolicies/{deployPolicy}`.
+        #     The `deployPolicy` component must match `[a-z]([a-z0-9-]{0,61}[a-z0-9])?`
+        # @!attribute [r] uid
+        #   @return [::String]
+        #     Output only. Unique identifier of the `DeployPolicy`.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     Description of the `DeployPolicy`. Max length is 255 characters.
+        # @!attribute [rw] annotations
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     User annotations. These attributes can only be set and used by the
+        #     user, and not by Cloud Deploy. Annotations must meet the following
+        #     constraints:
+        #
+        #     * Annotations are key/value pairs.
+        #     * Valid annotation keys have two segments: an optional prefix and name,
+        #     separated by a slash (`/`).
+        #     * The name segment is required and must be 63 characters or less,
+        #     beginning and ending with an alphanumeric character (`[a-z0-9A-Z]`) with
+        #     dashes (`-`), underscores (`_`), dots (`.`), and alphanumerics between.
+        #     * The prefix is optional. If specified, the prefix must be a DNS subdomain:
+        #     a series of DNS labels separated by dots(`.`), not longer than 253
+        #     characters in total, followed by a slash (`/`).
+        #
+        #     See
+        #     https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/#syntax-and-character-set
+        #     for more details.
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Labels are attributes that can be set and used by both the
+        #     user and by Cloud Deploy. Labels must meet the following constraints:
+        #
+        #     * Keys and values can contain only lowercase letters, numeric characters,
+        #     underscores, and dashes.
+        #     * All characters must use UTF-8 encoding, and international characters are
+        #     allowed.
+        #     * Keys must start with a lowercase letter or international character.
+        #     * Each resource is limited to a maximum of 64 labels.
+        #
+        #     Both keys and values are additionally constrained to be <= 128 bytes.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Time at which the deploy policy was created.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Most recent time at which the deploy policy was updated.
+        # @!attribute [rw] suspended
+        #   @return [::Boolean]
+        #     When suspended, the policy will not prevent actions from occurring, even
+        #     if the action violates the policy.
+        # @!attribute [rw] selectors
+        #   @return [::Array<::Google::Cloud::Deploy::V1::DeployPolicyResourceSelector>]
+        #     Required. Selected resources to which the policy will be applied. At least
+        #     one selector is required. If one selector matches the resource the policy
+        #     applies. For example, if there are two selectors and the action being
+        #     attempted matches one of them, the policy will apply to that action.
+        # @!attribute [rw] rules
+        #   @return [::Array<::Google::Cloud::Deploy::V1::PolicyRule>]
+        #     Required. Rules to apply. At least one rule must be present.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     The weak etag of the `Automation` resource.
+        #     This checksum is computed by the server based on the value of other
+        #     fields, and may be sent on update and delete requests to ensure the
+        #     client has an up-to-date value before proceeding.
+        class DeployPolicy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class AnnotationsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # What invoked the action. Filters enforcing the policy depending on what
+          # invoked the action.
+          module Invoker
+            # Unspecified.
+            INVOKER_UNSPECIFIED = 0
+
+            # The action is user-driven (e.g. creating a rollout manually via a gcloud
+            # create command).
+            USER = 1
+
+            # Automated action by Cloud Deploy.
+            DEPLOY_AUTOMATION = 2
+          end
+        end
+
+        # Contains information on the resources to select for a deploy policy.
+        # Attributes provided must all match the resource in order for policy
+        # restrictions to apply. E.g. if delivery pipelines attributes given are an id
+        # "prod" and labels "foo: bar", a delivery pipeline resource must match both
+        # that id and have that label in order to be subject to the policy.
+        # @!attribute [rw] delivery_pipeline
+        #   @return [::Google::Cloud::Deploy::V1::DeliveryPipelineAttribute]
+        #     Optional. Contains attributes about a delivery pipeline.
+        # @!attribute [rw] target
+        #   @return [::Google::Cloud::Deploy::V1::TargetAttribute]
+        #     Optional. Contains attributes about a target.
+        class DeployPolicyResourceSelector
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Contains criteria for selecting DeliveryPipelines.
+        # @!attribute [rw] id
+        #   @return [::String]
+        #     ID of the `DeliveryPipeline`. The value of this field could be one of the
+        #     following:
+        #     * The last segment of a pipeline name. It only needs the ID to determine
+        #     which pipeline is being referred to
+        #     * "*", all delivery pipelines in a location.
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     DeliveryPipeline labels.
+        class DeliveryPipelineAttribute
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # Contains criteria for selecting Targets.
         # @!attribute [rw] id
         #   @return [::String]
@@ -1484,6 +1645,129 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # Rule to apply.
+        # @!attribute [rw] restrict_rollouts
+        #   @return [::Google::Cloud::Deploy::V1::RestrictRollout]
+        #     Rollout restrictions.
+        class PolicyRule
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Rollout restrictions.
+        # @!attribute [rw] id
+        #   @return [::String]
+        #     Optional. Restriction rule ID. Required and must be unique within a
+        #     DeployPolicy. The format is `[a-z]([a-z0-9-]{0,61}[a-z0-9])?`.
+        # @!attribute [rw] invokers
+        #   @return [::Array<::Google::Cloud::Deploy::V1::DeployPolicy::Invoker>]
+        #     Optional. What invoked the action. If left empty, all invoker types will be
+        #     restricted.
+        # @!attribute [rw] actions
+        #   @return [::Array<::Google::Cloud::Deploy::V1::RestrictRollout::Actions>]
+        #     Rollout actions to be restricted as part of the policy. If left empty, all
+        #     actions will be restricted.
+        # @!attribute [rw] time_window
+        #   @return [::Google::Cloud::Deploy::V1::TimeWindow]
+        #     Required. Time Window within which actions are restricted.
+        class RestrictRollout
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Rollout actions to be restricted as part of the policy.
+          module Actions
+            # Unspecified.
+            ACTIONS_UNSPECIFIED = 0
+
+            # Advance the rollout to the next phase.
+            ADVANCE = 1
+
+            # Approve the rollout.
+            APPROVE = 2
+
+            # Cancel the rollout.
+            CANCEL = 3
+
+            # Create a rollout.
+            CREATE = 4
+
+            # Ignore a job result on the rollout.
+            IGNORE_JOB = 5
+
+            # Retry a job for a rollout.
+            RETRY_JOB = 6
+
+            # Rollback a rollout.
+            ROLLBACK = 7
+
+            # Terminate a jobrun.
+            TERMINATE_JOBRUN = 8
+          end
+        end
+
+        # Time Window within which actions are restricted.
+        # @!attribute [rw] time_zone
+        #   @return [::String]
+        #     Required. The time zone in IANA format [IANA Time Zone
+        #     Database](https://www.iana.org/time-zones) (e.g. America/New_York).
+        # @!attribute [rw] ranges
+        #   @return [::Array<::Google::Cloud::Deploy::V1::Range>]
+        #     Required. Range within which actions are restricted.
+        class TimeWindow
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Range within which actions are restricted.
+        # @!attribute [rw] start_date
+        #   @return [::Google::Type::Date]
+        #     Start date.
+        # @!attribute [rw] end_date
+        #   @return [::Google::Type::Date]
+        #     End date.
+        # @!attribute [rw] start_time_of_day
+        #   @return [::Google::Type::TimeOfDay]
+        #     Start time of day.
+        # @!attribute [rw] end_time_of_day
+        #   @return [::Google::Type::TimeOfDay]
+        #     End time of day.
+        # @!attribute [rw] day_of_week
+        #   @return [::Array<::Google::Type::DayOfWeek>]
+        #     Days of week.
+        class Range
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Returned from an action if one or more policies were
+        # violated, and therefore the action was prevented. Contains information about
+        # what policies were violated and why.
+        # @!attribute [rw] policy_violation_details
+        #   @return [::Array<::Google::Cloud::Deploy::V1::PolicyViolationDetails>]
+        #     Policy violation details.
+        class PolicyViolation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Policy violation details.
+        # @!attribute [rw] policy
+        #   @return [::String]
+        #     Name of the policy that was violated.
+        #     Policy resource will be in the format of
+        #     `projects/{project}/locations/{location}/policies/{policy}`.
+        # @!attribute [rw] rule_id
+        #   @return [::String]
+        #     Id of the rule that triggered the policy violation.
+        # @!attribute [rw] failure_message
+        #   @return [::String]
+        #     User readable message about why the request violated a policy. This is not
+        #     intended for machine parsing.
+        class PolicyViolationDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A `Release` resource in the Cloud Deploy API.
@@ -1769,6 +2053,175 @@ module Google
           end
         end
 
+        # The request object for `CreateDeployPolicy`.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent collection in which the `DeployPolicy` should be
+        #     created. Format should be
+        #     `projects/{project_id}/locations/{location_name}`.
+        # @!attribute [rw] deploy_policy_id
+        #   @return [::String]
+        #     Required. ID of the `DeployPolicy`.
+        # @!attribute [rw] deploy_policy
+        #   @return [::Google::Cloud::Deploy::V1::DeployPolicy]
+        #     Required. The `DeployPolicy` to create.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A request ID to identify requests. Specify a unique request ID
+        #     so that if you must retry your request, the server knows to ignore the
+        #     request if it has already been completed. The server guarantees that for
+        #     at least 60 minutes after the first request.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request ID,
+        #     the server can check if original operation with the same request ID was
+        #     received, and if so, will ignore the second request. This prevents clients
+        #     from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. If set to true, the request is validated and the user is provided
+        #     with an expected result, but no actual change is made.
+        class CreateDeployPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request object for `UpdateDeployPolicy`.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. Field mask is used to specify the fields to be overwritten in the
+        #     `DeployPolicy` resource by the update.
+        #     The fields specified in the update_mask are relative to the resource, not
+        #     the full request. A field will be overwritten if it's in the mask. If the
+        #     user doesn't provide a mask then all fields are overwritten.
+        # @!attribute [rw] deploy_policy
+        #   @return [::Google::Cloud::Deploy::V1::DeployPolicy]
+        #     Required. The `DeployPolicy` to update.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A request ID to identify requests. Specify a unique request ID
+        #     so that if you must retry your request, the server knows to ignore the
+        #     request if it has already been completed. The server guarantees that for
+        #     at least 60 minutes after the first request.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request ID,
+        #     the server can check if original operation with the same request ID was
+        #     received, and if so, will ignore the second request. This prevents clients
+        #     from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] allow_missing
+        #   @return [::Boolean]
+        #     Optional. If set to true, updating a `DeployPolicy` that does not exist
+        #     will result in the creation of a new `DeployPolicy`.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. If set to true, the request is validated and the user is provided
+        #     with an expected result, but no actual change is made.
+        class UpdateDeployPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request object for `DeleteDeployPolicy`.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the `DeployPolicy` to delete. Format should be
+        #     `projects/{project_id}/locations/{location_name}/deployPolicies/{deploy_policy_name}`.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A request ID to identify requests. Specify a unique request ID
+        #     so that if you must retry your request, the server knows to ignore the
+        #     request if it has already been completed. The server guarantees that for
+        #     at least 60 minutes after the first request.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request ID,
+        #     the server can check if original operation with the same request ID was
+        #     received, and if so, will ignore the second request. This prevents clients
+        #     from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] allow_missing
+        #   @return [::Boolean]
+        #     Optional. If set to true, then deleting an already deleted or non-existing
+        #     `DeployPolicy` will succeed.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. If set, validate the request and preview the review, but do not
+        #     actually post it.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     Optional. This checksum is computed by the server based on the value of
+        #     other fields, and may be sent on update and delete requests to ensure the
+        #     client has an up-to-date value before proceeding.
+        class DeleteDeployPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request object for `ListDeployPolicies`.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent, which owns this collection of deploy policies. Format
+        #     must be `projects/{project_id}/locations/{location_name}`.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of deploy policies to return. The service may return
+        #     fewer than this value. If unspecified, at most 50 deploy policies will
+        #     be returned. The maximum value is 1000; values above 1000 will be set
+        #     to 1000.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous `ListDeployPolicies` call.
+        #     Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other provided parameters match
+        #     the call that provided the page token.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Filter deploy policies to be returned. See https://google.aip.dev/160 for
+        #     more details. All fields can be used in the filter.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Field to sort by. See https://google.aip.dev/132#ordering for more details.
+        class ListDeployPoliciesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response object from `ListDeployPolicies`.
+        # @!attribute [rw] deploy_policies
+        #   @return [::Array<::Google::Cloud::Deploy::V1::DeployPolicy>]
+        #     The `DeployPolicy` objects.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Locations that could not be reached.
+        class ListDeployPoliciesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request object for `GetDeployPolicy`
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the `DeployPolicy`. Format must be
+        #     `projects/{project_id}/locations/{location_name}/deployPolicies/{deploy_policy_name}`.
+        class GetDeployPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Description of an a image to use during Skaffold rendering.
         # @!attribute [rw] image
         #   @return [::String]
@@ -1955,6 +2408,10 @@ module Google
         #   @return [::Boolean]
         #     Optional. If set to true, the request is validated and the user is provided
         #     with an expected result, but no actual change is made.
+        # @!attribute [rw] override_deploy_policy
+        #   @return [::Array<::String>]
+        #     Optional. Deploy policies to override. Format is
+        #     `projects/{project}/locations/{location}/deployPolicies/{deployPolicy}`.
         class CreateReleaseRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2236,15 +2693,15 @@ module Google
         # were performed on a rollout.
         # @!attribute [r] promote_automation_run
         #   @return [::String]
-        #     Output only. The ID of the AutomationRun initiated by a promote release
+        #     Output only. The name of the AutomationRun initiated by a promote release
         #     rule.
         # @!attribute [r] advance_automation_runs
         #   @return [::Array<::String>]
-        #     Output only. The IDs of the AutomationRuns initiated by an advance rollout
-        #     rule.
+        #     Output only. The names of the AutomationRuns initiated by an advance
+        #     rollout rule.
         # @!attribute [r] repair_automation_runs
         #   @return [::Array<::String>]
-        #     Output only. The IDs of the AutomationRuns initiated by a repair rollout
+        #     Output only. The names of the AutomationRuns initiated by a repair rollout
         #     rule.
         class AutomationRolloutMetadata
           include ::Google::Protobuf::MessageExts
@@ -2543,6 +3000,10 @@ module Google
         #   @return [::Boolean]
         #     Optional. If set to true, the request is validated and the user is provided
         #     with an expected result, but no actual change is made.
+        # @!attribute [rw] override_deploy_policy
+        #   @return [::Array<::String>]
+        #     Optional. Deploy policies to override. Format is
+        #     `projects/{project}/locations/{location}/deployPolicies/{deployPolicy}`.
         # @!attribute [rw] starting_phase_id
         #   @return [::String]
         #     Optional. The starting phase ID for the `Rollout`. If empty the `Rollout`
@@ -2591,6 +3052,10 @@ module Google
         # @!attribute [rw] approved
         #   @return [::Boolean]
         #     Required. True = approve; false = reject
+        # @!attribute [rw] override_deploy_policy
+        #   @return [::Array<::String>]
+        #     Optional. Deploy policies to override. Format is
+        #     `projects/{project}/locations/{location}/deployPolicies/{deployPolicy}`.
         class ApproveRolloutRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2610,6 +3075,10 @@ module Google
         # @!attribute [rw] phase_id
         #   @return [::String]
         #     Required. The phase ID to advance the `Rollout` to.
+        # @!attribute [rw] override_deploy_policy
+        #   @return [::Array<::String>]
+        #     Optional. Deploy policies to override. Format is
+        #     `projects/{project}/locations/{location}/deployPolicies/{deployPolicy}`.
         class AdvanceRolloutRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2626,6 +3095,10 @@ module Google
         #   @return [::String]
         #     Required. Name of the Rollout. Format is
         #     `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{release}/rollouts/{rollout}`.
+        # @!attribute [rw] override_deploy_policy
+        #   @return [::Array<::String>]
+        #     Optional. Deploy policies to override. Format is
+        #     `projects/{project}/locations/{location}/deployPolicies/{deployPolicy}`.
         class CancelRolloutRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2648,6 +3121,10 @@ module Google
         # @!attribute [rw] job_id
         #   @return [::String]
         #     Required. The job ID for the Job to ignore.
+        # @!attribute [rw] override_deploy_policy
+        #   @return [::Array<::String>]
+        #     Optional. Deploy policies to override. Format is
+        #     `projects/{project}/locations/{location}/deployPolicies/{deployPolicy}`.
         class IgnoreJobRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2670,6 +3147,10 @@ module Google
         # @!attribute [rw] job_id
         #   @return [::String]
         #     Required. The job ID for the Job to retry.
+        # @!attribute [rw] override_deploy_policy
+        #   @return [::Array<::String>]
+        #     Optional. Deploy policies to override. Format is
+        #     `projects/{project}/locations/{location}/deployPolicies/{deployPolicy}`.
         class RetryJobRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3049,6 +3530,10 @@ module Google
         #   @return [::String]
         #     Required. Name of the `JobRun`. Format must be
         #     `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{release}/rollouts/{rollout}/jobRuns/{jobRun}`.
+        # @!attribute [rw] override_deploy_policy
+        #   @return [::Array<::String>]
+        #     Optional. Deploy policies to override. Format is
+        #     `projects/{project}/locations/{location}/deployPolicies/{deployPolicy}`.
         class TerminateJobRunRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3585,6 +4070,10 @@ module Google
         #   @return [::String]
         #     Output only. Explains the current state of the `AutomationRun`. Present
         #     only when an explanation is needed.
+        # @!attribute [r] policy_violation
+        #   @return [::Google::Cloud::Deploy::V1::PolicyViolation]
+        #     Output only. Contains information about what policies prevented the
+        #     `AutomationRun` to proceed.
         # @!attribute [r] expire_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time the `AutomationRun` expires. An `AutomationRun` expires
@@ -3689,7 +4178,7 @@ module Google
         end
 
         # RepairPhase tracks the repair attempts that have been made for
-        # each `RepairMode` specified in the `Automation` resource.
+        # each `RepairPhaseConfig` specified in the `Automation` resource.
         # @!attribute [r] retry
         #   @return [::Google::Cloud::Deploy::V1::RetryPhase]
         #     Output only. Records of the retry attempts for retry repair mode.
