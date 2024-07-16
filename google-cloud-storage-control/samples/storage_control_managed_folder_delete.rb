@@ -28,7 +28,7 @@ def delete_managed_folder bucket_name:, managed_folder_id:
   # denotes this bucket exists in the global namespace.
   folder_path = storage_control.managed_folder_path project: "_",
                                                     bucket: bucket_name,
-                                                    managed_folder_id: managed_folder_id
+                                                    managed_folder: managed_folder_id
 
   request = Google::Cloud::Storage::Control::V2::DeleteManagedFolderRequest.new name: folder_path
 
