@@ -44,15 +44,10 @@ module Google
     #   @return [::String]
     #     The canonical name of this endpoint.
     # @!attribute [rw] aliases
-    #   @deprecated This field is deprecated and may be removed in the next major version update.
     #   @return [::Array<::String>]
-    #     Unimplemented. Dot not use.
-    #
-    #     DEPRECATED: This field is no longer supported. Instead of using aliases,
-    #     please specify multiple {::Google::Api::Endpoint google.api.Endpoint} for each
-    #     of the intended aliases.
-    #
-    #     Additional names that this endpoint will be hosted on.
+    #     Aliases for this endpoint, these will be served by the same UrlMap as the
+    #     parent endpoint, and will be provisioned in the GCP stack for the Regional
+    #     Endpoints.
     # @!attribute [rw] target
     #   @return [::String]
     #     The specification of an Internet routable address of API frontend that will
