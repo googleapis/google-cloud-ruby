@@ -25,6 +25,12 @@ module Google
     #     The standard format of a field value. This does not explicitly configure
     #     any API consumer, just documents the API's format for the field it is
     #     applied to.
+    # @!attribute [rw] referenced_types
+    #   @return [::Array<::Google::Api::TypeReference>]
+    #     The type(s) that the annotated, generic field may represent.
+    #
+    #     Currently, this must only be used on fields of type `google.protobuf.Any`.
+    #     Supporting other generic types may be considered in the future.
     class FieldInfo
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -60,6 +66,23 @@ module Google
         # allowed normalizations of each.
         IPV4_OR_IPV6 = 4
       end
+    end
+
+    # A reference to a message type, for use in {::Google::Api::FieldInfo FieldInfo}.
+    # @!attribute [rw] type_name
+    #   @return [::String]
+    #     The name of the type that the annotated, generic field may represent.
+    #     If the type is in the same protobuf package, the value can be the simple
+    #     message name e.g., `"MyMessage"`. Otherwise, the value must be the
+    #     fully-qualified message name e.g., `"google.library.v1.Book"`.
+    #
+    #     If the type(s) are unknown to the service (e.g. the field accepts generic
+    #     user input), use the wildcard `"*"` to denote this behavior.
+    #
+    #     See [AIP-202](https://google.aip.dev/202#type-references) for more details.
+    class TypeReference
+      include ::Google::Protobuf::MessageExts
+      extend ::Google::Protobuf::MessageExts::ClassMethods
     end
   end
 end
