@@ -1,0 +1,128 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.bigquery.analyticshub.v1",
+  "libraryPackage": "::Google::Cloud::Bigquery::AnalyticsHub::V1",
+  "services": {
+    "AnalyticsHubService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client",
+          "rpcs": {
+            "ListDataExchanges": {
+              "methods": [
+                "list_data_exchanges"
+              ]
+            },
+            "ListOrgDataExchanges": {
+              "methods": [
+                "list_org_data_exchanges"
+              ]
+            },
+            "GetDataExchange": {
+              "methods": [
+                "get_data_exchange"
+              ]
+            },
+            "CreateDataExchange": {
+              "methods": [
+                "create_data_exchange"
+              ]
+            },
+            "UpdateDataExchange": {
+              "methods": [
+                "update_data_exchange"
+              ]
+            },
+            "DeleteDataExchange": {
+              "methods": [
+                "delete_data_exchange"
+              ]
+            },
+            "ListListings": {
+              "methods": [
+                "list_listings"
+              ]
+            },
+            "GetListing": {
+              "methods": [
+                "get_listing"
+              ]
+            },
+            "CreateListing": {
+              "methods": [
+                "create_listing"
+              ]
+            },
+            "UpdateListing": {
+              "methods": [
+                "update_listing"
+              ]
+            },
+            "DeleteListing": {
+              "methods": [
+                "delete_listing"
+              ]
+            },
+            "SubscribeListing": {
+              "methods": [
+                "subscribe_listing"
+              ]
+            },
+            "SubscribeDataExchange": {
+              "methods": [
+                "subscribe_data_exchange"
+              ]
+            },
+            "RefreshSubscription": {
+              "methods": [
+                "refresh_subscription"
+              ]
+            },
+            "GetSubscription": {
+              "methods": [
+                "get_subscription"
+              ]
+            },
+            "ListSubscriptions": {
+              "methods": [
+                "list_subscriptions"
+              ]
+            },
+            "ListSharedResourceSubscriptions": {
+              "methods": [
+                "list_shared_resource_subscriptions"
+              ]
+            },
+            "RevokeSubscription": {
+              "methods": [
+                "revoke_subscription"
+              ]
+            },
+            "DeleteSubscription": {
+              "methods": [
+                "delete_subscription"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
