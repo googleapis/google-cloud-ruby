@@ -155,6 +155,13 @@ module Google
                                                             ["group_name", %r{^projects/[^/]+/groups/[^/]+/?$}, false]
                                                           ]
                                                         )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1beta1/{group_name}",
+                                                          matches: [
+                                                            ["group_name", %r{^projects/[^/]+/locations/[^/]+/groups/[^/]+/?$}, false]
+                                                          ]
+                                                        )
                 transcoder.transcode request_pb
               end
 
@@ -175,6 +182,14 @@ module Google
                                                           body: "group",
                                                           matches: [
                                                             ["group.name", %r{^projects/[^/]+/groups/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :put,
+                                                          uri_template: "/v1beta1/{group.name}",
+                                                          body: "group",
+                                                          matches: [
+                                                            ["group.name", %r{^projects/[^/]+/locations/[^/]+/groups/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
