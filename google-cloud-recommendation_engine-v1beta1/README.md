@@ -40,7 +40,7 @@ response = client.create_catalog_item request
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-recommendation_engine-v1beta1/latest)
 for class and method documentation.
 
-See also the [Product Documentation](https://cloud.google.com/recommendations-ai/)
+See also the [Product Documentation](https://cloud.google.com/recommendations)
 for general usage information.
 
 ## Enabling Logging
