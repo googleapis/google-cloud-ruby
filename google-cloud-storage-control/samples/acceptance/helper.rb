@@ -22,9 +22,9 @@ def random_bucket_name
   "ruby-storage-control-samples-test-#{t}-#{SecureRandom.hex 4}".downcase
 end
 
-def random_folder_name
+def random_folder_name prefix: "ruby-storage-control-folder-samples-test-"
   t = Time.now.utc.iso8601.gsub ":", "-"
-  "ruby-storage-control-folder-samples-test-#{t}-#{SecureRandom.hex 4}".downcase
+  "#{prefix}-#{t}-#{SecureRandom.hex 4}".downcase
 end
 
 def create_bucket_helper bucket_name, uniform_bucket_level_access: nil, hierarchical_namespace: nil
