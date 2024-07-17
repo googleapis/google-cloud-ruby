@@ -1,6 +1,6 @@
 # Ruby Client for the Cloud Bigtable V2 API
 
-API for reading and writing the contents of Bigtables associated with a cloud project.
+API for reading and writing the contents of Bigtable tables associated with a Google Cloud project.
 
 Cloud Bigtable is a fully managed, scalable NoSQL database service for large analytical and operational workloads.
 

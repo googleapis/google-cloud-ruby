@@ -5,7 +5,7 @@
 require 'google/protobuf'
 
 
-descriptor_data = "\n(google/bigtable/v2/response_params.proto\x12\x12google.bigtable.v2\"Z\n\x0eResponseParams\x12\x14\n\x07zone_id\x18\x01 \x01(\tH\x00\x88\x01\x01\x12\x17\n\ncluster_id\x18\x02 \x01(\tH\x01\x88\x01\x01\x42\n\n\x08_zone_idB\r\n\x0b_cluster_idB\xbf\x01\n\x16\x63om.google.bigtable.v2B\x13ResponseParamsProtoP\x01Z:google.golang.org/genproto/googleapis/bigtable/v2;bigtable\xaa\x02\x18Google.Cloud.Bigtable.V2\xca\x02\x18Google\\Cloud\\Bigtable\\V2\xea\x02\x1bGoogle::Cloud::Bigtable::V2b\x06proto3"
+descriptor_data = "\n(google/bigtable/v2/response_params.proto\x12\x12google.bigtable.v2\"Z\n\x0eResponseParams\x12\x14\n\x07zone_id\x18\x01 \x01(\tH\x00\x88\x01\x01\x12\x17\n\ncluster_id\x18\x02 \x01(\tH\x01\x88\x01\x01\x42\n\n\x08_zone_idB\r\n\x0b_cluster_idB\xbd\x01\n\x16\x63om.google.bigtable.v2B\x13ResponseParamsProtoP\x01Z8cloud.google.com/go/bigtable/apiv2/bigtablepb;bigtablepb\xaa\x02\x18Google.Cloud.Bigtable.V2\xca\x02\x18Google\\Cloud\\Bigtable\\V2\xea\x02\x1bGoogle::Cloud::Bigtable::V2b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
