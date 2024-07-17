@@ -1,0 +1,38 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.devtools.containeranalysis.v1",
+  "libraryPackage": "::Google::Cloud::ContainerAnalysis::V1",
+  "services": {
+    "ContainerAnalysis": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::ContainerAnalysis::V1::ContainerAnalysis::Client",
+          "rpcs": {
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            },
+            "GetVulnerabilityOccurrencesSummary": {
+              "methods": [
+                "get_vulnerability_occurrences_summary"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
