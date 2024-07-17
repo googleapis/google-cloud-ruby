@@ -250,6 +250,9 @@ module Google
         #     Output only. True if the cluster is a management cluster; false otherwise.
         #     There can only be one management cluster in a private cloud
         #     and it has to be the first one.
+        # @!attribute [rw] autoscaling_settings
+        #   @return [::Google::Cloud::VmwareEngine::V1::AutoscalingSettings]
+        #     Optional. Configuration of the autoscaling applied to this cluster.
         # @!attribute [r] uid
         #   @return [::String]
         #     Output only. System-generated unique identifier for the resource.
@@ -633,6 +636,15 @@ module Google
 
             # TCP
             TCP = 2
+
+            # TLS
+            TLS = 3
+
+            # SSL
+            SSL = 4
+
+            # RELP
+            RELP = 5
           end
 
           # Defines possible types of component that produces logs.
@@ -803,6 +815,9 @@ module Google
 
             # The appliance is being deployed.
             CREATING = 2
+
+            # The appliance is being activated.
+            ACTIVATING = 3
           end
         end
 
@@ -863,6 +878,98 @@ module Google
 
             # The appliance is being deployed.
             CREATING = 2
+          end
+        end
+
+        # Autoscaling settings define the rules used by VMware Engine to
+        # automatically scale-out and scale-in the clusters in a private cloud.
+        # @!attribute [rw] autoscaling_policies
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::VmwareEngine::V1::AutoscalingSettings::AutoscalingPolicy}]
+        #     Required. The map with autoscaling policies applied to the cluster.
+        #     The key is the identifier of the policy.
+        #     It must meet the following requirements:
+        #
+        #     * Only contains 1-63 alphanumeric characters and hyphens
+        #     * Begins with an alphabetical character
+        #     * Ends with a non-hyphen character
+        #     * Not formatted as a UUID
+        #     * Complies with [RFC
+        #     1034](https://datatracker.ietf.org/doc/html/rfc1034) (section 3.5)
+        #
+        #     Currently there map must contain only one element
+        #     that describes the autoscaling policy for compute nodes.
+        # @!attribute [rw] min_cluster_node_count
+        #   @return [::Integer]
+        #     Optional. Minimum number of nodes of any type in a cluster.
+        #     If not specified the default limits apply.
+        # @!attribute [rw] max_cluster_node_count
+        #   @return [::Integer]
+        #     Optional. Maximum number of nodes of any type in a cluster.
+        #     If not specified the default limits apply.
+        # @!attribute [rw] cool_down_period
+        #   @return [::Google::Protobuf::Duration]
+        #     Optional. The minimum duration between consecutive autoscale operations.
+        #     It starts once addition or removal of nodes is fully completed.
+        #     Defaults to 30 minutes if not specified. Cool down period must be in whole
+        #     minutes (for example, 30, 31, 50, 180 minutes).
+        class AutoscalingSettings
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Thresholds define the utilization of resources triggering
+          # scale-out and scale-in operations.
+          # @!attribute [rw] scale_out
+          #   @return [::Integer]
+          #     Required. The utilization triggering the scale-out operation in percent.
+          # @!attribute [rw] scale_in
+          #   @return [::Integer]
+          #     Required. The utilization triggering the scale-in operation in percent.
+          class Thresholds
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Autoscaling policy describes the behavior of the autoscaling
+          # with respect to the resource utilization.
+          # The scale-out operation is initiated if the utilization
+          # exceeds ANY of the respective thresholds.
+          # The scale-in operation is initiated if the utilization
+          # is below ALL of the respective thresholds.
+          # @!attribute [rw] node_type_id
+          #   @return [::String]
+          #     Required. The canonical identifier of the node type to add or remove.
+          #     Corresponds to the `NodeType`.
+          # @!attribute [rw] scale_out_size
+          #   @return [::Integer]
+          #     Required. Number of nodes to add to a cluster during a scale-out
+          #     operation. Must be divisible by 2 for stretched clusters. During a
+          #     scale-in operation only one node (or 2 for stretched clusters) are
+          #     removed in a single iteration.
+          # @!attribute [rw] cpu_thresholds
+          #   @return [::Google::Cloud::VmwareEngine::V1::AutoscalingSettings::Thresholds]
+          #     Optional. Utilization thresholds pertaining to CPU utilization.
+          # @!attribute [rw] granted_memory_thresholds
+          #   @return [::Google::Cloud::VmwareEngine::V1::AutoscalingSettings::Thresholds]
+          #     Optional. Utilization thresholds pertaining to amount of granted memory.
+          # @!attribute [rw] consumed_memory_thresholds
+          #   @return [::Google::Cloud::VmwareEngine::V1::AutoscalingSettings::Thresholds]
+          #     Optional. Utilization thresholds pertaining to amount of consumed memory.
+          # @!attribute [rw] storage_thresholds
+          #   @return [::Google::Cloud::VmwareEngine::V1::AutoscalingSettings::Thresholds]
+          #     Optional. Utilization thresholds pertaining to amount of consumed
+          #     storage.
+          class AutoscalingPolicy
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::VmwareEngine::V1::AutoscalingSettings::AutoscalingPolicy]
+          class AutoscalingPoliciesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
@@ -1035,6 +1142,9 @@ module Google
 
             # Peering connection used for connecting to Dell PowerScale Filers
             DELL_POWERSCALE = 6
+
+            # Peering connection used for connecting to Google Cloud NetApp Volumes.
+            GOOGLE_CLOUD_NETAPP_VOLUMES = 7
           end
         end
 
