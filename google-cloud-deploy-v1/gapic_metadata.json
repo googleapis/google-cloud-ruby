@@ -110,6 +110,31 @@
                 "abandon_release"
               ]
             },
+            "CreateDeployPolicy": {
+              "methods": [
+                "create_deploy_policy"
+              ]
+            },
+            "UpdateDeployPolicy": {
+              "methods": [
+                "update_deploy_policy"
+              ]
+            },
+            "DeleteDeployPolicy": {
+              "methods": [
+                "delete_deploy_policy"
+              ]
+            },
+            "ListDeployPolicies": {
+              "methods": [
+                "list_deploy_policies"
+              ]
+            },
+            "GetDeployPolicy": {
+              "methods": [
+                "get_deploy_policy"
+              ]
+            },
             "ApproveRollout": {
               "methods": [
                 "approve_rollout"

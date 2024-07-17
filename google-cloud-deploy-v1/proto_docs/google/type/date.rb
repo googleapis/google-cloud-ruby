@@ -30,7 +30,7 @@ module Google
     # * A year and month value, with a zero day, such as a credit card expiration
     # date
     #
-    # Related types are [google.type.TimeOfDay][google.type.TimeOfDay] and
+    # Related types are {::Google::Type::TimeOfDay google.type.TimeOfDay} and
     # `google.protobuf.Timestamp`.
     # @!attribute [rw] year
     #   @return [::Integer]
