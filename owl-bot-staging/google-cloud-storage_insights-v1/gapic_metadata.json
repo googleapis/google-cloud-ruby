@@ -1,0 +1,53 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.storageinsights.v1",
+  "libraryPackage": "::Google::Cloud::StorageInsights::V1",
+  "services": {
+    "StorageInsights": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::StorageInsights::V1::StorageInsights::Client",
+          "rpcs": {
+            "ListReportConfigs": {
+              "methods": [
+                "list_report_configs"
+              ]
+            },
+            "GetReportConfig": {
+              "methods": [
+                "get_report_config"
+              ]
+            },
+            "CreateReportConfig": {
+              "methods": [
+                "create_report_config"
+              ]
+            },
+            "UpdateReportConfig": {
+              "methods": [
+                "update_report_config"
+              ]
+            },
+            "DeleteReportConfig": {
+              "methods": [
+                "delete_report_config"
+              ]
+            },
+            "ListReportDetails": {
+              "methods": [
+                "list_report_details"
+              ]
+            },
+            "GetReportDetail": {
+              "methods": [
+                "get_report_detail"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

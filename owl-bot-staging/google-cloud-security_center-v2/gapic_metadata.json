@@ -1,0 +1,218 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.securitycenter.v2",
+  "libraryPackage": "::Google::Cloud::SecurityCenter::V2",
+  "services": {
+    "SecurityCenter": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::SecurityCenter::V2::SecurityCenter::Client",
+          "rpcs": {
+            "BatchCreateResourceValueConfigs": {
+              "methods": [
+                "batch_create_resource_value_configs"
+              ]
+            },
+            "BulkMuteFindings": {
+              "methods": [
+                "bulk_mute_findings"
+              ]
+            },
+            "CreateBigQueryExport": {
+              "methods": [
+                "create_big_query_export"
+              ]
+            },
+            "CreateFinding": {
+              "methods": [
+                "create_finding"
+              ]
+            },
+            "CreateMuteConfig": {
+              "methods": [
+                "create_mute_config"
+              ]
+            },
+            "CreateNotificationConfig": {
+              "methods": [
+                "create_notification_config"
+              ]
+            },
+            "CreateSource": {
+              "methods": [
+                "create_source"
+              ]
+            },
+            "DeleteBigQueryExport": {
+              "methods": [
+                "delete_big_query_export"
+              ]
+            },
+            "DeleteMuteConfig": {
+              "methods": [
+                "delete_mute_config"
+              ]
+            },
+            "DeleteNotificationConfig": {
+              "methods": [
+                "delete_notification_config"
+              ]
+            },
+            "DeleteResourceValueConfig": {
+              "methods": [
+                "delete_resource_value_config"
+              ]
+            },
+            "GetBigQueryExport": {
+              "methods": [
+                "get_big_query_export"
+              ]
+            },
+            "GetSimulation": {
+              "methods": [
+                "get_simulation"
+              ]
+            },
+            "GetValuedResource": {
+              "methods": [
+                "get_valued_resource"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "GetMuteConfig": {
+              "methods": [
+                "get_mute_config"
+              ]
+            },
+            "GetNotificationConfig": {
+              "methods": [
+                "get_notification_config"
+              ]
+            },
+            "GetResourceValueConfig": {
+              "methods": [
+                "get_resource_value_config"
+              ]
+            },
+            "GetSource": {
+              "methods": [
+                "get_source"
+              ]
+            },
+            "GroupFindings": {
+              "methods": [
+                "group_findings"
+              ]
+            },
+            "ListAttackPaths": {
+              "methods": [
+                "list_attack_paths"
+              ]
+            },
+            "ListBigQueryExports": {
+              "methods": [
+                "list_big_query_exports"
+              ]
+            },
+            "ListFindings": {
+              "methods": [
+                "list_findings"
+              ]
+            },
+            "ListMuteConfigs": {
+              "methods": [
+                "list_mute_configs"
+              ]
+            },
+            "ListNotificationConfigs": {
+              "methods": [
+                "list_notification_configs"
+              ]
+            },
+            "ListResourceValueConfigs": {
+              "methods": [
+                "list_resource_value_configs"
+              ]
+            },
+            "ListSources": {
+              "methods": [
+                "list_sources"
+              ]
+            },
+            "ListValuedResources": {
+              "methods": [
+                "list_valued_resources"
+              ]
+            },
+            "SetFindingState": {
+              "methods": [
+                "set_finding_state"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
+            },
+            "SetMute": {
+              "methods": [
+                "set_mute"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            },
+            "UpdateBigQueryExport": {
+              "methods": [
+                "update_big_query_export"
+              ]
+            },
+            "UpdateExternalSystem": {
+              "methods": [
+                "update_external_system"
+              ]
+            },
+            "UpdateFinding": {
+              "methods": [
+                "update_finding"
+              ]
+            },
+            "UpdateMuteConfig": {
+              "methods": [
+                "update_mute_config"
+              ]
+            },
+            "UpdateNotificationConfig": {
+              "methods": [
+                "update_notification_config"
+              ]
+            },
+            "UpdateResourceValueConfig": {
+              "methods": [
+                "update_resource_value_config"
+              ]
+            },
+            "UpdateSecurityMarks": {
+              "methods": [
+                "update_security_marks"
+              ]
+            },
+            "UpdateSource": {
+              "methods": [
+                "update_source"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
