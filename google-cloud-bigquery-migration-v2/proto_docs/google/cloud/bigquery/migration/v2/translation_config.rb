@@ -45,6 +45,12 @@ module Google
           # @!attribute [rw] request_source
           #   @return [::String]
           #     The indicator to show translation request initiator.
+          # @!attribute [rw] target_types
+          #   @return [::Array<::String>]
+          #     The types of output to generate, e.g. sql, metadata etc. If not specified,
+          #     a default set of targets will be generated. Some additional target types
+          #     may be slower to generate. See the documentation for the set of available
+          #     target types.
           class TranslationConfigDetails
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -93,6 +99,15 @@ module Google
           # @!attribute [rw] mysql_dialect
           #   @return [::Google::Cloud::Bigquery::Migration::V2::MySQLDialect]
           #     The MySQL dialect
+          # @!attribute [rw] db2_dialect
+          #   @return [::Google::Cloud::Bigquery::Migration::V2::DB2Dialect]
+          #     DB2 dialect
+          # @!attribute [rw] sqlite_dialect
+          #   @return [::Google::Cloud::Bigquery::Migration::V2::SQLiteDialect]
+          #     SQLite dialect
+          # @!attribute [rw] greenplum_dialect
+          #   @return [::Google::Cloud::Bigquery::Migration::V2::GreenplumDialect]
+          #     Greenplum dialect
           class Dialect
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -193,6 +208,24 @@ module Google
 
           # The dialect definition for MySQL.
           class MySQLDialect
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The dialect definition for DB2.
+          class DB2Dialect
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The dialect definition for SQLite.
+          class SQLiteDialect
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The dialect definition for Greenplum.
+          class GreenplumDialect
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -303,6 +336,14 @@ module Google
           #   @return [::Array<::String>]
           #     The schema search path. When SQL objects are missing schema name,
           #     translation engine will search through this list to find the value.
+          # @!attribute [rw] metadata_store_dataset
+          #   @return [::String]
+          #     Optional. Expects a valid BigQuery dataset ID that exists, e.g.,
+          #     project-123.metadata_store_123.  If specified, translation will search and
+          #     read the required schema information from a metadata store in this dataset.
+          #     If metadata store doesn't exist, translation will parse the metadata file
+          #     and upload the schema info to a temp table in the dataset to speed up
+          #     future translation jobs.
           class SourceEnv
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
