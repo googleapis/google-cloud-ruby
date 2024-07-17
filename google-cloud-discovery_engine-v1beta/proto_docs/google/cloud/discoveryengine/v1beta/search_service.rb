@@ -203,20 +203,26 @@ module Google
         #     documents. This overrides
         #     {::Google::Cloud::DiscoveryEngine::V1beta::ServingConfig#ranking_expression ServingConfig.ranking_expression}.
         #     The ranking expression is a single function or multiple functions that are
-        #     joint by "+".
+        #     joined by "+".
+        #
         #       * ranking_expression = function, { " + ", function };
+        #
         #     Supported functions:
+        #
         #       * double * relevance_score
         #       * double * dotProduct(embedding_field_path)
+        #
         #     Function variables:
-        #       `relevance_score`: pre-defined keywords, used for measure relevance
+        #
+        #       * `relevance_score`: pre-defined keywords, used for measure relevance
         #       between query and document.
-        #       `embedding_field_path`: the document embedding field
+        #       * `embedding_field_path`: the document embedding field
         #       used with query embedding vector.
-        #       `dotProduct`: embedding function between embedding_field_path and query
+        #       * `dotProduct`: embedding function between embedding_field_path and query
         #       embedding vector.
         #
         #      Example ranking expression:
+        #
         #        If document has an embedding field doc_embedding, the ranking expression
         #        could be `0.5 * relevance_score + 0.3 * dotProduct(doc_embedding)`.
         # @!attribute [rw] safe_search
@@ -257,8 +263,8 @@ module Google
           end
 
           # A struct to define data stores to filter on in a search call and
-          # configurations for those data stores. A maximum of 1 DataStoreSpec per
-          # data_store is allowed. Otherwise, an `INVALID_ARGUMENT` error is returned.
+          # configurations for those data stores. Otherwise, an `INVALID_ARGUMENT`
+          # error is returned.
           # @!attribute [rw] data_store
           #   @return [::String]
           #     Required. Full resource name of
@@ -278,6 +284,9 @@ module Google
           #     Maximum facet values that are returned for this facet. If
           #     unspecified, defaults to 20. The maximum allowed value is 300. Values
           #     above 300 are coerced to 300.
+          #     For aggregation in healthcare search, when the [FacetKey.key] is
+          #     "healthcare_aggregation_key", the limit will be overridden to
+          #     10,000 internally, regardless of the value set here.
           #
           #     If this field is negative, an  `INVALID_ARGUMENT`  is returned.
           # @!attribute [rw] excluded_filter_keys
@@ -615,6 +624,17 @@ module Google
           #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::ContentSearchSpec::ExtractiveContentSpec]
           #     If there is no extractive_content_spec provided, there will be no
           #     extractive answer in the search response.
+          # @!attribute [rw] search_result_mode
+          #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::ContentSearchSpec::SearchResultMode]
+          #     Specifies the search result mode. If unspecified, the
+          #     search result mode defaults to `DOCUMENTS`.
+          # @!attribute [rw] chunk_spec
+          #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::ContentSearchSpec::ChunkSpec]
+          #     Specifies the chunk spec to be returned from the search response.
+          #     Only available if the
+          #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::ContentSearchSpec#search_result_mode SearchRequest.ContentSearchSpec.search_result_mode}
+          #     is set to
+          #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::ContentSearchSpec::SearchResultMode::CHUNKS CHUNKS}
           class ContentSearchSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -651,8 +671,9 @@ module Google
             #
             #     At most 10 results for documents mode, or 50 for chunks mode, can be
             #     used to generate a summary. The chunks mode is used when
-            #     [SearchRequest.ContentSearchSpec.search_result_mode][] is set to
-            #     [CHUNKS][SearchRequest.ContentSearchSpec.SearchResultMode.CHUNKS].
+            #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::ContentSearchSpec#search_result_mode SearchRequest.ContentSearchSpec.search_result_mode}
+            #     is set to
+            #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::ContentSearchSpec::SearchResultMode::CHUNKS CHUNKS}.
             # @!attribute [rw] include_citations
             #   @return [::Boolean]
             #     Specifies whether to include citations in the summary. The default
@@ -809,6 +830,40 @@ module Google
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
+
+            # Specifies the chunk spec to be returned from the search response.
+            # Only available if the
+            # {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::ContentSearchSpec#search_result_mode SearchRequest.ContentSearchSpec.search_result_mode}
+            # is set to
+            # {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::ContentSearchSpec::SearchResultMode::CHUNKS CHUNKS}
+            # @!attribute [rw] num_previous_chunks
+            #   @return [::Integer]
+            #     The number of previous chunks to be returned of the current chunk. The
+            #     maximum allowed value is 3.
+            #     If not specified, no previous chunks will be returned.
+            # @!attribute [rw] num_next_chunks
+            #   @return [::Integer]
+            #     The number of next chunks to be returned of the current chunk. The
+            #     maximum allowed value is 3.
+            #     If not specified, no next chunks will be returned.
+            class ChunkSpec
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Specifies the search result mode. If unspecified, the
+            # search result mode defaults to `DOCUMENTS`.
+            module SearchResultMode
+              # Default value.
+              SEARCH_RESULT_MODE_UNSPECIFIED = 0
+
+              # Returns documents in the search result.
+              DOCUMENTS = 1
+
+              # Returns chunks in the search result. Only available if the
+              # [DataStore.DocumentProcessingConfig.chunking_config][] is specified.
+              CHUNKS = 2
+            end
           end
 
           # The specification that uses customized query embedding vector to do
@@ -924,6 +979,12 @@ module Google
           #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Document]
           #     The document data snippet in the search response. Only fields that are
           #     marked as `retrievable` are populated.
+          # @!attribute [rw] chunk
+          #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Chunk]
+          #     The chunk data in the search response if the
+          #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::ContentSearchSpec#search_result_mode SearchRequest.ContentSearchSpec.search_result_mode}
+          #     is set to
+          #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::ContentSearchSpec::SearchResultMode::CHUNKS CHUNKS}.
           # @!attribute [rw] model_scores
           #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::DiscoveryEngine::V1beta::DoubleList}]
           #     Google provided available scores.

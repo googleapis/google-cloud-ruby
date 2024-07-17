@@ -32,6 +32,9 @@ module Google
         #     The full resource name of the Document Processing Config.
         #     Format:
         #     `projects/*/locations/*/collections/*/dataStores/*/documentProcessingConfig`.
+        # @!attribute [rw] chunking_config
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::DocumentProcessingConfig::ChunkingConfig]
+        #     Whether chunking mode is enabled.
         # @!attribute [rw] default_parsing_config
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::DocumentProcessingConfig::ParsingConfig]
         #     Configurations for default Document parser.
@@ -46,12 +49,41 @@ module Google
         #     * `pdf`: Override parsing config for PDF files, either digital parsing, ocr
         #     parsing or layout parsing is supported.
         #     * `html`: Override parsing config for HTML files, only digital parsing and
-        #     or layout parsing are supported.
+        #     layout parsing are supported.
         #     * `docx`: Override parsing config for DOCX files, only digital parsing and
-        #     or layout parsing are supported.
+        #     layout parsing are supported.
+        #     * `pptx`: Override parsing config for PPTX files, only digital parsing and
+        #     layout parsing are supported.
         class DocumentProcessingConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Configuration for chunking config.
+          # @!attribute [rw] layout_based_chunking_config
+          #   @return [::Google::Cloud::DiscoveryEngine::V1beta::DocumentProcessingConfig::ChunkingConfig::LayoutBasedChunkingConfig]
+          #     Configuration for the layout based chunking.
+          class ChunkingConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Configuration for the layout based chunking.
+            # @!attribute [rw] chunk_size
+            #   @return [::Integer]
+            #     The token size limit for each chunk.
+            #
+            #     Supported values: 100-500 (inclusive).
+            #     Default value: 500.
+            # @!attribute [rw] include_ancestor_headings
+            #   @return [::Boolean]
+            #     Whether to include appending different levels of headings to chunks
+            #     from the middle of the document to prevent context loss.
+            #
+            #     Default value: False.
+            class LayoutBasedChunkingConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
 
           # Related configurations applied to a specific type of document parser.
           # @!attribute [rw] digital_parsing_config
@@ -61,6 +93,9 @@ module Google
           #   @return [::Google::Cloud::DiscoveryEngine::V1beta::DocumentProcessingConfig::ParsingConfig::OcrParsingConfig]
           #     Configurations applied to OCR parser. Currently it only applies to
           #     PDFs.
+          # @!attribute [rw] layout_parsing_config
+          #   @return [::Google::Cloud::DiscoveryEngine::V1beta::DocumentProcessingConfig::ParsingConfig::LayoutParsingConfig]
+          #     Configurations applied to layout parser.
           class ParsingConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -82,6 +117,12 @@ module Google
             #     If true, will use native text instead of OCR text on pages containing
             #     native text.
             class OcrParsingConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The layout parsing configurations for documents.
+            class LayoutParsingConfig
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
