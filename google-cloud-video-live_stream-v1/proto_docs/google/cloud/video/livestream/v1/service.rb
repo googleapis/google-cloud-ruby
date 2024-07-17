@@ -607,6 +607,112 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Request message for "LivestreamService.ListClips".
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. Parent value for ListClipsRequest
+          # @!attribute [rw] page_size
+          #   @return [::Integer]
+          #     Requested page size. Server may return fewer items than requested.
+          #     If unspecified, server will pick an appropriate default.
+          # @!attribute [rw] page_token
+          #   @return [::String]
+          #     A token identifying a page of results the server should return.
+          # @!attribute [rw] filter
+          #   @return [::String]
+          #     Filtering results
+          # @!attribute [rw] order_by
+          #   @return [::String]
+          #     Hint for how to order the results
+          class ListClipsRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Response message for "LivestreamService.ListClips".
+          # @!attribute [rw] clips
+          #   @return [::Array<::Google::Cloud::Video::LiveStream::V1::Clip>]
+          #     The list of Clip
+          # @!attribute [rw] next_page_token
+          #   @return [::String]
+          #     A token identifying a page of results the server should return.
+          # @!attribute [rw] unreachable
+          #   @return [::Array<::String>]
+          #     Locations that could not be reached.
+          class ListClipsResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for "LivestreamService.GetClip".
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. Name of the resource, in the following form:
+          #     `projects/{project}/locations/{location}/channels/{channel}/clips/{clip}`.
+          class GetClipRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for "LivestreamService.CreateClip".
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The parent resource name, in the following form:
+          #     `projects/{project}/locations/{location}/channels/{channel}`.
+          # @!attribute [rw] clip_id
+          #   @return [::String]
+          #     Required. Id of the requesting object in the following form:
+          #
+          #     1. 1 character minimum, 63 characters maximum
+          #     2. Only contains letters, digits, underscores, and hyphens
+          # @!attribute [rw] clip
+          #   @return [::Google::Cloud::Video::LiveStream::V1::Clip]
+          #     Required. The resource being created
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     Optional. An optional request ID to identify requests. Specify a unique
+          #     request ID so that if you must retry your request, the server will know to
+          #     ignore the request if it has already been completed. The server will
+          #     guarantee that for at least 60 minutes since the first request.
+          #
+          #     For example, consider a situation where you make an initial request and
+          #     the request times out. If you make the request again with the same request
+          #     ID, the server can check if original operation with the same request ID
+          #     was received, and if so, will ignore the second request. This prevents
+          #     clients from accidentally creating duplicate commitments.
+          #
+          #     The request ID must be a valid UUID with the exception that zero UUID is
+          #     not supported (00000000-0000-0000-0000-000000000000).
+          class CreateClipRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for "LivestreamService.DeleteClip".
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The name of the clip resource, in the form of:
+          #     `projects/{project}/locations/{location}/channels/{channelId}/clips/{clipId}`.
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     Optional. A request ID to identify requests. Specify a unique request ID
+          #     so that if you must retry your request, the server will know to ignore
+          #     the request if it has already been completed. The server will guarantee
+          #     that for at least 60 minutes since the first request.
+          #
+          #     For example, consider a situation where you make an initial request and the
+          #     request times out. If you make the request again with the same request ID,
+          #     the server can check if original operation with the same request ID was
+          #     received, and if so, will ignore the second request. This prevents clients
+          #     from accidentally creating duplicate commitments.
+          #
+          #     The request ID must be a valid UUID with the exception that zero UUID is
+          #     not supported `(00000000-0000-0000-0000-000000000000)`.
+          class DeleteClipRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Represents the metadata of the long-running operation.
           # @!attribute [r] create_time
           #   @return [::Google::Protobuf::Timestamp]
