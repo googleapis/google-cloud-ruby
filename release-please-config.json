@@ -1099,6 +1099,10 @@
       "component": "google-cloud-private_catalog-v1beta1",
       "version_file": "lib/google/cloud/private_catalog/v1beta1/version.rb"
     },
+    "google-cloud-privileged_access_manager-v1": {
+      "component": "google-cloud-privileged_access_manager-v1",
+      "version_file": "lib/google/cloud/privileged_access_manager/v1/version.rb"
+    },
     "google-cloud-profiler": {
       "component": "google-cloud-profiler",
       "version_file": "lib/google/cloud/profiler/version.rb"
