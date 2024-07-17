@@ -893,6 +893,10 @@ module Google
         #     Optional. The maximum bytes that can be written to a Cloud Storage file
         #     before a new file is created. Min 1 KB, max 10 GiB. The max_bytes limit may
         #     be exceeded in cases where messages are larger than the limit.
+        # @!attribute [rw] max_messages
+        #   @return [::Integer]
+        #     Optional. The maximum number of messages that can be written to a Cloud
+        #     Storage file before a new file is created. Min 1000 messages.
         # @!attribute [r] state
         #   @return [::Google::Cloud::PubSub::V1::CloudStorageConfig::State]
         #     Output only. An output-only field that indicates whether or not the
