@@ -13,6 +13,8 @@
 # limitations under the License.
 
 # OwlBot script for google-cloud-privileged_access_manager-v1
+# Properly escape README.md files for links.
+# See https://github.com/googleapis/gapic-generator-ruby/issues/1094
 OwlBot.modifier path: ["README.md"], name: "Escape README.md" do |content|
   content.gsub(/resourcemanager\.\{projects\|folders\|organizations\}\.(\w+)/, '`resourcemanager.{projects|folders|organizations}.\1`')
 end
