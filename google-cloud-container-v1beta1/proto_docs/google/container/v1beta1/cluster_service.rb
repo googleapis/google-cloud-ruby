@@ -560,14 +560,14 @@ module Google
         # within the NodeNetworkConfig message
         # @!attribute [rw] subnetwork
         #   @return [::String]
-        #     Name of the subnetwork where the additional pod network belongs
+        #     Name of the subnetwork where the additional pod network belongs.
         # @!attribute [rw] secondary_pod_range
         #   @return [::String]
         #     The name of the secondary range on the subnet which provides IP address for
-        #     this pod range
+        #     this pod range.
         # @!attribute [rw] max_pods_per_node
         #   @return [::Google::Cloud::Container::V1beta1::MaxPodsConstraint]
-        #     The maximum number of pods per node which use this pod network
+        #     The maximum number of pods per node which use this pod network.
         class AdditionalPodNetworkConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1097,6 +1097,9 @@ module Google
         # @!attribute [rw] stateful_ha_config
         #   @return [::Google::Cloud::Container::V1beta1::StatefulHAConfig]
         #     Optional. Configuration for the StatefulHA add-on.
+        # @!attribute [rw] ray_operator_config
+        #   @return [::Google::Cloud::Container::V1beta1::RayOperatorConfig]
+        #     Optional. Configuration for Ray Operator addon.
         class AddonsConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1216,6 +1219,21 @@ module Google
         #   @return [::Boolean]
         #     Whether the Cloud Storage Fuse CSI driver is enabled for this cluster.
         class GcsFuseCsiDriverConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration options for the Ray Operator add-on.
+        # @!attribute [rw] enabled
+        #   @return [::Boolean]
+        #     Whether the Ray addon is enabled for this cluster.
+        # @!attribute [rw] ray_cluster_logging_config
+        #   @return [::Google::Cloud::Container::V1beta1::RayClusterLoggingConfig]
+        #     Optional. Logging configuration for Ray clusters.
+        # @!attribute [rw] ray_cluster_monitoring_config
+        #   @return [::Google::Cloud::Container::V1beta1::RayClusterMonitoringConfig]
+        #     Optional. Monitoring configuration for Ray clusters.
+        class RayOperatorConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -6151,6 +6169,15 @@ module Google
           end
         end
 
+        # RayClusterLoggingConfig specifies logging configuration for Ray clusters.
+        # @!attribute [rw] enabled
+        #   @return [::Boolean]
+        #     Enable log collection for Ray clusters.
+        class RayClusterLoggingConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # MonitoringConfig is cluster monitoring configuration.
         # @!attribute [rw] component_config
         #   @return [::Google::Cloud::Container::V1beta1::MonitoringComponentConfig]
@@ -6196,6 +6223,16 @@ module Google
             # exposed via external load balancer
             EXTERNAL_LB = 4
           end
+        end
+
+        # RayClusterMonitoringConfig specifies monitoring configuration for Ray
+        # clusters.
+        # @!attribute [rw] enabled
+        #   @return [::Boolean]
+        #     Enable metrics collection for Ray clusters.
+        class RayClusterMonitoringConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # NodePoolLoggingConfig specifies logging configuration for nodepools.
