@@ -312,6 +312,15 @@ module Google
 
             # tsv
             TSV = 13
+
+            # Audio file types. Only used for profiling.
+            AUDIO = 15
+
+            # Video file types. Only used for profiling.
+            VIDEO = 16
+
+            # Executable file types. Only used for profiling.
+            EXECUTABLE = 17
           end
         end
 
@@ -422,6 +431,7 @@ module Google
         #     No more than 10 labels can be associated with a given finding.
         #
         #     Examples:
+        #
         #     * `"environment" : "production"`
         #     * `"pipeline" : "etl"`
         # @!attribute [rw] job_create_time
@@ -670,9 +680,9 @@ module Google
         #     processing
         #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
         #
-        #     + Projects scope, location specified:<br/>
+        #     + Projects scope, location specified:
         #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-        #     + Projects scope, no location specified (defaults to global):<br/>
+        #     + Projects scope, no location specified (defaults to global):
         #       `projects/`<var>PROJECT_ID</var>
         #
         #     The following example `parent` string specifies a parent project with the
@@ -762,9 +772,9 @@ module Google
         #     processing
         #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
         #
-        #     + Projects scope, location specified:<br/>
+        #     + Projects scope, location specified:
         #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-        #     + Projects scope, no location specified (defaults to global):<br/>
+        #     + Projects scope, no location specified (defaults to global):
         #       `projects/`<var>PROJECT_ID</var>
         #
         #     The following example `parent` string specifies a parent project with the
@@ -835,9 +845,9 @@ module Google
         #     processing
         #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
         #
-        #     + Projects scope, location specified:<br/>
+        #     + Projects scope, location specified:
         #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-        #     + Projects scope, no location specified (defaults to global):<br/>
+        #     + Projects scope, no location specified (defaults to global):
         #       `projects/`<var>PROJECT_ID</var>
         #
         #     The following example `parent` string specifies a parent project with the
@@ -908,9 +918,9 @@ module Google
         #     processing
         #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
         #
-        #     + Projects scope, location specified:<br/>
+        #     + Projects scope, location specified:
         #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-        #     + Projects scope, no location specified (defaults to global):<br/>
+        #     + Projects scope, no location specified (defaults to global):
         #       `projects/`<var>PROJECT_ID</var>
         #
         #     The following example `parent` string specifies a parent project with the
@@ -1074,6 +1084,9 @@ module Google
         # @!attribute [rw] column_profile
         #   @return [::Google::Cloud::Dlp::V2::ColumnDataProfile]
         #     Column data profile column
+        # @!attribute [rw] file_store_profile
+        #   @return [::Google::Cloud::Dlp::V2::FileStoreDataProfile]
+        #     File store data profile column.
         class DataProfileBigQueryRowSchema
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1212,11 +1225,17 @@ module Google
             # The infoType is typically used in Argentina.
             ARGENTINA = 2
 
+            # The infoType is typically used in Armenia.
+            ARMENIA = 51
+
             # The infoType is typically used in Australia.
             AUSTRALIA = 3
 
             # The infoType is typically used in Azerbaijan.
             AZERBAIJAN = 48
+
+            # The infoType is typically used in Belarus.
+            BELARUS = 50
 
             # The infoType is typically used in Belgium.
             BELGIUM = 4
@@ -2545,9 +2564,10 @@ module Google
 
         # Generalization function that buckets values based on ranges. The ranges and
         # replacement values are dynamically provided by the user for custom behavior,
-        # such as 1-30 -> LOW 31-65 -> MEDIUM 66-100 -> HIGH
-        # This can be used on
-        # data of type: number, long, string, timestamp.
+        # such as 1-30 -> LOW, 31-65 -> MEDIUM, 66-100 -> HIGH.
+        #
+        # This can be used on data of type: number, long, string, timestamp.
+        #
         # If the bound `Value` type differs from the type of data being transformed, we
         # will first attempt converting the type of the data to be transformed to match
         # the type of the bound before comparing.
@@ -3237,9 +3257,24 @@ module Google
         #   @return [::Array<::Google::Protobuf::Timestamp>]
         #     The times the error occurred. List includes the oldest timestamp and the
         #     last 9 timestamps.
+        # @!attribute [rw] extra_info
+        #   @return [::Google::Cloud::Dlp::V2::Error::ErrorExtraInfo]
+        #     Additional information about the error.
         class Error
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Additional information about the error.
+          module ErrorExtraInfo
+            # Unused.
+            ERROR_INFO_UNSPECIFIED = 0
+
+            # Image scan is not available in the region.
+            IMAGE_SCAN_UNAVAILABLE_IN_REGION = 1
+
+            # File store cluster is not supported for profile generation.
+            FILE_STORE_CLUSTER_UNSUPPORTED = 2
+          end
         end
 
         # Contains a configuration to make API calls on a repeating basis.
@@ -3442,7 +3477,7 @@ module Google
           # @!attribute [rw] cloud_storage_output
           #   @return [::String]
           #     Required. User settable Cloud Storage bucket and folders to store
-          #     de-identified files. This field must be set for cloud storage
+          #     de-identified files. This field must be set for Cloud Storage
           #     deidentification. The output Cloud Storage bucket must be different
           #     from the input bucket. De-identified files will overwrite files in the
           #     output path.
@@ -3451,12 +3486,12 @@ module Google
           # @!attribute [rw] file_types_to_transform
           #   @return [::Array<::Google::Cloud::Dlp::V2::FileType>]
           #     List of user-specified file type groups to transform. If specified, only
-          #     the files with these filetypes will be transformed. If empty, all
+          #     the files with these file types will be transformed. If empty, all
           #     supported files will be transformed. Supported types may be automatically
           #     added over time. If a file type is set in this field that isn't supported
           #     by the Deidentify action then the job will fail and will not be
-          #     successfully created/started. Currently the only filetypes supported are:
-          #     IMAGES, TEXT_FILES, CSV, TSV.
+          #     successfully created/started. Currently the only file types supported
+          #     are: IMAGES, TEXT_FILES, CSV, TSV.
           class Deidentify
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3520,13 +3555,13 @@ module Google
         #     (project or organization) and whether you have [specified a processing
         #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
         #
-        #     + Projects scope, location specified:<br/>
+        #     + Projects scope, location specified:
         #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-        #     + Projects scope, no location specified (defaults to global):<br/>
+        #     + Projects scope, no location specified (defaults to global):
         #       `projects/`<var>PROJECT_ID</var>
-        #     + Organizations scope, location specified:<br/>
+        #     + Organizations scope, location specified:
         #       `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
-        #     + Organizations scope, no location specified (defaults to global):<br/>
+        #     + Organizations scope, no location specified (defaults to global):
         #       `organizations/`<var>ORG_ID</var>
         #
         #     The following example `parent` string specifies a parent project with the
@@ -3588,13 +3623,13 @@ module Google
         #     (project or organization) and whether you have [specified a processing
         #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
         #
-        #     + Projects scope, location specified:<br/>
+        #     + Projects scope, location specified:
         #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-        #     + Projects scope, no location specified (defaults to global):<br/>
+        #     + Projects scope, no location specified (defaults to global):
         #       `projects/`<var>PROJECT_ID</var>
-        #     + Organizations scope, location specified:<br/>
+        #     + Organizations scope, location specified:
         #       `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
-        #     + Organizations scope, no location specified (defaults to global):<br/>
+        #     + Organizations scope, no location specified (defaults to global):
         #       `organizations/`<var>ORG_ID</var>
         #
         #     The following example `parent` string specifies a parent project with the
@@ -3612,7 +3647,7 @@ module Google
         #     returns a page of max size 100.
         # @!attribute [rw] order_by
         #   @return [::String]
-        #     Comma separated list of fields to order by,
+        #     Comma-separated list of fields to order by,
         #     followed by `asc` or `desc` postfix. This list is case insensitive. The
         #     default sorting order is ascending. Redundant space characters are
         #     insignificant.
@@ -3666,9 +3701,9 @@ module Google
         #     processing
         #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
         #
-        #     + Projects scope, location specified:<br/>
+        #     + Projects scope, location specified:
         #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-        #     + Projects scope, no location specified (defaults to global):<br/>
+        #     + Projects scope, no location specified (defaults to global):
         #       `projects/`<var>PROJECT_ID</var>
         #
         #     The following example `parent` string specifies a parent project with the
@@ -3734,8 +3769,13 @@ module Google
         #   @return [::String]
         #     Required. Parent resource name.
         #
-        #     The format of this value is as follows:
-        #     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+        #     The format of this value varies depending on the scope of the request
+        #     (project or organization):
+        #
+        #     + Projects scope:
+        #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+        #     + Organizations scope:
+        #       `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
         #
         #     The following example `parent` string specifies a parent project with the
         #     identifier `example-project`, and specifies the `europe-west3` location
@@ -3805,7 +3845,7 @@ module Google
         #     Size of the page. This value can be limited by a server.
         # @!attribute [rw] order_by
         #   @return [::String]
-        #     Comma separated list of config fields to order by,
+        #     Comma-separated list of config fields to order by,
         #     followed by `asc` or `desc` postfix. This list is case insensitive. The
         #     default sorting order is ascending. Redundant space characters are
         #     insignificant.
@@ -3856,9 +3896,9 @@ module Google
         #     processing
         #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
         #
-        #     + Projects scope, location specified:<br/>
+        #     + Projects scope, location specified:
         #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-        #     + Projects scope, no location specified (defaults to global):<br/>
+        #     + Projects scope, no location specified (defaults to global):
         #       `projects/`<var>PROJECT_ID</var>
         #
         #     The following example `parent` string specifies a parent project with the
@@ -3896,9 +3936,9 @@ module Google
         #     processing
         #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
         #
-        #     + Projects scope, location specified:<br/>
+        #     + Projects scope, location specified:
         #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-        #     + Projects scope, no location specified (defaults to global):<br/>
+        #     + Projects scope, no location specified (defaults to global):
         #       `projects/`<var>PROJECT_ID</var>
         #
         #     The following example `parent` string specifies a parent project with the
@@ -3916,7 +3956,7 @@ module Google
         #     Size of the page. This value can be limited by a server.
         # @!attribute [rw] order_by
         #   @return [::String]
-        #     Comma separated list of triggeredJob fields to order by,
+        #     Comma-separated list of triggeredJob fields to order by,
         #     followed by `asc` or `desc` postfix. This list is case insensitive. The
         #     default sorting order is ascending. Redundant space characters are
         #     insignificant.
@@ -4074,6 +4114,9 @@ module Google
 
               # The name of the profiled resource.
               RESOURCE_NAME = 2
+
+              # The full file store data profile.
+              FILE_STORE_PROFILE = 3
             end
           end
 
@@ -4191,7 +4234,7 @@ module Google
         #     The ID of an organization to scan.
         # @!attribute [rw] folder_id
         #   @return [::Integer]
-        #     The ID of the Folder within an organization to scan.
+        #     The ID of the folder within an organization to scan.
         class DataProfileLocation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -4303,6 +4346,10 @@ module Google
         #     Discovery target that looks for credentials and secrets stored in cloud
         #     resource metadata and reports them as vulnerabilities to Security Command
         #     Center. Only one target of this type is allowed.
+        # @!attribute [rw] cloud_storage_target
+        #   @return [::Google::Cloud::Dlp::V2::CloudStorageDiscoveryTarget]
+        #     Cloud Storage target for Discovery. The first target to match a table
+        #     will be the one applied.
         class DiscoveryTarget
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -4420,6 +4467,11 @@ module Google
         # @!attribute [rw] table_modified_cadence
         #   @return [::Google::Cloud::Dlp::V2::DiscoveryTableModifiedCadence]
         #     Governs when to update data profiles when a table is modified.
+        # @!attribute [rw] inspect_template_modified_cadence
+        #   @return [::Google::Cloud::Dlp::V2::DiscoveryInspectTemplateModifiedCadence]
+        #     Governs when to update data profiles when the inspection rules
+        #     defined by the `InspectTemplate` change.
+        #     If not set, changing the template will not cause a data profile to update.
         class DiscoveryGenerationCadence
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -4451,6 +4503,17 @@ module Google
         #     How frequently profiles may be updated when schemas are
         #     modified. Defaults to monthly.
         class DiscoverySchemaModifiedCadence
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The cadence at which to update data profiles when the inspection rules
+        # defined by the `InspectTemplate` change.
+        # @!attribute [rw] frequency
+        #   @return [::Google::Cloud::Dlp::V2::DataProfileUpdateFrequency]
+        #     How frequently data profiles can be updated when the template is modified.
+        #     Defaults to never.
+        class DiscoveryInspectTemplateModifiedCadence
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -4676,6 +4739,224 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Target used to match against for discovery with Cloud Storage buckets.
+        # @!attribute [rw] filter
+        #   @return [::Google::Cloud::Dlp::V2::DiscoveryCloudStorageFilter]
+        #     Required. The buckets the generation_cadence applies to. The first target
+        #     with a matching filter will be the one to apply to a bucket.
+        # @!attribute [rw] conditions
+        #   @return [::Google::Cloud::Dlp::V2::DiscoveryFileStoreConditions]
+        #     Optional. In addition to matching the filter, these conditions must be true
+        #     before a profile is generated.
+        # @!attribute [rw] generation_cadence
+        #   @return [::Google::Cloud::Dlp::V2::DiscoveryCloudStorageGenerationCadence]
+        #     Optional. How often and when to update profiles. New buckets that match
+        #     both the filter and conditions are scanned as quickly as possible
+        #     depending on system capacity.
+        # @!attribute [rw] disabled
+        #   @return [::Google::Cloud::Dlp::V2::Disabled]
+        #     Optional. Disable profiling for buckets that match this filter.
+        class CloudStorageDiscoveryTarget
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Determines which buckets will have profiles generated within an organization
+        # or project. Includes the ability to filter by regular expression patterns
+        # on project ID and bucket name.
+        # @!attribute [rw] collection
+        #   @return [::Google::Cloud::Dlp::V2::FileStoreCollection]
+        #     Optional. A specific set of buckets for this filter to apply to.
+        # @!attribute [rw] cloud_storage_resource_reference
+        #   @return [::Google::Cloud::Dlp::V2::CloudStorageResourceReference]
+        #     Optional. The bucket to scan. Targets including this can only include one
+        #     target (the target with this bucket). This enables profiling the contents
+        #     of a single bucket, while the other options allow for easy profiling of
+        #     many bucets within a project or an organization.
+        # @!attribute [rw] others
+        #   @return [::Google::Cloud::Dlp::V2::AllOtherResources]
+        #     Optional. Catch-all. This should always be the last target in the list
+        #     because anything above it will apply first. Should only appear once in a
+        #     configuration. If none is specified, a default one will be added
+        #     automatically.
+        class DiscoveryCloudStorageFilter
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Match file stores (e.g. buckets) using regex filters.
+        # @!attribute [rw] include_regexes
+        #   @return [::Google::Cloud::Dlp::V2::FileStoreRegexes]
+        #     Optional. A collection of regular expressions to match a file store
+        #     against.
+        class FileStoreCollection
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A collection of regular expressions to determine what file store to match
+        # against.
+        # @!attribute [rw] patterns
+        #   @return [::Array<::Google::Cloud::Dlp::V2::FileStoreRegex>]
+        #     Required. The group of regular expression patterns to match against one or
+        #     more file stores. Maximum of 100 entries. The sum of all regular
+        #     expression's length can't exceed 10 KiB.
+        class FileStoreRegexes
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A pattern to match against one or more file stores.
+        # @!attribute [rw] cloud_storage_regex
+        #   @return [::Google::Cloud::Dlp::V2::CloudStorageRegex]
+        #     Optional. Regex for Cloud Storage.
+        class FileStoreRegex
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A pattern to match against one or more file stores. At least one
+        # pattern must be specified. Regular expressions use RE2
+        # [syntax](https://github.com/google/re2/wiki/Syntax); a guide can be found
+        # under the google/re2 repository on GitHub.
+        # @!attribute [rw] project_id_regex
+        #   @return [::String]
+        #     Optional. For organizations, if unset, will match all projects.
+        # @!attribute [rw] bucket_name_regex
+        #   @return [::String]
+        #     Optional. Regex to test the bucket name against. If empty, all buckets
+        #     match. Example: "marketing2021" or "(marketing)\d\\{4}" will both match the
+        #     bucket gs://marketing2021
+        class CloudStorageRegex
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Identifies a single Cloud Storage bucket.
+        # @!attribute [rw] bucket_name
+        #   @return [::String]
+        #     Required. The bucket to scan.
+        # @!attribute [rw] project_id
+        #   @return [::String]
+        #     Required. If within a project-level config, then this must match the
+        #     config's project id.
+        class CloudStorageResourceReference
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # How often existing buckets should have their profiles refreshed.
+        # New buckets are scanned as quickly as possible depending on system
+        # capacity.
+        # @!attribute [rw] refresh_frequency
+        #   @return [::Google::Cloud::Dlp::V2::DataProfileUpdateFrequency]
+        #     Optional. Data changes in Cloud Storage can't trigger reprofiling. If you
+        #     set this field, profiles are refreshed at this frequency regardless of
+        #     whether the underlying buckets have changed. Defaults to never.
+        # @!attribute [rw] inspect_template_modified_cadence
+        #   @return [::Google::Cloud::Dlp::V2::DiscoveryInspectTemplateModifiedCadence]
+        #     Optional. Governs when to update data profiles when the inspection rules
+        #     defined by the `InspectTemplate` change.
+        #     If not set, changing the template will not cause a data profile to update.
+        class DiscoveryCloudStorageGenerationCadence
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Requirements that must be true before a Cloud Storage bucket or object is
+        # scanned in discovery for the first time. There is an AND relationship between
+        # the top-level attributes.
+        # @!attribute [rw] included_object_attributes
+        #   @return [::Array<::Google::Cloud::Dlp::V2::DiscoveryCloudStorageConditions::CloudStorageObjectAttribute>]
+        #     Required. Only objects with the specified attributes will be scanned. If an
+        #     object has one of the specified attributes but is inside an excluded
+        #     bucket, it will not be scanned. Defaults to [ALL_SUPPORTED_OBJECTS]. A
+        #     profile will be created even if no objects match the
+        #     included_object_attributes.
+        # @!attribute [rw] included_bucket_attributes
+        #   @return [::Array<::Google::Cloud::Dlp::V2::DiscoveryCloudStorageConditions::CloudStorageBucketAttribute>]
+        #     Required. Only objects with the specified attributes will be scanned.
+        #     Defaults to [ALL_SUPPORTED_BUCKETS] if unset.
+        class DiscoveryCloudStorageConditions
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The attribute of an object. See
+          # https://cloud.google.com/storage/docs/storage-classes for more information
+          # on storage classes.
+          module CloudStorageObjectAttribute
+            # Unused.
+            CLOUD_STORAGE_OBJECT_ATTRIBUTE_UNSPECIFIED = 0
+
+            # Scan objects regardless of the attribute.
+            ALL_SUPPORTED_OBJECTS = 1
+
+            # Scan objects with the standard storage class.
+            STANDARD = 2
+
+            # Scan objects with the nearline storage class. This will incur retrieval
+            # fees.
+            NEARLINE = 3
+
+            # Scan objects with the coldline storage class. This will incur retrieval
+            # fees.
+            COLDLINE = 4
+
+            # Scan objects with the archive storage class. This will incur retrieval
+            # fees.
+            ARCHIVE = 5
+
+            # Scan objects with the regional storage class.
+            REGIONAL = 6
+
+            # Scan objects with the multi-regional storage class.
+            MULTI_REGIONAL = 7
+
+            # Scan objects with the dual-regional storage class. This will incur
+            # retrieval fees.
+            DURABLE_REDUCED_AVAILABILITY = 8
+          end
+
+          # The attribute of a bucket.
+          module CloudStorageBucketAttribute
+            # Unused.
+            CLOUD_STORAGE_BUCKET_ATTRIBUTE_UNSPECIFIED = 0
+
+            # Scan buckets regardless of the attribute.
+            ALL_SUPPORTED_BUCKETS = 1
+
+            # Buckets with autoclass disabled
+            # (https://cloud.google.com/storage/docs/autoclass). Only one of
+            # AUTOCLASS_DISABLED or AUTOCLASS_ENABLED should be set.
+            AUTOCLASS_DISABLED = 2
+
+            # Buckets with autoclass enabled
+            # (https://cloud.google.com/storage/docs/autoclass). Only one of
+            # AUTOCLASS_DISABLED or AUTOCLASS_ENABLED should be set. Scanning
+            # Autoclass-enabled buckets can affect object storage classes.
+            AUTOCLASS_ENABLED = 3
+          end
+        end
+
+        # Requirements that must be true before a file store is scanned in discovery
+        # for the first time. There is an AND relationship between the top-level
+        # attributes.
+        # @!attribute [rw] created_after
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Optional. File store must have been created after this date. Used to avoid
+        #     backfilling.
+        # @!attribute [rw] min_age
+        #   @return [::Google::Protobuf::Duration]
+        #     Optional. Minimum age a file store must have. If set, the value must be 1
+        #     hour or greater.
+        # @!attribute [rw] cloud_storage_conditions
+        #   @return [::Google::Cloud::Dlp::V2::DiscoveryCloudStorageConditions]
+        #     Optional. Cloud Storage conditions.
+        class DiscoveryFileStoreConditions
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The location to begin a discovery scan. Denotes an organization ID or folder
         # ID within an organization.
         # @!attribute [rw] organization_id
@@ -4683,8 +4964,14 @@ module Google
         #     The ID of an organization to scan.
         # @!attribute [rw] folder_id
         #   @return [::Integer]
-        #     The ID of the Folder within an organization to scan.
+        #     The ID of the folder within an organization to scan.
         class DiscoveryStartingLocation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Match discovery resources not covered by any other filter.
+        class AllOtherResources
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -4778,9 +5065,9 @@ module Google
         #     processing
         #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
         #
-        #     + Projects scope, location specified:<br/>
+        #     + Projects scope, location specified:
         #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-        #     + Projects scope, no location specified (defaults to global):<br/>
+        #     + Projects scope, no location specified (defaults to global):
         #       `projects/`<var>PROJECT_ID</var>
         #
         #     The following example `parent` string specifies a parent project with the
@@ -4829,7 +5116,7 @@ module Google
         #     The type of job. Defaults to `DlpJobType.INSPECT`
         # @!attribute [rw] order_by
         #   @return [::String]
-        #     Comma separated list of fields to order by,
+        #     Comma-separated list of fields to order by,
         #     followed by `asc` or `desc` postfix. This list is case insensitive. The
         #     default sorting order is ascending. Redundant space characters are
         #     insignificant.
@@ -4898,13 +5185,13 @@ module Google
         #     (project or organization) and whether you have [specified a processing
         #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
         #
-        #     + Projects scope, location specified:<br/>
+        #     + Projects scope, location specified:
         #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-        #     + Projects scope, no location specified (defaults to global):<br/>
+        #     + Projects scope, no location specified (defaults to global):
         #       `projects/`<var>PROJECT_ID</var>
-        #     + Organizations scope, location specified:<br/>
+        #     + Organizations scope, location specified:
         #       `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
-        #     + Organizations scope, no location specified (defaults to global):<br/>
+        #     + Organizations scope, no location specified (defaults to global):
         #       `organizations/`<var>ORG_ID</var>
         #
         #     The following example `parent` string specifies a parent project with the
@@ -4967,13 +5254,13 @@ module Google
         #     (project or organization) and whether you have [specified a processing
         #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
         #
-        #     + Projects scope, location specified:<br/>
+        #     + Projects scope, location specified:
         #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-        #     + Projects scope, no location specified (defaults to global):<br/>
+        #     + Projects scope, no location specified (defaults to global):
         #       `projects/`<var>PROJECT_ID</var>
-        #     + Organizations scope, location specified:<br/>
+        #     + Organizations scope, location specified:
         #       `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
-        #     + Organizations scope, no location specified (defaults to global):<br/>
+        #     + Organizations scope, no location specified (defaults to global):
         #       `organizations/`<var>ORG_ID</var>
         #
         #     The following example `parent` string specifies a parent project with the
@@ -4991,7 +5278,7 @@ module Google
         #     returns a page of max size 100.
         # @!attribute [rw] order_by
         #   @return [::String]
-        #     Comma separated list of fields to order by,
+        #     Comma-separated list of fields to order by,
         #     followed by `asc` or `desc` postfix. This list is case insensitive. The
         #     default sorting order is ascending. Redundant space characters are
         #     insignificant.
@@ -5164,13 +5451,13 @@ module Google
         #     (project or organization) and whether you have [specified a processing
         #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
         #
-        #     + Projects scope, location specified:<br/>
+        #     + Projects scope, location specified:
         #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-        #     + Projects scope, no location specified (defaults to global):<br/>
+        #     + Projects scope, no location specified (defaults to global):
         #       `projects/`<var>PROJECT_ID</var>
-        #     + Organizations scope, location specified:<br/>
+        #     + Organizations scope, location specified:
         #       `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
-        #     + Organizations scope, no location specified (defaults to global):<br/>
+        #     + Organizations scope, no location specified (defaults to global):
         #       `organizations/`<var>ORG_ID</var>
         #
         #     The following example `parent` string specifies a parent project with the
@@ -5234,9 +5521,9 @@ module Google
         #     (project or organization) and whether you have [specified a processing
         #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
         #
-        #     + Projects scope, location specified:<br/>
+        #     + Projects scope, location specified:
         #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-        #     + Projects scope, no location specified (defaults to global):<br/>
+        #     + Projects scope, no location specified (defaults to global):
         #       `projects/`<var>PROJECT_ID</var>
         #
         #     The following example `parent` string specifies a parent project with the
@@ -5254,7 +5541,7 @@ module Google
         #     returns a page of max size 100.
         # @!attribute [rw] order_by
         #   @return [::String]
-        #     Comma separated list of fields to order by,
+        #     Comma-separated list of fields to order by,
         #     followed by `asc` or `desc` postfix. This list is case insensitive. The
         #     default sorting order is ascending. Redundant space characters are
         #     insignificant.
@@ -5377,6 +5664,7 @@ module Google
         #     No more than 10 labels can be associated with a given finding.
         #
         #     Examples:
+        #
         #     * `"environment" : "production"`
         #     * `"pipeline" : "etl"`
         class HybridFindingDetails
@@ -5412,7 +5700,7 @@ module Google
         #     returns a page of max size 100.
         # @!attribute [rw] order_by
         #   @return [::String]
-        #     Comma separated list of fields to order by, followed by `asc` or `desc`
+        #     Comma-separated list of fields to order by, followed by `asc` or `desc`
         #     postfix. This list is case insensitive. The default sorting order is
         #     ascending. Redundant space characters are insignificant. Only one order
         #     field at a time is allowed.
@@ -5483,7 +5771,7 @@ module Google
         #     returns a page of max size 100.
         # @!attribute [rw] order_by
         #   @return [::String]
-        #     Comma separated list of fields to order by, followed by `asc` or `desc`
+        #     Comma-separated list of fields to order by, followed by `asc` or `desc`
         #     postfix. This list is case insensitive. The default sorting order is
         #     ascending. Redundant space characters are insignificant. Only one order
         #     field at a time is allowed.
@@ -5565,12 +5853,13 @@ module Google
         #     returns a page of max size 100.
         # @!attribute [rw] order_by
         #   @return [::String]
-        #     Comma separated list of fields to order by, followed by `asc` or `desc`
+        #     Comma-separated list of fields to order by, followed by `asc` or `desc`
         #     postfix. This list is case insensitive. The default sorting order is
         #     ascending. Redundant space characters are insignificant. Only one order
         #     field at a time is allowed.
         #
         #     Examples:
+        #
         #     * `project_id asc`
         #     * `table_id`
         #     * `sensitivity_level desc`
@@ -5652,6 +5941,9 @@ module Google
             # data found.
             RISK_LOW = 10
 
+            # Unable to determine risk.
+            RISK_UNKNOWN = 12
+
             # Medium risk - Sensitive data may be present but additional access or fine
             # grain access restrictions appear to be present.  Consider limiting
             # access even further or transform data to mask.
@@ -5684,6 +5976,12 @@ module Google
         # @!attribute [rw] profile_status
         #   @return [::Google::Cloud::Dlp::V2::ProfileStatus]
         #     Success or error status of the last attempt to profile the project.
+        # @!attribute [rw] table_data_profile_count
+        #   @return [::Integer]
+        #     The number of table data profiles generated for this project.
+        # @!attribute [rw] file_store_data_profile_count
+        #   @return [::Integer]
+        #     The number of file store data profiles generated for this project.
         class ProjectDataProfile
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -5725,7 +6023,7 @@ module Google
         #     The resource type that was profiled.
         # @!attribute [rw] project_data_profile
         #   @return [::String]
-        #     The resource name to the project data profile for this table.
+        #     The resource name of the project data profile for this table.
         # @!attribute [rw] dataset_project_id
         #   @return [::String]
         #     The Google Cloud project ID that owns the resource.
@@ -6031,12 +6329,297 @@ module Google
           end
         end
 
+        # The profile for a file store.
+        #
+        # * Cloud Storage: maps 1:1 with a bucket.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     The name of the profile.
+        # @!attribute [rw] data_source_type
+        #   @return [::Google::Cloud::Dlp::V2::DataSourceType]
+        #     The resource type that was profiled.
+        # @!attribute [rw] project_data_profile
+        #   @return [::String]
+        #     The resource name of the project data profile for this file store.
+        # @!attribute [rw] project_id
+        #   @return [::String]
+        #     The Google Cloud project ID that owns the resource.
+        # @!attribute [rw] file_store_location
+        #   @return [::String]
+        #     The location of the file store.
+        #
+        #     * Cloud Storage:
+        #     https://cloud.google.com/storage/docs/locations#available-locations
+        # @!attribute [rw] data_storage_locations
+        #   @return [::Array<::String>]
+        #     For resources that have multiple storage locations, these are those
+        #     regions. For Cloud Storage this is the list of regions chosen for
+        #     dual-region storage. `file_store_location` will normally be the
+        #     corresponding multi-region for the list of individual locations. The first
+        #     region is always picked as the processing and storage location for the data
+        #     profile.
+        # @!attribute [rw] location_type
+        #   @return [::String]
+        #     The location type of the bucket (region, dual-region, multi-region, etc).
+        #     If dual-region, expect data_storage_locations to be populated.
+        # @!attribute [rw] file_store_path
+        #   @return [::String]
+        #     The file store path.
+        #
+        #     * Cloud Storage: `gs://{bucket}`
+        # @!attribute [rw] full_resource
+        #   @return [::String]
+        #     The resource name of the resource profiled.
+        #     https://cloud.google.com/apis/design/resource_names#full_resource_name
+        # @!attribute [rw] config_snapshot
+        #   @return [::Google::Cloud::Dlp::V2::DataProfileConfigSnapshot]
+        #     The snapshot of the configurations used to generate the profile.
+        # @!attribute [rw] profile_status
+        #   @return [::Google::Cloud::Dlp::V2::ProfileStatus]
+        #     Success or error status from the most recent profile generation attempt.
+        #     May be empty if the profile is still being generated.
+        # @!attribute [rw] state
+        #   @return [::Google::Cloud::Dlp::V2::FileStoreDataProfile::State]
+        #     State of a profile.
+        # @!attribute [rw] profile_last_generated
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The last time the profile was generated.
+        # @!attribute [rw] resource_visibility
+        #   @return [::Google::Cloud::Dlp::V2::ResourceVisibility]
+        #     How broadly a resource has been shared.
+        # @!attribute [rw] sensitivity_score
+        #   @return [::Google::Cloud::Dlp::V2::SensitivityScore]
+        #     The sensitivity score of this resource.
+        # @!attribute [rw] data_risk_level
+        #   @return [::Google::Cloud::Dlp::V2::DataRiskLevel]
+        #     The data risk level of this resource.
+        # @!attribute [rw] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time the file store was first created.
+        # @!attribute [rw] last_modified_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time the file store was last modified.
+        # @!attribute [rw] file_cluster_summaries
+        #   @return [::Array<::Google::Cloud::Dlp::V2::FileClusterSummary>]
+        #     FileClusterSummary per each cluster.
+        # @!attribute [rw] resource_attributes
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Dlp::V2::Value}]
+        #     Attributes of the resource being profiled.
+        #     Currently used attributes:
+        #
+        #     * customer_managed_encryption: boolean
+        #         - true: the resource is encrypted with a customer-managed key.
+        #         - false: the resource is encrypted with a provider-managed key.
+        # @!attribute [rw] resource_labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     The labels applied to the resource at the time the profile was generated.
+        # @!attribute [rw] file_store_info_type_summaries
+        #   @return [::Array<::Google::Cloud::Dlp::V2::FileStoreInfoTypeSummary>]
+        #     InfoTypes detected in this file store.
+        # @!attribute [rw] file_store_is_empty
+        #   @return [::Boolean]
+        #     The file store does not have any files.
+        class FileStoreDataProfile
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Dlp::V2::Value]
+          class ResourceAttributesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class ResourceLabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Possible states of a profile. New items may be added.
+          module State
+            # Unused.
+            STATE_UNSPECIFIED = 0
+
+            # The profile is currently running. Once a profile has finished it will
+            # transition to DONE.
+            RUNNING = 1
+
+            # The profile is no longer generating.
+            # If profile_status.status.code is 0, the profile succeeded, otherwise, it
+            # failed.
+            DONE = 2
+          end
+        end
+
+        # Information regarding the discovered InfoType.
+        # @!attribute [rw] info_type
+        #   @return [::Google::Cloud::Dlp::V2::InfoType]
+        #     The InfoType seen.
+        class FileStoreInfoTypeSummary
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Information regarding the discovered file extension.
+        # @!attribute [rw] file_extension
+        #   @return [::String]
+        #     The file extension if set. (aka .pdf, .jpg, .txt)
+        class FileExtensionInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The file cluster summary.
+        # @!attribute [rw] file_cluster_type
+        #   @return [::Google::Cloud::Dlp::V2::FileClusterType]
+        #     The file cluster type.
+        # @!attribute [rw] file_store_info_type_summaries
+        #   @return [::Array<::Google::Cloud::Dlp::V2::FileStoreInfoTypeSummary>]
+        #     InfoTypes detected in this cluster.
+        # @!attribute [rw] sensitivity_score
+        #   @return [::Google::Cloud::Dlp::V2::SensitivityScore]
+        #     The sensitivity score of this cluster. The score will be SENSITIVITY_LOW
+        #     if nothing has been scanned.
+        # @!attribute [rw] data_risk_level
+        #   @return [::Google::Cloud::Dlp::V2::DataRiskLevel]
+        #     The data risk level of this cluster. RISK_LOW if nothing has been
+        #     scanned.
+        # @!attribute [rw] errors
+        #   @return [::Array<::Google::Cloud::Dlp::V2::Error>]
+        #     A list of errors detected while scanning this cluster. The list is
+        #     truncated to 10 per cluster.
+        # @!attribute [rw] file_extensions_scanned
+        #   @return [::Array<::Google::Cloud::Dlp::V2::FileExtensionInfo>]
+        #     A sample of file types scanned in this cluster. Empty if no files were
+        #     scanned.
+        # @!attribute [rw] file_extensions_seen
+        #   @return [::Array<::Google::Cloud::Dlp::V2::FileExtensionInfo>]
+        #     A sample of file types seen in this cluster. Empty if no files were seen.
+        # @!attribute [rw] no_files_exist
+        #   @return [::Boolean]
+        #     True if no files exist in this cluster. If the bucket had more files than
+        #     could be listed, this will be false even if no files for this cluster
+        #     were seen and file_extensions_seen is empty.
+        class FileClusterSummary
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request to get a project data profile.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Resource name, for example
         #     `organizations/12345/locations/us/projectDataProfiles/53234423`.
         class GetProjectDataProfileRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to get a file store data profile.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Resource name, for example
+        #     `organizations/12345/locations/us/fileStoreDataProfiles/53234423`.
+        class GetFileStoreDataProfileRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to list the file store profiles generated for a given organization or
+        # project.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Resource name of the organization or project, for
+        #     example `organizations/433245324/locations/europe` or
+        #     `projects/project-id/locations/asia`.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. Page token to continue retrieval.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. Size of the page. This value can be limited by the server. If
+        #     zero, server returns a page of max size 100.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. Comma-separated list of fields to order by, followed by `asc` or
+        #     `desc` postfix. This list is case insensitive. The default sorting order is
+        #     ascending. Redundant space characters are insignificant. Only one order
+        #     field at a time is allowed.
+        #
+        #     Examples:
+        #
+        #     * `project_id asc`
+        #     * `name`
+        #     * `sensitivity_level desc`
+        #
+        #     Supported fields are:
+        #
+        #     - `project_id`: The Google Cloud project ID.
+        #     - `sensitivity_level`: How sensitive the data in a table is, at most.
+        #     - `data_risk_level`: How much risk is associated with this data.
+        #     - `profile_last_generated`: When the profile was last updated in epoch
+        #     seconds.
+        #     - `last_modified`: The last time the resource was modified.
+        #     - `resource_visibility`: Visibility restriction for this resource.
+        #     - `name`: The name of the profile.
+        #     - `create_time`: The time the file store was first created.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Allows filtering.
+        #
+        #     Supported syntax:
+        #
+        #     * Filter expressions are made up of one or more restrictions.
+        #     * Restrictions can be combined by `AND` or `OR` logical operators. A
+        #     sequence of restrictions implicitly uses `AND`.
+        #     * A restriction has the form of `{field} {operator} {value}`.
+        #     * Supported fields/values:
+        #         - `project_id` - The Google Cloud project ID.
+        #         - `file_store_path` - The path like "gs://bucket".
+        #         - `sensitivity_level` - HIGH|MODERATE|LOW
+        #         - `data_risk_level` - HIGH|MODERATE|LOW
+        #         - `resource_visibility`: PUBLIC|RESTRICTED
+        #         - `status_code` - an RPC status code as defined in
+        #         https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+        #     * The operator must be `=` or `!=`.
+        #
+        #     Examples:
+        #
+        #     * `project_id = 12345 AND status_code = 1`
+        #     * `project_id = 12345 AND sensitivity_level = HIGH`
+        #     * `project_id = 12345 AND resource_visibility = PUBLIC`
+        #     * `file_store_path = "gs://mybucket"`
+        #
+        #     The length of this field should be no more than 500 characters.
+        class ListFileStoreDataProfilesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # List of file store data profiles generated for a given organization or
+        # project.
+        # @!attribute [rw] file_store_data_profiles
+        #   @return [::Array<::Google::Cloud::Dlp::V2::FileStoreDataProfile>]
+        #     List of data profiles.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     The next page token.
+        class ListFileStoreDataProfilesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for DeleteFileStoreProfile.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Resource name of the file store data profile.
+        class DeleteFileStoreDataProfileRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -6126,6 +6709,11 @@ module Google
         #     If `DetailLevel` is `TABLE_PROFILE` this will be fully populated.
         #     Otherwise, if `DetailLevel` is `RESOURCE_NAME`, then only `name` and
         #     `full_resource` will be populated.
+        # @!attribute [rw] file_store_profile
+        #   @return [::Google::Cloud::Dlp::V2::FileStoreDataProfile]
+        #     If `DetailLevel` is `FILE_STORE_PROFILE` this will be fully populated.
+        #     Otherwise, if `DetailLevel` is `RESOURCE_NAME`, then only `name` and
+        #     `file_store_path` will be populated.
         # @!attribute [rw] event
         #   @return [::Google::Cloud::Dlp::V2::DataProfileAction::EventType]
         #     The event that caused the Pub/Sub message to be sent.
@@ -6359,6 +6947,49 @@ module Google
         class DataSourceType
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message used to identify file cluster type being profiled.
+        # @!attribute [rw] cluster
+        #   @return [::Google::Cloud::Dlp::V2::FileClusterType::Cluster]
+        #     Cluster type.
+        class FileClusterType
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Cluster type. Each cluster corresponds to a set of file types.
+          # Over time new types may be added.
+          module Cluster
+            # Unused.
+            CLUSTER_UNSPECIFIED = 0
+
+            # Unsupported files.
+            CLUSTER_UNKNOWN = 1
+
+            # Plain text.
+            CLUSTER_TEXT = 2
+
+            # Structured data like CSV, TSV etc.
+            CLUSTER_STRUCTURED_DATA = 3
+
+            # Source code.
+            CLUSTER_SOURCE_CODE = 4
+
+            # Rich document like docx, xlsx etc.
+            CLUSTER_RICH_DOCUMENT = 5
+
+            # Images like jpeg, bmp.
+            CLUSTER_IMAGE = 6
+
+            # Archives and containers like .zip, .tar etc.
+            CLUSTER_ARCHIVE = 7
+
+            # Multimedia like .mp4, .avi etc.
+            CLUSTER_MULTIMEDIA = 8
+
+            # Executable files like .exe, .class, .apk etc.
+            CLUSTER_EXECUTABLE = 9
+          end
         end
 
         # Enum of possible outcomes of transformations. SUCCESS if transformation and
@@ -6657,7 +7288,7 @@ module Google
 
           # May contain public items.
           # For example, if a Cloud Storage bucket has uniform bucket level access
-          # disabled, some objects inside it may be public.
+          # disabled, some objects inside it may be public, but none are known yet.
           RESOURCE_VISIBILITY_INCONCLUSIVE = 15
 
           # Visible only to specific users.

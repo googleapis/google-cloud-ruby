@@ -61,6 +61,9 @@ module Google
             # accessible.
             SENSITIVITY_LOW = 10
 
+            # Unable to determine sensitivity.
+            SENSITIVITY_UNKNOWN = 12
+
             # Medium risk. Contains personally identifiable information (PII),
             # potentially sensitive data, or fields with free-text data that are at a
             # higher risk of having intermittent sensitive data. Consider limiting
@@ -698,6 +701,7 @@ module Google
         #     No more than 10 labels can be associated with a given finding.
         #
         #     Examples:
+        #
         #     * `"environment" : "production"`
         #     * `"pipeline" : "etl"`
         # @!attribute [rw] table_options
