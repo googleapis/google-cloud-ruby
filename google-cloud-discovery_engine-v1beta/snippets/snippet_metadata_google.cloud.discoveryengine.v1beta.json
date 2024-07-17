@@ -1692,6 +1692,166 @@
       ]
     },
     {
+      "region_tag": "discoveryengine_v1beta_generated_EvaluationService_GetEvaluation_sync",
+      "title": "Snippet for the get_evaluation call in the EvaluationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Client#get_evaluation.",
+      "file": "evaluation_service/get_evaluation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_evaluation",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Client#get_evaluation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::GetEvaluationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::Evaluation",
+        "client": {
+          "short_name": "EvaluationService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Client"
+        },
+        "method": {
+          "short_name": "GetEvaluation",
+          "full_name": "google.cloud.discoveryengine.v1beta.EvaluationService.GetEvaluation",
+          "service": {
+            "short_name": "EvaluationService",
+            "full_name": "google.cloud.discoveryengine.v1beta.EvaluationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_EvaluationService_ListEvaluations_sync",
+      "title": "Snippet for the list_evaluations call in the EvaluationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Client#list_evaluations.",
+      "file": "evaluation_service/list_evaluations.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_evaluations",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Client#list_evaluations",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::ListEvaluationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::ListEvaluationsResponse",
+        "client": {
+          "short_name": "EvaluationService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Client"
+        },
+        "method": {
+          "short_name": "ListEvaluations",
+          "full_name": "google.cloud.discoveryengine.v1beta.EvaluationService.ListEvaluations",
+          "service": {
+            "short_name": "EvaluationService",
+            "full_name": "google.cloud.discoveryengine.v1beta.EvaluationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_EvaluationService_CreateEvaluation_sync",
+      "title": "Snippet for the create_evaluation call in the EvaluationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Client#create_evaluation.",
+      "file": "evaluation_service/create_evaluation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_evaluation",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Client#create_evaluation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::CreateEvaluationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "EvaluationService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Client"
+        },
+        "method": {
+          "short_name": "CreateEvaluation",
+          "full_name": "google.cloud.discoveryengine.v1beta.EvaluationService.CreateEvaluation",
+          "service": {
+            "short_name": "EvaluationService",
+            "full_name": "google.cloud.discoveryengine.v1beta.EvaluationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_EvaluationService_ListEvaluationResults_sync",
+      "title": "Snippet for the list_evaluation_results call in the EvaluationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Client#list_evaluation_results.",
+      "file": "evaluation_service/list_evaluation_results.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_evaluation_results",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Client#list_evaluation_results",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::ListEvaluationResultsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::ListEvaluationResultsResponse",
+        "client": {
+          "short_name": "EvaluationService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Client"
+        },
+        "method": {
+          "short_name": "ListEvaluationResults",
+          "full_name": "google.cloud.discoveryengine.v1beta.EvaluationService.ListEvaluationResults",
+          "service": {
+            "short_name": "EvaluationService",
+            "full_name": "google.cloud.discoveryengine.v1beta.EvaluationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "discoveryengine_v1beta_generated_GroundedGenerationService_CheckGrounding_sync",
       "title": "Snippet for the check_grounding call in the GroundedGenerationService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::GroundedGenerationService::Client#check_grounding.",
@@ -1838,6 +1998,446 @@
           "service": {
             "short_name": "RecommendationService",
             "full_name": "google.cloud.discoveryengine.v1beta.RecommendationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SampleQueryService_GetSampleQuery_sync",
+      "title": "Snippet for the get_sample_query call in the SampleQueryService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SampleQueryService::Client#get_sample_query.",
+      "file": "sample_query_service/get_sample_query.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_sample_query",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQueryService::Client#get_sample_query",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::GetSampleQueryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQuery",
+        "client": {
+          "short_name": "SampleQueryService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQueryService::Client"
+        },
+        "method": {
+          "short_name": "GetSampleQuery",
+          "full_name": "google.cloud.discoveryengine.v1beta.SampleQueryService.GetSampleQuery",
+          "service": {
+            "short_name": "SampleQueryService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SampleQueryService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SampleQueryService_ListSampleQueries_sync",
+      "title": "Snippet for the list_sample_queries call in the SampleQueryService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SampleQueryService::Client#list_sample_queries.",
+      "file": "sample_query_service/list_sample_queries.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_sample_queries",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQueryService::Client#list_sample_queries",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::ListSampleQueriesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::ListSampleQueriesResponse",
+        "client": {
+          "short_name": "SampleQueryService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQueryService::Client"
+        },
+        "method": {
+          "short_name": "ListSampleQueries",
+          "full_name": "google.cloud.discoveryengine.v1beta.SampleQueryService.ListSampleQueries",
+          "service": {
+            "short_name": "SampleQueryService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SampleQueryService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SampleQueryService_CreateSampleQuery_sync",
+      "title": "Snippet for the create_sample_query call in the SampleQueryService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SampleQueryService::Client#create_sample_query.",
+      "file": "sample_query_service/create_sample_query.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_sample_query",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQueryService::Client#create_sample_query",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::CreateSampleQueryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQuery",
+        "client": {
+          "short_name": "SampleQueryService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQueryService::Client"
+        },
+        "method": {
+          "short_name": "CreateSampleQuery",
+          "full_name": "google.cloud.discoveryengine.v1beta.SampleQueryService.CreateSampleQuery",
+          "service": {
+            "short_name": "SampleQueryService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SampleQueryService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SampleQueryService_UpdateSampleQuery_sync",
+      "title": "Snippet for the update_sample_query call in the SampleQueryService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SampleQueryService::Client#update_sample_query.",
+      "file": "sample_query_service/update_sample_query.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_sample_query",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQueryService::Client#update_sample_query",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::UpdateSampleQueryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQuery",
+        "client": {
+          "short_name": "SampleQueryService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQueryService::Client"
+        },
+        "method": {
+          "short_name": "UpdateSampleQuery",
+          "full_name": "google.cloud.discoveryengine.v1beta.SampleQueryService.UpdateSampleQuery",
+          "service": {
+            "short_name": "SampleQueryService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SampleQueryService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SampleQueryService_DeleteSampleQuery_sync",
+      "title": "Snippet for the delete_sample_query call in the SampleQueryService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SampleQueryService::Client#delete_sample_query.",
+      "file": "sample_query_service/delete_sample_query.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_sample_query",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQueryService::Client#delete_sample_query",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::DeleteSampleQueryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "SampleQueryService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQueryService::Client"
+        },
+        "method": {
+          "short_name": "DeleteSampleQuery",
+          "full_name": "google.cloud.discoveryengine.v1beta.SampleQueryService.DeleteSampleQuery",
+          "service": {
+            "short_name": "SampleQueryService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SampleQueryService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SampleQueryService_ImportSampleQueries_sync",
+      "title": "Snippet for the import_sample_queries call in the SampleQueryService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SampleQueryService::Client#import_sample_queries.",
+      "file": "sample_query_service/import_sample_queries.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "import_sample_queries",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQueryService::Client#import_sample_queries",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::ImportSampleQueriesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SampleQueryService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQueryService::Client"
+        },
+        "method": {
+          "short_name": "ImportSampleQueries",
+          "full_name": "google.cloud.discoveryengine.v1beta.SampleQueryService.ImportSampleQueries",
+          "service": {
+            "short_name": "SampleQueryService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SampleQueryService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SampleQuerySetService_GetSampleQuerySet_sync",
+      "title": "Snippet for the get_sample_query_set call in the SampleQuerySetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Client#get_sample_query_set.",
+      "file": "sample_query_set_service/get_sample_query_set.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_sample_query_set",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Client#get_sample_query_set",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::GetSampleQuerySetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySet",
+        "client": {
+          "short_name": "SampleQuerySetService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Client"
+        },
+        "method": {
+          "short_name": "GetSampleQuerySet",
+          "full_name": "google.cloud.discoveryengine.v1beta.SampleQuerySetService.GetSampleQuerySet",
+          "service": {
+            "short_name": "SampleQuerySetService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SampleQuerySetService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SampleQuerySetService_ListSampleQuerySets_sync",
+      "title": "Snippet for the list_sample_query_sets call in the SampleQuerySetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Client#list_sample_query_sets.",
+      "file": "sample_query_set_service/list_sample_query_sets.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_sample_query_sets",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Client#list_sample_query_sets",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::ListSampleQuerySetsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::ListSampleQuerySetsResponse",
+        "client": {
+          "short_name": "SampleQuerySetService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Client"
+        },
+        "method": {
+          "short_name": "ListSampleQuerySets",
+          "full_name": "google.cloud.discoveryengine.v1beta.SampleQuerySetService.ListSampleQuerySets",
+          "service": {
+            "short_name": "SampleQuerySetService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SampleQuerySetService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SampleQuerySetService_CreateSampleQuerySet_sync",
+      "title": "Snippet for the create_sample_query_set call in the SampleQuerySetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Client#create_sample_query_set.",
+      "file": "sample_query_set_service/create_sample_query_set.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_sample_query_set",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Client#create_sample_query_set",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::CreateSampleQuerySetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySet",
+        "client": {
+          "short_name": "SampleQuerySetService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Client"
+        },
+        "method": {
+          "short_name": "CreateSampleQuerySet",
+          "full_name": "google.cloud.discoveryengine.v1beta.SampleQuerySetService.CreateSampleQuerySet",
+          "service": {
+            "short_name": "SampleQuerySetService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SampleQuerySetService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SampleQuerySetService_UpdateSampleQuerySet_sync",
+      "title": "Snippet for the update_sample_query_set call in the SampleQuerySetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Client#update_sample_query_set.",
+      "file": "sample_query_set_service/update_sample_query_set.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_sample_query_set",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Client#update_sample_query_set",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::UpdateSampleQuerySetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySet",
+        "client": {
+          "short_name": "SampleQuerySetService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Client"
+        },
+        "method": {
+          "short_name": "UpdateSampleQuerySet",
+          "full_name": "google.cloud.discoveryengine.v1beta.SampleQuerySetService.UpdateSampleQuerySet",
+          "service": {
+            "short_name": "SampleQuerySetService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SampleQuerySetService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SampleQuerySetService_DeleteSampleQuerySet_sync",
+      "title": "Snippet for the delete_sample_query_set call in the SampleQuerySetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Client#delete_sample_query_set.",
+      "file": "sample_query_set_service/delete_sample_query_set.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_sample_query_set",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Client#delete_sample_query_set",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::DeleteSampleQuerySetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "SampleQuerySetService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Client"
+        },
+        "method": {
+          "short_name": "DeleteSampleQuerySet",
+          "full_name": "google.cloud.discoveryengine.v1beta.SampleQuerySetService.DeleteSampleQuerySet",
+          "service": {
+            "short_name": "SampleQuerySetService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SampleQuerySetService"
           }
         }
       },

@@ -428,6 +428,12 @@ module Google
             #     [Ordering](https://cloud.google.com/retail/docs/filter-and-order#order)
             #
             #     If this field is unrecognizable, an `INVALID_ARGUMENT` is returned.
+            # @!attribute [rw] search_result_mode
+            #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::ContentSearchSpec::SearchResultMode]
+            #     Specifies the search result mode. If unspecified, the
+            #     search result mode defaults to `DOCUMENTS`.
+            #     See [parse and chunk
+            #     documents](https://cloud.google.com/generative-ai-app-builder/docs/parse-chunk-documents)
             # @!attribute [rw] data_store_specs
             #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::DataStoreSpec>]
             #     Specs defining dataStores to filter on in a search call and
@@ -589,8 +595,10 @@ module Google
         # @!attribute [rw] answer
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Answer]
         #     Answer resource object.
-        #     If [AnswerQueryRequest.StepSpec.max_step_count][] is greater than 1,
-        #     use {::Google::Cloud::DiscoveryEngine::V1beta::Answer#name Answer.name} to fetch
+        #     If
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryRequest::QueryUnderstandingSpec::QueryRephraserSpec#max_rephrase_steps AnswerQueryRequest.QueryUnderstandingSpec.QueryRephraserSpec.max_rephrase_steps}
+        #     is greater than 1, use
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::Answer#name Answer.name} to fetch
         #     answer information using
         #     {::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client#get_answer ConversationalSearchService.GetAnswer}
         #     API.

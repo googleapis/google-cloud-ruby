@@ -278,6 +278,35 @@
         }
       }
     },
+    "EvaluationService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Client",
+          "rpcs": {
+            "GetEvaluation": {
+              "methods": [
+                "get_evaluation"
+              ]
+            },
+            "ListEvaluations": {
+              "methods": [
+                "list_evaluations"
+              ]
+            },
+            "CreateEvaluation": {
+              "methods": [
+                "create_evaluation"
+              ]
+            },
+            "ListEvaluationResults": {
+              "methods": [
+                "list_evaluation_results"
+              ]
+            }
+          }
+        }
+      }
+    },
     "GroundedGenerationService": {
       "clients": {
         "grpc": {
@@ -328,6 +357,79 @@
             "Recommend": {
               "methods": [
                 "recommend"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SampleQueryService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQueryService::Client",
+          "rpcs": {
+            "GetSampleQuery": {
+              "methods": [
+                "get_sample_query"
+              ]
+            },
+            "ListSampleQueries": {
+              "methods": [
+                "list_sample_queries"
+              ]
+            },
+            "CreateSampleQuery": {
+              "methods": [
+                "create_sample_query"
+              ]
+            },
+            "UpdateSampleQuery": {
+              "methods": [
+                "update_sample_query"
+              ]
+            },
+            "DeleteSampleQuery": {
+              "methods": [
+                "delete_sample_query"
+              ]
+            },
+            "ImportSampleQueries": {
+              "methods": [
+                "import_sample_queries"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SampleQuerySetService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Client",
+          "rpcs": {
+            "GetSampleQuerySet": {
+              "methods": [
+                "get_sample_query_set"
+              ]
+            },
+            "ListSampleQuerySets": {
+              "methods": [
+                "list_sample_query_sets"
+              ]
+            },
+            "CreateSampleQuerySet": {
+              "methods": [
+                "create_sample_query_set"
+              ]
+            },
+            "UpdateSampleQuerySet": {
+              "methods": [
+                "update_sample_query_set"
+              ]
+            },
+            "DeleteSampleQuerySet": {
+              "methods": [
+                "delete_sample_query_set"
               ]
             }
           }

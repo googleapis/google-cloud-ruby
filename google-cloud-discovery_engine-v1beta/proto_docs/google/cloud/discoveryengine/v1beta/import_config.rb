@@ -690,6 +690,91 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
+        # Request message for
+        # {::Google::Cloud::DiscoveryEngine::V1beta::SampleQueryService::Client#import_sample_queries SampleQueryService.ImportSampleQueries}
+        # method.
+        # @!attribute [rw] inline_source
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::ImportSampleQueriesRequest::InlineSource]
+        #     The Inline source for sample query entries.
+        # @!attribute [rw] gcs_source
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::GcsSource]
+        #     Cloud Storage location for the input content.
+        # @!attribute [rw] bigquery_source
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::BigQuerySource]
+        #     BigQuery input source.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent sample query set resource name, such as
+        #     `projects/{project}/locations/{location}/sampleQuerySets/{sampleQuerySet}`.
+        #
+        #     If the caller does not have permission to list
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::SampleQuery SampleQuery}s under this
+        #     sample query set, regardless of whether or not this sample query set
+        #     exists, a `PERMISSION_DENIED` error is returned.
+        # @!attribute [rw] error_config
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::ImportErrorConfig]
+        #     The desired location of errors incurred during the Import.
+        class ImportSampleQueriesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The inline source for
+          # {::Google::Cloud::DiscoveryEngine::V1beta::SampleQuery SampleQuery}s.
+          # @!attribute [rw] sample_queries
+          #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::SampleQuery>]
+          #     Required. A list of
+          #     {::Google::Cloud::DiscoveryEngine::V1beta::SampleQuery SampleQuery}s to
+          #     import. Max of 1000 items.
+          class InlineSource
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Response of the
+        # {::Google::Cloud::DiscoveryEngine::V1beta::SampleQueryService::Client#import_sample_queries SampleQueryService.ImportSampleQueries}
+        # method. If the long running operation is done, this message is returned by
+        # the google.longrunning.Operations.response field if the operation is
+        # successful.
+        # @!attribute [rw] error_samples
+        #   @return [::Array<::Google::Rpc::Status>]
+        #     A sample of errors encountered while processing the request.
+        # @!attribute [rw] error_config
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::ImportErrorConfig]
+        #     The desired location of errors incurred during the Import.
+        class ImportSampleQueriesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Metadata related to the progress of the ImportSampleQueries
+        # operation. This will be returned by the google.longrunning.Operation.metadata
+        # field.
+        # @!attribute [rw] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     ImportSampleQueries operation create time.
+        # @!attribute [rw] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     ImportSampleQueries operation last update time. If the operation is done,
+        #     this is also the finish time.
+        # @!attribute [rw] success_count
+        #   @return [::Integer]
+        #     Count of {::Google::Cloud::DiscoveryEngine::V1beta::SampleQuery SampleQuery}s
+        #     successfully imported.
+        # @!attribute [rw] failure_count
+        #   @return [::Integer]
+        #     Count of {::Google::Cloud::DiscoveryEngine::V1beta::SampleQuery SampleQuery}s
+        #     that failed to be imported.
+        # @!attribute [rw] total_count
+        #   @return [::Integer]
+        #     Total count of
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::SampleQuery SampleQuery}s that were
+        #     processed.
+        class ImportSampleQueriesMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
       end
     end
   end
