@@ -521,9 +521,8 @@ module Google
         # The request object for `CreateDeliveryPipeline`.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent collection in which the `DeliveryPipeline` should be
-        #     created. Format should be
-        #     `projects/{project_id}/locations/{location_name}`.
+        #     Required. The parent collection in which the `DeliveryPipeline` must be
+        #     created. The format is `projects/{project_id}/locations/{location_name}`.
         # @!attribute [rw] delivery_pipeline_id
         #   @return [::String]
         #     Required. ID of the `DeliveryPipeline`.
@@ -557,11 +556,11 @@ module Google
         # The request object for `UpdateDeliveryPipeline`.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. Field mask is used to specify the fields to be overwritten in the
-        #     `DeliveryPipeline` resource by the update.
-        #     The fields specified in the update_mask are relative to the resource, not
-        #     the full request. A field will be overwritten if it's in the mask. If the
-        #     user doesn't provide a mask then all fields are overwritten.
+        #     Required. Field mask is used to specify the fields to be overwritten by the
+        #     update in the `DeliveryPipeline` resource. The fields specified in the
+        #     update_mask are relative to the resource, not the full request. A field
+        #     will be overwritten if it's in the mask. If the user doesn't provide a mask
+        #     then all fields are overwritten.
         # @!attribute [rw] delivery_pipeline
         #   @return [::Google::Cloud::Deploy::V1::DeliveryPipeline]
         #     Required. The `DeliveryPipeline` to update.
@@ -596,7 +595,7 @@ module Google
         # The request object for `DeleteDeliveryPipeline`.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The name of the `DeliveryPipeline` to delete. Format should be
+        #     Required. The name of the `DeliveryPipeline` to delete. The format is
         #     `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}`.
         # @!attribute [rw] request_id
         #   @return [::String]
@@ -652,8 +651,8 @@ module Google
         # The request object for `RollbackTarget`.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The `DeliveryPipeline` for which the rollback `Rollout` should be
-        #     created. Format should be
+        #     Required. The `DeliveryPipeline` for which the rollback `Rollout` must be
+        #     created. The format is
         #     `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}`.
         # @!attribute [rw] target_id
         #   @return [::String]
@@ -1030,8 +1029,8 @@ module Google
         # The request object for `CreateTarget`.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent collection in which the `Target` should be created.
-        #     Format should be
+        #     Required. The parent collection in which the `Target` must be created.
+        #     The format is
         #     `projects/{project_id}/locations/{location_name}`.
         # @!attribute [rw] target_id
         #   @return [::String]
@@ -1066,11 +1065,11 @@ module Google
         # The request object for `UpdateTarget`.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. Field mask is used to specify the fields to be overwritten in the
-        #     Target resource by the update.
-        #     The fields specified in the update_mask are relative to the resource, not
-        #     the full request. A field will be overwritten if it's in the mask. If the
-        #     user doesn't provide a mask then all fields are overwritten.
+        #     Required. Field mask is used to specify the fields to be overwritten by the
+        #     update in the `Target` resource. The fields specified in the update_mask
+        #     are relative to the resource, not the full request. A field will be
+        #     overwritten if it's in the mask. If the user doesn't provide a mask then
+        #     all fields are overwritten.
         # @!attribute [rw] target
         #   @return [::Google::Cloud::Deploy::V1::Target]
         #     Required. The `Target` to update.
@@ -1105,7 +1104,7 @@ module Google
         # The request object for `DeleteTarget`.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The name of the `Target` to delete. Format should be
+        #     Required. The name of the `Target` to delete. The format is
         #     `projects/{project_id}/locations/{location_name}/targets/{target_name}`.
         # @!attribute [rw] request_id
         #   @return [::String]
@@ -1362,9 +1361,8 @@ module Google
         # The request object for `CreateCustomTargetType`.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent collection in which the `CustomTargetType` should be
-        #     created. Format should be
-        #     `projects/{project_id}/locations/{location_name}`.
+        #     Required. The parent collection in which the `CustomTargetType` must be
+        #     created. The format is `projects/{project_id}/locations/{location_name}`.
         # @!attribute [rw] custom_target_type_id
         #   @return [::String]
         #     Required. ID of the `CustomTargetType`.
@@ -1398,11 +1396,11 @@ module Google
         # The request object for `UpdateCustomTargetType`.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. Field mask is used to specify the fields to be overwritten in the
-        #     `CustomTargetType` resource by the update.
-        #     The fields specified in the update_mask are relative to the resource, not
-        #     the full request. A field will be overwritten if it's in the mask. If the
-        #     user doesn't provide a mask then all fields are overwritten.
+        #     Required. Field mask is used to specify the fields to be overwritten by the
+        #     update in the `CustomTargetType` resource. The fields specified in the
+        #     update_mask are relative to the resource, not the full request. A field
+        #     will be overwritten if it's in the mask. If the user doesn't provide a mask
+        #     then all fields are overwritten.
         # @!attribute [rw] custom_target_type
         #   @return [::Google::Cloud::Deploy::V1::CustomTargetType]
         #     Required. The `CustomTargetType` to update.
@@ -1572,8 +1570,8 @@ module Google
             # Unspecified.
             INVOKER_UNSPECIFIED = 0
 
-            # The action is user-driven (e.g. creating a rollout manually via a gcloud
-            # create command).
+            # The action is user-driven. For example, creating a rollout manually via a
+            # gcloud create command.
             USER = 1
 
             # Automated action by Cloud Deploy.
@@ -1583,9 +1581,9 @@ module Google
 
         # Contains information on the resources to select for a deploy policy.
         # Attributes provided must all match the resource in order for policy
-        # restrictions to apply. E.g. if delivery pipelines attributes given are an id
-        # "prod" and labels "foo: bar", a delivery pipeline resource must match both
-        # that id and have that label in order to be subject to the policy.
+        # restrictions to apply. For example, if delivery pipelines attributes given
+        # are an id "prod" and labels "foo: bar", a delivery pipeline resource must
+        # match both that id and have that label in order to be subject to the policy.
         # @!attribute [rw] delivery_pipeline
         #   @return [::Google::Cloud::Deploy::V1::DeliveryPipelineAttribute]
         #     Optional. Contains attributes about a delivery pipeline.
@@ -1602,6 +1600,7 @@ module Google
         #   @return [::String]
         #     ID of the `DeliveryPipeline`. The value of this field could be one of the
         #     following:
+        #
         #     * The last segment of a pipeline name. It only needs the ID to determine
         #     which pipeline is being referred to
         #     * "*", all delivery pipelines in a location.
@@ -1627,6 +1626,7 @@ module Google
         #   @return [::String]
         #     ID of the `Target`. The value of this field could be one of the
         #     following:
+        #
         #     * The last segment of a target name. It only needs the ID to determine
         #     which target is being referred to
         #     * "*", all targets in a location.
@@ -1671,7 +1671,7 @@ module Google
         #     actions will be restricted.
         # @!attribute [rw] time_window
         #   @return [::Google::Cloud::Deploy::V1::TimeWindow]
-        #     Required. Time Window within which actions are restricted.
+        #     Required. Time window within which actions are restricted.
         class RestrictRollout
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1707,7 +1707,7 @@ module Google
           end
         end
 
-        # Time Window within which actions are restricted.
+        # Time window within which actions are restricted.
         # @!attribute [rw] time_zone
         #   @return [::String]
         #     Required. The time zone in IANA format [IANA Time Zone
@@ -2056,9 +2056,8 @@ module Google
         # The request object for `CreateDeployPolicy`.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent collection in which the `DeployPolicy` should be
-        #     created. Format should be
-        #     `projects/{project_id}/locations/{location_name}`.
+        #     Required. The parent collection in which the `DeployPolicy` must be
+        #     created. The format is `projects/{project_id}/locations/{location_name}`.
         # @!attribute [rw] deploy_policy_id
         #   @return [::String]
         #     Required. ID of the `DeployPolicy`.
@@ -2092,11 +2091,11 @@ module Google
         # The request object for `UpdateDeployPolicy`.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. Field mask is used to specify the fields to be overwritten in the
-        #     `DeployPolicy` resource by the update.
-        #     The fields specified in the update_mask are relative to the resource, not
-        #     the full request. A field will be overwritten if it's in the mask. If the
-        #     user doesn't provide a mask then all fields are overwritten.
+        #     Required. Field mask is used to specify the fields to be overwritten by the
+        #     update in the `DeployPolicy` resource. The fields specified in the
+        #     update_mask are relative to the resource, not the full request. A field
+        #     will be overwritten if it's in the mask. If the user doesn't provide a mask
+        #     then all fields are overwritten.
         # @!attribute [rw] deploy_policy
         #   @return [::Google::Cloud::Deploy::V1::DeployPolicy]
         #     Required. The `DeployPolicy` to update.
@@ -2131,7 +2130,7 @@ module Google
         # The request object for `DeleteDeployPolicy`.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The name of the `DeployPolicy` to delete. Format should be
+        #     Required. The name of the `DeployPolicy` to delete. The format is
         #     `projects/{project_id}/locations/{location_name}/deployPolicies/{deploy_policy_name}`.
         # @!attribute [rw] request_id
         #   @return [::String]
@@ -2380,8 +2379,8 @@ module Google
         # The request object for `CreateRelease`,
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent collection in which the `Release` should be created.
-        #     Format should be
+        #     Required. The parent collection in which the `Release` is created.
+        #     The format is
         #     `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}`.
         # @!attribute [rw] release_id
         #   @return [::String]
@@ -2972,8 +2971,8 @@ module Google
         # CreateRolloutRequest is the request object used by `CreateRollout`.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent collection in which the `Rollout` should be created.
-        #     Format should be
+        #     Required. The parent collection in which the `Rollout` must be created.
+        #     The format is
         #     `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}/releases/{release_name}`.
         # @!attribute [rw] rollout_id
         #   @return [::String]
@@ -3716,8 +3715,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # `PromoteRelease` rule will automatically promote a release from the current
-        # target to a specified target.
+        # The `PromoteRelease` rule will automatically promote a release from the
+        # current target to a specified target.
         # @!attribute [rw] id
         #   @return [::String]
         #     Required. ID of the rule. This id must be unique in the `Automation`
@@ -3862,8 +3861,8 @@ module Google
         # The request object for `CreateAutomation`.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent collection in which the `Automation` should be
-        #     created. Format should be
+        #     Required. The parent collection in which the `Automation` must be created.
+        #     The format is
         #     `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}`.
         # @!attribute [rw] automation_id
         #   @return [::String]
@@ -3898,11 +3897,11 @@ module Google
         # The request object for `UpdateAutomation`.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. Field mask is used to specify the fields to be overwritten in the
-        #     `Automation` resource by the update.
-        #     The fields specified in the update_mask are relative to the resource, not
-        #     the full request. A field will be overwritten if it's in the mask. If the
-        #     user doesn't provide a mask then all fields are overwritten.
+        #     Required. Field mask is used to specify the fields to be overwritten by the
+        #     update in the `Automation` resource. The fields specified in the
+        #     update_mask are relative to the resource, not the full request. A field
+        #     will be overwritten if it's in the mask. If the user doesn't provide a mask
+        #     then all fields are overwritten.
         # @!attribute [rw] automation
         #   @return [::Google::Cloud::Deploy::V1::Automation]
         #     Required. The `Automation` to update.
@@ -3937,7 +3936,7 @@ module Google
         # The request object for `DeleteAutomation`.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The name of the `Automation` to delete. Format should be
+        #     Required. The name of the `Automation` to delete. The format is
         #     `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}/automations/{automation_name}`.
         # @!attribute [rw] request_id
         #   @return [::String]
@@ -4120,6 +4119,9 @@ module Google
 
             # The `AutomationRun` is pending.
             PENDING = 5
+
+            # The `AutomationRun` was aborted.
+            ABORTED = 6
           end
         end
 

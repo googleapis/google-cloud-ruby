@@ -567,9 +567,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent collection in which the `DeliveryPipeline` should be
-            #     created. Format should be
-            #     `projects/{project_id}/locations/{location_name}`.
+            #     Required. The parent collection in which the `DeliveryPipeline` must be
+            #     created. The format is `projects/{project_id}/locations/{location_name}`.
             #   @param delivery_pipeline_id [::String]
             #     Required. ID of the `DeliveryPipeline`.
             #   @param delivery_pipeline [::Google::Cloud::Deploy::V1::DeliveryPipeline, ::Hash]
@@ -684,11 +683,11 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required. Field mask is used to specify the fields to be overwritten in the
-            #     `DeliveryPipeline` resource by the update.
-            #     The fields specified in the update_mask are relative to the resource, not
-            #     the full request. A field will be overwritten if it's in the mask. If the
-            #     user doesn't provide a mask then all fields are overwritten.
+            #     Required. Field mask is used to specify the fields to be overwritten by the
+            #     update in the `DeliveryPipeline` resource. The fields specified in the
+            #     update_mask are relative to the resource, not the full request. A field
+            #     will be overwritten if it's in the mask. If the user doesn't provide a mask
+            #     then all fields are overwritten.
             #   @param delivery_pipeline [::Google::Cloud::Deploy::V1::DeliveryPipeline, ::Hash]
             #     Required. The `DeliveryPipeline` to update.
             #   @param request_id [::String]
@@ -804,7 +803,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the `DeliveryPipeline` to delete. Format should be
+            #     Required. The name of the `DeliveryPipeline` to delete. The format is
             #     `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}`.
             #   @param request_id [::String]
             #     Optional. A request ID to identify requests. Specify a unique request ID
@@ -1036,8 +1035,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The `DeliveryPipeline` for which the rollback `Rollout` should be
-            #     created. Format should be
+            #     Required. The `DeliveryPipeline` for which the rollback `Rollout` must be
+            #     created. The format is
             #     `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}`.
             #   @param target_id [::String]
             #     Required. ID of the `Target` that is being rolled back.
@@ -1230,8 +1229,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent collection in which the `Target` should be created.
-            #     Format should be
+            #     Required. The parent collection in which the `Target` must be created.
+            #     The format is
             #     `projects/{project_id}/locations/{location_name}`.
             #   @param target_id [::String]
             #     Required. ID of the `Target`.
@@ -1347,11 +1346,11 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required. Field mask is used to specify the fields to be overwritten in the
-            #     Target resource by the update.
-            #     The fields specified in the update_mask are relative to the resource, not
-            #     the full request. A field will be overwritten if it's in the mask. If the
-            #     user doesn't provide a mask then all fields are overwritten.
+            #     Required. Field mask is used to specify the fields to be overwritten by the
+            #     update in the `Target` resource. The fields specified in the update_mask
+            #     are relative to the resource, not the full request. A field will be
+            #     overwritten if it's in the mask. If the user doesn't provide a mask then
+            #     all fields are overwritten.
             #   @param target [::Google::Cloud::Deploy::V1::Target, ::Hash]
             #     Required. The `Target` to update.
             #   @param request_id [::String]
@@ -1467,7 +1466,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the `Target` to delete. Format should be
+            #     Required. The name of the `Target` to delete. The format is
             #     `projects/{project_id}/locations/{location_name}/targets/{target_name}`.
             #   @param request_id [::String]
             #     Optional. A request ID to identify requests. Specify a unique request ID
@@ -1782,9 +1781,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent collection in which the `CustomTargetType` should be
-            #     created. Format should be
-            #     `projects/{project_id}/locations/{location_name}`.
+            #     Required. The parent collection in which the `CustomTargetType` must be
+            #     created. The format is `projects/{project_id}/locations/{location_name}`.
             #   @param custom_target_type_id [::String]
             #     Required. ID of the `CustomTargetType`.
             #   @param custom_target_type [::Google::Cloud::Deploy::V1::CustomTargetType, ::Hash]
@@ -1899,11 +1897,11 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required. Field mask is used to specify the fields to be overwritten in the
-            #     `CustomTargetType` resource by the update.
-            #     The fields specified in the update_mask are relative to the resource, not
-            #     the full request. A field will be overwritten if it's in the mask. If the
-            #     user doesn't provide a mask then all fields are overwritten.
+            #     Required. Field mask is used to specify the fields to be overwritten by the
+            #     update in the `CustomTargetType` resource. The fields specified in the
+            #     update_mask are relative to the resource, not the full request. A field
+            #     will be overwritten if it's in the mask. If the user doesn't provide a mask
+            #     then all fields are overwritten.
             #   @param custom_target_type [::Google::Cloud::Deploy::V1::CustomTargetType, ::Hash]
             #     Required. The `CustomTargetType` to update.
             #   @param request_id [::String]
@@ -2334,8 +2332,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent collection in which the `Release` should be created.
-            #     Format should be
+            #     Required. The parent collection in which the `Release` is created.
+            #     The format is
             #     `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}`.
             #   @param release_id [::String]
             #     Required. ID of the `Release`.
@@ -2541,9 +2539,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent collection in which the `DeployPolicy` should be
-            #     created. Format should be
-            #     `projects/{project_id}/locations/{location_name}`.
+            #     Required. The parent collection in which the `DeployPolicy` must be
+            #     created. The format is `projects/{project_id}/locations/{location_name}`.
             #   @param deploy_policy_id [::String]
             #     Required. ID of the `DeployPolicy`.
             #   @param deploy_policy [::Google::Cloud::Deploy::V1::DeployPolicy, ::Hash]
@@ -2658,11 +2655,11 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required. Field mask is used to specify the fields to be overwritten in the
-            #     `DeployPolicy` resource by the update.
-            #     The fields specified in the update_mask are relative to the resource, not
-            #     the full request. A field will be overwritten if it's in the mask. If the
-            #     user doesn't provide a mask then all fields are overwritten.
+            #     Required. Field mask is used to specify the fields to be overwritten by the
+            #     update in the `DeployPolicy` resource. The fields specified in the
+            #     update_mask are relative to the resource, not the full request. A field
+            #     will be overwritten if it's in the mask. If the user doesn't provide a mask
+            #     then all fields are overwritten.
             #   @param deploy_policy [::Google::Cloud::Deploy::V1::DeployPolicy, ::Hash]
             #     Required. The `DeployPolicy` to update.
             #   @param request_id [::String]
@@ -2778,7 +2775,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the `DeployPolicy` to delete. Format should be
+            #     Required. The name of the `DeployPolicy` to delete. The format is
             #     `projects/{project_id}/locations/{location_name}/deployPolicies/{deploy_policy_name}`.
             #   @param request_id [::String]
             #     Optional. A request ID to identify requests. Specify a unique request ID
@@ -3561,8 +3558,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent collection in which the `Rollout` should be created.
-            #     Format should be
+            #     Required. The parent collection in which the `Rollout` must be created.
+            #     The format is
             #     `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}/releases/{release_name}`.
             #   @param rollout_id [::String]
             #     Required. ID of the `Rollout`.
@@ -4243,8 +4240,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent collection in which the `Automation` should be
-            #     created. Format should be
+            #     Required. The parent collection in which the `Automation` must be created.
+            #     The format is
             #     `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}`.
             #   @param automation_id [::String]
             #     Required. ID of the `Automation`.
@@ -4360,11 +4357,11 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required. Field mask is used to specify the fields to be overwritten in the
-            #     `Automation` resource by the update.
-            #     The fields specified in the update_mask are relative to the resource, not
-            #     the full request. A field will be overwritten if it's in the mask. If the
-            #     user doesn't provide a mask then all fields are overwritten.
+            #     Required. Field mask is used to specify the fields to be overwritten by the
+            #     update in the `Automation` resource. The fields specified in the
+            #     update_mask are relative to the resource, not the full request. A field
+            #     will be overwritten if it's in the mask. If the user doesn't provide a mask
+            #     then all fields are overwritten.
             #   @param automation [::Google::Cloud::Deploy::V1::Automation, ::Hash]
             #     Required. The `Automation` to update.
             #   @param request_id [::String]
@@ -4480,7 +4477,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the `Automation` to delete. Format should be
+            #     Required. The name of the `Automation` to delete. The format is
             #     `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}/automations/{automation_name}`.
             #   @param request_id [::String]
             #     Optional. A request ID to identify requests. Specify a unique request ID
