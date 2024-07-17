@@ -201,6 +201,16 @@ module Google
                   initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
+                default_config.rpcs.get_space_event.timeout = 30.0
+                default_config.rpcs.get_space_event.retry_policy = {
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                }
+
+                default_config.rpcs.list_space_events.timeout = 30.0
+                default_config.rpcs.list_space_events.retry_policy = {
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                }
+
                 default_config
               end
               yield @configure if block_given?
@@ -3403,6 +3413,280 @@ module Google
             end
 
             ##
+            # Returns an event from a Google Chat space. The [event
+            # payload](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.spaceEvents#SpaceEvent.FIELDS.oneof_payload)
+            # contains the most recent version of the resource that changed. For example,
+            # if you request an event about a new message but the message was later
+            # updated, the server returns the updated `Message` resource in the event
+            # payload.
+            #
+            # Requires [user
+            # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+            # To get an event, the authenticated user must be a member of the space.
+            #
+            # For an example, see [Get details about an
+            # event from a Google Chat
+            # space](https://developers.google.com/workspace/chat/get-space-event).
+            #
+            # @overload get_space_event(request, options = nil)
+            #   Pass arguments to `get_space_event` via a request object, either of type
+            #   {::Google::Apps::Chat::V1::GetSpaceEventRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Apps::Chat::V1::GetSpaceEventRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_space_event(name: nil)
+            #   Pass arguments to `get_space_event` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The resource name of the space event.
+            #
+            #     Format: `spaces/{space}/spaceEvents/{spaceEvent}`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Apps::Chat::V1::SpaceEvent]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Apps::Chat::V1::SpaceEvent]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/apps/chat/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Apps::Chat::V1::ChatService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Apps::Chat::V1::GetSpaceEventRequest.new
+            #
+            #   # Call the get_space_event method.
+            #   result = client.get_space_event request
+            #
+            #   # The returned object is of type Google::Apps::Chat::V1::SpaceEvent.
+            #   p result
+            #
+            def get_space_event request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Apps::Chat::V1::GetSpaceEventRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_space_event.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Apps::Chat::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_space_event.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_space_event.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @chat_service_stub.call_rpc :get_space_event, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists events from a Google Chat space. For each event, the
+            # [payload](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.spaceEvents#SpaceEvent.FIELDS.oneof_payload)
+            # contains the most recent version of the Chat resource. For example, if you
+            # list events about new space members, the server returns `Membership`
+            # resources that contain the latest membership details. If new members were
+            # removed during the requested period, the event payload contains an empty
+            # `Membership` resource.
+            #
+            # Requires [user
+            # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+            # To list events, the authenticated user must be a member of the space.
+            #
+            # For an example, see [List events from a Google Chat
+            # space](https://developers.google.com/workspace/chat/list-space-events).
+            #
+            # @overload list_space_events(request, options = nil)
+            #   Pass arguments to `list_space_events` via a request object, either of type
+            #   {::Google::Apps::Chat::V1::ListSpaceEventsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Apps::Chat::V1::ListSpaceEventsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_space_events(parent: nil, page_size: nil, page_token: nil, filter: nil)
+            #   Pass arguments to `list_space_events` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Resource name of the [Google Chat
+            #     space](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces)
+            #     where the events occurred.
+            #
+            #     Format: `spaces/{space}`.
+            #   @param page_size [::Integer]
+            #     Optional. The maximum number of space events returned. The service might
+            #     return fewer than this value.
+            #
+            #     Negative values return an `INVALID_ARGUMENT` error.
+            #   @param page_token [::String]
+            #     A page token, received from a previous list space events call. Provide this
+            #     to retrieve the subsequent page.
+            #
+            #     When paginating, all other parameters provided to list space events must
+            #     match the call that provided the page token. Passing different values to
+            #     the other parameters might lead to unexpected results.
+            #   @param filter [::String]
+            #     Required. A query filter.
+            #
+            #     You must specify at least one event type (`event_type`)
+            #     using the has `:` operator. To filter by multiple event types, use the `OR`
+            #     operator. Omit batch event types in your filter. The request automatically
+            #     returns any related batch events. For example, if you filter by new
+            #     reactions
+            #     (`google.workspace.chat.reaction.v1.created`), the server also returns
+            #     batch new reactions events
+            #     (`google.workspace.chat.reaction.v1.batchCreated`). For a list of supported
+            #     event types, see the [`SpaceEvents` reference
+            #     documentation](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.spaceEvents#SpaceEvent.FIELDS.event_type).
+            #
+            #     Optionally, you can also filter by start time (`start_time`) and
+            #     end time (`end_time`):
+            #
+            #     * `start_time`: Exclusive timestamp from which to start listing space
+            #     events.
+            #      You can list events that occurred up to 28 days ago. If unspecified, lists
+            #      space events from the past 28 days.
+            #     * `end_time`: Inclusive timestamp until which space events are listed.
+            #      If unspecified, lists events up to the time of the request.
+            #
+            #     To specify a start or end time, use the equals `=` operator and format in
+            #     [RFC-3339](https://www.rfc-editor.org/rfc/rfc3339). To filter by both
+            #     `start_time` and `end_time`, use the `AND` operator.
+            #
+            #     For example, the following queries are valid:
+            #
+            #     ```
+            #     start_time="2023-08-23T19:20:33+00:00" AND
+            #     end_time="2023-08-23T19:21:54+00:00"
+            #     ```
+            #     ```
+            #     start_time="2023-08-23T19:20:33+00:00" AND
+            #     (event_types:"google.workspace.chat.space.v1.updated" OR
+            #     event_types:"google.workspace.chat.message.v1.created")
+            #     ```
+            #
+            #     The following queries are invalid:
+            #
+            #     ```
+            #     start_time="2023-08-23T19:20:33+00:00" OR
+            #     end_time="2023-08-23T19:21:54+00:00"
+            #     ```
+            #     ```
+            #     event_types:"google.workspace.chat.space.v1.updated" AND
+            #     event_types:"google.workspace.chat.message.v1.created"
+            #     ```
+            #
+            #     Invalid queries are rejected by the server with an `INVALID_ARGUMENT`
+            #     error.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Apps::Chat::V1::SpaceEvent>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Apps::Chat::V1::SpaceEvent>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/apps/chat/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Apps::Chat::V1::ChatService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Apps::Chat::V1::ListSpaceEventsRequest.new
+            #
+            #   # Call the list_space_events method.
+            #   result = client.list_space_events request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Apps::Chat::V1::SpaceEvent.
+            #     p item
+            #   end
+            #
+            def list_space_events request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Apps::Chat::V1::ListSpaceEventsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_space_events.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Apps::Chat::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_space_events.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_space_events.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @chat_service_stub.call_rpc :list_space_events, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @chat_service_stub, :list_space_events, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the ChatService API.
             #
             # This class represents the configuration for ChatService,
@@ -3685,6 +3969,16 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_thread_read_state
+                ##
+                # RPC-specific configuration for `get_space_event`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_space_event
+                ##
+                # RPC-specific configuration for `list_space_events`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_space_events
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -3740,6 +4034,10 @@ module Google
                   @update_space_read_state = ::Gapic::Config::Method.new update_space_read_state_config
                   get_thread_read_state_config = parent_rpcs.get_thread_read_state if parent_rpcs.respond_to? :get_thread_read_state
                   @get_thread_read_state = ::Gapic::Config::Method.new get_thread_read_state_config
+                  get_space_event_config = parent_rpcs.get_space_event if parent_rpcs.respond_to? :get_space_event
+                  @get_space_event = ::Gapic::Config::Method.new get_space_event_config
+                  list_space_events_config = parent_rpcs.list_space_events if parent_rpcs.respond_to? :list_space_events
+                  @list_space_events = ::Gapic::Config::Method.new list_space_events_config
 
                   yield self if block_given?
                 end

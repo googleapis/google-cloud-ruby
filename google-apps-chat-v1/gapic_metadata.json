@@ -139,6 +139,16 @@
               "methods": [
                 "get_thread_read_state"
               ]
+            },
+            "GetSpaceEvent": {
+              "methods": [
+                "get_space_event"
+              ]
+            },
+            "ListSpaceEvents": {
+              "methods": [
+                "list_space_events"
+              ]
             }
           }
         }
