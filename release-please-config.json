@@ -1551,6 +1551,10 @@
       "component": "google-cloud-vision-v1p4beta1",
       "version_file": "lib/google/cloud/vision/v1p4beta1/version.rb"
     },
+    "google-cloud-vision_ai-v1": {
+      "component": "google-cloud-vision_ai-v1",
+      "version_file": "lib/google/cloud/vision_ai/v1/version.rb"
+    },
     "google-cloud-vm_migration": {
       "component": "google-cloud-vm_migration",
       "version_file": "lib/google/cloud/vm_migration/version.rb"
