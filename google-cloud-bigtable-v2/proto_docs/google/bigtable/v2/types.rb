@@ -123,12 +123,23 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
             # Rules used to convert to/from lower level types.
+            # @!attribute [rw] utf8_raw
+            #   @deprecated This field is deprecated and may be removed in the next major version update.
+            #   @return [::Google::Cloud::Bigtable::V2::Type::String::Encoding::Utf8Raw]
+            #     Deprecated: if set, converts to an empty `utf8_bytes`.
             # @!attribute [rw] utf8_bytes
             #   @return [::Google::Cloud::Bigtable::V2::Type::String::Encoding::Utf8Bytes]
             #     Use `Utf8Bytes` encoding.
             class Encoding
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Deprecated: prefer the equivalent `Utf8Bytes`.
+              # @deprecated This message is deprecated and may be removed in the next major version update.
+              class Utf8Raw
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
 
               # UTF-8 encoding
               # * Order-preserving? Yes (code point order)
