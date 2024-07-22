@@ -1,5 +1,13 @@
 # Changelog
 
+### 0.9.0 (2024-07-22)
+
+#### Features
+
+* Support for Cluster autoscaling settings 
+* Support for the ACTIVATING state of the HCX Cloud Manager appliance 
+* Support for TLS, SSL, and RELP protocols for the logging server 
+
 ### 0.8.0 (2024-02-26)
 
 #### Features
