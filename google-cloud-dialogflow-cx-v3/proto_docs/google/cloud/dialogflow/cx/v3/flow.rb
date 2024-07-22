@@ -152,9 +152,37 @@ module Google
           # @!attribute [rw] knowledge_connector_settings
           #   @return [::Google::Cloud::Dialogflow::CX::V3::KnowledgeConnectorSettings]
           #     Optional. Knowledge connector configuration.
+          # @!attribute [rw] multi_language_settings
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::Flow::MultiLanguageSettings]
+          #     Optional. Multi-lingual agent settings for this flow.
+          # @!attribute [rw] locked
+          #   @return [::Boolean]
+          #     Indicates whether the flow is locked for changes. If the flow is locked,
+          #     modifications to the flow will be rejected.
           class Flow
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Settings for multi-lingual agents.
+            # @!attribute [rw] enable_multi_language_detection
+            #   @return [::Boolean]
+            #     Optional. Enable multi-language detection for this flow. This can be set
+            #     only if [agent level multi language
+            #     setting][Agent.enable_multi_language_training] is enabled.
+            # @!attribute [rw] supported_response_language_codes
+            #   @return [::Array<::String>]
+            #     Optional. Agent will respond in the detected language if the detected
+            #     language code is in the supported resolved languages for this flow. This
+            #     will be used only if multi-language training is enabled in the
+            #     {::Google::Cloud::Dialogflow::CX::V3::Agent#enable_multi_language_training agent}
+            #     and multi-language detection is enabled in the
+            #     {::Google::Cloud::Dialogflow::CX::V3::Flow::MultiLanguageSettings#enable_multi_language_detection flow}.
+            #     The supported languages must be a subset of the languages supported by
+            #     the agent.
+            class MultiLanguageSettings
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
 
           # The request message for

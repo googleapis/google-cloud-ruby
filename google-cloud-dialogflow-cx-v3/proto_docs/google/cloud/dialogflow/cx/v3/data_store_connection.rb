@@ -38,6 +38,205 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Data store connection feature output signals.
+          # Might be only partially field if processing stop before the final answer.
+          # Reasons for this can be, but are not limited to: empty UCS search results,
+          # positive RAI check outcome, grounding failure, ...
+          # @!attribute [rw] rewriter_model_call_signals
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::DataStoreConnectionSignals::RewriterModelCallSignals]
+          #     Optional. Diagnostic info related to the rewriter model call.
+          # @!attribute [rw] rewritten_query
+          #   @return [::String]
+          #     Optional. Rewritten string query used for search.
+          # @!attribute [rw] search_snippets
+          #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::DataStoreConnectionSignals::SearchSnippet>]
+          #     Optional. Search snippets included in the answer generation prompt.
+          # @!attribute [rw] answer_generation_model_call_signals
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::DataStoreConnectionSignals::AnswerGenerationModelCallSignals]
+          #     Optional. Diagnostic info related to the answer generation model call.
+          # @!attribute [rw] answer
+          #   @return [::String]
+          #     Optional. The final compiled answer.
+          # @!attribute [rw] answer_parts
+          #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::DataStoreConnectionSignals::AnswerPart>]
+          #     Optional. Answer parts with relevant citations.
+          #     Concatenation of texts should add up the `answer` (not counting
+          #     whitespaces).
+          # @!attribute [rw] cited_snippets
+          #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::DataStoreConnectionSignals::CitedSnippet>]
+          #     Optional. Snippets cited by the answer generation model from the most to
+          #     least relevant.
+          # @!attribute [rw] grounding_signals
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::DataStoreConnectionSignals::GroundingSignals]
+          #     Optional. Grounding signals.
+          # @!attribute [rw] safety_signals
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::DataStoreConnectionSignals::SafetySignals]
+          #     Optional. Safety check result.
+          class DataStoreConnectionSignals
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Diagnostic info related to the rewriter model call.
+            # @!attribute [rw] rendered_prompt
+            #   @return [::String]
+            #     Prompt as sent to the model.
+            # @!attribute [rw] model_output
+            #   @return [::String]
+            #     Output of the generative model.
+            # @!attribute [rw] model
+            #   @return [::String]
+            #     Name of the generative model. For example, "gemini-ultra", "gemini-pro",
+            #     "gemini-1.5-flash" etc. Defaults to "Other" if the model is unknown.
+            class RewriterModelCallSignals
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Search snippet details.
+            # @!attribute [rw] document_title
+            #   @return [::String]
+            #     Title of the enclosing document.
+            # @!attribute [rw] document_uri
+            #   @return [::String]
+            #     Uri for the document. Present if specified for the document.
+            # @!attribute [rw] text
+            #   @return [::String]
+            #     Text included in the prompt.
+            class SearchSnippet
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Diagnostic info related to the answer generation model call.
+            # @!attribute [rw] rendered_prompt
+            #   @return [::String]
+            #     Prompt as sent to the model.
+            # @!attribute [rw] model_output
+            #   @return [::String]
+            #     Output of the generative model.
+            # @!attribute [rw] model
+            #   @return [::String]
+            #     Name of the generative model. For example, "gemini-ultra", "gemini-pro",
+            #     "gemini-1.5-flash" etc. Defaults to "Other" if the model is unknown.
+            class AnswerGenerationModelCallSignals
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Answer part with citation.
+            # @!attribute [rw] text
+            #   @return [::String]
+            #     Substring of the answer.
+            # @!attribute [rw] supporting_indices
+            #   @return [::Array<::Integer>]
+            #     Citations for this answer part. Indices of `search_snippets`.
+            class AnswerPart
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Snippet cited by the answer generation model.
+            # @!attribute [rw] search_snippet
+            #   @return [::Google::Cloud::Dialogflow::CX::V3::DataStoreConnectionSignals::SearchSnippet]
+            #     Details of the snippet.
+            # @!attribute [rw] snippet_index
+            #   @return [::Integer]
+            #     Index of the snippet in `search_snippets` field.
+            class CitedSnippet
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Grounding signals.
+            # @!attribute [rw] decision
+            #   @return [::Google::Cloud::Dialogflow::CX::V3::DataStoreConnectionSignals::GroundingSignals::GroundingDecision]
+            #     Represents the decision of the grounding check.
+            # @!attribute [rw] score
+            #   @return [::Google::Cloud::Dialogflow::CX::V3::DataStoreConnectionSignals::GroundingSignals::GroundingScoreBucket]
+            #     Grounding score bucket setting.
+            class GroundingSignals
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Represents the decision of the grounding check.
+              module GroundingDecision
+                # Decision not specified.
+                GROUNDING_DECISION_UNSPECIFIED = 0
+
+                # Grounding have accepted the answer.
+                ACCEPTED_BY_GROUNDING = 1
+
+                # Grounding have rejected the answer.
+                REJECTED_BY_GROUNDING = 2
+              end
+
+              # Grounding score buckets.
+              module GroundingScoreBucket
+                # Score not specified.
+                GROUNDING_SCORE_BUCKET_UNSPECIFIED = 0
+
+                # We have very low confidence that the answer is grounded.
+                VERY_LOW = 1
+
+                # We have low confidence that the answer is grounded.
+                LOW = 3
+
+                # We have medium confidence that the answer is grounded.
+                MEDIUM = 4
+
+                # We have high confidence that the answer is grounded.
+                HIGH = 5
+
+                # We have very high confidence that the answer is grounded.
+                VERY_HIGH = 6
+              end
+            end
+
+            # Safety check results.
+            # @!attribute [rw] decision
+            #   @return [::Google::Cloud::Dialogflow::CX::V3::DataStoreConnectionSignals::SafetySignals::SafetyDecision]
+            #     Safety decision.
+            # @!attribute [rw] banned_phrase_match
+            #   @return [::Google::Cloud::Dialogflow::CX::V3::DataStoreConnectionSignals::SafetySignals::BannedPhraseMatch]
+            #     Specifies banned phrase match subject.
+            # @!attribute [rw] matched_banned_phrase
+            #   @return [::String]
+            #     The matched banned phrase if there was a match.
+            class SafetySignals
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Safety decision.
+              # All kinds of check are incorporated into this final decision, including
+              # banned phrases check.
+              module SafetyDecision
+                # Decision not specified.
+                SAFETY_DECISION_UNSPECIFIED = 0
+
+                # No manual or automatic safety check fired.
+                ACCEPTED_BY_SAFETY_CHECK = 1
+
+                # One ore more safety checks fired.
+                REJECTED_BY_SAFETY_CHECK = 2
+              end
+
+              # Specifies banned phrase match subject.
+              module BannedPhraseMatch
+                # No banned phrase check was executed.
+                BANNED_PHRASE_MATCH_UNSPECIFIED = 0
+
+                # All banned phrase checks led to no match.
+                BANNED_PHRASE_MATCH_NONE = 1
+
+                # A banned phrase matched the query.
+                BANNED_PHRASE_MATCH_QUERY = 2
+
+                # A banned phrase matched the response.
+                BANNED_PHRASE_MATCH_RESPONSE = 3
+              end
+            end
+          end
+
           # Type of a data store.
           # Determines how search is performed in the data store.
           module DataStoreType

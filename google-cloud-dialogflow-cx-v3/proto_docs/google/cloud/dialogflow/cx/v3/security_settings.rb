@@ -174,6 +174,9 @@ module Google
           #     for Agent Assist traffic), higher value will be ignored and use default.
           #     Setting a value higher than that has no effect. A missing value or
           #     setting to 0 also means we use default TTL.
+          #     When data retention configuration is changed, it only applies to the data
+          #     created after the change; the TTL of existing data created before the
+          #     change stays intact.
           # @!attribute [rw] retention_strategy
           #   @return [::Google::Cloud::Dialogflow::CX::V3::SecuritySettings::RetentionStrategy]
           #     Specifies the retention behavior defined by
@@ -227,10 +230,16 @@ module Google
             # @!attribute [rw] enable_audio_redaction
             #   @return [::Boolean]
             #     Enable audio redaction if it is true.
+            #     Note that this only redacts end-user audio data;
+            #     Synthesised audio from the virtual agent is not redacted.
             # @!attribute [rw] audio_format
             #   @return [::Google::Cloud::Dialogflow::CX::V3::SecuritySettings::AudioExportSettings::AudioFormat]
             #     File format for exported audio file. Currently only in telephony
             #     recordings.
+            # @!attribute [rw] store_tts_audio
+            #   @return [::Boolean]
+            #     Whether to store TTS audio. By default, TTS audio from the virtual agent
+            #     is not exported.
             class AudioExportSettings
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
