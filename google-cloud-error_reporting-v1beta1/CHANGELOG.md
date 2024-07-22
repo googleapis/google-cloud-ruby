@@ -1,5 +1,14 @@
 # Release History
 
+### 0.11.0 (2024-07-22)
+
+#### Features
+
+* Support for including location in project_name parameters ([#26465](https://github.com/googleapis/google-cloud-ruby/issues/26465)) 
+#### Documentation
+
+* Various improvements and clarifications to reference documentation 
+
 ### 0.10.0 (2024-02-26)
 
 #### Features
