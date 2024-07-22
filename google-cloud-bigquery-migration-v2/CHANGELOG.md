@@ -1,5 +1,16 @@
 # Changelog
 
+### 0.11.0 (2024-07-22)
+
+#### Features
+
+* Support for DB2, SQLite, and Greenplum dialects 
+* Support for metrics and results for MigrationTask 
+* Support for MigrationTask details for unified SQL Translation 
+* Support for REST transport ([#26457](https://github.com/googleapis/google-cloud-ruby/issues/26457)) 
+* Support for SourceEnv#metadata_store_dataset 
+* Support for TranslationConfigDetails#target_types 
+
 ### 0.10.0 (2024-02-26)
 
 #### Features
