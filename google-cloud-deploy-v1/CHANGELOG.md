@@ -1,5 +1,16 @@
 # Changelog
 
+### 1.1.0 (2024-07-22)
+
+#### Features
+
+* AutomationRun resources now contain information about which policies prevented the run from proceeding 
+* Include protobuf notification event types for custom target type failure, deploy policy evaluation, and pub/sub failure 
+* Support for a proxy URL in a GKE cluster 
+* Support for operations on DeployPolicy resources ([#26461](https://github.com/googleapis/google-cloud-ruby/issues/26461)) 
+* Support for overriding deploy policies in several calls 
+* Support for the ABORTED AutomationRun state 
+
 ### 1.0.0 (2024-07-10)
 
 #### Features
