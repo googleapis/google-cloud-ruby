@@ -3,7 +3,7 @@
 source "https://rubygems.org"
 
 gem "google-cloud-bigtable", path: "../../"
-gem "grpc", "~> 1.62"
-gem "grpc-tools", "~> 1.62"
-gem "googleapis-common-protos", "~> 1.5"
-gem "googleapis-common-protos-types", "~> 1.14"
+gem "grpc", "~> 1.65"
+gem "grpc-tools", "~> 1.65"
+gem "googleapis-common-protos", "~> 1.6"
+gem "googleapis-common-protos-types", "~> 1.15"
