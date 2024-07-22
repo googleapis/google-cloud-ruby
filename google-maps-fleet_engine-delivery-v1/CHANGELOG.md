@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.2.1 (2024-07-22)
+
+#### Documentation
+
+* clarify behavior of UpdateDeliveryVehicle ([#26446](https://github.com/googleapis/google-cloud-ruby/issues/26446)) 
+
 ### 0.2.0 (2024-05-16)
 
 ### ⚠ BREAKING CHANGES
