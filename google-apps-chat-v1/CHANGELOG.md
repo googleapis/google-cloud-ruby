@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.3.0 (2024-07-22)
+
+#### Features
+
+* Support for getting and listing SpaceEvent resources ([#26453](https://github.com/googleapis/google-cloud-ruby/issues/26453)) 
+
 ### 0.2.0 (2024-07-08)
 
 #### Features
