@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.1.0 (2024-07-22)
+
+#### Features
+
+* Add a new field `tee_attestation` to `VerifyAttestationRequest` message proto for SEV SNP and TDX attestations ([#26440](https://github.com/googleapis/google-cloud-ruby/issues/26440)) 
+
 ### 1.0.0 (2024-07-10)
 
 #### Features
