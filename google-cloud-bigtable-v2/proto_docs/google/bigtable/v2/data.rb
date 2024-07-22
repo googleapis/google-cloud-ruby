@@ -524,6 +524,9 @@ module Google
         # @!attribute [rw] add_to_cell
         #   @return [::Google::Cloud::Bigtable::V2::Mutation::AddToCell]
         #     Incrementally updates an `Aggregate` cell.
+        # @!attribute [rw] merge_to_cell
+        #   @return [::Google::Cloud::Bigtable::V2::Mutation::MergeToCell]
+        #     Merges accumulated state to an `Aggregate` cell.
         # @!attribute [rw] delete_from_column
         #   @return [::Google::Cloud::Bigtable::V2::Mutation::DeleteFromColumn]
         #     Deletes cells from a column.
@@ -580,6 +583,31 @@ module Google
           #     The input value to be accumulated into the specified cell. This must be
           #     compatible with the family's `value_type.input_type`.
           class AddToCell
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # A Mutation which merges accumulated state into a cell in an `Aggregate`
+          # family.
+          # @!attribute [rw] family_name
+          #   @return [::String]
+          #     The name of the `Aggregate` family into which new data should be added.
+          #     This must be a family with a `value_type` of `Aggregate`.
+          #     Format: `[-_.a-zA-Z0-9]+`
+          # @!attribute [rw] column_qualifier
+          #   @return [::Google::Cloud::Bigtable::V2::Value]
+          #     The qualifier of the column into which new data should be added. This
+          #     must be a `raw_value`.
+          # @!attribute [rw] timestamp
+          #   @return [::Google::Cloud::Bigtable::V2::Value]
+          #     The timestamp of the cell to which new data should be added. This must
+          #     be a `raw_timestamp_micros` that matches the table's `granularity`.
+          # @!attribute [rw] input
+          #   @return [::Google::Cloud::Bigtable::V2::Value]
+          #     The input value to be merged into the specified cell. This must be
+          #     compatible with the family's `value_type.state_type`. Merging `NULL` is
+          #     allowed, but has no effect.
+          class MergeToCell
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
