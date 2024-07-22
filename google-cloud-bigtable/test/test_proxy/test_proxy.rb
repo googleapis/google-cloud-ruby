@@ -1,5 +1,5 @@
 # Generated protos live here
-$LOAD_PATH << File.join(__dir__, "lib")
+$LOAD_PATH << File.join(__dir__, "proto")
 
 require "grpc"
 require "google/cloud/bigtable"
@@ -88,8 +88,10 @@ class TestProxyServer < tp::CloudBigtableV2TestProxy::Service
     attr_accessor :instance_id
     attr_accessor :app_profile_id
 
-    def initialize client_id:, data_target:, project_id:, instance_id:, app_profile_id:, per_operation_timeout:,
-                   optional_feature_config:
+    def initialize client_id:, data_target:, project_id:, instance_id:,
+                   app_profile_id: nil,
+                   per_operation_timeout: nil,
+                   optional_feature_config: :OPTIONAL_FEATURE_CONFIG_DEFAULT
 
       LOGGER.debug "Building client #{client_id}"
 

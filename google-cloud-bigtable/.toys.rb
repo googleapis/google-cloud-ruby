@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-toys_version! ">= 0.15.3"
+toys_version! ">= 0.15.6"
 
 if ENV["RUBY_COMMON_TOOLS"]
   common_tools_dir = File.expand_path ENV["RUBY_COMMON_TOOLS"]
@@ -23,4 +23,51 @@ else
   load_git remote: "https://github.com/googleapis/ruby-common-tools.git",
            path: "toys/gapic",
            update: true
+end
+
+tool "conformance" do
+  tool "gen-protos" do
+    include :exec, e: true
+    include :gems
+    include :git_cache
+
+    def run
+      setup
+      generate_conformance
+      generate_test_proxy
+    end
+
+    def setup
+      gem "grpc-tools", "~> 1.65"
+      @googleapis_dir = git_cache.get "https://github.com/googleapis/googleapis.git", update: true
+      Dir.chdir context_directory
+    end
+
+    def generate_conformance
+      Dir.chdir "conformance/v2/proto" do
+        cmd = [
+          "grpc_tools_ruby_protoc",
+          "--ruby_out", ".",
+          "-I", ".",
+          "-I", @googleapis_dir,
+          "google/cloud/conformance/bigtable/v2/tests.proto"
+        ]
+        exec cmd
+      end
+    end
+
+    def generate_test_proxy
+      Dir.chdir "test/test_proxy/proto" do
+        cmd = [
+          "grpc_tools_ruby_protoc",
+          "--ruby_out", ".",
+          "--grpc_out", ".",
+          "-I", ".",
+          "-I", @googleapis_dir,
+          "google/bigtable/testproxy/test_proxy.proto"
+        ]
+        exec cmd
+      end
+    end
+  end
 end
