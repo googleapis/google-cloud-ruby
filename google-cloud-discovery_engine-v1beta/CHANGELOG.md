@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.13.0 (2024-07-22)
+
+#### Features
+
+* Support for chunked responses 
+* Support for EvaluationService calls 
+* Support for SampleQueryService calls 
+* Support for SampleQuerySetService calls 
+
 ### 0.12.0 (2024-05-29)
 
 #### Features
