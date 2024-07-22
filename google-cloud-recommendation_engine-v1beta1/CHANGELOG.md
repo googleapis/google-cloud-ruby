@@ -1,5 +1,11 @@
 # Release History
 
+### 0.9.1 (2024-07-22)
+
+#### Documentation
+
+* Update product links 
+
 ### 0.9.0 (2024-02-26)
 
 #### Features
