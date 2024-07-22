@@ -1,5 +1,13 @@
 # Changelog
 
+### 1.1.0 (2024-07-22)
+
+#### Features
+
+* Support for Channel#retention_config and Channel#static_overlays 
+* Support for Manifest#key 
+* Support for operations on Clip resources ([#26448](https://github.com/googleapis/google-cloud-ruby/issues/26448)) 
+
 ### 1.0.0 (2024-07-10)
 
 #### Features
