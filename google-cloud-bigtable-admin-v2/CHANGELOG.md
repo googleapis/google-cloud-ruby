@@ -1,5 +1,14 @@
 # Release History
 
+### 1.1.0 (2024-07-23)
+
+#### Features
+
+* Add min, max, hll aggregators and more types ([#26490](https://github.com/googleapis/google-cloud-ruby/issues/26490)) 
+#### Documentation
+
+* Correct various documentation types 
+
 ### 1.0.0 (2024-07-08)
 
 #### Features
