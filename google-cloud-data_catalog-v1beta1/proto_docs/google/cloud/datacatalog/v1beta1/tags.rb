@@ -29,7 +29,7 @@ module Google
         # on the permissions needed to create or view tags.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The resource name of the tag in URL format. Example:
+        #     Identifier. The resource name of the tag in URL format. Example:
         #
         #     * projects/\\{project_id}/locations/\\{location}/entrygroups/\\{entry_group_id}/entries/\\{entry_id}/tags/\\{tag_id}
         #
@@ -127,7 +127,7 @@ module Google
         # which includes permission to use the tag template to tag resources.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The resource name of the tag template in URL format. Example:
+        #     Identifier. The resource name of the tag template in URL format. Example:
         #
         #     * projects/\\{project_id}/locations/\\{location}/tagTemplates/\\{tag_template_id}
         #
@@ -146,6 +146,9 @@ module Google
         #     letters (both uppercase and lowercase), numbers (0-9) and underscores (_).
         #     Field IDs must be at least 1 character long and at most
         #     64 characters long. Field IDs must start with a letter or underscore.
+        # @!attribute [r] dataplex_transfer_status
+        #   @return [::Google::Cloud::DataCatalog::V1beta1::TagTemplate::DataplexTransferStatus]
+        #     Output only. Transfer status of the TagTemplate
         class TagTemplate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -158,13 +161,24 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+
+          # This enum describes TagTemplate transfer status to Dataplex service.
+          module DataplexTransferStatus
+            # Default value. TagTemplate and its tags are only visible and editable in
+            # DataCatalog.
+            DATAPLEX_TRANSFER_STATUS_UNSPECIFIED = 0
+
+            # TagTemplate and its tags are auto-copied to Dataplex service.
+            # Visible in both services. Editable in DataCatalog, read-only in Dataplex.
+            MIGRATED = 1
+          end
         end
 
         # The template for an individual field within a tag template.
         # @!attribute [r] name
         #   @return [::String]
-        #     Output only. The resource name of the tag template field in URL format.
-        #     Example:
+        #     Output only. Identifier. The resource name of the tag template field in URL
+        #     format. Example:
         #
         #     * projects/\\{project_id}/locations/\\{location}/tagTemplates/\\{tag_template}/fields/\\{field}
         #

@@ -380,8 +380,8 @@ module Google
         # {::Google::Cloud::DataCatalog::V1beta1::Tag Tag}.
         # @!attribute [r] name
         #   @return [::String]
-        #     Output only. The Data Catalog resource name of the entry in URL format.
-        #     Example:
+        #     Output only. Identifier. The Data Catalog resource name of the entry in URL
+        #     format. Example:
         #
         #     * projects/\\{project_id}/locations/\\{location}/entryGroups/\\{entry_group_id}/entries/\\{entry_id}
         #
@@ -472,7 +472,7 @@ module Google
         # Data Catalog {::Google::Cloud::DataCatalog::V1beta1::Entry Entry} resources.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The resource name of the entry group in URL format. Example:
+        #     Identifier. The resource name of the entry group in URL format. Example:
         #
         #     * projects/\\{project_id}/locations/\\{location}/entryGroups/\\{entry_group_id}
         #
