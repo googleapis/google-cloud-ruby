@@ -88,6 +88,17 @@ module Google
             #          -out example.com.crt \
             #          -extfile <(printf "\nsubjectAltName='DNS:www.example.com'")
             #     ```
+            # @!attribute [rw] oauth_config
+            #   @return [::Google::Cloud::Dialogflow::CX::V3::Webhook::GenericWebService::OAuthConfig]
+            #     Optional. The OAuth configuration of the webhook. If specified,
+            #     Dialogflow will initiate the OAuth client credential flow to exchange an
+            #     access token from the 3rd party platform and put it in the auth header.
+            # @!attribute [rw] service_agent_auth
+            #   @return [::Google::Cloud::Dialogflow::CX::V3::Webhook::GenericWebService::ServiceAgentAuth]
+            #     Optional. Indicate the auth token type generated from the [Diglogflow
+            #     service
+            #     agent](https://cloud.google.com/iam/docs/service-agents#dialogflow-service-agent).
+            #     The generated token is sent in the Authorization header.
             # @!attribute [rw] webhook_type
             #   @return [::Google::Cloud::Dialogflow::CX::V3::Webhook::GenericWebService::WebhookType]
             #     Optional. Type of the webhook.
@@ -109,6 +120,26 @@ module Google
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
 
+              # Represents configuration of OAuth client credential flow for 3rd party
+              # API authentication.
+              # @!attribute [rw] client_id
+              #   @return [::String]
+              #     Required. The client ID provided by the 3rd party platform.
+              # @!attribute [rw] client_secret
+              #   @return [::String]
+              #     Required. The client secret provided by the 3rd party platform.
+              # @!attribute [rw] token_endpoint
+              #   @return [::String]
+              #     Required. The token endpoint provided by the 3rd party platform to
+              #     exchange an access token.
+              # @!attribute [rw] scopes
+              #   @return [::Array<::String>]
+              #     Optional. The OAuth scopes to grant.
+              class OAuthConfig
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
               # @!attribute [rw] key
               #   @return [::String]
               # @!attribute [rw] value
@@ -125,6 +156,30 @@ module Google
               class ParameterMappingEntry
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
+              # Indicate the auth token type generated from the [Diglogflow service
+              # agent](https://cloud.google.com/iam/docs/service-agents#dialogflow-service-agent).
+              module ServiceAgentAuth
+                # Service agent auth type unspecified. Default to ID_TOKEN.
+                SERVICE_AGENT_AUTH_UNSPECIFIED = 0
+
+                # No token used.
+                NONE = 1
+
+                # Use [ID
+                # token](https://cloud.google.com/docs/authentication/token-types#id)
+                # generated from service agent. This can be used to access Cloud Function
+                # and Cloud Run after you grant Invoker role to
+                # `service-<PROJECT-NUMBER>@gcp-sa-dialogflow.iam.gserviceaccount.com`.
+                ID_TOKEN = 2
+
+                # Use [access
+                # token](https://cloud.google.com/docs/authentication/token-types#access)
+                # generated from service agent. This can be used to access other Google
+                # Cloud APIs after you grant required roles to
+                # `service-<PROJECT-NUMBER>@gcp-sa-dialogflow.iam.gserviceaccount.com`.
+                ACCESS_TOKEN = 3
               end
 
               # Represents the type of webhook configuration.
@@ -346,6 +401,9 @@ module Google
           #   @return [::Google::Cloud::Dialogflow::CX::V3::WebhookRequest::SentimentAnalysisResult]
           #     The sentiment analysis result of the current user request. The field is
           #     filled when sentiment analysis is configured to be enabled for the request.
+          # @!attribute [rw] language_info
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::LanguageInfo]
+          #     Information about the language of the request.
           class WebhookRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -624,6 +682,23 @@ module Google
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
+          end
+
+          # Represents the language information of the request.
+          # @!attribute [rw] input_language_code
+          #   @return [::String]
+          #     The language code specified in the original
+          #     {::Google::Cloud::Dialogflow::CX::V3::QueryInput#language_code request}.
+          # @!attribute [rw] resolved_language_code
+          #   @return [::String]
+          #     The language code detected for this request based on the user
+          #     conversation.
+          # @!attribute [rw] confidence_score
+          #   @return [::Float]
+          #     The confidence score of the detected language between 0 and 1.
+          class LanguageInfo
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
       end

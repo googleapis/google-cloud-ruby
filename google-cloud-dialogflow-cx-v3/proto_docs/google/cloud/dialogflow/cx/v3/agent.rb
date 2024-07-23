@@ -92,8 +92,7 @@ module Google
           #     Immutable. Name of the start flow in this agent. A start flow will be
           #     automatically created when the agent is created, and can only be deleted by
           #     deleting the agent. Format: `projects/<Project ID>/locations/<Location
-          #     ID>/agents/<Agent ID>/flows/<Flow ID>`. Currently only the default start
-          #     flow with id "00000000-0000-0000-0000-000000000000" is allowed.
+          #     ID>/agents/<Agent ID>/flows/<Flow ID>`.
           # @!attribute [rw] security_settings
           #   @return [::String]
           #     Name of the
@@ -111,6 +110,10 @@ module Google
           #   @return [::Boolean]
           #     Indicates if automatic spell correction is enabled in detect intent
           #     requests.
+          # @!attribute [rw] enable_multi_language_training
+          #   @return [::Boolean]
+          #     Optional. Enable training multi-lingual models for this agent. These models
+          #     will be trained on all the languages supported by the agent.
           # @!attribute [rw] locked
           #   @return [::Boolean]
           #     Indicates whether the agent is locked for changes. If the agent is locked,
@@ -132,6 +135,9 @@ module Google
           # @!attribute [rw] answer_feedback_settings
           #   @return [::Google::Cloud::Dialogflow::CX::V3::Agent::AnswerFeedbackSettings]
           #     Optional. Answer feedback collection settings.
+          # @!attribute [rw] personalization_settings
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::Agent::PersonalizationSettings]
+          #     Optional. Settings for end user personalization.
           class Agent
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -186,6 +192,22 @@ module Google
             #     Dialogflow responses. Feature works only if interaction logging is
             #     enabled in the Dialogflow agent.
             class AnswerFeedbackSettings
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Settings for end user personalization.
+            # @!attribute [rw] default_end_user_metadata
+            #   @return [::Google::Protobuf::Struct]
+            #     Optional. Default end user metadata, used when processing DetectIntent
+            #     requests. Recommended to be filled as a template instead of hard-coded
+            #     value, for example { "age": "$session.params.age" }. The data will be
+            #     merged with the
+            #     {::Google::Cloud::Dialogflow::CX::V3::QueryParameters#end_user_metadata QueryParameters.end_user_metadata}
+            #     in
+            #     {::Google::Cloud::Dialogflow::CX::V3::DetectIntentRequest#query_params DetectIntentRequest.query_params}
+            #     during query processing.
+            class PersonalizationSettings
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end

@@ -603,6 +603,12 @@ module Google
           # @!attribute [rw] search_config
           #   @return [::Google::Cloud::Dialogflow::CX::V3::SearchConfig]
           #     Optional. Search configuration for UCS search queries.
+          # @!attribute [rw] populate_data_store_connection_signals
+          #   @return [::Boolean]
+          #     Optional. If set to true and data stores are involved in serving the
+          #     request then
+          #     DetectIntentResponse.query_result.data_store_connection_signals
+          #     will be filled with data that can help evaluations.
           class QueryParameters
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -894,6 +900,12 @@ module Google
           #   @return [::Boolean]
           #     Indicates whether the Thumbs up/Thumbs down rating controls are need to be
           #     shown for the response in the Dialogflow Messenger widget.
+          # @!attribute [rw] data_store_connection_signals
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::DataStoreConnectionSignals]
+          #     Optional. Data store connection feature output signals.
+          #     Filled only when data stores are involved in serving the query and
+          #     DetectIntentRequest.populate data_store_connection_quality_signals is set
+          #     to true in the request.
           class QueryResult
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1033,6 +1045,12 @@ module Google
 
               # The query directly triggered an event.
               EVENT = 6
+
+              # The query was matched to a Knowledge Connector answer.
+              KNOWLEDGE_CONNECTOR = 8
+
+              # The query was handled by a [`Playbook`][Playbook].
+              PLAYBOOK = 9
             end
           end
 

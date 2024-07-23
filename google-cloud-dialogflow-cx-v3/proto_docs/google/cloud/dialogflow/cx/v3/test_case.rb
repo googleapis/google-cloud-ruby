@@ -97,9 +97,8 @@ module Google
           #     ID>/flows/<Flow ID>`.
           #
           #     Only one of `flow` and `page` should be set to indicate the starting point
-          #     of the test case. If both are set, `page` takes precedence over `flow`. If
-          #     neither is set, the test case will start with start page on the default
-          #     start flow.
+          #     of the test case. If neither is set, the test case will start with start
+          #     page on the default start flow.
           # @!attribute [rw] page
           #   @return [::String]
           #     The {::Google::Cloud::Dialogflow::CX::V3::Page page} to start the test case with.
@@ -107,9 +106,8 @@ module Google
           #     ID>/flows/<Flow ID>/pages/<Page ID>`.
           #
           #     Only one of `flow` and `page` should be set to indicate the starting point
-          #     of the test case. If both are set, `page` takes precedence over `flow`. If
-          #     neither is set, the test case will start with start page on the default
-          #     start flow.
+          #     of the test case. If neither is set, the test case will start with start
+          #     page on the default start flow.
           class TestConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

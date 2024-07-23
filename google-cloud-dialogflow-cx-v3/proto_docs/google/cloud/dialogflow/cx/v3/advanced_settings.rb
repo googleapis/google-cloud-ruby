@@ -40,6 +40,14 @@ module Google
           #     Exposed at the following levels:
           #     - Agent level
           #     - Flow level
+          # @!attribute [rw] speech_settings
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::AdvancedSettings::SpeechSettings]
+          #     Settings for speech to text detection.
+          #     Exposed at the following levels:
+          #     - Agent level
+          #     - Flow level
+          #     - Page level
+          #     - Parameter level
           # @!attribute [rw] dtmf_settings
           #   @return [::Google::Cloud::Dialogflow::CX::V3::AdvancedSettings::DtmfSettings]
           #     Settings for DTMF.
@@ -59,6 +67,39 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
+            # Define behaviors of speech to text detection.
+            # @!attribute [rw] endpointer_sensitivity
+            #   @return [::Integer]
+            #     Sensitivity of the speech model that detects the end of speech.
+            #     Scale from 0 to 100.
+            # @!attribute [rw] no_speech_timeout
+            #   @return [::Google::Protobuf::Duration]
+            #     Timeout before detecting no speech.
+            # @!attribute [rw] use_timeout_based_endpointing
+            #   @return [::Boolean]
+            #     Use timeout based endpointing, interpreting endpointer sensitivy as
+            #     seconds of timeout value.
+            # @!attribute [rw] models
+            #   @return [::Google::Protobuf::Map{::String => ::String}]
+            #     Mapping from language to Speech-to-Text model. The mapped Speech-to-Text
+            #     model will be selected for requests from its corresponding language.
+            #     For more information, see
+            #     [Speech
+            #     models](https://cloud.google.com/dialogflow/cx/docs/concept/speech-models).
+            class SpeechSettings
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # @!attribute [rw] key
+              #   @return [::String]
+              # @!attribute [rw] value
+              #   @return [::String]
+              class ModelsEntry
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+            end
+
             # Define behaviors for DTMF (dual tone multi frequency).
             # @!attribute [rw] enabled
             #   @return [::Boolean]
@@ -74,6 +115,12 @@ module Google
             # @!attribute [rw] finish_digit
             #   @return [::String]
             #     The digit that terminates a DTMF digit sequence.
+            # @!attribute [rw] interdigit_timeout_duration
+            #   @return [::Google::Protobuf::Duration]
+            #     Interdigit timeout setting for matching dtmf input to regex.
+            # @!attribute [rw] endpointing_timeout_duration
+            #   @return [::Google::Protobuf::Duration]
+            #     Endpoint timeout setting for matching dtmf input to regex.
             class DtmfSettings
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -82,10 +129,15 @@ module Google
             # Define behaviors on logging.
             # @!attribute [rw] enable_stackdriver_logging
             #   @return [::Boolean]
-            #     If true, StackDriver logging is currently enabled.
+            #     Enables StackDriver logging.
             # @!attribute [rw] enable_interaction_logging
             #   @return [::Boolean]
-            #     If true, DF Interaction logging is currently enabled.
+            #     Enables DF Interaction logging.
+            # @!attribute [rw] enable_consent_based_redaction
+            #   @return [::Boolean]
+            #     Enables consent-based end-user input redaction, if true, a pre-defined
+            #     session parameter `$session.params.conversation-redaction` will be
+            #     used to determine if the utterance should be redacted.
             class LoggingSettings
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
