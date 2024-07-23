@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/privilegedaccessmanager/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-privileged_access_manager/$1
