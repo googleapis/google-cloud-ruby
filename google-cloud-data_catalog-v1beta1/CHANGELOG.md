@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.5.0 (2024-07-24)
+
+#### Features
+
+* add DataplexTransferStatus enum and field to TagTemplate ([#26516](https://github.com/googleapis/google-cloud-ruby/issues/26516)) 
+#### Documentation
+
+* update field comments for updated IDENTIFIER field behavior 
+
 ### 0.4.0 (2024-02-26)
 
 #### Features
