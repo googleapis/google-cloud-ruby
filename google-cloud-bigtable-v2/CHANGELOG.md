@@ -1,5 +1,15 @@
 # Release History
 
+### 1.2.0 (2024-07-24)
+
+#### Features
+
+* Include ProtoRows message class, needed to parse ExecuteQuery responses 
+* Support merging accumulated state to an `Aggregate` cell ([#26491](https://github.com/googleapis/google-cloud-ruby/issues/26491)) 
+#### Documentation
+
+* Minor updates to reference documentation 
+
 ### 1.1.0 (2024-07-10)
 
 #### Features
