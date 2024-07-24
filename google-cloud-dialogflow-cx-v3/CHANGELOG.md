@@ -1,5 +1,22 @@
 # Changelog
 
+### 1.1.0 (2024-07-24)
+
+#### Features
+
+* added support for lock flow 
+* added support for multi language settings in flow 
+* added support for oauth and service agent auth for webhook. 
+* added support for service directory in tools 
+* expose PersonalizationSettings & SpeechSettings in v3 API. 
+* expose store tts option in security settings 
+* exposed DataStoreConnectionSignals ([#26508](https://github.com/googleapis/google-cloud-ruby/issues/26508)) 
+#### Documentation
+
+* clarified wording around audio redaction 
+* clarified wording around enable_stackdriver_logging & enable_interaction_logging 
+* clarified wording around start point of test config. 
+
 ### 1.0.0 (2024-07-10)
 
 #### Features
