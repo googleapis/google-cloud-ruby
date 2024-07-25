@@ -17,6 +17,7 @@ Metrics/BlockLength:
   Exclude:
     - "google-cloud-pubsub.gemspec"
     - "Rakefile"
+    - ".toys.rb"
 Metrics/ClassLength:
   Enabled: false
 Metrics/CyclomaticComplexity:
