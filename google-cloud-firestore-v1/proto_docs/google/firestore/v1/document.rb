@@ -125,7 +125,7 @@ module Google
         #   @return [::Google::Cloud::Firestore::V1::ArrayValue]
         #     An array value.
         #
-        #     Cannot directly contain another array value, though can contain an
+        #     Cannot directly contain another array value, though can contain a
         #     map which contains another array.
         # @!attribute [rw] map_value
         #   @return [::Google::Cloud::Firestore::V1::MapValue]
