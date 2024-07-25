@@ -1,5 +1,11 @@
 # Release History
 
+### 1.1.0 (2024-07-25)
+
+#### Features
+
+* Added CloudStorageConfig#max_messages ([#26456](https://github.com/googleapis/google-cloud-ruby/issues/26456)) 
+
 ### 1.0.0 (2024-07-09)
 
 #### Features
