@@ -24,3 +24,24 @@ else
            path: "toys/gapic",
            update: true
 end
+
+tool "samples" do
+  tool "gen-protos" do
+    include :exec, e: true
+    include :gems
+
+    def run
+      Dir.chdir context_directory
+      gem "grpc-tools", "~> 1.65"
+      Dir.chdir "samples/acceptance" do
+        cmd = [
+          "grpc_tools_ruby_protoc",
+          "--ruby_out", "../utilities",
+          "-I", "data",
+          "us-states.proto"
+        ]
+        exec cmd
+      end
+    end
+  end
+end
