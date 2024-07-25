@@ -31,6 +31,7 @@ tool "samples" do
     include :gems
 
     def run
+      Dir.chdir context_directory
       gem "grpc-tools", "~> 1.65"
       Dir.chdir "samples/acceptance" do
         cmd = [
