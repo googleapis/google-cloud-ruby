@@ -17,6 +17,9 @@ Style/Documentation:
 Metrics/AbcSize:
   Exclude:
     - "lib/google/cloud/firestore/query.rb"
+Metrics/BlockLength:
+  Exclude:
+    - ".toys.rb"
 Metrics/ClassLength:
   Enabled: false
 Metrics/CyclomaticComplexity:
