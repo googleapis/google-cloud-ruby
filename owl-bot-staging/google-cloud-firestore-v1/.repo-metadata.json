@@ -1,0 +1,18 @@
+{
+    "api_id": "firestore.googleapis.com",
+    "api_shortname": "firestore",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-firestore-v1/latest",
+    "distribution_name": "google-cloud-firestore-v1",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "firestore",
+    "name_pretty": "Cloud Firestore V1 API",
+    "product_documentation": "https://cloud.google.com/firestore",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Cloud Firestore is a NoSQL document database built for automatic scaling, high performance, and ease of application development. Note that google-cloud-firestore-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-firestore instead. See the readme for more details.",
+    "ruby-cloud-env-prefix": "FIRESTORE",
+    "ruby-cloud-product-url": "https://cloud.google.com/firestore",
+    "library_type": "GAPIC_AUTO"
+}
