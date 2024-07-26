@@ -27,9 +27,6 @@ jobs:
       matrix:
         include:
           - os: ubuntu-latest
-            ruby: "2.7"
-            task: "--test"
-          - os: ubuntu-latest
             ruby: "3.0"
             task: "--test"
           - os: ubuntu-latest
@@ -37,19 +34,19 @@ jobs:
             task: "--test"
           - os: ubuntu-latest
             ruby: "3.2"
-            task: "--rubocop --build --test"
+            task: "--test"
           - os: ubuntu-latest
-            ruby: "3.2"
-            task: "--yard --linkinator"
+            ruby: "3.3"
+            task: "--test"
+          - os: ubuntu-latest
+            ruby: "3.3"
+            task: "--rubocop-toplevel --rubocop --build --yard --linkinator"
           - os: macos-latest
-            ruby: "3.2"
+            ruby: "3.3"
             task: "--test"
           - os: windows-latest
-            ruby: "3.2"
+            ruby: "3.3"
             task: "--test"
-          - os: ubuntu-latest
-            ruby: "3.2"
-            task: "--rubocop-toplevel"
       fail-fast: false
     runs-on: ${{ matrix.os }}
     steps:
@@ -59,10 +56,10 @@ jobs:
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: "${{ matrix.ruby }}"
-    - name: Install NodeJS 16.x
+    - name: Install NodeJS 18.x
       uses: actions/setup-node@v4
       with:
-        node-version: "16.x"
+        node-version: "18.x"
     - name: Install tools
       run: "gem install --no-document toys && npm install linkinator"
     - name: Test ${{ matrix.task }}
