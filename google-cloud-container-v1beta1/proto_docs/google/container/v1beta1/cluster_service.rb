@@ -513,7 +513,7 @@ module Google
         #     Each pod network corresponds to an additional alias IP range for the node
         # @!attribute [r] pod_ipv4_range_utilization
         #   @return [::Float]
-        #     Output only. [Output only] The utilization of the IPv4 range for the pod.
+        #     Output only. The utilization of the IPv4 range for the pod.
         #     The ratio is Usage/[Total number of IPs in the secondary range],
         #     Usage=numNodes*numZones*podIPsPerNode.
         class NodeNetworkConfig
@@ -1012,15 +1012,17 @@ module Google
         #     Configuration for client certificate authentication on the cluster. For
         #     clusters before v1.12, if no configuration is specified, a client
         #     certificate is issued.
-        # @!attribute [rw] cluster_ca_certificate
+        # @!attribute [r] cluster_ca_certificate
         #   @return [::String]
-        # @!attribute [rw] client_certificate
+        #     Output only. Base64-encoded public certificate that is the root of
+        #     trust for the cluster.
+        # @!attribute [r] client_certificate
         #   @return [::String]
-        #     [Output only] Base64-encoded public certificate used by clients to
+        #     Output only. Base64-encoded public certificate used by clients to
         #     authenticate to the cluster endpoint.
-        # @!attribute [rw] client_key
+        # @!attribute [r] client_key
         #   @return [::String]
-        #     [Output only] Base64-encoded private key used by clients to authenticate
+        #     Output only. Base64-encoded private key used by clients to authenticate
         #     to the cluster endpoint.
         class MasterAuth
           include ::Google::Protobuf::MessageExts
@@ -1262,13 +1264,13 @@ module Google
         #     range will be used for assigning internal IP addresses to the master or
         #     set of masters, as well as the ILB VIP. This range must not overlap with
         #     any other ranges in use within the cluster's network.
-        # @!attribute [rw] private_endpoint
+        # @!attribute [r] private_endpoint
         #   @return [::String]
         #     Output only. The internal IP address of this cluster's master endpoint.
-        # @!attribute [rw] public_endpoint
+        # @!attribute [r] public_endpoint
         #   @return [::String]
         #     Output only. The external IP address of this cluster's master endpoint.
-        # @!attribute [rw] peering_name
+        # @!attribute [r] peering_name
         #   @return [::String]
         #     Output only. The peering name in the customer VPC used by this cluster.
         # @!attribute [rw] master_global_access_config
@@ -1564,22 +1566,21 @@ module Google
         #     overprovisioning is disabled.
         # @!attribute [r] subnet_ipv6_cidr_block
         #   @return [::String]
-        #     Output only. [Output only] The subnet's IPv6 CIDR block used by nodes and
-        #     pods.
+        #     Output only. The subnet's IPv6 CIDR block used by nodes and pods.
         # @!attribute [r] services_ipv6_cidr_block
         #   @return [::String]
-        #     Output only. [Output only] The services IPv6 CIDR block for the cluster.
+        #     Output only. The services IPv6 CIDR block for the cluster.
         # @!attribute [r] additional_pod_ranges_config
         #   @return [::Google::Cloud::Container::V1beta1::AdditionalPodRangesConfig]
-        #     Output only. [Output only] The additional pod ranges that are added to the
-        #     cluster. These pod ranges can be used by new node pools to allocate pod IPs
+        #     Output only. The additional pod ranges that are added to the cluster.
+        #     These pod ranges can be used by new node pools to allocate pod IPs
         #     automatically. Once the range is removed it will not show up in
         #     IPAllocationPolicy.
         # @!attribute [r] default_pod_ipv4_range_utilization
         #   @return [::Float]
-        #     Output only. [Output only] The utilization of the cluster default IPv4
-        #     range for the pod. The ratio is Usage/[Total number of IPs in the secondary
-        #     range], Usage=numNodes*numZones*podIPsPerNode.
+        #     Output only. The utilization of the cluster default IPv4 range for the
+        #     pod. The ratio is Usage/[Total number of IPs in the secondary range],
+        #     Usage=numNodes*numZones*podIPsPerNode.
         class IPAllocationPolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1947,18 +1948,18 @@ module Google
         # @!attribute [rw] identity_service_config
         #   @return [::Google::Cloud::Container::V1beta1::IdentityServiceConfig]
         #     Configuration for Identity Service component.
-        # @!attribute [rw] self_link
+        # @!attribute [r] self_link
         #   @return [::String]
-        #     [Output only] Server-defined URL for the resource.
-        # @!attribute [rw] zone
+        #     Output only. Server-defined URL for the resource.
+        # @!attribute [r] zone
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
-        #     [Output only] The name of the Google Compute Engine
+        #     Output only. The name of the Google Compute Engine
         #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
         #     cluster resides. This field is deprecated, use location instead.
-        # @!attribute [rw] endpoint
+        # @!attribute [r] endpoint
         #   @return [::String]
-        #     [Output only] The IP address of this cluster's master endpoint.
+        #     Output only. The IP address of this cluster's master endpoint.
         #     The endpoint can be accessed from the internet at
         #     `https://username:password@endpoint/`.
         #
@@ -1979,59 +1980,59 @@ module Google
         #     - "1.X.Y": picks the highest valid gke.N patch in the 1.X.Y version
         #     - "1.X.Y-gke.N": picks an explicit Kubernetes version
         #     - "","-": picks the default Kubernetes version
-        # @!attribute [rw] current_master_version
+        # @!attribute [r] current_master_version
         #   @return [::String]
-        #     [Output only] The current software version of the master endpoint.
-        # @!attribute [rw] current_node_version
+        #     Output only. The current software version of the master endpoint.
+        # @!attribute [r] current_node_version
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
-        #     [Output only] Deprecated, use
+        #     Output only. Deprecated, use
         #     [NodePool.version](https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1beta1/projects.locations.clusters.nodePools)
         #     instead. The current version of the node software components.
         #     If they are currently at multiple versions because they're in the process
         #     of being upgraded, this reflects the minimum version of all nodes.
-        # @!attribute [rw] create_time
+        # @!attribute [r] create_time
         #   @return [::String]
-        #     [Output only] The time the cluster was created, in
+        #     Output only. The time the cluster was created, in
         #     [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
-        # @!attribute [rw] status
+        # @!attribute [r] status
         #   @return [::Google::Cloud::Container::V1beta1::Cluster::Status]
-        #     [Output only] The current status of this cluster.
-        # @!attribute [rw] status_message
+        #     Output only. The current status of this cluster.
+        # @!attribute [r] status_message
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
-        #     [Output only] Deprecated. Use conditions instead.
+        #     Output only. Deprecated. Use conditions instead.
         #     Additional information about the current status of this
         #     cluster, if available.
-        # @!attribute [rw] node_ipv4_cidr_size
+        # @!attribute [r] node_ipv4_cidr_size
         #   @return [::Integer]
-        #     [Output only] The size of the address space on each node for hosting
+        #     Output only. The size of the address space on each node for hosting
         #     containers. This is provisioned from within the `container_ipv4_cidr`
         #     range. This field will only be set when cluster is in route-based network
         #     mode.
-        # @!attribute [rw] services_ipv4_cidr
+        # @!attribute [r] services_ipv4_cidr
         #   @return [::String]
-        #     [Output only] The IP address range of the Kubernetes services in
+        #     Output only. The IP address range of the Kubernetes services in
         #     this cluster, in
         #     [CIDR](http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)
         #     notation (e.g. `1.2.3.4/29`). Service addresses are
         #     typically put in the last `/16` from the container CIDR.
-        # @!attribute [rw] instance_group_urls
+        # @!attribute [r] instance_group_urls
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Array<::String>]
-        #     Deprecated. Use node_pools.instance_group_urls.
-        # @!attribute [rw] current_node_count
+        #     Output only. Deprecated. Use node_pools.instance_group_urls.
+        # @!attribute [r] current_node_count
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Integer]
-        #     [Output only]  The number of nodes currently in the cluster. Deprecated.
+        #     Output only. The number of nodes currently in the cluster. Deprecated.
         #     Call Kubernetes API directly to retrieve node information.
-        # @!attribute [rw] expire_time
+        # @!attribute [r] expire_time
         #   @return [::String]
-        #     [Output only] The time the cluster will be automatically
+        #     Output only. The time the cluster will be automatically
         #     deleted in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
-        # @!attribute [rw] location
+        # @!attribute [r] location
         #   @return [::String]
-        #     [Output only] The name of the Google Compute Engine
+        #     Output only. The name of the Google Compute Engine
         #     [zone](https://cloud.google.com/compute/docs/regions-zones/regions-zones#available)
         #     or
         #     [region](https://cloud.google.com/compute/docs/regions-zones/regions-zones#available)
@@ -2040,9 +2041,9 @@ module Google
         #   @return [::Boolean]
         #     Enable the ability to use Cloud TPUs in this cluster.
         #     This field is deprecated, use tpu_config.enabled instead.
-        # @!attribute [rw] tpu_ipv4_cidr_block
+        # @!attribute [r] tpu_ipv4_cidr_block
         #   @return [::String]
-        #     [Output only] The IP address range of the Cloud TPUs in this cluster, in
+        #     Output only. The IP address range of the Cloud TPUs in this cluster, in
         #     [CIDR](http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)
         #     notation (e.g. `1.2.3.4/29`).
         # @!attribute [rw] database_encryption
@@ -2640,7 +2641,7 @@ module Google
         #     Name for pod secondary ipv4 range which has the actual range defined ahead.
         # @!attribute [r] pod_range_info
         #   @return [::Array<::Google::Cloud::Container::V1beta1::RangeInfo>]
-        #     Output only. [Output only] Information for additional pod range.
+        #     Output only. Information for additional pod range.
         class AdditionalPodRangesConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2649,10 +2650,10 @@ module Google
         # RangeInfo contains the range name and the range utilization by this cluster.
         # @!attribute [r] range_name
         #   @return [::String]
-        #     Output only. [Output only] Name of a range.
+        #     Output only. Name of a range.
         # @!attribute [r] utilization
         #   @return [::Float]
-        #     Output only. [Output only] The utilization of the range.
+        #     Output only. The utilization of the range.
         class RangeInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2660,39 +2661,39 @@ module Google
 
         # This operation resource represents operations that may have happened or are
         # happening on the cluster. All fields are output only.
-        # @!attribute [rw] name
+        # @!attribute [r] name
         #   @return [::String]
-        #     The server-assigned ID for the operation.
-        # @!attribute [rw] zone
+        #     Output only. The server-assigned ID for the operation.
+        # @!attribute [r] zone
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
-        #     The name of the Google Compute Engine
+        #     Output only. The name of the Google Compute Engine
         #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
         #     operation is taking place. This field is deprecated, use location instead.
-        # @!attribute [rw] operation_type
+        # @!attribute [r] operation_type
         #   @return [::Google::Cloud::Container::V1beta1::Operation::Type]
-        #     The operation type.
-        # @!attribute [rw] status
+        #     Output only. The operation type.
+        # @!attribute [r] status
         #   @return [::Google::Cloud::Container::V1beta1::Operation::Status]
-        #     The current status of the operation.
-        # @!attribute [rw] detail
+        #     Output only. The current status of the operation.
+        # @!attribute [r] detail
         #   @return [::String]
-        #     Detailed operation progress, if available.
+        #     Output only. Detailed operation progress, if available.
         # @!attribute [r] status_message
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Output only. If an error has occurred, a textual description of the error.
         #     Deprecated. Use field error instead.
-        # @!attribute [rw] self_link
+        # @!attribute [r] self_link
         #   @return [::String]
-        #     Server-defined URI for the operation. Example:
+        #     Output only. Server-defined URI for the operation. Example:
         #     `https://container.googleapis.com/v1alpha1/projects/123/locations/us-central1/operations/operation-123`.
-        # @!attribute [rw] target_link
+        # @!attribute [r] target_link
         #   @return [::String]
-        #     Server-defined URI for the target of the operation. The format of this is a
-        #     URI to the resource being modified (such as a cluster, node pool, or node).
-        #     For node pool repairs, there may be multiple nodes being repaired, but only
-        #     one will be the target.
+        #     Output only. Server-defined URI for the target of the operation. The format
+        #     of this is a URI to the resource being modified (such as a cluster, node
+        #     pool, or node). For node pool repairs, there may be multiple nodes being
+        #     repaired, but only one will be the target.
         #
         #     Examples:
         #
@@ -2704,24 +2705,24 @@ module Google
         #     `https://container.googleapis.com/v1/projects/123/zones/us-central1-c/clusters/my-cluster/nodePools/my-np`
         #
         #     `https://container.googleapis.com/v1/projects/123/zones/us-central1-c/clusters/my-cluster/nodePools/my-np/node/my-node`
-        # @!attribute [rw] location
+        # @!attribute [r] location
         #   @return [::String]
-        #     [Output only] The name of the Google Compute Engine
+        #     Output only. The name of the Google Compute Engine
         #     [zone](https://cloud.google.com/compute/docs/regions-zones/regions-zones#available)
         #     or
         #     [region](https://cloud.google.com/compute/docs/regions-zones/regions-zones#available)
         #     in which the cluster resides.
-        # @!attribute [rw] start_time
+        # @!attribute [r] start_time
         #   @return [::String]
-        #     [Output only] The time the operation started, in
+        #     Output only. The time the operation started, in
         #     [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
-        # @!attribute [rw] end_time
+        # @!attribute [r] end_time
         #   @return [::String]
-        #     [Output only] The time the operation completed, in
+        #     Output only. The time the operation completed, in
         #     [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
         # @!attribute [r] progress
         #   @return [::Google::Cloud::Container::V1beta1::OperationProgress]
-        #     Output only. [Output only] Progress information for an operation.
+        #     Output only. Progress information for an operation.
         # @!attribute [rw] cluster_conditions
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Array<::Google::Cloud::Container::V1beta1::StatusCondition>]
@@ -3936,28 +3937,28 @@ module Google
         #   @return [::Google::Cloud::Container::V1beta1::NodeNetworkConfig]
         #     Networking configuration for this NodePool. If specified, it overrides the
         #     cluster-level defaults.
-        # @!attribute [rw] self_link
+        # @!attribute [r] self_link
         #   @return [::String]
-        #     [Output only] Server-defined URL for the resource.
+        #     Output only. Server-defined URL for the resource.
         # @!attribute [rw] version
         #   @return [::String]
         #     The version of Kubernetes running on this NodePool's nodes. If unspecified,
         #     it defaults as described
         #     [here](https://cloud.google.com/kubernetes-engine/versioning#specifying_node_version).
-        # @!attribute [rw] instance_group_urls
+        # @!attribute [r] instance_group_urls
         #   @return [::Array<::String>]
-        #     [Output only] The resource URLs of the [managed instance
+        #     Output only. The resource URLs of the [managed instance
         #     groups](https://cloud.google.com/compute/docs/instance-groups/creating-groups-of-managed-instances)
         #     associated with this node pool.
         #     During the node pool blue-green upgrade operation, the URLs contain both
         #     blue and green resources.
-        # @!attribute [rw] status
+        # @!attribute [r] status
         #   @return [::Google::Cloud::Container::V1beta1::NodePool::Status]
-        #     [Output only] The status of the nodes in this pool instance.
-        # @!attribute [rw] status_message
+        #     Output only. The status of the nodes in this pool instance.
+        # @!attribute [r] status_message
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
-        #     [Output only] Deprecated. Use conditions instead.
+        #     Output only. Deprecated. Use conditions instead.
         #     Additional information about the current status of this
         #     node pool instance, if available.
         # @!attribute [rw] autoscaling
@@ -3974,9 +3975,9 @@ module Google
         # @!attribute [rw] conditions
         #   @return [::Array<::Google::Cloud::Container::V1beta1::StatusCondition>]
         #     Which conditions caused the current node pool state.
-        # @!attribute [rw] pod_ipv4_cidr_size
+        # @!attribute [r] pod_ipv4_cidr_size
         #   @return [::Integer]
-        #     [Output only] The pod CIDR block size per node in this node pool.
+        #     Output only. The pod CIDR block size per node in this node pool.
         # @!attribute [rw] upgrade_settings
         #   @return [::Google::Cloud::Container::V1beta1::NodePool::UpgradeSettings]
         #     Upgrade settings control disruption and speed of the upgrade.
@@ -3985,8 +3986,8 @@ module Google
         #     Specifies the node placement policy.
         # @!attribute [r] update_info
         #   @return [::Google::Cloud::Container::V1beta1::NodePool::UpdateInfo]
-        #     Output only. [Output only] Update info contains relevant information during
-        #     a node pool update.
+        #     Output only. Update info contains relevant information during a node
+        #     pool update.
         # @!attribute [rw] etag
         #   @return [::String]
         #     This checksum is computed by the server based on the value of node pool
@@ -4224,14 +4225,14 @@ module Google
 
         # AutoUpgradeOptions defines the set of options for the user to control how
         # the Auto Upgrades will proceed.
-        # @!attribute [rw] auto_upgrade_start_time
+        # @!attribute [r] auto_upgrade_start_time
         #   @return [::String]
-        #     [Output only] This field is set when upgrades are about to commence
+        #     Output only. This field is set when upgrades are about to commence
         #     with the approximate start time for the upgrades, in
         #     [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
-        # @!attribute [rw] description
+        # @!attribute [r] description
         #   @return [::String]
-        #     [Output only] This field is set when upgrades are about to commence
+        #     Output only. This field is set when upgrades are about to commence
         #     with the description of the upgrade.
         class AutoUpgradeOptions
           include ::Google::Protobuf::MessageExts
@@ -4373,9 +4374,9 @@ module Google
         #   @return [::String]
         #     Time within the maintenance window to start the maintenance operations.
         #     It must be in format "HH:MM", where HH : [00-23] and MM : [00-59] GMT.
-        # @!attribute [rw] duration
+        # @!attribute [r] duration
         #   @return [::String]
-        #     [Output only] Duration of the time window, automatically chosen to be
+        #     Output only. Duration of the time window, automatically chosen to be
         #     smallest possible in the given scenario.
         class DailyMaintenanceWindow
           include ::Google::Protobuf::MessageExts
@@ -5156,13 +5157,13 @@ module Google
         end
 
         # NetworkConfig reports the relative names of network & subnetwork.
-        # @!attribute [rw] network
+        # @!attribute [r] network
         #   @return [::String]
         #     Output only. The relative name of the Google Compute Engine
         #     {::Google::Cloud::Container::V1beta1::NetworkConfig#network network}(https://cloud.google.com/compute/docs/networks-and-firewalls#networks)
         #     to which the cluster is connected. Example:
         #     projects/my-project/global/networks/my-network
-        # @!attribute [rw] subnetwork
+        # @!attribute [r] subnetwork
         #   @return [::String]
         #     Output only. The relative name of the Google Compute Engine
         #     [subnetwork](https://cloud.google.com/compute/docs/vpc) to which the
@@ -6329,14 +6330,14 @@ module Google
         #     The Fleet host project(project ID or project number) where this cluster
         #     will be registered to. This field cannot be changed after the cluster has
         #     been registered.
-        # @!attribute [rw] membership
+        # @!attribute [r] membership
         #   @return [::String]
-        #     [Output only] The full resource name of the registered fleet membership of
+        #     Output only. The full resource name of the registered fleet membership of
         #     the cluster, in the format
         #     `//gkehub.googleapis.com/projects/*/locations/*/memberships/*`.
-        # @!attribute [rw] pre_registered
+        # @!attribute [r] pre_registered
         #   @return [::Boolean]
-        #     [Output only] Whether the cluster has been registered through the fleet
+        #     Output only. Whether the cluster has been registered through the fleet
         #     API.
         class Fleet
           include ::Google::Protobuf::MessageExts
@@ -6372,8 +6373,7 @@ module Google
         # EnterpriseConfig is the cluster enterprise configuration.
         # @!attribute [r] cluster_tier
         #   @return [::Google::Cloud::Container::V1beta1::EnterpriseConfig::ClusterTier]
-        #     Output only. [Output only] cluster_tier specifies the premium tier of the
-        #     cluster.
+        #     Output only. cluster_tier specifies the premium tier of the cluster.
         class EnterpriseConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
