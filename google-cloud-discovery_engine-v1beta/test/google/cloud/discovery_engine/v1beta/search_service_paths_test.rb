@@ -80,4 +80,22 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::SearchService::ClientPathsTest <
       assert_equal "projects/value0/locations/value1/collections/value2/engines/value3/servingConfigs/value4", path
     end
   end
+
+  def test_session_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::DiscoveryEngine::V1beta::SearchService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.session_path project: "value0", location: "value1", data_store: "value2", session: "value3"
+      assert_equal "projects/value0/locations/value1/dataStores/value2/sessions/value3", path
+
+      path = client.session_path project: "value0", location: "value1", collection: "value2", data_store: "value3", session: "value4"
+      assert_equal "projects/value0/locations/value1/collections/value2/dataStores/value3/sessions/value4", path
+
+      path = client.session_path project: "value0", location: "value1", collection: "value2", engine: "value3", session: "value4"
+      assert_equal "projects/value0/locations/value1/collections/value2/engines/value3/sessions/value4", path
+    end
+  end
 end

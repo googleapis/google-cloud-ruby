@@ -24,6 +24,16 @@
               "methods": [
                 "purge_suggestion_deny_list_entries"
               ]
+            },
+            "ImportCompletionSuggestions": {
+              "methods": [
+                "import_completion_suggestions"
+              ]
+            },
+            "PurgeCompletionSuggestions": {
+              "methods": [
+                "purge_completion_suggestions"
+              ]
             }
           }
         }
@@ -595,6 +605,11 @@
             "CollectUserEvent": {
               "methods": [
                 "collect_user_event"
+              ]
+            },
+            "PurgeUserEvents": {
+              "methods": [
+                "purge_user_events"
               ]
             },
             "ImportUserEvents": {

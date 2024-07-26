@@ -237,6 +237,116 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::CompletionService::Rest::ClientT
     end
   end
 
+  def test_import_completion_suggestions
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    inline_source = {}
+    parent = "hello world"
+    error_config = {}
+
+    import_completion_suggestions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DiscoveryEngine::V1beta::CompletionService::Rest::ServiceStub.stub :transcode_import_completion_suggestions_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, import_completion_suggestions_client_stub do
+        # Create client
+        client = ::Google::Cloud::DiscoveryEngine::V1beta::CompletionService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.import_completion_suggestions({ inline_source: inline_source, parent: parent, error_config: error_config }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.import_completion_suggestions inline_source: inline_source, parent: parent, error_config: error_config do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.import_completion_suggestions ::Google::Cloud::DiscoveryEngine::V1beta::ImportCompletionSuggestionsRequest.new(inline_source: inline_source, parent: parent, error_config: error_config) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.import_completion_suggestions({ inline_source: inline_source, parent: parent, error_config: error_config }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.import_completion_suggestions(::Google::Cloud::DiscoveryEngine::V1beta::ImportCompletionSuggestionsRequest.new(inline_source: inline_source, parent: parent, error_config: error_config), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, import_completion_suggestions_client_stub.call_count
+      end
+    end
+  end
+
+  def test_purge_completion_suggestions
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+
+    purge_completion_suggestions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DiscoveryEngine::V1beta::CompletionService::Rest::ServiceStub.stub :transcode_purge_completion_suggestions_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, purge_completion_suggestions_client_stub do
+        # Create client
+        client = ::Google::Cloud::DiscoveryEngine::V1beta::CompletionService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.purge_completion_suggestions({ parent: parent }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.purge_completion_suggestions parent: parent do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.purge_completion_suggestions ::Google::Cloud::DiscoveryEngine::V1beta::PurgeCompletionSuggestionsRequest.new(parent: parent) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.purge_completion_suggestions({ parent: parent }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.purge_completion_suggestions(::Google::Cloud::DiscoveryEngine::V1beta::PurgeCompletionSuggestionsRequest.new(parent: parent), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, purge_completion_suggestions_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 
