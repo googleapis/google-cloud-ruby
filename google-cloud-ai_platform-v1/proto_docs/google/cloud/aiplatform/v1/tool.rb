@@ -126,10 +126,9 @@ module Google
         #   @return [::Google::Cloud::AIPlatform::V1::VertexAISearch]
         #     Set to use data source powered by Vertex AI Search.
         # @!attribute [rw] disable_attribution
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
-        #     Optional. Disable using the result from this tool in detecting grounding
-        #     attribution. This does not affect how the result is given to the model for
-        #     generation.
+        #     Optional. Deprecated. This option is no longer supported.
         class Retrieval
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

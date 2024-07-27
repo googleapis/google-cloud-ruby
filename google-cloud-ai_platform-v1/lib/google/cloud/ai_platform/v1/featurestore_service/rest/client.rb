@@ -1672,7 +1672,8 @@ module Google
               #
               #       * `description`
               #       * `labels`
-              #       * `disable_monitoring` (Not supported for FeatureRegistry Feature)
+              #       * `disable_monitoring` (Not supported for FeatureRegistryService Feature)
+              #       * `point_of_contact` (Not supported for FeaturestoreService FeatureStore)
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::AIPlatform::V1::Feature]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

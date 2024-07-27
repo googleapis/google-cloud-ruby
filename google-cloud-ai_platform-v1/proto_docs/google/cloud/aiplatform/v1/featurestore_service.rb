@@ -946,7 +946,8 @@ module Google
         #
         #       * `description`
         #       * `labels`
-        #       * `disable_monitoring` (Not supported for FeatureRegistry Feature)
+        #       * `disable_monitoring` (Not supported for FeatureRegistryService Feature)
+        #       * `point_of_contact` (Not supported for FeaturestoreService FeatureStore)
         class UpdateFeatureRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

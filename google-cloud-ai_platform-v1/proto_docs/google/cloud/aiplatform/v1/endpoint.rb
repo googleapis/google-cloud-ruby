@@ -120,6 +120,27 @@ module Google
         # @!attribute [rw] predict_request_response_logging_config
         #   @return [::Google::Cloud::AIPlatform::V1::PredictRequestResponseLoggingConfig]
         #     Configures the request-response logging for online prediction.
+        # @!attribute [rw] dedicated_endpoint_enabled
+        #   @return [::Boolean]
+        #     If true, the endpoint will be exposed through a dedicated
+        #     DNS [Endpoint.dedicated_endpoint_dns]. Your request to the dedicated DNS
+        #     will be isolated from other users' traffic and will have better performance
+        #     and reliability.
+        #     Note: Once you enabled dedicated endpoint, you won't be able to send
+        #     request to the shared DNS \\{region}-aiplatform.googleapis.com. The
+        #     limitation will be removed soon.
+        # @!attribute [r] dedicated_endpoint_dns
+        #   @return [::String]
+        #     Output only. DNS of the dedicated endpoint. Will only be populated if
+        #     dedicated_endpoint_enabled is true.
+        #     Format:
+        #     `https://{endpoint_id}.{region}-{project_number}.prediction.vertexai.goog`.
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
+        # @!attribute [r] satisfies_pzi
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
         class Endpoint
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

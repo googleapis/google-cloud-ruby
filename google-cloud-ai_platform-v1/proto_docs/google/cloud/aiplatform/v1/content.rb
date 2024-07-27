@@ -311,6 +311,9 @@ module Google
         # @!attribute [r] content
         #   @return [::Google::Cloud::AIPlatform::V1::Content]
         #     Output only. Content parts of the candidate.
+        # @!attribute [r] score
+        #   @return [::Float]
+        #     Output only. Confidence score of the candidate.
         # @!attribute [r] finish_reason
         #   @return [::Google::Cloud::AIPlatform::V1::Candidate::FinishReason]
         #     Output only. The reason why the model stopped generating tokens.
@@ -375,6 +378,82 @@ module Google
           end
         end
 
+        # Segment of the content.
+        # @!attribute [r] part_index
+        #   @return [::Integer]
+        #     Output only. The index of a Part object within its parent Content object.
+        # @!attribute [r] start_index
+        #   @return [::Integer]
+        #     Output only. Start index in the given Part, measured in bytes. Offset from
+        #     the start of the Part, inclusive, starting at zero.
+        # @!attribute [r] end_index
+        #   @return [::Integer]
+        #     Output only. End index in the given Part, measured in bytes. Offset from
+        #     the start of the Part, exclusive, starting at zero.
+        # @!attribute [r] text
+        #   @return [::String]
+        #     Output only. The text corresponding to the segment from the response.
+        class Segment
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Grounding chunk.
+        # @!attribute [rw] web
+        #   @return [::Google::Cloud::AIPlatform::V1::GroundingChunk::Web]
+        #     Grounding chunk from the web.
+        # @!attribute [rw] retrieved_context
+        #   @return [::Google::Cloud::AIPlatform::V1::GroundingChunk::RetrievedContext]
+        #     Grounding chunk from context retrieved by the retrieval tools.
+        class GroundingChunk
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Chunk from the web.
+          # @!attribute [rw] uri
+          #   @return [::String]
+          #     URI reference of the chunk.
+          # @!attribute [rw] title
+          #   @return [::String]
+          #     Title of the chunk.
+          class Web
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Chunk from context retrieved by the retrieval tools.
+          # @!attribute [rw] uri
+          #   @return [::String]
+          #     URI reference of the attribution.
+          # @!attribute [rw] title
+          #   @return [::String]
+          #     Title of the attribution.
+          class RetrievedContext
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Grounding support.
+        # @!attribute [rw] segment
+        #   @return [::Google::Cloud::AIPlatform::V1::Segment]
+        #     Segment of the content this support belongs to.
+        # @!attribute [rw] grounding_chunk_indices
+        #   @return [::Array<::Integer>]
+        #     A list of indices (into 'grounding_chunk') specifying the
+        #     citations associated with the claim. For instance [1,3,4] means
+        #     that grounding_chunk[1], grounding_chunk[3],
+        #     grounding_chunk[4] are the retrieved content attributed to the claim.
+        # @!attribute [rw] confidence_scores
+        #   @return [::Array<::Float>]
+        #     Confidence score of the support references. Ranges from 0 to 1. 1 is the
+        #     most confident. This list must have the same size as the
+        #     grounding_chunk_indices.
+        class GroundingSupport
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Metadata returned to client when grounding is enabled.
         # @!attribute [rw] web_search_queries
         #   @return [::Array<::String>]
@@ -382,6 +461,12 @@ module Google
         # @!attribute [rw] search_entry_point
         #   @return [::Google::Cloud::AIPlatform::V1::SearchEntryPoint]
         #     Optional. Google search entry for the following-up web searches.
+        # @!attribute [rw] grounding_chunks
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::GroundingChunk>]
+        #     List of supporting references retrieved from specified grounding source.
+        # @!attribute [rw] grounding_supports
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::GroundingSupport>]
+        #     Optional. List of grounding support.
         class GroundingMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

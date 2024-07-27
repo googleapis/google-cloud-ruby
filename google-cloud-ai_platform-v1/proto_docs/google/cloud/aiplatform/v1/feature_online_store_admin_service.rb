@@ -144,10 +144,11 @@ module Google
         #
         #     Updatable fields:
         #
-        #       * `big_query_source`
-        #       * `bigtable`
         #       * `labels`
-        #       * `sync_config`
+        #       * `description`
+        #       * `bigtable`
+        #       * `bigtable.auto_scaling`
+        #       * `bigtable.enable_multi_region_replica`
         class UpdateFeatureOnlineStoreRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -305,7 +306,14 @@ module Google
         #     Updatable fields:
         #
         #       * `labels`
-        #       * `serviceAgentType`
+        #       * `service_agent_type`
+        #       * `big_query_source`
+        #       * `big_query_source.uri`
+        #       * `big_query_source.entity_id_columns`
+        #       * `feature_registry_source`
+        #       * `feature_registry_source.feature_groups`
+        #       * `sync_config`
+        #       * `sync_config.cron`
         class UpdateFeatureViewRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

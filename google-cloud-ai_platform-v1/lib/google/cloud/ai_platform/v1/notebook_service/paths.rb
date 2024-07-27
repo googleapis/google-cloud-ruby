@@ -59,6 +59,25 @@ module Google
             end
 
             ##
+            # Create a fully-qualified NotebookExecutionJob resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/notebookExecutionJobs/{notebook_execution_job}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param notebook_execution_job [String]
+            #
+            # @return [::String]
+            def notebook_execution_job_path project:, location:, notebook_execution_job:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/notebookExecutionJobs/#{notebook_execution_job}"
+            end
+
+            ##
             # Create a fully-qualified NotebookRuntime resource string.
             #
             # The resource will be in the following format:
@@ -94,6 +113,25 @@ module Google
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/notebookRuntimeTemplates/#{notebook_runtime_template}"
+            end
+
+            ##
+            # Create a fully-qualified Schedule resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/schedules/{schedule}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param schedule [String]
+            #
+            # @return [::String]
+            def schedule_path project:, location:, schedule:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/schedules/#{schedule}"
             end
 
             ##

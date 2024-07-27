@@ -120,6 +120,9 @@ module Google
         # @!attribute [rw] string_filters
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::NearestNeighborQuery::StringFilter>]
         #     Optional. The list of string filters.
+        # @!attribute [rw] numeric_filters
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::NearestNeighborQuery::NumericFilter>]
+        #     Optional. The list of numeric filters.
         # @!attribute [rw] per_crowding_attribute_neighbor_count
         #   @return [::Integer]
         #     Optional. Crowding is a constraint on a neighbor list produced by nearest
@@ -162,6 +165,60 @@ module Google
           class StringFilter
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Numeric filter is used to search a subset of the entities by using boolean
+          # rules on numeric columns.
+          # For example:
+          # Database Point 0: \\{name: “a” value_int: 42} \\{name: “b” value_float: 1.0}
+          # Database Point 1:  \\{name: “a” value_int: 10} \\{name: “b” value_float: 2.0}
+          # Database Point 2: \\{name: “a” value_int: -1} \\{name: “b” value_float: 3.0}
+          # Query: \\{name: “a” value_int: 12 operator: LESS}    // Matches Point 1, 2
+          # \\{name: “b” value_float: 2.0 operator: EQUAL} // Matches Point 1
+          # @!attribute [rw] value_int
+          #   @return [::Integer]
+          #     int value type.
+          # @!attribute [rw] value_float
+          #   @return [::Float]
+          #     float value type.
+          # @!attribute [rw] value_double
+          #   @return [::Float]
+          #     double value type.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. Column name in BigQuery that used as filters.
+          # @!attribute [rw] op
+          #   @return [::Google::Cloud::AIPlatform::V1::NearestNeighborQuery::NumericFilter::Operator]
+          #     Optional. This MUST be specified for queries and must NOT be specified
+          #     for database points.
+          class NumericFilter
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Datapoints for which Operator is true relative to the query’s Value
+            # field will be allowlisted.
+            module Operator
+              # Unspecified operator.
+              OPERATOR_UNSPECIFIED = 0
+
+              # Entities are eligible if their value is < the query's.
+              LESS = 1
+
+              # Entities are eligible if their value is <= the query's.
+              LESS_EQUAL = 2
+
+              # Entities are eligible if their value is == the query's.
+              EQUAL = 3
+
+              # Entities are eligible if their value is >= the query's.
+              GREATER_EQUAL = 4
+
+              # Entities are eligible if their value is > the query's.
+              GREATER = 5
+
+              # Entities are eligible if their value is != the query's.
+              NOT_EQUAL = 6
+            end
           end
 
           # Parameters that can be overrided in each query to tune query latency and

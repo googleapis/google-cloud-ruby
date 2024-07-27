@@ -431,16 +431,29 @@ module Google
         #     `projects/{project}/locations/{location}/endpoints/{endpoint}`
         # @!attribute [rw] model
         #   @return [::String]
-        #     Required. The name of the publisher model requested to serve the
+        #     Optional. The name of the publisher model requested to serve the
         #     prediction. Format:
         #     `projects/{project}/locations/{location}/publishers/*/models/*`
         # @!attribute [rw] instances
         #   @return [::Array<::Google::Protobuf::Value>]
-        #     Required. The instances that are the input to token counting call.
+        #     Optional. The instances that are the input to token counting call.
         #     Schema is identical to the prediction schema of the underlying model.
         # @!attribute [rw] contents
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::Content>]
-        #     Required. Input content.
+        #     Optional. Input content.
+        # @!attribute [rw] system_instruction
+        #   @return [::Google::Cloud::AIPlatform::V1::Content]
+        #     Optional. The user provided system instructions for the model.
+        #     Note: only text should be used in parts and content in each part will be in
+        #     a separate paragraph.
+        # @!attribute [rw] tools
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::Tool>]
+        #     Optional. A list of `Tools` the model may use to generate the next
+        #     response.
+        #
+        #     A `Tool` is a piece of code that enables the system to interact with
+        #     external systems to perform an action, or set of actions, outside of
+        #     knowledge and scope of the model.
         class CountTokensRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

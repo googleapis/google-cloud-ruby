@@ -241,6 +241,9 @@ module Google
         # @!attribute [rw] ray_metric_spec
         #   @return [::Google::Cloud::AIPlatform::V1::RayMetricSpec]
         #     Optional. Ray metrics configurations.
+        # @!attribute [rw] ray_logs_spec
+        #   @return [::Google::Cloud::AIPlatform::V1::RayLogsSpec]
+        #     Optional. OSS Ray logging configurations.
         class RaySpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -308,6 +311,15 @@ module Google
         #   @return [::Boolean]
         #     Optional. Flag to disable the Ray metrics collection.
         class RayMetricSpec
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration for the Ray OSS Logs.
+        # @!attribute [rw] disabled
+        #   @return [::Boolean]
+        #     Optional. Flag to disable the export of Ray OSS logs to Cloud Logging.
+        class RayLogsSpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

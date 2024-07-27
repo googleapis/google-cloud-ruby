@@ -565,6 +565,9 @@ module Google
             #     Updatable fields:
             #
             #       * `labels`
+            #       * `description`
+            #       * `big_query`
+            #       * `big_query.entity_id_columns`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -1126,7 +1129,8 @@ module Google
             #
             #       * `description`
             #       * `labels`
-            #       * `disable_monitoring` (Not supported for FeatureRegistry Feature)
+            #       * `disable_monitoring` (Not supported for FeatureRegistryService Feature)
+            #       * `point_of_contact` (Not supported for FeaturestoreService FeatureStore)
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
