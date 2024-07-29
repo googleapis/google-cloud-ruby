@@ -130,6 +130,19 @@ module Google
         #     Highly recommended for analytics.
         #     {::Google::Cloud::DiscoveryEngine::V1beta::UserInfo#user_agent UserInfo.user_agent}
         #     is used to deduce `device_type` for analytics.
+        # @!attribute [rw] language_code
+        #   @return [::String]
+        #     The BCP-47 language code, such as "en-US" or "sr-Latn". For more
+        #     information, see [Standard
+        #     fields](https://cloud.google.com/apis/design/standard_fields). This field
+        #     helps to better interpret the query. If a value isn't specified, the query
+        #     language code is automatically detected, which may not be accurate.
+        # @!attribute [rw] region_code
+        #   @return [::String]
+        #     The Unicode country/region code (CLDR) of a location, such as "US" and
+        #     "419". For more information, see [Standard
+        #     fields](https://cloud.google.com/apis/design/standard_fields). If set,
+        #     then results will be boosted based on the region_code provided.
         # @!attribute [rw] facet_specs
         #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::FacetSpec>]
         #     Facet specifications for faceted search. If empty, no facets are returned.
@@ -248,6 +261,48 @@ module Google
         #     See [Google Cloud
         #     Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
         #     for more details.
+        # @!attribute [rw] natural_language_query_understanding_spec
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::NaturalLanguageQueryUnderstandingSpec]
+        #     If `naturalLanguageQueryUnderstandingSpec` is not specified, no additional
+        #     natural language query understanding will be done.
+        # @!attribute [rw] search_as_you_type_spec
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::SearchAsYouTypeSpec]
+        #     Search as you type configuration. Only supported for the
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::IndustryVertical::MEDIA IndustryVertical.MEDIA}
+        #     vertical.
+        # @!attribute [rw] session
+        #   @return [::String]
+        #     The session resource name. Optional.
+        #
+        #     Session allows users to do multi-turn /search API calls or coordination
+        #     between /search API calls and /answer API calls.
+        #
+        #     Example #1 (multi-turn /search API calls):
+        #       1. Call /search API with the auto-session mode (see below).
+        #       2. Call /search API with the session ID generated in the first call.
+        #          Here, the previous search query gets considered in query
+        #          standing. I.e., if the first query is "How did Alphabet do in 2022?"
+        #          and the current query is "How about 2023?", the current query will
+        #          be interpreted as "How did Alphabet do in 2023?".
+        #
+        #     Example #2 (coordination between /search API calls and /answer API calls):
+        #       1. Call /search API with the auto-session mode (see below).
+        #       2. Call /answer API with the session ID generated in the first call.
+        #          Here, the answer generation happens in the context of the search
+        #          results from the first search call.
+        #
+        #     Auto-session mode: when `projects/.../sessions/-` is used, a new session
+        #     gets automatically created. Otherwise, users can use the create-session API
+        #     to create a session manually.
+        #
+        #     Multi-turn Search feature is currently at private GA stage. Please use
+        #     v1alpha or v1beta version instead before we launch this feature to public
+        #     GA. Or ask for allowlisting through Google Support team.
+        # @!attribute [rw] session_spec
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::SessionSpec]
+        #     Session specification.
+        #
+        #     Can be used only when `session` is set.
         class SearchRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -888,6 +943,107 @@ module Google
             end
           end
 
+          # Specification to enable natural language understanding capabilities for
+          # search requests.
+          # @!attribute [rw] filter_extraction_condition
+          #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::NaturalLanguageQueryUnderstandingSpec::FilterExtractionCondition]
+          #     The condition under which filter extraction should occur.
+          #     Default to [Condition.DISABLED][].
+          # @!attribute [rw] geo_search_query_detection_field_names
+          #   @return [::Array<::String>]
+          #     Field names used for location-based filtering, where geolocation filters
+          #     are detected in natural language search queries.
+          #     Only valid when the FilterExtractionCondition is set to `ENABLED`.
+          #
+          #     If this field is set, it overrides the field names set in
+          #     [ServingConfig.geo_search_query_detection_field_names][google.cloud.discoveryengine.v1beta.ServingConfig.geo_search_query_detection_field_names].
+          class NaturalLanguageQueryUnderstandingSpec
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Enum describing under which condition filter extraction should occur.
+            module FilterExtractionCondition
+              # Server behavior defaults to [Condition.DISABLED][].
+              CONDITION_UNSPECIFIED = 0
+
+              # Disables NL filter extraction.
+              DISABLED = 1
+
+              # Enables NL filter extraction.
+              ENABLED = 2
+            end
+          end
+
+          # Specification for search as you type in search requests.
+          # @!attribute [rw] condition
+          #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::SearchAsYouTypeSpec::Condition]
+          #     The condition under which search as you type should occur.
+          #     Default to
+          #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::SearchAsYouTypeSpec::Condition::DISABLED Condition.DISABLED}.
+          class SearchAsYouTypeSpec
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Enum describing under which condition search as you type should occur.
+            module Condition
+              # Server behavior defaults to
+              # {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::SearchAsYouTypeSpec::Condition::DISABLED Condition.DISABLED}.
+              CONDITION_UNSPECIFIED = 0
+
+              # Disables Search As You Type.
+              DISABLED = 1
+
+              # Enables Search As You Type.
+              ENABLED = 2
+            end
+          end
+
+          # Session specification.
+          #
+          # Multi-turn Search feature is currently at private GA stage. Please use
+          # v1alpha or v1beta version instead before we launch this feature to public
+          # GA. Or ask for allowlisting through Google Support team.
+          # @!attribute [rw] query_id
+          #   @return [::String]
+          #     If set, the search result gets stored to the "turn" specified by this
+          #     query ID.
+          #
+          #     Example: Let's say the session looks like this:
+          #       session {
+          #         name: ".../sessions/xxx"
+          #         turns {
+          #           query { text: "What is foo?" query_id: ".../questions/yyy" }
+          #           answer: "Foo is ..."
+          #         }
+          #         turns {
+          #           query { text: "How about bar then?" query_id: ".../questions/zzz" }
+          #         }
+          #       }
+          #
+          #     The user can call /search API with a request like this:
+          #
+          #        session: ".../sessions/xxx"
+          #        session_spec { query_id: ".../questions/zzz" }
+          #
+          #     Then, the API stores the search result, associated with the last turn.
+          #     The stored search result can be used by a subsequent /answer API call
+          #     (with the session ID and the query ID specified). Also, it is possible
+          #     to call /search and /answer in parallel with the same session ID & query
+          #     ID.
+          # @!attribute [rw] search_result_persistence_count
+          #   @return [::Integer]
+          #     The number of top search results to persist. The persisted search results
+          #     can be used for the subsequent /answer api call.
+          #
+          #     This field is simliar to the `summary_result_count` field in
+          #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::ContentSearchSpec::SummarySpec#summary_result_count SearchRequest.ContentSearchSpec.SummarySpec.summary_result_count}.
+          #
+          #     At most 10 results for documents mode, or 50 for chunks mode.
+          class SessionSpec
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # @!attribute [rw] key
           #   @return [::String]
           # @!attribute [rw] value
@@ -966,6 +1122,16 @@ module Google
         # @!attribute [rw] query_expansion_info
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::QueryExpansionInfo]
         #     Query expansion information for the returned results.
+        # @!attribute [rw] natural_language_query_understanding_info
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::NaturalLanguageQueryUnderstandingInfo]
+        #     Natural language query understanding information for the returned results.
+        # @!attribute [rw] session_info
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::SessionInfo]
+        #     Session information.
+        #
+        #     Only set if
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest#session SearchRequest.session}
+        #     is provided. See its description for more details.
         class SearchResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1213,6 +1379,12 @@ module Google
               #
               # Google skips the summary if the LLM addon is not enabled.
               LLM_ADDON_NOT_ENABLED = 5
+
+              # The no relevant content case.
+              #
+              # Google skips the summary if there is no relevant content in the
+              # retrieved search results.
+              NO_RELEVANT_CONTENT = 6
             end
           end
 
@@ -1241,6 +1413,166 @@ module Google
           #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::QueryExpansionSpec#pin_unexpanded_results SearchRequest.QueryExpansionSpec.pin_unexpanded_results}
           #     is set to true.
           class QueryExpansionInfo
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Information describing what natural language understanding was
+          # done on the input query.
+          # @!attribute [rw] extracted_filters
+          #   @return [::String]
+          #     The filters that were extracted from the input query.
+          # @!attribute [rw] rewritten_query
+          #   @return [::String]
+          #     Rewritten input query minus the extracted filters.
+          # @!attribute [rw] structured_extracted_filter
+          #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::NaturalLanguageQueryUnderstandingInfo::StructuredExtractedFilter]
+          #     The filters that were extracted from the input query represented in a
+          #     structured form.
+          class NaturalLanguageQueryUnderstandingInfo
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The filters that were extracted from the input query represented in a
+            # structured form.
+            # @!attribute [rw] expression
+            #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::NaturalLanguageQueryUnderstandingInfo::StructuredExtractedFilter::Expression]
+            #     The expression denoting the filter that was extracted from the input
+            #     query in a structured form. It can be a simple expression denoting a
+            #     single string, numerical or geolocation constraint or a compound
+            #     expression which is a combination of multiple expressions connected
+            #     using logical (OR and AND) operators.
+            class StructuredExtractedFilter
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Constraint expression of a string field.
+              # @!attribute [rw] field_name
+              #   @return [::String]
+              #     Name of the string field as defined in the schema.
+              # @!attribute [rw] values
+              #   @return [::Array<::String>]
+              #     Values of the string field. The record will only be returned if the
+              #     field value matches one of the values specified here.
+              class StringConstraint
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
+              # Constraint expression of a number field. Example: price < 100.
+              # @!attribute [rw] field_name
+              #   @return [::String]
+              #     Name of the numerical field as defined in the schema.
+              # @!attribute [rw] comparison
+              #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::NaturalLanguageQueryUnderstandingInfo::StructuredExtractedFilter::NumberConstraint::Comparison]
+              #     The comparison operation performed between the field value and the
+              #     value specified in the constraint.
+              # @!attribute [rw] value
+              #   @return [::Float]
+              #     The value specified in the numerical constraint.
+              class NumberConstraint
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+
+                # The comparison operation that was performed.
+                module Comparison
+                  # Undefined comparison operator.
+                  COMPARISON_UNSPECIFIED = 0
+
+                  # Denotes equality `=` operator.
+                  EQUALS = 1
+
+                  # Denotes less than or equal to `<=` operator.
+                  LESS_THAN_EQUALS = 2
+
+                  # Denotes less than `<` operator.
+                  LESS_THAN = 3
+
+                  # Denotes greater than or equal to `>=` operator.
+                  GREATER_THAN_EQUALS = 4
+
+                  # Denotes greater than `>` operator.
+                  GREATER_THAN = 5
+                end
+              end
+
+              # Constraint of a geolocation field.
+              # Name of the geolocation field as defined in the schema.
+              # @!attribute [rw] field_name
+              #   @return [::String]
+              #     The name of the geolocation field as defined in the schema.
+              # @!attribute [rw] address
+              #   @return [::String]
+              #     The reference address that was inferred from the input query. The
+              #     proximity of the reference address to the geolocation field will be
+              #     used to filter the results.
+              # @!attribute [rw] radius_in_meters
+              #   @return [::Float]
+              #     The radius in meters around the address. The record is returned if
+              #     the location of the geolocation field is within the radius.
+              class GeolocationConstraint
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
+              # Logical `And` operator.
+              # @!attribute [rw] expressions
+              #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::NaturalLanguageQueryUnderstandingInfo::StructuredExtractedFilter::Expression>]
+              #     The expressions that were ANDed together.
+              class AndExpression
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
+              # Logical `Or` operator.
+              # @!attribute [rw] expressions
+              #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::NaturalLanguageQueryUnderstandingInfo::StructuredExtractedFilter::Expression>]
+              #     The expressions that were ORed together.
+              class OrExpression
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
+              # The expression denoting the filter that was extracted from the input
+              # query.
+              # @!attribute [rw] string_constraint
+              #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::NaturalLanguageQueryUnderstandingInfo::StructuredExtractedFilter::StringConstraint]
+              #     String constraint expression.
+              # @!attribute [rw] number_constraint
+              #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::NaturalLanguageQueryUnderstandingInfo::StructuredExtractedFilter::NumberConstraint]
+              #     Numerical constraint expression.
+              # @!attribute [rw] geolocation_constraint
+              #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::NaturalLanguageQueryUnderstandingInfo::StructuredExtractedFilter::GeolocationConstraint]
+              #     Geolocation constraint expression.
+              # @!attribute [rw] and_expr
+              #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::NaturalLanguageQueryUnderstandingInfo::StructuredExtractedFilter::AndExpression]
+              #     Logical "And" compound operator connecting multiple expressions.
+              # @!attribute [rw] or_expr
+              #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::NaturalLanguageQueryUnderstandingInfo::StructuredExtractedFilter::OrExpression]
+              #     Logical "Or" compound operator connecting multiple expressions.
+              class Expression
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+            end
+          end
+
+          # Information about the session.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Name of the session.
+          #     If the auto-session mode is used (when
+          #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest#session SearchRequest.session}
+          #     ends with "-"), this field holds the newly generated session name.
+          # @!attribute [rw] query_id
+          #   @return [::String]
+          #     Query ID that corresponds to this search API call.
+          #     One session can have multiple turns, each with a unique query ID.
+          #
+          #     By specifying the session name and this query ID in the Answer API call,
+          #     the answer generation happens in the context of the search results from
+          #     this search call.
+          class SessionInfo
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

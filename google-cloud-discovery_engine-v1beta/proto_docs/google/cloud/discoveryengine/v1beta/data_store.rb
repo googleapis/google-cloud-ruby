@@ -61,6 +61,9 @@ module Google
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Timestamp the
         #     {::Google::Cloud::DiscoveryEngine::V1beta::DataStore DataStore} was created at.
+        # @!attribute [rw] language_info
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::LanguageInfo]
+        #     Language info for DataStore.
         # @!attribute [rw] document_processing_config
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::DocumentProcessingConfig]
         #     Configuration for Document understanding and enrichment.
@@ -101,6 +104,28 @@ module Google
             # The data store is used for public website search.
             PUBLIC_WEBSITE = 3
           end
+        end
+
+        # Language info for DataStore.
+        # @!attribute [rw] language_code
+        #   @return [::String]
+        #     The language code for the DataStore.
+        # @!attribute [r] normalized_language_code
+        #   @return [::String]
+        #     Output only. This is the normalized form of language_code.
+        #     E.g.: language_code of `en-GB`, `en_GB`, `en-UK` or `en-gb`
+        #     will have normalized_language_code of `en-GB`.
+        # @!attribute [r] language
+        #   @return [::String]
+        #     Output only. Language part of normalized_language_code.
+        #     E.g.: `en-US` -> `en`, `zh-Hans-HK` -> `zh`, `en` -> `en`.
+        # @!attribute [r] region
+        #   @return [::String]
+        #     Output only. Region part of normalized_language_code, if present.
+        #     E.g.: `en-US` -> `US`, `zh-Hans-HK` -> `HK`, `en` -> ``.
+        class LanguageInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

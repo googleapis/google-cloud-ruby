@@ -39,14 +39,27 @@ module Google
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::CustomTuningModel::ModelState]
         #     The state that the model is in (e.g.`TRAINING` or `TRAINING_FAILED`).
         # @!attribute [rw] create_time
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Protobuf::Timestamp]
         #     Timestamp the Model was created at.
         # @!attribute [rw] training_start_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Timestamp the model training was initiated.
+        # @!attribute [rw] metrics
+        #   @return [::Google::Protobuf::Map{::String => ::Float}]
+        #     The metrics of the trained model.
         class CustomTuningModel
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Float]
+          class MetricsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # The state of the model.
           module ModelState
@@ -67,6 +80,9 @@ module Google
 
             # The model training failed.
             TRAINING_FAILED = 5
+
+            # The model training finished successfully but metrics did not improve.
+            NO_IMPROVEMENT = 6
           end
         end
       end
