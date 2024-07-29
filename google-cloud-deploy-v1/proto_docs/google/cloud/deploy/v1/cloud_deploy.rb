@@ -336,6 +336,10 @@ module Google
           #     Service to the original Service during the stable phase deployment. If
           #     specified, must be between 15s and 3600s. If unspecified, there is no
           #     cutback time.
+          # @!attribute [rw] pod_selector_label
+          #   @return [::String]
+          #     Optional. The label to use when selecting Pods for the Deployment and
+          #     Service resources. This label must already be present in both resources.
           class GatewayServiceMesh
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -355,6 +359,10 @@ module Google
           #     overprovisioning is disabled then Cloud Deploy will limit the number of
           #     total Pods used for the deployment strategy to the number of Pods the
           #     Deployment has on the cluster.
+          # @!attribute [rw] pod_selector_label
+          #   @return [::String]
+          #     Optional. The label to use when selecting Pods for the Deployment
+          #     resource. This label must already be present in the Deployment.
           class ServiceNetworking
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3780,14 +3788,6 @@ module Google
         #     Required. ID of the rule. This id must be unique in the `Automation`
         #     resource to which this rule belongs. The format is
         #     `[a-z]([a-z0-9-]{0,61}[a-z0-9])?`.
-        # @!attribute [rw] source_phases
-        #   @return [::Array<::String>]
-        #     Optional. Phases within which jobs are subject to automatic repair actions
-        #     on failure. Proceeds only after phase name matched any one in the list, or
-        #     for all phases if unspecified. This value must consist of lower-case
-        #     letters, numbers, and hyphens, start with a letter and end with a letter or
-        #     a number, and have a max length of 63 characters. In other words, it must
-        #     match the following regex: `^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$`.
         # @!attribute [rw] jobs
         #   @return [::Array<::String>]
         #     Optional. Jobs to repair. Proceeds only after job name matched any one in
@@ -3797,53 +3797,10 @@ module Google
         #     letter and end with a letter or a number, and have a max length of 63
         #     characters. In other words, it must match the following regex:
         #     `^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$`.
-        # @!attribute [rw] repair_modes
-        #   @return [::Array<::Google::Cloud::Deploy::V1::RepairMode>]
-        #     Required. Defines the types of automatic repair actions for failed jobs.
         # @!attribute [r] condition
         #   @return [::Google::Cloud::Deploy::V1::AutomationRuleCondition]
         #     Output only. Information around the state of the 'Automation' rule.
         class RepairRolloutRule
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Configuration of the repair action.
-        # @!attribute [rw] retry
-        #   @return [::Google::Cloud::Deploy::V1::Retry]
-        #     Optional. Retries a failed job.
-        # @!attribute [rw] rollback
-        #   @return [::Google::Cloud::Deploy::V1::Rollback]
-        #     Optional. Rolls back a `Rollout`.
-        class RepairMode
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Retries the failed job.
-        # @!attribute [rw] attempts
-        #   @return [::Integer]
-        #     Required. Total number of retries. Retry is skipped if set to 0; The
-        #     minimum value is 1, and the maximum value is 10.
-        # @!attribute [rw] wait
-        #   @return [::Google::Protobuf::Duration]
-        #     Optional. How long to wait for the first retry. Default is 0, and the
-        #     maximum value is 14d.
-        # @!attribute [rw] backoff_mode
-        #   @return [::Google::Cloud::Deploy::V1::BackoffMode]
-        #     Optional. The pattern of how wait time will be increased. Default is
-        #     linear. Backoff mode will be ignored if `wait` is 0.
-        class Retry
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Rolls back a `Rollout`.
-        # @!attribute [rw] destination_phase
-        #   @return [::String]
-        #     Optional. The starting phase ID for the `Rollout`. If unspecified, the
-        #     `Rollout` will start in the stable phase.
-        class Rollback
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -4167,13 +4124,17 @@ module Google
         # @!attribute [r] rollout
         #   @return [::String]
         #     Output only. The name of the rollout that initiates the `AutomationRun`.
-        # @!attribute [r] current_repair_mode_index
-        #   @return [::Integer]
-        #     Output only. The index of the current repair action in the repair sequence.
         # @!attribute [r] repair_phases
         #   @return [::Array<::Google::Cloud::Deploy::V1::RepairPhase>]
         #     Output only. Records of the repair attempts. Each repair phase may have
         #     multiple retry attempts or single rollback attempt.
+        # @!attribute [r] phase_id
+        #   @return [::String]
+        #     Output only. The phase ID of the phase that includes the job being
+        #     repaired.
+        # @!attribute [r] job_id
+        #   @return [::String]
+        #     Output only. The job ID for the Job to repair.
         class RepairRolloutOperation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -4201,12 +4162,6 @@ module Google
         #   @return [::Google::Cloud::Deploy::V1::BackoffMode]
         #     Output only. The pattern of how the wait time of the retry attempt is
         #     calculated.
-        # @!attribute [r] phase_id
-        #   @return [::String]
-        #     Output only. The phase ID of the phase that includes the job being retried.
-        # @!attribute [r] job_id
-        #   @return [::String]
-        #     Output only. The job ID for the Job to retry.
         # @!attribute [r] attempts
         #   @return [::Array<::Google::Cloud::Deploy::V1::RetryAttempt>]
         #     Output only. Detail of a retry action.
@@ -4371,8 +4326,8 @@ module Google
           # The `repair` action is pending.
           REPAIR_STATE_PENDING = 5
 
-          # The `repair` action was skipped.
-          REPAIR_STATE_SKIPPED = 6
+          # The `repair` action was aborted.
+          REPAIR_STATE_ABORTED = 7
         end
       end
     end
