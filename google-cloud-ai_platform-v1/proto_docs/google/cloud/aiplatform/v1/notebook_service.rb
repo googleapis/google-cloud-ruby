@@ -383,6 +383,131 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
+        # Request message for [NotebookService.CreateNotebookExecutionJob]
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the Location to create the
+        #     NotebookExecutionJob. Format: `projects/{project}/locations/{location}`
+        # @!attribute [rw] notebook_execution_job
+        #   @return [::Google::Cloud::AIPlatform::V1::NotebookExecutionJob]
+        #     Required. The NotebookExecutionJob to create.
+        # @!attribute [rw] notebook_execution_job_id
+        #   @return [::String]
+        #     Optional. User specified ID for the NotebookExecutionJob.
+        class CreateNotebookExecutionJobRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Metadata information for
+        # {::Google::Cloud::AIPlatform::V1::NotebookService::Client#create_notebook_execution_job NotebookService.CreateNotebookExecutionJob}.
+        # @!attribute [rw] generic_metadata
+        #   @return [::Google::Cloud::AIPlatform::V1::GenericOperationMetadata]
+        #     The operation generic information.
+        # @!attribute [rw] progress_message
+        #   @return [::String]
+        #     A human-readable message that shows the intermediate progress details of
+        #     NotebookRuntime.
+        class CreateNotebookExecutionJobOperationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for [NotebookService.GetNotebookExecutionJob]
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the NotebookExecutionJob resource.
+        # @!attribute [rw] view
+        #   @return [::Google::Cloud::AIPlatform::V1::NotebookExecutionJobView]
+        #     Optional. The NotebookExecutionJob view. Defaults to BASIC.
+        class GetNotebookExecutionJobRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for [NotebookService.ListNotebookExecutionJobs]
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the Location from which to list the
+        #     NotebookExecutionJobs.
+        #     Format: `projects/{project}/locations/{location}`
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. An expression for filtering the results of the request. For field
+        #     names both snake_case and camelCase are supported.
+        #
+        #       * `notebookExecutionJob` supports = and !=. `notebookExecutionJob`
+        #       represents the NotebookExecutionJob ID.
+        #       * `displayName` supports = and != and regex.
+        #       * `schedule` supports = and != and regex.
+        #
+        #     Some examples:
+        #       * `notebookExecutionJob="123"`
+        #       * `notebookExecutionJob="my-execution-job"`
+        #       * `displayName="myDisplayName"` and `displayName=~"myDisplayNameRegex"`
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The standard list page size.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. The standard list page token.
+        #     Typically obtained via
+        #     [ListNotebookExecutionJobs.next_page_token][] of the previous
+        #     {::Google::Cloud::AIPlatform::V1::NotebookService::Client#list_notebook_execution_jobs NotebookService.ListNotebookExecutionJobs}
+        #     call.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. A comma-separated list of fields to order by, sorted in ascending
+        #     order. Use "desc" after a field name for descending. Supported fields:
+        #
+        #       * `display_name`
+        #       * `create_time`
+        #       * `update_time`
+        #
+        #     Example: `display_name, create_time desc`.
+        # @!attribute [rw] view
+        #   @return [::Google::Cloud::AIPlatform::V1::NotebookExecutionJobView]
+        #     Optional. The NotebookExecutionJob view. Defaults to BASIC.
+        class ListNotebookExecutionJobsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for [NotebookService.CreateNotebookExecutionJob]
+        # @!attribute [rw] notebook_execution_jobs
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::NotebookExecutionJob>]
+        #     List of NotebookExecutionJobs in the requested page.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token to retrieve next page of results.
+        #     Pass to [ListNotebookExecutionJobs.page_token][] to obtain that
+        #     page.
+        class ListNotebookExecutionJobsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for [NotebookService.DeleteNotebookExecutionJob]
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the NotebookExecutionJob resource to be deleted.
+        class DeleteNotebookExecutionJobRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Views for Get/List NotebookExecutionJob
+        module NotebookExecutionJobView
+          # When unspecified, the API defaults to the BASIC view.
+          NOTEBOOK_EXECUTION_JOB_VIEW_UNSPECIFIED = 0
+
+          # Includes all fields except for direct notebook inputs.
+          NOTEBOOK_EXECUTION_JOB_VIEW_BASIC = 1
+
+          # Includes all fields.
+          NOTEBOOK_EXECUTION_JOB_VIEW_FULL = 2
+        end
       end
     end
   end

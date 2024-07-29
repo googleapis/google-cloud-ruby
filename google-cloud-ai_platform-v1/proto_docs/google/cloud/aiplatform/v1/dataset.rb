@@ -24,7 +24,7 @@ module Google
         # A collection of DataItems and Annotations on them.
         # @!attribute [r] name
         #   @return [::String]
-        #     Output only. The resource name of the Dataset.
+        #     Output only. Identifier. The resource name of the Dataset.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Required. The user-defined name of the Dataset.

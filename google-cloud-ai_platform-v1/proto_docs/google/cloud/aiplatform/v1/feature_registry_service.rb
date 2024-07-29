@@ -145,6 +145,9 @@ module Google
         #     Updatable fields:
         #
         #       * `labels`
+        #       * `description`
+        #       * `big_query`
+        #       * `big_query.entity_id_columns`
         class UpdateFeatureGroupRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -1265,6 +1265,26 @@
               "methods": [
                 "start_notebook_runtime"
               ]
+            },
+            "CreateNotebookExecutionJob": {
+              "methods": [
+                "create_notebook_execution_job"
+              ]
+            },
+            "GetNotebookExecutionJob": {
+              "methods": [
+                "get_notebook_execution_job"
+              ]
+            },
+            "ListNotebookExecutionJobs": {
+              "methods": [
+                "list_notebook_execution_jobs"
+              ]
+            },
+            "DeleteNotebookExecutionJob": {
+              "methods": [
+                "delete_notebook_execution_job"
+              ]
             }
           }
         }

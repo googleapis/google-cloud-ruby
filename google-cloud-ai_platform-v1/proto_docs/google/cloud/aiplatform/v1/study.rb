@@ -184,7 +184,6 @@ module Google
           end
         end
 
-        # Next ID: 3
         # @!attribute [rw] description
         #   @return [::String]
         #     A human-readable field which can store a description of this context.

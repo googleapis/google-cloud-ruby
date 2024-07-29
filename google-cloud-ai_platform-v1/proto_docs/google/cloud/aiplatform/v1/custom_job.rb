@@ -331,6 +331,9 @@ module Google
         #     Restarts the entire CustomJob if a worker gets restarted.
         #     This feature can be used by distributed training jobs that are not
         #     resilient to workers leaving and joining a job.
+        # @!attribute [rw] strategy
+        #   @return [::Google::Cloud::AIPlatform::V1::Scheduling::Strategy]
+        #     Optional. This determines which type of scheduling strategy to use.
         # @!attribute [rw] disable_retries
         #   @return [::Boolean]
         #     Optional. Indicates if the job should retry for internal errors after the
@@ -339,6 +342,22 @@ module Google
         class Scheduling
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Optional. This determines which type of scheduling strategy to use. Right
+          # now users have two options such as ON_DEMAND which will use regular on
+          # demand resources to schedule the job, the other is LOW_COST which would
+          # leverage spot resources alongwith regular resources to schedule
+          # the job.
+          module Strategy
+            # Strategy will default to ON_DEMAND.
+            STRATEGY_UNSPECIFIED = 0
+
+            # Regular on-demand provisioning strategy.
+            ON_DEMAND = 1
+
+            # Low cost by making potential use of spot resources.
+            LOW_COST = 2
+          end
         end
       end
     end

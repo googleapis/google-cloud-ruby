@@ -82,6 +82,8 @@ class ::Google::Cloud::AIPlatform::V1::LlmUtilityService::Rest::ClientTest < Min
     model = "hello world"
     instances = [{}]
     contents = [{}]
+    system_instruction = {}
+    tools = [{}]
 
     count_tokens_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -97,27 +99,27 @@ class ::Google::Cloud::AIPlatform::V1::LlmUtilityService::Rest::ClientTest < Min
         end
 
         # Use hash object
-        client.count_tokens({ endpoint: endpoint, model: model, instances: instances, contents: contents }) do |_result, response|
+        client.count_tokens({ endpoint: endpoint, model: model, instances: instances, contents: contents, system_instruction: system_instruction, tools: tools }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.count_tokens endpoint: endpoint, model: model, instances: instances, contents: contents do |_result, response|
+        client.count_tokens endpoint: endpoint, model: model, instances: instances, contents: contents, system_instruction: system_instruction, tools: tools do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.count_tokens ::Google::Cloud::AIPlatform::V1::CountTokensRequest.new(endpoint: endpoint, model: model, instances: instances, contents: contents) do |_result, response|
+        client.count_tokens ::Google::Cloud::AIPlatform::V1::CountTokensRequest.new(endpoint: endpoint, model: model, instances: instances, contents: contents, system_instruction: system_instruction, tools: tools) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.count_tokens({ endpoint: endpoint, model: model, instances: instances, contents: contents }, call_options) do |_result, response|
+        client.count_tokens({ endpoint: endpoint, model: model, instances: instances, contents: contents, system_instruction: system_instruction, tools: tools }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.count_tokens(::Google::Cloud::AIPlatform::V1::CountTokensRequest.new(endpoint: endpoint, model: model, instances: instances, contents: contents), call_options) do |_result, response|
+        client.count_tokens(::Google::Cloud::AIPlatform::V1::CountTokensRequest.new(endpoint: endpoint, model: model, instances: instances, contents: contents, system_instruction: system_instruction, tools: tools), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

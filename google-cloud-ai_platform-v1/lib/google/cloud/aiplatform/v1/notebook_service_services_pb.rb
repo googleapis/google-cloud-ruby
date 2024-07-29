@@ -56,6 +56,14 @@ module Google
             rpc :UpgradeNotebookRuntime, ::Google::Cloud::AIPlatform::V1::UpgradeNotebookRuntimeRequest, ::Google::Longrunning::Operation
             # Starts a NotebookRuntime.
             rpc :StartNotebookRuntime, ::Google::Cloud::AIPlatform::V1::StartNotebookRuntimeRequest, ::Google::Longrunning::Operation
+            # Creates a NotebookExecutionJob.
+            rpc :CreateNotebookExecutionJob, ::Google::Cloud::AIPlatform::V1::CreateNotebookExecutionJobRequest, ::Google::Longrunning::Operation
+            # Gets a NotebookExecutionJob.
+            rpc :GetNotebookExecutionJob, ::Google::Cloud::AIPlatform::V1::GetNotebookExecutionJobRequest, ::Google::Cloud::AIPlatform::V1::NotebookExecutionJob
+            # Lists NotebookExecutionJobs in a Location.
+            rpc :ListNotebookExecutionJobs, ::Google::Cloud::AIPlatform::V1::ListNotebookExecutionJobsRequest, ::Google::Cloud::AIPlatform::V1::ListNotebookExecutionJobsResponse
+            # Deletes a NotebookExecutionJob.
+            rpc :DeleteNotebookExecutionJob, ::Google::Cloud::AIPlatform::V1::DeleteNotebookExecutionJobRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

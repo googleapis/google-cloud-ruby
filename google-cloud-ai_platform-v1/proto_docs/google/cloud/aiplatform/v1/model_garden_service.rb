@@ -31,10 +31,14 @@ module Google
         # @!attribute [rw] language_code
         #   @return [::String]
         #     Optional. The IETF BCP-47 language code representing the language in which
-        #     the publisher model's text information should be written in (see go/bcp47).
+        #     the publisher model's text information should be written in.
         # @!attribute [rw] view
         #   @return [::Google::Cloud::AIPlatform::V1::PublisherModelView]
         #     Optional. PublisherModel view specifying which fields to read.
+        # @!attribute [rw] is_hugging_face_model
+        #   @return [::Boolean]
+        #     Optional. Boolean indicates whether the requested model is a Hugging Face
+        #     model.
         class GetPublisherModelRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

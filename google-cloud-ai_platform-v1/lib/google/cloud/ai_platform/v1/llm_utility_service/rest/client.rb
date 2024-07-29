@@ -201,7 +201,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload count_tokens(endpoint: nil, model: nil, instances: nil, contents: nil)
+              # @overload count_tokens(endpoint: nil, model: nil, instances: nil, contents: nil, system_instruction: nil, tools: nil)
               #   Pass arguments to `count_tokens` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -211,14 +211,25 @@ module Google
               #     Format:
               #     `projects/{project}/locations/{location}/endpoints/{endpoint}`
               #   @param model [::String]
-              #     Required. The name of the publisher model requested to serve the
+              #     Optional. The name of the publisher model requested to serve the
               #     prediction. Format:
               #     `projects/{project}/locations/{location}/publishers/*/models/*`
               #   @param instances [::Array<::Google::Protobuf::Value, ::Hash>]
-              #     Required. The instances that are the input to token counting call.
+              #     Optional. The instances that are the input to token counting call.
               #     Schema is identical to the prediction schema of the underlying model.
               #   @param contents [::Array<::Google::Cloud::AIPlatform::V1::Content, ::Hash>]
-              #     Required. Input content.
+              #     Optional. Input content.
+              #   @param system_instruction [::Google::Cloud::AIPlatform::V1::Content, ::Hash]
+              #     Optional. The user provided system instructions for the model.
+              #     Note: only text should be used in parts and content in each part will be in
+              #     a separate paragraph.
+              #   @param tools [::Array<::Google::Cloud::AIPlatform::V1::Tool, ::Hash>]
+              #     Optional. A list of `Tools` the model may use to generate the next
+              #     response.
+              #
+              #     A `Tool` is a piece of code that enables the system to interact with
+              #     external systems to perform an action, or set of actions, outside of
+              #     knowledge and scope of the model.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::AIPlatform::V1::CountTokensResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

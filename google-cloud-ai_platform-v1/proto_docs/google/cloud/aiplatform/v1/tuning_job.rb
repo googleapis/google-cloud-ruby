@@ -129,6 +129,9 @@ module Google
         # @!attribute [r] sum
         #   @return [::Integer]
         #     Output only. Sum of a given population of values.
+        # @!attribute [r] billable_sum
+        #   @return [::Integer]
+        #     Output only. Sum of a given population of values that are billable.
         # @!attribute [r] min
         #   @return [::Float]
         #     Output only. The minimum of the population values.
@@ -179,8 +182,12 @@ module Google
         #   @return [::Integer]
         #     Output only. Number of tuning characters in the tuning dataset.
         # @!attribute [r] total_billable_character_count
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Integer]
         #     Output only. Number of billable characters in the tuning dataset.
+        # @!attribute [r] total_billable_token_count
+        #   @return [::Integer]
+        #     Output only. Number of billable tokens in the tuning dataset.
         # @!attribute [r] tuning_step_count
         #   @return [::Integer]
         #     Output only. Number of tuning steps for this Tuning Job.
