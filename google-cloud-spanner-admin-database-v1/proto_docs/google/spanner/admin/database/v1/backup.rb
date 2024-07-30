@@ -73,6 +73,24 @@ module Google
             # @!attribute [r] size_bytes
             #   @return [::Integer]
             #     Output only. Size of the backup in bytes.
+            # @!attribute [r] freeable_size_bytes
+            #   @return [::Integer]
+            #     Output only. The number of bytes that will be freed by deleting this
+            #     backup. This value will be zero if, for example, this backup is part of an
+            #     incremental backup chain and younger backups in the chain require that we
+            #     keep its data. For backups not in an incremental backup chain, this is
+            #     always the size of the backup. This value may change if backups on the same
+            #     chain get created, deleted or expired.
+            # @!attribute [r] exclusive_size_bytes
+            #   @return [::Integer]
+            #     Output only. For a backup in an incremental backup chain, this is the
+            #     storage space needed to keep the data that has changed since the previous
+            #     backup. For all other backups, this is always the size of the backup. This
+            #     value may change if backups on the same chain get deleted or expired.
+            #
+            #     This field can be used to calculate the total storage space used by a set
+            #     of backups. For example, the total space used by all backups of a database
+            #     can be computed by summing up this field.
             # @!attribute [r] state
             #   @return [::Google::Cloud::Spanner::Admin::Database::V1::Backup::State]
             #     Output only. The current state of the backup.
@@ -126,6 +144,21 @@ module Google
             #     the list of all backup schedule URIs that are associated with creating
             #     this backup. If collapsing is not done, then this field captures the
             #     single backup schedule URI associated with creating this backup.
+            # @!attribute [r] incremental_backup_chain_id
+            #   @return [::String]
+            #     Output only. Populated only for backups in an incremental backup chain.
+            #     Backups share the same chain id if and only if they belong to the same
+            #     incremental backup chain. Use this field to determine which backups are
+            #     part of the same incremental backup chain. The ordering of backups in the
+            #     chain can be determined by ordering the backup `version_time`.
+            # @!attribute [r] oldest_version_time
+            #   @return [::Google::Protobuf::Timestamp]
+            #     Output only. Data deleted at a time older than this is guaranteed not to be
+            #     retained in order to support this backup. For a backup in an incremental
+            #     backup chain, this is the version time of the oldest backup that exists or
+            #     ever existed in the chain. For all other backups, this is the version time
+            #     of the backup. This field can be used to understand what data is being
+            #     retained by the backup system.
             class Backup
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -656,6 +689,17 @@ module Google
             # A full backup stores the entire contents of the database at a given
             # version time.
             class FullBackupSpec
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The specification for incremental backup chains.
+            # An incremental backup stores the delta of changes between a previous
+            # backup and the database contents at a given version time. An
+            # incremental backup chain consists of a full backup and zero or more
+            # successive incremental backups. The first backup created for an
+            # incremental backup chain is always a full backup.
+            class IncrementalBackupSpec
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
