@@ -73,9 +73,10 @@ module Google
         #     Required. Value for parent.
         # @!attribute [rw] volume_id
         #   @return [::String]
-        #     Required. Id of the requesting volume
-        #     If auto-generating Id server-side, remove this field and
-        #     Id from the method_signature of Create RPC
+        #     Required. Id of the requesting volume. Must be unique within the parent
+        #     resource. Must contain only letters, numbers, underscore and hyphen, with
+        #     the first character a letter or underscore, the last a letter or underscore
+        #     or a number, and a 63 character maximum.
         # @!attribute [rw] volume
         #   @return [::Google::Cloud::NetApp::V1::Volume]
         #     Required. The volume being created.
@@ -232,9 +233,24 @@ module Google
         # @!attribute [rw] restricted_actions
         #   @return [::Array<::Google::Cloud::NetApp::V1::RestrictedAction>]
         #     Optional. List of actions that are restricted on this volume.
+        # @!attribute [rw] large_capacity
+        #   @return [::Boolean]
+        #     Optional. Flag indicating if the volume will be a large capacity volume or
+        #     a regular volume.
+        # @!attribute [rw] multiple_endpoints
+        #   @return [::Boolean]
+        #     Optional. Flag indicating if the volume will have an IP address per node
+        #     for volumes supporting multiple IP endpoints. Only the volume with
+        #     large_capacity will be allowed to have multiple endpoints.
         # @!attribute [rw] tiering_policy
         #   @return [::Google::Cloud::NetApp::V1::TieringPolicy]
         #     Tiering policy for the volume.
+        # @!attribute [r] replica_zone
+        #   @return [::String]
+        #     Output only. Specifies the replica zone for regional volume.
+        # @!attribute [r] zone
+        #   @return [::String]
+        #     Output only. Specifies the active zone for regional volume.
         class Volume
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

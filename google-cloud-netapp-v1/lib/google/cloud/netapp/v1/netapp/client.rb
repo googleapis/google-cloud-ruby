@@ -470,9 +470,10 @@ module Google
             #   @param parent [::String]
             #     Required. Value for parent.
             #   @param storage_pool_id [::String]
-            #     Required. Id of the requesting storage pool
-            #     If auto-generating Id server-side, remove this field and
-            #     id from the method_signature of Create RPC
+            #     Required. Id of the requesting storage pool. Must be unique within the
+            #     parent resource. Must contain only letters, numbers, underscore and hyphen,
+            #     with the first character a letter or underscore, the last a letter or
+            #     underscore or a number, and a 63 character maximum.
             #   @param storage_pool [::Google::Cloud::NetApp::V1::StoragePool, ::Hash]
             #     Required. The required parameters to create a new storage pool.
             #
@@ -1036,9 +1037,10 @@ module Google
             #   @param parent [::String]
             #     Required. Value for parent.
             #   @param volume_id [::String]
-            #     Required. Id of the requesting volume
-            #     If auto-generating Id server-side, remove this field and
-            #     Id from the method_signature of Create RPC
+            #     Required. Id of the requesting volume. Must be unique within the parent
+            #     resource. Must contain only letters, numbers, underscore and hyphen, with
+            #     the first character a letter or underscore, the last a letter or underscore
+            #     or a number, and a 63 character maximum.
             #   @param volume [::Google::Cloud::NetApp::V1::Volume, ::Hash]
             #     Required. The volume being created.
             #
@@ -1627,9 +1629,10 @@ module Google
             #   @param snapshot [::Google::Cloud::NetApp::V1::Snapshot, ::Hash]
             #     Required. A snapshot resource
             #   @param snapshot_id [::String]
-            #     Required. ID of the snapshot to create.
-            #     This value must start with a lowercase letter followed by up to 62
-            #     lowercase letters, numbers, or hyphens, and cannot end with a hyphen.
+            #     Required. ID of the snapshot to create. Must be unique within the parent
+            #     resource. Must contain only letters, numbers, underscore and hyphen, with
+            #     the first character a letter or underscore, the last a letter or underscore
+            #     or a number, and a 63 character maximum.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -2106,7 +2109,10 @@ module Google
             #   @param active_directory [::Google::Cloud::NetApp::V1::ActiveDirectory, ::Hash]
             #     Required. Fields of the to be created active directory.
             #   @param active_directory_id [::String]
-            #     Required. ID of the active directory to create.
+            #     Required. ID of the active directory to create. Must be unique within the
+            #     parent resource. Must contain only letters, numbers, underscore and hyphen,
+            #     with the first character a letter or underscore, the last a letter or
+            #     underscore or a number, and a 63 character maximum.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -2496,9 +2502,10 @@ module Google
             #   @param parent [::String]
             #     Required. Value for parent.
             #   @param kms_config_id [::String]
-            #     Required. Id of the requesting KmsConfig
-            #     If auto-generating Id server-side, remove this field and
-            #     id from the method_signature of Create RPC
+            #     Required. Id of the requesting KmsConfig. Must be unique within the parent
+            #     resource. Must contain only letters, numbers, underscore and hyphen, with
+            #     the first character a letter or underscore, the last a letter or underscore
+            #     or a number, and a 63 character maximum.
             #   @param kms_config [::Google::Cloud::NetApp::V1::KmsConfig, ::Hash]
             #     Required. The required parameters to create a new KmsConfig.
             #
@@ -3249,9 +3256,10 @@ module Google
             #   @param replication [::Google::Cloud::NetApp::V1::Replication, ::Hash]
             #     Required. A replication resource
             #   @param replication_id [::String]
-            #     Required. ID of the replication to create.
-            #     This value must start with a lowercase letter followed by up to 62
-            #     lowercase letters, numbers, or hyphens, and cannot end with a hyphen.
+            #     Required. ID of the replication to create. Must be unique within the parent
+            #     resource. Must contain only letters, numbers, underscore and hyphen, with
+            #     the first character a letter or underscore, the last a letter or underscore
+            #     or a number, and a 63 character maximum.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -3835,11 +3843,9 @@ module Google
             #   @param backup_vault_id [::String]
             #     Required. The ID to use for the backupVault.
             #     The ID must be unique within the specified location.
-            #     The max supported length is 63 characters.
-            #     This value must start with a lowercase letter followed by up to 62
-            #     lowercase letters, numbers, or hyphens, and cannot end with a hyphen.
-            #     Values that do not match this pattern will trigger an INVALID_ARGUMENT
-            #     error.
+            #     Must contain only letters, numbers, underscore and hyphen, with the first
+            #     character a letter or underscore, the last a letter or underscore or a
+            #     number, and a 63 character maximum.
             #   @param backup_vault [::Google::Cloud::NetApp::V1::BackupVault, ::Hash]
             #     Required. A backupVault resource
             #
@@ -4327,10 +4333,9 @@ module Google
             #   @param backup_id [::String]
             #     Required. The ID to use for the backup.
             #     The ID must be unique within the specified backupVault.
-            #     This value must start with a lowercase letter followed by up to 62
-            #     lowercase letters, numbers, or hyphens, and cannot end with a hyphen.
-            #     Values that do not match this pattern will trigger an INVALID_ARGUMENT
-            #     error.
+            #     Must contain only letters, numbers, underscore and hyphen, with the first
+            #     character a letter or underscore, the last a letter or underscore or a
+            #     number, and a 63 character maximum.
             #   @param backup [::Google::Cloud::NetApp::V1::Backup, ::Hash]
             #     Required. A backup resource
             #
@@ -4828,8 +4833,9 @@ module Google
             #   @param backup_policy_id [::String]
             #     Required. The ID to use for the backup policy.
             #     The ID must be unique within the specified location.
-            #     This value must start with a lowercase letter followed by up to 62
-            #     lowercase letters, numbers, or hyphens, and cannot end with a hyphen.
+            #     Must contain only letters, numbers, underscore and hyphen, with the first
+            #     character a letter or underscore, the last a letter or underscore or a
+            #     number, and a 63 character maximum.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
