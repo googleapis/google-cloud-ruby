@@ -61,6 +61,9 @@ module Grafeas
     # @!attribute [rw] sbom_status
     #   @return [::Grafeas::V1::DiscoveryOccurrence::SBOMStatus]
     #     The status of an SBOM generation.
+    # @!attribute [rw] vulnerability_attestation
+    #   @return [::Grafeas::V1::DiscoveryOccurrence::VulnerabilityAttestation]
+    #     The status of an vulnerability attestation generation.
     class DiscoveryOccurrence
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -96,6 +99,33 @@ module Grafeas
 
           # SBOM scanning has completed.
           COMPLETE = 2
+        end
+      end
+
+      # The status of an vulnerability attestation generation.
+      # @!attribute [rw] last_attempt_time
+      #   @return [::Google::Protobuf::Timestamp]
+      #     The last time we attempted to generate an attestation.
+      # @!attribute [rw] state
+      #   @return [::Grafeas::V1::DiscoveryOccurrence::VulnerabilityAttestation::VulnerabilityAttestationState]
+      #     The success/failure state of the latest attestation attempt.
+      # @!attribute [rw] error
+      #   @return [::String]
+      #     If failure, the error reason for why the attestation generation failed.
+      class VulnerabilityAttestation
+        include ::Google::Protobuf::MessageExts
+        extend ::Google::Protobuf::MessageExts::ClassMethods
+
+        # An enum indicating the state of the attestation generation.
+        module VulnerabilityAttestationState
+          # Default unknown state.
+          VULNERABILITY_ATTESTATION_STATE_UNSPECIFIED = 0
+
+          # Attestation was successfully generated and stored.
+          SUCCESS = 1
+
+          # Attestation was unsuccessfully generated and stored.
+          FAILURE = 2
         end
       end
 
