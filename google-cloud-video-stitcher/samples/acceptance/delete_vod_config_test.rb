@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,19 +14,22 @@
 
 require_relative "helper"
 
-describe "#list_vod_stitch_details", :stitcher_snippet do
-  it "lists the stitch details for a VOD session" do
-    sample = SampleLoader.load "list_vod_stitch_details.rb"
+describe "#delete_vod_config", :stitcher_snippet do
+  it "deletes a VOD config" do
+    sample = SampleLoader.load "delete_vod_config.rb"
 
     refute_nil vod_config
     @vod_config_created = true
 
-    refute_nil vod_session
-    @session_id = vod_session.name.split("/").last
+    client.get_vod_config name: vod_config_name
 
-    assert_output %r{VOD stitch details:\n#{vod_session.name}/vodStitchDetails/\S+} do
+    assert_output(/Deleted VOD config/) do
       sample.run project_id: project_id, location: location_id,
-                 session_id: @session_id
+                 vod_config_id: vod_config_id
+    end
+
+    assert_raises Google::Cloud::NotFoundError do
+      client.get_vod_config name: vod_config_name
     end
   end
 end

@@ -52,7 +52,11 @@ class StitcherSnippetSpec < Minitest::Spec
   let(:akamai_token_key) { "VGhpcyBpcyBhIHRlc3Qgc3RyaW5nLg==" }
   let(:updated_akamai_token_key) { "VGhpcyBpcyBhbiB1cGRhdGVkIHRlc3Qgc3RyaW5nLg==" }
 
+  let(:vod_config_id) { "my-vod-config-test-#{(Time.now.to_f * 1000).to_i}" }
+  let(:vod_config_name) { "projects/#{project_id}/locations/#{location_id}/vodConfigs/#{vod_config_id}" }
+
   let(:vod_uri) { "https://storage.googleapis.com/cloud-samples-data/media/hls-vod/manifest.m3u8" }
+  let(:updated_vod_uri) { "https://storage.googleapis.com/cloud-samples-data/media/hls-vod/manifest.mpd" }
   let(:vod_ad_tag_uri) { "https://pubads.g.doubleclick.net/gampad/ads?iu=/21775744923/external/vmap_ad_samples&sz=640x480&cust_params=sample_ar%3Dpreonly&ciu_szs=300x250%2C728x90&gdfp_req=1&ad_rule=1&output=vmap&unviewed_position_start=1&env=vp&impl=s&correlator=" }
 
   let(:live_config_id) { "my-live-config-test-#{(Time.now.to_f * 1000).to_i}" }
@@ -66,6 +70,7 @@ class StitcherSnippetSpec < Minitest::Spec
   attr_writer :cloud_cdn_key_created
   attr_writer :media_cdn_key_created
   attr_writer :live_config_created
+  attr_writer :vod_config_created
 
   before do
     @slate_created = false
@@ -73,6 +78,7 @@ class StitcherSnippetSpec < Minitest::Spec
     @cloud_cdn_key_created = false
     @media_cdn_key_created = false
     @live_config_created = false
+    @vod_config_created = false
     @session_id = ""
     @ad_tag_detail_id = ""
     @stitch_detail_id = ""
@@ -120,6 +126,21 @@ class StitcherSnippetSpec < Minitest::Spec
         puts "Rescued: #{e.inspect}"
       end
     end
+
+    # Remove old VOD configs in the test project if they exist
+    response = client.list_vod_configs parent: location_path
+    response.each do |vod_config|
+      tmp = vod_config.name.to_s.split "-"
+      create_time = tmp.last.to_i
+      now = (Time.now.to_f * 1000).to_i # Milliseconds, preserves float value for precision
+      next if create_time >= (now - DELETION_THRESHOLD_TIME_HOURS_IN_MILLISECONDS)
+      begin
+        operation = client.delete_vod_config name: vod_config.name.to_s
+        operation.wait_until_done!
+      rescue Google::Cloud::NotFoundError => e
+        puts "Rescued: #{e.inspect}"
+      end
+    end
   end
 
   let :slate do
@@ -130,13 +151,6 @@ class StitcherSnippetSpec < Minitest::Spec
     )
     operation.wait_until_done!
     operation.response
-  end
-
-  let :vod_session do
-    client.create_vod_session(
-      parent: location_path,
-      vod_session: vod_session_def(vod_uri, vod_ad_tag_uri)
-    )
   end
 
   let :live_config do
@@ -153,6 +167,23 @@ class StitcherSnippetSpec < Minitest::Spec
     client.create_live_session(
       parent: location_path,
       live_session: live_session_def(live_config_name)
+    )
+  end
+
+  let :vod_config do
+    operation = client.create_vod_config(
+      parent: location_path,
+      vod_config_id: vod_config_id,
+      vod_config: vod_config_def(vod_uri, vod_ad_tag_uri)
+    )
+    operation.wait_until_done!
+    operation.response
+  end
+
+  let :vod_session do
+    client.create_vod_session(
+      parent: location_path,
+      vod_session: vod_session_def(vod_config_name)
     )
   end
 
@@ -227,6 +258,14 @@ class StitcherSnippetSpec < Minitest::Spec
         puts "Rescued: #{e.inspect}"
       end
     end
+    if @vod_config_created
+      begin
+        operation = client.delete_vod_config name: vod_config_name
+        operation.wait_until_done!
+      rescue Google::Cloud::NotFoundError, Google::Cloud::FailedPreconditionError => e
+        puts "Rescued: #{e.inspect}"
+      end
+    end
   end
 
   ##
@@ -285,10 +324,16 @@ class StitcherSnippetSpec < Minitest::Spec
     }
   end
 
-  def vod_session_def source_uri, ad_tag_uri
+  def vod_config_def source_uri, ad_tag_uri
     {
       source_uri: source_uri,
-      ad_tag_uri: ad_tag_uri,
+      ad_tag_uri: ad_tag_uri
+    }
+  end
+
+  def vod_session_def vod_config_name
+    {
+      vod_config: vod_config_name,
       ad_tracking: Google::Cloud::Video::Stitcher::V1::AdTracking::SERVER
     }
   end

@@ -21,23 +21,23 @@ require "google/cloud/video/stitcher"
 #
 # @param project_id [String] Your Google Cloud project (e.g. "my-project")
 # @param location [String] The location (e.g. "us-central1")
-# @param source_uri [String] The URI of an MPEG-DASH manifest (.mpd) file or
-#   an M3U playlist manifest (.m3u8) file
-#   (e.g. "https://storage.googleapis.com/my-bucket/main.mpd")
-# @param ad_tag_uri [String] The URI of the ad tag. See VMAP Pre-roll at
-#   https://developers.google.com/interactive-media-ads/docs/sdks/html5/client-side/tags.
+# @param vod_config_id [String] The VOD config ID (e.g. "my-vod-config") to use
 #
-def create_vod_session project_id:, location:, source_uri:, ad_tag_uri:
+def create_vod_session project_id:, location:, vod_config_id:
   # Create a Video Stitcher client.
   client = Google::Cloud::Video::Stitcher.video_stitcher_service
 
   # Build the resource name of the parent.
   parent = client.location_path project: project_id, location: location
 
+  # Build the resource name of the VOD config.
+  vod_config_name = client.vod_config_path project: project_id,
+                                           location: location,
+                                           vod_config: vod_config_id
+
   # Set the session fields.
   new_vod_session = {
-    source_uri: source_uri,
-    ad_tag_uri: ad_tag_uri,
+    vod_config: vod_config_name,
     ad_tracking: Google::Cloud::Video::Stitcher::V1::AdTracking::SERVER
   }
 

@@ -18,6 +18,9 @@ describe "#get_vod_session", :stitcher_snippet do
   it "gets the VOD session" do
     sample = SampleLoader.load "get_vod_session.rb"
 
+    refute_nil vod_config
+    @vod_config_created = true
+
     refute_nil vod_session
     @session_id = vod_session.name.split("/").last
 
