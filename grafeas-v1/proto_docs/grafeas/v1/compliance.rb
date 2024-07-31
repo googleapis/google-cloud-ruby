@@ -81,6 +81,9 @@ module Grafeas
     #   @return [::Array<::Grafeas::V1::NonCompliantFile>]
     # @!attribute [rw] non_compliance_reason
     #   @return [::String]
+    # @!attribute [rw] version
+    #   @return [::Grafeas::V1::ComplianceVersion]
+    #     The OS and config version the benchmark was run on.
     class ComplianceOccurrence
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
