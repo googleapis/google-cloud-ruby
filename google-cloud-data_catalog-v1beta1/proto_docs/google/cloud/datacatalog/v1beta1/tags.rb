@@ -170,6 +170,8 @@ module Google
 
             # TagTemplate and its tags are auto-copied to Dataplex service.
             # Visible in both services. Editable in DataCatalog, read-only in Dataplex.
+            # Deprecated: Individual TagTemplate migration is deprecated in favor of
+            # organization or project wide TagTemplate migration opt-in.
             MIGRATED = 1
           end
         end
