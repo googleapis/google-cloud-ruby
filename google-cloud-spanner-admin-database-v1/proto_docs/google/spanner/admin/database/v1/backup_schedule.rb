@@ -63,6 +63,9 @@ module Google
             # @!attribute [rw] full_backup_spec
             #   @return [::Google::Cloud::Spanner::Admin::Database::V1::FullBackupSpec]
             #     The schedule creates only full backups.
+            # @!attribute [rw] incremental_backup_spec
+            #   @return [::Google::Cloud::Spanner::Admin::Database::V1::IncrementalBackupSpec]
+            #     The schedule creates incremental backup chains.
             # @!attribute [r] update_time
             #   @return [::Google::Protobuf::Timestamp]
             #     Output only. The timestamp at which the schedule was last updated.
