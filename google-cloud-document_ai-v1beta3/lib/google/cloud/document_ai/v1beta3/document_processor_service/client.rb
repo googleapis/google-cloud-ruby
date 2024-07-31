@@ -223,7 +223,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload process_document(inline_document: nil, raw_document: nil, gcs_document: nil, name: nil, document: nil, skip_human_review: nil, field_mask: nil, process_options: nil, labels: nil)
+            # @overload process_document(inline_document: nil, raw_document: nil, gcs_document: nil, name: nil, document: nil, skip_human_review: nil, field_mask: nil, process_options: nil, labels: nil, imageless_mode: nil)
             #   Pass arguments to `process_document` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -267,6 +267,8 @@ module Google
             #     (Unicode codepoints) and can only contain lowercase letters, numeric
             #     characters, underscores, and dashes. International characters are allowed.
             #     Label values are optional. Label keys must start with a letter.
+            #   @param imageless_mode [::Boolean]
+            #     Optional. Option to remove images from the document.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DocumentAI::V1beta3::ProcessResponse]
@@ -1501,6 +1503,10 @@ module Google
             # Creates a processor from the
             # {::Google::Cloud::DocumentAI::V1beta3::ProcessorType ProcessorType} provided.
             # The processor will be at `ENABLED` state by default after its creation.
+            # Note that this method requires the `documentai.processors.create`
+            # permission on the project, which is highly privileged. A user or service
+            # account with this permission can create new processors that can interact
+            # with any gcs bucket in your project.
             #
             # @overload create_processor(request, options = nil)
             #   Pass arguments to `create_processor` via a request object, either of type

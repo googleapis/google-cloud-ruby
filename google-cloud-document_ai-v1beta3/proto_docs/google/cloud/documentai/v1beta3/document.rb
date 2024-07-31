@@ -1192,9 +1192,7 @@ module Google
             #     ID of the chunk.
             # @!attribute [rw] source_block_ids
             #   @return [::Array<::String>]
-            #     DO NOT USE.
-            #     List of all parsed documents layout source blocks used to generate the
-            #     chunk.
+            #     Unused.
             # @!attribute [rw] content
             #   @return [::String]
             #     Text content of the chunk.

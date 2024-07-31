@@ -52,6 +52,12 @@ module Google
         # @!attribute [rw] state
         #   @return [::Google::Cloud::DocumentAI::V1beta3::Dataset::State]
         #     Required. State of the dataset. Ignored when updating dataset.
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
+        # @!attribute [r] satisfies_pzi
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
         class Dataset
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

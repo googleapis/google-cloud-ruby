@@ -34,6 +34,11 @@ module Google
             self.service_name = 'google.cloud.documentai.v1beta3.DocumentService'
 
             # Updates metadata associated with a dataset.
+            # Note that this method requires the
+            # `documentai.googleapis.com/datasets.update` permission on the project,
+            # which is highly privileged. A user or service account with this permission
+            # can create new processors that can interact with any gcs bucket in your
+            # project.
             rpc :UpdateDataset, ::Google::Cloud::DocumentAI::V1beta3::UpdateDatasetRequest, ::Google::Longrunning::Operation
             # Import documents into a dataset.
             rpc :ImportDocuments, ::Google::Cloud::DocumentAI::V1beta3::ImportDocumentsRequest, ::Google::Longrunning::Operation

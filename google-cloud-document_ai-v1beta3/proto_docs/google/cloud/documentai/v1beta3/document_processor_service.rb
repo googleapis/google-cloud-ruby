@@ -144,6 +144,9 @@ module Google
         #     (Unicode codepoints) and can only contain lowercase letters, numeric
         #     characters, underscores, and dashes. International characters are allowed.
         #     Label values are optional. Label keys must start with a letter.
+        # @!attribute [rw] imageless_mode
+        #   @return [::Boolean]
+        #     Optional. Option to remove images from the document.
         class ProcessRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
