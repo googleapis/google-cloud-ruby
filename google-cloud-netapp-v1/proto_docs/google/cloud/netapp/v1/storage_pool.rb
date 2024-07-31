@@ -74,9 +74,10 @@ module Google
         #     Required. Value for parent.
         # @!attribute [rw] storage_pool_id
         #   @return [::String]
-        #     Required. Id of the requesting storage pool
-        #     If auto-generating Id server-side, remove this field and
-        #     id from the method_signature of Create RPC
+        #     Required. Id of the requesting storage pool. Must be unique within the
+        #     parent resource. Must contain only letters, numbers, underscore and hyphen,
+        #     with the first character a letter or underscore, the last a letter or
+        #     underscore or a number, and a 63 character maximum.
         # @!attribute [rw] storage_pool
         #   @return [::Google::Cloud::NetApp::V1::StoragePool]
         #     Required. The required parameters to create a new storage pool.
@@ -169,6 +170,12 @@ module Google
         #   @return [::Boolean]
         #     Deprecated. Used to allow SO pool to access AD or DNS server from other
         #     regions.
+        # @!attribute [rw] replica_zone
+        #   @return [::String]
+        #     Optional. Specifies the replica zone for regional storagePool.
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     Optional. Specifies the active zone for regional storagePool.
         class StoragePool
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

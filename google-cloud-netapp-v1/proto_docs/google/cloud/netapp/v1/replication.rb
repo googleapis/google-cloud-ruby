@@ -24,10 +24,11 @@ module Google
         # TransferStats reports all statistics related to replication transfer.
         # @!attribute [rw] transfer_bytes
         #   @return [::Integer]
-        #     bytes trasferred so far in current transfer.
+        #     Cumulative bytes trasferred so far for the replication relatinonship.
         # @!attribute [rw] total_transfer_duration
         #   @return [::Google::Protobuf::Duration]
-        #     Total time taken during transfer.
+        #     Cumulative time taken across all transfers for the replication
+        #     relationship.
         # @!attribute [rw] last_transfer_bytes
         #   @return [::Integer]
         #     Last transfer size in bytes.
@@ -186,7 +187,7 @@ module Google
             # Destination volume is not receiving replication transfers.
             STOPPED = 3
 
-            # Replication is in progress.
+            # Incremental replication is in progress.
             TRANSFERRING = 4
           end
         end
@@ -274,9 +275,10 @@ module Google
         #     Required. A replication resource
         # @!attribute [rw] replication_id
         #   @return [::String]
-        #     Required. ID of the replication to create.
-        #     This value must start with a lowercase letter followed by up to 62
-        #     lowercase letters, numbers, or hyphens, and cannot end with a hyphen.
+        #     Required. ID of the replication to create. Must be unique within the parent
+        #     resource. Must contain only letters, numbers, underscore and hyphen, with
+        #     the first character a letter or underscore, the last a letter or underscore
+        #     or a number, and a 63 character maximum.
         class CreateReplicationRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
