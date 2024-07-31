@@ -18,9 +18,9 @@ require "google/cloud/video/stitcher"
 ##
 # Get a CDN key
 #
-# @param project_id [String] Your Google Cloud project (e.g. "my-project")
-# @param location [String] The location (e.g. "us-central1")
-# @param cdn_key_id [String] Your CDN key name (e.g. "my-cdn-key")
+# @param project_id [String] Your Google Cloud project (e.g. `my-project`)
+# @param location [String] The location (e.g. `us-central1`)
+# @param cdn_key_id [String] Your CDN key name (e.g. `my-cdn-key`)
 #
 def get_cdn_key project_id:, location:, cdn_key_id:
   # Create a Video Stitcher client.

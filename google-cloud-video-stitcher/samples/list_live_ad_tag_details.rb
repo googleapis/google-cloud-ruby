@@ -18,9 +18,9 @@ require "google/cloud/video/stitcher"
 ##
 # List the ad tag details for a live session
 #
-# @param project_id [String] Your Google Cloud project (e.g. "my-project")
-# @param location [String] The location (e.g. "us-central1")
-# @param session_id [String] The live session ID (e.g. "my-live-session-id")
+# @param project_id [String] Your Google Cloud project (e.g. `my-project`)
+# @param location [String] The location (e.g. `us-central1`)
+# @param session_id [String] The live session ID (e.g. `my-live-session-id`)
 #
 def list_live_ad_tag_details project_id:, location:, session_id:
   # Create a Video Stitcher client.

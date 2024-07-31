@@ -18,8 +18,8 @@ require "google/cloud/video/stitcher"
 ##
 # Create an Akamai CDN key
 #
-# @param project_id [String] Your Google Cloud project (e.g. "my-project")
-# @param location [String] The location (e.g. "us-central1")
+# @param project_id [String] Your Google Cloud project (e.g. `my-project`)
+# @param location [String] The location (e.g. `us-central1`)
 # @param cdn_key_id [String] The user-defined CDN key ID
 # @param hostname [String] The hostname to which this CDN key applies
 # @param akamai_token_key [String] Applies to an Akamai CDN key. A

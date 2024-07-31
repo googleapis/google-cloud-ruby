@@ -18,8 +18,8 @@ require "google/cloud/video/stitcher"
 ##
 # Create a Media CDN or Cloud CDN key
 #
-# @param project_id [String] Your Google Cloud project (e.g. "my-project")
-# @param location [String] The location (e.g. "us-central1")
+# @param project_id [String] Your Google Cloud project (e.g. `my-project`)
+# @param location [String] The location (e.g. `us-central1`)
 # @param cdn_key_id [String] The user-defined CDN key ID
 # @param hostname [String] The hostname to which this CDN key applies
 # @param key_name [String] For a Media CDN key, this is the keyset name.

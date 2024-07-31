@@ -18,13 +18,13 @@ require "google/cloud/video/stitcher"
 ##
 # Create a VOD config. VOD configs are used to create VOD sessions.
 #
-# @param project_id [String] Your Google Cloud project (e.g. "my-project")
-# @param location [String] The location (e.g. "us-central1")
-# @param vod_config_id [String] Your VOD config name (e.g. "my-vod-config")
+# @param project_id [String] Your Google Cloud project (e.g. `my-project`)
+# @param location [String] The location (e.g. `us-central1`)
+# @param vod_config_id [String] Your VOD config name (e.g. `my-vod-config`)
 # @param source_uri [String] Uri of the VOD stream to stitch
-#   (e.g. "https://storage.googleapis.com/my-bucket/main.mpd")
+#   (e.g. `https://storage.googleapis.com/my-bucket/main.mpd`)
 # @param ad_tag_uri [String] Uri of the ad tag
-#   (e.g. "https://pubads.g.doubleclick.net/gampad/ads...")
+#   (e.g. `https://pubads.g.doubleclick.net/gampad/ads...`)
 #
 def create_vod_config project_id:, location:, vod_config_id:, source_uri:,
                       ad_tag_uri:

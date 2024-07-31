@@ -18,9 +18,9 @@ require "google/cloud/video/stitcher"
 ##
 # Get a VOD config
 #
-# @param project_id [String] Your Google Cloud project (e.g. "my-project")
-# @param location [String] The location (e.g. "us-central1")
-# @param vod_config_id [String] Your VOD config name (e.g. "my-vod-config")
+# @param project_id [String] Your Google Cloud project (e.g. `my-project`)
+# @param location [String] The location (e.g. `us-central1`)
+# @param vod_config_id [String] Your VOD config name (e.g. `my-vod-config`)
 #
 def get_vod_config project_id:, location:, vod_config_id:
   # Create a Video Stitcher client.

@@ -18,15 +18,15 @@ require "google/cloud/video/stitcher"
 ##
 # Create a live config
 #
-# @param project_id [String] Your Google Cloud project (e.g. "my-project")
-# @param location [String] The location (e.g. "us-central1")
-# @param live_config_id [String] Your live config name (e.g. "my-live-config")
+# @param project_id [String] Your Google Cloud project (e.g. `my-project`)
+# @param location [String] The location (e.g. `us-central1`)
+# @param live_config_id [String] Your live config name (e.g. `my-live-config`)
 # @param source_uri [String] Uri of the live stream to stitch
-#   (e.g. "https://storage.googleapis.com/my-bucket/main.mpd")
+#   (e.g. `https://storage.googleapis.com/my-bucket/main.mpd`)
 # @param ad_tag_uri [String] Uri of the ad tag
-#   (e.g. "https://pubads.g.doubleclick.net/gampad/ads...")
+#   (e.g. `https://pubads.g.doubleclick.net/gampad/ads...`)
 # @param slate_id [String] The default slate ID to use when no slates are
-#   specified in an ad break's message (e.g. "my-slate-id")
+#   specified in an ad break's message (e.g. `my-slate-id`)
 #
 def create_live_config project_id:, location:, live_config_id:, source_uri:,
                        ad_tag_uri:, slate_id:
