@@ -927,7 +927,7 @@ module Google
               #     request.
               #   @param files [::Array<::Google::Cloud::Speech::V2::BatchRecognizeFileMetadata, ::Hash>]
               #     Audio files with file metadata for ASR.
-              #     The maximum number of files allowed to be specified is 5.
+              #     The maximum number of files allowed to be specified is 15.
               #   @param recognition_output_config [::Google::Cloud::Speech::V2::RecognitionOutputConfig, ::Hash]
               #     Configuration options for where to output the transcripts of each file.
               #   @param processing_strategy [::Google::Cloud::Speech::V2::BatchRecognizeRequest::ProcessingStrategy]
