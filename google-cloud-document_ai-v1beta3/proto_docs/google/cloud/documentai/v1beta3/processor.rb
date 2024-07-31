@@ -60,6 +60,16 @@ module Google
         # @!attribute [r] model_type
         #   @return [::Google::Cloud::DocumentAI::V1beta3::ProcessorVersion::ModelType]
         #     Output only. The model type of this processor version.
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
+        # @!attribute [r] satisfies_pzi
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
+        # @!attribute [r] gen_ai_model_info
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::ProcessorVersion::GenAiModelInfo]
+        #     Output only. Information about Generative AI model-based processor
+        #     versions.
         class ProcessorVersion
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -74,6 +84,57 @@ module Google
           class DeprecationInfo
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Information about Generative AI model-based processor versions.
+          # @!attribute [rw] foundation_gen_ai_model_info
+          #   @return [::Google::Cloud::DocumentAI::V1beta3::ProcessorVersion::GenAiModelInfo::FoundationGenAiModelInfo]
+          #     Information for a pretrained Google-managed foundation model.
+          # @!attribute [rw] custom_gen_ai_model_info
+          #   @return [::Google::Cloud::DocumentAI::V1beta3::ProcessorVersion::GenAiModelInfo::CustomGenAiModelInfo]
+          #     Information for a custom Generative AI model created by the user.
+          class GenAiModelInfo
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Information for a pretrained Google-managed foundation model.
+            # @!attribute [rw] finetuning_allowed
+            #   @return [::Boolean]
+            #     Whether finetuning is allowed for this base processor version.
+            # @!attribute [rw] min_train_labeled_documents
+            #   @return [::Integer]
+            #     The minimum number of labeled documents in the training dataset
+            #     required for finetuning.
+            class FoundationGenAiModelInfo
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Information for a custom Generative AI model created by the user. These
+            # are created with `Create New Version` in either the `Call foundation
+            # model` or `Fine tuning` tabs.
+            # @!attribute [rw] custom_model_type
+            #   @return [::Google::Cloud::DocumentAI::V1beta3::ProcessorVersion::GenAiModelInfo::CustomGenAiModelInfo::CustomModelType]
+            #     The type of custom model created by the user.
+            # @!attribute [rw] base_processor_version_id
+            #   @return [::String]
+            #     The base processor version ID for the custom model.
+            class CustomGenAiModelInfo
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # The type of custom model created by the user.
+              module CustomModelType
+                # The model type is unspecified.
+                CUSTOM_MODEL_TYPE_UNSPECIFIED = 0
+
+                # The model is a versioned foundation model.
+                VERSIONED_FOUNDATION = 1
+
+                # The model is a finetuned foundation model.
+                FINE_TUNED = 2
+              end
+            end
           end
 
           # The possible states of the processor version.
@@ -165,6 +226,12 @@ module Google
         #   @return [::String]
         #     The [KMS key](https://cloud.google.com/security-key-management) used for
         #     encryption and decryption in CMEK scenarios.
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
+        # @!attribute [r] satisfies_pzi
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
         class Processor
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
