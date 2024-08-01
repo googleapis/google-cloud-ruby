@@ -27,6 +27,9 @@ end
 flag :source_path, "--source-path=PATH" do
   desc "Path to the googleapis-gen source repo"
 end
+flag :pull_googleapis, "--pull-googleapis[=COMMIT]" do
+  desc "Generate by pulling googleapis/googleapis and running Bazel from the protos there"
+end
 flag :pull, "--[no-]pull" do
   desc "Pull the latest owlbot images before running"
 end
@@ -66,11 +69,6 @@ include :git_cache
 include "yoshi-pr-generator"
 
 def run
-  # Temporary hack to allow minitest-rg 5.2.0 to work in minitest 5.19 or
-  # later. This should be removed if we have a better solution or decide to
-  # drop rg.
-  ENV["MT_COMPAT"] = "true"
-
   setup
   set :branch_name, "gen/#{gem_name}" unless branch_name
   commit_message = "feat: Initial generation of #{gem_name}"
@@ -130,6 +128,11 @@ def call_owlbot
   cmd << "--protos-path" << protos_path if protos_path
   cmd << "--source-path" << source_path if source_path
   cmd << "--piper-client" << piper_client if piper_client
+  if pull_googleapis == true
+    cmd << "--pull-googleapis"
+  elsif pull_googleapis
+    cmd << "--pull-googleapis=#{pull_googleapis}"
+  end
   cmd << "--bazelisk" if enable_bazelisk
   cmd += verbosity_flags
   exec_tool cmd

@@ -60,6 +60,9 @@ at_most_one desc: "Source" do
     default(ENV["GOOGLEAPIS_GEN_GITHUB_TOKEN"] || ENV["GITHUB_TOKEN"])
     desc "GitHub token for cloning the googleapis-gen repository."
   end
+  flag :pull_googleapis, "--pull-googleapis[=COMMIT]" do
+    desc "Generate by pulling googleapis/googleapis and running Bazel from the protos there"
+  end
   flag :source_path, "--source-path=PATH" do
     desc "Path to the googleapis-gen source repo."
   end
@@ -99,9 +102,10 @@ def run
   gems = choose_gems
   cd context_directory
   setup_git
-  gem_info = collect_gem_info gems
-
   pull_images
+  maybe_pull_googleapis
+
+  gem_info = collect_gem_info gems
   if piper_client || protos_path
     set :source_path, run_bazel(gem_info)
   else
@@ -163,6 +167,24 @@ def pull_images
   exec ["docker", "pull", "#{POSTPROCESSOR_IMAGE}:#{postprocessor_tag}"]
 end
 
+def maybe_pull_googleapis
+  return unless pull_googleapis
+  commit = pull_googleapis
+  commit = "HEAD" if commit == true
+  googleapis_dir = File.join context_directory, "tmp", "googleapis"
+  rm_rf googleapis_dir
+  mkdir_p googleapis_dir
+  at_exit { FileUtils.rm_rf googleapis_dir }
+  cd googleapis_dir do
+    exec ["git", "init"]
+    exec ["git", "remote", "add", "origin", "https://github.com/googleapis/googleapis.git"]
+    exec ["git", "fetch", "--depth=1", "origin", commit]
+    exec ["git", "branch", "github-head", "FETCH_HEAD"]
+    exec ["git", "switch", "github-head"]
+  end
+  set :protos_path, googleapis_dir
+end
+
 def collect_gem_info gems
   gem_info = {}
   gems.each do |name|
@@ -205,7 +227,7 @@ def run_bazel gem_info
   bazel_alias = enable_bazelisk ? "bazelisk" : "bazel"
   gem_info.each_value do |info|
     info[:bazel_targets].each do |library_path, bazel_target|
-      exec [bazel_alias, "build", "//#{library_path}:#{bazel_target}"], chdir: bazel_base_dir
+      exec [bazel_alias, "build", "--verbose_failures", "//#{library_path}:#{bazel_target}"], chdir: bazel_base_dir
     end
   end
   source_dir = capture([bazel_alias, "info", "bazel-bin"], chdir: bazel_base_dir).chomp
