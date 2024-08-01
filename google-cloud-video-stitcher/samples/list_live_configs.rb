@@ -18,8 +18,8 @@ require "google/cloud/video/stitcher"
 ##
 # List live configs for a given location
 #
-# @param project_id [String] Your Google Cloud project (e.g. "my-project")
-# @param location [String] The location (e.g. "us-central1")
+# @param project_id [String] Your Google Cloud project (e.g. `my-project`)
+# @param location [String] The location (e.g. `us-central1`)
 #
 def list_live_configs project_id:, location:
   # Create a Video Stitcher client.

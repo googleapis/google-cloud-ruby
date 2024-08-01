@@ -18,10 +18,10 @@ require "google/cloud/video/stitcher"
 ##
 # Get the specified stitch detail for a VOD session
 #
-# @param project_id [String] Your Google Cloud project (e.g. "my-project")
-# @param location [String] The location (e.g. "us-central1")
-# @param session_id [String] The VOD session ID (e.g. "my-vod-session-id")
-# @param stitch_detail_id [String] The stitch detail ID (e.g. "my-stitch-id")
+# @param project_id [String] Your Google Cloud project (e.g. `my-project`)
+# @param location [String] The location (e.g. `us-central1`)
+# @param session_id [String] The VOD session ID (e.g. `my-vod-session-id`)
+# @param stitch_detail_id [String] The stitch detail ID (e.g. `my-stitch-id`)
 #
 def get_vod_stitch_detail project_id:, location:, session_id:, stitch_detail_id:
   # Create a Video Stitcher client.

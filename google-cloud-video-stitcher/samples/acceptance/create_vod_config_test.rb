@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,19 +14,18 @@
 
 require_relative "helper"
 
-describe "#list_vod_stitch_details", :stitcher_snippet do
-  it "lists the stitch details for a VOD session" do
-    sample = SampleLoader.load "list_vod_stitch_details.rb"
+describe "#create_vod_config", :stitcher_snippet do
+  it "creates a VOD config" do
+    sample = SampleLoader.load "create_vod_config.rb"
 
-    refute_nil vod_config
+    out, _err = capture_io do
+      sample.run project_id: project_id, location: location_id,
+                 vod_config_id: vod_config_id, source_uri: vod_uri,
+                 ad_tag_uri: vod_ad_tag_uri
+    end
     @vod_config_created = true
 
-    refute_nil vod_session
-    @session_id = vod_session.name.split("/").last
-
-    assert_output %r{VOD stitch details:\n#{vod_session.name}/vodStitchDetails/\S+} do
-      sample.run project_id: project_id, location: location_id,
-                 session_id: @session_id
-    end
+    vod_config_id_regex = Regexp.escape vod_config_id
+    assert_match %r{VOD config: projects/\S+/locations/#{location_id}/vodConfigs/#{vod_config_id_regex}}, out
   end
 end

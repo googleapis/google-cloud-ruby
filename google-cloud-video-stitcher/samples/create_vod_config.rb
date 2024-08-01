@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,48 +12,44 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START videostitcher_create_cdn_key_akamai]
+# [START videostitcher_create_vod_config]
 require "google/cloud/video/stitcher"
 
 ##
-# Create an Akamai CDN key
+# Create a VOD config. VOD configs are used to create VOD sessions.
 #
 # @param project_id [String] Your Google Cloud project (e.g. `my-project`)
 # @param location [String] The location (e.g. `us-central1`)
-# @param cdn_key_id [String] The user-defined CDN key ID
-# @param hostname [String] The hostname to which this CDN key applies
-# @param akamai_token_key [String] Applies to an Akamai CDN key. A
-#   base64-encoded string token key.
+# @param vod_config_id [String] Your VOD config name (e.g. `my-vod-config`)
+# @param source_uri [String] Uri of the VOD stream to stitch
+#   (e.g. `https://storage.googleapis.com/my-bucket/main.mpd`)
+# @param ad_tag_uri [String] Uri of the ad tag
+#   (e.g. `https://pubads.g.doubleclick.net/gampad/ads...`)
 #
-def create_cdn_key_akamai project_id:, location:, cdn_key_id:, hostname:,
-                          akamai_token_key:
+def create_vod_config project_id:, location:, vod_config_id:, source_uri:,
+                      ad_tag_uri:
   # Create a Video Stitcher client.
   client = Google::Cloud::Video::Stitcher.video_stitcher_service
 
   # Build the resource name of the parent.
   parent = client.location_path project: project_id, location: location
-  # Build the path for the CDN key resource.
-  cdn_key_path = client.cdn_key_path project: project_id, location: location,
-                                     cdn_key: cdn_key_id
 
-  # Set the CDN key fields.
-  new_cdn_key = {
-    name: cdn_key_path,
-    hostname: hostname,
-    akamai_cdn_key: {
-      token_key: akamai_token_key
-    }
+  # Set the VOD config fields.
+  new_vod_config = {
+    source_uri: source_uri,
+    ad_tag_uri: ad_tag_uri
   }
 
-  operation = client.create_cdn_key parent: parent, cdn_key: new_cdn_key,
-                                    cdn_key_id: cdn_key_id
+  operation = client.create_vod_config parent: parent,
+                                       vod_config_id: vod_config_id,
+                                       vod_config: new_vod_config
 
   # The returned object is of type Gapic::Operation. You can use this
   # object to check the status of an operation, cancel it, or wait
   # for results. Here is how to block until completion:
   operation.wait_until_done!
 
-  # Print the CDN key name.
-  puts "CDN key: #{operation.response.name}"
+  # Print the VOD config name.
+  puts "VOD config: #{operation.response.name}"
 end
-# [END videostitcher_create_cdn_key_akamai]
+# [END videostitcher_create_vod_config]

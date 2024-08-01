@@ -18,9 +18,9 @@ require "google/cloud/video/stitcher"
 ##
 # Get a slate
 #
-# @param project_id [String] Your Google Cloud project (e.g. "my-project")
-# @param location [String] The location (e.g. "us-central1")
-# @param slate_id [String] Your slate name (e.g. "my-slate")
+# @param project_id [String] Your Google Cloud project (e.g. `my-project`)
+# @param location [String] The location (e.g. `us-central1`)
+# @param slate_id [String] Your slate name (e.g. `my-slate`)
 #
 def get_slate project_id:, location:, slate_id:
   # Create a Video Stitcher client.

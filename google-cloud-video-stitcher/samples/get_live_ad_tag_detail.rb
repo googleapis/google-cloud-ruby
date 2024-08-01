@@ -18,10 +18,10 @@ require "google/cloud/video/stitcher"
 ##
 # Get the specified ad tag detail for a live session
 #
-# @param project_id [String] Your Google Cloud project (e.g. "my-project")
-# @param location [String] The location (e.g. "us-central1")
-# @param session_id [String] The live session ID (e.g. "my-live-session-id")
-# @param ad_tag_detail_id [String] The ad tag detail ID (e.g. "my-ad-tag-id")
+# @param project_id [String] Your Google Cloud project (e.g. `my-project`)
+# @param location [String] The location (e.g. `us-central1`)
+# @param session_id [String] The live session ID (e.g. `my-live-session-id`)
+# @param ad_tag_detail_id [String] The ad tag detail ID (e.g. `my-ad-tag-id`)
 #
 def get_live_ad_tag_detail project_id:, location:, session_id:,
                            ad_tag_detail_id:

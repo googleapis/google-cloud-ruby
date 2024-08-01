@@ -19,9 +19,9 @@ require "google/cloud/video/stitcher"
 # Get a VOD session. VOD sessions are ephemeral resources that expire
 # after a few hours.
 #
-# @param project_id [String] Your Google Cloud project (e.g. "my-project")
-# @param location [String] The location (e.g. "us-central1")
-# @param session_id [String] The VOD session ID (e.g. "my-vod-session-id")
+# @param project_id [String] Your Google Cloud project (e.g. `my-project`)
+# @param location [String] The location (e.g. `us-central1`)
+# @param session_id [String] The VOD session ID (e.g. `my-vod-session-id`)
 #
 def get_vod_session project_id:, location:, session_id:
   # Create a Video Stitcher client.

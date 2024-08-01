@@ -18,9 +18,12 @@ describe "#create_vod_session", :stitcher_snippet do
   it "creates a VOD session" do
     sample = SampleLoader.load "create_vod_session.rb"
 
+    refute_nil vod_config
+    @vod_config_created = true
+
     out, _err = capture_io do
       sample.run project_id: project_id, location: location_id,
-                 source_uri: vod_uri, ad_tag_uri: vod_ad_tag_uri
+                 vod_config_id: vod_config_id
     end
 
     assert_match %r{VOD session: projects/\S+/locations/#{location_id}/vodSessions/\S+}, out

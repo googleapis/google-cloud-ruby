@@ -19,9 +19,9 @@ require "google/cloud/video/stitcher"
 # Create a live stream session. Live sessions are ephemeral resources
 # that expire after a few minutes.
 #
-# @param project_id [String] Your Google Cloud project (e.g. "my-project")
-# @param location [String] The location (e.g. "us-central1")
-# @param live_config_id [String] Your live config name (e.g. "my-live-config")
+# @param project_id [String] Your Google Cloud project (e.g. `my-project`)
+# @param location [String] The location (e.g. `us-central1`)
+# @param live_config_id [String] Your live config name (e.g. `my-live-config`)
 #
 def create_live_session project_id:, location:, live_config_id:
   # Create a Video Stitcher client.

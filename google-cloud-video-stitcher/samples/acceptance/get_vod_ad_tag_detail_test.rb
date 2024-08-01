@@ -18,6 +18,9 @@ describe "#get_vod_ad_tag_detail", :stitcher_snippet do
   it "gets an ad tag detail for a VOD session" do
     sample = SampleLoader.load "list_vod_ad_tag_details.rb"
 
+    refute_nil vod_config
+    @vod_config_created = true
+
     refute_nil vod_session
     @session_id = vod_session.name.split("/").last
 
