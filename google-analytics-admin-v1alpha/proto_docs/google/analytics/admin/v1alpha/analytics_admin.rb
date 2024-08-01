@@ -353,7 +353,8 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Format: properties/\\{property_id}
-        #     Example: properties/1234
+        #
+        #     Example: `properties/1234`
         # @!attribute [rw] firebase_link
         #   @return [::Google::Analytics::Admin::V1alpha::FirebaseLink]
         #     Required. The Firebase link to create.
@@ -366,7 +367,8 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Format: properties/\\{property_id}/firebaseLinks/\\{firebase_link_id}
-        #     Example: properties/1234/firebaseLinks/5678
+        #
+        #     Example: `properties/1234/firebaseLinks/5678`
         class DeleteFirebaseLinkRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -376,7 +378,8 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Format: properties/\\{property_id}
-        #     Example: properties/1234
+        #
+        #     Example: `properties/1234`
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of resources to return. The service may return
@@ -415,7 +418,8 @@ module Google
         #     Required. The name of the site tag to lookup.
         #     Note that site tags are singletons and do not have unique IDs.
         #     Format: properties/\\{property_id}/dataStreams/\\{stream_id}/globalSiteTag
-        #     Example: "properties/123/dataStreams/456/globalSiteTag"
+        #
+        #     Example: `properties/123/dataStreams/456/globalSiteTag`
         class GetGlobalSiteTagRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -496,7 +500,8 @@ module Google
         #   @return [::String]
         #     Required. The name of the settings to lookup.
         #     Format: accounts/\\{account}/dataSharingSettings
-        #     Example: "accounts/1000/dataSharingSettings"
+        #
+        #     Example: `accounts/1000/dataSharingSettings`
         class GetDataSharingSettingsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -562,13 +567,16 @@ module Google
         # @!attribute [rw] account
         #   @return [::String]
         #     Required. The account resource for which to return change history
-        #     resources. Format: accounts/\\{account} Example: "accounts/100"
+        #     resources. Format: accounts/\\{account}
+        #
+        #     Example: `accounts/100`
         # @!attribute [rw] property
         #   @return [::String]
         #     Optional. Resource name for a child property. If set, only return changes
         #     made to this property or its child resources.
         #     Format: properties/\\{propertyId}
-        #     Example: "properties/100"
+        #
+        #     Example: `properties/100`
         # @!attribute [rw] resource_type
         #   @return [::Array<::Google::Analytics::Admin::V1alpha::ChangeHistoryResourceType>]
         #     Optional. If set, only return changes if they are for a resource that
@@ -898,6 +906,91 @@ module Google
         #     A token, which can be sent as `page_token` to retrieve the next page.
         #     If this field is omitted, there are no subsequent pages.
         class ListConversionEventsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for CreateKeyEvent RPC
+        # @!attribute [rw] key_event
+        #   @return [::Google::Analytics::Admin::V1alpha::KeyEvent]
+        #     Required. The Key Event to create.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the parent property where this Key Event
+        #     will be created. Format: properties/123
+        class CreateKeyEventRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for UpdateKeyEvent RPC
+        # @!attribute [rw] key_event
+        #   @return [::Google::Analytics::Admin::V1alpha::KeyEvent]
+        #     Required. The Key Event to update.
+        #     The `name` field is used to identify the settings to be updated.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The list of fields to be updated. Field names must be in snake
+        #     case (e.g., "field_to_update"). Omitted fields will not be updated. To
+        #     replace the entire entity, use one path with the string "*" to match all
+        #     fields.
+        class UpdateKeyEventRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for GetKeyEvent RPC
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the Key Event to retrieve.
+        #     Format: properties/\\{property}/keyEvents/\\{key_event}
+        #     Example: "properties/123/keyEvents/456"
+        class GetKeyEventRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for DeleteKeyEvent RPC
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the Key Event to delete.
+        #     Format: properties/\\{property}/keyEvents/\\{key_event}
+        #     Example: "properties/123/keyEvents/456"
+        class DeleteKeyEventRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ListKeyEvents RPC
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the parent property.
+        #     Example: 'properties/123'
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of resources to return.
+        #     If unspecified, at most 50 resources will be returned.
+        #     The maximum value is 200; (higher values will be coerced to the maximum)
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous `ListKeyEvents` call.
+        #     Provide this to retrieve the subsequent page.
+        #     When paginating, all other parameters provided to `ListKeyEvents`
+        #     must match the call that provided the page token.
+        class ListKeyEventsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ListKeyEvents RPC.
+        # @!attribute [rw] key_events
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::KeyEvent>]
+        #     The requested Key Events
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListKeyEventsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -2025,6 +2118,18 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for CreateBigQueryLink RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Example format: properties/1234
+        # @!attribute [rw] bigquery_link
+        #   @return [::Google::Analytics::Admin::V1alpha::BigQueryLink]
+        #     Required. The BigQueryLink to create.
+        class CreateBigQueryLinkRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for GetBigQueryLink RPC.
         # @!attribute [rw] name
         #   @return [::String]
@@ -2068,6 +2173,32 @@ module Google
         #     A token, which can be sent as `page_token` to retrieve the next page.
         #     If this field is omitted, there are no subsequent pages.
         class ListBigQueryLinksResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for UpdateBigQueryLink RPC.
+        # @!attribute [rw] bigquery_link
+        #   @return [::Google::Analytics::Admin::V1alpha::BigQueryLink]
+        #     Required. The settings to update.
+        #     The `name` field is used to identify the settings to be updated.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The list of fields to be updated. Field names must be in snake
+        #     case (e.g., "field_to_update"). Omitted fields will not be updated. To
+        #     replace the entire entity, use one path with the string "*" to match all
+        #     fields.
+        class UpdateBigQueryLinkRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for DeleteBigQueryLink RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The BigQueryLink to delete.
+        #     Example format: properties/1234/bigQueryLinks/5678
+        class DeleteBigQueryLinkRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -2368,6 +2499,103 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for CreateEventEditRule RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Example format: properties/123/dataStreams/456
+        # @!attribute [rw] event_edit_rule
+        #   @return [::Google::Analytics::Admin::V1alpha::EventEditRule]
+        #     Required. The EventEditRule to create.
+        class CreateEventEditRuleRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for UpdateEventEditRule RPC.
+        # @!attribute [rw] event_edit_rule
+        #   @return [::Google::Analytics::Admin::V1alpha::EventEditRule]
+        #     Required. The EventEditRule to update.
+        #     The resource's `name` field is used to identify the EventEditRule to be
+        #     updated.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The list of fields to be updated. Field names must be in snake
+        #     case (e.g., "field_to_update"). Omitted fields will not be updated. To
+        #     replace the entire entity, use one path with the string "*" to match all
+        #     fields.
+        class UpdateEventEditRuleRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for DeleteEventEditRule RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Example format: properties/123/dataStreams/456/eventEditRules/789
+        class DeleteEventEditRuleRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for GetEventEditRule RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the EventEditRule to get.
+        #     Example format: properties/123/dataStreams/456/eventEditRules/789
+        class GetEventEditRuleRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ListEventEditRules RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Example format: properties/123/dataStreams/456
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of resources to return.
+        #     If unspecified, at most 50 resources will be returned.
+        #     The maximum value is 200 (higher values will be coerced to the maximum).
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A page token, received from a previous `ListEventEditRules` call.
+        #     Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to `ListEventEditRules`
+        #     must match the call that provided the page token.
+        class ListEventEditRulesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ListEventEditRules RPC.
+        # @!attribute [rw] event_edit_rules
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::EventEditRule>]
+        #     List of EventEditRules. These will be ordered stably, but in an arbitrary
+        #     order.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListEventEditRulesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ReorderEventEditRules RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Example format: properties/123/dataStreams/456
+        # @!attribute [rw] event_edit_rules
+        #   @return [::Array<::String>]
+        #     Required. EventEditRule resource names for the specified data stream, in
+        #     the needed processing order. All EventEditRules for the stream must be
+        #     present in the list.
+        class ReorderEventEditRulesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for CreateRollupProperty RPC.
         # @!attribute [rw] rollup_property
         #   @return [::Google::Analytics::Admin::V1alpha::Property]
@@ -2466,30 +2694,25 @@ module Google
         end
 
         # Request message for CreateSubproperty RPC.
-        # @!attribute [rw] parent
-        #   @return [::String]
-        #     Required. The ordinary property for which to create a subproperty.
-        #     Format: properties/property_id
-        #     Example: properties/123
         # @!attribute [rw] subproperty
         #   @return [::Google::Analytics::Admin::V1alpha::Property]
         #     Required. The subproperty to create.
         # @!attribute [rw] subproperty_event_filter
         #   @return [::Google::Analytics::Admin::V1alpha::SubpropertyEventFilter]
         #     Optional. The subproperty event filter to create on an ordinary property.
-        class CreateSubpropertyRequest
+        class ProvisionSubpropertyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for CreateSubproperty RPC.
+        # Response message for ProvisionSubproperty RPC.
         # @!attribute [rw] subproperty
         #   @return [::Google::Analytics::Admin::V1alpha::Property]
         #     The created subproperty.
         # @!attribute [rw] subproperty_event_filter
         #   @return [::Google::Analytics::Admin::V1alpha::SubpropertyEventFilter]
         #     The created subproperty event filter.
-        class CreateSubpropertyResponse
+        class ProvisionSubpropertyResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

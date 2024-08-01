@@ -142,18 +142,34 @@ module Google
             rpc :GetGoogleSignalsSettings, ::Google::Analytics::Admin::V1alpha::GetGoogleSignalsSettingsRequest, ::Google::Analytics::Admin::V1alpha::GoogleSignalsSettings
             # Updates Google Signals settings for a property.
             rpc :UpdateGoogleSignalsSettings, ::Google::Analytics::Admin::V1alpha::UpdateGoogleSignalsSettingsRequest, ::Google::Analytics::Admin::V1alpha::GoogleSignalsSettings
+            # Deprecated: Use `CreateKeyEvent` instead.
             # Creates a conversion event with the specified attributes.
             rpc :CreateConversionEvent, ::Google::Analytics::Admin::V1alpha::CreateConversionEventRequest, ::Google::Analytics::Admin::V1alpha::ConversionEvent
+            # Deprecated: Use `UpdateKeyEvent` instead.
             # Updates a conversion event with the specified attributes.
             rpc :UpdateConversionEvent, ::Google::Analytics::Admin::V1alpha::UpdateConversionEventRequest, ::Google::Analytics::Admin::V1alpha::ConversionEvent
+            # Deprecated: Use `GetKeyEvent` instead.
             # Retrieve a single conversion event.
             rpc :GetConversionEvent, ::Google::Analytics::Admin::V1alpha::GetConversionEventRequest, ::Google::Analytics::Admin::V1alpha::ConversionEvent
+            # Deprecated: Use `DeleteKeyEvent` instead.
             # Deletes a conversion event in a property.
             rpc :DeleteConversionEvent, ::Google::Analytics::Admin::V1alpha::DeleteConversionEventRequest, ::Google::Protobuf::Empty
+            # Deprecated: Use `ListKeyEvents` instead.
             # Returns a list of conversion events in the specified parent property.
             #
             # Returns an empty list if no conversion events are found.
             rpc :ListConversionEvents, ::Google::Analytics::Admin::V1alpha::ListConversionEventsRequest, ::Google::Analytics::Admin::V1alpha::ListConversionEventsResponse
+            # Creates a Key Event.
+            rpc :CreateKeyEvent, ::Google::Analytics::Admin::V1alpha::CreateKeyEventRequest, ::Google::Analytics::Admin::V1alpha::KeyEvent
+            # Updates a Key Event.
+            rpc :UpdateKeyEvent, ::Google::Analytics::Admin::V1alpha::UpdateKeyEventRequest, ::Google::Analytics::Admin::V1alpha::KeyEvent
+            # Retrieve a single Key Event.
+            rpc :GetKeyEvent, ::Google::Analytics::Admin::V1alpha::GetKeyEventRequest, ::Google::Analytics::Admin::V1alpha::KeyEvent
+            # Deletes a Key Event.
+            rpc :DeleteKeyEvent, ::Google::Analytics::Admin::V1alpha::DeleteKeyEventRequest, ::Google::Protobuf::Empty
+            # Returns a list of Key Events in the specified parent property.
+            # Returns an empty list if no Key Events are found.
+            rpc :ListKeyEvents, ::Google::Analytics::Admin::V1alpha::ListKeyEventsRequest, ::Google::Analytics::Admin::V1alpha::ListKeyEventsResponse
             # Look up a single DisplayVideo360AdvertiserLink
             rpc :GetDisplayVideo360AdvertiserLink, ::Google::Analytics::Admin::V1alpha::GetDisplayVideo360AdvertiserLinkRequest, ::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink
             # Lists all DisplayVideo360AdvertiserLinks on a property.
@@ -316,10 +332,16 @@ module Google
             # property.
             # Note: this has no effect on GA4 property.
             rpc :FetchAutomatedGa4ConfigurationOptOut, ::Google::Analytics::Admin::V1alpha::FetchAutomatedGa4ConfigurationOptOutRequest, ::Google::Analytics::Admin::V1alpha::FetchAutomatedGa4ConfigurationOptOutResponse
+            # Creates a BigQueryLink.
+            rpc :CreateBigQueryLink, ::Google::Analytics::Admin::V1alpha::CreateBigQueryLinkRequest, ::Google::Analytics::Admin::V1alpha::BigQueryLink
             # Lookup for a single BigQuery Link.
             rpc :GetBigQueryLink, ::Google::Analytics::Admin::V1alpha::GetBigQueryLinkRequest, ::Google::Analytics::Admin::V1alpha::BigQueryLink
             # Lists BigQuery Links on a property.
             rpc :ListBigQueryLinks, ::Google::Analytics::Admin::V1alpha::ListBigQueryLinksRequest, ::Google::Analytics::Admin::V1alpha::ListBigQueryLinksResponse
+            # Deletes a BigQueryLink on a property.
+            rpc :DeleteBigQueryLink, ::Google::Analytics::Admin::V1alpha::DeleteBigQueryLinkRequest, ::Google::Protobuf::Empty
+            # Updates a BigQueryLink.
+            rpc :UpdateBigQueryLink, ::Google::Analytics::Admin::V1alpha::UpdateBigQueryLinkRequest, ::Google::Analytics::Admin::V1alpha::BigQueryLink
             # Returns the enhanced measurement settings for this data stream.
             # Note that the stream must enable enhanced measurement for these settings to
             # take effect.
@@ -360,6 +382,18 @@ module Google
             rpc :UpdateEventCreateRule, ::Google::Analytics::Admin::V1alpha::UpdateEventCreateRuleRequest, ::Google::Analytics::Admin::V1alpha::EventCreateRule
             # Deletes an EventCreateRule.
             rpc :DeleteEventCreateRule, ::Google::Analytics::Admin::V1alpha::DeleteEventCreateRuleRequest, ::Google::Protobuf::Empty
+            # Lookup for a single EventEditRule.
+            rpc :GetEventEditRule, ::Google::Analytics::Admin::V1alpha::GetEventEditRuleRequest, ::Google::Analytics::Admin::V1alpha::EventEditRule
+            # Lists EventEditRules on a web data stream.
+            rpc :ListEventEditRules, ::Google::Analytics::Admin::V1alpha::ListEventEditRulesRequest, ::Google::Analytics::Admin::V1alpha::ListEventEditRulesResponse
+            # Creates an EventEditRule.
+            rpc :CreateEventEditRule, ::Google::Analytics::Admin::V1alpha::CreateEventEditRuleRequest, ::Google::Analytics::Admin::V1alpha::EventEditRule
+            # Updates an EventEditRule.
+            rpc :UpdateEventEditRule, ::Google::Analytics::Admin::V1alpha::UpdateEventEditRuleRequest, ::Google::Analytics::Admin::V1alpha::EventEditRule
+            # Deletes an EventEditRule.
+            rpc :DeleteEventEditRule, ::Google::Analytics::Admin::V1alpha::DeleteEventEditRuleRequest, ::Google::Protobuf::Empty
+            # Changes the processing order of event edit rules on the specified stream.
+            rpc :ReorderEventEditRules, ::Google::Analytics::Admin::V1alpha::ReorderEventEditRulesRequest, ::Google::Protobuf::Empty
             # Updates a DataRedactionSettings on a property.
             rpc :UpdateDataRedactionSettings, ::Google::Analytics::Admin::V1alpha::UpdateDataRedactionSettingsRequest, ::Google::Analytics::Admin::V1alpha::DataRedactionSettings
             # Lookup for a single DataRedactionSettings.
@@ -394,7 +428,7 @@ module Google
             rpc :DeleteRollupPropertySourceLink, ::Google::Analytics::Admin::V1alpha::DeleteRollupPropertySourceLinkRequest, ::Google::Protobuf::Empty
             # Create a subproperty and a subproperty event filter that applies to the
             # created subproperty.
-            rpc :CreateSubproperty, ::Google::Analytics::Admin::V1alpha::CreateSubpropertyRequest, ::Google::Analytics::Admin::V1alpha::CreateSubpropertyResponse
+            rpc :ProvisionSubproperty, ::Google::Analytics::Admin::V1alpha::ProvisionSubpropertyRequest, ::Google::Analytics::Admin::V1alpha::ProvisionSubpropertyResponse
             # Creates a subproperty Event Filter.
             rpc :CreateSubpropertyEventFilter, ::Google::Analytics::Admin::V1alpha::CreateSubpropertyEventFilterRequest, ::Google::Analytics::Admin::V1alpha::SubpropertyEventFilter
             # Lookup for a single subproperty Event Filter.

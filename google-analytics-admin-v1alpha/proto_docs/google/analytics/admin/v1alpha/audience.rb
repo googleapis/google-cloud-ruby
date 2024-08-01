@@ -376,6 +376,9 @@ module Google
         #   @return [::Array<::Google::Analytics::Admin::V1alpha::AudienceFilterClause>]
         #     Required. Immutable. Unordered list. Filter clauses that define the
         #     Audience. All clauses will be AND’ed together.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Time when the Audience was created.
         class Audience
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -360,6 +360,25 @@ module Google
             end
 
             ##
+            # Create a fully-qualified EventEditRule resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `properties/{property}/dataStreams/{data_stream}/eventEditRules/{event_edit_rule}`
+            #
+            # @param property [String]
+            # @param data_stream [String]
+            # @param event_edit_rule [String]
+            #
+            # @return [::String]
+            def event_edit_rule_path property:, data_stream:, event_edit_rule:
+              raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
+              raise ::ArgumentError, "data_stream cannot contain /" if data_stream.to_s.include? "/"
+
+              "properties/#{property}/dataStreams/#{data_stream}/eventEditRules/#{event_edit_rule}"
+            end
+
+            ##
             # Create a fully-qualified ExpandedDataSet resource string.
             #
             # The resource will be in the following format:
@@ -442,6 +461,23 @@ module Google
             end
 
             ##
+            # Create a fully-qualified KeyEvent resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `properties/{property}/keyEvents/{key_event}`
+            #
+            # @param property [String]
+            # @param key_event [String]
+            #
+            # @return [::String]
+            def key_event_path property:, key_event:
+              raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
+
+              "properties/#{property}/keyEvents/#{key_event}"
+            end
+
+            ##
             # Create a fully-qualified MeasurementProtocolSecret resource string.
             #
             # The resource will be in the following format:
@@ -458,6 +494,20 @@ module Google
               raise ::ArgumentError, "data_stream cannot contain /" if data_stream.to_s.include? "/"
 
               "properties/#{property}/dataStreams/#{data_stream}/measurementProtocolSecrets/#{measurement_protocol_secret}"
+            end
+
+            ##
+            # Create a fully-qualified Organization resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `organizations/{organization}`
+            #
+            # @param organization [String]
+            #
+            # @return [::String]
+            def organization_path organization:
+              "organizations/#{organization}"
             end
 
             ##
