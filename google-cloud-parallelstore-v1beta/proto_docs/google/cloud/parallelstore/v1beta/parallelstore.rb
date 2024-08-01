@@ -90,6 +90,16 @@ module Google
         #     "test-default" associated with IP range 10.0.0.0/29. This field is
         #     populated by the service and and contains the value currently used by the
         #     service.
+        # @!attribute [rw] file_stripe_level
+        #   @return [::Google::Cloud::Parallelstore::V1beta::FileStripeLevel]
+        #     Optional. Stripe level for files.
+        #     MIN better suited for small size files.
+        #     MAX higher throughput performance for larger files.
+        # @!attribute [rw] directory_stripe_level
+        #   @return [::Google::Cloud::Parallelstore::V1beta::DirectoryStripeLevel]
+        #     Optional. Stripe level for directories.
+        #     MIN when directory has a small number of files.
+        #     MAX when directory has a large number of files.
         class Instance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -559,6 +569,36 @@ module Google
 
           # Exports from Parallelstore.
           EXPORT = 2
+        end
+
+        # Represents the striping options for files.
+        module FileStripeLevel
+          # Default file striping
+          FILE_STRIPE_LEVEL_UNSPECIFIED = 0
+
+          # Minimum file striping
+          FILE_STRIPE_LEVEL_MIN = 1
+
+          # Medium file striping
+          FILE_STRIPE_LEVEL_BALANCED = 2
+
+          # Maximum file striping
+          FILE_STRIPE_LEVEL_MAX = 3
+        end
+
+        # Represents the striping options for directories.
+        module DirectoryStripeLevel
+          # Default directory striping
+          DIRECTORY_STRIPE_LEVEL_UNSPECIFIED = 0
+
+          # Minimum directory striping
+          DIRECTORY_STRIPE_LEVEL_MIN = 1
+
+          # Medium directory striping
+          DIRECTORY_STRIPE_LEVEL_BALANCED = 2
+
+          # Maximum directory striping
+          DIRECTORY_STRIPE_LEVEL_MAX = 3
         end
       end
     end
