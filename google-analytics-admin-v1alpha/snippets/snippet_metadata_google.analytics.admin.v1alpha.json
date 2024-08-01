@@ -1572,6 +1572,206 @@
       ]
     },
     {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateKeyEvent_sync",
+      "title": "Snippet for the create_key_event call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#create_key_event.",
+      "file": "analytics_admin_service/create_key_event.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_key_event",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#create_key_event",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::CreateKeyEventRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::KeyEvent",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "CreateKeyEvent",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.CreateKeyEvent",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateKeyEvent_sync",
+      "title": "Snippet for the update_key_event call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#update_key_event.",
+      "file": "analytics_admin_service/update_key_event.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_key_event",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#update_key_event",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::UpdateKeyEventRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::KeyEvent",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "UpdateKeyEvent",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.UpdateKeyEvent",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetKeyEvent_sync",
+      "title": "Snippet for the get_key_event call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#get_key_event.",
+      "file": "analytics_admin_service/get_key_event.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_key_event",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#get_key_event",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::GetKeyEventRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::KeyEvent",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "GetKeyEvent",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.GetKeyEvent",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteKeyEvent_sync",
+      "title": "Snippet for the delete_key_event call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#delete_key_event.",
+      "file": "analytics_admin_service/delete_key_event.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_key_event",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#delete_key_event",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::DeleteKeyEventRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "DeleteKeyEvent",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.DeleteKeyEvent",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListKeyEvents_sync",
+      "title": "Snippet for the list_key_events call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#list_key_events.",
+      "file": "analytics_admin_service/list_key_events.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_key_events",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#list_key_events",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::ListKeyEventsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::ListKeyEventsResponse",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "ListKeyEvents",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.ListKeyEvents",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetDisplayVideo360AdvertiserLink_sync",
       "title": "Snippet for the get_display_video360_advertiser_link call in the AnalyticsAdminService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#get_display_video360_advertiser_link.",
@@ -4052,6 +4252,46 @@
       ]
     },
     {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateBigQueryLink_sync",
+      "title": "Snippet for the create_big_query_link call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#create_big_query_link.",
+      "file": "analytics_admin_service/create_big_query_link.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_big_query_link",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#create_big_query_link",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::CreateBigQueryLinkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::BigQueryLink",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "CreateBigQueryLink",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.CreateBigQueryLink",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetBigQueryLink_sync",
       "title": "Snippet for the get_big_query_link call in the AnalyticsAdminService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#get_big_query_link.",
@@ -4127,6 +4367,86 @@
         {
           "start": 20,
           "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteBigQueryLink_sync",
+      "title": "Snippet for the delete_big_query_link call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#delete_big_query_link.",
+      "file": "analytics_admin_service/delete_big_query_link.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_big_query_link",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#delete_big_query_link",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::DeleteBigQueryLinkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "DeleteBigQueryLink",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.DeleteBigQueryLink",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateBigQueryLink_sync",
+      "title": "Snippet for the update_big_query_link call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#update_big_query_link.",
+      "file": "analytics_admin_service/update_big_query_link.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_big_query_link",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#update_big_query_link",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::UpdateBigQueryLinkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::BigQueryLink",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "UpdateBigQueryLink",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.UpdateBigQueryLink",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -4732,6 +5052,246 @@
       ]
     },
     {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetEventEditRule_sync",
+      "title": "Snippet for the get_event_edit_rule call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#get_event_edit_rule.",
+      "file": "analytics_admin_service/get_event_edit_rule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_event_edit_rule",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#get_event_edit_rule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::GetEventEditRuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::EventEditRule",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "GetEventEditRule",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.GetEventEditRule",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListEventEditRules_sync",
+      "title": "Snippet for the list_event_edit_rules call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#list_event_edit_rules.",
+      "file": "analytics_admin_service/list_event_edit_rules.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_event_edit_rules",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#list_event_edit_rules",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::ListEventEditRulesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::ListEventEditRulesResponse",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "ListEventEditRules",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.ListEventEditRules",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateEventEditRule_sync",
+      "title": "Snippet for the create_event_edit_rule call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#create_event_edit_rule.",
+      "file": "analytics_admin_service/create_event_edit_rule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_event_edit_rule",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#create_event_edit_rule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::CreateEventEditRuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::EventEditRule",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "CreateEventEditRule",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.CreateEventEditRule",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateEventEditRule_sync",
+      "title": "Snippet for the update_event_edit_rule call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#update_event_edit_rule.",
+      "file": "analytics_admin_service/update_event_edit_rule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_event_edit_rule",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#update_event_edit_rule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::UpdateEventEditRuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::EventEditRule",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "UpdateEventEditRule",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.UpdateEventEditRule",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteEventEditRule_sync",
+      "title": "Snippet for the delete_event_edit_rule call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#delete_event_edit_rule.",
+      "file": "analytics_admin_service/delete_event_edit_rule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_event_edit_rule",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#delete_event_edit_rule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::DeleteEventEditRuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "DeleteEventEditRule",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.DeleteEventEditRule",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_ReorderEventEditRules_sync",
+      "title": "Snippet for the reorder_event_edit_rules call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#reorder_event_edit_rules.",
+      "file": "analytics_admin_service/reorder_event_edit_rules.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "reorder_event_edit_rules",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#reorder_event_edit_rules",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::ReorderEventEditRulesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "ReorderEventEditRules",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.ReorderEventEditRules",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateDataRedactionSettings_sync",
       "title": "Snippet for the update_data_redaction_settings call in the AnalyticsAdminService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#update_data_redaction_settings.",
@@ -5212,29 +5772,29 @@
       ]
     },
     {
-      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateSubproperty_sync",
-      "title": "Snippet for the create_subproperty call in the AnalyticsAdminService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#create_subproperty.",
-      "file": "analytics_admin_service/create_subproperty.rb",
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_ProvisionSubproperty_sync",
+      "title": "Snippet for the provision_subproperty call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#provision_subproperty.",
+      "file": "analytics_admin_service/provision_subproperty.rb",
       "language": "RUBY",
       "client_method": {
-        "short_name": "create_subproperty",
-        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#create_subproperty",
+        "short_name": "provision_subproperty",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#provision_subproperty",
         "async": false,
         "parameters": [
           {
-            "type": "::Google::Analytics::Admin::V1alpha::CreateSubpropertyRequest",
+            "type": "::Google::Analytics::Admin::V1alpha::ProvisionSubpropertyRequest",
             "name": "request"
           }
         ],
-        "result_type": "::Google::Analytics::Admin::V1alpha::CreateSubpropertyResponse",
+        "result_type": "::Google::Analytics::Admin::V1alpha::ProvisionSubpropertyResponse",
         "client": {
           "short_name": "AnalyticsAdminService::Client",
           "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
         },
         "method": {
-          "short_name": "CreateSubproperty",
-          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.CreateSubproperty",
+          "short_name": "ProvisionSubproperty",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.ProvisionSubproperty",
           "service": {
             "short_name": "AnalyticsAdminService",
             "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"

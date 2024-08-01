@@ -43,6 +43,11 @@ module Google
         #   @return [::Boolean]
         #     Output only. Indicates whether this Account is soft-deleted or not. Deleted
         #     accounts are excluded from List results unless specifically requested.
+        # @!attribute [r] gmp_organization
+        #   @return [::String]
+        #     Output only. The URI for a Google Marketing Platform organization resource.
+        #     Only set when this account is connected to a GMP organization.
+        #     Format: marketingplatformadmin.googleapis.com/organizations/\\{org_id}
         class Account
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -865,6 +870,73 @@ module Google
           end
         end
 
+        # A key event in a Google Analytics property.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. Resource name of this key event.
+        #     Format: properties/\\{property}/keyEvents/\\{key_event}
+        # @!attribute [rw] event_name
+        #   @return [::String]
+        #     Immutable. The event name for this key event.
+        #     Examples: 'click', 'purchase'
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Time when this key event was created in the property.
+        # @!attribute [r] deletable
+        #   @return [::Boolean]
+        #     Output only. If set to true, this event can be deleted.
+        # @!attribute [r] custom
+        #   @return [::Boolean]
+        #     Output only. If set to true, this key event refers to a custom event.  If
+        #     set to false, this key event refers to a default event in GA. Default
+        #     events typically have special meaning in GA. Default events are usually
+        #     created for you by the GA system, but in some cases can be created by
+        #     property admins. Custom events count towards the maximum number of
+        #     custom key events that may be created per property.
+        # @!attribute [rw] counting_method
+        #   @return [::Google::Analytics::Admin::V1alpha::KeyEvent::CountingMethod]
+        #     Required. The method by which Key Events will be counted across multiple
+        #     events within a session.
+        # @!attribute [rw] default_value
+        #   @return [::Google::Analytics::Admin::V1alpha::KeyEvent::DefaultValue]
+        #     Optional. Defines a default value/currency for a key event.
+        class KeyEvent
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Defines a default value/currency for a key event.
+          # @!attribute [rw] numeric_value
+          #   @return [::Float]
+          #     Required. This will be used to populate the "value" parameter for all
+          #     occurrences of this Key Event (specified by event_name) where that
+          #     parameter is unset.
+          # @!attribute [rw] currency_code
+          #   @return [::String]
+          #     Required. When an occurrence of this Key Event (specified by event_name)
+          #     has no set currency this currency will be applied as the default. Must be
+          #     in ISO 4217 currency code format.
+          #
+          #     See https://en.wikipedia.org/wiki/ISO_4217 for more information.
+          class DefaultValue
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The method by which Key Events will be counted across multiple events
+          # within a session.
+          module CountingMethod
+            # Counting method not specified.
+            COUNTING_METHOD_UNSPECIFIED = 0
+
+            # Each Event instance is considered a Key Event.
+            ONCE_PER_EVENT = 1
+
+            # An Event instance is considered a Key Event at most once per session per
+            # user.
+            ONCE_PER_SESSION = 2
+          end
+        end
+
         # Settings values for Google Signals.  This is a singleton resource.
         # @!attribute [r] name
         #   @return [::String]
@@ -1358,6 +1430,11 @@ module Google
         # @!attribute [rw] excluded_events
         #   @return [::Array<::String>]
         #     The list of event names that will be excluded from exports.
+        # @!attribute [rw] dataset_location
+        #   @return [::String]
+        #     Required. Immutable. The geographic location where the created BigQuery
+        #     dataset should reside. See https://cloud.google.com/bigquery/docs/locations
+        #     for supported locations.
         class BigQueryLink
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1679,6 +1756,9 @@ module Google
 
           # ChannelGroup resource
           CHANNEL_GROUP = 22
+
+          # BigQuery link resource
+          BIGQUERY_LINK = 23
 
           # EnhancedMeasurementSettings resource
           ENHANCED_MEASUREMENT_SETTINGS = 24

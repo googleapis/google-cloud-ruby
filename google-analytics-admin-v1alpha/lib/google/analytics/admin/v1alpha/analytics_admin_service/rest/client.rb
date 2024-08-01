@@ -1210,7 +1210,8 @@ module Google
               #
               #   @param parent [::String]
               #     Required. Format: properties/\\{property_id}
-              #     Example: properties/1234
+              #
+              #     Example: `properties/1234`
               #   @param firebase_link [::Google::Analytics::Admin::V1alpha::FirebaseLink, ::Hash]
               #     Required. The Firebase link to create.
               # @yield [result, operation] Access the result along with the TransportOperation object
@@ -1292,7 +1293,8 @@ module Google
               #
               #   @param name [::String]
               #     Required. Format: properties/\\{property_id}/firebaseLinks/\\{firebase_link_id}
-              #     Example: properties/1234/firebaseLinks/5678
+              #
+              #     Example: `properties/1234/firebaseLinks/5678`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Protobuf::Empty]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1373,7 +1375,8 @@ module Google
               #
               #   @param parent [::String]
               #     Required. Format: properties/\\{property_id}
-              #     Example: properties/1234
+              #
+              #     Example: `properties/1234`
               #   @param page_size [::Integer]
               #     The maximum number of resources to return. The service may return
               #     fewer than this value, even if there are additional pages.
@@ -1471,7 +1474,8 @@ module Google
               #     Required. The name of the site tag to lookup.
               #     Note that site tags are singletons and do not have unique IDs.
               #     Format: properties/\\{property_id}/dataStreams/\\{stream_id}/globalSiteTag
-              #     Example: "properties/123/dataStreams/456/globalSiteTag"
+              #
+              #     Example: `properties/123/dataStreams/456/globalSiteTag`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Analytics::Admin::V1alpha::GlobalSiteTag]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1891,7 +1895,8 @@ module Google
               #   @param name [::String]
               #     Required. The name of the settings to lookup.
               #     Format: accounts/\\{account}/dataSharingSettings
-              #     Example: "accounts/1000/dataSharingSettings"
+              #
+              #     Example: `accounts/1000/dataSharingSettings`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Analytics::Admin::V1alpha::DataSharingSettings]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2911,12 +2916,15 @@ module Google
               #
               #   @param account [::String]
               #     Required. The account resource for which to return change history
-              #     resources. Format: accounts/\\{account} Example: "accounts/100"
+              #     resources. Format: accounts/\\{account}
+              #
+              #     Example: `accounts/100`
               #   @param property [::String]
               #     Optional. Resource name for a child property. If set, only return changes
               #     made to this property or its child resources.
               #     Format: properties/\\{propertyId}
-              #     Example: "properties/100"
+              #
+              #     Example: `properties/100`
               #   @param resource_type [::Array<::Google::Analytics::Admin::V1alpha::ChangeHistoryResourceType>]
               #     Optional. If set, only return changes if they are for a resource that
               #     matches at least one of these types.
@@ -3171,6 +3179,7 @@ module Google
               end
 
               ##
+              # Deprecated: Use `CreateKeyEvent` instead.
               # Creates a conversion event with the specified attributes.
               #
               # @overload create_conversion_event(request, options = nil)
@@ -3253,6 +3262,7 @@ module Google
               end
 
               ##
+              # Deprecated: Use `UpdateKeyEvent` instead.
               # Updates a conversion event with the specified attributes.
               #
               # @overload update_conversion_event(request, options = nil)
@@ -3338,6 +3348,7 @@ module Google
               end
 
               ##
+              # Deprecated: Use `GetKeyEvent` instead.
               # Retrieve a single conversion event.
               #
               # @overload get_conversion_event(request, options = nil)
@@ -3419,6 +3430,7 @@ module Google
               end
 
               ##
+              # Deprecated: Use `DeleteKeyEvent` instead.
               # Deletes a conversion event in a property.
               #
               # @overload delete_conversion_event(request, options = nil)
@@ -3500,6 +3512,7 @@ module Google
               end
 
               ##
+              # Deprecated: Use `ListKeyEvents` instead.
               # Returns a list of conversion events in the specified parent property.
               #
               # Returns an empty list if no conversion events are found.
@@ -3588,6 +3601,430 @@ module Google
 
                 @analytics_admin_service_stub.list_conversion_events request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @analytics_admin_service_stub, :list_conversion_events, "conversion_events", request, result, options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a Key Event.
+              #
+              # @overload create_key_event(request, options = nil)
+              #   Pass arguments to `create_key_event` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::CreateKeyEventRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::CreateKeyEventRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_key_event(key_event: nil, parent: nil)
+              #   Pass arguments to `create_key_event` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param key_event [::Google::Analytics::Admin::V1alpha::KeyEvent, ::Hash]
+              #     Required. The Key Event to create.
+              #   @param parent [::String]
+              #     Required. The resource name of the parent property where this Key Event
+              #     will be created. Format: properties/123
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::KeyEvent]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::KeyEvent]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::CreateKeyEventRequest.new
+              #
+              #   # Call the create_key_event method.
+              #   result = client.create_key_event request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::KeyEvent.
+              #   p result
+              #
+              def create_key_event request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::CreateKeyEventRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_key_event.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_key_event.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_key_event.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.create_key_event request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates a Key Event.
+              #
+              # @overload update_key_event(request, options = nil)
+              #   Pass arguments to `update_key_event` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::UpdateKeyEventRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::UpdateKeyEventRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_key_event(key_event: nil, update_mask: nil)
+              #   Pass arguments to `update_key_event` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param key_event [::Google::Analytics::Admin::V1alpha::KeyEvent, ::Hash]
+              #     Required. The Key Event to update.
+              #     The `name` field is used to identify the settings to be updated.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Required. The list of fields to be updated. Field names must be in snake
+              #     case (e.g., "field_to_update"). Omitted fields will not be updated. To
+              #     replace the entire entity, use one path with the string "*" to match all
+              #     fields.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::KeyEvent]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::KeyEvent]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::UpdateKeyEventRequest.new
+              #
+              #   # Call the update_key_event method.
+              #   result = client.update_key_event request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::KeyEvent.
+              #   p result
+              #
+              def update_key_event request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::UpdateKeyEventRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_key_event.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_key_event.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_key_event.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.update_key_event request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Retrieve a single Key Event.
+              #
+              # @overload get_key_event(request, options = nil)
+              #   Pass arguments to `get_key_event` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::GetKeyEventRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::GetKeyEventRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_key_event(name: nil)
+              #   Pass arguments to `get_key_event` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource name of the Key Event to retrieve.
+              #     Format: properties/\\{property}/keyEvents/\\{key_event}
+              #     Example: "properties/123/keyEvents/456"
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::KeyEvent]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::KeyEvent]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::GetKeyEventRequest.new
+              #
+              #   # Call the get_key_event method.
+              #   result = client.get_key_event request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::KeyEvent.
+              #   p result
+              #
+              def get_key_event request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::GetKeyEventRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_key_event.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_key_event.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_key_event.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.get_key_event request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a Key Event.
+              #
+              # @overload delete_key_event(request, options = nil)
+              #   Pass arguments to `delete_key_event` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::DeleteKeyEventRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::DeleteKeyEventRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_key_event(name: nil)
+              #   Pass arguments to `delete_key_event` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource name of the Key Event to delete.
+              #     Format: properties/\\{property}/keyEvents/\\{key_event}
+              #     Example: "properties/123/keyEvents/456"
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::DeleteKeyEventRequest.new
+              #
+              #   # Call the delete_key_event method.
+              #   result = client.delete_key_event request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
+              def delete_key_event request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::DeleteKeyEventRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_key_event.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_key_event.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_key_event.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.delete_key_event request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Returns a list of Key Events in the specified parent property.
+              # Returns an empty list if no Key Events are found.
+              #
+              # @overload list_key_events(request, options = nil)
+              #   Pass arguments to `list_key_events` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::ListKeyEventsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::ListKeyEventsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_key_events(parent: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_key_events` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The resource name of the parent property.
+              #     Example: 'properties/123'
+              #   @param page_size [::Integer]
+              #     The maximum number of resources to return.
+              #     If unspecified, at most 50 resources will be returned.
+              #     The maximum value is 200; (higher values will be coerced to the maximum)
+              #   @param page_token [::String]
+              #     A page token, received from a previous `ListKeyEvents` call.
+              #     Provide this to retrieve the subsequent page.
+              #     When paginating, all other parameters provided to `ListKeyEvents`
+              #     must match the call that provided the page token.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Analytics::Admin::V1alpha::KeyEvent>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Analytics::Admin::V1alpha::KeyEvent>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::ListKeyEventsRequest.new
+              #
+              #   # Call the list_key_events method.
+              #   result = client.list_key_events request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Analytics::Admin::V1alpha::KeyEvent.
+              #     p item
+              #   end
+              #
+              def list_key_events request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::ListKeyEventsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_key_events.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_key_events.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_key_events.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.list_key_events request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @analytics_admin_service_stub, :list_key_events, "key_events", request, result, options
                   yield result, operation if block_given?
                   return result
                 end
@@ -8906,6 +9343,87 @@ module Google
               end
 
               ##
+              # Creates a BigQueryLink.
+              #
+              # @overload create_big_query_link(request, options = nil)
+              #   Pass arguments to `create_big_query_link` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::CreateBigQueryLinkRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::CreateBigQueryLinkRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_big_query_link(parent: nil, bigquery_link: nil)
+              #   Pass arguments to `create_big_query_link` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Example format: properties/1234
+              #   @param bigquery_link [::Google::Analytics::Admin::V1alpha::BigQueryLink, ::Hash]
+              #     Required. The BigQueryLink to create.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::BigQueryLink]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::BigQueryLink]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::CreateBigQueryLinkRequest.new
+              #
+              #   # Call the create_big_query_link method.
+              #   result = client.create_big_query_link request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::BigQueryLink.
+              #   p result
+              #
+              def create_big_query_link request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::CreateBigQueryLinkRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_big_query_link.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_big_query_link.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_big_query_link.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.create_big_query_link request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Lookup for a single BigQuery Link.
               #
               # @overload get_big_query_link(request, options = nil)
@@ -9075,6 +9593,171 @@ module Google
 
                 @analytics_admin_service_stub.list_big_query_links request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @analytics_admin_service_stub, :list_big_query_links, "bigquery_links", request, result, options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a BigQueryLink on a property.
+              #
+              # @overload delete_big_query_link(request, options = nil)
+              #   Pass arguments to `delete_big_query_link` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::DeleteBigQueryLinkRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::DeleteBigQueryLinkRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_big_query_link(name: nil)
+              #   Pass arguments to `delete_big_query_link` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The BigQueryLink to delete.
+              #     Example format: properties/1234/bigQueryLinks/5678
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::DeleteBigQueryLinkRequest.new
+              #
+              #   # Call the delete_big_query_link method.
+              #   result = client.delete_big_query_link request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
+              def delete_big_query_link request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::DeleteBigQueryLinkRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_big_query_link.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_big_query_link.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_big_query_link.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.delete_big_query_link request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates a BigQueryLink.
+              #
+              # @overload update_big_query_link(request, options = nil)
+              #   Pass arguments to `update_big_query_link` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::UpdateBigQueryLinkRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::UpdateBigQueryLinkRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_big_query_link(bigquery_link: nil, update_mask: nil)
+              #   Pass arguments to `update_big_query_link` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param bigquery_link [::Google::Analytics::Admin::V1alpha::BigQueryLink, ::Hash]
+              #     Required. The settings to update.
+              #     The `name` field is used to identify the settings to be updated.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Required. The list of fields to be updated. Field names must be in snake
+              #     case (e.g., "field_to_update"). Omitted fields will not be updated. To
+              #     replace the entire entity, use one path with the string "*" to match all
+              #     fields.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::BigQueryLink]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::BigQueryLink]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::UpdateBigQueryLinkRequest.new
+              #
+              #   # Call the update_big_query_link method.
+              #   result = client.update_big_query_link request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::BigQueryLink.
+              #   p result
+              #
+              def update_big_query_link request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::UpdateBigQueryLinkRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_big_query_link.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_big_query_link.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_big_query_link.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.update_big_query_link request, options do |result, operation|
                   yield result, operation if block_given?
                   return result
                 end
@@ -10356,6 +11039,509 @@ module Google
               end
 
               ##
+              # Lookup for a single EventEditRule.
+              #
+              # @overload get_event_edit_rule(request, options = nil)
+              #   Pass arguments to `get_event_edit_rule` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::GetEventEditRuleRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::GetEventEditRuleRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_event_edit_rule(name: nil)
+              #   Pass arguments to `get_event_edit_rule` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the EventEditRule to get.
+              #     Example format: properties/123/dataStreams/456/eventEditRules/789
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::EventEditRule]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::EventEditRule]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::GetEventEditRuleRequest.new
+              #
+              #   # Call the get_event_edit_rule method.
+              #   result = client.get_event_edit_rule request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::EventEditRule.
+              #   p result
+              #
+              def get_event_edit_rule request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::GetEventEditRuleRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_event_edit_rule.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_event_edit_rule.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_event_edit_rule.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.get_event_edit_rule request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists EventEditRules on a web data stream.
+              #
+              # @overload list_event_edit_rules(request, options = nil)
+              #   Pass arguments to `list_event_edit_rules` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::ListEventEditRulesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::ListEventEditRulesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_event_edit_rules(parent: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_event_edit_rules` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Example format: properties/123/dataStreams/456
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of resources to return.
+              #     If unspecified, at most 50 resources will be returned.
+              #     The maximum value is 200 (higher values will be coerced to the maximum).
+              #   @param page_token [::String]
+              #     Optional. A page token, received from a previous `ListEventEditRules` call.
+              #     Provide this to retrieve the subsequent page.
+              #
+              #     When paginating, all other parameters provided to `ListEventEditRules`
+              #     must match the call that provided the page token.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Analytics::Admin::V1alpha::EventEditRule>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Analytics::Admin::V1alpha::EventEditRule>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::ListEventEditRulesRequest.new
+              #
+              #   # Call the list_event_edit_rules method.
+              #   result = client.list_event_edit_rules request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Analytics::Admin::V1alpha::EventEditRule.
+              #     p item
+              #   end
+              #
+              def list_event_edit_rules request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::ListEventEditRulesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_event_edit_rules.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_event_edit_rules.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_event_edit_rules.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.list_event_edit_rules request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @analytics_admin_service_stub, :list_event_edit_rules, "event_edit_rules", request, result, options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates an EventEditRule.
+              #
+              # @overload create_event_edit_rule(request, options = nil)
+              #   Pass arguments to `create_event_edit_rule` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::CreateEventEditRuleRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::CreateEventEditRuleRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_event_edit_rule(parent: nil, event_edit_rule: nil)
+              #   Pass arguments to `create_event_edit_rule` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Example format: properties/123/dataStreams/456
+              #   @param event_edit_rule [::Google::Analytics::Admin::V1alpha::EventEditRule, ::Hash]
+              #     Required. The EventEditRule to create.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::EventEditRule]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::EventEditRule]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::CreateEventEditRuleRequest.new
+              #
+              #   # Call the create_event_edit_rule method.
+              #   result = client.create_event_edit_rule request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::EventEditRule.
+              #   p result
+              #
+              def create_event_edit_rule request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::CreateEventEditRuleRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_event_edit_rule.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_event_edit_rule.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_event_edit_rule.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.create_event_edit_rule request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates an EventEditRule.
+              #
+              # @overload update_event_edit_rule(request, options = nil)
+              #   Pass arguments to `update_event_edit_rule` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::UpdateEventEditRuleRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::UpdateEventEditRuleRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_event_edit_rule(event_edit_rule: nil, update_mask: nil)
+              #   Pass arguments to `update_event_edit_rule` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param event_edit_rule [::Google::Analytics::Admin::V1alpha::EventEditRule, ::Hash]
+              #     Required. The EventEditRule to update.
+              #     The resource's `name` field is used to identify the EventEditRule to be
+              #     updated.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Required. The list of fields to be updated. Field names must be in snake
+              #     case (e.g., "field_to_update"). Omitted fields will not be updated. To
+              #     replace the entire entity, use one path with the string "*" to match all
+              #     fields.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::EventEditRule]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::EventEditRule]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::UpdateEventEditRuleRequest.new
+              #
+              #   # Call the update_event_edit_rule method.
+              #   result = client.update_event_edit_rule request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::EventEditRule.
+              #   p result
+              #
+              def update_event_edit_rule request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::UpdateEventEditRuleRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_event_edit_rule.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_event_edit_rule.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_event_edit_rule.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.update_event_edit_rule request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes an EventEditRule.
+              #
+              # @overload delete_event_edit_rule(request, options = nil)
+              #   Pass arguments to `delete_event_edit_rule` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::DeleteEventEditRuleRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::DeleteEventEditRuleRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_event_edit_rule(name: nil)
+              #   Pass arguments to `delete_event_edit_rule` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Example format: properties/123/dataStreams/456/eventEditRules/789
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::DeleteEventEditRuleRequest.new
+              #
+              #   # Call the delete_event_edit_rule method.
+              #   result = client.delete_event_edit_rule request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
+              def delete_event_edit_rule request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::DeleteEventEditRuleRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_event_edit_rule.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_event_edit_rule.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_event_edit_rule.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.delete_event_edit_rule request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Changes the processing order of event edit rules on the specified stream.
+              #
+              # @overload reorder_event_edit_rules(request, options = nil)
+              #   Pass arguments to `reorder_event_edit_rules` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::ReorderEventEditRulesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::ReorderEventEditRulesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload reorder_event_edit_rules(parent: nil, event_edit_rules: nil)
+              #   Pass arguments to `reorder_event_edit_rules` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Example format: properties/123/dataStreams/456
+              #   @param event_edit_rules [::Array<::String>]
+              #     Required. EventEditRule resource names for the specified data stream, in
+              #     the needed processing order. All EventEditRules for the stream must be
+              #     present in the list.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::ReorderEventEditRulesRequest.new
+              #
+              #   # Call the reorder_event_edit_rules method.
+              #   result = client.reorder_event_edit_rules request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
+              def reorder_event_edit_rules request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::ReorderEventEditRulesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.reorder_event_edit_rules.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.reorder_event_edit_rules.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.reorder_event_edit_rules.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.reorder_event_edit_rules request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Updates a DataRedactionSettings on a property.
               #
               # @overload update_data_redaction_settings(request, options = nil)
@@ -11387,34 +12573,30 @@ module Google
               # Create a subproperty and a subproperty event filter that applies to the
               # created subproperty.
               #
-              # @overload create_subproperty(request, options = nil)
-              #   Pass arguments to `create_subproperty` via a request object, either of type
-              #   {::Google::Analytics::Admin::V1alpha::CreateSubpropertyRequest} or an equivalent Hash.
+              # @overload provision_subproperty(request, options = nil)
+              #   Pass arguments to `provision_subproperty` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::ProvisionSubpropertyRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Analytics::Admin::V1alpha::CreateSubpropertyRequest, ::Hash]
+              #   @param request [::Google::Analytics::Admin::V1alpha::ProvisionSubpropertyRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload create_subproperty(parent: nil, subproperty: nil, subproperty_event_filter: nil)
-              #   Pass arguments to `create_subproperty` via keyword arguments. Note that at
+              # @overload provision_subproperty(subproperty: nil, subproperty_event_filter: nil)
+              #   Pass arguments to `provision_subproperty` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
-              #   @param parent [::String]
-              #     Required. The ordinary property for which to create a subproperty.
-              #     Format: properties/property_id
-              #     Example: properties/123
               #   @param subproperty [::Google::Analytics::Admin::V1alpha::Property, ::Hash]
               #     Required. The subproperty to create.
               #   @param subproperty_event_filter [::Google::Analytics::Admin::V1alpha::SubpropertyEventFilter, ::Hash]
               #     Optional. The subproperty event filter to create on an ordinary property.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Analytics::Admin::V1alpha::CreateSubpropertyResponse]
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::ProvisionSubpropertyResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Analytics::Admin::V1alpha::CreateSubpropertyResponse]
+              # @return [::Google::Analytics::Admin::V1alpha::ProvisionSubpropertyResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -11425,24 +12607,24 @@ module Google
               #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
               #
               #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Analytics::Admin::V1alpha::CreateSubpropertyRequest.new
+              #   request = Google::Analytics::Admin::V1alpha::ProvisionSubpropertyRequest.new
               #
-              #   # Call the create_subproperty method.
-              #   result = client.create_subproperty request
+              #   # Call the provision_subproperty method.
+              #   result = client.provision_subproperty request
               #
-              #   # The returned object is of type Google::Analytics::Admin::V1alpha::CreateSubpropertyResponse.
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::ProvisionSubpropertyResponse.
               #   p result
               #
-              def create_subproperty request, options = nil
+              def provision_subproperty request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::CreateSubpropertyRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::ProvisionSubpropertyRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = @config.rpcs.create_subproperty.metadata.to_h
+                call_metadata = @config.rpcs.provision_subproperty.metadata.to_h
 
                 # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
@@ -11453,15 +12635,15 @@ module Google
                 call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                options.apply_defaults timeout:      @config.rpcs.create_subproperty.timeout,
+                options.apply_defaults timeout:      @config.rpcs.provision_subproperty.timeout,
                                        metadata:     call_metadata,
-                                       retry_policy: @config.rpcs.create_subproperty.retry_policy
+                                       retry_policy: @config.rpcs.provision_subproperty.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @analytics_admin_service_stub.create_subproperty request, options do |result, operation|
+                @analytics_admin_service_stub.provision_subproperty request, options do |result, operation|
                   yield result, operation if block_given?
                   return result
                 end
@@ -12225,6 +13407,31 @@ module Google
                   #
                   attr_reader :list_conversion_events
                   ##
+                  # RPC-specific configuration for `create_key_event`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_key_event
+                  ##
+                  # RPC-specific configuration for `update_key_event`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_key_event
+                  ##
+                  # RPC-specific configuration for `get_key_event`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_key_event
+                  ##
+                  # RPC-specific configuration for `delete_key_event`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_key_event
+                  ##
+                  # RPC-specific configuration for `list_key_events`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_key_events
+                  ##
                   # RPC-specific configuration for `get_display_video360_advertiser_link`
                   # @return [::Gapic::Config::Method]
                   #
@@ -12535,6 +13742,11 @@ module Google
                   #
                   attr_reader :fetch_automated_ga4_configuration_opt_out
                   ##
+                  # RPC-specific configuration for `create_big_query_link`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_big_query_link
+                  ##
                   # RPC-specific configuration for `get_big_query_link`
                   # @return [::Gapic::Config::Method]
                   #
@@ -12544,6 +13756,16 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :list_big_query_links
+                  ##
+                  # RPC-specific configuration for `delete_big_query_link`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_big_query_link
+                  ##
+                  # RPC-specific configuration for `update_big_query_link`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_big_query_link
                   ##
                   # RPC-specific configuration for `get_enhanced_measurement_settings`
                   # @return [::Gapic::Config::Method]
@@ -12620,6 +13842,36 @@ module Google
                   #
                   attr_reader :delete_event_create_rule
                   ##
+                  # RPC-specific configuration for `get_event_edit_rule`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_event_edit_rule
+                  ##
+                  # RPC-specific configuration for `list_event_edit_rules`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_event_edit_rules
+                  ##
+                  # RPC-specific configuration for `create_event_edit_rule`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_event_edit_rule
+                  ##
+                  # RPC-specific configuration for `update_event_edit_rule`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_event_edit_rule
+                  ##
+                  # RPC-specific configuration for `delete_event_edit_rule`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_event_edit_rule
+                  ##
+                  # RPC-specific configuration for `reorder_event_edit_rules`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :reorder_event_edit_rules
+                  ##
                   # RPC-specific configuration for `update_data_redaction_settings`
                   # @return [::Gapic::Config::Method]
                   #
@@ -12680,10 +13932,10 @@ module Google
                   #
                   attr_reader :delete_rollup_property_source_link
                   ##
-                  # RPC-specific configuration for `create_subproperty`
+                  # RPC-specific configuration for `provision_subproperty`
                   # @return [::Gapic::Config::Method]
                   #
-                  attr_reader :create_subproperty
+                  attr_reader :provision_subproperty
                   ##
                   # RPC-specific configuration for `create_subproperty_event_filter`
                   # @return [::Gapic::Config::Method]
@@ -12790,6 +14042,16 @@ module Google
                     @delete_conversion_event = ::Gapic::Config::Method.new delete_conversion_event_config
                     list_conversion_events_config = parent_rpcs.list_conversion_events if parent_rpcs.respond_to? :list_conversion_events
                     @list_conversion_events = ::Gapic::Config::Method.new list_conversion_events_config
+                    create_key_event_config = parent_rpcs.create_key_event if parent_rpcs.respond_to? :create_key_event
+                    @create_key_event = ::Gapic::Config::Method.new create_key_event_config
+                    update_key_event_config = parent_rpcs.update_key_event if parent_rpcs.respond_to? :update_key_event
+                    @update_key_event = ::Gapic::Config::Method.new update_key_event_config
+                    get_key_event_config = parent_rpcs.get_key_event if parent_rpcs.respond_to? :get_key_event
+                    @get_key_event = ::Gapic::Config::Method.new get_key_event_config
+                    delete_key_event_config = parent_rpcs.delete_key_event if parent_rpcs.respond_to? :delete_key_event
+                    @delete_key_event = ::Gapic::Config::Method.new delete_key_event_config
+                    list_key_events_config = parent_rpcs.list_key_events if parent_rpcs.respond_to? :list_key_events
+                    @list_key_events = ::Gapic::Config::Method.new list_key_events_config
                     get_display_video360_advertiser_link_config = parent_rpcs.get_display_video360_advertiser_link if parent_rpcs.respond_to? :get_display_video360_advertiser_link
                     @get_display_video360_advertiser_link = ::Gapic::Config::Method.new get_display_video360_advertiser_link_config
                     list_display_video360_advertiser_links_config = parent_rpcs.list_display_video360_advertiser_links if parent_rpcs.respond_to? :list_display_video360_advertiser_links
@@ -12914,10 +14176,16 @@ module Google
                     @set_automated_ga4_configuration_opt_out = ::Gapic::Config::Method.new set_automated_ga4_configuration_opt_out_config
                     fetch_automated_ga4_configuration_opt_out_config = parent_rpcs.fetch_automated_ga4_configuration_opt_out if parent_rpcs.respond_to? :fetch_automated_ga4_configuration_opt_out
                     @fetch_automated_ga4_configuration_opt_out = ::Gapic::Config::Method.new fetch_automated_ga4_configuration_opt_out_config
+                    create_big_query_link_config = parent_rpcs.create_big_query_link if parent_rpcs.respond_to? :create_big_query_link
+                    @create_big_query_link = ::Gapic::Config::Method.new create_big_query_link_config
                     get_big_query_link_config = parent_rpcs.get_big_query_link if parent_rpcs.respond_to? :get_big_query_link
                     @get_big_query_link = ::Gapic::Config::Method.new get_big_query_link_config
                     list_big_query_links_config = parent_rpcs.list_big_query_links if parent_rpcs.respond_to? :list_big_query_links
                     @list_big_query_links = ::Gapic::Config::Method.new list_big_query_links_config
+                    delete_big_query_link_config = parent_rpcs.delete_big_query_link if parent_rpcs.respond_to? :delete_big_query_link
+                    @delete_big_query_link = ::Gapic::Config::Method.new delete_big_query_link_config
+                    update_big_query_link_config = parent_rpcs.update_big_query_link if parent_rpcs.respond_to? :update_big_query_link
+                    @update_big_query_link = ::Gapic::Config::Method.new update_big_query_link_config
                     get_enhanced_measurement_settings_config = parent_rpcs.get_enhanced_measurement_settings if parent_rpcs.respond_to? :get_enhanced_measurement_settings
                     @get_enhanced_measurement_settings = ::Gapic::Config::Method.new get_enhanced_measurement_settings_config
                     update_enhanced_measurement_settings_config = parent_rpcs.update_enhanced_measurement_settings if parent_rpcs.respond_to? :update_enhanced_measurement_settings
@@ -12948,6 +14216,18 @@ module Google
                     @update_event_create_rule = ::Gapic::Config::Method.new update_event_create_rule_config
                     delete_event_create_rule_config = parent_rpcs.delete_event_create_rule if parent_rpcs.respond_to? :delete_event_create_rule
                     @delete_event_create_rule = ::Gapic::Config::Method.new delete_event_create_rule_config
+                    get_event_edit_rule_config = parent_rpcs.get_event_edit_rule if parent_rpcs.respond_to? :get_event_edit_rule
+                    @get_event_edit_rule = ::Gapic::Config::Method.new get_event_edit_rule_config
+                    list_event_edit_rules_config = parent_rpcs.list_event_edit_rules if parent_rpcs.respond_to? :list_event_edit_rules
+                    @list_event_edit_rules = ::Gapic::Config::Method.new list_event_edit_rules_config
+                    create_event_edit_rule_config = parent_rpcs.create_event_edit_rule if parent_rpcs.respond_to? :create_event_edit_rule
+                    @create_event_edit_rule = ::Gapic::Config::Method.new create_event_edit_rule_config
+                    update_event_edit_rule_config = parent_rpcs.update_event_edit_rule if parent_rpcs.respond_to? :update_event_edit_rule
+                    @update_event_edit_rule = ::Gapic::Config::Method.new update_event_edit_rule_config
+                    delete_event_edit_rule_config = parent_rpcs.delete_event_edit_rule if parent_rpcs.respond_to? :delete_event_edit_rule
+                    @delete_event_edit_rule = ::Gapic::Config::Method.new delete_event_edit_rule_config
+                    reorder_event_edit_rules_config = parent_rpcs.reorder_event_edit_rules if parent_rpcs.respond_to? :reorder_event_edit_rules
+                    @reorder_event_edit_rules = ::Gapic::Config::Method.new reorder_event_edit_rules_config
                     update_data_redaction_settings_config = parent_rpcs.update_data_redaction_settings if parent_rpcs.respond_to? :update_data_redaction_settings
                     @update_data_redaction_settings = ::Gapic::Config::Method.new update_data_redaction_settings_config
                     get_data_redaction_settings_config = parent_rpcs.get_data_redaction_settings if parent_rpcs.respond_to? :get_data_redaction_settings
@@ -12972,8 +14252,8 @@ module Google
                     @create_rollup_property_source_link = ::Gapic::Config::Method.new create_rollup_property_source_link_config
                     delete_rollup_property_source_link_config = parent_rpcs.delete_rollup_property_source_link if parent_rpcs.respond_to? :delete_rollup_property_source_link
                     @delete_rollup_property_source_link = ::Gapic::Config::Method.new delete_rollup_property_source_link_config
-                    create_subproperty_config = parent_rpcs.create_subproperty if parent_rpcs.respond_to? :create_subproperty
-                    @create_subproperty = ::Gapic::Config::Method.new create_subproperty_config
+                    provision_subproperty_config = parent_rpcs.provision_subproperty if parent_rpcs.respond_to? :provision_subproperty
+                    @provision_subproperty = ::Gapic::Config::Method.new provision_subproperty_config
                     create_subproperty_event_filter_config = parent_rpcs.create_subproperty_event_filter if parent_rpcs.respond_to? :create_subproperty_event_filter
                     @create_subproperty_event_filter = ::Gapic::Config::Method.new create_subproperty_event_filter_config
                     get_subproperty_event_filter_config = parent_rpcs.get_subproperty_event_filter if parent_rpcs.respond_to? :get_subproperty_event_filter

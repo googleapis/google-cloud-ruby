@@ -205,6 +205,31 @@
                 "list_conversion_events"
               ]
             },
+            "CreateKeyEvent": {
+              "methods": [
+                "create_key_event"
+              ]
+            },
+            "UpdateKeyEvent": {
+              "methods": [
+                "update_key_event"
+              ]
+            },
+            "GetKeyEvent": {
+              "methods": [
+                "get_key_event"
+              ]
+            },
+            "DeleteKeyEvent": {
+              "methods": [
+                "delete_key_event"
+              ]
+            },
+            "ListKeyEvents": {
+              "methods": [
+                "list_key_events"
+              ]
+            },
             "GetDisplayVideo360AdvertiserLink": {
               "methods": [
                 "get_display_video360_advertiser_link"
@@ -515,6 +540,11 @@
                 "fetch_automated_ga4_configuration_opt_out"
               ]
             },
+            "CreateBigQueryLink": {
+              "methods": [
+                "create_big_query_link"
+              ]
+            },
             "GetBigQueryLink": {
               "methods": [
                 "get_big_query_link"
@@ -523,6 +553,16 @@
             "ListBigQueryLinks": {
               "methods": [
                 "list_big_query_links"
+              ]
+            },
+            "DeleteBigQueryLink": {
+              "methods": [
+                "delete_big_query_link"
+              ]
+            },
+            "UpdateBigQueryLink": {
+              "methods": [
+                "update_big_query_link"
               ]
             },
             "GetEnhancedMeasurementSettings": {
@@ -600,6 +640,36 @@
                 "delete_event_create_rule"
               ]
             },
+            "GetEventEditRule": {
+              "methods": [
+                "get_event_edit_rule"
+              ]
+            },
+            "ListEventEditRules": {
+              "methods": [
+                "list_event_edit_rules"
+              ]
+            },
+            "CreateEventEditRule": {
+              "methods": [
+                "create_event_edit_rule"
+              ]
+            },
+            "UpdateEventEditRule": {
+              "methods": [
+                "update_event_edit_rule"
+              ]
+            },
+            "DeleteEventEditRule": {
+              "methods": [
+                "delete_event_edit_rule"
+              ]
+            },
+            "ReorderEventEditRules": {
+              "methods": [
+                "reorder_event_edit_rules"
+              ]
+            },
             "UpdateDataRedactionSettings": {
               "methods": [
                 "update_data_redaction_settings"
@@ -660,9 +730,9 @@
                 "delete_rollup_property_source_link"
               ]
             },
-            "CreateSubproperty": {
+            "ProvisionSubproperty": {
               "methods": [
-                "create_subproperty"
+                "provision_subproperty"
               ]
             },
             "CreateSubpropertyEventFilter": {

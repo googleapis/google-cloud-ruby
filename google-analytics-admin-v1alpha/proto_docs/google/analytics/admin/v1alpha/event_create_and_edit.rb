@@ -86,6 +86,45 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # An Event Edit Rule defines conditions that will trigger the creation of an
+        # entirely new event based upon matched criteria of a source event. Additional
+        # mutations of the parameters from the source event can be defined.
+        #
+        # Unlike Event Create rules, Event Edit Rules are applied in their defined
+        # order.
+        #
+        # Event Edit rules can't be used to modify an event created from an Event
+        # Create rule.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. Resource name for this EventEditRule resource.
+        #     Format:
+        #     properties/\\{property}/dataStreams/\\{data_stream}/eventEditRules/\\{event_edit_rule}
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     Required. The display name of this event edit rule. Maximum of 255
+        #     characters.
+        # @!attribute [rw] event_conditions
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::MatchingCondition>]
+        #     Required. Conditions on the source event must match for this rule to be
+        #     applied. Must have at least one condition, and can have up to 10 max.
+        # @!attribute [rw] parameter_mutations
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::ParameterMutation>]
+        #     Required. Parameter mutations define parameter behavior on the new event,
+        #     and are applied in order. A maximum of 20 mutations can be applied.
+        # @!attribute [r] processing_order
+        #   @return [::Integer]
+        #     Output only. The order for which this rule will be processed. Rules with an
+        #     order value lower than this will be processed before this rule, rules with
+        #     an order value higher than this will be processed after this rule. New
+        #     event edit rules will be assigned an order value at the end of the order.
+        #
+        #     This value does not apply to event create rules.
+        class EventEditRule
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Defines a condition for when an Event Edit or Event Creation rule applies to
         # an event.
         # @!attribute [rw] field
