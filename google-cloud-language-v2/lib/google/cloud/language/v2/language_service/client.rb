@@ -440,13 +440,15 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload moderate_text(document: nil)
+            # @overload moderate_text(document: nil, model_version: nil)
             #   Pass arguments to `moderate_text` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param document [::Google::Cloud::Language::V2::Document, ::Hash]
             #     Required. Input document.
+            #   @param model_version [::Google::Cloud::Language::V2::ModerateTextRequest::ModelVersion]
+            #     Optional. The model version to use for ModerateText.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Language::V2::ModerateTextResponse]

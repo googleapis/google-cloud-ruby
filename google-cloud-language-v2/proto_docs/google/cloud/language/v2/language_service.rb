@@ -90,8 +90,7 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Metadata associated with the entity.
         #
-        #     For most entity types, the metadata is a Wikipedia URL (`wikipedia_url`)
-        #     and Knowledge Graph MID (`mid`), if they are available. For the metadata
+        #     For the metadata
         #     associated with other entity types, see the Type table below.
         # @!attribute [rw] mentions
         #   @return [::Array<::Google::Cloud::Language::V2::EntityMention>]
@@ -116,8 +115,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The type of the entity. For most entity types, the associated metadata is a
-          # Wikipedia URL (`wikipedia_url`) and Knowledge Graph MID (`mid`). The table
+          # The type of the entity. The table
           # below lists the associated fields for entities that have different
           # metadata.
           module Type
@@ -167,7 +165,7 @@ module Google
             # * `locality` - city or town
             # * `street_name` - street/route name, if detected
             # * `postal_code` - postal code, if detected
-            # * `country` - country, if detected<
+            # * `country` - country, if detected
             # * `broad_region` - administrative area, such as the state, if detected
             # * `narrow_region` - smaller administrative area, such as county, if
             # detected
@@ -272,6 +270,11 @@ module Google
         #   @return [::Float]
         #     The classifier's confidence of the category. Number represents how certain
         #     the classifier is that this category represents the given text.
+        # @!attribute [rw] severity
+        #   @return [::Float]
+        #     Optional. The classifier's severity of the category. This is only present
+        #     when the ModerateTextRequest.ModelVersion is set to MODEL_VERSION_2, and
+        #     the corresponding category has a severity score.
         class ClassificationCategory
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -374,9 +377,28 @@ module Google
         # @!attribute [rw] document
         #   @return [::Google::Cloud::Language::V2::Document]
         #     Required. Input document.
+        # @!attribute [rw] model_version
+        #   @return [::Google::Cloud::Language::V2::ModerateTextRequest::ModelVersion]
+        #     Optional. The model version to use for ModerateText.
         class ModerateTextRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The model version to use for ModerateText.
+          module ModelVersion
+            # The default model version.
+            MODEL_VERSION_UNSPECIFIED = 0
+
+            # Use the v1 model, this model is used by default when not provided.
+            # The v1 model only returns probability (confidence) score for each
+            # category.
+            MODEL_VERSION_1 = 1
+
+            # Use the v2 model.
+            # The v2 model only returns probability (confidence) score for each
+            # category, and returns severity score for a subset of the categories.
+            MODEL_VERSION_2 = 2
+          end
         end
 
         # The document moderation response message.
