@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.3.0 (2024-08-02)
+
+#### Features
+
+* Support for instance stripe level settings ([#26559](https://github.com/googleapis/google-cloud-ruby/issues/26559)) 
+
 ### 0.2.0 (2024-07-08)
 
 #### Features
