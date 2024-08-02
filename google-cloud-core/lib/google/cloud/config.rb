@@ -483,6 +483,16 @@ module Google
         false
       end
 
+      ##
+      # @private
+      # Implement standard is_a check
+      #
+      # @return [boolean]
+      #
+      def is_a? klass
+        klass == Config
+      end
+
       private
 
       ##
