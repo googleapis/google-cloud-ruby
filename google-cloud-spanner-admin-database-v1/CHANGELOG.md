@@ -1,5 +1,11 @@
 # Release History
 
+### 1.1.0 (2024-08-02)
+
+#### Features
+
+* Support for incremental backups ([#26546](https://github.com/googleapis/google-cloud-ruby/issues/26546)) 
+
 ### 1.0.0 (2024-07-08)
 
 #### Features
