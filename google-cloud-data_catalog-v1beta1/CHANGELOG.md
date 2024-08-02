@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.5.1 (2024-08-02)
+
+#### Documentation
+
+* Mark DataplexTransferStatus::MIGRATED as deprecated ([#26551](https://github.com/googleapis/google-cloud-ruby/issues/26551)) 
+
 ### 0.5.0 (2024-07-24)
 
 #### Features
