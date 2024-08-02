@@ -1,5 +1,12 @@
 # Release History
 
+### 0.36.0 (2024-08-02)
+
+#### Features
+
+* Support for Generative AI model-based processor version information 
+* Support the imageless_mode parameter to the process_document RPC 
+
 ### 0.35.0 (2024-04-25)
 
 #### Features
