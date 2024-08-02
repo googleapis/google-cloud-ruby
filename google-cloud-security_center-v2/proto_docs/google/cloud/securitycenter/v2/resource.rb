@@ -57,13 +57,13 @@ module Google
         #   @return [::String]
         #     A string representation of the resource path.
         #     For Google Cloud, it has the format of
-        #     organizations/\\{organization_id}/folders/\\{folder_id}/folders/\\{folder_id}/projects/\\{project_id}
+        #     `organizations/{organization_id}/folders/{folder_id}/folders/{folder_id}/projects/{project_id}`
         #     where there can be any number of folders.
         #     For AWS, it has the format of
-        #     org/\\{organization_id}/ou/\\{organizational_unit_id}/ou/\\{organizational_unit_id}/account/\\{account_id}
+        #     `org/{organization_id}/ou/{organizational_unit_id}/ou/{organizational_unit_id}/account/{account_id}`
         #     where there can be any number of organizational units.
         #     For Azure, it has the format of
-        #     mg/\\{management_group_id}/mg/\\{management_group_id}/subscription/\\{subscription_id}/rg/\\{resource_group_name}
+        #     `mg/{management_group_id}/mg/{management_group_id}/subscription/{subscription_id}/rg/{resource_group_name}`
         #     where there can be any number of management groups.
         class Resource
           include ::Google::Protobuf::MessageExts
@@ -177,7 +177,7 @@ module Google
           # @!attribute [rw] id
           #   @return [::String]
           #     The UUID of the Azure management group, for example,
-          #     "20000000-0001-0000-0000-000000000000".
+          #     `20000000-0001-0000-0000-000000000000`.
           # @!attribute [rw] display_name
           #   @return [::String]
           #     The display name of the Azure management group.
@@ -190,7 +190,7 @@ module Google
           # @!attribute [rw] id
           #   @return [::String]
           #     The UUID of the Azure subscription, for example,
-          #     "291bba3f-e0a5-47bc-a099-3bdcb2a50a05".
+          #     `291bba3f-e0a5-47bc-a099-3bdcb2a50a05`.
           # @!attribute [rw] display_name
           #   @return [::String]
           #     The display name of the Azure subscription.

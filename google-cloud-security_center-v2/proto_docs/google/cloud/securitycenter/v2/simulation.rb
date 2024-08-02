@@ -25,7 +25,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Full resource name of the Simulation:
-        #     organizations/123/simulations/456
+        #     `organizations/123/simulations/456`
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time simulation was created

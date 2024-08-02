@@ -25,8 +25,8 @@ module Google
         # to mute create/update events of findings.
         # @!attribute [rw] name
         #   @return [::String]
-        #     This field will be ignored if provided on config creation. The following
-        #     list shows some examples of the format:
+        #     Identifier. This field will be ignored if provided on config creation. The
+        #     following list shows some examples of the format:
         #
         #     + `organizations/{organization}/muteConfigs/{mute_config}`
         #     +
@@ -79,6 +79,11 @@ module Google
         #   @return [::Google::Cloud::SecurityCenter::V2::MuteConfig::MuteConfigType]
         #     Required. The type of the mute config, which determines what type of mute
         #     state the config affects. Immutable after creation.
+        # @!attribute [rw] expiry_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Optional. The expiry of the mute config. Only applicable for dynamic
+        #     configs. If the expiry is set, when the config expires, it is removed from
+        #     all findings.
         class MuteConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -92,6 +97,14 @@ module Google
             # findings to muted. Once the static mute state has been set, finding or
             # config modifications will not affect the state.
             STATIC = 1
+
+            # A dynamic mute config, which is applied to existing and future matching
+            # findings, setting their dynamic mute state to "muted". If the config is
+            # updated or deleted, or a matching finding is updated, such that the
+            # finding doesn't match the config, the config will be removed from the
+            # finding, and the finding's dynamic mute state may become "unmuted"
+            # (unless other configs still match).
+            DYNAMIC = 2
           end
         end
       end

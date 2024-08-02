@@ -42,11 +42,11 @@ module Google
           #     The name of the resource at this point in the attack path.
           #     The format of the name follows the Cloud Asset Inventory [resource
           #     name
-          #     format]("https://cloud.google.com/asset-inventory/docs/resource-name-format")
+          #     format](https://cloud.google.com/asset-inventory/docs/resource-name-format)
           # @!attribute [rw] resource_type
           #   @return [::String]
           #     The [supported resource
-          #     type](https://cloud.google.com/asset-inventory/docs/supported-asset-types")
+          #     type](https://cloud.google.com/asset-inventory/docs/supported-asset-types)
           # @!attribute [rw] display_name
           #   @return [::String]
           #     Human-readable name of this resource.
@@ -67,7 +67,7 @@ module Google
             # @!attribute [rw] canonical_finding
             #   @return [::String]
             #     Canonical name of the associated findings. Example:
-            #     organizations/123/sources/456/findings/789
+            #     `organizations/123/sources/456/findings/789`
             # @!attribute [rw] finding_category
             #   @return [::String]
             #     The additional taxonomy group within findings from a given source.
