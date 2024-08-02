@@ -1,5 +1,15 @@
 # Changelog
 
+### 1.2.0 (2024-08-02)
+
+#### Features
+
+* add support for different Pod selector labels when doing canaries 
+#### Bug Fixes
+
+* Remove deploy policy RPCs that were mistakenly released when not yet available ([#26538](https://github.com/googleapis/google-cloud-ruby/issues/26538)) 
+* removed fields related to automatic repair actions which is not yet available in the API 
+
 ### 1.1.0 (2024-07-22)
 
 #### Features
