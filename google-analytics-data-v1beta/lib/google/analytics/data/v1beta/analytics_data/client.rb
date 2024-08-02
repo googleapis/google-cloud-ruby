@@ -219,7 +219,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload run_report(property: nil, dimensions: nil, metrics: nil, date_ranges: nil, dimension_filter: nil, metric_filter: nil, offset: nil, limit: nil, metric_aggregations: nil, order_bys: nil, currency_code: nil, cohort_spec: nil, keep_empty_rows: nil, return_property_quota: nil)
+            # @overload run_report(property: nil, dimensions: nil, metrics: nil, date_ranges: nil, dimension_filter: nil, metric_filter: nil, offset: nil, limit: nil, metric_aggregations: nil, order_bys: nil, currency_code: nil, cohort_spec: nil, keep_empty_rows: nil, return_property_quota: nil, comparisons: nil)
             #   Pass arguments to `run_report` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -299,6 +299,10 @@ module Google
             #   @param return_property_quota [::Boolean]
             #     Toggles whether to return the current state of this Analytics Property's
             #     quota. Quota is returned in [PropertyQuota](#PropertyQuota).
+            #   @param comparisons [::Array<::Google::Analytics::Data::V1beta::Comparison, ::Hash>]
+            #     Optional. The configuration of comparisons requested and displayed. The
+            #     request only requires a comparisons field in order to receive a comparison
+            #     column in the response.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Analytics::Data::V1beta::RunReportResponse]
@@ -382,7 +386,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload run_pivot_report(property: nil, dimensions: nil, metrics: nil, date_ranges: nil, pivots: nil, dimension_filter: nil, metric_filter: nil, currency_code: nil, cohort_spec: nil, keep_empty_rows: nil, return_property_quota: nil)
+            # @overload run_pivot_report(property: nil, dimensions: nil, metrics: nil, date_ranges: nil, pivots: nil, dimension_filter: nil, metric_filter: nil, currency_code: nil, cohort_spec: nil, keep_empty_rows: nil, return_property_quota: nil, comparisons: nil)
             #   Pass arguments to `run_pivot_report` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -441,6 +445,10 @@ module Google
             #   @param return_property_quota [::Boolean]
             #     Toggles whether to return the current state of this Analytics Property's
             #     quota. Quota is returned in [PropertyQuota](#PropertyQuota).
+            #   @param comparisons [::Array<::Google::Analytics::Data::V1beta::Comparison, ::Hash>]
+            #     Optional. The configuration of comparisons requested and displayed. The
+            #     request requires both a comparisons field and a comparisons dimension to
+            #     receive a comparison column in the response.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Analytics::Data::V1beta::RunPivotReportResponse]

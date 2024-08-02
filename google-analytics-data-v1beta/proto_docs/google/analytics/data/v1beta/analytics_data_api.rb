@@ -82,6 +82,9 @@ module Google
         # @!attribute [rw] metrics
         #   @return [::Array<::Google::Analytics::Data::V1beta::MetricMetadata>]
         #     The metric descriptions.
+        # @!attribute [rw] comparisons
+        #   @return [::Array<::Google::Analytics::Data::V1beta::ComparisonMetadata>]
+        #     The comparison descriptions.
         class Metadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -177,6 +180,11 @@ module Google
         #   @return [::Boolean]
         #     Toggles whether to return the current state of this Analytics Property's
         #     quota. Quota is returned in [PropertyQuota](#PropertyQuota).
+        # @!attribute [rw] comparisons
+        #   @return [::Array<::Google::Analytics::Data::V1beta::Comparison>]
+        #     Optional. The configuration of comparisons requested and displayed. The
+        #     request only requires a comparisons field in order to receive a comparison
+        #     column in the response.
         class RunReportRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -295,6 +303,11 @@ module Google
         #   @return [::Boolean]
         #     Toggles whether to return the current state of this Analytics Property's
         #     quota. Quota is returned in [PropertyQuota](#PropertyQuota).
+        # @!attribute [rw] comparisons
+        #   @return [::Array<::Google::Analytics::Data::V1beta::Comparison>]
+        #     Optional. The configuration of comparisons requested and displayed. The
+        #     request requires both a comparisons field and a comparisons dimension to
+        #     receive a comparison column in the response.
         class RunPivotReportRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

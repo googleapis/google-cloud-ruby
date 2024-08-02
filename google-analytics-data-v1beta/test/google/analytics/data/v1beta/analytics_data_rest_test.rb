@@ -92,6 +92,7 @@ class ::Google::Analytics::Data::V1beta::AnalyticsData::Rest::ClientTest < Minit
     cohort_spec = {}
     keep_empty_rows = true
     return_property_quota = true
+    comparisons = [{}]
 
     run_report_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -107,27 +108,27 @@ class ::Google::Analytics::Data::V1beta::AnalyticsData::Rest::ClientTest < Minit
         end
 
         # Use hash object
-        client.run_report({ property: property, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, dimension_filter: dimension_filter, metric_filter: metric_filter, offset: offset, limit: limit, metric_aggregations: metric_aggregations, order_bys: order_bys, currency_code: currency_code, cohort_spec: cohort_spec, keep_empty_rows: keep_empty_rows, return_property_quota: return_property_quota }) do |_result, response|
+        client.run_report({ property: property, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, dimension_filter: dimension_filter, metric_filter: metric_filter, offset: offset, limit: limit, metric_aggregations: metric_aggregations, order_bys: order_bys, currency_code: currency_code, cohort_spec: cohort_spec, keep_empty_rows: keep_empty_rows, return_property_quota: return_property_quota, comparisons: comparisons }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.run_report property: property, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, dimension_filter: dimension_filter, metric_filter: metric_filter, offset: offset, limit: limit, metric_aggregations: metric_aggregations, order_bys: order_bys, currency_code: currency_code, cohort_spec: cohort_spec, keep_empty_rows: keep_empty_rows, return_property_quota: return_property_quota do |_result, response|
+        client.run_report property: property, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, dimension_filter: dimension_filter, metric_filter: metric_filter, offset: offset, limit: limit, metric_aggregations: metric_aggregations, order_bys: order_bys, currency_code: currency_code, cohort_spec: cohort_spec, keep_empty_rows: keep_empty_rows, return_property_quota: return_property_quota, comparisons: comparisons do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.run_report ::Google::Analytics::Data::V1beta::RunReportRequest.new(property: property, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, dimension_filter: dimension_filter, metric_filter: metric_filter, offset: offset, limit: limit, metric_aggregations: metric_aggregations, order_bys: order_bys, currency_code: currency_code, cohort_spec: cohort_spec, keep_empty_rows: keep_empty_rows, return_property_quota: return_property_quota) do |_result, response|
+        client.run_report ::Google::Analytics::Data::V1beta::RunReportRequest.new(property: property, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, dimension_filter: dimension_filter, metric_filter: metric_filter, offset: offset, limit: limit, metric_aggregations: metric_aggregations, order_bys: order_bys, currency_code: currency_code, cohort_spec: cohort_spec, keep_empty_rows: keep_empty_rows, return_property_quota: return_property_quota, comparisons: comparisons) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.run_report({ property: property, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, dimension_filter: dimension_filter, metric_filter: metric_filter, offset: offset, limit: limit, metric_aggregations: metric_aggregations, order_bys: order_bys, currency_code: currency_code, cohort_spec: cohort_spec, keep_empty_rows: keep_empty_rows, return_property_quota: return_property_quota }, call_options) do |_result, response|
+        client.run_report({ property: property, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, dimension_filter: dimension_filter, metric_filter: metric_filter, offset: offset, limit: limit, metric_aggregations: metric_aggregations, order_bys: order_bys, currency_code: currency_code, cohort_spec: cohort_spec, keep_empty_rows: keep_empty_rows, return_property_quota: return_property_quota, comparisons: comparisons }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.run_report(::Google::Analytics::Data::V1beta::RunReportRequest.new(property: property, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, dimension_filter: dimension_filter, metric_filter: metric_filter, offset: offset, limit: limit, metric_aggregations: metric_aggregations, order_bys: order_bys, currency_code: currency_code, cohort_spec: cohort_spec, keep_empty_rows: keep_empty_rows, return_property_quota: return_property_quota), call_options) do |_result, response|
+        client.run_report(::Google::Analytics::Data::V1beta::RunReportRequest.new(property: property, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, dimension_filter: dimension_filter, metric_filter: metric_filter, offset: offset, limit: limit, metric_aggregations: metric_aggregations, order_bys: order_bys, currency_code: currency_code, cohort_spec: cohort_spec, keep_empty_rows: keep_empty_rows, return_property_quota: return_property_quota, comparisons: comparisons), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,6 +157,7 @@ class ::Google::Analytics::Data::V1beta::AnalyticsData::Rest::ClientTest < Minit
     cohort_spec = {}
     keep_empty_rows = true
     return_property_quota = true
+    comparisons = [{}]
 
     run_pivot_report_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -171,27 +173,27 @@ class ::Google::Analytics::Data::V1beta::AnalyticsData::Rest::ClientTest < Minit
         end
 
         # Use hash object
-        client.run_pivot_report({ property: property, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, pivots: pivots, dimension_filter: dimension_filter, metric_filter: metric_filter, currency_code: currency_code, cohort_spec: cohort_spec, keep_empty_rows: keep_empty_rows, return_property_quota: return_property_quota }) do |_result, response|
+        client.run_pivot_report({ property: property, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, pivots: pivots, dimension_filter: dimension_filter, metric_filter: metric_filter, currency_code: currency_code, cohort_spec: cohort_spec, keep_empty_rows: keep_empty_rows, return_property_quota: return_property_quota, comparisons: comparisons }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.run_pivot_report property: property, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, pivots: pivots, dimension_filter: dimension_filter, metric_filter: metric_filter, currency_code: currency_code, cohort_spec: cohort_spec, keep_empty_rows: keep_empty_rows, return_property_quota: return_property_quota do |_result, response|
+        client.run_pivot_report property: property, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, pivots: pivots, dimension_filter: dimension_filter, metric_filter: metric_filter, currency_code: currency_code, cohort_spec: cohort_spec, keep_empty_rows: keep_empty_rows, return_property_quota: return_property_quota, comparisons: comparisons do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.run_pivot_report ::Google::Analytics::Data::V1beta::RunPivotReportRequest.new(property: property, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, pivots: pivots, dimension_filter: dimension_filter, metric_filter: metric_filter, currency_code: currency_code, cohort_spec: cohort_spec, keep_empty_rows: keep_empty_rows, return_property_quota: return_property_quota) do |_result, response|
+        client.run_pivot_report ::Google::Analytics::Data::V1beta::RunPivotReportRequest.new(property: property, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, pivots: pivots, dimension_filter: dimension_filter, metric_filter: metric_filter, currency_code: currency_code, cohort_spec: cohort_spec, keep_empty_rows: keep_empty_rows, return_property_quota: return_property_quota, comparisons: comparisons) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.run_pivot_report({ property: property, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, pivots: pivots, dimension_filter: dimension_filter, metric_filter: metric_filter, currency_code: currency_code, cohort_spec: cohort_spec, keep_empty_rows: keep_empty_rows, return_property_quota: return_property_quota }, call_options) do |_result, response|
+        client.run_pivot_report({ property: property, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, pivots: pivots, dimension_filter: dimension_filter, metric_filter: metric_filter, currency_code: currency_code, cohort_spec: cohort_spec, keep_empty_rows: keep_empty_rows, return_property_quota: return_property_quota, comparisons: comparisons }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.run_pivot_report(::Google::Analytics::Data::V1beta::RunPivotReportRequest.new(property: property, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, pivots: pivots, dimension_filter: dimension_filter, metric_filter: metric_filter, currency_code: currency_code, cohort_spec: cohort_spec, keep_empty_rows: keep_empty_rows, return_property_quota: return_property_quota), call_options) do |_result, response|
+        client.run_pivot_report(::Google::Analytics::Data::V1beta::RunPivotReportRequest.new(property: property, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, pivots: pivots, dimension_filter: dimension_filter, metric_filter: metric_filter, currency_code: currency_code, cohort_spec: cohort_spec, keep_empty_rows: keep_empty_rows, return_property_quota: return_property_quota, comparisons: comparisons), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
