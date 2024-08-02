@@ -1,5 +1,15 @@
 # Release History
 
+### 0.30.0 (2024-08-02)
+
+#### Features
+
+* Support for several additional resource fields 
+* Support KeyEvent resource management calls 
+#### Documentation
+
+* Deprecated calls related to ConversionEvent resources 
+
 ### 0.29.0 (2024-02-26)
 
 #### Features
