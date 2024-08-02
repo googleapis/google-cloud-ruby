@@ -1,5 +1,16 @@
 # Changelog
 
+### 1.1.0 (2024-08-02)
+
+#### Features
+
+* Support for ActiveDirectory administrators group 
+* Support for replica zone and active zone in StoragePool and Volume 
+* Support for Volume large_capacity and multiple_endpoints flags 
+#### Documentation
+
+* Various updates and clarifications in the reference documentation 
+
 ### 1.0.0 (2024-07-10)
 
 #### Features
