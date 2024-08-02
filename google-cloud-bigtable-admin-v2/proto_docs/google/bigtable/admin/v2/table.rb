@@ -472,14 +472,17 @@ module Google
           #   @return [::String]
           #     Output only. Name of the backup from which this backup was copied. If a
           #     backup is not created by copying a backup, this field will be empty. Values
-          #     are of the form: projects/<project>/instances/<instance>/backups/<backup>.
+          #     are of the form:
+          #     projects/<project>/instances/<instance>/clusters/<cluster>/backups/<backup>
           # @!attribute [rw] expire_time
           #   @return [::Google::Protobuf::Timestamp]
-          #     Required. The expiration time of the backup, with microseconds
-          #     granularity that must be at least 6 hours and at most 90 days
-          #     from the time the request is received. Once the `expire_time`
-          #     has passed, Cloud Bigtable will delete the backup and free the
-          #     resources used by the backup.
+          #     Required. The expiration time of the backup.
+          #     When creating a backup or updating its `expire_time`, the value must be
+          #     greater than the backup creation time by:
+          #     - At least 6 hours
+          #     - At most 90 days
+          #
+          #     Once the `expire_time` has passed, Cloud Bigtable will delete the backup.
           # @!attribute [r] start_time
           #   @return [::Google::Protobuf::Timestamp]
           #     Output only. `start_time` is the time that the backup was started
@@ -500,6 +503,19 @@ module Google
           # @!attribute [r] encryption_info
           #   @return [::Google::Cloud::Bigtable::Admin::V2::EncryptionInfo]
           #     Output only. The encryption information for the backup.
+          # @!attribute [rw] backup_type
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::Backup::BackupType]
+          #     Indicates the backup type of the backup.
+          # @!attribute [rw] hot_to_standard_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The time at which the hot backup will be converted to a standard backup.
+          #     Once the `hot_to_standard_time` has passed, Cloud Bigtable will convert the
+          #     hot backup to a standard backup. This value must be greater than the backup
+          #     creation time by:
+          #     - At least 24 hours
+          #
+          #     This field only applies for hot backups. When creating or updating a
+          #     standard backup, attempting to set this field will fail the request.
           class Backup
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -515,6 +531,23 @@ module Google
 
               # The backup is complete and ready for use.
               READY = 2
+            end
+
+            # The type of the backup.
+            module BackupType
+              # Not specified.
+              BACKUP_TYPE_UNSPECIFIED = 0
+
+              # The default type for Cloud Bigtable managed backups. Supported for
+              # backups created in both HDD and SSD instances. Requires optimization when
+              # restored to a table in an SSD instance.
+              STANDARD = 1
+
+              # A backup type with faster restore to SSD performance. Only supported for
+              # backups created in SSD instances. A new SSD table restored from a hot
+              # backup reaches production performance more quickly than a standard
+              # backup.
+              HOT = 2
             end
           end
 
@@ -537,7 +570,8 @@ module Google
           #   @return [::String]
           #     Output only. Name of the backup from which this backup was copied. If a
           #     backup is not created by copying a backup, this field will be empty. Values
-          #     are of the form: projects/<project>/instances/<instance>/backups/<backup>.
+          #     are of the form:
+          #     projects/<project>/instances/<instance>/clusters/<cluster>/backups/<backup>
           class BackupInfo
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -788,7 +788,7 @@ module Google
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The name of the destination cluster that will contain the backup
-          #     copy. The cluster must already exists. Values are of the form:
+          #     copy. The cluster must already exist. Values are of the form:
           #     `projects/{project}/instances/{instance}/clusters/{cluster}`.
           # @!attribute [rw] backup_id
           #   @return [::String]
