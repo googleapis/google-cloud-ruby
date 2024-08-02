@@ -27,7 +27,7 @@ module Google
         # to send notifications for create/update events of findings, assets and etc.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The relative resource name of this notification config. See:
+        #     Identifier. The relative resource name of this notification config. See:
         #     https://cloud.google.com/apis/design/resource_names#relative_resource_name
         #     The following list shows some examples:
         #     +

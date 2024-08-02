@@ -24,7 +24,7 @@ module Google
         # Configures how to deliver Findings to BigQuery Instance.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The relative resource name of this export. See:
+        #     Identifier. The relative resource name of this export. See:
         #     https://cloud.google.com/apis/design/resource_names#relative_resource_name.
         #     The following list shows some examples:
         #
@@ -65,7 +65,7 @@ module Google
         #   @return [::String]
         #     The dataset to write findings' updates to. Its format is
         #     "projects/[project_id]/datasets/[bigquery_dataset_id]".
-        #     BigQuery Dataset unique ID  must contain only letters (a-z, A-Z), numbers
+        #     BigQuery dataset unique ID  must contain only letters (a-z, A-Z), numbers
         #     (0-9), or underscores (_).
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]

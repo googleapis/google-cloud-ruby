@@ -129,6 +129,9 @@ module Google
         #     Indicates the mute state of a finding (either muted, unmuted
         #     or undefined). Unlike other attributes of a finding, a finding provider
         #     shouldn't set the value of mute.
+        # @!attribute [r] mute_info
+        #   @return [::Google::Cloud::SecurityCenter::V2::Finding::MuteInfo]
+        #     Output only. The mute information regarding this finding.
         # @!attribute [rw] finding_class
         #   @return [::Google::Cloud::SecurityCenter::V2::Finding::FindingClass]
         #     The class of the finding.
@@ -280,6 +283,50 @@ module Google
         class Finding
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Mute information about the finding, including whether the finding has a
+          # static mute or any matching dynamic mute rules.
+          # @!attribute [rw] static_mute
+          #   @return [::Google::Cloud::SecurityCenter::V2::Finding::MuteInfo::StaticMute]
+          #     If set, the static mute applied to this finding. Static mutes override
+          #     dynamic mutes. If unset, there is no static mute.
+          # @!attribute [rw] dynamic_mute_records
+          #   @return [::Array<::Google::Cloud::SecurityCenter::V2::Finding::MuteInfo::DynamicMuteRecord>]
+          #     The list of dynamic mute rules that currently match the finding.
+          class MuteInfo
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Information about the static mute state. A static mute state overrides
+            # any dynamic mute rules that apply to this finding. The static mute state
+            # can be set by a static mute rule or by muting the finding directly.
+            # @!attribute [rw] state
+            #   @return [::Google::Cloud::SecurityCenter::V2::Finding::Mute]
+            #     The static mute state. If the value is `MUTED` or `UNMUTED`, then the
+            #     finding's overall mute state will have the same value.
+            # @!attribute [rw] apply_time
+            #   @return [::Google::Protobuf::Timestamp]
+            #     When the static mute was applied.
+            class StaticMute
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The record of a dynamic mute rule that matches the finding.
+            # @!attribute [rw] mute_config
+            #   @return [::String]
+            #     The relative resource name of the mute rule, represented by a mute
+            #     config, that created this record, for example
+            #     `organizations/123/muteConfigs/mymuteconfig` or
+            #     `organizations/123/locations/global/muteConfigs/mymuteconfig`.
+            # @!attribute [rw] match_time
+            #   @return [::Google::Protobuf::Timestamp]
+            #     When the dynamic mute rule first matched the finding.
+            class DynamicMuteRecord
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
 
           # @!attribute [rw] key
           #   @return [::String]

@@ -125,12 +125,14 @@ class ::Google::Cloud::SecurityCenter::V2::SecurityCenter::ClientTest < Minitest
     # Create request parameters for a unary method.
     parent = "hello world"
     filter = "hello world"
+    mute_state = :MUTE_STATE_UNSPECIFIED
 
     bulk_mute_findings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :bulk_mute_findings, name
       assert_kind_of ::Google::Cloud::SecurityCenter::V2::BulkMuteFindingsRequest, request
       assert_equal "hello world", request["parent"]
       assert_equal "hello world", request["filter"]
+      assert_equal :MUTE_STATE_UNSPECIFIED, request["mute_state"]
       refute_nil options
     end
 
@@ -141,35 +143,35 @@ class ::Google::Cloud::SecurityCenter::V2::SecurityCenter::ClientTest < Minitest
       end
 
       # Use hash object
-      client.bulk_mute_findings({ parent: parent, filter: filter }) do |response, operation|
+      client.bulk_mute_findings({ parent: parent, filter: filter, mute_state: mute_state }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.bulk_mute_findings parent: parent, filter: filter do |response, operation|
+      client.bulk_mute_findings parent: parent, filter: filter, mute_state: mute_state do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.bulk_mute_findings ::Google::Cloud::SecurityCenter::V2::BulkMuteFindingsRequest.new(parent: parent, filter: filter) do |response, operation|
+      client.bulk_mute_findings ::Google::Cloud::SecurityCenter::V2::BulkMuteFindingsRequest.new(parent: parent, filter: filter, mute_state: mute_state) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.bulk_mute_findings({ parent: parent, filter: filter }, grpc_options) do |response, operation|
+      client.bulk_mute_findings({ parent: parent, filter: filter, mute_state: mute_state }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.bulk_mute_findings(::Google::Cloud::SecurityCenter::V2::BulkMuteFindingsRequest.new(parent: parent, filter: filter), grpc_options) do |response, operation|
+      client.bulk_mute_findings(::Google::Cloud::SecurityCenter::V2::BulkMuteFindingsRequest.new(parent: parent, filter: filter, mute_state: mute_state), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

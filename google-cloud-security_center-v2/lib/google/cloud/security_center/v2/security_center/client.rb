@@ -284,7 +284,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload bulk_mute_findings(parent: nil, filter: nil)
+            # @overload bulk_mute_findings(parent: nil, filter: nil, mute_state: nil)
             #   Pass arguments to `bulk_mute_findings` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -321,6 +321,10 @@ module Google
             #     * string literals in quotes.
             #     * integer literals without quotes.
             #     * boolean literals `true` and `false` without quotes.
+            #   @param mute_state [::Google::Cloud::SecurityCenter::V2::BulkMuteFindingsRequest::MuteState]
+            #     Optional. All findings matching the given filter will have their mute state
+            #     set to this value. The default value is `MUTED`. Setting this to
+            #     `UNDEFINED` will clear the mute state on all matching findings.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -415,9 +419,9 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The name of the parent resource of the new BigQuery export. Its
-            #     format is "organizations/[organization_id]/locations/[location_id]",
-            #     "folders/[folder_id]/locations/[location_id]", or
-            #     "projects/[project_id]/locations/[location_id]".
+            #     format is `organizations/[organization_id]/locations/[location_id]`,
+            #     `folders/[folder_id]/locations/[location_id]`, or
+            #     `projects/[project_id]/locations/[location_id]`.
             #   @param big_query_export [::Google::Cloud::SecurityCenter::V2::BigQueryExport, ::Hash]
             #     Required. The BigQuery export being created.
             #   @param big_query_export_id [::String]
@@ -610,9 +614,9 @@ module Google
             #
             #   @param parent [::String]
             #     Required. Resource name of the new mute configs's parent. Its format is
-            #     "organizations/[organization_id]/locations/[location_id]",
-            #     "folders/[folder_id]/locations/[location_id]", or
-            #     "projects/[project_id]/locations/[location_id]".
+            #     `organizations/[organization_id]/locations/[location_id]`,
+            #     `folders/[folder_id]/locations/[location_id]`, or
+            #     `projects/[project_id]/locations/[location_id]`.
             #   @param mute_config [::Google::Cloud::SecurityCenter::V2::MuteConfig, ::Hash]
             #     Required. The mute config being created.
             #   @param mute_config_id [::String]
@@ -721,9 +725,9 @@ module Google
             #
             #   @param parent [::String]
             #     Required. Resource name of the new notification config's parent. Its format
-            #     is "organizations/[organization_id]/locations/[location_id]",
-            #     "folders/[folder_id]/locations/[location_id]", or
-            #     "projects/[project_id]/locations/[location_id]".
+            #     is `organizations/[organization_id]/locations/[location_id]`,
+            #     `folders/[folder_id]/locations/[location_id]`, or
+            #     `projects/[project_id]/locations/[location_id]`.
             #   @param config_id [::String]
             #     Required.
             #     Unique identifier provided by the client within the parent scope.
@@ -819,7 +823,7 @@ module Google
             #
             #   @param parent [::String]
             #     Required. Resource name of the new source's parent. Its format should be
-            #     "organizations/[organization_id]".
+            #     `organizations/[organization_id]`.
             #   @param source [::Google::Cloud::SecurityCenter::V2::Source, ::Hash]
             #     Required. The Source being created, only the display_name and description
             #     will be used. All other fields will be ignored.
@@ -1387,8 +1391,8 @@ module Google
             #     Required. The organization name or simulation name of this simulation
             #
             #     Valid format:
-            #     "organizations/\\{organization}/simulations/latest"
-            #     "organizations/\\{organization}/simulations/\\{simulation}"
+            #     `organizations/{organization}/simulations/latest`
+            #     `organizations/{organization}/simulations/{simulation}`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::SecurityCenter::V2::Simulation]
@@ -1477,7 +1481,7 @@ module Google
             #     Required. The name of this valued resource
             #
             #     Valid format:
-            #     "organizations/\\{organization}/simulations/\\{simulation}/valuedResources/\\{valued_resource}"
+            #     `organizations/{organization}/simulations/{simulation}/valuedResources/{valued_resource}`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::SecurityCenter::V2::ValuedResource]
@@ -1946,7 +1950,7 @@ module Google
             #
             #   @param name [::String]
             #     Required. Relative resource name of the source. Its format is
-            #     "organizations/[organization_id]/source/[source_id]".
+            #     `organizations/[organization_id]/source/[source_id]`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::SecurityCenter::V2::Source]
@@ -2219,10 +2223,10 @@ module Google
             #     Required. Name of parent to list attack paths.
             #
             #     Valid formats:
-            #     "organizations/\\{organization}",
-            #     "organizations/\\{organization}/simulations/\\{simulation}"
-            #     "organizations/\\{organization}/simulations/\\{simulation}/attackExposureResults/\\{attack_exposure_result_v2}"
-            #     "organizations/\\{organization}/simulations/\\{simulation}/valuedResources/\\{valued_resource}"
+            #     `organizations/{organization}`,
+            #     `organizations/{organization}/simulations/{simulation}`
+            #     `organizations/{organization}/simulations/{simulation}/attackExposureResults/{attack_exposure_result_v2}`
+            #     `organizations/{organization}/simulations/{simulation}/valuedResources/{valued_resource}`
             #   @param filter [::String]
             #     The filter expression that filters the attack path in the response.
             #     Supported fields:
@@ -2330,9 +2334,9 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The parent, which owns the collection of BigQuery exports. Its
-            #     format is "organizations/[organization_id]/locations/[location_id]",
-            #     "folders/[folder_id]/locations/[location_id]", or
-            #     "projects/[project_id]/locations/[location_id]".
+            #     format is `organizations/[organization_id]/locations/[location_id]`,
+            #     `folders/[folder_id]/locations/[location_id]`, or
+            #     `projects/[project_id]/locations/[location_id]`.
             #   @param page_size [::Integer]
             #     The maximum number of configs to return. The service may return fewer than
             #     this value.
@@ -2631,11 +2635,11 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The parent, which owns the collection of mute configs. Its format
-            #     is "organizations/[organization_id]", "folders/[folder_id]",
-            #     "projects/[project_id]",
-            #     "organizations/[organization_id]/locations/[location_id]",
-            #     "folders/[folder_id]/locations/[location_id]",
-            #     "projects/[project_id]/locations/[location_id]".
+            #     is `organizations/[organization_id]", "folders/[folder_id]`,
+            #     `projects/[project_id]`,
+            #     `organizations/[organization_id]/locations/[location_id]`,
+            #     `folders/[folder_id]/locations/[location_id]`,
+            #     `projects/[project_id]/locations/[location_id]`.
             #   @param page_size [::Integer]
             #     The maximum number of configs to return. The service may return fewer than
             #     this value.
@@ -2856,7 +2860,7 @@ module Google
             #   @param parent [::String]
             #     Required. The parent, which owns the collection of resource value configs.
             #     Its format is
-            #     "organizations/[organization_id]"
+            #     `organizations/[organization_id]`
             #   @param page_size [::Integer]
             #     The maximum number of configs to return. The service may return fewer than
             #     this value.
@@ -2962,8 +2966,8 @@ module Google
             #
             #   @param parent [::String]
             #     Required. Resource name of the parent of sources to list. Its format should
-            #     be "organizations/[organization_id]", "folders/[folder_id]", or
-            #     "projects/[project_id]".
+            #     be `organizations/[organization_id]`, `folders/[folder_id]`, or
+            #     `projects/[project_id]`.
             #   @param page_token [::String]
             #     The value returned by the last `ListSourcesResponse`; indicates
             #     that this is a continuation of a prior `ListSources` call, and
@@ -3064,9 +3068,9 @@ module Google
             #     Required. Name of parent to list exposed resources.
             #
             #     Valid formats:
-            #     "organizations/\\{organization}",
-            #     "organizations/\\{organization}/simulations/\\{simulation}"
-            #     "organizations/\\{organization}/simulations/\\{simulation}/attackExposureResults/\\{attack_exposure_result_v2}"
+            #     `organizations/{organization}`,
+            #     `organizations/{organization}/simulations/{simulation}`
+            #     `organizations/{organization}/simulations/{simulation}/attackExposureResults/{attack_exposure_result_v2}`
             #   @param filter [::String]
             #     The filter expression that filters the valued resources in the response.
             #     Supported fields:

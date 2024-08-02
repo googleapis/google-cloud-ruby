@@ -135,6 +135,7 @@ class ::Google::Cloud::SecurityCenter::V2::SecurityCenter::Rest::ClientTest < Mi
     # Create request parameters for a unary method.
     parent = "hello world"
     filter = "hello world"
+    mute_state = :MUTE_STATE_UNSPECIFIED
 
     bulk_mute_findings_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -150,27 +151,27 @@ class ::Google::Cloud::SecurityCenter::V2::SecurityCenter::Rest::ClientTest < Mi
         end
 
         # Use hash object
-        client.bulk_mute_findings({ parent: parent, filter: filter }) do |_result, response|
+        client.bulk_mute_findings({ parent: parent, filter: filter, mute_state: mute_state }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.bulk_mute_findings parent: parent, filter: filter do |_result, response|
+        client.bulk_mute_findings parent: parent, filter: filter, mute_state: mute_state do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.bulk_mute_findings ::Google::Cloud::SecurityCenter::V2::BulkMuteFindingsRequest.new(parent: parent, filter: filter) do |_result, response|
+        client.bulk_mute_findings ::Google::Cloud::SecurityCenter::V2::BulkMuteFindingsRequest.new(parent: parent, filter: filter, mute_state: mute_state) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.bulk_mute_findings({ parent: parent, filter: filter }, call_options) do |_result, response|
+        client.bulk_mute_findings({ parent: parent, filter: filter, mute_state: mute_state }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.bulk_mute_findings(::Google::Cloud::SecurityCenter::V2::BulkMuteFindingsRequest.new(parent: parent, filter: filter), call_options) do |_result, response|
+        client.bulk_mute_findings(::Google::Cloud::SecurityCenter::V2::BulkMuteFindingsRequest.new(parent: parent, filter: filter, mute_state: mute_state), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
