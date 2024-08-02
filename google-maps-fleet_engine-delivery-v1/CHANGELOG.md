@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.2.2 (2024-08-02)
+
+#### Documentation
+
+* document that DeliveryVehicle#type can be set when calling create_delivery_vehicle 
+
 ### 0.2.1 (2024-07-22)
 
 #### Documentation
