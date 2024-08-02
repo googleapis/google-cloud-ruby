@@ -1,5 +1,12 @@
 # Release History
 
+### 1.1.0 (2024-08-02)
+
+#### Features
+
+* Support for ComplianceOccurrence#version 
+* Support for DiscoveryOccurrence#vulnerability_attestation 
+
 ### 1.0.0 (2024-07-08)
 
 #### Features
