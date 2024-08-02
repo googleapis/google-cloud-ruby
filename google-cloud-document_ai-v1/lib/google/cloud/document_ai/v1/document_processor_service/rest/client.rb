@@ -217,7 +217,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload process_document(inline_document: nil, raw_document: nil, gcs_document: nil, name: nil, skip_human_review: nil, field_mask: nil, process_options: nil, labels: nil)
+              # @overload process_document(inline_document: nil, raw_document: nil, gcs_document: nil, name: nil, skip_human_review: nil, field_mask: nil, process_options: nil, labels: nil, imageless_mode: nil)
               #   Pass arguments to `process_document` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -256,6 +256,8 @@ module Google
               #     (Unicode codepoints) and can only contain lowercase letters, numeric
               #     characters, underscores, and dashes. International characters are allowed.
               #     Label values are optional. Label keys must start with a letter.
+              #   @param imageless_mode [::Boolean]
+              #     Optional. Option to remove images from the document.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::DocumentAI::V1::ProcessResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
