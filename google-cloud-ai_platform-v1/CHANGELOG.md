@@ -1,5 +1,26 @@
 # Changelog
 
+### 0.46.0 (2024-08-02)
+
+#### Features
+
+* Support for Candidate#score 
+* Support for Endpoint#dedicated_endpoint_enabled, Endpoint#dedicated_endpoint_dns, Endpoint#satisfies_pzs, and Endpoint#satisfies_pzi 
+* Support for GroundingMetadata#grounding_chunks and GroundingMetadata#grounding_supports 
+* Support for NearestNeighborQuery#numeric_filters 
+* Support for RaySpec#ray_logs_spec 
+* Support for Scheduling#strategy 
+* Support for SupervisedTuningDatasetDistribution#billable_sum 
+* Support for SupervisedTuningDataStats#total_billable_token_count 
+* Support for the is_hugging_face_model parameter to the get_publisher_model RPC 
+* Support for the system_instruction and tools parameters to the count_tokens RPC 
+* Support operations on NotebookExecutionJob resources 
+#### Documentation
+
+* Deprecated Retrieval#disable_attribution 
+* Deprecated Retrieval#disable_attribution 
+* Deprecated SupervisedTuningDataStats#total_billable_character_count 
+
 ### 0.45.0 (2024-07-09)
 
 #### Features
