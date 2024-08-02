@@ -1,5 +1,25 @@
 # Changelog
 
+### 0.14.0 (2024-08-02)
+
+#### Features
+
+* Support for AnswerSkippedReason::NO_RELEVANT_CONTENT and SummarySkippedReason::NO_RELEVANT_CONTENT 
+* Support for CustomTuningModel::ModelState::NO_IMPROVEMENT 
+* Support for CustomTuningModel#metrics 
+* Support for DataStore#language_info 
+* Support for SearchResponse#natural_language_query_understanding_info 
+* Support for SearchResult#struct_data 
+* Support for the alloy_db_source parameter to the import_documents RPC 
+* Support for the import_completion_suggestions and purge_completion_suggestions RPCs 
+* Support for the language_code, region_code, natural_language_query_understanding_spec, search_as_you_type, session, and session_spec parameters to the search RPC 
+* Support for the purge_user_events RPC 
+* Support for the skip_default_schema_creation parameter to the create_data_store RPC 
+* Support for the user_labels parameter to the answer_query RPC 
+#### Documentation
+
+* Deprecate CustomTuningModel#create_time 
+
 ### 0.13.0 (2024-07-22)
 
 #### Features
