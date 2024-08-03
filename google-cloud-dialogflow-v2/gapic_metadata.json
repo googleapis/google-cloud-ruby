@@ -303,6 +303,11 @@
               "methods": [
                 "suggest_smart_replies"
               ]
+            },
+            "SuggestKnowledgeAssist": {
+              "methods": [
+                "suggest_knowledge_assist"
+              ]
             }
           }
         }
@@ -371,6 +376,40 @@
         }
       }
     },
+    "Generators": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dialogflow::V2::Generators::Client",
+          "rpcs": {
+            "CreateGenerator": {
+              "methods": [
+                "create_generator"
+              ]
+            },
+            "GetGenerator": {
+              "methods": [
+                "get_generator"
+              ]
+            },
+            "ListGenerators": {
+              "methods": [
+                "list_generators"
+              ]
+            },
+            "DeleteGenerator": {
+              "methods": [
+                "delete_generator"
+              ]
+            },
+            "UpdateGenerator": {
+              "methods": [
+                "update_generator"
+              ]
+            }
+          }
+        }
+      }
+    },
     "Conversations": {
       "clients": {
         "grpc": {
@@ -409,6 +448,11 @@
             "GenerateStatelessSummary": {
               "methods": [
                 "generate_stateless_summary"
+              ]
+            },
+            "GenerateStatelessSuggestion": {
+              "methods": [
+                "generate_stateless_suggestion"
               ]
             },
             "SearchKnowledge": {
@@ -551,6 +595,25 @@
             "ExportDocument": {
               "methods": [
                 "export_document"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "EncryptionSpecService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dialogflow::V2::EncryptionSpecService::Client",
+          "rpcs": {
+            "GetEncryptionSpec": {
+              "methods": [
+                "get_encryption_spec"
+              ]
+            },
+            "InitializeEncryptionSpec": {
+              "methods": [
+                "initialize_encryption_spec"
               ]
             }
           }

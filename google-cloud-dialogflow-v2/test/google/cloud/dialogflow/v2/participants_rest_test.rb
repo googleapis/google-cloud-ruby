@@ -521,6 +521,63 @@ class ::Google::Cloud::Dialogflow::V2::Participants::Rest::ClientTest < Minitest
     end
   end
 
+  def test_suggest_knowledge_assist
+    # Create test objects.
+    client_result = ::Google::Cloud::Dialogflow::V2::SuggestKnowledgeAssistResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    latest_message = "hello world"
+    context_size = 42
+    previous_suggested_query = "hello world"
+
+    suggest_knowledge_assist_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dialogflow::V2::Participants::Rest::ServiceStub.stub :transcode_suggest_knowledge_assist_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, suggest_knowledge_assist_client_stub do
+        # Create client
+        client = ::Google::Cloud::Dialogflow::V2::Participants::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.suggest_knowledge_assist({ parent: parent, latest_message: latest_message, context_size: context_size, previous_suggested_query: previous_suggested_query }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.suggest_knowledge_assist parent: parent, latest_message: latest_message, context_size: context_size, previous_suggested_query: previous_suggested_query do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.suggest_knowledge_assist ::Google::Cloud::Dialogflow::V2::SuggestKnowledgeAssistRequest.new(parent: parent, latest_message: latest_message, context_size: context_size, previous_suggested_query: previous_suggested_query) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.suggest_knowledge_assist({ parent: parent, latest_message: latest_message, context_size: context_size, previous_suggested_query: previous_suggested_query }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.suggest_knowledge_assist(::Google::Cloud::Dialogflow::V2::SuggestKnowledgeAssistRequest.new(parent: parent, latest_message: latest_message, context_size: context_size, previous_suggested_query: previous_suggested_query), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, suggest_knowledge_assist_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

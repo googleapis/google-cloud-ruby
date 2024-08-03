@@ -671,6 +671,70 @@ class ::Google::Cloud::Dialogflow::V2::Participants::ClientTest < Minitest::Test
     end
   end
 
+  def test_suggest_knowledge_assist
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Dialogflow::V2::SuggestKnowledgeAssistResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    latest_message = "hello world"
+    context_size = 42
+    previous_suggested_query = "hello world"
+
+    suggest_knowledge_assist_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :suggest_knowledge_assist, name
+      assert_kind_of ::Google::Cloud::Dialogflow::V2::SuggestKnowledgeAssistRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["latest_message"]
+      assert_equal 42, request["context_size"]
+      assert_equal "hello world", request["previous_suggested_query"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, suggest_knowledge_assist_client_stub do
+      # Create client
+      client = ::Google::Cloud::Dialogflow::V2::Participants::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.suggest_knowledge_assist({ parent: parent, latest_message: latest_message, context_size: context_size, previous_suggested_query: previous_suggested_query }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.suggest_knowledge_assist parent: parent, latest_message: latest_message, context_size: context_size, previous_suggested_query: previous_suggested_query do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.suggest_knowledge_assist ::Google::Cloud::Dialogflow::V2::SuggestKnowledgeAssistRequest.new(parent: parent, latest_message: latest_message, context_size: context_size, previous_suggested_query: previous_suggested_query) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.suggest_knowledge_assist({ parent: parent, latest_message: latest_message, context_size: context_size, previous_suggested_query: previous_suggested_query }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.suggest_knowledge_assist(::Google::Cloud::Dialogflow::V2::SuggestKnowledgeAssistRequest.new(parent: parent, latest_message: latest_message, context_size: context_size, previous_suggested_query: previous_suggested_query), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, suggest_knowledge_assist_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

@@ -27,7 +27,7 @@ module Google
         # include phone calls and text-based chat sessions.
         # @!attribute [r] name
         #   @return [::String]
-        #     Output only. The unique identifier of this conversation.
+        #     Output only. Identifier. The unique identifier of this conversation.
         #     Format: `projects/<Project ID>/locations/<Location
         #     ID>/conversations/<Conversation ID>`.
         # @!attribute [r] lifecycle_state
@@ -51,8 +51,8 @@ module Google
         #     Output only. The time the conversation was finished.
         # @!attribute [rw] conversation_stage
         #   @return [::Google::Cloud::Dialogflow::V2::Conversation::ConversationStage]
-        #     The stage of a conversation. It indicates whether the virtual agent or a
-        #     human agent is handling the conversation.
+        #     Optional. The stage of a conversation. It indicates whether the virtual
+        #     agent or a human agent is handling the conversation.
         #
         #     If the conversation is created with the conversation profile that has
         #     Dialogflow config set, defaults to
@@ -142,18 +142,9 @@ module Google
         #     Optional. The next_page_token value returned from a previous list request.
         # @!attribute [rw] filter
         #   @return [::String]
-        #     A filter expression that filters conversations listed in the response. In
-        #     general, the expression must specify the field name, a comparison operator,
-        #     and the value to use for filtering:
-        #     <ul>
-        #       <li>The value must be a string, a number, or a boolean.</li>
-        #       <li>The comparison operator must be either `=`,`!=`, `>`, or `<`.</li>
-        #       <li>To filter on multiple expressions, separate the
-        #           expressions with `AND` or `OR` (omitting both implies `AND`).</li>
-        #       <li>For clarity, expressions can be enclosed in parentheses.</li>
-        #     </ul>
-        #     Only `lifecycle_state` can be filtered on in this way. For example,
-        #     the following expression only returns `COMPLETED` conversations:
+        #     Optional. A filter expression that filters conversations listed in the
+        #     response. Only `lifecycle_state` can be filtered on in this way. For
+        #     example, the following expression only returns `COMPLETED` conversations:
         #
         #     `lifecycle_state = "COMPLETED"`
         #
@@ -267,7 +258,7 @@ module Google
         #     ID>/conversations/<Conversation ID>`.
         # @!attribute [rw] latest_message
         #   @return [::String]
-        #     The name of the latest conversation message used as context for
+        #     Optional. The name of the latest conversation message used as context for
         #     compiling suggestion. If empty, the latest message of the conversation will
         #     be used.
         #
@@ -275,12 +266,13 @@ module Google
         #     ID>/conversations/<Conversation ID>/messages/<Message ID>`.
         # @!attribute [rw] context_size
         #   @return [::Integer]
-        #     Max number of messages prior to and including
+        #     Optional. Max number of messages prior to and including
         #     [latest_message] to use as context when compiling the
         #     suggestion. By default 500 and at most 1000.
         # @!attribute [rw] assist_query_params
         #   @return [::Google::Cloud::Dialogflow::V2::AssistQueryParameters]
-        #     Parameters for a human assist query. Only used for POC/demo purpose.
+        #     Optional. Parameters for a human assist query. Only used for POC/demo
+        #     purpose.
         class SuggestConversationSummaryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -353,13 +345,13 @@ module Google
         #     Optional fields: \\{agent_assistant_config}
         # @!attribute [rw] latest_message
         #   @return [::String]
-        #     The name of the latest conversation message used as context for
+        #     Optional. The name of the latest conversation message used as context for
         #     generating a Summary. If empty, the latest message of the conversation will
         #     be used. The format is specific to the user and the names of the messages
         #     provided.
         # @!attribute [rw] max_context_size
         #   @return [::Integer]
-        #     Max number of messages prior to and including
+        #     Optional. Max number of messages prior to and including
         #     [latest_message] to use as context when compiling the
         #     suggestion. By default 500 and at most 1000.
         class GenerateStatelessSummaryRequest
@@ -434,10 +426,46 @@ module Google
         end
 
         # The request message for
+        # {::Google::Cloud::Dialogflow::V2::Conversations::Client#generate_stateless_suggestion Conversations.GenerateStatelessSuggestion}.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource to charge for the Suggestion's generation.
+        #     Format: `projects/<Project ID>/locations/<Location ID>`.
+        # @!attribute [rw] generator
+        #   @return [::Google::Cloud::Dialogflow::V2::Generator]
+        #     Uncreated generator. It should be a complete generator that includes all
+        #     information about the generator.
+        # @!attribute [rw] generator_name
+        #   @return [::String]
+        #     The resource name of the existing created generator. Format:
+        #     `projects/<Project ID>/locations/<Location ID>/generators/<Generator ID>`
+        # @!attribute [rw] conversation_context
+        #   @return [::Google::Cloud::Dialogflow::V2::ConversationContext]
+        #     Optional. Context of the conversation, including transcripts.
+        # @!attribute [rw] trigger_events
+        #   @return [::Array<::Google::Cloud::Dialogflow::V2::TriggerEvent>]
+        #     Optional. A list of trigger events. Generator will be triggered only if
+        #     it's trigger event is included here.
+        class GenerateStatelessSuggestionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response message for
+        # {::Google::Cloud::Dialogflow::V2::Conversations::Client#generate_stateless_suggestion Conversations.GenerateStatelessSuggestion}.
+        # @!attribute [rw] generator_suggestion
+        #   @return [::Google::Cloud::Dialogflow::V2::GeneratorSuggestion]
+        #     Required. Generated suggestion for a conversation.
+        class GenerateStatelessSuggestionResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for
         # {::Google::Cloud::Dialogflow::V2::Conversations::Client#search_knowledge Conversations.SearchKnowledge}.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     The parent resource contains the conversation profile
+        #     Required. The parent resource contains the conversation profile
         #     Format: 'projects/<Project ID>' or `projects/<Project
         #     ID>/locations/<Location ID>`.
         # @!attribute [rw] query
@@ -450,7 +478,7 @@ module Google
         #     ID>/conversationProfiles/<Conversation Profile ID>`.
         # @!attribute [rw] session_id
         #   @return [::String]
-        #     The ID of the search session.
+        #     Required. The ID of the search session.
         #     The session_id can be combined with Dialogflow V3 Agent ID retrieved from
         #     conversation profile or on its own to identify a search session. The search
         #     history of the same session will impact the search result. It's up to the
@@ -459,12 +487,12 @@ module Google
         #     not exceed 36 characters.
         # @!attribute [rw] conversation
         #   @return [::String]
-        #     The conversation (between human agent and end user) where the search
-        #     request is triggered. Format: `projects/<Project ID>/locations/<Location
-        #     ID>/conversations/<Conversation ID>`.
+        #     Optional. The conversation (between human agent and end user) where the
+        #     search request is triggered. Format: `projects/<Project
+        #     ID>/locations/<Location ID>/conversations/<Conversation ID>`.
         # @!attribute [rw] latest_message
         #   @return [::String]
-        #     The name of the latest conversation message when the request is
+        #     Optional. The name of the latest conversation message when the request is
         #     triggered.
         #     Format: `projects/<Project ID>/locations/<Location
         #     ID>/conversations/<Conversation ID>/messages/<Message ID>`.

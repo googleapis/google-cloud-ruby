@@ -210,6 +210,9 @@ module Google
         # @!attribute [rw] knowledge_search_feedback
         #   @return [::Google::Cloud::Dialogflow::V2::AgentAssistantFeedback::KnowledgeSearchFeedback]
         #     Optional. Feedback for knowledge search.
+        # @!attribute [rw] knowledge_assist_feedback
+        #   @return [::Google::Cloud::Dialogflow::V2::AgentAssistantFeedback::KnowledgeAssistFeedback]
+        #     Optional. Feedback for knowledge assist.
         class AgentAssistantFeedback
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -256,6 +259,25 @@ module Google
           #     {::Google::Cloud::Dialogflow::V2::AnswerFeedback#clicked AnswerFeedback.clicked}
           #     will be updated to be true.
           class KnowledgeSearchFeedback
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Feedback for knowledge assist.
+          # @!attribute [rw] answer_copied
+          #   @return [::Boolean]
+          #     Whether the suggested answer was copied by the human agent.
+          #     If the value is set to be true,
+          #     {::Google::Cloud::Dialogflow::V2::AnswerFeedback#clicked AnswerFeedback.clicked}
+          #     will be updated to be true.
+          # @!attribute [rw] clicked_uris
+          #   @return [::Array<::String>]
+          #     The URIs clicked by the human agent. The value is appended for each
+          #     UpdateAnswerRecordRequest.
+          #     If the value is not empty,
+          #     {::Google::Cloud::Dialogflow::V2::AnswerFeedback#clicked AnswerFeedback.clicked}
+          #     will be updated to be true.
+          class KnowledgeAssistFeedback
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
