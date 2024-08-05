@@ -7,3 +7,4 @@
 * Initial generation of google-cloud-network_services ([#25960](https://github.com/googleapis/google-cloud-ruby/issues/25960)) 
 
 ## Release History
+

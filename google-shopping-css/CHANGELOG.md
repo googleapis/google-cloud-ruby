@@ -7,3 +7,4 @@
 * Initial generation of google-shopping-css ([#26102](https://github.com/googleapis/google-cloud-ruby/issues/26102)) 
 
 ## Release History
+
