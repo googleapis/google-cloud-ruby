@@ -309,7 +309,7 @@ def run_toplevel
     puts "toplevel: bundle ...", :bold, :cyan
     result = exec ["bundle", @bundle_task, "--retry=#{bundle_retry}"]
     unless result.success?
-      @errors << [dir, "bundle"]
+      @errors << [@cur_dir, "bundle"]
       return
     end
   end
