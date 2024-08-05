@@ -7,3 +7,4 @@
 * Initial generation of google-cloud-connectors ([#25972](https://github.com/googleapis/google-cloud-ruby/issues/25972)) 
 
 ## Release History
+
