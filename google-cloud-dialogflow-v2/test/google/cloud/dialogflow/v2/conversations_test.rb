@@ -499,6 +499,71 @@ class ::Google::Cloud::Dialogflow::V2::Conversations::ClientTest < Minitest::Tes
     end
   end
 
+  def test_generate_stateless_suggestion
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Dialogflow::V2::GenerateStatelessSuggestionResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    generator = {}
+    conversation_context = {}
+    trigger_events = [:TRIGGER_EVENT_UNSPECIFIED]
+
+    generate_stateless_suggestion_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :generate_stateless_suggestion, name
+      assert_kind_of ::Google::Cloud::Dialogflow::V2::GenerateStatelessSuggestionRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::Generator), request["generator"]
+      assert_equal :generator, request.generator_resource
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::ConversationContext), request["conversation_context"]
+      assert_equal [:TRIGGER_EVENT_UNSPECIFIED], request["trigger_events"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, generate_stateless_suggestion_client_stub do
+      # Create client
+      client = ::Google::Cloud::Dialogflow::V2::Conversations::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.generate_stateless_suggestion({ parent: parent, generator: generator, conversation_context: conversation_context, trigger_events: trigger_events }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.generate_stateless_suggestion parent: parent, generator: generator, conversation_context: conversation_context, trigger_events: trigger_events do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.generate_stateless_suggestion ::Google::Cloud::Dialogflow::V2::GenerateStatelessSuggestionRequest.new(parent: parent, generator: generator, conversation_context: conversation_context, trigger_events: trigger_events) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.generate_stateless_suggestion({ parent: parent, generator: generator, conversation_context: conversation_context, trigger_events: trigger_events }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.generate_stateless_suggestion(::Google::Cloud::Dialogflow::V2::GenerateStatelessSuggestionRequest.new(parent: parent, generator: generator, conversation_context: conversation_context, trigger_events: trigger_events), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, generate_stateless_suggestion_client_stub.call_rpc_count
+    end
+  end
+
   def test_search_knowledge
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::Dialogflow::V2::SearchKnowledgeResponse.new

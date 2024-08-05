@@ -257,10 +257,19 @@ module Google
           #     can prevent those queries from being stored at answer records.
           #
           #     Supported features: KNOWLEDGE_SEARCH.
+          # @!attribute [rw] enable_query_suggestion_when_no_answer
+          #   @return [::Boolean]
+          #     Optional. Enable query suggestion even if we can't find its answer.
+          #     By default, queries are suggested only if we find its answer.
+          #     Supported features: KNOWLEDGE_ASSIST
           # @!attribute [rw] enable_conversation_augmented_query
           #   @return [::Boolean]
           #     Optional. Enable including conversation context during query answer
           #     generation. Supported features: KNOWLEDGE_SEARCH.
+          # @!attribute [rw] enable_query_suggestion_only
+          #   @return [::Boolean]
+          #     Optional. Enable query suggestion only.
+          #     Supported features: KNOWLEDGE_ASSIST
           # @!attribute [rw] suggestion_trigger_settings
           #   @return [::Google::Cloud::Dialogflow::V2::HumanAgentAssistantConfig::SuggestionTriggerSettings]
           #     Settings of suggestion trigger.
@@ -297,6 +306,19 @@ module Google
           #     If `group_suggestion_responses` set to true. All the suggestions to the
           #     same participant based on the same context will be grouped into a single
           #     Pub/Sub event or StreamingAnalyzeContentResponse.
+          # @!attribute [rw] generators
+          #   @return [::Array<::String>]
+          #     Optional. List of various generator resource names used in the
+          #     conversation profile.
+          # @!attribute [rw] disable_high_latency_features_sync_delivery
+          #   @return [::Boolean]
+          #     Optional. When disable_high_latency_features_sync_delivery is true and
+          #     using the AnalyzeContent API, we will not deliver the responses from high
+          #     latency features in the API response. The
+          #     human_agent_assistant_config.notification_config must be configured and
+          #     enable_event_based_suggestion must be set to true to receive the
+          #     responses from high latency features in Pub/Sub. High latency feature(s):
+          #     KNOWLEDGE_ASSIST
           class SuggestionConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -555,7 +577,7 @@ module Google
         # to get access.
         # @!attribute [rw] live_person_config
         #   @return [::Google::Cloud::Dialogflow::V2::HumanAgentHandoffConfig::LivePersonConfig]
-        #     Uses LivePerson (https://www.liveperson.com).
+        #     Uses [LivePerson](https://www.liveperson.com).
         # @!attribute [rw] salesforce_live_agent_config
         #   @return [::Google::Cloud::Dialogflow::V2::HumanAgentHandoffConfig::SalesforceLiveAgentConfig]
         #     Uses Salesforce Live Agent.
@@ -563,7 +585,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Configuration specific to LivePerson (https://www.liveperson.com).
+          # Configuration specific to [LivePerson](https://www.liveperson.com).
           # @!attribute [rw] account_number
           #   @return [::String]
           #     Required. Account number of the LivePerson account to connect. This is
@@ -672,6 +694,9 @@ module Google
 
             # Run knowledge search with text input from agent or text generated query.
             KNOWLEDGE_SEARCH = 14
+
+            # Run knowledge assist with automatic query generation.
+            KNOWLEDGE_ASSIST = 15
           end
         end
 

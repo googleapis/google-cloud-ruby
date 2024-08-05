@@ -207,6 +207,25 @@ module Google
             end
 
             ##
+            # Create a fully-qualified Generator resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/generators/{generator}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param generator [String]
+            #
+            # @return [::String]
+            def generator_path project:, location:, generator:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/generators/#{generator}"
+            end
+
+            ##
             # Create a fully-qualified KnowledgeBase resource string.
             #
             # @overload knowledge_base_path(project:, knowledge_base:)

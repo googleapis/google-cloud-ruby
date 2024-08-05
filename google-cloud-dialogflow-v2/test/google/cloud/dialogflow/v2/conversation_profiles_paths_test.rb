@@ -105,6 +105,18 @@ class ::Google::Cloud::Dialogflow::V2::ConversationProfiles::ClientPathsTest < M
     end
   end
 
+  def test_generator_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Dialogflow::V2::ConversationProfiles::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.generator_path project: "value0", location: "value1", generator: "value2"
+      assert_equal "projects/value0/locations/value1/generators/value2", path
+    end
+  end
+
   def test_knowledge_base_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do

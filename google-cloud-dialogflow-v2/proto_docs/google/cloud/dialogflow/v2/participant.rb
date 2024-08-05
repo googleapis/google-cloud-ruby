@@ -909,6 +909,9 @@ module Google
         # @!attribute [rw] suggest_articles_response
         #   @return [::Google::Cloud::Dialogflow::V2::SuggestArticlesResponse]
         #     SuggestArticlesResponse if request is for ARTICLE_SUGGESTION.
+        # @!attribute [rw] suggest_knowledge_assist_response
+        #   @return [::Google::Cloud::Dialogflow::V2::SuggestKnowledgeAssistResponse]
+        #     SuggestKnowledgeAssistResponse if request is for KNOWLEDGE_ASSIST.
         # @!attribute [rw] suggest_faq_answers_response
         #   @return [::Google::Cloud::Dialogflow::V2::SuggestFaqAnswersResponse]
         #     SuggestFaqAnswersResponse if request is for FAQ_ANSWER.
@@ -1019,6 +1022,136 @@ module Google
           class DocumentsMetadataFiltersEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # The request message for
+        # {::Google::Cloud::Dialogflow::V2::Participants::Client#suggest_knowledge_assist Participants.SuggestKnowledgeAssist}.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The name of the participant to fetch suggestions for.
+        #     Format: `projects/<Project ID>/locations/<Location
+        #     ID>/conversations/<Conversation ID>/participants/<Participant ID>`.
+        # @!attribute [rw] latest_message
+        #   @return [::String]
+        #     Optional. The name of the latest conversation message to compile
+        #     suggestions for. If empty, it will be the latest message of the
+        #     conversation. Format: `projects/<Project ID>/locations/<Location
+        #     ID>/conversations/<Conversation ID>/messages/<Message ID>`.
+        # @!attribute [rw] context_size
+        #   @return [::Integer]
+        #     Optional. Max number of messages prior to and including
+        #     {::Google::Cloud::Dialogflow::V2::SuggestKnowledgeAssistRequest#latest_message latest_message}
+        #     to use as context when compiling the suggestion. The context size is by
+        #     default 100 and at most 100.
+        # @!attribute [rw] previous_suggested_query
+        #   @return [::String]
+        #     Optional. The previously suggested query for the given conversation. This
+        #     helps identify whether the next suggestion we generate is resonably
+        #     different from the previous one. This is useful to avoid similar
+        #     suggestions within the conversation.
+        class SuggestKnowledgeAssistRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response message for
+        # {::Google::Cloud::Dialogflow::V2::Participants::Client#suggest_knowledge_assist Participants.SuggestKnowledgeAssist}.
+        # @!attribute [r] knowledge_assist_answer
+        #   @return [::Google::Cloud::Dialogflow::V2::KnowledgeAssistAnswer]
+        #     Output only. Knowledge Assist suggestion.
+        # @!attribute [rw] latest_message
+        #   @return [::String]
+        #     The name of the latest conversation message used to compile suggestion for.
+        #     Format: `projects/<Project ID>/locations/<Location
+        #     ID>/conversations/<Conversation ID>/messages/<Message ID>`.
+        # @!attribute [rw] context_size
+        #   @return [::Integer]
+        #     Number of messages prior to and including
+        #     {::Google::Cloud::Dialogflow::V2::SuggestKnowledgeAssistResponse#latest_message latest_message}
+        #     to compile the suggestion. It may be smaller than the
+        #     {::Google::Cloud::Dialogflow::V2::SuggestKnowledgeAssistRequest#context_size SuggestKnowledgeAssistRequest.context_size}
+        #     field in the request if there are fewer messages in the conversation.
+        class SuggestKnowledgeAssistResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents a Knowledge Assist answer.
+        # @!attribute [rw] suggested_query
+        #   @return [::Google::Cloud::Dialogflow::V2::KnowledgeAssistAnswer::SuggestedQuery]
+        #     The query suggested based on the context. Suggestion is made only if it
+        #     is different from the previous suggestion.
+        # @!attribute [rw] suggested_query_answer
+        #   @return [::Google::Cloud::Dialogflow::V2::KnowledgeAssistAnswer::KnowledgeAnswer]
+        #     The answer generated for the suggested query. Whether or not an answer is
+        #     generated depends on how confident we are about the generated query.
+        # @!attribute [rw] answer_record
+        #   @return [::String]
+        #     The name of the answer record.
+        #     Format: `projects/<Project ID>/locations/<location ID>/answer
+        #     Records/<Answer Record ID>`.
+        class KnowledgeAssistAnswer
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Represents a suggested query.
+          # @!attribute [rw] query_text
+          #   @return [::String]
+          #     Suggested query text.
+          class SuggestedQuery
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Represents an answer from Knowledge. Currently supports FAQ and Generative
+          # answers.
+          # @!attribute [rw] answer_text
+          #   @return [::String]
+          #     The piece of text from the `source` that answers this suggested query.
+          # @!attribute [rw] faq_source
+          #   @return [::Google::Cloud::Dialogflow::V2::KnowledgeAssistAnswer::KnowledgeAnswer::FaqSource]
+          #     Populated if the prediction came from FAQ.
+          # @!attribute [rw] generative_source
+          #   @return [::Google::Cloud::Dialogflow::V2::KnowledgeAssistAnswer::KnowledgeAnswer::GenerativeSource]
+          #     Populated if the prediction was Generative.
+          class KnowledgeAnswer
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Details about source of FAQ answer.
+            # @!attribute [rw] question
+            #   @return [::String]
+            #     The corresponding FAQ question.
+            class FaqSource
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Details about source of Generative answer.
+            # @!attribute [rw] snippets
+            #   @return [::Array<::Google::Cloud::Dialogflow::V2::KnowledgeAssistAnswer::KnowledgeAnswer::GenerativeSource::Snippet>]
+            #     All snippets used for this Generative Prediction, with their source URI
+            #     and data.
+            class GenerativeSource
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Snippet Source for a Generative Prediction.
+              # @!attribute [rw] uri
+              #   @return [::String]
+              #     URI the data is sourced from.
+              # @!attribute [rw] text
+              #   @return [::String]
+              #     Text taken from that URI.
+              # @!attribute [rw] title
+              #   @return [::String]
+              #     Title of the document.
+              class Snippet
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+            end
           end
         end
       end

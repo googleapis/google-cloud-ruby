@@ -291,6 +291,30 @@ module Google
         #     [Agent Speech
         #     settings](https://cloud.google.com/dialogflow/cx/docs/concept/agent#settings-speech)
         #     for model selection.
+        # @!attribute [rw] audio_encoding
+        #   @return [::Google::Cloud::Dialogflow::V2::AudioEncoding]
+        #     Audio encoding of the audio content to process.
+        # @!attribute [rw] sample_rate_hertz
+        #   @return [::Integer]
+        #     Sample rate (in Hertz) of the audio content sent in the query.
+        #     Refer to [Cloud Speech API
+        #     documentation](https://cloud.google.com/speech-to-text/docs/basics) for
+        #     more details.
+        # @!attribute [rw] language_code
+        #   @return [::String]
+        #     The language of the supplied audio. Dialogflow does not do
+        #     translations. See [Language
+        #     Support](https://cloud.google.com/dialogflow/docs/reference/language)
+        #     for a list of the currently supported language codes. Note that queries in
+        #     the same session do not necessarily need to specify the same language.
+        # @!attribute [rw] enable_word_info
+        #   @return [::Boolean]
+        #     If `true`, Dialogflow returns
+        #     {::Google::Cloud::Dialogflow::V2::SpeechWordInfo SpeechWordInfo} in
+        #     {::Google::Cloud::Dialogflow::V2::StreamingRecognitionResult StreamingRecognitionResult}
+        #     with information about the recognized speech words, e.g. start and end time
+        #     offsets. If false or unspecified, Speech doesn't return any word-level
+        #     information.
         # @!attribute [rw] use_timeout_based_endpointing
         #   @return [::Boolean]
         #     Use timeout based endpointing, interpreting endpointer sensitivy as

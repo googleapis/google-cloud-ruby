@@ -1932,6 +1932,46 @@
       ]
     },
     {
+      "region_tag": "dialogflow_v2_generated_Participants_SuggestKnowledgeAssist_sync",
+      "title": "Snippet for the suggest_knowledge_assist call in the Participants service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Participants::Client#suggest_knowledge_assist.",
+      "file": "participants/suggest_knowledge_assist.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "suggest_knowledge_assist",
+        "full_name": "::Google::Cloud::Dialogflow::V2::Participants::Client#suggest_knowledge_assist",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::SuggestKnowledgeAssistRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::V2::SuggestKnowledgeAssistResponse",
+        "client": {
+          "short_name": "Participants::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::Participants::Client"
+        },
+        "method": {
+          "short_name": "SuggestKnowledgeAssist",
+          "full_name": "google.cloud.dialogflow.v2.Participants.SuggestKnowledgeAssist",
+          "service": {
+            "short_name": "Participants",
+            "full_name": "google.cloud.dialogflow.v2.Participants"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "dialogflow_v2_generated_AnswerRecords_ListAnswerRecords_sync",
       "title": "Snippet for the list_answer_records call in the AnswerRecords service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::AnswerRecords::Client#list_answer_records.",
@@ -2292,6 +2332,206 @@
       ]
     },
     {
+      "region_tag": "dialogflow_v2_generated_Generators_CreateGenerator_sync",
+      "title": "Snippet for the create_generator call in the Generators service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Generators::Client#create_generator.",
+      "file": "generators/create_generator.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_generator",
+        "full_name": "::Google::Cloud::Dialogflow::V2::Generators::Client#create_generator",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::CreateGeneratorRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::V2::Generator",
+        "client": {
+          "short_name": "Generators::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::Generators::Client"
+        },
+        "method": {
+          "short_name": "CreateGenerator",
+          "full_name": "google.cloud.dialogflow.v2.Generators.CreateGenerator",
+          "service": {
+            "short_name": "Generators",
+            "full_name": "google.cloud.dialogflow.v2.Generators"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v2_generated_Generators_GetGenerator_sync",
+      "title": "Snippet for the get_generator call in the Generators service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Generators::Client#get_generator.",
+      "file": "generators/get_generator.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_generator",
+        "full_name": "::Google::Cloud::Dialogflow::V2::Generators::Client#get_generator",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::GetGeneratorRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::V2::Generator",
+        "client": {
+          "short_name": "Generators::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::Generators::Client"
+        },
+        "method": {
+          "short_name": "GetGenerator",
+          "full_name": "google.cloud.dialogflow.v2.Generators.GetGenerator",
+          "service": {
+            "short_name": "Generators",
+            "full_name": "google.cloud.dialogflow.v2.Generators"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v2_generated_Generators_ListGenerators_sync",
+      "title": "Snippet for the list_generators call in the Generators service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Generators::Client#list_generators.",
+      "file": "generators/list_generators.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_generators",
+        "full_name": "::Google::Cloud::Dialogflow::V2::Generators::Client#list_generators",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::ListGeneratorsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::V2::ListGeneratorsResponse",
+        "client": {
+          "short_name": "Generators::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::Generators::Client"
+        },
+        "method": {
+          "short_name": "ListGenerators",
+          "full_name": "google.cloud.dialogflow.v2.Generators.ListGenerators",
+          "service": {
+            "short_name": "Generators",
+            "full_name": "google.cloud.dialogflow.v2.Generators"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v2_generated_Generators_DeleteGenerator_sync",
+      "title": "Snippet for the delete_generator call in the Generators service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Generators::Client#delete_generator.",
+      "file": "generators/delete_generator.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_generator",
+        "full_name": "::Google::Cloud::Dialogflow::V2::Generators::Client#delete_generator",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::DeleteGeneratorRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "Generators::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::Generators::Client"
+        },
+        "method": {
+          "short_name": "DeleteGenerator",
+          "full_name": "google.cloud.dialogflow.v2.Generators.DeleteGenerator",
+          "service": {
+            "short_name": "Generators",
+            "full_name": "google.cloud.dialogflow.v2.Generators"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v2_generated_Generators_UpdateGenerator_sync",
+      "title": "Snippet for the update_generator call in the Generators service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Generators::Client#update_generator.",
+      "file": "generators/update_generator.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_generator",
+        "full_name": "::Google::Cloud::Dialogflow::V2::Generators::Client#update_generator",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::UpdateGeneratorRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::V2::Generator",
+        "client": {
+          "short_name": "Generators::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::Generators::Client"
+        },
+        "method": {
+          "short_name": "UpdateGenerator",
+          "full_name": "google.cloud.dialogflow.v2.Generators.UpdateGenerator",
+          "service": {
+            "short_name": "Generators",
+            "full_name": "google.cloud.dialogflow.v2.Generators"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "dialogflow_v2_generated_Conversations_CreateConversation_sync",
       "title": "Snippet for the create_conversation call in the Conversations service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Conversations::Client#create_conversation.",
@@ -2555,6 +2795,46 @@
         "method": {
           "short_name": "GenerateStatelessSummary",
           "full_name": "google.cloud.dialogflow.v2.Conversations.GenerateStatelessSummary",
+          "service": {
+            "short_name": "Conversations",
+            "full_name": "google.cloud.dialogflow.v2.Conversations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v2_generated_Conversations_GenerateStatelessSuggestion_sync",
+      "title": "Snippet for the generate_stateless_suggestion call in the Conversations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Conversations::Client#generate_stateless_suggestion.",
+      "file": "conversations/generate_stateless_suggestion.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "generate_stateless_suggestion",
+        "full_name": "::Google::Cloud::Dialogflow::V2::Conversations::Client#generate_stateless_suggestion",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::GenerateStatelessSuggestionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::V2::GenerateStatelessSuggestionResponse",
+        "client": {
+          "short_name": "Conversations::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::Conversations::Client"
+        },
+        "method": {
+          "short_name": "GenerateStatelessSuggestion",
+          "full_name": "google.cloud.dialogflow.v2.Conversations.GenerateStatelessSuggestion",
           "service": {
             "short_name": "Conversations",
             "full_name": "google.cloud.dialogflow.v2.Conversations"
@@ -3478,6 +3758,86 @@
           "service": {
             "short_name": "Documents",
             "full_name": "google.cloud.dialogflow.v2.Documents"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v2_generated_EncryptionSpecService_GetEncryptionSpec_sync",
+      "title": "Snippet for the get_encryption_spec call in the EncryptionSpecService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::EncryptionSpecService::Client#get_encryption_spec.",
+      "file": "encryption_spec_service/get_encryption_spec.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_encryption_spec",
+        "full_name": "::Google::Cloud::Dialogflow::V2::EncryptionSpecService::Client#get_encryption_spec",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::GetEncryptionSpecRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::V2::EncryptionSpec",
+        "client": {
+          "short_name": "EncryptionSpecService::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::EncryptionSpecService::Client"
+        },
+        "method": {
+          "short_name": "GetEncryptionSpec",
+          "full_name": "google.cloud.dialogflow.v2.EncryptionSpecService.GetEncryptionSpec",
+          "service": {
+            "short_name": "EncryptionSpecService",
+            "full_name": "google.cloud.dialogflow.v2.EncryptionSpecService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v2_generated_EncryptionSpecService_InitializeEncryptionSpec_sync",
+      "title": "Snippet for the initialize_encryption_spec call in the EncryptionSpecService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::EncryptionSpecService::Client#initialize_encryption_spec.",
+      "file": "encryption_spec_service/initialize_encryption_spec.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "initialize_encryption_spec",
+        "full_name": "::Google::Cloud::Dialogflow::V2::EncryptionSpecService::Client#initialize_encryption_spec",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::InitializeEncryptionSpecRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "EncryptionSpecService::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::EncryptionSpecService::Client"
+        },
+        "method": {
+          "short_name": "InitializeEncryptionSpec",
+          "full_name": "google.cloud.dialogflow.v2.EncryptionSpecService.InitializeEncryptionSpec",
+          "service": {
+            "short_name": "EncryptionSpecService",
+            "full_name": "google.cloud.dialogflow.v2.EncryptionSpecService"
           }
         }
       },
