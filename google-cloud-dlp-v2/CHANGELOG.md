@@ -1,5 +1,19 @@
 # Release History
 
+### 1.1.0 (2024-08-05)
+
+#### Features
+
+* Support for additional file types used for profiling 
+* Support for Armenia and Belarus location categories 
+* Support for Cloud Storage target for Discovery 
+* Support for DiscoveryInspectTemplateModifiedCadence 
+* Support for extra information about errors 
+* Support for file store data profile columns 
+* Support for operations on FileStoreDataProfile resources 
+* Support for profile counts generated for a project 
+* Support for unknown sensitivity score levels 
+
 ### 1.0.0 (2024-07-08)
 
 #### Features
