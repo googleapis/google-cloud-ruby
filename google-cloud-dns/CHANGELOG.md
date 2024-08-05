@@ -1,5 +1,11 @@
 # Release History
 
+### 1.0.0 (2024-08-05)
+
+#### Features
+
+* Bump version to 1.0.0 ([#26585](https://github.com/googleapis/google-cloud-ruby/issues/26585)) 
+
 ### 0.37.0 (2024-03-07)
 
 #### Features
@@ -156,4 +162,3 @@ This gem contains the Google Cloud DNS service implementation for the `google-cl
 
 * Namespace is now `Google::Cloud`
 * The `google-cloud` gem is now an umbrella package for individual gems
-
