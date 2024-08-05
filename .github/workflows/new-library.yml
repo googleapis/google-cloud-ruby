@@ -13,7 +13,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{ secrets.YOSHI_CODE_BOT_TOKEN }}
-      GOOGLEAPIS_GEN_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
     - name: Checkout repo
       uses: actions/checkout@v4
@@ -21,9 +20,11 @@ jobs:
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: "3.3"
+    - name: Install Bazel
+      uses: bazel-contrib/setup-bazel@0.8.5
     - name: Install tools
       run: |
         gem install --no-document toys
     - name: Create library
       run: |
-        toys new-library -v --pull --test --fork --bootstrap-releases ${{ github.event.inputs.protoPath }}
+        toys new-library -v --bazelisk --pull --pull-googleapis --test --fork --bootstrap-releases ${{ github.event.inputs.protoPath }}
