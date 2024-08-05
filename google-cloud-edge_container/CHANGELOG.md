@@ -7,3 +7,4 @@
 * Initial generation of google-cloud-edge_container ([#26262](https://github.com/googleapis/google-cloud-ruby/issues/26262)) 
 
 ## Release History
+

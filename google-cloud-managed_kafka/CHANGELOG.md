@@ -7,3 +7,4 @@
 * Initial generation of google-cloud-managed_kafka ([#26114](https://github.com/googleapis/google-cloud-ruby/issues/26114)) 
 
 ## Release History
+

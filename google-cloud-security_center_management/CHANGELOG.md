@@ -7,3 +7,4 @@
 * Initial generation of google-cloud-security_center_management ([#25773](https://github.com/googleapis/google-cloud-ruby/issues/25773)) 
 
 ## Release History
+

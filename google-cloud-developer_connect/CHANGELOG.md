@@ -7,3 +7,4 @@
 * Initial generation of google-cloud-developer_connect ([#26115](https://github.com/googleapis/google-cloud-ruby/issues/26115)) 
 
 ## Release History
+

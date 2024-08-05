@@ -7,3 +7,4 @@
 * Initial generation of google-maps-fleet_engine ([#25843](https://github.com/googleapis/google-cloud-ruby/issues/25843)) 
 
 ## Release History
+
