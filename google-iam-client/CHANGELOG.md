@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.0.0 (2024-08-05)
+
+#### Features
+
+* Bump version to 1.0.0 ([#26584](https://github.com/googleapis/google-cloud-ruby/issues/26584)) 
+
 ### 0.4.0 (2024-02-26)
 
 #### Features
@@ -25,4 +31,3 @@
 * Initial generation of google-iam-client ([#19155](https://github.com/googleapis/google-cloud-ruby/issues/19155)) 
 
 ## Changelog
-
