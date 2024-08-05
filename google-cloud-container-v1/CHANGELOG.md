@@ -1,5 +1,15 @@
 # Release History
 
+### 1.1.0 (2024-08-05)
+
+#### Features
+
+* Support for DCGM monitoring ([#26447](https://github.com/googleapis/google-cloud-ruby/issues/26447)) 
+* Support for Ray Clusters ([#26480](https://github.com/googleapis/google-cloud-ruby/issues/26480)) 
+#### Documentation
+
+* Mark a number of fields as read-only (i.e. only for output) ([#26515](https://github.com/googleapis/google-cloud-ruby/issues/26515)) 
+
 ### 1.0.0 (2024-07-08)
 
 #### Features
