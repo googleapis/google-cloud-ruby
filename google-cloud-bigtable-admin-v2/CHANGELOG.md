@@ -1,5 +1,14 @@
 # Release History
 
+### 1.2.0 (2024-08-05)
+
+#### Features
+
+* add fields and the BackupType proto for Hot Backups ([#26568](https://github.com/googleapis/google-cloud-ruby/issues/26568)) 
+#### Documentation
+
+* clarify comments and fix typos 
+
 ### 1.1.0 (2024-07-23)
 
 #### Features
