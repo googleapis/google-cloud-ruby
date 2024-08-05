@@ -156,3 +156,4 @@ This gem contains the Google Cloud DNS service implementation for the `google-cl
 
 * Namespace is now `Google::Cloud`
 * The `google-cloud` gem is now an umbrella package for individual gems
+
