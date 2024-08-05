@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.0.0 (2024-08-05)
+
+#### Features
+
+* Bump version to 1.0.0 ([#26583](https://github.com/googleapis/google-cloud-ruby/issues/26583)) 
+
 ### 0.5.0 (2024-02-26)
 
 #### Features
@@ -37,4 +43,3 @@
 #### Features
 
 * Initial generation of google-cloud-network_security
-
