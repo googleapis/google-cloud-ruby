@@ -280,7 +280,8 @@ module Google
             rpc :CreateConnection, ::Google::Cloud::Dlp::V2::CreateConnectionRequest, ::Google::Cloud::Dlp::V2::Connection
             # Get a Connection by name.
             rpc :GetConnection, ::Google::Cloud::Dlp::V2::GetConnectionRequest, ::Google::Cloud::Dlp::V2::Connection
-            # Lists Connections in a parent.
+            # Lists Connections in a parent. Use SearchConnections to see all connections
+            # within an organization.
             rpc :ListConnections, ::Google::Cloud::Dlp::V2::ListConnectionsRequest, ::Google::Cloud::Dlp::V2::ListConnectionsResponse
             # Searches for Connections in a parent.
             rpc :SearchConnections, ::Google::Cloud::Dlp::V2::SearchConnectionsRequest, ::Google::Cloud::Dlp::V2::SearchConnectionsResponse
