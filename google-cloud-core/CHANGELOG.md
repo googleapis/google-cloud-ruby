@@ -1,5 +1,11 @@
 # Release History
 
+### 1.7.1 (2024-08-05)
+
+#### Bug Fixes
+
+* Fixed exception when pretty-printing a client object in a Rails environment ([#26567](https://github.com/googleapis/google-cloud-ruby/issues/26567)) 
+
 ### 1.7.0 (2024-03-07)
 
 #### Features
