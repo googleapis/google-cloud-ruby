@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.5.0 (2024-08-05)
+
+#### Features
+
+* Support ClassificationCategory#severity 
+* Support model_version parameter to the moderate_text RPC 
+
 ### 0.4.0 (2024-02-26)
 
 #### Features
