@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.4.0 (2024-08-05)
+
+#### Features
+
+* Support for mute state and dynamic mute ([#26566](https://github.com/googleapis/google-cloud-ruby/issues/26566)) 
+#### Documentation
+
+* Various fixes to reference documentation formatting and links 
+
 ### 0.3.0 (2024-06-28)
 
 #### Features
