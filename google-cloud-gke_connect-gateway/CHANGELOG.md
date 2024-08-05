@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.0.0 (2024-08-05)
+
+#### Features
+
+* Bump version to 1.0.0 ([#26587](https://github.com/googleapis/google-cloud-ruby/issues/26587)) 
+
 ### 0.4.0 (2024-02-26)
 
 #### Features
@@ -48,4 +54,3 @@
 #### Features
 
 * Initial generation of google-cloud-gke_connect-gateway
-
