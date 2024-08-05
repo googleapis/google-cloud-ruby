@@ -1,5 +1,12 @@
 # Changelog
 
+### 1.1.0 (2024-08-05)
+
+#### Features
+
+* Support for imageless mode in the process_document RPC 
+* Support for information about Generative AI model-based processor versions 
+
 ### 1.0.0 (2024-07-10)
 
 #### Features
