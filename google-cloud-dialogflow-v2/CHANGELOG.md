@@ -1,5 +1,34 @@
 # Release History
 
+### 1.1.0 (2024-08-05)
+
+#### Features
+
+* Add GenerateStatelessSuggestion related endpoints and types 
+* Add Generator related services and types 
+* Add Proactive Generative Knowledge Assist endpoints and types ([#26573](https://github.com/googleapis/google-cloud-ruby/issues/26573)) 
+#### Bug Fixes
+
+* Changed field behavior for an existing field `parent` in message `.google.cloud.dialogflow.v2.SearchKnowledgeRequest` 
+* Changed field behavior for an existing field `session_id` in message `.google.cloud.dialogflow.v2.SearchKnowledgeRequest` 
+#### Documentation
+
+* A comment for field `assist_query_params` in message `.google.cloud.dialogflow.v2.SuggestConversationSummaryRequest` is changed 
+* A comment for field `audio` in message `.google.cloud.dialogflow.v2.AudioInput` is changed 
+* A comment for field `context_size` in message `.google.cloud.dialogflow.v2.SuggestConversationSummaryRequest` is changed 
+* A comment for field `conversation_stage` in message `.google.cloud.dialogflow.v2.Conversation` is changed 
+* A comment for field `conversation` in message `.google.cloud.dialogflow.v2.SearchKnowledgeRequest` is changed 
+* A comment for field `filter` in message `.google.cloud.dialogflow.v2.ListConversationsRequest` is changed 
+* A comment for field `latest_message` in message `.google.cloud.dialogflow.v2.GenerateStatelessSummaryRequest` is changed 
+* A comment for field `latest_message` in message `.google.cloud.dialogflow.v2.SearchKnowledgeRequest` is changed 
+* A comment for field `latest_message` in message `.google.cloud.dialogflow.v2.SuggestConversationSummaryRequest` is changed 
+* A comment for field `live_person_config` in message `.google.cloud.dialogflow.v2.HumanAgentHandoffConfig` is changed 
+* A comment for field `max_context_size` in message `.google.cloud.dialogflow.v2.GenerateStatelessSummaryRequest` is changed 
+* A comment for field `name` in message `.google.cloud.dialogflow.v2.Conversation` is changed 
+* A comment for field `parent` in message `.google.cloud.dialogflow.v2.SearchKnowledgeRequest` is changed 
+* A comment for field `session_id` in message `.google.cloud.dialogflow.v2.SearchKnowledgeRequest` is changed 
+* A comment for message `HumanAgentHandoffConfig` is changed 
+
 ### 1.0.0 (2024-07-08)
 
 #### Features
