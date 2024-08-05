@@ -1,5 +1,17 @@
 # Changelog
 
+### 0.13.0 (2024-08-05)
+
+#### Features
+
+* add the `Comparison` type 
+* add the `ComparisonMetadata` type 
+* add the `comparisons` field to the `Metadata` resource ([#26569](https://github.com/googleapis/google-cloud-ruby/issues/26569)) 
+* add the `comparisons` field to the `RunReportRequest`, `RunPivotReportRequest` resources 
+#### Documentation
+
+* a comment for field `custom_definition` in message `DimensionMetadata` is changed 
+
 ### 0.12.0 (2024-02-26)
 
 #### Features
