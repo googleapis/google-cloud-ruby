@@ -1,5 +1,14 @@
 # Release History
 
+### 0.42.0 (2024-08-05)
+
+#### Features
+
+* Support for Ray Clusters ([#26481](https://github.com/googleapis/google-cloud-ruby/issues/26481)) 
+#### Documentation
+
+* Mark a number of fields as read-only (i.e. only for output) ([#26524](https://github.com/googleapis/google-cloud-ruby/issues/26524)) 
+
 ### 0.41.0 (2024-07-10)
 
 #### Features
