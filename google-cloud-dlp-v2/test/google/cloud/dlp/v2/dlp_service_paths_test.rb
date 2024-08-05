@@ -57,6 +57,9 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientPathsTest < Minitest::Test
 
       path = client.connection_path project: "value0", location: "value1", connection: "value2"
       assert_equal "projects/value0/locations/value1/connections/value2", path
+
+      path = client.connection_path organization: "value0", location: "value1", connection: "value2"
+      assert_equal "organizations/value0/locations/value1/connections/value2", path
     end
   end
 

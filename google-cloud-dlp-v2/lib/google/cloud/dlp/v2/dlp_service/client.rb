@@ -242,6 +242,21 @@ module Google
                   initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
+                default_config.rpcs.list_file_store_data_profiles.timeout = 300.0
+                default_config.rpcs.list_file_store_data_profiles.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                }
+
+                default_config.rpcs.get_file_store_data_profile.timeout = 300.0
+                default_config.rpcs.get_file_store_data_profile.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                }
+
+                default_config.rpcs.delete_file_store_data_profile.timeout = 300.0
+                default_config.rpcs.delete_file_store_data_profile.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                }
+
                 default_config.rpcs.get_table_data_profile.timeout = 300.0
                 default_config.rpcs.get_table_data_profile.retry_policy = {
                   initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
@@ -399,9 +414,9 @@ module Google
             #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
             #
             #     + Projects scope, location specified:
-            #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+            #       `projects/{project_id}/locations/{location_id}`
             #     + Projects scope, no location specified (defaults to global):
-            #       `projects/`<var>PROJECT_ID</var>
+            #       `projects/{project_id}`
             #
             #     The following example `parent` string specifies a parent project with the
             #     identifier `example-project`, and specifies the `europe-west3` location
@@ -521,9 +536,9 @@ module Google
             #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
             #
             #     + Projects scope, location specified:
-            #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+            #       `projects/{project_id}/locations/{location_id}`
             #     + Projects scope, no location specified (defaults to global):
-            #       `projects/`<var>PROJECT_ID</var>
+            #       `projects/{project_id}`
             #
             #     The following example `parent` string specifies a parent project with the
             #     identifier `example-project`, and specifies the `europe-west3` location
@@ -641,9 +656,9 @@ module Google
             #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
             #
             #     + Projects scope, location specified:
-            #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+            #       `projects/{project_id}/locations/{location_id}`
             #     + Projects scope, no location specified (defaults to global):
-            #       `projects/`<var>PROJECT_ID</var>
+            #       `projects/{project_id}`
             #
             #     The following example `parent` string specifies a parent project with the
             #     identifier `example-project`, and specifies the `europe-west3` location
@@ -776,9 +791,9 @@ module Google
             #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
             #
             #     + Projects scope, location specified:
-            #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+            #       `projects/{project_id}/locations/{location_id}`
             #     + Projects scope, no location specified (defaults to global):
-            #       `projects/`<var>PROJECT_ID</var>
+            #       `projects/{project_id}`
             #
             #     The following example `parent` string specifies a parent project with the
             #     identifier `example-project`, and specifies the `europe-west3` location
@@ -908,7 +923,7 @@ module Google
             #
             #     The format of this value is as follows:
             #
-            #         locations/<var>LOCATION_ID</var>
+            #         `locations/{location_id}`
             #   @param language_code [::String]
             #     BCP-47 language code for localized infoType friendly
             #     names. If omitted, or if localized strings are not available,
@@ -1006,13 +1021,13 @@ module Google
             #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
             #
             #     + Projects scope, location specified:
-            #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+            #       `projects/{project_id}/locations/{location_id}`
             #     + Projects scope, no location specified (defaults to global):
-            #       `projects/`<var>PROJECT_ID</var>
+            #       `projects/{project_id}`
             #     + Organizations scope, location specified:
-            #       `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
+            #       `organizations/{org_id}/locations/{location_id}`
             #     + Organizations scope, no location specified (defaults to global):
-            #       `organizations/`<var>ORG_ID</var>
+            #       `organizations/{org_id}`
             #
             #     The following example `parent` string specifies a parent project with the
             #     identifier `example-project`, and specifies the `europe-west3` location
@@ -1309,13 +1324,13 @@ module Google
             #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
             #
             #     + Projects scope, location specified:
-            #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+            #       `projects/{project_id}/locations/{location_id}`
             #     + Projects scope, no location specified (defaults to global):
-            #       `projects/`<var>PROJECT_ID</var>
+            #       `projects/{project_id}`
             #     + Organizations scope, location specified:
-            #       `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
+            #       `organizations/{org_id}/locations/{location_id}`
             #     + Organizations scope, no location specified (defaults to global):
-            #       `organizations/`<var>ORG_ID</var>
+            #       `organizations/{org_id}`
             #
             #     The following example `parent` string specifies a parent project with the
             #     identifier `example-project`, and specifies the `europe-west3` location
@@ -1536,13 +1551,13 @@ module Google
             #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
             #
             #     + Projects scope, location specified:
-            #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+            #       `projects/{project_id}/locations/{location_id}`
             #     + Projects scope, no location specified (defaults to global):
-            #       `projects/`<var>PROJECT_ID</var>
+            #       `projects/{project_id}`
             #     + Organizations scope, location specified:
-            #       `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
+            #       `organizations/{org_id}/locations/{location_id}`
             #     + Organizations scope, no location specified (defaults to global):
-            #       `organizations/`<var>ORG_ID</var>
+            #       `organizations/{org_id}`
             #
             #     The following example `parent` string specifies a parent project with the
             #     identifier `example-project`, and specifies the `europe-west3` location
@@ -1840,13 +1855,13 @@ module Google
             #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
             #
             #     + Projects scope, location specified:
-            #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+            #       `projects/{project_id}/locations/{location_id}`
             #     + Projects scope, no location specified (defaults to global):
-            #       `projects/`<var>PROJECT_ID</var>
+            #       `projects/{project_id}`
             #     + Organizations scope, location specified:
-            #       `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
+            #       `organizations/{org_id}/locations/{location_id}`
             #     + Organizations scope, no location specified (defaults to global):
-            #       `organizations/`<var>ORG_ID</var>
+            #       `organizations/{org_id}`
             #
             #     The following example `parent` string specifies a parent project with the
             #     identifier `example-project`, and specifies the `europe-west3` location
@@ -2068,9 +2083,9 @@ module Google
             #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
             #
             #     + Projects scope, location specified:
-            #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+            #       `projects/{project_id}/locations/{location_id}`
             #     + Projects scope, no location specified (defaults to global):
-            #       `projects/`<var>PROJECT_ID</var>
+            #       `projects/{project_id}`
             #
             #     The following example `parent` string specifies a parent project with the
             #     identifier `example-project`, and specifies the `europe-west3` location
@@ -2456,9 +2471,9 @@ module Google
             #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
             #
             #     + Projects scope, location specified:
-            #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+            #       `projects/{project_id}/locations/{location_id}`
             #     + Projects scope, no location specified (defaults to global):
-            #       `projects/`<var>PROJECT_ID</var>
+            #       `projects/{project_id}`
             #
             #     The following example `parent` string specifies a parent project with the
             #     identifier `example-project`, and specifies the `europe-west3` location
@@ -2790,9 +2805,9 @@ module Google
             #     (project or organization):
             #
             #     + Projects scope:
-            #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+            #       `projects/{project_id}/locations/{location_id}`
             #     + Organizations scope:
-            #       `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
+            #       `organizations/{org_id}/locations/{location_id}`
             #
             #     The following example `parent` string specifies a parent project with the
             #     identifier `example-project`, and specifies the `europe-west3` location
@@ -3072,7 +3087,7 @@ module Google
             #     Required. Parent resource name.
             #
             #     The format of this value is as follows:
-            #     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+            #     `projects/{project_id}/locations/{location_id}`
             #
             #     The following example `parent` string specifies a parent project with the
             #     identifier `example-project`, and specifies the `europe-west3` location
@@ -3291,9 +3306,9 @@ module Google
             #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
             #
             #     + Projects scope, location specified:
-            #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+            #       `projects/{project_id}/locations/{location_id}`
             #     + Projects scope, no location specified (defaults to global):
-            #       `projects/`<var>PROJECT_ID</var>
+            #       `projects/{project_id}`
             #
             #     The following example `parent` string specifies a parent project with the
             #     identifier `example-project`, and specifies the `europe-west3` location
@@ -3409,9 +3424,9 @@ module Google
             #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
             #
             #     + Projects scope, location specified:
-            #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+            #       `projects/{project_id}/locations/{location_id}`
             #     + Projects scope, no location specified (defaults to global):
-            #       `projects/`<var>PROJECT_ID</var>
+            #       `projects/{project_id}`
             #
             #     The following example `parent` string specifies a parent project with the
             #     identifier `example-project`, and specifies the `europe-west3` location
@@ -3846,13 +3861,13 @@ module Google
             #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
             #
             #     + Projects scope, location specified:
-            #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+            #       `projects/{project_id}/locations/{location_id}`
             #     + Projects scope, no location specified (defaults to global):
-            #       `projects/`<var>PROJECT_ID</var>
+            #       `projects/{project_id}`
             #     + Organizations scope, location specified:
-            #       `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
+            #       `organizations/{org_id}/locations/{location_id}`
             #     + Organizations scope, no location specified (defaults to global):
-            #       `organizations/`<var>ORG_ID</var>
+            #       `organizations/{org_id}`
             #
             #     The following example `parent` string specifies a parent project with the
             #     identifier `example-project`, and specifies the `europe-west3` location
@@ -4152,9 +4167,9 @@ module Google
             #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
             #
             #     + Projects scope, location specified:
-            #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+            #       `projects/{project_id}/locations/{location_id}`
             #     + Projects scope, no location specified (defaults to global):
-            #       `projects/`<var>PROJECT_ID</var>
+            #       `projects/{project_id}`
             #
             #     The following example `parent` string specifies a parent project with the
             #     identifier `example-project`, and specifies the `europe-west3` location
@@ -5646,8 +5661,15 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. Parent resource name in the format:
-            #     `projects/{project}/locations/{location}`.
+            #     Required. Parent resource name.
+            #
+            #     The format of this value varies depending on the scope of the request
+            #     (project or organization):
+            #
+            #     + Projects scope:
+            #       `projects/{project_id}/locations/{location_id}`
+            #     + Organizations scope:
+            #       `organizations/{org_id}/locations/{location_id}`
             #   @param connection [::Google::Cloud::Dlp::V2::Connection, ::Hash]
             #     Required. The connection resource.
             #
@@ -5804,7 +5826,8 @@ module Google
             end
 
             ##
-            # Lists Connections in a parent.
+            # Lists Connections in a parent. Use SearchConnections to see all connections
+            # within an organization.
             #
             # @overload list_connections(request, options = nil)
             #   Pass arguments to `list_connections` via a request object, either of type
@@ -5822,8 +5845,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. Parent name, for example:
-            #     `projects/project-id/locations/global`.
+            #     Required. Resource name of the organization or project, for
+            #     example, `organizations/433245324/locations/europe` or
+            #     `projects/project-id/locations/asia`.
             #   @param page_size [::Integer]
             #     Optional. Number of results per page, max 1000.
             #   @param page_token [::String]
@@ -5921,8 +5945,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. Parent name, typically an organization, without location.
-            #     For example: `organizations/12345678`.
+            #     Required. Resource name of the organization or project with a wildcard
+            #     location, for example, `organizations/433245324/locations/-` or
+            #     `projects/project-id/locations/-`.
             #   @param page_size [::Integer]
             #     Optional. Number of results per page, max 1000.
             #   @param page_token [::String]

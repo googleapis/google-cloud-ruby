@@ -2313,7 +2313,7 @@ module Google
                                                           uri_template: "/v2/{parent}/inspectTemplates",
                                                           body: "*",
                                                           matches: [
-                                                            ["parent", %r{^organizations/[^/]+/?$}, false]
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
                                                           ]
                                                         )
                                                         .with_bindings(
@@ -2337,7 +2337,7 @@ module Google
                                                           uri_template: "/v2/{parent}/inspectTemplates",
                                                           body: "*",
                                                           matches: [
-                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
+                                                            ["parent", %r{^organizations/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -2359,7 +2359,7 @@ module Google
                                                           uri_template: "/v2/{name}",
                                                           body: "*",
                                                           matches: [
-                                                            ["name", %r{^organizations/[^/]+/inspectTemplates/[^/]+/?$}, false]
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/inspectTemplates/[^/]+/?$}, false]
                                                           ]
                                                         )
                                                         .with_bindings(
@@ -2383,7 +2383,7 @@ module Google
                                                           uri_template: "/v2/{name}",
                                                           body: "*",
                                                           matches: [
-                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/inspectTemplates/[^/]+/?$}, false]
+                                                            ["name", %r{^organizations/[^/]+/inspectTemplates/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -2404,7 +2404,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/v2/{name}",
                                                           matches: [
-                                                            ["name", %r{^organizations/[^/]+/inspectTemplates/[^/]+/?$}, false]
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/inspectTemplates/[^/]+/?$}, false]
                                                           ]
                                                         )
                                                         .with_bindings(
@@ -2425,7 +2425,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/v2/{name}",
                                                           matches: [
-                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/inspectTemplates/[^/]+/?$}, false]
+                                                            ["name", %r{^organizations/[^/]+/inspectTemplates/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -2446,7 +2446,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/v2/{parent}/inspectTemplates",
                                                           matches: [
-                                                            ["parent", %r{^organizations/[^/]+/?$}, false]
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
                                                           ]
                                                         )
                                                         .with_bindings(
@@ -2467,7 +2467,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/v2/{parent}/inspectTemplates",
                                                           matches: [
-                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
+                                                            ["parent", %r{^organizations/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -2488,7 +2488,7 @@ module Google
                                                           uri_method: :delete,
                                                           uri_template: "/v2/{name}",
                                                           matches: [
-                                                            ["name", %r{^organizations/[^/]+/inspectTemplates/[^/]+/?$}, false]
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/inspectTemplates/[^/]+/?$}, false]
                                                           ]
                                                         )
                                                         .with_bindings(
@@ -2509,7 +2509,7 @@ module Google
                                                           uri_method: :delete,
                                                           uri_template: "/v2/{name}",
                                                           matches: [
-                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/inspectTemplates/[^/]+/?$}, false]
+                                                            ["name", %r{^organizations/[^/]+/inspectTemplates/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -3822,6 +3822,14 @@ module Google
                                                             ["parent", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
                                                           ]
                                                         )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v2/{parent}/connections",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["parent", %r{^organizations/[^/]+/locations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
                 transcoder.transcode request_pb
               end
 
@@ -3843,6 +3851,13 @@ module Google
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/connections/[^/]+/?$}, false]
                                                           ]
                                                         )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v2/{name}",
+                                                          matches: [
+                                                            ["name", %r{^organizations/[^/]+/locations/[^/]+/connections/[^/]+/?$}, false]
+                                                          ]
+                                                        )
                 transcoder.transcode request_pb
               end
 
@@ -3862,6 +3877,13 @@ module Google
                                                           uri_template: "/v2/{parent}/connections",
                                                           matches: [
                                                             ["parent", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v2/{parent}/connections",
+                                                          matches: [
+                                                            ["parent", %r{^organizations/[^/]+/locations/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -3913,6 +3935,13 @@ module Google
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/connections/[^/]+/?$}, false]
                                                           ]
                                                         )
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/v2/{name}",
+                                                          matches: [
+                                                            ["name", %r{^organizations/[^/]+/locations/[^/]+/connections/[^/]+/?$}, false]
+                                                          ]
+                                                        )
                 transcoder.transcode request_pb
               end
 
@@ -3933,6 +3962,14 @@ module Google
                                                           body: "*",
                                                           matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/connections/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v2/{name}",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["name", %r{^organizations/[^/]+/locations/[^/]+/connections/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
