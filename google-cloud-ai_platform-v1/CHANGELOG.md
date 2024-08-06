@@ -1,5 +1,15 @@
 # Changelog
 
+### 0.47.0 (2024-08-06)
+
+#### Features
+
+* Add reservation affinity proto ([#26608](https://github.com/googleapis/google-cloud-ruby/issues/26608)) 
+* Add spot field to Vertex Prediction's Dedicated Resources and Custom Training's Scheduling Strategy 
+#### Documentation
+
+* Update the description for the deprecated GPU (K80) 
+
 ### 0.46.0 (2024-08-02)
 
 #### Features
