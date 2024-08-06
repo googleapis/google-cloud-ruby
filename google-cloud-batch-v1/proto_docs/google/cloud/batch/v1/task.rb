@@ -74,7 +74,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Status event
+        # Status event.
         # @!attribute [rw] type
         #   @return [::String]
         #     Type of the event.
@@ -86,10 +86,13 @@ module Google
         #     The time this event occurred.
         # @!attribute [rw] task_execution
         #   @return [::Google::Cloud::Batch::V1::TaskExecution]
-        #     Task Execution
+        #     Task Execution.
+        #     This field is only defined for task-level status events where the task
+        #     fails.
         # @!attribute [rw] task_state
         #   @return [::Google::Cloud::Batch::V1::TaskStatus::State]
-        #     Task State
+        #     Task State.
+        #     This field is only defined for task-level status events.
         class StatusEvent
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -115,10 +118,10 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Status of a task
+        # Status of a task.
         # @!attribute [rw] state
         #   @return [::Google::Cloud::Batch::V1::TaskStatus::State]
-        #     Task state
+        #     Task state.
         # @!attribute [rw] status_events
         #   @return [::Array<::Google::Cloud::Batch::V1::StatusEvent>]
         #     Detailed info about why the state is reached.
