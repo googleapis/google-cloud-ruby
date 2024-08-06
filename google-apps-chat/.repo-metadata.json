@@ -8,7 +8,7 @@
     "name": "chat",
     "name_pretty": "Google Chat API",
     "product_documentation": "https://developers.google.com/chat/concepts",
-    "release_level": "preview",
+    "release_level": "stable",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "The Google Chat API lets you build Chat apps to integrate your services with Google Chat and manage Chat resources such as spaces, members, and messages.",
