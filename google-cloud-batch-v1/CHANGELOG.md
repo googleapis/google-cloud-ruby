@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.18.1 (2024-08-06)
+
+#### Documentation
+
+* Refine usage scope for fields `task_execution` and `task_state` in StatusEvent ([#26607](https://github.com/googleapis/google-cloud-ruby/issues/26607)) 
+
 ### 0.18.0 (2024-06-26)
 
 #### Features
