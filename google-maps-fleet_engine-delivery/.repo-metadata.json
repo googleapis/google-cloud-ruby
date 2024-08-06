@@ -8,7 +8,7 @@
     "name": "fleetengine-delivery",
     "name_pretty": "Last Mile Fleet Solution Delivery API",
     "product_documentation": "https://developers.google.com/maps/documentation/transportation-logistics/mobility",
-    "release_level": "preview",
+    "release_level": "stable",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "Enables Fleet Engine for access to the On Demand Rides and Deliveries and Last Mile Fleet Solution APIs. Customer's use of Google Maps Content in the Cloud Logging Services is subject to the Google Maps Platform Terms of Service located at https://cloud.google.com/maps-platform/terms.",
