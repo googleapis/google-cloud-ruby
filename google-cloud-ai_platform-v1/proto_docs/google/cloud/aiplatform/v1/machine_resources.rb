@@ -49,6 +49,10 @@ module Google
         #   @return [::String]
         #     Immutable. The topology of the TPUs. Corresponds to the TPU topologies
         #     available from GKE. (Example: tpu_topology: "2x2x1").
+        # @!attribute [rw] reservation_affinity
+        #   @return [::Google::Cloud::AIPlatform::V1::ReservationAffinity]
+        #     Optional. Immutable. Configuration controlling how this resource pool
+        #     consumes reservation.
         class MachineSpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -110,6 +114,10 @@ module Google
         #     to `aiplatform.googleapis.com/prediction/online/cpu/utilization` and
         #     {::Google::Cloud::AIPlatform::V1::AutoscalingMetricSpec#target autoscaling_metric_specs.target}
         #     to `80`.
+        # @!attribute [rw] spot
+        #   @return [::Boolean]
+        #     Optional. If true, schedule the deployment workload on [spot
+        #     VMs](https://cloud.google.com/kubernetes-engine/docs/concepts/spot-vms).
         class DedicatedResources
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

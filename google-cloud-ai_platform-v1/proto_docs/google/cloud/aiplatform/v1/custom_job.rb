@@ -357,6 +357,12 @@ module Google
 
             # Low cost by making potential use of spot resources.
             LOW_COST = 2
+
+            # Standard provisioning strategy uses regular on-demand resources.
+            STANDARD = 3
+
+            # Spot provisioning strategy uses spot resources.
+            SPOT = 4
           end
         end
       end
