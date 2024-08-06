@@ -1,5 +1,11 @@
 # Release History
 
+### 1.2.0 (2024-08-06)
+
+#### Features
+
+* Support tags in profiled resources ([#26609](https://github.com/googleapis/google-cloud-ruby/issues/26609)) 
+
 ### 1.1.0 (2024-08-05)
 
 #### Features
