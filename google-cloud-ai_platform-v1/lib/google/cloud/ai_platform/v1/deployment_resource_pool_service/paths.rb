@@ -74,6 +74,25 @@ module Google
               "projects/#{project}"
             end
 
+            ##
+            # Create a fully-qualified Reservation resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project_id_or_number}/zones/{zone}/reservations/{reservation_name}`
+            #
+            # @param project_id_or_number [String]
+            # @param zone [String]
+            # @param reservation_name [String]
+            #
+            # @return [::String]
+            def reservation_path project_id_or_number:, zone:, reservation_name:
+              raise ::ArgumentError, "project_id_or_number cannot contain /" if project_id_or_number.to_s.include? "/"
+              raise ::ArgumentError, "zone cannot contain /" if zone.to_s.include? "/"
+
+              "projects/#{project_id_or_number}/zones/#{zone}/reservations/#{reservation_name}"
+            end
+
             extend self
           end
         end
