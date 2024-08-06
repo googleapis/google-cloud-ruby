@@ -4057,6 +4057,9 @@ module Google
         # @!attribute [rw] pub_sub_notification
         #   @return [::Google::Cloud::Dlp::V2::DataProfileAction::PubSubNotification]
         #     Publish a message into the Pub/Sub topic.
+        # @!attribute [rw] tag_resources
+        #   @return [::Google::Cloud::Dlp::V2::DataProfileAction::TagResources]
+        #     Tags the profiled resources with the specified tag values.
         class DataProfileAction
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -4116,6 +4119,63 @@ module Google
 
               # The full file store data profile.
               FILE_STORE_PROFILE = 3
+            end
+          end
+
+          # If set, attaches the [tags]
+          # (https://cloud.google.com/resource-manager/docs/tags/tags-overview)
+          # provided to profiled resources. Tags support [access
+          # control](https://cloud.google.com/iam/docs/tags-access-control). You can
+          # conditionally grant or deny access to a resource based on whether the
+          # resource has a specific tag.
+          # @!attribute [rw] tag_conditions
+          #   @return [::Array<::Google::Cloud::Dlp::V2::DataProfileAction::TagResources::TagCondition>]
+          #     The tags to associate with different conditions.
+          # @!attribute [rw] profile_generations_to_tag
+          #   @return [::Array<::Google::Cloud::Dlp::V2::ProfileGeneration>]
+          #     The profile generations for which the tag should be attached to
+          #     resources. If you attach a tag to only new profiles, then if the
+          #     sensitivity score of a profile subsequently changes, its tag doesn't
+          #     change. By default, this field includes only new profiles. To include
+          #     both new and updated profiles for tagging, this field should explicitly
+          #     include both `PROFILE_GENERATION_NEW` and `PROFILE_GENERATION_UPDATE`.
+          # @!attribute [rw] lower_data_risk_to_low
+          #   @return [::Boolean]
+          #     Whether applying a tag to a resource should lower the risk of the profile
+          #     for that resource. For example, in conjunction with an [IAM deny
+          #     policy](https://cloud.google.com/iam/docs/deny-overview), you can deny
+          #     all principals a permission if a tag value is present, mitigating the
+          #     risk of the resource. This also lowers the data risk of resources at the
+          #     lower levels of the resource hierarchy. For example, reducing the data
+          #     risk of a table data profile also reduces the data risk of the
+          #     constituent column data profiles.
+          class TagResources
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The tag to attach to profiles matching the condition. At most one
+            # `TagCondition` can be specified per sensitivity level.
+            # @!attribute [rw] tag
+            #   @return [::Google::Cloud::Dlp::V2::DataProfileAction::TagResources::TagValue]
+            #     The tag value to attach to resources.
+            # @!attribute [rw] sensitivity_score
+            #   @return [::Google::Cloud::Dlp::V2::SensitivityScore]
+            #     Conditions attaching the tag to a resource on its profile having this
+            #     sensitivity score.
+            class TagCondition
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # A value of a tag.
+            # @!attribute [rw] namespaced_value
+            #   @return [::String]
+            #     The namespaced name for the tag value to attach to resources. Must be
+            #     in the format `{parent_id}/{tag_key_short_name}/{short_name}`, for
+            #     example, "123456/environment/prod".
+            class TagValue
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
             end
           end
 
@@ -7092,6 +7152,18 @@ module Google
 
           # Redact image
           REDACT_IMAGE = 14
+        end
+
+        # Whether a profile being created is the first generation or an update.
+        module ProfileGeneration
+          # Unused.
+          PROFILE_GENERATION_UNSPECIFIED = 0
+
+          # The profile is the first profile for the resource.
+          PROFILE_GENERATION_NEW = 1
+
+          # The profile is an update to a previous profile.
+          PROFILE_GENERATION_UPDATE = 2
         end
 
         # Over time new types may be added. Currently VIEW, MATERIALIZED_VIEW,
