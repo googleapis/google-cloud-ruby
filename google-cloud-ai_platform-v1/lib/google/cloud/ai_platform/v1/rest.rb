@@ -19,6 +19,7 @@
 require "google/cloud/ai_platform/v1/dataset_service/rest"
 require "google/cloud/ai_platform/v1/deployment_resource_pool_service/rest"
 require "google/cloud/ai_platform/v1/endpoint_service/rest"
+require "google/cloud/ai_platform/v1/evaluation_service/rest"
 require "google/cloud/ai_platform/v1/feature_online_store_admin_service/rest"
 require "google/cloud/ai_platform/v1/featurestore_online_serving_service/rest"
 require "google/cloud/ai_platform/v1/feature_online_store_service/rest"

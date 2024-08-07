@@ -197,6 +197,20 @@
         }
       }
     },
+    "EvaluationService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::AIPlatform::V1::EvaluationService::Client",
+          "rpcs": {
+            "EvaluateInstances": {
+              "methods": [
+                "evaluate_instances"
+              ]
+            }
+          }
+        }
+      }
+    },
     "FeatureOnlineStoreAdminService": {
       "clients": {
         "grpc": {

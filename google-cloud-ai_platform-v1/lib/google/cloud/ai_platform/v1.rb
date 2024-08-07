@@ -19,6 +19,7 @@
 require "google/cloud/ai_platform/v1/dataset_service"
 require "google/cloud/ai_platform/v1/deployment_resource_pool_service"
 require "google/cloud/ai_platform/v1/endpoint_service"
+require "google/cloud/ai_platform/v1/evaluation_service"
 require "google/cloud/ai_platform/v1/feature_online_store_admin_service"
 require "google/cloud/ai_platform/v1/featurestore_online_serving_service"
 require "google/cloud/ai_platform/v1/feature_online_store_service"
