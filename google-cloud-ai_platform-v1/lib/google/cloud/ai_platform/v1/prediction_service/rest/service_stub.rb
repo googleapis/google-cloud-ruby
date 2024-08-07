@@ -601,6 +601,22 @@ module Google
                                                             ["model", %r{^projects/[^/]+/locations/[^/]+/publishers/[^/]+/models/[^/]+/?$}, false]
                                                           ]
                                                         )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{model}:generateContent",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["model", %r{^endpoints/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{model}:generateContent",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["model", %r{^publishers/[^/]+/models/[^/]+/?$}, false]
+                                                          ]
+                                                        )
                 transcoder.transcode request_pb
               end
 
@@ -629,6 +645,22 @@ module Google
                                                           body: "*",
                                                           matches: [
                                                             ["model", %r{^projects/[^/]+/locations/[^/]+/publishers/[^/]+/models/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{model}:streamGenerateContent",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["model", %r{^endpoints/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{model}:streamGenerateContent",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["model", %r{^publishers/[^/]+/models/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

@@ -164,6 +164,22 @@ module Google
                                                             ["endpoint", %r{^projects/[^/]+/locations/[^/]+/publishers/[^/]+/models/[^/]+/?$}, false]
                                                           ]
                                                         )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{endpoint}:countTokens",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["endpoint", %r{^endpoints/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{endpoint}:countTokens",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["endpoint", %r{^publishers/[^/]+/models/[^/]+/?$}, false]
+                                                          ]
+                                                        )
                 transcoder.transcode request_pb
               end
 
@@ -192,6 +208,22 @@ module Google
                                                           body: "*",
                                                           matches: [
                                                             ["endpoint", %r{^projects/[^/]+/locations/[^/]+/publishers/[^/]+/models/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{endpoint}:computeTokens",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["endpoint", %r{^endpoints/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{endpoint}:computeTokens",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["endpoint", %r{^publishers/[^/]+/models/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

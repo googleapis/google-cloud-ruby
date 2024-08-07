@@ -802,6 +802,12 @@ module Google
                                                             ["parent", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
                                                           ]
                                                         )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/datasets",
+                                                          body: "dataset",
+                                                          matches: []
+                                                        )
                 transcoder.transcode request_pb
               end
 
@@ -821,6 +827,13 @@ module Google
                                                           uri_template: "/v1/{name}",
                                                           matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/datasets/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^datasets/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -845,6 +858,14 @@ module Google
                                                             ["dataset.name", %r{^projects/[^/]+/locations/[^/]+/datasets/[^/]+/?$}, false]
                                                           ]
                                                         )
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v1/{dataset.name}",
+                                                          body: "dataset",
+                                                          matches: [
+                                                            ["dataset.name", %r{^datasets/[^/]+/?$}, false]
+                                                          ]
+                                                        )
                 transcoder.transcode request_pb
               end
 
@@ -866,6 +887,11 @@ module Google
                                                             ["parent", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
                                                           ]
                                                         )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/datasets",
+                                                          matches: []
+                                                        )
                 transcoder.transcode request_pb
               end
 
@@ -885,6 +911,13 @@ module Google
                                                           uri_template: "/v1/{name}",
                                                           matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/datasets/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^datasets/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -953,6 +986,14 @@ module Google
                                                             ["parent", %r{^projects/[^/]+/locations/[^/]+/datasets/[^/]+/?$}, false]
                                                           ]
                                                         )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{parent}/datasetVersions",
+                                                          body: "dataset_version",
+                                                          matches: [
+                                                            ["parent", %r{^datasets/[^/]+/?$}, false]
+                                                          ]
+                                                        )
                 transcoder.transcode request_pb
               end
 
@@ -973,6 +1014,14 @@ module Google
                                                           body: "dataset_version",
                                                           matches: [
                                                             ["dataset_version.name", %r{^projects/[^/]+/locations/[^/]+/datasets/[^/]+/datasetVersions/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v1/{dataset_version.name}",
+                                                          body: "dataset_version",
+                                                          matches: [
+                                                            ["dataset_version.name", %r{^datasets/[^/]+/datasetVersions/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -996,6 +1045,13 @@ module Google
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/datasets/[^/]+/datasetVersions/[^/]+/?$}, false]
                                                           ]
                                                         )
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^datasets/[^/]+/datasetVersions/[^/]+/?$}, false]
+                                                          ]
+                                                        )
                 transcoder.transcode request_pb
               end
 
@@ -1015,6 +1071,13 @@ module Google
                                                           uri_template: "/v1/{name}",
                                                           matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/datasets/[^/]+/datasetVersions/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^datasets/[^/]+/datasetVersions/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -1038,6 +1101,13 @@ module Google
                                                             ["parent", %r{^projects/[^/]+/locations/[^/]+/datasets/[^/]+/?$}, false]
                                                           ]
                                                         )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/datasetVersions",
+                                                          matches: [
+                                                            ["parent", %r{^datasets/[^/]+/?$}, false]
+                                                          ]
+                                                        )
                 transcoder.transcode request_pb
               end
 
@@ -1057,6 +1127,13 @@ module Google
                                                           uri_template: "/v1/{name}:restore",
                                                           matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/datasets/[^/]+/datasetVersions/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}:restore",
+                                                          matches: [
+                                                            ["name", %r{^datasets/[^/]+/datasetVersions/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

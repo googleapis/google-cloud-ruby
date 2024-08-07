@@ -567,7 +567,9 @@ module Google
           # Usage metadata about response(s).
           # @!attribute [rw] prompt_token_count
           #   @return [::Integer]
-          #     Number of tokens in the request.
+          #     Number of tokens in the request. When `cached_content` is set, this is
+          #     still the total effective prompt size meaning this includes the number of
+          #     tokens in the cached content.
           # @!attribute [rw] candidates_token_count
           #   @return [::Integer]
           #     Number of tokens in the response(s).
