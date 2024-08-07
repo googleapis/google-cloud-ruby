@@ -1332,6 +1332,46 @@
       ]
     },
     {
+      "region_tag": "aiplatform_v1_generated_EvaluationService_EvaluateInstances_sync",
+      "title": "Snippet for the evaluate_instances call in the EvaluationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::EvaluationService::Client#evaluate_instances.",
+      "file": "evaluation_service/evaluate_instances.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "evaluate_instances",
+        "full_name": "::Google::Cloud::AIPlatform::V1::EvaluationService::Client#evaluate_instances",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::EvaluateInstancesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::EvaluateInstancesResponse",
+        "client": {
+          "short_name": "EvaluationService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::EvaluationService::Client"
+        },
+        "method": {
+          "short_name": "EvaluateInstances",
+          "full_name": "google.cloud.aiplatform.v1.EvaluationService.EvaluateInstances",
+          "service": {
+            "short_name": "EvaluationService",
+            "full_name": "google.cloud.aiplatform.v1.EvaluationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "aiplatform_v1_generated_FeatureOnlineStoreAdminService_CreateFeatureOnlineStore_sync",
       "title": "Snippet for the create_feature_online_store call in the FeatureOnlineStoreAdminService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client#create_feature_online_store.",
