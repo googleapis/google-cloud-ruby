@@ -2,7 +2,6 @@
 
 The Network Management API provides a collection of network performance monitoring and diagnostic capabilities.
 
-The Network Management API provides a collection of network performance monitoring and diagnostic capabilities.
 
 https://github.com/googleapis/google-cloud-ruby
 
