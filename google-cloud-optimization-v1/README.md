@@ -2,7 +2,6 @@
 
 Cloud Optimization API provides a portfolio of solvers to address common optimization use cases starting with optimal route planning for vehicle fleets.
 
-Cloud Optimization API provides a portfolio of solvers to address common optimization use cases starting with optimal route planning for vehicle fleets.
 
 https://github.com/googleapis/google-cloud-ruby
 
