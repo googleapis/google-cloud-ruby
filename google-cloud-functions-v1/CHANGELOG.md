@@ -1,5 +1,19 @@
 # Release History
 
+### 1.1.0 (2024-08-08)
+
+#### Features
+
+* Added `build_service_account` field to CloudFunction ([#26620](https://github.com/googleapis/google-cloud-ruby/issues/26620)) 
+#### Documentation
+
+* A comment for field `automatic_update_policy` in message `.google.cloud.functions.v1.CloudFunction` is changed 
+* A comment for field `docker_repository` in message `.google.cloud.functions.v1.CloudFunction` is changed 
+* A comment for field `on_deploy_update_policy` in message `.google.cloud.functions.v1.CloudFunction` is changed 
+* A comment for field `runtime_version` in message `.google.cloud.functions.v1.CloudFunction` is changed 
+* A comment for field `url` in message `.google.cloud.functions.v1.HttpsTrigger` is changed 
+* A comment for field `url` in message `.google.cloud.functions.v1.SourceRepository` is changed 
+
 ### 1.0.0 (2024-07-08)
 
 #### Features
