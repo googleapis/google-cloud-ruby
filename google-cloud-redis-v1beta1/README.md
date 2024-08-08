@@ -2,7 +2,6 @@
 
 Creates and manages Redis instances on the Google Cloud Platform.
 
-Creates and manages Redis instances on the Google Cloud Platform.
 
 https://github.com/googleapis/google-cloud-ruby
 
