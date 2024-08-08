@@ -1,5 +1,11 @@
 # Release History
 
+### 0.6.2 (2024-08-08)
+
+#### Documentation
+
+* Formatting updates to README.md ([#26630](https://github.com/googleapis/google-cloud-ruby/issues/26630)) 
+
 ### 0.6.1 (2024-07-22)
 
 #### Documentation
