@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.48.0 (2024-08-08)
+
+#### Features
+
+* Add evaluation service proto to v1 
+* Allow v1 API calls for some dataset_service, llm_utility_service, and prediction_service APIs without project and location 
+
 ### 0.47.0 (2024-08-06)
 
 #### Features
