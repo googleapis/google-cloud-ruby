@@ -1,5 +1,12 @@
 # Release History
 
+### 1.1.0 (2024-08-08)
+
+#### Features
+
+* Expose the `FindNearest.distance_result_field` parameter ([#26619](https://github.com/googleapis/google-cloud-ruby/issues/26619)) 
+* Expose the `FindNearest.distance_threshold` parameter 
+
 ### 1.0.0 (2024-07-09)
 
 #### Features
