@@ -2,7 +2,6 @@
 
 Allows administrators to create managed developer environments in the cloud.
 
-Allows administrators to create managed developer environments in the cloud.
 
 https://github.com/googleapis/google-cloud-ruby
 
