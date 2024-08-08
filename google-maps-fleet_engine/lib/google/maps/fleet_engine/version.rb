@@ -20,7 +20,7 @@
 module Google
   module Maps
     module FleetEngine
-      VERSION = "1.0.0"
+      VERSION = "1.0.1"
     end
   end
 end
