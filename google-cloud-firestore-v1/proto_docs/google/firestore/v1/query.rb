@@ -389,6 +389,21 @@ module Google
           #   @return [::Google::Protobuf::Int32Value]
           #     Required. The number of nearest neighbors to return. Must be a positive
           #     integer of no more than 1000.
+          # @!attribute [rw] distance_result_field
+          #   @return [::String]
+          #     Optional. Optional name of the field to output the result of the vector
+          #     distance calculation. Must conform to [document field
+          #     name][google.firestore.v1.Document.fields] limitations.
+          # @!attribute [rw] distance_threshold
+          #   @return [::Google::Protobuf::DoubleValue]
+          #     Optional. Option to specify a threshold for which no less similar
+          #     documents will be returned. The behavior of the specified
+          #     `distance_measure` will affect the meaning of the distance threshold.
+          #     Since DOT_PRODUCT distances increase when the vectors are more similar,
+          #     the comparison is inverted.
+          #
+          #     For EUCLIDEAN, COSINE: WHERE distance <= distance_threshold
+          #     For DOT_PRODUCT:       WHERE distance >= distance_threshold
           class FindNearest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
