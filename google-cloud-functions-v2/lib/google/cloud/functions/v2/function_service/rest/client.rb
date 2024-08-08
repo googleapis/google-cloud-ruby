@@ -220,13 +220,20 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload get_function(name: nil)
+              # @overload get_function(name: nil, revision: nil)
               #   Pass arguments to `get_function` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
               #     Required. The name of the function which details should be obtained.
+              #   @param revision [::String]
+              #     Optional. The version of the 1st gen function whose details should
+              #     be obtained. The version of a 1st gen function is an integer that starts
+              #     from 1 and gets incremented on redeployments. GCF may keep historical
+              #     configs for old versions of 1st gen function. This field can be specified
+              #     to fetch the historical configs. This field is valid only for GCF 1st gen
+              #     function.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Functions::V2::Function]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -511,8 +518,7 @@ module Google
               #     Required. New version of the function.
               #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
               #     The list of fields to be updated.
-              #     If no field mask is provided, all provided fields in the request will be
-              #     updated.
+              #     If no field mask is provided, all fields will be updated.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -686,11 +692,11 @@ module Google
               #   attached, the identity from the credentials would be used, but that
               #   identity does not have permissions to upload files to the URL.
               #
-              # When making a HTTP PUT request, these two headers need to be specified:
+              # When making a HTTP PUT request, specify this header:
               #
               # * `content-type: application/zip`
               #
-              # And this header SHOULD NOT be specified:
+              # Do not specify this header:
               #
               # * `Authorization: Bearer YOUR_TOKEN`
               #
@@ -704,7 +710,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload generate_upload_url(parent: nil, kms_key_name: nil)
+              # @overload generate_upload_url(parent: nil, kms_key_name: nil, environment: nil)
               #   Pass arguments to `generate_upload_url` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -728,6 +734,11 @@ module Google
               #     granted the role 'Cloud KMS CryptoKey Encrypter/Decrypter
               #     (roles/cloudkms.cryptoKeyEncrypterDecrypter)' on the
               #     Key/KeyRing/Project/Organization (least access preferred).
+              #   @param environment [::Google::Cloud::Functions::V2::Environment]
+              #     The function environment the generated upload url will be used for.
+              #     The upload url for 2nd Gen functions can also be used for 1st gen
+              #     functions, but not vice versa. If not specified, 2nd generation-style
+              #     upload URLs are generated.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Functions::V2::GenerateUploadUrlResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
