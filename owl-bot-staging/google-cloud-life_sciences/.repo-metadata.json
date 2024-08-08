@@ -1,0 +1,19 @@
+{
+    "api_id": "lifesciences.googleapis.com",
+    "api_shortname": "lifesciences",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-life_sciences/latest",
+    "distribution_name": "google-cloud-life_sciences",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "lifesciences",
+    "name_pretty": "Cloud Life Sciences API",
+    "product_documentation": "https://cloud.google.com/life-sciences/",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Cloud Life Sciences is a suite of services and tools for managing, processing, and transforming life sciences data. It also enables advanced insights and operational workflows using highly scalable and compliant infrastructure.",
+    "ruby-cloud-env-prefix": "LIFE_SCIENCES",
+    "ruby-cloud-product-url": "https://cloud.google.com/life-sciences/",
+    "ruby-cloud-service-override": "WorkflowsServiceV2Beta=WorkflowsService",
+    "library_type": "GAPIC_AUTO"
+}
