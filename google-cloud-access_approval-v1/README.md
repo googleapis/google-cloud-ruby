@@ -2,7 +2,6 @@
 
 An API for controlling access to data by Google personnel.
 
-An API for controlling access to data by Google personnel.
 
 https://github.com/googleapis/google-cloud-ruby
 

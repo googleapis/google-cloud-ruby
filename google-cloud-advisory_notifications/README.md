@@ -2,7 +2,6 @@
 
 An API for accessing Advisory Notifications in Google Cloud.
 
-An API for accessing Advisory Notifications in Google Cloud.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-advisory_notifications-v*`.
@@ -32,7 +31,7 @@ In order to use this library, you first need to go through the following steps:
 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
 1. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
 1. [Enable the API.](https://console.cloud.google.com/apis/library/advisorynotifications.googleapis.com)
-1. {file:AUTHENTICATION.md Set up authentication.}
+1. [Set up authentication.](AUTHENTICATION.md)
 
 ## Supported Ruby Versions
 
