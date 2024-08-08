@@ -1,5 +1,5 @@
 {
-  "google-analytics-admin": "0.5.1",
+  "google-analytics-admin": "0.5.0",
   "google-analytics-admin+FILLER": "0.0.0",
   "google-analytics-admin-v1alpha": "0.30.0",
   "google-analytics-admin-v1alpha+FILLER": "0.0.0",
@@ -639,7 +639,7 @@
   "google-cloud-security_center-v1p1beta1+FILLER": "0.0.0",
   "google-cloud-security_center-v2": "0.4.0",
   "google-cloud-security_center-v2+FILLER": "0.0.0",
-  "google-cloud-security_center_management": "1.0.0",
+  "google-cloud-security_center_management": "1.0.1",
   "google-cloud-security_center_management+FILLER": "0.0.0",
   "google-cloud-security_center_management-v1": "1.0.0",
   "google-cloud-security_center_management-v1+FILLER": "0.0.0",
