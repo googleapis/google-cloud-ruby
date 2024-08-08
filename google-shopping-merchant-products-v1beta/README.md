@@ -2,7 +2,6 @@
 
 Programmatically manage your Merchant Center accounts.
 
-Programmatically manage your Merchant Center accounts.
 
 https://github.com/googleapis/google-cloud-ruby
 
