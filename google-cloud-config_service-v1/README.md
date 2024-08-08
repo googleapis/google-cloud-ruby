@@ -2,7 +2,6 @@
 
 Creates and manages Google Cloud Platform resources and infrastructure.
 
-Creates and manages Google Cloud Platform resources and infrastructure.
 
 https://github.com/googleapis/google-cloud-ruby
 

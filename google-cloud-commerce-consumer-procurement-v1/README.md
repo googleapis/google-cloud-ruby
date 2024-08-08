@@ -2,7 +2,6 @@
 
 Enables consumers to procure products served by Cloud Marketplace platform.
 
-Enables consumers to procure products served by Cloud Marketplace platform.
 
 https://github.com/googleapis/google-cloud-ruby
 

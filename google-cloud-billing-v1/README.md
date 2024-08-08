@@ -2,7 +2,6 @@
 
 Allows developers to manage billing for their Google Cloud Platform projects programmatically.
 
-Allows developers to manage billing for their Google Cloud Platform projects programmatically.
 
 https://github.com/googleapis/google-cloud-ruby
 

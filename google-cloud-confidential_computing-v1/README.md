@@ -2,7 +2,6 @@
 
 Attestation verifier for Confidential Space.
 
-Attestation verifier for Confidential Space.
 
 https://github.com/googleapis/google-cloud-ruby
 
