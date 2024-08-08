@@ -2,7 +2,6 @@
 
 Discovery Engine API.
 
-Discovery Engine API.
 
 https://github.com/googleapis/google-cloud-ruby
 
