@@ -404,6 +404,82 @@ module Google
               end
 
               ##
+              # Baseline implementation for the get_simulation REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::GetSimulationRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::SecurityCenter::V1::Simulation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::SecurityCenter::V1::Simulation]
+              #   A result object deserialized from the server's reply
+              def get_simulation request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_get_simulation_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::SecurityCenter::V1::Simulation.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the get_valued_resource REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::GetValuedResourceRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::SecurityCenter::V1::ValuedResource]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::SecurityCenter::V1::ValuedResource]
+              #   A result object deserialized from the server's reply
+              def get_valued_resource request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_get_valued_resource_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::SecurityCenter::V1::ValuedResource.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
               # Baseline implementation for the get_big_query_export REST call
               #
               # @param request_pb [::Google::Cloud::SecurityCenter::V1::GetBigQueryExportRequest]
@@ -1772,6 +1848,614 @@ module Google
               end
 
               ##
+              # Baseline implementation for the create_event_threat_detection_custom_module REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::CreateEventThreatDetectionCustomModuleRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::SecurityCenter::V1::EventThreatDetectionCustomModule]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::SecurityCenter::V1::EventThreatDetectionCustomModule]
+              #   A result object deserialized from the server's reply
+              def create_event_threat_detection_custom_module request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_create_event_threat_detection_custom_module_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::SecurityCenter::V1::EventThreatDetectionCustomModule.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the delete_event_threat_detection_custom_module REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::DeleteEventThreatDetectionCustomModuleRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #   A result object deserialized from the server's reply
+              def delete_event_threat_detection_custom_module request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_delete_event_threat_detection_custom_module_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Protobuf::Empty.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the get_event_threat_detection_custom_module REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::GetEventThreatDetectionCustomModuleRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::SecurityCenter::V1::EventThreatDetectionCustomModule]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::SecurityCenter::V1::EventThreatDetectionCustomModule]
+              #   A result object deserialized from the server's reply
+              def get_event_threat_detection_custom_module request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_get_event_threat_detection_custom_module_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::SecurityCenter::V1::EventThreatDetectionCustomModule.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the list_descendant_event_threat_detection_custom_modules REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::ListDescendantEventThreatDetectionCustomModulesRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::SecurityCenter::V1::ListDescendantEventThreatDetectionCustomModulesResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::SecurityCenter::V1::ListDescendantEventThreatDetectionCustomModulesResponse]
+              #   A result object deserialized from the server's reply
+              def list_descendant_event_threat_detection_custom_modules request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_list_descendant_event_threat_detection_custom_modules_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::SecurityCenter::V1::ListDescendantEventThreatDetectionCustomModulesResponse.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the list_event_threat_detection_custom_modules REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::ListEventThreatDetectionCustomModulesRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::SecurityCenter::V1::ListEventThreatDetectionCustomModulesResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::SecurityCenter::V1::ListEventThreatDetectionCustomModulesResponse]
+              #   A result object deserialized from the server's reply
+              def list_event_threat_detection_custom_modules request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_list_event_threat_detection_custom_modules_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::SecurityCenter::V1::ListEventThreatDetectionCustomModulesResponse.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the update_event_threat_detection_custom_module REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::UpdateEventThreatDetectionCustomModuleRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::SecurityCenter::V1::EventThreatDetectionCustomModule]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::SecurityCenter::V1::EventThreatDetectionCustomModule]
+              #   A result object deserialized from the server's reply
+              def update_event_threat_detection_custom_module request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_update_event_threat_detection_custom_module_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::SecurityCenter::V1::EventThreatDetectionCustomModule.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the validate_event_threat_detection_custom_module REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::ValidateEventThreatDetectionCustomModuleRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::SecurityCenter::V1::ValidateEventThreatDetectionCustomModuleResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::SecurityCenter::V1::ValidateEventThreatDetectionCustomModuleResponse]
+              #   A result object deserialized from the server's reply
+              def validate_event_threat_detection_custom_module request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_validate_event_threat_detection_custom_module_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::SecurityCenter::V1::ValidateEventThreatDetectionCustomModuleResponse.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the get_effective_event_threat_detection_custom_module REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::GetEffectiveEventThreatDetectionCustomModuleRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::SecurityCenter::V1::EffectiveEventThreatDetectionCustomModule]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::SecurityCenter::V1::EffectiveEventThreatDetectionCustomModule]
+              #   A result object deserialized from the server's reply
+              def get_effective_event_threat_detection_custom_module request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_get_effective_event_threat_detection_custom_module_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::SecurityCenter::V1::EffectiveEventThreatDetectionCustomModule.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the list_effective_event_threat_detection_custom_modules REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::ListEffectiveEventThreatDetectionCustomModulesRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::SecurityCenter::V1::ListEffectiveEventThreatDetectionCustomModulesResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::SecurityCenter::V1::ListEffectiveEventThreatDetectionCustomModulesResponse]
+              #   A result object deserialized from the server's reply
+              def list_effective_event_threat_detection_custom_modules request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_list_effective_event_threat_detection_custom_modules_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::SecurityCenter::V1::ListEffectiveEventThreatDetectionCustomModulesResponse.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the batch_create_resource_value_configs REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::BatchCreateResourceValueConfigsRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::SecurityCenter::V1::BatchCreateResourceValueConfigsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::SecurityCenter::V1::BatchCreateResourceValueConfigsResponse]
+              #   A result object deserialized from the server's reply
+              def batch_create_resource_value_configs request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_batch_create_resource_value_configs_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::SecurityCenter::V1::BatchCreateResourceValueConfigsResponse.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the delete_resource_value_config REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::DeleteResourceValueConfigRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #   A result object deserialized from the server's reply
+              def delete_resource_value_config request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_delete_resource_value_config_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Protobuf::Empty.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the get_resource_value_config REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::GetResourceValueConfigRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::SecurityCenter::V1::ResourceValueConfig]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::SecurityCenter::V1::ResourceValueConfig]
+              #   A result object deserialized from the server's reply
+              def get_resource_value_config request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_get_resource_value_config_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::SecurityCenter::V1::ResourceValueConfig.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the list_resource_value_configs REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::ListResourceValueConfigsRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::SecurityCenter::V1::ListResourceValueConfigsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::SecurityCenter::V1::ListResourceValueConfigsResponse]
+              #   A result object deserialized from the server's reply
+              def list_resource_value_configs request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_list_resource_value_configs_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::SecurityCenter::V1::ListResourceValueConfigsResponse.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the update_resource_value_config REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::UpdateResourceValueConfigRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::SecurityCenter::V1::ResourceValueConfig]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::SecurityCenter::V1::ResourceValueConfig]
+              #   A result object deserialized from the server's reply
+              def update_resource_value_config request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_update_resource_value_config_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::SecurityCenter::V1::ResourceValueConfig.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the list_valued_resources REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::ListValuedResourcesRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::SecurityCenter::V1::ListValuedResourcesResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::SecurityCenter::V1::ListValuedResourcesResponse]
+              #   A result object deserialized from the server's reply
+              def list_valued_resources request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_list_valued_resources_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::SecurityCenter::V1::ListValuedResourcesResponse.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the list_attack_paths REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::ListAttackPathsRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::SecurityCenter::V1::ListAttackPathsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::SecurityCenter::V1::ListAttackPathsResponse]
+              #   A result object deserialized from the server's reply
+              def list_attack_paths request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_list_attack_paths_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::SecurityCenter::V1::ListAttackPathsResponse.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
               # @private
               #
               # GRPC transcoding helper method for the bulk_mute_findings REST call
@@ -1915,6 +2599,14 @@ module Google
                                                           uri_template: "/v1/{parent}/muteConfigs",
                                                           body: "mute_config",
                                                           matches: [
+                                                            ["parent", %r{^organizations/[^/]+/locations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{parent}/muteConfigs",
+                                                          body: "mute_config",
+                                                          matches: [
                                                             ["parent", %r{^folders/[^/]+/?$}, false]
                                                           ]
                                                         )
@@ -1923,7 +2615,23 @@ module Google
                                                           uri_template: "/v1/{parent}/muteConfigs",
                                                           body: "mute_config",
                                                           matches: [
+                                                            ["parent", %r{^folders/[^/]+/locations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{parent}/muteConfigs",
+                                                          body: "mute_config",
+                                                          matches: [
                                                             ["parent", %r{^projects/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{parent}/muteConfigs",
+                                                          body: "mute_config",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -1999,6 +2707,27 @@ module Google
                                                             ["name", %r{^projects/[^/]+/muteConfigs/[^/]+/?$}, false]
                                                           ]
                                                         )
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^organizations/[^/]+/locations/[^/]+/muteConfigs/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^folders/[^/]+/locations/[^/]+/muteConfigs/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/muteConfigs/[^/]+/?$}, false]
+                                                          ]
+                                                        )
                 transcoder.transcode request_pb
               end
 
@@ -2067,6 +2796,48 @@ module Google
                                                           uri_template: "/v1/{name}",
                                                           matches: [
                                                             ["name", %r{^projects/[^/]+/securityHealthAnalyticsSettings/customModules/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the get_simulation REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::GetSimulationRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_get_simulation_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^organizations/[^/]+/simulations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the get_valued_resource REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::GetValuedResourceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_get_valued_resource_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^organizations/[^/]+/simulations/[^/]+/valuedResources/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -2159,6 +2930,27 @@ module Google
                                                           uri_template: "/v1/{name}",
                                                           matches: [
                                                             ["name", %r{^projects/[^/]+/muteConfigs/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^organizations/[^/]+/locations/[^/]+/muteConfigs/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^folders/[^/]+/locations/[^/]+/muteConfigs/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/muteConfigs/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -2522,6 +3314,27 @@ module Google
                                                           uri_template: "/v1/{parent}/muteConfigs",
                                                           matches: [
                                                             ["parent", %r{^projects/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}",
+                                                          matches: [
+                                                            ["parent", %r{^organizations/[^/]+/locations/[^/]+/muteConfigs/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}",
+                                                          matches: [
+                                                            ["parent", %r{^folders/[^/]+/locations/[^/]+/muteConfigs/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/muteConfigs/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -2958,6 +3771,30 @@ module Google
                                                             ["mute_config.name", %r{^projects/[^/]+/muteConfigs/[^/]+/?$}, false]
                                                           ]
                                                         )
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v1/{mute_config.name}",
+                                                          body: "mute_config",
+                                                          matches: [
+                                                            ["mute_config.name", %r{^organizations/[^/]+/locations/[^/]+/muteConfigs/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v1/{mute_config.name}",
+                                                          body: "mute_config",
+                                                          matches: [
+                                                            ["mute_config.name", %r{^folders/[^/]+/locations/[^/]+/muteConfigs/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v1/{mute_config.name}",
+                                                          body: "mute_config",
+                                                          matches: [
+                                                            ["mute_config.name", %r{^projects/[^/]+/locations/[^/]+/muteConfigs/[^/]+/?$}, false]
+                                                          ]
+                                                        )
                 transcoder.transcode request_pb
               end
 
@@ -3284,6 +4121,500 @@ module Google
                                                           uri_template: "/v1/{parent}/bigQueryExports",
                                                           matches: [
                                                             ["parent", %r{^projects/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the create_event_threat_detection_custom_module REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::CreateEventThreatDetectionCustomModuleRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_create_event_threat_detection_custom_module_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{parent}/customModules",
+                                                          body: "event_threat_detection_custom_module",
+                                                          matches: [
+                                                            ["parent", %r{^organizations/[^/]+/eventThreatDetectionSettings/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{parent}/customModules",
+                                                          body: "event_threat_detection_custom_module",
+                                                          matches: [
+                                                            ["parent", %r{^folders/[^/]+/eventThreatDetectionSettings/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{parent}/customModules",
+                                                          body: "event_threat_detection_custom_module",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/eventThreatDetectionSettings/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the delete_event_threat_detection_custom_module REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::DeleteEventThreatDetectionCustomModuleRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_delete_event_threat_detection_custom_module_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^organizations/[^/]+/eventThreatDetectionSettings/customModules/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^folders/[^/]+/eventThreatDetectionSettings/customModules/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/eventThreatDetectionSettings/customModules/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the get_event_threat_detection_custom_module REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::GetEventThreatDetectionCustomModuleRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_get_event_threat_detection_custom_module_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^organizations/[^/]+/eventThreatDetectionSettings/customModules/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^folders/[^/]+/eventThreatDetectionSettings/customModules/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/eventThreatDetectionSettings/customModules/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the list_descendant_event_threat_detection_custom_modules REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::ListDescendantEventThreatDetectionCustomModulesRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_list_descendant_event_threat_detection_custom_modules_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/customModules:listDescendant",
+                                                          matches: [
+                                                            ["parent", %r{^organizations/[^/]+/eventThreatDetectionSettings/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/customModules:listDescendant",
+                                                          matches: [
+                                                            ["parent", %r{^folders/[^/]+/eventThreatDetectionSettings/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/customModules:listDescendant",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/eventThreatDetectionSettings/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the list_event_threat_detection_custom_modules REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::ListEventThreatDetectionCustomModulesRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_list_event_threat_detection_custom_modules_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/customModules",
+                                                          matches: [
+                                                            ["parent", %r{^organizations/[^/]+/eventThreatDetectionSettings/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/customModules",
+                                                          matches: [
+                                                            ["parent", %r{^folders/[^/]+/eventThreatDetectionSettings/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/customModules",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/eventThreatDetectionSettings/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the update_event_threat_detection_custom_module REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::UpdateEventThreatDetectionCustomModuleRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_update_event_threat_detection_custom_module_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v1/{event_threat_detection_custom_module.name}",
+                                                          body: "event_threat_detection_custom_module",
+                                                          matches: [
+                                                            ["event_threat_detection_custom_module.name", %r{^organizations/[^/]+/eventThreatDetectionSettings/customModules/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v1/{event_threat_detection_custom_module.name}",
+                                                          body: "event_threat_detection_custom_module",
+                                                          matches: [
+                                                            ["event_threat_detection_custom_module.name", %r{^folders/[^/]+/eventThreatDetectionSettings/customModules/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v1/{event_threat_detection_custom_module.name}",
+                                                          body: "event_threat_detection_custom_module",
+                                                          matches: [
+                                                            ["event_threat_detection_custom_module.name", %r{^projects/[^/]+/eventThreatDetectionSettings/customModules/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the validate_event_threat_detection_custom_module REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::ValidateEventThreatDetectionCustomModuleRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_validate_event_threat_detection_custom_module_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{parent}:validateCustomModule",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["parent", %r{^organizations/[^/]+/eventThreatDetectionSettings/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{parent}:validateCustomModule",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["parent", %r{^folders/[^/]+/eventThreatDetectionSettings/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{parent}:validateCustomModule",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/eventThreatDetectionSettings/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the get_effective_event_threat_detection_custom_module REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::GetEffectiveEventThreatDetectionCustomModuleRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_get_effective_event_threat_detection_custom_module_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^organizations/[^/]+/eventThreatDetectionSettings/effectiveCustomModules/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^folders/[^/]+/eventThreatDetectionSettings/effectiveCustomModules/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/eventThreatDetectionSettings/effectiveCustomModules/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the list_effective_event_threat_detection_custom_modules REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::ListEffectiveEventThreatDetectionCustomModulesRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_list_effective_event_threat_detection_custom_modules_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/effectiveCustomModules",
+                                                          matches: [
+                                                            ["parent", %r{^organizations/[^/]+/eventThreatDetectionSettings/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/effectiveCustomModules",
+                                                          matches: [
+                                                            ["parent", %r{^folders/[^/]+/eventThreatDetectionSettings/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/effectiveCustomModules",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/eventThreatDetectionSettings/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the batch_create_resource_value_configs REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::BatchCreateResourceValueConfigsRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_batch_create_resource_value_configs_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{parent}/resourceValueConfigs:batchCreate",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["parent", %r{^organizations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the delete_resource_value_config REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::DeleteResourceValueConfigRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_delete_resource_value_config_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^organizations/[^/]+/resourceValueConfigs/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the get_resource_value_config REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::GetResourceValueConfigRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_get_resource_value_config_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^organizations/[^/]+/resourceValueConfigs/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the list_resource_value_configs REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::ListResourceValueConfigsRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_list_resource_value_configs_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/resourceValueConfigs",
+                                                          matches: [
+                                                            ["parent", %r{^organizations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the update_resource_value_config REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::UpdateResourceValueConfigRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_update_resource_value_config_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v1/{resource_value_config.name}",
+                                                          body: "resource_value_config",
+                                                          matches: [
+                                                            ["resource_value_config.name", %r{^organizations/[^/]+/resourceValueConfigs/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the list_valued_resources REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::ListValuedResourcesRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_list_valued_resources_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/valuedResources",
+                                                          matches: [
+                                                            ["parent", %r{^organizations/[^/]+/simulations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/valuedResources",
+                                                          matches: [
+                                                            ["parent", %r{^organizations/[^/]+/simulations/[^/]+/attackExposureResults/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the list_attack_paths REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::ListAttackPathsRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_list_attack_paths_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/attackPaths",
+                                                          matches: [
+                                                            ["parent", %r{^organizations/[^/]+/simulations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/attackPaths",
+                                                          matches: [
+                                                            ["parent", %r{^organizations/[^/]+/simulations/[^/]+/valuedResources/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/attackPaths",
+                                                          matches: [
+                                                            ["parent", %r{^organizations/[^/]+/simulations/[^/]+/attackExposureResults/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

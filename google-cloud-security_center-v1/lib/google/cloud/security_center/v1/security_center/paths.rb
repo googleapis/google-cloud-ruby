@@ -118,6 +118,58 @@ module Google
             end
 
             ##
+            # Create a fully-qualified EffectiveEventThreatDetectionCustomModule resource string.
+            #
+            # @overload effective_event_threat_detection_custom_module_path(organization:, module_param:)
+            #   The resource will be in the following format:
+            #
+            #   `organizations/{organization}/eventThreatDetectionSettings/effectiveCustomModules/{module_param}`
+            #
+            #   @param organization [String]
+            #   @param module_param [String]
+            #
+            # @overload effective_event_threat_detection_custom_module_path(folder:, module_param:)
+            #   The resource will be in the following format:
+            #
+            #   `folders/{folder}/eventThreatDetectionSettings/effectiveCustomModules/{module_param}`
+            #
+            #   @param folder [String]
+            #   @param module_param [String]
+            #
+            # @overload effective_event_threat_detection_custom_module_path(project:, module_param:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/eventThreatDetectionSettings/effectiveCustomModules/{module_param}`
+            #
+            #   @param project [String]
+            #   @param module_param [String]
+            #
+            # @return [::String]
+            def effective_event_threat_detection_custom_module_path **args
+              resources = {
+                "module_param:organization" => (proc do |organization:, module_param:|
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+
+                  "organizations/#{organization}/eventThreatDetectionSettings/effectiveCustomModules/#{module_param}"
+                end),
+                "folder:module_param" => (proc do |folder:, module_param:|
+                  raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
+
+                  "folders/#{folder}/eventThreatDetectionSettings/effectiveCustomModules/#{module_param}"
+                end),
+                "module_param:project" => (proc do |project:, module_param:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+                  "projects/#{project}/eventThreatDetectionSettings/effectiveCustomModules/#{module_param}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
+            end
+
+            ##
             # Create a fully-qualified EffectiveSecurityHealthAnalyticsCustomModule resource string.
             #
             # @overload effective_security_health_analytics_custom_module_path(organization:, effective_custom_module:)
@@ -161,6 +213,101 @@ module Google
                   raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
                   "projects/#{project}/securityHealthAnalyticsSettings/effectiveCustomModules/#{effective_custom_module}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
+            end
+
+            ##
+            # Create a fully-qualified EventThreatDetectionCustomModule resource string.
+            #
+            # @overload event_threat_detection_custom_module_path(organization:, module_param:)
+            #   The resource will be in the following format:
+            #
+            #   `organizations/{organization}/eventThreatDetectionSettings/customModules/{module_param}`
+            #
+            #   @param organization [String]
+            #   @param module_param [String]
+            #
+            # @overload event_threat_detection_custom_module_path(folder:, module_param:)
+            #   The resource will be in the following format:
+            #
+            #   `folders/{folder}/eventThreatDetectionSettings/customModules/{module_param}`
+            #
+            #   @param folder [String]
+            #   @param module_param [String]
+            #
+            # @overload event_threat_detection_custom_module_path(project:, module_param:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/eventThreatDetectionSettings/customModules/{module_param}`
+            #
+            #   @param project [String]
+            #   @param module_param [String]
+            #
+            # @return [::String]
+            def event_threat_detection_custom_module_path **args
+              resources = {
+                "module_param:organization" => (proc do |organization:, module_param:|
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+
+                  "organizations/#{organization}/eventThreatDetectionSettings/customModules/#{module_param}"
+                end),
+                "folder:module_param" => (proc do |folder:, module_param:|
+                  raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
+
+                  "folders/#{folder}/eventThreatDetectionSettings/customModules/#{module_param}"
+                end),
+                "module_param:project" => (proc do |project:, module_param:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+                  "projects/#{project}/eventThreatDetectionSettings/customModules/#{module_param}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
+            end
+
+            ##
+            # Create a fully-qualified EventThreatDetectionSettings resource string.
+            #
+            # @overload event_threat_detection_settings_path(organization:)
+            #   The resource will be in the following format:
+            #
+            #   `organizations/{organization}/eventThreatDetectionSettings`
+            #
+            #   @param organization [String]
+            #
+            # @overload event_threat_detection_settings_path(folder:)
+            #   The resource will be in the following format:
+            #
+            #   `folders/{folder}/eventThreatDetectionSettings`
+            #
+            #   @param folder [String]
+            #
+            # @overload event_threat_detection_settings_path(project:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/eventThreatDetectionSettings`
+            #
+            #   @param project [String]
+            #
+            # @return [::String]
+            def event_threat_detection_settings_path **args
+              resources = {
+                "organization" => (proc do |organization:|
+                  "organizations/#{organization}/eventThreatDetectionSettings"
+                end),
+                "folder" => (proc do |folder:|
+                  "folders/#{folder}/eventThreatDetectionSettings"
+                end),
+                "project" => (proc do |project:|
+                  "projects/#{project}/eventThreatDetectionSettings"
                 end)
               }
 
@@ -306,6 +453,40 @@ module Google
             end
 
             ##
+            # Create a fully-qualified FolderLocation resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `folders/{folder}/locations/{location}`
+            #
+            # @param folder [String]
+            # @param location [String]
+            #
+            # @return [::String]
+            def folder_location_path folder:, location:
+              raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
+
+              "folders/#{folder}/locations/#{location}"
+            end
+
+            ##
+            # Create a fully-qualified Location resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}`
+            #
+            # @param project [String]
+            # @param location [String]
+            #
+            # @return [::String]
+            def location_path project:, location:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}"
+            end
+
+            ##
             # Create a fully-qualified MuteConfig resource string.
             #
             # @overload mute_config_path(organization:, mute_config:)
@@ -332,6 +513,33 @@ module Google
             #   @param project [String]
             #   @param mute_config [String]
             #
+            # @overload mute_config_path(organization:, location:, mute_config:)
+            #   The resource will be in the following format:
+            #
+            #   `organizations/{organization}/locations/{location}/muteConfigs/{mute_config}`
+            #
+            #   @param organization [String]
+            #   @param location [String]
+            #   @param mute_config [String]
+            #
+            # @overload mute_config_path(folder:, location:, mute_config:)
+            #   The resource will be in the following format:
+            #
+            #   `folders/{folder}/locations/{location}/muteConfigs/{mute_config}`
+            #
+            #   @param folder [String]
+            #   @param location [String]
+            #   @param mute_config [String]
+            #
+            # @overload mute_config_path(project:, location:, mute_config:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/muteConfigs/{mute_config}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param mute_config [String]
+            #
             # @return [::String]
             def mute_config_path **args
               resources = {
@@ -349,6 +557,24 @@ module Google
                   raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
                   "projects/#{project}/muteConfigs/#{mute_config}"
+                end),
+                "location:mute_config:organization" => (proc do |organization:, location:, mute_config:|
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                  "organizations/#{organization}/locations/#{location}/muteConfigs/#{mute_config}"
+                end),
+                "folder:location:mute_config" => (proc do |folder:, location:, mute_config:|
+                  raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                  "folders/#{folder}/locations/#{location}/muteConfigs/#{mute_config}"
+                end),
+                "location:mute_config:project" => (proc do |project:, location:, mute_config:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/muteConfigs/#{mute_config}"
                 end)
               }
 
@@ -424,6 +650,23 @@ module Google
             end
 
             ##
+            # Create a fully-qualified OrganizationLocation resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `organizations/{organization}/locations/{location}`
+            #
+            # @param organization [String]
+            # @param location [String]
+            #
+            # @return [::String]
+            def organization_location_path organization:, location:
+              raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+
+              "organizations/#{organization}/locations/#{location}"
+            end
+
+            ##
             # Create a fully-qualified OrganizationSettings resource string.
             #
             # The resource will be in the following format:
@@ -435,6 +678,23 @@ module Google
             # @return [::String]
             def organization_settings_path organization:
               "organizations/#{organization}/organizationSettings"
+            end
+
+            ##
+            # Create a fully-qualified OrganizationSimulation resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `organizations/{organization}/simulations/{simulation}`
+            #
+            # @param organization [String]
+            # @param simulation [String]
+            #
+            # @return [::String]
+            def organization_simulation_path organization:, simulation:
+              raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+
+              "organizations/#{organization}/simulations/#{simulation}"
             end
 
             ##
@@ -501,6 +761,23 @@ module Google
             # @return [::String]
             def project_path project:
               "projects/#{project}"
+            end
+
+            ##
+            # Create a fully-qualified ResourceValueConfig resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `organizations/{organization}/resourceValueConfigs/{resource_value_config}`
+            #
+            # @param organization [String]
+            # @param resource_value_config [String]
+            #
+            # @return [::String]
+            def resource_value_config_path organization:, resource_value_config:
+              raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+
+              "organizations/#{organization}/resourceValueConfigs/#{resource_value_config}"
             end
 
             ##
@@ -696,6 +973,23 @@ module Google
             end
 
             ##
+            # Create a fully-qualified Simulation resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `organizations/{organization}/simulations/{simulation}`
+            #
+            # @param organization [String]
+            # @param simulation [String]
+            #
+            # @return [::String]
+            def simulation_path organization:, simulation:
+              raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+
+              "organizations/#{organization}/simulations/#{simulation}"
+            end
+
+            ##
             # Create a fully-qualified Source resource string.
             #
             # @overload source_path(organization:, source:)
@@ -803,6 +1097,25 @@ module Google
               raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
               "projects/#{project}/topics/#{topic}"
+            end
+
+            ##
+            # Create a fully-qualified ValuedResource resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `organizations/{organization}/simulations/{simulation}/valuedResources/{valued_resource}`
+            #
+            # @param organization [String]
+            # @param simulation [String]
+            # @param valued_resource [String]
+            #
+            # @return [::String]
+            def valued_resource_path organization:, simulation:, valued_resource:
+              raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+              raise ::ArgumentError, "simulation cannot contain /" if simulation.to_s.include? "/"
+
+              "organizations/#{organization}/simulations/#{simulation}/valuedResources/#{valued_resource}"
             end
 
             extend self

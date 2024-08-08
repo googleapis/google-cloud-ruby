@@ -99,7 +99,7 @@ module Google
 
           # MITRE ATT&CK techniques that can be referenced by SCC findings.
           # See: https://attack.mitre.org/techniques/enterprise/
-          # Next ID: 59
+          # Next ID: 65
           module Technique
             # Unspecified value.
             TECHNIQUE_UNSPECIFIED = 0
@@ -128,11 +128,20 @@ module Google
             # T1059.004
             UNIX_SHELL = 7
 
+            # T1059.006
+            PYTHON = 59
+
+            # T1068
+            EXPLOITATION_FOR_PRIVILEGE_ESCALATION = 63
+
             # T1069
             PERMISSION_GROUPS_DISCOVERY = 18
 
             # T1069.003
             CLOUD_GROUPS = 19
+
+            # T1070.004
+            INDICATOR_REMOVAL_FILE_DELETION = 64
 
             # T1071
             APPLICATION_LAYER_PROTOCOL = 45
@@ -275,8 +284,17 @@ module Google
             # T1595.001
             SCANNING_IP_BLOCKS = 2
 
+            # T1609
+            CONTAINER_ADMINISTRATION_COMMAND = 60
+
+            # T1611
+            ESCAPE_TO_HOST = 61
+
             # T1613
             CONTAINER_AND_RESOURCE_DISCOVERY = 57
+
+            # T1649
+            STEAL_OR_FORGE_AUTHENTICATION_CERTIFICATES = 62
           end
         end
       end

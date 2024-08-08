@@ -43,8 +43,8 @@ module Google
         # @!attribute [rw] threat_vector
         #   @return [::String]
         #     Distinguish between volumetric & protocol DDoS attack and
-        #     application layer attacks. For example, “L3_4” for Layer 3 and Layer 4 DDoS
-        #     attacks, or “L_7” for Layer 7 DDoS attacks.
+        #     application layer attacks. For example, "L3_4" for Layer 3 and Layer 4 DDoS
+        #     attacks, or "L_7" for Layer 7 DDoS attacks.
         # @!attribute [rw] duration
         #   @return [::Google::Protobuf::Duration]
         #     Duration of attack from the start until the current moment (updated every 5
@@ -63,9 +63,9 @@ module Google
         #     "my-security-policy".
         # @!attribute [rw] type
         #   @return [::String]
-        #     The type of Google Cloud Armor security policy for example, ‘backend
-        #     security policy’, ‘edge security policy’, ‘network edge security policy’,
-        #     or ‘always-on DDoS protection’.
+        #     The type of Google Cloud Armor security policy for example, 'backend
+        #     security policy', 'edge security policy', 'network edge security policy',
+        #     or 'always-on DDoS protection'.
         # @!attribute [rw] preview
         #   @return [::Boolean]
         #     Whether or not the associated rule or policy is in preview mode.
@@ -117,7 +117,7 @@ module Google
         #     Total BPS (bytes per second) volume of attack.
         # @!attribute [rw] classification
         #   @return [::String]
-        #     Type of attack, for example, ‘SYN-flood’, ‘NTP-udp’, or ‘CHARGEN-udp’.
+        #     Type of attack, for example, 'SYN-flood', 'NTP-udp', or 'CHARGEN-udp'.
         class Attack
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
