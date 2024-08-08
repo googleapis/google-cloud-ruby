@@ -1,5 +1,5 @@
 {
-  "google-analytics-admin": "0.5.1",
+  "google-analytics-admin": "0.5.0",
   "google-analytics-admin+FILLER": "0.0.0",
   "google-analytics-admin-v1alpha": "0.30.0",
   "google-analytics-admin-v1alpha+FILLER": "0.0.0",
@@ -665,7 +665,7 @@
   "google-cloud-service_usage+FILLER": "0.0.0",
   "google-cloud-service_usage-v1": "1.0.0",
   "google-cloud-service_usage-v1+FILLER": "0.0.0",
-  "google-cloud-shell": "1.4.0",
+  "google-cloud-shell": "1.4.1",
   "google-cloud-shell+FILLER": "0.0.0",
   "google-cloud-shell-v1": "1.0.0",
   "google-cloud-shell-v1+FILLER": "0.0.0",
