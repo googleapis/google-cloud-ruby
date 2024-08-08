@@ -64,11 +64,13 @@ class ::Google::Cloud::Functions::V2::FunctionService::ClientTest < Minitest::Te
 
     # Create request parameters for a unary method.
     name = "hello world"
+    revision = "hello world"
 
     get_function_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_function, name
       assert_kind_of ::Google::Cloud::Functions::V2::GetFunctionRequest, request
       assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["revision"]
       refute_nil options
     end
 
@@ -79,31 +81,31 @@ class ::Google::Cloud::Functions::V2::FunctionService::ClientTest < Minitest::Te
       end
 
       # Use hash object
-      client.get_function({ name: name }) do |response, operation|
+      client.get_function({ name: name, revision: revision }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_function name: name do |response, operation|
+      client.get_function name: name, revision: revision do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_function ::Google::Cloud::Functions::V2::GetFunctionRequest.new(name: name) do |response, operation|
+      client.get_function ::Google::Cloud::Functions::V2::GetFunctionRequest.new(name: name, revision: revision) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_function({ name: name }, grpc_options) do |response, operation|
+      client.get_function({ name: name, revision: revision }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_function(::Google::Cloud::Functions::V2::GetFunctionRequest.new(name: name), grpc_options) do |response, operation|
+      client.get_function(::Google::Cloud::Functions::V2::GetFunctionRequest.new(name: name, revision: revision), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -389,12 +391,14 @@ class ::Google::Cloud::Functions::V2::FunctionService::ClientTest < Minitest::Te
     # Create request parameters for a unary method.
     parent = "hello world"
     kms_key_name = "hello world"
+    environment = :ENVIRONMENT_UNSPECIFIED
 
     generate_upload_url_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :generate_upload_url, name
       assert_kind_of ::Google::Cloud::Functions::V2::GenerateUploadUrlRequest, request
       assert_equal "hello world", request["parent"]
       assert_equal "hello world", request["kms_key_name"]
+      assert_equal :ENVIRONMENT_UNSPECIFIED, request["environment"]
       refute_nil options
     end
 
@@ -405,31 +409,31 @@ class ::Google::Cloud::Functions::V2::FunctionService::ClientTest < Minitest::Te
       end
 
       # Use hash object
-      client.generate_upload_url({ parent: parent, kms_key_name: kms_key_name }) do |response, operation|
+      client.generate_upload_url({ parent: parent, kms_key_name: kms_key_name, environment: environment }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.generate_upload_url parent: parent, kms_key_name: kms_key_name do |response, operation|
+      client.generate_upload_url parent: parent, kms_key_name: kms_key_name, environment: environment do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.generate_upload_url ::Google::Cloud::Functions::V2::GenerateUploadUrlRequest.new(parent: parent, kms_key_name: kms_key_name) do |response, operation|
+      client.generate_upload_url ::Google::Cloud::Functions::V2::GenerateUploadUrlRequest.new(parent: parent, kms_key_name: kms_key_name, environment: environment) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.generate_upload_url({ parent: parent, kms_key_name: kms_key_name }, grpc_options) do |response, operation|
+      client.generate_upload_url({ parent: parent, kms_key_name: kms_key_name, environment: environment }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.generate_upload_url(::Google::Cloud::Functions::V2::GenerateUploadUrlRequest.new(parent: parent, kms_key_name: kms_key_name), grpc_options) do |response, operation|
+      client.generate_upload_url(::Google::Cloud::Functions::V2::GenerateUploadUrlRequest.new(parent: parent, kms_key_name: kms_key_name, environment: environment), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

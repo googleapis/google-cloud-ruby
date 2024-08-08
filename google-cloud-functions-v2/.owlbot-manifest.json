@@ -42,6 +42,7 @@
     "proto_docs/google/protobuf/field_mask.rb",
     "proto_docs/google/protobuf/timestamp.rb",
     "proto_docs/google/rpc/status.rb",
+    "proto_docs/google/type/date.rb",
     "proto_docs/google/type/expr.rb",
     "snippets/Gemfile",
     "snippets/function_service/create_function.rb",

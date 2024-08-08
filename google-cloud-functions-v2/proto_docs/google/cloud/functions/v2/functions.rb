@@ -67,6 +67,13 @@ module Google
         #
         #     It must match the pattern
         #     `projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}`.
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The create timestamp of a Cloud Function. This is only
+        #     applicable to 2nd Gen functions.
         class Function
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -149,6 +156,11 @@ module Google
         #   @return [::Integer]
         #     Google Cloud Storage generation for the object. If the generation is
         #     omitted, the latest generation will be used.
+        # @!attribute [rw] source_upload_url
+        #   @return [::String]
+        #     When the specified storage bucket is a 1st gen function uploard url bucket,
+        #     this field should be set as the generated upload url for 1st gen
+        #     deployment.
         class StorageSource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -201,6 +213,11 @@ module Google
         #   @return [::Google::Cloud::Functions::V2::RepoSource]
         #     If provided, get the source from this location in a Cloud Source
         #     Repository.
+        # @!attribute [rw] git_uri
+        #   @return [::String]
+        #     If provided, get the source from GitHub repository. This option is valid
+        #     only for GCF 1st Gen function.
+        #     Example: https://github.com/<user>/<repo>/blob/<commit>/<path-to-code>
         class Source
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -216,6 +233,10 @@ module Google
         #   @return [::Google::Cloud::Functions::V2::RepoSource]
         #     A copy of the build's `source.repo_source`, if exists, with any
         #     revisions resolved.
+        # @!attribute [rw] git_uri
+        #   @return [::String]
+        #     A copy of the build's `source.git_uri`, if exists, with any commits
+        #     resolved.
         class SourceProvenance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -223,6 +244,10 @@ module Google
 
         # Describes the Build step of the function that builds a container from the
         # given source.
+        # @!attribute [rw] automatic_update_policy
+        #   @return [::Google::Cloud::Functions::V2::AutomaticUpdatePolicy]
+        # @!attribute [rw] on_deploy_update_policy
+        #   @return [::Google::Cloud::Functions::V2::OnDeployUpdatePolicy]
         # @!attribute [r] build
         #   @return [::String]
         #     Output only. The Cloud Build name of the latest successful deployment of
@@ -271,16 +296,15 @@ module Google
         #     applicable to 1st Gen functions, 2nd Gen functions can only use Artifact
         #     Registry.
         #
-        #     If `docker_repository` field is specified, this field will be automatically
-        #     set as `ARTIFACT_REGISTRY`.
-        #     If unspecified, it currently defaults to `CONTAINER_REGISTRY`.
-        #     This field may be overridden by the backend for eligible deployments.
+        #     If unspecified, it defaults to `ARTIFACT_REGISTRY`.
+        #     If `docker_repository` field is specified, this field should either be left
+        #     unspecified or set to `ARTIFACT_REGISTRY`.
         # @!attribute [rw] docker_repository
         #   @return [::String]
-        #     User managed repository created in Artifact Registry optionally
-        #     with a customer managed encryption key. This is the repository to which the
-        #     function docker image will be pushed after it is built by Cloud Build.
-        #     If unspecified, GCF will create and use a repository named 'gcf-artifacts'
+        #     Repository in Artifact Registry to which the function docker image will be
+        #     pushed after it is built by Cloud Build. If specified by user, it is
+        #     created and managed by user with a customer managed encryption key.
+        #     Otherwise, GCF will create and use a repository named 'gcf-artifacts'
         #     for every deployed region.
         #
         #     It must match the pattern
@@ -289,6 +313,10 @@ module Google
         #     Cross-project repositories are not supported.
         #     Cross-location repositories are not supported.
         #     Repository format must be 'DOCKER'.
+        # @!attribute [rw] service_account
+        #   @return [::String]
+        #     Service account to be used for building the container. The format of this
+        #     field is `projects/{projectId}/serviceAccounts/{serviceAccountEmail}`.
         class BuildConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -342,7 +370,7 @@ module Google
         #     a full description.
         # @!attribute [rw] available_cpu
         #   @return [::String]
-        #     [Preview] The number of CPUs used in a single container instance.
+        #     The number of CPUs used in a single container instance.
         #     Default value is calculated from available memory.
         #     Supports the same values as Cloud Run, see
         #     https://cloud.google.com/run/docs/reference/rest/v1/Container#resourcerequirements
@@ -412,7 +440,7 @@ module Google
         #     Output only. The name of service revision.
         # @!attribute [rw] max_instance_request_concurrency
         #   @return [::Integer]
-        #     [Preview] Sets the maximum number of concurrent requests that each instance
+        #     Sets the maximum number of concurrent requests that each instance
         #     can receive. Defaults to 1.
         # @!attribute [rw] security_level
         #   @return [::Google::Cloud::Functions::V2::ServiceConfig::SecurityLevel]
@@ -420,6 +448,10 @@ module Google
         #     This configuration is only applicable to 1st Gen functions with Http
         #     trigger. By default https is optional for 1st Gen functions; 2nd Gen
         #     functions are https ONLY.
+        # @!attribute [rw] binary_authorization_policy
+        #   @return [::String]
+        #     Optional. The binary authorization policy to be checked when deploying the
+        #     Cloud Run service.
         class ServiceConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -605,6 +637,16 @@ module Google
         #     Optional. The name of the channel associated with the trigger in
         #     `projects/{project}/locations/{location}/channels/{channel}` format.
         #     You must provide a channel to receive events from Eventarc SaaS partners.
+        # @!attribute [rw] service
+        #   @return [::String]
+        #     Optional. The hostname of the service that 1st Gen function should be
+        #     observed.
+        #
+        #     If no string is provided, the default service implementing the API will
+        #     be used. For example, `storage.googleapis.com` is the default for all
+        #     event types in the `google.storage` namespace.
+        #
+        #     The field is only applicable to 1st Gen functions.
         class EventTrigger
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -646,6 +688,14 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the function which details should be obtained.
+        # @!attribute [rw] revision
+        #   @return [::String]
+        #     Optional. The version of the 1st gen function whose details should
+        #     be obtained. The version of a 1st gen function is an integer that starts
+        #     from 1 and gets incremented on redeployments. GCF may keep historical
+        #     configs for old versions of 1st gen function. This field can be specified
+        #     to fetch the historical configs. This field is valid only for GCF 1st gen
+        #     function.
         class GetFunctionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -730,8 +780,7 @@ module Google
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     The list of fields to be updated.
-        #     If no field mask is provided, all provided fields in the request will be
-        #     updated.
+        #     If no field mask is provided, all fields will be updated.
         class UpdateFunctionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -768,6 +817,12 @@ module Google
         #     granted the role 'Cloud KMS CryptoKey Encrypter/Decrypter
         #     (roles/cloudkms.cryptoKeyEncrypterDecrypter)' on the
         #     Key/KeyRing/Project/Organization (least access preferred).
+        # @!attribute [rw] environment
+        #   @return [::Google::Cloud::Functions::V2::Environment]
+        #     The function environment the generated upload url will be used for.
+        #     The upload url for 2nd Gen functions can also be used for 1st gen
+        #     functions, but not vice versa. If not specified, 2nd generation-style
+        #     upload URLs are generated.
         class GenerateUploadUrlRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -853,6 +908,12 @@ module Google
           # @!attribute [rw] environment
           #   @return [::Google::Cloud::Functions::V2::Environment]
           #     The environment for the runtime.
+          # @!attribute [rw] deprecation_date
+          #   @return [::Google::Type::Date]
+          #     Deprecation date for the runtime.
+          # @!attribute [rw] decommission_date
+          #   @return [::Google::Type::Date]
+          #     Decommission date for the runtime.
           class Runtime
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -883,6 +944,23 @@ module Google
           end
         end
 
+        # Security patches are applied automatically to the runtime without requiring
+        # the function to be redeployed.
+        class AutomaticUpdatePolicy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Security patches are only applied when a function is redeployed.
+        # @!attribute [r] runtime_version
+        #   @return [::String]
+        #     Output only. contains the runtime version which was used during latest
+        #     function deployment.
+        class OnDeployUpdatePolicy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Represents the metadata of the long-running operation.
         # @!attribute [rw] create_time
         #   @return [::Google::Protobuf::Timestamp]
@@ -903,9 +981,10 @@ module Google
         #   @return [::Boolean]
         #     Identifies whether the user has requested cancellation
         #     of the operation. Operations that have successfully been cancelled
-        #     have [Operation.error][] value with a
-        #     {::Google::Rpc::Status#code google.rpc.Status.code} of 1, corresponding to
-        #     `Code.CANCELLED`.
+        #     have
+        #     {::Google::Longrunning::Operation#error google.longrunning.Operation.error}
+        #     value with a {::Google::Rpc::Status#code google.rpc.Status.code} of 1,
+        #     corresponding to `Code.CANCELLED`.
         # @!attribute [rw] api_version
         #   @return [::String]
         #     API version used to start the operation.
@@ -915,6 +994,16 @@ module Google
         # @!attribute [rw] stages
         #   @return [::Array<::Google::Cloud::Functions::V2::Stage>]
         #     Mechanism for reporting in-progress stages
+        # @!attribute [rw] source_token
+        #   @return [::String]
+        #     An identifier for Firebase function sources. Disclaimer: This field is only
+        #     supported for Firebase function deployments.
+        # @!attribute [rw] build_name
+        #   @return [::String]
+        #     The build name of the function for create and update operations.
+        # @!attribute [rw] operation_type
+        #   @return [::Google::Cloud::Functions::V2::OperationType]
+        #     The operation type.
         class OperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -990,6 +1079,21 @@ module Google
             # Stage has completed.
             COMPLETE = 3
           end
+        end
+
+        # The type of the long running operation.
+        module OperationType
+          # Unspecified
+          OPERATIONTYPE_UNSPECIFIED = 0
+
+          # CreateFunction
+          CREATE_FUNCTION = 1
+
+          # UpdateFunction
+          UPDATE_FUNCTION = 2
+
+          # DeleteFunction
+          DELETE_FUNCTION = 3
         end
 
         # The environment the function is hosted on.
