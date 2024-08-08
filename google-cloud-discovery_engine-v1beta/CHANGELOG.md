@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.14.1 (2024-08-08)
+
+#### Documentation
+
+* Formatting updates to README.md ([#26627](https://github.com/googleapis/google-cloud-ruby/issues/26627)) 
+
 ### 0.14.0 (2024-08-02)
 
 #### Features
