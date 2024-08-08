@@ -2,7 +2,6 @@
 
 Notebooks API is used to manage notebook resources in Google Cloud.
 
-Notebooks API is used to manage notebook resources in Google Cloud.
 
 https://github.com/googleapis/google-cloud-ruby
 
