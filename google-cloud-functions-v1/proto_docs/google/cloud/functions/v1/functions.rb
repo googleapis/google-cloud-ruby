@@ -204,12 +204,12 @@ module Google
         #     field is only supported for Firebase function deployments.
         # @!attribute [rw] docker_repository
         #   @return [::String]
-        #     User managed repository created in Artifact Registry optionally with a
-        #     customer managed encryption key. If specified, deployments will use
-        #     Artifact Registry. If unspecified and the deployment is eligible to use
-        #     Artifact Registry, GCF will create and use a repository named
-        #     'gcf-artifacts' for every deployed region. This is the repository to which
-        #     the function docker image will be pushed after it is built by Cloud Build.
+        #     User-managed repository created in Artifact Registry to which the
+        #     function's Docker image will be pushed after it is built by Cloud Build.
+        #     May optionally be encrypted with a customer-managed encryption key (CMEK).
+        #     If unspecified and `docker_registry` is not explicitly set to
+        #     `CONTAINER_REGISTRY`, GCF will create and use a default Artifact Registry
+        #     repository named 'gcf-artifacts' in the region.
         #
         #     It must match the pattern
         #     `projects/{project}/locations/{location}/repositories/{repository}`.
@@ -226,10 +226,13 @@ module Google
         #     unspecified or set to `ARTIFACT_REGISTRY`.
         # @!attribute [rw] automatic_update_policy
         #   @return [::Google::Cloud::Functions::V1::CloudFunction::AutomaticUpdatePolicy]
-        #     See the comment next to this message for more details.
         # @!attribute [rw] on_deploy_update_policy
         #   @return [::Google::Cloud::Functions::V1::CloudFunction::OnDeployUpdatePolicy]
-        #     See the comment next to this message for more details.
+        # @!attribute [rw] build_service_account
+        #   @return [::String]
+        #     A service account the user provides for use with Cloud Build. The format of
+        #     this field is
+        #     `projects/{projectId}/serviceAccounts/{serviceAccountEmail}`.
         class CloudFunction
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -244,7 +247,7 @@ module Google
           # Security patches are only applied when a function is redeployed.
           # @!attribute [r] runtime_version
           #   @return [::String]
-          #     Output only. contains the runtime version which was used during latest
+          #     Output only. Contains the runtime version which was used during latest
           #     function deployment.
           class OnDeployUpdatePolicy
             include ::Google::Protobuf::MessageExts
@@ -347,7 +350,8 @@ module Google
         #     To refer to a specific fixed alias (tag):
         #     `https://source.developers.google.com/projects/*/repos/*/fixed-aliases/*/paths/*`
         #
-        #     You may omit `paths/*` if you want to use the main directory.
+        #     You may omit `paths/*` if you want to use the main directory. The function
+        #     response may add an empty `/paths/` to the URL.
         # @!attribute [r] deployed_url
         #   @return [::String]
         #     Output only. The URL pointing to the hosted repository where the function
@@ -361,7 +365,7 @@ module Google
         # Describes HttpsTrigger, could be used to connect web hooks to function.
         # @!attribute [r] url
         #   @return [::String]
-        #     Output only. The deployed URL for the function.
+        #     Output only. The deployed url for the function.
         # @!attribute [rw] security_level
         #   @return [::Google::Cloud::Functions::V1::HttpsTrigger::SecurityLevel]
         #     The security level for the function.
