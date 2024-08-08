@@ -2,7 +2,6 @@
 
 Cloud Spanner is a managed, mission-critical, globally consistent and scalable relational database service.
 
-Cloud Spanner is a managed, mission-critical, globally consistent and scalable relational database service.
 
 https://github.com/googleapis/google-cloud-ruby
 
