@@ -2,7 +2,6 @@
 
 Network management API for Distributed Cloud Edge.
 
-Network management API for Distributed Cloud Edge.
 
 https://github.com/googleapis/google-cloud-ruby
 
