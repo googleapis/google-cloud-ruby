@@ -2,7 +2,6 @@
 
 Create and manage meetings in Google Meet.
 
-Create and manage meetings in Google Meet.
 
 https://github.com/googleapis/google-cloud-ruby
 
