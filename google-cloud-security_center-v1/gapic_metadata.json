@@ -55,6 +55,16 @@
                 "delete_security_health_analytics_custom_module"
               ]
             },
+            "GetSimulation": {
+              "methods": [
+                "get_simulation"
+              ]
+            },
+            "GetValuedResource": {
+              "methods": [
+                "get_valued_resource"
+              ]
+            },
             "GetBigQueryExport": {
               "methods": [
                 "get_big_query_export"
@@ -233,6 +243,86 @@
             "ListBigQueryExports": {
               "methods": [
                 "list_big_query_exports"
+              ]
+            },
+            "CreateEventThreatDetectionCustomModule": {
+              "methods": [
+                "create_event_threat_detection_custom_module"
+              ]
+            },
+            "DeleteEventThreatDetectionCustomModule": {
+              "methods": [
+                "delete_event_threat_detection_custom_module"
+              ]
+            },
+            "GetEventThreatDetectionCustomModule": {
+              "methods": [
+                "get_event_threat_detection_custom_module"
+              ]
+            },
+            "ListDescendantEventThreatDetectionCustomModules": {
+              "methods": [
+                "list_descendant_event_threat_detection_custom_modules"
+              ]
+            },
+            "ListEventThreatDetectionCustomModules": {
+              "methods": [
+                "list_event_threat_detection_custom_modules"
+              ]
+            },
+            "UpdateEventThreatDetectionCustomModule": {
+              "methods": [
+                "update_event_threat_detection_custom_module"
+              ]
+            },
+            "ValidateEventThreatDetectionCustomModule": {
+              "methods": [
+                "validate_event_threat_detection_custom_module"
+              ]
+            },
+            "GetEffectiveEventThreatDetectionCustomModule": {
+              "methods": [
+                "get_effective_event_threat_detection_custom_module"
+              ]
+            },
+            "ListEffectiveEventThreatDetectionCustomModules": {
+              "methods": [
+                "list_effective_event_threat_detection_custom_modules"
+              ]
+            },
+            "BatchCreateResourceValueConfigs": {
+              "methods": [
+                "batch_create_resource_value_configs"
+              ]
+            },
+            "DeleteResourceValueConfig": {
+              "methods": [
+                "delete_resource_value_config"
+              ]
+            },
+            "GetResourceValueConfig": {
+              "methods": [
+                "get_resource_value_config"
+              ]
+            },
+            "ListResourceValueConfigs": {
+              "methods": [
+                "list_resource_value_configs"
+              ]
+            },
+            "UpdateResourceValueConfig": {
+              "methods": [
+                "update_resource_value_config"
+              ]
+            },
+            "ListValuedResources": {
+              "methods": [
+                "list_valued_resources"
+              ]
+            },
+            "ListAttackPaths": {
+              "methods": [
+                "list_attack_paths"
               ]
             }
           }

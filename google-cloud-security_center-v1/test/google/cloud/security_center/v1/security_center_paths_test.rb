@@ -66,6 +66,24 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientPathsTest < Min
     end
   end
 
+  def test_effective_event_threat_detection_custom_module_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.effective_event_threat_detection_custom_module_path organization: "value0", module_param: "value1"
+      assert_equal "organizations/value0/eventThreatDetectionSettings/effectiveCustomModules/value1", path
+
+      path = client.effective_event_threat_detection_custom_module_path folder: "value0", module_param: "value1"
+      assert_equal "folders/value0/eventThreatDetectionSettings/effectiveCustomModules/value1", path
+
+      path = client.effective_event_threat_detection_custom_module_path project: "value0", module_param: "value1"
+      assert_equal "projects/value0/eventThreatDetectionSettings/effectiveCustomModules/value1", path
+    end
+  end
+
   def test_effective_security_health_analytics_custom_module_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -81,6 +99,42 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientPathsTest < Min
 
       path = client.effective_security_health_analytics_custom_module_path project: "value0", effective_custom_module: "value1"
       assert_equal "projects/value0/securityHealthAnalyticsSettings/effectiveCustomModules/value1", path
+    end
+  end
+
+  def test_event_threat_detection_custom_module_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.event_threat_detection_custom_module_path organization: "value0", module_param: "value1"
+      assert_equal "organizations/value0/eventThreatDetectionSettings/customModules/value1", path
+
+      path = client.event_threat_detection_custom_module_path folder: "value0", module_param: "value1"
+      assert_equal "folders/value0/eventThreatDetectionSettings/customModules/value1", path
+
+      path = client.event_threat_detection_custom_module_path project: "value0", module_param: "value1"
+      assert_equal "projects/value0/eventThreatDetectionSettings/customModules/value1", path
+    end
+  end
+
+  def test_event_threat_detection_settings_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.event_threat_detection_settings_path organization: "value0"
+      assert_equal "organizations/value0/eventThreatDetectionSettings", path
+
+      path = client.event_threat_detection_settings_path folder: "value0"
+      assert_equal "folders/value0/eventThreatDetectionSettings", path
+
+      path = client.event_threat_detection_settings_path project: "value0"
+      assert_equal "projects/value0/eventThreatDetectionSettings", path
     end
   end
 
@@ -132,6 +186,30 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientPathsTest < Min
     end
   end
 
+  def test_folder_location_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.folder_location_path folder: "value0", location: "value1"
+      assert_equal "folders/value0/locations/value1", path
+    end
+  end
+
+  def test_location_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.location_path project: "value0", location: "value1"
+      assert_equal "projects/value0/locations/value1", path
+    end
+  end
+
   def test_mute_config_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -147,6 +225,15 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientPathsTest < Min
 
       path = client.mute_config_path project: "value0", mute_config: "value1"
       assert_equal "projects/value0/muteConfigs/value1", path
+
+      path = client.mute_config_path organization: "value0", location: "value1", mute_config: "value2"
+      assert_equal "organizations/value0/locations/value1/muteConfigs/value2", path
+
+      path = client.mute_config_path folder: "value0", location: "value1", mute_config: "value2"
+      assert_equal "folders/value0/locations/value1/muteConfigs/value2", path
+
+      path = client.mute_config_path project: "value0", location: "value1", mute_config: "value2"
+      assert_equal "projects/value0/locations/value1/muteConfigs/value2", path
     end
   end
 
@@ -180,6 +267,18 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientPathsTest < Min
     end
   end
 
+  def test_organization_location_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.organization_location_path organization: "value0", location: "value1"
+      assert_equal "organizations/value0/locations/value1", path
+    end
+  end
+
   def test_organization_settings_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -189,6 +288,18 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientPathsTest < Min
 
       path = client.organization_settings_path organization: "value0"
       assert_equal "organizations/value0/organizationSettings", path
+    end
+  end
+
+  def test_organization_simulation_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.organization_simulation_path organization: "value0", simulation: "value1"
+      assert_equal "organizations/value0/simulations/value1", path
     end
   end
 
@@ -219,6 +330,18 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientPathsTest < Min
 
       path = client.project_path project: "value0"
       assert_equal "projects/value0", path
+    end
+  end
+
+  def test_resource_value_config_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.resource_value_config_path organization: "value0", resource_value_config: "value1"
+      assert_equal "organizations/value0/resourceValueConfigs/value1", path
     end
   end
 
@@ -285,6 +408,18 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientPathsTest < Min
     end
   end
 
+  def test_simulation_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.simulation_path organization: "value0", simulation: "value1"
+      assert_equal "organizations/value0/simulations/value1", path
+    end
+  end
+
   def test_source_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -327,6 +462,18 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientPathsTest < Min
 
       path = client.topic_path project: "value0", topic: "value1"
       assert_equal "projects/value0/topics/value1", path
+    end
+  end
+
+  def test_valued_resource_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.valued_resource_path organization: "value0", simulation: "value1", valued_resource: "value2"
+      assert_equal "organizations/value0/simulations/value1/valuedResources/value2", path
     end
   end
 end

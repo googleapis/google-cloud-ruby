@@ -30,8 +30,8 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent, at which bulk action needs to be applied. Its format
-        #     is "organizations/[organization_id]", "folders/[folder_id]",
-        #     "projects/[project_id]".
+        #     is `organizations/[organization_id]`, `folders/[folder_id]`,
+        #     `projects/[project_id]`.
         # @!attribute [rw] filter
         #   @return [::String]
         #     Expression that identifies findings that should be updated.
@@ -59,9 +59,26 @@ module Google
         #   @return [::String]
         #     This can be a mute configuration name or any identifier for mute/unmute
         #     of findings based on the filter.
+        # @!attribute [rw] mute_state
+        #   @return [::Google::Cloud::SecurityCenter::V1::BulkMuteFindingsRequest::MuteState]
+        #     Optional. All findings matching the given filter will have their mute state
+        #     set to this value. The default value is `MUTED`. Setting this to
+        #     `UNDEFINED` will clear the mute state on all matching findings.
         class BulkMuteFindingsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The mute state.
+          module MuteState
+            # Unused.
+            MUTE_STATE_UNSPECIFIED = 0
+
+            # Matching findings will be muted (default).
+            MUTED = 1
+
+            # Matching findings will have their mute state cleared.
+            UNDEFINED = 2
+          end
         end
 
         # The response to a BulkMute request. Contains the LRO information.
@@ -74,7 +91,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Resource name of the new finding's parent. Its format should be
-        #     "organizations/[organization_id]/sources/[source_id]".
+        #     `organizations/[organization_id]/sources/[source_id]`.
         # @!attribute [rw] finding_id
         #   @return [::String]
         #     Required. Unique identifier provided by the client within the parent scope.
@@ -93,8 +110,8 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Resource name of the new mute configs's parent. Its format is
-        #     "organizations/[organization_id]", "folders/[folder_id]", or
-        #     "projects/[project_id]".
+        #     `organizations/[organization_id]`, `folders/[folder_id]`, or
+        #     `projects/[project_id]`.
         # @!attribute [rw] mute_config
         #   @return [::Google::Cloud::SecurityCenter::V1::MuteConfig]
         #     Required. The mute config being created.
@@ -109,12 +126,119 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message to create single resource value config
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Resource name of the new ResourceValueConfig's parent.
+        # @!attribute [rw] resource_value_config
+        #   @return [::Google::Cloud::SecurityCenter::V1::ResourceValueConfig]
+        #     Required. The resource value config being created.
+        class CreateResourceValueConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message to create multiple resource value configs
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Resource name of the new ResourceValueConfig's parent.
+        #     The parent field in the CreateResourceValueConfigRequest
+        #     messages must either be empty or match this field.
+        # @!attribute [rw] requests
+        #   @return [::Array<::Google::Cloud::SecurityCenter::V1::CreateResourceValueConfigRequest>]
+        #     Required. The resource value configs to be created.
+        class BatchCreateResourceValueConfigsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for BatchCreateResourceValueConfigs
+        # @!attribute [rw] resource_value_configs
+        #   @return [::Array<::Google::Cloud::SecurityCenter::V1::ResourceValueConfig>]
+        #     The resource value configs created
+        class BatchCreateResourceValueConfigsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message to delete resource value config
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the ResourceValueConfig to delete
+        class DeleteResourceValueConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message to get resource value config
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the resource value config to retrieve. Its format is
+        #     `organizations/{organization}/resourceValueConfigs/{config_id}`.
+        class GetResourceValueConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message to list resource value configs of a parent
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent, which owns the collection of resource value configs.
+        #     Its format is
+        #     `organizations/[organization_id]`
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The number of results to return. The service may return fewer than
+        #     this value.
+        #     If unspecified, at most 10 configs will be returned.
+        #     The maximum value is 1000; values above 1000 will be coerced to 1000.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous `ListResourceValueConfigs` call.
+        #     Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to
+        #     `ListResourceValueConfigs` must match the call that provided the
+        #     page token.
+        #
+        #     page_size can be specified, and the new page_size will be used.
+        class ListResourceValueConfigsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message to list resource value configs
+        # @!attribute [rw] resource_value_configs
+        #   @return [::Array<::Google::Cloud::SecurityCenter::V1::ResourceValueConfig>]
+        #     The resource value configs from the specified parent.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is empty, there are no subsequent pages.
+        class ListResourceValueConfigsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message to update resource value config
+        # @!attribute [rw] resource_value_config
+        #   @return [::Google::Cloud::SecurityCenter::V1::ResourceValueConfig]
+        #     Required. The resource value config being updated.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     The list of fields to be updated.
+        #     If empty all mutable fields will be updated.
+        class UpdateResourceValueConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for creating a notification config.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Resource name of the new notification config's parent. Its format
-        #     is "organizations/[organization_id]", "folders/[folder_id]", or
-        #     "projects/[project_id]".
+        #     is `organizations/[organization_id]`, `folders/[folder_id]`, or
+        #     `projects/[project_id]`.
         # @!attribute [rw] config_id
         #   @return [::String]
         #     Required.
@@ -135,9 +259,9 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Resource name of the new custom module's parent. Its format is
-        #     "organizations/\\{organization}/securityHealthAnalyticsSettings",
-        #     "folders/\\{folder}/securityHealthAnalyticsSettings", or
-        #     "projects/\\{project}/securityHealthAnalyticsSettings"
+        #     `organizations/{organization}/securityHealthAnalyticsSettings`,
+        #     `folders/{folder}/securityHealthAnalyticsSettings`, or
+        #     `projects/{project}/securityHealthAnalyticsSettings`
         # @!attribute [rw] security_health_analytics_custom_module
         #   @return [::Google::Cloud::SecurityCenter::V1::SecurityHealthAnalyticsCustomModule]
         #     Required. SecurityHealthAnalytics custom module to create. The provided
@@ -152,7 +276,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Resource name of the new source's parent. Its format should be
-        #     "organizations/[organization_id]".
+        #     `organizations/[organization_id]`.
         # @!attribute [rw] source
         #   @return [::Google::Cloud::SecurityCenter::V1::Source]
         #     Required. The Source being created, only the display_name and description
@@ -166,9 +290,12 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Name of the mute config to delete. Its format is
-        #     organizations/\\{organization}/muteConfigs/\\{config_id},
-        #     folders/\\{folder}/muteConfigs/\\{config_id}, or
-        #     projects/\\{project}/muteConfigs/\\{config_id}
+        #     `organizations/{organization}/muteConfigs/{config_id}`,
+        #     `folders/{folder}/muteConfigs/{config_id}`,
+        #     `projects/{project}/muteConfigs/{config_id}`,
+        #     `organizations/{organization}/locations/global/muteConfigs/{config_id}`,
+        #     `folders/{folder}/locations/global/muteConfigs/{config_id}`, or
+        #     `projects/{project}/locations/global/muteConfigs/{config_id}`.
         class DeleteMuteConfigRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -178,9 +305,9 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Name of the notification config to delete. Its format is
-        #     "organizations/[organization_id]/notificationConfigs/[config_id]",
-        #     "folders/[folder_id]/notificationConfigs/[config_id]",
-        #     or "projects/[project_id]/notificationConfigs/[config_id]".
+        #     `organizations/[organization_id]/notificationConfigs/[config_id]`,
+        #     `folders/[folder_id]/notificationConfigs/[config_id]`,
+        #     or `projects/[project_id]/notificationConfigs/[config_id]`.
         class DeleteNotificationConfigRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -190,10 +317,10 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Name of the custom module to delete. Its format is
-        #     "organizations/\\{organization}/securityHealthAnalyticsSettings/customModules/\\{customModule}",
-        #     "folders/\\{folder}/securityHealthAnalyticsSettings/customModules/\\{customModule}",
+        #     `organizations/{organization}/securityHealthAnalyticsSettings/customModules/{customModule}`,
+        #     `folders/{folder}/securityHealthAnalyticsSettings/customModules/{customModule}`,
         #     or
-        #     "projects/\\{project}/securityHealthAnalyticsSettings/customModules/\\{customModule}"
+        #     `projects/{project}/securityHealthAnalyticsSettings/customModules/{customModule}`
         class DeleteSecurityHealthAnalyticsCustomModuleRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -203,9 +330,9 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Name of the BigQuery export to retrieve. Its format is
-        #     organizations/\\{organization}/bigQueryExports/\\{export_id},
-        #     folders/\\{folder}/bigQueryExports/\\{export_id}, or
-        #     projects/\\{project}/bigQueryExports/\\{export_id}
+        #     `organizations/{organization}/bigQueryExports/{export_id}`,
+        #     `folders/{folder}/bigQueryExports/{export_id}`, or
+        #     `projects/{project}/bigQueryExports/{export_id}`
         class GetBigQueryExportRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -215,9 +342,12 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Name of the mute config to retrieve. Its format is
-        #     organizations/\\{organization}/muteConfigs/\\{config_id},
-        #     folders/\\{folder}/muteConfigs/\\{config_id}, or
-        #     projects/\\{project}/muteConfigs/\\{config_id}
+        #     `organizations/{organization}/muteConfigs/{config_id}`,
+        #     `folders/{folder}/muteConfigs/{config_id}`,
+        #     `projects/{project}/muteConfigs/{config_id}`,
+        #     `organizations/{organization}/locations/global/muteConfigs/{config_id}`,
+        #     `folders/{folder}/locations/global/muteConfigs/{config_id}`, or
+        #     `projects/{project}/locations/global/muteConfigs/{config_id}`.
         class GetMuteConfigRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -227,9 +357,9 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Name of the notification config to get. Its format is
-        #     "organizations/[organization_id]/notificationConfigs/[config_id]",
-        #     "folders/[folder_id]/notificationConfigs/[config_id]",
-        #     or "projects/[project_id]/notificationConfigs/[config_id]".
+        #     `organizations/[organization_id]/notificationConfigs/[config_id]`,
+        #     `folders/[folder_id]/notificationConfigs/[config_id]`,
+        #     or `projects/[project_id]/notificationConfigs/[config_id]`.
         class GetNotificationConfigRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -239,7 +369,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Name of the organization to get organization settings for. Its
-        #     format is "organizations/[organization_id]/organizationSettings".
+        #     format is `organizations/[organization_id]/organizationSettings`.
         class GetOrganizationSettingsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -250,10 +380,10 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Name of the effective custom module to get. Its format is
-        #     "organizations/\\{organization}/securityHealthAnalyticsSettings/effectiveCustomModules/\\{customModule}",
-        #     "folders/\\{folder}/securityHealthAnalyticsSettings/effectiveCustomModules/\\{customModule}",
+        #     `organizations/{organization}/securityHealthAnalyticsSettings/effectiveCustomModules/{customModule}`,
+        #     `folders/{folder}/securityHealthAnalyticsSettings/effectiveCustomModules/{customModule}`,
         #     or
-        #     "projects/\\{project}/securityHealthAnalyticsSettings/effectiveCustomModules/\\{customModule}"
+        #     `projects/{project}/securityHealthAnalyticsSettings/effectiveCustomModules/{customModule}`
         class GetEffectiveSecurityHealthAnalyticsCustomModuleRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -263,10 +393,10 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Name of the custom module to get. Its format is
-        #     "organizations/\\{organization}/securityHealthAnalyticsSettings/customModules/\\{customModule}",
-        #     "folders/\\{folder}/securityHealthAnalyticsSettings/customModules/\\{customModule}",
+        #     `organizations/{organization}/securityHealthAnalyticsSettings/customModules/{customModule}`,
+        #     `folders/{folder}/securityHealthAnalyticsSettings/customModules/{customModule}`,
         #     or
-        #     "projects/\\{project}/securityHealthAnalyticsSettings/customModules/\\{customModule}"
+        #     `projects/{project}/securityHealthAnalyticsSettings/customModules/{customModule}`
         class GetSecurityHealthAnalyticsCustomModuleRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -276,7 +406,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Relative resource name of the source. Its format is
-        #     "organizations/[organization_id]/source/[source_id]".
+        #     `organizations/[organization_id]/source/[source_id]`.
         class GetSourceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -286,8 +416,8 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The name of the parent to group the assets by. Its format is
-        #     "organizations/[organization_id]", "folders/[folder_id]", or
-        #     "projects/[project_id]".
+        #     `organizations/[organization_id]`, `folders/[folder_id]`, or
+        #     `projects/[project_id]`.
         # @!attribute [rw] filter
         #   @return [::String]
         #     Expression that defines the filter to apply across assets.
@@ -446,12 +576,12 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Name of the source to groupBy. Its format is
-        #     "organizations/[organization_id]/sources/[source_id]",
-        #     folders/[folder_id]/sources/[source_id], or
-        #     projects/[project_id]/sources/[source_id]. To groupBy across all sources
+        #     `organizations/[organization_id]/sources/[source_id]`,
+        #     `folders/[folder_id]/sources/[source_id]`, or
+        #     `projects/[project_id]/sources/[source_id]`. To groupBy across all sources
         #     provide a source_id of `-`. For example:
-        #     organizations/\\{organization_id}/sources/-, folders/\\{folder_id}/sources/-,
-        #     or projects/\\{project_id}/sources/-
+        #     `organizations/{organization_id}/sources/-, folders/{folder_id}/sources/-`,
+        #     or `projects/{project_id}/sources/-`
         # @!attribute [rw] filter
         #   @return [::String]
         #     Expression that defines the filter to apply across findings.
@@ -518,14 +648,6 @@ module Google
         #     Required. Expression that defines what assets fields to use for grouping
         #     (including `state_change`). The string value should follow SQL syntax:
         #     comma separated list of fields. For example: "parent,resource_name".
-        #
-        #     The following fields are supported:
-        #
-        #     * resource_name
-        #     * category
-        #     * state
-        #     * parent
-        #     * severity
         #
         #     The following fields are supported when compare_duration is set:
         #
@@ -631,9 +753,9 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Name of parent to list descendant custom modules. Its format is
-        #     "organizations/\\{organization}/securityHealthAnalyticsSettings",
-        #     "folders/\\{folder}/securityHealthAnalyticsSettings", or
-        #     "projects/\\{project}/securityHealthAnalyticsSettings"
+        #     `organizations/{organization}/securityHealthAnalyticsSettings`,
+        #     `folders/{folder}/securityHealthAnalyticsSettings`, or
+        #     `projects/{project}/securityHealthAnalyticsSettings`
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of results to return in a single response. Default is
@@ -660,13 +782,153 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for listing the valued resources for a given simulation.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Name of parent to list valued resources.
+        #
+        #     Valid formats:
+        #     `organizations/{organization}`,
+        #     `organizations/{organization}/simulations/{simulation}`
+        #     `organizations/{organization}/simulations/{simulation}/attackExposureResults/{attack_exposure_result_v2}`
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     The filter expression that filters the valued resources in the response.
+        #     Supported fields:
+        #
+        #       * `resource_value` supports =
+        #       * `resource_type` supports =
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     The value returned by the last `ListValuedResourcesResponse`; indicates
+        #     that this is a continuation of a prior `ListValuedResources` call, and
+        #     that the system should return the next page of data.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of results to return in a single response. Default is
+        #     10, minimum is 1, maximum is 1000.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. The fields by which to order the valued resources response.
+        #
+        #     Supported fields:
+        #
+        #       * `exposed_score`
+        #
+        #       * `resource_value`
+        #
+        #       * `resource_type`
+        #
+        #       * `resource`
+        #
+        #       * `display_name`
+        #
+        #     Values should be a comma separated list of fields. For example:
+        #     `exposed_score,resource_value`.
+        #
+        #     The default sorting order is descending. To specify ascending or descending
+        #     order for a field, append a ` ASC` or a ` DESC` suffix, respectively; for
+        #     example: `exposed_score DESC`.
+        class ListValuedResourcesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for listing the valued resources for a given simulation.
+        # @!attribute [rw] valued_resources
+        #   @return [::Array<::Google::Cloud::SecurityCenter::V1::ValuedResource>]
+        #     The valued resources that the attack path simulation identified.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     Token to retrieve the next page of results, or empty if there are no more
+        #     results.
+        # @!attribute [rw] total_size
+        #   @return [::Integer]
+        #     The estimated total number of results matching the query.
+        class ListValuedResourcesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for listing the attack paths for a given simulation or valued
+        # resource.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Name of parent to list attack paths.
+        #
+        #     Valid formats:
+        #     `organizations/{organization}`,
+        #     `organizations/{organization}/simulations/{simulation}`
+        #     `organizations/{organization}/simulations/{simulation}/attackExposureResults/{attack_exposure_result_v2}`
+        #     `organizations/{organization}/simulations/{simulation}/valuedResources/{valued_resource}`
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     The filter expression that filters the attack path in the response.
+        #     Supported fields:
+        #
+        #       * `valued_resources` supports =
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     The value returned by the last `ListAttackPathsResponse`; indicates
+        #     that this is a continuation of a prior `ListAttackPaths` call, and
+        #     that the system should return the next page of data.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of results to return in a single response. Default is
+        #     10, minimum is 1, maximum is 1000.
+        class ListAttackPathsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for listing the attack paths for a given simulation or
+        # valued resource.
+        # @!attribute [rw] attack_paths
+        #   @return [::Array<::Google::Cloud::SecurityCenter::V1::AttackPath>]
+        #     The attack paths that the attack path simulation identified.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     Token to retrieve the next page of results, or empty if there are no more
+        #     results.
+        class ListAttackPathsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for getting simulation.
+        # Simulation name can include "latest" to retrieve the latest simulation
+        # For example, "organizations/123/simulations/latest"
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The organization name or simulation name of this simulation
+        #
+        #     Valid format:
+        #     `organizations/{organization}/simulations/latest`
+        #     `organizations/{organization}/simulations/{simulation}`
+        class GetSimulationRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for getting a valued resource.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of this valued resource
+        #
+        #     Valid format:
+        #     `organizations/{organization}/simulations/{simulation}/valuedResources/{valued_resource}`
+        class GetValuedResourceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for listing  mute configs at a given scope e.g. organization,
         # folder or project.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent, which owns the collection of mute configs. Its format
-        #     is "organizations/[organization_id]", "folders/[folder_id]",
-        #     "projects/[project_id]".
+        #     is `organizations/[organization_id]`, `folders/[folder_id]`,
+        #     `projects/[project_id]`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of configs to return. The service may return fewer than
@@ -736,9 +998,9 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Name of parent to list effective custom modules. Its format is
-        #     "organizations/\\{organization}/securityHealthAnalyticsSettings",
-        #     "folders/\\{folder}/securityHealthAnalyticsSettings", or
-        #     "projects/\\{project}/securityHealthAnalyticsSettings"
+        #     `organizations/{organization}/securityHealthAnalyticsSettings`,
+        #     `folders/{folder}/securityHealthAnalyticsSettings`, or
+        #     `projects/{project}/securityHealthAnalyticsSettings`
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of results to return in a single response. Default is
@@ -769,9 +1031,9 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Name of parent to list custom modules. Its format is
-        #     "organizations/\\{organization}/securityHealthAnalyticsSettings",
-        #     "folders/\\{folder}/securityHealthAnalyticsSettings", or
-        #     "projects/\\{project}/securityHealthAnalyticsSettings"
+        #     `organizations/{organization}/securityHealthAnalyticsSettings`,
+        #     `folders/{folder}/securityHealthAnalyticsSettings`, or
+        #     `projects/{project}/securityHealthAnalyticsSettings`
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of results to return in a single response. Default is
@@ -801,8 +1063,8 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Resource name of the parent of sources to list. Its format should
-        #     be "organizations/[organization_id]", "folders/[folder_id]", or
-        #     "projects/[project_id]".
+        #     be `organizations/[organization_id]`, `folders/[folder_id]`, or
+        #     `projects/[project_id]`.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     The value returned by the last `ListSourcesResponse`; indicates
@@ -836,8 +1098,8 @@ module Google
         #     Required. The name of the parent resource that contains the assets. The
         #     value that you can specify on parent depends on the method in which you
         #     specify parent. You can specify one of the following values:
-        #     "organizations/[organization_id]", "folders/[folder_id]", or
-        #     "projects/[project_id]".
+        #     `organizations/[organization_id]`, `folders/[folder_id]`, or
+        #     `projects/[project_id]`.
         # @!attribute [rw] filter
         #   @return [::String]
         #     Expression that defines the filter to apply across assets.
@@ -1031,12 +1293,12 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Name of the source the findings belong to. Its format is
-        #     "organizations/[organization_id]/sources/[source_id],
-        #     folders/[folder_id]/sources/[source_id], or
-        #     projects/[project_id]/sources/[source_id]". To list across all sources
+        #     `organizations/[organization_id]/sources/[source_id]`,
+        #     `folders/[folder_id]/sources/[source_id]`, or
+        #     `projects/[project_id]/sources/[source_id]`. To list across all sources
         #     provide a source_id of `-`. For example:
-        #     organizations/\\{organization_id}/sources/-, folders/\\{folder_id}/sources/- or
-        #     projects/\\{projects_id}/sources/-
+        #     `organizations/{organization_id}/sources/-`,
+        #     `folders/{folder_id}/sources/-` or `projects/{projects_id}/sources/-`
         # @!attribute [rw] filter
         #   @return [::String]
         #     Expression that defines the filter to apply across findings.
@@ -1237,6 +1499,39 @@ module Google
             #     Contains a Folder message for each folder in the assets ancestry.
             #     The first folder is the deepest nested folder, and the last folder is
             #     the folder directly under the Organization.
+            # @!attribute [rw] cloud_provider
+            #   @return [::Google::Cloud::SecurityCenter::V1::CloudProvider]
+            #     Indicates which cloud provider the finding is from.
+            # @!attribute [rw] organization
+            #   @return [::String]
+            #     Indicates which organization / tenant the finding is for.
+            # @!attribute [rw] service
+            #   @return [::String]
+            #     The service or resource provider associated with the resource.
+            # @!attribute [rw] location
+            #   @return [::String]
+            #     The region or location of the service (if applicable).
+            # @!attribute [rw] aws_metadata
+            #   @return [::Google::Cloud::SecurityCenter::V1::AwsMetadata]
+            #     The AWS metadata associated with the finding.
+            # @!attribute [rw] azure_metadata
+            #   @return [::Google::Cloud::SecurityCenter::V1::AzureMetadata]
+            #     The Azure metadata associated with the finding.
+            # @!attribute [rw] resource_path
+            #   @return [::Google::Cloud::SecurityCenter::V1::ResourcePath]
+            #     Provides the path to the resource within the resource hierarchy.
+            # @!attribute [rw] resource_path_string
+            #   @return [::String]
+            #     A string representation of the resource path.
+            #     For Google Cloud, it has the format of
+            #     `org/{organization_id}/folder/{folder_id}/folder/{folder_id}/project/{project_id}`
+            #     where there can be any number of folders.
+            #     For AWS, it has the format of
+            #     `org/{organization_id}/ou/{organizational_unit_id}/ou/{organizational_unit_id}/account/{account_id}`
+            #     where there can be any number of organizational units.
+            #     For Azure, it has the format of
+            #     `mg/{management_group_id}/mg/{management_group_id}/subscription/{subscription_id}/rg/{resource_group_name}`
+            #     where there can be any number of management groups.
             class Resource
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1278,9 +1573,9 @@ module Google
         #     Required. The [relative resource
         #     name](https://cloud.google.com/apis/design/resource_names#relative_resource_name)
         #     of the finding. Example:
-        #     "organizations/\\{organization_id}/sources/\\{source_id}/findings/\\{finding_id}",
-        #     "folders/\\{folder_id}/sources/\\{source_id}/findings/\\{finding_id}",
-        #     "projects/\\{project_id}/sources/\\{source_id}/findings/\\{finding_id}".
+        #     `organizations/{organization_id}/sources/{source_id}/findings/{finding_id}`,
+        #     `folders/{folder_id}/sources/{source_id}/findings/{finding_id}`,
+        #     `projects/{project_id}/sources/{source_id}/findings/{finding_id}`.
         # @!attribute [rw] state
         #   @return [::Google::Cloud::SecurityCenter::V1::Finding::State]
         #     Required. The desired State of the finding.
@@ -1298,9 +1593,9 @@ module Google
         #     Required. The [relative resource
         #     name](https://cloud.google.com/apis/design/resource_names#relative_resource_name)
         #     of the finding. Example:
-        #     "organizations/\\{organization_id}/sources/\\{source_id}/findings/\\{finding_id}",
-        #     "folders/\\{folder_id}/sources/\\{source_id}/findings/\\{finding_id}",
-        #     "projects/\\{project_id}/sources/\\{source_id}/findings/\\{finding_id}".
+        #     `organizations/{organization_id}/sources/{source_id}/findings/{finding_id}`,
+        #     `folders/{folder_id}/sources/{source_id}/findings/{finding_id}`,
+        #     `projects/{project_id}/sources/{source_id}/findings/{finding_id}`.
         # @!attribute [rw] mute
         #   @return [::Google::Cloud::SecurityCenter::V1::Finding::Mute]
         #     Required. The desired state of the Mute.
@@ -1313,7 +1608,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Name of the organization to run asset discovery for. Its format
-        #     is "organizations/[organization_id]".
+        #     is `organizations/[organization_id]`.
         class RunAssetDiscoveryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1468,7 +1763,9 @@ module Google
         #     Required. The SecurityHealthAnalytics custom module to update.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     The list of fields to update.
+        #     The list of fields to be updated. The only fields that can be updated are
+        #     `enablement_state` and `custom_config`. If empty or set to the wildcard
+        #     value `*`, both `enablement_state` and `custom_config` are updated.
         class UpdateSecurityHealthAnalyticsCustomModuleRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1514,8 +1811,8 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The name of the parent resource of the new BigQuery export. Its
-        #     format is "organizations/[organization_id]", "folders/[folder_id]", or
-        #     "projects/[project_id]".
+        #     format is `organizations/[organization_id]`, `folders/[folder_id]`, or
+        #     `projects/[project_id]`.
         # @!attribute [rw] big_query_export
         #   @return [::Google::Cloud::SecurityCenter::V1::BigQueryExport]
         #     Required. The BigQuery export being created.
@@ -1548,8 +1845,8 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent, which owns the collection of BigQuery exports. Its
-        #     format is "organizations/[organization_id]", "folders/[folder_id]",
-        #     "projects/[project_id]".
+        #     format is `organizations/[organization_id]`, `folders/[folder_id]`,
+        #     `projects/[project_id]`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of configs to return. The service may return fewer than
@@ -1584,10 +1881,252 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the BigQuery export to delete. Its format is
-        #     organizations/\\{organization}/bigQueryExports/\\{export_id},
-        #     folders/\\{folder}/bigQueryExports/\\{export_id}, or
-        #     projects/\\{project}/bigQueryExports/\\{export_id}
+        #     `organizations/{organization}/bigQueryExports/{export_id}`,
+        #     `folders/{folder}/bigQueryExports/{export_id}`, or
+        #     `projects/{project}/bigQueryExports/{export_id}`
         class DeleteBigQueryExportRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to create an Event Threat Detection custom module.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The new custom module's parent.
+        #
+        #     Its format is:
+        #
+        #       * `organizations/{organization}/eventThreatDetectionSettings`.
+        #       * `folders/{folder}/eventThreatDetectionSettings`.
+        #       * `projects/{project}/eventThreatDetectionSettings`.
+        # @!attribute [rw] event_threat_detection_custom_module
+        #   @return [::Google::Cloud::SecurityCenter::V1::EventThreatDetectionCustomModule]
+        #     Required. The module to create. The
+        #     event_threat_detection_custom_module.name will be ignored and server
+        #     generated.
+        class CreateEventThreatDetectionCustomModuleRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to validate an Event Threat Detection custom module.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Resource name of the parent to validate the Custom Module under.
+        #
+        #     Its format is:
+        #
+        #       * `organizations/{organization}/eventThreatDetectionSettings`.
+        #       * `folders/{folder}/eventThreatDetectionSettings`.
+        #       * `projects/{project}/eventThreatDetectionSettings`.
+        # @!attribute [rw] raw_text
+        #   @return [::String]
+        #     Required. The raw text of the module's contents. Used to generate error
+        #     messages.
+        # @!attribute [rw] type
+        #   @return [::String]
+        #     Required. The type of the module (e.g. CONFIGURABLE_BAD_IP).
+        class ValidateEventThreatDetectionCustomModuleRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response to validating an Event Threat Detection custom module.
+        # @!attribute [rw] errors
+        #   @return [::Google::Cloud::SecurityCenter::V1::CustomModuleValidationErrors]
+        #     A list of errors returned by the validator. If the list is empty, there
+        #     were no errors.
+        class ValidateEventThreatDetectionCustomModuleResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to delete an Event Threat Detection custom module.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the custom module to delete.
+        #
+        #     Its format is:
+        #
+        #     * `organizations/{organization}/eventThreatDetectionSettings/customModules/{module}`.
+        #     * `folders/{folder}/eventThreatDetectionSettings/customModules/{module}`.
+        #     * `projects/{project}/eventThreatDetectionSettings/customModules/{module}`.
+        class DeleteEventThreatDetectionCustomModuleRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to get an Event Threat Detection custom module.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the custom module to get.
+        #
+        #     Its format is:
+        #
+        #     * `organizations/{organization}/eventThreatDetectionSettings/customModules/{module}`.
+        #     * `folders/{folder}/eventThreatDetectionSettings/customModules/{module}`.
+        #     * `projects/{project}/eventThreatDetectionSettings/customModules/{module}`.
+        class GetEventThreatDetectionCustomModuleRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to list current and descendant resident Event Threat Detection custom
+        # modules.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Name of the parent to list custom modules under.
+        #
+        #     Its format is:
+        #
+        #       * `organizations/{organization}/eventThreatDetectionSettings`.
+        #       * `folders/{folder}/eventThreatDetectionSettings`.
+        #       * `projects/{project}/eventThreatDetectionSettings`.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous
+        #     `ListDescendantEventThreatDetectionCustomModules` call. Provide this to
+        #     retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to
+        #     `ListDescendantEventThreatDetectionCustomModules` must match the call that
+        #     provided the page token.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of modules to return. The service may return fewer than
+        #     this value.
+        #     If unspecified, at most 10 configs will be returned.
+        #     The maximum value is 1000; values above 1000 will be coerced to 1000.
+        class ListDescendantEventThreatDetectionCustomModulesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response for listing current and descendant resident
+        # Event Threat Detection custom modules.
+        # @!attribute [rw] event_threat_detection_custom_modules
+        #   @return [::Array<::Google::Cloud::SecurityCenter::V1::EventThreatDetectionCustomModule>]
+        #     Custom modules belonging to the requested parent.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListDescendantEventThreatDetectionCustomModulesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to list Event Threat Detection custom modules.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Name of the parent to list custom modules under.
+        #
+        #     Its format is:
+        #
+        #       * `organizations/{organization}/eventThreatDetectionSettings`.
+        #       * `folders/{folder}/eventThreatDetectionSettings`.
+        #       * `projects/{project}/eventThreatDetectionSettings`.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous
+        #     `ListEventThreatDetectionCustomModules` call. Provide this to retrieve the
+        #     subsequent page.
+        #
+        #     When paginating, all other parameters provided to
+        #     `ListEventThreatDetectionCustomModules` must match the call that provided
+        #     the page token.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of modules to return. The service may return fewer than
+        #     this value.
+        #     If unspecified, at most 10 configs will be returned.
+        #     The maximum value is 1000; values above 1000 will be coerced to 1000.
+        class ListEventThreatDetectionCustomModulesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response for listing Event Threat Detection custom modules.
+        # @!attribute [rw] event_threat_detection_custom_modules
+        #   @return [::Array<::Google::Cloud::SecurityCenter::V1::EventThreatDetectionCustomModule>]
+        #     Custom modules belonging to the requested parent.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListEventThreatDetectionCustomModulesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to update an Event Threat Detection custom module.
+        # @!attribute [rw] event_threat_detection_custom_module
+        #   @return [::Google::Cloud::SecurityCenter::V1::EventThreatDetectionCustomModule]
+        #     Required. The module being updated.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     The list of fields to be updated.
+        #     If empty all mutable fields will be updated.
+        class UpdateEventThreatDetectionCustomModuleRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to get an EffectiveEventThreatDetectionCustomModule.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the effective Event Threat Detection custom
+        #     module.
+        #
+        #     Its format is:
+        #
+        #       * `organizations/{organization}/eventThreatDetectionSettings/effectiveCustomModules/{module}`.
+        #       * `folders/{folder}/eventThreatDetectionSettings/effectiveCustomModules/{module}`.
+        #       * `projects/{project}/eventThreatDetectionSettings/effectiveCustomModules/{module}`.
+        class GetEffectiveEventThreatDetectionCustomModuleRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to list effective Event Threat Detection custom modules.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Name of the parent to list custom modules for.
+        #
+        #     Its format is:
+        #
+        #       * `organizations/{organization}/eventThreatDetectionSettings`.
+        #       * `folders/{folder}/eventThreatDetectionSettings`.
+        #       * `projects/{project}/eventThreatDetectionSettings`.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous
+        #     `ListEffectiveEventThreatDetectionCustomModules` call. Provide this to
+        #     retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to
+        #     `ListEffectiveEventThreatDetectionCustomModules` must match the call that
+        #     provided the page token.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of modules to return. The service may return fewer than
+        #     this value.
+        #     If unspecified, at most 10 configs will be returned.
+        #     The maximum value is 1000; values above 1000 will be coerced to 1000.
+        class ListEffectiveEventThreatDetectionCustomModulesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response for listing EffectiveEventThreatDetectionCustomModules.
+        # @!attribute [rw] effective_event_threat_detection_custom_modules
+        #   @return [::Array<::Google::Cloud::SecurityCenter::V1::EffectiveEventThreatDetectionCustomModule>]
+        #     Effective custom modules belonging to the requested parent.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListEffectiveEventThreatDetectionCustomModulesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

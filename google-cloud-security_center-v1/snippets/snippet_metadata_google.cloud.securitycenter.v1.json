@@ -372,6 +372,86 @@
       ]
     },
     {
+      "region_tag": "securitycenter_v1_generated_SecurityCenter_GetSimulation_sync",
+      "title": "Snippet for the get_simulation call in the SecurityCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#get_simulation.",
+      "file": "security_center/get_simulation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_simulation",
+        "full_name": "::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#get_simulation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenter::V1::GetSimulationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenter::V1::Simulation",
+        "client": {
+          "short_name": "SecurityCenter::Client",
+          "full_name": "::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client"
+        },
+        "method": {
+          "short_name": "GetSimulation",
+          "full_name": "google.cloud.securitycenter.v1.SecurityCenter.GetSimulation",
+          "service": {
+            "short_name": "SecurityCenter",
+            "full_name": "google.cloud.securitycenter.v1.SecurityCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycenter_v1_generated_SecurityCenter_GetValuedResource_sync",
+      "title": "Snippet for the get_valued_resource call in the SecurityCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#get_valued_resource.",
+      "file": "security_center/get_valued_resource.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_valued_resource",
+        "full_name": "::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#get_valued_resource",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenter::V1::GetValuedResourceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenter::V1::ValuedResource",
+        "client": {
+          "short_name": "SecurityCenter::Client",
+          "full_name": "::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client"
+        },
+        "method": {
+          "short_name": "GetValuedResource",
+          "full_name": "google.cloud.securitycenter.v1.SecurityCenter.GetValuedResource",
+          "service": {
+            "short_name": "SecurityCenter",
+            "full_name": "google.cloud.securitycenter.v1.SecurityCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "securitycenter_v1_generated_SecurityCenter_GetBigQueryExport_sync",
       "title": "Snippet for the get_big_query_export call in the SecurityCenter service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#get_big_query_export.",
@@ -1795,6 +1875,646 @@
         "method": {
           "short_name": "ListBigQueryExports",
           "full_name": "google.cloud.securitycenter.v1.SecurityCenter.ListBigQueryExports",
+          "service": {
+            "short_name": "SecurityCenter",
+            "full_name": "google.cloud.securitycenter.v1.SecurityCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycenter_v1_generated_SecurityCenter_CreateEventThreatDetectionCustomModule_sync",
+      "title": "Snippet for the create_event_threat_detection_custom_module call in the SecurityCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#create_event_threat_detection_custom_module.",
+      "file": "security_center/create_event_threat_detection_custom_module.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_event_threat_detection_custom_module",
+        "full_name": "::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#create_event_threat_detection_custom_module",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenter::V1::CreateEventThreatDetectionCustomModuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenter::V1::EventThreatDetectionCustomModule",
+        "client": {
+          "short_name": "SecurityCenter::Client",
+          "full_name": "::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client"
+        },
+        "method": {
+          "short_name": "CreateEventThreatDetectionCustomModule",
+          "full_name": "google.cloud.securitycenter.v1.SecurityCenter.CreateEventThreatDetectionCustomModule",
+          "service": {
+            "short_name": "SecurityCenter",
+            "full_name": "google.cloud.securitycenter.v1.SecurityCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycenter_v1_generated_SecurityCenter_DeleteEventThreatDetectionCustomModule_sync",
+      "title": "Snippet for the delete_event_threat_detection_custom_module call in the SecurityCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#delete_event_threat_detection_custom_module.",
+      "file": "security_center/delete_event_threat_detection_custom_module.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_event_threat_detection_custom_module",
+        "full_name": "::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#delete_event_threat_detection_custom_module",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenter::V1::DeleteEventThreatDetectionCustomModuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "SecurityCenter::Client",
+          "full_name": "::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client"
+        },
+        "method": {
+          "short_name": "DeleteEventThreatDetectionCustomModule",
+          "full_name": "google.cloud.securitycenter.v1.SecurityCenter.DeleteEventThreatDetectionCustomModule",
+          "service": {
+            "short_name": "SecurityCenter",
+            "full_name": "google.cloud.securitycenter.v1.SecurityCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycenter_v1_generated_SecurityCenter_GetEventThreatDetectionCustomModule_sync",
+      "title": "Snippet for the get_event_threat_detection_custom_module call in the SecurityCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#get_event_threat_detection_custom_module.",
+      "file": "security_center/get_event_threat_detection_custom_module.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_event_threat_detection_custom_module",
+        "full_name": "::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#get_event_threat_detection_custom_module",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenter::V1::GetEventThreatDetectionCustomModuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenter::V1::EventThreatDetectionCustomModule",
+        "client": {
+          "short_name": "SecurityCenter::Client",
+          "full_name": "::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client"
+        },
+        "method": {
+          "short_name": "GetEventThreatDetectionCustomModule",
+          "full_name": "google.cloud.securitycenter.v1.SecurityCenter.GetEventThreatDetectionCustomModule",
+          "service": {
+            "short_name": "SecurityCenter",
+            "full_name": "google.cloud.securitycenter.v1.SecurityCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycenter_v1_generated_SecurityCenter_ListDescendantEventThreatDetectionCustomModules_sync",
+      "title": "Snippet for the list_descendant_event_threat_detection_custom_modules call in the SecurityCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#list_descendant_event_threat_detection_custom_modules.",
+      "file": "security_center/list_descendant_event_threat_detection_custom_modules.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_descendant_event_threat_detection_custom_modules",
+        "full_name": "::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#list_descendant_event_threat_detection_custom_modules",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenter::V1::ListDescendantEventThreatDetectionCustomModulesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenter::V1::ListDescendantEventThreatDetectionCustomModulesResponse",
+        "client": {
+          "short_name": "SecurityCenter::Client",
+          "full_name": "::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client"
+        },
+        "method": {
+          "short_name": "ListDescendantEventThreatDetectionCustomModules",
+          "full_name": "google.cloud.securitycenter.v1.SecurityCenter.ListDescendantEventThreatDetectionCustomModules",
+          "service": {
+            "short_name": "SecurityCenter",
+            "full_name": "google.cloud.securitycenter.v1.SecurityCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycenter_v1_generated_SecurityCenter_ListEventThreatDetectionCustomModules_sync",
+      "title": "Snippet for the list_event_threat_detection_custom_modules call in the SecurityCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#list_event_threat_detection_custom_modules.",
+      "file": "security_center/list_event_threat_detection_custom_modules.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_event_threat_detection_custom_modules",
+        "full_name": "::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#list_event_threat_detection_custom_modules",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenter::V1::ListEventThreatDetectionCustomModulesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenter::V1::ListEventThreatDetectionCustomModulesResponse",
+        "client": {
+          "short_name": "SecurityCenter::Client",
+          "full_name": "::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client"
+        },
+        "method": {
+          "short_name": "ListEventThreatDetectionCustomModules",
+          "full_name": "google.cloud.securitycenter.v1.SecurityCenter.ListEventThreatDetectionCustomModules",
+          "service": {
+            "short_name": "SecurityCenter",
+            "full_name": "google.cloud.securitycenter.v1.SecurityCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycenter_v1_generated_SecurityCenter_UpdateEventThreatDetectionCustomModule_sync",
+      "title": "Snippet for the update_event_threat_detection_custom_module call in the SecurityCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#update_event_threat_detection_custom_module.",
+      "file": "security_center/update_event_threat_detection_custom_module.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_event_threat_detection_custom_module",
+        "full_name": "::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#update_event_threat_detection_custom_module",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenter::V1::UpdateEventThreatDetectionCustomModuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenter::V1::EventThreatDetectionCustomModule",
+        "client": {
+          "short_name": "SecurityCenter::Client",
+          "full_name": "::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client"
+        },
+        "method": {
+          "short_name": "UpdateEventThreatDetectionCustomModule",
+          "full_name": "google.cloud.securitycenter.v1.SecurityCenter.UpdateEventThreatDetectionCustomModule",
+          "service": {
+            "short_name": "SecurityCenter",
+            "full_name": "google.cloud.securitycenter.v1.SecurityCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycenter_v1_generated_SecurityCenter_ValidateEventThreatDetectionCustomModule_sync",
+      "title": "Snippet for the validate_event_threat_detection_custom_module call in the SecurityCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#validate_event_threat_detection_custom_module.",
+      "file": "security_center/validate_event_threat_detection_custom_module.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "validate_event_threat_detection_custom_module",
+        "full_name": "::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#validate_event_threat_detection_custom_module",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenter::V1::ValidateEventThreatDetectionCustomModuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenter::V1::ValidateEventThreatDetectionCustomModuleResponse",
+        "client": {
+          "short_name": "SecurityCenter::Client",
+          "full_name": "::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client"
+        },
+        "method": {
+          "short_name": "ValidateEventThreatDetectionCustomModule",
+          "full_name": "google.cloud.securitycenter.v1.SecurityCenter.ValidateEventThreatDetectionCustomModule",
+          "service": {
+            "short_name": "SecurityCenter",
+            "full_name": "google.cloud.securitycenter.v1.SecurityCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycenter_v1_generated_SecurityCenter_GetEffectiveEventThreatDetectionCustomModule_sync",
+      "title": "Snippet for the get_effective_event_threat_detection_custom_module call in the SecurityCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#get_effective_event_threat_detection_custom_module.",
+      "file": "security_center/get_effective_event_threat_detection_custom_module.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_effective_event_threat_detection_custom_module",
+        "full_name": "::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#get_effective_event_threat_detection_custom_module",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenter::V1::GetEffectiveEventThreatDetectionCustomModuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenter::V1::EffectiveEventThreatDetectionCustomModule",
+        "client": {
+          "short_name": "SecurityCenter::Client",
+          "full_name": "::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client"
+        },
+        "method": {
+          "short_name": "GetEffectiveEventThreatDetectionCustomModule",
+          "full_name": "google.cloud.securitycenter.v1.SecurityCenter.GetEffectiveEventThreatDetectionCustomModule",
+          "service": {
+            "short_name": "SecurityCenter",
+            "full_name": "google.cloud.securitycenter.v1.SecurityCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycenter_v1_generated_SecurityCenter_ListEffectiveEventThreatDetectionCustomModules_sync",
+      "title": "Snippet for the list_effective_event_threat_detection_custom_modules call in the SecurityCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#list_effective_event_threat_detection_custom_modules.",
+      "file": "security_center/list_effective_event_threat_detection_custom_modules.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_effective_event_threat_detection_custom_modules",
+        "full_name": "::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#list_effective_event_threat_detection_custom_modules",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenter::V1::ListEffectiveEventThreatDetectionCustomModulesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenter::V1::ListEffectiveEventThreatDetectionCustomModulesResponse",
+        "client": {
+          "short_name": "SecurityCenter::Client",
+          "full_name": "::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client"
+        },
+        "method": {
+          "short_name": "ListEffectiveEventThreatDetectionCustomModules",
+          "full_name": "google.cloud.securitycenter.v1.SecurityCenter.ListEffectiveEventThreatDetectionCustomModules",
+          "service": {
+            "short_name": "SecurityCenter",
+            "full_name": "google.cloud.securitycenter.v1.SecurityCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycenter_v1_generated_SecurityCenter_BatchCreateResourceValueConfigs_sync",
+      "title": "Snippet for the batch_create_resource_value_configs call in the SecurityCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#batch_create_resource_value_configs.",
+      "file": "security_center/batch_create_resource_value_configs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_create_resource_value_configs",
+        "full_name": "::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#batch_create_resource_value_configs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenter::V1::BatchCreateResourceValueConfigsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenter::V1::BatchCreateResourceValueConfigsResponse",
+        "client": {
+          "short_name": "SecurityCenter::Client",
+          "full_name": "::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client"
+        },
+        "method": {
+          "short_name": "BatchCreateResourceValueConfigs",
+          "full_name": "google.cloud.securitycenter.v1.SecurityCenter.BatchCreateResourceValueConfigs",
+          "service": {
+            "short_name": "SecurityCenter",
+            "full_name": "google.cloud.securitycenter.v1.SecurityCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycenter_v1_generated_SecurityCenter_DeleteResourceValueConfig_sync",
+      "title": "Snippet for the delete_resource_value_config call in the SecurityCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#delete_resource_value_config.",
+      "file": "security_center/delete_resource_value_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_resource_value_config",
+        "full_name": "::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#delete_resource_value_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenter::V1::DeleteResourceValueConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "SecurityCenter::Client",
+          "full_name": "::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client"
+        },
+        "method": {
+          "short_name": "DeleteResourceValueConfig",
+          "full_name": "google.cloud.securitycenter.v1.SecurityCenter.DeleteResourceValueConfig",
+          "service": {
+            "short_name": "SecurityCenter",
+            "full_name": "google.cloud.securitycenter.v1.SecurityCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycenter_v1_generated_SecurityCenter_GetResourceValueConfig_sync",
+      "title": "Snippet for the get_resource_value_config call in the SecurityCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#get_resource_value_config.",
+      "file": "security_center/get_resource_value_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_resource_value_config",
+        "full_name": "::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#get_resource_value_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenter::V1::GetResourceValueConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenter::V1::ResourceValueConfig",
+        "client": {
+          "short_name": "SecurityCenter::Client",
+          "full_name": "::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client"
+        },
+        "method": {
+          "short_name": "GetResourceValueConfig",
+          "full_name": "google.cloud.securitycenter.v1.SecurityCenter.GetResourceValueConfig",
+          "service": {
+            "short_name": "SecurityCenter",
+            "full_name": "google.cloud.securitycenter.v1.SecurityCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycenter_v1_generated_SecurityCenter_ListResourceValueConfigs_sync",
+      "title": "Snippet for the list_resource_value_configs call in the SecurityCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#list_resource_value_configs.",
+      "file": "security_center/list_resource_value_configs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_resource_value_configs",
+        "full_name": "::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#list_resource_value_configs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenter::V1::ListResourceValueConfigsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenter::V1::ListResourceValueConfigsResponse",
+        "client": {
+          "short_name": "SecurityCenter::Client",
+          "full_name": "::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client"
+        },
+        "method": {
+          "short_name": "ListResourceValueConfigs",
+          "full_name": "google.cloud.securitycenter.v1.SecurityCenter.ListResourceValueConfigs",
+          "service": {
+            "short_name": "SecurityCenter",
+            "full_name": "google.cloud.securitycenter.v1.SecurityCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycenter_v1_generated_SecurityCenter_UpdateResourceValueConfig_sync",
+      "title": "Snippet for the update_resource_value_config call in the SecurityCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#update_resource_value_config.",
+      "file": "security_center/update_resource_value_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_resource_value_config",
+        "full_name": "::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#update_resource_value_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenter::V1::UpdateResourceValueConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenter::V1::ResourceValueConfig",
+        "client": {
+          "short_name": "SecurityCenter::Client",
+          "full_name": "::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client"
+        },
+        "method": {
+          "short_name": "UpdateResourceValueConfig",
+          "full_name": "google.cloud.securitycenter.v1.SecurityCenter.UpdateResourceValueConfig",
+          "service": {
+            "short_name": "SecurityCenter",
+            "full_name": "google.cloud.securitycenter.v1.SecurityCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycenter_v1_generated_SecurityCenter_ListValuedResources_sync",
+      "title": "Snippet for the list_valued_resources call in the SecurityCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#list_valued_resources.",
+      "file": "security_center/list_valued_resources.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_valued_resources",
+        "full_name": "::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#list_valued_resources",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenter::V1::ListValuedResourcesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenter::V1::ListValuedResourcesResponse",
+        "client": {
+          "short_name": "SecurityCenter::Client",
+          "full_name": "::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client"
+        },
+        "method": {
+          "short_name": "ListValuedResources",
+          "full_name": "google.cloud.securitycenter.v1.SecurityCenter.ListValuedResources",
+          "service": {
+            "short_name": "SecurityCenter",
+            "full_name": "google.cloud.securitycenter.v1.SecurityCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycenter_v1_generated_SecurityCenter_ListAttackPaths_sync",
+      "title": "Snippet for the list_attack_paths call in the SecurityCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#list_attack_paths.",
+      "file": "security_center/list_attack_paths.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_attack_paths",
+        "full_name": "::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#list_attack_paths",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenter::V1::ListAttackPathsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenter::V1::ListAttackPathsResponse",
+        "client": {
+          "short_name": "SecurityCenter::Client",
+          "full_name": "::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client"
+        },
+        "method": {
+          "short_name": "ListAttackPaths",
+          "full_name": "google.cloud.securitycenter.v1.SecurityCenter.ListAttackPaths",
           "service": {
             "short_name": "SecurityCenter",
             "full_name": "google.cloud.securitycenter.v1.SecurityCenter"

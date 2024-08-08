@@ -59,6 +59,11 @@ module Google
             # descendants in the CRM hierarchy. This method is only supported for
             # resident custom modules.
             rpc :DeleteSecurityHealthAnalyticsCustomModule, ::Google::Cloud::SecurityCenter::V1::DeleteSecurityHealthAnalyticsCustomModuleRequest, ::Google::Protobuf::Empty
+            # Get the simulation by name or the latest simulation for the given
+            # organization.
+            rpc :GetSimulation, ::Google::Cloud::SecurityCenter::V1::GetSimulationRequest, ::Google::Cloud::SecurityCenter::V1::Simulation
+            # Get the valued resource by name
+            rpc :GetValuedResource, ::Google::Cloud::SecurityCenter::V1::GetValuedResourceRequest, ::Google::Cloud::SecurityCenter::V1::ValuedResource
             # Gets a BigQuery export.
             rpc :GetBigQueryExport, ::Google::Cloud::SecurityCenter::V1::GetBigQueryExportRequest, ::Google::Cloud::SecurityCenter::V1::BigQueryExport
             # Gets the access control policy on the specified Source.
@@ -162,6 +167,55 @@ module Google
             # immediately under the folder plus the ones created under the projects
             # within the folder are returned.
             rpc :ListBigQueryExports, ::Google::Cloud::SecurityCenter::V1::ListBigQueryExportsRequest, ::Google::Cloud::SecurityCenter::V1::ListBigQueryExportsResponse
+            # Creates a resident Event Threat Detection custom module at the scope of the
+            # given Resource Manager parent, and also creates inherited custom modules
+            # for all descendants of the given parent. These modules are enabled by
+            # default.
+            rpc :CreateEventThreatDetectionCustomModule, ::Google::Cloud::SecurityCenter::V1::CreateEventThreatDetectionCustomModuleRequest, ::Google::Cloud::SecurityCenter::V1::EventThreatDetectionCustomModule
+            # Deletes the specified Event Threat Detection custom module and all of its
+            # descendants in the Resource Manager hierarchy. This method is only
+            # supported for resident custom modules.
+            rpc :DeleteEventThreatDetectionCustomModule, ::Google::Cloud::SecurityCenter::V1::DeleteEventThreatDetectionCustomModuleRequest, ::Google::Protobuf::Empty
+            # Gets an Event Threat Detection custom module.
+            rpc :GetEventThreatDetectionCustomModule, ::Google::Cloud::SecurityCenter::V1::GetEventThreatDetectionCustomModuleRequest, ::Google::Cloud::SecurityCenter::V1::EventThreatDetectionCustomModule
+            # Lists all resident Event Threat Detection custom modules under the
+            # given Resource Manager parent and its descendants.
+            rpc :ListDescendantEventThreatDetectionCustomModules, ::Google::Cloud::SecurityCenter::V1::ListDescendantEventThreatDetectionCustomModulesRequest, ::Google::Cloud::SecurityCenter::V1::ListDescendantEventThreatDetectionCustomModulesResponse
+            # Lists all Event Threat Detection custom modules for the given
+            # Resource Manager parent. This includes resident modules defined at the
+            # scope of the parent along with modules inherited from ancestors.
+            rpc :ListEventThreatDetectionCustomModules, ::Google::Cloud::SecurityCenter::V1::ListEventThreatDetectionCustomModulesRequest, ::Google::Cloud::SecurityCenter::V1::ListEventThreatDetectionCustomModulesResponse
+            # Updates the Event Threat Detection custom module with the given name based
+            # on the given update mask. Updating the enablement state is supported for
+            # both resident and inherited modules (though resident modules cannot have an
+            # enablement state of "inherited"). Updating the display name or
+            # configuration of a module is supported for resident modules only. The type
+            # of a module cannot be changed.
+            rpc :UpdateEventThreatDetectionCustomModule, ::Google::Cloud::SecurityCenter::V1::UpdateEventThreatDetectionCustomModuleRequest, ::Google::Cloud::SecurityCenter::V1::EventThreatDetectionCustomModule
+            # Validates the given Event Threat Detection custom module.
+            rpc :ValidateEventThreatDetectionCustomModule, ::Google::Cloud::SecurityCenter::V1::ValidateEventThreatDetectionCustomModuleRequest, ::Google::Cloud::SecurityCenter::V1::ValidateEventThreatDetectionCustomModuleResponse
+            # Gets an effective Event Threat Detection custom module at the given level.
+            rpc :GetEffectiveEventThreatDetectionCustomModule, ::Google::Cloud::SecurityCenter::V1::GetEffectiveEventThreatDetectionCustomModuleRequest, ::Google::Cloud::SecurityCenter::V1::EffectiveEventThreatDetectionCustomModule
+            # Lists all effective Event Threat Detection custom modules for the
+            # given parent. This includes resident modules defined at the scope of the
+            # parent along with modules inherited from its ancestors.
+            rpc :ListEffectiveEventThreatDetectionCustomModules, ::Google::Cloud::SecurityCenter::V1::ListEffectiveEventThreatDetectionCustomModulesRequest, ::Google::Cloud::SecurityCenter::V1::ListEffectiveEventThreatDetectionCustomModulesResponse
+            # Creates a ResourceValueConfig for an organization. Maps user's tags to
+            # difference resource values for use by the attack path simulation.
+            rpc :BatchCreateResourceValueConfigs, ::Google::Cloud::SecurityCenter::V1::BatchCreateResourceValueConfigsRequest, ::Google::Cloud::SecurityCenter::V1::BatchCreateResourceValueConfigsResponse
+            # Deletes a ResourceValueConfig.
+            rpc :DeleteResourceValueConfig, ::Google::Cloud::SecurityCenter::V1::DeleteResourceValueConfigRequest, ::Google::Protobuf::Empty
+            # Gets a ResourceValueConfig.
+            rpc :GetResourceValueConfig, ::Google::Cloud::SecurityCenter::V1::GetResourceValueConfigRequest, ::Google::Cloud::SecurityCenter::V1::ResourceValueConfig
+            # Lists all ResourceValueConfigs.
+            rpc :ListResourceValueConfigs, ::Google::Cloud::SecurityCenter::V1::ListResourceValueConfigsRequest, ::Google::Cloud::SecurityCenter::V1::ListResourceValueConfigsResponse
+            # Updates an existing ResourceValueConfigs with new rules.
+            rpc :UpdateResourceValueConfig, ::Google::Cloud::SecurityCenter::V1::UpdateResourceValueConfigRequest, ::Google::Cloud::SecurityCenter::V1::ResourceValueConfig
+            # Lists the valued resources for a set of simulation results and filter.
+            rpc :ListValuedResources, ::Google::Cloud::SecurityCenter::V1::ListValuedResourcesRequest, ::Google::Cloud::SecurityCenter::V1::ListValuedResourcesResponse
+            # Lists the attack paths for a set of simulation results or valued resources
+            # and filter.
+            rpc :ListAttackPaths, ::Google::Cloud::SecurityCenter::V1::ListAttackPathsRequest, ::Google::Cloud::SecurityCenter::V1::ListAttackPathsResponse
           end
 
           Stub = Service.rpc_stub_class
