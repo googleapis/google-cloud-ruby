@@ -21,7 +21,7 @@ module Google
   module Apps
     module Events
       module Subscriptions
-        VERSION = "1.0.0"
+        VERSION = "1.0.1"
       end
     end
   end
