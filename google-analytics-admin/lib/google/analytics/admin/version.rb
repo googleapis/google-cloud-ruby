@@ -20,7 +20,7 @@
 module Google
   module Analytics
     module Admin
-      VERSION = "0.5.0"
+      VERSION = "0.5.1"
     end
   end
 end
