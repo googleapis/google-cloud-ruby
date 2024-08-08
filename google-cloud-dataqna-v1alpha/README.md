@@ -2,7 +2,6 @@
 
 Data QnA is a natural language question and answer service for BigQuery data.
 
-Data QnA is a natural language question and answer service for BigQuery data.
 
 https://github.com/googleapis/google-cloud-ruby
 
