@@ -2,7 +2,6 @@
 
 Provides insights capability on Google Cloud Storage.
 
-Provides insights capability on Google Cloud Storage.
 
 https://github.com/googleapis/google-cloud-ruby
 
