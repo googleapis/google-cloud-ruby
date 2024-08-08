@@ -2,7 +2,6 @@
 
 Manages Hadoop-based clusters and jobs on Google Cloud Platform.
 
-Manages Hadoop-based clusters and jobs on Google Cloud Platform.
 
 https://github.com/googleapis/google-cloud-ruby
 

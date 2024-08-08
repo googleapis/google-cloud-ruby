@@ -2,7 +2,6 @@
 
 Builds and manages container-based applications, powered by the open source Kubernetes technology.
 
-Builds and manages container-based applications, powered by the open source Kubernetes technology.
 
 https://github.com/googleapis/google-cloud-ruby
 
