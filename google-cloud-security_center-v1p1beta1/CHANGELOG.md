@@ -4,6 +4,12 @@
 
 * Clarify Finding#event_time description
 
+### 0.14.1 (2024-08-08)
+
+#### Documentation
+
+* Formatting updates to README.md ([#26657](https://github.com/googleapis/google-cloud-ruby/issues/26657)) 
+
 ### 0.14.0 (2024-02-26)
 
 #### Features
