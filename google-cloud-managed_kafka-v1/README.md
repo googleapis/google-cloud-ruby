@@ -2,7 +2,6 @@
 
 Manage Apache Kafka clusters and resources.
 
-Manage Apache Kafka clusters and resources.
 
 https://github.com/googleapis/google-cloud-ruby
 

@@ -2,7 +2,6 @@
 
 Google Cloud Memorystore for Memcached API is used for creating and managing Memcached instances in GCP.
 
-Google Cloud Memorystore for Memcached API is used for creating and managing Memcached instances in GCP.
 
 https://github.com/googleapis/google-cloud-ruby
 
