@@ -1,5 +1,20 @@
 # Release History
 
+### 1.1.0 (2024-08-08)
+
+#### Features
+
+* added attack path API methods 
+* added cloud provider field to list findings response 
+* added etd custom module protos and API methods 
+* added ResourceValueConfig protos and API methods 
+* added toxic combination field to finding 
+* enable Dynamic Mute ([#26358](https://github.com/googleapis/google-cloud-ruby/issues/26358)) 
+#### Documentation
+
+* update examples in comments to use backticks 
+* update toxic combinations comments 
+
 ### 1.0.0 (2024-07-08)
 
 #### Features
