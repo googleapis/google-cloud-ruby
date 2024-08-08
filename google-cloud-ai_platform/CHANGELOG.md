@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.4.0 (2024-08-08)
+
+#### Features
+
+* add evaluation service proto to v1 ([#26615](https://github.com/googleapis/google-cloud-ruby/issues/26615)) 
+
 ### 1.3.0 (2024-04-19)
 
 #### Features
