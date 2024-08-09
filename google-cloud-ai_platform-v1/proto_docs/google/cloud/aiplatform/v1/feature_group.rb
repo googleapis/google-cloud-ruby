@@ -71,9 +71,27 @@ module Google
           #   @return [::Array<::String>]
           #     Optional. Columns to construct entity_id / row keys.
           #     If not provided defaults to `entity_id`.
+          # @!attribute [rw] time_series
+          #   @return [::Google::Cloud::AIPlatform::V1::FeatureGroup::BigQuery::TimeSeries]
+          #     Optional. If the source is a time-series source, this can be set to
+          #     control how downstream sources (ex:
+          #     {::Google::Cloud::AIPlatform::V1::FeatureView FeatureView} ) will treat
+          #     time-series sources. If not set, will treat the source as a time-series
+          #     source with `feature_timestamp` as timestamp column and no scan boundary.
           class BigQuery
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # @!attribute [rw] timestamp_column
+            #   @return [::String]
+            #     Optional. Column hosting timestamp values for a time-series source.
+            #     Will be used to determine the latest `feature_values` for each entity.
+            #     Optional. If not provided, column named `feature_timestamp` of
+            #     type `TIMESTAMP` will be used.
+            class TimeSeries
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
 
           # @!attribute [rw] key

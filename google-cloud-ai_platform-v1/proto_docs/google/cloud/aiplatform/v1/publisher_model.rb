@@ -252,6 +252,9 @@ module Google
               #   @return [::Google::Protobuf::Map{::String => ::String}]
               #     Optional. Labels for the deployment. For managing deployment config
               #     like verifying, source of deployment config, etc.
+              # @!attribute [rw] sample_request
+              #   @return [::String]
+              #     Optional. Sample request for deployed endpoint.
               class DeployMetadata
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods

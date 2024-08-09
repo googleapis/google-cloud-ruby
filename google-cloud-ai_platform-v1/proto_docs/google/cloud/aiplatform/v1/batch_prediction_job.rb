@@ -215,6 +215,12 @@ module Google
         #     pricing](https://cloud.google.com/logging/pricing).
         #
         #     User can disable container logging by setting this flag to true.
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
+        # @!attribute [r] satisfies_pzi
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
         class BatchPredictionJob
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

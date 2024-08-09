@@ -141,6 +141,9 @@ module Google
         # @!attribute [rw] frequency_penalty
         #   @return [::Float]
         #     Optional. Frequency penalties.
+        # @!attribute [rw] seed
+        #   @return [::Integer]
+        #     Optional. Seed.
         # @!attribute [rw] response_mime_type
         #   @return [::String]
         #     Optional. Output response mimetype of the generated candidate text.
@@ -159,9 +162,60 @@ module Google
         #     If set, a compatible response_mime_type must also be set.
         #     Compatible mimetypes:
         #     `application/json`: Schema for JSON response.
+        # @!attribute [rw] routing_config
+        #   @return [::Google::Cloud::AIPlatform::V1::GenerationConfig::RoutingConfig]
+        #     Optional. Routing configuration.
         class GenerationConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The configuration for routing the request to a specific model.
+          # @!attribute [rw] auto_mode
+          #   @return [::Google::Cloud::AIPlatform::V1::GenerationConfig::RoutingConfig::AutoRoutingMode]
+          #     Automated routing.
+          # @!attribute [rw] manual_mode
+          #   @return [::Google::Cloud::AIPlatform::V1::GenerationConfig::RoutingConfig::ManualRoutingMode]
+          #     Manual routing.
+          class RoutingConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # When automated routing is specified, the routing will be determined by
+            # the pretrained routing model and customer provided model routing
+            # preference.
+            # @!attribute [rw] model_routing_preference
+            #   @return [::Google::Cloud::AIPlatform::V1::GenerationConfig::RoutingConfig::AutoRoutingMode::ModelRoutingPreference]
+            #     The model routing preference.
+            class AutoRoutingMode
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # The model routing preference.
+              module ModelRoutingPreference
+                # Unspecified model routing preference.
+                UNKNOWN = 0
+
+                # Prefer higher quality over low cost.
+                PRIORITIZE_QUALITY = 1
+
+                # Balanced model routing preference.
+                BALANCED = 2
+
+                # Prefer lower cost over higher quality.
+                PRIORITIZE_COST = 3
+              end
+            end
+
+            # When manual routing is set, the specified model will be used directly.
+            # @!attribute [rw] model_name
+            #   @return [::String]
+            #     The model name to use. Only the public LLM models are accepted. e.g.
+            #     'gemini-1.5-pro-001'.
+            class ManualRoutingMode
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
         end
 
         # Safety settings.
@@ -314,6 +368,9 @@ module Google
         # @!attribute [r] score
         #   @return [::Float]
         #     Output only. Confidence score of the candidate.
+        # @!attribute [r] avg_logprobs
+        #   @return [::Float]
+        #     Output only. Average log probability score of the candidate.
         # @!attribute [r] finish_reason
         #   @return [::Google::Cloud::AIPlatform::V1::Candidate::FinishReason]
         #     Output only. The reason why the model stopped generating tokens.
@@ -343,34 +400,34 @@ module Google
             # The finish reason is unspecified.
             FINISH_REASON_UNSPECIFIED = 0
 
-            # Natural stop point of the model or provided stop sequence.
+            # Token generation reached a natural stopping point or a configured stop
+            # sequence.
             STOP = 1
 
-            # The maximum number of tokens as specified in the request was reached.
+            # Token generation reached the configured maximum output tokens.
             MAX_TOKENS = 2
 
-            # The token generation was stopped as the response was flagged for safety
-            # reasons. NOTE: When streaming the Candidate.content will be empty if
-            # content filters blocked the output.
+            # Token generation stopped because the content potentially contains safety
+            # violations. NOTE: When streaming,
+            # {::Google::Cloud::AIPlatform::V1::Candidate#content content} is empty if
+            # content filters blocks the output.
             SAFETY = 3
 
-            # The token generation was stopped as the response was flagged for
-            # unauthorized citations.
+            # Token generation stopped because the content potentially contains
+            # copyright violations.
             RECITATION = 4
 
-            # All other reasons that stopped the token generation
+            # All other reasons that stopped the token generation.
             OTHER = 5
 
-            # The token generation was stopped as the response was flagged for the
-            # terms which are included from the terminology blocklist.
+            # Token generation stopped because the content contains forbidden terms.
             BLOCKLIST = 6
 
-            # The token generation was stopped as the response was flagged for
-            # the prohibited contents.
+            # Token generation stopped for potentially containing prohibited content.
             PROHIBITED_CONTENT = 7
 
-            # The token generation was stopped as the response was flagged for
-            # Sensitive Personally Identifiable Information (SPII) contents.
+            # Token generation stopped because the content potentially contains
+            # Sensitive Personally Identifiable Information (SPII).
             SPII = 8
 
             # The function call generated by the model is invalid.

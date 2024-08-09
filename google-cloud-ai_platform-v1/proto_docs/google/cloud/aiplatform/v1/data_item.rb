@@ -55,6 +55,12 @@ module Google
         #   @return [::String]
         #     Optional. Used to perform consistent read-modify-write updates. If not set,
         #     a blind "overwrite" update happens.
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
+        # @!attribute [r] satisfies_pzi
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
         class DataItem
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

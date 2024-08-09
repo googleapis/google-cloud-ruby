@@ -108,6 +108,12 @@ module Google
         #     Immutable. Customer-managed encryption key spec for an IndexEndpoint. If
         #     set, this IndexEndpoint and all sub-resources of this IndexEndpoint will be
         #     secured by this key.
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
+        # @!attribute [r] satisfies_pzi
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
         class IndexEndpoint
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

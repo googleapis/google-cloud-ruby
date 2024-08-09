@@ -50,6 +50,12 @@ module Google
         #   @return [::String]
         #     Output only. Reference to the public base model last used by the dataset
         #     version. Only set for prompt dataset versions.
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
+        # @!attribute [r] satisfies_pzi
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
         class DatasetVersion
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

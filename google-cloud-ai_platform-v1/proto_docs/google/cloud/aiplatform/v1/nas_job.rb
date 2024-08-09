@@ -76,6 +76,12 @@ module Google
         #   @return [::Boolean]
         #     Optional. Enable a separation of Custom model training
         #     and restricted image training for tenant project.
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
+        # @!attribute [r] satisfies_pzi
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
         class NasJob
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

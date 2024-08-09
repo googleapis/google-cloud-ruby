@@ -206,7 +206,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload get_publisher_model(name: nil, language_code: nil, view: nil, is_hugging_face_model: nil)
+            # @overload get_publisher_model(name: nil, language_code: nil, view: nil, is_hugging_face_model: nil, hugging_face_token: nil)
             #   Pass arguments to `get_publisher_model` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -223,6 +223,8 @@ module Google
             #   @param is_hugging_face_model [::Boolean]
             #     Optional. Boolean indicates whether the requested model is a Hugging Face
             #     model.
+            #   @param hugging_face_token [::String]
+            #     Optional. Token used to access Hugging Face gated models.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::AIPlatform::V1::PublisherModel]

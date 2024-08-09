@@ -73,6 +73,12 @@ module Google
         #   @return [::Google::Cloud::AIPlatform::V1::EncryptionSpec]
         #     Optional. Customer-managed encryption key spec for data storage. If set,
         #     both of the online and offline data storage will be secured by this key.
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
+        # @!attribute [r] satisfies_pzi
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
         class Featurestore
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

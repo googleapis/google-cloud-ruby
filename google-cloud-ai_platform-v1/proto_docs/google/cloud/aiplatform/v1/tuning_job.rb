@@ -203,6 +203,14 @@ module Google
         # @!attribute [r] user_dataset_examples
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::Content>]
         #     Output only. Sample user messages in the training dataset uri.
+        # @!attribute [rw] total_truncated_example_count
+        #   @return [::Integer]
+        #     The number of examples in the dataset that have been truncated by any
+        #     amount.
+        # @!attribute [rw] truncated_example_indices
+        #   @return [::Array<::Integer>]
+        #     A partial sample of the indices (starting from 1) of the truncated
+        #     examples.
         class SupervisedTuningDataStats
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

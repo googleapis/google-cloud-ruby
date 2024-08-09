@@ -91,6 +91,12 @@ module Google
         #   @return [::Google::Cloud::AIPlatform::V1::EncryptionSpec]
         #     Immutable. Customer-managed encryption key spec for an Index. If set, this
         #     Index and all sub-resources of this Index will be secured by this key.
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
+        # @!attribute [r] satisfies_pzi
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
         class Index
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
