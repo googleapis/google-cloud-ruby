@@ -1,0 +1,362 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.apihub.v1",
+  "libraryPackage": "::Google::Cloud::ApiHub::V1",
+  "services": {
+    "ApiHub": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::ApiHub::V1::ApiHub::Client",
+          "rpcs": {
+            "CreateApi": {
+              "methods": [
+                "create_api"
+              ]
+            },
+            "GetApi": {
+              "methods": [
+                "get_api"
+              ]
+            },
+            "ListApis": {
+              "methods": [
+                "list_apis"
+              ]
+            },
+            "UpdateApi": {
+              "methods": [
+                "update_api"
+              ]
+            },
+            "DeleteApi": {
+              "methods": [
+                "delete_api"
+              ]
+            },
+            "CreateVersion": {
+              "methods": [
+                "create_version"
+              ]
+            },
+            "GetVersion": {
+              "methods": [
+                "get_version"
+              ]
+            },
+            "ListVersions": {
+              "methods": [
+                "list_versions"
+              ]
+            },
+            "UpdateVersion": {
+              "methods": [
+                "update_version"
+              ]
+            },
+            "DeleteVersion": {
+              "methods": [
+                "delete_version"
+              ]
+            },
+            "CreateSpec": {
+              "methods": [
+                "create_spec"
+              ]
+            },
+            "GetSpec": {
+              "methods": [
+                "get_spec"
+              ]
+            },
+            "GetSpecContents": {
+              "methods": [
+                "get_spec_contents"
+              ]
+            },
+            "ListSpecs": {
+              "methods": [
+                "list_specs"
+              ]
+            },
+            "UpdateSpec": {
+              "methods": [
+                "update_spec"
+              ]
+            },
+            "DeleteSpec": {
+              "methods": [
+                "delete_spec"
+              ]
+            },
+            "GetApiOperation": {
+              "methods": [
+                "get_api_operation"
+              ]
+            },
+            "ListApiOperations": {
+              "methods": [
+                "list_api_operations"
+              ]
+            },
+            "GetDefinition": {
+              "methods": [
+                "get_definition"
+              ]
+            },
+            "CreateDeployment": {
+              "methods": [
+                "create_deployment"
+              ]
+            },
+            "GetDeployment": {
+              "methods": [
+                "get_deployment"
+              ]
+            },
+            "ListDeployments": {
+              "methods": [
+                "list_deployments"
+              ]
+            },
+            "UpdateDeployment": {
+              "methods": [
+                "update_deployment"
+              ]
+            },
+            "DeleteDeployment": {
+              "methods": [
+                "delete_deployment"
+              ]
+            },
+            "CreateAttribute": {
+              "methods": [
+                "create_attribute"
+              ]
+            },
+            "GetAttribute": {
+              "methods": [
+                "get_attribute"
+              ]
+            },
+            "UpdateAttribute": {
+              "methods": [
+                "update_attribute"
+              ]
+            },
+            "DeleteAttribute": {
+              "methods": [
+                "delete_attribute"
+              ]
+            },
+            "ListAttributes": {
+              "methods": [
+                "list_attributes"
+              ]
+            },
+            "SearchResources": {
+              "methods": [
+                "search_resources"
+              ]
+            },
+            "CreateExternalApi": {
+              "methods": [
+                "create_external_api"
+              ]
+            },
+            "GetExternalApi": {
+              "methods": [
+                "get_external_api"
+              ]
+            },
+            "UpdateExternalApi": {
+              "methods": [
+                "update_external_api"
+              ]
+            },
+            "DeleteExternalApi": {
+              "methods": [
+                "delete_external_api"
+              ]
+            },
+            "ListExternalApis": {
+              "methods": [
+                "list_external_apis"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ApiHubDependencies": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::ApiHub::V1::ApiHubDependencies::Client",
+          "rpcs": {
+            "CreateDependency": {
+              "methods": [
+                "create_dependency"
+              ]
+            },
+            "GetDependency": {
+              "methods": [
+                "get_dependency"
+              ]
+            },
+            "UpdateDependency": {
+              "methods": [
+                "update_dependency"
+              ]
+            },
+            "DeleteDependency": {
+              "methods": [
+                "delete_dependency"
+              ]
+            },
+            "ListDependencies": {
+              "methods": [
+                "list_dependencies"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "HostProjectRegistrationService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::ApiHub::V1::HostProjectRegistrationService::Client",
+          "rpcs": {
+            "CreateHostProjectRegistration": {
+              "methods": [
+                "create_host_project_registration"
+              ]
+            },
+            "GetHostProjectRegistration": {
+              "methods": [
+                "get_host_project_registration"
+              ]
+            },
+            "ListHostProjectRegistrations": {
+              "methods": [
+                "list_host_project_registrations"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "LintingService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::ApiHub::V1::LintingService::Client",
+          "rpcs": {
+            "GetStyleGuide": {
+              "methods": [
+                "get_style_guide"
+              ]
+            },
+            "UpdateStyleGuide": {
+              "methods": [
+                "update_style_guide"
+              ]
+            },
+            "GetStyleGuideContents": {
+              "methods": [
+                "get_style_guide_contents"
+              ]
+            },
+            "LintSpec": {
+              "methods": [
+                "lint_spec"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ApiHubPlugin": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::ApiHub::V1::ApiHubPlugin::Client",
+          "rpcs": {
+            "GetPlugin": {
+              "methods": [
+                "get_plugin"
+              ]
+            },
+            "EnablePlugin": {
+              "methods": [
+                "enable_plugin"
+              ]
+            },
+            "DisablePlugin": {
+              "methods": [
+                "disable_plugin"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Provisioning": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::ApiHub::V1::Provisioning::Client",
+          "rpcs": {
+            "CreateApiHubInstance": {
+              "methods": [
+                "create_api_hub_instance"
+              ]
+            },
+            "GetApiHubInstance": {
+              "methods": [
+                "get_api_hub_instance"
+              ]
+            },
+            "LookupApiHubInstance": {
+              "methods": [
+                "lookup_api_hub_instance"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RuntimeProjectAttachmentService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::ApiHub::V1::RuntimeProjectAttachmentService::Client",
+          "rpcs": {
+            "CreateRuntimeProjectAttachment": {
+              "methods": [
+                "create_runtime_project_attachment"
+              ]
+            },
+            "GetRuntimeProjectAttachment": {
+              "methods": [
+                "get_runtime_project_attachment"
+              ]
+            },
+            "ListRuntimeProjectAttachments": {
+              "methods": [
+                "list_runtime_project_attachments"
+              ]
+            },
+            "DeleteRuntimeProjectAttachment": {
+              "methods": [
+                "delete_runtime_project_attachment"
+              ]
+            },
+            "LookupRuntimeProjectAttachment": {
+              "methods": [
+                "lookup_runtime_project_attachment"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
