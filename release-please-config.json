@@ -111,6 +111,10 @@
       "component": "google-cloud-api_gateway-v1",
       "version_file": "lib/google/cloud/api_gateway/v1/version.rb"
     },
+    "google-cloud-api_hub": {
+      "component": "google-cloud-api_hub",
+      "version_file": "lib/google/cloud/api_hub/version.rb"
+    },
     "google-cloud-api_hub-v1": {
       "component": "google-cloud-api_hub-v1",
       "version_file": "lib/google/cloud/api_hub/v1/version.rb"
