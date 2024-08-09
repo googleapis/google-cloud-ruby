@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.8.1 (2024-08-09)
+
+#### Documentation
+
+* Formatting updates ([#26623](https://github.com/googleapis/google-cloud-ruby/issues/26623)) 
+
 ### 0.8.0 (2024-02-28)
 
 #### Features
