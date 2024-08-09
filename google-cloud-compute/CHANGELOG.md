@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.8.1 (2024-08-09)
+
+#### Documentation
+
+* Formatting updates to README.md ([#26625](https://github.com/googleapis/google-cloud-ruby/issues/26625)) 
+
 ### 1.8.0 (2024-05-16)
 
 #### Features
