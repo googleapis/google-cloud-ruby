@@ -1185,6 +1185,61 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client
     end
   end
 
+  def test_move_instance
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    target_config = "hello world"
+
+    move_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::ServiceStub.stub :transcode_move_instance_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, move_instance_client_stub do
+        # Create client
+        client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.move_instance({ name: name, target_config: target_config }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.move_instance name: name, target_config: target_config do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.move_instance ::Google::Cloud::Spanner::Admin::Instance::V1::MoveInstanceRequest.new(name: name, target_config: target_config) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.move_instance({ name: name, target_config: target_config }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.move_instance(::Google::Cloud::Spanner::Admin::Instance::V1::MoveInstanceRequest.new(name: name, target_config: target_config), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, move_instance_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

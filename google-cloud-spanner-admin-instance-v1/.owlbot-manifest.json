@@ -63,6 +63,7 @@
     "snippets/instance_admin/list_instance_partition_operations.rb",
     "snippets/instance_admin/list_instance_partitions.rb",
     "snippets/instance_admin/list_instances.rb",
+    "snippets/instance_admin/move_instance.rb",
     "snippets/instance_admin/set_iam_policy.rb",
     "snippets/instance_admin/test_iam_permissions.rb",
     "snippets/instance_admin/update_instance.rb",

@@ -109,6 +109,11 @@
               "methods": [
                 "list_instance_partition_operations"
               ]
+            },
+            "MoveInstance": {
+              "methods": [
+                "move_instance"
+              ]
             }
           }
         }

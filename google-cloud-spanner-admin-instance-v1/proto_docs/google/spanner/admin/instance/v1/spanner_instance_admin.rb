@@ -81,13 +81,15 @@ module Google
             #     A unique identifier for the instance configuration.  Values
             #     are of the form
             #     `projects/<project>/instanceConfigs/[a-z][-a-z0-9]*`.
+            #
+            #     User instance configuration must start with `custom-`.
             # @!attribute [rw] display_name
             #   @return [::String]
             #     The name of this instance configuration as it appears in UIs.
             # @!attribute [r] config_type
             #   @return [::Google::Cloud::Spanner::Admin::Instance::V1::InstanceConfig::Type]
-            #     Output only. Whether this instance config is a Google or User Managed
-            #     Configuration.
+            #     Output only. Whether this instance configuration is a Google-managed or
+            #     user-managed configuration.
             # @!attribute [rw] replicas
             #   @return [::Array<::Google::Cloud::Spanner::Admin::Instance::V1::ReplicaInfo>]
             #     The geographic placement of nodes in this instance configuration and their
@@ -128,26 +130,29 @@ module Google
             # @!attribute [rw] etag
             #   @return [::String]
             #     etag is used for optimistic concurrency control as a way
-            #     to help prevent simultaneous updates of a instance config from overwriting
-            #     each other. It is strongly suggested that systems make use of the etag in
-            #     the read-modify-write cycle to perform instance config updates in order to
-            #     avoid race conditions: An etag is returned in the response which contains
-            #     instance configs, and systems are expected to put that etag in the request
-            #     to update instance config to ensure that their change will be applied to
-            #     the same version of the instance config.
-            #     If no etag is provided in the call to update instance config, then the
-            #     existing instance config is overwritten blindly.
+            #     to help prevent simultaneous updates of a instance configuration from
+            #     overwriting each other. It is strongly suggested that systems make use of
+            #     the etag in the read-modify-write cycle to perform instance configuration
+            #     updates in order to avoid race conditions: An etag is returned in the
+            #     response which contains instance configurations, and systems are expected
+            #     to put that etag in the request to update instance configuration to ensure
+            #     that their change is applied to the same version of the instance
+            #     configuration. If no etag is provided in the call to update the instance
+            #     configuration, then the existing instance configuration is overwritten
+            #     blindly.
             # @!attribute [rw] leader_options
             #   @return [::Array<::String>]
             #     Allowed values of the "default_leader" schema option for databases in
             #     instances that use this instance configuration.
             # @!attribute [r] reconciling
             #   @return [::Boolean]
-            #     Output only. If true, the instance config is being created or updated. If
-            #     false, there are no ongoing operations for the instance config.
+            #     Output only. If true, the instance configuration is being created or
+            #     updated. If false, there are no ongoing operations for the instance
+            #     configuration.
             # @!attribute [r] state
             #   @return [::Google::Cloud::Spanner::Admin::Instance::V1::InstanceConfig::State]
-            #     Output only. The current instance config state.
+            #     Output only. The current instance configuration state. Applicable only for
+            #     `USER_MANAGED` configurations.
             class InstanceConfig
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -173,21 +178,21 @@ module Google
                 USER_MANAGED = 2
               end
 
-              # Indicates the current state of the instance config.
+              # Indicates the current state of the instance configuration.
               module State
                 # Not specified.
                 STATE_UNSPECIFIED = 0
 
-                # The instance config is still being created.
+                # The instance configuration is still being created.
                 CREATING = 1
 
-                # The instance config is fully created and ready to be used to create
-                # instances.
+                # The instance configuration is fully created and ready to be used to
+                # create instances.
                 READY = 2
               end
             end
 
-            # Autoscaling config for an instance.
+            # Autoscaling configuration for an instance.
             # @!attribute [rw] autoscaling_limits
             #   @return [::Google::Cloud::Spanner::Admin::Instance::V1::AutoscalingConfig::AutoscalingLimits]
             #     Required. Autoscaling limits for an instance.
@@ -334,6 +339,9 @@ module Google
             # @!attribute [r] update_time
             #   @return [::Google::Protobuf::Timestamp]
             #     Output only. The time at which the instance was most recently updated.
+            # @!attribute [rw] edition
+            #   @return [::Google::Cloud::Spanner::Admin::Instance::V1::Instance::Edition]
+            #     Optional. The `Edition` of the current instance.
             class Instance
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -360,6 +368,22 @@ module Google
                 # The instance is fully created and ready to do work such as
                 # creating databases.
                 READY = 2
+              end
+
+              # The edition selected for this instance. Different editions provide
+              # different capabilities at different price points.
+              module Edition
+                # Edition not specified.
+                EDITION_UNSPECIFIED = 0
+
+                # Standard edition.
+                STANDARD = 1
+
+                # Enterprise edition.
+                ENTERPRISE = 2
+
+                # Enterprise Plus edition.
+                ENTERPRISE_PLUS = 3
               end
             end
 
@@ -415,14 +439,14 @@ module Google
             # [CreateInstanceConfigRequest][InstanceAdmin.CreateInstanceConfigRequest].
             # @!attribute [rw] parent
             #   @return [::String]
-            #     Required. The name of the project in which to create the instance config.
-            #     Values are of the form `projects/<project>`.
+            #     Required. The name of the project in which to create the instance
+            #     configuration. Values are of the form `projects/<project>`.
             # @!attribute [rw] instance_config_id
             #   @return [::String]
-            #     Required. The ID of the instance config to create.  Valid identifiers are
-            #     of the form `custom-[-a-z0-9]*[a-z0-9]` and must be between 2 and 64
+            #     Required. The ID of the instance configuration to create. Valid identifiers
+            #     are of the form `custom-[-a-z0-9]*[a-z0-9]` and must be between 2 and 64
             #     characters in length. The `custom-` prefix is required to avoid name
-            #     conflicts with Google managed configurations.
+            #     conflicts with Google-managed configurations.
             # @!attribute [rw] instance_config
             #   @return [::Google::Cloud::Spanner::Admin::Instance::V1::InstanceConfig]
             #     Required. The InstanceConfig proto of the configuration to create.
@@ -443,8 +467,9 @@ module Google
             # [UpdateInstanceConfigRequest][InstanceAdmin.UpdateInstanceConfigRequest].
             # @!attribute [rw] instance_config
             #   @return [::Google::Cloud::Spanner::Admin::Instance::V1::InstanceConfig]
-            #     Required. The user instance config to update, which must always include the
-            #     instance config name. Otherwise, only fields mentioned in
+            #     Required. The user instance configuration to update, which must always
+            #     include the instance configuration name. Otherwise, only fields mentioned
+            #     in
             #     {::Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstanceConfigRequest#update_mask update_mask}
             #     need be included. To prevent conflicts of concurrent updates,
             #     {::Google::Cloud::Spanner::Admin::Instance::V1::InstanceConfig#reconciling etag} can
@@ -476,12 +501,12 @@ module Google
             # @!attribute [rw] etag
             #   @return [::String]
             #     Used for optimistic concurrency control as a way to help prevent
-            #     simultaneous deletes of an instance config from overwriting each
+            #     simultaneous deletes of an instance configuration from overwriting each
             #     other. If not empty, the API
-            #     only deletes the instance config when the etag provided matches the current
-            #     status of the requested instance config. Otherwise, deletes the instance
-            #     config without checking the current status of the requested instance
-            #     config.
+            #     only deletes the instance configuration when the etag provided matches the
+            #     current status of the requested instance configuration. Otherwise, deletes
+            #     the instance configuration without checking the current status of the
+            #     requested instance configuration.
             # @!attribute [rw] validate_only
             #   @return [::Boolean]
             #     An option to validate, but not actually execute, a request,
@@ -495,7 +520,7 @@ module Google
             # {::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#list_instance_config_operations ListInstanceConfigOperations}.
             # @!attribute [rw] parent
             #   @return [::String]
-            #     Required. The project of the instance config operations.
+            #     Required. The project of the instance configuration operations.
             #     Values are of the form `projects/<project>`.
             # @!attribute [rw] filter
             #   @return [::String]
@@ -539,7 +564,7 @@ module Google
             #         `(error:*)` - Return operations where:
             #         * The operation's metadata type is
             #         {::Google::Cloud::Spanner::Admin::Instance::V1::CreateInstanceConfigMetadata CreateInstanceConfigMetadata}.
-            #         * The instance config name contains "custom-config".
+            #         * The instance configuration name contains "custom-config".
             #         * The operation started before 2021-03-28T14:50:00Z.
             #         * The operation resulted in an error.
             # @!attribute [rw] page_size
@@ -562,9 +587,9 @@ module Google
             # {::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#list_instance_config_operations ListInstanceConfigOperations}.
             # @!attribute [rw] operations
             #   @return [::Array<::Google::Longrunning::Operation>]
-            #     The list of matching instance config [long-running
+            #     The list of matching instance configuration [long-running
             #     operations][google.longrunning.Operation]. Each operation's name will be
-            #     prefixed by the instance config's name. The operation's
+            #     prefixed by the name of the instance configuration. The operation's
             #     {::Google::Longrunning::Operation#metadata metadata} field type
             #     `metadata.type_url` describes the type of the metadata.
             # @!attribute [rw] next_page_token
@@ -772,7 +797,7 @@ module Google
             # {::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#create_instance_config CreateInstanceConfig}.
             # @!attribute [rw] instance_config
             #   @return [::Google::Cloud::Spanner::Admin::Instance::V1::InstanceConfig]
-            #     The target instance config end state.
+            #     The target instance configuration end state.
             # @!attribute [rw] progress
             #   @return [::Google::Cloud::Spanner::Admin::Instance::V1::OperationProgress]
             #     The progress of the
@@ -790,7 +815,7 @@ module Google
             # {::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#update_instance_config UpdateInstanceConfig}.
             # @!attribute [rw] instance_config
             #   @return [::Google::Cloud::Spanner::Admin::Instance::V1::InstanceConfig]
-            #     The desired instance config after updating.
+            #     The desired instance configuration after updating.
             # @!attribute [rw] progress
             #   @return [::Google::Cloud::Spanner::Admin::Instance::V1::OperationProgress]
             #     The progress of the
@@ -1160,6 +1185,49 @@ module Google
             #     not be retrieved within
             #     {::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionOperationsRequest#instance_partition_deadline instance_partition_deadline}.
             class ListInstancePartitionOperationsResponse
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The request for
+            # {::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#move_instance MoveInstance}.
+            # @!attribute [rw] name
+            #   @return [::String]
+            #     Required. The instance to move.
+            #     Values are of the form `projects/<project>/instances/<instance>`.
+            # @!attribute [rw] target_config
+            #   @return [::String]
+            #     Required. The target instance configuration where to move the instance.
+            #     Values are of the form `projects/<project>/instanceConfigs/<config>`.
+            class MoveInstanceRequest
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The response for
+            # {::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#move_instance MoveInstance}.
+            class MoveInstanceResponse
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Metadata type for the operation returned by
+            # {::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#move_instance MoveInstance}.
+            # @!attribute [rw] target_config
+            #   @return [::String]
+            #     The target instance configuration where to move the instance.
+            #     Values are of the form `projects/<project>/instanceConfigs/<config>`.
+            # @!attribute [rw] progress
+            #   @return [::Google::Cloud::Spanner::Admin::Instance::V1::OperationProgress]
+            #     The progress of the
+            #     {::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#move_instance MoveInstance}
+            #     operation.
+            #     {::Google::Cloud::Spanner::Admin::Instance::V1::OperationProgress#progress_percent progress_percent}
+            #     is reset when cancellation is requested.
+            # @!attribute [rw] cancel_time
+            #   @return [::Google::Protobuf::Timestamp]
+            #     The time at which this operation was cancelled.
+            class MoveInstanceMetadata
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
