@@ -6,7 +6,7 @@
     "is_cloud": true,
     "language": "ruby",
     "name": "managedkafka",
-    "name_pretty": "Apache Kafka for BigQuery API",
+    "name_pretty": "Managed Service for Apache Kafka API",
     "product_documentation": "https://cloud.google.com/managed-kafka",
     "release_level": "stable",
     "repo": "googleapis/google-cloud-ruby",

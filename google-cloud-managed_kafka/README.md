@@ -1,4 +1,4 @@
-# Ruby Client for the Apache Kafka for BigQuery API
+# Ruby Client for the Managed Service for Apache Kafka API
 
 Manage Apache Kafka clusters and resources.
 
