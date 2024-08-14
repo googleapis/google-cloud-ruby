@@ -217,7 +217,7 @@ module Google
         # Metadata for a consumer group corresponding to a specific partition.
         # @!attribute [rw] offset
         #   @return [::Integer]
-        #     Required. The offset for this partition, or 0 if no offset has been
+        #     Required. The current offset for this partition, or 0 if no offset has been
         #     committed.
         # @!attribute [rw] metadata
         #   @return [::String]
